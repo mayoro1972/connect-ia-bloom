@@ -287,6 +287,11 @@ export const en = {
       { title: "AI for Diplomacy", desc: "Master AI tools for diplomacy and international affairs", metierKey: "Diplomatie & Affaires Internationales" },
     ],
     coursesLabel: "courses",
+    levels: {
+      "Débutant": "Beginner",
+      "Intermédiaire": "Intermediate",
+      "Avancé": "Advanced",
+    },
     ctaTitle: "Need a custom learning path?",
     ctaDesc: "Contact us to design a path tailored to your company's specific needs.",
   },
