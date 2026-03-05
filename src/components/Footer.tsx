@@ -25,6 +25,7 @@ const Footer = () => {
                 { label: "Catalogue", to: "/catalogue" },
                 { label: "Certification", to: "/certification" },
                 { label: "Entreprises", to: "/entreprises" },
+                { label: "Partenaires", to: "/partenaires" },
               ],
             },
             {
