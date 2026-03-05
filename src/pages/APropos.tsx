@@ -25,7 +25,9 @@ const AProposPage = () => {
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-heading text-2xl font-bold mb-4">{t("about.missionTitle")}</h2>
-            <p className="text-muted-foreground leading-relaxed mb-8">{t("about.missionText")}</p>
+            {t("about.missionText").split("\n\n").map((para, i) => (
+              <p key={i} className="text-muted-foreground leading-relaxed mb-4">{para}</p>
+            ))}
           </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-4 mb-16">
