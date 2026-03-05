@@ -13,10 +13,10 @@ const stats = [
 ];
 
 const team = [
-  { initials: "D", name: "Dr. Kouamé Assi", role: "Directeur Général", desc: "Expert en IA et transformation digitale, 15 ans d'expérience en conseil." },
-  { initials: "M", name: "Mariam Touré", role: "Directrice Pédagogique", desc: "Spécialiste en ingénierie de formation et e-learning adaptatif." },
-  { initials: "Y", name: "Yves N'Guessan", role: "Responsable Entreprises", desc: "Ancien DRH, spécialiste de la formation professionnelle en entreprise." },
-  { initials: "A", name: "Aïcha Diop", role: "Experte IA & Data", desc: "Data scientist et formatrice, passionnée par la démocratisation de l'IA." },
+  { initials: "CB", name: "Casimir Beda Kassi", role: "Directeur Général", desc: "Visionnaire et stratège, il pilote TransferAI Africa avec l'ambition de connecter la diaspora ivoirienne au continent." },
+  { initials: "MA", name: "Marius Ayoro", role: "Responsable Entreprises", desc: "Spécialiste du développement business, il accompagne les entreprises dans leur transformation IA." },
+  { initials: "SK", name: "Souleymane Konate", role: "Expert IA & Data", desc: "Data scientist et formateur, passionné par la démocratisation de l'IA en Afrique." },
+  { initials: "EN", name: "Eric N'Guessan", role: "Directeur Pédagogique", desc: "Expert en ingénierie de formation, il conçoit des programmes adaptés aux réalités africaines." },
 ];
 
 const AProposPage = () => {
