@@ -94,7 +94,7 @@ export const en = {
   },
   catalogue: {
     title: "AI Training Catalogue",
-    subtitle: "130 practical courses for 13 areas of expertise. Filter by field, level and format.",
+    subtitle: "Over 130 practical courses across 13 areas of expertise. Explore by domain, search by keyword or discover our latest additions.",
     search: "Search...",
     allMetiers: "All areas of expertise",
     allLevels: "All levels",
