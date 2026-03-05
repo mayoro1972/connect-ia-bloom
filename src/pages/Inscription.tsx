@@ -8,6 +8,7 @@ import PageTransition from "@/components/PageTransition";
 import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const InscriptionPage = () => {
   const { toast } = useToast();
@@ -32,7 +33,8 @@ const InscriptionPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <AnimatedLogoWatermarks />
         <Navbar />
         <PageHeader title={t("inscription.title")} subtitle={t("inscription.subtitle")} />
 

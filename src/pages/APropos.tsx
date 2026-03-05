@@ -7,7 +7,7 @@ import PageTransition from "@/components/PageTransition";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
-import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const iconMap = [Target, Users, Award, Globe];
 
@@ -19,31 +19,7 @@ const AProposPage = () => {
 
   return (
     <PageTransition><div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Animated logo watermarks */}
-      <motion.img
-        src={logoTransferAI}
-        alt=""
-        className="pointer-events-none select-none absolute top-32 -right-24 w-[420px] h-[420px] object-contain"
-        style={{ opacity: 0.04 }}
-        animate={{ rotate: [0, 360], scale: [1, 1.08, 1] }}
-        transition={{ rotate: { duration: 90, repeat: Infinity, ease: "linear" }, scale: { duration: 12, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" } }}
-      />
-      <motion.img
-        src={logoTransferAI}
-        alt=""
-        className="pointer-events-none select-none absolute top-[60%] -left-32 w-[350px] h-[350px] object-contain"
-        style={{ opacity: 0.03 }}
-        animate={{ rotate: [360, 0], scale: [1, 1.1, 1] }}
-        transition={{ rotate: { duration: 120, repeat: Infinity, ease: "linear" }, scale: { duration: 15, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" } }}
-      />
-      <motion.img
-        src={logoTransferAI}
-        alt=""
-        className="pointer-events-none select-none absolute bottom-20 right-10 w-[280px] h-[280px] object-contain"
-        style={{ opacity: 0.025 }}
-        animate={{ rotate: [0, -360], y: [0, -20, 0] }}
-        transition={{ rotate: { duration: 100, repeat: Infinity, ease: "linear" }, y: { duration: 10, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" } }}
-      />
+      <AnimatedLogoWatermarks />
       <Navbar />
       <PageHeader title={t("about.title")} subtitle={t("about.subtitle")} />
 

@@ -15,6 +15,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
@@ -175,7 +176,8 @@ const CataloguePage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <AnimatedLogoWatermarks />
         <Navbar />
         <PageHeader title={t("catalogue.title")} subtitle={t("catalogue.subtitle")} />
 

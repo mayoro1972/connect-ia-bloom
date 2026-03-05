@@ -11,6 +11,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const levelIcons = { "Débutant": Layers, "Intermédiaire": TrendingUp, "Avancé": Award };
 const levelColors = {
@@ -39,7 +40,8 @@ const ParcoursPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <AnimatedLogoWatermarks />
         <Navbar />
         <PageHeader title={parcours.title} subtitle={parcours.subtitle} />
 

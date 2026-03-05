@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const getFormationDetails = (f: typeof formations[0]) => {
   const levelMap: Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }> = {
@@ -95,7 +96,8 @@ const FormationDetailPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <AnimatedLogoWatermarks />
         <Navbar />
 
         {/* Header */}

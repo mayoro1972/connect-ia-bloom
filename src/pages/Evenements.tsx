@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const typeColors: Record<string, string> = {
   "Séminaire": "bg-primary/10 text-primary",
@@ -23,7 +24,8 @@ const EvenementsPage = () => {
   const events = trans.events.items;
 
   return (
-    <PageTransition><div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background relative overflow-hidden">
+      <AnimatedLogoWatermarks />
       <Navbar />
       <PageHeader title={t("events.title")} subtitle={t("events.subtitle")} />
 

@@ -7,13 +7,15 @@ import PageTransition from "@/components/PageTransition";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const CertificationPage = () => {
   const { t, language } = useLanguage();
   const trans = language === "fr" ? fr : en;
 
   return (
-    <PageTransition><div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background relative overflow-hidden">
+      <AnimatedLogoWatermarks />
       <Navbar />
       <PageHeader badge={t("certification.badge")} title={t("certification.title")} subtitle={t("certification.subtitle")} />
 

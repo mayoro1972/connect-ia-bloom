@@ -9,6 +9,7 @@ import PageHeader from "@/components/PageHeader";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const ContactPage = () => {
   const { toast } = useToast();
@@ -31,7 +32,8 @@ const ContactPage = () => {
   const inputClass = "w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
 
   return (
-    <PageTransition><div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background relative overflow-hidden">
+      <AnimatedLogoWatermarks />
       <Navbar />
       <PageHeader title={t("contact.title")} subtitle={t("contact.subtitle")} />
 
