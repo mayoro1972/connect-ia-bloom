@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="py-12 border-t" style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(0 0% 100% / 0.08)" }}>
       <div className="container mx-auto px-4 lg:px-8">
@@ -14,32 +17,32 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: "hsl(210 20% 55%)" }}>
-              La référence en formation professionnelle IA en Afrique — portée par la diaspora.
+              {t("footer.desc")}
             </p>
           </div>
           {[
             {
-              title: "Formations",
+              title: t("footer.formations"),
               links: [
-                { label: "Catalogue", to: "/catalogue" },
-                { label: "Certification", to: "/certification" },
-                { label: "Entreprises", to: "/entreprises" },
-                { label: "Partenaires", to: "/partenaires" },
+                { label: t("footer.catalogue"), to: "/catalogue" },
+                { label: t("footer.certification"), to: "/certification" },
+                { label: t("footer.enterprises"), to: "/entreprises" },
+                { label: t("footer.partners"), to: "/partenaires" },
               ],
             },
             {
-              title: "Ressources",
+              title: t("footer.resources"),
               links: [
-                { label: "Blog", to: "/blog" },
-                { label: "Événements", to: "/evenements" },
-                { label: "À propos", to: "/a-propos" },
+                { label: t("footer.blog"), to: "/blog" },
+                { label: t("footer.events"), to: "/evenements" },
+                { label: t("footer.about"), to: "/a-propos" },
               ],
             },
             {
-              title: "Contact",
+              title: t("footer.contact"),
               links: [
-                { label: "Demander un devis", to: "/contact" },
-                { label: "Support", to: "/contact" },
+                { label: t("footer.requestQuote"), to: "/contact" },
+                { label: t("footer.support"), to: "/contact" },
               ],
             },
           ].map((col) => (
@@ -59,7 +62,7 @@ const Footer = () => {
         </div>
         <div className="border-t pt-8" style={{ borderColor: "hsl(0 0% 100% / 0.08)" }}>
           <p className="text-center text-xs" style={{ color: "hsl(210 20% 45%)" }}>
-            © 2026 TransferAI Africa. Tous droits réservés.
+            {t("footer.rights")}
           </p>
         </div>
       </div>
