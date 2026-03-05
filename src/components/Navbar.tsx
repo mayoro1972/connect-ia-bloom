@@ -7,6 +7,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 const navKeys = [
   { key: "home", href: "/" },
+  { key: "about", href: "/a-propos" },
   { key: "catalogue", href: "/catalogue" },
   { key: "parcours", href: "/parcours" },
   { key: "certification", href: "/certification" },
@@ -14,7 +15,6 @@ const navKeys = [
   { key: "partners", href: "/partenaires" },
   { key: "events", href: "/evenements" },
   { key: "blog", href: "/blog" },
-  { key: "about", href: "/a-propos" },
   { key: "contact", href: "/contact" },
 ];
 
