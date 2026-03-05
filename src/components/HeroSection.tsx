@@ -23,8 +23,8 @@ const HeroSection = () => {
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        animate={{ scale: [1, 1.06, 1.03, 1.08], x: [0, -10, 5, -15], y: [0, -8, 4, -10] }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
       >
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.65), hsl(30 80% 30% / 0.45))" }} />
