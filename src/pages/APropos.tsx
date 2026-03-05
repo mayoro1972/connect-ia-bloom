@@ -9,9 +9,11 @@ import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import teamCasimir from "@/assets/team-casimir.jpg";
+import teamMarius from "@/assets/team-marius.jpg";
 
 const teamPhotos: Record<string, string> = {
   "Casimir Beda Kassi": teamCasimir,
+  "Marius Ayoro": teamMarius,
 };
 
 const iconMap = [Target, Users, Award, Globe];
