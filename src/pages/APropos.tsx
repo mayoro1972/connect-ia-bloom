@@ -55,7 +55,7 @@ const AProposPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-2xl p-6 text-center flex flex-col items-center shadow-md hover-lift">
-                <div className="w-36 h-36 rounded-full border-4 border-primary/20 shadow-lg overflow-hidden mb-4 bg-muted">
+                <div className="w-40 h-40 rounded-2xl border-4 border-primary/20 shadow-lg overflow-hidden mb-4 bg-muted">
                   {teamPhotos[member.name] ? (
                     <img src={teamPhotos[member.name]} alt={member.name} className="w-full h-full object-cover" />
                   ) : (
