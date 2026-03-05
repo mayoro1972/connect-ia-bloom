@@ -25,7 +25,7 @@ const WhyUsSection = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <ScrollReveal className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
-            Pourquoi choisir l'Académie IA <span className="text-gradient-coral">Afrique</span> ?
+            Pourquoi choisir <span className="text-gradient-orange">TransferAI</span> Africa ?
           </h2>
         </ScrollReveal>
 

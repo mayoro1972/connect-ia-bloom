@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
+import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
 
 const navLinks = [
   { label: "Accueil", href: "/" },
@@ -20,14 +21,12 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(174 70% 42% / 0.1)" }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(30 90% 50% / 0.15)" }}>
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
         <Link to="/" className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-teal-gradient font-heading font-bold text-sm" style={{ color: "hsl(0 0% 100%)" }}>
-            IA
-          </span>
+          <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-10 rounded-lg object-contain" />
           <span className="font-heading font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
-            Académie IA <span className="text-gradient-coral">Afrique</span>
+            Transfer<span className="text-gradient-orange">AI</span> Africa
           </span>
         </Link>
 
@@ -48,7 +47,7 @@ const Navbar = () => {
 
         <Link
           to="/contact"
-          className="hidden lg:inline-flex bg-coral-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
+          className="hidden lg:inline-flex bg-orange-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
           style={{ color: "hsl(0 0% 100%)" }}
         >
           Demander un devis
@@ -66,7 +65,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden border-t"
-            style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(174 70% 42% / 0.1)" }}
+            style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(30 90% 50% / 0.1)" }}
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
@@ -85,7 +84,7 @@ const Navbar = () => {
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="bg-coral-gradient font-semibold text-sm px-5 py-2.5 rounded-lg text-center mt-2"
+                className="bg-orange-gradient font-semibold text-sm px-5 py-2.5 rounded-lg text-center mt-2"
                 style={{ color: "hsl(0 0% 100%)" }}
               >
                 Demander un devis

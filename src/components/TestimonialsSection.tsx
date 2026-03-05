@@ -13,7 +13,7 @@ const testimonials = [
     role: "DSI, Orange CI",
   },
   {
-    quote: "L'IA a révolutionné notre création de contenu. L'Académie IA Afrique nous a accompagnés de A à Z.",
+    quote: "L'IA a révolutionné notre création de contenu. TransferAI Africa nous a accompagnés de A à Z.",
     name: "Fatou Diallo",
     role: "Directrice Marketing, Ecobank",
   },
