@@ -11,8 +11,8 @@ const HeroSection = () => {
   const [downloadOpen, setDownloadOpen] = useState(false);
 
   const stats = [
-    { icon: BookOpen, value: "120+", label: t("hero.stats.formations") },
-    { icon: Users, value: "12", label: t("hero.stats.metiers") },
+    { icon: BookOpen, value: "130+", label: t("hero.stats.formations") },
+    { icon: Users, value: "13", label: t("hero.stats.metiers") },
     { icon: Award, value: "3", label: t("hero.stats.formats") },
     { icon: Globe, value: "10+", label: t("hero.stats.pays") },
   ];
