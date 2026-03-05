@@ -52,18 +52,20 @@ const AProposPage = () => {
           </div>
 
           <h2 className="font-heading text-2xl font-bold mb-6">{t("about.teamTitle")}</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
-              <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-xl p-5 text-center flex flex-col items-center">
-                {teamPhotos[member.name] ? (
-                  <img src={teamPhotos[member.name]} alt={member.name} className="w-24 h-24 rounded-full object-cover mb-3 ring-2 ring-primary/30" />
-                ) : (
-                  <div className="w-24 h-24 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-2xl mb-3" style={{ color: "hsl(0 0% 100%)" }}>
-                    {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                  </div>
-                )}
-                <h3 className="font-heading font-semibold text-card-foreground text-sm">{member.name}</h3>
-                <p className="text-xs font-medium text-coral mb-2">{member.role}</p>
+              <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-2xl p-6 text-center flex flex-col items-center shadow-md hover-lift">
+                <div className="w-36 h-36 rounded-full border-4 border-primary/20 shadow-lg overflow-hidden mb-4 bg-muted">
+                  {teamPhotos[member.name] ? (
+                    <img src={teamPhotos[member.name]} alt={member.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-3xl" style={{ color: "hsl(0 0% 100%)" }}>
+                      {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                    </div>
+                  )}
+                </div>
+                <h3 className="font-heading font-semibold text-card-foreground text-base">{member.name}</h3>
+                <p className="text-sm font-medium text-coral mb-2">{member.role}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">{member.desc}</p>
               </motion.div>
             ))}
