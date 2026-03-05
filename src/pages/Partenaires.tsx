@@ -7,13 +7,14 @@ import ScrollReveal from "@/components/ScrollReveal";
 import logoMiddlesex from "@/assets/logo-middlesex.png";
 import logoNettelecom from "@/assets/logo-nettelecom.png";
 import logoFdfp from "@/assets/logo-fdfp.png";
+import logoIads from "@/assets/logo-iads.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 
-const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP"];
-const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp];
-const partnerColors = ["hsl(220 60% 50%)", "hsl(174 70% 42%)", "hsl(15 85% 57%)"];
+const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP", "IADS"];
+const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp, logoIads];
+const partnerColors = ["hsl(220 60% 50%)", "hsl(174 70% 42%)", "hsl(15 85% 57%)", "hsl(220 70% 30%)"];
 
 const PartenairesPage = () => {
   const { t, language } = useLanguage();
