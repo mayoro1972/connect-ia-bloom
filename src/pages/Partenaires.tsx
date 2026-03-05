@@ -36,8 +36,8 @@ const PartenairesPage = () => {
                   <div className="bg-card border border-border rounded-2xl overflow-hidden hover-lift">
                     <div className="flex flex-col md:flex-row">
                       <div className="md:w-72 flex flex-col items-center justify-center p-8 gap-4" style={{ background: `${partnerColors[i]}08` }}>
-                        <div className="w-56 h-44 flex items-center justify-center rounded-xl bg-white p-5">
-                          <img src={partnerLogos[i]} alt={`Logo ${partnerNames[i]}`} className="max-w-full max-h-full object-contain" />
+                        <div className={`flex items-center justify-center rounded-xl bg-white ${partnerNames[i] === "SNDI" ? "w-64 h-52 p-3" : "w-56 h-44 p-5"}`}>
+                          <img src={partnerLogos[i]} alt={`Logo ${partnerNames[i]}`} className={`max-w-full max-h-full object-contain ${partnerNames[i] === "SNDI" ? "scale-150" : ""}`} />
                         </div>
                         <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: `${partnerColors[i]}15`, color: partnerColors[i] }}>
                           {partner.type}
