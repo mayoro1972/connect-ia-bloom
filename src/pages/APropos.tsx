@@ -56,9 +56,9 @@ const AProposPage = () => {
             {team.map((member, i) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-xl p-5 text-center flex flex-col items-center">
                 {teamPhotos[member.name] ? (
-                  <img src={teamPhotos[member.name]} alt={member.name} className="w-14 h-14 rounded-full object-cover mb-3" />
+                  <img src={teamPhotos[member.name]} alt={member.name} className="w-24 h-24 rounded-full object-cover mb-3 ring-2 ring-primary/30" />
                 ) : (
-                  <div className="w-14 h-14 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-lg mb-3" style={{ color: "hsl(0 0% 100%)" }}>
+                  <div className="w-24 h-24 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-2xl mb-3" style={{ color: "hsl(0 0% 100%)" }}>
                     {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
                   </div>
                 )}
