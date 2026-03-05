@@ -287,6 +287,11 @@ export const fr = {
       { title: "IA pour la Diplomatie", desc: "Maîtrisez les outils IA pour la diplomatie et les affaires internationales", metierKey: "Diplomatie & Affaires Internationales" },
     ],
     coursesLabel: "formations",
+    levels: {
+      "Débutant": "Débutant",
+      "Intermédiaire": "Intermédiaire",
+      "Avancé": "Avancé",
+    },
     ctaTitle: "Besoin d'un parcours sur-mesure ?",
     ctaDesc: "Contactez-nous pour concevoir un parcours adapté aux besoins spécifiques de votre entreprise.",
   },
