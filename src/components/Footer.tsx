@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Facebook, Instagram, Youtube, Twitter, MessageCircle, Send } from "lucide-react";
+import { Linkedin, Facebook, Instagram, Youtube, Twitter, MessageCircle, Send, Music2, AtSign } from "lucide-react";
 import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -9,6 +9,8 @@ const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/transferai.africa", label: "Instagram", color: "hover:text-[#E4405F]" },
   { icon: Youtube, href: "https://www.youtube.com/@transferai-africa", label: "YouTube", color: "hover:text-[#FF0000]" },
   { icon: Twitter, href: "https://x.com/transferai_afr", label: "X (Twitter)", color: "hover:text-[#1DA1F2]" },
+  { icon: Music2, href: "https://www.tiktok.com/@transferai.africa", label: "TikTok", color: "hover:text-[#ff0050]" },
+  { icon: AtSign, href: "https://www.threads.net/@transferai.africa", label: "Threads", color: "hover:text-[#000000] dark:hover:text-white" },
   { icon: Send, href: "https://t.me/transferaiafrica", label: "Telegram", color: "hover:text-[#26A5E4]" },
   { icon: MessageCircle, href: "https://wa.me/2250700000000", label: "WhatsApp", color: "hover:text-[#25D366]" },
 ];
