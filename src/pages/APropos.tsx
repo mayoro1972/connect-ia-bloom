@@ -8,6 +8,11 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import teamCasimir from "@/assets/team-casimir.jpg";
+
+const teamPhotos: Record<string, string> = {
+  "Casimir Beda Kassi": teamCasimir,
+};
 
 const iconMap = [Target, Users, Award, Globe];
 
@@ -50,9 +55,13 @@ const AProposPage = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {team.map((member, i) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-xl p-5 text-center flex flex-col items-center">
-                <div className="w-14 h-14 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-lg mb-3" style={{ color: "hsl(0 0% 100%)" }}>
-                  {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                </div>
+                {teamPhotos[member.name] ? (
+                  <img src={teamPhotos[member.name]} alt={member.name} className="w-14 h-14 rounded-full object-cover mb-3" />
+                ) : (
+                  <div className="w-14 h-14 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-lg mb-3" style={{ color: "hsl(0 0% 100%)" }}>
+                    {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                  </div>
+                )}
                 <h3 className="font-heading font-semibold text-card-foreground text-sm">{member.name}</h3>
                 <p className="text-xs font-medium text-coral mb-2">{member.role}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">{member.desc}</p>
