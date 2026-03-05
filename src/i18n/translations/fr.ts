@@ -94,7 +94,7 @@ export const fr = {
   },
   catalogue: {
     title: "Catalogue de Formations IA",
-    subtitle: "120 formations pratiques pour 12 domaines d'expertise. Filtrez par domaine, niveau et format.",
+    subtitle: "Plus de 130 formations pratiques réparties dans 13 domaines d'expertise. Explorez par domaine, recherchez par mot-clé ou découvrez nos nouveautés.",
     search: "Rechercher...",
     allMetiers: "Tous les domaines d'expertise",
     allLevels: "Tous les niveaux",
