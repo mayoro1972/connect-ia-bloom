@@ -41,7 +41,6 @@ const CataloguePage = () => {
 
       <section className="py-12">
         <div className="container mx-auto px-4 lg:px-8">
-          {/* Filters */}
           <div className="bg-card rounded-xl border border-border p-6 mb-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="relative">
               <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -69,7 +68,6 @@ const CataloguePage = () => {
 
           <p className="text-sm text-muted-foreground mb-6">{filtered.length} formation(s) trouvée(s)</p>
 
-          {/* Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((f, i) => (
               <motion.div
@@ -92,7 +90,7 @@ const CataloguePage = () => {
                 </div>
                 <div className="flex items-center justify-between mt-auto">
                   <span className="font-semibold text-sm text-card-foreground">{f.price}</span>
-                  <span className="text-xs font-semibold text-primary cursor-pointer">Voir détails →</span>
+                  <span className="text-xs font-semibold text-coral cursor-pointer">Voir détails →</span>
                 </div>
               </motion.div>
             ))}

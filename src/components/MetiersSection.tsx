@@ -25,7 +25,7 @@ const MetiersSection = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <ScrollReveal className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
-            12 métiers, une transformation <span className="text-gradient-gold">IA</span>
+            12 métiers, une transformation <span className="text-gradient-teal">IA</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Des formations conçues pour chaque fonction de l'entreprise, adaptées aux réalités du marché africain.
@@ -37,16 +37,16 @@ const MetiersSection = () => {
             <ScrollReveal
               key={m.title}
               delay={i * 0.06}
-              direction={i % 2 === 0 ? "up" : "up"}
+              direction="up"
               distance={30}
             >
               <div className="group bg-card rounded-xl p-6 border border-border hover-lift cursor-pointer h-full">
-                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-4 group-hover:bg-gold-gradient transition-all duration-300">
-                  <m.icon size={22} className="text-accent-foreground group-hover:text-navy-deep transition-colors duration-300" />
+                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-4 group-hover:bg-teal-gradient transition-all duration-300">
+                  <m.icon size={22} className="text-accent-foreground group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="font-heading font-semibold text-base mb-2 text-card-foreground">{m.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{m.desc}</p>
-                <span className="text-sm font-semibold text-primary">{m.count} formations →</span>
+                <span className="text-sm font-semibold text-coral">{m.count} formations →</span>
               </div>
             </ScrollReveal>
           ))}
@@ -55,7 +55,8 @@ const MetiersSection = () => {
         <ScrollReveal delay={0.3} className="text-center mt-12">
           <a
             href="#cta"
-            className="bg-gold-gradient font-semibold px-8 py-3 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105"
+            className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105"
+            style={{ color: "hsl(0 0% 100%)" }}
           >
             Voir tout le catalogue
           </a>

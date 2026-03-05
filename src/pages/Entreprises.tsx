@@ -60,7 +60,7 @@ const EntreprisesPage = () => {
                 <ul className="space-y-2">
                   {s.features.map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm text-card-foreground">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-coral shrink-0" />
                       {f}
                     </li>
                   ))}
@@ -72,7 +72,8 @@ const EntreprisesPage = () => {
           <div className="text-center mt-12">
             <a
               href="/contact"
-              className="bg-gold-gradient font-semibold px-8 py-3 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+              className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+              style={{ color: "hsl(0 0% 100%)" }}
             >
               Demander un devis entreprise <ArrowRight size={18} />
             </a>

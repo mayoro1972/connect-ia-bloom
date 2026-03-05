@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
-import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
   { icon: Target, value: "120+", label: "Formations", sub: "Un catalogue complet couvrant 12 métiers" },
@@ -31,7 +30,6 @@ const AProposPage = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
-          {/* Mission */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-heading text-2xl font-bold mb-4">Notre Mission</h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -39,7 +37,6 @@ const AProposPage = () => {
             </p>
           </motion.div>
 
-          {/* Stats */}
           <div className="grid sm:grid-cols-2 gap-4 mb-16">
             {stats.map((s, i) => (
               <motion.div
@@ -61,7 +58,6 @@ const AProposPage = () => {
             ))}
           </div>
 
-          {/* Team */}
           <h2 className="font-heading text-2xl font-bold mb-6">Notre Équipe</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {team.map((t, i) => (
@@ -73,11 +69,11 @@ const AProposPage = () => {
                 transition={{ delay: i * 0.08 }}
                 className="bg-card border border-border rounded-xl p-6"
               >
-                <div className="w-12 h-12 rounded-full bg-gold-gradient flex items-center justify-center font-heading font-bold text-navy-deep mb-4">
+                <div className="w-12 h-12 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold mb-4" style={{ color: "hsl(0 0% 100%)" }}>
                   {t.initials}
                 </div>
                 <h3 className="font-heading font-semibold text-card-foreground">{t.name}</h3>
-                <p className="text-sm text-primary mb-2">{t.role}</p>
+                <p className="text-sm text-coral mb-2">{t.role}</p>
                 <p className="text-sm text-muted-foreground">{t.desc}</p>
               </motion.div>
             ))}

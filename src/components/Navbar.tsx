@@ -20,14 +20,14 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-deep/90 backdrop-blur-lg border-b border-gold/10">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(174 70% 42% / 0.1)" }}>
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
         <Link to="/" className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-gold-gradient font-heading font-bold text-navy-deep text-sm">
+          <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-teal-gradient font-heading font-bold text-sm" style={{ color: "hsl(0 0% 100%)" }}>
             IA
           </span>
-          <span className="font-heading font-semibold text-card tracking-tight">
-            Académie IA <span className="text-gradient-gold">Afrique</span>
+          <span className="font-heading font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
+            Académie IA <span className="text-gradient-coral">Afrique</span>
           </span>
         </Link>
 
@@ -37,9 +37,9 @@ const Navbar = () => {
               key={link.label}
               to={link.href}
               className={`text-sm transition-colors font-medium ${
-                location.pathname === link.href ? "text-gold" : ""
+                location.pathname === link.href ? "text-primary" : ""
               }`}
-              style={location.pathname !== link.href ? { color: "hsl(220 20% 70%)" } : undefined}
+              style={location.pathname !== link.href ? { color: "hsl(210 20% 72%)" } : undefined}
             >
               {link.label}
             </Link>
@@ -48,12 +48,13 @@ const Navbar = () => {
 
         <Link
           to="/contact"
-          className="hidden lg:inline-flex bg-gold-gradient font-semibold text-sm px-5 py-2.5 rounded-lg text-navy-deep hover:opacity-90 transition-opacity"
+          className="hidden lg:inline-flex bg-coral-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
+          style={{ color: "hsl(0 0% 100%)" }}
         >
           Demander un devis
         </Link>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-card">
+        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden" style={{ color: "hsl(0 0% 96%)" }}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -64,7 +65,8 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-navy-deep border-t border-gold/10"
+            className="lg:hidden border-t"
+            style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(174 70% 42% / 0.1)" }}
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
@@ -73,9 +75,9 @@ const Navbar = () => {
                   to={link.href}
                   onClick={() => setIsOpen(false)}
                   className={`text-sm py-2 font-medium ${
-                    location.pathname === link.href ? "text-gold" : ""
+                    location.pathname === link.href ? "text-primary" : ""
                   }`}
-                  style={location.pathname !== link.href ? { color: "hsl(220 20% 70%)" } : undefined}
+                  style={location.pathname !== link.href ? { color: "hsl(210 20% 72%)" } : undefined}
                 >
                   {link.label}
                 </Link>
@@ -83,7 +85,8 @@ const Navbar = () => {
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="bg-gold-gradient font-semibold text-sm px-5 py-2.5 rounded-lg text-navy-deep text-center mt-2"
+                className="bg-coral-gradient font-semibold text-sm px-5 py-2.5 rounded-lg text-center mt-2"
+                style={{ color: "hsl(0 0% 100%)" }}
               >
                 Demander un devis
               </Link>

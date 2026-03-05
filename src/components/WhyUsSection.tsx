@@ -21,24 +21,24 @@ const reasons = [
 
 const WhyUsSection = () => {
   return (
-    <section id="pourquoi" className="py-24 bg-navy-gradient">
+    <section id="pourquoi" className="py-24 bg-indigo-gradient">
       <div className="container mx-auto px-4 lg:px-8">
         <ScrollReveal className="text-center mb-16">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 96%)" }}>
-            Pourquoi choisir l'Académie IA <span className="text-gradient-gold">Afrique</span> ?
+          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
+            Pourquoi choisir l'Académie IA <span className="text-gradient-coral">Afrique</span> ?
           </h2>
         </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {reasons.map((r, i) => (
             <ScrollReveal key={r.title} delay={i * 0.15} direction="up" className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-gold-gradient mx-auto flex items-center justify-center mb-6 hover:scale-110 transition-transform duration-300">
-                <r.icon size={28} className="text-navy-deep" />
+              <div className="w-16 h-16 rounded-2xl bg-teal-gradient mx-auto flex items-center justify-center mb-6 hover:scale-110 transition-transform duration-300">
+                <r.icon size={28} style={{ color: "hsl(0 0% 100%)" }} />
               </div>
-              <h3 className="font-heading text-xl font-semibold mb-3" style={{ color: "hsl(0 0% 96%)" }}>
+              <h3 className="font-heading text-xl font-semibold mb-3" style={{ color: "hsl(0 0% 98%)" }}>
                 {r.title}
               </h3>
-              <p style={{ color: "hsl(220 20% 65%)" }} className="leading-relaxed">
+              <p style={{ color: "hsl(210 20% 70%)" }} className="leading-relaxed">
                 {r.desc}
               </p>
             </ScrollReveal>

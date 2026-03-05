@@ -5,7 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
-import ScrollReveal from "@/components/ScrollReveal";
 import PageHeader from "@/components/PageHeader";
 
 const sectors = [
@@ -39,7 +38,6 @@ const ContactPage = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
-            {/* Form */}
             <div className="lg:col-span-2">
               <h2 className="font-heading text-2xl font-bold mb-6">Demander un devis</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,13 +67,12 @@ const ContactPage = () => {
                   onChange={(e) => update("message", e.target.value)}
                   className={inputClass + " resize-none"}
                 />
-                <button type="submit" className="bg-gold-gradient font-semibold px-6 py-3 rounded-lg text-navy-deep hover:opacity-90 transition-opacity">
+                <button type="submit" className="bg-coral-gradient font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                   Envoyer ma demande de devis
                 </button>
               </form>
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-5">
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -128,7 +125,7 @@ const ContactPage = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Réservez un créneau pour discuter de vos besoins en formation avec un de nos experts.
                 </p>
-                <button className="w-full bg-gold-gradient font-semibold py-2.5 rounded-lg text-navy-deep text-sm hover:opacity-90 transition-opacity">
+                <button className="w-full bg-teal-gradient font-semibold py-2.5 rounded-lg text-sm hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                   Réserver un créneau
                 </button>
               </motion.div>
