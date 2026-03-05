@@ -28,16 +28,38 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(30 90% 50% / 0.15)" }}>
-      {/* Animated AI tools banner strip */}
+      {/* Animated AI tools banner strip - multi-directional */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Layer 1: scroll left */}
         <motion.div
           className="absolute inset-0 flex"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ x: { duration: 30, repeat: Infinity, ease: "linear" } }}
+          transition={{ x: { duration: 25, repeat: Infinity, ease: "linear" } }}
           style={{ width: "200%" }}
         >
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.15 }} />
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.15 }} />
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.18 }} />
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.18 }} />
+        </motion.div>
+        {/* Layer 2: scroll right + slight vertical drift */}
+        <motion.div
+          className="absolute inset-0 flex"
+          animate={{ x: ["-50%", "0%"], y: ["-8%", "8%", "-8%"] }}
+          transition={{
+            x: { duration: 35, repeat: Infinity, ease: "linear" },
+            y: { duration: 6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" },
+          }}
+          style={{ width: "200%" }}
+        >
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover scale-110" style={{ opacity: 0.1, transform: "scaleX(-1) scale(1.1)" }} />
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover scale-110" style={{ opacity: 0.1, transform: "scaleX(-1) scale(1.1)" }} />
+        </motion.div>
+        {/* Layer 3: diagonal drift */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{ x: ["5%", "-5%", "5%"], y: ["5%", "-5%", "5%"], scale: [1.2, 1.3, 1.2] }}
+          transition={{ duration: 12, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        >
+          <img src={aiToolsBanner} alt="" className="h-full w-full object-cover" style={{ opacity: 0.08 }} />
         </motion.div>
       </div>
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8 relative z-10">
