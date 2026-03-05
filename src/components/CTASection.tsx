@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
@@ -13,10 +14,14 @@ const CTASection = () => {
   return (
     <>
     <section id="cta" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0">
+      <motion.div
+        className="absolute inset-0"
+        animate={{ scale: [1, 1.06, 1.03, 1.08], x: [0, -10, 5, -15], y: [0, -8, 4, -10] }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+      >
         <img src={ctaBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.88), hsl(30 80% 30% / 0.8))" }} />
-      </div>
+      </motion.div>
 
       <div className="relative z-10 container mx-auto px-4 lg:px-8">
         <ScrollReveal className="text-center max-w-3xl mx-auto">
