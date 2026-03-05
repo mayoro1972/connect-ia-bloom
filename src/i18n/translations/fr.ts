@@ -17,18 +17,18 @@ export const fr = {
     title1: "Formez vos équipes à l'",
     titleHighlight: "IA",
     title2: "qui transforme l'Afrique",
-    subtitle: "120 formations pratiques, 12 métiers, des formats flexibles. Préparez votre entreprise à l'ère de l'Intelligence Artificielle.",
+    subtitle: "120 formations pratiques, 12 domaines d'expertise, des formats flexibles. Préparez votre entreprise à l'ère de l'Intelligence Artificielle.",
     cta: "Demander un devis",
     catalogue: "Télécharger le catalogue",
     stats: {
       formations: "Formations IA",
-      metiers: "Métiers couverts",
+      metiers: "Domaines d'expertise",
       formats: "Formats flexibles",
       pays: "Pays couverts",
     },
   },
   metiers: {
-    title1: "12 métiers, une transformation ",
+    title1: "12 domaines d'expertise, une transformation ",
     titleHighlight: "IA",
     subtitle: "Des formations conçues pour chaque fonction de l'entreprise, adaptées aux réalités du marché africain.",
     cta: "Voir tout le catalogue",
@@ -93,9 +93,9 @@ export const fr = {
   },
   catalogue: {
     title: "Catalogue de Formations IA",
-    subtitle: "120 formations pratiques pour 12 métiers. Filtrez par domaine, niveau et format.",
+    subtitle: "120 formations pratiques pour 12 domaines d'expertise. Filtrez par domaine, niveau et format.",
     search: "Rechercher...",
-    allMetiers: "Tous les métiers",
+    allMetiers: "Tous les domaines d'expertise",
     allLevels: "Tous les niveaux",
     allFormats: "Tous les formats",
     found: "formation(s) trouvée(s)",
@@ -183,9 +183,9 @@ export const fr = {
   },
   blog: {
     title: "Blog & Ressources",
-    subtitle: "Articles, guides pratiques et études de cas sur l'IA et les métiers en Afrique.",
+    subtitle: "Articles, guides pratiques et études de cas sur l'IA et les domaines d'expertise en Afrique.",
     articles: [
-      { category: "Métiers & IA", title: "Comment l'IA révolutionne le métier d'assistant de direction en Afrique", desc: "Découvrez comment les outils d'IA transforment les tâches quotidiennes des assistants et secrétaires de direction.", readTime: "5 min", date: "2 Mars 2026" },
+      { category: "Expertise & IA", title: "Comment l'IA révolutionne le métier d'assistant de direction en Afrique", desc: "Découvrez comment les outils d'IA transforment les tâches quotidiennes des assistants et secrétaires de direction.", readTime: "5 min", date: "2 Mars 2026" },
       { category: "Guides", title: "ChatGPT en entreprise : guide pratique pour les PME africaines", desc: "Un guide étape par étape pour intégrer ChatGPT dans vos processus d'entreprise, avec des cas d'usage concrets.", readTime: "8 min", date: "25 Février 2026" },
       { category: "Études de cas", title: "Recrutement et IA : comment les DRH africains s'adaptent", desc: "Étude de cas sur l'utilisation de l'IA dans le recrutement au sein de grandes entreprises ivoiriennes.", readTime: "6 min", date: "18 Février 2026" },
       { category: "Guides", title: "Mesurer le ROI de la formation IA en entreprise", desc: "Méthodologie et indicateurs clés pour évaluer l'impact de vos investissements en formation IA.", readTime: "7 min", date: "10 Février 2026" },
@@ -222,7 +222,7 @@ export const fr = {
     missionTitle: "Notre Mission",
     missionText: "TransferAI Africa est née d'un constat simple : la diaspora ivoirienne regorge d'experts en Intelligence Artificielle. Notre mission est de créer un pont entre ces talents et le continent africain, en proposant des formations pratiques, accessibles et directement applicables au quotidien professionnel en Côte d'Ivoire et en Afrique francophone.",
     stats: [
-      { value: "120+", label: "Formations", sub: "Un catalogue complet couvrant 12 métiers" },
+      { value: "120+", label: "Formations", sub: "Un catalogue complet couvrant 12 domaines d'expertise" },
       { value: "500+", label: "Professionnels formés", sub: "Issus de banques, télécoms, ministères" },
       { value: "98%", label: "de satisfaction", sub: "Noté par nos participants" },
       { value: "10+", label: "Pays", sub: "Côte d'Ivoire, Sénégal, Cameroun, etc." },
@@ -237,10 +237,10 @@ export const fr = {
   },
   parcours: {
     title: "Parcours d'Apprentissage",
-    subtitle: "Des parcours structurés pour vous accompagner du niveau débutant à expert dans chaque métier.",
+    subtitle: "Des parcours structurés pour vous accompagner du niveau débutant à expert dans chaque domaine d'expertise.",
     howItWorks: "Comment ça fonctionne ?",
     steps: [
-      { title: "Niveau Débutant", desc: "Découvrez les fondamentaux de l'IA appliquée à votre métier. Aucun prérequis technique." },
+      { title: "Niveau Débutant", desc: "Découvrez les fondamentaux de l'IA appliquée à votre domaine. Aucun prérequis technique." },
       { title: "Niveau Intermédiaire", desc: "Approfondissez vos compétences avec des cas pratiques avancés et des outils spécialisés." },
       { title: "Niveau Expert", desc: "Devenez référent IA dans votre organisation et pilotez des projets de transformation." },
     ],
