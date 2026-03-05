@@ -7,6 +7,7 @@ import PageTransition from "@/components/PageTransition";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const categoryColors: Record<string, string> = {
   "Métiers & IA": "text-primary",
@@ -22,7 +23,8 @@ const BlogPage = () => {
   const articles = trans.blog.articles;
 
   return (
-    <PageTransition><div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background relative overflow-hidden">
+      <AnimatedLogoWatermarks />
       <Navbar />
       <PageHeader title={t("blog.title")} subtitle={t("blog.subtitle")} />
 

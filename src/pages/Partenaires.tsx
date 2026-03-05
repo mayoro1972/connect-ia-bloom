@@ -13,6 +13,7 @@ import logoPigier from "@/assets/logo-pigier.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP", "IADS", "SNDI", "Pigier CI"];
 const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp, logoIads, logoSndi, logoPigier];
@@ -25,7 +26,8 @@ const PartenairesPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <AnimatedLogoWatermarks />
         <Navbar />
         <PageHeader title={t("partners.title")} subtitle={t("partners.subtitle")} badge={t("partners.badge")} />
 

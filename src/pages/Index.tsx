@@ -6,11 +6,13 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const Index = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen">
+      <div className="min-h-screen relative overflow-hidden">
+        <AnimatedLogoWatermarks />
         <Navbar />
         <HeroSection />
         <MetiersSection />

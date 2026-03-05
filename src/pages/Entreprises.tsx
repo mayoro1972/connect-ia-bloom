@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
 const icons = [FileText, Target, Users, Settings];
 
@@ -16,7 +17,8 @@ const EntreprisesPage = () => {
   const solutions = trans.enterprises.solutions;
 
   return (
-    <PageTransition><div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background relative overflow-hidden">
+      <AnimatedLogoWatermarks />
       <Navbar />
       <PageHeader title={t("enterprises.title")} subtitle={t("enterprises.subtitle")} />
 
