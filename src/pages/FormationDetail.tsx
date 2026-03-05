@@ -10,61 +10,113 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
-const getFormationDetails = (f: typeof formations[0]) => {
-  const levelMap: Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }> = {
+const getFormationDetails = (f: typeof formations[0], language: string) => {
+  const levelMap: Record<string, Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }>> = {
     "Débutant": {
-      objectives: [
-        "Comprendre les fondamentaux de l'IA appliquée à votre métier",
-        "Maîtriser les outils IA de base (ChatGPT, Copilot, etc.)",
-        "Réaliser des cas pratiques adaptés à votre contexte professionnel",
-        "Gagner en productivité grâce à l'automatisation intelligente",
-      ],
-      prerequisites: ["Aucun prérequis technique", "Ordinateur portable recommandé", "Curiosité et motivation"],
-      modules: [
-        "Introduction à l'Intelligence Artificielle",
-        "Prise en main des outils IA essentiels",
-        "Cas pratiques et exercices guidés",
-        "Plan d'action personnalisé",
-      ],
+      fr: {
+        objectives: [
+          "Comprendre les fondamentaux de l'IA appliquée à votre métier",
+          "Maîtriser les outils IA de base (ChatGPT, Copilot, etc.)",
+          "Réaliser des cas pratiques adaptés à votre contexte professionnel",
+          "Gagner en productivité grâce à l'automatisation intelligente",
+        ],
+        prerequisites: ["Aucun prérequis technique", "Ordinateur portable recommandé", "Curiosité et motivation"],
+        modules: [
+          "Introduction à l'Intelligence Artificielle",
+          "Prise en main des outils IA essentiels",
+          "Cas pratiques et exercices guidés",
+          "Plan d'action personnalisé",
+        ],
+      },
+      en: {
+        objectives: [
+          "Understand the fundamentals of AI applied to your profession",
+          "Master basic AI tools (ChatGPT, Copilot, etc.)",
+          "Complete practical exercises tailored to your professional context",
+          "Boost productivity through intelligent automation",
+        ],
+        prerequisites: ["No technical prerequisites", "Laptop recommended", "Curiosity and motivation"],
+        modules: [
+          "Introduction to Artificial Intelligence",
+          "Getting started with essential AI tools",
+          "Practical cases and guided exercises",
+          "Personalized action plan",
+        ],
+      },
     },
     "Intermédiaire": {
-      objectives: [
-        "Approfondir vos compétences IA dans votre domaine métier",
-        "Automatiser des processus complexes avec l'IA",
-        "Analyser et interpréter des données avec des outils avancés",
-        "Concevoir des workflows IA adaptés à votre organisation",
-      ],
-      prerequisites: ["Connaissances de base en IA ou formation débutant complétée", "Expérience dans le domaine métier concerné", "Ordinateur portable requis"],
-      modules: [
-        "Rappel et approfondissement des concepts IA",
-        "Outils avancés et intégrations métier",
-        "Projet pratique : cas d'entreprise réel",
-        "Optimisation et bonnes pratiques",
-      ],
+      fr: {
+        objectives: [
+          "Approfondir vos compétences IA dans votre domaine métier",
+          "Automatiser des processus complexes avec l'IA",
+          "Analyser et interpréter des données avec des outils avancés",
+          "Concevoir des workflows IA adaptés à votre organisation",
+        ],
+        prerequisites: ["Connaissances de base en IA ou formation débutant complétée", "Expérience dans le domaine métier concerné", "Ordinateur portable requis"],
+        modules: [
+          "Rappel et approfondissement des concepts IA",
+          "Outils avancés et intégrations métier",
+          "Projet pratique : cas d'entreprise réel",
+          "Optimisation et bonnes pratiques",
+        ],
+      },
+      en: {
+        objectives: [
+          "Deepen your AI skills in your professional domain",
+          "Automate complex processes with AI",
+          "Analyze and interpret data with advanced tools",
+          "Design AI workflows tailored to your organization",
+        ],
+        prerequisites: ["Basic AI knowledge or beginner training completed", "Experience in the relevant professional field", "Laptop required"],
+        modules: [
+          "Review and deepening of AI concepts",
+          "Advanced tools and business integrations",
+          "Practical project: real business case",
+          "Optimization and best practices",
+        ],
+      },
     },
     "Avancé": {
-      objectives: [
-        "Devenir référent IA dans votre organisation",
-        "Piloter des projets de transformation IA",
-        "Évaluer et sélectionner les solutions IA adaptées",
-        "Former et accompagner vos équipes sur l'IA",
-      ],
-      prerequisites: ["Formation intermédiaire complétée ou expérience équivalente", "Expérience significative dans le domaine métier", "Projet IA en cours ou planifié"],
-      modules: [
-        "Stratégie IA et vision d'ensemble",
-        "Outils et plateformes IA avancés",
-        "Gestion de projet IA et conduite du changement",
-        "Projet final et soutenance",
-      ],
+      fr: {
+        objectives: [
+          "Devenir référent IA dans votre organisation",
+          "Piloter des projets de transformation IA",
+          "Évaluer et sélectionner les solutions IA adaptées",
+          "Former et accompagner vos équipes sur l'IA",
+        ],
+        prerequisites: ["Formation intermédiaire complétée ou expérience équivalente", "Expérience significative dans le domaine métier", "Projet IA en cours ou planifié"],
+        modules: [
+          "Stratégie IA et vision d'ensemble",
+          "Outils et plateformes IA avancés",
+          "Gestion de projet IA et conduite du changement",
+          "Projet final et soutenance",
+        ],
+      },
+      en: {
+        objectives: [
+          "Become an AI reference in your organization",
+          "Lead AI transformation projects",
+          "Evaluate and select appropriate AI solutions",
+          "Train and support your teams on AI",
+        ],
+        prerequisites: ["Intermediate training completed or equivalent experience", "Significant experience in the professional field", "Ongoing or planned AI project"],
+        modules: [
+          "AI strategy and big picture overview",
+          "Advanced AI tools and platforms",
+          "AI project management and change management",
+          "Final project and presentation",
+        ],
+      },
     },
   };
 
-  return levelMap[f.level] || levelMap["Débutant"];
+  const lang = language === "en" ? "en" : "fr";
+  return levelMap[f.level]?.[lang] || levelMap["Débutant"][lang];
 };
 
 const FormationDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
   const formation = formations.find((f) => f.id === id);
 
@@ -83,7 +135,7 @@ const FormationDetailPage = () => {
     );
   }
 
-  const details = getFormationDetails(formation);
+  const details = getFormationDetails(formation, language);
   const relatedFormations = formations
     .filter((f) => f.metier === formation.metier && f.id !== formation.id)
     .slice(0, 3);
