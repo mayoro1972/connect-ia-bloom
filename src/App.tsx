@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
+import { usePageView } from "./hooks/usePageView";
 import Index from "./pages/Index";
 import Catalogue from "./pages/Catalogue";
 import FormationDetail from "./pages/FormationDetail";
@@ -24,6 +25,7 @@ const queryClient = new QueryClient();
 
 const AnimatedRoutes = () => {
   const location = useLocation();
+  usePageView();
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
