@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import ScrollReveal from "@/components/ScrollReveal";
 import {
   Briefcase, Users, Megaphone, Calculator, Scale, HeadphonesIcon,
   BarChart3, ClipboardList, Crown, Monitor, GraduationCap, Heart,
@@ -23,48 +23,43 @@ const MetiersSection = () => {
   return (
     <section id="metiers" className="py-24 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
             12 métiers, une transformation <span className="text-gradient-gold">IA</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Des formations conçues pour chaque fonction de l'entreprise, adaptées aux réalités du marché africain.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {metiers.map((m, i) => (
-            <motion.div
+            <ScrollReveal
               key={m.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="group bg-card rounded-xl p-6 border border-border hover-lift cursor-pointer"
+              delay={i * 0.06}
+              direction={i % 2 === 0 ? "up" : "up"}
+              distance={30}
             >
-              <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-4 group-hover:bg-gold-gradient transition-colors">
-                <m.icon size={22} className="text-accent-foreground group-hover:text-navy-deep transition-colors" />
+              <div className="group bg-card rounded-xl p-6 border border-border hover-lift cursor-pointer h-full">
+                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-4 group-hover:bg-gold-gradient transition-all duration-300">
+                  <m.icon size={22} className="text-accent-foreground group-hover:text-navy-deep transition-colors duration-300" />
+                </div>
+                <h3 className="font-heading font-semibold text-base mb-2 text-card-foreground">{m.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{m.desc}</p>
+                <span className="text-sm font-semibold text-primary">{m.count} formations →</span>
               </div>
-              <h3 className="font-heading font-semibold text-base mb-2 text-card-foreground">{m.title}</h3>
-              <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{m.desc}</p>
-              <span className="text-sm font-semibold text-primary">{m.count} formations →</span>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <ScrollReveal delay={0.3} className="text-center mt-12">
           <a
             href="#cta"
-            className="bg-gold-gradient font-semibold px-8 py-3 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+            className="bg-gold-gradient font-semibold px-8 py-3 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105"
           >
             Voir tout le catalogue
           </a>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

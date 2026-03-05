@@ -4,6 +4,7 @@ import { Search, Clock, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import PageTransition from "@/components/PageTransition";
 import { formations, type Formation } from "@/data/formations";
 
 const metiers = [...new Set(formations.map((f) => f.metier))];
@@ -33,6 +34,7 @@ const CataloguePage = () => {
   }, [search, filterMetier, filterLevel, filterFormat]);
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader title="Catalogue de Formations IA" subtitle="120 formations pratiques pour 12 métiers. Filtrez par domaine, niveau et format." />
@@ -99,6 +101,7 @@ const CataloguePage = () => {
       </section>
       <Footer />
     </div>
+    </PageTransition>
   );
 };
 

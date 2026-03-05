@@ -4,6 +4,8 @@ import { Phone, Mail, MapPin, MessageCircle, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
+import ScrollReveal from "@/components/ScrollReveal";
 import PageHeader from "@/components/PageHeader";
 
 const sectors = [
@@ -30,7 +32,7 @@ const ContactPage = () => {
   const inputClass = "w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
 
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader title="Contactez-nous" subtitle="Demandez un devis, prenez rendez-vous ou posez-nous vos questions." />
 
@@ -135,7 +137,7 @@ const ContactPage = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </div></PageTransition>
   );
 };
 

@@ -5,18 +5,21 @@ import WhyUsSection from "@/components/WhyUsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <HeroSection />
-      <MetiersSection />
-      <WhyUsSection />
-      <TestimonialsSection />
-      <CTASection />
-      <Footer />
-    </div>
+    <PageTransition>
+      <div className="min-h-screen">
+        <Navbar />
+        <HeroSection />
+        <MetiersSection />
+        <WhyUsSection />
+        <TestimonialsSection />
+        <CTASection />
+        <Footer />
+      </div>
+    </PageTransition>
   );
 };
 

@@ -3,6 +3,8 @@ import { Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import PageTransition from "@/components/PageTransition";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const articles = [
   {
@@ -41,7 +43,7 @@ const articles = [
 
 const BlogPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader title="Blog & Ressources" subtitle="Articles, guides pratiques et études de cas sur l'IA et les métiers en Afrique." />
 
@@ -70,7 +72,7 @@ const BlogPage = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </div></PageTransition>
   );
 };
 

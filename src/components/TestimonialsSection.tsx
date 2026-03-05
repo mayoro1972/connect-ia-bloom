@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import ScrollReveal from "@/components/ScrollReveal";
 import { Quote } from "lucide-react";
 
 const testimonials = [
@@ -23,39 +23,29 @@ const TestimonialsSection = () => {
   return (
     <section id="temoignages" className="py-24 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
             Ils nous font <span className="text-gradient-gold">confiance</span>
           </h2>
-        </motion.div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card border border-border rounded-xl p-8 hover-lift relative"
-            >
-              <Quote size={32} className="text-primary/20 mb-4" />
-              <p className="text-card-foreground leading-relaxed mb-6 text-sm">"{t.quote}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center font-heading font-bold text-navy-deep text-sm">
-                  {t.name.split(" ").map(n => n[0]).join("")}
-                </div>
-                <div>
-                  <p className="font-semibold text-sm text-card-foreground">{t.name}</p>
-                  <p className="text-muted-foreground text-xs">{t.role}</p>
+            <ScrollReveal key={t.name} delay={i * 0.12} direction={i === 0 ? "left" : i === 2 ? "right" : "up"}>
+              <div className="bg-card border border-border rounded-xl p-8 hover-lift relative h-full">
+                <Quote size={32} className="text-primary/20 mb-4" />
+                <p className="text-card-foreground leading-relaxed mb-6 text-sm">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center font-heading font-bold text-navy-deep text-sm">
+                    {t.name.split(" ").map(n => n[0]).join("")}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-card-foreground">{t.name}</p>
+                    <p className="text-muted-foreground text-xs">{t.role}</p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

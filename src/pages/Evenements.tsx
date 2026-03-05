@@ -3,6 +3,8 @@ import { Calendar, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import PageTransition from "@/components/PageTransition";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const events = [
   {
@@ -41,7 +43,7 @@ const events = [
 
 const EvenementsPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader title="Événements" subtitle="Séminaires, webinaires et conférences autour de l'IA en Afrique." />
 
@@ -49,14 +51,12 @@ const EvenementsPage = () => {
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <div className="space-y-5">
             {events.map((e, i) => (
-              <motion.div
+              <ScrollReveal
                 key={e.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-card border border-border rounded-xl p-6 flex flex-col md:flex-row md:items-center gap-4 hover-lift"
+                delay={i * 0.1}
+                direction="up"
               >
+              <div className="bg-card border border-border rounded-xl p-6 flex flex-col md:flex-row md:items-center gap-4 hover-lift">
                 <span className={`text-xs font-semibold px-3 py-1 rounded-full self-start ${e.typeColor}`}>
                   {e.type}
                 </span>
@@ -74,13 +74,13 @@ const EvenementsPage = () => {
                 >
                   S'inscrire
                 </a>
-              </motion.div>
+              </div></ScrollReveal>
             ))}
           </div>
         </div>
       </section>
       <Footer />
-    </div>
+    </div></PageTransition>
   );
 };
 

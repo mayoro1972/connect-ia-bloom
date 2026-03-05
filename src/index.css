@@ -92,6 +92,10 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
@@ -129,5 +133,25 @@
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px -12px hsl(38 92% 50% / 0.15);
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .story-link * {
+    @apply relative inline-block;
+  }
+
+  .story-link *::after {
+    content: '';
+    @apply absolute w-full h-0.5 bottom-0 left-0 origin-bottom-right transition-transform duration-300;
+    background: hsl(var(--primary));
+    transform: scaleX(0);
+  }
+
+  .story-link *:hover::after {
+    transform: scaleX(1);
+    @apply origin-bottom-left;
   }
 }

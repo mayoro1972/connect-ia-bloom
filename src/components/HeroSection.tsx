@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen, Users, Award, Globe, ArrowRight, Download } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const stats = [
@@ -12,8 +13,13 @@ const stats = [
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
+      {/* Background with parallax-like scale */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         <img src={heroBg} alt="Équipe africaine en formation IA" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-navy-deep/80" />
         <div
@@ -22,24 +28,24 @@ const HeroSection = () => {
             background: "linear-gradient(to bottom, hsl(220 50% 8% / 0.4), hsl(220 50% 8% / 0.9))",
           }}
         />
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 pt-24 pb-12">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ delay: 0.2, duration: 0.6 }}
             className="text-gold font-semibold uppercase tracking-[0.2em] text-sm mb-6"
           >
             Formation Professionnelle en Intelligence Artificielle
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
+            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ delay: 0.35, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6"
             style={{ color: "hsl(0 0% 96%)" }}
           >
@@ -52,7 +58,7 @@ const HeroSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.55, duration: 0.6 }}
             className="text-lg md:text-xl max-w-2xl mx-auto mb-10"
             style={{ color: "hsl(220 20% 70%)" }}
           >
@@ -62,18 +68,18 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
               href="#cta"
-              className="bg-gold-gradient font-semibold px-8 py-3.5 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-opacity text-base"
+              className="bg-gold-gradient font-semibold px-8 py-3.5 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base"
             >
               Demander un devis <ArrowRight size={18} />
             </a>
             <a
               href="#metiers"
-              className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-colors text-base"
+              className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105 text-base"
               style={{
                 borderColor: "hsl(0 0% 100% / 0.2)",
                 color: "hsl(0 0% 90%)",
@@ -85,23 +91,17 @@ const HeroSection = () => {
         </div>
 
         {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
-        >
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="glass-card rounded-xl p-6 text-center"
-            >
-              <stat.icon className="mx-auto mb-3 text-gold" size={28} />
-              <p className="font-heading text-3xl font-bold text-gold mb-1">{stat.value}</p>
-              <p className="text-sm" style={{ color: "hsl(220 20% 70%)" }}>{stat.label}</p>
-            </div>
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {stats.map((stat, i) => (
+            <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up">
+              <div className="glass-card rounded-xl p-6 text-center hover-lift">
+                <stat.icon className="mx-auto mb-3 text-gold" size={28} />
+                <p className="font-heading text-3xl font-bold text-gold mb-1">{stat.value}</p>
+                <p className="text-sm" style={{ color: "hsl(220 20% 70%)" }}>{stat.label}</p>
+              </div>
+            </ScrollReveal>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
