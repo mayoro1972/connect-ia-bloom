@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
+import { Linkedin, Facebook, Instagram, Youtube, Twitter, MessageCircle, Send } from "lucide-react";
 import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
 import { useLanguage } from "@/i18n/LanguageContext";
+
+const socialLinks = [
+  { icon: Linkedin, href: "https://www.linkedin.com/company/transferai-africa", label: "LinkedIn", color: "hover:text-[#0A66C2]" },
+  { icon: Facebook, href: "https://www.facebook.com/transferai.africa", label: "Facebook", color: "hover:text-[#1877F2]" },
+  { icon: Instagram, href: "https://www.instagram.com/transferai.africa", label: "Instagram", color: "hover:text-[#E4405F]" },
+  { icon: Youtube, href: "https://www.youtube.com/@transferai-africa", label: "YouTube", color: "hover:text-[#FF0000]" },
+  { icon: Twitter, href: "https://x.com/transferai_afr", label: "X (Twitter)", color: "hover:text-[#1DA1F2]" },
+  { icon: Send, href: "https://t.me/transferaiafrica", label: "Telegram", color: "hover:text-[#26A5E4]" },
+  { icon: MessageCircle, href: "https://wa.me/2250700000000", label: "WhatsApp", color: "hover:text-[#25D366]" },
+];
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -16,9 +27,24 @@ const Footer = () => {
                 TransferAI Africa
               </span>
             </Link>
-            <p className="text-sm leading-relaxed" style={{ color: "hsl(210 20% 55%)" }}>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "hsl(210 20% 55%)" }}>
               {t("footer.desc")}
             </p>
+            <div className="flex flex-wrap gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 ${social.color}`}
+                  style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(210 20% 55%)" }}
+                >
+                  <social.icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
           {[
             {
