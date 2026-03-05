@@ -3,6 +3,8 @@ import { FileText, Target, Users, Settings, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import PageTransition from "@/components/PageTransition";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const solutions = [
   {
@@ -33,7 +35,7 @@ const solutions = [
 
 const EntreprisesPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader
         title="Solutions Entreprises"
@@ -44,14 +46,12 @@ const EntreprisesPage = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {solutions.map((s, i) => (
-              <motion.div
+              <ScrollReveal
                 key={s.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card border border-border rounded-xl p-8 hover-lift"
+                delay={i * 0.1}
+                direction={i % 2 === 0 ? "left" : "right"}
               >
+              <div className="bg-card border border-border rounded-xl p-8 hover-lift">
                 <div className="w-14 h-14 rounded-xl bg-accent flex items-center justify-center mb-5">
                   <s.icon size={24} className="text-primary" />
                 </div>
@@ -65,7 +65,7 @@ const EntreprisesPage = () => {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div></ScrollReveal>
             ))}
           </div>
 
@@ -80,7 +80,7 @@ const EntreprisesPage = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </div></PageTransition>
   );
 };
 

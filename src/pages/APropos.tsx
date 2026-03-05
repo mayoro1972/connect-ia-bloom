@@ -3,6 +3,8 @@ import { Target, Users, Award, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import PageTransition from "@/components/PageTransition";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
   { icon: Target, value: "120+", label: "Formations", sub: "Un catalogue complet couvrant 12 métiers" },
@@ -20,7 +22,7 @@ const team = [
 
 const AProposPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader
         title="À propos de l'Académie IA Afrique"
@@ -83,7 +85,7 @@ const AProposPage = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </div></PageTransition>
   );
 };
 

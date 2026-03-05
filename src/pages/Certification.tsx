@@ -3,6 +3,8 @@ import { CheckCircle, BookOpen, Award, Clock, MapPin, Monitor, Calendar } from "
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import PageTransition from "@/components/PageTransition";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const objectives = [
   "Maîtriser les outils IA essentiels pour l'assistanat de direction",
@@ -29,7 +31,7 @@ const evalPoints = [
 
 const CertificationPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader
         badge="Certification Professionnelle"
@@ -129,7 +131,7 @@ const CertificationPage = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </div></PageTransition>
   );
 };
 
