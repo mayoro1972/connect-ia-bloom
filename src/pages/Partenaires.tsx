@@ -76,7 +76,7 @@ const PartenairesPage = () => {
                         className="md:w-72 flex flex-col items-center justify-center p-8 gap-4"
                         style={{ background: `${partner.color}08` }}
                       >
-                        <div className="w-48 h-36 flex items-center justify-center rounded-xl bg-white p-4">
+                        <div className="w-56 h-44 flex items-center justify-center rounded-xl bg-white p-5">
                           <img
                             src={partner.logo}
                             alt={`Logo ${partner.name}`}
