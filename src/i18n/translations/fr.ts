@@ -255,7 +255,7 @@ export const fr = {
     missionTitle: "Notre Mission",
     missionText: "TransferAI Africa est née d'un constat simple : la diaspora ivoirienne regorge d'experts en Intelligence Artificielle. Notre mission est de créer un pont entre ces talents et le continent africain, en proposant des formations pratiques, accessibles et directement applicables au quotidien professionnel en Côte d'Ivoire et en Afrique francophone.",
     stats: [
-      { value: "120+", label: "Formations", sub: "Un catalogue complet couvrant 12 domaines d'expertise" },
+      { value: "130+", label: "Formations", sub: "Un catalogue complet couvrant 13 domaines d'expertise" },
       { value: "500+", label: "Professionnels formés", sub: "Issus de banques, télécoms, ministères" },
       { value: "98%", label: "de satisfaction", sub: "Noté par nos participants" },
       { value: "10+", label: "Pays", sub: "Côte d'Ivoire, Sénégal, Cameroun, etc." },

@@ -255,7 +255,7 @@ export const en = {
     missionTitle: "Our Mission",
     missionText: "TransferAI Africa was born from a simple observation: the Ivorian diaspora is full of AI experts. Our mission is to bridge these talents and the African continent, offering practical, accessible training directly applicable to professional life in Côte d'Ivoire and francophone Africa.",
     stats: [
-      { value: "120+", label: "Courses", sub: "A comprehensive catalogue covering 12 areas of expertise" },
+      { value: "130+", label: "Courses", sub: "A comprehensive catalogue covering 13 areas of expertise" },
       { value: "500+", label: "Professionals trained", sub: "From banks, telecoms, ministries" },
       { value: "98%", label: "satisfaction rate", sub: "Rated by our participants" },
       { value: "10+", label: "Countries", sub: "Côte d'Ivoire, Senegal, Cameroon, etc." },
