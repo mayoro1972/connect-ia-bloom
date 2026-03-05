@@ -17,20 +17,20 @@ export const en = {
     title1: "Train your teams in ",
     titleHighlight: "AI",
     title2: "that transforms Africa",
-    subtitle: "120 practical courses, 12 professions, flexible formats. Prepare your company for the AI era.",
+    subtitle: "120 practical courses, 12 areas of expertise, flexible formats. Prepare your company for the AI era.",
     cta: "Request a Quote",
     catalogue: "Download Catalogue",
     stats: {
       formations: "AI Courses",
-      metiers: "Professions covered",
+      metiers: "Areas of expertise",
       formats: "Flexible formats",
       pays: "Countries covered",
     },
   },
   metiers: {
-    title1: "12 professions, one ",
+    title1: "12 areas of expertise, one ",
     titleHighlight: "AI",
-    subtitle: "Courses designed for every business function, tailored to the African market.",
+    subtitle: "Courses designed for every area of expertise, tailored to the African market.",
     cta: "View full catalogue",
     items: {
       assistanat: { title: "Executive Assistants & Secretaries", desc: "Task automation, smart calendar management, AI-assisted writing." },
@@ -93,9 +93,9 @@ export const en = {
   },
   catalogue: {
     title: "AI Training Catalogue",
-    subtitle: "120 practical courses for 12 professions. Filter by field, level and format.",
+    subtitle: "120 practical courses for 12 areas of expertise. Filter by field, level and format.",
     search: "Search...",
-    allMetiers: "All professions",
+    allMetiers: "All areas of expertise",
     allLevels: "All levels",
     allFormats: "All formats",
     found: "course(s) found",
@@ -183,9 +183,9 @@ export const en = {
   },
   blog: {
     title: "Blog & Resources",
-    subtitle: "Articles, practical guides and case studies on AI and professions in Africa.",
+    subtitle: "Articles, practical guides and case studies on AI and areas of expertise in Africa.",
     articles: [
-      { category: "Professions & AI", title: "How AI is Revolutionizing Executive Assistants in Africa", desc: "Discover how AI tools are transforming the daily tasks of executive assistants and secretaries.", readTime: "5 min", date: "March 2, 2026" },
+      { category: "Expertise & AI", title: "How AI is Revolutionizing Executive Assistants in Africa", desc: "Discover how AI tools are transforming the daily tasks of executive assistants and secretaries.", readTime: "5 min", date: "March 2, 2026" },
       { category: "Guides", title: "ChatGPT in Business: A Practical Guide for African SMEs", desc: "A step-by-step guide to integrating ChatGPT into your business processes, with real use cases.", readTime: "8 min", date: "February 25, 2026" },
       { category: "Case Studies", title: "Recruitment & AI: How African CHROs Are Adapting", desc: "Case study on the use of AI in recruitment within major Ivorian companies.", readTime: "6 min", date: "February 18, 2026" },
       { category: "Guides", title: "Measuring the ROI of AI Training in Business", desc: "Methodology and key indicators to assess the impact of your AI training investments.", readTime: "7 min", date: "February 10, 2026" },
@@ -222,7 +222,7 @@ export const en = {
     missionTitle: "Our Mission",
     missionText: "TransferAI Africa was born from a simple observation: the Ivorian diaspora is full of AI experts. Our mission is to bridge these talents and the African continent, offering practical, accessible training directly applicable to professional life in Côte d'Ivoire and francophone Africa.",
     stats: [
-      { value: "120+", label: "Courses", sub: "A comprehensive catalogue covering 12 professions" },
+      { value: "120+", label: "Courses", sub: "A comprehensive catalogue covering 12 areas of expertise" },
       { value: "500+", label: "Professionals trained", sub: "From banks, telecoms, ministries" },
       { value: "98%", label: "satisfaction rate", sub: "Rated by our participants" },
       { value: "10+", label: "Countries", sub: "Côte d'Ivoire, Senegal, Cameroon, etc." },
@@ -237,10 +237,10 @@ export const en = {
   },
   parcours: {
     title: "Learning Paths",
-    subtitle: "Structured paths to guide you from beginner to expert level in each profession.",
+    subtitle: "Structured paths to guide you from beginner to expert level in each area of expertise.",
     howItWorks: "How does it work?",
     steps: [
-      { title: "Beginner Level", desc: "Discover the fundamentals of AI applied to your profession. No technical prerequisites." },
+      { title: "Beginner Level", desc: "Discover the fundamentals of AI applied to your field. No technical prerequisites." },
       { title: "Intermediate Level", desc: "Deepen your skills with advanced practical cases and specialized tools." },
       { title: "Expert Level", desc: "Become an AI leader in your organization and manage transformation projects." },
     ],
