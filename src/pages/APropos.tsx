@@ -24,8 +24,8 @@ const AProposPage = () => {
     <PageTransition><div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader
-        title="À propos de l'Académie IA Afrique"
-        subtitle="Notre mission : démocratiser l'Intelligence Artificielle dans les entreprises africaines."
+        title="À propos de TransferAI Africa"
+        subtitle="Notre mission : transférer l'expertise IA de la diaspora vers l'Afrique."
       />
 
       <section className="py-16">
@@ -33,7 +33,7 @@ const AProposPage = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-heading text-2xl font-bold mb-4">Notre Mission</h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              L'Académie IA Afrique est née d'un constat simple : l'Intelligence Artificielle transforme tous les métiers, mais les formations disponibles sont rarement adaptées aux réalités du marché africain. Notre mission est de combler ce fossé en proposant des formations pratiques, accessibles et directement applicables au quotidien professionnel en Côte d'Ivoire et en Afrique francophone.
+              TransferAI Africa est née d'un constat simple : la diaspora ivoirienne regorge d'experts en Intelligence Artificielle. Notre mission est de créer un pont entre ces talents et le continent africain, en proposant des formations pratiques, accessibles et directement applicables au quotidien professionnel en Côte d'Ivoire et en Afrique francophone.
             </p>
           </motion.div>
 

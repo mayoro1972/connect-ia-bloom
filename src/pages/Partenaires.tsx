@@ -14,7 +14,7 @@ const partners = [
     logo: logoMiddlesex,
     type: "Partenaire Académique",
     description:
-      "Université britannique de renommée internationale, Middlesex University collabore avec l'Académie IA Afrique pour offrir des programmes certifiants reconnus à l'échelle mondiale.",
+      "Université britannique de renommée internationale, Middlesex University collabore avec TransferAI Africa pour offrir des programmes certifiants reconnus à l'échelle mondiale.",
     highlights: [
       "Certifications co-délivrées reconnues internationalement",
       "Accès aux ressources pédagogiques universitaires",
@@ -28,7 +28,7 @@ const partners = [
     logo: logoNettelecom,
     type: "Partenaire Entreprise",
     description:
-      "Leader des télécommunications en Côte d'Ivoire, Nettelecom CI accompagne l'Académie IA Afrique dans le déploiement d'infrastructures numériques et la formation des talents du secteur télécom.",
+      "Leader des télécommunications en Côte d'Ivoire, Nettelecom CI accompagne TransferAI Africa dans le déploiement d'infrastructures numériques et la formation des talents du secteur télécom.",
     highlights: [
       "Infrastructure réseau et connectivité pour les formations",
       "Cas pratiques issus du secteur télécom",
@@ -126,7 +126,7 @@ const PartenairesPage = () => {
                 Devenir Partenaire
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-                Vous êtes une université, une entreprise ou une institution et souhaitez collaborer avec l'Académie IA Afrique ? Contactez-nous.
+                Vous êtes une université, une entreprise ou une institution et souhaitez collaborer avec TransferAI Africa ? Contactez-nous.
               </p>
               <a
                 href="/contact"

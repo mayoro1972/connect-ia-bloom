@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
 
 const Footer = () => {
   return (
@@ -7,15 +8,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-teal-gradient font-heading font-bold text-xs" style={{ color: "hsl(0 0% 100%)" }}>
-                IA
-              </span>
+              <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-9 rounded-lg object-contain" />
               <span className="font-heading font-semibold" style={{ color: "hsl(0 0% 92%)" }}>
-                Académie IA Afrique
+                TransferAI Africa
               </span>
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: "hsl(210 20% 55%)" }}>
-              La référence en formation professionnelle IA en Afrique.
+              La référence en formation professionnelle IA en Afrique — portée par la diaspora.
             </p>
           </div>
           {[
@@ -60,7 +59,7 @@ const Footer = () => {
         </div>
         <div className="border-t pt-8" style={{ borderColor: "hsl(0 0% 100% / 0.08)" }}>
           <p className="text-center text-xs" style={{ color: "hsl(210 20% 45%)" }}>
-            © 2026 Académie IA Afrique. Tous droits réservés.
+            © 2026 TransferAI Africa. Tous droits réservés.
           </p>
         </div>
       </div>

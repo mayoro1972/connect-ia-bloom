@@ -15,30 +15,34 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
-    --primary: 174 70% 42%;
+    --primary: 30 90% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 50% 16%;
     --secondary-foreground: 0 0% 96%;
 
-    --muted: 210 20% 96%;
+    --muted: 35 30% 96%;
     --muted-foreground: 220 15% 46%;
 
-    --accent: 174 50% 93%;
-    --accent-foreground: 174 70% 28%;
+    --accent: 30 50% 93%;
+    --accent-foreground: 30 80% 35%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 174 70% 42%;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 30 90% 50%;
 
     --radius: 0.75rem;
 
     --hero-overlay: 220 50% 12%;
     --coral: 15 85% 57%;
     --coral-light: 15 80% 68%;
+    --orange: 30 90% 50%;
+    --orange-light: 35 85% 60%;
+    --green: 145 65% 42%;
+    --green-light: 145 50% 55%;
     --teal: 174 70% 42%;
     --teal-light: 174 55% 55%;
     --teal-deep: 174 80% 25%;
@@ -66,19 +70,19 @@
     --card-foreground: 220 20% 92%;
     --popover: 225 50% 10%;
     --popover-foreground: 220 20% 92%;
-    --primary: 174 70% 42%;
+    --primary: 30 90% 50%;
     --primary-foreground: 0 0% 100%;
     --secondary: 220 40% 22%;
     --secondary-foreground: 0 0% 96%;
     --muted: 220 30% 15%;
     --muted-foreground: 220 15% 60%;
-    --accent: 174 30% 15%;
-    --accent-foreground: 174 60% 65%;
+    --accent: 30 30% 15%;
+    --accent-foreground: 30 60% 65%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 220 30% 18%;
     --input: 220 30% 18%;
-    --ring: 174 70% 42%;
+    --ring: 30 90% 50%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -112,7 +116,7 @@
 @layer utilities {
   .text-gradient-teal {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(174 70% 42%), hsl(174 55% 55%));
+    background-image: linear-gradient(135deg, hsl(145 65% 42%), hsl(145 50% 55%));
   }
 
   .text-gradient-coral {
@@ -120,16 +124,25 @@
     background-image: linear-gradient(135deg, hsl(15 85% 57%), hsl(25 90% 60%));
   }
 
+  .text-gradient-orange {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(30 90% 50%), hsl(40 95% 55%));
+  }
+
   .bg-indigo-gradient {
     background: linear-gradient(135deg, hsl(225 55% 10%), hsl(220 50% 16%));
   }
 
   .bg-teal-gradient {
-    background: linear-gradient(135deg, hsl(174 70% 42%), hsl(174 55% 55%));
+    background: linear-gradient(135deg, hsl(30 90% 50%), hsl(145 65% 42%));
   }
 
   .bg-coral-gradient {
     background: linear-gradient(135deg, hsl(15 85% 57%), hsl(25 90% 60%));
+  }
+
+  .bg-orange-gradient {
+    background: linear-gradient(135deg, hsl(30 90% 50%), hsl(40 95% 55%));
   }
 
   .glass-card {
@@ -144,7 +157,7 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px hsl(174 70% 42% / 0.2);
+    box-shadow: 0 20px 40px -12px hsl(30 90% 50% / 0.2);
   }
 
   .hover-scale {

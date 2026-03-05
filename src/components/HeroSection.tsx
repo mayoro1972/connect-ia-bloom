@@ -25,7 +25,7 @@ const HeroSection = () => {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(135deg, hsl(225 55% 10% / 0.65), hsl(174 70% 20% / 0.55))",
+            background: "linear-gradient(135deg, hsl(225 55% 10% / 0.65), hsl(30 80% 30% / 0.45))",
           }}
         />
         <div
@@ -44,7 +44,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="font-semibold uppercase tracking-[0.2em] text-sm mb-6"
-            style={{ color: "hsl(174 70% 60%)" }}
+            style={{ color: "hsl(30 90% 65%)" }}
           >
             Formation Professionnelle en Intelligence Artificielle
           </motion.p>
@@ -57,7 +57,7 @@ const HeroSection = () => {
             style={{ color: "hsl(0 0% 98%)" }}
           >
             Formez vos équipes à l'
-            <span className="text-gradient-coral">IA</span>
+            <span className="text-gradient-orange">IA</span>
             <br />
             qui transforme l'Afrique
           </motion.h1>
@@ -80,7 +80,7 @@ const HeroSection = () => {
           >
             <a
               href="#cta"
-              className="bg-coral-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base"
+              className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base"
               style={{ color: "hsl(0 0% 100%)" }}
             >
               Demander un devis <ArrowRight size={18} />
@@ -103,8 +103,8 @@ const HeroSection = () => {
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up">
               <div className="glass-card rounded-xl p-6 text-center hover-lift">
-                <stat.icon className="mx-auto mb-3" size={28} style={{ color: "hsl(174 70% 60%)" }} />
-                <p className="font-heading text-3xl font-bold mb-1" style={{ color: "hsl(15 85% 60%)" }}>{stat.value}</p>
+                <stat.icon className="mx-auto mb-3" size={28} style={{ color: "hsl(30 90% 60%)" }} />
+                <p className="font-heading text-3xl font-bold mb-1" style={{ color: "hsl(145 65% 50%)" }}>{stat.value}</p>
                 <p className="text-sm" style={{ color: "hsl(210 20% 75%)" }}>{stat.label}</p>
               </div>
             </ScrollReveal>
