@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Search, Clock, Monitor } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -67,7 +68,8 @@ const CataloguePage = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((f, i) => (
-              <motion.div key={f.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }} className="bg-card border border-border rounded-xl p-5 hover-lift flex flex-col">
+              <Link key={f.id} to={`/catalogue/${f.id}`}>
+              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }} className="bg-card border border-border rounded-xl p-5 hover-lift flex flex-col h-full">
                 <div className="flex items-center gap-2 mb-3 flex-wrap">
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{f.level}</span>
                   <span className="text-xs text-muted-foreground flex items-center gap-1"><Monitor size={12} />{f.format}</span>
@@ -81,9 +83,10 @@ const CataloguePage = () => {
                 </div>
                 <div className="flex items-center justify-between mt-auto">
                   <span className="font-semibold text-sm text-card-foreground">{f.price}</span>
-                  <span className="text-xs font-semibold text-coral cursor-pointer">{t("catalogue.details")}</span>
+                  <span className="text-xs font-semibold text-primary">{t("catalogue.details")}</span>
                 </div>
               </motion.div>
+              </Link>
             ))}
           </div>
         </div>

@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Catalogue from "./pages/Catalogue";
+import FormationDetail from "./pages/FormationDetail";
 import Certification from "./pages/Certification";
 import Entreprises from "./pages/Entreprises";
 import Partenaires from "./pages/Partenaires";
@@ -15,6 +16,8 @@ import Evenements from "./pages/Evenements";
 import APropos from "./pages/APropos";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Parcours from "./pages/Parcours";
+import Inscription from "./pages/Inscription";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/catalogue" element={<Catalogue />} />
+        <Route path="/catalogue/:id" element={<FormationDetail />} />
+        <Route path="/parcours" element={<Parcours />} />
+        <Route path="/inscription" element={<Inscription />} />
         <Route path="/certification" element={<Certification />} />
         <Route path="/entreprises" element={<Entreprises />} />
         <Route path="/partenaires" element={<Partenaires />} />

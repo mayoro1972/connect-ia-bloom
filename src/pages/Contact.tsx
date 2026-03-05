@@ -88,9 +88,9 @@ const ContactPage = () => {
               <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-card border border-border rounded-xl p-6">
                 <h3 className="font-heading font-semibold mb-2 flex items-center gap-2"><Calendar size={18} /> {t("contact.appointmentTitle")}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{t("contact.appointmentDesc")}</p>
-                <button className="w-full bg-teal-gradient font-semibold py-2.5 rounded-lg text-sm hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="w-full bg-teal-gradient font-semibold py-2.5 rounded-lg text-sm hover:opacity-90 transition-opacity block text-center" style={{ color: "hsl(0 0% 100%)" }}>
                   {t("contact.appointmentCta")}
-                </button>
+                </a>
               </motion.div>
             </div>
           </div>

@@ -1,12 +1,17 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
+import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
 import { ArrowRight, Download } from "lucide-react";
 import ctaBg from "@/assets/cta-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const CTASection = () => {
   const { t } = useLanguage();
+  const [downloadOpen, setDownloadOpen] = useState(false);
 
   return (
+    <>
     <section id="cta" className="relative py-24 overflow-hidden">
       <div className="absolute inset-0">
         <img src={ctaBg} alt="" className="w-full h-full object-cover" />
@@ -22,16 +27,18 @@ const CTASection = () => {
             {t("cta.subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105" style={{ color: "hsl(0 0% 100%)" }}>
+            <Link to="/contact" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105" style={{ color: "hsl(0 0% 100%)" }}>
               {t("cta.button")} <ArrowRight size={18} />
-            </a>
-            <a href="#" className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105" style={{ borderColor: "hsl(0 0% 100% / 0.25)", color: "hsl(0 0% 95%)" }}>
+            </Link>
+            <button onClick={() => setDownloadOpen(true)} className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105" style={{ borderColor: "hsl(0 0% 100% / 0.25)", color: "hsl(0 0% 95%)" }}>
               <Download size={18} /> {t("cta.catalogue")}
-            </a>
+            </button>
           </div>
         </ScrollReveal>
       </div>
     </section>
+    <CatalogueDownloadModal isOpen={downloadOpen} onClose={() => setDownloadOpen(false)} />
+    </>
   );
 };
 
