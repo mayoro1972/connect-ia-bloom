@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Users, Award, Globe, ArrowRight, Download } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const [downloadOpen, setDownloadOpen] = useState(false);
 
   const stats = [
     { icon: BookOpen, value: "120+", label: t("hero.stats.formations") },
@@ -15,6 +18,7 @@ const HeroSection = () => {
   ];
 
   return (
+    <>
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <motion.div
         className="absolute inset-0"
@@ -68,12 +72,12 @@ const HeroSection = () => {
             transition={{ delay: 0.7, duration: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#cta" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base" style={{ color: "hsl(0 0% 100%)" }}>
+            <a href="/contact" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base" style={{ color: "hsl(0 0% 100%)" }}>
               {t("hero.cta")} <ArrowRight size={18} />
             </a>
-            <a href="#metiers" className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105 text-base" style={{ borderColor: "hsl(0 0% 100% / 0.25)", color: "hsl(0 0% 95%)" }}>
+            <button onClick={() => setDownloadOpen(true)} className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105 text-base" style={{ borderColor: "hsl(0 0% 100% / 0.25)", color: "hsl(0 0% 95%)" }}>
               <Download size={18} /> {t("hero.catalogue")}
-            </a>
+            </button>
           </motion.div>
         </div>
 
@@ -90,6 +94,8 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
+    <CatalogueDownloadModal isOpen={downloadOpen} onClose={() => setDownloadOpen(false)} />
+    </>
   );
 };
 
