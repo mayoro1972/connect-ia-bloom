@@ -1,20 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Users, Award, Globe, ArrowRight, Download } from "lucide-react";
+import { BookOpen, Users, Award, Globe, ArrowRight, Download, Eye } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const HeroSection = () => {
   const { t } = useLanguage();
   const [downloadOpen, setDownloadOpen] = useState(false);
+  const [totalViews, setTotalViews] = useState<number | null>(null);
 
+  useEffect(() => {
+    const fetchViews = async () => {
+      const { data } = await supabase.from("page_view_stats").select("total_views").single();
+      if (data) setTotalViews(data.total_views);
+    };
+    fetchViews();
+  }, []);
   const stats = [
     { icon: BookOpen, value: "130+", label: t("hero.stats.formations") },
     { icon: Users, value: "13", label: t("hero.stats.metiers") },
     { icon: Award, value: "3", label: t("hero.stats.formats") },
     { icon: Globe, value: "10+", label: t("hero.stats.pays") },
+    { icon: Eye, value: totalViews !== null ? totalViews.toLocaleString() : "—", label: t("hero.stats.visiteurs") },
   ];
 
   return (
@@ -81,7 +91,7 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up">
               <div className="glass-card rounded-xl p-6 text-center hover-lift">
