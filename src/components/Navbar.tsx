@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Catalogue", href: "/catalogue" },
   { label: "Certification", href: "/certification" },
   { label: "Entreprises", href: "/entreprises" },
+  { label: "Partenaires", href: "/partenaires" },
   { label: "Événements", href: "/evenements" },
   { label: "Blog", href: "/blog" },
   { label: "À propos", href: "/a-propos" },

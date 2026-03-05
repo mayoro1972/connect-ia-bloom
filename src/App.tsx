@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Catalogue from "./pages/Catalogue";
 import Certification from "./pages/Certification";
 import Entreprises from "./pages/Entreprises";
+import Partenaires from "./pages/Partenaires";
 import Evenements from "./pages/Evenements";
 import APropos from "./pages/APropos";
 import Blog from "./pages/Blog";
@@ -26,6 +27,7 @@ const AnimatedRoutes = () => {
         <Route path="/catalogue" element={<Catalogue />} />
         <Route path="/certification" element={<Certification />} />
         <Route path="/entreprises" element={<Entreprises />} />
+        <Route path="/partenaires" element={<Partenaires />} />
         <Route path="/evenements" element={<Evenements />} />
         <Route path="/a-propos" element={<APropos />} />
         <Route path="/blog" element={<Blog />} />
