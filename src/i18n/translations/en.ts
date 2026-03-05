@@ -25,6 +25,7 @@ export const en = {
       metiers: "Areas of expertise",
       formats: "Flexible formats",
       pays: "Countries covered",
+      visiteurs: "Visitors",
     },
   },
   metiers: {
