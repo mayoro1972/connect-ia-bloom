@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
-import ScrollReveal from "@/components/ScrollReveal";
 
 const articles = [
   {
@@ -17,7 +16,7 @@ const articles = [
   },
   {
     category: "Guides",
-    categoryColor: "text-accent-foreground",
+    categoryColor: "text-coral",
     title: "ChatGPT en entreprise : guide pratique pour les PME africaines",
     desc: "Un guide étape par étape pour intégrer ChatGPT dans vos processus d'entreprise, avec des cas d'usage concrets.",
     readTime: "8 min",
@@ -33,7 +32,7 @@ const articles = [
   },
   {
     category: "Guides",
-    categoryColor: "text-accent-foreground",
+    categoryColor: "text-coral",
     title: "Mesurer le ROI de la formation IA en entreprise",
     desc: "Méthodologie et indicateurs clés pour évaluer l'impact de vos investissements en formation IA.",
     readTime: "7 min",

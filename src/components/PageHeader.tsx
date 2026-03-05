@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import headerBg from "@/assets/header-bg.jpg";
 
 interface PageHeaderProps {
   title: string;
@@ -8,14 +9,29 @@ interface PageHeaderProps {
 
 const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
   return (
-    <section className="bg-navy-gradient pt-28 pb-16">
-      <div className="container mx-auto px-4 lg:px-8 text-center">
+    <section className="relative pt-28 pb-16 overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img src={headerBg} alt="" className="w-full h-full object-cover" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, hsl(225 55% 10% / 0.85), hsl(220 50% 16% / 0.9))",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
         {badge && (
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-medium mb-6 text-gold"
-            style={{ borderColor: "hsl(38 92% 50% / 0.3)", background: "hsl(38 92% 50% / 0.08)" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-medium mb-6"
+            style={{
+              borderColor: "hsl(15 85% 57% / 0.3)",
+              background: "hsl(15 85% 57% / 0.1)",
+              color: "hsl(15 85% 65%)",
+            }}
           >
             {badge}
           </motion.span>
@@ -25,7 +41,7 @@ const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-4"
-          style={{ color: "hsl(0 0% 96%)" }}
+          style={{ color: "hsl(0 0% 98%)" }}
         >
           {title}
         </motion.h1>
@@ -35,7 +51,7 @@ const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-lg max-w-2xl mx-auto"
-            style={{ color: "hsl(220 20% 65%)" }}
+            style={{ color: "hsl(210 20% 75%)" }}
           >
             {subtitle}
           </motion.p>

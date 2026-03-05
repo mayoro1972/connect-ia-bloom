@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
-import ScrollReveal from "@/components/ScrollReveal";
 
 const objectives = [
   "Maîtriser les outils IA essentiels pour l'assistanat de direction",
@@ -42,20 +41,12 @@ const CertificationPage = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Left content */}
             <div className="lg:col-span-2 space-y-12">
-              {/* Objectives */}
               <div>
                 <h2 className="font-heading text-2xl font-bold mb-6">Objectifs de la certification</h2>
                 <div className="space-y-4">
                   {objectives.map((obj) => (
-                    <motion.div
-                      key={obj}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      className="flex items-start gap-3"
-                    >
+                    <motion.div key={obj} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex items-start gap-3">
                       <CheckCircle size={20} className="text-primary mt-0.5 shrink-0" />
                       <p className="text-card-foreground">{obj}</p>
                     </motion.div>
@@ -63,7 +54,6 @@ const CertificationPage = () => {
                 </div>
               </div>
 
-              {/* Programme */}
               <div>
                 <h2 className="font-heading text-2xl font-bold mb-6">Programme (5 jours)</h2>
                 <div className="space-y-3">
@@ -76,13 +66,12 @@ const CertificationPage = () => {
                 </div>
               </div>
 
-              {/* Evaluation */}
               <div>
                 <h2 className="font-heading text-2xl font-bold mb-6">Évaluation</h2>
                 <div className="space-y-3">
                   {evalPoints.map((ep) => (
                     <div key={ep} className="flex items-start gap-3">
-                      <Award size={18} className="text-primary mt-0.5 shrink-0" />
+                      <Award size={18} className="text-coral mt-0.5 shrink-0" />
                       <p className="text-card-foreground text-sm">{ep}</p>
                     </div>
                   ))}
@@ -90,7 +79,6 @@ const CertificationPage = () => {
               </div>
             </div>
 
-            {/* Sidebar pricing */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -111,8 +99,7 @@ const CertificationPage = () => {
                   ].map((item) => (
                     <div key={item.label} className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground flex items-center gap-2">
-                        <item.icon size={16} />
-                        {item.label}
+                        <item.icon size={16} /> {item.label}
                       </span>
                       <span className="text-sm font-medium text-card-foreground">{item.value}</span>
                     </div>
@@ -121,7 +108,8 @@ const CertificationPage = () => {
 
                 <a
                   href="/contact"
-                  className="block w-full bg-gold-gradient font-semibold py-3 rounded-lg text-navy-deep text-center hover:opacity-90 transition-opacity"
+                  className="block w-full bg-coral-gradient font-semibold py-3 rounded-lg text-center hover:opacity-90 transition-opacity"
+                  style={{ color: "hsl(0 0% 100%)" }}
                 >
                   S'inscrire / Demander un devis
                 </a>

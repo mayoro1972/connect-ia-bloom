@@ -21,11 +21,17 @@ const HeroSection = () => {
         transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <img src={heroBg} alt="Équipe africaine en formation IA" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-navy-deep/80" />
+        {/* Overlay: lighter to let image shine */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to bottom, hsl(220 50% 8% / 0.4), hsl(220 50% 8% / 0.9))",
+            background: "linear-gradient(135deg, hsl(225 55% 10% / 0.65), hsl(174 70% 20% / 0.55))",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, hsl(225 55% 10% / 0.3) 0%, hsl(225 55% 10% / 0.7) 100%)",
           }}
         />
       </motion.div>
@@ -37,7 +43,8 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-gold font-semibold uppercase tracking-[0.2em] text-sm mb-6"
+            className="font-semibold uppercase tracking-[0.2em] text-sm mb-6"
+            style={{ color: "hsl(174 70% 60%)" }}
           >
             Formation Professionnelle en Intelligence Artificielle
           </motion.p>
@@ -47,10 +54,10 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 0.35, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6"
-            style={{ color: "hsl(0 0% 96%)" }}
+            style={{ color: "hsl(0 0% 98%)" }}
           >
             Formez vos équipes à l'
-            <span className="text-gradient-gold">IA</span>
+            <span className="text-gradient-coral">IA</span>
             <br />
             qui transforme l'Afrique
           </motion.h1>
@@ -60,7 +67,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55, duration: 0.6 }}
             className="text-lg md:text-xl max-w-2xl mx-auto mb-10"
-            style={{ color: "hsl(220 20% 70%)" }}
+            style={{ color: "hsl(210 20% 80%)" }}
           >
             120 formations pratiques, 12 métiers, des formats flexibles. Préparez votre entreprise à l'ère de l'Intelligence Artificielle.
           </motion.p>
@@ -73,7 +80,8 @@ const HeroSection = () => {
           >
             <a
               href="#cta"
-              className="bg-gold-gradient font-semibold px-8 py-3.5 rounded-lg text-navy-deep inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base"
+              className="bg-coral-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base"
+              style={{ color: "hsl(0 0% 100%)" }}
             >
               Demander un devis <ArrowRight size={18} />
             </a>
@@ -81,8 +89,8 @@ const HeroSection = () => {
               href="#metiers"
               className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105 text-base"
               style={{
-                borderColor: "hsl(0 0% 100% / 0.2)",
-                color: "hsl(0 0% 90%)",
+                borderColor: "hsl(0 0% 100% / 0.25)",
+                color: "hsl(0 0% 95%)",
               }}
             >
               <Download size={18} /> Télécharger le catalogue
@@ -95,9 +103,9 @@ const HeroSection = () => {
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up">
               <div className="glass-card rounded-xl p-6 text-center hover-lift">
-                <stat.icon className="mx-auto mb-3 text-gold" size={28} />
-                <p className="font-heading text-3xl font-bold text-gold mb-1">{stat.value}</p>
-                <p className="text-sm" style={{ color: "hsl(220 20% 70%)" }}>{stat.label}</p>
+                <stat.icon className="mx-auto mb-3" size={28} style={{ color: "hsl(174 70% 60%)" }} />
+                <p className="font-heading text-3xl font-bold mb-1" style={{ color: "hsl(15 85% 60%)" }}>{stat.value}</p>
+                <p className="text-sm" style={{ color: "hsl(210 20% 75%)" }}>{stat.label}</p>
               </div>
             </ScrollReveal>
           ))}
