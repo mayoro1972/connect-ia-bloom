@@ -76,7 +76,7 @@ export const en = {
     catalogue: "Download Catalogue",
   },
   footer: {
-    desc: "The reference in AI professional training in Africa — powered by the diaspora.",
+    desc: "The reference in AI professional training in Côte d'Ivoire and Africa — powered by the diaspora.",
     formations: "Training",
     resources: "Resources",
     contact: "Contact",
