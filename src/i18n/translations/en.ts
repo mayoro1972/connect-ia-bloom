@@ -252,6 +252,11 @@ export const en = {
         description: "The African Institute for Development and Strategies (IADS), led by Mr. Gnamien Yao, former Minister and Ambassador, supports TransferAI Africa in developing innovative training strategies for the African continent.",
         highlights: ["High-level strategic expertise", "Institutional and diplomatic network across Africa", "Support in developing AI training policies", "Synergy between economic development and digital transformation"],
       },
+      {
+        type: "Public Digital Partner",
+        description: "The SNDI (Société Nationale de Développement Informatique) is the key player in the digital transformation of public administration in Côte d'Ivoire. TransferAI Africa supports SNDI in training its teams and public servants in AI tools and digital technologies.",
+        highlights: ["Training public servants in AI and digital tools", "Supporting the digital transformation of government", "Developing AI skills for e-government", "Tailored programs for public administration"],
+      },
     ],
   },
   about: {

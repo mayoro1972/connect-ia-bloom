@@ -252,6 +252,11 @@ export const fr = {
         description: "L'Institut Africain de Développement et de Stratégies (IADS), dirigé par M. Gnamien Yao, ancien ministre et Ambassadeur, accompagne TransferAI Africa dans le développement de stratégies de formation innovantes pour le continent africain.",
         highlights: ["Expertise stratégique de haut niveau", "Réseau institutionnel et diplomatique en Afrique", "Accompagnement dans le développement de politiques de formation IA", "Synergie entre développement économique et transformation numérique"],
       },
+      {
+        type: "Partenaire Digital Public",
+        description: "La SNDI (Société Nationale de Développement Informatique) est l'acteur clé de la transformation digitale de l'administration publique en Côte d'Ivoire. TransferAI Africa accompagne la SNDI dans la formation de ses équipes et des agents publics aux outils d'IA et au numérique.",
+        highlights: ["Formation des agents publics à l'IA et au numérique", "Accompagnement de la transformation digitale de l'État", "Développement de compétences IA pour l'e-gouvernement", "Programmes sur mesure pour l'administration publique"],
+      },
     ],
   },
   about: {
