@@ -8,6 +8,7 @@ import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
 import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useFormationLocale } from "@/hooks/useFormationLocale";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 
@@ -20,6 +21,7 @@ const levelColors = {
 
 const ParcoursPage = () => {
   const { t, language } = useLanguage();
+  const { getTitle, getDuration } = useFormationLocale();
   const trans = language === "fr" ? fr : en;
   const parcours = trans.parcours;
 
@@ -95,9 +97,9 @@ const ParcoursPage = () => {
                             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                               {lvl.formations.slice(0, 3).map((f) => (
                                 <Link key={f.id} to={`/catalogue/${f.id}`} className="p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 transition-colors group">
-                                  <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors">{f.title}</p>
+                                  <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors">{getTitle(f)}</p>
                                   <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                                    <span className="flex items-center gap-1"><Clock size={12} />{f.duration}</span>
+                                    <span className="flex items-center gap-1"><Clock size={12} />{getDuration(f)}</span>
                                     <span>{f.price}</span>
                                   </div>
                                 </Link>

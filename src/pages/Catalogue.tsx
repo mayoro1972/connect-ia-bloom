@@ -12,6 +12,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import { formations, type Formation } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useFormationLocale } from "@/hooks/useFormationLocale";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
@@ -67,6 +68,7 @@ const newFormationIds = new Set([
 
 const FormationCard = ({ f, i, isNew = false }: { f: Formation; i: number; isNew?: boolean }) => {
   const { t } = useLanguage();
+  const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
   return (
     <Link to={`/catalogue/${f.id}`}>
       <motion.div
@@ -84,11 +86,11 @@ const FormationCard = ({ f, i, isNew = false }: { f: Formation; i: number; isNew
           </div>
         )}
         <div className="flex items-center gap-2 mb-3 flex-wrap">
-          <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{f.level}</span>
-          <span className="text-xs text-muted-foreground flex items-center gap-1"><Monitor size={12} />{f.format}</span>
-          <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} />{f.duration}</span>
+          <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{getLevel(f)}</span>
+          <span className="text-xs text-muted-foreground flex items-center gap-1"><Monitor size={12} />{getFormat(f)}</span>
+          <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} />{getDuration(f)}</span>
         </div>
-        <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1 group-hover:text-primary transition-colors">{f.title}</h3>
+        <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1 group-hover:text-primary transition-colors">{getTitle(f)}</h3>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {f.tags.map((tag) => (
             <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{tag}</span>
@@ -131,7 +133,7 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
 };
 
 const CataloguePage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState("explorer");
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
 
@@ -155,7 +157,8 @@ const CataloguePage = () => {
 
   const searchFiltered = useMemo(() => {
     return formations.filter((f) => {
-      const matchSearch = !search || f.title.toLowerCase().includes(search.toLowerCase()) || f.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
+      const title = language === "en" ? f.titleEn : f.title;
+      const matchSearch = !search || title.toLowerCase().includes(search.toLowerCase()) || f.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
       const matchMetier = !filterMetier || f.metier === filterMetier;
       const matchLevel = !filterLevel || f.level === filterLevel;
       const matchFormat = !filterFormat || f.format === filterFormat;

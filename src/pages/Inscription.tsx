@@ -7,10 +7,12 @@ import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useFormationLocale } from "@/hooks/useFormationLocale";
 
 const InscriptionPage = () => {
   const { toast } = useToast();
   const { t } = useLanguage();
+  const { getTitle } = useFormationLocale();
   const [searchParams] = useSearchParams();
   const preselected = searchParams.get("formation") || "";
 
@@ -71,7 +73,7 @@ const InscriptionPage = () => {
                 <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.formation")}</label>
                 <select required value={form.formation} onChange={(e) => update("formation", e.target.value)} className={inputClass}>
                   <option value="">{t("inscription.selectFormation")}</option>
-                  {formations.map((f) => <option key={f.id} value={f.title}>{f.title}</option>)}
+                  {formations.map((f) => <option key={f.id} value={f.title}>{getTitle(f)}</option>)}
                 </select>
               </div>
               <div>
