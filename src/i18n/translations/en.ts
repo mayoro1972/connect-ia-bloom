@@ -247,6 +247,11 @@ export const en = {
         description: "The FDFP (Professional Training Development Fund) actively supports AI skill development in Africa. This partnership helps finance and make professional training accessible.",
         highlights: ["Training funding for professionals", "Scholarships and training grants", "AI career transition programs", "Administrative support for training applications"],
       },
+      {
+        type: "Institutional Partner",
+        description: "The African Institute for Development and Strategies (IADS), led by Mr. Gnamien Yao, former Minister and Ambassador, supports TransferAI Africa in developing innovative training strategies for the African continent.",
+        highlights: ["High-level strategic expertise", "Institutional and diplomatic network across Africa", "Support in developing AI training policies", "Synergy between economic development and digital transformation"],
+      },
     ],
   },
   about: {

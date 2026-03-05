@@ -247,6 +247,11 @@ export const fr = {
         description: "Le FDFP (Fonds de Développement de la Formation Professionnelle) soutient activement la montée en compétences IA en Afrique. Ce partenariat permet de financer et rendre accessibles les formations professionnelles.",
         highlights: ["Financement de formations pour les professionnels", "Bourses d'études et aides à la formation", "Programmes de reconversion professionnelle vers l'IA", "Accompagnement administratif des dossiers de formation"],
       },
+      {
+        type: "Partenaire Institutionnel",
+        description: "L'Institut Africain de Développement et de Stratégies (IADS), dirigé par M. Gnamien Yao, ancien ministre et Ambassadeur, accompagne TransferAI Africa dans le développement de stratégies de formation innovantes pour le continent africain.",
+        highlights: ["Expertise stratégique de haut niveau", "Réseau institutionnel et diplomatique en Afrique", "Accompagnement dans le développement de politiques de formation IA", "Synergie entre développement économique et transformation numérique"],
+      },
     ],
   },
   about: {
