@@ -1,14 +1,17 @@
-import { ExternalLink, GraduationCap, Wifi, BookOpen } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
+import logoMiddlesex from "@/assets/logo-middlesex.png";
+import logoNettelecom from "@/assets/logo-nettelecom.png";
+import logoFdfp from "@/assets/logo-fdfp.png";
 
 const partners = [
   {
     name: "Middlesex University",
-    icon: GraduationCap,
+    logo: logoMiddlesex,
     type: "Partenaire Académique",
     description:
       "Université britannique de renommée internationale, Middlesex University collabore avec l'Académie IA Afrique pour offrir des programmes certifiants reconnus à l'échelle mondiale.",
@@ -22,7 +25,7 @@ const partners = [
   },
   {
     name: "Nettelecom CI",
-    icon: Wifi,
+    logo: logoNettelecom,
     type: "Partenaire Entreprise",
     description:
       "Leader des télécommunications en Côte d'Ivoire, Nettelecom CI accompagne l'Académie IA Afrique dans le déploiement d'infrastructures numériques et la formation des talents du secteur télécom.",
@@ -35,11 +38,11 @@ const partners = [
     color: "hsl(174 70% 42%)",
   },
   {
-    name: "FDPF",
-    icon: BookOpen,
+    name: "FDFP",
+    logo: logoFdfp,
     type: "Partenaire Formation",
     description:
-      "Le FDPF (Fonds de Développement de la Formation Professionnelle) soutient activement la montée en compétences IA en Afrique. Ce partenariat permet de financer et rendre accessibles les formations professionnelles.",
+      "Le FDFP (Fonds de Développement de la Formation Professionnelle) soutient activement la montée en compétences IA en Afrique. Ce partenariat permet de financer et rendre accessibles les formations professionnelles.",
     highlights: [
       "Financement de formations pour les professionnels",
       "Bourses d'études et aides à la formation",
@@ -68,15 +71,17 @@ const PartenairesPage = () => {
                 <ScrollReveal key={partner.name} delay={i * 0.15} direction={i % 2 === 0 ? "left" : "right"}>
                   <div className="bg-card border border-border rounded-2xl overflow-hidden hover-lift">
                     <div className="flex flex-col md:flex-row">
+                      {/* Logo */}
                       <div
-                        className="md:w-64 flex flex-col items-center justify-center p-8 gap-3"
-                        style={{ background: `${partner.color}15` }}
+                        className="md:w-72 flex flex-col items-center justify-center p-8 gap-4"
+                        style={{ background: `${partner.color}08` }}
                       >
-                        <div
-                          className="w-20 h-20 rounded-2xl flex items-center justify-center"
-                          style={{ background: `${partner.color}20` }}
-                        >
-                          <partner.icon size={36} style={{ color: partner.color }} />
+                        <div className="w-40 h-28 flex items-center justify-center rounded-xl bg-white p-4">
+                          <img
+                            src={partner.logo}
+                            alt={`Logo ${partner.name}`}
+                            className="max-w-full max-h-full object-contain"
+                          />
                         </div>
                         <span
                           className="text-xs font-semibold px-3 py-1 rounded-full"
@@ -86,6 +91,7 @@ const PartenairesPage = () => {
                         </span>
                       </div>
 
+                      {/* Content */}
                       <div className="flex-1 p-8">
                         <h3 className="font-heading text-2xl font-bold text-card-foreground mb-3">
                           {partner.name}
