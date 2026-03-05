@@ -177,4 +177,18 @@ export const formations: Formation[] = [
   { id: "sante-08", title: "Télémédecine et IA en Entreprise", metier: "Santé & Bien-être", level: "Avancé", format: "Présentiel", duration: "2 jours", price: "750 000 FCFA", tags: ["Télémédecine", "Digital"] },
   { id: "sante-09", title: "Nutrition et Bien-être Assistés par l'IA", metier: "Santé & Bien-être", level: "Débutant", format: "En ligne", duration: "1 jour", price: "350 000 FCFA", tags: ["Nutrition", "Bien-être"] },
   { id: "sante-10", title: "Conformité HSE et IA", metier: "Santé & Bien-être", level: "Avancé", format: "Hybride", duration: "2 jours", price: "750 000 FCFA", tags: ["HSE", "Conformité"] },
+
+  // ═══════════════════════════════════════════════
+  // DIPLOMATIE & AFFAIRES INTERNATIONALES (10)
+  // ═══════════════════════════════════════════════
+  { id: "diplo-01", title: "Diplomatie Digitale et Intelligence Artificielle", metier: "Diplomatie & Affaires Internationales", level: "Débutant", format: "Présentiel", duration: "2 jours", price: "2 500 000 FCFA", tags: ["Diplomatie numérique", "Relations internationales"] },
+  { id: "diplo-02", title: "Intelligence Artificielle et Analyse Géopolitique", metier: "Diplomatie & Affaires Internationales", level: "Intermédiaire", format: "Présentiel", duration: "2 jours", price: "3 000 000 FCFA", tags: ["Géopolitique", "Analyse stratégique"] },
+  { id: "diplo-03", title: "Diplomatie des Données (Data Diplomacy)", metier: "Diplomatie & Affaires Internationales", level: "Intermédiaire", format: "Hybride", duration: "2 jours", price: "3 000 000 FCFA", tags: ["Data Diplomacy", "Gouvernance des données"] },
+  { id: "diplo-04", title: "Cybersécurité et Diplomatie Internationale", metier: "Diplomatie & Affaires Internationales", level: "Avancé", format: "Présentiel", duration: "2 jours", price: "3 500 000 FCFA", tags: ["Cybersécurité", "Cyber diplomatie"] },
+  { id: "diplo-05", title: "Diplomatie des Technologies Émergentes", metier: "Diplomatie & Affaires Internationales", level: "Intermédiaire", format: "Présentiel", duration: "2 jours", price: "3 000 000 FCFA", tags: ["Technologies émergentes", "Régulation IA"] },
+  { id: "diplo-06", title: "Communication Diplomatique à l'ère de l'IA", metier: "Diplomatie & Affaires Internationales", level: "Débutant", format: "Hybride", duration: "2 jours", price: "2 500 000 FCFA", tags: ["Communication", "Rédaction diplomatique"] },
+  { id: "diplo-07", title: "Négociation Internationale et IA", metier: "Diplomatie & Affaires Internationales", level: "Avancé", format: "Présentiel", duration: "2 jours", price: "3 500 000 FCFA", tags: ["Négociation", "Simulation IA"] },
+  { id: "diplo-08", title: "Diplomatie Économique et Intelligence Artificielle", metier: "Diplomatie & Affaires Internationales", level: "Intermédiaire", format: "Présentiel", duration: "2 jours", price: "3 000 000 FCFA", tags: ["Commerce international", "Diplomatie économique"] },
+  { id: "diplo-09", title: "Gouvernance Mondiale de l'Intelligence Artificielle", metier: "Diplomatie & Affaires Internationales", level: "Avancé", format: "Hybride", duration: "2 jours", price: "3 500 000 FCFA", tags: ["Gouvernance IA", "ONU & UNESCO"] },
+  { id: "diplo-10", title: "Leadership Diplomatique à l'ère de l'IA", metier: "Diplomatie & Affaires Internationales", level: "Avancé", format: "Présentiel", duration: "2 jours", price: "5 000 000 FCFA", tags: ["Leadership", "Transformation numérique"] },
 ];

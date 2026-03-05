@@ -1,7 +1,7 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import {
   Briefcase, Users, Megaphone, Calculator, Scale, HeadphonesIcon,
-  BarChart3, ClipboardList, Crown, Monitor, GraduationCap, Heart,
+  BarChart3, ClipboardList, Crown, Monitor, GraduationCap, Heart, Globe,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -18,6 +18,7 @@ const metierKeys = [
   { key: "it", icon: Monitor },
   { key: "formation", icon: GraduationCap },
   { key: "sante", icon: Heart },
+  { key: "diplomatie", icon: Globe },
 ];
 
 const MetiersSection = () => {

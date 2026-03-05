@@ -17,7 +17,7 @@ export const fr = {
     title1: "Formez vos équipes à l'",
     titleHighlight: "IA",
     title2: "qui transforme l'Afrique",
-    subtitle: "120 formations pratiques, 12 domaines d'expertise, des formats flexibles. Préparez votre entreprise à l'ère de l'Intelligence Artificielle.",
+    subtitle: "130 formations pratiques, 13 domaines d'expertise, des formats flexibles. Préparez votre entreprise à l'ère de l'Intelligence Artificielle.",
     cta: "Demander un devis",
     catalogue: "Télécharger le catalogue",
     stats: {
@@ -28,7 +28,7 @@ export const fr = {
     },
   },
   metiers: {
-    title1: "12 domaines d'expertise, une transformation ",
+    title1: "13 domaines d'expertise, une transformation ",
     titleHighlight: "IA",
     subtitle: "Des formations conçues pour chaque fonction de l'entreprise, adaptées aux réalités du marché africain.",
     cta: "Voir tout le catalogue",
@@ -45,6 +45,7 @@ export const fr = {
       it: { title: "IT & Transformation Digitale", desc: "Intégration d'outils IA, cybersécurité, automatisation IT." },
       formation: { title: "Formation & Pédagogie", desc: "Conception pédagogique assistée, e-learning adaptatif." },
       sante: { title: "Santé & Bien-être au Travail", desc: "Prévention des risques, analyse ergonomique, suivi du bien-être." },
+      diplomatie: { title: "Diplomatie & Affaires Internationales", desc: "Diplomatie digitale, analyse géopolitique, cybersécurité, négociation internationale avec l'IA." },
     },
     formationsCount: "formations →",
   },
@@ -251,6 +252,7 @@ export const fr = {
       { title: "IA pour la Finance", desc: "Optimisez vos analyses et reportings financiers", metierKey: "Finance & Comptabilité" },
       { title: "IA pour le Management", desc: "Prenez des décisions data-driven et managez avec l'IA", metierKey: "Management & Leadership" },
       { title: "IA pour l'IT", desc: "Intégrez l'IA dans vos infrastructures et processus IT", metierKey: "IT & Transformation Digitale" },
+      { title: "IA pour la Diplomatie", desc: "Maîtrisez les outils IA pour la diplomatie et les affaires internationales", metierKey: "Diplomatie & Affaires Internationales" },
     ],
     coursesLabel: "formations",
     ctaTitle: "Besoin d'un parcours sur-mesure ?",

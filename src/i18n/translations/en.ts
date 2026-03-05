@@ -17,7 +17,7 @@ export const en = {
     title1: "Train your teams in ",
     titleHighlight: "AI",
     title2: "that transforms Africa",
-    subtitle: "120 practical courses, 12 areas of expertise, flexible formats. Prepare your company for the AI era.",
+    subtitle: "130 practical courses, 13 areas of expertise, flexible formats. Prepare your company for the AI era.",
     cta: "Request a Quote",
     catalogue: "Download Catalogue",
     stats: {
@@ -28,7 +28,7 @@ export const en = {
     },
   },
   metiers: {
-    title1: "12 areas of expertise, one ",
+    title1: "13 areas of expertise, one ",
     titleHighlight: "AI",
     subtitle: "Courses designed for every area of expertise, tailored to the African market.",
     cta: "View full catalogue",
@@ -45,6 +45,7 @@ export const en = {
       it: { title: "IT & Digital Transformation", desc: "AI tool integration, cybersecurity, IT automation." },
       formation: { title: "Training & Education", desc: "AI-assisted instructional design, adaptive e-learning." },
       sante: { title: "Health & Workplace Wellness", desc: "Risk prevention, ergonomic analysis, wellness monitoring." },
+      diplomatie: { title: "Diplomacy & International Affairs", desc: "Digital diplomacy, geopolitical analysis, cybersecurity, international negotiations with AI." },
     },
     formationsCount: "courses →",
   },
@@ -93,7 +94,7 @@ export const en = {
   },
   catalogue: {
     title: "AI Training Catalogue",
-    subtitle: "120 practical courses for 12 areas of expertise. Filter by field, level and format.",
+    subtitle: "130 practical courses for 13 areas of expertise. Filter by field, level and format.",
     search: "Search...",
     allMetiers: "All areas of expertise",
     allLevels: "All levels",
@@ -251,6 +252,7 @@ export const en = {
       { title: "AI for Finance", desc: "Optimize your financial analyses and reporting", metierKey: "Finance & Comptabilité" },
       { title: "AI for Management", desc: "Make data-driven decisions and manage with AI", metierKey: "Management & Leadership" },
       { title: "AI for IT", desc: "Integrate AI into your infrastructure and IT processes", metierKey: "IT & Transformation Digitale" },
+      { title: "AI for Diplomacy", desc: "Master AI tools for diplomacy and international affairs", metierKey: "Diplomatie & Affaires Internationales" },
     ],
     coursesLabel: "courses",
     ctaTitle: "Need a custom learning path?",
