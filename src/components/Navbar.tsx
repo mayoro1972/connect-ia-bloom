@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
+import aiToolsBanner from "@/assets/ai-tools-banner.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const navKeys = [
@@ -27,7 +28,19 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(30 90% 50% / 0.15)" }}>
-      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
+      {/* Animated AI tools banner strip */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute inset-0 flex"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ x: { duration: 30, repeat: Infinity, ease: "linear" } }}
+          style={{ width: "200%" }}
+        >
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.15 }} />
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.15 }} />
+        </motion.div>
+      </div>
+      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8 relative z-10">
         <Link to="/" className="flex items-center gap-2">
           <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-10 rounded-lg object-contain" />
           <span className="font-heading font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
