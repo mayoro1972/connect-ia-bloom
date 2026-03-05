@@ -106,6 +106,7 @@ const FormationCard = ({ f, i, isNew = false }: { f: Formation; i: number; isNew
 };
 
 const DomainCard = ({ domain, count, onClick }: { domain: string; count: number; onClick: () => void }) => {
+  const { t } = useLanguage();
   const Icon = domainIcons[domain] || BookOpen;
   const colorClass = domainColors[domain] || "from-primary/20 to-primary/5 border-primary/30";
 
@@ -121,9 +122,9 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
         <Icon size={22} className="text-primary" />
       </div>
       <h3 className="font-heading font-semibold text-base mb-1 text-card-foreground">{domain}</h3>
-      <p className="text-sm text-muted-foreground mb-3">{count} formations disponibles</p>
+      <p className="text-sm text-muted-foreground mb-3">{count} {t("catalogue.availableFormations")}</p>
       <span className="text-xs font-semibold text-primary flex items-center gap-1">
-        Explorer <ChevronRight size={14} />
+        {t("catalogue.explore")} <ChevronRight size={14} />
       </span>
     </motion.button>
   );
@@ -182,24 +183,24 @@ const CataloguePage = () => {
               <div className="flex items-center gap-2">
                 <BookOpen size={16} className="text-primary" />
                 <span className="font-semibold text-card-foreground">{totalFormations}+</span>
-                <span className="text-muted-foreground">formations</span>
+                <span className="text-muted-foreground">{t("catalogue.formations")}</span>
               </div>
               <span className="text-border">•</span>
               <div className="flex items-center gap-2">
                 <BarChart3 size={16} className="text-primary" />
                 <span className="font-semibold text-card-foreground">{totalDomains}</span>
-                <span className="text-muted-foreground">domaines d'expertise</span>
+                <span className="text-muted-foreground">{t("catalogue.domainsExpertise")}</span>
               </div>
               <span className="text-border">•</span>
               <div className="flex items-center gap-2">
                 <Monitor size={16} className="text-primary" />
                 <span className="font-semibold text-card-foreground">3</span>
-                <span className="text-muted-foreground">formats</span>
+                <span className="text-muted-foreground">{t("catalogue.formatsLabel")}</span>
               </div>
               <span className="text-border">•</span>
               <div className="flex items-center gap-2">
                 <Sparkles size={16} className="text-primary" />
-                <span className="text-muted-foreground">Certifications reconnues</span>
+                <span className="text-muted-foreground">{t("catalogue.certifiedLabel")}</span>
               </div>
             </div>
           </div>
@@ -214,21 +215,21 @@ const CataloguePage = () => {
                   className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg px-6 py-2.5 text-sm font-semibold transition-all"
                 >
                   <BookOpen size={16} className="mr-2" />
-                  Explorer par domaine
+                  {t("catalogue.tabExplore")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="rechercher"
                   className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg px-6 py-2.5 text-sm font-semibold transition-all"
                 >
                   <Search size={16} className="mr-2" />
-                  Rechercher
+                  {t("catalogue.tabSearch")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="nouveautes"
                   className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg px-6 py-2.5 text-sm font-semibold transition-all"
                 >
                   <Sparkles size={16} className="mr-2" />
-                  Nouveautés
+                  {t("catalogue.tabNew")}
                 </TabsTrigger>
               </TabsList>
 
@@ -265,7 +266,7 @@ const CataloguePage = () => {
                         className="flex items-center gap-2 text-sm font-semibold text-primary mb-6 hover:underline"
                       >
                         <ChevronRight size={16} className="rotate-180" />
-                        Retour aux domaines
+                        {t("catalogue.backToDomains")}
                       </button>
 
                       <div className="flex items-center gap-4 mb-8">
@@ -279,7 +280,7 @@ const CataloguePage = () => {
                         })()}
                         <div>
                           <h2 className="font-heading text-2xl font-bold text-card-foreground">{selectedDomain}</h2>
-                          <p className="text-sm text-muted-foreground">{domainGroups[selectedDomain]?.length || 0} formations disponibles</p>
+                          <p className="text-sm text-muted-foreground">{domainGroups[selectedDomain]?.length || 0} {t("catalogue.availableFormations")}</p>
                         </div>
                       </div>
 
@@ -298,7 +299,7 @@ const CataloguePage = () => {
                 <div className="bg-card rounded-xl border border-border p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
                     <Filter size={18} className="text-muted-foreground" />
-                    <h3 className="font-heading font-semibold text-sm text-card-foreground">Filtres avancés</h3>
+                    <h3 className="font-heading font-semibold text-sm text-card-foreground">{t("catalogue.advancedFilters")}</h3>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div className="relative">
@@ -328,7 +329,7 @@ const CataloguePage = () => {
                   {/* Active filters */}
                   {(search || filterMetier || filterLevel || filterFormat) && (
                     <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-border">
-                      <span className="text-xs text-muted-foreground">Filtres actifs :</span>
+                      <span className="text-xs text-muted-foreground">{t("catalogue.activeFilters")}</span>
                       {search && (
                         <Badge variant="secondary" className="gap-1 cursor-pointer" onClick={() => setSearch("")}>
                           "{search}" <X size={12} />
@@ -353,7 +354,7 @@ const CataloguePage = () => {
                         onClick={() => { setSearch(""); setFilterMetier(""); setFilterLevel(""); setFilterFormat(""); }}
                         className="text-xs text-primary font-semibold hover:underline ml-2"
                       >
-                        Tout effacer
+                        {t("catalogue.clearAll")}
                       </button>
                     </div>
                   )}
@@ -372,8 +373,8 @@ const CataloguePage = () => {
                 {searchFiltered.length === 0 && (
                   <div className="text-center py-16">
                     <Search size={48} className="mx-auto text-muted-foreground/30 mb-4" />
-                    <h3 className="font-heading font-semibold text-lg text-card-foreground mb-2">Aucune formation trouvée</h3>
-                    <p className="text-sm text-muted-foreground">Essayez de modifier vos critères de recherche.</p>
+                    <h3 className="font-heading font-semibold text-lg text-card-foreground mb-2">{t("catalogue.noResults")}</h3>
+                    <p className="text-sm text-muted-foreground">{t("catalogue.noResultsHint")}</p>
                   </div>
                 )}
               </TabsContent>
@@ -385,8 +386,8 @@ const CataloguePage = () => {
                     <Sparkles size={20} className="text-[hsl(145,65%,42%)]" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-xl font-bold text-card-foreground">Formations récentes</h2>
-                    <p className="text-sm text-muted-foreground">{newFormations.length} nouvelles formations ajoutées</p>
+                    <h2 className="font-heading text-xl font-bold text-card-foreground">{t("catalogue.recentFormations")}</h2>
+                    <p className="text-sm text-muted-foreground">{newFormations.length} {t("catalogue.newFormationsAdded")}</p>
                   </div>
                 </div>
 
