@@ -1,39 +1,10 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Search, Clock, Monitor, MapPin } from "lucide-react";
+import { Search, Clock, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
-
-type Formation = {
-  id: string;
-  title: string;
-  metier: string;
-  level: "Débutant" | "Intermédiaire" | "Avancé";
-  format: "Présentiel" | "Hybride" | "En ligne";
-  duration: string;
-  price: string;
-  tags: string[];
-};
-
-const formations: Formation[] = [
-  { id: "assist-01", title: "ChatGPT pour Assistants de Direction", metier: "Assistanat & Secrétariat", level: "Débutant", format: "Présentiel", duration: "2 jours", price: "350 000 FCFA", tags: ["ChatGPT", "Productivité"] },
-  { id: "assist-02", title: "Gestion Intelligente de l'Agenda avec l'IA", metier: "Assistanat & Secrétariat", level: "Débutant", format: "Hybride", duration: "1 jour", price: "350 000 FCFA", tags: ["Agenda", "Automatisation"] },
-  { id: "assist-03", title: "Rédaction Professionnelle Assistée par IA", metier: "Assistanat & Secrétariat", level: "Intermédiaire", format: "Présentiel", duration: "2 jours", price: "500 000 FCFA", tags: ["Rédaction", "ChatGPT"] },
-  { id: "rh-01", title: "IA et Recrutement : Sourcing & Sélection", metier: "Ressources Humaines", level: "Débutant", format: "Présentiel", duration: "2 jours", price: "350 000 FCFA", tags: ["Recrutement", "IA"] },
-  { id: "rh-02", title: "Gestion Prévisionnelle des Emplois avec l'IA", metier: "Ressources Humaines", level: "Intermédiaire", format: "Hybride", duration: "2 jours", price: "500 000 FCFA", tags: ["GPEC", "Prédictif"] },
-  { id: "mkt-01", title: "Création de Contenu Marketing avec l'IA", metier: "Marketing & Communication", level: "Débutant", format: "Présentiel", duration: "2 jours", price: "350 000 FCFA", tags: ["Contenu", "ChatGPT"] },
-  { id: "mkt-02", title: "SEO Automatisé et IA", metier: "Marketing & Communication", level: "Intermédiaire", format: "En ligne", duration: "1 jour", price: "350 000 FCFA", tags: ["SEO", "Automatisation"] },
-  { id: "fin-01", title: "IA et Analyse Financière Avancée", metier: "Finance & Comptabilité", level: "Avancé", format: "Présentiel", duration: "3 jours", price: "750 000 FCFA", tags: ["Finance", "Analyse"] },
-  { id: "fin-02", title: "Détection de Fraudes avec l'IA", metier: "Finance & Comptabilité", level: "Intermédiaire", format: "Hybride", duration: "2 jours", price: "500 000 FCFA", tags: ["Fraude", "Machine Learning"] },
-  { id: "jur-01", title: "Recherche Juridique Assistée par IA", metier: "Juridique & Conformité", level: "Débutant", format: "En ligne", duration: "1 jour", price: "350 000 FCFA", tags: ["Juridique", "Recherche"] },
-  { id: "sc-01", title: "Chatbots Intelligents pour le Service Client", metier: "Service Client", level: "Intermédiaire", format: "Présentiel", duration: "2 jours", price: "500 000 FCFA", tags: ["Chatbot", "IA"] },
-  { id: "data-01", title: "Visualisation de Données avec IA", metier: "Data & Analyse", level: "Débutant", format: "Présentiel", duration: "2 jours", price: "350 000 FCFA", tags: ["Data Viz", "IA"] },
-  { id: "admin-01", title: "Automatisation Administrative avec l'IA", metier: "Administration & Gestion", level: "Débutant", format: "Hybride", duration: "1 jour", price: "350 000 FCFA", tags: ["Automatisation", "Admin"] },
-  { id: "mgmt-01", title: "Leadership Data-Driven avec l'IA", metier: "Management & Leadership", level: "Avancé", format: "Présentiel", duration: "2 jours", price: "750 000 FCFA", tags: ["Leadership", "Data"] },
-  { id: "it-01", title: "Intégration d'Outils IA en Entreprise", metier: "IT & Transformation Digitale", level: "Intermédiaire", format: "Présentiel", duration: "3 jours", price: "500 000 FCFA", tags: ["IT", "Intégration"] },
-  { id: "form-01", title: "E-learning Adaptatif avec l'IA", metier: "Formation & Pédagogie", level: "Intermédiaire", format: "En ligne", duration: "2 jours", price: "500 000 FCFA", tags: ["E-learning", "Pédagogie"] },
-];
+import { formations, type Formation } from "@/data/formations";
 
 const metiers = [...new Set(formations.map((f) => f.metier))];
 const levels: Formation["level"][] = ["Débutant", "Intermédiaire", "Avancé"];
@@ -103,7 +74,7 @@ const CataloguePage = () => {
                 key={f.id}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.03 }}
+                transition={{ delay: Math.min(i * 0.03, 0.5) }}
                 className="bg-card border border-border rounded-xl p-5 hover-lift flex flex-col"
               >
                 <div className="flex items-center gap-2 mb-3 flex-wrap">
