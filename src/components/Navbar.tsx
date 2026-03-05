@@ -28,38 +28,47 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(30 90% 50% / 0.15)" }}>
-      {/* Animated AI tools banner strip - multi-directional */}
+      {/* Animated AI tools banner - all directions */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Layer 1: scroll left */}
         <motion.div
           className="absolute inset-0 flex"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ x: { duration: 25, repeat: Infinity, ease: "linear" } }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           style={{ width: "200%" }}
         >
           <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.18 }} />
           <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.18 }} />
         </motion.div>
-        {/* Layer 2: scroll right + slight vertical drift */}
+        {/* Layer 2: scroll right */}
         <motion.div
           className="absolute inset-0 flex"
-          animate={{ x: ["-50%", "0%"], y: ["-8%", "8%", "-8%"] }}
-          transition={{
-            x: { duration: 35, repeat: Infinity, ease: "linear" },
-            y: { duration: 6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" },
-          }}
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
           style={{ width: "200%" }}
         >
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover scale-110" style={{ opacity: 0.1, transform: "scaleX(-1) scale(1.1)" }} />
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover scale-110" style={{ opacity: 0.1, transform: "scaleX(-1) scale(1.1)" }} />
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.1, transform: "scaleX(-1)" }} />
+          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.1, transform: "scaleX(-1)" }} />
         </motion.div>
-        {/* Layer 3: diagonal drift */}
+        {/* Layer 3: scroll down */}
         <motion.div
-          className="absolute inset-0"
-          animate={{ x: ["5%", "-5%", "5%"], y: ["5%", "-5%", "5%"], scale: [1.2, 1.3, 1.2] }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+          className="absolute left-0 right-0 flex flex-col"
+          animate={{ y: ["0%", "-50%"] }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+          style={{ height: "200%" }}
         >
-          <img src={aiToolsBanner} alt="" className="h-full w-full object-cover" style={{ opacity: 0.08 }} />
+          <img src={aiToolsBanner} alt="" className="w-full h-1/2 object-cover" style={{ opacity: 0.08, transform: "rotate(90deg) scale(2)" }} />
+          <img src={aiToolsBanner} alt="" className="w-full h-1/2 object-cover" style={{ opacity: 0.08, transform: "rotate(90deg) scale(2)" }} />
+        </motion.div>
+        {/* Layer 4: scroll up */}
+        <motion.div
+          className="absolute left-0 right-0 flex flex-col"
+          animate={{ y: ["-50%", "0%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          style={{ height: "200%" }}
+        >
+          <img src={aiToolsBanner} alt="" className="w-full h-1/2 object-cover" style={{ opacity: 0.06, transform: "rotate(-90deg) scale(2)" }} />
+          <img src={aiToolsBanner} alt="" className="w-full h-1/2 object-cover" style={{ opacity: 0.06, transform: "rotate(-90deg) scale(2)" }} />
         </motion.div>
       </div>
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8 relative z-10">
