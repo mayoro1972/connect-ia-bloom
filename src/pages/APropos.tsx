@@ -11,11 +11,13 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import teamCasimir from "@/assets/team-casimir.jpg";
 import teamMarius from "@/assets/team-marius.jpg";
 import teamSouleymane from "@/assets/team-souleymane.jpg";
+import teamEric from "@/assets/team-eric.jpg";
 
 const teamPhotos: Record<string, string> = {
   "Casimir Beda Kassi": teamCasimir,
   "Marius Ayoro": teamMarius,
   "Souleymane Konate": teamSouleymane,
+  "Eric N'Guessan": teamEric,
 };
 
 const iconMap = [Target, Users, Award, Globe];
