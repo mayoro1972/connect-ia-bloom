@@ -257,6 +257,11 @@ export const fr = {
         description: "La SNDI (Société Nationale de Développement Informatique) est l'acteur clé de la transformation digitale de l'administration publique en Côte d'Ivoire. TransferAI Africa accompagne la SNDI dans la formation de ses équipes et des agents publics aux outils d'IA et au numérique.",
         highlights: ["Formation des agents publics à l'IA et au numérique", "Accompagnement de la transformation digitale de l'État", "Développement de compétences IA pour l'e-gouvernement", "Programmes sur mesure pour l'administration publique"],
       },
+      {
+        type: "Partenaire Académique & Formation",
+        description: "École de commerce et de management de référence en Côte d'Ivoire et en Afrique francophone, Pigier CI forme des milliers de professionnels chaque année. Ce partenariat gagnant-gagnant permet à TransferAI Africa d'intégrer l'IA dans les cursus Pigier, tout en offrant aux étudiants et alumni un accès privilégié à des formations en intelligence artificielle adaptées au marché africain.",
+        highlights: ["Intégration de modules IA dans les cursus Pigier CI", "Accès privilégié aux formations TransferAI pour étudiants et alumni", "Co-certification de programmes IA & management", "Passerelles entre formation classique et compétences digitales"],
+      },
     ],
   },
   about: {
