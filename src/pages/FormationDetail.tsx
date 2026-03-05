@@ -7,6 +7,7 @@ import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
 import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useFormationLocale } from "@/hooks/useFormationLocale";
 
 const getFormationDetails = (f: typeof formations[0]) => {
   const levelMap: Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }> = {
@@ -63,6 +64,7 @@ const getFormationDetails = (f: typeof formations[0]) => {
 const FormationDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useLanguage();
+  const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
   const formation = formations.find((f) => f.id === id);
 
   if (!formation) {
@@ -103,14 +105,14 @@ const FormationDetailPage = () => {
               <ArrowLeft size={16} /> {t("formationDetail.backToCatalogue")}
             </Link>
             <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <span className={`text-xs font-medium px-3 py-1 rounded-full ${levelColors[formation.level]}`}>{formation.level}</span>
-              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}><Monitor size={14} />{formation.format}</span>
-              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}><Clock size={14} />{formation.duration}</span>
+              <span className={`text-xs font-medium px-3 py-1 rounded-full ${levelColors[formation.level]}`}>{getLevel(formation)}</span>
+              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}><Monitor size={14} />{getFormat(formation)}</span>
+              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}><Clock size={14} />{getDuration(formation)}</span>
             </div>
             <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
-              {formation.title}
+              {getTitle(formation)}
             </motion.h1>
-            <p className="text-sm" style={{ color: "hsl(210 20% 72%)" }}>{formation.metier}</p>
+            <p className="text-sm" style={{ color: "hsl(210 20% 72%)" }}>{t(`catalogue.domains.${formation.metier}`) || formation.metier}</p>
           </div>
         </section>
 
@@ -187,9 +189,9 @@ const FormationDetailPage = () => {
                   <p className="text-xs text-muted-foreground mb-6">{t("formationDetail.perParticipant")}</p>
 
                   <div className="space-y-4 mb-6">
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.durationLabel")}</span><span className="font-medium text-card-foreground">{formation.duration}</span></div>
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.formatLabel")}</span><span className="font-medium text-card-foreground">{formation.format}</span></div>
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.levelLabel")}</span><span className="font-medium text-card-foreground">{formation.level}</span></div>
+                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.durationLabel")}</span><span className="font-medium text-card-foreground">{getDuration(formation)}</span></div>
+                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.formatLabel")}</span><span className="font-medium text-card-foreground">{getFormat(formation)}</span></div>
+                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.levelLabel")}</span><span className="font-medium text-card-foreground">{getLevel(formation)}</span></div>
                     <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.locationLabel")}</span><span className="font-medium text-card-foreground">Abidjan, CI</span></div>
                   </div>
 
@@ -217,10 +219,10 @@ const FormationDetailPage = () => {
                   {relatedFormations.map((f) => (
                     <Link key={f.id} to={`/catalogue/${f.id}`} className="bg-card border border-border rounded-xl p-5 hover-lift flex flex-col">
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
-                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{f.level}</span>
-                        <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} />{f.duration}</span>
+                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{getLevel(f)}</span>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} />{getDuration(f)}</span>
                       </div>
-                      <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1">{f.title}</h3>
+                      <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1">{getTitle(f)}</h3>
                       <div className="flex items-center justify-between mt-auto">
                         <span className="font-semibold text-sm text-card-foreground">{f.price}</span>
                         <span className="text-xs font-semibold text-primary flex items-center gap-1">{t("catalogue.details")} <ChevronRight size={14} /></span>
