@@ -278,10 +278,10 @@ export const fr = {
     ],
     teamTitle: "Notre Équipe",
     team: [
-      { name: "Casimir Beda Kassi", role: "Directeur Général", desc: "Visionnaire et stratège, il pilote TransferAI Africa avec l'ambition de connecter la diaspora ivoirienne au continent." },
-      { name: "Marius Ayoro", role: "Responsable Entreprises", desc: "Spécialiste du développement business, il accompagne les entreprises dans leur transformation IA." },
-      { name: "Souleymane Konate", role: "Expert IA & Data", desc: "Data scientist et formateur, passionné par la démocratisation de l'IA en Afrique." },
-      { name: "Eric N'Guessan", role: "Directeur Pédagogique", desc: "Expert en ingénierie de formation, il conçoit des programmes adaptés aux réalités africaines." },
+      { name: "Casimir Beda Kassi", role: "Directeur Général & Co-fondateur", desc: "15+ ans d'expérience en stratégie digitale. Il pilote la vision de TransferAI Africa pour faire de l'IA un levier de croissance en Afrique." },
+      { name: "Marius Ayoro", role: "Directeur Développement & Partenariats", desc: "Expert en transformation digitale des entreprises. Il conçoit des solutions IA sur mesure pour les secteurs banque, télécom et industrie." },
+      { name: "Souleymane Konate", role: "Directeur IA & Innovation", desc: "PhD en Data Science, il dirige la R&D et forme les professionnels aux technologies IA de pointe : machine learning, NLP et vision par ordinateur." },
+      { name: "Eric N'Guessan", role: "Directeur Pédagogique & Certifications", desc: "Ingénieur pédagogique certifié, il supervise la qualité des formations et les partenariats académiques internationaux." },
     ],
   },
   parcours: {

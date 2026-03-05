@@ -45,15 +45,15 @@ const AProposPage = () => {
           </div>
 
           <h2 className="font-heading text-2xl font-bold mb-6">{t("about.teamTitle")}</h2>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {team.map((member, i) => (
-              <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-xl p-6">
-                <div className="w-12 h-12 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold mb-4" style={{ color: "hsl(0 0% 100%)" }}>
+              <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-card border border-border rounded-xl p-5 text-center flex flex-col items-center">
+                <div className="w-14 h-14 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-lg mb-3" style={{ color: "hsl(0 0% 100%)" }}>
                   {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
                 </div>
-                <h3 className="font-heading font-semibold text-card-foreground">{member.name}</h3>
-                <p className="text-sm text-coral mb-2">{member.role}</p>
-                <p className="text-sm text-muted-foreground">{member.desc}</p>
+                <h3 className="font-heading font-semibold text-card-foreground text-sm">{member.name}</h3>
+                <p className="text-xs font-medium text-coral mb-2">{member.role}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{member.desc}</p>
               </motion.div>
             ))}
           </div>
