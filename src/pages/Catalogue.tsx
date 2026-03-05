@@ -121,7 +121,7 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
       <div className="w-12 h-12 rounded-lg bg-card flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
         <Icon size={22} className="text-primary" />
       </div>
-      <h3 className="font-heading font-semibold text-base mb-1 text-card-foreground">{domain}</h3>
+      <h3 className="font-heading font-semibold text-base mb-1 text-card-foreground">{t(`catalogue.domains.${domain}`) || domain}</h3>
       <p className="text-sm text-muted-foreground mb-3">{count} {t("catalogue.availableFormations")}</p>
       <span className="text-xs font-semibold text-primary flex items-center gap-1">
         {t("catalogue.explore")} <ChevronRight size={14} />
@@ -279,7 +279,7 @@ const CataloguePage = () => {
                           );
                         })()}
                         <div>
-                          <h2 className="font-heading text-2xl font-bold text-card-foreground">{selectedDomain}</h2>
+                          <h2 className="font-heading text-2xl font-bold text-card-foreground">{t(`catalogue.domains.${selectedDomain}`) || selectedDomain}</h2>
                           <p className="text-sm text-muted-foreground">{domainGroups[selectedDomain]?.length || 0} {t("catalogue.availableFormations")}</p>
                         </div>
                       </div>
