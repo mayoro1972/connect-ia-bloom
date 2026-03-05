@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
@@ -51,14 +51,30 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
-          <button
-            onClick={() => setLanguage(language === "fr" ? "en" : "fr")}
-            className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg border transition-colors hover:border-primary/50"
-            style={{ color: "hsl(210 20% 80%)", borderColor: "hsl(0 0% 100% / 0.15)" }}
-          >
-            <Globe size={14} />
-            {language === "fr" ? "EN" : "FR"}
-          </button>
+          <div className="flex items-center rounded-lg border overflow-hidden" style={{ borderColor: "hsl(0 0% 100% / 0.15)" }}>
+            <button
+              onClick={() => setLanguage("fr")}
+              className={`text-xs font-bold px-3 py-1.5 transition-colors ${
+                language === "fr"
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-white/10"
+              }`}
+              style={language !== "fr" ? { color: "hsl(210 20% 70%)" } : undefined}
+            >
+              FR
+            </button>
+            <button
+              onClick={() => setLanguage("en")}
+              className={`text-xs font-bold px-3 py-1.5 transition-colors ${
+                language === "en"
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-white/10"
+              }`}
+              style={language !== "en" ? { color: "hsl(210 20% 70%)" } : undefined}
+            >
+              EN
+            </button>
+          </div>
           <Link
             to="/contact"
             className="bg-orange-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
@@ -96,14 +112,26 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <button
-                onClick={() => { setLanguage(language === "fr" ? "en" : "fr"); }}
-                className="flex items-center gap-2 text-sm py-2 font-medium"
-                style={{ color: "hsl(210 20% 80%)" }}
-              >
-                <Globe size={14} />
-                {language === "fr" ? "Switch to English" : "Passer en Français"}
-              </button>
+              <div className="flex items-center gap-2 py-2">
+                <button
+                  onClick={() => setLanguage("fr")}
+                  className={`text-xs font-bold px-4 py-2 rounded-lg transition-colors ${
+                    language === "fr" ? "bg-primary text-primary-foreground" : "border"
+                  }`}
+                  style={language !== "fr" ? { color: "hsl(210 20% 70%)", borderColor: "hsl(0 0% 100% / 0.15)" } : undefined}
+                >
+                  FR
+                </button>
+                <button
+                  onClick={() => setLanguage("en")}
+                  className={`text-xs font-bold px-4 py-2 rounded-lg transition-colors ${
+                    language === "en" ? "bg-primary text-primary-foreground" : "border"
+                  }`}
+                  style={language !== "en" ? { color: "hsl(210 20% 70%)", borderColor: "hsl(0 0% 100% / 0.15)" } : undefined}
+                >
+                  EN
+                </button>
+              </div>
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
