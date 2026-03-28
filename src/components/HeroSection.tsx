@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Users, Award, Globe, ArrowRight, Download, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -82,9 +83,9 @@ const HeroSection = () => {
             transition={{ delay: 0.7, duration: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="/contact" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base" style={{ color: "hsl(0 0% 100%)" }}>
+            <Link to="/contact" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105 text-base" style={{ color: "hsl(0 0% 100%)" }}>
               {t("hero.cta")} <ArrowRight size={18} />
-            </a>
+            </Link>
             <button onClick={() => setDownloadOpen(true)} className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105 text-base" style={{ borderColor: "hsl(0 0% 100% / 0.25)", color: "hsl(0 0% 95%)" }}>
               <Download size={18} /> {t("hero.catalogue")}
             </button>

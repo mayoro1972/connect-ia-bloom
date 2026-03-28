@@ -1,4 +1,5 @@
 import { FileText, Target, Users, Settings, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -50,9 +51,9 @@ const EntreprisesPage = () => {
           </div>
 
           <div className="text-center mt-12">
-            <a href="/contact" className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+            <Link to="/contact" className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
               {t("enterprises.cta")} <ArrowRight size={18} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

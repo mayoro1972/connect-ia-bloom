@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle, BookOpen, Award, Clock, MapPin, Monitor, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -80,9 +81,9 @@ const CertificationPage = () => {
                   ))}
                 </div>
 
-                <a href="/contact" className="block w-full bg-coral-gradient font-semibold py-3 rounded-lg text-center hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+                <Link to="/contact" className="block w-full bg-coral-gradient font-semibold py-3 rounded-lg text-center hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                   {t("certification.enrollCta")}
-                </a>
+                </Link>
               </motion.div>
             </div>
           </div>

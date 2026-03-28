@@ -1,4 +1,5 @@
 import { Calendar, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -46,9 +47,9 @@ const EvenementsPage = () => {
                       <span className="flex items-center gap-1"><MapPin size={14} />{e.location}</span>
                     </div>
                   </div>
-                  <a href="/contact" className="bg-coral-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity shrink-0" style={{ color: "hsl(0 0% 100%)" }}>
+                  <Link to="/contact" className="bg-coral-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity shrink-0" style={{ color: "hsl(0 0% 100%)" }}>
                     {t("events.register")}
-                  </a>
+                  </Link>
                 </div>
               </ScrollReveal>
             ))}

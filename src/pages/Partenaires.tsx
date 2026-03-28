@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -71,9 +72,9 @@ const PartenairesPage = () => {
             <ScrollReveal>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-secondary-foreground mb-4">{t("partners.becomePartner")}</h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-8">{t("partners.becomePartnerDesc")}</p>
-              <a href="/contact" className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+              <Link to="/contact" className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                 {t("partners.contactUs")} <ExternalLink size={18} />
-              </a>
+              </Link>
             </ScrollReveal>
           </div>
         </section>

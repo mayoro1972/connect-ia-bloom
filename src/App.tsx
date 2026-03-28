@@ -22,6 +22,9 @@ import Inscription from "./pages/Inscription";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+const routerBasename = import.meta.env.BASE_URL === "/"
+  ? undefined
+  : import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -54,7 +57,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter basename={routerBasename}>
             <ScrollToTop />
             <AnimatedRoutes />
           </BrowserRouter>
