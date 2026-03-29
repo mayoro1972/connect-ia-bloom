@@ -23,7 +23,7 @@ const HeroSection = () => {
   const stats = [
     { icon: BookOpen, value: "130+", label: t("hero.stats.formations") },
     { icon: Users, value: "13", label: t("hero.stats.metiers") },
-    { icon: Award, value: "3", label: t("hero.stats.formats") },
+    { icon: Award, value: "3", label: t("hero.stats.services") },
     { icon: Globe, value: "10+", label: t("hero.stats.pays") },
     { icon: Eye, value: totalViews !== null ? totalViews.toLocaleString() : "—", label: t("hero.stats.visiteurs") },
   ];
