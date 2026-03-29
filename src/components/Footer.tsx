@@ -45,9 +45,10 @@ const Footer = () => {
               title: t("footer.educationIA"),
               links: [
                 { label: t("footer.catalogue"), to: "/catalogue" },
+                { label: t("footer.certification"), to: "/certification" },
                 { label: t("footer.seminaires"), to: "/seminaires" },
                 { label: t("footer.webinars"), to: "/webinars" },
-                { label: t("footer.certification"), to: "/certification" },
+                { label: t("footer.enterprises"), to: "/entreprises" },
               ],
             },
             {
@@ -56,16 +57,15 @@ const Footer = () => {
                 { label: t("footer.contenuIA"), to: "/createur-contenu-ia" },
                 { label: t("footer.consultingIA"), to: "/consulting-ia" },
                 { label: t("footer.devSolutionsIA"), to: "/developpement-solutions-ia" },
-                { label: t("footer.enterprises"), to: "/entreprises" },
               ],
             },
             {
               title: t("footer.resources"),
               links: [
-                { label: t("footer.blog"), to: "/blog" },
                 { label: t("footer.events"), to: "/evenements" },
-                { label: t("footer.about"), to: "/a-propos" },
+                { label: t("footer.blog"), to: "/blog" },
                 { label: t("footer.partners"), to: "/partenaires" },
+                { label: t("footer.about"), to: "/a-propos" },
                 { label: t("footer.requestQuote"), to: "/contact" },
               ],
             },
