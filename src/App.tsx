@@ -19,6 +19,11 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Parcours from "./pages/Parcours";
 import Inscription from "./pages/Inscription";
+import Seminaires from "./pages/Seminaires";
+import Webinars from "./pages/Webinars";
+import CreateurContenuIA from "./pages/CreateurContenuIA";
+import ConsultingIA from "./pages/ConsultingIA";
+import DeveloppementSolutionsIA from "./pages/DeveloppementSolutionsIA";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -44,6 +49,11 @@ const AnimatedRoutes = () => {
         <Route path="/a-propos" element={<APropos />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/seminaires" element={<Seminaires />} />
+        <Route path="/webinars" element={<Webinars />} />
+        <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
+        <Route path="/consulting-ia" element={<ConsultingIA />} />
+        <Route path="/developpement-solutions-ia" element={<DeveloppementSolutionsIA />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

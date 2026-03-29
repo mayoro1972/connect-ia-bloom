@@ -11,7 +11,7 @@ const translations: Record<Language, Translations> = { fr, en };
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string) => any;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -20,13 +20,13 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>("fr");
 
   const t = useCallback(
-    (key: string): string => {
+    (key: string): any => {
       const keys = key.split(".");
       let value: any = translations[language];
       for (const k of keys) {
         value = value?.[k];
       }
-      return typeof value === "string" ? value : key;
+      return value !== undefined ? value : key;
     },
     [language]
   );

@@ -21,8 +21,8 @@ const Footer = () => {
   return (
     <footer className="py-12 border-t" style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(0 0% 100% / 0.08)" }}>
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
+        <div className="grid md:grid-cols-5 gap-8 mb-8">
+          <div className="md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-9 rounded-lg object-contain" />
               <span className="font-heading font-semibold" style={{ color: "hsl(0 0% 92%)" }}>
@@ -34,15 +34,7 @@ const Footer = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 ${social.color}`}
-                  style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(210 20% 55%)" }}
-                >
+                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 ${social.color}`} style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(210 20% 55%)" }}>
                   <social.icon size={18} />
                 </a>
               ))}
@@ -50,12 +42,21 @@ const Footer = () => {
           </div>
           {[
             {
-              title: t("footer.formations"),
+              title: t("footer.educationIA"),
               links: [
                 { label: t("footer.catalogue"), to: "/catalogue" },
+                { label: t("footer.seminaires"), to: "/seminaires" },
+                { label: t("footer.webinars"), to: "/webinars" },
                 { label: t("footer.certification"), to: "/certification" },
+              ],
+            },
+            {
+              title: t("footer.services"),
+              links: [
+                { label: t("footer.contenuIA"), to: "/createur-contenu-ia" },
+                { label: t("footer.consultingIA"), to: "/consulting-ia" },
+                { label: t("footer.devSolutionsIA"), to: "/developpement-solutions-ia" },
                 { label: t("footer.enterprises"), to: "/entreprises" },
-                { label: t("footer.partners"), to: "/partenaires" },
               ],
             },
             {
@@ -64,13 +65,8 @@ const Footer = () => {
                 { label: t("footer.blog"), to: "/blog" },
                 { label: t("footer.events"), to: "/evenements" },
                 { label: t("footer.about"), to: "/a-propos" },
-              ],
-            },
-            {
-              title: t("footer.contact"),
-              links: [
+                { label: t("footer.partners"), to: "/partenaires" },
                 { label: t("footer.requestQuote"), to: "/contact" },
-                { label: t("footer.support"), to: "/contact" },
               ],
             },
           ].map((col) => (
