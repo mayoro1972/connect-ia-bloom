@@ -14,18 +14,23 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { key: "home", href: "/" },
-  { key: "about", href: "/a-propos" },
   {
     key: "education",
     children: [
       { key: "formations", href: "/catalogue" },
+      { key: "certification", href: "/certification" },
       { key: "seminaires", href: "/seminaires" },
       { key: "webinars", href: "/webinars" },
+      { key: "enterprises", href: "/entreprises" },
     ],
   },
   { key: "contenuIA", href: "/createur-contenu-ia" },
   { key: "consultingIA", href: "/consulting-ia" },
   { key: "devSolutionsIA", href: "/developpement-solutions-ia" },
+  { key: "events", href: "/evenements" },
+  { key: "blog", href: "/blog" },
+  { key: "partners", href: "/partenaires" },
+  { key: "about", href: "/a-propos" },
   { key: "contact", href: "/contact" },
 ];
 
