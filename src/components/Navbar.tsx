@@ -85,7 +85,7 @@ const Navbar = () => {
               <div key={item.key} className="relative">
                 <button
                   onClick={() => setDropdownOpen(dropdownOpen === item.key ? null : item.key)}
-                  className={`text-sm transition-colors font-medium flex items-center gap-1 ${isChildActive(item.children) ? "text-primary" : ""}`}
+                  className={`text-xs transition-colors font-medium flex items-center gap-1 ${isChildActive(item.children) ? "text-primary" : ""}`}
                   style={!isChildActive(item.children) ? { color: "hsl(210 20% 72%)" } : undefined}
                 >
                   {t(`nav.${item.key}`)}
