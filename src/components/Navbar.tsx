@@ -72,20 +72,20 @@ const Navbar = () => {
 
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8 relative z-10">
         <Link to="/" className="flex items-center gap-1.5 shrink-0">
-          <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-auto max-w-[140px] rounded-lg object-contain" />
-          <span className="font-heading text-sm font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
+          <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-auto max-w-[120px] rounded-lg object-contain" />
+          <span className="font-heading text-xs font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
             Transfer<span className="text-gradient-orange">AI</span> Africa
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-3" ref={dropdownRef}>
+        <div className="hidden lg:flex items-center gap-2" ref={dropdownRef}>
           {navItems.map((item) =>
             item.children ? (
               <div key={item.key} className="relative">
                 <button
                   onClick={() => setDropdownOpen(dropdownOpen === item.key ? null : item.key)}
-                  className={`text-sm transition-colors font-medium flex items-center gap-1 ${isChildActive(item.children) ? "text-primary" : ""}`}
+                  className={`text-xs transition-colors font-medium flex items-center gap-1 ${isChildActive(item.children) ? "text-primary" : ""}`}
                   style={!isChildActive(item.children) ? { color: "hsl(210 20% 72%)" } : undefined}
                 >
                   {t(`nav.${item.key}`)}
@@ -119,7 +119,7 @@ const Navbar = () => {
               <Link
                 key={item.key}
                 to={item.href!}
-                className={`text-sm transition-colors font-medium ${isActive(item.href) ? "text-primary" : ""}`}
+                className={`text-xs transition-colors font-medium ${isActive(item.href) ? "text-primary" : ""}`}
                 style={!isActive(item.href) ? { color: "hsl(210 20% 72%)" } : undefined}
               >
                 {t(`nav.${item.key}`)}
@@ -128,12 +128,12 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
           <div className="flex items-center rounded-lg border overflow-hidden" style={{ borderColor: "hsl(0 0% 100% / 0.15)" }}>
-            <button onClick={() => setLanguage("fr")} className={`text-xs font-bold px-3 py-1.5 transition-colors ${language === "fr" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "fr" ? { color: "hsl(210 20% 70%)" } : undefined}>FR</button>
-            <button onClick={() => setLanguage("en")} className={`text-xs font-bold px-3 py-1.5 transition-colors ${language === "en" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "en" ? { color: "hsl(210 20% 70%)" } : undefined}>EN</button>
+            <button onClick={() => setLanguage("fr")} className={`text-[10px] font-bold px-2 py-1 transition-colors ${language === "fr" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "fr" ? { color: "hsl(210 20% 70%)" } : undefined}>FR</button>
+            <button onClick={() => setLanguage("en")} className={`text-[10px] font-bold px-2 py-1 transition-colors ${language === "en" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "en" ? { color: "hsl(210 20% 70%)" } : undefined}>EN</button>
           </div>
-          <Link to="/contact" className="bg-orange-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+          <Link to="/contact" className="bg-orange-gradient font-semibold text-xs px-4 py-2 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
             {t("nav.cta")}
           </Link>
         </div>
