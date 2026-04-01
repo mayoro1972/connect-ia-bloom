@@ -128,12 +128,12 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
           <div className="flex items-center rounded-lg border overflow-hidden" style={{ borderColor: "hsl(0 0% 100% / 0.15)" }}>
-            <button onClick={() => setLanguage("fr")} className={`text-xs font-bold px-3 py-1.5 transition-colors ${language === "fr" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "fr" ? { color: "hsl(210 20% 70%)" } : undefined}>FR</button>
-            <button onClick={() => setLanguage("en")} className={`text-xs font-bold px-3 py-1.5 transition-colors ${language === "en" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "en" ? { color: "hsl(210 20% 70%)" } : undefined}>EN</button>
+            <button onClick={() => setLanguage("fr")} className={`text-[10px] font-bold px-2 py-1 transition-colors ${language === "fr" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "fr" ? { color: "hsl(210 20% 70%)" } : undefined}>FR</button>
+            <button onClick={() => setLanguage("en")} className={`text-[10px] font-bold px-2 py-1 transition-colors ${language === "en" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "en" ? { color: "hsl(210 20% 70%)" } : undefined}>EN</button>
           </div>
-          <Link to="/contact" className="bg-orange-gradient font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+          <Link to="/contact" className="bg-orange-gradient font-semibold text-xs px-4 py-2 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
             {t("nav.cta")}
           </Link>
         </div>
