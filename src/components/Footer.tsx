@@ -24,7 +24,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-5 gap-8 mb-8">
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-9 rounded-lg object-contain" />
+              <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-auto max-w-[140px] rounded-lg object-contain" />
               <span className="font-heading font-semibold" style={{ color: "hsl(0 0% 92%)" }}>
                 TransferAI Africa
               </span>
