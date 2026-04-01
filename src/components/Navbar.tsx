@@ -14,6 +14,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { key: "home", href: "/" },
+  { key: "about", href: "/a-propos" },
   {
     key: "education",
     children: [
@@ -30,7 +31,6 @@ const navItems: NavItem[] = [
   { key: "events", href: "/evenements" },
   { key: "blog", href: "/blog" },
   { key: "partners", href: "/partenaires" },
-  { key: "about", href: "/a-propos" },
   { key: "contact", href: "/contact" },
 ];
 
@@ -79,7 +79,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-2" ref={dropdownRef}>
+        <div className="hidden lg:flex items-center gap-4" ref={dropdownRef}>
           {navItems.map((item) =>
             item.children ? (
               <div key={item.key} className="relative">
