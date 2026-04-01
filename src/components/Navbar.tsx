@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
+import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import aiToolsBanner from "@/assets/ai-tools-banner.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 
