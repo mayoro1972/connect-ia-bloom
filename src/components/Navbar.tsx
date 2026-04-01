@@ -119,7 +119,7 @@ const Navbar = () => {
               <Link
                 key={item.key}
                 to={item.href!}
-                className={`text-sm transition-colors font-medium ${isActive(item.href) ? "text-primary" : ""}`}
+                className={`text-xs transition-colors font-medium ${isActive(item.href) ? "text-primary" : ""}`}
                 style={!isActive(item.href) ? { color: "hsl(210 20% 72%)" } : undefined}
               >
                 {t(`nav.${item.key}`)}
