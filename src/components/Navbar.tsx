@@ -79,7 +79,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-3 ml-4 mr-4" ref={dropdownRef}>
+        <div className="hidden lg:flex items-center justify-center flex-1 gap-3 mx-4" ref={dropdownRef}>
           {navItems.map((item) =>
             item.children ? (
               <div key={item.key} className="relative">
