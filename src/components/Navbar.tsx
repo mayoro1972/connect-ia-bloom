@@ -72,14 +72,14 @@ const Navbar = () => {
 
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8 relative z-10">
         <Link to="/" className="flex items-center gap-1.5 shrink-0">
-          <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-auto max-w-[140px] rounded-lg object-contain" />
-          <span className="font-heading text-sm font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
+          <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-auto max-w-[120px] rounded-lg object-contain" />
+          <span className="font-heading text-xs font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
             Transfer<span className="text-gradient-orange">AI</span> Africa
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-3" ref={dropdownRef}>
+        <div className="hidden lg:flex items-center gap-2" ref={dropdownRef}>
           {navItems.map((item) =>
             item.children ? (
               <div key={item.key} className="relative">
