@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Facebook, Instagram, Youtube, Twitter, MessageCircle, Send, Music2, AtSign } from "lucide-react";
-import logoTransferAI from "@/assets/logo-academie-ia-afrique.png";
+import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const socialLinks = [
