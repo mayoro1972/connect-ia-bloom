@@ -9,6 +9,8 @@ import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import { buildContactPath } from "@/lib/site-links";
+import { deepFixMojibake, fixMojibake } from "@/lib/fixMojibake";
 
 const getFormationDetails = (f: typeof formations[0], language: string) => {
   const levelMap: Record<string, Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }>> = {
@@ -119,6 +121,7 @@ const FormationDetailPage = () => {
   const { t, language } = useLanguage();
   const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
   const formation = formations.find((f) => f.id === id);
+  const locationLabel = language === "fr" ? "Abidjan, Cote d'Ivoire" : "Abidjan, Ivory Coast";
 
   if (!formation) {
     return (
@@ -135,7 +138,7 @@ const FormationDetailPage = () => {
     );
   }
 
-  const details = getFormationDetails(formation, language);
+  const details = deepFixMojibake(getFormationDetails(formation, language));
   const relatedFormations = formations
     .filter((f) => f.metier === formation.metier && f.id !== formation.id)
     .slice(0, 3);
@@ -166,7 +169,7 @@ const FormationDetailPage = () => {
             <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
               {getTitle(formation)}
             </motion.h1>
-            <p className="text-sm" style={{ color: "hsl(210 20% 72%)" }}>{t(`catalogue.domains.${formation.metier}`) || formation.metier}</p>
+            <p className="text-sm" style={{ color: "hsl(210 20% 72%)" }}>{t(`catalogue.domains.${fixMojibake(formation.metier)}`) || fixMojibake(formation.metier)}</p>
           </div>
         </section>
 
@@ -246,19 +249,19 @@ const FormationDetailPage = () => {
                     <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.durationLabel")}</span><span className="font-medium text-card-foreground">{getDuration(formation)}</span></div>
                     <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.formatLabel")}</span><span className="font-medium text-card-foreground">{getFormat(formation)}</span></div>
                     <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.levelLabel")}</span><span className="font-medium text-card-foreground">{getLevel(formation)}</span></div>
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.locationLabel")}</span><span className="font-medium text-card-foreground">Abidjan, CI</span></div>
+                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.locationLabel")}</span><span className="font-medium text-card-foreground">{locationLabel}</span></div>
                   </div>
 
-                  <Link to={`/inscription?formation=${encodeURIComponent(formation.title)}`} className="bg-orange-gradient font-semibold text-sm px-5 py-3 rounded-lg hover:opacity-90 transition-opacity w-full block text-center" style={{ color: "hsl(0 0% 100%)" }}>
+                  <Link to={`/inscription?formation=${encodeURIComponent(formation.id)}`} className="bg-orange-gradient font-semibold text-sm px-5 py-3 rounded-lg hover:opacity-90 transition-opacity w-full block text-center" style={{ color: "hsl(0 0% 100%)" }}>
                     {t("formationDetail.enrollCta")}
                   </Link>
-                  <Link to="/contact" className="mt-3 border border-border font-medium text-sm px-5 py-3 rounded-lg hover:bg-muted transition-colors w-full block text-center text-card-foreground">
+                  <Link to={buildContactPath("contact-devis")} className="mt-3 border border-border font-medium text-sm px-5 py-3 rounded-lg hover:bg-muted transition-colors w-full block text-center text-card-foreground">
                     {t("formationDetail.quoteCta")}
                   </Link>
 
                   <div className="flex flex-wrap gap-1.5 mt-6">
                     {formation.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{tag}</span>
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{fixMojibake(tag)}</span>
                     ))}
                   </div>
                 </div>

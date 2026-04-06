@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
-import aiToolsBanner from "@/assets/ai-tools-banner.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { buildContactPath } from "@/lib/site-links";
 
 interface NavItem {
   key: string;
@@ -18,157 +18,223 @@ const navItems: NavItem[] = [
   {
     key: "education",
     children: [
+      { key: "domainCatalogues", href: "/catalogues-domaines" },
       { key: "formations", href: "/catalogue" },
+      { key: "paths", href: "/parcours" },
       { key: "certification", href: "/certification" },
       { key: "seminaires", href: "/seminaires" },
       { key: "webinars", href: "/webinars" },
-      { key: "enterprises", href: "/entreprises" },
     ],
   },
-  { key: "contenuIA", href: "/createur-contenu-ia" },
-  { key: "consultingIA", href: "/consulting-ia" },
-  { key: "devSolutionsIA", href: "/developpement-solutions-ia" },
-  { key: "events", href: "/evenements" },
-  { key: "blog", href: "/blog" },
-  { key: "partners", href: "/partenaires" },
+  {
+    key: "services",
+    children: [
+      { key: "enterprises", href: "/entreprises" },
+      { key: "consultingIA", href: "/consulting-ia" },
+      { key: "devSolutionsIA", href: "/developpement-solutions-ia" },
+      { key: "contenuIA", href: "/createur-contenu-ia" },
+    ],
+  },
+  {
+    key: "resources",
+    children: [
+      { key: "partners", href: "/partenaires" },
+      { key: "blog", href: "/blog" },
+    ],
+  },
   { key: "contact", href: "/contact" },
 ];
 
+const dropdownWidths: Record<string, string> = {
+  education: "w-[320px]",
+  services: "w-[320px]",
+  resources: "w-[280px]",
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [desktopOpenMenu, setDesktopOpenMenu] = useState<string | null>(null);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(null);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
+  const isActive = (href?: string) => {
+    if (!href) return false;
+    if (href === "/") return location.pathname === href;
 
-  const isActive = (href?: string) => href && location.pathname === href;
-  const isChildActive = (children?: { href: string }[]) =>
-    children?.some((c) => location.pathname === c.href);
+    return location.pathname === href || location.pathname.startsWith(`${href}/`);
+  };
+
+  const isChildActive = (children?: { href: string }[]) => children?.some((child) => isActive(child.href));
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ background: "hsl(225 55% 10% / 0.92)", borderColor: "hsl(30 90% 50% / 0.15)" }}>
-      {/* Animated AI tools banner */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div className="absolute inset-0 flex" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} style={{ width: "200%" }}>
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.18 }} />
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.18 }} />
-        </motion.div>
-        <motion.div className="absolute inset-0 flex" animate={{ x: ["-50%", "0%"] }} transition={{ duration: 28, repeat: Infinity, ease: "linear" }} style={{ width: "200%" }}>
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.1, transform: "scaleX(-1)" }} />
-          <img src={aiToolsBanner} alt="" className="h-full w-1/2 object-cover" style={{ opacity: 0.1, transform: "scaleX(-1)" }} />
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8 relative z-10">
-        <Link to="/" className="flex items-center gap-1.5 shrink-0">
-          <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-auto max-w-[120px] rounded-lg object-contain" />
-          <span className="font-heading text-xs font-semibold tracking-tight" style={{ color: "hsl(0 0% 96%)" }}>
-            Transfer<span className="text-gradient-orange">AI</span> Africa
+    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-stone-200/90 bg-[#f7f2ea]/95 backdrop-blur-xl">
+      <div className="container mx-auto flex h-[74px] items-center justify-between gap-6 px-4 lg:px-6 xl:px-8">
+        <Link to="/" className="flex shrink-0 items-center gap-3">
+          <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-auto max-w-[132px] object-contain" />
+          <span className="hidden font-heading text-lg font-semibold tracking-[-0.03em] text-slate-950 xl:block">
+            Transfer<span className="text-[hsl(20_92%_52%)]">AI</span> Africa
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center justify-center flex-1 gap-3 mx-4" ref={dropdownRef}>
-          {navItems.map((item) =>
-            item.children ? (
-              <div key={item.key} className="relative">
-                <button
-                  onClick={() => setDropdownOpen(dropdownOpen === item.key ? null : item.key)}
-                  className={`text-xs transition-colors font-medium flex items-center gap-1 ${isChildActive(item.children) ? "text-primary" : ""}`}
-                  style={!isChildActive(item.children) ? { color: "hsl(210 20% 72%)" } : undefined}
+        <div className="hidden min-w-0 flex-1 items-center justify-center gap-7 lg:flex">
+          {navItems.map((item) => {
+            const active = isActive(item.href) || isChildActive(item.children);
+
+            if (!item.children) {
+              return (
+                <Link
+                  key={item.key}
+                  to={item.href!}
+                  className={`relative inline-flex h-[74px] items-center whitespace-nowrap text-[12px] font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
+                    active ? "text-slate-950" : "text-slate-600 hover:text-slate-950"
+                  }`}
                 >
                   {t(`nav.${item.key}`)}
-                  <ChevronDown size={14} className={`transition-transform ${dropdownOpen === item.key ? "rotate-180" : ""}`} />
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2px] w-full origin-left bg-[hsl(20_92%_52%)] transition-transform duration-200 ${
+                      active ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
+                </Link>
+              );
+            }
+
+            return (
+              <div
+                key={item.key}
+                className="relative"
+                onMouseEnter={() => setDesktopOpenMenu(item.key)}
+                onMouseLeave={() => setDesktopOpenMenu((current) => (current === item.key ? null : current))}
+              >
+                <button
+                  type="button"
+                  onClick={() => setDesktopOpenMenu((current) => (current === item.key ? null : item.key))}
+                  className={`relative inline-flex h-[74px] items-center gap-1 whitespace-nowrap text-[12px] font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
+                    active || desktopOpenMenu === item.key ? "text-slate-950" : "text-slate-600 hover:text-slate-950"
+                  }`}
+                  aria-expanded={desktopOpenMenu === item.key}
+                >
+                  {t(`nav.${item.key}`)}
+                  <ChevronDown size={14} className={`transition-transform ${desktopOpenMenu === item.key ? "rotate-180" : ""}`} />
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2px] w-full origin-left bg-[hsl(20_92%_52%)] transition-transform duration-200 ${
+                      active || desktopOpenMenu === item.key ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
                 </button>
+
                 <AnimatePresence>
-                  {dropdownOpen === item.key && (
+                  {desktopOpenMenu === item.key && (
                     <motion.div
-                      initial={{ opacity: 0, y: -5 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      className="absolute top-full left-0 mt-2 w-56 rounded-xl border shadow-xl overflow-hidden"
-                      style={{ background: "hsl(225 55% 12%)", borderColor: "hsl(30 90% 50% / 0.15)" }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.18 }}
+                      className={`absolute left-1/2 top-[calc(100%-6px)] -translate-x-1/2 rounded-3xl border border-stone-200 bg-white p-3 shadow-[0_26px_80px_-34px_rgba(15,23,42,0.4)] ${dropdownWidths[item.key] ?? "w-[300px]"}`}
                     >
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          to={child.href}
-                          onClick={() => setDropdownOpen(null)}
-                          className={`block px-4 py-3 text-sm font-medium transition-colors hover:bg-primary/10 ${isActive(child.href) ? "text-primary bg-primary/5" : ""}`}
-                          style={!isActive(child.href) ? { color: "hsl(210 20% 72%)" } : undefined}
-                        >
-                          {t(`nav.${child.key}`)}
-                        </Link>
-                      ))}
+                      <div className="mb-2 border-b border-stone-100 px-3 pb-3">
+                        <p className="text-[10px] font-heading font-bold uppercase tracking-[0.18em] text-[hsl(20_92%_52%)]">
+                          {t(`nav.${item.key}`)}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-col gap-1">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            to={child.href}
+                            onClick={() => setDesktopOpenMenu(null)}
+                            className={`rounded-2xl px-4 py-3 text-[13px] font-medium transition-all ${
+                              isActive(child.href)
+                                ? "bg-[hsl(20_92%_96%)] text-[hsl(20_92%_38%)]"
+                                : "text-slate-700 hover:bg-stone-50 hover:text-slate-950"
+                            }`}
+                          >
+                            {t(`nav.${child.key}`)}
+                          </Link>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-            ) : (
-              <Link
-                key={item.key}
-                to={item.href!}
-                className={`text-xs transition-colors font-medium ${isActive(item.href) ? "text-primary" : ""}`}
-                style={!isActive(item.href) ? { color: "hsl(210 20% 72%)" } : undefined}
-              >
-                {t(`nav.${item.key}`)}
-              </Link>
-            )
-          )}
+            );
+          })}
         </div>
 
-        <div className="hidden lg:flex items-center gap-2">
-          <div className="flex items-center rounded-lg border overflow-hidden" style={{ borderColor: "hsl(0 0% 100% / 0.15)" }}>
-            <button onClick={() => setLanguage("fr")} className={`text-[10px] font-bold px-2 py-1 transition-colors ${language === "fr" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "fr" ? { color: "hsl(210 20% 70%)" } : undefined}>FR</button>
-            <button onClick={() => setLanguage("en")} className={`text-[10px] font-bold px-2 py-1 transition-colors ${language === "en" ? "bg-primary text-primary-foreground" : "hover:bg-white/10"}`} style={language !== "en" ? { color: "hsl(210 20% 70%)" } : undefined}>EN</button>
+        <div className="hidden items-center gap-3 lg:flex">
+          <div className="flex items-center rounded-full border border-stone-200 bg-white p-1 shadow-sm">
+            <button
+              type="button"
+              onClick={() => setLanguage("fr")}
+              className={`rounded-full px-3 py-1.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
+                language === "fr" ? "bg-[hsl(20_92%_52%)] text-white" : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              className={`rounded-full px-3 py-1.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
+                language === "en" ? "bg-[hsl(20_92%_52%)] text-white" : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              EN
+            </button>
           </div>
-          <Link to="/contact" className="bg-orange-gradient font-semibold text-xs px-4 py-2 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+
+          <Link
+            to={buildContactPath("contact-devis")}
+            className="rounded-full bg-[hsl(20_92%_52%)] px-5 py-2.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] text-white transition-all hover:bg-[hsl(20_92%_48%)]"
+          >
             {t("nav.cta")}
           </Link>
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden" style={{ color: "hsl(0 0% 96%)" }}>
+        <button onClick={() => setIsOpen(!isOpen)} className="text-slate-800 lg:hidden">
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="lg:hidden border-t" style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(30 90% 50% / 0.1)" }}>
-            <div className="container mx-auto px-4 py-4 flex flex-col gap-1">
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-t border-stone-200 bg-white lg:hidden"
+          >
+            <div className="container mx-auto flex flex-col gap-1 px-4 py-4">
               {navItems.map((item) =>
                 item.children ? (
                   <div key={item.key}>
                     <button
                       onClick={() => setMobileExpanded(mobileExpanded === item.key ? null : item.key)}
-                      className={`w-full text-left text-sm py-2 font-medium flex items-center justify-between ${isChildActive(item.children) ? "text-primary" : ""}`}
-                      style={!isChildActive(item.children) ? { color: "hsl(210 20% 72%)" } : undefined}
+                      className={`flex w-full items-center justify-between py-2 text-left text-sm font-heading font-semibold uppercase tracking-[0.08em] ${
+                        isChildActive(item.children) ? "text-[hsl(20_92%_52%)]" : "text-slate-800"
+                      }`}
                     >
                       {t(`nav.${item.key}`)}
                       <ChevronDown size={14} className={`transition-transform ${mobileExpanded === item.key ? "rotate-180" : ""}`} />
                     </button>
                     <AnimatePresence>
                       {mobileExpanded === item.key && (
-                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden pl-4">
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden pl-4"
+                        >
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
                               to={child.href}
                               onClick={() => setIsOpen(false)}
-                              className={`block text-sm py-2 font-medium ${isActive(child.href) ? "text-primary" : ""}`}
-                              style={!isActive(child.href) ? { color: "hsl(210 20% 60%)" } : undefined}
+                              className={`block py-2 text-sm ${
+                                isActive(child.href) ? "text-[hsl(20_92%_52%)]" : "text-slate-600"
+                              }`}
                             >
                               {t(`nav.${child.key}`)}
                             </Link>
@@ -182,18 +248,41 @@ const Navbar = () => {
                     key={item.key}
                     to={item.href!}
                     onClick={() => setIsOpen(false)}
-                    className={`text-sm py-2 font-medium ${isActive(item.href) ? "text-primary" : ""}`}
-                    style={!isActive(item.href) ? { color: "hsl(210 20% 72%)" } : undefined}
+                    className={`py-2 text-sm font-heading font-semibold uppercase tracking-[0.08em] ${
+                      isActive(item.href) ? "text-[hsl(20_92%_52%)]" : "text-slate-800"
+                    }`}
                   >
                     {t(`nav.${item.key}`)}
                   </Link>
-                )
+                ),
               )}
-              <div className="flex items-center gap-2 py-2">
-                <button onClick={() => setLanguage("fr")} className={`text-xs font-bold px-4 py-2 rounded-lg transition-colors ${language === "fr" ? "bg-primary text-primary-foreground" : "border"}`} style={language !== "fr" ? { color: "hsl(210 20% 70%)", borderColor: "hsl(0 0% 100% / 0.15)" } : undefined}>FR</button>
-                <button onClick={() => setLanguage("en")} className={`text-xs font-bold px-4 py-2 rounded-lg transition-colors ${language === "en" ? "bg-primary text-primary-foreground" : "border"}`} style={language !== "en" ? { color: "hsl(210 20% 70%)", borderColor: "hsl(0 0% 100% / 0.15)" } : undefined}>EN</button>
+
+              <div className="mt-3 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLanguage("fr")}
+                  className={`rounded-full px-4 py-2 text-xs font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
+                    language === "fr" ? "bg-[hsl(20_92%_52%)] text-white" : "border border-stone-200 text-slate-700"
+                  }`}
+                >
+                  FR
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage("en")}
+                  className={`rounded-full px-4 py-2 text-xs font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
+                    language === "en" ? "bg-[hsl(20_92%_52%)] text-white" : "border border-stone-200 text-slate-700"
+                  }`}
+                >
+                  EN
+                </button>
               </div>
-              <Link to="/contact" onClick={() => setIsOpen(false)} className="bg-orange-gradient font-semibold text-sm px-5 py-2.5 rounded-lg text-center mt-2" style={{ color: "hsl(0 0% 100%)" }}>
+
+              <Link
+                to={buildContactPath("contact-devis")}
+                onClick={() => setIsOpen(false)}
+                className="mt-3 rounded-full bg-[hsl(20_92%_52%)] px-5 py-3 text-center text-sm font-heading font-bold uppercase tracking-[0.12em] text-white"
+              >
                 {t("nav.cta")}
               </Link>
             </div>

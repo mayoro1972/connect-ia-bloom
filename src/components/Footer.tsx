@@ -1,93 +1,172 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Facebook, Instagram, Youtube, Twitter, MessageCircle, Send, Music2, AtSign } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import { useLanguage } from "@/i18n/LanguageContext";
-
-const socialLinks = [
-  { icon: Linkedin, href: "https://www.linkedin.com/company/transferai-africa", label: "LinkedIn", color: "hover:text-[#0A66C2]" },
-  { icon: Facebook, href: "https://www.facebook.com/transferai.africa", label: "Facebook", color: "hover:text-[#1877F2]" },
-  { icon: Instagram, href: "https://www.instagram.com/transferai.africa", label: "Instagram", color: "hover:text-[#E4405F]" },
-  { icon: Youtube, href: "https://www.youtube.com/@transferai-africa", label: "YouTube", color: "hover:text-[#FF0000]" },
-  { icon: Twitter, href: "https://x.com/transferai_afr", label: "X (Twitter)", color: "hover:text-[#1DA1F2]" },
-  { icon: Music2, href: "https://www.tiktok.com/@transferai.africa", label: "TikTok", color: "hover:text-[#ff0050]" },
-  { icon: AtSign, href: "https://www.threads.net/@transferai.africa", label: "Threads", color: "hover:text-[#000000] dark:hover:text-white" },
-  { icon: Send, href: "https://t.me/transferaiafrica", label: "Telegram", color: "hover:text-[#26A5E4]" },
-  { icon: MessageCircle, href: "https://wa.me/2250700000000", label: "WhatsApp", color: "hover:text-[#25D366]" },
-];
+import { buildContactPath, contactDetails, directLinks, socialLinks } from "@/lib/site-links";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+
+  const copy =
+    language === "fr"
+      ? {
+          company: "Entreprise",
+          companyLinks: [
+            { label: "A propos", to: "/a-propos" },
+            { label: "Partenaires", to: "/partenaires" },
+            { label: "Entreprises", to: "/entreprises" },
+            { label: "Blog", to: "/blog" },
+            { label: "Evenements", to: "/evenements" },
+          ],
+          product: "Formations",
+          productLinks: [
+            { label: "Catalogues par domaine", to: "/catalogues-domaines" },
+            { label: "Catalogue complet", to: "/catalogue" },
+            { label: "Parcours", to: "/parcours" },
+            { label: "Certification", to: "/certification" },
+            { label: "Seminaires", to: "/seminaires" },
+            { label: "Webinars", to: "/webinars" },
+          ],
+          resources: "Services",
+          resourceLinks: [
+            { label: "Consulting IA", to: "/consulting-ia" },
+            { label: "Solutions IA", to: "/developpement-solutions-ia" },
+            { label: "Createur de contenu IA", to: "/createur-contenu-ia" },
+            { label: "Demander un devis", to: buildContactPath("contact-devis") },
+            { label: "Prendre RDV", to: "/prise-rdv" },
+          ],
+          legal: "Juridique",
+          legalLinks: [
+            { label: "Politique de confidentialite", to: "/confidentialite" },
+            { label: "Contact", to: "/contact" },
+            { label: "Email", href: directLinks.email },
+            { label: "WhatsApp", href: directLinks.whatsapp },
+            { label: "Google Maps", href: directLinks.map },
+          ],
+          community: "Communaute",
+          contactTitle: "Coordonnees",
+          rights: t("footer.rights"),
+        }
+      : {
+          company: "Company",
+          companyLinks: [
+            { label: "About", to: "/a-propos" },
+            { label: "Partners", to: "/partenaires" },
+            { label: "Enterprise", to: "/entreprises" },
+            { label: "Blog", to: "/blog" },
+            { label: "Events", to: "/evenements" },
+          ],
+          product: "Training",
+          productLinks: [
+            { label: "Domain catalogues", to: "/catalogues-domaines" },
+            { label: "Full catalogue", to: "/catalogue" },
+            { label: "Learning paths", to: "/parcours" },
+            { label: "Certification", to: "/certification" },
+            { label: "Seminars", to: "/seminaires" },
+            { label: "Webinars", to: "/webinars" },
+          ],
+          resources: "Services",
+          resourceLinks: [
+            { label: "AI Consulting", to: "/consulting-ia" },
+            { label: "AI Solutions", to: "/developpement-solutions-ia" },
+            { label: "AI Content Creator", to: "/createur-contenu-ia" },
+            { label: "Request a quote", to: buildContactPath("contact-devis") },
+            { label: "Book a meeting", to: "/prise-rdv" },
+          ],
+          legal: "Legal",
+          legalLinks: [
+            { label: "Privacy policy", to: "/confidentialite" },
+            { label: "Contact", to: "/contact" },
+            { label: "Email", href: directLinks.email },
+            { label: "WhatsApp", href: directLinks.whatsapp },
+            { label: "Google Maps", href: directLinks.map },
+          ],
+          community: "Community",
+          contactTitle: "Contact details",
+          rights: t("footer.rights"),
+        };
+
+  const footerColumns = [
+    { title: copy.company, links: copy.companyLinks },
+    { title: copy.product, links: copy.productLinks },
+    { title: copy.resources, links: copy.resourceLinks },
+    { title: copy.legal, links: copy.legalLinks },
+    {
+      title: copy.community,
+      links: socialLinks.map((item) => ({
+        label: item.label,
+        href: item.href,
+      })),
+    },
+  ];
 
   return (
-    <footer className="py-12 border-t" style={{ background: "hsl(225 55% 10%)", borderColor: "hsl(0 0% 100% / 0.08)" }}>
+    <footer className="border-t border-stone-200 bg-[#f7f2ea] py-16 text-slate-900">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-5 gap-8 mb-8">
-          <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-auto max-w-[140px] rounded-lg object-contain" />
-              <span className="font-heading font-semibold" style={{ color: "hsl(0 0% 92%)" }}>
-                TransferAI Africa
+        <div className="grid gap-10 border-b border-stone-200 pb-12 lg:grid-cols-[1.2fr_2.8fr]">
+          <div className="max-w-md">
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-auto max-w-[142px] object-contain" />
+              <span className="font-heading text-lg font-semibold tracking-[-0.03em] text-slate-950">
+                Transfer<span className="text-[hsl(20_92%_52%)]">AI</span> Africa
               </span>
             </Link>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "hsl(210 20% 55%)" }}>
-              {t("footer.desc")}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social) => (
-                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 ${social.color}`} style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(210 20% 55%)" }}>
-                  <social.icon size={18} />
-                </a>
-              ))}
+
+            <p className="mt-5 max-w-sm text-sm leading-7 text-slate-600">{t("footer.desc")}</p>
+
+            <div className="mt-8 space-y-3 text-sm text-slate-700">
+              <a href={directLinks.phone} className="flex items-start gap-3 transition-colors hover:text-[hsl(20_92%_42%)]">
+                <Phone size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
+                {contactDetails.phoneDisplay}
+              </a>
+              <a href={directLinks.email} className="flex items-start gap-3 transition-colors hover:text-[hsl(20_92%_42%)]">
+                <Mail size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
+                {contactDetails.email}
+              </a>
+              <a
+                href={directLinks.map}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 transition-colors hover:text-[hsl(20_92%_42%)]"
+              >
+                <MapPin size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
+                {contactDetails.addressShort}
+              </a>
             </div>
           </div>
-          {[
-            {
-              title: t("footer.educationIA"),
-              links: [
-                { label: t("footer.catalogue"), to: "/catalogue" },
-                { label: t("footer.certification"), to: "/certification" },
-                { label: t("footer.seminaires"), to: "/seminaires" },
-                { label: t("footer.webinars"), to: "/webinars" },
-                { label: t("footer.enterprises"), to: "/entreprises" },
-              ],
-            },
-            {
-              title: t("footer.services"),
-              links: [
-                { label: t("footer.contenuIA"), to: "/createur-contenu-ia" },
-                { label: t("footer.consultingIA"), to: "/consulting-ia" },
-                { label: t("footer.devSolutionsIA"), to: "/developpement-solutions-ia" },
-              ],
-            },
-            {
-              title: t("footer.resources"),
-              links: [
-                { label: t("footer.events"), to: "/evenements" },
-                { label: t("footer.blog"), to: "/blog" },
-                { label: t("footer.partners"), to: "/partenaires" },
-                { label: t("footer.about"), to: "/a-propos" },
-                { label: t("footer.requestQuote"), to: "/contact" },
-              ],
-            },
-          ].map((col) => (
-            <div key={col.title}>
-              <h4 className="font-heading font-semibold text-sm mb-4 text-primary">{col.title}</h4>
-              <ul className="space-y-2">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link to={link.to} className="text-sm hover:text-primary transition-colors" style={{ color: "hsl(210 20% 55%)" }}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+            {footerColumns.map((column) => (
+              <div key={column.title}>
+                <h4 className="font-heading text-[15px] font-semibold tracking-[-0.01em] text-slate-950">{column.title}</h4>
+                <ul className="mt-5 space-y-3.5">
+                  {column.links.map((link) => (
+                    <li key={link.label}>
+                      {"to" in link ? (
+                        <Link to={link.to} className="text-[15px] leading-6 text-slate-700 transition-colors hover:text-[hsl(20_92%_42%)]">
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[15px] leading-6 text-slate-700 transition-colors hover:text-[hsl(20_92%_42%)]"
+                        >
+                          {link.label}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="border-t pt-8" style={{ borderColor: "hsl(0 0% 100% / 0.08)" }}>
-          <p className="text-center text-xs" style={{ color: "hsl(210 20% 45%)" }}>
-            {t("footer.rights")}
-          </p>
+
+        <div className="flex flex-col gap-4 pt-6 text-sm text-slate-500 lg:flex-row lg:items-center lg:justify-between">
+          <p>{copy.rights}</p>
+          <p>{copy.contactTitle}: {contactDetails.addressShort}</p>
         </div>
       </div>
     </footer>

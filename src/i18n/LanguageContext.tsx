@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 import { fr } from "./translations/fr";
 import { en } from "./translations/en";
 
@@ -16,8 +16,33 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const getInitialLanguage = (): Language => {
+  if (typeof window === "undefined") {
+    return "fr";
+  }
+
+  const storedLanguage = window.localStorage.getItem("transferai-language");
+  return storedLanguage === "en" ? "en" : "fr";
+};
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("fr");
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+
+  const setLanguage = useCallback((lang: Language) => {
+    setLanguageState(lang);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("transferai-language", language);
+    }
+
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = language;
+      document.documentElement.setAttribute("data-language", language);
+      document.body.setAttribute("data-language", language);
+    }
+  }, [language]);
 
   const t = useCallback(
     (key: string): any => {
