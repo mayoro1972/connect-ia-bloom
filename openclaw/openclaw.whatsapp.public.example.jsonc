@@ -1,0 +1,32 @@
+{
+  // Example OpenClaw setup for a public-facing WhatsApp agent.
+  // Review this carefully before production use.
+  // Use a dedicated WhatsApp number, not a personal number.
+  "assistant": {
+    "name": "TransferAI Africa WhatsApp Agent",
+    "systemPromptFile": "./openclaw/TRANSFERAI_AGENT.md"
+  },
+  "channels": {
+    "whatsapp": {
+      // Public mode so any user can message the number.
+      // If you want safer rollout first, replace with an explicit list of numbers.
+      "allowFrom": ["*"],
+      "dmPolicy": "open",
+      // Recommended: keep group access disabled at launch.
+      "groupPolicy": "disabled"
+    }
+  },
+  "agents": {
+    "defaults": {
+      // Start conservatively; increase if needed after validation.
+      "heartbeat": {
+        "every": "0m"
+      }
+    }
+  },
+  "business": {
+    "email": "contact@transferai.ci",
+    "phone": "+225071657733990",
+    "website": "https://transferai.ci"
+  }
+}

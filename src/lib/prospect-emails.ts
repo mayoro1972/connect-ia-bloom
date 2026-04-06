@@ -80,7 +80,7 @@ export const buildAppointmentMailto = (payload: {
         `Organisation : ${payload.company || ""}`,
         `Domaine : ${payload.domain || ""}`,
         "",
-        "Merci de me proposer un creneau ou de me recontacter par email.",
+        "Merci de me proposer un créneau ou de me recontacter par email.",
         "",
         "Cordialement,",
       ].join("\n");

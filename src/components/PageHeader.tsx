@@ -9,7 +9,7 @@ interface PageHeaderProps {
 
 const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
   return (
-    <section className="relative pt-28 pb-16 overflow-hidden">
+    <section className="relative overflow-hidden pb-16 pt-28 lg:pt-32">
       {/* Background image */}
       <div className="absolute inset-0">
         <img src={headerBg} alt="" className="w-full h-full object-cover" />

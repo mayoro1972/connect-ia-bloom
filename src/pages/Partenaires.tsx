@@ -15,6 +15,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import { buildContactPath } from "@/lib/site-links";
 
 const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP", "IADS", "SNDI", "Pigier CI"];
 const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp, logoIads, logoSndi, logoPigier];
@@ -72,7 +73,7 @@ const PartenairesPage = () => {
             <ScrollReveal>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-secondary-foreground mb-4">{t("partners.becomePartner")}</h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-8">{t("partners.becomePartnerDesc")}</p>
-              <Link to="/contact" className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+              <Link to={buildContactPath("contact-devis")} className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                 {t("partners.contactUs")} <ExternalLink size={18} />
               </Link>
             </ScrollReveal>

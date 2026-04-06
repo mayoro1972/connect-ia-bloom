@@ -7,6 +7,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { buildContactPath } from "@/lib/site-links";
 
 const Seminaires = () => {
   const { t } = useLanguage();
@@ -46,7 +47,7 @@ const Seminaires = () => {
                     </div>
                     <div className="flex items-center justify-between pt-4 border-t border-border">
                       <span className="font-semibold text-card-foreground">{sem.price}</span>
-                      <Link to="/contact" className="text-sm font-semibold text-primary flex items-center gap-1 hover:underline">
+                      <Link to={buildContactPath("demande-renseignement")} className="text-sm font-semibold text-primary flex items-center gap-1 hover:underline">
                         {t("seminaires.register")} <ArrowRight size={14} />
                       </Link>
                     </div>
@@ -59,7 +60,7 @@ const Seminaires = () => {
             <div className="bg-indigo-gradient rounded-2xl p-8 md:p-12 text-center">
               <h3 className="font-heading text-2xl font-bold mb-4" style={{ color: "hsl(0 0% 96%)" }}>{t("seminaires.ctaTitle")}</h3>
               <p className="text-sm mb-6" style={{ color: "hsl(210 20% 70%)" }}>{t("seminaires.ctaDesc")}</p>
-              <Link to="/contact" className="inline-block bg-orange-gradient font-semibold text-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+              <Link to={buildContactPath("demande-renseignement")} className="inline-block bg-orange-gradient font-semibold text-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                 {t("seminaires.ctaCta")}
               </Link>
             </div>

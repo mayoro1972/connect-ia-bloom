@@ -1,3 +1,5 @@
+import { deepFixMojibake } from "@/lib/fixMojibake";
+
 export type Formation = {
   id: string;
   title: string;
@@ -11,7 +13,7 @@ export type Formation = {
   tags: string[];
 };
 
-export const formations: Formation[] = [
+const rawFormations: Formation[] = [
   // ═══════════════════════════════════════════════
   // ASSISTANAT & SECRÉTARIAT DE DIRECTION (10)
   // ═══════════════════════════════════════════════
@@ -194,3 +196,5 @@ export const formations: Formation[] = [
   { id: "diplo-09", title: "Gouvernance Mondiale de l'Intelligence Artificielle", titleEn: "Global AI Governance", metier: "Diplomatie & Affaires Internationales", level: "Avancé", format: "Hybride", duration: "2 jours", durationEn: "2 days", price: "3 500 000 FCFA", tags: ["Gouvernance IA", "ONU & UNESCO"] },
   { id: "diplo-10", title: "Leadership Diplomatique à l'ère de l'IA", titleEn: "Diplomatic Leadership in the AI Era", metier: "Diplomatie & Affaires Internationales", level: "Avancé", format: "Présentiel", duration: "2 jours", durationEn: "2 days", price: "5 000 000 FCFA", tags: ["Leadership", "Transformation numérique"] },
 ];
+
+export const formations = deepFixMojibake(rawFormations) as Formation[];

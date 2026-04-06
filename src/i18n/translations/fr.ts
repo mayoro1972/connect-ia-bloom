@@ -1,9 +1,15 @@
-export const fr = {
+import { deepFixMojibake } from "@/lib/fixMojibake";
+
+const rawFr = {
   nav: {
     home: "ACCUEIL",
     about: "A PROPOS",
     education: "EDUCATION IA",
+    services: "SERVICES",
+    resources: "RESSOURCES",
+    domainCatalogues: "CATALOGUES",
     formations: "Formations",
+    paths: "PARCOURS",
     certification: "Certification",
     seminaires: "Seminaires",
     webinars: "Webinars",
@@ -15,7 +21,7 @@ export const fr = {
     blog: "BLOG",
     partners: "PARTENAIRES",
     contact: "CONTACT",
-    cta: "Demander un devis",
+    cta: "PARLER A UN EXPERT",
   },
   hero: {
     badge: "Éducation · Consulting · Solutions IA",
@@ -88,7 +94,9 @@ export const fr = {
     services: "Services",
     resources: "Ressources",
     contact: "Contact",
+    domainCatalogues: "Catalogues par domaine",
     catalogue: "Catalogue / Formations",
+    paths: "Parcours",
     seminaires: "Séminaires",
     webinars: "Webinars",
     contenuIA: "Créateur de Contenu IA",
@@ -101,6 +109,8 @@ export const fr = {
     events: "Événements",
     about: "À propos",
     requestQuote: "Demander un devis",
+    appointment: "Prendre RDV",
+    privacyPolicy: "Confidentialite",
     support: "Support",
     rights: "© 2026 TransferAI Africa. Tous droits réservés.",
   },
@@ -309,8 +319,14 @@ export const fr = {
     participants: "Nombre de participants",
     message: "Message ou besoins spécifiques",
     submit: "Envoyer mon inscription",
+    submitPending: "Envoi en cours...",
+    privacyConsent: "J'accepte que mes donnees soient traitees uniquement pour repondre a ma demande, conformement a la",
+    privacyLink: "politique de confidentialite",
     toastTitle: "Inscription envoyée !",
     toastDesc: "Nous vous recontacterons dans les 24h pour confirmer votre inscription.",
+    toastErrorTitle: "Envoi impossible",
+    toastErrorDesc: "Votre inscription n'a pas pu être enregistrée. Merci de réessayer dans un instant.",
+    privacyConsentError: "Merci d'accepter la politique de confidentialite avant d'envoyer votre inscription.",
   },
   download: {
     title: "Télécharger le catalogue",
@@ -336,8 +352,14 @@ export const fr = {
     formations: "Formations souhaitées",
     message: "Votre message ou besoins spécifiques...",
     submit: "Envoyer ma demande de devis",
+    submitPending: "Envoi en cours...",
+    privacyConsent: "J'accepte que mes donnees soient traitees uniquement pour repondre a ma demande, conformement a la",
+    privacyLink: "politique de confidentialite",
     toastTitle: "Demande envoyée !",
     toastDesc: "Nous vous recontacterons dans les 24h.",
+    toastErrorTitle: "Envoi impossible",
+    toastErrorDesc: "Votre demande n'a pas pu être enregistrée. Merci de réessayer dans un instant.",
+    privacyConsentError: "Merci d'accepter la politique de confidentialite avant d'envoyer votre demande.",
     coordTitle: "Nos coordonnées",
     whatsapp: "WhatsApp",
     whatsappDesc: "Écrivez-nous sur WhatsApp",
@@ -505,3 +527,5 @@ export const fr = {
     },
   },
 };
+
+export const fr = deepFixMojibake(rawFr);

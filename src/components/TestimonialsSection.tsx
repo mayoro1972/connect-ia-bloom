@@ -1,35 +1,62 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { Quote } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { fr } from "@/i18n/translations/fr";
-import { en } from "@/i18n/translations/en";
+import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+
+const sectionCopy = {
+  fr: {
+    title1: "Ils nous font ",
+    titleHighlight: "confiance",
+    items: [
+      { quote: "La formation IA pour nos équipes RH a transformé notre processus de recrutement. Gain de temps de 40% sur le sourcing.", name: "Aminata Koné", role: "DRH, Banque Atlantique" },
+      { quote: "Un programme de formation structuré et adapté aux réalités africaines. Nos équipes sont devenues autonomes sur les outils IA.", name: "Jean-Marc Ouattara", role: "DSI, Orange CI" },
+      { quote: "L'IA a révolutionné notre création de contenu. TransferAI Africa nous a accompagnés de A à Z.", name: "Fatou Diallo", role: "Directrice Marketing, Ecobank" },
+    ],
+  },
+  en: {
+    title1: "They trust ",
+    titleHighlight: "us",
+    items: [
+      { quote: "The AI training for our HR teams transformed our recruitment process. 40% time saved on sourcing.", name: "Aminata Koné", role: "CHRO, Banque Atlantique" },
+      { quote: "A structured training program adapted to African realities. Our teams became autonomous on AI tools.", name: "Jean-Marc Ouattara", role: "CIO, Orange CI" },
+      { quote: "AI revolutionized our content creation. TransferAI Africa supported us from A to Z.", name: "Fatou Diallo", role: "Marketing Director, Ecobank" },
+    ],
+  },
+} as const;
 
 const TestimonialsSection = () => {
-  const { t, language } = useLanguage();
-  const items = language === "fr" ? fr.testimonials.items : en.testimonials.items;
+  const { language } = useLanguage();
+  const copy = sectionCopy[resolveActiveLanguage(language)];
 
   return (
-    <section id="temoignages" className="py-24 bg-muted">
+    <section id="temoignages" className="bg-muted py-24">
       <div className="container mx-auto px-4 lg:px-8">
-        <ScrollReveal className="text-center mb-16">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
-            {t("testimonials.title1")}<span className="text-gradient-coral">{t("testimonials.titleHighlight")}</span>
+        <ScrollReveal className="mb-16 text-center">
+          <h2 className="mb-4 font-heading text-3xl font-bold md:text-5xl">
+            {copy.title1}
+            <span className="text-gradient-coral">{copy.titleHighlight}</span>
           </h2>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {items.map((item, i) => (
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+          {copy.items.map((item, i) => (
             <ScrollReveal key={item.name} delay={i * 0.12} direction={i === 0 ? "left" : i === 2 ? "right" : "up"}>
-              <div className="bg-card border border-border rounded-xl p-8 hover-lift relative h-full">
-                <Quote size={32} className="text-primary/20 mb-4" />
-                <p className="text-card-foreground leading-relaxed mb-6 text-sm">"{item.quote}"</p>
+              <div className="relative h-full rounded-xl border border-border bg-card p-8 hover-lift">
+                <Quote size={32} className="mb-4 text-primary/20" />
+                <p className="mb-6 text-sm leading-relaxed text-card-foreground">"{item.quote}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-teal-gradient flex items-center justify-center font-heading font-bold text-sm" style={{ color: "hsl(0 0% 100%)" }}>
-                    {item.name.split(" ").map(n => n[0]).join("")}
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-gradient font-heading text-sm font-bold"
+                    style={{ color: "hsl(0 0% 100%)" }}
+                  >
+                    {item.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-card-foreground">{item.name}</p>
-                    <p className="text-muted-foreground text-xs">{item.role}</p>
+                    <p className="text-sm font-semibold text-card-foreground">{item.name}</p>
+                    <p className="text-xs text-muted-foreground">{item.role}</p>
                   </div>
                 </div>
               </div>

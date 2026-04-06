@@ -3,8 +3,8 @@ import type { Formation } from "@/data/formations";
 import { fixMojibake } from "@/lib/fixMojibake";
 
 const levelTranslations: Record<string, Record<string, string>> = {
-  en: { "Débutant": "Beginner", "Intermédiaire": "Intermediate", "Avancé": "Advanced" },
-  fr: { "Débutant": "Débutant", "Intermédiaire": "Intermédiaire", "Avancé": "Avancé" },
+  en: { Débutant: "Beginner", Intermédiaire: "Intermediate", Avancé: "Advanced" },
+  fr: { Débutant: "Débutant", Intermédiaire: "Intermédiaire", Avancé: "Avancé" },
 };
 
 const formatTranslations: Record<string, Record<string, string>> = {

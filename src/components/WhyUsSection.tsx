@@ -1,35 +1,62 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { MapPin, Wrench, Laptop } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 
 const icons = [MapPin, Wrench, Laptop];
-const keys = ["local", "practical", "flexible"];
+const keys = ["local", "practical", "flexible"] as const;
+
+const sectionCopy = {
+  fr: {
+    title1: "Pourquoi choisir ",
+    titleHighlight: "TransferAI",
+    title2: " Africa ?",
+    reasons: {
+      local: { title: "Expertise Locale", desc: "Des formateurs qui comprennent les défis et opportunités du marché africain." },
+      practical: { title: "Approche Pratique", desc: "80% de pratique, des cas d'usage réels issus d'entreprises africaines." },
+      flexible: { title: "Formats Flexibles", desc: "Présentiel, hybride ou en ligne. Nous nous adaptons à vos contraintes." },
+    },
+  },
+  en: {
+    title1: "Why choose ",
+    titleHighlight: "TransferAI",
+    title2: " Africa?",
+    reasons: {
+      local: { title: "Local Expertise", desc: "Trainers who understand the challenges and opportunities of the African market." },
+      practical: { title: "Hands-On Approach", desc: "80% practical work, real use cases from African businesses." },
+      flexible: { title: "Flexible Formats", desc: "On-site, hybrid or online. We adapt to your constraints." },
+    },
+  },
+} as const;
 
 const WhyUsSection = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const copy = sectionCopy[resolveActiveLanguage(language)];
 
   return (
-    <section id="pourquoi" className="py-24 bg-indigo-gradient">
+    <section id="pourquoi" className="bg-indigo-gradient py-24">
       <div className="container mx-auto px-4 lg:px-8">
-        <ScrollReveal className="text-center mb-16">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
-            {t("whyUs.title1")}<span className="text-gradient-orange">{t("whyUs.titleHighlight")}</span>{t("whyUs.title2")}
+        <ScrollReveal className="mb-16 text-center">
+          <h2 className="mb-4 font-heading text-3xl font-bold md:text-5xl" style={{ color: "hsl(0 0% 98%)" }}>
+            {copy.title1}
+            <span className="text-gradient-orange">{copy.titleHighlight}</span>
+            {copy.title2}
           </h2>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
           {keys.map((key, i) => {
             const Icon = icons[i];
             return (
               <ScrollReveal key={key} delay={i * 0.15} direction="up" className="text-center">
-                <div className="w-16 h-16 rounded-2xl bg-teal-gradient mx-auto flex items-center justify-center mb-6 hover:scale-110 transition-transform duration-300">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-gradient transition-transform duration-300 hover:scale-110">
                   <Icon size={28} style={{ color: "hsl(0 0% 100%)" }} />
                 </div>
-                <h3 className="font-heading text-xl font-semibold mb-3" style={{ color: "hsl(0 0% 98%)" }}>
-                  {t(`whyUs.reasons.${key}.title`)}
+                <h3 className="mb-3 font-heading text-xl font-semibold" style={{ color: "hsl(0 0% 98%)" }}>
+                  {copy.reasons[key].title}
                 </h3>
-                <p style={{ color: "hsl(210 20% 70%)" }} className="leading-relaxed">
-                  {t(`whyUs.reasons.${key}.desc`)}
+                <p className="leading-relaxed" style={{ color: "hsl(210 20% 70%)" }}>
+                  {copy.reasons[key].desc}
                 </p>
               </ScrollReveal>
             );

@@ -9,6 +9,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import { buildContactPath } from "@/lib/site-links";
 
 const icons = [FileText, Target, Users, Settings];
 
@@ -51,7 +52,7 @@ const EntreprisesPage = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/contact" className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+            <Link to={buildContactPath("contact-devis")} className="bg-coral-gradient font-semibold px-8 py-3 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
               {t("enterprises.cta")} <ArrowRight size={18} />
             </Link>
           </div>

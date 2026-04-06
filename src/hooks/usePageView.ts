@@ -7,14 +7,9 @@ export const usePageView = () => {
 
   useEffect(() => {
     const trackView = async () => {
-      try {
-        await supabase.from("page_views").insert({
-          page_path: location.pathname,
-        });
-      } catch (error) {
-        // Silently fail - don't break the app for analytics
-        console.error("Failed to track page view:", error);
-      }
+      await supabase.rpc("track_page_view", {
+        page_path_input: location.pathname,
+      });
     };
 
     trackView();

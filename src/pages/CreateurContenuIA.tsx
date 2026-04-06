@@ -7,6 +7,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { buildContactPath } from "@/lib/site-links";
 
 const channels = [
   { icon: Youtube, color: "text-[#FF0000]", bg: "bg-[#FF0000]/10" },
@@ -89,7 +90,7 @@ const CreateurContenuIA = () => {
                 <a href="https://www.youtube.com/@transferai-africa" target="_blank" rel="noopener noreferrer" className="bg-orange-gradient font-semibold text-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                   {t("contenuIA.ctaSubscribe")}
                 </a>
-                <Link to="/contact" className="border font-semibold text-sm px-8 py-3 rounded-lg hover:bg-primary/10 transition-colors" style={{ color: "hsl(0 0% 96%)", borderColor: "hsl(0 0% 100% / 0.2)" }}>
+                <Link to={buildContactPath("contact-devis", "Marketing & Communication")} className="border font-semibold text-sm px-8 py-3 rounded-lg hover:bg-primary/10 transition-colors" style={{ color: "hsl(0 0% 96%)", borderColor: "hsl(0 0% 100% / 0.2)" }}>
                   {t("contenuIA.ctaContact")}
                 </Link>
               </div>

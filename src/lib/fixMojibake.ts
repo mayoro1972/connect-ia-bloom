@@ -1,4 +1,4 @@
-const suspiciousEncodingPattern = /Ã|Â|â|ð/;
+const suspiciousEncodingPattern = /[\u00C2\u00C3\u00E2\u00F0\uFFFD]/;
 
 export const fixMojibake = (value: string): string => {
   if (!suspiciousEncodingPattern.test(value)) {
@@ -9,7 +9,7 @@ export const fixMojibake = (value: string): string => {
     const bytes = Uint8Array.from(Array.from(value, (char) => char.charCodeAt(0) & 0xff));
     const decoded = new TextDecoder("utf-8").decode(bytes);
 
-    return decoded.includes("�") ? value : decoded;
+    return decoded.includes("\uFFFD") && !value.includes("\uFFFD") ? value : decoded;
   } catch {
     return value;
   }

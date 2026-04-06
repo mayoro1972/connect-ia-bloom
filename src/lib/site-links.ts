@@ -63,19 +63,19 @@ export const metierKeyToDomain: Record<string, string> = {
 };
 
 export const metierKeyToCatalogueSlug: Record<string, string> = {
-  assistanat: "assistanat-secretariat",
+  assistanat: "assistanat-et-secretariat",
   rh: "ressources-humaines",
-  marketing: "marketing-communication",
-  finance: "finance-comptabilite",
-  juridique: "juridique-conformite",
+  marketing: "marketing-et-communication",
+  finance: "finance-et-comptabilite",
+  juridique: "juridique-et-conformite",
   service: "service-client",
   data: "data-analyse",
-  admin: "administration-gestion",
-  management: "management-leadership",
-  it: "it-transformation-digitale",
-  formation: "formation-pedagogie",
-  sante: "sante-bien-etre",
-  diplomatie: "diplomatie-affaires-internationales",
+  admin: "administration-et-gestion",
+  management: "management-et-leadership",
+  it: "it-et-transformation-digitale",
+  formation: "formation-et-pedagogie",
+  sante: "sante-et-bien-etre",
+  diplomatie: "diplomatie-et-affaires-internationales",
 };
 
 export const slugifySiteValue = (value: string) =>

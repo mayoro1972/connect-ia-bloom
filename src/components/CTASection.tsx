@@ -1,49 +1,74 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
-import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
 import { ArrowRight, Download } from "lucide-react";
 import ctaBg from "@/assets/cta-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import { buildContactPath } from "@/lib/site-links";
+
+const sectionCopy = {
+  fr: {
+    title1: "Prêt à transformer vos ",
+    titleHighlight: "équipes",
+    title2: " ?",
+    subtitle: "Contactez-nous pour un devis personnalisé ou téléchargez notre catalogue complet.",
+    button: "Demander un devis",
+    catalogue: "Télécharger le catalogue",
+  },
+  en: {
+    title1: "Ready to transform your ",
+    titleHighlight: "teams",
+    title2: "?",
+    subtitle: "Contact us for a personalized quote or download our full catalogue.",
+    button: "Request a quote",
+    catalogue: "Download the catalogue",
+  },
+} as const;
 
 const CTASection = () => {
-  const { t } = useLanguage();
-  const [downloadOpen, setDownloadOpen] = useState(false);
+  const { language } = useLanguage();
+  const copy = sectionCopy[resolveActiveLanguage(language)];
 
   return (
-    <>
-    <section id="cta" className="relative py-24 overflow-hidden">
+    <section id="cta" className="relative overflow-hidden py-24">
       <motion.div
         className="absolute inset-0"
         animate={{ scale: [1, 1.06, 1.03, 1.08], x: [0, -10, 5, -15], y: [0, -8, 4, -10] }}
         transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
       >
-        <img src={ctaBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.88), hsl(30 80% 30% / 0.8))" }} />
+        <img src={ctaBg} alt="" className="h-full w-full object-cover" />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.88), hsl(30 80% 30% / 0.8))" }}
+        />
       </motion.div>
 
-      <div className="relative z-10 container mx-auto px-4 lg:px-8">
-        <ScrollReveal className="text-center max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-6" style={{ color: "hsl(0 0% 98%)" }}>
-            {t("cta.title1")}<span className="text-gradient-orange">{t("cta.titleHighlight")}</span>{t("cta.title2")}
+      <div className="container relative z-10 mx-auto px-4 lg:px-8">
+        <ScrollReveal className="mx-auto max-w-3xl text-center">
+          <h2 className="mb-6 font-heading text-3xl font-bold leading-tight md:text-5xl" style={{ color: "hsl(0 0% 98%)" }}>
+            {copy.title1}
+            <span className="text-gradient-orange">{copy.titleHighlight}</span>
+            {copy.title2}
           </h2>
-          <p className="text-lg mb-10" style={{ color: "hsl(210 20% 75%)" }}>
-            {t("cta.subtitle")}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/contact" className="bg-orange-gradient font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105" style={{ color: "hsl(0 0% 100%)" }}>
-              {t("cta.button")} <ArrowRight size={18} />
+          <p className="mb-10 text-lg text-slate-200/82">{copy.subtitle}</p>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              to={buildContactPath("contact-devis")}
+              className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition-all hover:scale-105 hover:opacity-95"
+            >
+              {copy.button} <ArrowRight size={18} />
             </Link>
-            <button onClick={() => setDownloadOpen(true)} className="font-semibold px-8 py-3.5 rounded-lg inline-flex items-center gap-2 border transition-all hover:scale-105" style={{ borderColor: "hsl(0 0% 100% / 0.25)", color: "hsl(0 0% 95%)" }}>
-              <Download size={18} /> {t("cta.catalogue")}
-            </button>
+            <Link
+              to="/catalogues-domaines"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/95 transition-all hover:scale-105 hover:bg-white/[0.08]"
+            >
+              <Download size={18} /> {copy.catalogue}
+            </Link>
           </div>
         </ScrollReveal>
       </div>
     </section>
-    <CatalogueDownloadModal isOpen={downloadOpen} onClose={() => setDownloadOpen(false)} />
-    </>
   );
 };
 

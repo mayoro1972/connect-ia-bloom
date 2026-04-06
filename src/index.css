@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,91 +6,94 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 30% 15%;
+    --background: 42 36% 97%;
+    --foreground: 222 38% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 15%;
+    --card-foreground: 222 38% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 15%;
+    --popover-foreground: 222 38% 14%;
 
-    --primary: 30 90% 50%;
+    --primary: 32 94% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 50% 16%;
+    --secondary: 224 40% 15%;
     --secondary-foreground: 0 0% 96%;
 
-    --muted: 35 30% 96%;
-    --muted-foreground: 220 15% 46%;
+    --muted: 38 30% 93%;
+    --muted-foreground: 218 16% 39%;
 
-    --accent: 30 50% 93%;
-    --accent-foreground: 30 80% 35%;
+    --accent: 37 66% 92%;
+    --accent-foreground: 28 84% 32%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 78% 58%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 15% 88%;
-    --input: 30 15% 88%;
-    --ring: 30 90% 50%;
+    --border: 30 20% 86%;
+    --input: 30 20% 86%;
+    --ring: 32 94% 52%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    --hero-overlay: 220 50% 12%;
-    --coral: 15 85% 57%;
-    --coral-light: 15 80% 68%;
-    --orange: 30 90% 50%;
-    --orange-light: 35 85% 60%;
-    --green: 145 65% 42%;
-    --green-light: 145 50% 55%;
-    --teal: 174 70% 42%;
-    --teal-light: 174 55% 55%;
-    --teal-deep: 174 80% 25%;
-    --indigo: 220 50% 16%;
-    --indigo-deep: 225 55% 10%;
-    --indigo-light: 220 40% 28%;
+    --hero-overlay: 224 42% 12%;
+    --coral: 13 83% 58%;
+    --coral-light: 17 92% 67%;
+    --orange: 32 94% 52%;
+    --orange-light: 39 96% 61%;
+    --green: 151 58% 38%;
+    --green-light: 150 46% 50%;
+    --teal: 176 60% 36%;
+    --teal-light: 174 49% 48%;
+    --teal-deep: 177 64% 22%;
+    --indigo: 223 37% 17%;
+    --indigo-deep: 225 44% 11%;
+    --indigo-light: 222 28% 28%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --shadow-soft: 0 20px 40px -24px hsl(224 40% 12% / 0.18);
+    --shadow-warm: 0 26px 52px -28px hsl(32 94% 52% / 0.3);
 
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --sidebar-background: 42 28% 96%;
+    --sidebar-foreground: 222 38% 14%;
+    --sidebar-primary: 224 40% 15%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 35 30% 93%;
+    --sidebar-accent-foreground: 222 38% 14%;
+    --sidebar-border: 30 20% 86%;
+    --sidebar-ring: 32 94% 52%;
+
+    --font-heading: "Space Grotesk";
+    --font-body: "Plus Jakarta Sans";
   }
 
   .dark {
-    --background: 225 55% 6%;
-    --foreground: 220 20% 92%;
-    --card: 225 50% 10%;
-    --card-foreground: 220 20% 92%;
-    --popover: 225 50% 10%;
-    --popover-foreground: 220 20% 92%;
-    --primary: 30 90% 50%;
+    --background: 224 40% 7%;
+    --foreground: 210 30% 94%;
+    --card: 224 34% 10%;
+    --card-foreground: 210 30% 94%;
+    --popover: 224 34% 10%;
+    --popover-foreground: 210 30% 94%;
+    --primary: 32 94% 52%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 40% 22%;
-    --secondary-foreground: 0 0% 96%;
-    --muted: 220 30% 15%;
-    --muted-foreground: 220 15% 60%;
-    --accent: 30 30% 15%;
-    --accent-foreground: 30 60% 65%;
+    --secondary: 222 27% 20%;
+    --secondary-foreground: 210 30% 96%;
+    --muted: 222 24% 16%;
+    --muted-foreground: 215 16% 68%;
+    --accent: 31 36% 18%;
+    --accent-foreground: 37 88% 74%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 30% 18%;
-    --input: 220 30% 18%;
-    --ring: 30 90% 50%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 220 23% 19%;
+    --input: 220 23% 19%;
+    --ring: 32 94% 52%;
+    --sidebar-background: 224 40% 8%;
+    --sidebar-foreground: 210 30% 94%;
+    --sidebar-primary: 32 94% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 223 24% 16%;
+    --sidebar-accent-foreground: 210 30% 94%;
+    --sidebar-border: 220 23% 19%;
+    --sidebar-ring: 32 94% 52%;
   }
 }
 
@@ -105,50 +108,88 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-body);
+    font-family: var(--font-body), sans-serif;
+    background-image:
+      radial-gradient(circle at top left, hsl(37 96% 75% / 0.16), transparent 26%),
+      radial-gradient(circle at top right, hsl(176 60% 52% / 0.08), transparent 24%),
+      linear-gradient(180deg, hsl(var(--background)), hsl(40 38% 96%));
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background: hsl(32 94% 52% / 0.22);
+    color: hsl(224 40% 12%);
+  }
+}
+
+@layer components {
+  .surface-card {
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.96), hsl(38 42% 98% / 0.94));
+    border: 1px solid hsl(30 20% 88%);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-dark {
+    background: linear-gradient(180deg, hsl(224 40% 12% / 0.96), hsl(224 40% 10% / 0.92));
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    box-shadow: 0 20px 40px -26px hsl(224 44% 8% / 0.52);
   }
 }
 
 @layer utilities {
   .text-gradient-teal {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(145 65% 42%), hsl(145 50% 55%));
+    background-image: linear-gradient(135deg, hsl(151 58% 38%), hsl(176 60% 40%));
   }
 
   .text-gradient-coral {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(15 85% 57%), hsl(25 90% 60%));
+    background-image: linear-gradient(135deg, hsl(13 83% 58%), hsl(32 94% 52%));
   }
 
   .text-gradient-orange {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(30 90% 50%), hsl(40 95% 55%));
+    background-image: linear-gradient(135deg, hsl(32 94% 52%), hsl(39 96% 61%));
   }
 
   .bg-indigo-gradient {
-    background: linear-gradient(135deg, hsl(225 55% 10%), hsl(220 50% 16%));
+    background: linear-gradient(135deg, hsl(225 44% 11%), hsl(223 37% 17%));
   }
 
   .bg-teal-gradient {
-    background: linear-gradient(135deg, hsl(30 90% 50%), hsl(145 65% 42%));
+    background: linear-gradient(135deg, hsl(176 60% 36%), hsl(151 58% 38%));
   }
 
   .bg-coral-gradient {
-    background: linear-gradient(135deg, hsl(15 85% 57%), hsl(25 90% 60%));
+    background: linear-gradient(135deg, hsl(13 83% 58%), hsl(22 92% 59%));
   }
 
   .bg-orange-gradient {
-    background: linear-gradient(135deg, hsl(30 90% 50%), hsl(40 95% 55%));
+    background: linear-gradient(135deg, hsl(32 94% 52%), hsl(39 96% 61%));
   }
 
   .glass-card {
-    @apply backdrop-blur-md border;
-    background: hsl(0 0% 100% / 0.1);
-    border-color: hsl(0 0% 100% / 0.15);
+    @apply backdrop-blur-xl border;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.18), hsl(0 0% 100% / 0.08));
+    border-color: hsl(0 0% 100% / 0.16);
+    box-shadow: 0 18px 36px -24px hsl(224 44% 8% / 0.32);
   }
 
   .hover-lift {
@@ -157,11 +198,11 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px hsl(30 90% 50% / 0.2);
+    box-shadow: var(--shadow-warm);
   }
 
   .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
+    @apply transition-transform duration-200 hover:scale-[1.02];
   }
 
   .story-link * {
@@ -169,7 +210,7 @@
   }
 
   .story-link *::after {
-    content: '';
+    content: "";
     @apply absolute w-full h-0.5 bottom-0 left-0 origin-bottom-right transition-transform duration-300;
     background: hsl(var(--primary));
     transform: scaleX(0);

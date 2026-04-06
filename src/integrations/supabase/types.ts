@@ -14,6 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_requests: {
+        Row: {
+          city: string | null
+          company: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          language: string
+          message: string | null
+          participants: number | null
+          phone: string
+          privacy_consent: boolean
+          request_intent: string
+          requested_domain: string | null
+          requested_formations: string | null
+          sector: string | null
+          source_page: string
+        }
+        Insert: {
+          city?: string | null
+          company: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          language?: string
+          message?: string | null
+          participants?: number | null
+          phone: string
+          privacy_consent?: boolean
+          request_intent?: string
+          requested_domain?: string | null
+          requested_formations?: string | null
+          sector?: string | null
+          source_page?: string
+        }
+        Update: {
+          city?: string | null
+          company?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          language?: string
+          message?: string | null
+          participants?: number | null
+          phone?: string
+          privacy_consent?: boolean
+          request_intent?: string
+          requested_domain?: string | null
+          requested_formations?: string | null
+          sector?: string | null
+          source_page?: string
+        }
+        Relationships: []
+      }
       page_views: {
         Row: {
           id: string
@@ -38,20 +95,116 @@ export type Database = {
         }
         Relationships: []
       }
-    }
-    Views: {
-      page_view_stats: {
+      registration_requests: {
         Row: {
-          total_views: number | null
-          unique_today: number | null
-          unique_visitors: number | null
-          views_today: number | null
+          company: string
+          created_at: string
+          email: string
+          first_name: string
+          formation_id: string | null
+          formation_title: string
+          id: string
+          language: string
+          last_name: string
+          message: string | null
+          participants: number
+          phone: string
+          position: string | null
+          privacy_consent: boolean
+          source_page: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          first_name: string
+          formation_id?: string | null
+          formation_title: string
+          id?: string
+          language?: string
+          last_name: string
+          message?: string | null
+          participants?: number
+          phone: string
+          position?: string | null
+          privacy_consent?: boolean
+          source_page?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          first_name?: string
+          formation_id?: string | null
+          formation_title?: string
+          id?: string
+          language?: string
+          last_name?: string
+          message?: string | null
+          participants?: number
+          phone?: string
+          position?: string | null
+          privacy_consent?: boolean
+          source_page?: string
         }
         Relationships: []
       }
     }
+    Views: {
+    }
     Functions: {
-      [_ in never]: never
+      get_public_page_view_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          total_views: number
+          views_today: number
+        }[]
+      }
+      submit_contact_request: {
+        Args: {
+          city_input?: string | null
+          company_input: string
+          email_input: string
+          full_name_input: string
+          honeypot_input?: string | null
+          language_input?: string | null
+          message_input?: string | null
+          participants_input?: number | null
+          phone_input: string
+          privacy_consent_input?: boolean | null
+          request_intent_input?: string | null
+          requested_domain_input?: string | null
+          requested_formations_input?: string | null
+          sector_input?: string | null
+          source_page_input?: string | null
+        }
+        Returns: string
+      }
+      submit_registration_request: {
+        Args: {
+          company_input: string
+          email_input: string
+          first_name_input: string
+          formation_id_input?: string | null
+          formation_title_input: string
+          honeypot_input?: string | null
+          language_input?: string | null
+          last_name_input: string
+          message_input?: string | null
+          participants_input?: number | null
+          phone_input: string
+          position_input?: string | null
+          privacy_consent_input?: boolean | null
+          source_page_input?: string | null
+        }
+        Returns: string
+      }
+      track_page_view: {
+        Args: {
+          page_path_input?: string | null
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

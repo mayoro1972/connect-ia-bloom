@@ -1,9 +1,15 @@
-export const en = {
+import { deepFixMojibake } from "@/lib/fixMojibake";
+
+const rawEn = {
   nav: {
     home: "HOME",
     about: "ABOUT",
     education: "AI EDUCATION",
+    services: "SERVICES",
+    resources: "RESOURCES",
+    domainCatalogues: "CATALOGUES",
     formations: "Courses",
+    paths: "PATHS",
     certification: "Certification",
     seminaires: "Seminars",
     webinars: "Webinars",
@@ -15,7 +21,7 @@ export const en = {
     blog: "BLOG",
     partners: "PARTNERS",
     contact: "CONTACT",
-    cta: "Request a Quote",
+    cta: "TALK TO AN EXPERT",
   },
   hero: {
     badge: "Education · Consulting · AI Solutions",
@@ -88,7 +94,9 @@ export const en = {
     services: "Services",
     resources: "Resources",
     contact: "Contact",
+    domainCatalogues: "Domain catalogues",
     catalogue: "Catalogue / Courses",
+    paths: "Paths",
     seminaires: "Seminars",
     webinars: "Webinars",
     contenuIA: "AI Content Creator",
@@ -101,6 +109,8 @@ export const en = {
     events: "Events",
     about: "About",
     requestQuote: "Request a Quote",
+    appointment: "Book a meeting",
+    privacyPolicy: "Privacy policy",
     support: "Support",
     rights: "© 2026 TransferAI Africa. All rights reserved.",
   },
@@ -309,8 +319,14 @@ export const en = {
     participants: "Number of participants",
     message: "Message or specific needs",
     submit: "Submit my registration",
+    submitPending: "Sending...",
+    privacyConsent: "I agree that my data may be processed only to answer my request, in accordance with the",
+    privacyLink: "privacy policy",
     toastTitle: "Registration sent!",
     toastDesc: "We will contact you within 24 hours to confirm your registration.",
+    toastErrorTitle: "Unable to send",
+    toastErrorDesc: "Your registration could not be saved. Please try again in a moment.",
+    privacyConsentError: "Please accept the privacy policy before sending your registration.",
   },
   download: {
     title: "Download Catalogue",
@@ -336,8 +352,14 @@ export const en = {
     formations: "Desired training",
     message: "Your message or specific needs...",
     submit: "Send my quote request",
+    submitPending: "Sending...",
+    privacyConsent: "I agree that my data may be processed only to answer my request, in accordance with the",
+    privacyLink: "privacy policy",
     toastTitle: "Request sent!",
     toastDesc: "We will get back to you within 24h.",
+    toastErrorTitle: "Unable to send",
+    toastErrorDesc: "Your request could not be saved. Please try again in a moment.",
+    privacyConsentError: "Please accept the privacy policy before sending your request.",
     coordTitle: "Our Contact Details",
     whatsapp: "WhatsApp",
     whatsappDesc: "Write to us on WhatsApp",
@@ -505,3 +527,5 @@ export const en = {
     },
   },
 };
+
+export const en = deepFixMojibake(rawEn);

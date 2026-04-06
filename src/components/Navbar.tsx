@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { fr } from "@/i18n/translations/fr";
+import { en } from "@/i18n/translations/en";
+import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { buildContactPath } from "@/lib/site-links";
 
 interface NavItem {
@@ -56,7 +59,9 @@ const Navbar = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [desktopOpenMenu, setDesktopOpenMenu] = useState<string | null>(null);
   const location = useLocation();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
+  const activeLanguage = resolveActiveLanguage(language);
+  const copy = activeLanguage === "fr" ? fr : en;
 
   const isActive = (href?: string) => {
     if (!href) return false;
@@ -90,7 +95,7 @@ const Navbar = () => {
                     active ? "text-slate-950" : "text-slate-600 hover:text-slate-950"
                   }`}
                 >
-                  {t(`nav.${item.key}`)}
+                  {copy.nav[item.key as keyof typeof copy.nav]}
                   <span
                     className={`absolute bottom-0 left-0 h-[2px] w-full origin-left bg-[hsl(20_92%_52%)] transition-transform duration-200 ${
                       active ? "scale-x-100" : "scale-x-0"
@@ -115,7 +120,7 @@ const Navbar = () => {
                   }`}
                   aria-expanded={desktopOpenMenu === item.key}
                 >
-                  {t(`nav.${item.key}`)}
+                  {copy.nav[item.key as keyof typeof copy.nav]}
                   <ChevronDown size={14} className={`transition-transform ${desktopOpenMenu === item.key ? "rotate-180" : ""}`} />
                   <span
                     className={`absolute bottom-0 left-0 h-[2px] w-full origin-left bg-[hsl(20_92%_52%)] transition-transform duration-200 ${
@@ -135,7 +140,7 @@ const Navbar = () => {
                     >
                       <div className="mb-2 border-b border-stone-100 px-3 pb-3">
                         <p className="text-[10px] font-heading font-bold uppercase tracking-[0.18em] text-[hsl(20_92%_52%)]">
-                          {t(`nav.${item.key}`)}
+                          {copy.nav[item.key as keyof typeof copy.nav]}
                         </p>
                       </div>
 
@@ -151,7 +156,7 @@ const Navbar = () => {
                                 : "text-slate-700 hover:bg-stone-50 hover:text-slate-950"
                             }`}
                           >
-                            {t(`nav.${child.key}`)}
+                            {copy.nav[child.key as keyof typeof copy.nav]}
                           </Link>
                         ))}
                       </div>
@@ -169,7 +174,7 @@ const Navbar = () => {
               type="button"
               onClick={() => setLanguage("fr")}
               className={`rounded-full px-3 py-1.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
-                language === "fr" ? "bg-[hsl(20_92%_52%)] text-white" : "text-slate-600 hover:text-slate-900"
+                activeLanguage === "fr" ? "bg-[hsl(20_92%_52%)] text-white" : "text-slate-600 hover:text-slate-900"
               }`}
             >
               FR
@@ -178,7 +183,7 @@ const Navbar = () => {
               type="button"
               onClick={() => setLanguage("en")}
               className={`rounded-full px-3 py-1.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
-                language === "en" ? "bg-[hsl(20_92%_52%)] text-white" : "text-slate-600 hover:text-slate-900"
+                activeLanguage === "en" ? "bg-[hsl(20_92%_52%)] text-white" : "text-slate-600 hover:text-slate-900"
               }`}
             >
               EN
@@ -189,7 +194,7 @@ const Navbar = () => {
             to={buildContactPath("contact-devis")}
             className="rounded-full bg-[hsl(20_92%_52%)] px-5 py-2.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] text-white transition-all hover:bg-[hsl(20_92%_48%)]"
           >
-            {t("nav.cta")}
+            {copy.nav.cta}
           </Link>
         </div>
 
@@ -216,7 +221,7 @@ const Navbar = () => {
                         isChildActive(item.children) ? "text-[hsl(20_92%_52%)]" : "text-slate-800"
                       }`}
                     >
-                      {t(`nav.${item.key}`)}
+                      {copy.nav[item.key as keyof typeof copy.nav]}
                       <ChevronDown size={14} className={`transition-transform ${mobileExpanded === item.key ? "rotate-180" : ""}`} />
                     </button>
                     <AnimatePresence>
@@ -236,7 +241,7 @@ const Navbar = () => {
                                 isActive(child.href) ? "text-[hsl(20_92%_52%)]" : "text-slate-600"
                               }`}
                             >
-                              {t(`nav.${child.key}`)}
+                              {copy.nav[child.key as keyof typeof copy.nav]}
                             </Link>
                           ))}
                         </motion.div>
@@ -252,7 +257,7 @@ const Navbar = () => {
                       isActive(item.href) ? "text-[hsl(20_92%_52%)]" : "text-slate-800"
                     }`}
                   >
-                    {t(`nav.${item.key}`)}
+                    {copy.nav[item.key as keyof typeof copy.nav]}
                   </Link>
                 ),
               )}
@@ -262,7 +267,7 @@ const Navbar = () => {
                   type="button"
                   onClick={() => setLanguage("fr")}
                   className={`rounded-full px-4 py-2 text-xs font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
-                    language === "fr" ? "bg-[hsl(20_92%_52%)] text-white" : "border border-stone-200 text-slate-700"
+                    activeLanguage === "fr" ? "bg-[hsl(20_92%_52%)] text-white" : "border border-stone-200 text-slate-700"
                   }`}
                 >
                   FR
@@ -271,7 +276,7 @@ const Navbar = () => {
                   type="button"
                   onClick={() => setLanguage("en")}
                   className={`rounded-full px-4 py-2 text-xs font-heading font-bold uppercase tracking-[0.14em] transition-colors ${
-                    language === "en" ? "bg-[hsl(20_92%_52%)] text-white" : "border border-stone-200 text-slate-700"
+                    activeLanguage === "en" ? "bg-[hsl(20_92%_52%)] text-white" : "border border-stone-200 text-slate-700"
                   }`}
                 >
                   EN
@@ -283,7 +288,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className="mt-3 rounded-full bg-[hsl(20_92%_52%)] px-5 py-3 text-center text-sm font-heading font-bold uppercase tracking-[0.12em] text-white"
               >
-                {t("nav.cta")}
+                {copy.nav.cta}
               </Link>
             </div>
           </motion.div>
