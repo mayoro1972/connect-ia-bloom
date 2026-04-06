@@ -16,6 +16,7 @@ import { useFormationLocale } from "@/hooks/useFormationLocale";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import { fixMojibake } from "@/lib/fixMojibake";
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
@@ -87,14 +88,14 @@ const FormationCard = ({ f, i, isNew = false }: { f: Formation; i: number; isNew
           </div>
         )}
         <div className="flex items-center gap-2 mb-3 flex-wrap">
-          <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{getLevel(f)}</span>
+          <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[fixMojibake(f.level)]}`}>{getLevel(f)}</span>
           <span className="text-xs text-muted-foreground flex items-center gap-1"><Monitor size={12} />{getFormat(f)}</span>
           <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} />{getDuration(f)}</span>
         </div>
         <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1 group-hover:text-primary transition-colors">{getTitle(f)}</h3>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {f.tags.map((tag) => (
-            <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{tag}</span>
+            <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{fixMojibake(tag)}</span>
           ))}
         </div>
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-border">
@@ -112,6 +113,7 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
   const { t } = useLanguage();
   const Icon = domainIcons[domain] || BookOpen;
   const colorClass = domainColors[domain] || "from-primary/20 to-primary/5 border-primary/30";
+  const localizedDomain = fixMojibake(domain);
 
   return (
     <motion.button
@@ -124,7 +126,7 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
       <div className="w-12 h-12 rounded-lg bg-card flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
         <Icon size={22} className="text-primary" />
       </div>
-      <h3 className="font-heading font-semibold text-base mb-1 text-card-foreground">{t(`catalogue.domains.${domain}`) || domain}</h3>
+      <h3 className="font-heading font-semibold text-base mb-1 text-card-foreground">{t(`catalogue.domains.${localizedDomain}`) || localizedDomain}</h3>
       <p className="text-sm text-muted-foreground mb-3">{count} {t("catalogue.availableFormations")}</p>
       <span className="text-xs font-semibold text-primary flex items-center gap-1">
         {t("catalogue.explore")} <ChevronRight size={14} />
@@ -134,7 +136,8 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
 };
 
 const CataloguePage = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
+  const { getTitle, getLevel, getFormat } = useFormationLocale();
   const [activeTab, setActiveTab] = useState("explorer");
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
 
@@ -144,8 +147,8 @@ const CataloguePage = () => {
   const [filterFormat, setFilterFormat] = useState("");
   const [filterMetier, setFilterMetier] = useState("");
 
-  const levels: Formation["level"][] = ["Débutant", "Intermédiaire", "Avancé"];
-  const formats: Formation["format"][] = ["Présentiel", "Hybride", "En ligne"];
+  const levels = ["Débutant", "Intermédiaire", "Avancé"];
+  const formats = ["Présentiel", "Hybride", "En ligne"];
 
   const domainGroups = useMemo(() => {
     const groups: Record<string, Formation[]> = {};
@@ -158,14 +161,17 @@ const CataloguePage = () => {
 
   const searchFiltered = useMemo(() => {
     return formations.filter((f) => {
-      const title = language === "en" ? f.titleEn : f.title;
-      const matchSearch = !search || title.toLowerCase().includes(search.toLowerCase()) || f.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
+      const title = getTitle(f);
+      const matchSearch =
+        !search ||
+        title.toLowerCase().includes(search.toLowerCase()) ||
+        f.tags.some((tag) => fixMojibake(tag).toLowerCase().includes(search.toLowerCase()));
       const matchMetier = !filterMetier || f.metier === filterMetier;
       const matchLevel = !filterLevel || f.level === filterLevel;
       const matchFormat = !filterFormat || f.format === filterFormat;
       return matchSearch && matchMetier && matchLevel && matchFormat;
     });
-  }, [search, filterMetier, filterLevel, filterFormat]);
+  }, [search, filterMetier, filterLevel, filterFormat, getTitle]);
 
   const newFormations = useMemo(() => {
     return formations.filter(f => newFormationIds.has(f.id));
@@ -190,19 +196,19 @@ const CataloguePage = () => {
                 <span className="font-semibold text-card-foreground">{totalFormations}+</span>
                 <span className="text-muted-foreground">{t("catalogue.formations")}</span>
               </div>
-              <span className="text-border">•</span>
+              <span className="text-border">&bull;</span>
               <div className="flex items-center gap-2">
                 <BarChart3 size={16} className="text-primary" />
                 <span className="font-semibold text-card-foreground">{totalDomains}</span>
                 <span className="text-muted-foreground">{t("catalogue.domainsExpertise")}</span>
               </div>
-              <span className="text-border">•</span>
+              <span className="text-border">&bull;</span>
               <div className="flex items-center gap-2">
                 <Monitor size={16} className="text-primary" />
                 <span className="font-semibold text-card-foreground">3</span>
                 <span className="text-muted-foreground">{t("catalogue.formatsLabel")}</span>
               </div>
-              <span className="text-border">•</span>
+              <span className="text-border">&bull;</span>
               <div className="flex items-center gap-2">
                 <Sparkles size={16} className="text-primary" />
                 <span className="text-muted-foreground">{t("catalogue.certifiedLabel")}</span>
@@ -238,7 +244,7 @@ const CataloguePage = () => {
                 </TabsTrigger>
               </TabsList>
 
-              {/* ═══ TAB 1: EXPLORER PAR DOMAINE ═══ */}
+              {/* â•â•â• TAB 1: EXPLORER PAR DOMAINE â•â•â• */}
               <TabsContent value="explorer">
                 <AnimatePresence mode="wait">
                   {!selectedDomain ? (
@@ -284,7 +290,7 @@ const CataloguePage = () => {
                           );
                         })()}
                         <div>
-                          <h2 className="font-heading text-2xl font-bold text-card-foreground">{t(`catalogue.domains.${selectedDomain}`) || selectedDomain}</h2>
+                          <h2 className="font-heading text-2xl font-bold text-card-foreground">{t(`catalogue.domains.${fixMojibake(selectedDomain)}`) || fixMojibake(selectedDomain)}</h2>
                           <p className="text-sm text-muted-foreground">{domainGroups[selectedDomain]?.length || 0} {t("catalogue.availableFormations")}</p>
                         </div>
                       </div>
@@ -299,7 +305,7 @@ const CataloguePage = () => {
                 </AnimatePresence>
               </TabsContent>
 
-              {/* ═══ TAB 2: RECHERCHER ═══ */}
+              {/* â•â•â• TAB 2: RECHERCHER â•â•â• */}
               <TabsContent value="rechercher">
                 <div className="bg-card rounded-xl border border-border p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
@@ -319,15 +325,15 @@ const CataloguePage = () => {
                     </div>
                     <select value={filterMetier} onChange={(e) => setFilterMetier(e.target.value)} className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none">
                       <option value="">{t("catalogue.allMetiers")}</option>
-                      {metiers.map((m) => <option key={m} value={m}>{m}</option>)}
+                      {metiers.map((m) => <option key={m} value={m}>{t(`catalogue.domains.${fixMojibake(m)}`) || fixMojibake(m)}</option>)}
                     </select>
                     <select value={filterLevel} onChange={(e) => setFilterLevel(e.target.value)} className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none">
                       <option value="">{t("catalogue.allLevels")}</option>
-                      {levels.map((l) => <option key={l} value={l}>{l}</option>)}
+                      {levels.map((l) => <option key={l} value={l}>{getLevel({ level: l } as Formation)}</option>)}
                     </select>
                     <select value={filterFormat} onChange={(e) => setFilterFormat(e.target.value)} className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none">
                       <option value="">{t("catalogue.allFormats")}</option>
-                      {formats.map((f) => <option key={f} value={f}>{f}</option>)}
+                      {formats.map((f) => <option key={f} value={f}>{getFormat({ format: f } as Formation)}</option>)}
                     </select>
                   </div>
 
@@ -342,17 +348,17 @@ const CataloguePage = () => {
                       )}
                       {filterMetier && (
                         <Badge variant="secondary" className="gap-1 cursor-pointer" onClick={() => setFilterMetier("")}>
-                          {filterMetier} <X size={12} />
+                          {t(`catalogue.domains.${fixMojibake(filterMetier)}`) || fixMojibake(filterMetier)} <X size={12} />
                         </Badge>
                       )}
                       {filterLevel && (
                         <Badge variant="secondary" className="gap-1 cursor-pointer" onClick={() => setFilterLevel("")}>
-                          {filterLevel} <X size={12} />
+                          {getLevel({ level: filterLevel } as Formation)} <X size={12} />
                         </Badge>
                       )}
                       {filterFormat && (
                         <Badge variant="secondary" className="gap-1 cursor-pointer" onClick={() => setFilterFormat("")}>
-                          {filterFormat} <X size={12} />
+                          {getFormat({ format: filterFormat } as Formation)} <X size={12} />
                         </Badge>
                       )}
                       <button
@@ -384,7 +390,7 @@ const CataloguePage = () => {
                 )}
               </TabsContent>
 
-              {/* ═══ TAB 3: NOUVEAUTÉS ═══ */}
+              {/* â•â•â• TAB 3: NOUVEAUTÃ‰S â•â•â• */}
               <TabsContent value="nouveautes">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-10 h-10 rounded-lg bg-[hsl(145,65%,42%)]/10 flex items-center justify-center">
@@ -412,3 +418,4 @@ const CataloguePage = () => {
 };
 
 export default CataloguePage;
+

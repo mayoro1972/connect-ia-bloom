@@ -12,9 +12,12 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { buildContactPath } from "@/lib/site-links";
 import { deepFixMojibake, fixMojibake } from "@/lib/fixMojibake";
 
-const getFormationDetails = (f: typeof formations[0], language: string) => {
-  const levelMap: Record<string, Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }>> = {
-    "Débutant": {
+const getFormationDetails = (formation: typeof formations[0], language: string) => {
+  const levelMap: Record<
+    string,
+    Record<string, { objectives: string[]; prerequisites: string[]; modules: string[] }>
+  > = {
+    Débutant: {
       fr: {
         objectives: [
           "Comprendre les fondamentaux de l'IA appliquée à votre métier",
@@ -46,7 +49,7 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
         ],
       },
     },
-    "Intermédiaire": {
+    Intermédiaire: {
       fr: {
         objectives: [
           "Approfondir vos compétences IA dans votre domaine métier",
@@ -54,7 +57,11 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
           "Analyser et interpréter des données avec des outils avancés",
           "Concevoir des workflows IA adaptés à votre organisation",
         ],
-        prerequisites: ["Connaissances de base en IA ou formation débutant complétée", "Expérience dans le domaine métier concerné", "Ordinateur portable requis"],
+        prerequisites: [
+          "Connaissances de base en IA ou formation débutant complétée",
+          "Expérience dans le domaine métier concerné",
+          "Ordinateur portable requis",
+        ],
         modules: [
           "Rappel et approfondissement des concepts IA",
           "Outils avancés et intégrations métier",
@@ -69,7 +76,11 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
           "Analyze and interpret data with advanced tools",
           "Design AI workflows tailored to your organization",
         ],
-        prerequisites: ["Basic AI knowledge or beginner training completed", "Experience in the relevant professional field", "Laptop required"],
+        prerequisites: [
+          "Basic AI knowledge or beginner training completed",
+          "Experience in the relevant professional field",
+          "Laptop required",
+        ],
         modules: [
           "Review and deepening of AI concepts",
           "Advanced tools and business integrations",
@@ -78,7 +89,7 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
         ],
       },
     },
-    "Avancé": {
+    Avancé: {
       fr: {
         objectives: [
           "Devenir référent IA dans votre organisation",
@@ -86,7 +97,11 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
           "Évaluer et sélectionner les solutions IA adaptées",
           "Former et accompagner vos équipes sur l'IA",
         ],
-        prerequisites: ["Formation intermédiaire complétée ou expérience équivalente", "Expérience significative dans le domaine métier", "Projet IA en cours ou planifié"],
+        prerequisites: [
+          "Formation intermédiaire complétée ou expérience équivalente",
+          "Expérience significative dans le domaine métier",
+          "Projet IA en cours ou planifié",
+        ],
         modules: [
           "Stratégie IA et vision d'ensemble",
           "Outils et plateformes IA avancés",
@@ -101,7 +116,11 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
           "Evaluate and select appropriate AI solutions",
           "Train and support your teams on AI",
         ],
-        prerequisites: ["Intermediate training completed or equivalent experience", "Significant experience in the professional field", "Ongoing or planned AI project"],
+        prerequisites: [
+          "Intermediate training completed or equivalent experience",
+          "Significant experience in the professional field",
+          "Ongoing or planned AI project",
+        ],
         modules: [
           "AI strategy and big picture overview",
           "Advanced AI tools and platforms",
@@ -112,15 +131,22 @@ const getFormationDetails = (f: typeof formations[0], language: string) => {
     },
   };
 
-  const lang = language === "en" ? "en" : "fr";
-  return levelMap[f.level]?.[lang] || levelMap["Débutant"][lang];
+  const normalizedLanguage = language === "en" ? "en" : "fr";
+
+  return levelMap[formation.level]?.[normalizedLanguage] || levelMap.Débutant[normalizedLanguage];
+};
+
+const levelColors: Record<string, string> = {
+  Débutant: "bg-accent text-accent-foreground",
+  Intermédiaire: "bg-primary/10 text-primary",
+  Avancé: "bg-destructive/10 text-destructive",
 };
 
 const FormationDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { t, language } = useLanguage();
   const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
-  const formation = formations.find((f) => f.id === id);
+  const formation = formations.find((item) => item.id === id);
   const locationLabel = language === "fr" ? "Abidjan, Cote d'Ivoire" : "Abidjan, Ivory Coast";
 
   if (!formation) {
@@ -130,7 +156,9 @@ const FormationDetailPage = () => {
           <Navbar />
           <div className="pt-28 pb-16 text-center container mx-auto px-4">
             <h1 className="font-heading text-3xl font-bold mb-4">{t("formationDetail.notFound")}</h1>
-            <Link to="/catalogue" className="text-primary hover:underline">{t("formationDetail.backToCatalogue")}</Link>
+            <Link to="/catalogue" className="text-primary hover:underline">
+              {t("formationDetail.backToCatalogue")}
+            </Link>
           </div>
           <Footer />
         </div>
@@ -140,14 +168,8 @@ const FormationDetailPage = () => {
 
   const details = deepFixMojibake(getFormationDetails(formation, language));
   const relatedFormations = formations
-    .filter((f) => f.metier === formation.metier && f.id !== formation.id)
+    .filter((item) => item.metier === formation.metier && item.id !== formation.id)
     .slice(0, 3);
-
-  const levelColors: Record<string, string> = {
-    "Débutant": "bg-accent text-accent-foreground",
-    "Intermédiaire": "bg-primary/10 text-primary",
-    "Avancé": "bg-destructive/10 text-destructive",
-  };
 
   return (
     <PageTransition>
@@ -155,80 +177,97 @@ const FormationDetailPage = () => {
         <AnimatedLogoWatermarks />
         <Navbar />
 
-        {/* Header */}
         <section className="relative pt-28 pb-16 overflow-hidden bg-indigo-gradient">
           <div className="relative z-10 container mx-auto px-4 lg:px-8">
-            <Link to="/catalogue" className="inline-flex items-center gap-2 text-sm mb-6 hover:text-primary transition-colors" style={{ color: "hsl(210 20% 75%)" }}>
+            <Link
+              to="/catalogue"
+              className="inline-flex items-center gap-2 text-sm mb-6 hover:text-primary transition-colors"
+              style={{ color: "hsl(210 20% 75%)" }}
+            >
               <ArrowLeft size={16} /> {t("formationDetail.backToCatalogue")}
             </Link>
             <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <span className={`text-xs font-medium px-3 py-1 rounded-full ${levelColors[formation.level]}`}>{getLevel(formation)}</span>
-              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}><Monitor size={14} />{getFormat(formation)}</span>
-              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}><Clock size={14} />{getDuration(formation)}</span>
+              <span className={`text-xs font-medium px-3 py-1 rounded-full ${levelColors[fixMojibake(formation.level)]}`}>
+                {getLevel(formation)}
+              </span>
+              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}>
+                <Monitor size={14} />
+                {getFormat(formation)}
+              </span>
+              <span className="text-xs flex items-center gap-1" style={{ color: "hsl(210 20% 72%)" }}>
+                <Clock size={14} />
+                {getDuration(formation)}
+              </span>
             </div>
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+              style={{ color: "hsl(0 0% 98%)" }}
+            >
               {getTitle(formation)}
             </motion.h1>
-            <p className="text-sm" style={{ color: "hsl(210 20% 72%)" }}>{t(`catalogue.domains.${fixMojibake(formation.metier)}`) || fixMojibake(formation.metier)}</p>
+            <p className="text-sm" style={{ color: "hsl(210 20% 72%)" }}>
+              {t(`catalogue.domains.${fixMojibake(formation.metier)}`) || fixMojibake(formation.metier)}
+            </p>
           </div>
         </section>
 
         <section className="py-12">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-              {/* Main Content */}
               <div className="lg:col-span-2 space-y-10">
-                {/* Objectifs */}
                 <ScrollReveal>
                   <div className="bg-card border border-border rounded-xl p-8">
                     <h2 className="font-heading text-xl font-bold mb-6 flex items-center gap-3 text-card-foreground">
                       <Target size={22} className="text-primary" /> {t("formationDetail.objectives")}
                     </h2>
                     <ul className="space-y-3">
-                      {details.objectives.map((obj, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                          <span className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">{i + 1}</span>
-                          {obj}
+                      {details.objectives.map((objective, index) => (
+                        <li key={objective} className="flex items-start gap-3 text-sm text-muted-foreground">
+                          <span className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
+                            {index + 1}
+                          </span>
+                          {objective}
                         </li>
                       ))}
                     </ul>
                   </div>
                 </ScrollReveal>
 
-                {/* Modules */}
                 <ScrollReveal delay={0.1}>
                   <div className="bg-card border border-border rounded-xl p-8">
                     <h2 className="font-heading text-xl font-bold mb-6 flex items-center gap-3 text-card-foreground">
                       <BookOpen size={22} className="text-primary" /> {t("formationDetail.program")}
                     </h2>
                     <div className="space-y-4">
-                      {details.modules.map((mod, i) => (
-                        <div key={i} className="flex items-center gap-4 p-4 rounded-lg bg-muted/50">
-                          <span className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">{i + 1}</span>
-                          <span className="text-sm font-medium text-card-foreground">{mod}</span>
+                      {details.modules.map((module, index) => (
+                        <div key={module} className="flex items-center gap-4 p-4 rounded-lg bg-muted/50">
+                          <span className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">
+                            {index + 1}
+                          </span>
+                          <span className="text-sm font-medium text-card-foreground">{module}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </ScrollReveal>
 
-                {/* Prérequis */}
                 <ScrollReveal delay={0.2}>
                   <div className="bg-card border border-border rounded-xl p-8">
                     <h2 className="font-heading text-xl font-bold mb-6 flex items-center gap-3 text-card-foreground">
                       <Users size={22} className="text-primary" /> {t("formationDetail.prerequisites")}
                     </h2>
                     <ul className="space-y-2">
-                      {details.prerequisites.map((pre, i) => (
-                        <li key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> {pre}
+                      {details.prerequisites.map((prerequisite) => (
+                        <li key={prerequisite} className="flex items-center gap-3 text-sm text-muted-foreground">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> {prerequisite}
                         </li>
                       ))}
                     </ul>
                   </div>
                 </ScrollReveal>
 
-                {/* Certification */}
                 <ScrollReveal delay={0.3}>
                   <div className="bg-card border border-border rounded-xl p-8">
                     <h2 className="font-heading text-xl font-bold mb-4 flex items-center gap-3 text-card-foreground">
@@ -239,50 +278,86 @@ const FormationDetailPage = () => {
                 </ScrollReveal>
               </div>
 
-              {/* Sidebar */}
               <div className="space-y-6">
                 <div className="bg-card border border-border rounded-xl p-6 sticky top-24">
                   <div className="text-3xl font-bold text-card-foreground mb-1">{formation.price}</div>
                   <p className="text-xs text-muted-foreground mb-6">{t("formationDetail.perParticipant")}</p>
 
                   <div className="space-y-4 mb-6">
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.durationLabel")}</span><span className="font-medium text-card-foreground">{getDuration(formation)}</span></div>
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.formatLabel")}</span><span className="font-medium text-card-foreground">{getFormat(formation)}</span></div>
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.levelLabel")}</span><span className="font-medium text-card-foreground">{getLevel(formation)}</span></div>
-                    <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("formationDetail.locationLabel")}</span><span className="font-medium text-card-foreground">{locationLabel}</span></div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">{t("formationDetail.durationLabel")}</span>
+                      <span className="font-medium text-card-foreground">{getDuration(formation)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">{t("formationDetail.formatLabel")}</span>
+                      <span className="font-medium text-card-foreground">{getFormat(formation)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">{t("formationDetail.levelLabel")}</span>
+                      <span className="font-medium text-card-foreground">{getLevel(formation)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">{t("formationDetail.locationLabel")}</span>
+                      <span className="font-medium text-card-foreground">{locationLabel}</span>
+                    </div>
                   </div>
 
-                  <Link to={`/inscription?formation=${encodeURIComponent(formation.id)}`} className="bg-orange-gradient font-semibold text-sm px-5 py-3 rounded-lg hover:opacity-90 transition-opacity w-full block text-center" style={{ color: "hsl(0 0% 100%)" }}>
+                  <Link
+                    to={`/inscription?formation=${encodeURIComponent(formation.id)}`}
+                    className="bg-orange-gradient font-semibold text-sm px-5 py-3 rounded-lg hover:opacity-90 transition-opacity w-full block text-center"
+                    style={{ color: "hsl(0 0% 100%)" }}
+                  >
                     {t("formationDetail.enrollCta")}
                   </Link>
-                  <Link to={buildContactPath("contact-devis")} className="mt-3 border border-border font-medium text-sm px-5 py-3 rounded-lg hover:bg-muted transition-colors w-full block text-center text-card-foreground">
+                  <Link
+                    to={buildContactPath("contact-devis")}
+                    className="mt-3 border border-border font-medium text-sm px-5 py-3 rounded-lg hover:bg-muted transition-colors w-full block text-center text-card-foreground"
+                  >
                     {t("formationDetail.quoteCta")}
                   </Link>
 
                   <div className="flex flex-wrap gap-1.5 mt-6">
                     {formation.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{fixMojibake(tag)}</span>
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">
+                        {fixMojibake(tag)}
+                      </span>
                     ))}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Related Formations - Recommendations */}
             {relatedFormations.length > 0 && (
               <div className="max-w-6xl mx-auto mt-16">
                 <h2 className="font-heading text-2xl font-bold mb-6 text-card-foreground">{t("formationDetail.relatedTitle")}</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {relatedFormations.map((f) => (
-                    <Link key={f.id} to={`/catalogue/${f.id}`} className="bg-card border border-border rounded-xl p-5 hover-lift flex flex-col">
+                  {relatedFormations.map((relatedFormation) => (
+                    <Link
+                      key={relatedFormation.id}
+                      to={`/catalogue/${relatedFormation.id}`}
+                      className="bg-card border border-border rounded-xl p-5 hover-lift flex flex-col"
+                    >
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
-                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColors[f.level]}`}>{getLevel(f)}</span>
-                        <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} />{getDuration(f)}</span>
+                        <span
+                          className={`text-xs font-medium px-2.5 py-1 rounded-full ${
+                            levelColors[fixMojibake(relatedFormation.level)]
+                          }`}
+                        >
+                          {getLevel(relatedFormation)}
+                        </span>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Clock size={12} />
+                          {getDuration(relatedFormation)}
+                        </span>
                       </div>
-                      <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1">{getTitle(f)}</h3>
+                      <h3 className="font-heading font-semibold text-sm mb-3 text-card-foreground flex-1">
+                        {getTitle(relatedFormation)}
+                      </h3>
                       <div className="flex items-center justify-between mt-auto">
-                        <span className="font-semibold text-sm text-card-foreground">{f.price}</span>
-                        <span className="text-xs font-semibold text-primary flex items-center gap-1">{t("catalogue.details")} <ChevronRight size={14} /></span>
+                        <span className="font-semibold text-sm text-card-foreground">{relatedFormation.price}</span>
+                        <span className="text-xs font-semibold text-primary flex items-center gap-1">
+                          {t("catalogue.details")} <ChevronRight size={14} />
+                        </span>
                       </div>
                     </Link>
                   ))}
