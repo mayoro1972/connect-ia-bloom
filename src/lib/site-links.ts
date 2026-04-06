@@ -24,15 +24,15 @@ export const directLinks = {
   phone: "tel:+225071657733990",
   whatsapp: "https://wa.me/225071657733990",
   appointment: "/prise-rdv",
-  calendlyBooking: "https://calendly.com/marius-ayoro70/catalogue-discovery-call",
+  calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   map: "https://www.google.com/maps/search/?api=1&query=Nettelecomci%2C+Residence+de+la+Paix%2C+Riviera+3%2C+carrefour+Sainte+Famille%2C+Abidjan%2C+Cote+d%27Ivoire",
 };
 
 export const appointmentBookings: Record<AppointmentSource, string> = {
-  "demande-catalogue": "https://calendly.com/marius-ayoro70/catalogue-discovery-call",
-  "demande-renseignement": "https://calendly.com/marius-ayoro70/needs-qualification-call",
   "contact-devis": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
-  brochure: "https://calendly.com/marius-ayoro70/catalogue-discovery-call",
+  "demande-catalogue": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+  "demande-renseignement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+  brochure: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
 };
 
 export const contactDetails = {
