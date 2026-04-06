@@ -3,18 +3,18 @@ import { appointmentBookings, buildAppointmentPath } from "@/lib/site-links";
 
 describe("appointment booking routing", () => {
   it("maps each journey to the expected Calendly link", () => {
+    const sharedBookingLink = "https://calendly.com/marius-ayoro70/devis-quote-preparation-call";
+
     expect(appointmentBookings["demande-catalogue"]).toBe(
-      "https://calendly.com/marius-ayoro70/catalogue-discovery-call",
+      sharedBookingLink,
     );
     expect(appointmentBookings["demande-renseignement"]).toBe(
-      "https://calendly.com/marius-ayoro70/needs-qualification-call",
+      sharedBookingLink,
     );
     expect(appointmentBookings["contact-devis"]).toBe(
-      "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+      sharedBookingLink,
     );
-    expect(appointmentBookings.brochure).toBe(
-      "https://calendly.com/marius-ayoro70/catalogue-discovery-call",
-    );
+    expect(appointmentBookings.brochure).toBe(sharedBookingLink);
   });
 
   it("builds the appointment path with the right source and optional domain", () => {
