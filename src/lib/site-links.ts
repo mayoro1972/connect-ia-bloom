@@ -7,6 +7,10 @@ export type SocialLink = {
   kind: "social" | "messaging" | "video";
 };
 
+const auditFormUrl =
+  import.meta.env.VITE_AUDIT_FORM_URL ||
+  (import.meta.env.DEV ? "http://127.0.0.1:4175/" : "/formulaire-audit-ia/");
+
 export const socialLinks: SocialLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/transferai-africa", kind: "social" },
   { label: "Facebook", href: "https://www.facebook.com/transferai.africa", kind: "social" },
@@ -24,7 +28,7 @@ export const directLinks = {
   phone: "tel:+225071657733990",
   whatsapp: "https://wa.me/225071657733990",
   appointment: "/prise-rdv",
-  auditForm: "/formulaire-audit-ia/",
+  auditForm: auditFormUrl,
   calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   map: "https://www.google.com/maps/search/?api=1&query=Nettelecomci%2C+Residence+de+la+Paix%2C+Riviera+3%2C+carrefour+Sainte+Famille%2C+Abidjan%2C+Cote+d%27Ivoire",
 };

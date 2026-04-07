@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appointmentBookings, buildAppointmentPath } from "@/lib/site-links";
+import { appointmentBookings, buildAppointmentPath, directLinks } from "@/lib/site-links";
 
 describe("appointment booking routing", () => {
   it("maps each journey to the expected Calendly link", () => {
@@ -22,5 +22,9 @@ describe("appointment booking routing", () => {
     expect(buildAppointmentPath("contact-devis", "Finance & Comptabilite")).toBe(
       "/prise-rdv?source=contact-devis&domain=Finance+%26+Comptabilite",
     );
+  });
+
+  it("uses the local audit app while developing", () => {
+    expect(directLinks.auditForm).toBe("http://127.0.0.1:4175/");
   });
 });
