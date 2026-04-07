@@ -9,6 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
+    "sync:audit-form": "node scripts/sync-audit-form.mjs",
     "test": "vitest run",
     "deploy": "vite build && node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\" && gh-pages -d dist",
     "test:watch": "vitest"
