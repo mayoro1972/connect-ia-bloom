@@ -24,6 +24,7 @@ export const directLinks = {
   phone: "tel:+225071657733990",
   whatsapp: "https://wa.me/225071657733990",
   appointment: "/prise-rdv",
+  auditForm: "/formulaire-audit-ia/",
   calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   map: "https://www.google.com/maps/search/?api=1&query=Nettelecomci%2C+Residence+de+la+Paix%2C+Riviera+3%2C+carrefour+Sainte+Famille%2C+Abidjan%2C+Cote+d%27Ivoire",
 };

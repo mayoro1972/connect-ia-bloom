@@ -7,7 +7,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { buildContactPath } from "@/lib/site-links";
+import { buildContactPath, directLinks } from "@/lib/site-links";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import { deepFixMojibake } from "@/lib/fixMojibake";
@@ -90,13 +90,24 @@ const DeveloppementSolutionsIA = () => {
                 </div>
 
                 <div className="text-center">
-                  <Link
-                    to={buildContactPath("demande-renseignement", "IT & Transformation Digitale")}
-                    className="inline-flex items-center gap-2 rounded-lg bg-orange-gradient px-8 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
-                    style={{ color: "hsl(0 0% 100%)" }}
-                  >
-                    {content.auditCta} <FileDown size={16} />
-                  </Link>
+                  <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                    <Link
+                      to={buildContactPath("demande-renseignement", "IT & Transformation Digitale")}
+                      className="inline-flex items-center gap-2 rounded-lg bg-orange-gradient px-8 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
+                      style={{ color: "hsl(0 0% 100%)" }}
+                    >
+                      {content.auditCta} <ArrowRight size={16} />
+                    </Link>
+                    <a
+                      href={directLinks.auditForm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-8 py-3 text-sm font-semibold text-card-foreground transition-colors hover:bg-muted"
+                    >
+                      <FileDown size={16} />
+                      {language === "fr" ? "Ouvrir le formulaire d'audit" : "Open the audit form"}
+                    </a>
+                  </div>
                   <p className="mt-3 text-xs text-muted-foreground">{content.auditNote}</p>
                 </div>
               </div>
