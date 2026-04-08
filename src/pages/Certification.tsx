@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle, BookOpen, Award, Clock, MapPin, Monitor, Calendar } from "lucide-react";
+import { CheckCircle, BookOpen, Award, Clock, MapPin, Monitor, Calendar, BriefcaseBusiness } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,6 +27,28 @@ const CertificationPage = () => {
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid gap-12 lg:grid-cols-3">
               <div className="space-y-12 lg:col-span-2">
+                <div className="rounded-3xl border border-border bg-card p-8">
+                  <div className="mb-5 flex items-center gap-3">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
+                      <BriefcaseBusiness size={24} className="text-primary" />
+                    </div>
+                    <div>
+                      <h2 className="font-heading text-2xl font-bold text-card-foreground">{content.positioningTitle}</h2>
+                    </div>
+                  </div>
+                  <p className="mb-6 leading-7 text-muted-foreground">{content.positioningDesc}</p>
+                  <div>
+                    <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{content.domainsTitle}</h3>
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                      {content.applicableDomains.map((domain) => (
+                        <div key={domain} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm font-medium text-card-foreground">
+                          {domain}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <h2 className="mb-6 font-heading text-2xl font-bold">{content.objectivesTitle}</h2>
                   <div className="space-y-4">
@@ -49,6 +71,11 @@ const CertificationPage = () => {
                       </div>
                     ))}
                   </div>
+                </div>
+
+                <div>
+                  <h2 className="mb-4 font-heading text-2xl font-bold">{content.strategicTitle}</h2>
+                  <p className="text-card-foreground leading-7">{content.strategicDesc}</p>
                 </div>
 
                 <div>
@@ -93,6 +120,7 @@ const CertificationPage = () => {
                   >
                     {content.enrollCta}
                   </Link>
+                  <p className="mt-4 text-center text-xs leading-6 text-muted-foreground">{content.cohortNote}</p>
                 </motion.div>
               </div>
             </div>
