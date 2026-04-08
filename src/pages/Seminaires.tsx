@@ -1,55 +1,165 @@
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Users, Clock, ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle2, Clock, Globe, MapPin, Play, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
-import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { buildContactPath } from "@/lib/site-links";
 
+const liveFormatsCopy = {
+  fr: {
+    title: "Formats live & decouverte",
+    subtitle:
+      "Une seule porte d'entree pour les seminaires, webinars et replays. Le bon format pour decouvrir TransferAI Africa, monter en competence vite et passer ensuite a l'inscription.",
+    overviewTitle: "Pourquoi regrouper les formats live",
+    overviewPoints: [
+      "Le visiteur comprend immediatement ou commencer s'il veut tester avant de s'engager.",
+      "Les seminaires et les webinars jouent la meme fonction commerciale : faire decouvrir l'offre et convertir vers une formation plus complete.",
+      "Les replays rassurent et prouvent la qualite pedagogique avant la candidature ou l'inscription.",
+    ],
+    comparisonTitle: "Choisir le bon format",
+    comparisonCards: [
+      {
+        title: "Seminaires intensifs",
+        desc: "Formats courts en presentiel ou hybrides pour les equipes, promotions executives et groupes metiers.",
+        meta: "Ideal pour une montee en competence rapide et concrete",
+      },
+      {
+        title: "Webinars pratiques",
+        desc: "Sessions a distance pour decouvrir un sujet, tester l'approche pedagogique et capter des leads qualifies.",
+        meta: "Ideal pour les prospects qui veulent commencer sans friction",
+      },
+      {
+        title: "Replays selectionnes",
+        desc: "Contenus a revoir a la demande pour garder le lien avec les visiteurs et nourrir l'intention d'achat.",
+        meta: "Ideal pour nourrir la newsletter et les campagnes de conversion",
+      },
+    ],
+    seminarTitle: "Seminaires a venir",
+    webinarTitle: "Webinars a venir",
+    replayTitle: "Replays a forte intention",
+    register: "Demander ma place",
+    replayCta: "Voir ce replay",
+    ctaTitle: "Le meilleur usage commercial des formats live",
+    ctaDesc:
+      "Les formats live doivent servir d'entree basse friction dans ton tunnel Education : decouverte, reassurance, puis orientation vers la bonne formation ou la certification signature.",
+    ctaPrimary: "Deposer ma candidature",
+    ctaSecondary: "Demander une orientation",
+  },
+  en: {
+    title: "Live formats & discovery",
+    subtitle:
+      "One clear entry point for seminars, webinars and replays. The right format to discover TransferAI Africa, upskill fast and then move toward registration.",
+    overviewTitle: "Why bring live formats together",
+    overviewPoints: [
+      "Visitors instantly understand where to start if they want to test before committing.",
+      "Seminars and webinars play the same commercial role: introduce the offer and convert into fuller training.",
+      "Replays reassure prospects and prove teaching quality before application or registration.",
+    ],
+    comparisonTitle: "Choose the right format",
+    comparisonCards: [
+      {
+        title: "Intensive seminars",
+        desc: "Short in-person or hybrid formats for teams, executive cohorts and profession-based groups.",
+        meta: "Best for fast, concrete upskilling",
+      },
+      {
+        title: "Practical webinars",
+        desc: "Remote sessions to discover a topic, test the teaching approach and capture qualified leads.",
+        meta: "Best for prospects who want a low-friction starting point",
+      },
+      {
+        title: "Selected replays",
+        desc: "On-demand content that keeps visitors engaged and nurtures buying intent.",
+        meta: "Best for newsletter growth and conversion campaigns",
+      },
+    ],
+    seminarTitle: "Upcoming seminars",
+    webinarTitle: "Upcoming webinars",
+    replayTitle: "High-intent replays",
+    register: "Request my seat",
+    replayCta: "Watch this replay",
+    ctaTitle: "The strongest commercial use of live formats",
+    ctaDesc:
+      "Live formats should work as the low-friction front door of your Education funnel: discovery, reassurance and then orientation toward the right training or signature certification.",
+    ctaPrimary: "Apply now",
+    ctaSecondary: "Request orientation",
+  },
+} as const;
+
 const Seminaires = () => {
-  const { t } = useLanguage();
-  const seminaires = t("seminaires.items") as any[];
+  const { language, t } = useLanguage();
+  const copy = liveFormatsCopy[language === "en" ? "en" : "fr"];
+  const seminaires = t("seminaires.items") as Array<Record<string, string>>;
+  const upcoming = t("webinars.upcoming") as Array<Record<string, string>>;
+  const replays = t("webinars.replays") as Array<Record<string, string>>;
   const priceLabel = t("pricing.availableOnRequest");
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden bg-background">
         <AnimatedLogoWatermarks />
         <Navbar />
-        <PageHeader title={t("seminaires.title")} subtitle={t("seminaires.subtitle")} />
+        <PageHeader title={copy.title} subtitle={copy.subtitle} />
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            {/* Upcoming Seminaires */}
-            <div className="mb-12">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-8">{t("seminaires.upcoming")}</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {seminaires.map((sem: any, i: number) => (
+            <div className="mb-16 grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+              <div className="rounded-3xl border border-border bg-card p-8">
+                <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.overviewTitle}</h2>
+                <div className="space-y-4">
+                  {copy.overviewPoints.map((item) => (
+                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
+                      <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
+                      <p className="text-sm leading-7 text-card-foreground">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-border bg-card p-8">
+                <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.comparisonTitle}</h2>
+                <div className="space-y-4">
+                  {copy.comparisonCards.map((card) => (
+                    <div key={card.title} className="rounded-2xl border border-border bg-background p-5">
+                      <h3 className="font-heading text-lg font-semibold text-card-foreground">{card.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-muted-foreground">{card.desc}</p>
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary">{card.meta}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-16">
+              <h2 className="mb-8 font-heading text-2xl font-bold text-foreground">{copy.seminarTitle}</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                {seminaires.map((sem, i) => (
                   <motion.div
-                    key={i}
+                    key={`${sem.title}-${i}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-card border border-border rounded-xl p-6 hover-lift"
+                    transition={{ delay: i * 0.07 }}
+                    className="rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.35)]"
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary">{sem.audience}</span>
+                    <div className="mb-3 flex items-center gap-2">
+                      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{sem.audience}</span>
                     </div>
-                    <h3 className="font-heading font-bold text-lg text-card-foreground mb-2">{sem.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{sem.desc}</p>
-                    <div className="flex flex-wrap gap-4 text-xs text-muted-foreground mb-4">
+                    <h3 className="mb-2 font-heading text-lg font-bold text-card-foreground">{sem.title}</h3>
+                    <p className="mb-4 text-sm text-muted-foreground">{sem.desc}</p>
+                    <div className="mb-4 flex flex-wrap gap-4 text-xs text-muted-foreground">
                       <span className="flex items-center gap-1"><Calendar size={14} /> {sem.date}</span>
                       <span className="flex items-center gap-1"><MapPin size={14} /> {sem.location}</span>
                       <span className="flex items-center gap-1"><Clock size={14} /> {sem.duration}</span>
                       <span className="flex items-center gap-1"><Users size={14} /> {sem.capacity}</span>
                     </div>
-                    <div className="flex items-center justify-between pt-4 border-t border-border">
+                    <div className="flex items-center justify-between border-t border-border pt-4">
                       <span className="font-semibold text-card-foreground">{priceLabel}</span>
-                      <Link to={buildContactPath("demande-renseignement")} className="text-sm font-semibold text-primary flex items-center gap-1 hover:underline">
-                        {t("seminaires.register")} <ArrowRight size={14} />
+                      <Link to="/inscription" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                        {copy.register} <ArrowRight size={14} />
                       </Link>
                     </div>
                   </motion.div>
@@ -57,13 +167,81 @@ const Seminaires = () => {
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="bg-indigo-gradient rounded-2xl p-8 md:p-12 text-center">
-              <h3 className="font-heading text-2xl font-bold mb-4" style={{ color: "hsl(0 0% 96%)" }}>{t("seminaires.ctaTitle")}</h3>
-              <p className="text-sm mb-6" style={{ color: "hsl(210 20% 70%)" }}>{t("seminaires.ctaDesc")}</p>
-              <Link to={buildContactPath("demande-renseignement")} className="inline-block bg-orange-gradient font-semibold text-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
-                {t("seminaires.ctaCta")}
-              </Link>
+            <div className="mb-16">
+              <h2 className="mb-8 flex items-center gap-2 font-heading text-2xl font-bold text-foreground">
+                <Globe size={24} className="text-primary" /> {copy.webinarTitle}
+              </h2>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {upcoming.map((webinar, i) => (
+                  <motion.div
+                    key={`${webinar.title}-${i}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="flex flex-col rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.3)]"
+                  >
+                    <span className="mb-3 self-start rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">{webinar.audience}</span>
+                    <h3 className="mb-2 font-heading text-base font-bold text-card-foreground">{webinar.title}</h3>
+                    <p className="mb-4 flex-1 text-sm text-muted-foreground">{webinar.desc}</p>
+                    <div className="mb-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1"><Calendar size={12} /> {webinar.date}</span>
+                      <span className="flex items-center gap-1"><Clock size={12} /> {webinar.time}</span>
+                    </div>
+                    <div className="flex items-center justify-between border-t border-border pt-3">
+                      <span className="text-sm font-semibold text-primary">{priceLabel}</span>
+                      <Link to={buildContactPath("demande-renseignement")} className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                        {copy.register} <ArrowRight size={12} />
+                      </Link>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-16">
+              <h2 className="mb-8 flex items-center gap-2 font-heading text-2xl font-bold text-foreground">
+                <Play size={24} className="text-primary" /> {copy.replayTitle}
+              </h2>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {replays.map((replay, i) => (
+                  <motion.div
+                    key={`${replay.title}-${i}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.04 }}
+                    className="rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.3)]"
+                  >
+                    <h3 className="mb-2 font-heading text-base font-semibold text-card-foreground">{replay.title}</h3>
+                    <p className="mb-3 text-sm text-muted-foreground">{replay.desc}</p>
+                    <div className="mb-4 flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1"><Users size={12} /> {replay.viewers}</span>
+                      <span className="flex items-center gap-1"><Clock size={12} /> {replay.duration}</span>
+                    </div>
+                    <Link to={buildContactPath("demande-renseignement")} className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                      {copy.replayCta} <ArrowRight size={12} />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[30px] bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))] p-8 text-center md:p-12">
+              <h3 className="mb-4 font-heading text-3xl font-bold text-white">{copy.ctaTitle}</h3>
+              <p className="mx-auto mb-8 max-w-3xl text-sm leading-7 text-white/75">{copy.ctaDesc}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  to="/inscription"
+                  className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                >
+                  {copy.ctaPrimary} <ArrowRight size={16} />
+                </Link>
+                <Link
+                  to={buildContactPath("demande-renseignement")}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white hover:bg-white/5"
+                >
+                  {copy.ctaSecondary}
+                </Link>
+              </div>
             </div>
           </div>
         </section>

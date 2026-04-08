@@ -28,9 +28,9 @@ import { useJobFeed } from "@/hooks/useJobFeed";
 
 const creatorHubCopy = {
   fr: {
-    title: "Créateur de Contenu IA",
+    title: "Media, veille & opportunites IA",
     subtitle:
-      "Le hub de contenu pratique pour apprendre l'IA, l'utiliser dans son métier et repérer les opportunités qui comptent pour l'Afrique et la Côte d'Ivoire.",
+      "Le hub éditorial pour apprendre l'IA, suivre les nouveautés utiles, nourrir la newsletter et faire remonter les opportunités qui comptent pour l'Afrique et la Côte d'Ivoire.",
     missionTitle: "Notre mission : transformer l'IA en avantage concret",
     missionDesc:
       "Nous ne publions pas du contenu pour faire joli. Nous construisons un média utile pour les professionnels, étudiants, entrepreneurs et talents africains qui veulent gagner du temps, trouver des cas d'usage métier, comprendre les nouveautés IA et accéder plus vite aux opportunités de formation et d'emploi.",
@@ -166,9 +166,9 @@ const creatorHubCopy = {
     ctaSecondary: "Parler emploi & mise en relation",
   },
   en: {
-    title: "AI Content Creator",
+    title: "Media, watch & AI opportunities",
     subtitle:
-      "A practical content hub to learn AI, apply it in day-to-day work, and surface the opportunities that matter for Africa and Côte d'Ivoire.",
+      "The editorial hub to learn AI, track useful updates, power the newsletter and surface the opportunities that matter for Africa and Côte d'Ivoire.",
     missionTitle: "Our mission: turn AI into concrete advantage",
     missionDesc:
       "We do not publish content for vanity. We are building a useful media layer for professionals, students, entrepreneurs and African talent who want to save time, find business use cases, understand what is new in AI and access training and job opportunities faster.",

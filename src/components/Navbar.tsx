@@ -20,18 +20,17 @@ const navItems: NavItem[] = [
   {
     key: "education",
     children: [
-      { key: "domainCatalogues", href: "/catalogues-domaines" },
+      { key: "educationOverview", href: "/education" },
       { key: "formations", href: "/catalogue" },
       { key: "paths", href: "/parcours" },
       { key: "certification", href: "/certification" },
-      { key: "seminaires", href: "/seminaires" },
-      { key: "webinars", href: "/webinars" },
+      { key: "liveFormats", href: "/seminaires" },
     ],
   },
   {
     key: "services",
     children: [
-      { key: "enterprises", href: "/entreprises" },
+      { key: "enterprises", href: "/services" },
       { key: "consultingIA", href: "/consulting-ia" },
       { key: "devSolutionsIA", href: "/developpement-solutions-ia" },
       { key: "contenuIA", href: "/createur-contenu-ia" },
@@ -49,7 +48,7 @@ const navItems: NavItem[] = [
 
 const dropdownWidths: Record<string, string> = {
   education: "w-[320px]",
-  services: "w-[320px]",
+  services: "w-[380px]",
   resources: "w-[280px]",
 };
 

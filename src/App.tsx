@@ -9,6 +9,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import { usePageView } from "./hooks/usePageView";
 import Index from "./pages/Index";
+import EducationHub from "./pages/EducationHub";
 import Catalogue from "./pages/Catalogue";
 import FormationDetail from "./pages/FormationDetail";
 import Certification from "./pages/Certification";
@@ -45,12 +46,14 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={`${language}:${location.pathname}`}>
         <Route path="/" element={<Index />} />
+        <Route path="/education" element={<EducationHub />} />
         <Route path="/catalogue" element={<Catalogue />} />
         <Route path="/catalogue/:id" element={<FormationDetail />} />
         <Route path="/parcours" element={<Parcours />} />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/certification" element={<Certification />} />
         <Route path="/entreprises" element={<Entreprises />} />
+        <Route path="/services" element={<Entreprises />} />
         <Route path="/partenaires" element={<Partenaires />} />
         <Route path="/evenements" element={<Evenements />} />
         <Route path="/a-propos" element={<APropos />} />
