@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Users, Award, Globe, ArrowRight, Download, Eye } from "lucide-react";
-import { Link } from "react-router-dom";
+import { BookOpen, Users, Award, Globe, Eye } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
-import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
   fr: {
@@ -17,8 +15,6 @@ const sectionCopy = {
     title2: "que les entreprises s'arrachent",
     subtitle:
       "Des milliers d'entreprises cherchent urgemment des experts pour réussir leurs transitions IA. En quelques mois, devenez le partenaire stratégique IA que les entreprises paieront cher, même si vous partez de zéro.",
-    cta: "Commencer maintenant",
-    catalogue: "Télécharger le catalogue",
     stats: {
       formations: "Formations IA",
       metiers: "Domaines d'expertise",
@@ -34,8 +30,6 @@ const sectionCopy = {
     title2: "partner companies are snapping up",
     subtitle:
       "Thousands of companies are urgently looking for experts to succeed in their AI transitions. In a matter of months, become the AI strategic partner that companies will pay dearly for, even if you're starting from scratch.",
-    cta: "Get started now",
-    catalogue: "Download the catalogue",
     stats: {
       formations: "AI training",
       metiers: "Areas of expertise",
@@ -129,27 +123,6 @@ const HeroSection = () => {
           >
             {copy.subtitle}
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <Link
-              to={buildContactPath("demande-renseignement")}
-              aria-label="Contacter TransferAI Africa"
-              className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-3.5 text-base font-heading font-bold uppercase tracking-[0.08em] text-white shadow-[0_20px_40px_-24px_hsl(32_94%_52%_/_0.75)] transition-all hover:scale-105 hover:opacity-95"
-            >
-              {copy.cta} <ArrowRight size={18} />
-            </Link>
-            <Link
-              to="/catalogues-domaines"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-8 py-3.5 text-base font-heading font-bold uppercase tracking-[0.08em] text-white/95 transition-all hover:scale-105 hover:bg-white/[0.08]"
-            >
-              <Download size={18} /> {copy.catalogue}
-            </Link>
-          </motion.div>
         </div>
 
         <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-5">

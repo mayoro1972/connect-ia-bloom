@@ -29,9 +29,9 @@ const Footer = () => {
           ],
           resources: "Services",
           resourceLinks: [
-            { label: "Consulting IA", to: "/consulting-ia" },
-            { label: "Solutions IA", to: "/developpement-solutions-ia" },
-            { label: "Createur de contenu IA", to: "/createur-contenu-ia" },
+            { label: "Consulting", to: "/consulting-ia" },
+            { label: "Solutions", to: "/developpement-solutions-ia" },
+            { label: "Createur de contenu", to: "/createur-contenu-ia" },
             { label: "Demander un devis", to: buildContactPath("contact-devis") },
             { label: "Prendre RDV", to: "/prise-rdv" },
           ],
@@ -67,9 +67,9 @@ const Footer = () => {
           ],
           resources: "Services",
           resourceLinks: [
-            { label: "AI Consulting", to: "/consulting-ia" },
-            { label: "AI Solutions", to: "/developpement-solutions-ia" },
-            { label: "AI Content Creator", to: "/createur-contenu-ia" },
+            { label: "Consulting", to: "/consulting-ia" },
+            { label: "Solutions", to: "/developpement-solutions-ia" },
+            { label: "Content Creator", to: "/createur-contenu-ia" },
             { label: "Request a quote", to: buildContactPath("contact-devis") },
             { label: "Book a meeting", to: "/prise-rdv" },
           ],
@@ -106,7 +106,11 @@ const Footer = () => {
         <div className="grid gap-10 border-b border-stone-200 pb-12 lg:grid-cols-[1.2fr_2.8fr]">
           <div className="max-w-md">
             <Link to="/" className="flex items-center gap-3">
-              <img src={logoTransferAI} alt="TransferAI Africa" className="h-10 w-auto max-w-[142px] object-contain" />
+              <img
+                src={logoTransferAI}
+                alt="TransferAI Africa"
+                className="h-10 w-auto max-w-[142px] object-contain mix-blend-multiply"
+              />
               <span className="font-heading text-lg font-semibold tracking-[-0.03em] text-slate-950">
                 Transfer<span className="text-[hsl(20_92%_52%)]">AI</span> Africa
               </span>

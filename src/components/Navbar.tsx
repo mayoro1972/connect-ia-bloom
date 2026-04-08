@@ -75,7 +75,11 @@ const Navbar = () => {
     <nav className="fixed left-0 right-0 top-0 z-50 border-b border-stone-200/90 bg-[#f7f2ea]/95 backdrop-blur-xl">
       <div className="container mx-auto flex h-[74px] items-center justify-between gap-6 px-4 lg:px-6 xl:px-8">
         <Link to="/" className="flex shrink-0 items-center gap-3">
-          <img src={logoTransferAI} alt="TransferAI Africa" className="h-9 w-auto max-w-[132px] object-contain" />
+          <img
+            src={logoTransferAI}
+            alt="TransferAI Africa"
+            className="h-9 w-auto max-w-[132px] object-contain mix-blend-multiply"
+          />
           <span className="hidden font-heading text-lg font-semibold tracking-[-0.03em] text-slate-950 xl:block">
             Transfer<span className="text-[hsl(20_92%_52%)]">AI</span> Africa
           </span>

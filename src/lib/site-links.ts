@@ -16,9 +16,8 @@ export const socialLinks: SocialLink[] = [
   { label: "Facebook", href: "https://www.facebook.com/transferai.africa", kind: "social" },
   { label: "Instagram", href: "https://www.instagram.com/transferai.africa", kind: "social" },
   { label: "YouTube", href: "https://www.youtube.com/@transferai-africa", kind: "video" },
-  { label: "X", href: "https://x.com/transferai_afr", kind: "social" },
+  { label: "X / Twitter", href: "https://x.com/transferai_afr", kind: "social" },
   { label: "TikTok", href: "https://www.tiktok.com/@transferai.africa", kind: "video" },
-  { label: "Threads", href: "https://www.threads.net/@transferai.africa", kind: "social" },
   { label: "Telegram", href: "https://t.me/transferaiafrica", kind: "messaging" },
   { label: "WhatsApp", href: "https://wa.me/225071657733990", kind: "messaging" },
 ];
@@ -46,8 +45,8 @@ export const contactDetails = {
   phoneDigits: "+225071657733990",
   whatsappDisplay: "+225 071657733990",
   whatsappDigits: "225071657733990",
-  addressShort: "Riviera 3, carrefour Sainte Famille, Abidjan, Cote d'Ivoire",
-  addressFull: "Nettelecomci, Residence de la Paix, Riviera 3, carrefour Sainte Famille, Abidjan, Cote d'Ivoire",
+  addressShort: "Riviera 3, carrefour Sainte Famille, Abidjan, Côte\u00A0d'Ivoire",
+  addressFull: "Nettelecomci, Residence de la Paix, Riviera 3, carrefour Sainte Famille, Abidjan, Côte\u00A0d'Ivoire",
   mapsLabel: "Voir sur Google Maps",
 };
 

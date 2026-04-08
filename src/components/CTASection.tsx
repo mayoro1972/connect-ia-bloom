@@ -40,18 +40,26 @@ const CTASection = () => {
         <img src={ctaBg} alt="" className="h-full w-full object-cover" />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.88), hsl(30 80% 30% / 0.8))" }}
+          style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.93), hsl(30 80% 28% / 0.86))" }}
         />
       </motion.div>
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
         <ScrollReveal className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-6 font-heading text-3xl font-bold leading-tight md:text-5xl" style={{ color: "hsl(0 0% 98%)" }}>
+          <h2
+            className="mb-6 font-heading text-3xl font-bold leading-tight md:text-5xl"
+            style={{ color: "hsl(0 0% 98%)", textShadow: "0 3px 18px rgba(15, 23, 42, 0.35)" }}
+          >
             {copy.title1}
             <span className="text-gradient-orange">{copy.titleHighlight}</span>
             {copy.title2}
           </h2>
-          <p className="mb-10 text-lg text-slate-200/82">{copy.subtitle}</p>
+          <p
+            className="mb-10 text-lg font-medium"
+            style={{ color: "#F8F3EC", textShadow: "0 2px 12px rgba(15, 23, 42, 0.4)" }}
+          >
+            {copy.subtitle}
+          </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               to={buildContactPath("contact-devis")}

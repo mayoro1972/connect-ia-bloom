@@ -89,7 +89,7 @@ const rawFr = {
     catalogue: "Télécharger le catalogue",
   },
   footer: {
-    desc: "La référence en formation professionnelle IA en Côte d'Ivoire et en Afrique — portée par la diaspora.",
+    desc: "La référence en formation professionnelle IA en Côte d'Ivoire et en Afrique portée par la diaspora.",
     educationIA: "Éducation IA",
     services: "Services",
     resources: "Ressources",
