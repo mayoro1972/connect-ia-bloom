@@ -122,7 +122,7 @@ const rawFr = {
     rights: "© 2026 TransferAI Africa. Tous droits réservés.",
   },
   catalogue: {
-    title: "Catalogue de Formations IA",
+    title: "Catalogue de Formations",
     subtitle: "Plus de 130 formations pratiques réparties dans 13 domaines d'expertise. Explorez par domaine, recherchez par mot-clé ou découvrez nos nouveautés.",
     search: "Rechercher...",
     allMetiers: "Tous les domaines d'expertise",
