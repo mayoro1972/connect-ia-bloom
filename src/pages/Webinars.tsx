@@ -13,6 +13,7 @@ const Webinars = () => {
   const { t } = useLanguage();
   const upcoming = t("webinars.upcoming") as any[];
   const replays = t("webinars.replays") as any[];
+  const priceLabel = t("pricing.availableOnRequest");
 
   return (
     <PageTransition>
@@ -38,7 +39,7 @@ const Webinars = () => {
                     <span className="flex items-center gap-1"><Clock size={12} /> {w.time}</span>
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t border-border">
-                    <span className="text-sm font-semibold text-primary">{w.price}</span>
+                    <span className="text-sm font-semibold text-primary">{priceLabel}</span>
                     <Link to={buildContactPath("demande-renseignement")} className="text-xs font-semibold text-primary flex items-center gap-1 hover:underline">
                       {t("webinars.register")} <ArrowRight size={12} />
                     </Link>

@@ -70,7 +70,7 @@ const newFormationIds = new Set([
 
 const FormationCard = ({ f, i, isNew = false }: { f: Formation; i: number; isNew?: boolean }) => {
   const { t } = useLanguage();
-  const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
+  const { getTitle, getDuration, getLevel, getFormat, getPrice } = useFormationLocale();
   return (
     <Link to={`/catalogue/${f.id}`}>
       <motion.div
@@ -99,7 +99,7 @@ const FormationCard = ({ f, i, isNew = false }: { f: Formation; i: number; isNew
           ))}
         </div>
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-border">
-          <span className="font-semibold text-sm text-card-foreground">{f.price}</span>
+          <span className="font-semibold text-sm text-card-foreground">{getPrice(f)}</span>
           <span className="text-xs font-semibold text-primary flex items-center gap-1">
             {t("catalogue.details")} <ChevronRight size={12} />
           </span>
@@ -418,4 +418,3 @@ const CataloguePage = () => {
 };
 
 export default CataloguePage;
-

@@ -10,12 +10,28 @@ export const supabaseUnavailableMessage =
 
 const createUnavailableSupabaseClient = () => {
   const error = new Error(supabaseUnavailableMessage);
+  const result = {
+    data: null,
+    error,
+  };
+  const queryBuilder: {
+    select: (...args: unknown[]) => typeof queryBuilder;
+    eq: (...args: unknown[]) => typeof queryBuilder;
+    order: (...args: unknown[]) => typeof queryBuilder;
+    then: (onFulfilled: (value: typeof result) => unknown) => Promise<unknown>;
+  } = {
+    select: () => queryBuilder,
+    eq: () => queryBuilder,
+    order: () => queryBuilder,
+    then: (onFulfilled) => Promise.resolve(onFulfilled(result)),
+  };
 
   return {
     rpc: async () => ({
       data: null,
       error,
     }),
+    from: (..._args: unknown[]) => queryBuilder,
     functions: {
       invoke: async () => ({
         data: null,

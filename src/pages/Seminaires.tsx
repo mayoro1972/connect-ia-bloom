@@ -12,6 +12,7 @@ import { buildContactPath } from "@/lib/site-links";
 const Seminaires = () => {
   const { t } = useLanguage();
   const seminaires = t("seminaires.items") as any[];
+  const priceLabel = t("pricing.availableOnRequest");
 
   return (
     <PageTransition>
@@ -46,7 +47,7 @@ const Seminaires = () => {
                       <span className="flex items-center gap-1"><Users size={14} /> {sem.capacity}</span>
                     </div>
                     <div className="flex items-center justify-between pt-4 border-t border-border">
-                      <span className="font-semibold text-card-foreground">{sem.price}</span>
+                      <span className="font-semibold text-card-foreground">{priceLabel}</span>
                       <Link to={buildContactPath("demande-renseignement")} className="text-sm font-semibold text-primary flex items-center gap-1 hover:underline">
                         {t("seminaires.register")} <ArrowRight size={14} />
                       </Link>

@@ -71,6 +71,75 @@ export type Database = {
         }
         Relationships: []
       }
+      job_opportunities: {
+        Row: {
+          apply_url: string | null
+          compensation_label: string | null
+          created_at: string
+          id: string
+          is_featured: boolean
+          is_new_manual: boolean
+          location_en: string
+          location_fr: string
+          market_key: string
+          opportunity_type: string
+          published_at: string
+          slug: string
+          source_name: string
+          source_url: string | null
+          status: string
+          summary_en: string
+          summary_fr: string
+          title: string
+          updated_at: string
+          work_mode: string
+        }
+        Insert: {
+          apply_url?: string | null
+          compensation_label?: string | null
+          created_at?: string
+          id?: string
+          is_featured?: boolean
+          is_new_manual?: boolean
+          location_en: string
+          location_fr: string
+          market_key: string
+          opportunity_type?: string
+          published_at?: string
+          slug: string
+          source_name: string
+          source_url?: string | null
+          status?: string
+          summary_en: string
+          summary_fr: string
+          title: string
+          updated_at?: string
+          work_mode?: string
+        }
+        Update: {
+          apply_url?: string | null
+          compensation_label?: string | null
+          created_at?: string
+          id?: string
+          is_featured?: boolean
+          is_new_manual?: boolean
+          location_en?: string
+          location_fr?: string
+          market_key?: string
+          opportunity_type?: string
+          published_at?: string
+          slug?: string
+          source_name?: string
+          source_url?: string | null
+          status?: string
+          summary_en?: string
+          summary_fr?: string
+          title?: string
+          updated_at?: string
+          work_mode?: string
+        }
+        Relationships: []
+      }
       page_views: {
         Row: {
           id: string
@@ -92,6 +161,69 @@ export type Database = {
           user_agent?: string | null
           visited_at?: string
           visitor_ip?: string | null
+        }
+        Relationships: []
+      }
+      resource_posts: {
+        Row: {
+          category_key: string
+          created_at: string
+          excerpt_en: string
+          excerpt_fr: string
+          id: string
+          is_featured: boolean
+          is_new_manual: boolean
+          published_at: string
+          read_time_minutes: number | null
+          sector_key: string | null
+          slug: string
+          source_name: string | null
+          source_url: string | null
+          status: string
+          tags: string[]
+          title_en: string
+          title_fr: string
+          updated_at: string
+        }
+        Insert: {
+          category_key: string
+          created_at?: string
+          excerpt_en: string
+          excerpt_fr: string
+          id?: string
+          is_featured?: boolean
+          is_new_manual?: boolean
+          published_at?: string
+          read_time_minutes?: number | null
+          sector_key?: string | null
+          slug: string
+          source_name?: string | null
+          source_url?: string | null
+          status?: string
+          tags?: string[]
+          title_en: string
+          title_fr: string
+          updated_at?: string
+        }
+        Update: {
+          category_key?: string
+          created_at?: string
+          excerpt_en?: string
+          excerpt_fr?: string
+          id?: string
+          is_featured?: boolean
+          is_new_manual?: boolean
+          published_at?: string
+          read_time_minutes?: number | null
+          sector_key?: string | null
+          slug?: string
+          source_name?: string | null
+          source_url?: string | null
+          status?: string
+          tags?: string[]
+          title_en?: string
+          title_fr?: string
+          updated_at?: string
         }
         Relationships: []
       }

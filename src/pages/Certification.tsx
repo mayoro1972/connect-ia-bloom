@@ -67,7 +67,7 @@ const CertificationPage = () => {
               <div>
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="sticky top-24 rounded-xl border border-border bg-card p-8">
                   <p className="mb-2 text-center text-sm text-muted-foreground">{content.priceLabel}</p>
-                  <p className="mb-1 text-center font-heading text-4xl font-bold text-card-foreground">{content.price}</p>
+                  <p className="mb-1 text-center font-heading text-3xl font-bold leading-tight text-card-foreground">{content.price}</p>
                   <p className="mb-8 text-center text-sm text-muted-foreground">{content.perParticipant}</p>
 
                   <div className="mb-8 space-y-4">

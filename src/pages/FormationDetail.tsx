@@ -145,7 +145,7 @@ const levelColors: Record<string, string> = {
 const FormationDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { t, language } = useLanguage();
-  const { getTitle, getDuration, getLevel, getFormat } = useFormationLocale();
+  const { getTitle, getDuration, getLevel, getFormat, getPrice } = useFormationLocale();
   const formation = formations.find((item) => item.id === id);
   const locationLabel = language === "fr" ? "Abidjan, Cote d'Ivoire" : "Abidjan, Ivory Coast";
 
@@ -280,8 +280,8 @@ const FormationDetailPage = () => {
 
               <div className="space-y-6">
                 <div className="bg-card border border-border rounded-xl p-6 sticky top-24">
-                  <div className="text-3xl font-bold text-card-foreground mb-1">{formation.price}</div>
-                  <p className="text-xs text-muted-foreground mb-6">{t("formationDetail.perParticipant")}</p>
+                  <div className="text-2xl font-bold text-card-foreground leading-tight mb-1">{getPrice(formation)}</div>
+                  <p className="text-xs text-muted-foreground mb-6">{t("pricing.note")}</p>
 
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between text-sm">
@@ -354,7 +354,7 @@ const FormationDetailPage = () => {
                         {getTitle(relatedFormation)}
                       </h3>
                       <div className="flex items-center justify-between mt-auto">
-                        <span className="font-semibold text-sm text-card-foreground">{relatedFormation.price}</span>
+                        <span className="font-semibold text-sm text-card-foreground">{getPrice(relatedFormation)}</span>
                         <span className="text-xs font-semibold text-primary flex items-center gap-1">
                           {t("catalogue.details")} <ChevronRight size={14} />
                         </span>

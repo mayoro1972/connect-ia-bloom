@@ -23,7 +23,7 @@ const levelIcons = {
 
 const ParcoursPage = () => {
   const { t, language } = useLanguage();
-  const { getTitle, getDuration } = useFormationLocale();
+  const { getTitle, getDuration, getPrice } = useFormationLocale();
   const trans = language === "fr" ? fr : en;
   const parcours = trans.parcours;
 
@@ -130,7 +130,7 @@ const ParcoursPage = () => {
                                       <Clock size={12} />
                                       {getDuration(formation)}
                                     </span>
-                                    <span>{formation.price}</span>
+                                    <span>{getPrice(formation)}</span>
                                   </div>
                                 </Link>
                               ))}

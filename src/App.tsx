@@ -29,6 +29,7 @@ import CatalogueDomainPreview from "./pages/CatalogueDomainPreview";
 import LeadFormsPreview from "./pages/LeadFormsPreview";
 import AppointmentPreview from "./pages/AppointmentPreview";
 import Privacy from "./pages/Privacy";
+import BackOffice from "./pages/BackOffice";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -68,6 +69,7 @@ const AnimatedRoutes = () => {
         <Route path="/preview/catalogues/:slug" element={<CatalogueDomainPreview />} />
         <Route path="/preview/formulaires" element={<LeadFormsPreview />} />
         <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
+        <Route path="/back-office" element={<BackOffice />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

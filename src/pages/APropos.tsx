@@ -23,7 +23,7 @@ const iconMap = [Target, Users, Award, Globe];
 
 const pageCopy = {
   fr: {
-    title: "À propos de TransferAI Africa",
+    title: "A propos de TransferAI Africa",
     subtitle: "Notre mission : transférer l'expertise IA de la diaspora vers l'Afrique.",
     missionTitle: "Notre Mission",
     missionText: [

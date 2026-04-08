@@ -30,7 +30,7 @@ describe("homepage language switch", () => {
 
     expect(screen.getByText("ACCUEIL")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Devenez le partenaire stratégique/i })).toBeInTheDocument();
-    expect(screen.getByText("Télécharger le catalogue")).toBeInTheDocument();
+    expect(screen.getByText("Formations IA")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "EN" }));
 
@@ -39,6 +39,6 @@ describe("homepage language switch", () => {
     });
 
     expect(screen.getByRole("heading", { name: /Become the strategic/i })).toBeInTheDocument();
-    expect(screen.getByText("Download the catalogue")).toBeInTheDocument();
+    expect(screen.getByText("AI training")).toBeInTheDocument();
   });
 });

@@ -103,8 +103,8 @@ const Footer = () => {
   return (
     <footer className="border-t border-stone-200 bg-[#f7f2ea] py-16 text-slate-900">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid gap-10 border-b border-stone-200 pb-12 lg:grid-cols-[1.2fr_2.8fr]">
-          <div className="max-w-md">
+        <div className="grid gap-10 border-b border-stone-200 pb-12 lg:grid-cols-[1.35fr_2.65fr] xl:grid-cols-[1.45fr_2.55fr]">
+          <div className="max-w-[30rem]">
             <Link to="/" className="flex items-center gap-3">
               <img
                 src={logoTransferAI}
@@ -116,14 +116,17 @@ const Footer = () => {
               </span>
             </Link>
 
-            <p className="mt-5 max-w-sm text-sm leading-7 text-slate-600">{t("footer.desc")}</p>
+            <p className="mt-5 max-w-[28rem] text-sm leading-7 text-slate-600">{t("footer.desc")}</p>
 
-            <div className="mt-8 space-y-3 text-sm text-slate-700">
-              <a href={directLinks.phone} className="flex items-start gap-3 transition-colors hover:text-[hsl(20_92%_42%)]">
+            <div className="mt-8 max-w-[29rem] space-y-3 text-sm text-slate-700">
+              <a href={directLinks.phone} className="flex items-start gap-2.5 transition-colors hover:text-[hsl(20_92%_42%)]">
                 <Phone size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
                 {contactDetails.phoneDisplay}
               </a>
-              <a href={directLinks.email} className="flex items-start gap-3 transition-colors hover:text-[hsl(20_92%_42%)]">
+              <a
+                href={directLinks.email}
+                className="flex items-start gap-2.5 transition-colors hover:text-[hsl(20_92%_42%)] hover:underline hover:underline-offset-4"
+              >
                 <Mail size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
                 {contactDetails.email}
               </a>
@@ -131,7 +134,7 @@ const Footer = () => {
                 href={directLinks.map}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 transition-colors hover:text-[hsl(20_92%_42%)]"
+                className="flex items-start gap-2.5 leading-6 transition-colors hover:text-[hsl(20_92%_42%)]"
               >
                 <MapPin size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
                 {contactDetails.addressShort}

@@ -1,5 +1,5 @@
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { Formation } from "@/data/formations";
+import { FORMATION_PRICE_ON_REQUEST, type Formation } from "@/data/formations";
 import { fixMojibake } from "@/lib/fixMojibake";
 
 const levelTranslations: Record<string, Record<string, string>> = {
@@ -13,7 +13,7 @@ const formatTranslations: Record<string, Record<string, string>> = {
 };
 
 export function useFormationLocale() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   return {
     getTitle: (f: Formation) => fixMojibake(language === "en" ? f.titleEn : f.title),
@@ -25,6 +25,13 @@ export function useFormationLocale() {
     getFormat: (f: Formation) => {
       const normalizedFormat = fixMojibake(f.format);
       return formatTranslations[language]?.[normalizedFormat] ?? normalizedFormat;
+    },
+    getPrice: (f: Formation) => {
+      if (f.price === FORMATION_PRICE_ON_REQUEST) {
+        return t("pricing.onRequest");
+      }
+
+      return fixMojibake(f.price);
     },
   };
 }

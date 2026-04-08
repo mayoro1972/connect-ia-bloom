@@ -23,7 +23,7 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const directLinks = {
-  email: "mailto:contact@transferai.ci",
+  email: "mailto:contact@transferai.ci?subject=Contact%20TransferAI%20Africa",
   phone: "tel:+225071657733990",
   whatsapp: "https://wa.me/225071657733990",
   appointment: "/prise-rdv",
