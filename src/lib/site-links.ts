@@ -12,8 +12,8 @@ const auditFormUrl =
   (import.meta.env.DEV ? "http://127.0.0.1:4175/" : "/formulaire-audit-ia/");
 
 export const socialLinks: SocialLink[] = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/transferai-africa", kind: "social" },
-  { label: "Facebook", href: "https://www.facebook.com/transferai.africa", kind: "social" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/transfert-ai-africa/", kind: "social" },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61573275622415", kind: "social" },
   { label: "Instagram", href: "https://www.instagram.com/transferai.africa", kind: "social" },
   { label: "YouTube", href: "https://www.youtube.com/@transferai-africa", kind: "video" },
   { label: "X / Twitter", href: "https://x.com/transferai_afr", kind: "social" },
