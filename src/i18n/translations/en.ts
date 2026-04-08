@@ -122,8 +122,8 @@ const rawEn = {
     rights: "© 2026 TransferAI Africa. All rights reserved.",
   },
   catalogue: {
-    title: "AI Training Catalogue",
-    subtitle: "Over 130 practical courses across 13 areas of expertise. Explore by domain, search by keyword or discover our latest additions.",
+    title: "Find the AI training that fits your profession",
+    subtitle: "Explore more than 130 practical courses across 13 areas of expertise. Filter by profession, level and preferred format to quickly find the training that matches your needs.",
     search: "Search...",
     allMetiers: "All areas of expertise",
     allLevels: "All levels",

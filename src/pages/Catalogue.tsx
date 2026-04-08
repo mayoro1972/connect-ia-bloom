@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X } from "lucide-react";
+import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X, CheckCircle2, Compass, ArrowRight } from "lucide-react";
 import {
   Briefcase, Users, Megaphone, Calculator, Scale, HeadphonesIcon,
   BarChart3, ClipboardList, Crown, GraduationCap, Heart, Globe,
@@ -17,6 +17,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { fixMojibake } from "@/lib/fixMojibake";
+import { buildContactPath } from "@/lib/site-links";
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
@@ -136,7 +137,7 @@ const DomainCard = ({ domain, count, onClick }: { domain: string; count: number;
 };
 
 const CataloguePage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { getTitle, getLevel, getFormat } = useFormationLocale();
   const [activeTab, setActiveTab] = useState("explorer");
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
@@ -179,13 +180,125 @@ const CataloguePage = () => {
 
   const totalFormations = formations.length;
   const totalDomains = metiers.length;
+  const guideCopy = language === "fr"
+    ? {
+        badge: "Catalogue",
+        reassuranceTitle: "Un catalogue conçu pour vous aider à choisir vite et bien",
+        reassurancePoints: [
+          "Des formations classées par domaine métier pour aller à l'essentiel.",
+          "Des niveaux clairs : débutant, intermédiaire et avancé.",
+          "Des formats adaptés : présentiel, hybride ou en ligne.",
+          "Des tarifs communiqués sur demande selon le format retenu.",
+        ],
+        howToTitle: "Comment trouver la bonne formation en moins de 2 minutes",
+        howToSteps: [
+          "Choisissez un domaine si vous connaissez déjà votre métier ou votre fonction.",
+          "Utilisez la recherche si vous cherchez un sujet précis ou un mot-clé.",
+          "Filtrez par niveau et par format pour affiner la sélection.",
+          "Ouvrez la fiche détaillée pour voir les objectifs, le programme et le bon prochain pas.",
+        ],
+        sectionIntroTitle: "Explorez, comparez et choisissez selon votre besoin",
+        sectionIntroDesc:
+          "Cette page vous aide à parcourir l'offre complète, à comparer les formations et à identifier rapidement celle qui correspond à votre niveau, votre métier et votre objectif.",
+        domainsTitle: "Explorer par domaine d'expertise",
+        domainsDesc:
+          "Chaque domaine regroupe des formations conçues pour des usages professionnels concrets. Cliquez sur un domaine pour découvrir les formations disponibles.",
+        searchTitle: "Rechercher une formation",
+        searchDesc:
+          "Vous connaissez déjà votre besoin ? Recherchez par mot-clé, filtrez par domaine, niveau ou format, et comparez les résultats en quelques secondes.",
+        newTitle: "Nouvelles formations à découvrir",
+        newDesc:
+          "Consultez les dernières formations ajoutées au catalogue pour découvrir les sujets récents, les nouveaux cas d'usage et les domaines en forte évolution.",
+        finalTitle: "Vous hésitez entre plusieurs formations ?",
+        finalDesc:
+          "Nous pouvons vous orienter vers la bonne formation selon votre métier, votre niveau actuel et votre objectif professionnel.",
+        primaryCta: "Demander une orientation",
+        secondaryCta: "Déposer ma candidature",
+      }
+    : {
+        badge: "Catalogue",
+        reassuranceTitle: "A catalogue designed to help you choose quickly and confidently",
+        reassurancePoints: [
+          "Courses organized by professional domain so you can focus fast.",
+          "Clear levels: beginner, intermediate and advanced.",
+          "Flexible formats: on-site, hybrid or online.",
+          "Pricing shared on request depending on the selected format.",
+        ],
+        howToTitle: "How to find the right training in under 2 minutes",
+        howToSteps: [
+          "Choose a domain if you already know your profession or function.",
+          "Use search if you are looking for a precise topic or keyword.",
+          "Filter by level and format to narrow the selection.",
+          "Open the detailed page to review goals, program and the right next step.",
+        ],
+        sectionIntroTitle: "Explore, compare and choose according to your needs",
+        sectionIntroDesc:
+          "This page helps you browse the full offer, compare training options and quickly identify the one that fits your level, role and objective.",
+        domainsTitle: "Explore by area of expertise",
+        domainsDesc:
+          "Each domain groups together training built around practical professional use cases. Click a domain to discover the available courses.",
+        searchTitle: "Search for a training",
+        searchDesc:
+          "Already know what you need? Search by keyword, filter by domain, level or format, and compare results in seconds.",
+        newTitle: "New trainings to discover",
+        newDesc:
+          "Browse the latest additions to the catalogue to discover emerging topics, new use cases and fast-moving domains.",
+        finalTitle: "Still hesitating between several trainings?",
+        finalDesc:
+          "We can guide you toward the right training based on your role, current level and professional objective.",
+        primaryCta: "Request guidance",
+        secondaryCta: "Apply now",
+      };
 
   return (
     <PageTransition>
       <div className="min-h-screen bg-background relative overflow-hidden">
         <AnimatedLogoWatermarks />
         <Navbar />
-        <PageHeader title={t("catalogue.title")} subtitle={t("catalogue.subtitle")} />
+        <PageHeader title={t("catalogue.title")} subtitle={t("catalogue.subtitle")} badge={guideCopy.badge} />
+
+        <section className="py-10">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-6">
+              <div className="bg-card rounded-3xl border border-border p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <CheckCircle2 size={22} className="text-primary" />
+                  </div>
+                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{guideCopy.reassuranceTitle}</h2>
+                </div>
+                <div className="space-y-4">
+                  {guideCopy.reassurancePoints.map((point) => (
+                    <div key={point} className="rounded-2xl border border-border bg-background p-4 text-sm leading-relaxed text-muted-foreground">
+                      {point}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-card rounded-3xl border border-border p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <Compass size={22} className="text-primary" />
+                  </div>
+                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{guideCopy.howToTitle}</h2>
+                </div>
+                <div className="space-y-4">
+                  {guideCopy.howToSteps.map((step, index) => (
+                    <div key={step} className="rounded-2xl border border-border bg-background p-4">
+                      <div className="flex items-start gap-4">
+                        <span className="shrink-0 inline-flex w-8 h-8 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold">
+                          {index + 1}
+                        </span>
+                        <p className="text-sm leading-relaxed text-muted-foreground">{step}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Stats Banner */}
         <div className="border-b border-border bg-card">
@@ -219,6 +332,11 @@ const CataloguePage = () => {
 
         <section className="py-10">
           <div className="container mx-auto px-4 lg:px-8">
+            <div className="max-w-3xl mb-8">
+              <h2 className="font-heading text-3xl font-bold text-card-foreground mb-3">{guideCopy.sectionIntroTitle}</h2>
+              <p className="text-muted-foreground leading-relaxed">{guideCopy.sectionIntroDesc}</p>
+            </div>
+
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="w-full sm:w-auto bg-muted/50 p-1 rounded-xl mb-8 h-auto flex-wrap">
                 <TabsTrigger
@@ -246,6 +364,10 @@ const CataloguePage = () => {
 
               {/* â•â•â• TAB 1: EXPLORER PAR DOMAINE â•â•â• */}
               <TabsContent value="explorer">
+                <div className="mb-8">
+                  <h3 className="font-heading text-xl font-bold text-card-foreground mb-2">{guideCopy.domainsTitle}</h3>
+                  <p className="text-sm text-muted-foreground max-w-3xl">{guideCopy.domainsDesc}</p>
+                </div>
                 <AnimatePresence mode="wait">
                   {!selectedDomain ? (
                     <motion.div
@@ -307,6 +429,10 @@ const CataloguePage = () => {
 
               {/* â•â•â• TAB 2: RECHERCHER â•â•â• */}
               <TabsContent value="rechercher">
+                <div className="mb-8">
+                  <h3 className="font-heading text-xl font-bold text-card-foreground mb-2">{guideCopy.searchTitle}</h3>
+                  <p className="text-sm text-muted-foreground max-w-3xl">{guideCopy.searchDesc}</p>
+                </div>
                 <div className="bg-card rounded-xl border border-border p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
                     <Filter size={18} className="text-muted-foreground" />
@@ -392,6 +518,10 @@ const CataloguePage = () => {
 
               {/* â•â•â• TAB 3: NOUVEAUTÃ‰S â•â•â• */}
               <TabsContent value="nouveautes">
+                <div className="mb-8">
+                  <h3 className="font-heading text-xl font-bold text-card-foreground mb-2">{guideCopy.newTitle}</h3>
+                  <p className="text-sm text-muted-foreground max-w-3xl">{guideCopy.newDesc}</p>
+                </div>
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-10 h-10 rounded-lg bg-[hsl(145,65%,42%)]/10 flex items-center justify-center">
                     <Sparkles size={20} className="text-[hsl(145,65%,42%)]" />
@@ -409,6 +539,32 @@ const CataloguePage = () => {
                 </div>
               </TabsContent>
             </Tabs>
+          </div>
+        </section>
+
+        <section className="pb-16">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="rounded-[32px] bg-[hsl(225,55%,12%)] px-8 py-10 md:px-12 md:py-12">
+              <div className="max-w-3xl">
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">{guideCopy.finalTitle}</h2>
+                <p className="text-[hsl(210,20%,78%)] text-lg leading-relaxed mb-8">{guideCopy.finalDesc}</p>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  to={buildContactPath("demande-renseignement")}
+                  className="inline-flex items-center gap-2 bg-coral-gradient font-semibold text-sm px-7 py-3 rounded-lg hover:opacity-90 transition-opacity"
+                  style={{ color: "hsl(0 0% 100%)" }}
+                >
+                  {guideCopy.primaryCta} <ArrowRight size={16} />
+                </Link>
+                <Link
+                  to="/inscription"
+                  className="inline-flex items-center gap-2 border border-white/20 bg-white/5 font-semibold text-sm px-7 py-3 rounded-lg hover:bg-white/10 transition-colors text-white"
+                >
+                  {guideCopy.secondaryCta}
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
         <Footer />
