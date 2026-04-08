@@ -49,6 +49,32 @@ const CertificationPage = () => {
                   </div>
                 </div>
 
+                <div className="grid gap-6 lg:grid-cols-2">
+                  <div className="rounded-3xl border border-border bg-card p-8">
+                    <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{content.forWhoTitle}</h2>
+                    <div className="space-y-4">
+                      {content.forWhoProfiles.map((profile) => (
+                        <div key={profile} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
+                          <CheckCircle size={18} className="mt-0.5 shrink-0 text-primary" />
+                          <p className="text-sm leading-7 text-card-foreground">{profile}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-3xl border border-border bg-card p-8">
+                    <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{content.valueTitle}</h2>
+                    <div className="space-y-4">
+                      {content.valuePoints.map((point) => (
+                        <div key={point} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
+                          <Award size={18} className="mt-0.5 shrink-0 text-coral" />
+                          <p className="text-sm leading-7 text-card-foreground">{point}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <h2 className="mb-6 font-heading text-2xl font-bold">{content.objectivesTitle}</h2>
                   <div className="space-y-4">
@@ -76,6 +102,18 @@ const CertificationPage = () => {
                 <div>
                   <h2 className="mb-4 font-heading text-2xl font-bold">{content.strategicTitle}</h2>
                   <p className="text-card-foreground leading-7">{content.strategicDesc}</p>
+                </div>
+
+                <div className="rounded-3xl border border-border bg-card p-8">
+                  <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{content.applyNowTitle}</h2>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {content.applyNowPoints.map((point) => (
+                      <div key={point} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
+                        <CheckCircle size={18} className="mt-0.5 shrink-0 text-primary" />
+                        <p className="text-sm leading-7 text-card-foreground">{point}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div>

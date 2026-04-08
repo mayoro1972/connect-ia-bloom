@@ -168,7 +168,7 @@ const rawEn = {
   certification: {
     badge: "Professional Certification",
     title: "AI certification for support and management roles",
-    subtitle: "A certification designed for professionals who want to use AI with structure, productivity and concrete impact in their role: executive support, IT, finance & accounting, marketing, human resources, administration and support functions.",
+    subtitle: "A premium certification designed for professionals who want to use AI with structure, productivity and concrete impact in their role: executive support, IT, finance & accounting, marketing, human resources, administration and support functions.",
     positioningTitle: "A certification designed for multiple roles",
     positioningDesc: "This certification is not limited to executive assistants and secretaries. It is designed as a cross-functional certification for support and management roles that want to integrate AI into day-to-day work, save time, automate selected tasks and improve the quality of their deliverables.",
     domainsTitle: "Roles and functions covered",
@@ -182,6 +182,13 @@ const rawEn = {
       "Customer service",
       "Management & coordination",
     ],
+    forWhoTitle: "Who this certification is for",
+    forWhoProfiles: [
+      "Professionals who want to integrate AI into daily work without a technical profile",
+      "Managers and support teams who want to improve efficiency and quality",
+      "Profiles who want to strengthen their value in the job market",
+      "Organizations that want to train staff on immediately applicable AI use cases",
+    ],
     objectivesTitle: "Certification Objectives",
     objectives: [
       "Master essential AI tools to improve professional productivity",
@@ -190,6 +197,13 @@ const rawEn = {
       "Analyze information, produce business materials and accelerate decision support",
       "Apply AI concretely across several support and management functions",
       "Build a modern, reliable work method that transfers directly into the workplace",
+    ],
+    valueTitle: "What this certification helps you gain",
+    valuePoints: [
+      "A clear method to use AI in a real professional context",
+      "Use cases you can apply immediately in your role",
+      "Visible, structured and marketable upskilling",
+      "A stronger profile to grow, apply or lead transformation projects",
     ],
     programTitle: "Program (5 days)",
     modules: [
@@ -201,6 +215,13 @@ const rawEn = {
     ],
     strategicTitle: "Why this certification matters",
     strategicDesc: "Organizations increasingly look for professionals who can use AI in an operational, responsible and effective way. This certification helps you build immediately applicable skills and strengthen your market value.",
+    applyNowTitle: "Why apply now",
+    applyNowPoints: [
+      "The first cohort is planned for October 2026",
+      "Early applications help identify the most committed profiles",
+      "Organizations already expect concrete AI use cases in support roles",
+      "Positioning early helps you anticipate where the market is going",
+    ],
     evalTitle: "Assessment",
     evalPoints: [
       "Continuous assessment throughout the training",

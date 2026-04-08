@@ -168,7 +168,7 @@ const rawFr = {
   certification: {
     badge: "Certification Professionnelle",
     title: "Certification IA appliquée aux métiers support et de gestion",
-    subtitle: "Une certification conçue pour les professionnels qui veulent utiliser l'IA avec méthode, productivité et impact concret dans leur métier : assistanat de direction, IT, finance & comptabilité, marketing, ressources humaines, administration et fonctions support.",
+    subtitle: "Une certification premium conçue pour les professionnels qui veulent utiliser l'IA avec méthode, productivité et impact concret dans leur métier : assistanat de direction, IT, finance & comptabilité, marketing, ressources humaines, administration et fonctions support.",
     positioningTitle: "Une certification pensée pour plusieurs métiers",
     positioningDesc: "Cette certification ne s'adresse pas uniquement aux assistants et secrétaires de direction. Elle a été conçue comme une certification transversale pour les métiers support et de gestion qui veulent intégrer l'IA dans leurs pratiques quotidiennes, gagner du temps, automatiser certaines tâches et améliorer la qualité de leurs livrables.",
     domainsTitle: "Métiers et fonctions concernés",
@@ -182,6 +182,13 @@ const rawFr = {
       "Service client",
       "Management & coordination",
     ],
+    forWhoTitle: "Pour qui cette certification est faite",
+    forWhoProfiles: [
+      "Professionnels qui veulent intégrer l'IA dans leur quotidien sans profil technique",
+      "Managers et fonctions support qui veulent gagner en efficacité et en qualité",
+      "Profils qui veulent renforcer leur valeur sur le marché du travail",
+      "Entreprises qui veulent former des collaborateurs à des usages IA immédiatement applicables",
+    ],
     objectivesTitle: "Objectifs de la certification",
     objectives: [
       "Maîtriser les outils IA essentiels pour améliorer la productivité professionnelle",
@@ -190,6 +197,13 @@ const rawFr = {
       "Analyser des informations, produire des supports et accélérer la prise de décision",
       "Appliquer l'IA de manière concrète dans plusieurs métiers support et de gestion",
       "Développer une méthode de travail moderne, fiable et transférable à son environnement professionnel",
+    ],
+    valueTitle: "Ce que cette certification vous permet d'obtenir",
+    valuePoints: [
+      "Une méthode claire pour utiliser l'IA dans un contexte professionnel réel",
+      "Des usages immédiatement applicables dans votre fonction",
+      "Une montée en compétence visible, structurée et valorisable",
+      "Un positionnement plus fort pour évoluer, candidater ou piloter des projets",
     ],
     programTitle: "Programme (5 jours)",
     modules: [
@@ -201,6 +215,13 @@ const rawFr = {
     ],
     strategicTitle: "Pourquoi cette certification est stratégique",
     strategicDesc: "Les entreprises recherchent de plus en plus des profils capables d'utiliser l'IA de façon opérationnelle, responsable et efficace. Cette certification vous permet de monter en compétence sur des usages immédiatement applicables dans votre fonction et de renforcer votre valeur sur le marché.",
+    applyNowTitle: "Pourquoi candidater maintenant",
+    applyNowPoints: [
+      "La première cohorte est prévue pour octobre 2026",
+      "Les candidatures en amont permettent d'identifier les profils les plus motivés",
+      "Les entreprises recherchent déjà des usages IA concrets dans les métiers support",
+      "Se positionner tôt vous permet d'anticiper les nouvelles attentes du marché",
+    ],
     evalTitle: "Évaluation",
     evalPoints: [
       "Évaluation continue tout au long de la formation",
