@@ -9,7 +9,7 @@ import { formations, type Formation } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
 
 type InscriptionFormState = {
@@ -69,6 +69,15 @@ const InscriptionPage = () => {
       toast({
         title: t("inscription.toastErrorTitle"),
         description: t("inscription.toastErrorDesc"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!isSupabaseConfigured) {
+      toast({
+        title: t("inscription.toastErrorTitle"),
+        description: supabaseUnavailableMessage,
         variant: "destructive",
       });
       return;

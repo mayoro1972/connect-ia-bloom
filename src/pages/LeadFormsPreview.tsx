@@ -8,7 +8,7 @@ import PageHeader from "@/components/PageHeader";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { domainPreviews, getLocalizedDomainLabel } from "@/lib/catalogue-preview";
 import { contactDetails, directLinks, socialLinks } from "@/lib/site-links";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
@@ -95,6 +95,9 @@ const LeadFormsPreview = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!privacyAccepted) return toast({ title: copy.page.consentTitle, description: copy.page.consentDesc, variant: "destructive" });
+    if (!isSupabaseConfigured) {
+      return toast({ title: copy.page.error, description: supabaseUnavailableMessage, variant: "destructive" });
+    }
     const activeLanguage = resolveOutboundLanguage(language);
     setIsSubmitting(true);
     const { error } = await supabase.rpc("submit_contact_request", { full_name_input: form.fullName.trim(), email_input: form.email.trim(), phone_input: form.phone.trim(), company_input: form.company.trim(), sector_input: form.role.trim() || null, city_input: form.country.trim() || null, participants_input: participantsCount, requested_formations_input: form.domain.trim() || requestedDomain || null, message_input: form.message.trim() || null, source_page_input: "/contact", language_input: activeLanguage, request_intent_input: activeIntent, requested_domain_input: form.domain.trim() || requestedDomain || null, privacy_consent_input: privacyAccepted, honeypot_input: botField.trim() || null });

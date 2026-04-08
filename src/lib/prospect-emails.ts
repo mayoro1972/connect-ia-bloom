@@ -1,4 +1,4 @@
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { contactDetails } from "@/lib/site-links";
 
 export type ProspectEmailIntent =
@@ -90,6 +90,13 @@ export const buildAppointmentMailto = (payload: {
 
 export const sendProspectEmailNotifications = async (payload: ProspectEmailPayload) => {
   try {
+    if (!isSupabaseConfigured) {
+      return {
+        data: null,
+        error: new Error("Supabase is not configured."),
+      };
+    }
+
     const language = resolveOutboundLanguage(payload.language);
     return await supabase.functions.invoke("send-prospect-emails", {
       body: {

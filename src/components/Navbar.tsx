@@ -7,7 +7,6 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
-import { buildContactPath } from "@/lib/site-links";
 
 interface NavItem {
   key: string;
@@ -139,7 +138,7 @@ const Navbar = () => {
                       className={`absolute left-1/2 top-[calc(100%-6px)] -translate-x-1/2 rounded-3xl border border-stone-200 bg-white p-3 shadow-[0_26px_80px_-34px_rgba(15,23,42,0.4)] ${dropdownWidths[item.key] ?? "w-[300px]"}`}
                     >
                       <div className="mb-2 border-b border-stone-100 px-3 pb-3">
-                        <p className="text-[10px] font-heading font-bold uppercase tracking-[0.18em] text-[hsl(20_92%_52%)]">
+                        <p className="text-[11px] font-heading font-bold uppercase tracking-[0.22em] text-[hsl(20_92%_52%)]">
                           {copy.nav[item.key as keyof typeof copy.nav]}
                         </p>
                       </div>
@@ -150,7 +149,7 @@ const Navbar = () => {
                             key={child.href}
                             to={child.href}
                             onClick={() => setDesktopOpenMenu(null)}
-                            className={`rounded-2xl px-4 py-3 text-[13px] font-medium transition-all ${
+                            className={`rounded-2xl px-4 py-3 font-heading text-[11px] font-semibold uppercase tracking-[0.18em] transition-all ${
                               isActive(child.href)
                                 ? "bg-[hsl(20_92%_96%)] text-[hsl(20_92%_38%)]"
                                 : "text-slate-700 hover:bg-stone-50 hover:text-slate-950"
@@ -189,13 +188,6 @@ const Navbar = () => {
               EN
             </button>
           </div>
-
-          <Link
-            to={buildContactPath("contact-devis")}
-            className="rounded-full bg-[hsl(20_92%_52%)] px-5 py-2.5 text-[11px] font-heading font-bold uppercase tracking-[0.14em] text-white transition-all hover:bg-[hsl(20_92%_48%)]"
-          >
-            {copy.nav.cta}
-          </Link>
         </div>
 
         <button onClick={() => setIsOpen(!isOpen)} className="text-slate-800 lg:hidden">
@@ -237,7 +229,7 @@ const Navbar = () => {
                               key={child.href}
                               to={child.href}
                               onClick={() => setIsOpen(false)}
-                              className={`block py-2 text-sm ${
+                              className={`block py-2 text-xs font-heading font-semibold uppercase tracking-[0.08em] ${
                                 isActive(child.href) ? "text-[hsl(20_92%_52%)]" : "text-slate-600"
                               }`}
                             >
@@ -282,14 +274,6 @@ const Navbar = () => {
                   EN
                 </button>
               </div>
-
-              <Link
-                to={buildContactPath("contact-devis")}
-                onClick={() => setIsOpen(false)}
-                className="mt-3 rounded-full bg-[hsl(20_92%_52%)] px-5 py-3 text-center text-sm font-heading font-bold uppercase tracking-[0.12em] text-white"
-              >
-                {copy.nav.cta}
-              </Link>
             </div>
           </motion.div>
         )}

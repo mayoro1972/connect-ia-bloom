@@ -90,14 +90,7 @@ const DeveloppementSolutionsIA = () => {
                 </div>
 
                 <div className="text-center">
-                  <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-                    <Link
-                      to={buildContactPath("demande-renseignement", "IT & Transformation Digitale")}
-                      className="inline-flex items-center gap-2 rounded-lg bg-orange-gradient px-8 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
-                      style={{ color: "hsl(0 0% 100%)" }}
-                    >
-                      {content.auditCta} <ArrowRight size={16} />
-                    </Link>
+                  <div className="flex justify-center">
                     <a
                       href={directLinks.auditForm}
                       target="_blank"

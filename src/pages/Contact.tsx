@@ -10,7 +10,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { contactDetails, directLinks } from "@/lib/site-links";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
 
@@ -62,10 +62,8 @@ const ContactPage = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const activeLanguage = resolveOutboundLanguage(language);
-    setIsSubmitting(true);
 
     if (!form.privacyAccepted) {
-      setIsSubmitting(false);
       toast({
         title: t("contact.toastErrorTitle"),
         description: t("contact.privacyConsentError"),
@@ -73,6 +71,17 @@ const ContactPage = () => {
       });
       return;
     }
+
+    if (!isSupabaseConfigured) {
+      toast({
+        title: t("contact.toastErrorTitle"),
+        description: supabaseUnavailableMessage,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
 
     const { error } = await supabase.rpc("submit_contact_request", {
       full_name_input: form.name.trim(),

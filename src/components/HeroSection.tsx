@@ -6,7 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
@@ -53,6 +53,10 @@ const HeroSection = () => {
   const [totalViews, setTotalViews] = useState<number | null>(null);
 
   useEffect(() => {
+    if (!isSupabaseConfigured) {
+      return;
+    }
+
     const fetchViews = async () => {
       const { data } = await supabase.rpc("get_public_page_view_stats");
       const stats = Array.isArray(data) ? data[0] : null;
@@ -150,13 +154,18 @@ const HeroSection = () => {
 
         <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-5">
           {stats.map((stat, i) => (
-            <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up">
-              <div className="glass-card hover-lift rounded-xl p-6 text-center">
-                <stat.icon className="mx-auto mb-3" size={28} style={{ color: "hsl(30 90% 60%)" }} />
-                <p className="mb-1 font-heading text-3xl font-bold" style={{ color: "hsl(145 65% 50%)" }}>
+            <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up" className="h-full">
+              <div className="hover-lift flex h-full min-h-[168px] flex-col items-center justify-center rounded-[22px] border border-white/18 bg-[linear-gradient(180deg,hsl(226_28%_18%_/_0.72),hsl(224_24%_14%_/_0.64))] px-5 py-6 text-center shadow-[0_22px_38px_-26px_rgba(15,23,42,0.5)] backdrop-blur-xl">
+                <stat.icon className="mx-auto mb-3" size={28} style={{ color: "hsl(32 96% 64%)" }} />
+                <p className="mb-2 font-heading text-3xl font-bold tracking-[-0.03em]" style={{ color: "hsl(145 78% 56%)" }}>
                   {stat.value}
                 </p>
-                <p className="text-sm text-slate-200/78">{stat.label}</p>
+                <p
+                  className="max-w-[12ch] text-sm font-semibold leading-snug text-[hsl(0_0%_100%_/_0.94)]"
+                  style={{ textShadow: "0 1px 2px rgba(15, 23, 42, 0.55)" }}
+                >
+                  {stat.label}
+                </p>
               </div>
             </ScrollReveal>
           ))}

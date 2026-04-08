@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
 vi.mock("@/integrations/supabase/client", () => ({
+  isSupabaseConfigured: true,
   supabase: {
     rpc: vi.fn().mockResolvedValue({
       data: [{ total_views: 88 }],
