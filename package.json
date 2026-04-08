@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "sync:audit-form": "node scripts/sync-audit-form.mjs",
     "test": "vitest run",
-    "deploy": "vite build && node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\" && gh-pages -d dist",
+    "deploy": "VITE_BASE_PATH=/connect-ia-bloom/ vite build && node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\" && gh-pages -d dist",
     "test:watch": "vitest"
   },
   "dependencies": {
