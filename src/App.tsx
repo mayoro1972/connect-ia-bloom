@@ -11,6 +11,7 @@ import SeoManager from "./components/SeoManager";
 import ScrollToTop from "./components/ScrollToTop";
 import { usePageView } from "./hooks/usePageView";
 import Index from "./pages/Index";
+import Blog from "./pages/Blog";
 
 const EducationHub = lazy(() => import("./pages/EducationHub"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
@@ -20,7 +21,6 @@ const Entreprises = lazy(() => import("./pages/Entreprises"));
 const Partenaires = lazy(() => import("./pages/Partenaires"));
 const Evenements = lazy(() => import("./pages/Evenements"));
 const APropos = lazy(() => import("./pages/APropos"));
-const Blog = lazy(() => import("./pages/Blog"));
 const Parcours = lazy(() => import("./pages/Parcours"));
 const Inscription = lazy(() => import("./pages/Inscription"));
 const Seminaires = lazy(() => import("./pages/Seminaires"));
