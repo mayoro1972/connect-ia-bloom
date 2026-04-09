@@ -213,6 +213,41 @@ const rawFr = {
       "Module 4 : Rédaction, synthèse et communication assistées par IA (1 jour)",
       "Module 5 : Projet Pratique & Évaluation Finale (1 jour)",
     ],
+    specializationTitle: "Choisissez votre spécialisation par domaine",
+    specializationIntro:
+      "La certification repose sur un socle commun, puis sur une spécialisation adaptée à votre domaine. Vous développez d'abord une maîtrise transversale de l'IA, puis vous appliquez ces compétences à votre réalité métier pour produire de meilleurs résultats, gagner du temps et renforcer votre valeur professionnelle.",
+    specializationDesc:
+      "Cette approche permet de conserver une certification forte, cohérente et professionnalisante, tout en l'adaptant aux réalités de 13 domaines d'expertise.",
+    specializationGroups: [
+      {
+        title: "Support & administration",
+        desc: "Pour les métiers centrés sur la coordination, l'organisation, la gestion documentaire, le traitement de l'information et l'efficacité opérationnelle.",
+        roles: "Assistanat de direction, Administration & gestion, Service client",
+      },
+      {
+        title: "Business & management",
+        desc: "Pour les fonctions orientées performance, pilotage, croissance, organisation, communication et prise de décision.",
+        roles: "Ressources humaines, Marketing & communication, Finance & comptabilité, Management & leadership",
+      },
+      {
+        title: "Expertise & conformité",
+        desc: "Pour les métiers qui exigent rigueur, analyse, veille, structuration de l'information et production de supports à forte valeur.",
+        roles: "Juridique & conformité, Diplomatie & affaires internationales, Formation & pédagogie",
+      },
+      {
+        title: "Technique & transformation",
+        desc: "Pour les fonctions qui accompagnent les systèmes, les outils, les données et les projets de transformation dans les organisations.",
+        roles: "IT & transformation digitale, Data & analyse, Santé & bien-être au travail",
+      },
+    ],
+    specializationAvailableTitle: "13 spécialisations disponibles",
+    specializationAvailableDesc:
+      "Les spécialisations couvrent les principaux métiers support, business, techniques et d'expertise afin de rendre la certification directement applicable à votre environnement professionnel.",
+    specializationConclusionTitle: "Une certification commune, des applications métier différenciées",
+    specializationConclusion:
+      "Le socle commun garantit la cohérence et le niveau de la certification. La spécialisation métier garantit la pertinence opérationnelle. Cette combinaison permet de former des professionnels capables d'utiliser l'IA avec méthode, responsabilité et impact concret dans leur domaine.",
+    specializationMarketNote:
+      "Les premières cohortes peuvent être ouvertes par spécialisation prioritaire, selon la demande du marché et le profil des candidats.",
     strategicTitle: "Pourquoi cette certification est stratégique",
     strategicDesc: "Les entreprises recherchent de plus en plus des profils capables d'utiliser l'IA de façon opérationnelle, responsable et efficace. Cette certification vous permet de monter en compétence sur des usages immédiatement applicables dans votre fonction et de renforcer votre valeur sur le marché.",
     applyNowTitle: "Pourquoi candidater maintenant",

@@ -99,6 +99,30 @@ const CertificationPage = () => {
                   </div>
                 </div>
 
+                <div className="rounded-3xl border border-border bg-card p-8">
+                  <h2 className="mb-4 font-heading text-2xl font-bold text-card-foreground">{content.specializationTitle}</h2>
+                  <p className="mb-4 leading-7 text-muted-foreground">{content.specializationIntro}</p>
+                  <p className="mb-8 leading-7 text-muted-foreground">{content.specializationDesc}</p>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {content.specializationGroups.map((domain) => (
+                      <div key={domain.title} className="rounded-2xl border border-border bg-background p-5">
+                        <h3 className="mb-2 font-heading text-lg font-semibold text-card-foreground">{domain.title}</h3>
+                        <p className="text-sm leading-7 text-muted-foreground">{domain.desc}</p>
+                        <p className="mt-4 text-sm font-medium text-card-foreground">{domain.roles}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 rounded-2xl border border-border bg-background p-6">
+                    <h3 className="mb-3 font-heading text-xl font-semibold text-card-foreground">{content.specializationAvailableTitle}</h3>
+                    <p className="mb-4 leading-7 text-muted-foreground">{content.specializationAvailableDesc}</p>
+                    <h3 className="mb-3 font-heading text-xl font-semibold text-card-foreground">{content.specializationConclusionTitle}</h3>
+                    <p className="mb-4 leading-7 text-muted-foreground">{content.specializationConclusion}</p>
+                    <p className="text-sm font-medium text-primary">{content.specializationMarketNote}</p>
+                  </div>
+                </div>
+
                 <div>
                   <h2 className="mb-4 font-heading text-2xl font-bold">{content.strategicTitle}</h2>
                   <p className="text-card-foreground leading-7">{content.strategicDesc}</p>

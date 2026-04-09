@@ -213,6 +213,41 @@ const rawEn = {
       "Module 4: AI-assisted writing, synthesis and communication (1 day)",
       "Module 5: Practical Project & Final Assessment (1 day)",
     ],
+    specializationTitle: "Choose your specialization by domain",
+    specializationIntro:
+      "The certification is built around a common core and then a specialization adapted to your domain. You first develop a cross-functional command of AI, then apply those skills to your professional reality to deliver better results, save time and strengthen your market value.",
+    specializationDesc:
+      "This approach preserves a strong, coherent and professional certification while adapting it to the realities of 13 areas of expertise.",
+    specializationGroups: [
+      {
+        title: "Support & administration",
+        desc: "For roles centered on coordination, organization, document management, information handling and operational efficiency.",
+        roles: "Executive support, Administration & management, Customer service",
+      },
+      {
+        title: "Business & management",
+        desc: "For functions focused on performance, steering, growth, communication and decision-making.",
+        roles: "Human resources, Marketing & communication, Finance & accounting, Management & leadership",
+      },
+      {
+        title: "Expertise & compliance",
+        desc: "For roles that require rigor, analysis, watch capabilities, information structuring and high-value support material.",
+        roles: "Legal & compliance, Diplomacy & international affairs, Training & education",
+      },
+      {
+        title: "Technology & transformation",
+        desc: "For functions that support systems, tools, data and transformation projects inside organizations.",
+        roles: "IT & digital transformation, Data & analytics, Health & workplace wellbeing",
+      },
+    ],
+    specializationAvailableTitle: "13 specializations available",
+    specializationAvailableDesc:
+      "The specializations cover key support, business, technical and expert functions so the certification becomes directly applicable to your professional environment.",
+    specializationConclusionTitle: "One certification, differentiated professional applications",
+    specializationConclusion:
+      "The common core guarantees the consistency and level of the certification. The domain specialization guarantees operational relevance. Together, they create professionals who can use AI with method, responsibility and tangible impact in their own field.",
+    specializationMarketNote:
+      "The first cohorts can be opened by priority specialization depending on market demand and candidate profiles.",
     strategicTitle: "Why this certification matters",
     strategicDesc: "Organizations increasingly look for professionals who can use AI in an operational, responsible and effective way. This certification helps you build immediately applicable skills and strengthen your market value.",
     applyNowTitle: "Why apply now",
