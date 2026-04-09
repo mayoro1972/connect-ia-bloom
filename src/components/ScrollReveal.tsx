@@ -1,5 +1,4 @@
-import { motion, useInView } from "framer-motion";
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -11,13 +10,6 @@ interface ScrollRevealProps {
   distance?: number;
 }
 
-const directionOffset = {
-  up: { y: 40, x: 0 },
-  down: { y: -40, x: 0 },
-  left: { x: 60, y: 0 },
-  right: { x: -60, y: 0 },
-};
-
 const ScrollReveal = ({
   children,
   className = "",
@@ -27,31 +19,12 @@ const ScrollReveal = ({
   once = true,
   distance,
 }: ScrollRevealProps) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once, margin: "-60px 0px" });
-
-  const offset = directionOffset[direction];
-  const actualDistance = distance ?? (direction === "up" || direction === "down" ? 40 : 60);
-  const initialOffset = {
-    x: offset.x !== 0 ? (offset.x > 0 ? actualDistance : -actualDistance) : 0,
-    y: offset.y !== 0 ? (offset.y > 0 ? actualDistance : -actualDistance) : 0,
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, ...initialOffset }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...initialOffset }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+  void delay;
+  void direction;
+  void duration;
+  void once;
+  void distance;
+  return <div className={className}>{children}</div>;
 };
 
 export default ScrollReveal;

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -131,15 +130,10 @@ const Navbar = () => {
                   />
                 </button>
 
-                <AnimatePresence>
-                  {desktopOpenMenu === item.key && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      transition={{ duration: 0.18 }}
-                      className={`absolute left-1/2 top-[calc(100%-6px)] -translate-x-1/2 rounded-3xl border border-stone-200 bg-white p-3 shadow-[0_26px_80px_-34px_rgba(15,23,42,0.4)] ${dropdownWidths[item.key] ?? "w-[300px]"}`}
-                    >
+                {desktopOpenMenu === item.key && (
+                  <div
+                    className={`absolute left-1/2 top-[calc(100%-6px)] -translate-x-1/2 rounded-3xl border border-stone-200 bg-white p-3 shadow-[0_26px_80px_-34px_rgba(15,23,42,0.4)] ${dropdownWidths[item.key] ?? "w-[300px]"}`}
+                  >
                       <div className="mb-2 border-b border-stone-100 px-3 pb-3">
                         <p className="text-[11px] font-heading font-bold uppercase tracking-[0.22em] text-[hsl(20_92%_52%)]">
                           {copy.nav[item.key as keyof typeof copy.nav]}
@@ -162,9 +156,8 @@ const Navbar = () => {
                           </Link>
                         ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -198,14 +191,8 @@ const Navbar = () => {
         </button>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-t border-stone-200 bg-white lg:hidden"
-          >
+      {isOpen && (
+        <div className="border-t border-stone-200 bg-white lg:hidden">
             <div className="container mx-auto flex flex-col gap-1 px-4 py-4">
               {navItems.map((item) =>
                 item.children ? (
@@ -219,14 +206,8 @@ const Navbar = () => {
                       {copy.nav[item.key as keyof typeof copy.nav]}
                       <ChevronDown size={14} className={`transition-transform ${mobileExpanded === item.key ? "rotate-180" : ""}`} />
                     </button>
-                    <AnimatePresence>
-                      {mobileExpanded === item.key && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden pl-4"
-                        >
+                    {mobileExpanded === item.key && (
+                      <div className="overflow-hidden pl-4">
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
@@ -239,9 +220,8 @@ const Navbar = () => {
                               {copy.nav[child.key as keyof typeof copy.nav]}
                             </Link>
                           ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <Link
@@ -278,9 +258,8 @@ const Navbar = () => {
                 </button>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </nav>
   );
 };

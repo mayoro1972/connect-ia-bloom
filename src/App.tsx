@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SeoManager from "./components/SeoManager";
@@ -125,39 +124,37 @@ const AnimatedRoutes = () => {
   return (
     <ChunkErrorBoundary key={location.pathname}>
       <Suspense fallback={<RouteLoader />}>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={`${language}:${location.pathname}`}>
-            <Route path="/" element={<Index />} />
-            <Route path="/education" element={<EducationHub />} />
-            <Route path="/catalogue" element={<Catalogue />} />
-            <Route path="/catalogue/:id" element={<FormationDetail />} />
-            <Route path="/parcours" element={<Parcours />} />
-            <Route path="/inscription" element={<Inscription />} />
-            <Route path="/certification" element={<Certification />} />
-            <Route path="/entreprises" element={<Entreprises />} />
-            <Route path="/services" element={<Entreprises />} />
-            <Route path="/partenaires" element={<Partenaires />} />
-            <Route path="/evenements" element={<Evenements />} />
-            <Route path="/a-propos" element={<APropos />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/contact" element={<LeadFormsPreview />} />
-            <Route path="/confidentialite" element={<Privacy />} />
-            <Route path="/seminaires" element={<Seminaires />} />
-            <Route path="/webinars" element={<Webinars />} />
-            <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
-            <Route path="/consulting-ia" element={<ConsultingIA />} />
-            <Route path="/developpement-solutions-ia" element={<DeveloppementSolutionsIA />} />
-            <Route path="/catalogues-domaines" element={<PreviewHub />} />
-            <Route path="/catalogues-domaines/:slug" element={<CatalogueDomainPreview />} />
-            <Route path="/prise-rdv" element={<AppointmentPreview />} />
-            <Route path="/preview" element={<PreviewHub />} />
-            <Route path="/preview/catalogues/:slug" element={<CatalogueDomainPreview />} />
-            <Route path="/preview/formulaires" element={<LeadFormsPreview />} />
-            <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
-            <Route path="/back-office" element={<BackOffice />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
+        <Routes location={location} key={`${language}:${location.pathname}`}>
+          <Route path="/" element={<Index />} />
+          <Route path="/education" element={<EducationHub />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/catalogue/:id" element={<FormationDetail />} />
+          <Route path="/parcours" element={<Parcours />} />
+          <Route path="/inscription" element={<Inscription />} />
+          <Route path="/certification" element={<Certification />} />
+          <Route path="/entreprises" element={<Entreprises />} />
+          <Route path="/services" element={<Entreprises />} />
+          <Route path="/partenaires" element={<Partenaires />} />
+          <Route path="/evenements" element={<Evenements />} />
+          <Route path="/a-propos" element={<APropos />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<LeadFormsPreview />} />
+          <Route path="/confidentialite" element={<Privacy />} />
+          <Route path="/seminaires" element={<Seminaires />} />
+          <Route path="/webinars" element={<Webinars />} />
+          <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
+          <Route path="/consulting-ia" element={<ConsultingIA />} />
+          <Route path="/developpement-solutions-ia" element={<DeveloppementSolutionsIA />} />
+          <Route path="/catalogues-domaines" element={<PreviewHub />} />
+          <Route path="/catalogues-domaines/:slug" element={<CatalogueDomainPreview />} />
+          <Route path="/prise-rdv" element={<AppointmentPreview />} />
+          <Route path="/preview" element={<PreviewHub />} />
+          <Route path="/preview/catalogues/:slug" element={<CatalogueDomainPreview />} />
+          <Route path="/preview/formulaires" element={<LeadFormsPreview />} />
+          <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
+          <Route path="/back-office" element={<BackOffice />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Suspense>
     </ChunkErrorBoundary>
   );

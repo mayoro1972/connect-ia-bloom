@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { BookOpen, Users, Award, Globe, Eye } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -73,12 +72,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: [1, 1.06, 1.03, 1.08], x: [0, -10, 5, -15], y: [0, -8, 4, -10] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-      >
+      <div className="absolute inset-0">
         <img src={heroBg} alt="" className="h-full w-full object-cover" />
         <div
           className="absolute inset-0"
@@ -88,40 +82,31 @@ const HeroSection = () => {
           className="absolute inset-0"
           style={{ background: "linear-gradient(to bottom, hsl(225 55% 10% / 0.3) 0%, hsl(225 55% 10% / 0.7) 100%)" }}
         />
-      </motion.div>
+      </div>
 
       <div className="container relative z-10 mx-auto px-4 pb-12 pt-28 lg:px-8 lg:pt-32">
         <div className="mx-auto max-w-4xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+          <p
             className="mb-6 text-sm font-heading font-bold uppercase tracking-[0.22em]"
             style={{ color: "hsl(30 90% 65%)" }}
           >
             {copy.badge}
-          </motion.p>
+          </p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 0.35, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          <h1
             className="mb-6 font-heading text-4xl font-bold leading-[1.02] md:text-6xl lg:text-7xl"
             style={{ color: "hsl(0 0% 98%)" }}
           >
             {copy.title1}
             <span className="text-gradient-orange">{copy.titleHighlight}</span>
             {copy.title2}
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
+          <p
             className="mx-auto mb-10 max-w-2xl text-lg text-slate-200/85 md:text-xl"
           >
             {copy.subtitle}
-          </motion.p>
+          </p>
         </div>
 
         <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-5">

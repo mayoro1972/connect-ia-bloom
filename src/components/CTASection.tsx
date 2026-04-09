@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import { ArrowRight, Download } from "lucide-react";
@@ -33,17 +32,13 @@ const CTASection = () => {
 
   return (
     <section id="cta" className="relative overflow-hidden py-24">
-      <motion.div
-        className="absolute inset-0"
-        animate={{ scale: [1, 1.06, 1.03, 1.08], x: [0, -10, 5, -15], y: [0, -8, 4, -10] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-      >
+      <div className="absolute inset-0">
         <img src={ctaBg} alt="" className="h-full w-full object-cover" />
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(135deg, hsl(225 55% 10% / 0.93), hsl(30 80% 28% / 0.86))" }}
         />
-      </motion.div>
+      </div>
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
         <ScrollReveal className="mx-auto max-w-3xl text-center">

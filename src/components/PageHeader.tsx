@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import headerBg from "@/assets/header-bg.jpg";
 
 interface PageHeaderProps {
@@ -23,9 +22,7 @@ const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
 
       <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
         {badge && (
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+          <span
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-medium mb-6"
             style={{
               borderColor: "hsl(15 85% 57% / 0.3)",
@@ -34,27 +31,21 @@ const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
             }}
           >
             {badge}
-          </motion.span>
+          </span>
         )}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+        <h1
           className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-4"
           style={{ color: "hsl(0 0% 98%)" }}
         >
           {title}
-        </motion.h1>
+        </h1>
         {subtitle && (
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <p
             className="text-lg max-w-2xl mx-auto"
             style={{ color: "hsl(210 20% 75%)" }}
           >
             {subtitle}
-          </motion.p>
+          </p>
         )}
       </div>
     </section>
