@@ -5,8 +5,8 @@ import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 
 const sectionCopy = {
   fr: {
-    title1: "Ils nous font ",
-    titleHighlight: "confiance",
+    title1: "Des résultats qui ",
+    titleHighlight: "parlent",
     items: [
       { quote: "La formation IA pour nos équipes RH a transformé notre processus de recrutement. Gain de temps de 40% sur le sourcing.", name: "Aminata Koné", role: "DRH, Banque Atlantique" },
       { quote: "Un programme de formation structuré et adapté aux réalités africaines. Nos équipes sont devenues autonomes sur les outils IA.", name: "Jean-Marc Ouattara", role: "DSI, Orange CI" },
@@ -14,8 +14,8 @@ const sectionCopy = {
     ],
   },
   en: {
-    title1: "They trust ",
-    titleHighlight: "us",
+    title1: "Results that ",
+    titleHighlight: "speak",
     items: [
       { quote: "The AI training for our HR teams transformed our recruitment process. 40% time saved on sourcing.", name: "Aminata Koné", role: "CHRO, Banque Atlantique" },
       { quote: "A structured training program adapted to African realities. Our teams became autonomous on AI tools.", name: "Jean-Marc Ouattara", role: "CIO, Orange CI" },

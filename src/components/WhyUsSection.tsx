@@ -12,9 +12,9 @@ const sectionCopy = {
     titleHighlight: "TransferAI",
     title2: " Africa ?",
     reasons: {
-      local: { title: "Expertise Locale", desc: "Des formateurs qui comprennent les défis et opportunités du marché africain." },
-      practical: { title: "Approche Pratique", desc: "80% de pratique, des cas d'usage réels issus d'entreprises africaines." },
-      flexible: { title: "Formats Flexibles", desc: "Présentiel, hybride ou en ligne. Nous nous adaptons à vos contraintes." },
+      local: { title: "Ancrage Côte d'Ivoire & Afrique", desc: "Une offre pensée pour les réalités locales, portée par la diaspora et orientée vers l'impact sur le continent." },
+      practical: { title: "Formation utile et appliquée", desc: "Des cas concrets, des outils directement mobilisables et une pédagogie tournée vers le résultat métier." },
+      flexible: { title: "Des parcours pour particuliers et entreprises", desc: "Catalogue, parcours, certification, formats live et formation d'équipes : chacun peut trouver le bon niveau d'entrée." },
     },
   },
   en: {
@@ -22,9 +22,9 @@ const sectionCopy = {
     titleHighlight: "TransferAI",
     title2: " Africa?",
     reasons: {
-      local: { title: "Local Expertise", desc: "Trainers who understand the challenges and opportunities of the African market." },
-      practical: { title: "Hands-On Approach", desc: "80% practical work, real use cases from African businesses." },
-      flexible: { title: "Flexible Formats", desc: "On-site, hybrid or online. We adapt to your constraints." },
+      local: { title: "Côte d'Ivoire & Africa focus", desc: "An offer designed for local realities, powered by the diaspora and focused on tangible impact across the continent." },
+      practical: { title: "Useful, applied training", desc: "Concrete use cases, directly usable tools, and a pedagogy focused on professional outcomes." },
+      flexible: { title: "Paths for individuals and companies", desc: "Catalogue, guided paths, certification, live formats, and team training so everyone can find the right entry point." },
     },
   },
 } as const;

@@ -37,9 +37,9 @@ const metierKeys = [
 
 const sectionCopy = {
   fr: {
-    title1: "13 domaines d'expertise, une transformation ",
+    title1: "13 domaines d'expertise pour apprendre l'",
     titleHighlight: "IA",
-    subtitle: "Des formations conçues pour chaque fonction de l'entreprise, adaptées aux réalités du marché africain.",
+    subtitle: "Des formations concrètes, pensées pour les métiers, les entreprises et les réalités de la Côte d'Ivoire et du continent africain.",
     cta: "Voir tout le catalogue",
     formationsCount: "formations →",
     items: {
@@ -59,9 +59,9 @@ const sectionCopy = {
     },
   },
   en: {
-    title1: "13 areas of expertise, one ",
+    title1: "13 areas of expertise to learn ",
     titleHighlight: "AI",
-    subtitle: "Courses designed for every area of expertise, tailored to the African market.",
+    subtitle: "Practical courses designed for professions, companies, and the realities of Côte d'Ivoire and the African continent.",
     cta: "View full catalogue",
     formationsCount: "courses →",
     items: {

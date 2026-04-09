@@ -9,20 +9,20 @@ import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
   fr: {
-    title1: "Prêt à transformer vos ",
-    titleHighlight: "équipes",
+    title1: "Prêt à faire de l'",
+    titleHighlight: "IA",
     title2: " ?",
-    subtitle: "Contactez-nous pour un devis personnalisé ou téléchargez notre catalogue complet.",
-    button: "Demander un devis",
-    catalogue: "Télécharger le catalogue",
+    subtitle: "Choisissez la bonne porte d'entrée pour votre projet : former vos équipes, découvrir nos parcours ou demander un accompagnement adapté à votre besoin.",
+    button: "Demander un accompagnement",
+    catalogue: "Explorer le catalogue",
   },
   en: {
-    title1: "Ready to transform your ",
-    titleHighlight: "teams",
+    title1: "Ready to turn ",
+    titleHighlight: "AI",
     title2: "?",
-    subtitle: "Contact us for a personalized quote or download our full catalogue.",
-    button: "Request a quote",
-    catalogue: "Download the catalogue",
+    subtitle: "Choose the right entry point for your project: train your teams, explore our paths, or request tailored support.",
+    button: "Request support",
+    catalogue: "Explore the catalogue",
   },
 } as const;
 
@@ -68,7 +68,7 @@ const CTASection = () => {
               {copy.button} <ArrowRight size={18} />
             </Link>
             <Link
-              to="/catalogues-domaines"
+              to="/catalogue"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/95 transition-all hover:scale-105 hover:bg-white/[0.08]"
             >
               <Download size={18} /> {copy.catalogue}

@@ -9,31 +9,31 @@ import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 
 const sectionCopy = {
   fr: {
-    badge: "Éducation · Consulting · Solutions IA",
-    title1: "Devenez le partenaire stratégique ",
+    badge: "Formation · Certification · Services IA",
+    title1: "L'",
     titleHighlight: "IA",
-    title2: "que les entreprises s'arrachent",
+    title2: " utile pour les talents, les entreprises et les institutions d'Afrique",
     subtitle:
-      "Des milliers d'entreprises cherchent urgemment des experts pour réussir leurs transitions IA. En quelques mois, devenez le partenaire stratégique IA que les entreprises paieront cher, même si vous partez de zéro.",
+      "TransferAI Africa forme en Côte d'Ivoire et en Afrique des professionnels, étudiants, entrepreneurs et équipes qui veulent apprendre l'IA, l'appliquer concrètement à leur métier et créer de vraies opportunités de croissance.",
     stats: {
-      formations: "Formations IA",
+      formations: "Formations",
       metiers: "Domaines d'expertise",
-      services: "Services experts",
+      services: "Piliers de services",
       pays: "Pays couverts",
       visiteurs: "Visiteurs",
     },
   },
   en: {
-    badge: "Education · Consulting · AI Solutions",
-    title1: "Become the strategic ",
+    badge: "Training · Certification · AI Services",
+    title1: "",
     titleHighlight: "AI",
-    title2: "partner companies are snapping up",
+    title2: " that serves African talent, companies, and institutions",
     subtitle:
-      "Thousands of companies are urgently looking for experts to succeed in their AI transitions. In a matter of months, become the AI strategic partner that companies will pay dearly for, even if you're starting from scratch.",
+      "TransferAI Africa trains professionals, students, entrepreneurs, and teams in Côte d'Ivoire and across Africa to learn AI, apply it concretely to their work, and unlock real growth opportunities.",
     stats: {
-      formations: "AI training",
+      formations: "Courses",
       metiers: "Areas of expertise",
-      services: "Expert services",
+      services: "Service pillars",
       pays: "Countries covered",
       visiteurs: "Visitors",
     },
@@ -111,7 +111,6 @@ const HeroSection = () => {
           >
             {copy.title1}
             <span className="text-gradient-orange">{copy.titleHighlight}</span>
-            <br />
             {copy.title2}
           </motion.h1>
 
