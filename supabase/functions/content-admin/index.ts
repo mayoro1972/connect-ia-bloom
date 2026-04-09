@@ -50,6 +50,25 @@ const asStringArray = (value: unknown) => {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string").map((item) => item.trim()).filter(Boolean);
 };
+const asJson = (value: unknown) => {
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  if (typeof value === "string") {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+
+  if (typeof value === "object") {
+    return value;
+  }
+
+  return null;
+};
 
 const mapResourcePayload = (payload: Record<string, unknown>) => ({
   slug: asString(payload.slug),
@@ -59,10 +78,18 @@ const mapResourcePayload = (payload: Record<string, unknown>) => ({
   title_en: asString(payload.title_en),
   excerpt_fr: asString(payload.excerpt_fr),
   excerpt_en: asString(payload.excerpt_en),
+  content_fr: asNullableString(payload.content_fr),
+  content_en: asNullableString(payload.content_en),
   read_time_minutes: asNumber(payload.read_time_minutes),
   published_at: asString(payload.published_at) || new Date().toISOString(),
   source_name: asNullableString(payload.source_name),
   source_url: asNullableString(payload.source_url),
+  sources_json: asJson(payload.sources_json),
+  seo_title_fr: asNullableString(payload.seo_title_fr),
+  seo_title_en: asNullableString(payload.seo_title_en),
+  seo_description_fr: asNullableString(payload.seo_description_fr),
+  seo_description_en: asNullableString(payload.seo_description_en),
+  cover_image_url: asNullableString(payload.cover_image_url),
   tags: asStringArray(payload.tags),
   is_featured: asBoolean(payload.is_featured),
   is_new_manual: asBoolean(payload.is_new_manual),

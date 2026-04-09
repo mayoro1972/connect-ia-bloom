@@ -82,6 +82,21 @@ export const metierKeyToCatalogueSlug: Record<string, string> = {
   diplomatie: "diplomatie-et-affaires-internationales",
 };
 
+export const resolveCatalogueSlugFromSector = (sectorKey?: string | null) => {
+  if (!sectorKey) {
+    return null;
+  }
+
+  const normalizedTarget = slugifySiteValue(sectorKey);
+  const matchedEntry = Object.entries(metierKeyToDomain).find(([, value]) => slugifySiteValue(value) === normalizedTarget);
+
+  if (matchedEntry) {
+    return metierKeyToCatalogueSlug[matchedEntry[0]];
+  }
+
+  return slugifySiteValue(sectorKey);
+};
+
 export const slugifySiteValue = (value: string) =>
   value
     .normalize("NFD")

@@ -1,4 +1,5 @@
-import { Clock, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowUpRight, Clock, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -61,20 +62,9 @@ const BlogPage = () => {
                   article.sectorKey && (t(`catalogue.domains.${article.sectorKey}`) || article.sectorKey);
                 const categoryLabel = t(`blog.categories.${article.categoryKey}`);
                 const isRecent = isResourceNew(article.publishedAt, article.isNewManual);
-                const Wrapper = article.sourceUrl ? "a" : "article";
-
                 return (
                   <div key={article.id}>
-                    <Wrapper
-                      {...(article.sourceUrl
-                        ? {
-                            href: article.sourceUrl,
-                            target: "_blank",
-                            rel: "noreferrer",
-                          }
-                        : {})}
-                      className="group block rounded-xl border border-border bg-card p-6 hover-lift"
-                    >
+                    <Link to={`/blog/${article.slug}`} className="group block rounded-xl border border-border bg-card p-6 hover-lift">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className={`text-xs font-semibold ${categoryColors[article.categoryKey] || "text-primary"}`}>
                           {categoryLabel}
@@ -108,15 +98,14 @@ const BlogPage = () => {
                         </div>
 
                         <div className="flex items-center gap-2">
-                          {article.sourceName ? (
-                            <span>
-                              {content.sourceLabel}: {article.sourceName}
-                            </span>
-                          ) : null}
-                          {article.sourceUrl ? <ExternalLink size={14} /> : null}
+                          {article.sourceName ? <span>{content.sourceLabel}: {article.sourceName}</span> : null}
+                          <span className="inline-flex items-center gap-1 font-semibold text-primary">
+                            {content.readArticle}
+                            <ArrowUpRight size={14} />
+                          </span>
                         </div>
                       </div>
-                    </Wrapper>
+                    </Link>
                   </div>
                 );
               })}

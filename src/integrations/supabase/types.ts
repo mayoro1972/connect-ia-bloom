@@ -167,6 +167,9 @@ export type Database = {
       resource_posts: {
         Row: {
           category_key: string
+          content_en: string | null
+          content_fr: string | null
+          cover_image_url: string | null
           created_at: string
           excerpt_en: string
           excerpt_fr: string
@@ -176,9 +179,14 @@ export type Database = {
           published_at: string
           read_time_minutes: number | null
           sector_key: string | null
+          seo_description_en: string | null
+          seo_description_fr: string | null
+          seo_title_en: string | null
+          seo_title_fr: string | null
           slug: string
           source_name: string | null
           source_url: string | null
+          sources_json: Json | null
           status: string
           tags: string[]
           title_en: string
@@ -187,6 +195,9 @@ export type Database = {
         }
         Insert: {
           category_key: string
+          content_en?: string | null
+          content_fr?: string | null
+          cover_image_url?: string | null
           created_at?: string
           excerpt_en: string
           excerpt_fr: string
@@ -196,9 +207,14 @@ export type Database = {
           published_at?: string
           read_time_minutes?: number | null
           sector_key?: string | null
+          seo_description_en?: string | null
+          seo_description_fr?: string | null
+          seo_title_en?: string | null
+          seo_title_fr?: string | null
           slug: string
           source_name?: string | null
           source_url?: string | null
+          sources_json?: Json | null
           status?: string
           tags?: string[]
           title_en: string
@@ -207,6 +223,9 @@ export type Database = {
         }
         Update: {
           category_key?: string
+          content_en?: string | null
+          content_fr?: string | null
+          cover_image_url?: string | null
           created_at?: string
           excerpt_en?: string
           excerpt_fr?: string
@@ -216,9 +235,14 @@ export type Database = {
           published_at?: string
           read_time_minutes?: number | null
           sector_key?: string | null
+          seo_description_en?: string | null
+          seo_description_fr?: string | null
+          seo_title_en?: string | null
+          seo_title_fr?: string | null
           slug?: string
           source_name?: string | null
           source_url?: string | null
+          sources_json?: Json | null
           status?: string
           tags?: string[]
           title_en?: string

@@ -1,5 +1,12 @@
 export type ResourceCategoryKey = "expertise-ai" | "guides" | "case-studies" | "veille";
 
+export type ResourceSource = {
+  label: string;
+  url: string;
+  publisher?: string | null;
+  publishedAt?: string | null;
+};
+
 export type ResourceFeedItem = {
   id: string;
   slug: string;
@@ -16,6 +23,17 @@ export type ResourceFeedItem = {
   tags: string[];
   isFeatured: boolean;
   isNewManual: boolean;
+};
+
+export type ResourcePost = ResourceFeedItem & {
+  contentFr: string | null;
+  contentEn: string | null;
+  sources: ResourceSource[];
+  seoTitleFr: string | null;
+  seoTitleEn: string | null;
+  seoDescriptionFr: string | null;
+  seoDescriptionEn: string | null;
+  coverImageUrl: string | null;
 };
 
 export const RESOURCE_NEW_WINDOW_DAYS = 14;
@@ -108,6 +126,47 @@ export const resourceFeedFallback: ResourceFeedItem[] = [
   },
 ];
 
+const buildFallbackContent = (item: ResourceFeedItem, language: "fr" | "en") => {
+  if (language === "en") {
+    return [
+      item.excerptEn,
+      `Why this matters now`,
+      `TransferAI Africa curates this article to help professionals and organizations understand how AI changes ${item.sectorKey ?? "their sector"} in Côte d'Ivoire and across Africa.`,
+      `What to do next`,
+      `Use this resource as a starting point, then explore the related training paths, certification options, and consulting support available on the platform.`,
+    ].join("\n\n");
+  }
+
+  return [
+    item.excerptFr,
+    `Pourquoi ce sujet compte maintenant`,
+    `TransferAI Africa publie cette ressource pour aider les professionnels et les organisations à comprendre comment l'IA transforme ${item.sectorKey ?? "leur secteur"} en Côte d'Ivoire et en Afrique.`,
+    `Quelle est la prochaine étape`,
+    `Utilisez cet article comme point d'entrée, puis explorez les formations, la certification et les services liés à ce domaine sur la plateforme.`,
+  ].join("\n\n");
+};
+
+export const resourcePostFallback: ResourcePost[] = resourceFeedFallback.map((item) => ({
+  ...item,
+  contentFr: buildFallbackContent(item, "fr"),
+  contentEn: buildFallbackContent(item, "en"),
+  sources:
+    item.sourceUrl && item.sourceName
+      ? [
+          {
+            label: item.sourceName,
+            url: item.sourceUrl,
+            publisher: item.sourceName,
+          },
+        ]
+      : [],
+  seoTitleFr: null,
+  seoTitleEn: null,
+  seoDescriptionFr: null,
+  seoDescriptionEn: null,
+  coverImageUrl: null,
+}));
+
 export const sortResourceFeed = (items: ResourceFeedItem[]) =>
   [...items].sort((left, right) => {
     const featuredDelta = Number(right.isFeatured) - Number(left.isFeatured);
@@ -136,3 +195,5 @@ export const isResourceNew = (publishedAt: string, isNewManual = false) => {
   return diffInDays >= 0 && diffInDays <= RESOURCE_NEW_WINDOW_DAYS;
 };
 
+export const getFallbackResourcePostBySlug = (slug?: string | null) =>
+  resourcePostFallback.find((item) => item.slug === slug) ?? null;

@@ -66,10 +66,18 @@ const emptyResourceForm = {
   title_en: "",
   excerpt_fr: "",
   excerpt_en: "",
+  content_fr: "",
+  content_en: "",
   read_time_minutes: "5",
   published_at: new Date().toISOString().slice(0, 16),
   source_name: "",
   source_url: "",
+  sources_json: "",
+  seo_title_fr: "",
+  seo_title_en: "",
+  seo_description_fr: "",
+  seo_description_en: "",
+  cover_image_url: "",
   tags: "",
   status: "published",
   is_featured: false,
@@ -434,11 +442,26 @@ const BackOfficePage = () => {
                     <Input value={resourceForm.title_en} onChange={(e) => setResourceForm({ ...resourceForm, title_en: e.target.value })} placeholder="Titre EN" />
                     <Textarea value={resourceForm.excerpt_fr} onChange={(e) => setResourceForm({ ...resourceForm, excerpt_fr: e.target.value })} placeholder="Résumé FR" />
                     <Textarea value={resourceForm.excerpt_en} onChange={(e) => setResourceForm({ ...resourceForm, excerpt_en: e.target.value })} placeholder="Résumé EN" />
+                    <Textarea value={resourceForm.content_fr} onChange={(e) => setResourceForm({ ...resourceForm, content_fr: e.target.value })} placeholder="Contenu complet FR" className="min-h-[180px]" />
+                    <Textarea value={resourceForm.content_en} onChange={(e) => setResourceForm({ ...resourceForm, content_en: e.target.value })} placeholder="Contenu complet EN" className="min-h-[180px]" />
                     <div className="grid gap-4 md:grid-cols-2">
                       <input className={fieldClass} value={resourceForm.source_name} onChange={(e) => setResourceForm({ ...resourceForm, source_name: e.target.value })} placeholder="Source" />
                       <input className={fieldClass} value={resourceForm.source_url} onChange={(e) => setResourceForm({ ...resourceForm, source_url: e.target.value })} placeholder="URL source" />
                       <input className={fieldClass} value={resourceForm.tags} onChange={(e) => setResourceForm({ ...resourceForm, tags: e.target.value })} placeholder="Tags séparés par des virgules" />
                       <input className={fieldClass} type="number" min="1" value={resourceForm.read_time_minutes} onChange={(e) => setResourceForm({ ...resourceForm, read_time_minutes: e.target.value })} placeholder="Temps de lecture" />
+                    </div>
+                    <Textarea
+                      value={resourceForm.sources_json}
+                      onChange={(e) => setResourceForm({ ...resourceForm, sources_json: e.target.value })}
+                      placeholder='Sources JSON [{"label":"OpenAI","url":"https://..."}]'
+                      className="min-h-[120px] font-mono text-xs"
+                    />
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <Input value={resourceForm.seo_title_fr} onChange={(e) => setResourceForm({ ...resourceForm, seo_title_fr: e.target.value })} placeholder="SEO title FR" />
+                      <Input value={resourceForm.seo_title_en} onChange={(e) => setResourceForm({ ...resourceForm, seo_title_en: e.target.value })} placeholder="SEO title EN" />
+                      <Textarea value={resourceForm.seo_description_fr} onChange={(e) => setResourceForm({ ...resourceForm, seo_description_fr: e.target.value })} placeholder="SEO description FR" />
+                      <Textarea value={resourceForm.seo_description_en} onChange={(e) => setResourceForm({ ...resourceForm, seo_description_en: e.target.value })} placeholder="SEO description EN" />
+                      <Input value={resourceForm.cover_image_url} onChange={(e) => setResourceForm({ ...resourceForm, cover_image_url: e.target.value })} placeholder="Cover image URL" />
                     </div>
                     <div className="grid gap-4 md:grid-cols-3">
                       <select className={fieldClass} value={resourceForm.status} onChange={(e) => setResourceForm({ ...resourceForm, status: e.target.value })}>
