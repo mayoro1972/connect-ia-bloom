@@ -16,9 +16,6 @@ export default defineConfig(({ mode }) => ({
   ],
   build: {
     target: ["es2015", "safari13"],
-    rollupOptions: {
-      output: {},
-    },
   },
   resolve: {
     alias: {
