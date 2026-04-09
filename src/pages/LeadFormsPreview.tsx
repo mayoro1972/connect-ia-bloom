@@ -12,6 +12,7 @@ import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/in
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 type FormIntent = "demande-catalogue" | "demande-renseignement" | "contact-devis";
 type FormState = { fullName: string; email: string; phone: string; company: string; role: string; country: string; domain: string; participants: string; format: string; timeline: string; message: string };
@@ -106,6 +107,11 @@ const LeadFormsPreview = () => {
     const appointmentUrl = `${window.location.origin}/prise-rdv?${new URLSearchParams({ source: activeIntent, domain: form.domain || requestedDomain, company: form.company, fullName: form.fullName }).toString()}`;
     const { error: notificationError } = await sendProspectEmailNotifications({ intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), role: form.role.trim() || null, city: form.country.trim() || null, domain: form.domain.trim() || requestedDomain || null, participants: participantsCount, format: form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
     toast({ title: copy.page.success, description: notificationError ? copy.page.successPending : copy.page.successDesc });
+    trackAnalyticsEvent("lead_request_submitted", {
+      request_intent: activeIntent,
+      requested_domain: form.domain.trim() || requestedDomain || null,
+      participants: participantsCount ?? undefined,
+    });
     navigate(appointmentUrl.replace(window.location.origin, ""));
   };
 

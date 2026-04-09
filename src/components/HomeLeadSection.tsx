@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, BriefcaseBusiness, Compass, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import { trackCtaClick } from "@/lib/analytics";
 import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
@@ -92,7 +93,17 @@ const HomeLeadSection = () => {
             const Icon = item.icon;
             return (
               <ScrollReveal key={item.title} delay={index * 0.08} direction="up">
-                <Link to={item.href} className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 hover-lift">
+                <Link
+                  to={item.href}
+                  onClick={() =>
+                    trackCtaClick({
+                      ctaName: item.title,
+                      ctaLocation: "home_lead_section",
+                      destination: item.href,
+                    })
+                  }
+                  className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 hover-lift"
+                >
                   <div className="mb-5 flex items-center justify-between gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       <Icon size={22} />

@@ -29,8 +29,8 @@ describe("homepage language switch", () => {
     );
 
     expect(screen.getByText("ACCUEIL")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Devenez le partenaire stratégique/i })).toBeInTheDocument();
-    expect(screen.getByText("Formations IA")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /l' ia utile pour les talents/i })).toBeInTheDocument();
+    expect(screen.getByText("Formations")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "EN" }));
 
@@ -38,7 +38,7 @@ describe("homepage language switch", () => {
       expect(screen.getByText("HOME")).toBeInTheDocument();
     });
 
-    expect(screen.getByRole("heading", { name: /Become the strategic/i })).toBeInTheDocument();
-    expect(screen.getByText("AI training")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /ai that serves african talent/i })).toBeInTheDocument();
+    expect(screen.getByText("Courses")).toBeInTheDocument();
   });
 });

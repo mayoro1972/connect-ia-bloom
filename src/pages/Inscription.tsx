@@ -12,6 +12,7 @@ import { useFormationLocale } from "@/hooks/useFormationLocale";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import { buildContactPath } from "@/lib/site-links";
 
 type InscriptionFormState = {
@@ -201,6 +202,11 @@ const InscriptionPage = () => {
       description: notificationError
         ? "Votre inscription a bien ete enregistree. La confirmation email sera activee des que la messagerie sera configuree."
         : t("inscription.toastDesc"),
+    });
+    trackAnalyticsEvent("registration_request_submitted", {
+      formation_id: selectedFormation.id,
+      formation_title: getTitle(selectedFormation),
+      participants: Number.isFinite(participants) && participants > 0 ? participants : 1,
     });
     setForm(emptyInscriptionForm());
   };

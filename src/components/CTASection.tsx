@@ -5,6 +5,7 @@ import { ArrowRight, Download } from "lucide-react";
 import ctaBg from "@/assets/cta-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import { trackCtaClick } from "@/lib/analytics";
 import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
@@ -63,12 +64,26 @@ const CTASection = () => {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               to={buildContactPath("contact-devis")}
+              onClick={() =>
+                trackCtaClick({
+                  ctaName: copy.button,
+                  ctaLocation: "home_final_cta",
+                  destination: buildContactPath("contact-devis"),
+                })
+              }
               className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition-all hover:scale-105 hover:opacity-95"
             >
               {copy.button} <ArrowRight size={18} />
             </Link>
             <Link
               to="/catalogue"
+              onClick={() =>
+                trackCtaClick({
+                  ctaName: copy.catalogue,
+                  ctaLocation: "home_final_cta",
+                  destination: "/catalogue",
+                })
+              }
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/95 transition-all hover:scale-105 hover:bg-white/[0.08]"
             >
               <Download size={18} /> {copy.catalogue}

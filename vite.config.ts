@@ -13,6 +13,39 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) {
+            return undefined;
+          }
+
+          if (id.includes("react-router-dom") || id.includes("react-dom") || id.includes("/react/")) {
+            return "vendor-react";
+          }
+
+          if (id.includes("@tanstack/react-query") || id.includes("@supabase/supabase-js")) {
+            return "vendor-data";
+          }
+
+          if (id.includes("framer-motion")) {
+            return "vendor-motion";
+          }
+
+          if (id.includes("@radix-ui")) {
+            return "vendor-ui";
+          }
+
+          if (id.includes("lucide-react")) {
+            return "vendor-icons";
+          }
+
+          return "vendor-misc";
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -8,6 +8,7 @@ import logoSndi from "@/assets/logo-sndi.png";
 import logoPigier from "@/assets/logo-pigier.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import { trackCtaClick } from "@/lib/analytics";
 
 const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP", "IADS", "SNDI", "Pigier CI"];
 const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp, logoIads, logoSndi, logoPigier];
@@ -103,6 +104,13 @@ const HomeTrustSection = () => {
         <ScrollReveal delay={0.28} className="mt-10 text-center">
           <Link
             to="/partenaires"
+            onClick={() =>
+              trackCtaClick({
+                ctaName: copy.cta,
+                ctaLocation: "home_trust_section",
+                destination: "/partenaires",
+              })
+            }
             className="inline-flex items-center gap-2 rounded-lg bg-coral-gradient px-8 py-3 font-semibold transition-all hover:scale-105 hover:opacity-90"
             style={{ color: "hsl(0 0% 100%)" }}
           >

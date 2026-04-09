@@ -3,6 +3,7 @@ import { GraduationCap, BriefcaseBusiness, Award, Compass } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import { trackCtaClick } from "@/lib/analytics";
 import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
@@ -97,6 +98,13 @@ const HomeEntrySection = () => {
               <ScrollReveal key={item.title} delay={index * 0.08} direction="up">
                 <Link
                   to={item.href}
+                  onClick={() =>
+                    trackCtaClick({
+                      ctaName: item.title,
+                      ctaLocation: "home_entry_section",
+                      destination: item.href,
+                    })
+                  }
                   className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 hover-lift"
                 >
                   <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-orange-gradient group-hover:text-white">

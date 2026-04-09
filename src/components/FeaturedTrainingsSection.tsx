@@ -4,6 +4,7 @@ import { formations } from "@/data/formations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { useFormationLocale } from "@/hooks/useFormationLocale";
+import { trackCtaClick } from "@/lib/analytics";
 
 const featuredFormationIds = ["assist-01", "rh-01", "mkt-01", "mgmt-05"] as const;
 
@@ -94,6 +95,13 @@ const FeaturedTrainingsSection = () => {
             <ScrollReveal key={formation.id} delay={index * 0.08} direction="up">
               <Link
                 to={`/catalogue/${formation.id}`}
+                onClick={() =>
+                  trackCtaClick({
+                    ctaName: getTitle(formation),
+                    ctaLocation: "home_featured_trainings",
+                    destination: `/catalogue/${formation.id}`,
+                  })
+                }
                 className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 hover-lift"
               >
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -121,7 +129,17 @@ const FeaturedTrainingsSection = () => {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           <ScrollReveal direction="up">
-            <Link to="/certification" className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 hover-lift">
+            <Link
+              to="/certification"
+              onClick={() =>
+                trackCtaClick({
+                  ctaName: copy.premiumTitle,
+                  ctaLocation: "home_featured_trainings",
+                  destination: "/certification",
+                })
+              }
+              className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 hover-lift"
+            >
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">{copy.premiumTitle}</p>
               <h3 className="mb-3 font-heading text-2xl font-bold text-card-foreground">
                 {activeLanguage === "fr"
@@ -134,7 +152,17 @@ const FeaturedTrainingsSection = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={0.08} direction="up">
-            <Link to="/seminaires" className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 hover-lift">
+            <Link
+              to="/seminaires"
+              onClick={() =>
+                trackCtaClick({
+                  ctaName: copy.liveTitle,
+                  ctaLocation: "home_featured_trainings",
+                  destination: "/seminaires",
+                })
+              }
+              className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 hover-lift"
+            >
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">{copy.liveTitle}</p>
               <h3 className="mb-3 font-heading text-2xl font-bold text-card-foreground">
                 {activeLanguage === "fr" ? "Tester l'offre avant de s'engager" : "Test the offer before committing"}
