@@ -17,10 +17,14 @@ export const resolveActiveLanguage = (fallback: Language): Language => {
   }
 
   if (typeof window !== "undefined") {
-    const storedLanguage = window.localStorage.getItem("transferai-language");
+    try {
+      const storedLanguage = window.localStorage.getItem("transferai-language");
 
-    if (isLanguage(storedLanguage)) {
-      return storedLanguage;
+      if (isLanguage(storedLanguage)) {
+        return storedLanguage;
+      }
+    } catch {
+      return fallback;
     }
   }
 

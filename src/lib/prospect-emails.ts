@@ -28,11 +28,21 @@ export type ProspectEmailPayload = {
 };
 
 export const resolveOutboundLanguage = (preferred?: string | null): "fr" | "en" => {
+  let storedLanguage: string | null = null;
+
+  if (typeof window !== "undefined") {
+    try {
+      storedLanguage = window.localStorage.getItem("transferai-language");
+    } catch {
+      storedLanguage = null;
+    }
+  }
+
   const candidates = [
     preferred,
     typeof document !== "undefined" ? document.documentElement.lang : null,
     typeof document !== "undefined" ? document.body.getAttribute("data-language") : null,
-    typeof window !== "undefined" ? window.localStorage.getItem("transferai-language") : null,
+    storedLanguage,
   ];
 
   for (const candidate of candidates) {

@@ -21,13 +21,21 @@ const getInitialLanguage = (): Language => {
     return "fr";
   }
 
-  const storedLanguage = window.localStorage.getItem("transferai-language");
-  return storedLanguage === "en" ? "en" : "fr";
+  try {
+    const storedLanguage = window.localStorage.getItem("transferai-language");
+    return storedLanguage === "en" ? "en" : "fr";
+  } catch {
+    return "fr";
+  }
 };
 
 const applyLanguageToDocument = (language: Language) => {
   if (typeof window !== "undefined") {
-    window.localStorage.setItem("transferai-language", language);
+    try {
+      window.localStorage.setItem("transferai-language", language);
+    } catch {
+      // Ignore storage failures in privacy-restricted browsers.
+    }
   }
 
   if (typeof document !== "undefined") {

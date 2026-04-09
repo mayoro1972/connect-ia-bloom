@@ -60,14 +60,18 @@ const authStorage = (() => {
     return createMemoryStorage();
   }
 
-  const candidate = globalThis.localStorage;
-  if (
-    candidate &&
-    typeof candidate.getItem === "function" &&
-    typeof candidate.setItem === "function" &&
-    typeof candidate.removeItem === "function"
-  ) {
-    return candidate;
+  try {
+    const candidate = globalThis.localStorage;
+    if (
+      candidate &&
+      typeof candidate.getItem === "function" &&
+      typeof candidate.setItem === "function" &&
+      typeof candidate.removeItem === "function"
+    ) {
+      return candidate;
+    }
+  } catch {
+    return createMemoryStorage();
   }
 
   return createMemoryStorage();
