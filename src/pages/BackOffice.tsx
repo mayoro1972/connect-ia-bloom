@@ -28,6 +28,34 @@ type JobAdminItem = {
   published_at: string;
 };
 
+type AnalyticsRow = {
+  label: string;
+  count: number;
+};
+
+type AnalyticsTrendRow = {
+  day: string;
+  pageViews: number;
+  contacts: number;
+  registrations: number;
+};
+
+type AnalyticsSnapshot = {
+  overview: {
+    totalPageViews: number;
+    pageViewsLast30Days: number;
+    totalContactRequests: number;
+    contactRequestsLast30Days: number;
+    totalRegistrationRequests: number;
+    registrationRequestsLast30Days: number;
+  };
+  byIntent: AnalyticsRow[];
+  topDomains: AnalyticsRow[];
+  topFormations: AnalyticsRow[];
+  topPages: AnalyticsRow[];
+  trend: AnalyticsTrendRow[];
+};
+
 const ADMIN_TOKEN_STORAGE_KEY = "transferai-admin-token";
 
 const emptyResourceForm = {
@@ -70,12 +98,25 @@ const emptyJobForm = {
 
 const fieldClass = "w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
 
+const intentLabels: Record<string, string> = {
+  "contact-devis": "Contact / devis",
+  "demande-catalogue": "Demande de catalogue",
+  "demande-renseignement": "Demande de renseignement",
+};
+
+const formatDateLabel = (value: string) =>
+  new Date(`${value}T00:00:00Z`).toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "short",
+  });
+
 const BackOfficePage = () => {
   const [token, setToken] = useState("");
   const [resourceForm, setResourceForm] = useState(emptyResourceForm);
   const [jobForm, setJobForm] = useState(emptyJobForm);
   const [resources, setResources] = useState<ResourceAdminItem[]>([]);
   const [jobs, setJobs] = useState<JobAdminItem[]>([]);
+  const [analytics, setAnalytics] = useState<AnalyticsSnapshot | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isBusy, setIsBusy] = useState(false);
@@ -90,13 +131,15 @@ const BackOfficePage = () => {
   const isReady = useMemo(() => token.trim().length > 0 && isSupabaseConfigured, [token]);
 
   const loadData = async (adminToken: string) => {
-    const [resourceResult, jobResult] = await Promise.all([
+    const [resourceResult, jobResult, analyticsResult] = await Promise.all([
       invokeContentAdmin<{ data: ResourceAdminItem[] }>(adminToken, { entity: "resource", action: "list" }),
       invokeContentAdmin<{ data: JobAdminItem[] }>(adminToken, { entity: "job", action: "list" }),
+      invokeContentAdmin<{ data: AnalyticsSnapshot }>(adminToken, { entity: "analytics", action: "list" }),
     ]);
 
     setResources(resourceResult.data ?? []);
     setJobs(jobResult.data ?? []);
+    setAnalytics(analyticsResult.data ?? null);
   };
 
   useEffect(() => {
@@ -234,10 +277,143 @@ const BackOfficePage = () => {
 
             <Tabs defaultValue="resources" className="w-full">
               <TabsList className="mb-8 h-auto flex-wrap">
+                <TabsTrigger value="analytics">Analytics</TabsTrigger>
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="help">Mode d'emploi</TabsTrigger>
               </TabsList>
+
+              <TabsContent value="analytics">
+                <div className="space-y-8">
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Trafic global</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {analytics?.overview.totalPageViews ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        {analytics?.overview.pageViewsLast30Days ?? 0} vues sur les 30 derniers jours.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Leads contact</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {analytics?.overview.totalContactRequests ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        {analytics?.overview.contactRequestsLast30Days ?? 0} demandes sur les 30 derniers jours.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Inscriptions</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {analytics?.overview.totalRegistrationRequests ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        {analytics?.overview.registrationRequestsLast30Days ?? 0} demandes sur les 30 derniers jours.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Tendance 7 jours</h2>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Vue rapide du trafic et des conversions pour suivre l'effet des changements de contenu.
+                      </p>
+                      <div className="mt-6 space-y-4">
+                        {(analytics?.trend ?? []).map((entry) => {
+                          const maxValue = Math.max(
+                            ...((analytics?.trend ?? []).flatMap((item) => [item.pageViews, item.contacts, item.registrations])),
+                            1,
+                          );
+
+                          return (
+                            <div key={entry.day} className="rounded-xl border border-border bg-background/70 p-4">
+                              <div className="flex items-center justify-between gap-3">
+                                <p className="text-sm font-semibold text-card-foreground">{formatDateLabel(entry.day)}</p>
+                                <p className="text-xs text-muted-foreground">
+                                  {entry.pageViews} vues · {entry.contacts} leads · {entry.registrations} inscriptions
+                                </p>
+                              </div>
+                              <div className="mt-3 space-y-2">
+                                {[
+                                  { label: "Vues", value: entry.pageViews, tone: "bg-primary/80" },
+                                  { label: "Leads", value: entry.contacts, tone: "bg-orange-400/90" },
+                                  { label: "Inscriptions", value: entry.registrations, tone: "bg-emerald-500/90" },
+                                ].map((bar) => (
+                                  <div key={bar.label} className="grid grid-cols-[88px_1fr_36px] items-center gap-3 text-xs">
+                                    <span className="font-medium text-muted-foreground">{bar.label}</span>
+                                    <div className="h-2 rounded-full bg-muted">
+                                      <div
+                                        className={`h-2 rounded-full ${bar.tone}`}
+                                        style={{ width: `${Math.max((bar.value / maxValue) * 100, bar.value > 0 ? 8 : 0)}%` }}
+                                      />
+                                    </div>
+                                    <span className="text-right font-semibold text-card-foreground">{bar.value}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className="rounded-2xl border border-border bg-card p-6">
+                        <h2 className="font-heading text-xl font-bold text-card-foreground">Intentions les plus fréquentes</h2>
+                        <div className="mt-4 space-y-3">
+                          {(analytics?.byIntent ?? []).map((item) => (
+                            <div key={item.label} className="flex items-center justify-between rounded-xl border border-border px-4 py-3 text-sm">
+                              <span className="text-card-foreground">{intentLabels[item.label] ?? item.label}</span>
+                              <Badge variant="secondary">{item.count}</Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="rounded-2xl border border-border bg-card p-6">
+                        <h2 className="font-heading text-xl font-bold text-card-foreground">Top domaines demandés</h2>
+                        <div className="mt-4 space-y-3">
+                          {(analytics?.topDomains ?? []).map((item) => (
+                            <div key={item.label} className="flex items-center justify-between rounded-xl border border-border px-4 py-3 text-sm">
+                              <span className="text-card-foreground">{item.label}</span>
+                              <Badge variant="secondary">{item.count}</Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 xl:grid-cols-2">
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Formations les plus demandées</h2>
+                      <div className="mt-4 space-y-3">
+                        {(analytics?.topFormations ?? []).map((item) => (
+                          <div key={item.label} className="flex items-center justify-between rounded-xl border border-border px-4 py-3 text-sm">
+                            <span className="text-card-foreground">{item.label}</span>
+                            <Badge variant="secondary">{item.count}</Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Pages les plus vues</h2>
+                      <div className="mt-4 space-y-3">
+                        {(analytics?.topPages ?? []).map((item) => (
+                          <div key={item.label} className="flex items-center justify-between rounded-xl border border-border px-4 py-3 text-sm">
+                            <span className="text-card-foreground">{item.label}</span>
+                            <Badge variant="secondary">{item.count}</Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
 
               <TabsContent value="resources">
                 <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">

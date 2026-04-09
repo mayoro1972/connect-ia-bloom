@@ -125,6 +125,163 @@ const setJobStatus = async (payload: Record<string, unknown>) =>
     .select("*")
     .single();
 
+const buildDateBuckets = (days: number) => {
+  const buckets = [];
+
+  for (let offset = days - 1; offset >= 0; offset -= 1) {
+    const date = new Date();
+    date.setUTCHours(0, 0, 0, 0);
+    date.setUTCDate(date.getUTCDate() - offset);
+    buckets.push(date.toISOString().slice(0, 10));
+  }
+
+  return buckets;
+};
+
+const sortByCountDesc = ([leftLabel, leftCount]: [string, number], [rightLabel, rightCount]: [string, number]) =>
+  rightCount - leftCount || leftLabel.localeCompare(rightLabel);
+
+const listAnalytics = async () => {
+  const now = new Date();
+  const daysAgo = (days: number) => {
+    const date = new Date(now);
+    date.setUTCDate(date.getUTCDate() - days);
+    return date.toISOString();
+  };
+
+  const sevenDaysAgo = daysAgo(6);
+  const thirtyDaysAgo = daysAgo(29);
+  const ninetyDaysAgo = daysAgo(89);
+
+  const [
+    pageViewsTotal,
+    pageViewsRecent,
+    contactRequestsTotal,
+    contactRequestsRecent,
+    registrationRequestsTotal,
+    registrationRequestsRecent,
+  ] = await Promise.all([
+    supabase.from("page_views").select("id", { count: "exact", head: true }),
+    supabase.from("page_views").select("page_path, visited_at").gte("visited_at", ninetyDaysAgo),
+    supabase.from("contact_requests").select("id", { count: "exact", head: true }),
+    supabase
+      .from("contact_requests")
+      .select("created_at, request_intent, requested_domain, requested_formations")
+      .gte("created_at", ninetyDaysAgo),
+    supabase.from("registration_requests").select("id", { count: "exact", head: true }),
+    supabase
+      .from("registration_requests")
+      .select("created_at, formation_title")
+      .gte("created_at", ninetyDaysAgo),
+  ]);
+
+  const resultList = [
+    pageViewsTotal,
+    pageViewsRecent,
+    contactRequestsTotal,
+    contactRequestsRecent,
+    registrationRequestsTotal,
+    registrationRequestsRecent,
+  ];
+
+  const failingResult = resultList.find((result) => result.error);
+
+  if (failingResult?.error) {
+    return { data: null, error: failingResult.error };
+  }
+
+  const pageViews = pageViewsRecent.data ?? [];
+  const contactRequests = contactRequestsRecent.data ?? [];
+  const registrationRequests = registrationRequestsRecent.data ?? [];
+
+  const trendDays = buildDateBuckets(7);
+  const contactIntentCounts = new Map<string, number>();
+  const domainCounts = new Map<string, number>();
+  const pageCounts = new Map<string, number>();
+  const formationCounts = new Map<string, number>();
+  const pageViewsTrend = new Map<string, number>();
+  const contactTrend = new Map<string, number>();
+  const registrationTrend = new Map<string, number>();
+
+  for (const day of trendDays) {
+    pageViewsTrend.set(day, 0);
+    contactTrend.set(day, 0);
+    registrationTrend.set(day, 0);
+  }
+
+  const publicPageFallback = "/";
+
+  for (const view of pageViews) {
+    const day = view.visited_at?.slice(0, 10);
+    const pagePath = asString(view.page_path, publicPageFallback);
+
+    pageCounts.set(pagePath, (pageCounts.get(pagePath) ?? 0) + 1);
+
+    if (day && pageViewsTrend.has(day)) {
+      pageViewsTrend.set(day, (pageViewsTrend.get(day) ?? 0) + 1);
+    }
+  }
+
+  for (const lead of contactRequests) {
+    const day = lead.created_at?.slice(0, 10);
+    const intentLabel = asString(lead.request_intent, "contact-devis");
+    const requestedDomain =
+      asString(lead.requested_domain) ||
+      asString(lead.requested_formations) ||
+      "Non precise";
+
+    contactIntentCounts.set(intentLabel, (contactIntentCounts.get(intentLabel) ?? 0) + 1);
+    domainCounts.set(requestedDomain, (domainCounts.get(requestedDomain) ?? 0) + 1);
+
+    if (day && contactTrend.has(day)) {
+      contactTrend.set(day, (contactTrend.get(day) ?? 0) + 1);
+    }
+  }
+
+  for (const registration of registrationRequests) {
+    const day = registration.created_at?.slice(0, 10);
+    const formationTitle = asString(registration.formation_title, "Formation");
+
+    formationCounts.set(formationTitle, (formationCounts.get(formationTitle) ?? 0) + 1);
+
+    if (day && registrationTrend.has(day)) {
+      registrationTrend.set(day, (registrationTrend.get(day) ?? 0) + 1);
+    }
+  }
+
+  const contactLastThirtyDays = contactRequests.filter((lead) => lead.created_at && lead.created_at >= thirtyDaysAgo).length;
+  const registrationLastThirtyDays = registrationRequests.filter((lead) => lead.created_at && lead.created_at >= thirtyDaysAgo).length;
+  const pageViewsLastThirtyDays = pageViews.filter((view) => view.visited_at && view.visited_at >= thirtyDaysAgo).length;
+
+  return {
+    data: {
+      overview: {
+        totalPageViews: pageViewsTotal.count ?? 0,
+        pageViewsLast30Days,
+        totalContactRequests: contactRequestsTotal.count ?? 0,
+        contactRequestsLast30Days: contactLastThirtyDays,
+        totalRegistrationRequests: registrationRequestsTotal.count ?? 0,
+        registrationRequestsLast30Days: registrationLastThirtyDays,
+      },
+      byIntent: Array.from(contactIntentCounts.entries()).sort(sortByCountDesc).map(([label, count]) => ({ label, count })),
+      topDomains: Array.from(domainCounts.entries()).sort(sortByCountDesc).slice(0, 6).map(([label, count]) => ({ label, count })),
+      topFormations: Array.from(formationCounts.entries()).sort(sortByCountDesc).slice(0, 6).map(([label, count]) => ({ label, count })),
+      topPages: Array.from(pageCounts.entries())
+        .filter(([label]) => !label.startsWith("/preview") && !label.startsWith("/back-office"))
+        .sort(sortByCountDesc)
+        .slice(0, 6)
+        .map(([label, count]) => ({ label, count })),
+      trend: trendDays.map((day) => ({
+        day,
+        pageViews: pageViewsTrend.get(day) ?? 0,
+        contacts: contactTrend.get(day) ?? 0,
+        registrations: registrationTrend.get(day) ?? 0,
+      })),
+    },
+    error: null,
+  };
+};
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -160,6 +317,7 @@ Deno.serve(async (request) => {
   if (entity === "job" && action === "list") result = await listJobs();
   if (entity === "job" && action === "create") result = await createJob(payload);
   if (entity === "job" && action === "set-status") result = await setJobStatus(payload);
+  if (entity === "analytics" && action === "list") result = await listAnalytics();
 
   if (!result) {
     return json(400, { error: "Unsupported admin action." });
@@ -171,4 +329,3 @@ Deno.serve(async (request) => {
 
   return json(200, { data: result.data });
 });
-

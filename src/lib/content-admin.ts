@@ -1,6 +1,6 @@
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 
-export type AdminEntity = "resource" | "job";
+export type AdminEntity = "resource" | "job" | "analytics";
 export type AdminAction = "list" | "create" | "set-status";
 
 type AdminRequest = {
@@ -47,4 +47,3 @@ export async function invokeContentAdmin<T>(token: string, request: AdminRequest
 
   return data as T;
 }
-

@@ -13,6 +13,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { contactDetails, directLinks } from "@/lib/site-links";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 type ContactFormState = {
   name: string;
@@ -144,6 +145,15 @@ const ContactPage = () => {
         ? "Votre demande a bien ete enregistree. L'accuse de reception email sera active des que la messagerie sera configuree."
         : t("contact.toastDesc"),
     });
+
+    trackAnalyticsEvent("lead_request_submitted", {
+      intent: "contact-devis",
+      language: activeLanguage,
+      requested_domain: form.formations.trim() || null,
+      participants: participantsCount,
+      source_page: "/contact",
+    });
+
     setForm(emptyForm);
   };
 

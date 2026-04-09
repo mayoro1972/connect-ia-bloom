@@ -10,6 +10,7 @@ import { getLocalizedDomainLabel } from "@/lib/catalogue-preview";
 import { useLanguage } from "@/i18n/LanguageContext";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
 import { appointmentBookings, directLinks, type AppointmentSource } from "@/lib/site-links";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 const appointmentCopy = {
   fr: {
@@ -355,6 +356,14 @@ const AppointmentPreview = () => {
                       href={calendlyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        trackAnalyticsEvent("appointment_booking_started", {
+                          source,
+                          domain,
+                          company,
+                          location: "appointment_primary_cta",
+                        })
+                      }
                       className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-2.5 text-sm font-semibold opacity-90"
                       style={{ color: "hsl(0 0% 100%)" }}
                     >
@@ -362,6 +371,14 @@ const AppointmentPreview = () => {
                     </a>
                     <a
                       href={fallbackAppointmentMailto}
+                      onClick={() =>
+                        trackAnalyticsEvent("appointment_fallback_clicked", {
+                          source,
+                          domain,
+                          company,
+                          location: "appointment_mailto_fallback",
+                        })
+                      }
                       className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-card-foreground hover:bg-muted"
                     >
                       <MessageSquareText size={14} className="text-primary" /> {copy.alternative}
@@ -376,6 +393,14 @@ const AppointmentPreview = () => {
                       href={calendlyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        trackAnalyticsEvent("appointment_booking_started", {
+                          source,
+                          domain,
+                          company,
+                          location: "appointment_embed_footer_cta",
+                        })
+                      }
                       className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted"
                     >
                       <ArrowUpRight size={14} /> {copy.openExternal}
