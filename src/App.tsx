@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { Component, lazy, Suspense, type ErrorInfo, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -42,47 +42,115 @@ const routerBasename = import.meta.env.BASE_URL === "/"
   : import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const RouteLoader = () => <div className="min-h-screen bg-background" aria-hidden="true" />;
+const CHUNK_RELOAD_KEY = "transferai-chunk-reload-at";
+const CHUNK_RELOAD_WINDOW_MS = 30_000;
+
+const shouldRecoverFromChunkError = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const message = error.message.toLowerCase();
+
+  return [
+    "failed to fetch dynamically imported module",
+    "dynamically imported module",
+    "importing a module script failed",
+    "module script",
+    "unexpected token '<'",
+    "mime type",
+  ].some((token) => message.includes(token));
+};
+
+class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  state = { error: null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+
+  componentDidCatch(error: Error, _info: ErrorInfo) {
+    if (typeof window === "undefined" || !shouldRecoverFromChunkError(error)) {
+      return;
+    }
+
+    const lastReloadAt = Number(window.sessionStorage.getItem(CHUNK_RELOAD_KEY) ?? 0);
+    const now = Date.now();
+
+    if (!Number.isFinite(lastReloadAt) || now - lastReloadAt > CHUNK_RELOAD_WINDOW_MS) {
+      window.sessionStorage.setItem(CHUNK_RELOAD_KEY, String(now));
+      window.location.reload();
+    }
+  }
+
+  render() {
+    if (!this.state.error) {
+      return this.props.children;
+    }
+
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-4">
+        <div className="max-w-lg rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
+          <h1 className="font-heading text-2xl font-bold text-card-foreground">
+            Une mise a jour du site est en cours
+          </h1>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            Si la page ne se recharge pas automatiquement, rafraichissez-la pour charger la version la plus recente.
+          </p>
+          <a
+            href="/"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Revenir a l'accueil
+          </a>
+        </div>
+      </div>
+    );
+  }
+}
 
 const AnimatedRoutes = () => {
   const location = useLocation();
   const { language } = useLanguage();
   usePageView();
   return (
-    <Suspense fallback={<RouteLoader />}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={`${language}:${location.pathname}`}>
-          <Route path="/" element={<Index />} />
-          <Route path="/education" element={<EducationHub />} />
-          <Route path="/catalogue" element={<Catalogue />} />
-          <Route path="/catalogue/:id" element={<FormationDetail />} />
-          <Route path="/parcours" element={<Parcours />} />
-          <Route path="/inscription" element={<Inscription />} />
-          <Route path="/certification" element={<Certification />} />
-          <Route path="/entreprises" element={<Entreprises />} />
-          <Route path="/services" element={<Entreprises />} />
-          <Route path="/partenaires" element={<Partenaires />} />
-          <Route path="/evenements" element={<Evenements />} />
-          <Route path="/a-propos" element={<APropos />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<LeadFormsPreview />} />
-          <Route path="/confidentialite" element={<Privacy />} />
-          <Route path="/seminaires" element={<Seminaires />} />
-          <Route path="/webinars" element={<Webinars />} />
-          <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
-          <Route path="/consulting-ia" element={<ConsultingIA />} />
-          <Route path="/developpement-solutions-ia" element={<DeveloppementSolutionsIA />} />
-          <Route path="/catalogues-domaines" element={<PreviewHub />} />
-          <Route path="/catalogues-domaines/:slug" element={<CatalogueDomainPreview />} />
-          <Route path="/prise-rdv" element={<AppointmentPreview />} />
-          <Route path="/preview" element={<PreviewHub />} />
-          <Route path="/preview/catalogues/:slug" element={<CatalogueDomainPreview />} />
-          <Route path="/preview/formulaires" element={<LeadFormsPreview />} />
-          <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
-          <Route path="/back-office" element={<BackOffice />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AnimatePresence>
-    </Suspense>
+    <ChunkErrorBoundary key={location.pathname}>
+      <Suspense fallback={<RouteLoader />}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={`${language}:${location.pathname}`}>
+            <Route path="/" element={<Index />} />
+            <Route path="/education" element={<EducationHub />} />
+            <Route path="/catalogue" element={<Catalogue />} />
+            <Route path="/catalogue/:id" element={<FormationDetail />} />
+            <Route path="/parcours" element={<Parcours />} />
+            <Route path="/inscription" element={<Inscription />} />
+            <Route path="/certification" element={<Certification />} />
+            <Route path="/entreprises" element={<Entreprises />} />
+            <Route path="/services" element={<Entreprises />} />
+            <Route path="/partenaires" element={<Partenaires />} />
+            <Route path="/evenements" element={<Evenements />} />
+            <Route path="/a-propos" element={<APropos />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<LeadFormsPreview />} />
+            <Route path="/confidentialite" element={<Privacy />} />
+            <Route path="/seminaires" element={<Seminaires />} />
+            <Route path="/webinars" element={<Webinars />} />
+            <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
+            <Route path="/consulting-ia" element={<ConsultingIA />} />
+            <Route path="/developpement-solutions-ia" element={<DeveloppementSolutionsIA />} />
+            <Route path="/catalogues-domaines" element={<PreviewHub />} />
+            <Route path="/catalogues-domaines/:slug" element={<CatalogueDomainPreview />} />
+            <Route path="/prise-rdv" element={<AppointmentPreview />} />
+            <Route path="/preview" element={<PreviewHub />} />
+            <Route path="/preview/catalogues/:slug" element={<CatalogueDomainPreview />} />
+            <Route path="/preview/formulaires" element={<LeadFormsPreview />} />
+            <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
+            <Route path="/back-office" element={<BackOffice />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+    </ChunkErrorBoundary>
   );
 };
 
