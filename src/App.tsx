@@ -74,11 +74,20 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Err
       return;
     }
 
-    const lastReloadAt = Number(window.sessionStorage.getItem(CHUNK_RELOAD_KEY) ?? 0);
+    let lastReloadAt = 0;
+    try {
+      lastReloadAt = Number(window.sessionStorage.getItem(CHUNK_RELOAD_KEY) ?? 0);
+    } catch {
+      lastReloadAt = 0;
+    }
     const now = Date.now();
 
     if (!Number.isFinite(lastReloadAt) || now - lastReloadAt > CHUNK_RELOAD_WINDOW_MS) {
-      window.sessionStorage.setItem(CHUNK_RELOAD_KEY, String(now));
+      try {
+        window.sessionStorage.setItem(CHUNK_RELOAD_KEY, String(now));
+      } catch {
+        // Ignore sessionStorage failures in privacy-restricted browsers.
+      }
       window.location.reload();
     }
   }
