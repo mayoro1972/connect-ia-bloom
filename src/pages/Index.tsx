@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HomeEntrySection from "@/components/HomeEntrySection";
 import FeaturedTrainingsSection from "@/components/FeaturedTrainingsSection";
+import HomeLeadSection from "@/components/HomeLeadSection";
 import MetiersSection from "@/components/MetiersSection";
 import WhyUsSection from "@/components/WhyUsSection";
 import HomeTrustSection from "@/components/HomeTrustSection";
@@ -24,6 +25,7 @@ const Index = () => {
         <WhyUsSection />
         <HomeTrustSection />
         <TestimonialsSection />
+        <HomeLeadSection />
         <CTASection />
         <Footer />
       </div>
