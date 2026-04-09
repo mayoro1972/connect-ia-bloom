@@ -1,5 +1,4 @@
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
 
 const showStartupError = (message: string) => {
@@ -40,4 +39,17 @@ if (typeof window !== "undefined") {
   });
 }
 
-createRoot(document.getElementById("root")!).render(<App />);
+const bootstrap = async () => {
+  const rootElement = document.getElementById("root");
+  if (!rootElement) {
+    throw new Error("Root element #root is missing");
+  }
+
+  const { default: App } = await import("./App.tsx");
+  createRoot(rootElement).render(<App />);
+};
+
+bootstrap().catch((error) => {
+  const message = error instanceof Error ? error.stack ?? error.message : String(error ?? "Unknown bootstrap error");
+  showStartupError(message);
+});
