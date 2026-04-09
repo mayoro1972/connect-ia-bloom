@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react()],
   build: {
+    target: "es2019",
     rollupOptions: {
       output: {
         manualChunks(id) {
