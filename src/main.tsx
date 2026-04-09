@@ -1,10 +1,43 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
 
+const setDiagnosticStep = (message: string, background = "#10213d") => {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const badge = document.getElementById("startup-diagnostic");
+  if (!badge) {
+    return;
+  }
+
+  badge.textContent = message;
+  badge.setAttribute(
+    "style",
+    [
+      "position:fixed",
+      "left:12px",
+      "top:12px",
+      "z-index:99999",
+      "max-width:calc(100vw - 24px)",
+      "padding:10px 14px",
+      "border-radius:12px",
+      `background:${background}`,
+      "color:#ffffff",
+      "font:600 12px/1.4 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
+      "box-shadow:0 10px 30px rgba(15,23,42,.22)",
+      "white-space:pre-wrap",
+      "word-break:break-word",
+    ].join(";"),
+  );
+};
+
 const showStartupError = (message: string) => {
   if (typeof document === "undefined") {
     return;
   }
+
+  setDiagnosticStep(`Diag erreur: ${message}`, "#b91c1c");
 
   const root = document.getElementById("root");
   if (!root) {
@@ -28,6 +61,8 @@ const showStartupError = (message: string) => {
 };
 
 if (typeof window !== "undefined") {
+  setDiagnosticStep("Diag 2/4: JS principal chargé", "#0f766e");
+
   window.addEventListener("error", (event) => {
     const message = event.error instanceof Error ? event.error.stack ?? event.error.message : String(event.message ?? "Unknown startup error");
     showStartupError(message);
@@ -45,7 +80,9 @@ const bootstrap = async () => {
     throw new Error("Root element #root is missing");
   }
 
+  setDiagnosticStep("Diag 3/4: import de App en cours", "#7c3aed");
   const { default: App } = await import("./App.tsx");
+  setDiagnosticStep("Diag 4/4: App importée, rendu React", "#166534");
   createRoot(rootElement).render(<App />);
 };
 
