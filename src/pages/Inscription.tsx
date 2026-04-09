@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Clock3, ShieldCheck, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,6 +12,7 @@ import { useFormationLocale } from "@/hooks/useFormationLocale";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
+import { buildContactPath } from "@/lib/site-links";
 
 type InscriptionFormState = {
   firstName: string;
@@ -50,12 +52,62 @@ const emptyInscriptionForm = (formationId = ""): InscriptionFormState => ({
   botField: "",
 });
 
+const inscriptionCopy = {
+  fr: {
+    processTitle: "Ce qui se passe après votre demande",
+    processSteps: [
+      "Nous vérifions avec vous la formation choisie et votre objectif.",
+      "Nous confirmons le format, les dates et le nombre de participants.",
+      "Nous vous orientons si une autre formation est plus adaptée.",
+      "Vous recevez une réponse sous 24h.",
+    ],
+    benefitsTitle: "Pourquoi passer par cette demande d'inscription",
+    benefits: [
+      "Être orienté vers la bonne formation avant engagement.",
+      "Valider le bon niveau selon votre profil et vos besoins.",
+      "Préparer une inscription individuelle ou équipe.",
+      "Obtenir les modalités adaptées à votre contexte.",
+    ],
+    alternativeTitle: "Vous hésitez encore ?",
+    alternativeText:
+      "Si vous n'êtes pas encore certain de la bonne formation, nous pouvons d'abord vous orienter vers le parcours le plus adapté.",
+    alternativeCta: "Demander une orientation",
+    formTitle: "Votre demande d'inscription",
+    formNote:
+      "Prix sur demande, confirmation sous 24h, accompagnement possible si vous hésitez entre plusieurs formations.",
+  },
+  en: {
+    processTitle: "What happens after your request",
+    processSteps: [
+      "We review the selected course with you and clarify your objective.",
+      "We confirm the format, dates, and number of participants.",
+      "We guide you to another course if it is a better fit.",
+      "You receive a response within 24 hours.",
+    ],
+    benefitsTitle: "Why use this registration request",
+    benefits: [
+      "Get guided toward the right course before committing.",
+      "Validate the right level for your profile and needs.",
+      "Prepare an individual or team registration.",
+      "Receive the right delivery options for your context.",
+    ],
+    alternativeTitle: "Still hesitating?",
+    alternativeText:
+      "If you are not fully sure which course is right for you, we can first guide you toward the best-fit path.",
+    alternativeCta: "Request guidance",
+    formTitle: "Your registration request",
+    formNote:
+      "Pricing available on request, confirmation within 24 hours, and guidance available if you are hesitating between several courses.",
+  },
+} as const;
+
 const InscriptionPage = () => {
   const { toast } = useToast();
   const { t, language } = useLanguage();
   const { getTitle } = useFormationLocale();
   const [searchParams] = useSearchParams();
   const preselectedFormationId = getInitialFormationId(searchParams.get("formation"));
+  const copy = inscriptionCopy[language === "en" ? "en" : "fr"];
 
   const [form, setForm] = useState<InscriptionFormState>(() => emptyInscriptionForm(preselectedFormationId));
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -165,80 +217,140 @@ const InscriptionPage = () => {
         <PageHeader title={t("inscription.title")} subtitle={t("inscription.subtitle")} />
 
         <section className="py-12">
-          <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
-            <form onSubmit={handleSubmit} className="bg-card border border-border rounded-xl p-8 space-y-5">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.firstName")}</label>
-                  <input required value={form.firstName} onChange={(e) => update("firstName", e.target.value)} className={inputClass} />
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-start">
+              <div className="space-y-6">
+                <div className="bg-card border border-border rounded-xl p-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                      <Clock3 size={22} />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.processTitle}</h2>
+                  </div>
+                  <ul className="space-y-3">
+                    {copy.processSteps.map((step) => (
+                      <li key={step} className="flex items-start gap-3 rounded-lg border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
+                        <span className="mt-1 h-2.5 w-2.5 rounded-full bg-primary shrink-0" />
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.lastName")}</label>
-                  <input required value={form.lastName} onChange={(e) => update("lastName", e.target.value)} className={inputClass} />
+
+                <div className="bg-card border border-border rounded-xl p-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                      <ShieldCheck size={22} />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.benefitsTitle}</h2>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {copy.benefits.map((benefit) => (
+                      <div key={benefit} className="rounded-lg border border-border bg-background px-4 py-4 text-sm text-muted-foreground">
+                        {benefit}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.email")}</label>
-                  <input type="email" required value={form.email} onChange={(e) => update("email", e.target.value)} className={inputClass} />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.phone")}</label>
-                  <input required value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass} />
-                </div>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.company")}</label>
-                  <input required value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass} />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.position")}</label>
-                  <input value={form.position} onChange={(e) => update("position", e.target.value)} className={inputClass} />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.formation")}</label>
-                <select required value={form.formation} onChange={(e) => update("formation", e.target.value)} className={inputClass}>
-                  <option value="">{t("inscription.selectFormation")}</option>
-                  {formations.map((f) => <option key={f.id} value={f.id}>{getTitle(f)}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.participants")}</label>
-                <input type="number" min="1" value={form.participants} onChange={(e) => update("participants", e.target.value)} className={inputClass} />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.message")}</label>
-                <textarea rows={3} value={form.message} onChange={(e) => update("message", e.target.value)} className={inputClass + " resize-none"} />
-              </div>
-              <input
-                tabIndex={-1}
-                autoComplete="off"
-                value={form.botField}
-                onChange={(e) => update("botField", e.target.value)}
-                className="hidden"
-                aria-hidden="true"
-              />
-              <label className="flex items-start gap-3 rounded-lg border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
-                <input
-                  type="checkbox"
-                  checked={form.privacyAccepted}
-                  onChange={(e) => update("privacyAccepted", e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
-                />
-                <span>
-                  {t("inscription.privacyConsent")}{" "}
-                  <a href="/confidentialite" className="font-semibold text-primary underline-offset-4 hover:underline">
-                    {t("inscription.privacyLink")}
+
+                <div className="bg-indigo-gradient rounded-xl p-7 text-white">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-white/10 text-white flex items-center justify-center">
+                      <Sparkles size={22} />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold">{copy.alternativeTitle}</h2>
+                  </div>
+                  <p className="text-sm leading-relaxed text-white/80 mb-5">{copy.alternativeText}</p>
+                  <a
+                    href={buildContactPath("demande-renseignement")}
+                    className="inline-flex items-center justify-center rounded-lg border border-white/25 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                  >
+                    {copy.alternativeCta}
                   </a>
-                  .
-                </span>
-              </label>
-              <button type="submit" disabled={isSubmitting} className="bg-orange-gradient font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity w-full disabled:cursor-not-allowed disabled:opacity-70" style={{ color: "hsl(0 0% 100%)" }}>
-                {isSubmitting ? t("inscription.submitPending") : t("inscription.submit")}
-              </button>
-            </form>
+                </div>
+              </div>
+
+              <div className="lg:sticky lg:top-24">
+                <form onSubmit={handleSubmit} className="bg-card border border-border rounded-xl p-8 space-y-5">
+                  <div className="border-b border-border pb-5">
+                    <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.formTitle}</h2>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{copy.formNote}</p>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.firstName")}</label>
+                      <input required value={form.firstName} onChange={(e) => update("firstName", e.target.value)} className={inputClass} />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.lastName")}</label>
+                      <input required value={form.lastName} onChange={(e) => update("lastName", e.target.value)} className={inputClass} />
+                    </div>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.email")}</label>
+                      <input type="email" required value={form.email} onChange={(e) => update("email", e.target.value)} className={inputClass} />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.phone")}</label>
+                      <input required value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass} />
+                    </div>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.company")}</label>
+                      <input required value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass} />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.position")}</label>
+                      <input value={form.position} onChange={(e) => update("position", e.target.value)} className={inputClass} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.formation")}</label>
+                    <select required value={form.formation} onChange={(e) => update("formation", e.target.value)} className={inputClass}>
+                      <option value="">{t("inscription.selectFormation")}</option>
+                      {formations.map((f) => <option key={f.id} value={f.id}>{getTitle(f)}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.participants")}</label>
+                    <input type="number" min="1" value={form.participants} onChange={(e) => update("participants", e.target.value)} className={inputClass} />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-card-foreground mb-1.5 block">{t("inscription.message")}</label>
+                    <textarea rows={3} value={form.message} onChange={(e) => update("message", e.target.value)} className={inputClass + " resize-none"} />
+                  </div>
+                  <input
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.botField}
+                    onChange={(e) => update("botField", e.target.value)}
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+                  <label className="flex items-start gap-3 rounded-lg border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
+                    <input
+                      type="checkbox"
+                      checked={form.privacyAccepted}
+                      onChange={(e) => update("privacyAccepted", e.target.checked)}
+                      className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
+                    />
+                    <span>
+                      {t("inscription.privacyConsent")}{" "}
+                      <a href="/confidentialite" className="font-semibold text-primary underline-offset-4 hover:underline">
+                        {t("inscription.privacyLink")}
+                      </a>
+                      .
+                    </span>
+                  </label>
+                  <button type="submit" disabled={isSubmitting} className="bg-orange-gradient font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity w-full disabled:cursor-not-allowed disabled:opacity-70" style={{ color: "hsl(0 0% 100%)" }}>
+                    {isSubmitting ? t("inscription.submitPending") : t("inscription.submit")}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </section>
         <Footer />
