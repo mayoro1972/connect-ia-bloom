@@ -1,5 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
-import { GraduationCap, BriefcaseBusiness, Award, Compass } from "lucide-react";
+import { GraduationCap, BriefcaseBusiness, Workflow } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
@@ -14,31 +14,24 @@ const sectionCopy = {
     items: [
       {
         title: "Je veux me former",
-        desc: "Explorer les parcours, le catalogue et les formations les plus utiles pour mon métier.",
+        desc: "Découvrir les parcours, le catalogue et la certification selon mon métier et mon niveau.",
         cta: "Découvrir l'offre formation",
         href: "/education",
         icon: GraduationCap,
       },
       {
-        title: "Je veux former mon équipe",
-        desc: "Identifier un programme adapté à mon entreprise, mon secteur et mes objectifs de montée en compétence.",
+        title: "Je représente une entreprise",
+        desc: "Identifier un dispositif adapté à mon équipe, mon secteur et mes objectifs de montée en compétence.",
         cta: "Parler de mon besoin",
         href: buildContactPath("contact-devis"),
         icon: BriefcaseBusiness,
       },
       {
-        title: "Je veux découvrir la certification",
-        desc: "Comprendre notre offre premium et voir comment elle s'applique à plusieurs métiers et domaines.",
-        cta: "Voir la certification",
-        href: "/certification",
-        icon: Award,
-      },
-      {
-        title: "Je veux être orienté",
-        desc: "Obtenir une recommandation claire si j'hésite entre plusieurs formations, parcours ou formats.",
-        cta: "Demander une orientation",
-        href: buildContactPath("demande-renseignement"),
-        icon: Compass,
+        title: "Je veux explorer les domaines et outils",
+        desc: "Voir les spécialisations, les stacks outils IA et les usages à maîtriser par domaine.",
+        cta: "Explorer les outils IA",
+        href: "/outils-ia",
+        icon: Workflow,
       },
     ],
   },
@@ -49,31 +42,24 @@ const sectionCopy = {
     items: [
       {
         title: "I want to train",
-        desc: "Explore pathways, catalogue options, and the most useful courses for my profession.",
+        desc: "Discover paths, catalogue options, and certification tracks aligned with my role and level.",
         cta: "Explore training",
         href: "/education",
         icon: GraduationCap,
       },
       {
-        title: "I want to train my team",
-        desc: "Identify a program aligned with my company, sector, and upskilling goals.",
+        title: "I represent a company",
+        desc: "Identify a program aligned with my team, sector, and upskilling goals.",
         cta: "Discuss my needs",
         href: buildContactPath("contact-devis"),
         icon: BriefcaseBusiness,
       },
       {
-        title: "I want to discover the certification",
-        desc: "Understand our premium offer and see how it applies across several professions and domains.",
-        cta: "View certification",
-        href: "/certification",
-        icon: Award,
-      },
-      {
-        title: "I want guidance",
-        desc: "Get a clear recommendation if I hesitate between several courses, paths, or formats.",
-        cta: "Request guidance",
-        href: buildContactPath("demande-renseignement"),
-        icon: Compass,
+        title: "I want to explore domains and tools",
+        desc: "Review the specializations, AI tool stacks, and use cases to master by domain.",
+        cta: "Explore AI tools",
+        href: "/outils-ia",
+        icon: Workflow,
       },
     ],
   },
@@ -91,7 +77,7 @@ const HomeEntrySection = () => {
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground">{copy.subtitle}</p>
         </ScrollReveal>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-3">
           {copy.items.map((item, index) => {
             const Icon = item.icon;
             return (

@@ -3,12 +3,8 @@ import {
   ArrowRight,
   Award,
   BookOpen,
-  CalendarDays,
-  CheckCircle2,
-  GraduationCap,
   Layers,
-  Sparkles,
-  Users,
+  Workflow,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -23,24 +19,10 @@ import { buildContactPath } from "@/lib/site-links";
 const educationCopy = {
   fr: {
     badge: "Education",
-    title: "Formez-vous a l'IA avec des parcours concrets, utiles et accessibles",
+    title: "Choisissez le bon format pour apprendre l'IA sans vous disperser",
     subtitle:
-      "Que vous soyez professionnel, manager, entrepreneur, etudiant ou en reconversion, TransferAI Africa vous aide a choisir la bonne formation IA selon votre metier, votre niveau et vos objectifs.",
-    diagnosisTitle: "Une offre de formation pensée pour les réalités du terrain",
-    diagnosisPoints: [
-      "Nos formations sont conçues pour être utiles dans le travail quotidien, pas pour ajouter du jargon inutile.",
-      "Chaque parcours est pensé pour aider l'apprenant à comprendre, pratiquer et appliquer rapidement l'IA.",
-      "Les contenus s'appuient sur des cas d'usage concrets liés à la Côte d'Ivoire, à l'Afrique francophone et aux métiers support.",
-      "L'objectif n'est pas seulement d'apprendre l'IA, mais de mieux travailler, mieux décider et mieux se positionner sur le marché.",
-    ],
-    cleanupTitle: "Ce que vous pouvez réellement obtenir",
-    cleanupPoints: [
-      "Une meilleure maîtrise des outils IA utiles dans votre métier",
-      "Des méthodes concrètes pour gagner du temps et automatiser certaines tâches",
-      "Une capacité à rédiger, synthétiser, analyser et produire plus efficacement",
-      "Une montée en compétence visible, valorisable et directement applicable",
-    ],
-    architectureTitle: "Comment choisir la bonne formation",
+      "TransferAI Africa vous aide a aller directement vers le bon format selon votre metier, votre niveau, votre besoin et votre rythme d'apprentissage.",
+    architectureTitle: "Choisissez votre format d'entree",
     pillars: [
       {
         title: "Catalogue complet",
@@ -64,37 +46,14 @@ const educationCopy = {
         icon: Award,
       },
       {
-        title: "Formats live",
-        desc: "Pour commencer par un séminaire, un webinar ou un replay avant de s'engager sur une formation plus structurée.",
-        cta: "Voir les formats live",
-        href: "/seminaires",
-        icon: CalendarDays,
+        title: "Outils IA par domaine",
+        desc: "Pour voir les outils, workflows et stacks à maîtriser selon votre fonction avant de choisir une formation.",
+        cta: "Voir les outils IA",
+        href: "/outils-ia",
+        icon: Workflow,
       },
     ],
-    commercialTitle: "Nos formats de formation",
-    commercialCards: [
-      {
-        title: "Formations catalogue",
-        desc: "Des formations ciblées pour monter rapidement en compétence sur un sujet, un métier ou un usage IA précis.",
-      },
-      {
-        title: "Parcours progressifs",
-        desc: "Des chemins d'apprentissage structurés pour accompagner une progression claire, du niveau débutant au niveau plus avancé.",
-      },
-      {
-        title: "Formats live & certification",
-        desc: "Des séminaires, webinars, replays et une certification professionnelle pour accélérer l'apprentissage et renforcer la crédibilité du profil.",
-      },
-    ],
-    whyItConvertsTitle: "Pourquoi choisir TransferAI Africa",
-    whyItConverts: [
-      "Une pédagogie orientée pratique, résultats et application immédiate",
-      "Des contenus pensés pour l'Afrique, la Côte d'Ivoire et les réalités du terrain",
-      "Des cas d'usage dans 13 domaines d'expertise",
-      "Une approche simple, claire et professionnelle pour rassurer les apprenants",
-      "Un pont entre formation, veille, certification et opportunités",
-    ],
-    statsTitle: "Ce que le visiteur doit comprendre en 10 secondes",
+    statsTitle: "Ce que vous trouvez ici en un coup d'oeil",
     stats: [
       { value: `${formations.length}+`, label: "formations disponibles" },
       { value: "13", label: "domaines d'expertise" },
@@ -143,24 +102,10 @@ const educationCopy = {
   },
   en: {
     badge: "Education",
-    title: "Train in AI through concrete, useful and accessible learning paths",
+    title: "Choose the right format to learn AI without getting lost",
     subtitle:
-      "Whether you are a working professional, manager, entrepreneur, student or career switcher, TransferAI Africa helps you choose the right AI training path based on your role, level and goals.",
-    diagnosisTitle: "A training offer built for real-world use",
-    diagnosisPoints: [
-      "Our training is designed to be useful in day-to-day work, not to add more unnecessary jargon.",
-      "Each learning path is built to help learners understand, practice and apply AI quickly.",
-      "The content is grounded in concrete use cases relevant to Côte d'Ivoire, francophone Africa and support functions.",
-      "The goal is not only to learn AI, but to work better, decide better and position yourself better on the market.",
-    ],
-    cleanupTitle: "What you can actually gain",
-    cleanupPoints: [
-      "A stronger command of AI tools that are relevant to your role",
-      "Practical methods to save time and automate selected tasks",
-      "The ability to write, summarize, analyze and produce work more efficiently",
-      "Visible, valuable skills that can be applied immediately",
-    ],
-    architectureTitle: "How to choose the right training path",
+      "TransferAI Africa helps you move directly toward the right format based on your role, level, business need, and preferred learning pace.",
+    architectureTitle: "Choose your entry format",
     pillars: [
       {
         title: "Full catalogue",
@@ -184,37 +129,14 @@ const educationCopy = {
         icon: Award,
       },
       {
-        title: "Live formats",
-        desc: "Start with a seminar, webinar or replay before committing to a more structured training path.",
-        cta: "View live formats",
-        href: "/seminaires",
-        icon: CalendarDays,
+        title: "AI tools by domain",
+        desc: "Review the tools, workflows, and stacks to master by role before choosing a training format.",
+        cta: "View AI tools",
+        href: "/outils-ia",
+        icon: Workflow,
       },
     ],
-    commercialTitle: "Our training formats",
-    commercialCards: [
-      {
-        title: "Catalogue training",
-        desc: "Focused training programs to build capability quickly on a topic, profession or specific AI use case.",
-      },
-      {
-        title: "Progressive paths",
-        desc: "Structured learning journeys that support a clear progression from beginner level to more advanced capability.",
-      },
-      {
-        title: "Live formats & certification",
-        desc: "Seminars, webinars, replays and one professional certification to accelerate learning and strengthen profile credibility.",
-      },
-    ],
-    whyItConvertsTitle: "Why choose TransferAI Africa",
-    whyItConverts: [
-      "A teaching approach focused on practice, outcomes and immediate application",
-      "Content designed for Africa, Côte d'Ivoire and real operational contexts",
-      "Use cases across 13 areas of expertise",
-      "A simple, clear and professional learning experience",
-      "A bridge between training, watch content, certification and opportunities",
-    ],
-    statsTitle: "What visitors should understand in 10 seconds",
+    statsTitle: "What you can grasp at a glance",
     stats: [
       { value: `${formations.length}+`, label: "available courses" },
       { value: "13", label: "areas of expertise" },
@@ -276,25 +198,7 @@ const EducationHub = () => {
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="grid gap-10 xl:grid-cols-[1fr_0.95fr] mb-16">
-              <div className="rounded-3xl border border-border bg-card p-8">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
-                    <Sparkles size={24} className="text-primary" />
-                  </div>
-                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.diagnosisTitle}</h2>
-                </div>
-                <div className="space-y-4">
-                  {copy.diagnosisPoints.map((point) => (
-                    <div key={point} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
-                      <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
-                      <p className="text-sm leading-7 text-card-foreground">{point}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-border bg-card p-8">
+            <div className="mb-16 rounded-3xl border border-border bg-card p-8">
                 <h2 className="font-heading text-2xl font-bold text-card-foreground mb-6">{copy.statsTitle}</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {copy.stats.map((item) => (
@@ -304,19 +208,6 @@ const EducationHub = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-
-            <div className="mb-16 rounded-3xl border border-border bg-card p-8">
-              <h2 className="font-heading text-2xl font-bold text-card-foreground mb-6">{copy.cleanupTitle}</h2>
-              <div className="grid gap-4 md:grid-cols-2">
-                {copy.cleanupPoints.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-5">
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
-                    <p className="text-sm leading-7 text-card-foreground">{item}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div className="mb-16">
@@ -346,32 +237,6 @@ const EducationHub = () => {
               </div>
             </div>
 
-            <div className="mb-16 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="rounded-3xl border border-border bg-card p-8">
-                <h2 className="font-heading text-2xl font-bold text-card-foreground mb-6">{copy.commercialTitle}</h2>
-                <div className="space-y-4">
-                  {copy.commercialCards.map((card) => (
-                    <div key={card.title} className="rounded-2xl border border-border bg-background p-5">
-                      <h3 className="font-heading text-lg font-semibold text-card-foreground">{card.title}</h3>
-                      <p className="mt-2 text-sm leading-7 text-muted-foreground">{card.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-border bg-card p-8">
-                <h2 className="font-heading text-2xl font-bold text-card-foreground mb-6">{copy.whyItConvertsTitle}</h2>
-                <div className="space-y-4">
-                  {copy.whyItConverts.map((item) => (
-                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
-                      <GraduationCap size={18} className="mt-0.5 shrink-0 text-primary" />
-                      <p className="text-sm leading-7 text-card-foreground">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
             <div className="mb-16 rounded-3xl border border-border bg-card p-8">
               <h2 className="font-heading text-2xl font-bold text-card-foreground mb-8">{copy.pathwaysTitle}</h2>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -382,18 +247,6 @@ const EducationHub = () => {
                     <Link to={path.href} className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80">
                       {path.cta} <ArrowRight size={14} />
                     </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-16 rounded-3xl border border-border bg-card p-8">
-              <h2 className="font-heading text-2xl font-bold text-card-foreground mb-6">{copy.audienceTitle}</h2>
-              <div className="grid gap-4 md:grid-cols-2">
-                {copy.audiences.map((audience) => (
-                  <div key={audience} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-5">
-                    <Users size={18} className="mt-0.5 shrink-0 text-primary" />
-                    <p className="text-sm leading-7 text-card-foreground">{audience}</p>
                   </div>
                 ))}
               </div>

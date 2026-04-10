@@ -15,7 +15,6 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { key: "home", href: "/" },
-  { key: "about", href: "/a-propos" },
   {
     key: "education",
     children: [
@@ -26,29 +25,22 @@ const navItems: NavItem[] = [
       { key: "liveFormats", href: "/seminaires" },
     ],
   },
-  {
-    key: "services",
-    children: [
-      { key: "enterprises", href: "/services" },
-      { key: "consultingIA", href: "/consulting-ia" },
-      { key: "devSolutionsIA", href: "/developpement-solutions-ia" },
-      { key: "contenuIA", href: "/createur-contenu-ia" },
-    ],
-  },
+  { key: "services", href: "/services" },
   {
     key: "resources",
     children: [
-      { key: "partners", href: "/partenaires" },
       { key: "blog", href: "/blog" },
+      { key: "aiTools", href: "/outils-ia" },
+      { key: "contenuIA", href: "/createur-contenu-ia" },
     ],
   },
+  { key: "about", href: "/a-propos" },
   { key: "contact", href: "/contact" },
 ];
 
 const dropdownWidths: Record<string, string> = {
   education: "w-[320px]",
-  services: "w-[380px]",
-  resources: "w-[280px]",
+  resources: "w-[320px]",
 };
 
 const Navbar = () => {

@@ -82,6 +82,38 @@ export const metierKeyToCatalogueSlug: Record<string, string> = {
   diplomatie: "diplomatie-et-affaires-internationales",
 };
 
+export const metierKeyToCertificationSlug: Record<string, string> = {
+  assistanat: "executive-support",
+  rh: "human-resources",
+  marketing: "marketing-communication",
+  finance: "finance-accounting",
+  juridique: "legal-compliance",
+  service: "customer-service",
+  data: "data-analytics",
+  admin: "administration-operations",
+  management: "management-leadership",
+  it: "it-digital-transformation",
+  formation: "learning-pedagogy",
+  sante: "health-wellbeing",
+  diplomatie: "diplomacy-international-affairs",
+};
+
+export const metierKeyToToolSlug: Record<string, string> = {
+  assistanat: "assistanat-secretariat",
+  rh: "ressources-humaines",
+  marketing: "marketing-communication",
+  finance: "finance-comptabilite",
+  juridique: "juridique-conformite",
+  service: "service-client",
+  data: "data-analyse",
+  admin: "administration-gestion",
+  management: "management-leadership",
+  it: "it-transformation-digitale",
+  formation: "formation-pedagogie",
+  sante: "sante-bien-etre",
+  diplomatie: "diplomatie-affaires-internationales",
+};
+
 export const resolveCatalogueSlugFromSector = (sectorKey?: string | null) => {
   if (!sectorKey) {
     return null;
@@ -95,6 +127,27 @@ export const resolveCatalogueSlugFromSector = (sectorKey?: string | null) => {
   }
 
   return null;
+};
+
+const resolveMetierKeyFromSector = (sectorKey?: string | null) => {
+  if (!sectorKey) {
+    return null;
+  }
+
+  const normalizedTarget = slugifySiteValue(sectorKey);
+  const matchedEntry = Object.entries(metierKeyToDomain).find(([, value]) => slugifySiteValue(value) === normalizedTarget);
+
+  return matchedEntry?.[0] ?? null;
+};
+
+export const resolveCertificationSlugFromSector = (sectorKey?: string | null) => {
+  const metierKey = resolveMetierKeyFromSector(sectorKey);
+  return metierKey ? metierKeyToCertificationSlug[metierKey] : null;
+};
+
+export const resolveToolSlugFromSector = (sectorKey?: string | null) => {
+  const metierKey = resolveMetierKeyFromSector(sectorKey);
+  return metierKey ? metierKeyToToolSlug[metierKey] : null;
 };
 
 export const slugifySiteValue = (value: string) =>

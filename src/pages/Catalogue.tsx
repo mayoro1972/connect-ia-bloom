@@ -17,7 +17,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { fixMojibake } from "@/lib/fixMojibake";
-import { buildContactPath } from "@/lib/site-links";
+import { buildContactPath, resolveCatalogueSlugFromSector, resolveCertificationSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
@@ -214,6 +214,12 @@ const CataloguePage = () => {
           "Nous pouvons vous orienter vers la bonne formation selon votre métier, votre niveau actuel et votre objectif professionnel.",
         primaryCta: "Demander une orientation",
         secondaryCta: "Déposer ma candidature",
+        quickLinksTitle: "Commencer plus vite",
+        quickLinks: [
+          { title: "Voir la certification", desc: "Pour comprendre les objectifs, le programme et la valeur métier par domaine.", href: "/certification" },
+          { title: "Voir les outils IA", desc: "Pour découvrir les outils, workflows et stacks recommandés par domaine.", href: "/outils-ia" },
+          { title: "Être orienté", desc: "Pour obtenir une recommandation claire si vous hésitez entre plusieurs formats.", href: buildContactPath("demande-renseignement") },
+        ],
       }
     : {
         badge: "Catalogue",
@@ -248,6 +254,12 @@ const CataloguePage = () => {
           "We can guide you toward the right training based on your role, current level and professional objective.",
         primaryCta: "Request guidance",
         secondaryCta: "Apply now",
+        quickLinksTitle: "Start faster",
+        quickLinks: [
+          { title: "View certification", desc: "Understand the goals, program, and business value by domain.", href: "/certification" },
+          { title: "View AI tools", desc: "Discover the tools, workflows, and stacks recommended for each domain.", href: "/outils-ia" },
+          { title: "Get guidance", desc: "Receive a clear recommendation if you hesitate between several formats.", href: buildContactPath("demande-renseignement") },
+        ],
       };
 
   return (
@@ -259,6 +271,21 @@ const CataloguePage = () => {
 
         <section className="py-10">
           <div className="container mx-auto px-4 lg:px-8">
+            <div className="mb-6 rounded-3xl border border-border bg-card p-6">
+              <h2 className="mb-4 font-heading text-xl font-bold text-card-foreground">{guideCopy.quickLinksTitle}</h2>
+              <div className="grid gap-4 md:grid-cols-3">
+                {guideCopy.quickLinks.map((link) => (
+                  <Link key={link.title} to={link.href} className="rounded-2xl border border-border bg-background p-5 transition hover:border-primary/30 hover:text-primary">
+                    <h3 className="font-heading text-base font-semibold text-card-foreground">{link.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground">{link.desc}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                      {language === "fr" ? "Ouvrir" : "Open"} <ArrowRight size={14} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <div className="grid lg:grid-cols-2 gap-6">
               <div className="bg-card rounded-3xl border border-border p-8">
                 <div className="flex items-center gap-3 mb-6">
@@ -405,16 +432,41 @@ const CataloguePage = () => {
                       <div className="flex items-center gap-4 mb-8">
                         {(() => {
                           const Icon = domainIcons[selectedDomain] || BookOpen;
+                          const domainCertificationSlug = resolveCertificationSlugFromSector(selectedDomain);
+                          const domainToolSlug = resolveToolSlugFromSector(selectedDomain);
+                          const domainCatalogueSlug = resolveCatalogueSlugFromSector(selectedDomain);
                           return (
-                            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                              <Icon size={28} className="text-primary" />
-                            </div>
+                            <>
+                              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                                <Icon size={28} className="text-primary" />
+                              </div>
+                              <div>
+                                <h2 className="font-heading text-2xl font-bold text-card-foreground">{t(`catalogue.domains.${fixMojibake(selectedDomain)}`) || fixMojibake(selectedDomain)}</h2>
+                                <p className="text-sm text-muted-foreground">{domainGroups[selectedDomain]?.length || 0} {t("catalogue.availableFormations")}</p>
+                                <div className="mt-3 flex flex-wrap gap-3">
+                                  <Link
+                                    to={domainCertificationSlug ? `/certification?domaine=${domainCertificationSlug}` : "/certification"}
+                                    className="inline-flex items-center gap-2 rounded-full border border-primary/20 px-4 py-2 text-xs font-semibold text-primary hover:border-primary/40"
+                                  >
+                                    {language === "fr" ? "Voir la certification" : "View certification"}
+                                  </Link>
+                                  <Link
+                                    to={domainToolSlug ? `/outils-ia?domaine=${domainToolSlug}` : "/outils-ia"}
+                                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-card-foreground hover:border-primary/30 hover:text-primary"
+                                  >
+                                    {language === "fr" ? "Voir les outils IA" : "View AI tools"}
+                                  </Link>
+                                  <Link
+                                    to={domainCatalogueSlug ? `/catalogues-domaines/${domainCatalogueSlug}` : "/catalogue"}
+                                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-card-foreground hover:border-primary/30 hover:text-primary"
+                                  >
+                                    {language === "fr" ? "Vue domaine" : "Domain view"}
+                                  </Link>
+                                </div>
+                              </div>
+                            </>
                           );
                         })()}
-                        <div>
-                          <h2 className="font-heading text-2xl font-bold text-card-foreground">{t(`catalogue.domains.${fixMojibake(selectedDomain)}`) || fixMojibake(selectedDomain)}</h2>
-                          <p className="text-sm text-muted-foreground">{domainGroups[selectedDomain]?.length || 0} {t("catalogue.availableFormations")}</p>
-                        </div>
                       </div>
 
                       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">

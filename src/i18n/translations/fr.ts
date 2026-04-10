@@ -3,10 +3,10 @@ import { deepFixMojibake } from "@/lib/fixMojibake";
 const rawFr = {
   nav: {
     home: "ACCUEIL",
-    about: "A PROPOS",
-    education: "EDUCATION",
-    services: "SERVICES",
+    education: "SE FORMER",
+    services: "ENTREPRISES",
     resources: "RESSOURCES",
+    about: "A PROPOS",
     educationOverview: "VUE D'ENSEMBLE",
     domainCatalogues: "CATALOGUES",
     formations: "CATALOGUE",
@@ -19,6 +19,7 @@ const rawFr = {
     contenuIA: "MEDIA & VEILLE",
     consultingIA: "CONSEIL & ADOPTION",
     devSolutionsIA: "AUTOMATISATION",
+    aiTools: "OUTILS IA",
     events: "EVENEMENTS",
     blog: "BLOG",
     partners: "PARTENAIRES",

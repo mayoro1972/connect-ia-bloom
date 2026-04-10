@@ -11,6 +11,7 @@ import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { deepFixMojibake } from "@/lib/fixMojibake";
 import { certificationDomainProfiles, getCertificationDomainProfile, type LocalizedText } from "@/data/certification-curricula";
+import { resolveCatalogueSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
 
 const CertificationPage = () => {
   const { language } = useLanguage();
@@ -30,6 +31,8 @@ const CertificationPage = () => {
   const profileDeliverables = language === "en" ? activeProfile.deliverables.en : activeProfile.deliverables.fr;
   const featuredTargets = profileTargets.slice(0, 3);
   const featuredOutcomes = profileOutcomes.slice(0, 3);
+  const toolSlug = resolveToolSlugFromSector(activeProfile.domainKey);
+  const catalogueSlug = resolveCatalogueSlugFromSector(activeProfile.domainKey);
 
   const selectDomain = (slug: string) => {
     const params = new URLSearchParams(searchParams);
@@ -114,6 +117,20 @@ const CertificationPage = () => {
                             ))}
                           </div>
                         </div>
+                      </div>
+                      <div className="mt-5 flex flex-wrap gap-3">
+                        <Link
+                          to={toolSlug ? `/outils-ia?domaine=${toolSlug}` : "/outils-ia"}
+                          className="inline-flex items-center justify-center rounded-full border border-primary/20 bg-background px-4 py-2 text-sm font-semibold text-primary hover:border-primary/40"
+                        >
+                          {language === "en" ? "See recommended AI tools" : "Voir les outils recommandés"}
+                        </Link>
+                        <Link
+                          to={catalogueSlug ? `/catalogues-domaines/${catalogueSlug}` : "/catalogue"}
+                          className="inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-card-foreground hover:border-primary/30 hover:text-primary"
+                        >
+                          {language === "en" ? "See related training" : "Voir les formations liées"}
+                        </Link>
                       </div>
                     </div>
                   </div>
