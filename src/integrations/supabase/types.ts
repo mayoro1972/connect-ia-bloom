@@ -260,6 +260,176 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_issues: {
+        Row: {
+          approved_at: string | null
+          body_html: string | null
+          body_markdown: string | null
+          created_at: string
+          cta_label: string | null
+          cta_url: string | null
+          generation_notes: string | null
+          generation_source: string
+          highlight_summary: string | null
+          highlight_title: string | null
+          highlight_url: string | null
+          id: string
+          intro: string | null
+          issue_date: string
+          language: string
+          last_test_sent_at: string | null
+          meta: Json | null
+          preheader: string | null
+          prompt_body: string | null
+          prompt_title: string | null
+          recipient_count: number
+          scheduled_for: string | null
+          send_count: number
+          sent_at: string | null
+          source_post_ids: string[]
+          status: string
+          subject: string
+          target_domains: string[]
+          tip_body: string | null
+          tip_title: string | null
+          title: string
+          tool_category: string | null
+          tool_name: string | null
+          tool_summary: string | null
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          body_html?: string | null
+          body_markdown?: string | null
+          created_at?: string
+          cta_label?: string | null
+          cta_url?: string | null
+          generation_notes?: string | null
+          generation_source?: string
+          highlight_summary?: string | null
+          highlight_title?: string | null
+          highlight_url?: string | null
+          id?: string
+          intro?: string | null
+          issue_date?: string
+          language?: string
+          last_test_sent_at?: string | null
+          meta?: Json | null
+          preheader?: string | null
+          prompt_body?: string | null
+          prompt_title?: string | null
+          recipient_count?: number
+          scheduled_for?: string | null
+          send_count?: number
+          sent_at?: string | null
+          source_post_ids?: string[]
+          status?: string
+          subject: string
+          target_domains?: string[]
+          tip_body?: string | null
+          tip_title?: string | null
+          title: string
+          tool_category?: string | null
+          tool_name?: string | null
+          tool_summary?: string | null
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          body_html?: string | null
+          body_markdown?: string | null
+          created_at?: string
+          cta_label?: string | null
+          cta_url?: string | null
+          generation_notes?: string | null
+          generation_source?: string
+          highlight_summary?: string | null
+          highlight_title?: string | null
+          highlight_url?: string | null
+          id?: string
+          intro?: string | null
+          issue_date?: string
+          language?: string
+          last_test_sent_at?: string | null
+          meta?: Json | null
+          preheader?: string | null
+          prompt_body?: string | null
+          prompt_title?: string | null
+          recipient_count?: number
+          scheduled_for?: string | null
+          send_count?: number
+          sent_at?: string | null
+          source_post_ids?: string[]
+          status?: string
+          subject?: string
+          target_domains?: string[]
+          tip_body?: string | null
+          tip_title?: string | null
+          title?: string
+          tool_category?: string | null
+          tool_name?: string | null
+          tool_summary?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      newsletter_delivery_logs: {
+        Row: {
+          created_at: string
+          delivery_type: string
+          error_message: string | null
+          id: string
+          language: string
+          newsletter_issue_id: string
+          payload: Json | null
+          provider: string
+          provider_message_id: string | null
+          recipient_email: string
+          sent_at: string | null
+          status: string
+          subscribed_domains: string[]
+        }
+        Insert: {
+          created_at?: string
+          delivery_type?: string
+          error_message?: string | null
+          id?: string
+          language?: string
+          newsletter_issue_id: string
+          payload?: Json | null
+          provider?: string
+          provider_message_id?: string | null
+          recipient_email: string
+          sent_at?: string | null
+          status?: string
+          subscribed_domains?: string[]
+        }
+        Update: {
+          created_at?: string
+          delivery_type?: string
+          error_message?: string | null
+          id?: string
+          language?: string
+          newsletter_issue_id?: string
+          payload?: Json | null
+          provider?: string
+          provider_message_id?: string | null
+          recipient_email?: string
+          sent_at?: string | null
+          status?: string
+          subscribed_domains?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "newsletter_delivery_logs_newsletter_issue_id_fkey"
+            columns: ["newsletter_issue_id"]
+            isOneToOne: false
+            referencedRelation: "newsletter_issues"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       resource_posts: {
         Row: {
           category_key: string

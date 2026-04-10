@@ -136,6 +136,41 @@ const mapFeedPayload = (payload: Record<string, unknown>) => ({
   notes: asNullableString(payload.notes),
 });
 
+const mapNewsletterPayload = (payload: Record<string, unknown>) => ({
+  issue_date: asString(payload.issue_date) || new Date().toISOString().slice(0, 10),
+  language: asString(payload.language, "fr"),
+  status: asString(payload.status, "draft"),
+  title: asString(payload.title),
+  subject: asString(payload.subject),
+  preheader: asNullableString(payload.preheader),
+  intro: asNullableString(payload.intro),
+  target_domains: asStringArray(payload.target_domains),
+  highlight_title: asNullableString(payload.highlight_title),
+  highlight_summary: asNullableString(payload.highlight_summary),
+  highlight_url: asNullableString(payload.highlight_url),
+  tip_title: asNullableString(payload.tip_title),
+  tip_body: asNullableString(payload.tip_body),
+  tool_name: asNullableString(payload.tool_name),
+  tool_category: asNullableString(payload.tool_category),
+  tool_summary: asNullableString(payload.tool_summary),
+  prompt_title: asNullableString(payload.prompt_title),
+  prompt_body: asNullableString(payload.prompt_body),
+  cta_label: asNullableString(payload.cta_label),
+  cta_url: asNullableString(payload.cta_url),
+  body_markdown: asNullableString(payload.body_markdown),
+  body_html: asNullableString(payload.body_html),
+  source_post_ids: asStringArray(payload.source_post_ids),
+  generation_source: asString(payload.generation_source, "manual"),
+  generation_notes: asNullableString(payload.generation_notes),
+  scheduled_for: asNullableString(payload.scheduled_for),
+  approved_at: asNullableString(payload.approved_at),
+  sent_at: asNullableString(payload.sent_at),
+  last_test_sent_at: asNullableString(payload.last_test_sent_at),
+  recipient_count: asNumber(payload.recipient_count) ?? 0,
+  send_count: asNumber(payload.send_count) ?? 0,
+  meta: asJson(payload.meta),
+});
+
 const listResources = async () =>
   supabase
     .from("resource_posts")
@@ -433,6 +468,81 @@ const setEditorialStatus = async (payload: Record<string, unknown>) => {
   return { data: null, error: { message: "Unsupported editorial status target." } };
 };
 
+const listNewsletters = async () => {
+  const [issuesResult, subscriptionsResult, deliveriesResult] = await Promise.all([
+    supabase
+      .from("newsletter_issues")
+      .select("*")
+      .order("issue_date", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(24),
+    supabase
+      .from("newsletter_subscriptions")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "active"),
+    supabase
+      .from("newsletter_delivery_logs")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(30),
+  ]);
+
+  const resultList = [issuesResult, subscriptionsResult, deliveriesResult];
+  const failingResult = resultList.find((result) => result.error);
+
+  if (failingResult?.error) {
+    return { data: null, error: failingResult.error };
+  }
+
+  const issues = issuesResult.data ?? [];
+  const deliveries = deliveriesResult.data ?? [];
+
+  return {
+    data: {
+      overview: {
+        activeSubscriptions: subscriptionsResult.count ?? 0,
+        totalIssues: issues.length,
+        draftIssues: issues.filter((issue) => ["draft", "review", "approved", "scheduled"].includes(issue.status)).length,
+        sentIssues: issues.filter((issue) => issue.status === "sent").length,
+      },
+      issues,
+      deliveries,
+    },
+    error: null,
+  };
+};
+
+const createNewsletter = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("newsletter_issues")
+    .insert(mapNewsletterPayload(payload))
+    .select("*")
+    .single();
+
+const saveNewsletter = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("newsletter_issues")
+    .update(mapNewsletterPayload(payload))
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+
+const setNewsletterStatus = async (payload: Record<string, unknown>) => {
+  const status = asString(payload.status, "draft");
+  const now = new Date().toISOString();
+
+  return supabase
+    .from("newsletter_issues")
+    .update({
+      status,
+      scheduled_for: asNullableString(payload.scheduled_for),
+      approved_at: status === "approved" ? now : status === "draft" ? null : undefined,
+    })
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+};
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -472,6 +582,10 @@ Deno.serve(async (request) => {
   if (entity === "editorial" && action === "list") result = await listEditorial();
   if (entity === "editorial" && action === "create-feed") result = await createEditorialFeed(payload);
   if (entity === "editorial" && action === "set-status") result = await setEditorialStatus(payload);
+  if (entity === "newsletter" && action === "list") result = await listNewsletters();
+  if (entity === "newsletter" && action === "create") result = await createNewsletter(payload);
+  if (entity === "newsletter" && action === "save") result = await saveNewsletter(payload);
+  if (entity === "newsletter" && action === "set-status") result = await setNewsletterStatus(payload);
 
   if (!result) {
     return json(400, { error: "Unsupported admin action." });

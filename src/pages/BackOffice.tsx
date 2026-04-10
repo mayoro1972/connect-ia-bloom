@@ -11,6 +11,7 @@ import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { invokeContentAdmin } from "@/lib/content-admin";
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
+import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -112,6 +113,9 @@ type EditorialSnapshot = {
 };
 
 const ADMIN_TOKEN_STORAGE_KEY = "transferai-admin-token";
+const LOCAL_DEV_ADMIN_TOKEN = import.meta.env.DEV
+  ? import.meta.env.VITE_LOCAL_ADMIN_TOKEN?.trim() ?? ""
+  : "";
 
 const emptyResourceForm = {
   slug: "",
@@ -204,6 +208,11 @@ const BackOfficePage = () => {
     const storedToken = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY) ?? "";
     if (storedToken) {
       setToken(storedToken);
+      return;
+    }
+
+    if (LOCAL_DEV_ADMIN_TOKEN) {
+      setToken(LOCAL_DEV_ADMIN_TOKEN);
     }
   }, []);
 
@@ -431,6 +440,7 @@ const BackOfficePage = () => {
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
                 <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
+                <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="help">Mode d'emploi</TabsTrigger>
               </TabsList>
@@ -837,6 +847,16 @@ const BackOfficePage = () => {
                     </div>
                   </div>
                 </div>
+              </TabsContent>
+
+              <TabsContent value="newsletters">
+                <NewsletterAdminPanel
+                  token={token}
+                  isReady={isReady}
+                  isBusyGlobal={isBusy}
+                  onStatus={setStatusMessage}
+                  onError={setErrorMessage}
+                />
               </TabsContent>
 
               <TabsContent value="jobs">
