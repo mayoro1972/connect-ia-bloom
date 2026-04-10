@@ -31,6 +31,18 @@ const preferredSectorOrder = [
   "Médias & Création de contenu",
 ];
 
+const resolveSectorLabel = (
+  sector: string | null | undefined,
+  translate: (key: string) => string,
+) => {
+  if (!sector) {
+    return null;
+  }
+
+  const translated = translate(`catalogue.domains.${sector}`);
+  return translated !== `catalogue.domains.${sector}` ? translated : sector;
+};
+
 const BlogPage = () => {
   const { language, t } = useLanguage();
   const { items, isLoading } = useResourceFeed();
@@ -116,8 +128,7 @@ const BlogPage = () => {
   const renderCard = (article: (typeof items)[number]) => {
     const title = language === "en" ? article.titleEn : article.titleFr;
     const excerpt = language === "en" ? article.excerptEn : article.excerptFr;
-    const sectorLabel =
-      article.sectorKey && (t(`catalogue.domains.${article.sectorKey}`) || article.sectorKey);
+    const sectorLabel = resolveSectorLabel(article.sectorKey, t);
     const categoryLabel = t(`blog.categories.${article.categoryKey}`);
     const isRecent = isResourceNew(article.publishedAt, article.isNewManual);
 
@@ -217,6 +228,7 @@ const BlogPage = () => {
                   {availableSectors.map((sector) => {
                     const slug = slugifySiteValue(sector);
                     const count = items.filter((item) => item.sectorKey === sector).length;
+                    const sectorLabel = resolveSectorLabel(sector, t);
 
                     return (
                       <button
@@ -229,7 +241,7 @@ const BlogPage = () => {
                             : "border-border bg-background text-card-foreground hover:border-primary/40 hover:text-primary"
                         }`}
                       >
-                        {t(`catalogue.domains.${sector}`) || sector} ({count})
+                        {sectorLabel} ({count})
                       </button>
                     );
                   })}

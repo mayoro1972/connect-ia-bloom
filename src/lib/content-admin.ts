@@ -1,7 +1,7 @@
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 
-export type AdminEntity = "resource" | "job" | "analytics";
-export type AdminAction = "list" | "create" | "set-status";
+export type AdminEntity = "resource" | "job" | "analytics" | "editorial";
+export type AdminAction = "list" | "create" | "set-status" | "create-feed";
 
 type AdminRequest = {
   entity: AdminEntity;
@@ -9,31 +9,26 @@ type AdminRequest = {
   payload?: Record<string, unknown>;
 };
 
-const getAdminEndpoint = () => {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
-
-  if (!supabaseUrl) {
-    return null;
-  }
-
-  return `${supabaseUrl}/functions/v1/content-admin`;
-};
-
 export async function invokeContentAdmin<T>(token: string, request: AdminRequest): Promise<T> {
-  const endpoint = getAdminEndpoint();
-
-  if (!isSupabaseConfigured || !endpoint) {
+  if (!isSupabaseConfigured) {
     throw new Error("Supabase n'est pas configuré localement.");
   }
 
-  const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+  const anonJwt =
+    import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
+    import.meta.env.VITE_SUPABASE_LEGACY_ANON_KEY?.trim();
 
-  const response = await fetch(endpoint, {
+  if (!supabaseUrl || !anonJwt) {
+    throw new Error("Ajoutez VITE_SUPABASE_ANON_KEY pour appeler le back-office admin.");
+  }
+
+  const response = await fetch(`${supabaseUrl}/functions/v1/content-admin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      apikey: publishableKey ?? "",
-      Authorization: `Bearer ${publishableKey ?? ""}`,
+      apikey: anonJwt,
+      Authorization: `Bearer ${anonJwt}`,
       "x-admin-token": token,
     },
     body: JSON.stringify(request),
@@ -42,8 +37,12 @@ export async function invokeContentAdmin<T>(token: string, request: AdminRequest
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(typeof data?.error === "string" ? data.error : "La requête admin a échoué.");
+    throw new Error(typeof data?.error === "string"
+      ? data.error
+      : typeof data?.message === "string"
+        ? data.message
+        : "La requête admin a échoué.");
   }
 
-  return data as T;
+  return (data ?? {}) as T;
 }

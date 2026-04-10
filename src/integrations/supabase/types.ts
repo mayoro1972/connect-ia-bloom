@@ -164,6 +164,102 @@ export type Database = {
         }
         Relationships: []
       }
+      editorial_jobs: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          finished_at: string | null
+          id: string
+          input_payload: Json | null
+          job_type: string
+          model: string | null
+          output_payload: Json | null
+          provider: string
+          resource_post_id: string | null
+          source_signal_id: string | null
+          started_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          input_payload?: Json | null
+          job_type: string
+          model?: string | null
+          output_payload?: Json | null
+          provider: string
+          resource_post_id?: string | null
+          source_signal_id?: string | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          input_payload?: Json | null
+          job_type?: string
+          model?: string | null
+          output_payload?: Json | null
+          provider?: string
+          resource_post_id?: string | null
+          source_signal_id?: string | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "editorial_jobs_resource_post_id_fkey"
+            columns: ["resource_post_id"]
+            isOneToOne: false
+            referencedRelation: "resource_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "editorial_jobs_source_signal_id_fkey"
+            columns: ["source_signal_id"]
+            isOneToOne: false
+            referencedRelation: "source_signals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      newsletter_subscriptions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          language: string
+          source_page: string | null
+          status: string
+          subscribed_domains: string[]
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          language?: string
+          source_page?: string | null
+          status?: string
+          subscribed_domains?: string[]
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          language?: string
+          source_page?: string | null
+          status?: string
+          subscribed_domains?: string[]
+        }
+        Relationships: []
+      }
       resource_posts: {
         Row: {
           category_key: string
@@ -171,13 +267,16 @@ export type Database = {
           content_fr: string | null
           cover_image_url: string | null
           created_at: string
+          editorial_status: string
           excerpt_en: string
           excerpt_fr: string
           id: string
           is_featured: boolean
           is_new_manual: boolean
+          origin_signal_id: string | null
           published_at: string
           read_time_minutes: number | null
+          review_notes: string | null
           sector_key: string | null
           seo_description_en: string | null
           seo_description_fr: string | null
@@ -191,6 +290,7 @@ export type Database = {
           tags: string[]
           title_en: string
           title_fr: string
+          translated_from_post_id: string | null
           updated_at: string
         }
         Insert: {
@@ -199,13 +299,16 @@ export type Database = {
           content_fr?: string | null
           cover_image_url?: string | null
           created_at?: string
+          editorial_status?: string
           excerpt_en: string
           excerpt_fr: string
           id?: string
           is_featured?: boolean
           is_new_manual?: boolean
+          origin_signal_id?: string | null
           published_at?: string
           read_time_minutes?: number | null
+          review_notes?: string | null
           sector_key?: string | null
           seo_description_en?: string | null
           seo_description_fr?: string | null
@@ -219,6 +322,7 @@ export type Database = {
           tags?: string[]
           title_en: string
           title_fr: string
+          translated_from_post_id?: string | null
           updated_at?: string
         }
         Update: {
@@ -227,13 +331,16 @@ export type Database = {
           content_fr?: string | null
           cover_image_url?: string | null
           created_at?: string
+          editorial_status?: string
           excerpt_en?: string
           excerpt_fr?: string
           id?: string
           is_featured?: boolean
           is_new_manual?: boolean
+          origin_signal_id?: string | null
           published_at?: string
           read_time_minutes?: number | null
+          review_notes?: string | null
           sector_key?: string | null
           seo_description_en?: string | null
           seo_description_fr?: string | null
@@ -247,9 +354,159 @@ export type Database = {
           tags?: string[]
           title_en?: string
           title_fr?: string
+          translated_from_post_id?: string | null
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "resource_posts_origin_signal_id_fkey"
+            columns: ["origin_signal_id"]
+            isOneToOne: false
+            referencedRelation: "source_signals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_posts_translated_from_post_id_fkey"
+            columns: ["translated_from_post_id"]
+            isOneToOne: false
+            referencedRelation: "resource_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      source_feeds: {
+        Row: {
+          country_focus: string | null
+          created_at: string
+          domain_focus: string | null
+          feed_type: string
+          id: string
+          is_active: boolean
+          language: string
+          name: string
+          notes: string | null
+          publisher: string | null
+          region_focus: string | null
+          trust_score: number
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          country_focus?: string | null
+          created_at?: string
+          domain_focus?: string | null
+          feed_type?: string
+          id?: string
+          is_active?: boolean
+          language?: string
+          name: string
+          notes?: string | null
+          publisher?: string | null
+          region_focus?: string | null
+          trust_score?: number
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          country_focus?: string | null
+          created_at?: string
+          domain_focus?: string | null
+          feed_type?: string
+          id?: string
+          is_active?: boolean
+          language?: string
+          name?: string
+          notes?: string | null
+          publisher?: string | null
+          region_focus?: string | null
+          trust_score?: number
+          updated_at?: string
+          url?: string
+        }
         Relationships: []
+      }
+      source_signals: {
+        Row: {
+          content_type_detected: string | null
+          country_detected: string | null
+          created_at: string
+          credibility_score: number | null
+          domain_detected: string | null
+          external_id: string | null
+          hash: string | null
+          id: string
+          language: string | null
+          priority_score: number | null
+          published_at: string | null
+          raw_summary: string | null
+          raw_text: string | null
+          region_detected: string | null
+          relevance_score: number | null
+          review_notes: string | null
+          source_feed_id: string | null
+          status: string
+          tags: string[]
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          content_type_detected?: string | null
+          country_detected?: string | null
+          created_at?: string
+          credibility_score?: number | null
+          domain_detected?: string | null
+          external_id?: string | null
+          hash?: string | null
+          id?: string
+          language?: string | null
+          priority_score?: number | null
+          published_at?: string | null
+          raw_summary?: string | null
+          raw_text?: string | null
+          region_detected?: string | null
+          relevance_score?: number | null
+          review_notes?: string | null
+          source_feed_id?: string | null
+          status?: string
+          tags?: string[]
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          content_type_detected?: string | null
+          country_detected?: string | null
+          created_at?: string
+          credibility_score?: number | null
+          domain_detected?: string | null
+          external_id?: string | null
+          hash?: string | null
+          id?: string
+          language?: string | null
+          priority_score?: number | null
+          published_at?: string | null
+          raw_summary?: string | null
+          raw_text?: string | null
+          region_detected?: string | null
+          relevance_score?: number | null
+          review_notes?: string | null
+          source_feed_id?: string | null
+          status?: string
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "source_signals_source_feed_id_fkey"
+            columns: ["source_feed_id"]
+            isOneToOne: false
+            referencedRelation: "source_feeds"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       registration_requests: {
         Row: {

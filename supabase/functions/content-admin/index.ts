@@ -28,7 +28,6 @@ const json = (status: number, body: Record<string, unknown>) =>
 
 const requireAdmin = (request: Request) => {
   const token = request.headers.get("x-admin-token") ?? "";
-
   return adminToken.length > 0 && token === adminToken;
 };
 
@@ -48,7 +47,10 @@ const asNumber = (value: unknown) => {
 };
 const asStringArray = (value: unknown) => {
   if (!Array.isArray(value)) return [];
-  return value.filter((item): item is string => typeof item === "string").map((item) => item.trim()).filter(Boolean);
+  return value
+    .filter((item): item is string => typeof item === "string")
+    .map((item) => item.trim())
+    .filter(Boolean);
 };
 const asJson = (value: unknown) => {
   if (value === null || value === undefined || value === "") {
@@ -94,6 +96,10 @@ const mapResourcePayload = (payload: Record<string, unknown>) => ({
   is_featured: asBoolean(payload.is_featured),
   is_new_manual: asBoolean(payload.is_new_manual),
   status: asString(payload.status, "draft"),
+  origin_signal_id: asNullableString(payload.origin_signal_id),
+  editorial_status: asString(payload.editorial_status, "draft"),
+  review_notes: asNullableString(payload.review_notes),
+  translated_from_post_id: asNullableString(payload.translated_from_post_id),
 });
 
 const mapJobPayload = (payload: Record<string, unknown>) => ({
@@ -116,6 +122,20 @@ const mapJobPayload = (payload: Record<string, unknown>) => ({
   status: asString(payload.status, "draft"),
 });
 
+const mapFeedPayload = (payload: Record<string, unknown>) => ({
+  name: asString(payload.name),
+  url: asString(payload.url),
+  feed_type: asString(payload.feed_type, "rss"),
+  publisher: asNullableString(payload.publisher),
+  country_focus: asNullableString(payload.country_focus),
+  region_focus: asNullableString(payload.region_focus),
+  domain_focus: asNullableString(payload.domain_focus),
+  language: asString(payload.language, "fr"),
+  trust_score: asNumber(payload.trust_score) ?? 50,
+  is_active: payload.is_active !== false,
+  notes: asNullableString(payload.notes),
+});
+
 const listResources = async () =>
   supabase
     .from("resource_posts")
@@ -126,13 +146,21 @@ const listResources = async () =>
 const createResource = async (payload: Record<string, unknown>) =>
   supabase.from("resource_posts").insert(mapResourcePayload(payload)).select("*").single();
 
-const setResourceStatus = async (payload: Record<string, unknown>) =>
-  supabase
+const setResourceStatus = async (payload: Record<string, unknown>) => {
+  const nextStatus = asString(payload.status);
+  const nextEditorialStatus = asNullableString(payload.editorial_status);
+
+  return supabase
     .from("resource_posts")
-    .update({ status: asString(payload.status) })
+    .update({
+      status: nextStatus,
+      ...(nextEditorialStatus ? { editorial_status: nextEditorialStatus } : {}),
+      review_notes: asNullableString(payload.review_notes),
+    })
     .eq("id", asString(payload.id))
     .select("*")
     .single();
+};
 
 const listJobs = async () =>
   supabase
@@ -153,7 +181,7 @@ const setJobStatus = async (payload: Record<string, unknown>) =>
     .single();
 
 const buildDateBuckets = (days: number) => {
-  const buckets = [];
+  const buckets: string[] = [];
 
   for (let offset = days - 1; offset >= 0; offset -= 1) {
     const date = new Date();
@@ -176,7 +204,6 @@ const listAnalytics = async () => {
     return date.toISOString();
   };
 
-  const sevenDaysAgo = daysAgo(6);
   const thirtyDaysAgo = daysAgo(29);
   const ninetyDaysAgo = daysAgo(89);
 
@@ -236,11 +263,9 @@ const listAnalytics = async () => {
     registrationTrend.set(day, 0);
   }
 
-  const publicPageFallback = "/";
-
   for (const view of pageViews) {
     const day = view.visited_at?.slice(0, 10);
-    const pagePath = asString(view.page_path, publicPageFallback);
+    const pagePath = asString(view.page_path, "/");
 
     pageCounts.set(pagePath, (pageCounts.get(pagePath) ?? 0) + 1);
 
@@ -276,19 +301,15 @@ const listAnalytics = async () => {
     }
   }
 
-  const contactLastThirtyDays = contactRequests.filter((lead) => lead.created_at && lead.created_at >= thirtyDaysAgo).length;
-  const registrationLastThirtyDays = registrationRequests.filter((lead) => lead.created_at && lead.created_at >= thirtyDaysAgo).length;
-  const pageViewsLastThirtyDays = pageViews.filter((view) => view.visited_at && view.visited_at >= thirtyDaysAgo).length;
-
   return {
     data: {
       overview: {
         totalPageViews: pageViewsTotal.count ?? 0,
-        pageViewsLast30Days,
+        pageViewsLast30Days: pageViews.filter((view) => view.visited_at && view.visited_at >= thirtyDaysAgo).length,
         totalContactRequests: contactRequestsTotal.count ?? 0,
-        contactRequestsLast30Days: contactLastThirtyDays,
+        contactRequestsLast30Days: contactRequests.filter((lead) => lead.created_at && lead.created_at >= thirtyDaysAgo).length,
         totalRegistrationRequests: registrationRequestsTotal.count ?? 0,
-        registrationRequestsLast30Days: registrationLastThirtyDays,
+        registrationRequestsLast30Days: registrationRequests.filter((lead) => lead.created_at && lead.created_at >= thirtyDaysAgo).length,
       },
       byIntent: Array.from(contactIntentCounts.entries()).sort(sortByCountDesc).map(([label, count]) => ({ label, count })),
       topDomains: Array.from(domainCounts.entries()).sort(sortByCountDesc).slice(0, 6).map(([label, count]) => ({ label, count })),
@@ -307,6 +328,109 @@ const listAnalytics = async () => {
     },
     error: null,
   };
+};
+
+const listEditorial = async () => {
+  const [feedsResult, signalsResult, draftsResult, jobsResult] = await Promise.all([
+    supabase
+      .from("source_feeds")
+      .select("*")
+      .order("is_active", { ascending: false })
+      .order("trust_score", { ascending: false })
+      .limit(40),
+    supabase
+      .from("source_signals")
+      .select("id, title, url, published_at, status, domain_detected, content_type_detected, priority_score, source_feed_id, review_notes, created_at")
+      .order("priority_score", { ascending: false, nullsFirst: false })
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(60),
+    supabase
+      .from("resource_posts")
+      .select("id, slug, title_fr, sector_key, editorial_status, status, published_at, origin_signal_id, review_notes")
+      .in("editorial_status", ["draft", "review", "approved"])
+      .order("published_at", { ascending: false })
+      .limit(40),
+    supabase
+      .from("editorial_jobs")
+      .select("id, job_type, provider, status, created_at, source_signal_id, resource_post_id, error_message")
+      .order("created_at", { ascending: false })
+      .limit(40),
+  ]);
+
+  const resultList = [feedsResult, signalsResult, draftsResult, jobsResult];
+  const failingResult = resultList.find((result) => result.error);
+
+  if (failingResult?.error) {
+    return { data: null, error: failingResult.error };
+  }
+
+  return {
+    data: {
+      feeds: feedsResult.data ?? [],
+      signals: signalsResult.data ?? [],
+      drafts: draftsResult.data ?? [],
+      jobs: jobsResult.data ?? [],
+    },
+    error: null,
+  };
+};
+
+const createEditorialFeed = async (payload: Record<string, unknown>) =>
+  supabase.from("source_feeds").insert(mapFeedPayload(payload)).select("*").single();
+
+const setEditorialStatus = async (payload: Record<string, unknown>) => {
+  const kind = asString(payload.kind);
+  const id = asString(payload.id);
+  const nextStatus = asString(payload.status);
+  const reviewNotes = asNullableString(payload.review_notes);
+
+  if (kind === "signal") {
+    return supabase
+      .from("source_signals")
+      .update({
+        status: nextStatus,
+        review_notes: reviewNotes,
+      })
+      .eq("id", id)
+      .select("*")
+      .single();
+  }
+
+  if (kind === "draft") {
+    const mappedPostStatus =
+      nextStatus === "published"
+        ? "published"
+        : nextStatus === "archived"
+          ? "archived"
+          : "draft";
+
+    const result = await supabase
+      .from("resource_posts")
+      .update({
+        editorial_status: nextStatus,
+        status: mappedPostStatus,
+        review_notes: reviewNotes,
+      })
+      .eq("id", id)
+      .select("*")
+      .single();
+
+    const originSignalId = asNullableString(payload.origin_signal_id);
+
+    if (!result.error && originSignalId) {
+      await supabase
+        .from("source_signals")
+        .update({
+          status: nextStatus === "published" ? "published" : nextStatus === "archived" ? "rejected" : "drafted",
+          review_notes: reviewNotes,
+        })
+        .eq("id", originSignalId);
+    }
+
+    return result;
+  }
+
+  return { data: null, error: { message: "Unsupported editorial status target." } };
 };
 
 Deno.serve(async (request) => {
@@ -345,6 +469,9 @@ Deno.serve(async (request) => {
   if (entity === "job" && action === "create") result = await createJob(payload);
   if (entity === "job" && action === "set-status") result = await setJobStatus(payload);
   if (entity === "analytics" && action === "list") result = await listAnalytics();
+  if (entity === "editorial" && action === "list") result = await listEditorial();
+  if (entity === "editorial" && action === "create-feed") result = await createEditorialFeed(payload);
+  if (entity === "editorial" && action === "set-status") result = await setEditorialStatus(payload);
 
   if (!result) {
     return json(400, { error: "Unsupported admin action." });

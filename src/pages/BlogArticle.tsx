@@ -66,6 +66,18 @@ const replaceDynamicTokens = (value: string, language: "fr" | "en") => {
     }).format(new Date()));
 };
 
+const resolveSectorLabel = (
+  sector: string | null | undefined,
+  translate: (key: string) => string,
+) => {
+  if (!sector) {
+    return null;
+  }
+
+  const translated = translate(`catalogue.domains.${sector}`);
+  return translated !== `catalogue.domains.${sector}` ? translated : sector;
+};
+
 const BlogArticlePage = () => {
   const { slug } = useParams();
   const { language, t } = useLanguage();
@@ -79,7 +91,7 @@ const BlogArticlePage = () => {
     (language === "en" ? item?.contentEn || item?.contentFr : item?.contentFr || item?.contentEn) || excerpt || "",
     language,
   );
-  const sectorLabel = item?.sectorKey ? (t(`catalogue.domains.${item.sectorKey}`) || item.sectorKey) : null;
+  const sectorLabel = resolveSectorLabel(item?.sectorKey, t);
   const categoryLabel = item ? t(`blog.categories.${item.categoryKey}`) : "";
   const catalogueSlug = resolveCatalogueSlugFromSector(item?.sectorKey);
 

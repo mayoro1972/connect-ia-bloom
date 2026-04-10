@@ -56,6 +56,61 @@ type AnalyticsSnapshot = {
   trend: AnalyticsTrendRow[];
 };
 
+type EditorialFeedItem = {
+  id: string;
+  name: string;
+  url: string;
+  feed_type: string;
+  country_focus: string | null;
+  domain_focus: string | null;
+  trust_score: number;
+  is_active: boolean;
+};
+
+type EditorialSignalItem = {
+  id: string;
+  title: string;
+  url: string;
+  published_at: string | null;
+  status: string;
+  domain_detected: string | null;
+  content_type_detected: string | null;
+  priority_score: number | null;
+  source_feed_id: string | null;
+  review_notes: string | null;
+  created_at: string;
+};
+
+type EditorialDraftItem = {
+  id: string;
+  slug: string;
+  title_fr: string;
+  sector_key: string | null;
+  editorial_status: string;
+  status: string;
+  published_at: string;
+  origin_signal_id: string | null;
+  review_notes: string | null;
+};
+
+type EditorialJobItem = {
+  id: string;
+  job_type: string;
+  provider: string;
+  status: string;
+  created_at: string;
+  source_signal_id: string | null;
+  resource_post_id: string | null;
+  error_message: string | null;
+};
+
+type EditorialSnapshot = {
+  feeds: EditorialFeedItem[];
+  signals: EditorialSignalItem[];
+  drafts: EditorialDraftItem[];
+  jobs: EditorialJobItem[];
+};
+
 const ADMIN_TOKEN_STORAGE_KEY = "transferai-admin-token";
 
 const emptyResourceForm = {
@@ -104,6 +159,20 @@ const emptyJobForm = {
   is_new_manual: true,
 };
 
+const emptyFeedForm = {
+  name: "",
+  url: "",
+  feed_type: "rss",
+  publisher: "",
+  country_focus: "Côte d'Ivoire",
+  region_focus: "Afrique de l'Ouest",
+  domain_focus: "",
+  language: "fr",
+  trust_score: "70",
+  notes: "",
+  is_active: true,
+};
+
 const fieldClass = "w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
 
 const intentLabels: Record<string, string> = {
@@ -122,9 +191,11 @@ const BackOfficePage = () => {
   const [token, setToken] = useState("");
   const [resourceForm, setResourceForm] = useState(emptyResourceForm);
   const [jobForm, setJobForm] = useState(emptyJobForm);
+  const [feedForm, setFeedForm] = useState(emptyFeedForm);
   const [resources, setResources] = useState<ResourceAdminItem[]>([]);
   const [jobs, setJobs] = useState<JobAdminItem[]>([]);
   const [analytics, setAnalytics] = useState<AnalyticsSnapshot | null>(null);
+  const [editorial, setEditorial] = useState<EditorialSnapshot | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isBusy, setIsBusy] = useState(false);
@@ -139,15 +210,17 @@ const BackOfficePage = () => {
   const isReady = useMemo(() => token.trim().length > 0 && isSupabaseConfigured, [token]);
 
   const loadData = async (adminToken: string) => {
-    const [resourceResult, jobResult, analyticsResult] = await Promise.all([
+    const [resourceResult, jobResult, analyticsResult, editorialResult] = await Promise.all([
       invokeContentAdmin<{ data: ResourceAdminItem[] }>(adminToken, { entity: "resource", action: "list" }),
       invokeContentAdmin<{ data: JobAdminItem[] }>(adminToken, { entity: "job", action: "list" }),
       invokeContentAdmin<{ data: AnalyticsSnapshot }>(adminToken, { entity: "analytics", action: "list" }),
+      invokeContentAdmin<{ data: EditorialSnapshot }>(adminToken, { entity: "editorial", action: "list" }),
     ]);
 
     setResources(resourceResult.data ?? []);
     setJobs(jobResult.data ?? []);
     setAnalytics(analyticsResult.data ?? null);
+    setEditorial(editorialResult.data ?? null);
   };
 
   useEffect(() => {
@@ -223,6 +296,31 @@ const BackOfficePage = () => {
     }
   };
 
+  const submitFeed = async () => {
+    setIsBusy(true);
+    setStatusMessage(null);
+    setErrorMessage(null);
+
+    try {
+      await invokeContentAdmin(token, {
+        entity: "editorial",
+        action: "create-feed",
+        payload: {
+          ...feedForm,
+          trust_score: Number(feedForm.trust_score),
+        },
+      });
+
+      setFeedForm(emptyFeedForm);
+      await loadData(token);
+      setStatusMessage("Source de veille enregistrée avec succès.");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Création du flux impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
   const setResourceStatus = async (id: string, status: string) => {
     setIsBusy(true);
     try {
@@ -242,6 +340,51 @@ const BackOfficePage = () => {
       await loadData(token);
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Mise à jour impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  const setEditorialSignalStatus = async (id: string, status: string) => {
+    setIsBusy(true);
+    try {
+      await invokeContentAdmin(token, {
+        entity: "editorial",
+        action: "set-status",
+        payload: { kind: "signal", id, status },
+      });
+      await loadData(token);
+      setStatusMessage("Signal éditorial mis à jour.");
+      setErrorMessage(null);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Mise à jour du signal impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  const setEditorialDraftStatus = async (
+    id: string,
+    status: "review" | "approved" | "published" | "archived",
+    originSignalId?: string | null,
+  ) => {
+    setIsBusy(true);
+    try {
+      await invokeContentAdmin(token, {
+        entity: "editorial",
+        action: "set-status",
+        payload: {
+          kind: "draft",
+          id,
+          status,
+          origin_signal_id: originSignalId ?? null,
+        },
+      });
+      await loadData(token);
+      setStatusMessage("Brouillon IA mis à jour.");
+      setErrorMessage(null);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Mise à jour du brouillon impossible.");
     } finally {
       setIsBusy(false);
     }
@@ -287,6 +430,7 @@ const BackOfficePage = () => {
               <TabsList className="mb-8 h-auto flex-wrap">
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
+                <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="help">Mode d'emploi</TabsTrigger>
               </TabsList>
@@ -500,6 +644,194 @@ const BackOfficePage = () => {
                             <button type="button" onClick={() => setResourceStatus(resource.id, "draft")} className="text-xs font-semibold text-muted-foreground">Brouillon</button>
                             <button type="button" onClick={() => setResourceStatus(resource.id, "archived")} className="text-xs font-semibold text-destructive">Archiver</button>
                           </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="editorial">
+                <div className="space-y-8">
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Flux suivis</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {editorial?.feeds.length ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">Sources actives pour nourrir la veille automatique.</p>
+                    </div>
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Signaux détectés</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {editorial?.signals.length ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">Signaux à scorer, rejeter ou convertir en brouillon.</p>
+                    </div>
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Brouillons IA</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {editorial?.drafts.length ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">Articles FR à relire avant validation ou publication.</p>
+                    </div>
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jobs pipeline</p>
+                      <p className="mt-3 font-heading text-3xl font-bold text-card-foreground">
+                        {editorial?.jobs.length ?? 0}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground">Traçabilité des étapes découverte, scoring et rédaction.</p>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+                    <div className="rounded-2xl border border-border bg-card p-6 space-y-4">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Ajouter une source de veille</h2>
+                      <p className="text-sm text-muted-foreground">
+                        Renseignez les flux prioritaires Côte d'Ivoire / Afrique pour nourrir le pipeline de découverte automatique.
+                      </p>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <Input value={feedForm.name} onChange={(e) => setFeedForm({ ...feedForm, name: e.target.value })} placeholder="Nom de la source" />
+                        <Input value={feedForm.publisher} onChange={(e) => setFeedForm({ ...feedForm, publisher: e.target.value })} placeholder="Publisher (optionnel)" />
+                        <Input className="md:col-span-2" value={feedForm.url} onChange={(e) => setFeedForm({ ...feedForm, url: e.target.value })} placeholder="URL RSS / site / API" />
+                        <select className={fieldClass} value={feedForm.feed_type} onChange={(e) => setFeedForm({ ...feedForm, feed_type: e.target.value })}>
+                          <option value="rss">RSS</option>
+                          <option value="site">Site</option>
+                          <option value="api">API</option>
+                          <option value="institution">Institution</option>
+                          <option value="manual">Manuel</option>
+                        </select>
+                        <select className={fieldClass} value={feedForm.language} onChange={(e) => setFeedForm({ ...feedForm, language: e.target.value })}>
+                          <option value="fr">FR</option>
+                          <option value="en">EN</option>
+                        </select>
+                        <Input value={feedForm.country_focus} onChange={(e) => setFeedForm({ ...feedForm, country_focus: e.target.value })} placeholder="Focus pays" />
+                        <Input value={feedForm.region_focus} onChange={(e) => setFeedForm({ ...feedForm, region_focus: e.target.value })} placeholder="Focus région" />
+                        <Input value={feedForm.domain_focus} onChange={(e) => setFeedForm({ ...feedForm, domain_focus: e.target.value })} placeholder="Domaine prioritaire" />
+                        <Input type="number" min="0" max="100" value={feedForm.trust_score} onChange={(e) => setFeedForm({ ...feedForm, trust_score: e.target.value })} placeholder="Trust score" />
+                      </div>
+                      <Textarea value={feedForm.notes} onChange={(e) => setFeedForm({ ...feedForm, notes: e.target.value })} placeholder="Notes éditoriales (facultatif)" />
+                      <label className="flex items-center justify-between rounded-lg border border-border px-4 py-2.5 text-sm text-card-foreground">
+                        Source active
+                        <Switch checked={feedForm.is_active} onCheckedChange={(checked) => setFeedForm({ ...feedForm, is_active: checked })} />
+                      </label>
+                      <button type="button" onClick={submitFeed} disabled={!isReady || isBusy} className="rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">
+                        Enregistrer la source
+                      </button>
+                    </div>
+
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Sources suivies</h2>
+                      <div className="mt-4 space-y-3">
+                        {(editorial?.feeds ?? []).map((feed) => (
+                          <div key={feed.id} className="rounded-xl border border-border p-4">
+                            <div className="flex items-center justify-between gap-3">
+                              <div>
+                                <p className="font-medium text-card-foreground">{feed.name}</p>
+                                <p className="text-xs text-muted-foreground">
+                                  {feed.feed_type} · {feed.domain_focus || "Tous domaines"} · {feed.country_focus || "Afrique"}
+                                </p>
+                              </div>
+                              <Badge variant={feed.is_active ? "default" : "secondary"}>
+                                {feed.is_active ? `Actif · ${feed.trust_score}` : "Inactif"}
+                              </Badge>
+                            </div>
+                            <p className="mt-3 truncate text-xs text-muted-foreground">{feed.url}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 xl:grid-cols-2">
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Signaux détectés</h2>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Une fois classés par les fonctions IA, ces signaux servent de base aux brouillons FR du blog.
+                      </p>
+                      <div className="mt-4 space-y-3">
+                        {(editorial?.signals ?? []).map((signal) => (
+                          <div key={signal.id} className="rounded-xl border border-border p-4">
+                            <div className="flex items-start justify-between gap-3">
+                              <div>
+                                <p className="font-medium text-card-foreground">{signal.title}</p>
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                  {(signal.domain_detected || "À classer")} · {(signal.content_type_detected || "veille")} · {signal.priority_score ?? "—"} / 100
+                                </p>
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                  {signal.published_at ? new Date(signal.published_at).toLocaleString() : new Date(signal.created_at).toLocaleString()}
+                                </p>
+                              </div>
+                              <Badge variant="secondary">{signal.status}</Badge>
+                            </div>
+                            <div className="mt-3 flex flex-wrap gap-3">
+                              <a href={signal.url} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary">
+                                Ouvrir la source
+                              </a>
+                              <button type="button" onClick={() => setEditorialSignalStatus(signal.id, "new")} className="text-xs font-semibold text-muted-foreground">
+                                Remettre en file
+                              </button>
+                              <button type="button" onClick={() => setEditorialSignalStatus(signal.id, "rejected")} className="text-xs font-semibold text-destructive">
+                                Rejeter
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Brouillons IA à relire</h2>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        La logique éditoriale est FR d'abord. Les versions EN restent réservées aux meilleurs contenus ensuite.
+                      </p>
+                      <div className="mt-4 space-y-3">
+                        {(editorial?.drafts ?? []).map((draft) => (
+                          <div key={draft.id} className="rounded-xl border border-border p-4">
+                            <div className="flex items-start justify-between gap-3">
+                              <div>
+                                <p className="font-medium text-card-foreground">{draft.title_fr}</p>
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                  {draft.sector_key || "Sans domaine"} · {draft.slug}
+                                </p>
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                  {new Date(draft.published_at).toLocaleString()} · statut public: {draft.status}
+                                </p>
+                              </div>
+                              <Badge variant="secondary">{draft.editorial_status}</Badge>
+                            </div>
+                            <div className="mt-3 flex flex-wrap gap-3">
+                              <button type="button" onClick={() => setEditorialDraftStatus(draft.id, "review", draft.origin_signal_id)} className="text-xs font-semibold text-muted-foreground">
+                                Revue
+                              </button>
+                              <button type="button" onClick={() => setEditorialDraftStatus(draft.id, "approved", draft.origin_signal_id)} className="text-xs font-semibold text-primary">
+                                Approuver
+                              </button>
+                              <button type="button" onClick={() => setEditorialDraftStatus(draft.id, "published", draft.origin_signal_id)} className="text-xs font-semibold text-primary">
+                                Publier
+                              </button>
+                              <button type="button" onClick={() => setEditorialDraftStatus(draft.id, "archived", draft.origin_signal_id)} className="text-xs font-semibold text-destructive">
+                                Archiver
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-border bg-card p-6">
+                    <h2 className="font-heading text-xl font-bold text-card-foreground">Jobs pipeline récents</h2>
+                    <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+                      {(editorial?.jobs ?? []).map((job) => (
+                        <div key={job.id} className="rounded-xl border border-border p-4">
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="text-sm font-semibold text-card-foreground">{job.job_type}</p>
+                            <Badge variant="secondary">{job.status}</Badge>
+                          </div>
+                          <p className="mt-2 text-xs text-muted-foreground">{job.provider}</p>
+                          <p className="mt-2 text-xs text-muted-foreground">{new Date(job.created_at).toLocaleString()}</p>
+                          {job.error_message ? <p className="mt-3 text-xs text-destructive">{job.error_message}</p> : null}
                         </div>
                       ))}
                     </div>
