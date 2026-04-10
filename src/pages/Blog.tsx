@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { isResourceNew, type ResourceCategoryKey } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
@@ -273,6 +274,12 @@ const BlogPage = () => {
                   ) : null}
                 </>
               )}
+
+              <BlogNewsletterSignup
+                availableSectors={availableSectors}
+                defaultSector={availableSectors.find((sector) => getBlogSectorSlug(sector) === activeDomain) ?? null}
+                sourcePage={`/blog${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+              />
             </div>
           )}
         </div>

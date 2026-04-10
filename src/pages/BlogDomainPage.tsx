@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, Clock, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { isResourceNew, type ResourceCategoryKey } from "@/lib/resource-feed";
@@ -233,6 +234,15 @@ const BlogDomainPage = () => {
                     {filteredItems.map(renderCard)}
                   </div>
                 )}
+              </section>
+
+              <section className="mt-10">
+                <BlogNewsletterSignup
+                  availableSectors={sector ? [sector] : []}
+                  defaultSector={sector}
+                  sourcePage={`/blog/domaine/${domainSlug ?? ""}`}
+                  compact
+                />
               </section>
             </>
           )}

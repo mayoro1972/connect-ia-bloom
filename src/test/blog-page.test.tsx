@@ -66,5 +66,6 @@ describe("blog page", () => {
 
     expect(screen.getByText(/veille dynamique/i)).toBeInTheDocument();
     expect(screen.getByText(/transferai africa · veille editoriale multi-sources/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /recevoir la veille ia afrique/i })).toBeInTheDocument();
   });
 });
