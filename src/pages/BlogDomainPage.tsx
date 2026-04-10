@@ -8,7 +8,12 @@ import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { isResourceNew, type ResourceCategoryKey } from "@/lib/resource-feed";
-import { buildContactPath, resolveCatalogueSlugFromSector } from "@/lib/site-links";
+import {
+  buildContactPath,
+  resolveCatalogueSlugFromSector,
+  resolveCertificationSlugFromSector,
+  resolveToolSlugFromSector,
+} from "@/lib/site-links";
 import { getBlogSectorSlug, resolveBlogSectorFromSlug, resolveBlogSectorLabel } from "@/lib/blog-domains";
 
 const categoryColors: Record<ResourceCategoryKey, string> = {
@@ -65,6 +70,8 @@ const BlogDomainPage = () => {
   );
 
   const catalogueSlug = resolveCatalogueSlugFromSector(sector);
+  const certificationSlug = resolveCertificationSlugFromSector(sector);
+  const toolSlug = resolveToolSlugFromSector(sector);
 
   const formatDate = (value: string) => {
     const date = new Date(value);
@@ -197,7 +204,9 @@ const BlogDomainPage = () => {
                       {content.domainPageHeading.replace("{domain}", sectorLabel || sector)}
                     </h1>
                     <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      {content.domainPageIntro.replace("{domain}", sectorLabel || sector)}
+                      {language === "en"
+                        ? `${sectorLabel || sector} resources, signals and practical reading paths for teams that want to act faster.`
+                        : `Veilles, analyses et ressources ${sectorLabel || sector} pour les équipes qui veulent passer plus vite à l’action.`}
                     </p>
                   </div>
                   <div className="text-sm font-medium text-muted-foreground">
@@ -218,6 +227,22 @@ const BlogDomainPage = () => {
                   >
                     {content.articleSecondaryCta}
                   </Link>
+                  {toolSlug ? (
+                    <Link
+                      to={`/outils-ia?domaine=${toolSlug}`}
+                      className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
+                    >
+                      {language === "en" ? "Recommended tools" : "Outils recommandés"}
+                    </Link>
+                  ) : null}
+                  {certificationSlug ? (
+                    <Link
+                      to={`/certification?domaine=${certificationSlug}`}
+                      className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
+                    >
+                      {language === "en" ? "Domain certification" : "Certification du domaine"}
+                    </Link>
+                  ) : null}
                 </div>
               </section>
 

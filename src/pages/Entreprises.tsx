@@ -27,7 +27,7 @@ const servicesHubCopy = {
       "Nous avons structuré notre offre en 3 piliers simples pour aider chaque entreprise à trouver rapidement le bon point d'entrée : cadrer, déployer ou animer sa dynamique IA.",
     diagnosisTitle: "Choisissez le bon pilier selon votre situation",
     diagnosisDesc:
-      "Cette page n'est pas là pour vous présenter une architecture interne. Elle sert à vous aider à identifier rapidement le bon service selon votre niveau de maturité, votre besoin actuel et le résultat que vous attendez.",
+      "Commencez par le besoin le plus urgent : cadrer, déployer ou animer votre dynamique IA.",
     pillarsTitle: "Les 3 points d'entrée de notre offre",
     pillars: [
       {
@@ -70,7 +70,7 @@ const servicesHubCopy = {
         icon: Radar,
       },
     ],
-    pathwayTitle: "Le parcours le plus efficace pour une entreprise",
+    pathwayTitle: "Le chemin le plus simple pour avancer",
     pathway: [
       {
         title: "1. Cadrer",
@@ -89,14 +89,14 @@ const servicesHubCopy = {
         desc: "Former, nourrir les équipes, publier la veille et maintenir la dynamique IA dans le temps.",
       },
     ],
-    audiencesTitle: "Si vous vous reconnaissez ici, voici votre bon point d'entrée",
+    audiencesTitle: "Quelques situations fréquentes",
     audiences: [
       "Nous ne savons pas par où commencer : Conseil & adoption IA",
       "Nous avons des tâches répétitives à automatiser : Automatisation & solutions IA",
       "Nous voulons former, communiquer et rester à jour : Media, veille & opportunités",
       "Nous voulons éviter les projets IA flous ou redondants : commencer par un cadrage",
     ],
-    outcomesTitle: "Ce que vous obtenez concrètement",
+    outcomesTitle: "Résultats attendus",
     outcomes: [
       "Un diagnostic clair, une feuille de route et des cas d'usage priorisés",
       "Des automatisations, assistants IA et workflows utiles à vos équipes",
@@ -115,7 +115,7 @@ const servicesHubCopy = {
       "We structured the offer into 3 simple pillars to help every organization quickly find the right entry point: frame, deploy or activate its AI momentum.",
     diagnosisTitle: "Choose the right pillar for your situation",
     diagnosisDesc:
-      "This page is not here to explain our internal architecture. It is here to help you quickly identify the right service based on your maturity, your current need and the result you want to buy.",
+      "Start with the most urgent need: frame, deploy or activate your AI momentum.",
     pillarsTitle: "The 3 entry points into our offer",
     pillars: [
       {
@@ -158,7 +158,7 @@ const servicesHubCopy = {
         icon: Radar,
       },
     ],
-    pathwayTitle: "The most effective path for an organization",
+    pathwayTitle: "The simplest path to move forward",
     pathway: [
       {
         title: "1. Frame",
@@ -177,14 +177,14 @@ const servicesHubCopy = {
         desc: "Train teams, feed the watch, publish content and sustain the AI momentum over time.",
       },
     ],
-    audiencesTitle: "If you recognize yourself here, this is your right entry point",
+    audiencesTitle: "Frequent situations we see",
     audiences: [
       "We do not know where to start: AI advisory & adoption",
       "We have repetitive tasks to automate: AI automation & solutions",
       "We want to train, communicate and stay current: Media, watch & opportunities",
       "We want to avoid vague or overlapping AI projects: start with framing",
     ],
-    outcomesTitle: "What you get in concrete terms",
+    outcomesTitle: "Expected outcomes",
     outcomes: [
       "A clear diagnosis, a roadmap and prioritized use cases",
       "Useful automations, AI assistants and workflows for your teams",
@@ -214,10 +214,23 @@ const EntreprisesPage = () => {
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="mx-auto mb-16 max-w-4xl text-center">
-              <Sparkles size={42} className="mx-auto mb-4 text-primary" />
-              <h2 className="mb-4 font-heading text-3xl font-bold text-foreground">{copy.diagnosisTitle}</h2>
-              <p className="text-base leading-relaxed text-muted-foreground">{copy.diagnosisDesc}</p>
+            <div className="mx-auto mb-12 max-w-5xl rounded-[28px] border border-border bg-card p-8 md:p-10">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div className="max-w-3xl">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                    <Sparkles size={14} />
+                    {copy.diagnosisTitle}
+                  </div>
+                  <p className="text-base leading-relaxed text-muted-foreground">{copy.diagnosisDesc}</p>
+                </div>
+                <Link
+                  to={buildContactPath("contact-devis")}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                >
+                  {copy.ctaPrimary}
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
             </div>
 
             <div className="mb-16 rounded-[28px] border border-border bg-card p-8 md:p-10">

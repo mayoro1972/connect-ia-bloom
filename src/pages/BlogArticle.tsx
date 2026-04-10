@@ -7,7 +7,12 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { useResourcePost } from "@/hooks/useResourcePost";
 import { isResourceNew, type ResourceCategoryKey, type ResourceSource } from "@/lib/resource-feed";
-import { buildContactPath, resolveCatalogueSlugFromSector } from "@/lib/site-links";
+import {
+  buildContactPath,
+  resolveCatalogueSlugFromSector,
+  resolveCertificationSlugFromSector,
+  resolveToolSlugFromSector,
+} from "@/lib/site-links";
 
 const categoryColors: Record<ResourceCategoryKey, string> = {
   "expertise-ai": "text-primary",
@@ -94,6 +99,8 @@ const BlogArticlePage = () => {
   const sectorLabel = resolveSectorLabel(item?.sectorKey, t);
   const categoryLabel = item ? t(`blog.categories.${item.categoryKey}`) : "";
   const catalogueSlug = resolveCatalogueSlugFromSector(item?.sectorKey);
+  const certificationSlug = resolveCertificationSlugFromSector(item?.sectorKey);
+  const toolSlug = resolveToolSlugFromSector(item?.sectorKey);
 
   const sources = useMemo<ResourceSource[]>(() => {
     if (!item) {
@@ -266,7 +273,11 @@ const BlogArticlePage = () => {
                     {content.articleSidebarBadge}
                   </span>
                   <h2 className="mt-4 font-heading text-2xl font-bold text-card-foreground">{content.articleSidebarTitle}</h2>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{content.articleSidebarDesc}</p>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                    {language === "en"
+                      ? "Turn this reading into skills, tools and the right next action for your team."
+                      : "Transformez cette lecture en compétences, en outils concrets et en prochaine action utile pour vos équipes."}
+                  </p>
 
                   <div className="mt-6 grid gap-3">
                     {catalogueSlug ? (
@@ -290,6 +301,22 @@ const BlogArticlePage = () => {
                     >
                       {content.articleSecondaryCta}
                     </Link>
+                    {toolSlug ? (
+                      <Link
+                        to={`/outils-ia?domaine=${toolSlug}`}
+                        className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
+                      >
+                        {language === "en" ? "Recommended tools" : "Outils recommandés"}
+                      </Link>
+                    ) : null}
+                    {certificationSlug ? (
+                      <Link
+                        to={`/certification?domaine=${certificationSlug}`}
+                        className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
+                      >
+                        {language === "en" ? "Domain certification" : "Certification du domaine"}
+                      </Link>
+                    ) : null}
                   </div>
                 </div>
 

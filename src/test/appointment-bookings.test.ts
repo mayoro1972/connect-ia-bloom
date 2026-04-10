@@ -24,7 +24,7 @@ describe("appointment booking routing", () => {
     );
   });
 
-  it("uses the local audit app while developing", () => {
-    expect(directLinks.auditForm).toBe("http://127.0.0.1:4175/");
+  it("routes the audit form through the integrated public path", () => {
+    expect(directLinks.auditForm).toBe("/formulaire-audit-ia/index.html");
   });
 });

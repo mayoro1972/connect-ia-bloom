@@ -9,7 +9,7 @@ export type SocialLink = {
 
 const auditFormUrl =
   import.meta.env.VITE_AUDIT_FORM_URL ||
-  (import.meta.env.DEV ? "http://127.0.0.1:4175/" : "/formulaire-audit-ia/");
+  "/formulaire-audit-ia/index.html";
 
 export const socialLinks: SocialLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/transfert-ai-africa/", kind: "social" },

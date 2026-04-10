@@ -24,6 +24,17 @@ const BlogPage = () => {
   const { language, t } = useLanguage();
   const { items, isLoading } = useResourceFeed();
   const content = t("blog");
+  const quickLinks = language === "en"
+    ? [
+        { label: "AI certification", href: "/certification" },
+        { label: "Recommended tools", href: "/outils-ia" },
+        { label: "Training catalogue", href: "/catalogue" },
+      ]
+    : [
+        { label: "Certification IA", href: "/certification" },
+        { label: "Outils recommandés", href: "/outils-ia" },
+        { label: "Catalogue de formation", href: "/catalogue" },
+      ];
   const [searchParams, setSearchParams] = useSearchParams();
   const activeDomain = searchParams.get("domain") ?? "all";
   const activeType = searchParams.get("type") ?? "all";
@@ -164,7 +175,11 @@ const BlogPage = () => {
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
                     <h2 className="font-heading text-2xl font-bold text-card-foreground">{content.domainFilterTitle}</h2>
-                    <p className="mt-2 text-sm text-muted-foreground">{content.domainFilterDesc}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {language === "en"
+                        ? "Start with a domain, then move to the most useful resources."
+                        : "Commencez par votre domaine, puis allez vers les contenus les plus utiles."}
+                    </p>
                   </div>
                   <div className="text-sm font-medium text-muted-foreground">
                     {filteredItems.length} {content.resultsLabel}
@@ -234,7 +249,7 @@ const BlogPage = () => {
                 </div>
 
                 {activeDomain !== "all" ? (
-                  <div className="mt-5">
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
                     <Link
                       to={`/blog/domaine/${activeDomain}`}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
@@ -242,6 +257,20 @@ const BlogPage = () => {
                       {content.domainPageCta}
                       <ArrowUpRight size={14} />
                     </Link>
+                    <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                      {language === "en" ? "Next step" : "Étape suivante"}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {quickLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          to={link.href}
+                          className="rounded-full border border-border px-3 py-1.5 text-xs font-medium text-card-foreground hover:border-primary/40 hover:text-primary"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 ) : null}
               </div>
@@ -270,7 +299,11 @@ const BlogPage = () => {
                       <div className="mb-4 flex items-center justify-between gap-3">
                         <div>
                           <h2 className="font-heading text-2xl font-bold text-card-foreground">{content.latestTitle}</h2>
-                          <p className="mt-2 text-sm text-muted-foreground">{content.latestDesc}</p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            {language === "en"
+                              ? "Recent analysis, watch items and practical resources."
+                              : "Analyses, veilles et ressources pratiques publiées récemment."}
+                          </p>
                         </div>
                       </div>
                       <div className="grid gap-6 md:grid-cols-2">
