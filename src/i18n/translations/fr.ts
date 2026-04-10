@@ -314,6 +314,7 @@ const rawFr = {
     articleSidebarTitle: "Passez de la veille à l'action",
     articleSidebarDesc: "Chaque article TransferAI est relié à un domaine d'expertise, à des parcours de formation et à une orientation concrète pour la Côte d'Ivoire et l'Afrique.",
     articlePrimaryCta: "Découvrir les formations liées",
+    articleFallbackCta: "Explorer le catalogue",
     articleSecondaryCta: "Demander une orientation",
     relatedTitle: "Sur le même domaine",
     newBadge: "Nouveau",

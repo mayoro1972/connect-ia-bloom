@@ -45,6 +45,27 @@ const buildAbsoluteUrl = (pathname: string) => {
   return new URL(pathname, origin).toString();
 };
 
+const replaceDynamicTokens = (value: string, language: "fr" | "en") => {
+  const currentDate = new Intl.DateTimeFormat(language === "en" ? "en-GB" : "fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
+  return value
+    .replaceAll("{{CURRENT_DATE}}", currentDate)
+    .replaceAll("{{CURRENT_DATE_FR}}", new Intl.DateTimeFormat("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date()))
+    .replaceAll("{{CURRENT_DATE_EN}}", new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date()));
+};
+
 const BlogArticlePage = () => {
   const { slug } = useParams();
   const { language, t } = useLanguage();
@@ -54,7 +75,10 @@ const BlogArticlePage = () => {
 
   const title = language === "en" ? item?.titleEn : item?.titleFr;
   const excerpt = language === "en" ? item?.excerptEn : item?.excerptFr;
-  const body = (language === "en" ? item?.contentEn : item?.contentFr) || excerpt || "";
+  const body = replaceDynamicTokens(
+    (language === "en" ? item?.contentEn || item?.contentFr : item?.contentFr || item?.contentEn) || excerpt || "",
+    language,
+  );
   const sectorLabel = item?.sectorKey ? (t(`catalogue.domains.${item.sectorKey}`) || item.sectorKey) : null;
   const categoryLabel = item ? t(`blog.categories.${item.categoryKey}`) : "";
   const catalogueSlug = resolveCatalogueSlugFromSector(item?.sectorKey);
@@ -240,7 +264,14 @@ const BlogArticlePage = () => {
                       >
                         {content.articlePrimaryCta}
                       </Link>
-                    ) : null}
+                    ) : (
+                      <Link
+                        to="/catalogue"
+                        className="inline-flex items-center justify-center rounded-xl bg-orange-gradient px-4 py-3 text-sm font-semibold text-white hover:opacity-90"
+                      >
+                        {content.articleFallbackCta}
+                      </Link>
+                    )}
                     <Link
                       to={buildContactPath("demande-renseignement", item.sectorKey ?? undefined)}
                       className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"

@@ -94,7 +94,7 @@ export const resolveCatalogueSlugFromSector = (sectorKey?: string | null) => {
     return metierKeyToCatalogueSlug[matchedEntry[0]];
   }
 
-  return slugifySiteValue(sectorKey);
+  return null;
 };
 
 export const slugifySiteValue = (value: string) =>

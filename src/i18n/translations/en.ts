@@ -314,6 +314,7 @@ const rawEn = {
     articleSidebarTitle: "Turn insight into action",
     articleSidebarDesc: "Each TransferAI article is linked to an expertise domain, practical learning paths, and next steps tailored to Côte d'Ivoire and the wider African market.",
     articlePrimaryCta: "Explore related training",
+    articleFallbackCta: "Explore the catalogue",
     articleSecondaryCta: "Request guidance",
     relatedTitle: "More from this domain",
     newBadge: "New",
