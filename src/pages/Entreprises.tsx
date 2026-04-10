@@ -9,7 +9,6 @@ import {
   Compass,
   Radar,
   Sparkles,
-  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -24,10 +23,10 @@ const servicesHubCopy = {
   fr: {
     title: "Des services IA clairs pour passer de l'idée à l'impact",
     subtitle:
-      "Nous avons structuré notre offre en 3 piliers simples pour aider chaque entreprise à trouver rapidement le bon point d'entrée : cadrer, déployer ou animer sa dynamique IA.",
+      "Trois points d'entrée simples pour cadrer, déployer et faire vivre une dynamique IA utile dans votre organisation.",
     diagnosisTitle: "Choisissez le bon pilier selon votre situation",
     diagnosisDesc:
-      "Commencez par le besoin le plus urgent : cadrer, déployer ou animer votre dynamique IA.",
+      "Allez directement vers le bon service selon votre besoin actuel, puis avancez avec un plan clair et actionnable.",
     pillarsTitle: "Les 3 points d'entrée de notre offre",
     pillars: [
       {
@@ -70,38 +69,26 @@ const servicesHubCopy = {
         icon: Radar,
       },
     ],
-    pathwayTitle: "Le chemin le plus simple pour avancer",
+    pathwayTitle: "Le chemin le plus simple",
     pathway: [
       {
         title: "1. Cadrer",
         desc: "Comprendre votre situation, vos objectifs et les usages IA vraiment utiles à votre organisation.",
       },
       {
-        title: "2. Prioriser",
-        desc: "Identifier les quick wins, arbitrer les priorités et sécuriser les conditions d'adoption.",
-      },
-      {
-        title: "3. Déployer",
+        title: "2. Déployer",
         desc: "Construire les automatisations, assistants et solutions qui créent un résultat concret.",
       },
       {
-        title: "4. Animer",
+        title: "3. Animer",
         desc: "Former, nourrir les équipes, publier la veille et maintenir la dynamique IA dans le temps.",
       },
-    ],
-    audiencesTitle: "Quelques situations fréquentes",
-    audiences: [
-      "Nous ne savons pas par où commencer : Conseil & adoption IA",
-      "Nous avons des tâches répétitives à automatiser : Automatisation & solutions IA",
-      "Nous voulons former, communiquer et rester à jour : Media, veille & opportunités",
-      "Nous voulons éviter les projets IA flous ou redondants : commencer par un cadrage",
     ],
     outcomesTitle: "Résultats attendus",
     outcomes: [
       "Un diagnostic clair, une feuille de route et des cas d'usage priorisés",
       "Des automatisations, assistants IA et workflows utiles à vos équipes",
-      "Une newsletter métier, une veille utile et des ressources activables",
-      "Un parcours commercial plus simple entre découverte, décision et prise de contact",
+      "Une dynamique durable grâce à la formation, à la veille utile et aux ressources activables",
     ],
     ctaTitle: "Commencer par le bon service",
     ctaDesc:
@@ -112,10 +99,10 @@ const servicesHubCopy = {
   en: {
     title: "Clear AI services to move from idea to impact",
     subtitle:
-      "We structured the offer into 3 simple pillars to help every organization quickly find the right entry point: frame, deploy or activate its AI momentum.",
+      "Three simple entry points to frame, deploy and sustain useful AI adoption inside your organization.",
     diagnosisTitle: "Choose the right pillar for your situation",
     diagnosisDesc:
-      "Start with the most urgent need: frame, deploy or activate your AI momentum.",
+      "Go directly to the right service based on your current need, then move forward with a clear and actionable plan.",
     pillarsTitle: "The 3 entry points into our offer",
     pillars: [
       {
@@ -158,38 +145,26 @@ const servicesHubCopy = {
         icon: Radar,
       },
     ],
-    pathwayTitle: "The simplest path to move forward",
+    pathwayTitle: "The simplest path",
     pathway: [
       {
         title: "1. Frame",
         desc: "Understand your situation, your objectives and the AI use cases that truly matter to your organization.",
       },
       {
-        title: "2. Prioritize",
-        desc: "Identify quick wins, arbitrate priorities and secure adoption conditions.",
-      },
-      {
-        title: "3. Deploy",
+        title: "2. Deploy",
         desc: "Build automations, assistants and solutions that create tangible outcomes.",
       },
       {
-        title: "4. Activate",
+        title: "3. Activate",
         desc: "Train teams, feed the watch, publish content and sustain the AI momentum over time.",
       },
-    ],
-    audiencesTitle: "Frequent situations we see",
-    audiences: [
-      "We do not know where to start: AI advisory & adoption",
-      "We have repetitive tasks to automate: AI automation & solutions",
-      "We want to train, communicate and stay current: Media, watch & opportunities",
-      "We want to avoid vague or overlapping AI projects: start with framing",
     ],
     outcomesTitle: "Expected outcomes",
     outcomes: [
       "A clear diagnosis, a roadmap and prioritized use cases",
       "Useful automations, AI assistants and workflows for your teams",
-      "A profession-focused newsletter, useful watch and actionable resources",
-      "A simpler commercial path from discovery to decision and contact",
+      "Long-term momentum through training, useful watch and actionable resources",
     ],
     ctaTitle: "Start with the right service",
     ctaDesc:
@@ -294,7 +269,7 @@ const EntreprisesPage = () => {
             <div className="mb-16 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
               <div className="rounded-3xl border border-border bg-card p-8">
                 <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.pathwayTitle}</h2>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-3">
                   {copy.pathway.map((step) => (
                     <div key={step.title} className="rounded-2xl border border-border bg-background p-5">
                       <h3 className="mb-2 font-heading text-lg font-semibold text-card-foreground">{step.title}</h3>
@@ -305,27 +280,15 @@ const EntreprisesPage = () => {
               </div>
 
               <div className="rounded-3xl border border-border bg-card p-8">
-                <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.audiencesTitle}</h2>
+                <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.outcomesTitle}</h2>
                 <div className="space-y-4">
-                  {copy.audiences.map((audience) => (
-                    <div key={audience} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
-                      <Users size={18} className="mt-0.5 shrink-0 text-primary" />
-                      <p className="text-sm text-card-foreground">{audience}</p>
+                  {copy.outcomes.map((outcome) => (
+                    <div key={outcome} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
+                      <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
+                      <p className="text-sm leading-7 text-card-foreground">{outcome}</p>
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-
-            <div className="mb-16 rounded-3xl border border-border bg-card p-8">
-              <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.outcomesTitle}</h2>
-              <div className="grid gap-4 md:grid-cols-2">
-                {copy.outcomes.map((outcome) => (
-                  <div key={outcome} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-5">
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
-                    <p className="text-sm leading-7 text-card-foreground">{outcome}</p>
-                  </div>
-                ))}
               </div>
             </div>
 
