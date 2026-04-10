@@ -18,6 +18,7 @@ const EducationHub = lazy(() => import("./pages/EducationHub"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const FormationDetail = lazy(() => import("./pages/FormationDetail"));
 const Certification = lazy(() => import("./pages/Certification"));
+const AIToolsMatrix = lazy(() => import("./pages/AIToolsMatrix"));
 const Entreprises = lazy(() => import("./pages/Entreprises"));
 const Partenaires = lazy(() => import("./pages/Partenaires"));
 const Evenements = lazy(() => import("./pages/Evenements"));
@@ -134,6 +135,7 @@ const AnimatedRoutes = () => {
           <Route path="/parcours" element={<Parcours />} />
           <Route path="/inscription" element={<Inscription />} />
           <Route path="/certification" element={<Certification />} />
+          <Route path="/outils-ia" element={<AIToolsMatrix />} />
           <Route path="/entreprises" element={<Entreprises />} />
           <Route path="/services" element={<Entreprises />} />
           <Route path="/partenaires" element={<Partenaires />} />

@@ -146,6 +146,17 @@ const getSeoMeta = (pathname: string, language: "fr" | "en"): SeoMeta => {
           },
         },
         {
+          path: "/outils-ia",
+          meta: {
+            title: `AI tools by domain | ${SITE_NAME}`,
+            description:
+              "Explore the recommended AI tools, low-code stacks, workflow platforms, and training formats for each business domain covered by TransferAI Africa.",
+            robots: "index,follow",
+            canonicalPath: "/outils-ia",
+            ogType: "website",
+          },
+        },
+        {
           path: "/blog",
           meta: {
             title: `Resources & AI watch | ${SITE_NAME}`,
@@ -221,6 +232,17 @@ const getSeoMeta = (pathname: string, language: "fr" | "en"): SeoMeta => {
               "Découvrez la certification IA premium pour les métiers support et de gestion, avec socle commun et spécialisations métier dès octobre 2026.",
             robots: "index,follow",
             canonicalPath: "/certification",
+            ogType: "website",
+          },
+        },
+        {
+          path: "/outils-ia",
+          meta: {
+            title: `Outils IA par domaine | ${SITE_NAME}`,
+            description:
+              "Explorez les outils IA recommandés, les stacks low-code, les workflows et les formats de formation adaptés à chaque domaine métier couvert par TransferAI Africa.",
+            robots: "index,follow",
+            canonicalPath: "/outils-ia",
             ogType: "website",
           },
         },

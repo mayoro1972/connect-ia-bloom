@@ -170,7 +170,7 @@ const rawEn = {
     title: "AI certification for support and management roles",
     subtitle: "A premium certification designed for professionals who want to use AI with structure, productivity and concrete impact in their role: executive support, IT, finance & accounting, marketing, human resources, administration and support functions.",
     positioningTitle: "A certification designed for multiple roles",
-    positioningDesc: "This certification is not limited to executive assistants and secretaries. It is designed as a cross-functional certification for support and management roles that want to integrate AI into day-to-day work, save time, automate selected tasks and improve the quality of their deliverables.",
+    positioningDesc: "A professional certification designed for roles that want to integrate AI with structure, rigor, and measurable impact. It helps improve productivity, deliverable quality, analysis, communication, and decision support across a wide range of professional contexts.",
     domainsTitle: "Roles and functions covered",
     applicableDomains: [
       "Executive support",
@@ -190,6 +190,8 @@ const rawEn = {
       "Organizations that want to train staff on immediately applicable AI use cases",
     ],
     objectivesTitle: "Certification Objectives",
+    domainSelectorDesc: "Choose a domain to view objectives, a 5-day program, and a value proposition tailored to that sector.",
+    sectorPitchTitle: "Why this version fits your sector",
     objectives: [
       "Master essential AI tools to improve professional productivity",
       "Automate repetitive tasks and reduce operational load",
@@ -206,6 +208,8 @@ const rawEn = {
       "A stronger profile to grow, apply or lead transformation projects",
     ],
     programTitle: "Program (5 days)",
+    programDayLabel: "Day",
+    deliverablesTitle: "Deliverables & final project",
     modules: [
       "Module 1: AI fundamentals for support roles (1 day)",
       "Module 2: ChatGPT, copilots and AI tools for productivity (1 day)",
@@ -250,6 +254,7 @@ const rawEn = {
       "The first cohorts can be opened by priority specialization depending on market demand and candidate profiles.",
     strategicTitle: "Why this certification matters",
     strategicDesc: "Organizations increasingly look for professionals who can use AI in an operational, responsible and effective way. This certification helps you build immediately applicable skills and strengthen your market value.",
+    methodologyTitle: "Pedagogical framework & AI inspiration",
     applyNowTitle: "Why apply now",
     applyNowPoints: [
       "The first cohort is planned for October 2026",
@@ -261,8 +266,8 @@ const rawEn = {
     evalPoints: [
       "Continuous assessment throughout the training",
       "Practical project: real business case to solve with AI",
-      "Presentation before a panel of professionals",
-      "Minimum required score: 70/100",
+      "Learning validation based on the deliverables produced during the training",
+      "Certificate awarded at the end of the program",
     ],
     priceLabel: "Pricing",
     price: "Price on request",

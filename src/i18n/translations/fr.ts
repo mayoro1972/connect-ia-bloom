@@ -170,7 +170,7 @@ const rawFr = {
     title: "Certification IA appliquée aux métiers support et de gestion",
     subtitle: "Une certification premium conçue pour les professionnels qui veulent utiliser l'IA avec méthode, productivité et impact concret dans leur métier : assistanat de direction, IT, finance & comptabilité, marketing, ressources humaines, administration et fonctions support.",
     positioningTitle: "Une certification pensée pour plusieurs métiers",
-    positioningDesc: "Cette certification ne s'adresse pas uniquement aux assistants et secrétaires de direction. Elle a été conçue comme une certification transversale pour les métiers support et de gestion qui veulent intégrer l'IA dans leurs pratiques quotidiennes, gagner du temps, automatiser certaines tâches et améliorer la qualité de leurs livrables.",
+    positioningDesc: "Une certification professionnelle conçue pour les métiers qui veulent intégrer l'IA avec méthode, exigence et impact concret. Elle permet d'améliorer la productivité, la qualité des livrables, l'analyse, la communication et la prise de décision dans des contextes professionnels variés.",
     domainsTitle: "Métiers et fonctions concernés",
     applicableDomains: [
       "Assistanat de direction",
@@ -190,6 +190,8 @@ const rawFr = {
       "Entreprises qui veulent former des collaborateurs à des usages IA immédiatement applicables",
     ],
     objectivesTitle: "Objectifs de la certification",
+    domainSelectorDesc: "Choisissez un domaine pour voir des objectifs, un programme 5 jours et une proposition de valeur adaptés à votre secteur.",
+    sectorPitchTitle: "Pourquoi cette version concerne votre secteur",
     objectives: [
       "Maîtriser les outils IA essentiels pour améliorer la productivité professionnelle",
       "Automatiser les tâches répétitives et réduire la charge opérationnelle",
@@ -206,6 +208,8 @@ const rawFr = {
       "Un positionnement plus fort pour évoluer, candidater ou piloter des projets",
     ],
     programTitle: "Programme (5 jours)",
+    programDayLabel: "Jour",
+    deliverablesTitle: "Livrables & projet final",
     modules: [
       "Module 1 : Fondamentaux de l'IA appliquée aux métiers support (1 jour)",
       "Module 2 : ChatGPT, copilotes et outils IA pour la productivité (1 jour)",
@@ -250,6 +254,7 @@ const rawFr = {
       "Les premières cohortes peuvent être ouvertes par spécialisation prioritaire, selon la demande du marché et le profil des candidats.",
     strategicTitle: "Pourquoi cette certification est stratégique",
     strategicDesc: "Les entreprises recherchent de plus en plus des profils capables d'utiliser l'IA de façon opérationnelle, responsable et efficace. Cette certification vous permet de monter en compétence sur des usages immédiatement applicables dans votre fonction et de renforcer votre valeur sur le marché.",
+    methodologyTitle: "Cadre pédagogique & inspiration IA",
     applyNowTitle: "Pourquoi candidater maintenant",
     applyNowPoints: [
       "La première cohorte est prévue pour octobre 2026",
@@ -261,8 +266,8 @@ const rawFr = {
     evalPoints: [
       "Évaluation continue tout au long de la formation",
       "Projet pratique : cas d'entreprise réel à résoudre avec l'IA",
-      "Soutenance devant un jury de professionnels",
-      "Score minimum requis : 70/100",
+      "Validation des acquis sur la base des livrables produits pendant la formation",
+      "Certificat délivré en fin de parcours",
     ],
     priceLabel: "Tarification",
     price: "Prix sur demande",
