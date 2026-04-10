@@ -213,7 +213,7 @@ const BlogPage = () => {
                   </div>
                 </div>
 
-                <div className="mt-5 flex gap-3 overflow-x-auto pb-1">
+                <div className="mt-5 flex flex-wrap gap-3">
                   <button
                     type="button"
                     onClick={() => updateFilters({ domain: "all" })}
