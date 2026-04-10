@@ -330,14 +330,14 @@ const EducationHub = () => {
                       initial={{ opacity: 0, y: 18 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.06 }}
-                      className="rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.35)]"
+                      className="flex h-full min-h-[332px] flex-col rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.35)]"
                     >
                       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
                         <Icon size={22} className="text-primary" />
                       </div>
                       <h3 className="mb-3 font-heading text-xl font-bold text-card-foreground">{pillar.title}</h3>
-                      <p className="mb-5 text-sm leading-7 text-muted-foreground">{pillar.desc}</p>
-                      <Link to={pillar.href} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80">
+                      <p className="mb-5 flex-1 text-sm leading-7 text-muted-foreground">{pillar.desc}</p>
+                      <Link to={pillar.href} className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80">
                         {pillar.cta} <ArrowRight size={15} />
                       </Link>
                     </motion.div>
@@ -376,10 +376,10 @@ const EducationHub = () => {
               <h2 className="font-heading text-2xl font-bold text-card-foreground mb-8">{copy.pathwaysTitle}</h2>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {copy.pathways.map((path) => (
-                  <div key={path.title} className="rounded-2xl border border-border bg-background p-5">
+                  <div key={path.title} className="flex h-full min-h-[280px] flex-col rounded-2xl border border-border bg-background p-5">
                     <h3 className="font-heading text-lg font-semibold text-card-foreground">{path.title}</h3>
-                    <p className="mt-2 mb-4 text-sm leading-7 text-muted-foreground">{path.desc}</p>
-                    <Link to={path.href} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80">
+                    <p className="mt-2 mb-4 flex-1 text-sm leading-7 text-muted-foreground">{path.desc}</p>
+                    <Link to={path.href} className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80">
                       {path.cta} <ArrowRight size={14} />
                     </Link>
                   </div>

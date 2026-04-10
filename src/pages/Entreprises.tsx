@@ -241,7 +241,7 @@ const EntreprisesPage = () => {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.08 }}
-                      className="rounded-3xl border border-border bg-background p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.35)]"
+                      className="flex h-full min-h-[420px] flex-col rounded-3xl border border-border bg-background p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.35)]"
                     >
                       <div className="mb-5 flex items-center justify-between gap-3">
                         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
@@ -253,16 +253,18 @@ const EntreprisesPage = () => {
                       </div>
 
                       <h3 className="mb-3 font-heading text-xl font-bold text-card-foreground">{pillar.title}</h3>
-                      <p className="mb-5 text-sm leading-7 text-muted-foreground">{pillar.desc}</p>
+                      <div className="flex-1">
+                        <p className="mb-5 text-sm leading-7 text-muted-foreground">{pillar.desc}</p>
 
-                      <ul className="space-y-3">
-                        {pillar.highlights.map((item) => (
-                          <li key={item} className="flex items-start gap-2 text-sm text-card-foreground">
-                            <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
+                        <ul className="space-y-3">
+                          {pillar.highlights.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-sm text-card-foreground">
+                              <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
                       <Link
                         to={pillar.href}

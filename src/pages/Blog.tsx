@@ -85,30 +85,34 @@ const BlogPage = () => {
     const isRecent = isResourceNew(article.publishedAt, article.isNewManual);
 
     return (
-      <div key={article.id}>
-        <Link to={`/blog/${article.slug}`} className="group block rounded-xl border border-border bg-card p-6 hover-lift">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className={`text-xs font-semibold ${categoryColors[article.categoryKey] || "text-primary"}`}>
-              {categoryLabel}
-            </span>
-            {sectorLabel && (
-              <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-                {sectorLabel}
+      <div key={article.id} className="h-full">
+        <Link to={`/blog/${article.slug}`} className="group flex h-full min-h-[400px] flex-col rounded-xl border border-border bg-card p-6 hover-lift">
+          <div className="flex min-h-[52px] items-start justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`text-xs font-semibold ${categoryColors[article.categoryKey] || "text-primary"}`}>
+                {categoryLabel}
               </span>
-            )}
-            {isRecent && (
-              <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
+              {sectorLabel && (
+                <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium leading-none text-muted-foreground">
+                  {sectorLabel}
+                </span>
+              )}
+            </div>
+            {isRecent ? (
+              <span className="inline-flex shrink-0 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] leading-none text-primary-foreground">
                 {content.newBadge}
               </span>
+            ) : (
+              <span className="h-6 w-[72px] shrink-0" aria-hidden="true" />
             )}
           </div>
 
-          <h3 className="mb-3 mt-3 font-heading text-lg font-bold text-card-foreground transition-colors group-hover:text-primary">
+          <h3 className="mt-3 min-h-[7rem] line-clamp-4 font-heading text-lg font-bold leading-snug text-card-foreground transition-colors group-hover:text-primary">
             {title}
           </h3>
-          <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{excerpt}</p>
+          <p className="mt-3 min-h-[6.75rem] line-clamp-4 text-sm leading-relaxed text-muted-foreground">{excerpt}</p>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+          <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-5 text-xs text-muted-foreground">
             <div className="flex flex-wrap items-center gap-3">
               {article.readTimeMinutes ? (
                 <span className="flex items-center gap-1">
@@ -119,9 +123,11 @@ const BlogPage = () => {
               <span>{formatDate(article.publishedAt)}</span>
             </div>
 
-            <div className="flex items-center gap-2">
-              {article.sourceName ? <span>{content.sourceLabel}: {article.sourceName}</span> : null}
-              <span className="inline-flex items-center gap-1 font-semibold text-primary">
+            <div className="flex max-w-full items-center gap-2">
+              {article.sourceName ? (
+                <span className="line-clamp-1 max-w-[180px]">{content.sourceLabel}: {article.sourceName}</span>
+              ) : null}
+              <span className="inline-flex shrink-0 items-center gap-1 font-semibold text-primary">
                 {content.readArticle}
                 <ArrowUpRight size={14} />
               </span>

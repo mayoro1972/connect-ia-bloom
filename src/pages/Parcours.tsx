@@ -197,12 +197,12 @@ const ParcoursPage = () => {
 
                 return (
                   <ScrollReveal key={step.title} delay={index * 0.1}>
-                    <div className="bg-card border border-border rounded-xl p-6 text-center hover-lift">
+                    <div className="flex h-full min-h-[268px] flex-col items-center rounded-xl border border-border bg-card p-6 text-center hover-lift">
                       <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                         <Icon size={24} className="text-primary" />
                       </div>
-                      <h3 className="font-heading font-bold text-lg mb-2 text-card-foreground">{step.title}</h3>
-                      <p className="text-sm text-muted-foreground">{step.desc}</p>
+                      <h3 className="min-h-[3.5rem] font-heading text-lg font-bold text-card-foreground mb-2">{step.title}</h3>
+                      <p className="flex-1 text-sm text-muted-foreground">{step.desc}</p>
                     </div>
                   </ScrollReveal>
                 );
