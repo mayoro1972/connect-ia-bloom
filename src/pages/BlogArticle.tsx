@@ -21,6 +21,16 @@ const categoryColors: Record<ResourceCategoryKey, string> = {
   veille: "text-[hsl(145,65%,42%)]",
 };
 
+const sanitizeResourceTitle = (title: string, categoryKey: ResourceCategoryKey) => {
+  if (categoryKey !== "veille") {
+    return title;
+  }
+
+  return title
+    .replace(/^Veille\s+/i, "")
+    .replace(/^Watch\s+/i, "");
+};
+
 const setMetaTag = (attribute: "name" | "property", key: string, content: string) => {
   let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
 
@@ -90,7 +100,8 @@ const BlogArticlePage = () => {
   const { items } = useResourceFeed();
   const content = t("blog");
 
-  const title = language === "en" ? item?.titleEn : item?.titleFr;
+  const rawTitle = language === "en" ? item?.titleEn : item?.titleFr;
+  const title = item && rawTitle ? sanitizeResourceTitle(rawTitle, item.categoryKey) : rawTitle;
   const excerpt = language === "en" ? item?.excerptEn : item?.excerptFr;
   const body = replaceDynamicTokens(
     (language === "en" ? item?.contentEn || item?.contentFr : item?.contentFr || item?.contentEn) || excerpt || "",
@@ -328,7 +339,10 @@ const BlogArticlePage = () => {
                     </div>
                     <div className="mt-4 space-y-4">
                       {relatedItems.map((related) => {
-                        const relatedTitle = language === "en" ? related.titleEn : related.titleFr;
+                        const relatedTitle = sanitizeResourceTitle(
+                          language === "en" ? related.titleEn : related.titleFr,
+                          related.categoryKey,
+                        );
                         const relatedExcerpt = language === "en" ? related.excerptEn : related.excerptFr;
 
                         return (

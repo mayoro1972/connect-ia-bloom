@@ -23,6 +23,16 @@ const categoryColors: Record<ResourceCategoryKey, string> = {
   veille: "text-[hsl(145,65%,42%)]",
 };
 
+const sanitizeResourceTitle = (title: string, categoryKey: ResourceCategoryKey) => {
+  if (categoryKey !== "veille") {
+    return title;
+  }
+
+  return title
+    .replace(/^Veille\s+/i, "")
+    .replace(/^Watch\s+/i, "");
+};
+
 const setMetaTag = (attribute: "name" | "property", key: string, content: string) => {
   let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
 
@@ -118,7 +128,7 @@ const BlogDomainPage = () => {
   }, [domainSlug, language, sector, sectorLabel]);
 
   const renderCard = (article: (typeof items)[number]) => {
-    const title = language === "en" ? article.titleEn : article.titleFr;
+    const title = sanitizeResourceTitle(language === "en" ? article.titleEn : article.titleFr, article.categoryKey);
     const excerpt = language === "en" ? article.excerptEn : article.excerptFr;
     const categoryLabel = t(`blog.categories.${article.categoryKey}`);
     const isRecent = isResourceNew(article.publishedAt, article.isNewManual);
