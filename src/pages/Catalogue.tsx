@@ -272,8 +272,23 @@ const CataloguePage = () => {
         <section className="py-10">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="mb-6 rounded-3xl border border-border bg-card p-6">
-              <h2 className="mb-4 font-heading text-xl font-bold text-card-foreground">{guideCopy.quickLinksTitle}</h2>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="flex flex-wrap items-start justify-between gap-6">
+                <div className="max-w-3xl">
+                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{guideCopy.sectionIntroTitle}</h2>
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{guideCopy.sectionIntroDesc}</p>
+                </div>
+                <div className="flex flex-wrap items-center gap-4 text-sm">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-background px-4 py-2 text-card-foreground">
+                    <BookOpen size={16} className="text-primary" />
+                    <strong>{totalFormations}+</strong> {t("catalogue.formations")}
+                  </span>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-background px-4 py-2 text-card-foreground">
+                    <BarChart3 size={16} className="text-primary" />
+                    <strong>{totalDomains}</strong> {t("catalogue.domainsExpertise")}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-5 grid gap-4 md:grid-cols-3">
                 {guideCopy.quickLinks.map((link) => (
                   <Link key={link.title} to={link.href} className="rounded-2xl border border-border bg-background p-5 transition hover:border-primary/30 hover:text-primary">
                     <h3 className="font-heading text-base font-semibold text-card-foreground">{link.title}</h3>
@@ -284,84 +299,6 @@ const CataloguePage = () => {
                   </Link>
                 ))}
               </div>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-6">
-              <div className="bg-card rounded-3xl border border-border p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <CheckCircle2 size={22} className="text-primary" />
-                  </div>
-                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{guideCopy.reassuranceTitle}</h2>
-                </div>
-                <div className="space-y-4">
-                  {guideCopy.reassurancePoints.map((point) => (
-                    <div key={point} className="rounded-2xl border border-border bg-background p-4 text-sm leading-relaxed text-muted-foreground">
-                      {point}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-card rounded-3xl border border-border p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <Compass size={22} className="text-primary" />
-                  </div>
-                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{guideCopy.howToTitle}</h2>
-                </div>
-                <div className="space-y-4">
-                  {guideCopy.howToSteps.map((step, index) => (
-                    <div key={step} className="rounded-2xl border border-border bg-background p-4">
-                      <div className="flex items-start gap-4">
-                        <span className="shrink-0 inline-flex w-8 h-8 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold">
-                          {index + 1}
-                        </span>
-                        <p className="text-sm leading-relaxed text-muted-foreground">{step}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Banner */}
-        <div className="border-b border-border bg-card">
-          <div className="container mx-auto px-4 lg:px-8 py-4">
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <BookOpen size={16} className="text-primary" />
-                <span className="font-semibold text-card-foreground">{totalFormations}+</span>
-                <span className="text-muted-foreground">{t("catalogue.formations")}</span>
-              </div>
-              <span className="text-border">&bull;</span>
-              <div className="flex items-center gap-2">
-                <BarChart3 size={16} className="text-primary" />
-                <span className="font-semibold text-card-foreground">{totalDomains}</span>
-                <span className="text-muted-foreground">{t("catalogue.domainsExpertise")}</span>
-              </div>
-              <span className="text-border">&bull;</span>
-              <div className="flex items-center gap-2">
-                <Monitor size={16} className="text-primary" />
-                <span className="font-semibold text-card-foreground">3</span>
-                <span className="text-muted-foreground">{t("catalogue.formatsLabel")}</span>
-              </div>
-              <span className="text-border">&bull;</span>
-              <div className="flex items-center gap-2">
-                <Sparkles size={16} className="text-primary" />
-                <span className="text-muted-foreground">{t("catalogue.certifiedLabel")}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <section className="py-10">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-3xl mb-8">
-              <h2 className="font-heading text-3xl font-bold text-card-foreground mb-3">{guideCopy.sectionIntroTitle}</h2>
-              <p className="text-muted-foreground leading-relaxed">{guideCopy.sectionIntroDesc}</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">

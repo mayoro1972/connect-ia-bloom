@@ -8,7 +8,6 @@ import PageTransition from "@/components/PageTransition";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveCatalogueSlugFromSector } from "@/lib/site-links";
 import {
-  aiToolMethodology,
   domainToolPlans,
   getDomainToolPlan,
   getToolById,
@@ -43,7 +42,6 @@ const pageCopy = {
     useCasesTitle: "Usages prioritaires",
     formatsTitle: "Catalogue de formation par domaine",
     toolsTitle: "Outils recommandés",
-    methodologyTitle: "Pourquoi cette sélection",
     browseDomains: "Explorer les 13 domaines",
     viewCertification: "Voir la certification sectorielle",
     viewCatalogue: "Voir le catalogue du domaine",
@@ -65,7 +63,6 @@ const pageCopy = {
     useCasesTitle: "Priority use cases",
     formatsTitle: "Domain training catalogue",
     toolsTitle: "Recommended tools",
-    methodologyTitle: "Why this selection",
     browseDomains: "Explore the 13 domains",
     viewCertification: "View sector certification",
     viewCatalogue: "View domain catalogue",
@@ -151,32 +148,6 @@ const AIToolsMatrixPage = () => {
                   </button>
                 ))}
               </div>
-
-              <div className="mt-8 grid gap-4 lg:grid-cols-2">
-                {domainToolPlans.map((plan) => (
-                  <button
-                    key={plan.slug}
-                    type="button"
-                    onClick={() => updateDomain(plan)}
-                    className={`rounded-2xl border p-5 text-left transition ${
-                      plan.slug === selectedPlan.slug
-                        ? "border-primary bg-primary/5"
-                        : "border-border bg-background hover:border-primary/30"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-heading text-lg font-semibold text-card-foreground">{localize(language, plan.label)}</h3>
-                        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">{localize(language, plan.trendLabel)}</p>
-                        <p className="mt-3 text-sm leading-7 text-muted-foreground">{localize(language, plan.summary)}</p>
-                      </div>
-                      <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
-                        {plan.recommendedToolIds.length} {language === "en" ? "tools" : "outils"}
-                      </span>
-                    </div>
-                  </button>
-                ))}
-              </div>
             </section>
 
             <section className="mt-10 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
@@ -253,27 +224,6 @@ const AIToolsMatrixPage = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-            </section>
-
-            <section className="mt-10 rounded-[1.75rem] border border-border bg-card p-8">
-              <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.methodologyTitle}</h2>
-              <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">{localize(language, aiToolMethodology.description)}</p>
-              <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {aiToolMethodology.evidence.map((item) => (
-                  <a
-                    key={item.url}
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-2xl border border-border bg-background p-4 text-sm font-medium text-card-foreground hover:border-primary/30 hover:text-primary"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      {item.label}
-                      <ArrowUpRight size={14} />
-                    </span>
-                  </a>
-                ))}
               </div>
             </section>
           </div>
