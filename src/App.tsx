@@ -12,6 +12,7 @@ import { usePageView } from "./hooks/usePageView";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const BlogDomainPage = lazy(() => import("./pages/BlogDomainPage"));
 
 const EducationHub = lazy(() => import("./pages/EducationHub"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
@@ -139,6 +140,8 @@ const AnimatedRoutes = () => {
           <Route path="/evenements" element={<Evenements />} />
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/domaine/:domainSlug" element={<BlogDomainPage />} />
+          <Route path="/blog/domain/:domainSlug" element={<BlogDomainPage />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/contact" element={<LeadFormsPreview />} />
           <Route path="/confidentialite" element={<Privacy />} />

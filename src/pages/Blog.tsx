@@ -6,41 +6,17 @@ import PageHeader from "@/components/PageHeader";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { isResourceNew, type ResourceCategoryKey } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
-import { slugifySiteValue } from "@/lib/site-links";
+import {
+  getAvailableBlogSectors,
+  getBlogSectorSlug,
+  resolveBlogSectorLabel,
+} from "@/lib/blog-domains";
 
 const categoryColors: Record<ResourceCategoryKey, string> = {
   "expertise-ai": "text-primary",
   guides: "text-coral",
   "case-studies": "text-destructive",
   veille: "text-[hsl(145,65%,42%)]",
-};
-
-const preferredSectorOrder = [
-  "IT & Transformation Digitale",
-  "Finance & Fintech",
-  "Agriculture & AgroTech IA",
-  "Éducation & EdTech IA",
-  "Santé & IA médicale",
-  "Logistique & Supply Chain",
-  "Énergie & Transition énergétique",
-  "RH & Gestion des talents",
-  "Marketing & Communication IA",
-  "Droit & LegalTech IA",
-  "Immobilier & Smart City",
-  "Tourisme & Hospitalité",
-  "Médias & Création de contenu",
-];
-
-const resolveSectorLabel = (
-  sector: string | null | undefined,
-  translate: (key: string) => string,
-) => {
-  if (!sector) {
-    return null;
-  }
-
-  const translated = translate(`catalogue.domains.${sector}`);
-  return translated !== `catalogue.domains.${sector}` ? translated : sector;
 };
 
 const BlogPage = () => {
@@ -65,37 +41,12 @@ const BlogPage = () => {
     }).format(date);
   };
 
-  const availableSectors = Array.from(
-    new Map(
-      items
-        .filter((item) => item.sectorKey)
-        .map((item) => [slugifySiteValue(item.sectorKey as string), item.sectorKey as string]),
-    ).entries(),
-  )
-    .map(([, value]) => value)
-    .sort((left, right) => {
-      const leftIndex = preferredSectorOrder.indexOf(left);
-      const rightIndex = preferredSectorOrder.indexOf(right);
-
-      if (leftIndex === -1 && rightIndex === -1) {
-        return left.localeCompare(right);
-      }
-
-      if (leftIndex === -1) {
-        return 1;
-      }
-
-      if (rightIndex === -1) {
-        return -1;
-      }
-
-      return leftIndex - rightIndex;
-    });
+  const availableSectors = getAvailableBlogSectors(items.map((item) => item.sectorKey));
 
   const filteredItems = items.filter((item) => {
     const domainMatches =
       activeDomain === "all" ||
-      (item.sectorKey ? slugifySiteValue(item.sectorKey) === activeDomain : false);
+      (item.sectorKey ? getBlogSectorSlug(item.sectorKey) === activeDomain : false);
     const typeMatches = activeType === "all" || item.categoryKey === activeType;
     return domainMatches && typeMatches;
   });
@@ -128,7 +79,7 @@ const BlogPage = () => {
   const renderCard = (article: (typeof items)[number]) => {
     const title = language === "en" ? article.titleEn : article.titleFr;
     const excerpt = language === "en" ? article.excerptEn : article.excerptFr;
-    const sectorLabel = resolveSectorLabel(article.sectorKey, t);
+    const sectorLabel = resolveBlogSectorLabel(article.sectorKey, t);
     const categoryLabel = t(`blog.categories.${article.categoryKey}`);
     const isRecent = isResourceNew(article.publishedAt, article.isNewManual);
 
@@ -226,9 +177,9 @@ const BlogPage = () => {
                     {content.allDomains}
                   </button>
                   {availableSectors.map((sector) => {
-                    const slug = slugifySiteValue(sector);
+                    const slug = getBlogSectorSlug(sector);
                     const count = items.filter((item) => item.sectorKey === sector).length;
-                    const sectorLabel = resolveSectorLabel(sector, t);
+                    const sectorLabel = resolveBlogSectorLabel(sector, t);
 
                     return (
                       <button
@@ -274,6 +225,18 @@ const BlogPage = () => {
                     </button>
                   ))}
                 </div>
+
+                {activeDomain !== "all" ? (
+                  <div className="mt-5">
+                    <Link
+                      to={`/blog/domaine/${activeDomain}`}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                    >
+                      {content.domainPageCta}
+                      <ArrowUpRight size={14} />
+                    </Link>
+                  </div>
+                ) : null}
               </div>
 
               {filteredItems.length === 0 ? (
