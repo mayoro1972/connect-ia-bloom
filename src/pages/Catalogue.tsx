@@ -17,7 +17,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { fixMojibake } from "@/lib/fixMojibake";
-import { buildContactPath, resolveCatalogueSlugFromSector, resolveCertificationSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
+import { buildContactPath, resolveCertificationSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
@@ -183,82 +183,52 @@ const CataloguePage = () => {
   const guideCopy = language === "fr"
     ? {
         badge: "Catalogue",
-        reassuranceTitle: "Un catalogue conçu pour vous aider à choisir vite et bien",
-        reassurancePoints: [
-          "Des formations classées par domaine métier pour aller à l'essentiel.",
-          "Des niveaux clairs : débutant, intermédiaire et avancé.",
-          "Des formats adaptés : présentiel, hybride ou en ligne.",
-          "Des tarifs communiqués sur demande selon le format retenu.",
-        ],
-        howToTitle: "Comment trouver la bonne formation en moins de 2 minutes",
-        howToSteps: [
-          "Choisissez un domaine si vous connaissez déjà votre métier ou votre fonction.",
-          "Utilisez la recherche si vous cherchez un sujet précis ou un mot-clé.",
-          "Filtrez par niveau et par format pour affiner la sélection.",
-          "Ouvrez la fiche détaillée pour voir les objectifs, le programme et le bon prochain pas.",
-        ],
-        sectionIntroTitle: "Explorez, comparez et choisissez selon votre besoin",
+        sectionIntroTitle: "Un catalogue plus clair pour choisir vite",
         sectionIntroDesc:
-          "Cette page vous aide à parcourir l'offre complète, à comparer les formations et à identifier rapidement celle qui correspond à votre niveau, votre métier et votre objectif.",
+          "Parcourez l'offre par domaine, filtrez selon votre niveau et allez directement vers la bonne formation.",
         domainsTitle: "Explorer par domaine d'expertise",
         domainsDesc:
-          "Chaque domaine regroupe des formations conçues pour des usages professionnels concrets. Cliquez sur un domaine pour découvrir les formations disponibles.",
+          "Chaque domaine regroupe les formations les plus utiles pour un même métier ou une même fonction.",
         searchTitle: "Rechercher une formation",
         searchDesc:
-          "Vous connaissez déjà votre besoin ? Recherchez par mot-clé, filtrez par domaine, niveau ou format, et comparez les résultats en quelques secondes.",
+          "Utilisez la recherche si vous avez déjà un besoin précis, puis affinez avec les filtres.",
         newTitle: "Nouvelles formations à découvrir",
         newDesc:
-          "Consultez les dernières formations ajoutées au catalogue pour découvrir les sujets récents, les nouveaux cas d'usage et les domaines en forte évolution.",
-        finalTitle: "Vous hésitez entre plusieurs formations ?",
+          "Retrouvez ici les dernières formations ajoutées au catalogue.",
+        finalTitle: "Besoin d'un choix plus simple ?",
         finalDesc:
-          "Nous pouvons vous orienter vers la bonne formation selon votre métier, votre niveau actuel et votre objectif professionnel.",
+          "Nous pouvons vous orienter vers la bonne formation selon votre métier, votre niveau et votre objectif.",
         primaryCta: "Demander une orientation",
         secondaryCta: "Déposer ma candidature",
-        quickLinksTitle: "Commencer plus vite",
         quickLinks: [
-          { title: "Voir la certification", desc: "Pour comprendre les objectifs, le programme et la valeur métier par domaine.", href: "/certification" },
-          { title: "Voir les outils IA", desc: "Pour découvrir les outils, workflows et stacks recommandés par domaine.", href: "/outils-ia" },
-          { title: "Être orienté", desc: "Pour obtenir une recommandation claire si vous hésitez entre plusieurs formats.", href: buildContactPath("demande-renseignement") },
+          { title: "Certification", desc: "Objectifs, programme et valeur métier.", href: "/certification" },
+          { title: "Outils IA", desc: "Stacks, workflows et outils recommandés.", href: "/outils-ia" },
+          { title: "Orientation", desc: "Recevoir une recommandation claire.", href: buildContactPath("demande-renseignement") },
         ],
       }
     : {
         badge: "Catalogue",
-        reassuranceTitle: "A catalogue designed to help you choose quickly and confidently",
-        reassurancePoints: [
-          "Courses organized by professional domain so you can focus fast.",
-          "Clear levels: beginner, intermediate and advanced.",
-          "Flexible formats: on-site, hybrid or online.",
-          "Pricing shared on request depending on the selected format.",
-        ],
-        howToTitle: "How to find the right training in under 2 minutes",
-        howToSteps: [
-          "Choose a domain if you already know your profession or function.",
-          "Use search if you are looking for a precise topic or keyword.",
-          "Filter by level and format to narrow the selection.",
-          "Open the detailed page to review goals, program and the right next step.",
-        ],
-        sectionIntroTitle: "Explore, compare and choose according to your needs",
+        sectionIntroTitle: "A clearer catalogue to choose faster",
         sectionIntroDesc:
-          "This page helps you browse the full offer, compare training options and quickly identify the one that fits your level, role and objective.",
+          "Browse the offer by domain, filter by level, and move straight toward the right training.",
         domainsTitle: "Explore by area of expertise",
         domainsDesc:
-          "Each domain groups together training built around practical professional use cases. Click a domain to discover the available courses.",
+          "Each domain groups the most useful training options for the same role or function.",
         searchTitle: "Search for a training",
         searchDesc:
-          "Already know what you need? Search by keyword, filter by domain, level or format, and compare results in seconds.",
+          "Use search when you already have a specific need, then refine with filters.",
         newTitle: "New trainings to discover",
         newDesc:
-          "Browse the latest additions to the catalogue to discover emerging topics, new use cases and fast-moving domains.",
-        finalTitle: "Still hesitating between several trainings?",
+          "Find the latest training additions to the catalogue here.",
+        finalTitle: "Need a simpler choice?",
         finalDesc:
-          "We can guide you toward the right training based on your role, current level and professional objective.",
+          "We can guide you toward the right training based on your role, level, and objective.",
         primaryCta: "Request guidance",
         secondaryCta: "Apply now",
-        quickLinksTitle: "Start faster",
         quickLinks: [
-          { title: "View certification", desc: "Understand the goals, program, and business value by domain.", href: "/certification" },
-          { title: "View AI tools", desc: "Discover the tools, workflows, and stacks recommended for each domain.", href: "/outils-ia" },
-          { title: "Get guidance", desc: "Receive a clear recommendation if you hesitate between several formats.", href: buildContactPath("demande-renseignement") },
+          { title: "Certification", desc: "Goals, program, and business value.", href: "/certification" },
+          { title: "AI tools", desc: "Stacks, workflows, and recommended tools.", href: "/outils-ia" },
+          { title: "Guidance", desc: "Receive a clear recommendation.", href: buildContactPath("demande-renseignement") },
         ],
       };
 
@@ -288,12 +258,12 @@ const CataloguePage = () => {
                   </span>
                 </div>
               </div>
-              <div className="mt-5 grid gap-4 md:grid-cols-3">
+              <div className="mt-5 grid gap-3 md:grid-cols-3">
                 {guideCopy.quickLinks.map((link) => (
-                  <Link key={link.title} to={link.href} className="rounded-2xl border border-border bg-background p-5 transition hover:border-primary/30 hover:text-primary">
+                  <Link key={link.title} to={link.href} className="rounded-2xl border border-border bg-background p-4 transition hover:border-primary/30 hover:text-primary">
                     <h3 className="font-heading text-base font-semibold text-card-foreground">{link.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-muted-foreground">{link.desc}</p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{link.desc}</p>
+                    <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary">
                       {language === "fr" ? "Ouvrir" : "Open"} <ArrowRight size={14} />
                     </span>
                   </Link>
@@ -371,7 +341,6 @@ const CataloguePage = () => {
                           const Icon = domainIcons[selectedDomain] || BookOpen;
                           const domainCertificationSlug = resolveCertificationSlugFromSector(selectedDomain);
                           const domainToolSlug = resolveToolSlugFromSector(selectedDomain);
-                          const domainCatalogueSlug = resolveCatalogueSlugFromSector(selectedDomain);
                           return (
                             <>
                               <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -392,12 +361,6 @@ const CataloguePage = () => {
                                     className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-card-foreground hover:border-primary/30 hover:text-primary"
                                   >
                                     {language === "fr" ? "Voir les outils IA" : "View AI tools"}
-                                  </Link>
-                                  <Link
-                                    to={domainCatalogueSlug ? `/catalogues-domaines/${domainCatalogueSlug}` : "/catalogue"}
-                                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-card-foreground hover:border-primary/30 hover:text-primary"
-                                  >
-                                    {language === "fr" ? "Vue domaine" : "Domain view"}
                                   </Link>
                                 </div>
                               </div>
