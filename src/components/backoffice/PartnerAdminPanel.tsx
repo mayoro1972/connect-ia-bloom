@@ -222,6 +222,9 @@ const PartnerAdminPanel = ({
     [form.recommended_offer_key],
   );
   const hasRemoteReviewSelected = isUuid(form.id);
+  const hasRecipient = form.prospect_email.trim().length > 0;
+  const hasReplyBody = form.response_email_body_fr.trim().length > 0;
+  const canSendReply = hasRemoteReviewSelected && hasRecipient && hasReplyBody;
 
   const localSaveReview = () => {
     const nextReview: PartnerReview = {
@@ -492,6 +495,10 @@ const PartnerAdminPanel = ({
         throw new Error("Sélectionnez d’abord une demande partenaire réelle avant d’envoyer une réponse.");
       }
 
+      if (!hasRecipient || !hasReplyBody) {
+        throw new Error("Générez ou rédigez d’abord une réponse email complète avant l’envoi.");
+      }
+
       const result = await invokeAdminEdgeFunction<{ data?: { review?: PartnerReview; recipient?: string } }>(token, "partner-followup-send", {
         review_id: form.id,
       });
@@ -724,6 +731,12 @@ const PartnerAdminPanel = ({
               <Textarea value={form.response_email_body_fr} onChange={(e) => setForm({ ...form, response_email_body_fr: e.target.value })} placeholder="Corps FR de l’email automatique" className="min-h-[260px]" />
               <Textarea value={form.admin_notes} onChange={(e) => setForm({ ...form, admin_notes: e.target.value })} placeholder="Notes admin / consignes" className="min-h-[120px]" />
 
+              {!canSendReply ? (
+                <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                  Pour envoyer la réponse, sélectionnez un dossier réel puis générez ou rédigez un email complet.
+                </div>
+              ) : null}
+
               <div className="flex flex-wrap gap-3">
                 <button type="button" onClick={generateDraft} disabled={isBusy || isBusyGlobal} className="rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">
                   Générer la recommandation IA
@@ -734,7 +747,7 @@ const PartnerAdminPanel = ({
                 <button type="button" onClick={approveReview} disabled={isBusy || isBusyGlobal} className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50">
                   Marquer approuvée
                 </button>
-                <button type="button" onClick={sendReply} disabled={isBusy || isBusyGlobal} className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50">
+                <button type="button" onClick={sendReply} disabled={isBusy || isBusyGlobal || !canSendReply} className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50">
                   {isBusy ? "Traitement en cours..." : "Envoyer la réponse"}
                 </button>
               </div>
