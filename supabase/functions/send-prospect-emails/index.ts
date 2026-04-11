@@ -2,6 +2,7 @@ type ProspectEmailIntent =
   | "demande-catalogue"
   | "demande-renseignement"
   | "contact-devis"
+  | "demande-referencement"
   | "inscription"
   | "prise-rdv";
 
@@ -11,6 +12,7 @@ type ProspectEmailPayload = {
   email: string;
   phone?: string | null;
   company?: string | null;
+  website?: string | null;
   role?: string | null;
   city?: string | null;
   domain?: string | null;
@@ -41,6 +43,7 @@ type TranslationCopy = {
     email: string;
     phone: string;
     company: string;
+    website: string;
     role: string;
     city: string;
     domain: string;
@@ -57,6 +60,12 @@ type TranslationCopy = {
   greeting: (fullName: string) => string;
   acknowledgementBody: (intentLabel: string) => string;
   acknowledgementNextStep: string;
+  listingAcknowledgementBody: string;
+  listingReviewTitle: string;
+  listingReviewItems: string[];
+  listingFormatsTitle: string;
+  listingFormatsItems: string[];
+  listingResponseDelay: string;
   summaryTitle: string;
   reviewAppointment: string;
   closing: string;
@@ -85,6 +94,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       email: "Email",
       phone: "Telephone",
       company: "Organisation",
+      website: "Site web",
       role: "Fonction",
       city: "Ville / Pays",
       domain: "Domaine",
@@ -103,6 +113,22 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       `Nous confirmons la bonne reception de votre ${intentLabel.toLowerCase()}. Notre equipe va l'etudier et vous repondra depuis contact@transferai.ci dans les meilleurs delais.`,
     acknowledgementNextStep:
       "Si votre demande concerne un rendez-vous, un devis ou une orientation formation, nous pourrons vous recontacter afin de preciser votre besoin avant l'etape suivante.",
+    listingAcknowledgementBody:
+      "Nous confirmons la bonne reception de votre demande de référencement. Votre dossier va être relu par notre équipe afin d'évaluer la cohérence éditoriale, la forme de présence la plus adaptée et les prochaines modalités à vous proposer.",
+    listingReviewTitle: "Ce que nous allons étudier",
+    listingReviewItems: [
+      "L'alignement de votre activité avec l'audience TransferAI Africa",
+      "Le niveau de présence le plus pertinent pour votre organisation",
+      "Les éléments à mettre en avant pour une publication utile et crédible",
+    ],
+    listingFormatsTitle: "Ce qu'une présence peut inclure",
+    listingFormatsItems: [
+      "Une présentation courte avec logo, texte et lien utile",
+      "Une présentation enrichie avec angle sectoriel et proposition de valeur",
+      "Une mise en avant plus éditoriale pour les profils les plus alignés",
+    ],
+    listingResponseDelay:
+      "Notre retour intervient en général sous 7 à 10 jours ouvrés après réception d'un dossier exploitable. Les modalités précises et la proposition associée sont communiquées ensuite par email.",
     summaryTitle: "Recapitulatif de votre demande",
     reviewAppointment: "Verifier mon lien de RDV",
     closing: "Merci pour votre confiance,\nTransferAI Africa",
@@ -110,6 +136,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "demande-catalogue": "Demande de catalogue",
       "demande-renseignement": "Demande de renseignement",
       "contact-devis": "Demande de devis",
+      "demande-referencement": "Demande de referencement",
       inscription: "Inscription a une formation",
       "prise-rdv": "Demande de prise de rendez-vous",
     } satisfies Record<ProspectEmailIntent, string>,
@@ -125,6 +152,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       email: "Email",
       phone: "Phone",
       company: "Organization",
+      website: "Website",
       role: "Role",
       city: "City / Country",
       domain: "Domain",
@@ -143,6 +171,22 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       `We confirm that we received your ${intentLabel.toLowerCase()}. Our team will review it and reply from contact@transferai.ci as soon as possible.`,
     acknowledgementNextStep:
       "If your request concerns a meeting, quote or training recommendation, we may contact you to refine your need before sending the next step.",
+    listingAcknowledgementBody:
+      "We confirm that we received your listing request. Our team will review your file to assess editorial fit, the most relevant visibility format, and the next steps we can propose.",
+    listingReviewTitle: "What we will review",
+    listingReviewItems: [
+      "How your activity fits the TransferAI Africa audience",
+      "The most relevant visibility level for your organization",
+      "Which elements should be highlighted for a useful and credible publication",
+    ],
+    listingFormatsTitle: "What a presence may include",
+    listingFormatsItems: [
+      "A short presentation with logo, text, and useful link",
+      "An enriched presentation with sector angle and value proposition",
+      "A more editorialized feature for the most aligned profiles",
+    ],
+    listingResponseDelay:
+      "We usually reply within 7 to 10 business days after receiving a workable file. Exact terms and the related proposal are then shared by email.",
     summaryTitle: "Summary of your request",
     reviewAppointment: "Review my meeting link",
     closing: "Thank you for your trust,\nTransferAI Africa",
@@ -150,6 +194,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "demande-catalogue": "Catalogue request",
       "demande-renseignement": "Information request",
       "contact-devis": "Quote request",
+      "demande-referencement": "Listing request",
       inscription: "Training registration",
       "prise-rdv": "Meeting request",
     } satisfies Record<ProspectEmailIntent, string>,
@@ -181,6 +226,11 @@ const asHtmlParagraphs = (copy: TranslationCopy, value?: string | null) => {
 const asTextValue = (copy: TranslationCopy, value?: string | number | null) =>
   value === null || value === undefined || value === "" ? copy.missingValue : String(value);
 
+const asHtmlList = (items: string[]) =>
+  `<ul style="margin:0;padding-left:18px;color:#475467;">${items
+    .map((item) => `<li style="margin:0 0 8px;">${escapeHtml(item)}</li>`)
+    .join("")}</ul>`;
+
 const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage => {
   const copy = getCopy(payload.language);
   const topic =
@@ -200,6 +250,7 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.email)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.email))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.phone)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.phone))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.company)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.company))}</td></tr>
+          <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.website)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.website))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.role)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.role))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.city)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.city))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.domain)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.domain))}</td></tr>
@@ -228,6 +279,7 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
     `${copy.fieldLabels.email} : ${asTextValue(copy, payload.email)}`,
     `${copy.fieldLabels.phone} : ${asTextValue(copy, payload.phone)}`,
     `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
+    `${copy.fieldLabels.website} : ${asTextValue(copy, payload.website)}`,
     `${copy.fieldLabels.role} : ${asTextValue(copy, payload.role)}`,
     `${copy.fieldLabels.city} : ${asTextValue(copy, payload.city)}`,
     `${copy.fieldLabels.domain} : ${asTextValue(copy, payload.domain)}`,
@@ -258,10 +310,33 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
   const intentLabel = copy.intentLabels[payload.intent];
   const subject = copy.acknowledgementSubject;
   const intro = copy.greeting(payload.fullName);
-  const body = copy.acknowledgementBody(intentLabel);
-  const nextStep = copy.acknowledgementNextStep;
+  const isListingRequest = payload.intent === "demande-referencement";
+  const body = isListingRequest ? copy.listingAcknowledgementBody : copy.acknowledgementBody(intentLabel);
+  const nextStep = isListingRequest ? copy.listingResponseDelay : copy.acknowledgementNextStep;
   const detailsTitle = copy.summaryTitle;
   const closing = copy.closing;
+  const listingReviewBlock = isListingRequest
+    ? `
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.listingReviewTitle)}</p>
+          ${asHtmlList(copy.listingReviewItems)}
+        </div>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.listingFormatsTitle)}</p>
+          ${asHtmlList(copy.listingFormatsItems)}
+        </div>
+      `
+    : "";
+  const listingReviewText = isListingRequest
+    ? [
+        "",
+        `${copy.listingReviewTitle} :`,
+        ...copy.listingReviewItems.map((item) => `- ${item}`),
+        "",
+        `${copy.listingFormatsTitle} :`,
+        ...copy.listingFormatsItems.map((item) => `- ${item}`),
+      ].join("\n")
+    : "";
 
   const html = `
     <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
@@ -278,6 +353,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
           <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.formation)} :</strong> ${escapeHtml(asTextValue(copy, payload.formationTitle))}</p>
           <p style="margin:0;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.company)} :</strong> ${escapeHtml(asTextValue(copy, payload.company))}</p>
         </div>
+        ${listingReviewBlock}
         ${
           payload.appointmentUrl
             ? `<p style="margin:24px 0 0;"><a href="${escapeHtml(payload.appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.reviewAppointment)}</a></p>`
@@ -299,6 +375,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     `${copy.fieldLabels.domain} : ${asTextValue(copy, payload.domain)}`,
     `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}`,
     `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
+    listingReviewText,
     payload.appointmentUrl ? `${copy.reviewAppointment} : ${payload.appointmentUrl}` : "",
     "",
     closing,

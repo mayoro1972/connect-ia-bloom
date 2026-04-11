@@ -1,4 +1,8 @@
-export type ContactIntent = "demande-catalogue" | "demande-renseignement" | "contact-devis";
+export type ContactIntent =
+  | "demande-catalogue"
+  | "demande-renseignement"
+  | "contact-devis"
+  | "demande-referencement";
 export type AppointmentSource = ContactIntent | "brochure";
 
 export type SocialLink = {
@@ -36,6 +40,7 @@ export const appointmentBookings: Record<AppointmentSource, string> = {
   "contact-devis": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   "demande-catalogue": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   "demande-renseignement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+  "demande-referencement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   brochure: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
 };
 

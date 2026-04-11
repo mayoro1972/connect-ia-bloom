@@ -18,6 +18,7 @@ const appointmentCopy = {
       "demande-catalogue": "Demande de catalogue",
       "demande-renseignement": "Demande de renseignement",
       "contact-devis": "Demande de contact / devis",
+      "demande-referencement": "Demande de référencement",
       brochure: "Consultation du catalogue domaine",
     },
     pageBadge: "Prise de RDV",
@@ -52,6 +53,7 @@ const appointmentCopy = {
       "demande-catalogue": "Découverte catalogue",
       "demande-renseignement": "Qualification besoin",
       "contact-devis": "Préparation devis",
+      "demande-referencement": "Qualification référencement",
       brochure: "Suivi brochure domaine",
     },
     duration: "Durée conseillée",
@@ -105,6 +107,19 @@ const appointmentCopy = {
         confirmation:
           "Merci pour votre demande. Réservez un échange de cadrage afin que nous préparions une proposition ajustée à votre besoin.",
       },
+      "demande-referencement": {
+        title: "RDV de qualification référencement",
+        intro:
+          "Ce rendez-vous intervient après une demande de référencement ou de présence sur le site. Il permet de comprendre le profil de l'organisation, ses objectifs de visibilité et la forme de mise en avant la plus pertinente.",
+        agenda: [
+          "Présenter l'organisation et son positionnement",
+          "Clarifier l'objectif de visibilité recherché",
+          "Vérifier la cohérence éditoriale avec l'audience TransferAI",
+          "Préciser les prochaines étapes après revue du dossier",
+        ],
+        confirmation:
+          "Merci pour votre demande. Réservez un échange de qualification si vous souhaitez préciser votre projet de présence sur TransferAI Africa.",
+      },
       brochure: {
         title: "RDV après lecture de brochure",
         intro:
@@ -124,6 +139,7 @@ const appointmentCopy = {
       "demande-catalogue": "Catalogue request",
       "demande-renseignement": "Information request",
       "contact-devis": "Contact / quote request",
+      "demande-referencement": "Listing request",
       brochure: "Domain catalogue review",
     },
     pageBadge: "Booking",
@@ -158,6 +174,7 @@ const appointmentCopy = {
       "demande-catalogue": "Catalogue discovery",
       "demande-renseignement": "Needs qualification",
       "contact-devis": "Quote preparation",
+      "demande-referencement": "Listing qualification",
       brochure: "Domain brochure follow-up",
     },
     duration: "Recommended duration",
@@ -210,6 +227,19 @@ const appointmentCopy = {
         ],
         confirmation:
           "Thank you for your request. Book a scoping call so we can prepare a proposal tailored to your needs.",
+      },
+      "demande-referencement": {
+        title: "Listing qualification call",
+        intro:
+          "This meeting applies after a listing or visibility request. It helps us understand the organization, its visibility goals, and the most relevant way to position it on TransferAI Africa.",
+        agenda: [
+          "Present the organization and its positioning",
+          "Clarify the visibility objective",
+          "Review editorial fit with the TransferAI audience",
+          "Align on next steps after file review",
+        ],
+        confirmation:
+          "Thank you for your request. Book a qualification call if you would like to discuss your visibility project on TransferAI Africa.",
       },
       brochure: {
         title: "Call after brochure review",

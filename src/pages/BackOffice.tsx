@@ -183,6 +183,7 @@ const intentLabels: Record<string, string> = {
   "contact-devis": "Contact / devis",
   "demande-catalogue": "Demande de catalogue",
   "demande-renseignement": "Demande de renseignement",
+  "demande-referencement": "Demande de référencement",
 };
 
 const formatDateLabel = (value: string) =>

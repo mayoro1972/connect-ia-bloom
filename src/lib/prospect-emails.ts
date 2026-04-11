@@ -5,6 +5,7 @@ export type ProspectEmailIntent =
   | "demande-catalogue"
   | "demande-renseignement"
   | "contact-devis"
+  | "demande-referencement"
   | "inscription"
   | "prise-rdv";
 
@@ -14,6 +15,7 @@ export type ProspectEmailPayload = {
   email: string;
   phone?: string | null;
   company?: string | null;
+  website?: string | null;
   role?: string | null;
   city?: string | null;
   domain?: string | null;
