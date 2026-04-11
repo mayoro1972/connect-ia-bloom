@@ -641,16 +641,18 @@ const PartnerAdminPanel = ({
                           key={offer.offer_key}
                           className={`flex h-full min-h-[320px] flex-col rounded-2xl border p-5 shadow-sm ${section.cardClass}`}
                         >
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
+                          <div className="text-center">
+                            <div className="flex flex-col items-center">
                               <p className="font-semibold text-card-foreground">{partnerFamilyLabels[offer.offer_family]}</p>
-                              <p className="mt-3 text-xl font-bold leading-tight text-card-foreground">{formatFcfa(offer.price_fcfa)}</p>
+                              <span
+                                className={`mt-3 inline-flex shrink-0 items-center justify-center rounded-full px-3 py-1 text-[11px] font-semibold leading-none ${section.badgeClass}`}
+                              >
+                                {offer.duration_months} mois
+                              </span>
+                              <p className="mt-3 whitespace-nowrap text-lg font-bold leading-tight text-card-foreground">
+                                {formatFcfa(offer.price_fcfa)}
+                              </p>
                             </div>
-                            <span
-                              className={`inline-flex shrink-0 items-center justify-center rounded-full px-3 py-1 text-[11px] font-semibold leading-none ${section.badgeClass}`}
-                            >
-                              {offer.duration_months} mois
-                            </span>
                           </div>
                           <p className="mt-4 min-h-[96px] text-sm leading-relaxed text-muted-foreground">{offer.summary_fr}</p>
                           <div className="mt-auto flex flex-wrap gap-2 pt-4">
