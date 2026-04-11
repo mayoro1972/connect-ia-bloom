@@ -122,7 +122,70 @@ const LeadFormsPreview = () => {
     const effectiveDomain = isReferencingIntent
       ? form.domain.trim() || null
       : form.domain.trim() || requestedDomain || null;
-    const { error } = await supabase.rpc("submit_contact_request", { full_name_input: form.fullName.trim(), email_input: form.email.trim(), phone_input: form.phone.trim(), company_input: form.company.trim(), sector_input: form.role.trim() || null, city_input: form.country.trim() || null, participants_input: participantsCount, requested_formations_input: effectiveDomain, message_input: form.message.trim() || null, source_page_input: "/contact", language_input: activeLanguage, request_intent_input: activeIntent, requested_domain_input: effectiveDomain, privacy_consent_input: privacyAccepted, honeypot_input: botField.trim() || null });
+    let error: { message?: string } | null = null;
+
+    if (isReferencingIntent) {
+      const listingResult = await (supabase as any).rpc("submit_partner_listing_request", {
+        full_name_input: form.fullName.trim(),
+        email_input: form.email.trim(),
+        phone_input: form.phone.trim(),
+        company_input: form.company.trim(),
+        website_input: form.website.trim() || null,
+        role_input: form.role.trim() || null,
+        city_input: form.country.trim() || null,
+        sector_activity_input: effectiveDomain,
+        requested_visibility_type_input: form.format.trim() || null,
+        timeline_input: form.timeline.trim() || null,
+        message_input: form.message.trim() || null,
+        source_page_input: "/contact",
+        language_input: activeLanguage,
+        privacy_consent_input: privacyAccepted,
+        honeypot_input: botField.trim() || null,
+      });
+
+      if (listingResult?.error) {
+        const fallbackResult = await supabase.rpc("submit_contact_request", {
+          full_name_input: form.fullName.trim(),
+          email_input: form.email.trim(),
+          phone_input: form.phone.trim(),
+          company_input: form.company.trim(),
+          sector_input: form.role.trim() || null,
+          city_input: form.country.trim() || null,
+          participants_input: null,
+          requested_formations_input: effectiveDomain,
+          message_input: form.message.trim() || null,
+          source_page_input: "/contact",
+          language_input: activeLanguage,
+          request_intent_input: activeIntent,
+          requested_domain_input: effectiveDomain,
+          privacy_consent_input: privacyAccepted,
+          honeypot_input: botField.trim() || null,
+        });
+
+        error = fallbackResult.error;
+      }
+    } else {
+      const defaultResult = await supabase.rpc("submit_contact_request", {
+        full_name_input: form.fullName.trim(),
+        email_input: form.email.trim(),
+        phone_input: form.phone.trim(),
+        company_input: form.company.trim(),
+        sector_input: form.role.trim() || null,
+        city_input: form.country.trim() || null,
+        participants_input: participantsCount,
+        requested_formations_input: effectiveDomain,
+        message_input: form.message.trim() || null,
+        source_page_input: "/contact",
+        language_input: activeLanguage,
+        request_intent_input: activeIntent,
+        requested_domain_input: effectiveDomain,
+        privacy_consent_input: privacyAccepted,
+        honeypot_input: botField.trim() || null,
+      });
+
+      error = defaultResult.error;
+    }
+
     setIsSubmitting(false);
     if (error) return toast({ title: copy.page.error, description: copy.page.errorDesc, variant: "destructive" });
     const appointmentUrl = isReferencingIntent

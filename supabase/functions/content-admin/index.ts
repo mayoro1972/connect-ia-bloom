@@ -171,6 +171,61 @@ const mapNewsletterPayload = (payload: Record<string, unknown>) => ({
   meta: asJson(payload.meta),
 });
 
+const mapPartnerOfferPayload = (payload: Record<string, unknown>) => ({
+  offer_key: asString(payload.offer_key),
+  offer_family: asString(payload.offer_family),
+  offer_name_fr: asString(payload.offer_name_fr),
+  offer_name_en: asString(payload.offer_name_en),
+  duration_months: asNumber(payload.duration_months),
+  price_fcfa: asNumber(payload.price_fcfa),
+  visibility_level: asString(payload.visibility_level, "standard"),
+  summary_fr: asNullableString(payload.summary_fr),
+  summary_en: asNullableString(payload.summary_en),
+  deliverables_fr: asJson(payload.deliverables_fr) ?? [],
+  deliverables_en: asJson(payload.deliverables_en) ?? [],
+  is_active: payload.is_active !== false,
+  sort_order: asNumber(payload.sort_order) ?? 100,
+});
+
+const mapPartnerTemplatePayload = (payload: Record<string, unknown>) => ({
+  template_key: asString(payload.template_key),
+  language: asString(payload.language, "fr"),
+  subject_template: asString(payload.subject_template),
+  body_template: asString(payload.body_template),
+  is_active: payload.is_active !== false,
+  meta: asJson(payload.meta),
+});
+
+const mapPartnerReviewPayload = (payload: Record<string, unknown>) => ({
+  prospect_name: asString(payload.prospect_name),
+  prospect_email: asString(payload.prospect_email),
+  company: asString(payload.company),
+  website: asNullableString(payload.website),
+  role: asNullableString(payload.role),
+  city: asNullableString(payload.city),
+  sector_activity: asNullableString(payload.sector_activity),
+  requested_visibility_type: asNullableString(payload.requested_visibility_type),
+  requested_timeline: asNullableString(payload.requested_timeline),
+  request_message: asNullableString(payload.request_message),
+  review_status: asString(payload.review_status, "received"),
+  ai_score: asNumber(payload.ai_score),
+  ai_recommendation: asNullableString(payload.ai_recommendation),
+  ai_provider: asNullableString(payload.ai_provider),
+  ai_reasoning: asJson(payload.ai_reasoning),
+  recommended_offer_key: asNullableString(payload.recommended_offer_key),
+  recommended_duration_months: asNumber(payload.recommended_duration_months),
+  recommended_price_fcfa: asNumber(payload.recommended_price_fcfa),
+  recommended_deliverables: asJson(payload.recommended_deliverables),
+  response_due_at: asNullableString(payload.response_due_at),
+  response_sent_at: asNullableString(payload.response_sent_at),
+  response_email_subject: asNullableString(payload.response_email_subject),
+  response_email_body_fr: asNullableString(payload.response_email_body_fr),
+  response_email_body_en: asNullableString(payload.response_email_body_en),
+  assigned_to: asNullableString(payload.assigned_to),
+  admin_notes: asNullableString(payload.admin_notes),
+  meta: asJson(payload.meta),
+});
+
 const listResources = async () =>
   supabase
     .from("resource_posts")
@@ -543,6 +598,165 @@ const setNewsletterStatus = async (payload: Record<string, unknown>) => {
     .single();
 };
 
+const listPartners = async () => {
+  const [offersResult, templatesResult, reviewsResult, jobsResult] = await Promise.all([
+    supabase
+      .from("partner_offer_catalog")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .order("price_fcfa", { ascending: true }),
+    supabase
+      .from("partner_email_templates")
+      .select("*")
+      .order("template_key", { ascending: true })
+      .order("language", { ascending: true }),
+    supabase
+      .from("partner_listing_reviews")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(40),
+    supabase
+      .from("partner_followup_jobs")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(40),
+  ]);
+
+  const resultList = [offersResult, templatesResult, reviewsResult, jobsResult];
+  const failingResult = resultList.find((result) => result.error);
+
+  if (failingResult?.error) {
+    return { data: null, error: failingResult.error };
+  }
+
+  const reviews = reviewsResult.data ?? [];
+
+  return {
+    data: {
+      overview: {
+        totalRequests: reviews.length,
+        pendingReplies: reviews.filter((review) =>
+          ["received", "needs_info", "scored", "review"].includes(review.review_status),
+        ).length,
+        approvedReplies: reviews.filter((review) =>
+          ["approved", "scheduled"].includes(review.review_status),
+        ).length,
+        sentReplies: reviews.filter((review) => review.review_status === "sent").length,
+      },
+      offers: offersResult.data ?? [],
+      templates: templatesResult.data ?? [],
+      reviews,
+      jobs: jobsResult.data ?? [],
+      rules: [
+        {
+          label: "Alignement audience TransferAI",
+          weight: 25,
+          description: "Formation, IA, transformation digitale, innovation, outils métier ou utilité business claire pour notre audience.",
+        },
+        {
+          label: "Clarté du positionnement",
+          weight: 15,
+          description: "L’activité et la promesse de valeur sont-elles immédiatement compréhensibles ?",
+        },
+        {
+          label: "Crédibilité de la structure",
+          weight: 15,
+          description: "Qualité du site, présence publique, identité de marque et cohérence des informations.",
+        },
+        {
+          label: "Valeur pour l’audience",
+          weight: 20,
+          description: "Le prospect apporte-t-il une vraie utilité au public TransferAI Africa ?",
+        },
+        {
+          label: "Qualité des éléments fournis",
+          weight: 10,
+          description: "Logo, texte, liens, message de demande et précision du besoin.",
+        },
+        {
+          label: "Potentiel de visibilité ou de relai",
+          weight: 15,
+          description: "Capacité à créer un effet de levier, de relai ou de partenariat dans l’écosystème.",
+        },
+      ],
+    },
+    error: null,
+  };
+};
+
+const savePartner = async (payload: Record<string, unknown>) => {
+  const kind = asString(payload.kind);
+
+  if (kind === "review") {
+    const id = asString(payload.id);
+    if (!id) {
+      return supabase.from("partner_listing_reviews").insert(mapPartnerReviewPayload(payload)).select("*").single();
+    }
+
+    return supabase
+      .from("partner_listing_reviews")
+      .update(mapPartnerReviewPayload(payload))
+      .eq("id", id)
+      .select("*")
+      .single();
+  }
+
+  if (kind === "offer") {
+    const id = asString(payload.id);
+    const offerPayload = mapPartnerOfferPayload(payload);
+
+    if (id) {
+      return supabase
+        .from("partner_offer_catalog")
+        .update(offerPayload)
+        .eq("id", id)
+        .select("*")
+        .single();
+    }
+
+    return supabase
+      .from("partner_offer_catalog")
+      .upsert(offerPayload, { onConflict: "offer_key" })
+      .select("*")
+      .single();
+  }
+
+  if (kind === "template") {
+    const id = asString(payload.id);
+    const templatePayload = mapPartnerTemplatePayload(payload);
+
+    if (id) {
+      return supabase
+        .from("partner_email_templates")
+        .update(templatePayload)
+        .eq("id", id)
+        .select("*")
+        .single();
+    }
+
+    return supabase
+      .from("partner_email_templates")
+      .upsert(templatePayload, { onConflict: "template_key,language" })
+      .select("*")
+      .single();
+  }
+
+  return { data: null, error: { message: "Unsupported partner save target." } };
+};
+
+const setPartnerStatus = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("partner_listing_reviews")
+    .update({
+      review_status: asString(payload.status, "received"),
+      response_due_at: asNullableString(payload.response_due_at),
+      response_sent_at: asNullableString(payload.response_sent_at),
+      admin_notes: asNullableString(payload.admin_notes),
+    })
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -586,6 +800,9 @@ Deno.serve(async (request) => {
   if (entity === "newsletter" && action === "create") result = await createNewsletter(payload);
   if (entity === "newsletter" && action === "save") result = await saveNewsletter(payload);
   if (entity === "newsletter" && action === "set-status") result = await setNewsletterStatus(payload);
+  if (entity === "partners" && action === "list") result = await listPartners();
+  if (entity === "partners" && action === "save") result = await savePartner(payload);
+  if (entity === "partners" && action === "set-status") result = await setPartnerStatus(payload);
 
   if (!result) {
     return json(400, { error: "Unsupported admin action." });

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +13,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { invokeContentAdmin } from "@/lib/content-admin";
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
+import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -193,7 +195,10 @@ const formatDateLabel = (value: string) =>
   });
 
 const BackOfficePage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [token, setToken] = useState("");
+  const requestedTab = searchParams.get("tab") ?? "resources";
+  const [activeTab, setActiveTab] = useState(requestedTab);
   const [resourceForm, setResourceForm] = useState(emptyResourceForm);
   const [jobForm, setJobForm] = useState(emptyJobForm);
   const [feedForm, setFeedForm] = useState(emptyFeedForm);
@@ -216,6 +221,10 @@ const BackOfficePage = () => {
       setToken(LOCAL_DEV_ADMIN_TOKEN);
     }
   }, []);
+
+  useEffect(() => {
+    setActiveTab(requestedTab);
+  }, [requestedTab]);
 
   const isReady = useMemo(() => token.trim().length > 0 && isSupabaseConfigured, [token]);
 
@@ -436,11 +445,21 @@ const BackOfficePage = () => {
               {errorMessage ? <p className="mt-3 text-sm text-destructive">{errorMessage}</p> : null}
             </div>
 
-            <Tabs defaultValue="resources" className="w-full">
+            <Tabs
+              value={activeTab}
+              onValueChange={(nextValue) => {
+                setActiveTab(nextValue);
+                const nextParams = new URLSearchParams(searchParams);
+                nextParams.set("tab", nextValue);
+                setSearchParams(nextParams, { replace: true });
+              }}
+              className="w-full"
+            >
               <TabsList className="mb-8 h-auto flex-wrap">
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
                 <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
+                <TabsTrigger value="partners">Partenaires IA</TabsTrigger>
                 <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="help">Mode d'emploi</TabsTrigger>
@@ -852,6 +871,16 @@ const BackOfficePage = () => {
 
               <TabsContent value="newsletters">
                 <NewsletterAdminPanel
+                  token={token}
+                  isReady={isReady}
+                  isBusyGlobal={isBusy}
+                  onStatus={setStatusMessage}
+                  onError={setErrorMessage}
+                />
+              </TabsContent>
+
+              <TabsContent value="partners">
+                <PartnerAdminPanel
                   token={token}
                   isReady={isReady}
                   isBusyGlobal={isBusy}
