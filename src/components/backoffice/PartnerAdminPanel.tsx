@@ -114,6 +114,9 @@ const formatDateTimeInput = (value?: string | null) =>
   value ? new Date(value).toISOString().slice(0, 16) : "";
 
 const toIsoOrNull = (value: string) => (value.trim() ? new Date(value).toISOString() : null);
+const isUuid = (value?: string | null) =>
+  typeof value === "string" &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 
 const statusOptions: PartnerReviewStatus[] = [
   "received",
@@ -154,12 +157,14 @@ const PartnerAdminPanel = ({
       });
 
       if (result.data) {
+        const nextReviews = result.data.reviews ?? [];
+
         setSnapshot({
           ...result.data,
           offers: result.data.offers?.length ? result.data.offers : partnerOffersCatalogue,
           rules: result.data.rules?.length ? result.data.rules : partnerDecisionRules,
           templates: result.data.templates?.length ? result.data.templates : partnerEmailTemplates,
-          reviews: result.data.reviews?.length ? result.data.reviews : fallbackSnapshot.reviews,
+          reviews: nextReviews,
           jobs: result.data.jobs ?? [],
         });
         setUsesFallback(false);
@@ -181,7 +186,10 @@ const PartnerAdminPanel = ({
     if (!form.id && snapshot.reviews[0]) {
       applyReviewToForm(snapshot.reviews[0]);
     }
-  }, [snapshot]);
+    if (!usesFallback && snapshot.reviews.length === 0) {
+      setForm(emptyReviewForm);
+    }
+  }, [snapshot, usesFallback]);
 
   const applyReviewToForm = (review: PartnerReview) => {
     setForm({
@@ -213,6 +221,7 @@ const PartnerAdminPanel = ({
     () => getOfferByKey(form.recommended_offer_key) ?? null,
     [form.recommended_offer_key],
   );
+  const hasRemoteReviewSelected = isUuid(form.id);
 
   const localSaveReview = () => {
     const nextReview: PartnerReview = {
@@ -335,6 +344,10 @@ const PartnerAdminPanel = ({
         return;
       }
 
+      if (!hasRemoteReviewSelected) {
+        throw new Error("Sélectionnez d’abord une demande partenaire réelle avant d’enregistrer la revue.");
+      }
+
       await invokeContentAdmin(token, {
         entity: "partners",
         action: "save",
@@ -374,6 +387,10 @@ const PartnerAdminPanel = ({
           description: "Le brouillon IA local a bien été préparé.",
         });
         return;
+      }
+
+      if (!hasRemoteReviewSelected) {
+        throw new Error("Aucun dossier partenaire réel n’est sélectionné. Soumettez une demande publique ou choisissez un dossier existant.");
       }
 
       const result = await invokeAdminEdgeFunction<{ data: { review: PartnerReview } }>(
@@ -425,6 +442,10 @@ const PartnerAdminPanel = ({
         return;
       }
 
+      if (!hasRemoteReviewSelected) {
+        throw new Error("Sélectionnez d’abord une demande partenaire réelle avant de l’approuver.");
+      }
+
       await invokeContentAdmin(token, {
         entity: "partners",
         action: "set-status",
@@ -465,6 +486,10 @@ const PartnerAdminPanel = ({
           description: "L’envoi réel n’est pas disponible dans la prévisualisation locale seule.",
         });
         return;
+      }
+
+      if (!hasRemoteReviewSelected) {
+        throw new Error("Sélectionnez d’abord une demande partenaire réelle avant d’envoyer une réponse.");
       }
 
       const result = await invokeAdminEdgeFunction<{ data?: { review?: PartnerReview; recipient?: string } }>(token, "partner-followup-send", {
@@ -601,7 +626,7 @@ const PartnerAdminPanel = ({
             </p>
 
             <div className="mt-5 space-y-3">
-              {snapshot.reviews.map((review) => (
+              {snapshot.reviews.length > 0 ? snapshot.reviews.map((review) => (
                 <button
                   key={review.id}
                   type="button"
@@ -622,7 +647,11 @@ const PartnerAdminPanel = ({
                     <Badge variant="secondary">{review.review_status}</Badge>
                   </div>
                 </button>
-              ))}
+              )) : (
+                <div className="rounded-xl border border-dashed border-border bg-background p-5 text-sm text-muted-foreground">
+                  Aucune demande partenaire réelle n’est encore remontée depuis le formulaire public. Quand une nouvelle demande arrive, elle apparaîtra ici pour revue, recommandation IA et envoi.
+                </div>
+              )}
             </div>
 
             <div className="mt-6 space-y-4">
