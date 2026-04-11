@@ -57,21 +57,20 @@ export async function invokeAdminEdgeFunction<T>(
   }
 
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
-  const publishableKey =
-    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ||
+  const anonJwt =
     import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
     import.meta.env.VITE_SUPABASE_LEGACY_ANON_KEY?.trim();
 
-  if (!supabaseUrl || !publishableKey) {
-    throw new Error("Ajoutez VITE_SUPABASE_PUBLISHABLE_KEY pour appeler les fonctions edge admin.");
+  if (!supabaseUrl || !anonJwt) {
+    throw new Error("Ajoutez VITE_SUPABASE_ANON_KEY pour appeler les fonctions edge admin.");
   }
 
   const response = await fetch(`${supabaseUrl}/functions/v1/${functionName}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      apikey: publishableKey,
-      Authorization: `Bearer ${publishableKey}`,
+      apikey: anonJwt,
+      Authorization: `Bearer ${anonJwt}`,
       "x-admin-token": token,
     },
     body: JSON.stringify(payload),
