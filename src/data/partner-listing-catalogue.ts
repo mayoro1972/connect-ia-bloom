@@ -173,16 +173,16 @@ export const partnerEmailTemplates: PartnerEmailTemplatePreview[] = [
   {
     template_key: "partner_needs_info",
     language: "fr",
-    subject_template: "Suite à votre demande de référencement sur TransferAI Africa",
+    subject_template: "Compléments utiles pour votre demande de référencement | TransferAI Africa",
     body_template:
-      "Bonjour {{prospect_name}},\n\nMerci pour votre demande et pour l’intérêt porté à TransferAI Africa.\n\nAprès une première lecture de votre dossier, nous aurions besoin de quelques éléments complémentaires afin d’évaluer la forme de présence la plus pertinente pour votre organisation.\n\nMerci de nous transmettre si possible :\n- votre logo\n- une courte présentation de votre activité\n- votre site web ou vos liens principaux\n- l’objectif de visibilité recherché\n- les éléments que vous souhaitez voir publiés\n\nDès réception, notre équipe pourra finaliser l’étude de votre demande et revenir vers vous avec une proposition adaptée.\n\nBien cordialement,\nL’équipe TransferAI Africa",
+      "Bonjour {{prospect_name}},\n\nMerci pour votre demande et pour l’intérêt porté à TransferAI Africa.\n\nAprès une première lecture de votre dossier, nous aurions besoin de quelques éléments complémentaires afin d’évaluer le format de présence le plus pertinent pour votre organisation.\n\nMerci de nous transmettre si possible :\n- votre logo\n- une présentation courte de votre activité\n- votre site web ou vos liens principaux\n- l’objectif de visibilité recherché\n- les éléments que vous souhaitez voir publiés\n\nDès réception, notre équipe pourra finaliser l’étude de votre demande et revenir vers vous avec une proposition adaptée.\n\nBien cordialement,\nL’équipe TransferAI Africa",
   },
   {
     template_key: "partner_offer_recommendation",
     language: "fr",
-    subject_template: "Suite à votre demande de référencement sur TransferAI Africa",
+    subject_template: "Votre demande de référencement a été étudiée | TransferAI Africa",
     body_template:
-      "Bonjour {{prospect_name}},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à {{sector_activity}}.\n\nAu regard de votre profil, nous vous recommandons la formule suivante :\n\n{{offer_name_fr}}\n{{recommended_price_fcfa}} FCFA pour {{recommended_duration_months}} mois\n\nCette formule comprend :\n{{deliverables_bullets}}\n\nSi cette orientation vous convient, nous pouvons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa",
+      "Bonjour {{prospect_name}},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à {{sector_activity}}.\n\nLa formule que nous vous recommandons est la suivante :\n\n{{offer_name_fr}}\n{{recommended_price_fcfa}} FCFA pour {{recommended_duration_months}} mois\n\nCette formule inclut :\n{{deliverables_bullets}}\n\nSi cette orientation vous convient, nous pourrons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa",
   },
 ];
 
@@ -211,9 +211,9 @@ export const fallbackPartnerReview: PartnerReviewPreview = {
   recommended_offer_key: "visibilite_6m",
   recommended_duration_months: 6,
   recommended_price_fcfa: 540000,
-  response_email_subject: "Suite à votre demande de référencement sur TransferAI Africa",
+  response_email_subject: "Votre demande de référencement a été étudiée | TransferAI Africa",
   response_email_body_fr:
-    "Bonjour Awa Traore,\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés au conseil en transformation digitale et à l’accompagnement IA.\n\nAu regard de votre profil, nous vous recommandons la formule suivante :\n\nVisibilité\n540 000 FCFA pour 6 mois\n\nCette formule comprend :\n- une fiche enrichie\n- une meilleure visibilité dans la page partenaires\n- un angle de présentation plus structuré\n\nSi cette orientation vous convient, nous pouvons vous transmettre la proposition finale et les éléments attendus pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa",
+    "Bonjour Awa Traore,\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés au conseil en transformation digitale et à l’accompagnement IA.\n\nLa formule que nous vous recommandons est la suivante :\n\nVisibilité\n540 000 FCFA pour 6 mois\n\nCette formule inclut :\n- une fiche enrichie\n- une meilleure visibilité dans la page partenaires\n- un angle de présentation plus structuré\n\nSi cette orientation vous convient, nous pourrons vous transmettre la proposition finale et les éléments attendus pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa",
   response_due_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   admin_notes: "Exemple local de preview avant connexion complète au pipeline Supabase.",
 };
@@ -289,5 +289,5 @@ export const renderPartnerRecommendationEmail = (review: PartnerReviewPreview) =
   const offer = getOfferByKey(review.recommended_offer_key) ?? choosePartnerOffer(review);
   const deliverablesBullets = offer.deliverables_fr.map((item) => `- ${item}`).join("\n");
 
-  return `Bonjour ${review.prospect_name},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à ${review.sector_activity || "votre secteur d’activité"}.\n\nAu regard de votre profil, nous vous recommandons la formule suivante :\n\n${partnerFamilyLabels[offer.offer_family]}\n${formatFcfa(offer.price_fcfa)} pour ${offer.duration_months} mois\n\nCette formule comprend :\n${deliverablesBullets}\n\nSi cette orientation vous convient, nous pouvons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa`;
+  return `Bonjour ${review.prospect_name},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à ${review.sector_activity || "votre secteur d’activité"}.\n\nLa formule que nous vous recommandons est la suivante :\n\n${partnerFamilyLabels[offer.offer_family]}\n${formatFcfa(offer.price_fcfa)} pour ${offer.duration_months} mois\n\nCette formule inclut :\n${deliverablesBullets}\n\nSi cette orientation vous convient, nous pourrons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa`;
 };

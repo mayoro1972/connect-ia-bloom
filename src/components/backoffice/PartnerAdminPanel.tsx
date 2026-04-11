@@ -293,7 +293,7 @@ const PartnerAdminPanel = ({
       recommended_duration_months: recommendedOffer.duration_months.toString(),
       recommended_price_fcfa: recommendedOffer.price_fcfa.toString(),
       review_status: "review",
-      response_email_subject: "Suite à votre demande de référencement sur TransferAI Africa",
+      response_email_subject: "Votre demande de référencement a été étudiée | TransferAI Africa",
       response_email_body_fr: renderPartnerRecommendationEmail({
         ...fallbackPartnerReview,
         ...current,

@@ -137,6 +137,7 @@ Rules:
 - business tone, concise and premium
 - recommendationFamily must be one of: referencement, visibilite, premium
 - do not invent facts not present in the input
+- use a more elegant subject than "Suite à votre demande..."
 - bodyFr must be a complete email in French`;
 
 Deno.serve(async (request) => {
@@ -226,7 +227,7 @@ Deno.serve(async (request) => {
 
     const bodyFr =
       aiDraft?.bodyFr ||
-      `Bonjour ${review.prospect_name},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à ${sectorActivity}.\n\nAu regard de votre profil, nous vous recommandons la formule suivante :\n\n${selectedOffer.offer_name_fr}\n${new Intl.NumberFormat("fr-FR").format(selectedOffer.price_fcfa)} FCFA pour ${selectedOffer.duration_months} mois\n\nCette formule comprend :\n${deliverables.map((item) => `- ${item}`).join("\n")}\n\nSi cette orientation vous convient, nous pouvons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa`;
+      `Bonjour ${review.prospect_name},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à ${sectorActivity}.\n\nLa formule que nous vous recommandons est la suivante :\n\n${selectedOffer.offer_name_fr}\n${new Intl.NumberFormat("fr-FR").format(selectedOffer.price_fcfa)} FCFA pour ${selectedOffer.duration_months} mois\n\nCette formule inclut :\n${deliverables.map((item) => `- ${item}`).join("\n")}\n\nSi cette orientation vous convient, nous pourrons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa`;
 
     const payload = {
       ai_score: aiScore,
@@ -238,7 +239,7 @@ Deno.serve(async (request) => {
       recommended_price_fcfa: selectedOffer.price_fcfa,
       recommended_deliverables: deliverables,
       response_email_subject:
-        asNullableString(aiDraft?.subject) || "Suite à votre demande de référencement sur TransferAI Africa",
+        asNullableString(aiDraft?.subject) || "Votre demande de référencement a été étudiée | TransferAI Africa",
       response_email_body_fr: bodyFr,
       review_status: "review",
     };
@@ -258,7 +259,7 @@ Deno.serve(async (request) => {
           recommended_duration_months: selectedOffer.duration_months,
           recommended_price_fcfa: selectedOffer.price_fcfa,
           response_email_subject:
-            asNullableString(aiDraft?.subject) || "Suite à votre demande de référencement sur TransferAI Africa",
+            asNullableString(aiDraft?.subject) || "Votre demande de référencement a été étudiée | TransferAI Africa",
           response_email_body_fr: bodyFr,
           review_status: "review",
         };
