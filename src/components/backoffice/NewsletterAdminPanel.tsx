@@ -154,23 +154,23 @@ const NewsletterPreview = ({ form }: { form: typeof emptyNewsletterForm }) => (
       </div>
 
       <div className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Signal clé</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Signal à retenir</p>
         <h4 className="mt-3 text-lg font-semibold text-card-foreground">
-          {form.highlight_title || "Signal principal de la semaine"}
+          {form.highlight_title || "Point principal de la semaine"}
         </h4>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {form.highlight_summary || "Le résumé du signal clé sera visible ici."}
+          {form.highlight_summary || "Le résumé du point principal apparaîtra ici."}
         </p>
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
         <div className="rounded-2xl border border-border bg-card p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Conseil pratique</p>
-          <h4 className="mt-3 font-semibold text-card-foreground">{form.tip_title || "Conseil activable"}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{form.tip_body || "Le conseil pratique apparaîtra ici."}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Action à lancer</p>
+          <h4 className="mt-3 font-semibold text-card-foreground">{form.tip_title || "Action simple cette semaine"}</h4>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{form.tip_body || "L'action recommandée apparaîtra ici."}</p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Outil à connaître</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Outil à tester</p>
           <h4 className="mt-3 font-semibold text-card-foreground">{form.tool_name || "Nom de l’outil"}</h4>
           <p className="mt-1 text-xs text-muted-foreground">{form.tool_category || "Copilote / Workflow / No-code / Recherche"}</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{form.tool_summary || "Le résumé outil apparaîtra ici."}</p>
@@ -178,17 +178,17 @@ const NewsletterPreview = ({ form }: { form: typeof emptyNewsletterForm }) => (
       </div>
 
       <div className="rounded-2xl border border-border bg-card p-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Prompt de la semaine</p>
-        <h4 className="mt-3 font-semibold text-card-foreground">{form.prompt_title || "Prompt métier prêt à adapter"}</h4>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Prompt métier</p>
+        <h4 className="mt-3 font-semibold text-card-foreground">{form.prompt_title || "Prompt prêt à adapter"}</h4>
         <pre className="mt-3 whitespace-pre-wrap rounded-xl bg-background p-4 text-xs leading-6 text-muted-foreground">
           {form.prompt_body || "Le prompt apparaîtra ici."}
         </pre>
       </div>
 
       <div className="rounded-2xl border border-border bg-card p-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Bloc éditorial</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Prochaine étape</p>
         <div className="mt-3 whitespace-pre-wrap text-sm leading-7 text-muted-foreground">
-          {form.body_markdown || "Le bloc de conclusion et les prochaines étapes apparaîtront ici."}
+          {form.body_markdown || "La conclusion et la prochaine étape apparaîtront ici."}
         </div>
       </div>
     </div>
@@ -453,7 +453,7 @@ const NewsletterAdminPanel = ({
             <div>
               <h2 className="font-heading text-xl font-bold text-card-foreground">Édition newsletter hebdomadaire</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                FR d’abord, ciblage par domaine, puis validation humaine avant envoi automatique ou manuel.
+                FR d’abord, ciblage par domaine, brouillon IA puis validation humaine avant envoi.
               </p>
             </div>
             <Badge variant="secondary">{selectedDomainsLabel}</Badge>
@@ -504,29 +504,29 @@ const NewsletterAdminPanel = ({
           <Textarea value={form.intro} onChange={(e) => setForm({ ...form, intro: e.target.value })} placeholder="Introduction" />
 
           <div className="grid gap-4 md:grid-cols-2">
-            <Input value={form.highlight_title} onChange={(e) => setForm({ ...form, highlight_title: e.target.value })} placeholder="Signal clé · titre" />
-            <Input value={form.highlight_url} onChange={(e) => setForm({ ...form, highlight_url: e.target.value })} placeholder="Signal clé · URL source" />
+            <Input value={form.highlight_title} onChange={(e) => setForm({ ...form, highlight_title: e.target.value })} placeholder="Signal à retenir · titre" />
+            <Input value={form.highlight_url} onChange={(e) => setForm({ ...form, highlight_url: e.target.value })} placeholder="Signal à retenir · URL source" />
           </div>
-          <Textarea value={form.highlight_summary} onChange={(e) => setForm({ ...form, highlight_summary: e.target.value })} placeholder="Signal clé · résumé" />
+          <Textarea value={form.highlight_summary} onChange={(e) => setForm({ ...form, highlight_summary: e.target.value })} placeholder="Signal à retenir · résumé" />
 
           <div className="grid gap-4 md:grid-cols-2">
-            <Input value={form.tip_title} onChange={(e) => setForm({ ...form, tip_title: e.target.value })} placeholder="Conseil pratique · titre" />
-            <Input value={form.tool_name} onChange={(e) => setForm({ ...form, tool_name: e.target.value })} placeholder="Outil à connaître · nom" />
+            <Input value={form.tip_title} onChange={(e) => setForm({ ...form, tip_title: e.target.value })} placeholder="Action à lancer · titre" />
+            <Input value={form.tool_name} onChange={(e) => setForm({ ...form, tool_name: e.target.value })} placeholder="Outil à tester · nom" />
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Textarea value={form.tip_body} onChange={(e) => setForm({ ...form, tip_body: e.target.value })} placeholder="Conseil pratique · contenu" />
+            <Textarea value={form.tip_body} onChange={(e) => setForm({ ...form, tip_body: e.target.value })} placeholder="Action à lancer · contenu" />
             <div className="space-y-4">
               <Input value={form.tool_category} onChange={(e) => setForm({ ...form, tool_category: e.target.value })} placeholder="Outil · catégorie" />
-              <Textarea value={form.tool_summary} onChange={(e) => setForm({ ...form, tool_summary: e.target.value })} placeholder="Outil · résumé" />
+              <Textarea value={form.tool_summary} onChange={(e) => setForm({ ...form, tool_summary: e.target.value })} placeholder="Outil · résumé concret" />
             </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <Input value={form.prompt_title} onChange={(e) => setForm({ ...form, prompt_title: e.target.value })} placeholder="Prompt · titre" />
+            <Input value={form.prompt_title} onChange={(e) => setForm({ ...form, prompt_title: e.target.value })} placeholder="Prompt métier · titre" />
             <Input value={form.cta_label} onChange={(e) => setForm({ ...form, cta_label: e.target.value })} placeholder="CTA · libellé" />
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Textarea value={form.prompt_body} onChange={(e) => setForm({ ...form, prompt_body: e.target.value })} placeholder="Prompt · contenu" className="min-h-[130px]" />
+            <Textarea value={form.prompt_body} onChange={(e) => setForm({ ...form, prompt_body: e.target.value })} placeholder="Prompt métier · contenu" className="min-h-[130px]" />
             <div className="space-y-4">
               <Input value={form.cta_url} onChange={(e) => setForm({ ...form, cta_url: e.target.value })} placeholder="CTA · URL" />
               <input className={fieldClass} type="datetime-local" value={form.scheduled_for} onChange={(e) => setForm({ ...form, scheduled_for: e.target.value })} />
@@ -536,7 +536,7 @@ const NewsletterAdminPanel = ({
           <Textarea
             value={form.body_markdown}
             onChange={(e) => setForm({ ...form, body_markdown: e.target.value })}
-            placeholder="Bloc éditorial complémentaire"
+            placeholder="Prochaine étape / conclusion"
             className="min-h-[170px]"
           />
           <Textarea

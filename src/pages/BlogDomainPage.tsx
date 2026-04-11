@@ -214,9 +214,7 @@ const BlogDomainPage = () => {
                       {content.domainPageHeading.replace("{domain}", sectorLabel || sector)}
                     </h1>
                     <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      {language === "en"
-                        ? `${sectorLabel || sector} resources, signals and practical reading paths for teams that want to act faster.`
-                        : `Veilles, analyses et ressources ${sectorLabel || sector} pour les équipes qui veulent passer plus vite à l’action.`}
+                      {content.domainPageIntro.replace("{domain}", sectorLabel || sector)}
                     </p>
                   </div>
                   <div className="text-sm font-medium text-muted-foreground">
@@ -231,12 +229,6 @@ const BlogDomainPage = () => {
                   >
                     {catalogueSlug ? content.articlePrimaryCta : content.articleFallbackCta}
                   </Link>
-                  <Link
-                    to={buildContactPath("demande-renseignement", sector)}
-                    className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
-                  >
-                    {content.articleSecondaryCta}
-                  </Link>
                   {toolSlug ? (
                     <Link
                       to={`/outils-ia?domaine=${toolSlug}`}
@@ -245,7 +237,7 @@ const BlogDomainPage = () => {
                       {language === "en" ? "Recommended tools" : "Outils recommandés"}
                     </Link>
                   ) : null}
-                  {certificationSlug ? (
+                  {certificationSlug && !catalogueSlug ? (
                     <Link
                       to={`/certification?domaine=${certificationSlug}`}
                       className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
@@ -253,6 +245,12 @@ const BlogDomainPage = () => {
                       {language === "en" ? "Domain certification" : "Certification du domaine"}
                     </Link>
                   ) : null}
+                  <Link
+                    to={buildContactPath("demande-renseignement", sector)}
+                    className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
+                  >
+                    {content.articleSecondaryCta}
+                  </Link>
                 </div>
               </section>
 

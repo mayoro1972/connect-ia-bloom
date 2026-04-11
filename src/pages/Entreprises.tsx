@@ -24,19 +24,18 @@ const servicesHubCopy = {
     title: "Des services IA clairs pour passer de l'idée à l'impact",
     subtitle:
       "Trois points d'entrée simples pour cadrer, déployer et faire vivre une dynamique IA utile dans votre organisation.",
-    diagnosisTitle: "Choisissez le bon pilier selon votre situation",
+    diagnosisTitle: "Choisissez votre point d'entrée",
     diagnosisDesc:
-      "Allez directement vers le bon service selon votre besoin actuel, puis avancez avec un plan clair et actionnable.",
+      "Commencez par le bon pilier selon votre besoin actuel, puis avancez avec un plan clair.",
     pillarsTitle: "Les 3 points d'entrée de notre offre",
     pillars: [
       {
         title: "Conseil & adoption IA",
-        desc: "Pour les entreprises qui veulent clarifier leurs priorités, cadrer leurs cas d'usage et préparer les équipes avant d'investir.",
+        desc: "Pour cadrer les priorités, choisir les bons cas d'usage et préparer les équipes avant d'investir.",
         highlights: [
-          "Le bon choix si vous ne savez pas encore par où commencer",
           "Diagnostic de maturité IA et cartographie des cas d'usage",
           "Feuille de route 30 / 60 / 90 jours",
-          "Cadre d'adoption, gouvernance et conduite du changement",
+          "Cadre d'adoption et gouvernance",
         ],
         cta: "Explorer le conseil",
         href: "/consulting-ia",
@@ -44,9 +43,8 @@ const servicesHubCopy = {
       },
       {
         title: "Automatisation & solutions IA",
-        desc: "Pour les entreprises qui ont déjà identifié des besoins concrets et veulent déployer des outils, assistants ou workflows IA.",
+        desc: "Pour déployer des outils, assistants et workflows IA sur des besoins déjà identifiés.",
         highlights: [
-          "Le bon choix si vous avez des tâches répétitives à automatiser",
           "Automatisations de processus et workflows intelligents",
           "Assistants IA, chatbots métier et outils internes",
           "Dashboards, reporting et solutions maintenables",
@@ -57,12 +55,11 @@ const servicesHubCopy = {
       },
       {
         title: "Media, veille & opportunités",
-        desc: "Pour les organisations qui veulent former dans la durée, nourrir leur audience, suivre les nouveautés utiles et ouvrir des débouchés.",
+        desc: "Pour former dans la durée, nourrir l'audience et faire circuler les nouveautés vraiment utiles.",
         highlights: [
-          "Le bon choix si vous voulez former, communiquer et rester à jour",
-          "Newsletter métier, veille IA Afrique & Côte d'Ivoire",
-          "Guides pratiques, contenus courts et ressources utiles",
-          "Rubrique emploi, opportunités et mise en relation",
+          "Newsletter métier et signaux utiles",
+          "Guides pratiques et contenus courts",
+          "Opportunités et mise en relation",
         ],
         cta: "Explorer le media hub",
         href: "/createur-contenu-ia",
@@ -73,26 +70,26 @@ const servicesHubCopy = {
     pathway: [
       {
         title: "1. Cadrer",
-        desc: "Comprendre votre situation, vos objectifs et les usages IA vraiment utiles à votre organisation.",
+        desc: "Clarifier vos objectifs et les usages IA qui comptent vraiment.",
       },
       {
         title: "2. Déployer",
-        desc: "Construire les automatisations, assistants et solutions qui créent un résultat concret.",
+        desc: "Construire les automatisations et solutions qui créent un résultat concret.",
       },
       {
         title: "3. Animer",
-        desc: "Former, nourrir les équipes, publier la veille et maintenir la dynamique IA dans le temps.",
+        desc: "Former les équipes et maintenir la dynamique dans le temps.",
       },
     ],
     outcomesTitle: "Résultats attendus",
     outcomes: [
-      "Un diagnostic clair, une feuille de route et des cas d'usage priorisés",
-      "Des automatisations, assistants IA et workflows utiles à vos équipes",
-      "Une dynamique durable grâce à la formation, à la veille utile et aux ressources activables",
+      "Un diagnostic clair et des priorités lisibles",
+      "Des automatisations et assistants utiles aux équipes",
+      "Une dynamique durable grâce à la formation et aux ressources",
     ],
     ctaTitle: "Commencer par le bon service",
     ctaDesc:
-      "Si votre besoin est déjà clair, accédez directement au bon pilier. Sinon, nous pouvons commencer par un échange de cadrage pour vous orienter.",
+      "Si votre besoin est déjà clair, allez directement au bon pilier. Sinon, commencez par un échange de cadrage.",
     ctaPrimary: "Demander un cadrage",
     ctaSecondary: "Voir le catalogue formations",
   },
@@ -100,19 +97,18 @@ const servicesHubCopy = {
     title: "Clear AI services to move from idea to impact",
     subtitle:
       "Three simple entry points to frame, deploy and sustain useful AI adoption inside your organization.",
-    diagnosisTitle: "Choose the right pillar for your situation",
+    diagnosisTitle: "Choose your entry point",
     diagnosisDesc:
-      "Go directly to the right service based on your current need, then move forward with a clear and actionable plan.",
+      "Start with the right pillar for your current need, then move forward with a clear plan.",
     pillarsTitle: "The 3 entry points into our offer",
     pillars: [
       {
         title: "AI advisory & adoption",
-        desc: "For organizations that need to clarify priorities, frame use cases and prepare teams before investing.",
+        desc: "To clarify priorities, frame the right use cases and prepare teams before investing.",
         highlights: [
-          "The right choice if you do not yet know where to start",
           "AI maturity diagnosis and opportunity mapping",
           "30 / 60 / 90-day roadmap",
-          "Adoption, governance and change management framework",
+          "Adoption and governance framework",
         ],
         cta: "Explore advisory",
         href: "/consulting-ia",
@@ -120,9 +116,8 @@ const servicesHubCopy = {
       },
       {
         title: "AI automation & solutions",
-        desc: "For organizations that already identified concrete needs and want to deploy tools, assistants or AI workflows.",
+        desc: "To deploy tools, assistants and AI workflows on already identified needs.",
         highlights: [
-          "The right choice if you have repetitive tasks to automate",
           "Process automation and intelligent workflows",
           "AI assistants, business chatbots and internal tools",
           "Dashboards, reporting and maintainable systems",
@@ -133,12 +128,11 @@ const servicesHubCopy = {
       },
       {
         title: "Media, watch & opportunities",
-        desc: "For organizations that want to train over time, grow audience, follow useful AI updates and open opportunities.",
+        desc: "To train over time, grow audience and share the AI updates that actually matter.",
         highlights: [
-          "The right choice if you want to train, communicate and stay current",
-          "Profession-focused newsletter and Africa AI watch",
-          "Practical guides, short-form content and useful resources",
-          "Jobs section, opportunities and warm introductions",
+          "Profession-focused newsletter and useful signals",
+          "Practical guides and short-form content",
+          "Opportunities and warm introductions",
         ],
         cta: "Explore the media hub",
         href: "/createur-contenu-ia",
@@ -149,26 +143,26 @@ const servicesHubCopy = {
     pathway: [
       {
         title: "1. Frame",
-        desc: "Understand your situation, your objectives and the AI use cases that truly matter to your organization.",
+        desc: "Clarify your goals and the AI use cases that truly matter.",
       },
       {
         title: "2. Deploy",
-        desc: "Build automations, assistants and solutions that create tangible outcomes.",
+        desc: "Build automations and solutions that create tangible outcomes.",
       },
       {
         title: "3. Activate",
-        desc: "Train teams, feed the watch, publish content and sustain the AI momentum over time.",
+        desc: "Train teams and sustain the AI momentum over time.",
       },
     ],
     outcomesTitle: "Expected outcomes",
     outcomes: [
-      "A clear diagnosis, a roadmap and prioritized use cases",
-      "Useful automations, AI assistants and workflows for your teams",
-      "Long-term momentum through training, useful watch and actionable resources",
+      "A clear diagnosis and visible priorities",
+      "Useful automations and assistants for your teams",
+      "Long-term momentum through training and resources",
     ],
     ctaTitle: "Start with the right service",
     ctaDesc:
-      "If your need is already clear, go directly to the right pillar. If not, we can begin with a framing conversation to orient your project.",
+      "If your need is already clear, go directly to the right pillar. If not, start with a framing conversation.",
     ctaPrimary: "Request a framing call",
     ctaSecondary: "View the training catalogue",
   },

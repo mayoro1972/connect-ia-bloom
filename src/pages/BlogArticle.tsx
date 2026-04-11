@@ -234,7 +234,7 @@ const BlogArticlePage = () => {
                   {title}
                 </h1>
 
-                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{excerpt}</p>
+                <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground">{excerpt}</p>
 
                 <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                   {item.readTimeMinutes ? (
@@ -285,9 +285,7 @@ const BlogArticlePage = () => {
                   </span>
                   <h2 className="mt-4 font-heading text-2xl font-bold text-card-foreground">{content.articleSidebarTitle}</h2>
                   <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                    {language === "en"
-                      ? "Turn this reading into skills, tools and the right next action for your team."
-                      : "Transformez cette lecture en compétences, en outils concrets et en prochaine action utile pour vos équipes."}
+                    {content.articleSidebarDesc}
                   </p>
 
                   <div className="mt-6 grid gap-3">
@@ -320,7 +318,7 @@ const BlogArticlePage = () => {
                         {language === "en" ? "Recommended tools" : "Outils recommandés"}
                       </Link>
                     ) : null}
-                    {certificationSlug ? (
+                    {certificationSlug && !catalogueSlug ? (
                       <Link
                         to={`/certification?domaine=${certificationSlug}`}
                         className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
@@ -352,7 +350,7 @@ const BlogArticlePage = () => {
                             className="block rounded-2xl border border-border px-4 py-4 hover:border-primary/40"
                           >
                             <p className="font-semibold text-card-foreground">{relatedTitle}</p>
-                            <p className="mt-2 text-sm leading-6 text-muted-foreground line-clamp-3">{relatedExcerpt}</p>
+                            <p className="mt-2 text-sm leading-6 text-muted-foreground line-clamp-2">{relatedExcerpt}</p>
                           </Link>
                         );
                       })}
