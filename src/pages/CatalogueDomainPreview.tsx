@@ -58,7 +58,7 @@ const pageCopy = {
     positioningText:
       'Les tarifs ne sont pas affichés dans cette version du catalogue. Chaque brochure indique "Tarif communiqué sur demande" afin de qualifier le besoin, le format, le volume de participants et la modalité d\'intervention.',
     requestDomain: "Demander le catalogue de ce domaine",
-    appointment: "Prendre RDV après lecture",
+    appointment: "Réserver un audit gratuit",
     detailsBadge: "Contenu détaillé du catalogue",
     detailsSuffix: "formations présentées dans ce domaine",
     exportText: "Chaque fiche peut ensuite être exportée en PDF domaine par domaine.",
@@ -86,7 +86,7 @@ const pageCopy = {
     positioningText:
       'Pricing is not shown in this catalogue version. Each brochure states "Pricing available on request" in order to qualify the need, format, participant volume and delivery model.',
     requestDomain: "Request this domain catalogue",
-    appointment: "Book a meeting after review",
+    appointment: "Book a free audit",
     detailsBadge: "Detailed catalogue content",
     detailsSuffix: "courses presented in this domain",
     exportText: "Each course sheet can later be exported as a domain-specific PDF.",

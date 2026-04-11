@@ -19,72 +19,74 @@ const appointmentCopy = {
       "demande-renseignement": "Demande de renseignement",
       "contact-devis": "Demande de contact / devis",
       "demande-referencement": "Demande de référencement",
-      brochure: "Consultation du catalogue domaine",
+      brochure: "Lecture du catalogue domaine",
     },
-    pageBadge: "Prise de RDV",
-    pageSubtitle: "Modèle de rendez-vous proposé après une demande de catalogue, une demande de renseignement ou une demande de devis.",
+    pageBadge: "Audit IA gratuit",
+    pageTitle: "Réserver un audit IA gratuit",
+    pageSubtitle:
+      "Choisissez un créneau pour un échange de cadrage avec l'équipe TransferAI Africa. L'objectif est de clarifier votre besoin, orienter la demande et définir la meilleure suite.",
     back: "Retour aux formulaires",
-    linkedRequest: "Demande associée",
-    contextTitle: "Contexte du rendez-vous",
+    linkedRequest: "Contexte associé",
+    contextTitle: "Votre contexte",
     source: "Source",
     name: "Nom",
     organization: "Organisation",
     domain: "Domaine",
-    editorialModel: "Modèle éditorial",
-    introTitle: "Texte d'introduction proposé",
-    agenda: "Agenda suggéré",
-    connectLabel: "Lien à connecter",
-    connectTitle: "Calendrier de réservation",
-    prospectMessage: "Message affiché au prospect",
-    cta: "Choisir un créneau",
+    editorialModel: "Pourquoi cet échange est utile",
+    introTitle: "Avant le rendez-vous",
+    agenda: "Ce que nous clarifierons",
+    connectLabel: "Réservation",
+    connectTitle: "Choisissez votre créneau",
+    prospectMessage: "Confirmation de l'échange",
+    cta: "Réserver mon audit gratuit",
     openExternal: "Ouvrir dans Calendly",
-    liveEmbed: "Réservation instantanée",
-    routeLabel: "Parcours actif",
-    eventType: "Type de rendez-vous",
+    liveEmbed: "Réservation immédiate",
+    routeLabel: "Parcours recommandé",
+    eventType: "Format d'échange",
     platform: "Plateforme",
     platformValue: "Calendly + Google Meet",
     reassuranceTitle: "Pourquoi ce format fonctionne",
     reassuranceItems: [
-      "Le prospect reserve sans quitter ton univers de marque.",
-      "Le type de rendez-vous reste adapte au contexte de la demande.",
-      "Un lien externe reste disponible si l'embed ne charge pas.",
+      "Vous réservez en quelques clics sans échange inutile.",
+      "Le créneau reste rattaché à votre contexte réel.",
+      "Un lien externe reste disponible si l'intégration ne charge pas.",
     ],
     eventTypeLabels: {
-      "demande-catalogue": "Découverte catalogue",
-      "demande-renseignement": "Qualification besoin",
-      "contact-devis": "Préparation devis",
+      "demande-catalogue": "Audit d'orientation catalogue",
+      "demande-renseignement": "Audit de cadrage besoin",
+      "contact-devis": "Audit de cadrage devis",
       "demande-referencement": "Qualification référencement",
-      brochure: "Suivi brochure domaine",
+      brochure: "Audit après lecture du catalogue",
     },
     duration: "Durée conseillée",
-    durationText: "20 à 30 minutes pour un premier cadrage, avec possibilité d'un second échange si nécessaire.",
+    durationText: "20 à 30 minutes pour clarifier le besoin et décider de la meilleure suite sans perdre de temps.",
     participants: "Participants",
-    participantsText: "Décideur métier, RH, responsable formation ou sponsor projet selon le type de demande.",
-    alternative: "Alternative rapide",
-    alternativeText: "Un lien WhatsApp ou email peut aussi être affiché pour les prospects qui préfèrent un échange direct.",
+    participantsText: "Décideur métier, RH, responsable formation ou sponsor projet selon la nature de la demande.",
+    alternative: "Alternative directe",
+    alternativeText: "Si vous préférez, vous pouvez aussi nous écrire directement par email depuis cette page.",
     status: "Statut",
-    statusText: "Modèle prêt à être relié au calendrier final après validation du wording et de la structure.",
+    statusText: "Créneau prêt à être réservé immédiatement, avec une orientation adaptée à votre contexte.",
     fallbackDomain: "Non précisé",
     fallbackCompany: "Organisation à préciser",
     fallbackName: "Prospect",
     variants: {
       "demande-catalogue": {
-        title: "RDV de découverte catalogue",
+        title: "Audit IA gratuit pour choisir le bon catalogue",
         intro:
-          "Ce rendez-vous sert à aider le prospect à sélectionner les formations les plus pertinentes dans le domaine demandé, à préciser les priorités et à préparer la suite de l'échange.",
+          "Cet échange vous aide à identifier les formations les plus pertinentes dans le domaine visé, à préciser vos priorités et à décider de la meilleure suite.",
         agenda: [
-          "Comprendre le contexte métier et le public cible",
+          "Comprendre le contexte métier et le public visé",
           "Identifier les formations prioritaires dans le domaine demandé",
           "Valider le format, le niveau et la temporalité souhaités",
-          "Proposer la suite : devis, programme ou second échange",
+          "Définir la suite : devis, programme ou second échange",
         ],
         confirmation:
-          "Merci pour votre intérêt. Choisissez un créneau de 20 à 30 minutes pour parcourir le catalogue avec un conseiller formation.",
+          "Merci pour votre intérêt. Choisissez un créneau de 20 à 30 minutes pour parcourir les options les plus utiles avec un conseiller TransferAI Africa.",
       },
       "demande-renseignement": {
-        title: "RDV de cadrage besoin",
+        title: "Audit IA gratuit pour cadrer votre besoin",
         intro:
-          "Ce rendez-vous est conçu pour un prospect qui sait ce qu'il veut améliorer, mais pas encore quelle formation choisir. Il permet d'orienter la demande vers le bon domaine et le bon parcours.",
+          "Cet échange est conçu pour clarifier ce que vous voulez améliorer, même si vous n'avez pas encore choisi la bonne offre ou le bon domaine.",
         agenda: [
           "Clarifier le besoin et le résultat attendu",
           "Faire émerger le domaine ou les domaines prioritaires",
@@ -95,9 +97,9 @@ const appointmentCopy = {
           "Merci pour votre demande. Choisissez maintenant un créneau pour que nous puissions qualifier votre besoin et vous orienter vers la bonne offre.",
       },
       "contact-devis": {
-        title: "RDV de préparation devis",
+        title: "Audit IA gratuit avant proposition",
         intro:
-          "Ce modèle de rendez-vous intervient lorsqu'un besoin est déjà structuré. L'objectif est de valider les paramètres de l'intervention pour préparer une proposition commerciale adaptée.",
+          "Cet échange intervient quand votre besoin est déjà structuré. L'objectif est de confirmer les paramètres utiles avant préparation de la proposition.",
         agenda: [
           "Confirmer le domaine et les formations ciblées",
           "Valider le volume de participants et la modalité d'intervention",
@@ -108,9 +110,9 @@ const appointmentCopy = {
           "Merci pour votre demande. Réservez un échange de cadrage afin que nous préparions une proposition ajustée à votre besoin.",
       },
       "demande-referencement": {
-        title: "RDV de qualification référencement",
+        title: "Échange de qualification référencement",
         intro:
-          "Ce rendez-vous intervient après une demande de référencement ou de présence sur le site. Il permet de comprendre le profil de l'organisation, ses objectifs de visibilité et la forme de mise en avant la plus pertinente.",
+          "Cet échange intervient après une demande de référencement ou de présence sur le site. Il permet de comprendre le profil de l'organisation, ses objectifs de visibilité et la forme de présence la plus pertinente.",
         agenda: [
           "Présenter l'organisation et son positionnement",
           "Clarifier l'objectif de visibilité recherché",
@@ -121,9 +123,9 @@ const appointmentCopy = {
           "Merci pour votre demande. Réservez un échange de qualification si vous souhaitez préciser votre projet de présence sur TransferAI Africa.",
       },
       brochure: {
-        title: "RDV après lecture de brochure",
+        title: "Audit IA gratuit après lecture du catalogue",
         intro:
-          "Le prospect a déjà consulté une brochure domaine. Le rendez-vous doit donc être bref, rassurant et très orienté vers la priorisation des formations et la modalité adaptée.",
+          "Vous avez déjà consulté un catalogue domaine. L'échange est donc volontairement bref, rassurant et orienté vers la priorisation des formations et la modalité adaptée.",
         agenda: [
           "Vérifier les formations qui ont retenu l'attention",
           "Qualifier le besoin exact",
@@ -142,26 +144,28 @@ const appointmentCopy = {
       "demande-referencement": "Listing request",
       brochure: "Domain catalogue review",
     },
-    pageBadge: "Booking",
-    pageSubtitle: "Appointment model proposed after a catalogue request, information request or quote request.",
+    pageBadge: "Free AI audit",
+    pageTitle: "Book a free AI audit",
+    pageSubtitle:
+      "Choose a slot for a scoping conversation with the TransferAI Africa team. The goal is to clarify your need, orient the request, and define the best next step.",
     back: "Back to forms",
-    linkedRequest: "Linked request",
-    contextTitle: "Meeting context",
+    linkedRequest: "Related context",
+    contextTitle: "Your context",
     source: "Source",
     name: "Name",
     organization: "Organization",
     domain: "Domain",
-    editorialModel: "Editorial model",
-    introTitle: "Suggested introduction text",
-    agenda: "Suggested agenda",
-    connectLabel: "Link to connect",
-    connectTitle: "Booking calendar",
-    prospectMessage: "Message shown to the prospect",
-    cta: "Choose a slot",
+    editorialModel: "Why this conversation helps",
+    introTitle: "Before the meeting",
+    agenda: "What we will clarify",
+    connectLabel: "Booking",
+    connectTitle: "Choose your slot",
+    prospectMessage: "Conversation confirmation",
+    cta: "Book my free audit",
     openExternal: "Open in Calendly",
     liveEmbed: "Instant booking",
-    routeLabel: "Active journey",
-    eventType: "Meeting type",
+    routeLabel: "Recommended path",
+    eventType: "Conversation type",
     platform: "Platform",
     platformValue: "Calendly + Google Meet",
     reassuranceTitle: "Why this format works",
@@ -171,26 +175,26 @@ const appointmentCopy = {
       "An external link remains available if the embed fails to load.",
     ],
     eventTypeLabels: {
-      "demande-catalogue": "Catalogue discovery",
-      "demande-renseignement": "Needs qualification",
-      "contact-devis": "Quote preparation",
+      "demande-catalogue": "Catalogue orientation audit",
+      "demande-renseignement": "Needs scoping audit",
+      "contact-devis": "Quote scoping audit",
       "demande-referencement": "Listing qualification",
-      brochure: "Domain brochure follow-up",
+      brochure: "Post-catalogue audit",
     },
     duration: "Recommended duration",
-    durationText: "20 to 30 minutes for an initial scoping call, with a possible follow-up meeting if needed.",
+    durationText: "20 to 30 minutes to clarify the need and decide the best next step without wasting time.",
     participants: "Participants",
     participantsText: "Business decision-maker, HR lead, learning manager or project sponsor depending on the request.",
-    alternative: "Fast alternative",
-    alternativeText: "A WhatsApp or email link can also be displayed for prospects who prefer direct contact.",
+    alternative: "Direct alternative",
+    alternativeText: "If you prefer, you can also contact us directly by email from this page.",
     status: "Status",
-    statusText: "Model ready to be connected to the final calendar after wording and flow validation.",
+    statusText: "The slot is ready to be booked immediately, with orientation adapted to your context.",
     fallbackDomain: "Not specified",
     fallbackCompany: "Organization to be specified",
     fallbackName: "Prospect",
     variants: {
       "demande-catalogue": {
-        title: "Catalogue discovery call",
+        title: "Free AI audit to choose the right catalogue",
         intro:
           "This meeting helps the prospect identify the most relevant courses in the requested domain, clarify priorities and prepare the next step in the conversation.",
         agenda: [
@@ -203,7 +207,7 @@ const appointmentCopy = {
           "Thank you for your interest. Choose a 20 to 30 minute slot to review the catalogue with a training advisor.",
       },
       "demande-renseignement": {
-        title: "Needs scoping call",
+        title: "Free AI audit to scope your need",
         intro:
           "This meeting is designed for a prospect who knows what they want to improve but has not yet chosen the right course. It helps direct the request toward the right domain and pathway.",
         agenda: [
@@ -216,7 +220,7 @@ const appointmentCopy = {
           "Thank you for your request. Choose a time slot so we can qualify your need and guide you toward the right offer.",
       },
       "contact-devis": {
-        title: "Quote preparation call",
+        title: "Free AI audit before proposal",
         intro:
           "This meeting model applies when the need is already well defined. The goal is to validate delivery parameters so we can prepare the right commercial proposal.",
         agenda: [
@@ -229,7 +233,7 @@ const appointmentCopy = {
           "Thank you for your request. Book a scoping call so we can prepare a proposal tailored to your needs.",
       },
       "demande-referencement": {
-        title: "Listing qualification call",
+        title: "Listing qualification conversation",
         intro:
           "This meeting applies after a listing or visibility request. It helps us understand the organization, its visibility goals, and the most relevant way to position it on TransferAI Africa.",
         agenda: [
@@ -242,7 +246,7 @@ const appointmentCopy = {
           "Thank you for your request. Book a qualification call if you would like to discuss your visibility project on TransferAI Africa.",
       },
       brochure: {
-        title: "Call after brochure review",
+        title: "Free AI audit after catalogue review",
         intro:
           "The prospect has already reviewed a domain brochure. The meeting should therefore be short, reassuring and focused on prioritizing courses and the right delivery format.",
         agenda: [
@@ -283,7 +287,7 @@ const AppointmentPreview = () => {
       <div className="min-h-screen bg-background relative overflow-hidden">
         <AnimatedLogoWatermarks />
         <Navbar />
-        <PageHeader badge={copy.pageBadge} title={currentCopy.title} subtitle={copy.pageSubtitle} />
+        <PageHeader badge={copy.pageBadge} title={copy.pageTitle} subtitle={copy.pageSubtitle} />
 
         <section className="py-12">
           <div className="container mx-auto px-4 lg:px-8 space-y-8">

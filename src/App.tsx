@@ -32,6 +32,7 @@ const ConsultingIA = lazy(() => import("./pages/ConsultingIA"));
 const DeveloppementSolutionsIA = lazy(() => import("./pages/DeveloppementSolutionsIA"));
 const PreviewHub = lazy(() => import("./pages/PreviewHub"));
 const CatalogueDomainPreview = lazy(() => import("./pages/CatalogueDomainPreview"));
+const Contact = lazy(() => import("./pages/Contact"));
 const LeadFormsPreview = lazy(() => import("./pages/LeadFormsPreview"));
 const AppointmentPreview = lazy(() => import("./pages/AppointmentPreview"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -145,7 +146,7 @@ const AnimatedRoutes = () => {
           <Route path="/blog/domaine/:domainSlug" element={<BlogDomainPage />} />
           <Route path="/blog/domain/:domainSlug" element={<BlogDomainPage />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
-          <Route path="/contact" element={<LeadFormsPreview />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/confidentialite" element={<Privacy />} />
           <Route path="/seminaires" element={<Seminaires />} />
           <Route path="/webinars" element={<Webinars />} />

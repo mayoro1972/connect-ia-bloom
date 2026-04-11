@@ -10,7 +10,7 @@ const Footer = () => {
   const copy =
     language === "fr"
       ? {
-          company: "Entreprise",
+          company: "TransferAI",
           companyLinks: [
             { label: "A propos", to: "/a-propos" },
             { label: "Partenaires", to: "/partenaires" },
@@ -31,8 +31,8 @@ const Footer = () => {
             { label: "Conseil & adoption", to: "/consulting-ia" },
             { label: "Automatisation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, veille & emploi", to: "/createur-contenu-ia" },
+            { label: "Audit IA gratuit", to: "/prise-rdv" },
             { label: "Demander un devis", to: buildContactPath("contact-devis") },
-            { label: "Prendre RDV", to: "/prise-rdv" },
           ],
           legal: "Juridique",
           legalLinks: [
@@ -47,7 +47,7 @@ const Footer = () => {
           rights: t("footer.rights"),
         }
       : {
-          company: "Company",
+          company: "TransferAI",
           companyLinks: [
             { label: "About", to: "/a-propos" },
             { label: "Partners", to: "/partenaires" },
@@ -68,8 +68,8 @@ const Footer = () => {
             { label: "Advisory & adoption", to: "/consulting-ia" },
             { label: "Automation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, watch & jobs", to: "/createur-contenu-ia" },
+            { label: "Free AI audit", to: "/prise-rdv" },
             { label: "Request a quote", to: buildContactPath("contact-devis") },
-            { label: "Book a meeting", to: "/prise-rdv" },
           ],
           legal: "Legal",
           legalLinks: [
@@ -91,7 +91,9 @@ const Footer = () => {
     { title: copy.legal, links: copy.legalLinks },
     {
       title: copy.community,
-      links: socialLinks.map((item) => ({
+      links: socialLinks
+        .filter((item) => item.label !== "WhatsApp")
+        .map((item) => ({
         label: item.label,
         href: item.href,
       })),
