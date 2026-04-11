@@ -1,0 +1,179 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0 Arial;}}\viewkind4\uc1
+\pard\sa260\sb160\b\fs44 TransferAI Africa Deployment Operations Plan 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Plan de Déploiement et d'Exploitation\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Vue d'ensemble\b0\fs24\par
+\pard\sa120\fs24 Le site repose sur une séparation simple :\par
+\pard\li720\fi-360\sa80\fs24 -\tab front : React / Vite / TypeScript\par
+\pard\li720\fi-360\sa80\fs24 -\tab base de données et logique serveur : Supabase\par
+\pard\li720\fi-360\sa80\fs24 -\tab emails : Resend\par
+\pard\li720\fi-360\sa80\fs24 -\tab hébergement front : Cloudflare\par
+\pard\li720\fi-360\sa80\fs24 -\tab dépôt source : GitHub\par
+\pard\sa220\sb120\b\fs32 2. Environnements à connaître\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Environnement local\b0\fs24\par
+\pard\sa120\fs24 Usage :\par
+\pard\li720\fi-360\sa80\fs24 -\tab développement\par
+\pard\li720\fi-360\sa80\fs24 -\tab preview\par
+\pard\li720\fi-360\sa80\fs24 -\tab test UI\par
+\pard\li720\fi-360\sa80\fs24 -\tab validation avant commit\par
+\pard\sa180\sb80\b\fs28 Environnement de production\b0\fs24\par
+\pard\sa120\fs24 Usage :\par
+\pard\li720\fi-360\sa80\fs24 -\tab site public\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office réel\par
+\pard\li720\fi-360\sa80\fs24 -\tab edge functions réelles\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoi email réel\par
+\pard\sa220\sb120\b\fs32 3. Déploiement du front\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Cas d'usage\b0\fs24\par
+\pard\sa120\fs24 À faire lorsqu'on modifie :\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages\par
+\pard\li720\fi-360\sa80\fs24 -\tab composants\par
+\pard\li720\fi-360\sa80\fs24 -\tab styles\par
+\pard\li720\fi-360\sa80\fs24 -\tab routes\par
+\pard\li720\fi-360\sa80\fs24 -\tab logique front du back-office\par
+\pard\sa180\sb80\b\fs28 Procédure standard\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab lancer la preview locale\par
+\pard\li720\fi-360\sa80\fs24 2.\tab tester les pages concernées\par
+\pard\li720\fi-360\sa80\fs24 3.\tab lancer le build\par
+\pard\li720\fi-360\sa80\fs24 4.\tab corriger les erreurs s'il y en a\par
+\pard\li720\fi-360\sa80\fs24 5.\tab faire un commit clair\par
+\pard\li720\fi-360\sa80\fs24 6.\tab pousser sur main\par
+\pard\li720\fi-360\sa80\fs24 7.\tab laisser Cloudflare déployer\par
+\pard\li720\fi-360\sa80\fs24 8.\tab vérifier la page en production\par
+\pard\sa180\sb80\b\fs28 Checklist front post-déploiement\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page principale concernée s'ouvre\par
+\pard\li720\fi-360\sa80\fs24 -\tab les routes associées s'ouvrent\par
+\pard\li720\fi-360\sa80\fs24 -\tab les boutons critiques fonctionnent\par
+\pard\li720\fi-360\sa80\fs24 -\tab les formulaires critiques s'ouvrent\par
+\pard\li720\fi-360\sa80\fs24 -\tab les alignements sont corrects\par
+\pard\li720\fi-360\sa80\fs24 -\tab le mobile ne casse pas\par
+\pard\sa220\sb120\b\fs32 4. Déploiement Supabase\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Cas d'usage\b0\fs24\par
+\pard\sa120\fs24 À faire lorsqu'on modifie :\par
+\pard\li720\fi-360\sa80\fs24 -\tab migrations SQL\par
+\pard\li720\fi-360\sa80\fs24 -\tab edge functions\par
+\pard\li720\fi-360\sa80\fs24 -\tab secrets\par
+\pard\li720\fi-360\sa80\fs24 -\tab automatisations planifiées\par
+\pard\sa180\sb80\b\fs28 Ordre recommandé\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier les fichiers supabase/migrations\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier les fonctions supabase/functions\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier les secrets requis\par
+\pard\li720\fi-360\sa80\fs24 4.\tab pousser les migrations\par
+\pard\li720\fi-360\sa80\fs24 5.\tab déployer les fonctions concernées\par
+\pard\li720\fi-360\sa80\fs24 6.\tab tester le flux réel\par
+\pard\sa180\sb80\b\fs28 Quand front et Supabase doivent être déployés ensemble\b0\fs24\par
+\pard\sa120\fs24 Lorsque :\par
+\pard\li720\fi-360\sa80\fs24 -\tab une nouvelle page dépend d'une nouvelle table\par
+\pard\li720\fi-360\sa80\fs24 -\tab le back-office appelle une nouvelle edge function\par
+\pard\li720\fi-360\sa80\fs24 -\tab une edge function change de payload et que le front doit suivre\par
+\pard\sa220\sb120\b\fs32 5. Secrets critiques\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Secrets administratifs\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab CONTENT_ADMIN_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab NEWSLETTER_SCHEDULER_TOKEN\par
+\pard\sa180\sb80\b\fs28 Secrets email\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab RESEND_API_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab MAIL_FROM\par
+\pard\sa180\sb80\b\fs28 Secrets Supabase\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_URL\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_ANON_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_SERVICE_ROLE_KEY\par
+\pard\sa180\sb80\b\fs28 Bonnes pratiques\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab stocker les secrets uniquement dans les environnements sécurisés\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenter le rôle de chaque secret\par
+\pard\li720\fi-360\sa80\fs24 -\tab retester tout flux critique après rotation\par
+\pard\sa220\sb120\b\fs32 6. Plan d'exploitation hebdomadaire\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Blog\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les derniers contenus publiés\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les brouillons IA intéressants\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'aucun titre ou résumé n'est incohérent\par
+\pard\sa180\sb80\b\fs28 Newsletter\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier si un brouillon a été généré\par
+\pard\li720\fi-360\sa80\fs24 -\tab ajuster si besoin\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver ou planifier\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les diffusions\par
+\pard\sa180\sb80\b\fs28 Entreprises et formulaires\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier la page entreprises\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le lien audit IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les demandes entrantes\par
+\pard\sa220\sb120\b\fs32 7. Automatisation newsletter actuelle\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Brouillon hebdomadaire\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab créer une édition FR à partir des domaines les plus actifs\par
+\pard\sa120\fs24 Programmation :\par
+\pard\li720\fi-360\sa80\fs24 -\tab mercredi à 06:00\par
+\pard\sa180\sb80\b\fs28 Envoi hebdomadaire\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer l'édition validée aux abonnés ciblés\par
+\pard\sa120\fs24 Programmation :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vendredi à 08:30\par
+\pard\sa180\sb80\b\fs28 Garde-fou\b0\fs24\par
+\pard\sa120\fs24 L'envoi ne doit partir que si une édition est dans un statut compatible :\par
+\pard\li720\fi-360\sa80\fs24 -\tab approved\par
+\pard\li720\fi-360\sa80\fs24 -\tab scheduled\par
+\pard\sa220\sb120\b\fs32 8. Procédure d'urgence en cas d'incident\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Incident front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab identifier l'URL cassée\par
+\pard\li720\fi-360\sa80\fs24 2.\tab reproduire localement\par
+\pard\li720\fi-360\sa80\fs24 3.\tab corriger\par
+\pard\li720\fi-360\sa80\fs24 4.\tab rebuild\par
+\pard\li720\fi-360\sa80\fs24 5.\tab push\par
+\pard\li720\fi-360\sa80\fs24 6.\tab vérifier Cloudflare\par
+\pard\sa180\sb80\b\fs28 Incident back-office\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier le token admin\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier l'appel content-admin\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier les variables Supabase du front\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier la fonction edge concernée\par
+\pard\sa180\sb80\b\fs28 Incident email\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier Resend\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier la fonction newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier les logs de diffusion\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier l'expéditeur\par
+\pard\li720\fi-360\sa80\fs24 5.\tab vérifier le secret API\par
+\pard\sa220\sb120\b\fs32 9. Validation fonctionnelle minimale avant annonce "c'est déployé"\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Pour un changement front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab homepage si impact navigation\par
+\pard\li720\fi-360\sa80\fs24 -\tab page directement concernée\par
+\pard\li720\fi-360\sa80\fs24 -\tab CTA principal concerné\par
+\pard\li720\fi-360\sa80\fs24 -\tab mobile si la page est commerciale\par
+\pard\sa180\sb80\b\fs28 Pour un changement blog\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab /blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab un article individuel\par
+\pard\li720\fi-360\sa80\fs24 -\tab un filtre domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab la newsletter blog si impactée\par
+\pard\sa180\sb80\b\fs28 Pour un changement newsletter\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab chargement de Newsletter IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab sauvegarde d'une édition\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoi test\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérification de Dernières diffusions\par
+\pard\sa220\sb120\b\fs32 10. Stratégie de rollback\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front\b0\fs24\par
+\pard\sa120\fs24 Si un push casse le site :\par
+\pard\li720\fi-360\sa80\fs24 -\tab identifier le commit fautif\par
+\pard\li720\fi-360\sa80\fs24 -\tab préparer un correctif rapide\par
+\pard\li720\fi-360\sa80\fs24 -\tab si nécessaire revenir à une version stable via git\par
+\pard\li720\fi-360\sa80\fs24 -\tab repusher puis vérifier Cloudflare\par
+\pard\sa180\sb80\b\fs28 Supabase\b0\fs24\par
+\pard\sa120\fs24 Si une fonction edge casse un flux :\par
+\pard\li720\fi-360\sa80\fs24 -\tab redéployer la dernière version stable\par
+\pard\li720\fi-360\sa80\fs24 -\tab corriger localement\par
+\pard\li720\fi-360\sa80\fs24 -\tab retester avant nouveau déploiement\par
+\pard\sa180\sb80\b\fs28 Principe\b0\fs24\par
+\pard\sa120\fs24 Toujours privilégier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab correctif rapide et propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérification réelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab documentation du problème et de la solution\par
+\pard\sa220\sb120\b\fs32 11. Gouvernance recommandée\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Administrateur No1\b0\fs24\par
+\pard\sa120\fs24 Responsable de :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la cohérence globale\par
+\pard\li720\fi-360\sa80\fs24 -\tab la qualité des contenus\par
+\pard\li720\fi-360\sa80\fs24 -\tab la validation avant diffusion\par
+\pard\li720\fi-360\sa80\fs24 -\tab la documentation\par
+\pard\sa180\sb80\b\fs28 Administrateur No2\b0\fs24\par
+\pard\sa120\fs24 Responsable de soutien sur :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifications\par
+\pard\li720\fi-360\sa80\fs24 -\tab publication\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office\par
+\pard\li720\fi-360\sa80\fs24 -\tab relais en cas d'absence\par
+\pard\sa180\sb80\b\fs28 Règle de continuité\b0\fs24\par
+\pard\sa120\fs24 Aucun flux critique ne doit dépendre uniquement d'une seule personne et d'une seule mémoire non documentée.\par
+}

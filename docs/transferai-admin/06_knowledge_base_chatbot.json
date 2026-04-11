@@ -1,0 +1,399 @@
+{
+  "version": "2026-04-11",
+  "site": {
+    "name": "TransferAI Africa",
+    "positioning": "Plateforme de formation, contenus, conseil et solutions IA orientee Cote d'Ivoire et Afrique.",
+    "promise": "Aider les professionnels, entreprises et institutions a integrer l'IA avec methode, impact concret et logique metier.",
+    "primary_language": "fr",
+    "secondary_language_policy": "en seulement pour contenus strategiques",
+    "geographic_priority": [
+      "Cote d'Ivoire",
+      "Afrique de l'Ouest",
+      "Afrique"
+    ],
+    "target_audiences": [
+      "professionnels",
+      "entreprises",
+      "institutions",
+      "dirigeants",
+      "responsables formation",
+      "equipes metiers",
+      "apprenants"
+    ]
+  },
+  "navigation": {
+    "primary_routes": [
+      {
+        "path": "/",
+        "purpose": "accueil",
+        "when_to_send_user": "quand le visiteur veut une vue globale de TransferAI Africa"
+      },
+      {
+        "path": "/education",
+        "purpose": "hub education",
+        "when_to_send_user": "quand le visiteur cherche une entree formation"
+      },
+      {
+        "path": "/catalogue",
+        "purpose": "catalogue formations",
+        "when_to_send_user": "quand le visiteur veut comparer les formations"
+      },
+      {
+        "path": "/catalogue/:id",
+        "purpose": "detail formation",
+        "when_to_send_user": "quand le visiteur demande une formation precise"
+      },
+      {
+        "path": "/parcours",
+        "purpose": "parcours guides",
+        "when_to_send_user": "quand le visiteur ne sait pas encore quelle trajectoire choisir"
+      },
+      {
+        "path": "/certification",
+        "purpose": "certification sectorielle",
+        "when_to_send_user": "quand le visiteur veut une offre plus structuree et professionnalisante"
+      },
+      {
+        "path": "/outils-ia",
+        "purpose": "matrice outils IA",
+        "when_to_send_user": "quand le visiteur cherche les outils recommandes par domaine"
+      },
+      {
+        "path": "/entreprises",
+        "purpose": "offre entreprise",
+        "when_to_send_user": "quand l'intention est B2B, accompagnement, audit, conseil ou solution"
+      },
+      {
+        "path": "/services",
+        "purpose": "alias de /entreprises",
+        "when_to_send_user": "quand un lien historique ou un ancien CTA pointe sur services"
+      },
+      {
+        "path": "/blog",
+        "purpose": "hub ressources",
+        "when_to_send_user": "quand le visiteur veut lire des contenus ou commencer par la veille"
+      },
+      {
+        "path": "/blog/domaine/:domainSlug",
+        "purpose": "blog par domaine",
+        "when_to_send_user": "quand le visiteur veut un domaine specifique"
+      },
+      {
+        "path": "/blog/:slug",
+        "purpose": "article individuel",
+        "when_to_send_user": "quand le visiteur veut lire un contenu precis"
+      },
+      {
+        "path": "/contact",
+        "purpose": "formulaires et demandes",
+        "when_to_send_user": "quand le visiteur veut poser une question ou faire une demande"
+      },
+      {
+        "path": "/back-office",
+        "purpose": "administration",
+        "when_to_send_user": "jamais pour le public, seulement pour l'administration interne"
+      }
+    ]
+  },
+  "offer": {
+    "pillars": [
+      {
+        "name": "education",
+        "description": "Formations, catalogue, parcours, certification, formats live."
+      },
+      {
+        "name": "entreprises",
+        "description": "Conseil, audit IA, adoption, automatisation, solutions IA."
+      },
+      {
+        "name": "ressources",
+        "description": "Blog, veille, guides, etudes de cas, newsletter par domaine."
+      },
+      {
+        "name": "outils",
+        "description": "Matrice officielle des outils IA recommandes par domaine."
+      }
+    ]
+  },
+  "domains": [
+    {
+      "slug": "it-transformation-digitale",
+      "label": "IT & Transformation Digitale",
+      "intent_examples": [
+        "moderniser les processus",
+        "structurer la transformation digitale",
+        "outiller les equipes IT"
+      ]
+    },
+    {
+      "slug": "finance-fintech",
+      "label": "Finance & Fintech",
+      "intent_examples": [
+        "reporting",
+        "fraude",
+        "conformite",
+        "analyse financiere"
+      ]
+    },
+    {
+      "slug": "agriculture-agrotech-ia",
+      "label": "Agriculture & AgroTech IA",
+      "intent_examples": [
+        "rendement",
+        "traçabilite",
+        "maladies des cultures",
+        "supply agricole"
+      ]
+    },
+    {
+      "slug": "education-edtech-ia",
+      "label": "Education & EdTech IA",
+      "intent_examples": [
+        "personnalisation",
+        "tutorat IA",
+        "contenus pedagogiques"
+      ]
+    },
+    {
+      "slug": "sante-ia-medicale",
+      "label": "Sante & IA medicale",
+      "intent_examples": [
+        "diagnostic assiste",
+        "surveillance epidemiologique",
+        "optimisation pharmaceutique"
+      ]
+    },
+    {
+      "slug": "logistique-supply-chain",
+      "label": "Logistique & Supply Chain",
+      "intent_examples": [
+        "prevision",
+        "optimisation",
+        "flux logistiques"
+      ]
+    },
+    {
+      "slug": "energie-transition-energetique",
+      "label": "Energie & Transition energetique",
+      "intent_examples": [
+        "maintenance predictive",
+        "pilotage energie",
+        "reporting transition"
+      ]
+    },
+    {
+      "slug": "rh-gestion-talents",
+      "label": "RH & Gestion des talents",
+      "intent_examples": [
+        "recrutement",
+        "formation",
+        "experience collaborateur"
+      ]
+    },
+    {
+      "slug": "marketing-communication-ia",
+      "label": "Marketing & Communication IA",
+      "intent_examples": [
+        "contenu",
+        "campagnes",
+        "analyse audience"
+      ]
+    },
+    {
+      "slug": "droit-legaltech-ia",
+      "label": "Droit & LegalTech IA",
+      "intent_examples": [
+        "recherche",
+        "conformite",
+        "analyse documentaire"
+      ]
+    },
+    {
+      "slug": "immobilier-smart-city",
+      "label": "Immobilier & Smart City",
+      "intent_examples": [
+        "ville intelligente",
+        "urbanisme",
+        "proptech"
+      ]
+    },
+    {
+      "slug": "tourisme-hospitalite",
+      "label": "Tourisme & Hospitalite",
+      "intent_examples": [
+        "experience voyageur",
+        "revenue management",
+        "hospitality"
+      ]
+    },
+    {
+      "slug": "medias-creation-contenu",
+      "label": "Medias & Creation de contenu",
+      "intent_examples": [
+        "contenu multiformat",
+        "monetisation",
+        "desinformation"
+      ]
+    }
+  ],
+  "certification": {
+    "positioning": "Certification professionnelle pensee pour plusieurs metiers, avec socle commun puis specialisation par domaine.",
+    "duration": "5 jours",
+    "evaluation_mode": "evaluation continue, sans soutenance jury, avec seuil de validation 70/100",
+    "sector_logic": "chaque domaine dispose d'objectifs, de resultats attendus et d'un programme adapte"
+  },
+  "blog": {
+    "role": [
+      "credibilite",
+      "SEO",
+      "conversion",
+      "nurturing",
+      "autorite editoriale"
+    ],
+    "formats": [
+      "veille",
+      "guides",
+      "case-studies",
+      "expertise-ai"
+    ],
+    "editorial_rules": [
+      "afficher le badge de type",
+      "eviter la repetition du type dans le titre",
+      "mettre en avant le domaine",
+      "resumes courts et actionnables"
+    ]
+  },
+  "newsletter": {
+    "subscription_mode": "par domaine",
+    "newsletter_structure": [
+      "titre",
+      "objet",
+      "preheader",
+      "introduction",
+      "signal cle",
+      "conseil pratique",
+      "outil a connaitre",
+      "prompt de la semaine",
+      "bloc editorial",
+      "cta"
+    ],
+    "automation": {
+      "draft_weekly": "mercredi 06:00",
+      "send_weekly": "vendredi 08:30",
+      "guardrail": "envoi seulement si edition approved ou scheduled",
+      "recommended_mode": "semi-automatique avec validation humaine"
+    }
+  },
+  "backoffice": {
+    "tabs": [
+      "Analytics",
+      "Ressources",
+      "Brouillons IA",
+      "Newsletter IA",
+      "Emplois IA",
+      "Mode d'emploi"
+    ],
+    "requires_admin_token": true,
+    "admin_secret_name": "CONTENT_ADMIN_TOKEN",
+    "main_actions": [
+      "publier une ressource",
+      "gerer des brouillons IA",
+      "creer ou relire une newsletter",
+      "gerer des emplois",
+      "suivre les chiffres admin"
+    ]
+  },
+  "tech_stack": {
+    "frontend": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "React Router",
+      "TanStack Query"
+    ],
+    "backend": [
+      "Supabase database",
+      "Supabase Edge Functions",
+      "Supabase scheduled jobs"
+    ],
+    "email": [
+      "Resend"
+    ],
+    "deployment": [
+      "GitHub",
+      "Cloudflare"
+    ]
+  },
+  "supabase": {
+    "tables": [
+      "contact_requests",
+      "registration_requests",
+      "page_views",
+      "resource_posts",
+      "job_opportunities",
+      "source_feeds",
+      "source_signals",
+      "editorial_jobs",
+      "newsletter_subscriptions",
+      "newsletter_issues",
+      "newsletter_delivery_logs"
+    ],
+    "functions": [
+      "content-admin",
+      "content-discovery",
+      "content-classifier",
+      "content-drafter",
+      "newsletter-subscribe",
+      "newsletter-drafter",
+      "newsletter-send",
+      "newsletter-scheduler",
+      "send-prospect-emails"
+    ]
+  },
+  "faq": [
+    {
+      "question": "Qu'est-ce que TransferAI Africa ?",
+      "answer": "TransferAI Africa est une plateforme de formation, contenus, conseil et solutions IA orientee Cote d'Ivoire et Afrique."
+    },
+    {
+      "question": "Comment trouver la bonne formation ?",
+      "answer": "Le visiteur doit etre oriente vers le catalogue, les parcours ou la certification selon son objectif et son metier."
+    },
+    {
+      "question": "Comment fonctionne la newsletter ?",
+      "answer": "Les visiteurs s'abonnent par domaine. Une edition peut etre preparee automatiquement, relue puis envoyee si elle est approuvee."
+    },
+    {
+      "question": "Comment fonctionne la certification ?",
+      "answer": "La certification repose sur un socle commun puis une specialisation par domaine, avec evaluation continue."
+    },
+    {
+      "question": "Ou gere-t-on les contenus ?",
+      "answer": "Dans le back-office, onglets Ressources, Brouillons IA, Newsletter IA et Emplois IA."
+    }
+  ],
+  "assistant_policy": {
+    "must_do": [
+      "repondre clairement",
+      "orienter vers la bonne page",
+      "respecter la logique FR d'abord",
+      "rester utile et concret",
+      "reconnaitre quand une information n'est pas confirmee"
+    ],
+    "must_not_do": [
+      "inventer des prix",
+      "inventer des dates de session",
+      "inventer des partenaires",
+      "inventer des promesses produit",
+      "inventer des actions techniques non verifiees"
+    ],
+    "preferred_cta_logic": [
+      "catalogue si intention formation",
+      "parcours si intention orientation",
+      "certification si intention premium ou sectorielle",
+      "entreprises si intention B2B ou audit",
+      "blog si intention veille ou contenu",
+      "contact si besoin humain explicite"
+    ]
+  }
+}

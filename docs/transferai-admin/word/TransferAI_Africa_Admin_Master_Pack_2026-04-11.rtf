@@ -1,0 +1,1157 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0 Arial;}}\viewkind4\uc1
+\pard\sa260\sb160\b\fs44 TransferAI Africa Admin Index 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Pack Administration TransferAI Africa\b0\fs24\par
+\pard\sa120\fs24 Ce dossier regroupe la documentation de référence du site TransferAI Africa.\par
+\pard\sa120\fs24 Il a 4 objectifs :\par
+\pard\li720\fi-360\sa80\fs24 -\tab donner à l'administrateur No1 une vue complète du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab permettre à d'autres administrateurs de prendre le relais rapidement\par
+\pard\li720\fi-360\sa80\fs24 -\tab servir de base de connaissance pour un assistant IA interne ou un chatbot public\par
+\pard\li720\fi-360\sa80\fs24 -\tab conserver une mémoire claire du projet, de son architecture et de ses évolutions\par
+\pard\sa220\sb120\b\fs32 Contenu du pack\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab [Guide Administrateur No1](./01_Guide_Administrateur_No1.md)\par
+\pard\li720\fi-360\sa80\fs24 2.\tab [Base de Connaissance du Site](./02_Base_Connaissance_Site.md)\par
+\pard\li720\fi-360\sa80\fs24 3.\tab [FAQ Site, Back-office et Support](./03_FAQ_Site_Assistant_IA.md)\par
+\pard\li720\fi-360\sa80\fs24 4.\tab [Plan de Déploiement et d'Exploitation](./04_Plan_Deploiement_Exploitation.md)\par
+\pard\li720\fi-360\sa80\fs24 5.\tab [Roadmap Historique du Projet](./05_Roadmap_Historique_Projet.md)\par
+\pard\li720\fi-360\sa80\fs24 6.\tab [Base de Connaissance Chatbot JSON](./06_knowledge_base_chatbot.json)\par
+\pard\li720\fi-360\sa80\fs24 7.\tab [Export Word Friendly HTML](./07_Export_Word_TransferAI_Admin_Pack.html)\par
+\pard\li720\fi-360\sa80\fs24 8.\tab [Note Direction / Partage Externe](./08_Note_Direction_Partage_Externe.md)\par
+\pard\li720\fi-360\sa80\fs24 9.\tab [Export Word Friendly Direction / Externe](./09_Export_Word_Direction_Externe.html)\par
+\pard\sa220\sb120\b\fs32 Ordre de lecture recommandé\b0\fs24\par
+\pard\sa120\fs24 Pour l'administrateur principal :\par
+\pard\li720\fi-360\sa80\fs24 -\tab commencer par le guide administrateur\par
+\pard\li720\fi-360\sa80\fs24 -\tab lire ensuite le plan de déploiement et la roadmap\par
+\pard\li720\fi-360\sa80\fs24 -\tab garder la FAQ sous la main pour les cas fréquents\par
+\pard\sa120\fs24 Pour les autres administrateurs :\par
+\pard\li720\fi-360\sa80\fs24 -\tab commencer par le guide administrateur\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire la base de connaissance du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser la FAQ comme socle de réponses standardisées\par
+\pard\sa120\fs24 Pour la future IA assistant / chatbot :\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser en priorité la base de connaissance du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab charger ensuite la FAQ\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser enfin le fichier JSON comme format structuré de départ\par
+\pard\sa220\sb120\b\fs32 Périmètre actuel du site\b0\fs24\par
+\pard\sa120\fs24 Le site couvre aujourd'hui les briques suivantes :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vitrine institutionnelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab hub éducation\par
+\pard\li720\fi-360\sa80\fs24 -\tab catalogue de formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages parcours\par
+\pard\li720\fi-360\sa80\fs24 -\tab certification sectorielle\par
+\pard\li720\fi-360\sa80\fs24 -\tab page entreprises / services\par
+\pard\li720\fi-360\sa80\fs24 -\tab blog / ressources dynamiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab matrice des outils IA par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab formulaire de contact et formulaires de leads\par
+\pard\li720\fi-360\sa80\fs24 -\tab audit IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office contenus / brouillons IA / newsletter / emplois\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline éditorial Supabase\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline newsletter avec abonnement, génération, test et envoi\par
+\pard\sa220\sb120\b\fs32 Architecture résumée\b0\fs24\par
+\pard\sa120\fs24 Front :\par
+\pard\li720\fi-360\sa80\fs24 -\tab React + Vite + TypeScript\par
+\pard\li720\fi-360\sa80\fs24 -\tab déploiement via GitHub puis Cloudflare\par
+\pard\sa120\fs24 Backend :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Supabase pour la base de données, l'auth technique, les edge functions et les automatisations\par
+\pard\sa120\fs24 Email :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Resend pour les emails transactionnels et newsletters\par
+\pard\sa220\sb120\b\fs32 Logique éditoriale de référence\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab EN ensuite uniquement pour les contenus stratégiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab Côte d'Ivoire d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab Afrique de l'Ouest ensuite\par
+\pard\li720\fi-360\sa80\fs24 -\tab angle concret, métier, actionnable\par
+\pard\sa220\sb120\b\fs32 Export vers Word\b0\fs24\par
+\pard\sa120\fs24 Le fichier [07_Export_Word_TransferAI_Admin_Pack.html](./07_Export_Word_TransferAI_Admin_Pack.html) peut être :\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouvert directement dans Microsoft Word\par
+\pard\li720\fi-360\sa80\fs24 -\tab enregistré au format .docx\par
+\pard\li720\fi-360\sa80\fs24 -\tab partagé aux autres administrateurs\par
+\pard\li720\fi-360\sa80\fs24 -\tab imprimé en PDF\par
+\pard\sa120\fs24 Le fichier [09_Export_Word_Direction_Externe.html](./09_Export_Word_Direction_Externe.html) a été pensé pour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la direction\par
+\pard\li720\fi-360\sa80\fs24 -\tab les partenaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab les administrateurs secondaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab les présentations synthétiques de l'avancement du site\par
+\pard\sa220\sb120\b\fs32 Recommandation de gouvernance\b0\fs24\par
+\pard\sa120\fs24 Ce pack doit devenir un document vivant.\par
+\pard\sa120\fs24 À mettre à jour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque évolution majeure du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque ajout d'edge function ou de secret critique\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque changement de workflow admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque nouvelle offre, rubrique ou domaine stratégique\par
+\pard\sa220\sb120\b\fs32 Nomenclature des livrables Word\b0\fs24\par
+\pard\sa120\fs24 Les fichiers source conservent une numérotation simple dans ce dossier pour rester faciles à maintenir.\par
+\pard\sa120\fs24 Les fichiers livrables Word du dossier word/ suivent désormais une nomenclature plus corporate :\par
+\pard\li720\fi-360\sa80\fs24 -\tab TransferAI_Africa_Admin_...\par
+\pard\li720\fi-360\sa80\fs24 -\tab TransferAI_Africa_Executive_...\par
+\pard\li720\fi-360\sa80\fs24 -\tab suffixe optionnel de date pour les versions partageables\par
+\page
+\pard\sa260\sb160\b\fs44 TransferAI Africa Admin Guide No1 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Guide Administrateur No1\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Mission de l'administrateur principal\b0\fs24\par
+\pard\sa120\fs24 L'administrateur No1 est responsable de 6 piliers :\par
+\pard\li720\fi-360\sa80\fs24 1.\tab Gouvernance du contenu\par
+\pard\li720\fi-360\sa80\fs24 2.\tab Pilotage du back-office\par
+\pard\li720\fi-360\sa80\fs24 3.\tab Supervision technique légère du site\par
+\pard\li720\fi-360\sa80\fs24 4.\tab Contrôle des accès, tokens et secrets\par
+\pard\li720\fi-360\sa80\fs24 5.\tab Validation avant publication et déploiement\par
+\pard\li720\fi-360\sa80\fs24 6.\tab Transmission de la méthode aux autres administrateurs\par
+\pard\sa120\fs24 Son rôle n'est pas seulement de publier. Il doit garantir que le site reste :\par
+\pard\li720\fi-360\sa80\fs24 -\tab cohérent\par
+\pard\li720\fi-360\sa80\fs24 -\tab lisible\par
+\pard\li720\fi-360\sa80\fs24 -\tab exploitable commercialement\par
+\pard\li720\fi-360\sa80\fs24 -\tab fiable techniquement\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenté pour l'équipe\par
+\pard\sa220\sb120\b\fs32 2. Ce que vous administrez concrètement\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front office\b0\fs24\par
+\pard\sa120\fs24 Pages principales :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Accueil\par
+\pard\li720\fi-360\sa80\fs24 -\tab A propos\par
+\pard\li720\fi-360\sa80\fs24 -\tab Education\par
+\pard\li720\fi-360\sa80\fs24 -\tab Catalogue\par
+\pard\li720\fi-360\sa80\fs24 -\tab Détail formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab Parcours\par
+\pard\li720\fi-360\sa80\fs24 -\tab Certification\par
+\pard\li720\fi-360\sa80\fs24 -\tab Outils IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Entreprises / Services\par
+\pard\li720\fi-360\sa80\fs24 -\tab Blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab Article blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab Domaines blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab Contact / formulaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab Pages preview et hubs secondaires\par
+\pard\sa180\sb80\b\fs28 Back-office\b0\fs24\par
+\pard\sa120\fs24 Onglets actuels :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Analytics\par
+\pard\li720\fi-360\sa80\fs24 -\tab Ressources\par
+\pard\li720\fi-360\sa80\fs24 -\tab Brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Newsletter IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Emplois IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Mode d'emploi\par
+\pard\sa180\sb80\b\fs28 Backend Supabase\b0\fs24\par
+\pard\sa120\fs24 Tables et flux principaux :\par
+\pard\li720\fi-360\sa80\fs24 -\tab contact_requests\par
+\pard\li720\fi-360\sa80\fs24 -\tab registration_requests\par
+\pard\li720\fi-360\sa80\fs24 -\tab page_views\par
+\pard\li720\fi-360\sa80\fs24 -\tab resource_posts\par
+\pard\li720\fi-360\sa80\fs24 -\tab job_opportunities\par
+\pard\li720\fi-360\sa80\fs24 -\tab source_feeds\par
+\pard\li720\fi-360\sa80\fs24 -\tab source_signals\par
+\pard\li720\fi-360\sa80\fs24 -\tab editorial_jobs\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter_subscriptions\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter_issues\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter_delivery_logs\par
+\pard\sa120\fs24 Edge Functions principales :\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-discovery\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-classifier\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-drafter\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-subscribe\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-drafter\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-scheduler\par
+\pard\li720\fi-360\sa80\fs24 -\tab send-prospect-emails\par
+\pard\sa220\sb120\b\fs32 3. Règles de fonctionnement\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Ligne éditoriale\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab EN ensuite pour les contenus stratégiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab Côte d'Ivoire d'abord, Afrique de l'Ouest ensuite\par
+\pard\li720\fi-360\sa80\fs24 -\tab contenu orienté usages métiers et valeur business\par
+\pard\li720\fi-360\sa80\fs24 -\tab éviter le jargon vide\par
+\pard\li720\fi-360\sa80\fs24 -\tab privilégier les formulations courtes, utiles et crédibles\par
+\pard\sa180\sb80\b\fs28 Discipline de publication\b0\fs24\par
+\pard\sa120\fs24 La bonne séquence est :\par
+\pard\li720\fi-360\sa80\fs24 1.\tab preview locale\par
+\pard\li720\fi-360\sa80\fs24 2.\tab validation\par
+\pard\li720\fi-360\sa80\fs24 3.\tab commit\par
+\pard\li720\fi-360\sa80\fs24 4.\tab push\par
+\pard\li720\fi-360\sa80\fs24 5.\tab déploiement front ou Supabase selon le cas\par
+\pard\li720\fi-360\sa80\fs24 6.\tab vérification post-déploiement\par
+\pard\sa180\sb80\b\fs28 Règle de prudence\b0\fs24\par
+\pard\sa120\fs24 Ne jamais :\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier sans vérifier la page concernée\par
+\pard\li720\fi-360\sa80\fs24 -\tab pousser un changement front qui dépend d'une migration non déployée\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplacer un secret sans savoir où il est utilisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab annoncer une fonctionnalité non vérifiée\par
+\pard\sa220\sb120\b\fs32 4. Routine d'exploitation recommandée\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Chaque jour ouvré\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les demandes de contact et d'inscription\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le blog, la page entreprises, la certification et le formulaire d'audit\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier que le back-office charge bien\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'aucun message d'erreur critique n'est visible sur les pages commerciales\par
+\pard\sa180\sb80\b\fs28 Chaque semaine\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouvrir Back-office > Brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les nouveaux brouillons utiles\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouvrir Back-office > Newsletter IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'édition de la semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test email\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver l'édition si elle est correcte\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les inscriptions newsletter récentes\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les contenus blog les plus importants\par
+\pard\sa180\sb80\b\fs28 Chaque mois\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les rubriques les plus consultées\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les CTA et formulaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab mettre à jour la FAQ si de nouvelles questions reviennent\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les secrets et accès critiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab ajuster la roadmap et les priorités business\par
+\pard\sa220\sb120\b\fs32 5. Procédure d'utilisation du back-office\b0\fs24\par
+\pard\sa180\sb80\b\fs28 A. Token administrateur\b0\fs24\par
+\pard\sa120\fs24 Le back-office exige un token administrateur.\par
+\pard\sa120\fs24 À faire :\par
+\pard\li720\fi-360\sa80\fs24 -\tab coller le token dans le champ Accès admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab cliquer sur Enregistrer le token\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier que les compteurs et listes se chargent\par
+\pard\sa120\fs24 Si le token ne fonctionne pas :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'il s'agit bien du CONTENT_ADMIN_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'il n'y a pas d'espace au début ou à la fin\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier que le secret Supabase n'a pas été remplacé récemment\par
+\pard\sa180\sb80\b\fs28 B. Gestion des ressources\b0\fs24\par
+\pard\sa120\fs24 Dans Ressources :\par
+\pard\li720\fi-360\sa80\fs24 -\tab créer un slug propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab choisir le type de contenu\par
+\pard\li720\fi-360\sa80\fs24 -\tab choisir le domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplir les titres FR\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplir les résumés\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplir le contenu complet FR\par
+\pard\li720\fi-360\sa80\fs24 -\tab renseigner la source et la date\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier ou garder en brouillon\par
+\pard\sa120\fs24 Bonnes pratiques :\par
+\pard\li720\fi-360\sa80\fs24 -\tab garder le badge de type mais éviter de répéter le mot dans le titre\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser des résumés clairs, courts, concrets\par
+\pard\li720\fi-360\sa80\fs24 -\tab lier le contenu aux formations et à l'offre entreprise quand c'est pertinent\par
+\pard\sa180\sb80\b\fs28 C. Gestion des brouillons IA\b0\fs24\par
+\pard\sa120\fs24 Dans Brouillons IA :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les sources suivies\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les signaux détectés\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les brouillons générés\par
+\pard\li720\fi-360\sa80\fs24 -\tab corriger si nécessaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver, publier ou archiver\par
+\pard\sa180\sb80\b\fs28 D. Gestion de la newsletter\b0\fs24\par
+\pard\sa120\fs24 Dans Newsletter IA :\par
+\pard\li720\fi-360\sa80\fs24 -\tab charger l'édition\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les domaines ciblés\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le titre\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'objet email\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le préheader\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'introduction\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le signal clé\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le conseil pratique\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'outil à connaître\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le prompt de la semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le bloc éditorial\par
+\pard\li720\fi-360\sa80\fs24 -\tab enregistrer\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver ou planifier\par
+\pard\sa220\sb120\b\fs32 6. Workflow newsletter : ce qui est automatique et ce qui reste humain\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Ce qui est automatisé\b0\fs24\par
+\pard\sa120\fs24 Le système hebdomadaire est déjà préparé pour fonctionner avec Supabase :\par
+\pard\li720\fi-360\sa80\fs24 -\tab génération d'un brouillon hebdomadaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab ciblage par domaines abonnés\par
+\pard\li720\fi-360\sa80\fs24 -\tab garde-fou d'envoi uniquement si l'édition est approved ou scheduled\par
+\pard\sa120\fs24 Programmation actuelle :\par
+\pard\li720\fi-360\sa80\fs24 -\tab mercredi à 06:00 : génération du brouillon hebdomadaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab vendredi à 08:30 : tentative d'envoi de l'édition validée\par
+\pard\sa180\sb80\b\fs28 Ce qui reste recommandé côté humain\b0\fs24\par
+\pard\sa120\fs24 Avant l'envoi réel, il faut idéalement :\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire le contenu\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un email test\par
+\pard\li720\fi-360\sa80\fs24 -\tab corriger l'objet, le conseil, l'outil ou le prompt si besoin\par
+\pard\li720\fi-360\sa80\fs24 -\tab passer l'édition en approved\par
+\pard\sa120\fs24 Conclusion :\par
+\pard\li720\fi-360\sa80\fs24 -\tab oui, le système peut tourner chaque semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab non, il n'est pas conseillé de laisser partir les emails sans validation au départ\par
+\pard\sa220\sb120\b\fs32 7. Secrets et accès critiques\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Secrets principaux\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab CONTENT_ADMIN_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab NEWSLETTER_SCHEDULER_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab RESEND_API_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab MAIL_FROM\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_URL\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_ANON_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_SERVICE_ROLE_KEY\par
+\pard\sa180\sb80\b\fs28 Règles de sécurité\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab ne jamais publier un secret dans le front\par
+\pard\li720\fi-360\sa80\fs24 -\tab ne jamais envoyer un secret dans un message non sécurisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab si un secret est perdu, le remplacer proprement\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenter toute rotation de secret\par
+\pard\sa180\sb80\b\fs28 Rotation d'un secret\b0\fs24\par
+\pard\sa120\fs24 Quand un secret est remplacé :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier où il est utilisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplacer la valeur dans Supabase ou dans l'environnement concerné\par
+\pard\li720\fi-360\sa80\fs24 -\tab retester immédiatement le workflow lié\par
+\pard\sa220\sb120\b\fs32 8. Déploiements\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front\b0\fs24\par
+\pard\sa120\fs24 Flux normal :\par
+\pard\li720\fi-360\sa80\fs24 -\tab développement local\par
+\pard\li720\fi-360\sa80\fs24 -\tab preview\par
+\pard\li720\fi-360\sa80\fs24 -\tab npm run build\par
+\pard\li720\fi-360\sa80\fs24 -\tab commit\par
+\pard\li720\fi-360\sa80\fs24 -\tab push sur main\par
+\pard\li720\fi-360\sa80\fs24 -\tab déploiement Cloudflare\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérification sur le site public\par
+\pard\sa180\sb80\b\fs28 Backend Supabase\b0\fs24\par
+\pard\sa120\fs24 À faire si nécessaire :\par
+\pard\li720\fi-360\sa80\fs24 -\tab pousser les migrations SQL\par
+\pard\li720\fi-360\sa80\fs24 -\tab déployer les edge functions concernées\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les secrets\par
+\pard\li720\fi-360\sa80\fs24 -\tab tester les flux critiques après déploiement\par
+\pard\sa220\sb120\b\fs32 9. Gestion des incidents\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Si une page front casse\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab identifier l'URL concernée\par
+\pard\li720\fi-360\sa80\fs24 2.\tab reproduire en local\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier le router et le composant\par
+\pard\li720\fi-360\sa80\fs24 4.\tab corriger\par
+\pard\li720\fi-360\sa80\fs24 5.\tab rebuild\par
+\pard\li720\fi-360\sa80\fs24 6.\tab push\par
+\pard\li720\fi-360\sa80\fs24 7.\tab vérifier Cloudflare\par
+\pard\sa180\sb80\b\fs28 Si le back-office ne charge pas\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier le token admin\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier les variables Supabase du front\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier la fonction content-admin\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier la réponse réseau\par
+\pard\sa180\sb80\b\fs28 Si la newsletter ne part pas\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier que l'édition existe\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier son statut\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier Dernières diffusions\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier la fonction newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 5.\tab vérifier RESEND_API_KEY\par
+\pard\li720\fi-360\sa80\fs24 6.\tab vérifier le domaine email expéditeur\par
+\pard\sa220\sb120\b\fs32 10. Checklist avant publication\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Avant toute mise en ligne front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page est lisible en desktop\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page est lisible en mobile\par
+\pard\li720\fi-360\sa80\fs24 -\tab les CTA sont alignés\par
+\pard\li720\fi-360\sa80\fs24 -\tab les formulaires s'ouvrent\par
+\pard\li720\fi-360\sa80\fs24 -\tab le build passe\par
+\pard\li720\fi-360\sa80\fs24 -\tab le contenu est cohérent FR\par
+\pard\sa180\sb80\b\fs28 Avant publication d'une ressource\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab titre propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab domaine correct\par
+\pard\li720\fi-360\sa80\fs24 -\tab résumé utile\par
+\pard\li720\fi-360\sa80\fs24 -\tab source renseignée\par
+\pard\li720\fi-360\sa80\fs24 -\tab date correcte\par
+\pard\li720\fi-360\sa80\fs24 -\tab page article accessible\par
+\pard\sa180\sb80\b\fs28 Avant envoi newsletter\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab édition chargée\par
+\pard\li720\fi-360\sa80\fs24 -\tab objet correct\par
+\pard\li720\fi-360\sa80\fs24 -\tab test email envoyé\par
+\pard\li720\fi-360\sa80\fs24 -\tab rendu email validé\par
+\pard\li720\fi-360\sa80\fs24 -\tab statut approved ou scheduled\par
+\pard\sa220\sb120\b\fs32 11. Documentation à garder vivante\b0\fs24\par
+\pard\sa120\fs24 Ce guide doit être mis à jour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque nouvelle rubrique du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque nouveau flux automatisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque changement de secret ou de procédure\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque évolution importante du back-office\par
+\page
+\pard\sa260\sb160\b\fs44 TransferAI Africa Site Knowledge Base 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Base de Connaissance du Site\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Présentation générale\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Nom\b0\fs24\par
+\pard\sa120\fs24 TransferAI Africa\par
+\pard\sa180\sb80\b\fs28 Positionnement\b0\fs24\par
+\pard\sa120\fs24 TransferAI Africa est une plateforme de formation, contenus, conseil et solutions IA conçue pour les professionnels, entreprises et institutions qui veulent intégrer l'intelligence artificielle avec méthode, impact concret et ancrage Afrique, en particulier Côte d'Ivoire.\par
+\pard\sa180\sb80\b\fs28 Promesse\b0\fs24\par
+\pard\sa120\fs24 Aider les organisations et les professionnels à :\par
+\pard\li720\fi-360\sa80\fs24 -\tab comprendre l'IA de façon concrète\par
+\pard\li720\fi-360\sa80\fs24 -\tab choisir les bons outils\par
+\pard\li720\fi-360\sa80\fs24 -\tab monter en compétences\par
+\pard\li720\fi-360\sa80\fs24 -\tab structurer des usages métiers\par
+\pard\li720\fi-360\sa80\fs24 -\tab transformer la veille en action\par
+\pard\sa180\sb80\b\fs28 Priorité éditoriale\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab EN ensuite pour les contenus stratégiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab angle Côte d'Ivoire\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouverture Afrique de l'Ouest puis Afrique\par
+\pard\sa220\sb120\b\fs32 2. Publics cibles\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Publics principaux\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab professionnels en poste\par
+\pard\li720\fi-360\sa80\fs24 -\tab dirigeants\par
+\pard\li720\fi-360\sa80\fs24 -\tab équipes métiers\par
+\pard\li720\fi-360\sa80\fs24 -\tab responsables formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab entreprises\par
+\pard\li720\fi-360\sa80\fs24 -\tab institutions\par
+\pard\li720\fi-360\sa80\fs24 -\tab apprenants orientés employabilité\par
+\pard\sa180\sb80\b\fs28 Intentions principales des visiteurs\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab comprendre l'offre TransferAI\par
+\pard\li720\fi-360\sa80\fs24 -\tab trouver une formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab demander un devis ou un accompagnement entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab consulter des contenus IA fiables\par
+\pard\li720\fi-360\sa80\fs24 -\tab s'abonner à la newsletter\par
+\pard\li720\fi-360\sa80\fs24 -\tab se repérer dans les domaines couverts\par
+\pard\sa220\sb120\b\fs32 3. Piliers de l'offre\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Education\b0\fs24\par
+\pard\sa120\fs24 Ce pilier couvre :\par
+\pard\li720\fi-360\sa80\fs24 -\tab hub éducation\par
+\pard\li720\fi-360\sa80\fs24 -\tab catalogue de formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab parcours guidés\par
+\pard\li720\fi-360\sa80\fs24 -\tab certification\par
+\pard\li720\fi-360\sa80\fs24 -\tab séminaires et webinars\par
+\pard\sa180\sb80\b\fs28 Entreprises\b0\fs24\par
+\pard\sa120\fs24 Ce pilier couvre :\par
+\pard\li720\fi-360\sa80\fs24 -\tab accompagnement entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab conseil et adoption IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab audit IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab automatisation et solutions IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab contenus utiles orientés décideurs\par
+\pard\sa180\sb80\b\fs28 Ressources\b0\fs24\par
+\pard\sa120\fs24 Ce pilier couvre :\par
+\pard\li720\fi-360\sa80\fs24 -\tab blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab veille IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab guides\par
+\pard\li720\fi-360\sa80\fs24 -\tab études de cas\par
+\pard\li720\fi-360\sa80\fs24 -\tab contenus expertise et IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter par domaine\par
+\pard\sa180\sb80\b\fs28 Outils IA\b0\fs24\par
+\pard\sa120\fs24 Ce pilier couvre :\par
+\pard\li720\fi-360\sa80\fs24 -\tab matrice des outils par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab formats de formation recommandés\par
+\pard\li720\fi-360\sa80\fs24 -\tab usages métier\par
+\pard\li720\fi-360\sa80\fs24 -\tab logique copilote / workflow / low-code / no-code / recherche\par
+\pard\sa220\sb120\b\fs32 4. Pages principales et rôle de chaque page\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Pages coeur du site\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab / : page d'accueil, vision globale, orientation, preuve et CTA\par
+\pard\li720\fi-360\sa80\fs24 -\tab /education : porte d'entrée formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab /catalogue : vue large de l'offre de formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab /catalogue/:id : détail d'une formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab /parcours : trajectoires guidées selon profil\par
+\pard\li720\fi-360\sa80\fs24 -\tab /certification : certification sectorielle avec objectifs et programme\par
+\pard\li720\fi-360\sa80\fs24 -\tab /outils-ia : matrice des outils IA par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab /entreprises : offre entreprise et services\par
+\pard\li720\fi-360\sa80\fs24 -\tab /services : alias de la page entreprises\par
+\pard\li720\fi-360\sa80\fs24 -\tab /blog : hub ressources et veille\par
+\pard\li720\fi-360\sa80\fs24 -\tab /blog/domaine/:domainSlug : page SEO ciblée par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab /blog/:slug : page article individuelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab /contact : formulaires et demandes\par
+\pard\li720\fi-360\sa80\fs24 -\tab /back-office : administration\par
+\pard\sa180\sb80\b\fs28 Pages secondaires\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab /seminaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab /webinars\par
+\pard\li720\fi-360\sa80\fs24 -\tab /a-propos\par
+\pard\li720\fi-360\sa80\fs24 -\tab /partenaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab /evenements\par
+\pard\li720\fi-360\sa80\fs24 -\tab /prise-rdv\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages preview et hubs catalogues\par
+\pard\sa220\sb120\b\fs32 5. Domaines couverts\b0\fs24\par
+\pard\sa120\fs24 Les 13 domaines actuellement couverts sont :\par
+\pard\li720\fi-360\sa80\fs24 1.\tab IT & Transformation Digitale\par
+\pard\li720\fi-360\sa80\fs24 2.\tab Finance & Fintech\par
+\pard\li720\fi-360\sa80\fs24 3.\tab Agriculture & AgroTech IA\par
+\pard\li720\fi-360\sa80\fs24 4.\tab Éducation & EdTech IA\par
+\pard\li720\fi-360\sa80\fs24 5.\tab Santé & IA médicale\par
+\pard\li720\fi-360\sa80\fs24 6.\tab Logistique & Supply Chain\par
+\pard\li720\fi-360\sa80\fs24 7.\tab Énergie & Transition énergétique\par
+\pard\li720\fi-360\sa80\fs24 8.\tab RH & Gestion des talents\par
+\pard\li720\fi-360\sa80\fs24 9.\tab Marketing & Communication IA\par
+\pard\li720\fi-360\sa80\fs24 10.\tab Droit & LegalTech IA\par
+\pard\li720\fi-360\sa80\fs24 11.\tab Immobilier & Smart City\par
+\pard\li720\fi-360\sa80\fs24 12.\tab Tourisme & Hospitalité\par
+\pard\li720\fi-360\sa80\fs24 13.\tab Médias & Création de contenu\par
+\pard\sa220\sb120\b\fs32 6. Certification sectorielle\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Logique\b0\fs24\par
+\pard\sa120\fs24 La certification n'est pas générique. Elle repose sur :\par
+\pard\li720\fi-360\sa80\fs24 -\tab un socle commun de méthode IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab une adaptation par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab une logique métier et livrables\par
+\pard\li720\fi-360\sa80\fs24 -\tab une évaluation continue simple\par
+\pard\sa180\sb80\b\fs28 Ce que la page certification doit transmettre\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab qui est concerné\par
+\pard\li720\fi-360\sa80\fs24 -\tab pourquoi la version concerne le secteur\par
+\pard\li720\fi-360\sa80\fs24 -\tab objectifs de la certification\par
+\pard\li720\fi-360\sa80\fs24 -\tab résultats attendus\par
+\pard\li720\fi-360\sa80\fs24 -\tab programme sur 5 jours\par
+\pard\li720\fi-360\sa80\fs24 -\tab modalités d'évaluation\par
+\pard\li720\fi-360\sa80\fs24 -\tab CTA clair\par
+\pard\sa180\sb80\b\fs28 Positionnement pédagogique\b0\fs24\par
+\pard\sa120\fs24 La certification doit être perçue comme :\par
+\pard\li720\fi-360\sa80\fs24 -\tab professionnelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab concrète\par
+\pard\li720\fi-360\sa80\fs24 -\tab utile en entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab orientée métier\par
+\pard\li720\fi-360\sa80\fs24 -\tab premium mais accessible\par
+\pard\sa220\sb120\b\fs32 7. Blog et pipeline éditorial\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Rôle du blog\b0\fs24\par
+\pard\sa120\fs24 Le blog n'est pas un simple espace d'articles. Il sert à :\par
+\pard\li720\fi-360\sa80\fs24 -\tab crédibiliser TransferAI\par
+\pard\li720\fi-360\sa80\fs24 -\tab nourrir le SEO\par
+\pard\li720\fi-360\sa80\fs24 -\tab convertir les visiteurs vers les formations et l'offre entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab démontrer une lecture IA ancrée Côte d'Ivoire / Afrique\par
+\pard\sa180\sb80\b\fs28 Formats actuels\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab Veille\par
+\pard\li720\fi-360\sa80\fs24 -\tab Guides\par
+\pard\li720\fi-360\sa80\fs24 -\tab Études de cas\par
+\pard\li720\fi-360\sa80\fs24 -\tab Expertise & IA\par
+\pard\sa180\sb80\b\fs28 Principes éditoriaux\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab badge de type visible\par
+\pard\li720\fi-360\sa80\fs24 -\tab domaine visible\par
+\pard\li720\fi-360\sa80\fs24 -\tab titre allégé\par
+\pard\li720\fi-360\sa80\fs24 -\tab résumé orienté utilité\par
+\pard\li720\fi-360\sa80\fs24 -\tab article individuel propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab CTA lisible\par
+\pard\sa180\sb80\b\fs28 Pipeline IA\b0\fs24\par
+\pard\sa120\fs24 Le flux éditorial s'appuie sur :\par
+\pard\li720\fi-360\sa80\fs24 -\tab sources suivies\par
+\pard\li720\fi-360\sa80\fs24 -\tab signaux détectés\par
+\pard\li720\fi-360\sa80\fs24 -\tab classification\par
+\pard\li720\fi-360\sa80\fs24 -\tab brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab revue humaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab publication\par
+\pard\sa220\sb120\b\fs32 8. Newsletter\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Finalité\b0\fs24\par
+\pard\sa120\fs24 La newsletter sert à :\par
+\pard\li720\fi-360\sa80\fs24 -\tab fidéliser l'audience\par
+\pard\li720\fi-360\sa80\fs24 -\tab prolonger la valeur du blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab créer un rendez-vous hebdomadaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab nourrir la relation avant formation ou mission\par
+\pard\sa180\sb80\b\fs28 Structure officielle\b0\fs24\par
+\pard\sa120\fs24 Une édition newsletter contient :\par
+\pard\li720\fi-360\sa80\fs24 -\tab un titre\par
+\pard\li720\fi-360\sa80\fs24 -\tab un objet email\par
+\pard\li720\fi-360\sa80\fs24 -\tab un préheader\par
+\pard\li720\fi-360\sa80\fs24 -\tab une introduction\par
+\pard\li720\fi-360\sa80\fs24 -\tab un signal clé\par
+\pard\li720\fi-360\sa80\fs24 -\tab un conseil pratique\par
+\pard\li720\fi-360\sa80\fs24 -\tab un outil à connaître\par
+\pard\li720\fi-360\sa80\fs24 -\tab un prompt de la semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab un bloc éditorial\par
+\pard\li720\fi-360\sa80\fs24 -\tab un CTA\par
+\pard\sa180\sb80\b\fs28 Ciblage\b0\fs24\par
+\pard\sa120\fs24 L'abonnement se fait par domaine.\par
+\pard\sa120\fs24 Le système peut :\par
+\pard\li720\fi-360\sa80\fs24 -\tab filtrer par domaines choisis\par
+\pard\li720\fi-360\sa80\fs24 -\tab préparer une édition FR\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer la campagne si approuvée\par
+\pard\sa220\sb120\b\fs32 9. Matrice des outils IA\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Rôle de la page outils\b0\fs24\par
+\pard\sa120\fs24 Cette page sert à :\par
+\pard\li720\fi-360\sa80\fs24 -\tab montrer les outils réellement utilisés\par
+\pard\li720\fi-360\sa80\fs24 -\tab structurer le discours commercial B2B\par
+\pard\li720\fi-360\sa80\fs24 -\tab appuyer les formations par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab préparer des offres sectorielles\par
+\pard\sa180\sb80\b\fs28 Catégories d'outils\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab copilote\par
+\pard\li720\fi-360\sa80\fs24 -\tab workflow\par
+\pard\li720\fi-360\sa80\fs24 -\tab low-code\par
+\pard\li720\fi-360\sa80\fs24 -\tab no-code\par
+\pard\li720\fi-360\sa80\fs24 -\tab recherche\par
+\pard\li720\fi-360\sa80\fs24 -\tab builder\par
+\pard\sa180\sb80\b\fs28 Outils structurants\b0\fs24\par
+\pard\sa120\fs24 Le noyau de crédibilité actuel repose notamment sur :\par
+\pard\li720\fi-360\sa80\fs24 -\tab ChatGPT Business\par
+\pard\li720\fi-360\sa80\fs24 -\tab Claude for Enterprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab Gemini for Google Workspace\par
+\pard\li720\fi-360\sa80\fs24 -\tab Microsoft 365 Copilot\par
+\pard\li720\fi-360\sa80\fs24 -\tab n8n\par
+\pard\li720\fi-360\sa80\fs24 -\tab Make\par
+\pard\li720\fi-360\sa80\fs24 -\tab Zapier\par
+\pard\li720\fi-360\sa80\fs24 -\tab Power Automate\par
+\pard\li720\fi-360\sa80\fs24 -\tab Airtable\par
+\pard\li720\fi-360\sa80\fs24 -\tab Notion AI\par
+\pard\li720\fi-360\sa80\fs24 -\tab Softr\par
+\pard\li720\fi-360\sa80\fs24 -\tab Bubble\par
+\pard\li720\fi-360\sa80\fs24 -\tab Glide\par
+\pard\li720\fi-360\sa80\fs24 -\tab Perplexity\par
+\pard\li720\fi-360\sa80\fs24 -\tab NotebookLM\par
+\pard\sa220\sb120\b\fs32 10. Back-office\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Rôle\b0\fs24\par
+\pard\sa120\fs24 Le back-office est le poste de pilotage interne du site.\par
+\pard\sa180\sb80\b\fs28 Ce qu'il permet\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier et modifier les ressources\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier et modifier les emplois\par
+\pard\li720\fi-360\sa80\fs24 -\tab suivre les analytics\par
+\pard\li720\fi-360\sa80\fs24 -\tab piloter les flux éditoriaux IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab piloter la newsletter\par
+\pard\sa180\sb80\b\fs28 Dépendance critique\b0\fs24\par
+\pard\sa120\fs24 Le back-office dépend du token administrateur.\par
+\pard\sa120\fs24 Sans token valide :\par
+\pard\li720\fi-360\sa80\fs24 -\tab les données ne se chargent pas\par
+\pard\li720\fi-360\sa80\fs24 -\tab les actions d'admin ne fonctionnent pas\par
+\pard\sa220\sb120\b\fs32 11. Base technique\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab React\par
+\pard\li720\fi-360\sa80\fs24 -\tab TypeScript\par
+\pard\li720\fi-360\sa80\fs24 -\tab Vite\par
+\pard\li720\fi-360\sa80\fs24 -\tab React Router\par
+\pard\li720\fi-360\sa80\fs24 -\tab TanStack Query\par
+\pard\sa180\sb80\b\fs28 Backend\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab Supabase base de données\par
+\pard\li720\fi-360\sa80\fs24 -\tab Supabase Edge Functions\par
+\pard\li720\fi-360\sa80\fs24 -\tab Supabase Cron / scheduler\par
+\pard\sa180\sb80\b\fs28 Email\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab Resend\par
+\pard\sa180\sb80\b\fs28 Déploiement\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab GitHub\par
+\pard\li720\fi-360\sa80\fs24 -\tab Cloudflare pour le front\par
+\pard\sa220\sb120\b\fs32 12. Principes pour le futur assistant IA / chatbot\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Ce qu'il doit savoir faire\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab expliquer TransferAI clairement\par
+\pard\li720\fi-360\sa80\fs24 -\tab orienter vers la bonne page\par
+\pard\li720\fi-360\sa80\fs24 -\tab distinguer formation, certification, entreprise, blog et outils\par
+\pard\li720\fi-360\sa80\fs24 -\tab répondre sans inventer\par
+\pard\li720\fi-360\sa80\fs24 -\tab respecter FR d'abord\par
+\pard\sa180\sb80\b\fs28 Ce qu'il ne doit pas faire\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab inventer des prix\par
+\pard\li720\fi-360\sa80\fs24 -\tab inventer des dates de session\par
+\pard\li720\fi-360\sa80\fs24 -\tab inventer des partenaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab promettre un accès humain immédiat si cela n'est pas confirmé\par
+\pard\sa180\sb80\b\fs28 Style de réponse recommandé\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab professionnel\par
+\pard\li720\fi-360\sa80\fs24 -\tab clair\par
+\pard\li720\fi-360\sa80\fs24 -\tab concret\par
+\pard\li720\fi-360\sa80\fs24 -\tab orienté solution\par
+\pard\li720\fi-360\sa80\fs24 -\tab jamais agressif commercialement\par
+\pard\sa220\sb120\b\fs32 13. Mots-clés de gouvernance\b0\fs24\par
+\pard\sa120\fs24 À retenir pour tout futur assistant et toute documentation :\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab Côte d'Ivoire d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab métier avant gadget\par
+\pard\li720\fi-360\sa80\fs24 -\tab utilité avant volume\par
+\pard\li720\fi-360\sa80\fs24 -\tab validation humaine avant diffusion large\par
+\page
+\pard\sa260\sb160\b\fs44 TransferAI Africa FAQ Assistant Support 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 FAQ Site, Assistant IA et Support\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. FAQ publique\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Qu'est-ce que TransferAI Africa ?\b0\fs24\par
+\pard\sa120\fs24 TransferAI Africa est une plateforme dédiée à la formation, aux contenus, au conseil et aux solutions IA, avec un ancrage fort en Côte d'Ivoire et une vocation africaine.\par
+\pard\sa180\sb80\b\fs28 À qui s'adresse le site ?\b0\fs24\par
+\pard\sa120\fs24 Le site s'adresse aux professionnels, entreprises, institutions, responsables formation, dirigeants et équipes métiers qui veulent intégrer l'IA avec méthode et impact concret.\par
+\pard\sa180\sb80\b\fs28 Comment trouver la bonne formation ?\b0\fs24\par
+\pard\sa120\fs24 Le plus simple est de commencer par le catalogue, les parcours ou la certification selon votre objectif, votre métier et votre niveau.\par
+\pard\sa180\sb80\b\fs28 Quelle est la différence entre Catalogue, Parcours et Certification ?\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab le catalogue présente l'offre de formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab les parcours aident à choisir une trajectoire adaptée\par
+\pard\li720\fi-360\sa80\fs24 -\tab la certification propose un programme structuré avec spécialisation métier\par
+\pard\sa180\sb80\b\fs28 La certification est-elle destinée à un seul métier ?\b0\fs24\par
+\pard\sa120\fs24 Non. Elle repose sur un socle commun puis une spécialisation par domaine ou famille de métiers.\par
+\pard\sa180\sb80\b\fs28 Combien de domaines sont couverts ?\b0\fs24\par
+\pard\sa120\fs24 Le site couvre actuellement 13 domaines d'expertise autour de l'IA appliquée.\par
+\pard\sa180\sb80\b\fs28 Puis-je consulter des contenus avant de m'inscrire ?\b0\fs24\par
+\pard\sa120\fs24 Oui. Le blog, la veille, les guides, les études de cas et la newsletter servent justement à vous donner une vision concrète avant toute décision.\par
+\pard\sa180\sb80\b\fs28 Le site propose-t-il des contenus pour les entreprises ?\b0\fs24\par
+\pard\sa120\fs24 Oui. La page Entreprises présente l'accompagnement, l'audit IA, le conseil, les solutions IA et des contenus utiles pour les décideurs.\par
+\pard\sa180\sb80\b\fs28 Peut-on demander un audit IA ?\b0\fs24\par
+\pard\sa120\fs24 Oui. Une offre d'audit IA est intégrée à la partie Entreprises / Services.\par
+\pard\sa180\sb80\b\fs28 La newsletter est-elle générale ou ciblée ?\b0\fs24\par
+\pard\sa120\fs24 Elle est ciblée par domaine. L'abonné choisit les domaines qui l'intéressent.\par
+\pard\sa180\sb80\b\fs28 Quels types d'informations la newsletter peut-elle contenir ?\b0\fs24\par
+\pard\sa120\fs24 Veille utile, signal clé, conseil pratique, outil à connaître, prompt métier, lien vers des ressources et prochaines étapes concrètes.\par
+\pard\sa180\sb80\b\fs28 Est-ce que l'anglais est disponible partout ?\b0\fs24\par
+\pard\sa120\fs24 Non. La logique du site est FR d'abord. L'anglais est réservé aux contenus stratégiques.\par
+\pard\sa180\sb80\b\fs28 Le site est-il centré uniquement sur la Côte d'Ivoire ?\b0\fs24\par
+\pard\sa120\fs24 Le cœur éditorial est Côte d'Ivoire d'abord, avec extension Afrique de l'Ouest puis Afrique selon les sujets.\par
+\pard\sa180\sb80\b\fs28 Les outils présentés sur le site sont-ils purement théoriques ?\b0\fs24\par
+\pard\sa120\fs24 Non. La matrice outils a été pensée pour refléter des usages concrets en entreprise et en formation.\par
+\pard\sa180\sb80\b\fs28 Comment entrer en contact ?\b0\fs24\par
+\pard\sa120\fs24 Le visiteur peut passer par la page Contact, la page Entreprises, les CTA du site ou les formulaires dédiés.\par
+\pard\sa220\sb120\b\fs32 2. FAQ blog et contenus\b0\fs24\par
+\pard\sa180\sb80\b\fs28 À quoi sert le blog ?\b0\fs24\par
+\pard\sa120\fs24 Le blog sert à informer, crédibiliser, attirer du trafic qualifié et convertir vers les formations, missions et offres entreprise.\par
+\pard\sa180\sb80\b\fs28 Pourquoi voit-on un badge de type sur les cartes ?\b0\fs24\par
+\pard\sa120\fs24 Le badge aide le visiteur à comprendre rapidement s'il s'agit d'une veille, d'un guide, d'une étude de cas ou d'un contenu expertise.\par
+\pard\sa180\sb80\b\fs28 Pourquoi le mot "Veille" n'apparaît plus dans tous les titres ?\b0\fs24\par
+\pard\sa120\fs24 Parce qu'il est déjà porté par le badge. Retirer la répétition rend les titres plus lisibles et plus premium.\par
+\pard\sa180\sb80\b\fs28 Comment sont classés les contenus ?\b0\fs24\par
+\pard\sa120\fs24 Par domaine et par format.\par
+\pard\sa180\sb80\b\fs28 Peut-on ouvrir un article individuellement ?\b0\fs24\par
+\pard\sa120\fs24 Oui. Chaque contenu du blog dispose d'une page article dédiée.\par
+\pard\sa180\sb80\b\fs28 Le blog peut-il être alimenté automatiquement ?\b0\fs24\par
+\pard\sa120\fs24 Oui, partiellement. Le pipeline peut détecter des signaux, proposer des brouillons et préparer du contenu, mais la validation humaine reste recommandée.\par
+\pard\sa220\sb120\b\fs32 3. FAQ newsletter\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Comment s'abonner ?\b0\fs24\par
+\pard\sa120\fs24 Le visiteur saisit son email et choisit un ou plusieurs domaines.\par
+\pard\sa180\sb80\b\fs28 Que reçoit un abonné ?\b0\fs24\par
+\pard\sa120\fs24 Il reçoit prioritairement les contenus correspondant aux domaines qu'il a choisis.\par
+\pard\sa180\sb80\b\fs28 L'envoi est-il automatique ?\b0\fs24\par
+\pard\sa120\fs24 Le système est conçu pour fonctionner automatiquement chaque semaine, avec une étape de validation humaine recommandée avant envoi réel.\par
+\pard\sa180\sb80\b\fs28 Faut-il remplir la newsletter manuellement chaque semaine ?\b0\fs24\par
+\pard\sa120\fs24 Pas forcément. Le brouillon peut être généré automatiquement. En revanche, il est conseillé de le relire, envoyer un test puis l'approuver.\par
+\pard\sa180\sb80\b\fs28 Sur quelle base la newsletter est-elle construite ?\b0\fs24\par
+\pard\sa120\fs24 Elle peut s'appuyer sur :\par
+\pard\li720\fi-360\sa80\fs24 -\tab les contenus blog publiés\par
+\pard\li720\fi-360\sa80\fs24 -\tab les signaux éditoriaux suivis\par
+\pard\li720\fi-360\sa80\fs24 -\tab les domaines abonnés\par
+\pard\li720\fi-360\sa80\fs24 -\tab les choix éditoriaux validés dans le back-office\par
+\pard\sa180\sb80\b\fs28 Pourquoi un test email peut échouer ?\b0\fs24\par
+\pard\sa120\fs24 Ca peut venir :\par
+\pard\li720\fi-360\sa80\fs24 -\tab d'un token admin invalide\par
+\pard\li720\fi-360\sa80\fs24 -\tab d'une edge function non alignée\par
+\pard\li720\fi-360\sa80\fs24 -\tab d'un problème de clé Resend\par
+\pard\li720\fi-360\sa80\fs24 -\tab d'un problème de domaine expéditeur\par
+\pard\sa180\sb80\b\fs28 Pourquoi un email a été envoyé en test mais pas en campagne ?\b0\fs24\par
+\pard\sa120\fs24 Parce qu'un test n'est pas une diffusion complète. L'édition doit ensuite être approuvée ou planifiée pour passer en campagne.\par
+\pard\sa220\sb120\b\fs32 4. FAQ back-office\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Où gère-t-on les ressources ?\b0\fs24\par
+\pard\sa120\fs24 Dans Back-office > Ressources.\par
+\pard\sa180\sb80\b\fs28 Où gère-t-on les brouillons IA ?\b0\fs24\par
+\pard\sa120\fs24 Dans Back-office > Brouillons IA.\par
+\pard\sa180\sb80\b\fs28 Où gère-t-on la newsletter ?\b0\fs24\par
+\pard\sa120\fs24 Dans Back-office > Newsletter IA.\par
+\pard\sa180\sb80\b\fs28 Pourquoi le back-office demande un token ?\b0\fs24\par
+\pard\sa120\fs24 Parce qu'il déclenche des actions d'administration sur Supabase et sur les edge functions.\par
+\pard\sa180\sb80\b\fs28 Où trouver le token admin ?\b0\fs24\par
+\pard\sa120\fs24 Il ne se trouve pas dans le code public. Il doit être récupéré ou remplacé dans les secrets Supabase sous le nom CONTENT_ADMIN_TOKEN.\par
+\pard\sa180\sb80\b\fs28 Que signifie le message "Invalid Token or Protected Header formatting" ?\b0\fs24\par
+\pard\sa120\fs24 Cela signifie généralement que le header d'auth n'est pas correct côté front ou qu'un mauvais token a été utilisé.\par
+\pard\sa180\sb80\b\fs28 Faut-il changer tout le projet si on remplace le CONTENT_ADMIN_TOKEN ?\b0\fs24\par
+\pard\sa120\fs24 Non, pas si le projet lit déjà le secret par son nom. Il suffit surtout :\par
+\pard\li720\fi-360\sa80\fs24 -\tab de remplacer la valeur dans Supabase\par
+\pard\li720\fi-360\sa80\fs24 -\tab d'utiliser la nouvelle valeur dans le back-office\par
+\pard\sa220\sb120\b\fs32 5. FAQ déploiement\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Comment se déploie le front ?\b0\fs24\par
+\pard\sa120\fs24 Le front suit le flux GitHub puis Cloudflare.\par
+\pard\sa180\sb80\b\fs28 Comment se déploie le backend ?\b0\fs24\par
+\pard\sa120\fs24 Le backend se déploie via Supabase :\par
+\pard\li720\fi-360\sa80\fs24 -\tab migrations\par
+\pard\li720\fi-360\sa80\fs24 -\tab edge functions\par
+\pard\li720\fi-360\sa80\fs24 -\tab secrets si nécessaire\par
+\pard\sa180\sb80\b\fs28 Faut-il toujours déployer le front et Supabase ensemble ?\b0\fs24\par
+\pard\sa120\fs24 Non. Seulement quand une évolution front dépend d'une évolution base de données ou edge functions.\par
+\pard\sa180\sb80\b\fs28 Que vérifier après un push ?\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page concernée\par
+\pard\li720\fi-360\sa80\fs24 -\tab le back-office si touché\par
+\pard\li720\fi-360\sa80\fs24 -\tab les formulaires critiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab les emails si un flux email a été modifié\par
+\pard\sa220\sb120\b\fs32 6. FAQ assistant IA / chatbot\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Quelle doit être la priorité du chatbot ?\b0\fs24\par
+\pard\sa120\fs24 Orienter rapidement le visiteur vers la bonne page et répondre clairement sans inventer.\par
+\pard\sa180\sb80\b\fs28 Que doit répondre le chatbot si une date de session n'est pas confirmée ?\b0\fs24\par
+\pard\sa120\fs24 Il doit rester prudent et proposer une prise de contact ou une demande d'information au lieu d'inventer.\par
+\pard\sa180\sb80\b\fs28 Le chatbot peut-il répondre en anglais ?\b0\fs24\par
+\pard\sa120\fs24 Oui, mais seulement lorsque le contexte ou le contenu stratégique le justifie.\par
+\pard\sa180\sb80\b\fs28 Le chatbot doit-il pousser les visiteurs vers une seule offre ?\b0\fs24\par
+\pard\sa120\fs24 Non. Il doit d'abord comprendre l'intention du visiteur puis orienter vers la page pertinente.\par
+\pard\sa220\sb120\b\fs32 7. FAQ incidents fréquents\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Le formulaire d'audit n'ouvre pas\b0\fs24\par
+\pard\sa120\fs24 Vérifier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la route front\par
+\pard\li720\fi-360\sa80\fs24 -\tab le lien utilisé par le bouton\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page cible réelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab le déploiement Cloudflare si le fix a déjà été poussé\par
+\pard\sa180\sb80\b\fs28 Le blog charge mal ou certaines cartes débordent\b0\fs24\par
+\pard\sa120\fs24 Vérifier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab le composant de carte\par
+\pard\li720\fi-360\sa80\fs24 -\tab les hauteurs minimales\par
+\pard\li720\fi-360\sa80\fs24 -\tab les lignes clamp\par
+\pard\li720\fi-360\sa80\fs24 -\tab les libellés trop longs des domaines\par
+\pard\sa180\sb80\b\fs28 Le back-office charge mais les compteurs restent à zéro\b0\fs24\par
+\pard\sa120\fs24 Vérifier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab le token admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab les appels à content-admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab les réponses réseau\par
+\pard\li720\fi-360\sa80\fs24 -\tab l'environnement Supabase\par
+\pard\sa180\sb80\b\fs28 Une newsletter est marquée envoyée mais rien n'arrive\b0\fs24\par
+\pard\sa120\fs24 Vérifier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab les logs de diffusion\par
+\pard\li720\fi-360\sa80\fs24 -\tab la clé Resend\par
+\pard\li720\fi-360\sa80\fs24 -\tab l'adresse expéditrice\par
+\pard\li720\fi-360\sa80\fs24 -\tab les spams et promotions\par
+\pard\sa180\sb80\b\fs28 Le brouillon hebdomadaire ne se crée pas\b0\fs24\par
+\pard\sa120\fs24 Vérifier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la fonction newsletter-scheduler\par
+\pard\li720\fi-360\sa80\fs24 -\tab le secret NEWSLETTER_SCHEDULER_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab les cron jobs\par
+\pard\li720\fi-360\sa80\fs24 -\tab l'existence ou non d'une édition déjà créée pour la même date\par
+\page
+\pard\sa260\sb160\b\fs44 TransferAI Africa Deployment Operations Plan 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Plan de Déploiement et d'Exploitation\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Vue d'ensemble\b0\fs24\par
+\pard\sa120\fs24 Le site repose sur une séparation simple :\par
+\pard\li720\fi-360\sa80\fs24 -\tab front : React / Vite / TypeScript\par
+\pard\li720\fi-360\sa80\fs24 -\tab base de données et logique serveur : Supabase\par
+\pard\li720\fi-360\sa80\fs24 -\tab emails : Resend\par
+\pard\li720\fi-360\sa80\fs24 -\tab hébergement front : Cloudflare\par
+\pard\li720\fi-360\sa80\fs24 -\tab dépôt source : GitHub\par
+\pard\sa220\sb120\b\fs32 2. Environnements à connaître\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Environnement local\b0\fs24\par
+\pard\sa120\fs24 Usage :\par
+\pard\li720\fi-360\sa80\fs24 -\tab développement\par
+\pard\li720\fi-360\sa80\fs24 -\tab preview\par
+\pard\li720\fi-360\sa80\fs24 -\tab test UI\par
+\pard\li720\fi-360\sa80\fs24 -\tab validation avant commit\par
+\pard\sa180\sb80\b\fs28 Environnement de production\b0\fs24\par
+\pard\sa120\fs24 Usage :\par
+\pard\li720\fi-360\sa80\fs24 -\tab site public\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office réel\par
+\pard\li720\fi-360\sa80\fs24 -\tab edge functions réelles\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoi email réel\par
+\pard\sa220\sb120\b\fs32 3. Déploiement du front\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Cas d'usage\b0\fs24\par
+\pard\sa120\fs24 À faire lorsqu'on modifie :\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages\par
+\pard\li720\fi-360\sa80\fs24 -\tab composants\par
+\pard\li720\fi-360\sa80\fs24 -\tab styles\par
+\pard\li720\fi-360\sa80\fs24 -\tab routes\par
+\pard\li720\fi-360\sa80\fs24 -\tab logique front du back-office\par
+\pard\sa180\sb80\b\fs28 Procédure standard\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab lancer la preview locale\par
+\pard\li720\fi-360\sa80\fs24 2.\tab tester les pages concernées\par
+\pard\li720\fi-360\sa80\fs24 3.\tab lancer le build\par
+\pard\li720\fi-360\sa80\fs24 4.\tab corriger les erreurs s'il y en a\par
+\pard\li720\fi-360\sa80\fs24 5.\tab faire un commit clair\par
+\pard\li720\fi-360\sa80\fs24 6.\tab pousser sur main\par
+\pard\li720\fi-360\sa80\fs24 7.\tab laisser Cloudflare déployer\par
+\pard\li720\fi-360\sa80\fs24 8.\tab vérifier la page en production\par
+\pard\sa180\sb80\b\fs28 Checklist front post-déploiement\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page principale concernée s'ouvre\par
+\pard\li720\fi-360\sa80\fs24 -\tab les routes associées s'ouvrent\par
+\pard\li720\fi-360\sa80\fs24 -\tab les boutons critiques fonctionnent\par
+\pard\li720\fi-360\sa80\fs24 -\tab les formulaires critiques s'ouvrent\par
+\pard\li720\fi-360\sa80\fs24 -\tab les alignements sont corrects\par
+\pard\li720\fi-360\sa80\fs24 -\tab le mobile ne casse pas\par
+\pard\sa220\sb120\b\fs32 4. Déploiement Supabase\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Cas d'usage\b0\fs24\par
+\pard\sa120\fs24 À faire lorsqu'on modifie :\par
+\pard\li720\fi-360\sa80\fs24 -\tab migrations SQL\par
+\pard\li720\fi-360\sa80\fs24 -\tab edge functions\par
+\pard\li720\fi-360\sa80\fs24 -\tab secrets\par
+\pard\li720\fi-360\sa80\fs24 -\tab automatisations planifiées\par
+\pard\sa180\sb80\b\fs28 Ordre recommandé\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier les fichiers supabase/migrations\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier les fonctions supabase/functions\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier les secrets requis\par
+\pard\li720\fi-360\sa80\fs24 4.\tab pousser les migrations\par
+\pard\li720\fi-360\sa80\fs24 5.\tab déployer les fonctions concernées\par
+\pard\li720\fi-360\sa80\fs24 6.\tab tester le flux réel\par
+\pard\sa180\sb80\b\fs28 Quand front et Supabase doivent être déployés ensemble\b0\fs24\par
+\pard\sa120\fs24 Lorsque :\par
+\pard\li720\fi-360\sa80\fs24 -\tab une nouvelle page dépend d'une nouvelle table\par
+\pard\li720\fi-360\sa80\fs24 -\tab le back-office appelle une nouvelle edge function\par
+\pard\li720\fi-360\sa80\fs24 -\tab une edge function change de payload et que le front doit suivre\par
+\pard\sa220\sb120\b\fs32 5. Secrets critiques\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Secrets administratifs\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab CONTENT_ADMIN_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab NEWSLETTER_SCHEDULER_TOKEN\par
+\pard\sa180\sb80\b\fs28 Secrets email\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab RESEND_API_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab MAIL_FROM\par
+\pard\sa180\sb80\b\fs28 Secrets Supabase\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_URL\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_ANON_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_SERVICE_ROLE_KEY\par
+\pard\sa180\sb80\b\fs28 Bonnes pratiques\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab stocker les secrets uniquement dans les environnements sécurisés\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenter le rôle de chaque secret\par
+\pard\li720\fi-360\sa80\fs24 -\tab retester tout flux critique après rotation\par
+\pard\sa220\sb120\b\fs32 6. Plan d'exploitation hebdomadaire\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Blog\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les derniers contenus publiés\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les brouillons IA intéressants\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'aucun titre ou résumé n'est incohérent\par
+\pard\sa180\sb80\b\fs28 Newsletter\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier si un brouillon a été généré\par
+\pard\li720\fi-360\sa80\fs24 -\tab ajuster si besoin\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver ou planifier\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les diffusions\par
+\pard\sa180\sb80\b\fs28 Entreprises et formulaires\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier la page entreprises\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le lien audit IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les demandes entrantes\par
+\pard\sa220\sb120\b\fs32 7. Automatisation newsletter actuelle\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Brouillon hebdomadaire\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab créer une édition FR à partir des domaines les plus actifs\par
+\pard\sa120\fs24 Programmation :\par
+\pard\li720\fi-360\sa80\fs24 -\tab mercredi à 06:00\par
+\pard\sa180\sb80\b\fs28 Envoi hebdomadaire\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer l'édition validée aux abonnés ciblés\par
+\pard\sa120\fs24 Programmation :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vendredi à 08:30\par
+\pard\sa180\sb80\b\fs28 Garde-fou\b0\fs24\par
+\pard\sa120\fs24 L'envoi ne doit partir que si une édition est dans un statut compatible :\par
+\pard\li720\fi-360\sa80\fs24 -\tab approved\par
+\pard\li720\fi-360\sa80\fs24 -\tab scheduled\par
+\pard\sa220\sb120\b\fs32 8. Procédure d'urgence en cas d'incident\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Incident front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab identifier l'URL cassée\par
+\pard\li720\fi-360\sa80\fs24 2.\tab reproduire localement\par
+\pard\li720\fi-360\sa80\fs24 3.\tab corriger\par
+\pard\li720\fi-360\sa80\fs24 4.\tab rebuild\par
+\pard\li720\fi-360\sa80\fs24 5.\tab push\par
+\pard\li720\fi-360\sa80\fs24 6.\tab vérifier Cloudflare\par
+\pard\sa180\sb80\b\fs28 Incident back-office\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier le token admin\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier l'appel content-admin\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier les variables Supabase du front\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier la fonction edge concernée\par
+\pard\sa180\sb80\b\fs28 Incident email\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier Resend\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier la fonction newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier les logs de diffusion\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier l'expéditeur\par
+\pard\li720\fi-360\sa80\fs24 5.\tab vérifier le secret API\par
+\pard\sa220\sb120\b\fs32 9. Validation fonctionnelle minimale avant annonce "c'est déployé"\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Pour un changement front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab homepage si impact navigation\par
+\pard\li720\fi-360\sa80\fs24 -\tab page directement concernée\par
+\pard\li720\fi-360\sa80\fs24 -\tab CTA principal concerné\par
+\pard\li720\fi-360\sa80\fs24 -\tab mobile si la page est commerciale\par
+\pard\sa180\sb80\b\fs28 Pour un changement blog\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab /blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab un article individuel\par
+\pard\li720\fi-360\sa80\fs24 -\tab un filtre domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab la newsletter blog si impactée\par
+\pard\sa180\sb80\b\fs28 Pour un changement newsletter\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab chargement de Newsletter IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab sauvegarde d'une édition\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoi test\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérification de Dernières diffusions\par
+\pard\sa220\sb120\b\fs32 10. Stratégie de rollback\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front\b0\fs24\par
+\pard\sa120\fs24 Si un push casse le site :\par
+\pard\li720\fi-360\sa80\fs24 -\tab identifier le commit fautif\par
+\pard\li720\fi-360\sa80\fs24 -\tab préparer un correctif rapide\par
+\pard\li720\fi-360\sa80\fs24 -\tab si nécessaire revenir à une version stable via git\par
+\pard\li720\fi-360\sa80\fs24 -\tab repusher puis vérifier Cloudflare\par
+\pard\sa180\sb80\b\fs28 Supabase\b0\fs24\par
+\pard\sa120\fs24 Si une fonction edge casse un flux :\par
+\pard\li720\fi-360\sa80\fs24 -\tab redéployer la dernière version stable\par
+\pard\li720\fi-360\sa80\fs24 -\tab corriger localement\par
+\pard\li720\fi-360\sa80\fs24 -\tab retester avant nouveau déploiement\par
+\pard\sa180\sb80\b\fs28 Principe\b0\fs24\par
+\pard\sa120\fs24 Toujours privilégier :\par
+\pard\li720\fi-360\sa80\fs24 -\tab correctif rapide et propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérification réelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab documentation du problème et de la solution\par
+\pard\sa220\sb120\b\fs32 11. Gouvernance recommandée\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Administrateur No1\b0\fs24\par
+\pard\sa120\fs24 Responsable de :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la cohérence globale\par
+\pard\li720\fi-360\sa80\fs24 -\tab la qualité des contenus\par
+\pard\li720\fi-360\sa80\fs24 -\tab la validation avant diffusion\par
+\pard\li720\fi-360\sa80\fs24 -\tab la documentation\par
+\pard\sa180\sb80\b\fs28 Administrateur No2\b0\fs24\par
+\pard\sa120\fs24 Responsable de soutien sur :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifications\par
+\pard\li720\fi-360\sa80\fs24 -\tab publication\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office\par
+\pard\li720\fi-360\sa80\fs24 -\tab relais en cas d'absence\par
+\pard\sa180\sb80\b\fs28 Règle de continuité\b0\fs24\par
+\pard\sa120\fs24 Aucun flux critique ne doit dépendre uniquement d'une seule personne et d'une seule mémoire non documentée.\par
+\page
+\pard\sa260\sb160\b\fs44 TransferAI Africa Project Roadmap 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Roadmap Historique du Projet\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Vision générale\b0\fs24\par
+\pard\sa120\fs24 Le projet TransferAI Africa a évolué d'un site vitrine orienté formation vers une plateforme beaucoup plus structurée, combinant :\par
+\pard\li720\fi-360\sa80\fs24 -\tab formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab certification\par
+\pard\li720\fi-360\sa80\fs24 -\tab offre entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab contenus dynamiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab outils IA par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline éditorial\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter ciblée et automatisée\par
+\pard\sa220\sb120\b\fs32 2. Phases de construction\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Phase 1. Construction du socle front\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab mettre en place les pages principales du site\par
+\pard\sa120\fs24 Livrables majeurs :\par
+\pard\li720\fi-360\sa80\fs24 -\tab accueil\par
+\pard\li720\fi-360\sa80\fs24 -\tab éducation\par
+\pard\li720\fi-360\sa80\fs24 -\tab catalogue\par
+\pard\li720\fi-360\sa80\fs24 -\tab détail formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab parcours\par
+\pard\li720\fi-360\sa80\fs24 -\tab certification\par
+\pard\li720\fi-360\sa80\fs24 -\tab entreprises / services\par
+\pard\li720\fi-360\sa80\fs24 -\tab contact\par
+\pard\sa180\sb80\b\fs28 Phase 2. Stabilisation et compatibilité\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab résoudre les problèmes de chargement et de compatibilité navigateur\par
+\pard\sa120\fs24 Signaux observés dans l'historique git :\par
+\pard\li720\fi-360\sa80\fs24 -\tab diagnostics Safari\par
+\pard\li720\fi-360\sa80\fs24 -\tab ajustements Vite\par
+\pard\li720\fi-360\sa80\fs24 -\tab sécurisation du chargement dynamique\par
+\pard\sa180\sb80\b\fs28 Phase 3. Refonte de lisibilité et simplification UX\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab rendre les pages plus claires\par
+\pard\li720\fi-360\sa80\fs24 -\tab alléger les parcours\par
+\pard\li720\fi-360\sa80\fs24 -\tab mieux hiérarchiser l'information\par
+\pard\sa120\fs24 Résultats :\par
+\pard\li720\fi-360\sa80\fs24 -\tab simplification des navigations\par
+\pard\li720\fi-360\sa80\fs24 -\tab simplification de la page entreprises\par
+\pard\li720\fi-360\sa80\fs24 -\tab simplification de certaines pages certification et outils\par
+\pard\li720\fi-360\sa80\fs24 -\tab alignement des cartes et CTA\par
+\pard\sa180\sb80\b\fs28 Phase 4. Naissance du blog dynamique\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab créer un vrai hub ressources\par
+\pard\sa120\fs24 Étapes majeures :\par
+\pard\li720\fi-360\sa80\fs24 -\tab page blog dynamique\par
+\pard\li720\fi-360\sa80\fs24 -\tab filtres domaine + type\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages article individuelles\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages blog par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab 13 contenus de veille couvrant les 13 domaines\par
+\pard\li720\fi-360\sa80\fs24 -\tab dates d'articles rendues dynamiques\par
+\pard\sa180\sb80\b\fs28 Phase 5. Construction du pipeline éditorial IA\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab permettre à l'équipe de détecter, classer et rédiger des contenus avec assistance IA\par
+\pard\sa120\fs24 Livrables :\par
+\pard\li720\fi-360\sa80\fs24 -\tab tables éditoriales\par
+\pard\li720\fi-360\sa80\fs24 -\tab sources suivies\par
+\pard\li720\fi-360\sa80\fs24 -\tab signaux détectés\par
+\pard\li720\fi-360\sa80\fs24 -\tab brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office dédié\par
+\pard\li720\fi-360\sa80\fs24 -\tab fonctions discovery / classifier / drafter\par
+\pard\sa180\sb80\b\fs28 Phase 6. Construction de la matrice outils IA\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab structurer le discours formation et B2B autour des outils réellement utilisés\par
+\pard\sa120\fs24 Livrables :\par
+\pard\li720\fi-360\sa80\fs24 -\tab page outils IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab matrice par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab formats de formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab catalogue outils / usages / niveaux\par
+\pard\sa180\sb80\b\fs28 Phase 7. Refonte de la certification sectorielle\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab sortir d'une certification trop générique\par
+\pard\sa120\fs24 Livrables :\par
+\pard\li720\fi-360\sa80\fs24 -\tab objectifs par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab programme 5 jours par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab spécialisation sectorielle\par
+\pard\li720\fi-360\sa80\fs24 -\tab évaluation continue plus simple\par
+\pard\li720\fi-360\sa80\fs24 -\tab suppression de la logique de soutenance jury\par
+\pard\sa180\sb80\b\fs28 Phase 8. Newsletter par domaine\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab fidéliser l'audience et prolonger la valeur du blog\par
+\pard\sa120\fs24 Livrables :\par
+\pard\li720\fi-360\sa80\fs24 -\tab inscription newsletter par domaine sur le blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab table abonnements\par
+\pard\li720\fi-360\sa80\fs24 -\tab confirmations email\par
+\pard\li720\fi-360\sa80\fs24 -\tab interface back-office newsletter\par
+\pard\li720\fi-360\sa80\fs24 -\tab structure éditoriale officielle\par
+\pard\sa180\sb80\b\fs28 Phase 9. Pipeline newsletter et automatisation hebdomadaire\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab préparer un système quasi autonome mais pilotable\par
+\pard\sa120\fs24 Livrables :\par
+\pard\li720\fi-360\sa80\fs24 -\tab table newsletter_issues\par
+\pard\li720\fi-360\sa80\fs24 -\tab table newsletter_delivery_logs\par
+\pard\li720\fi-360\sa80\fs24 -\tab fonction newsletter-drafter\par
+\pard\li720\fi-360\sa80\fs24 -\tab fonction newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 -\tab fonction newsletter-scheduler\par
+\pard\li720\fi-360\sa80\fs24 -\tab cron hebdomadaire de génération\par
+\pard\li720\fi-360\sa80\fs24 -\tab cron hebdomadaire d'envoi\par
+\pard\li720\fi-360\sa80\fs24 -\tab garde-fou d'approbation humaine\par
+\pard\sa180\sb80\b\fs28 Phase 10. Correction et fiabilisation des flux admin\b0\fs24\par
+\pard\sa120\fs24 Objectif :\par
+\pard\li720\fi-360\sa80\fs24 -\tab rendre le back-office réellement exploitable\par
+\pard\sa120\fs24 Livrables et corrections marquantes :\par
+\pard\li720\fi-360\sa80\fs24 -\tab fix du formulaire d'audit\par
+\pard\li720\fi-360\sa80\fs24 -\tab fix des liens cassés\par
+\pard\li720\fi-360\sa80\fs24 -\tab fix d'auth des edge functions admin pour la newsletter\par
+\pard\li720\fi-360\sa80\fs24 -\tab validation d'un test email réel\par
+\pard\sa220\sb120\b\fs32 3. Jalons visibles dans l'historique git récent\b0\fs24\par
+\pard\sa120\fs24 Les jalons majeurs récents identifiés dans le dépôt :\par
+\pard\li720\fi-360\sa80\fs24 -\tab 48ae469 Build article pages for blog resources\par
+\pard\li720\fi-360\sa80\fs24 -\tab 99abf8c Seed watch articles and add dynamic article dates\par
+\pard\li720\fi-360\sa80\fs24 -\tab b10fd3a Add blog domain and type filters\par
+\pard\li720\fi-360\sa80\fs24 -\tab 1e7407f Build editorial pipeline and admin drafts workflow\par
+\pard\li720\fi-360\sa80\fs24 -\tab 2a8dcfd Add SEO-ready blog domain pages\par
+\pard\li720\fi-360\sa80\fs24 -\tab afda68c Add domain newsletter signup for blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab 891f6ae Polish card alignment across blog and learning pages\par
+\pard\li720\fi-360\sa80\fs24 -\tab 3378901 Refine certification specialization content\par
+\pard\li720\fi-360\sa80\fs24 -\tab 8ba01cf Simplify navigation and learning journeys\par
+\pard\li720\fi-360\sa80\fs24 -\tab 73b5240 Simplify certification tools and catalogue pages\par
+\pard\li720\fi-360\sa80\fs24 -\tab 0332c0d Polish blog enterprise flows and fix audit form link\par
+\pard\li720\fi-360\sa80\fs24 -\tab 339c666 Simplify enterprise services page\par
+\pard\li720\fi-360\sa80\fs24 -\tab c9bfbd4 Add newsletter confirmation emails\par
+\pard\li720\fi-360\sa80\fs24 -\tab b74da84 Add weekly newsletter editorial pipeline\par
+\pard\li720\fi-360\sa80\fs24 -\tab 655499a Automate weekly newsletter scheduling\par
+\pard\li720\fi-360\sa80\fs24 -\tab 8ac7720 Fix admin edge auth for newsletter actions\par
+\pard\sa220\sb120\b\fs32 4. Ce qui existe maintenant\b0\fs24\par
+\pard\sa120\fs24 Le site dispose maintenant de :\par
+\pard\li720\fi-360\sa80\fs24 -\tab un front structuré\par
+\pard\li720\fi-360\sa80\fs24 -\tab un blog éditorial cohérent\par
+\pard\li720\fi-360\sa80\fs24 -\tab des pages articles\par
+\pard\li720\fi-360\sa80\fs24 -\tab un back-office utilisable\par
+\pard\li720\fi-360\sa80\fs24 -\tab un pipeline éditorial IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab une newsletter par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab un envoi test réel validé\par
+\pard\li720\fi-360\sa80\fs24 -\tab une base de connaissance outils / certification / domaines\par
+\pard\sa220\sb120\b\fs32 5. Ce qui reste logique pour la suite\b0\fs24\par
+\pard\sa120\fs24 Les prochains axes rationnels sont :\par
+\pard\li720\fi-360\sa80\fs24 -\tab industrialiser encore la génération éditoriale\par
+\pard\li720\fi-360\sa80\fs24 -\tab enrichir la base de connaissance du futur assistant IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab améliorer la relation email au-delà de la seule veille\par
+\pard\li720\fi-360\sa80\fs24 -\tab renforcer les dashboards analytics utiles à l'admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab préparer davantage de contenus stratégiques EN\par
+\pard\sa220\sb120\b\fs32 6. Lecture business de l'évolution\b0\fs24\par
+\pard\sa120\fs24 Le projet n'est plus simplement un site. Il est devenu :\par
+\pard\li720\fi-360\sa80\fs24 -\tab un outil de conversion\par
+\pard\li720\fi-360\sa80\fs24 -\tab un outil de crédibilité\par
+\pard\li720\fi-360\sa80\fs24 -\tab un outil d'animation éditoriale\par
+\pard\li720\fi-360\sa80\fs24 -\tab un socle de future relation automatisée avec prospects et abonnés\par
+\pard\li720\fi-360\sa80\fs24 -\tab une base exploitable pour un assistant IA TransferAI\par
+\page
+\pard\sa260\sb160\b\fs44 TransferAI Africa Executive Brief 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Note Direction / Partage Externe\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Objet\b0\fs24\par
+\pard\sa120\fs24 Cette note synthétique présente l'état du site TransferAI Africa, ses briques déjà construites, sa valeur business actuelle et ses prochains axes de développement.\par
+\pard\sa120\fs24 Elle a été pensée pour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la direction\par
+\pard\li720\fi-360\sa80\fs24 -\tab les partenaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab les administrateurs secondaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab les personnes qui ont besoin d'une vision claire sans entrer dans le détail technique complet\par
+\pard\sa220\sb120\b\fs32 2. Ce qu'est aujourd'hui TransferAI Africa\b0\fs24\par
+\pard\sa120\fs24 TransferAI Africa n'est plus seulement un site vitrine. C'est désormais une plateforme structurée qui combine :\par
+\pard\li720\fi-360\sa80\fs24 -\tab formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab certification sectorielle\par
+\pard\li720\fi-360\sa80\fs24 -\tab offre entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab ressources éditoriales\par
+\pard\li720\fi-360\sa80\fs24 -\tab matrice outils IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office d'administration\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline éditorial assisté par IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter ciblée par domaine\par
+\pard\sa220\sb120\b\fs32 3. Ce que le site permet déjà\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Côté visiteurs\b0\fs24\par
+\pard\sa120\fs24 Le site permet déjà de :\par
+\pard\li720\fi-360\sa80\fs24 -\tab découvrir l'offre TransferAI Africa\par
+\pard\li720\fi-360\sa80\fs24 -\tab trouver une formation ou une trajectoire adaptée\par
+\pard\li720\fi-360\sa80\fs24 -\tab explorer une certification sectorielle\par
+\pard\li720\fi-360\sa80\fs24 -\tab consulter des contenus IA ciblés par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab demander un accompagnement entreprise\par
+\pard\li720\fi-360\sa80\fs24 -\tab s'abonner à une newsletter IA par domaine\par
+\pard\sa180\sb80\b\fs28 Côté administration\b0\fs24\par
+\pard\sa120\fs24 Le site permet déjà de :\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier des ressources\par
+\pard\li720\fi-360\sa80\fs24 -\tab gérer des brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab piloter une newsletter éditoriale\par
+\pard\li720\fi-360\sa80\fs24 -\tab suivre des emplois / opportunités\par
+\pard\li720\fi-360\sa80\fs24 -\tab exploiter un back-office centralisé\par
+\pard\sa220\sb120\b\fs32 4. Différenciation stratégique\b0\fs24\par
+\pard\sa120\fs24 Les points de différenciation les plus forts sont :\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord, avec ancrage Côte d'Ivoire\par
+\pard\li720\fi-360\sa80\fs24 -\tab approche métier et non gadget\par
+\pard\li720\fi-360\sa80\fs24 -\tab couverture de 13 domaines d'expertise\par
+\pard\li720\fi-360\sa80\fs24 -\tab combinaison formation + contenus + entreprise + outils\par
+\pard\li720\fi-360\sa80\fs24 -\tab logique de veille transformée en contenus actionnables\par
+\pard\li720\fi-360\sa80\fs24 -\tab base déjà exploitable pour un futur assistant IA ou chatbot\par
+\pard\sa220\sb120\b\fs32 5. Valeur business actuelle\b0\fs24\par
+\pard\sa120\fs24 Le site agit déjà comme :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vitrine premium\par
+\pard\li720\fi-360\sa80\fs24 -\tab support de conversion commerciale\par
+\pard\li720\fi-360\sa80\fs24 -\tab socle de crédibilité éditoriale\par
+\pard\li720\fi-360\sa80\fs24 -\tab outil de nurturing via la newsletter\par
+\pard\li720\fi-360\sa80\fs24 -\tab base de connaissance pour futures automatisations IA\par
+\pard\sa220\sb120\b\fs32 6. Briques techniques et opérationnelles en place\b0\fs24\par
+\pard\sa120\fs24 Les briques déjà en place incluent :\par
+\pard\li720\fi-360\sa80\fs24 -\tab front structuré React / Vite\par
+\pard\li720\fi-360\sa80\fs24 -\tab déploiement Cloudflare\par
+\pard\li720\fi-360\sa80\fs24 -\tab backend Supabase\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office interne\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline éditorial IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab abonnement newsletter par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab génération et envoi test de newsletter\par
+\pard\li720\fi-360\sa80\fs24 -\tab base de connaissance documentée\par
+\pard\sa220\sb120\b\fs32 7. Gouvernance recommandée\b0\fs24\par
+\pard\sa120\fs24 Pour garder un site robuste et évolutif, il est recommandé de :\par
+\pard\li720\fi-360\sa80\fs24 -\tab maintenir un administrateur principal\par
+\pard\li720\fi-360\sa80\fs24 -\tab prévoir un administrateur relais\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenter systématiquement les secrets et workflows\par
+\pard\li720\fi-360\sa80\fs24 -\tab conserver la validation humaine sur les contenus et newsletters clés\par
+\pard\sa220\sb120\b\fs32 8. Prochaines étapes rationnelles\b0\fs24\par
+\pard\sa120\fs24 Les prochaines étapes les plus logiques sont :\par
+\pard\li720\fi-360\sa80\fs24 -\tab industrialiser l'édition newsletter hebdomadaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab enrichir l'assistant IA avec la base de connaissance produite\par
+\pard\li720\fi-360\sa80\fs24 -\tab renforcer les analytics utiles à la décision\par
+\pard\li720\fi-360\sa80\fs24 -\tab continuer à simplifier certaines pages très denses\par
+\pard\li720\fi-360\sa80\fs24 -\tab développer progressivement les contenus EN les plus stratégiques\par
+\pard\sa220\sb120\b\fs32 9. Conclusion\b0\fs24\par
+\pard\sa120\fs24 TransferAI Africa dispose aujourd'hui d'un site beaucoup plus mature qu'un simple site institutionnel. Le socle construit permet déjà de former, convertir, informer, administrer et préparer la prochaine couche : assistant IA, automatisation éditoriale et relation audience plus structurée.\par
+}

@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0 Arial;}}\viewkind4\uc1
+\pard\sa260\sb160\b\fs44 TransferAI Africa Admin Index 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Pack Administration TransferAI Africa\b0\fs24\par
+\pard\sa120\fs24 Ce dossier regroupe la documentation de référence du site TransferAI Africa.\par
+\pard\sa120\fs24 Il a 4 objectifs :\par
+\pard\li720\fi-360\sa80\fs24 -\tab donner à l'administrateur No1 une vue complète du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab permettre à d'autres administrateurs de prendre le relais rapidement\par
+\pard\li720\fi-360\sa80\fs24 -\tab servir de base de connaissance pour un assistant IA interne ou un chatbot public\par
+\pard\li720\fi-360\sa80\fs24 -\tab conserver une mémoire claire du projet, de son architecture et de ses évolutions\par
+\pard\sa220\sb120\b\fs32 Contenu du pack\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab [Guide Administrateur No1](./01_Guide_Administrateur_No1.md)\par
+\pard\li720\fi-360\sa80\fs24 2.\tab [Base de Connaissance du Site](./02_Base_Connaissance_Site.md)\par
+\pard\li720\fi-360\sa80\fs24 3.\tab [FAQ Site, Back-office et Support](./03_FAQ_Site_Assistant_IA.md)\par
+\pard\li720\fi-360\sa80\fs24 4.\tab [Plan de Déploiement et d'Exploitation](./04_Plan_Deploiement_Exploitation.md)\par
+\pard\li720\fi-360\sa80\fs24 5.\tab [Roadmap Historique du Projet](./05_Roadmap_Historique_Projet.md)\par
+\pard\li720\fi-360\sa80\fs24 6.\tab [Base de Connaissance Chatbot JSON](./06_knowledge_base_chatbot.json)\par
+\pard\li720\fi-360\sa80\fs24 7.\tab [Export Word Friendly HTML](./07_Export_Word_TransferAI_Admin_Pack.html)\par
+\pard\li720\fi-360\sa80\fs24 8.\tab [Note Direction / Partage Externe](./08_Note_Direction_Partage_Externe.md)\par
+\pard\li720\fi-360\sa80\fs24 9.\tab [Export Word Friendly Direction / Externe](./09_Export_Word_Direction_Externe.html)\par
+\pard\sa220\sb120\b\fs32 Ordre de lecture recommandé\b0\fs24\par
+\pard\sa120\fs24 Pour l'administrateur principal :\par
+\pard\li720\fi-360\sa80\fs24 -\tab commencer par le guide administrateur\par
+\pard\li720\fi-360\sa80\fs24 -\tab lire ensuite le plan de déploiement et la roadmap\par
+\pard\li720\fi-360\sa80\fs24 -\tab garder la FAQ sous la main pour les cas fréquents\par
+\pard\sa120\fs24 Pour les autres administrateurs :\par
+\pard\li720\fi-360\sa80\fs24 -\tab commencer par le guide administrateur\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire la base de connaissance du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser la FAQ comme socle de réponses standardisées\par
+\pard\sa120\fs24 Pour la future IA assistant / chatbot :\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser en priorité la base de connaissance du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab charger ensuite la FAQ\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser enfin le fichier JSON comme format structuré de départ\par
+\pard\sa220\sb120\b\fs32 Périmètre actuel du site\b0\fs24\par
+\pard\sa120\fs24 Le site couvre aujourd'hui les briques suivantes :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vitrine institutionnelle\par
+\pard\li720\fi-360\sa80\fs24 -\tab hub éducation\par
+\pard\li720\fi-360\sa80\fs24 -\tab catalogue de formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab pages parcours\par
+\pard\li720\fi-360\sa80\fs24 -\tab certification sectorielle\par
+\pard\li720\fi-360\sa80\fs24 -\tab page entreprises / services\par
+\pard\li720\fi-360\sa80\fs24 -\tab blog / ressources dynamiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab matrice des outils IA par domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab formulaire de contact et formulaires de leads\par
+\pard\li720\fi-360\sa80\fs24 -\tab audit IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab back-office contenus / brouillons IA / newsletter / emplois\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline éditorial Supabase\par
+\pard\li720\fi-360\sa80\fs24 -\tab pipeline newsletter avec abonnement, génération, test et envoi\par
+\pard\sa220\sb120\b\fs32 Architecture résumée\b0\fs24\par
+\pard\sa120\fs24 Front :\par
+\pard\li720\fi-360\sa80\fs24 -\tab React + Vite + TypeScript\par
+\pard\li720\fi-360\sa80\fs24 -\tab déploiement via GitHub puis Cloudflare\par
+\pard\sa120\fs24 Backend :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Supabase pour la base de données, l'auth technique, les edge functions et les automatisations\par
+\pard\sa120\fs24 Email :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Resend pour les emails transactionnels et newsletters\par
+\pard\sa220\sb120\b\fs32 Logique éditoriale de référence\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab EN ensuite uniquement pour les contenus stratégiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab Côte d'Ivoire d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab Afrique de l'Ouest ensuite\par
+\pard\li720\fi-360\sa80\fs24 -\tab angle concret, métier, actionnable\par
+\pard\sa220\sb120\b\fs32 Export vers Word\b0\fs24\par
+\pard\sa120\fs24 Le fichier [07_Export_Word_TransferAI_Admin_Pack.html](./07_Export_Word_TransferAI_Admin_Pack.html) peut être :\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouvert directement dans Microsoft Word\par
+\pard\li720\fi-360\sa80\fs24 -\tab enregistré au format .docx\par
+\pard\li720\fi-360\sa80\fs24 -\tab partagé aux autres administrateurs\par
+\pard\li720\fi-360\sa80\fs24 -\tab imprimé en PDF\par
+\pard\sa120\fs24 Le fichier [09_Export_Word_Direction_Externe.html](./09_Export_Word_Direction_Externe.html) a été pensé pour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab la direction\par
+\pard\li720\fi-360\sa80\fs24 -\tab les partenaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab les administrateurs secondaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab les présentations synthétiques de l'avancement du site\par
+\pard\sa220\sb120\b\fs32 Recommandation de gouvernance\b0\fs24\par
+\pard\sa120\fs24 Ce pack doit devenir un document vivant.\par
+\pard\sa120\fs24 À mettre à jour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque évolution majeure du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque ajout d'edge function ou de secret critique\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque changement de workflow admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab après chaque nouvelle offre, rubrique ou domaine stratégique\par
+\pard\sa220\sb120\b\fs32 Nomenclature des livrables Word\b0\fs24\par
+\pard\sa120\fs24 Les fichiers source conservent une numérotation simple dans ce dossier pour rester faciles à maintenir.\par
+\pard\sa120\fs24 Les fichiers livrables Word du dossier word/ suivent désormais une nomenclature plus corporate :\par
+\pard\li720\fi-360\sa80\fs24 -\tab TransferAI_Africa_Admin_...\par
+\pard\li720\fi-360\sa80\fs24 -\tab TransferAI_Africa_Executive_...\par
+\pard\li720\fi-360\sa80\fs24 -\tab suffixe optionnel de date pour les versions partageables\par
+}

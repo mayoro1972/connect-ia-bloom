@@ -1,0 +1,258 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0 Arial;}}\viewkind4\uc1
+\pard\sa260\sb160\b\fs44 TransferAI Africa Admin Guide No1 2026-04-11\b0\fs24\par
+\pard\sa260\sb140\b\fs40 Guide Administrateur No1\b0\fs24\par
+\pard\sa220\sb120\b\fs32 1. Mission de l'administrateur principal\b0\fs24\par
+\pard\sa120\fs24 L'administrateur No1 est responsable de 6 piliers :\par
+\pard\li720\fi-360\sa80\fs24 1.\tab Gouvernance du contenu\par
+\pard\li720\fi-360\sa80\fs24 2.\tab Pilotage du back-office\par
+\pard\li720\fi-360\sa80\fs24 3.\tab Supervision technique légère du site\par
+\pard\li720\fi-360\sa80\fs24 4.\tab Contrôle des accès, tokens et secrets\par
+\pard\li720\fi-360\sa80\fs24 5.\tab Validation avant publication et déploiement\par
+\pard\li720\fi-360\sa80\fs24 6.\tab Transmission de la méthode aux autres administrateurs\par
+\pard\sa120\fs24 Son rôle n'est pas seulement de publier. Il doit garantir que le site reste :\par
+\pard\li720\fi-360\sa80\fs24 -\tab cohérent\par
+\pard\li720\fi-360\sa80\fs24 -\tab lisible\par
+\pard\li720\fi-360\sa80\fs24 -\tab exploitable commercialement\par
+\pard\li720\fi-360\sa80\fs24 -\tab fiable techniquement\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenté pour l'équipe\par
+\pard\sa220\sb120\b\fs32 2. Ce que vous administrez concrètement\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front office\b0\fs24\par
+\pard\sa120\fs24 Pages principales :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Accueil\par
+\pard\li720\fi-360\sa80\fs24 -\tab A propos\par
+\pard\li720\fi-360\sa80\fs24 -\tab Education\par
+\pard\li720\fi-360\sa80\fs24 -\tab Catalogue\par
+\pard\li720\fi-360\sa80\fs24 -\tab Détail formation\par
+\pard\li720\fi-360\sa80\fs24 -\tab Parcours\par
+\pard\li720\fi-360\sa80\fs24 -\tab Certification\par
+\pard\li720\fi-360\sa80\fs24 -\tab Outils IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Entreprises / Services\par
+\pard\li720\fi-360\sa80\fs24 -\tab Blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab Article blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab Domaines blog\par
+\pard\li720\fi-360\sa80\fs24 -\tab Contact / formulaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab Pages preview et hubs secondaires\par
+\pard\sa180\sb80\b\fs28 Back-office\b0\fs24\par
+\pard\sa120\fs24 Onglets actuels :\par
+\pard\li720\fi-360\sa80\fs24 -\tab Analytics\par
+\pard\li720\fi-360\sa80\fs24 -\tab Ressources\par
+\pard\li720\fi-360\sa80\fs24 -\tab Brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Newsletter IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Emplois IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab Mode d'emploi\par
+\pard\sa180\sb80\b\fs28 Backend Supabase\b0\fs24\par
+\pard\sa120\fs24 Tables et flux principaux :\par
+\pard\li720\fi-360\sa80\fs24 -\tab contact_requests\par
+\pard\li720\fi-360\sa80\fs24 -\tab registration_requests\par
+\pard\li720\fi-360\sa80\fs24 -\tab page_views\par
+\pard\li720\fi-360\sa80\fs24 -\tab resource_posts\par
+\pard\li720\fi-360\sa80\fs24 -\tab job_opportunities\par
+\pard\li720\fi-360\sa80\fs24 -\tab source_feeds\par
+\pard\li720\fi-360\sa80\fs24 -\tab source_signals\par
+\pard\li720\fi-360\sa80\fs24 -\tab editorial_jobs\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter_subscriptions\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter_issues\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter_delivery_logs\par
+\pard\sa120\fs24 Edge Functions principales :\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-discovery\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-classifier\par
+\pard\li720\fi-360\sa80\fs24 -\tab content-drafter\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-subscribe\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-drafter\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 -\tab newsletter-scheduler\par
+\pard\li720\fi-360\sa80\fs24 -\tab send-prospect-emails\par
+\pard\sa220\sb120\b\fs32 3. Règles de fonctionnement\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Ligne éditoriale\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab FR d'abord\par
+\pard\li720\fi-360\sa80\fs24 -\tab EN ensuite pour les contenus stratégiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab Côte d'Ivoire d'abord, Afrique de l'Ouest ensuite\par
+\pard\li720\fi-360\sa80\fs24 -\tab contenu orienté usages métiers et valeur business\par
+\pard\li720\fi-360\sa80\fs24 -\tab éviter le jargon vide\par
+\pard\li720\fi-360\sa80\fs24 -\tab privilégier les formulations courtes, utiles et crédibles\par
+\pard\sa180\sb80\b\fs28 Discipline de publication\b0\fs24\par
+\pard\sa120\fs24 La bonne séquence est :\par
+\pard\li720\fi-360\sa80\fs24 1.\tab preview locale\par
+\pard\li720\fi-360\sa80\fs24 2.\tab validation\par
+\pard\li720\fi-360\sa80\fs24 3.\tab commit\par
+\pard\li720\fi-360\sa80\fs24 4.\tab push\par
+\pard\li720\fi-360\sa80\fs24 5.\tab déploiement front ou Supabase selon le cas\par
+\pard\li720\fi-360\sa80\fs24 6.\tab vérification post-déploiement\par
+\pard\sa180\sb80\b\fs28 Règle de prudence\b0\fs24\par
+\pard\sa120\fs24 Ne jamais :\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier sans vérifier la page concernée\par
+\pard\li720\fi-360\sa80\fs24 -\tab pousser un changement front qui dépend d'une migration non déployée\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplacer un secret sans savoir où il est utilisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab annoncer une fonctionnalité non vérifiée\par
+\pard\sa220\sb120\b\fs32 4. Routine d'exploitation recommandée\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Chaque jour ouvré\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les demandes de contact et d'inscription\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le blog, la page entreprises, la certification et le formulaire d'audit\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier que le back-office charge bien\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'aucun message d'erreur critique n'est visible sur les pages commerciales\par
+\pard\sa180\sb80\b\fs28 Chaque semaine\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouvrir Back-office > Brouillons IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les nouveaux brouillons utiles\par
+\pard\li720\fi-360\sa80\fs24 -\tab ouvrir Back-office > Newsletter IA\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'édition de la semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test email\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver l'édition si elle est correcte\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les inscriptions newsletter récentes\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les contenus blog les plus importants\par
+\pard\sa180\sb80\b\fs28 Chaque mois\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les rubriques les plus consultées\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les CTA et formulaires\par
+\pard\li720\fi-360\sa80\fs24 -\tab mettre à jour la FAQ si de nouvelles questions reviennent\par
+\pard\li720\fi-360\sa80\fs24 -\tab revoir les secrets et accès critiques\par
+\pard\li720\fi-360\sa80\fs24 -\tab ajuster la roadmap et les priorités business\par
+\pard\sa220\sb120\b\fs32 5. Procédure d'utilisation du back-office\b0\fs24\par
+\pard\sa180\sb80\b\fs28 A. Token administrateur\b0\fs24\par
+\pard\sa120\fs24 Le back-office exige un token administrateur.\par
+\pard\sa120\fs24 À faire :\par
+\pard\li720\fi-360\sa80\fs24 -\tab coller le token dans le champ Accès admin\par
+\pard\li720\fi-360\sa80\fs24 -\tab cliquer sur Enregistrer le token\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier que les compteurs et listes se chargent\par
+\pard\sa120\fs24 Si le token ne fonctionne pas :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'il s'agit bien du CONTENT_ADMIN_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier qu'il n'y a pas d'espace au début ou à la fin\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier que le secret Supabase n'a pas été remplacé récemment\par
+\pard\sa180\sb80\b\fs28 B. Gestion des ressources\b0\fs24\par
+\pard\sa120\fs24 Dans Ressources :\par
+\pard\li720\fi-360\sa80\fs24 -\tab créer un slug propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab choisir le type de contenu\par
+\pard\li720\fi-360\sa80\fs24 -\tab choisir le domaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplir les titres FR\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplir les résumés\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplir le contenu complet FR\par
+\pard\li720\fi-360\sa80\fs24 -\tab renseigner la source et la date\par
+\pard\li720\fi-360\sa80\fs24 -\tab publier ou garder en brouillon\par
+\pard\sa120\fs24 Bonnes pratiques :\par
+\pard\li720\fi-360\sa80\fs24 -\tab garder le badge de type mais éviter de répéter le mot dans le titre\par
+\pard\li720\fi-360\sa80\fs24 -\tab utiliser des résumés clairs, courts, concrets\par
+\pard\li720\fi-360\sa80\fs24 -\tab lier le contenu aux formations et à l'offre entreprise quand c'est pertinent\par
+\pard\sa180\sb80\b\fs28 C. Gestion des brouillons IA\b0\fs24\par
+\pard\sa120\fs24 Dans Brouillons IA :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les sources suivies\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les signaux détectés\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire les brouillons générés\par
+\pard\li720\fi-360\sa80\fs24 -\tab corriger si nécessaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver, publier ou archiver\par
+\pard\sa180\sb80\b\fs28 D. Gestion de la newsletter\b0\fs24\par
+\pard\sa120\fs24 Dans Newsletter IA :\par
+\pard\li720\fi-360\sa80\fs24 -\tab charger l'édition\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les domaines ciblés\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le titre\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'objet email\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le préheader\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'introduction\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le signal clé\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le conseil pratique\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier l'outil à connaître\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le prompt de la semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier le bloc éditorial\par
+\pard\li720\fi-360\sa80\fs24 -\tab enregistrer\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un test\par
+\pard\li720\fi-360\sa80\fs24 -\tab approuver ou planifier\par
+\pard\sa220\sb120\b\fs32 6. Workflow newsletter : ce qui est automatique et ce qui reste humain\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Ce qui est automatisé\b0\fs24\par
+\pard\sa120\fs24 Le système hebdomadaire est déjà préparé pour fonctionner avec Supabase :\par
+\pard\li720\fi-360\sa80\fs24 -\tab génération d'un brouillon hebdomadaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab ciblage par domaines abonnés\par
+\pard\li720\fi-360\sa80\fs24 -\tab garde-fou d'envoi uniquement si l'édition est approved ou scheduled\par
+\pard\sa120\fs24 Programmation actuelle :\par
+\pard\li720\fi-360\sa80\fs24 -\tab mercredi à 06:00 : génération du brouillon hebdomadaire\par
+\pard\li720\fi-360\sa80\fs24 -\tab vendredi à 08:30 : tentative d'envoi de l'édition validée\par
+\pard\sa180\sb80\b\fs28 Ce qui reste recommandé côté humain\b0\fs24\par
+\pard\sa120\fs24 Avant l'envoi réel, il faut idéalement :\par
+\pard\li720\fi-360\sa80\fs24 -\tab relire le contenu\par
+\pard\li720\fi-360\sa80\fs24 -\tab envoyer un email test\par
+\pard\li720\fi-360\sa80\fs24 -\tab corriger l'objet, le conseil, l'outil ou le prompt si besoin\par
+\pard\li720\fi-360\sa80\fs24 -\tab passer l'édition en approved\par
+\pard\sa120\fs24 Conclusion :\par
+\pard\li720\fi-360\sa80\fs24 -\tab oui, le système peut tourner chaque semaine\par
+\pard\li720\fi-360\sa80\fs24 -\tab non, il n'est pas conseillé de laisser partir les emails sans validation au départ\par
+\pard\sa220\sb120\b\fs32 7. Secrets et accès critiques\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Secrets principaux\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab CONTENT_ADMIN_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab NEWSLETTER_SCHEDULER_TOKEN\par
+\pard\li720\fi-360\sa80\fs24 -\tab RESEND_API_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab MAIL_FROM\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_URL\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_ANON_KEY\par
+\pard\li720\fi-360\sa80\fs24 -\tab SUPABASE_SERVICE_ROLE_KEY\par
+\pard\sa180\sb80\b\fs28 Règles de sécurité\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab ne jamais publier un secret dans le front\par
+\pard\li720\fi-360\sa80\fs24 -\tab ne jamais envoyer un secret dans un message non sécurisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab si un secret est perdu, le remplacer proprement\par
+\pard\li720\fi-360\sa80\fs24 -\tab documenter toute rotation de secret\par
+\pard\sa180\sb80\b\fs28 Rotation d'un secret\b0\fs24\par
+\pard\sa120\fs24 Quand un secret est remplacé :\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier où il est utilisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab remplacer la valeur dans Supabase ou dans l'environnement concerné\par
+\pard\li720\fi-360\sa80\fs24 -\tab retester immédiatement le workflow lié\par
+\pard\sa220\sb120\b\fs32 8. Déploiements\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Front\b0\fs24\par
+\pard\sa120\fs24 Flux normal :\par
+\pard\li720\fi-360\sa80\fs24 -\tab développement local\par
+\pard\li720\fi-360\sa80\fs24 -\tab preview\par
+\pard\li720\fi-360\sa80\fs24 -\tab npm run build\par
+\pard\li720\fi-360\sa80\fs24 -\tab commit\par
+\pard\li720\fi-360\sa80\fs24 -\tab push sur main\par
+\pard\li720\fi-360\sa80\fs24 -\tab déploiement Cloudflare\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérification sur le site public\par
+\pard\sa180\sb80\b\fs28 Backend Supabase\b0\fs24\par
+\pard\sa120\fs24 À faire si nécessaire :\par
+\pard\li720\fi-360\sa80\fs24 -\tab pousser les migrations SQL\par
+\pard\li720\fi-360\sa80\fs24 -\tab déployer les edge functions concernées\par
+\pard\li720\fi-360\sa80\fs24 -\tab vérifier les secrets\par
+\pard\li720\fi-360\sa80\fs24 -\tab tester les flux critiques après déploiement\par
+\pard\sa220\sb120\b\fs32 9. Gestion des incidents\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Si une page front casse\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab identifier l'URL concernée\par
+\pard\li720\fi-360\sa80\fs24 2.\tab reproduire en local\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier le router et le composant\par
+\pard\li720\fi-360\sa80\fs24 4.\tab corriger\par
+\pard\li720\fi-360\sa80\fs24 5.\tab rebuild\par
+\pard\li720\fi-360\sa80\fs24 6.\tab push\par
+\pard\li720\fi-360\sa80\fs24 7.\tab vérifier Cloudflare\par
+\pard\sa180\sb80\b\fs28 Si le back-office ne charge pas\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier le token admin\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier les variables Supabase du front\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier la fonction content-admin\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier la réponse réseau\par
+\pard\sa180\sb80\b\fs28 Si la newsletter ne part pas\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 1.\tab vérifier que l'édition existe\par
+\pard\li720\fi-360\sa80\fs24 2.\tab vérifier son statut\par
+\pard\li720\fi-360\sa80\fs24 3.\tab vérifier Dernières diffusions\par
+\pard\li720\fi-360\sa80\fs24 4.\tab vérifier la fonction newsletter-send\par
+\pard\li720\fi-360\sa80\fs24 5.\tab vérifier RESEND_API_KEY\par
+\pard\li720\fi-360\sa80\fs24 6.\tab vérifier le domaine email expéditeur\par
+\pard\sa220\sb120\b\fs32 10. Checklist avant publication\b0\fs24\par
+\pard\sa180\sb80\b\fs28 Avant toute mise en ligne front\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page est lisible en desktop\par
+\pard\li720\fi-360\sa80\fs24 -\tab la page est lisible en mobile\par
+\pard\li720\fi-360\sa80\fs24 -\tab les CTA sont alignés\par
+\pard\li720\fi-360\sa80\fs24 -\tab les formulaires s'ouvrent\par
+\pard\li720\fi-360\sa80\fs24 -\tab le build passe\par
+\pard\li720\fi-360\sa80\fs24 -\tab le contenu est cohérent FR\par
+\pard\sa180\sb80\b\fs28 Avant publication d'une ressource\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab titre propre\par
+\pard\li720\fi-360\sa80\fs24 -\tab domaine correct\par
+\pard\li720\fi-360\sa80\fs24 -\tab résumé utile\par
+\pard\li720\fi-360\sa80\fs24 -\tab source renseignée\par
+\pard\li720\fi-360\sa80\fs24 -\tab date correcte\par
+\pard\li720\fi-360\sa80\fs24 -\tab page article accessible\par
+\pard\sa180\sb80\b\fs28 Avant envoi newsletter\b0\fs24\par
+\pard\li720\fi-360\sa80\fs24 -\tab édition chargée\par
+\pard\li720\fi-360\sa80\fs24 -\tab objet correct\par
+\pard\li720\fi-360\sa80\fs24 -\tab test email envoyé\par
+\pard\li720\fi-360\sa80\fs24 -\tab rendu email validé\par
+\pard\li720\fi-360\sa80\fs24 -\tab statut approved ou scheduled\par
+\pard\sa220\sb120\b\fs32 11. Documentation à garder vivante\b0\fs24\par
+\pard\sa120\fs24 Ce guide doit être mis à jour :\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque nouvelle rubrique du site\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque nouveau flux automatisé\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque changement de secret ou de procédure\par
+\pard\li720\fi-360\sa80\fs24 -\tab à chaque évolution importante du back-office\par
+}
