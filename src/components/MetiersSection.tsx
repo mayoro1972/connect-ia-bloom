@@ -42,11 +42,11 @@ const sectionCopy = {
     eyebrow: "Catalogue de formation · Abidjan & Afrique de l'Ouest",
     title: "Les domaines les plus demandés",
     subtitle:
-      "Commencez par les domaines qui génèrent le plus d'intérêt, puis explorez l'ensemble de nos 13 expertises si vous souhaitez aller plus loin.",
+      "Commencez par les domaines qui génèrent le plus d'intérêt, puis explorez le reste de l'offre si besoin.",
     primaryCta: "Voir les 13 domaines",
     secondaryCta: "Explorer le catalogue",
-    hiddenCount: "7 domaines masqués",
-    formationsCount: "10 formations →",
+    hiddenCount: "7 autres domaines disponibles",
+    formationsCount: "10 formations",
     badges: {
       assistanat: "Très demandé",
       rh: "Très demandé",
@@ -75,11 +75,11 @@ const sectionCopy = {
     eyebrow: "Training catalogue · Abidjan & West Africa",
     title: "The most requested domains",
     subtitle:
-      "Start with the domains attracting the most interest, then explore all 13 areas of expertise if you want to go further.",
+      "Start with the domains attracting the most interest, then explore the rest of the offer if needed.",
     primaryCta: "View all 13 domains",
     secondaryCta: "Explore the catalogue",
-    hiddenCount: "7 hidden domains",
-    formationsCount: "10 courses →",
+    hiddenCount: "7 other domains available",
+    formationsCount: "10 courses",
     badges: {
       assistanat: "Highly requested",
       rh: "Highly requested",
@@ -114,7 +114,7 @@ const MetiersSection = () => {
   return (
     <section id="metiers" className="bg-background py-24">
       <div className="container mx-auto px-4 lg:px-8">
-        <ScrollReveal className="mb-14 text-center">
+        <ScrollReveal className="mb-12 text-center">
           <p className="mb-4 text-sm font-heading font-bold uppercase tracking-[0.22em] text-primary">{copy.eyebrow}</p>
           <h2 className="mb-4 font-heading text-3xl font-bold md:text-5xl text-card-foreground">{copy.title}</h2>
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground">{copy.subtitle}</p>
@@ -139,7 +139,9 @@ const MetiersSection = () => {
                   {copy.items[m.key].title}
                 </h3>
                 <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{copy.items[m.key].desc}</p>
-                <span className="text-sm font-semibold text-coral">{copy.formationsCount}</span>
+                <span className="text-sm font-semibold text-coral">
+                  {copy.formationsCount} →
+                </span>
               </Link>
             </ScrollReveal>
           ))}
@@ -149,17 +151,17 @@ const MetiersSection = () => {
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                to="/catalogues-domaines"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:bg-muted"
-              >
-                {copy.primaryCta} →
-              </Link>
-              <Link
                 to="/catalogue"
                 className="inline-flex items-center gap-2 rounded-lg bg-coral-gradient px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:opacity-90"
                 style={{ color: "hsl(0 0% 100%)" }}
               >
                 {copy.secondaryCta} ↗
+              </Link>
+              <Link
+                to="/catalogues-domaines"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:bg-muted"
+              >
+                {copy.primaryCta} →
               </Link>
             </div>
             <p className="text-sm text-muted-foreground">{copy.hiddenCount}</p>

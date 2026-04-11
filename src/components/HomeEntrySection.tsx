@@ -10,25 +10,25 @@ const sectionCopy = {
   fr: {
     title: "Choisissez votre point d'entrée",
     subtitle:
-      "Que vous soyez professionnel, entreprise, étudiant ou talent en reconversion, nous vous aidons à trouver rapidement la bonne porte d'entrée vers l'IA.",
+      "Trouvez rapidement le bon point d'entrée selon votre profil et votre besoin.",
     items: [
       {
         title: "Je veux me former",
-        desc: "Découvrir les parcours, le catalogue et la certification selon mon métier et mon niveau.",
+        desc: "Découvrir les parcours, le catalogue et la certification selon mon métier.",
         cta: "Découvrir l'offre formation",
         href: "/education",
         icon: GraduationCap,
       },
       {
         title: "Je représente une entreprise",
-        desc: "Identifier un dispositif adapté à mon équipe, mon secteur et mes objectifs de montée en compétence.",
+        desc: "Identifier un dispositif adapté à mon équipe et à mes objectifs.",
         cta: "Parler de mon besoin",
         href: buildContactPath("contact-devis"),
         icon: BriefcaseBusiness,
       },
       {
         title: "Je veux explorer les domaines et outils",
-        desc: "Voir les spécialisations, les stacks outils IA et les usages à maîtriser par domaine.",
+        desc: "Voir les spécialisations, outils IA et usages par domaine.",
         cta: "Explorer les outils IA",
         href: "/outils-ia",
         icon: Workflow,
@@ -38,25 +38,25 @@ const sectionCopy = {
   en: {
     title: "Choose your entry point",
     subtitle:
-      "Whether you are a professional, company, student, or career-switching talent, we help you quickly find the right way into AI.",
+      "Find the right entry point quickly based on your profile and your need.",
     items: [
       {
         title: "I want to train",
-        desc: "Discover paths, catalogue options, and certification tracks aligned with my role and level.",
+        desc: "Discover paths, catalogue options, and certification tracks aligned with my role.",
         cta: "Explore training",
         href: "/education",
         icon: GraduationCap,
       },
       {
         title: "I represent a company",
-        desc: "Identify a program aligned with my team, sector, and upskilling goals.",
+        desc: "Identify a program aligned with my team and upskilling goals.",
         cta: "Discuss my needs",
         href: buildContactPath("contact-devis"),
         icon: BriefcaseBusiness,
       },
       {
         title: "I want to explore domains and tools",
-        desc: "Review the specializations, AI tool stacks, and use cases to master by domain.",
+        desc: "Review the specializations, AI tools, and use cases by domain.",
         cta: "Explore AI tools",
         href: "/outils-ia",
         icon: Workflow,

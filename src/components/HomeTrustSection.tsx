@@ -18,7 +18,7 @@ const sectionCopy = {
     badge: "Partenaires & preuves de confiance",
     title: "Une offre portée par des partenaires crédibles",
     subtitle:
-      "TransferAI Africa s'appuie sur des partenaires académiques, institutionnels, publics et entreprises pour garantir la qualité, l'ancrage marché et la portée de ses formations.",
+      "Des partenaires académiques, institutionnels et entreprises qui renforcent la crédibilité de l'offre.",
     proofs: [
       {
         title: "Crédibilité académique",
@@ -39,7 +39,7 @@ const sectionCopy = {
     badge: "Partners & trust signals",
     title: "An offer backed by credible partners",
     subtitle:
-      "TransferAI Africa relies on academic, institutional, public, and corporate partners to guarantee the quality, market relevance, and reach of its training programs.",
+      "Academic, institutional, public, and corporate partners that reinforce the credibility of the offer.",
     proofs: [
       {
         title: "Academic credibility",
@@ -93,9 +93,9 @@ const HomeTrustSection = () => {
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {copy.proofs.map((proof, index) => (
             <ScrollReveal key={proof.title} delay={0.12 + index * 0.08} direction="up">
-              <div className="rounded-2xl border border-border bg-card p-6 hover-lift">
+              <div className="rounded-2xl border border-border bg-card p-5 hover-lift">
                 <h3 className="mb-3 font-heading text-xl font-semibold text-card-foreground">{proof.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{proof.desc}</p>
+                <p className="text-sm leading-6 text-muted-foreground">{proof.desc}</p>
               </div>
             </ScrollReveal>
           ))}

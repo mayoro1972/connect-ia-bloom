@@ -13,7 +13,7 @@ const sectionCopy = {
     titleHighlight: "IA",
     title2: " utile pour les talents, les entreprises et les institutions d'Afrique",
     subtitle:
-      "TransferAI Africa forme en Côte d'Ivoire et en Afrique des professionnels, étudiants, entrepreneurs et équipes qui veulent apprendre l'IA, l'appliquer concrètement à leur métier et créer de vraies opportunités de croissance.",
+      "TransferAI Africa forme en Côte d'Ivoire et en Afrique celles et ceux qui veulent apprendre l'IA et l'appliquer concrètement à leur métier.",
     stats: {
       formations: "Formations",
       metiers: "Domaines d'expertise",
@@ -28,7 +28,7 @@ const sectionCopy = {
     titleHighlight: "AI",
     title2: " that serves African talent, companies, and institutions",
     subtitle:
-      "TransferAI Africa trains professionals, students, entrepreneurs, and teams in Côte d'Ivoire and across Africa to learn AI, apply it concretely to their work, and unlock real growth opportunities.",
+      "TransferAI Africa trains people and teams in Côte d'Ivoire and across Africa who want to learn AI and apply it concretely to their work.",
     stats: {
       formations: "Courses",
       metiers: "Areas of expertise",
@@ -109,10 +109,10 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-5">
+        <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-5">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={0.8 + i * 0.1} direction="up" className="h-full">
-              <div className="hover-lift flex h-full min-h-[168px] flex-col items-center justify-center rounded-[22px] border border-white/18 bg-[linear-gradient(180deg,hsl(226_28%_18%_/_0.72),hsl(224_24%_14%_/_0.64))] px-5 py-6 text-center shadow-[0_22px_38px_-26px_rgba(15,23,42,0.5)] backdrop-blur-xl">
+              <div className="hover-lift flex h-full min-h-[148px] flex-col items-center justify-center rounded-[22px] border border-white/18 bg-[linear-gradient(180deg,hsl(226_28%_18%_/_0.72),hsl(224_24%_14%_/_0.64))] px-5 py-5 text-center shadow-[0_22px_38px_-26px_rgba(15,23,42,0.5)] backdrop-blur-xl">
                 <stat.icon className="mx-auto mb-3" size={28} style={{ color: "hsl(32 96% 64%)" }} />
                 <p className="mb-2 font-heading text-3xl font-bold tracking-[-0.03em]" style={{ color: "hsl(145 78% 56%)" }}>
                   {stat.value}
