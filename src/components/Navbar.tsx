@@ -34,6 +34,7 @@ const navItems: NavItem[] = [
       { key: "contenuIA", href: "/createur-contenu-ia" },
     ],
   },
+  { key: "partners", href: "/partenaires" },
   { key: "about", href: "/a-propos" },
   { key: "contact", href: "/contact" },
 ];

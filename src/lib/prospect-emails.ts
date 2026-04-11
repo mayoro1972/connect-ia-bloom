@@ -1,4 +1,6 @@
+import { createClient } from "@supabase/supabase-js";
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import { contactDetails } from "@/lib/site-links";
 
 export type ProspectEmailIntent =
@@ -110,7 +112,27 @@ export const sendProspectEmailNotifications = async (payload: ProspectEmailPaylo
     }
 
     const language = resolveOutboundLanguage(payload.language);
-    return await supabase.functions.invoke("send-prospect-emails", {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+    const functionKey =
+      import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
+      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
+
+    if (!supabaseUrl || !functionKey) {
+      return {
+        data: null,
+        error: new Error("Supabase function credentials are missing."),
+      };
+    }
+
+    // Edge function delivery is more reliable with the anon JWT key in this project.
+    const functionsClient = createClient<Database>(supabaseUrl, functionKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
+
+    return await functionsClient.functions.invoke("send-prospect-emails", {
       body: {
         ...payload,
         language,

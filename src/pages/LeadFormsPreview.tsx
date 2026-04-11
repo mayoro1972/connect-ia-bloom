@@ -119,12 +119,12 @@ const LeadFormsPreview = () => {
       ? null
       : `${window.location.origin}/prise-rdv?${new URLSearchParams({ source: activeIntent, domain: form.domain || requestedDomain, company: form.company, fullName: form.fullName }).toString()}`;
     const { error: notificationError } = await sendProspectEmailNotifications({ intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), website: form.website.trim() || null, role: form.role.trim() || null, city: form.country.trim() || null, domain: form.domain.trim() || requestedDomain || null, participants: isReferencingIntent ? null : participantsCount, format: isReferencingIntent ? null : form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
-    const successDescription = isReferencingIntent
-      ? language === "fr"
-        ? "Votre demande de référencement a bien été transmise. Notre équipe reviendra vers vous par email après revue du dossier."
-        : "Your listing request has been submitted successfully. Our team will reply by email after reviewing your file."
-      : notificationError
-        ? copy.page.successPending
+    const successDescription = notificationError
+      ? copy.page.successPending
+      : isReferencingIntent
+        ? language === "fr"
+          ? "Votre demande de référencement a bien été transmise. Notre équipe reviendra vers vous par email après revue du dossier."
+          : "Your listing request has been submitted successfully. Our team will reply by email after reviewing your file."
         : copy.page.successDesc;
     toast({ title: copy.page.success, description: successDescription });
     trackAnalyticsEvent("lead_request_submitted", {
