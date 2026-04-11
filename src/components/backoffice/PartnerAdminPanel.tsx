@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { invokeAdminEdgeFunction, invokeContentAdmin } from "@/lib/content-admin";
 import {
   choosePartnerOffer,
@@ -133,6 +134,7 @@ const PartnerAdminPanel = ({
   onStatus,
   onError,
 }: PartnerAdminPanelProps) => {
+  const { toast } = useToast();
   const [snapshot, setSnapshot] = useState<PartnerSnapshot>(fallbackSnapshot);
   const [form, setForm] = useState(emptyReviewForm);
   const [isBusy, setIsBusy] = useState(false);
@@ -262,6 +264,36 @@ const PartnerAdminPanel = ({
     });
   };
 
+  const applyLocalRecommendation = () => {
+    const recommendedOffer = choosePartnerOffer({
+      sector_activity: form.sector_activity,
+      requested_visibility_type: form.requested_visibility_type,
+      requested_timeline: form.requested_timeline,
+      website: form.website,
+      request_message: form.request_message,
+    });
+
+    setForm((current) => ({
+      ...current,
+      ai_score: "72",
+      ai_recommendation: recommendedOffer.offer_family,
+      recommended_offer_key: recommendedOffer.offer_key,
+      recommended_duration_months: recommendedOffer.duration_months.toString(),
+      recommended_price_fcfa: recommendedOffer.price_fcfa.toString(),
+      review_status: "review",
+      response_email_subject: "Suite à votre demande de référencement sur TransferAI Africa",
+      response_email_body_fr: renderPartnerRecommendationEmail({
+        ...fallbackPartnerReview,
+        ...current,
+        prospect_name: current.prospect_name || fallbackPartnerReview.prospect_name,
+        sector_activity: current.sector_activity || fallbackPartnerReview.sector_activity,
+        recommended_offer_key: recommendedOffer.offer_key,
+        recommended_duration_months: recommendedOffer.duration_months,
+        recommended_price_fcfa: recommendedOffer.price_fcfa,
+      }),
+    }));
+  };
+
   const saveReview = async () => {
     setIsBusy(true);
     onStatus(null);
@@ -296,6 +328,10 @@ const PartnerAdminPanel = ({
       if (usesFallback || !isReady) {
         localSaveReview();
         onStatus("Prévisualisation locale mise à jour. La sauvegarde Supabase s’activera après déploiement.");
+        toast({
+          title: "Revue enregistrée",
+          description: "La prévisualisation locale a bien été mise à jour.",
+        });
         return;
       }
 
@@ -307,8 +343,17 @@ const PartnerAdminPanel = ({
 
       await loadSnapshot();
       onStatus("Revue partenaire enregistrée.");
+      toast({
+        title: "Revue enregistrée",
+        description: "Les modifications du dossier partenaire ont bien été sauvegardées.",
+      });
     } catch (error) {
       onError(error instanceof Error ? error.message : "Enregistrement partenaire impossible.");
+      toast({
+        title: "Enregistrement impossible",
+        description: error instanceof Error ? error.message : "La revue partenaire n'a pas pu être enregistrée.",
+        variant: "destructive",
+      });
     } finally {
       setIsBusy(false);
     }
@@ -321,35 +366,13 @@ const PartnerAdminPanel = ({
 
     try {
       if (usesFallback || !isReady) {
-        const recommendedOffer = choosePartnerOffer({
-          sector_activity: form.sector_activity,
-          requested_visibility_type: form.requested_visibility_type,
-          requested_timeline: form.requested_timeline,
-          website: form.website,
-          request_message: form.request_message,
-        });
-
-        setForm((current) => ({
-          ...current,
-          ai_score: "72",
-          ai_recommendation: recommendedOffer.offer_family,
-          recommended_offer_key: recommendedOffer.offer_key,
-          recommended_duration_months: recommendedOffer.duration_months.toString(),
-          recommended_price_fcfa: recommendedOffer.price_fcfa.toString(),
-          review_status: "review",
-          response_email_subject: "Suite à votre demande de référencement sur TransferAI Africa",
-          response_email_body_fr: renderPartnerRecommendationEmail({
-            ...fallbackPartnerReview,
-            ...current,
-            prospect_name: current.prospect_name || fallbackPartnerReview.prospect_name,
-            sector_activity: current.sector_activity || fallbackPartnerReview.sector_activity,
-            recommended_offer_key: recommendedOffer.offer_key,
-            recommended_duration_months: recommendedOffer.duration_months,
-            recommended_price_fcfa: recommendedOffer.price_fcfa,
-          }),
-        }));
+        applyLocalRecommendation();
 
         onStatus("Brouillon IA local généré pour la preview.");
+        toast({
+          title: "Recommandation générée",
+          description: "Le brouillon IA local a bien été préparé.",
+        });
         return;
       }
 
@@ -367,8 +390,19 @@ const PartnerAdminPanel = ({
 
       await loadSnapshot();
       onStatus("Recommandation partenaire générée.");
+      toast({
+        title: "Recommandation générée",
+        description: "La proposition IA et l’email de réponse sont prêts à être relus.",
+      });
     } catch (error) {
+      applyLocalRecommendation();
       onError(error instanceof Error ? error.message : "Génération partenaire impossible.");
+      toast({
+        title: "Brouillon local généré",
+        description: error instanceof Error
+          ? `La fonction distante a échoué (${error.message}), mais une recommandation locale exploitable a été préparée.`
+          : "La fonction distante a échoué, mais une recommandation locale exploitable a été préparée.",
+      });
     } finally {
       setIsBusy(false);
     }
@@ -384,6 +418,10 @@ const PartnerAdminPanel = ({
         setForm((current) => ({ ...current, review_status: "approved" }));
         localSaveReview();
         onStatus("Revue marquée approuvée en preview locale.");
+        toast({
+          title: "Revue approuvée",
+          description: "Le dossier est maintenant marqué comme prêt à envoyer.",
+        });
         return;
       }
 
@@ -398,8 +436,17 @@ const PartnerAdminPanel = ({
 
       await loadSnapshot();
       onStatus("Revue partenaire approuvée.");
+      toast({
+        title: "Revue approuvée",
+        description: "Le dossier partenaire est prêt pour l’envoi de la réponse.",
+      });
     } catch (error) {
       onError(error instanceof Error ? error.message : "Validation partenaire impossible.");
+      toast({
+        title: "Validation impossible",
+        description: error instanceof Error ? error.message : "Le dossier n'a pas pu être approuvé.",
+        variant: "destructive",
+      });
     } finally {
       setIsBusy(false);
     }
@@ -413,17 +460,36 @@ const PartnerAdminPanel = ({
     try {
       if (usesFallback || !isReady) {
         onStatus("Preview locale prête. L’envoi réel sera disponible après déploiement de la fonction Supabase.");
+        toast({
+          title: "Mode preview",
+          description: "L’envoi réel n’est pas disponible dans la prévisualisation locale seule.",
+        });
         return;
       }
 
-      await invokeAdminEdgeFunction(token, "partner-followup-send", {
+      const result = await invokeAdminEdgeFunction<{ data?: { review?: PartnerReview; recipient?: string } }>(token, "partner-followup-send", {
         review_id: form.id,
       });
 
+      if (result.data?.review) {
+        applyReviewToForm(result.data.review);
+      }
+
       await loadSnapshot();
       onStatus("Email partenaire envoyé.");
+      toast({
+        title: "Réponse envoyée",
+        description: result.data?.recipient
+          ? `L’email partenaire a bien été envoyé à ${result.data.recipient}.`
+          : "L’email partenaire a bien été envoyé.",
+      });
     } catch (error) {
       onError(error instanceof Error ? error.message : "Envoi partenaire impossible.");
+      toast({
+        title: "Envoi impossible",
+        description: error instanceof Error ? error.message : "La réponse partenaire n'a pas pu être envoyée.",
+        variant: "destructive",
+      });
     } finally {
       setIsBusy(false);
     }
@@ -640,7 +706,7 @@ const PartnerAdminPanel = ({
                   Marquer approuvée
                 </button>
                 <button type="button" onClick={sendReply} disabled={isBusy || isBusyGlobal} className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50">
-                  Envoyer la réponse
+                  {isBusy ? "Traitement en cours..." : "Envoyer la réponse"}
                 </button>
               </div>
             </div>
