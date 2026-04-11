@@ -82,7 +82,7 @@ const LeadFormsPreview = () => {
   const requestedDomain = searchParams.get("domain") ?? "";
   const requestedIntent = (searchParams.get("intent") as FormIntent | null) ?? "contact-devis";
   const [activeIntent, setActiveIntent] = useState<FormIntent>(requestedIntent);
-  const [form, setForm] = useState<FormState>({ ...emptyForm, domain: requestedDomain });
+  const [form, setForm] = useState<FormState>({ ...emptyForm, domain: requestedIntent === "demande-referencement" ? "" : requestedDomain });
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [botField, setBotField] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -97,11 +97,18 @@ const LeadFormsPreview = () => {
 
   useEffect(() => {
     setActiveIntent(requestedIntent);
-    setForm((current) => ({ ...current, domain: requestedDomain || current.domain }));
+    setForm((current) => ({
+      ...current,
+      domain: requestedIntent === "demande-referencement" ? current.domain : requestedDomain || current.domain,
+    }));
   }, [requestedDomain, requestedIntent]);
 
   const update = (key: keyof FormState, value: string) => setForm((current) => ({ ...current, [key]: value }));
-  const loadExample = () => setForm({ ...activeModel.exampleData, domain: requestedDomain || activeModel.exampleData.domain });
+  const loadExample = () =>
+    setForm({
+      ...activeModel.exampleData,
+      domain: requestedIntent === "demande-referencement" ? activeModel.exampleData.domain : requestedDomain || activeModel.exampleData.domain,
+    });
   const participantsCount = useMemo(() => { const parsed = Number.parseInt(form.participants, 10); return Number.isFinite(parsed) && parsed > 0 ? parsed : null; }, [form.participants]);
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -112,13 +119,16 @@ const LeadFormsPreview = () => {
     }
     const activeLanguage = resolveOutboundLanguage(language);
     setIsSubmitting(true);
-    const { error } = await supabase.rpc("submit_contact_request", { full_name_input: form.fullName.trim(), email_input: form.email.trim(), phone_input: form.phone.trim(), company_input: form.company.trim(), sector_input: form.role.trim() || null, city_input: form.country.trim() || null, participants_input: participantsCount, requested_formations_input: form.domain.trim() || requestedDomain || null, message_input: form.message.trim() || null, source_page_input: "/contact", language_input: activeLanguage, request_intent_input: activeIntent, requested_domain_input: form.domain.trim() || requestedDomain || null, privacy_consent_input: privacyAccepted, honeypot_input: botField.trim() || null });
+    const effectiveDomain = isReferencingIntent
+      ? form.domain.trim() || null
+      : form.domain.trim() || requestedDomain || null;
+    const { error } = await supabase.rpc("submit_contact_request", { full_name_input: form.fullName.trim(), email_input: form.email.trim(), phone_input: form.phone.trim(), company_input: form.company.trim(), sector_input: form.role.trim() || null, city_input: form.country.trim() || null, participants_input: participantsCount, requested_formations_input: effectiveDomain, message_input: form.message.trim() || null, source_page_input: "/contact", language_input: activeLanguage, request_intent_input: activeIntent, requested_domain_input: effectiveDomain, privacy_consent_input: privacyAccepted, honeypot_input: botField.trim() || null });
     setIsSubmitting(false);
     if (error) return toast({ title: copy.page.error, description: copy.page.errorDesc, variant: "destructive" });
     const appointmentUrl = isReferencingIntent
       ? null
       : `${window.location.origin}/prise-rdv?${new URLSearchParams({ source: activeIntent, domain: form.domain || requestedDomain, company: form.company, fullName: form.fullName }).toString()}`;
-    const { error: notificationError } = await sendProspectEmailNotifications({ intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), website: form.website.trim() || null, role: form.role.trim() || null, city: form.country.trim() || null, domain: form.domain.trim() || requestedDomain || null, participants: isReferencingIntent ? null : participantsCount, format: isReferencingIntent ? null : form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
+    const { error: notificationError } = await sendProspectEmailNotifications({ intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), website: form.website.trim() || null, role: form.role.trim() || null, city: form.country.trim() || null, domain: effectiveDomain, participants: isReferencingIntent ? null : participantsCount, format: isReferencingIntent ? null : form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
     const successDescription = notificationError
       ? copy.page.successPending
       : isReferencingIntent
@@ -129,10 +139,10 @@ const LeadFormsPreview = () => {
     toast({ title: copy.page.success, description: successDescription });
     trackAnalyticsEvent("lead_request_submitted", {
       request_intent: activeIntent,
-      requested_domain: form.domain.trim() || requestedDomain || null,
+      requested_domain: effectiveDomain,
       participants: participantsCount ?? undefined,
     });
-    setForm({ ...emptyForm, domain: requestedDomain });
+    setForm({ ...emptyForm, domain: isReferencingIntent ? "" : requestedDomain });
     if (!isReferencingIntent && appointmentUrl) {
       navigate(appointmentUrl.replace(window.location.origin, ""));
     }
@@ -171,7 +181,22 @@ const LeadFormsPreview = () => {
                   <div className="grid gap-4 md:grid-cols-2"><input required placeholder={copy.page.fullName} value={form.fullName} onChange={(e) => update("fullName", e.target.value)} className={inputClass} /><input required type="email" placeholder={copy.page.email} value={form.email} onChange={(e) => update("email", e.target.value)} className={inputClass} /></div>
                   <div className="grid gap-4 md:grid-cols-2"><input required placeholder={copy.page.phone} value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass} /><input required placeholder={copy.page.company} value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass} /></div>
                   <div className="grid gap-4 md:grid-cols-2"><input placeholder={copy.page.website} value={form.website} onChange={(e) => update("website", e.target.value)} className={inputClass} /><input placeholder={copy.page.role} value={form.role} onChange={(e) => update("role", e.target.value)} className={inputClass} /></div>
-                  <div className="grid gap-4 md:grid-cols-2"><input placeholder={copy.page.country} value={form.country} onChange={(e) => update("country", e.target.value)} className={inputClass} />{isReferencingIntent ? <input placeholder={domainPlaceholder} value={form.domain} onChange={(e) => update("domain", e.target.value)} className={inputClass} /> : <select value={form.domain} onChange={(e) => update("domain", e.target.value)} className={inputClass}><option value="">{domainPlaceholder}</option>{domainPreviews.map((item) => <option key={item.slug} value={item.domain}>{getLocalizedDomainLabel(item.domain, language)}</option>)}</select>}</div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <input placeholder={copy.page.country} value={form.country} onChange={(e) => update("country", e.target.value)} className={inputClass} />
+                    {isReferencingIntent ? (
+                      <div className="space-y-2">
+                        <p className="text-sm font-semibold text-card-foreground">{domainPlaceholder}</p>
+                        <input
+                          placeholder={domainPlaceholder}
+                          value={form.domain}
+                          onChange={(e) => update("domain", e.target.value)}
+                          className={inputClass}
+                        />
+                      </div>
+                    ) : (
+                      <select value={form.domain} onChange={(e) => update("domain", e.target.value)} className={inputClass}><option value="">{domainPlaceholder}</option>{domainPreviews.map((item) => <option key={item.slug} value={item.domain}>{getLocalizedDomainLabel(item.domain, language)}</option>)}</select>
+                    )}
+                  </div>
                   {!isReferencingIntent ? (
                     <>
                       <div className="grid gap-4 md:grid-cols-2"><input placeholder={copy.page.participants} value={form.participants} onChange={(e) => update("participants", e.target.value)} className={inputClass} /><select value={form.format} onChange={(e) => update("format", e.target.value)} className={inputClass}><option value="">{copy.page.format}</option><option value="presentiel">{copy.page.formats[0]}</option><option value="hybride">{copy.page.formats[1]}</option><option value="distanciel">{copy.page.formats[2]}</option><option value="a-definir">{copy.page.formats[3]}</option></select></div>

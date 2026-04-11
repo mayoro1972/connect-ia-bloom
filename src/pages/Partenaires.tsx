@@ -267,7 +267,7 @@ const PartenairesPage = () => {
                       </div>
 
                       <Link
-                        to={buildContactPath(model.intent, model.title)}
+                        to={model.intent === "demande-referencement" ? buildContactPath(model.intent) : buildContactPath(model.intent, model.title)}
                         className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80"
                       >
                         {model.cta}
@@ -293,7 +293,7 @@ const PartenairesPage = () => {
 
                 <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                   <Link
-                    to={buildContactPath("demande-referencement", "Referencement partenaire")}
+                    to={buildContactPath("demande-referencement")}
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                   >
                     {copy.primaryCta}

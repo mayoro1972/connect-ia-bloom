@@ -38,6 +38,7 @@ type TranslationCopy = {
   noExtraMessage: string;
   websiteRequest: string;
   requestLabel: string;
+  listingSectorLabel: string;
   fieldLabels: {
     name: string;
     email: string;
@@ -89,6 +90,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     noExtraMessage: "Aucun message complementaire.",
     websiteRequest: "Nouvelle demande site web",
     requestLabel: "Nouvelle demande",
+    listingSectorLabel: "Secteur / activite",
     fieldLabels: {
       name: "Nom",
       email: "Email",
@@ -147,6 +149,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     noExtraMessage: "No additional message.",
     websiteRequest: "New website request",
     requestLabel: "New request",
+    listingSectorLabel: "Sector / activity",
     fieldLabels: {
       name: "Name",
       email: "Email",
@@ -233,6 +236,8 @@ const asHtmlList = (items: string[]) =>
 
 const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage => {
   const copy = getCopy(payload.language);
+  const isListingRequest = payload.intent === "demande-referencement";
+  const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
   const topic =
     payload.intent === "inscription"
       ? payload.formationTitle || copy.defaultTrainingLabel
@@ -253,7 +258,7 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.website)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.website))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.role)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.role))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.city)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.city))}</td></tr>
-          <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.domain)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.domain))}</td></tr>
+          <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(domainLabel)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.domain))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.formation)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.formationTitle))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.participants)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.participants))}</td></tr>
           <tr><td style="padding:10px 0;color:#667085;">${escapeHtml(copy.fieldLabels.format)}</td><td style="padding:10px 0;color:#101828;">${escapeHtml(asTextValue(copy, payload.format))}</td></tr>
@@ -282,7 +287,7 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
     `${copy.fieldLabels.website} : ${asTextValue(copy, payload.website)}`,
     `${copy.fieldLabels.role} : ${asTextValue(copy, payload.role)}`,
     `${copy.fieldLabels.city} : ${asTextValue(copy, payload.city)}`,
-    `${copy.fieldLabels.domain} : ${asTextValue(copy, payload.domain)}`,
+    `${domainLabel} : ${asTextValue(copy, payload.domain)}`,
     `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}`,
     `${copy.fieldLabels.participants} : ${asTextValue(copy, payload.participants)}`,
     `${copy.fieldLabels.format} : ${asTextValue(copy, payload.format)}`,
@@ -311,6 +316,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
   const subject = copy.acknowledgementSubject;
   const intro = copy.greeting(payload.fullName);
   const isListingRequest = payload.intent === "demande-referencement";
+  const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
   const body = isListingRequest ? copy.listingAcknowledgementBody : copy.acknowledgementBody(intentLabel);
   const nextStep = isListingRequest ? copy.listingResponseDelay : copy.acknowledgementNextStep;
   const detailsTitle = copy.summaryTitle;
@@ -349,7 +355,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
         <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
           <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(detailsTitle)}</p>
           <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.type)} :</strong> ${escapeHtml(intentLabel)}</p>
-          <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.domain)} :</strong> ${escapeHtml(asTextValue(copy, payload.domain))}</p>
+          <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(domainLabel)} :</strong> ${escapeHtml(asTextValue(copy, payload.domain))}</p>
           <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.formation)} :</strong> ${escapeHtml(asTextValue(copy, payload.formationTitle))}</p>
           <p style="margin:0;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.company)} :</strong> ${escapeHtml(asTextValue(copy, payload.company))}</p>
         </div>
@@ -372,7 +378,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     "",
     `${detailsTitle} :`,
     `${copy.fieldLabels.type} : ${intentLabel}`,
-    `${copy.fieldLabels.domain} : ${asTextValue(copy, payload.domain)}`,
+    `${domainLabel} : ${asTextValue(copy, payload.domain)}`,
     `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}`,
     `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
     listingReviewText,
