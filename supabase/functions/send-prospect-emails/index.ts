@@ -1,3 +1,5 @@
+import { getEmailGreeting } from "../_shared/email-greetings.ts";
+
 type ProspectEmailIntent =
   | "demande-catalogue"
   | "demande-renseignement"
@@ -58,7 +60,6 @@ type TranslationCopy = {
   prospectMessage: string;
   appointmentCta: string;
   acknowledgementSubject: string;
-  greeting: (fullName: string) => string;
   acknowledgementBody: (intentLabel: string) => string;
   acknowledgementNextStep: string;
   listingAcknowledgementBody: string;
@@ -110,7 +111,6 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     prospectMessage: "Message du prospect",
     appointmentCta: "Ouvrir le lien de RDV",
     acknowledgementSubject: "Nous avons bien recu votre demande - TransferAI Africa",
-    greeting: (fullName: string) => `Bonjour ${fullName},`,
     acknowledgementBody: (intentLabel: string) =>
       `Nous confirmons la bonne reception de votre ${intentLabel.toLowerCase()}. Notre equipe va l'etudier et vous repondra depuis contact@transferai.ci dans les meilleurs delais.`,
     acknowledgementNextStep:
@@ -169,7 +169,6 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     prospectMessage: "Prospect message",
     appointmentCta: "Open booking link",
     acknowledgementSubject: "We received your request - TransferAI Africa",
-    greeting: (fullName: string) => `Hello ${fullName},`,
     acknowledgementBody: (intentLabel: string) =>
       `We confirm that we received your ${intentLabel.toLowerCase()}. Our team will review it and reply from contact@transferai.ci as soon as possible.`,
     acknowledgementNextStep:
@@ -314,7 +313,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
   const copy = getCopy(payload.language);
   const intentLabel = copy.intentLabels[payload.intent];
   const subject = copy.acknowledgementSubject;
-  const intro = copy.greeting(payload.fullName);
+  const intro = getEmailGreeting(payload.language === "en" ? "en" : "fr", payload.fullName);
   const isListingRequest = payload.intent === "demande-referencement";
   const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
   const body = isListingRequest ? copy.listingAcknowledgementBody : copy.acknowledgementBody(intentLabel);

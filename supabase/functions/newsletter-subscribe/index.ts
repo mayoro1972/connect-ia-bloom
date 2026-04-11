@@ -1,4 +1,5 @@
 import { corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
+import { getEmailGreeting } from "../_shared/email-greetings.ts";
 
 type SubscriptionBody = {
   email?: string;
@@ -32,6 +33,7 @@ const escapeHtml = (value: string) =>
 
 const buildNewsletterConfirmation = (email: string, domains: string[], language: "fr" | "en") => {
   const domainList = domains.join(", ");
+  const greeting = getEmailGreeting(language);
 
   if (language === "en") {
     return {
@@ -41,6 +43,7 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
           <div style="max-width:680px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
             <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#f28c28;">TransferAI Africa</p>
             <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2;color:#101828;">Subscription confirmed</h1>
+            <p style="margin:0 0 14px;color:#101828;">${escapeHtml(greeting)}</p>
             <p style="margin:0 0 14px;color:#475467;">Your domain-based AI watch subscription is now active.</p>
             <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
               <p style="margin:0 0 10px;color:#101828;font-weight:700;">Selected domains</p>
@@ -53,6 +56,8 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
       `,
       text: [
         "TransferAI Africa",
+        "",
+        greeting,
         "",
         "Your domain-based AI watch subscription is now active.",
         `Selected domains: ${domainList}`,
@@ -72,6 +77,7 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
         <div style="max-width:680px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
           <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#f28c28;">TransferAI Africa</p>
           <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2;color:#101828;">Inscription confirmée</h1>
+          <p style="margin:0 0 14px;color:#101828;">${escapeHtml(greeting)}</p>
           <p style="margin:0 0 14px;color:#475467;">Votre abonnement à la veille IA par domaine est maintenant actif.</p>
           <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
             <p style="margin:0 0 10px;color:#101828;font-weight:700;">Domaines sélectionnés</p>
@@ -84,6 +90,8 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
     `,
     text: [
       "TransferAI Africa",
+      "",
+      greeting,
       "",
       "Votre abonnement à la veille IA par domaine est maintenant actif.",
       `Domaines sélectionnés : ${domainList}`,

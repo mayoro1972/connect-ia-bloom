@@ -1,4 +1,5 @@
 import { callOpenAIJson, corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
+import { getEmailGreeting } from "../_shared/email-greetings.ts";
 
 const adminToken = Deno.env.get("CONTENT_ADMIN_TOKEN") ?? "";
 
@@ -227,7 +228,7 @@ Deno.serve(async (request) => {
 
     const bodyFr =
       aiDraft?.bodyFr ||
-      `Bonjour ${review.prospect_name},\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à ${sectorActivity}.\n\nLa formule que nous vous recommandons est la suivante :\n\n${selectedOffer.offer_name_fr}\n${new Intl.NumberFormat("fr-FR").format(selectedOffer.price_fcfa)} FCFA pour ${selectedOffer.duration_months} mois\n\nCette formule inclut :\n${deliverables.map((item) => `- ${item}`).join("\n")}\n\nSi cette orientation vous convient, nous pourrons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa`;
+      `${getEmailGreeting("fr", review.prospect_name)}\n\nMerci pour votre patience et pour l’intérêt porté à TransferAI Africa.\n\nAprès étude de votre dossier, nous confirmons que votre organisation présente un bon alignement avec notre audience et notre ligne éditoriale, notamment sur les sujets liés à ${sectorActivity}.\n\nLa formule que nous vous recommandons est la suivante :\n\n${selectedOffer.offer_name_fr}\n${new Intl.NumberFormat("fr-FR").format(selectedOffer.price_fcfa)} FCFA pour ${selectedOffer.duration_months} mois\n\nCette formule inclut :\n${deliverables.map((item) => `- ${item}`).join("\n")}\n\nSi cette orientation vous convient, nous pourrons vous transmettre la proposition finale ainsi que la liste des éléments à fournir pour validation éditoriale puis publication.\n\nBien cordialement,\nL’équipe TransferAI Africa`;
 
     const payload = {
       ai_score: aiScore,

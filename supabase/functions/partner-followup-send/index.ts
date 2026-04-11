@@ -1,4 +1,5 @@
 import { corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
+import { getEmailGreeting, replaceLeadingGreeting } from "../_shared/email-greetings.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <contact@transferai.ci>";
@@ -131,11 +132,16 @@ Deno.serve(async (request) => {
 
     const recipient = testEmail || review.prospect_email;
     const subject = review.response_email_subject || "Votre demande de référencement a été étudiée | TransferAI Africa";
-    const bodyFr = review.response_email_body_fr || "";
+    const rawBodyFr = review.response_email_body_fr || "";
 
-    if (!recipient || !bodyFr.trim()) {
+    if (!recipient || !rawBodyFr.trim()) {
       throw new Error("Missing recipient or response_email_body_fr.");
     }
+
+    const bodyFr = replaceLeadingGreeting(
+      rawBodyFr,
+      getEmailGreeting("fr", review.prospect_name),
+    );
 
     const html = `
       <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
@@ -193,6 +199,7 @@ Deno.serve(async (request) => {
       .update({
         review_status: "sent",
         response_sent_at: new Date().toISOString(),
+        response_email_body_fr: bodyFr,
       })
       .eq("id", reviewId);
 

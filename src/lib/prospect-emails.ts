@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import { getEmailGreeting } from "@/lib/email-greetings";
 import { contactDetails } from "@/lib/site-links";
 
 export type ProspectEmailIntent =
@@ -71,7 +72,7 @@ export const buildAppointmentMailto = (payload: {
     : `Demande de prise de RDV - ${payload.company || payload.fullName || "Prospect"} - TransferAI`;
   const body = isEnglish
     ? [
-        "Hello TransferAI Africa,",
+        getEmailGreeting("en", "TransferAI Africa"),
         "",
         "I would like to book a discovery call.",
         "",
@@ -85,7 +86,7 @@ export const buildAppointmentMailto = (payload: {
         "Best regards,",
       ].join("\n")
     : [
-        "Bonjour TransferAI Africa,",
+        getEmailGreeting("fr", "TransferAI Africa"),
         "",
         "Je souhaite reserver un rendez-vous de cadrage.",
         "",
