@@ -130,6 +130,39 @@ const statusOptions: PartnerReviewStatus[] = [
   "archived",
 ];
 
+const offerFamilySections: Record<
+  PartnerOffer["offer_family"],
+  {
+    title: string;
+    description: string;
+    containerClass: string;
+    cardClass: string;
+    badgeClass: string;
+  }
+> = {
+  referencement: {
+    title: "Référencement",
+    description: "L’offre la plus simple pour être présent de façon crédible et immédiatement publiable sur l’écosystème TransferAI Africa.",
+    containerClass: "border-slate-200 bg-slate-50/70",
+    cardClass: "border-slate-200 bg-white",
+    badgeClass: "bg-slate-900 text-white",
+  },
+  visibilite: {
+    title: "Visibilité",
+    description: "Une présence renforcée pour mieux structurer votre image, votre proposition de valeur et votre exposition auprès de notre audience.",
+    containerClass: "border-amber-200 bg-amber-50/60",
+    cardClass: "border-amber-200 bg-white",
+    badgeClass: "bg-amber-500 text-white",
+  },
+  premium: {
+    title: "Premium",
+    description: "Le format le plus visible pour les organisations qui veulent une présence plus forte, plus éditoriale et plus marquante.",
+    containerClass: "border-primary/20 bg-primary/5",
+    cardClass: "border-primary/20 bg-white",
+    badgeClass: "bg-primary text-primary-foreground",
+  },
+};
+
 const PartnerAdminPanel = ({
   token,
   isReady,
@@ -220,6 +253,14 @@ const PartnerAdminPanel = ({
   const selectedOffer = useMemo(
     () => getOfferByKey(form.recommended_offer_key) ?? null,
     [form.recommended_offer_key],
+  );
+  const groupedOffers = useMemo(
+    () => ({
+      referencement: snapshot.offers.filter((offer) => offer.offer_family === "referencement"),
+      visibilite: snapshot.offers.filter((offer) => offer.offer_family === "visibilite"),
+      premium: snapshot.offers.filter((offer) => offer.offer_family === "premium"),
+    }),
+    [snapshot.offers],
   );
   const hasRemoteReviewSelected = isUuid(form.id);
   const hasRecipient = form.prospect_email.trim().length > 0;
@@ -566,22 +607,63 @@ const PartnerAdminPanel = ({
             <p className="mt-2 text-sm text-muted-foreground">
               Référentiel de recommandations utilisé par l’équipe et par la logique IA pour répondre proprement aux demandes partenaires.
             </p>
-            <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {snapshot.offers.map((offer) => (
-                <div key={offer.offer_key} className="rounded-2xl border border-border bg-background p-5">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="font-semibold text-card-foreground">{partnerFamilyLabels[offer.offer_family]}</p>
-                    <Badge variant="secondary">{offer.duration_months} mois</Badge>
-                  </div>
-                  <p className="mt-3 text-lg font-bold text-card-foreground">{formatFcfa(offer.price_fcfa)}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{offer.summary_fr}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {offer.deliverables_fr.map((item) => (
-                      <Badge key={`${offer.offer_key}-${item}`} variant="outline">{item}</Badge>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div className="mt-5 space-y-5">
+              {(Object.keys(groupedOffers) as PartnerOffer["offer_family"][]).map((family) => {
+                const section = offerFamilySections[family];
+                const offers = groupedOffers[family];
+
+                if (!offers.length) {
+                  return null;
+                }
+
+                return (
+                  <section
+                    key={family}
+                    className={`rounded-2xl border p-5 ${section.containerClass}`}
+                  >
+                    <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                          {section.title}
+                        </p>
+                        <h3 className="mt-1 font-heading text-lg font-bold text-card-foreground">
+                          {section.title} partenaire
+                        </h3>
+                      </div>
+                      <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                        {section.description}
+                      </p>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {offers.map((offer) => (
+                        <div
+                          key={offer.offer_key}
+                          className={`flex h-full min-h-[320px] flex-col rounded-2xl border p-5 shadow-sm ${section.cardClass}`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="font-semibold text-card-foreground">{partnerFamilyLabels[offer.offer_family]}</p>
+                              <p className="mt-3 text-xl font-bold leading-tight text-card-foreground">{formatFcfa(offer.price_fcfa)}</p>
+                            </div>
+                            <span
+                              className={`inline-flex shrink-0 items-center justify-center rounded-full px-3 py-1 text-[11px] font-semibold leading-none ${section.badgeClass}`}
+                            >
+                              {offer.duration_months} mois
+                            </span>
+                          </div>
+                          <p className="mt-4 min-h-[96px] text-sm leading-relaxed text-muted-foreground">{offer.summary_fr}</p>
+                          <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                            {offer.deliverables_fr.map((item) => (
+                              <Badge key={`${offer.offer_key}-${item}`} variant="outline">{item}</Badge>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
           </div>
 
