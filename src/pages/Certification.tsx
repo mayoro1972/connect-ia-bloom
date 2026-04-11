@@ -11,6 +11,7 @@ import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { deepFixMojibake } from "@/lib/fixMojibake";
 import { certificationDomainProfiles, getCertificationDomainProfile, type LocalizedText } from "@/data/certification-curricula";
+import { getCertificationOfferMeta, type CertificationMetaText } from "@/data/certification-meta";
 import { resolveCatalogueSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
 
 const CertificationPage = () => {
@@ -20,8 +21,10 @@ const CertificationPage = () => {
   const content = trans.certification;
   const domainSlug = searchParams.get("domaine");
   const activeProfile = getCertificationDomainProfile(domainSlug);
+  const offerMeta = getCertificationOfferMeta(activeProfile.slug);
 
   const localize = (value: LocalizedText) => (language === "en" ? value.en : value.fr);
+  const localizeMeta = (value: CertificationMetaText) => (language === "en" ? value.en : value.fr);
   const profileLabel = localize(activeProfile.label);
   const profilePitch = localize(activeProfile.shortPitch);
   const profileCompanyPitch = localize(activeProfile.companyPitch);
@@ -60,7 +63,7 @@ const CertificationPage = () => {
                       <h2 className="font-heading text-2xl font-bold text-card-foreground">{content.positioningTitle}</h2>
                     </div>
                   </div>
-                  <p className="mb-6 leading-7 text-muted-foreground">{content.positioningDesc}</p>
+                  <p className="mb-6 max-w-3xl leading-7 text-muted-foreground">{content.positioningDesc}</p>
                   <div>
                     <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{content.domainsTitle}</h3>
                     <p className="mb-4 text-sm leading-7 text-muted-foreground">{content.domainSelectorDesc}</p>
@@ -85,11 +88,21 @@ const CertificationPage = () => {
                         );
                       })}
                     </div>
-                    <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/5 p-5">
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{content.sectorPitchTitle}</p>
-                      <h3 className="mt-3 font-heading text-2xl font-bold text-card-foreground">{profileLabel}</h3>
-                      <p className="mt-3 leading-7 text-muted-foreground">{profileCompanyPitch}</p>
-                      <p className="mt-3 text-sm leading-7 text-card-foreground">{profilePitch}</p>
+                    <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/5 p-6">
+                      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                        <div className="max-w-2xl">
+                          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{content.sectorPitchTitle}</p>
+                          <h3 className="mt-3 font-heading text-2xl font-bold text-card-foreground">{profileLabel}</h3>
+                          <p className="mt-3 leading-7 text-muted-foreground">{profileCompanyPitch}</p>
+                        </div>
+                        <div className="rounded-2xl border border-primary/10 bg-background/80 px-4 py-3 lg:max-w-sm">
+                          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                            {language === "en" ? "Use case focus" : "Focus métier"}
+                          </p>
+                          <p className="mt-2 text-sm leading-6 text-card-foreground">{profilePitch}</p>
+                        </div>
+                      </div>
+
                       <div className="mt-5 grid gap-4 lg:grid-cols-2">
                         <div className="rounded-2xl border border-primary/10 bg-background/80 p-4">
                           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
@@ -106,7 +119,7 @@ const CertificationPage = () => {
                         </div>
                         <div className="rounded-2xl border border-primary/10 bg-background/80 p-4">
                           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                            {language === "en" ? "Expected business impact" : "Impacts attendus"}
+                            {language === "en" ? "Expected impact" : "Impact attendu"}
                           </p>
                           <div className="mt-3 space-y-3">
                             {featuredOutcomes.map((item) => (
@@ -118,6 +131,7 @@ const CertificationPage = () => {
                           </div>
                         </div>
                       </div>
+
                       <div className="mt-5 flex flex-wrap gap-3">
                         <Link
                           to={toolSlug ? `/outils-ia?domaine=${toolSlug}` : "/outils-ia"}
@@ -136,15 +150,29 @@ const CertificationPage = () => {
                   </div>
                 </div>
 
-                <div>
-                  <h2 className="mb-6 font-heading text-2xl font-bold">{content.objectivesTitle}</h2>
-                  <div className="space-y-4">
-                    {profileObjectives.map((objective) => (
-                      <motion.div key={objective} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex items-start gap-3">
-                        <CheckCircle size={20} className="mt-0.5 shrink-0 text-primary" />
-                        <p className="text-card-foreground">{objective}</p>
-                      </motion.div>
-                    ))}
+                <div className="grid gap-6 lg:grid-cols-2">
+                  <div className="rounded-3xl border border-border bg-card p-8">
+                    <h2 className="mb-6 font-heading text-2xl font-bold">{content.objectivesTitle}</h2>
+                    <div className="space-y-4">
+                      {profileObjectives.map((objective) => (
+                        <motion.div key={objective} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex items-start gap-3">
+                          <CheckCircle size={20} className="mt-0.5 shrink-0 text-primary" />
+                          <p className="text-sm leading-7 text-card-foreground">{objective}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-3xl border border-border bg-card p-8">
+                    <h2 className="mb-6 font-heading text-2xl font-bold">{content.valueTitle}</h2>
+                    <div className="space-y-4">
+                      {profileOutcomes.map((outcome) => (
+                        <div key={outcome} className="flex items-start gap-3">
+                          <Award size={18} className="mt-1 shrink-0 text-coral" />
+                          <p className="text-sm leading-7 text-card-foreground">{outcome}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -173,27 +201,29 @@ const CertificationPage = () => {
                   </div>
                 </div>
 
-                <div className="rounded-3xl border border-border bg-card p-8">
-                  <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{content.deliverablesTitle}</h2>
-                  <div className="grid gap-4 lg:grid-cols-2">
-                    {profileDeliverables.map((item) => (
-                      <div key={item} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
-                        <BookOpen size={18} className="mt-0.5 shrink-0 text-primary" />
-                        <p className="text-sm leading-7 text-card-foreground">{item}</p>
-                      </div>
-                    ))}
+                <div className="grid gap-6 lg:grid-cols-2">
+                  <div className="rounded-3xl border border-border bg-card p-8">
+                    <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{content.deliverablesTitle}</h2>
+                    <div className="space-y-4">
+                      {profileDeliverables.map((item) => (
+                        <div key={item} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4">
+                          <BookOpen size={18} className="mt-0.5 shrink-0 text-primary" />
+                          <p className="text-sm leading-7 text-card-foreground">{item}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <h2 className="mb-6 font-heading text-2xl font-bold">{content.evalTitle}</h2>
-                  <div className="space-y-3">
-                    {content.evalPoints.map((point) => (
-                      <div key={point} className="flex items-start gap-3">
-                        <Award size={18} className="mt-0.5 shrink-0 text-coral" />
-                        <p className="text-sm text-card-foreground">{point}</p>
-                      </div>
-                    ))}
+                  <div className="rounded-3xl border border-border bg-card p-8">
+                    <h2 className="mb-6 font-heading text-2xl font-bold">{content.evalTitle}</h2>
+                    <div className="space-y-4">
+                      {content.evalPoints.map((point) => (
+                        <div key={point} className="flex items-start gap-3">
+                          <Award size={18} className="mt-0.5 shrink-0 text-coral" />
+                          <p className="text-sm leading-7 text-card-foreground">{point}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,15 +231,15 @@ const CertificationPage = () => {
               <div>
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="sticky top-24 rounded-xl border border-border bg-card p-8">
                   <p className="mb-2 text-center text-sm text-muted-foreground">{content.priceLabel}</p>
-                  <p className="mb-1 text-center font-heading text-3xl font-bold leading-tight text-card-foreground">{content.price}</p>
-                  <p className="mb-8 text-center text-sm text-muted-foreground">{content.perParticipant}</p>
+                  <p className="mb-1 text-center font-heading text-3xl font-bold leading-tight text-card-foreground">{localizeMeta(offerMeta.price)}</p>
+                  <p className="mb-8 text-center text-sm text-muted-foreground">{localizeMeta(offerMeta.pricingNote)}</p>
 
                   <div className="mb-8 space-y-4">
                     {[
-                      { icon: Clock, label: content.duration, value: content.durationValue },
-                      { icon: Monitor, label: content.format, value: content.formatValue },
-                      { icon: MapPin, label: content.location, value: content.locationValue },
-                      { icon: Calendar, label: content.nextSession, value: content.nextSessionValue },
+                      { icon: Clock, label: content.duration, value: localizeMeta(offerMeta.durationValue) },
+                      { icon: Monitor, label: content.format, value: localizeMeta(offerMeta.formatValue) },
+                      { icon: MapPin, label: content.location, value: localizeMeta(offerMeta.locationValue) },
+                      { icon: Calendar, label: content.nextSession, value: localizeMeta(offerMeta.nextSessionValue) },
                     ].map((item) => (
                       <div key={item.label} className="flex items-center justify-between">
                         <span className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -227,7 +257,7 @@ const CertificationPage = () => {
                   >
                     {content.enrollCta}
                   </Link>
-                  <p className="mt-4 text-center text-xs leading-6 text-muted-foreground">{content.cohortNote}</p>
+                  <p className="mt-4 text-center text-xs leading-6 text-muted-foreground">{localizeMeta(offerMeta.cohortNote)}</p>
                 </motion.div>
               </div>
             </div>
