@@ -26,11 +26,18 @@ const pageCopy = {
     title: "A propos de TransferAI Africa",
     subtitle: "Notre mission : transférer l'expertise IA de la diaspora vers l'Afrique.",
     missionTitle: "Notre Mission",
+    missionLead:
+      "TransferAI Africa construit un pont entre l'expertise IA de la diaspora et les besoins réels des entreprises, institutions et talents africains.",
     missionText: [
-      "TransferAI Africa est née d'une conviction forte : la diaspora ivoirienne et africaine regorge d'experts de haut niveau en Intelligence Artificielle, en data science et en transformation digitale, des talents souvent méconnus ou sous-exploités par le continent.",
-      "Notre mission est de bâtir un pont durable entre cette diaspora d'excellence et les entreprises, institutions et professionnels d'Afrique francophone. En mobilisant ces experts comme formateurs, mentors et consultants, nous assurons un transfert de compétences concret en digital et en IA, au service du développement économique de la Côte d'Ivoire et du continent.",
-      "Pour garantir l'excellence et l'ancrage institutionnel de nos programmes, nous nous appuyons sur des partenariats stratégiques avec des acteurs de référence : Middlesex University pour la dimension académique internationale, le FDFP pour le financement de la formation professionnelle, la SNDI et l'IADS pour l'accompagnement institutionnel, et Nettelecom CI pour l'infrastructure digitale.",
-      "Nos formations sont pratiques, ancrées dans les réalités africaines et immédiatement applicables. Parce que la transformation digitale de l'Afrique passera par ses propres talents, ceux d'ici et ceux de la diaspora.",
+      "Nous mobilisons des experts comme formateurs, mentors et consultants pour transférer des compétences utiles en IA, data et transformation digitale.",
+      "Nos programmes sont conçus pour des usages concrets, avec un ancrage fort en Côte d'Ivoire et en Afrique francophone.",
+      "Nous nous appuyons sur des partenaires académiques, institutionnels et entreprises pour renforcer la qualité, la crédibilité et la portée de l'offre.",
+    ],
+    proofTitle: "Ce qui nous distingue",
+    proofs: [
+      "Une expertise portée par la diaspora et reliée aux besoins du terrain.",
+      "Des formations immédiatement applicables dans les métiers et les organisations.",
+      "Un ancrage fort en Côte d'Ivoire, avec une ambition africaine.",
     ],
     stats: [
       { value: "130+", label: "Formations", sub: "Un catalogue complet couvrant 13 domaines d'expertise" },
@@ -66,11 +73,18 @@ const pageCopy = {
     title: "About TransferAI Africa",
     subtitle: "Our mission: transfer AI expertise from the diaspora to Africa.",
     missionTitle: "Our Mission",
+    missionLead:
+      "TransferAI Africa builds a bridge between diaspora AI expertise and the real needs of African companies, institutions, and talent.",
     missionText: [
-      "TransferAI Africa was born from a strong conviction: the Ivorian and African diaspora is home to world-class experts in Artificial Intelligence, data science and digital transformation, talents often overlooked or underutilized by the continent.",
-      "Our mission is to build a lasting bridge between this diaspora of excellence and the businesses, institutions and professionals of francophone Africa. By mobilizing these experts as trainers, mentors and consultants, we deliver concrete skills transfer in digital and AI, driving the economic development of Côte d'Ivoire and the continent.",
-      "To ensure the excellence and institutional grounding of our programs, we rely on strategic partnerships with key players: Middlesex University for international academic standards, the FDFP for professional training funding, SNDI and IADS for institutional support, and Nettelecom CI for digital infrastructure.",
-      "Our courses are practical, rooted in African realities and immediately applicable. Because Africa's digital transformation will be driven by its own talents, those at home and those in the diaspora.",
+      "We mobilize experts as trainers, mentors, and consultants to transfer useful capabilities in AI, data, and digital transformation.",
+      "Our programs are built for concrete use cases, with a strong grounding in Côte d'Ivoire and francophone Africa.",
+      "We rely on academic, institutional, and corporate partners to strengthen the quality, credibility, and reach of the offer.",
+    ],
+    proofTitle: "What sets us apart",
+    proofs: [
+      "Expertise carried by the diaspora and connected to field realities.",
+      "Training designed to be applied immediately in roles and organizations.",
+      "A strong Côte d'Ivoire grounding with an African ambition.",
     ],
     stats: [
       { value: "130+", label: "Courses", sub: "A comprehensive catalogue covering 13 areas of expertise" },
@@ -117,14 +131,28 @@ const AProposPage = () => {
 
         <section className="py-16">
           <div className="container mx-auto max-w-4xl px-4 lg:px-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 rounded-3xl border border-border bg-card p-8">
               <h2 className="mb-4 font-heading text-2xl font-bold">{copy.missionTitle}</h2>
-              {copy.missionText.map((para, i) => (
-                <p key={i} className="mb-4 leading-relaxed text-muted-foreground">
-                  {para}
-                </p>
-              ))}
+              <p className="mb-6 text-base leading-8 text-card-foreground">{copy.missionLead}</p>
+              <div className="grid gap-4 md:grid-cols-3">
+                {copy.missionText.map((para, i) => (
+                  <div key={i} className="rounded-2xl border border-border bg-background p-4">
+                    <p className="text-sm leading-7 text-muted-foreground">{para}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
+
+            <div className="mb-12 rounded-3xl border border-border bg-card p-8">
+              <h2 className="mb-6 font-heading text-2xl font-bold">{copy.proofTitle}</h2>
+              <div className="grid gap-4 md:grid-cols-3">
+                {copy.proofs.map((item) => (
+                  <div key={item} className="rounded-2xl border border-border bg-background p-4">
+                    <p className="text-sm leading-7 text-card-foreground">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="mb-16 grid gap-4 sm:grid-cols-2">
               {copy.stats.map((s, i) => (
