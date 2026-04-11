@@ -28,34 +28,34 @@ const ParcoursPage = () => {
   const parcours = trans.parcours;
   const pageCopy = language === "fr"
     ? {
-        title: "Des parcours guidés pour progresser en IA sans vous perdre",
+        title: "Des parcours guidés pour progresser en IA",
         subtitle:
-          "Choisissez une trajectoire claire selon votre métier, votre niveau et votre objectif. Chaque parcours vous aide à avancer étape par étape, du socle essentiel aux usages les plus avancés.",
-        reassuranceTitle: "Pourquoi choisir un parcours plutôt qu'une formation isolée",
+          "Choisissez une trajectoire claire selon votre métier, votre niveau et votre objectif.",
+        reassuranceTitle: "Pourquoi choisir un parcours",
         reassurancePoints: [
-          "Vous progressez avec une logique claire et rassurante.",
-          "Vous évitez de suivre des formations dans le désordre.",
-          "Vous construisez des compétences utiles et cohérentes dans votre métier.",
+          "Vous progressez dans un ordre clair.",
+          "Vous évitez les formations prises au hasard.",
+          "Vous construisez des compétences cohérentes pour votre métier.",
           "Vous gagnez du temps dans votre montée en compétence.",
         ],
         howItWorks: "Comment fonctionne un parcours",
         steps: [
           {
             title: "Partir de votre niveau réel",
-            desc: "Nous vous aidons à commencer au bon niveau pour éviter à la fois les bases inutiles et les contenus trop avancés.",
+            desc: "Commencer au bon niveau pour éviter les bases inutiles ou les contenus trop avancés.",
           },
           {
             title: "Avancer dans le bon ordre",
-            desc: "Chaque étape renforce la précédente pour créer une progression simple, cohérente et plus facile à appliquer.",
+            desc: "Chaque étape renforce la précédente pour créer une progression simple et cohérente.",
           },
           {
             title: "Renforcer vos usages métier",
-            desc: "L'objectif n'est pas seulement d'apprendre l'IA, mais de mieux travailler, mieux décider et mieux produire dans votre fonction.",
+            desc: "L'objectif est de mieux travailler, mieux décider et mieux produire dans votre fonction.",
           },
         ],
         pathsTitle: "Choisissez votre parcours par domaine",
         pathsDesc:
-          "Chaque parcours regroupe des formations pensées pour un usage métier concret. Vous pouvez commencer simplement, puis monter en puissance selon votre rythme et votre objectif.",
+          "Chaque parcours regroupe des formations pensées pour un usage métier concret, du socle aux usages plus avancés.",
         outcomesTitle: "Ce qu'un parcours vous apporte réellement",
         outcomes: [
           "Une montée en compétence plus rapide",
@@ -63,41 +63,41 @@ const ParcoursPage = () => {
           "Une progression cohérente dans votre métier",
           "Une capacité plus forte à appliquer l'IA au quotidien",
         ],
-        ctaTitle: "Vous ne savez pas par quel parcours commencer ?",
+        ctaTitle: "Besoin d'aide pour choisir ?",
         ctaDesc:
-          "Nous pouvons vous aider à identifier le bon parcours selon votre métier, votre niveau actuel et votre objectif professionnel.",
+          "Nous pouvons vous aider à identifier le bon parcours selon votre métier, votre niveau et votre objectif.",
         primaryCta: "Demander une orientation",
         secondaryCta: "Voir tout le catalogue",
       }
     : {
-        title: "Guided paths to grow in AI without getting lost",
+        title: "Guided paths to grow in AI",
         subtitle:
-          "Choose a clear trajectory based on your role, your level and your objective. Each path helps you move step by step from solid foundations to advanced real-world use.",
-        reassuranceTitle: "Why choose a path instead of one isolated training",
+          "Choose a clear trajectory based on your role, level and objective.",
+        reassuranceTitle: "Why choose a path",
         reassurancePoints: [
-          "You progress with a clear and reassuring logic.",
-          "You avoid taking trainings in the wrong order.",
-          "You build useful and coherent skills for your role.",
+          "You progress in a clear order.",
+          "You avoid taking training in the wrong sequence.",
+          "You build coherent skills for your role.",
           "You save time in your upskilling journey.",
         ],
         howItWorks: "How a path works",
         steps: [
           {
             title: "Start from your real level",
-            desc: "We help you begin at the right level to avoid both unnecessary basics and content that is too advanced too early.",
+            desc: "Start at the right level to avoid unnecessary basics or content that is too advanced too early.",
           },
           {
             title: "Move forward in the right order",
-            desc: "Each step reinforces the previous one so your progression stays simple, coherent and easier to apply.",
+            desc: "Each step reinforces the previous one so your progression stays simple and coherent.",
           },
           {
             title: "Strengthen role-based use cases",
-            desc: "The goal is not only to learn AI, but to work better, decide better and produce better in your role.",
+            desc: "The goal is to work better, decide better and produce better in your role.",
           },
         ],
         pathsTitle: "Choose your path by domain",
         pathsDesc:
-          "Each path brings together trainings designed for a concrete professional use case. You can start simply and then grow according to your pace and objective.",
+          "Each path brings together training designed for a concrete professional use case, from fundamentals to more advanced use.",
         outcomesTitle: "What a path really gives you",
         outcomes: [
           "Faster upskilling",
@@ -105,9 +105,9 @@ const ParcoursPage = () => {
           "A coherent progression in your role",
           "A stronger ability to apply AI in daily work",
         ],
-        ctaTitle: "Not sure which path to start with?",
+        ctaTitle: "Need help choosing?",
         ctaDesc:
-          "We can help you identify the right learning path based on your role, current level and professional objective.",
+          "We can help you identify the right learning path based on your role, level and objective.",
         primaryCta: "Request guidance",
         secondaryCta: "View full catalogue",
       };
@@ -188,26 +188,6 @@ const ParcoursPage = () => {
                 </div>
               </div>
             </div>
-
-            <h2 className="font-heading text-2xl font-bold text-center mb-3">{pageCopy.howItWorks}</h2>
-            <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-8">{pageCopy.subtitle}</p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {pageCopy.steps.map((step, index) => {
-                const Icon = [Layers, TrendingUp, Award][index];
-
-                return (
-                  <ScrollReveal key={step.title} delay={index * 0.1}>
-                    <div className="flex h-full min-h-[268px] flex-col items-center rounded-xl border border-border bg-card p-6 text-center hover-lift">
-                      <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                        <Icon size={24} className="text-primary" />
-                      </div>
-                      <h3 className="min-h-[3.5rem] font-heading text-lg font-bold text-card-foreground mb-2">{step.title}</h3>
-                      <p className="flex-1 text-sm text-muted-foreground">{step.desc}</p>
-                    </div>
-                  </ScrollReveal>
-                );
-              })}
-            </div>
           </div>
         </section>
 
@@ -274,6 +254,14 @@ const ParcoursPage = () => {
                           </div>
                         );
                       })}
+                    </div>
+                    <div className="mt-6">
+                      <Link
+                        to={buildContactPath("demande-renseignement")}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80"
+                      >
+                        {language === "fr" ? "Être orienté sur ce parcours" : "Get guidance for this path"} <ArrowRight size={14} />
+                      </Link>
                     </div>
                   </div>
                 </ScrollReveal>
