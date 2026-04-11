@@ -32,6 +32,8 @@ Le site permet déjà de :
 - explorer une certification sectorielle
 - consulter des contenus IA ciblés par domaine
 - demander un accompagnement entreprise
+- demander un audit IA gratuit
+- demander un référencement partenaire
 - s'abonner à une newsletter IA par domaine
 
 ### Côté administration
@@ -40,6 +42,7 @@ Le site permet déjà de :
 - publier des ressources
 - gérer des brouillons IA
 - piloter une newsletter éditoriale
+- gérer des demandes partenaires et préparer les réponses
 - suivre des emplois / opportunités
 - exploiter un back-office centralisé
 
@@ -72,6 +75,8 @@ Les briques déjà en place incluent :
 - pipeline éditorial IA
 - abonnement newsletter par domaine
 - génération et envoi test de newsletter
+- pipeline partenaire avec recommandation et email de réponse
+- logique email transactionnelle plus professionnelle
 - base de connaissance documentée
 
 ## 7. Gouvernance recommandée
@@ -90,6 +95,14 @@ Les prochaines étapes les plus logiques sont :
 - renforcer les analytics utiles à la décision
 - continuer à simplifier certaines pages très denses
 - développer progressivement les contenus EN les plus stratégiques
+
+## 8.1. Mise à jour récente importante
+
+Depuis la première version de cette note, plusieurs améliorations ont été apportées :
+- simplification éditoriale de pages clés pour réduire la surcharge de lecture
+- meilleure mise en avant de l'audit IA comme porte d'entrée entreprise
+- création d'un véritable parcours partenaires / référencement
+- amélioration des emails automatiques avec une logique horaire plus naturelle
 
 ## 9. Conclusion
 

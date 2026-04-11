@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-11",
+  "version": "2026-04-11-evening",
   "site": {
     "name": "TransferAI Africa",
     "positioning": "Plateforme de formation, contenus, conseil et solutions IA orientee Cote d'Ivoire et Afrique.",
@@ -92,6 +92,11 @@
         "path": "/back-office",
         "purpose": "administration",
         "when_to_send_user": "jamais pour le public, seulement pour l'administration interne"
+      },
+      {
+        "path": "/partenaires",
+        "purpose": "partenaires et demandes de referencement",
+        "when_to_send_user": "quand le visiteur cherche les partenaires existants ou veut demander une presence sur le site"
       }
     ]
   },
@@ -260,7 +265,8 @@
       "afficher le badge de type",
       "eviter la repetition du type dans le titre",
       "mettre en avant le domaine",
-      "resumes courts et actionnables"
+      "resumes courts et actionnables",
+      "alleger les textes de section pour reduire la surcharge"
     ]
   },
   "newsletter": {
@@ -282,7 +288,8 @@
       "send_weekly": "vendredi 08:30",
       "guardrail": "envoi seulement si edition approved ou scheduled",
       "recommended_mode": "semi-automatique avec validation humaine"
-    }
+    },
+    "email_greeting_rule": "Bonjour avant 12:00 heure de Cote d'Ivoire, Bonsoir a partir de 12:00"
   },
   "backoffice": {
     "tabs": [
@@ -290,6 +297,7 @@
       "Ressources",
       "Brouillons IA",
       "Newsletter IA",
+      "Partenaires",
       "Emplois IA",
       "Mode d'emploi"
     ],
@@ -299,6 +307,8 @@
       "publier une ressource",
       "gerer des brouillons IA",
       "creer ou relire une newsletter",
+      "revoir des demandes partenaires",
+      "envoyer des reponses partenaires",
       "gerer des emplois",
       "suivre les chiffres admin"
     ]
@@ -336,7 +346,11 @@
       "editorial_jobs",
       "newsletter_subscriptions",
       "newsletter_issues",
-      "newsletter_delivery_logs"
+      "newsletter_delivery_logs",
+      "partner_offer_catalog",
+      "partner_email_templates",
+      "partner_listing_reviews",
+      "partner_followup_jobs"
     ],
     "functions": [
       "content-admin",
@@ -347,7 +361,9 @@
       "newsletter-drafter",
       "newsletter-send",
       "newsletter-scheduler",
-      "send-prospect-emails"
+      "send-prospect-emails",
+      "partner-review-drafter",
+      "partner-followup-send"
     ]
   },
   "faq": [
@@ -370,6 +386,14 @@
     {
       "question": "Ou gere-t-on les contenus ?",
       "answer": "Dans le back-office, onglets Ressources, Brouillons IA, Newsletter IA et Emplois IA."
+    },
+    {
+      "question": "Ou gere-t-on les demandes partenaires ?",
+      "answer": "Dans le back-office, onglet Partenaires."
+    },
+    {
+      "question": "Comment fonctionne la salutation dans les emails ?",
+      "answer": "Les emails automatiques utilisent Bonjour avant midi et Bonsoir a partir de midi, selon l'heure de Cote d'Ivoire."
     }
   ],
   "assistant_policy": {
@@ -392,8 +416,16 @@
       "parcours si intention orientation",
       "certification si intention premium ou sectorielle",
       "entreprises si intention B2B ou audit",
+      "partenaires si intention visibilite, referencement ou partenariat",
       "blog si intention veille ou contenu",
       "contact si besoin humain explicite"
     ]
-  }
+  },
+  "recent_updates": [
+    "simplification de plusieurs pages denses pour mieux guider les visiteurs",
+    "meilleure mise en avant de l'audit IA gratuit sur le parcours entreprise",
+    "ajout d'un flux partenaires avec formulaire public, revue admin et email de suivi",
+    "professionnalisation des emails automatiques avec salutation selon l'heure",
+    "confirmation que la logique editoriale reste FR d'abord et validation humaine avant diffusion"
+  ]
 }

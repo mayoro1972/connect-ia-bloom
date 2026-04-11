@@ -139,6 +139,38 @@ Livrables et corrections marquantes :
 - fix d'auth des edge functions admin pour la newsletter
 - validation d'un test email réel
 
+### Phase 11. Simplification éditoriale et fluidité UX
+
+Objectif :
+- réduire la surcharge d'information
+- rendre les pages plus lisibles
+- améliorer la compréhension dès la première lecture
+
+Livrables et résultats :
+- simplification de l'accueil
+- simplification de la page à propos
+- simplification du catalogue
+- simplification des parcours
+- simplification de la certification
+- simplification de l'education hub
+- simplification du blog et des pages entreprises
+- meilleure mise en avant de l'audit IA gratuit
+
+### Phase 12. Pipeline partenaires et relation email
+
+Objectif :
+- transformer la rubrique partenaires en vrai parcours administrable
+- industrialiser la réponse aux demandes de référencement
+
+Livrables :
+- page partenaires clarifiée
+- formulaire public de demande de référencement
+- back-office partenaires
+- grille officielle des formules partenaires
+- recommandation IA de formule
+- email automatique de réponse au prospect
+- normalisation horaire des salutations `Bonjour / Bonsoir`
+
 ## 3. Jalons visibles dans l'historique git récent
 
 Les jalons majeurs récents identifiés dans le dépôt :
@@ -159,6 +191,17 @@ Les jalons majeurs récents identifiés dans le dépôt :
 - `b74da84` Add weekly newsletter editorial pipeline
 - `655499a` Automate weekly newsletter scheduling
 - `8ac7720` Fix admin edge auth for newsletter actions
+- `ab98d46` Refine blog and enterprise page messaging
+- `15d3550` Externalize certification offer metadata
+- `a6fa61f` Simplify catalogue page messaging
+- `efd3a34` Simplify education hub messaging
+- `001f682` Simplify parcours page messaging
+- `086e06d` Simplify home page and add audit CTA
+- `8daf826` Simplify about page messaging
+- `23e63d1` Refine partners page structure and offers
+- `39400fe` Refine partner listing flow and email follow-up
+- `2d385f2` Add partner listing admin pipeline
+- `d1c8428` Add time-based email greetings
 
 ## 4. Ce qui existe maintenant
 
@@ -171,6 +214,9 @@ Le site dispose maintenant de :
 - une newsletter par domaine
 - un envoi test réel validé
 - une base de connaissance outils / certification / domaines
+- un audit IA gratuit mieux visible dans le parcours B2B
+- une page partenaires administrable
+- une relation email plus professionnelle et plus cohérente
 
 ## 5. Ce qui reste logique pour la suite
 
@@ -180,6 +226,7 @@ Les prochains axes rationnels sont :
 - améliorer la relation email au-delà de la seule veille
 - renforcer les dashboards analytics utiles à l'admin
 - préparer davantage de contenus stratégiques EN
+- finaliser la simplification des pages les plus denses restantes, notamment services et contact
 
 ## 6. Lecture business de l'évolution
 

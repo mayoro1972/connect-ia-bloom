@@ -62,6 +62,10 @@
       <strong>Objectif du document :</strong> donner à l'administrateur principal et aux autres administrateurs une base claire pour gérer le site, le back-office, les contenus, la newsletter, les déploiements et la future base d'assistant IA.
     </div>
 
+    <div class="box">
+      <strong>Mise à jour du jour :</strong> ce pack reflète désormais la simplification de plusieurs pages du site, la mise en avant de l'audit IA gratuit, l'ajout du flux partenaires et la normalisation horaire des emails automatiques.
+    </div>
+
     <h2>1. Vue d'ensemble du site</h2>
     <p>TransferAI Africa est une plateforme de formation, contenus, conseil et solutions IA avec un ancrage fort en Côte d'Ivoire et une vocation africaine.</p>
     <p>Le site s'organise autour de 4 piliers :</p>
@@ -119,6 +123,7 @@
       <li>Ressources</li>
       <li>Brouillons IA</li>
       <li>Newsletter IA</li>
+      <li>Partenaires</li>
       <li>Emplois IA</li>
       <li>Mode d'emploi</li>
     </ul>
@@ -212,6 +217,10 @@
       <li><code>newsletter_subscriptions</code></li>
       <li><code>newsletter_issues</code></li>
       <li><code>newsletter_delivery_logs</code></li>
+      <li><code>partner_offer_catalog</code></li>
+      <li><code>partner_email_templates</code></li>
+      <li><code>partner_listing_reviews</code></li>
+      <li><code>partner_followup_jobs</code></li>
     </ul>
 
     <p>Edge Functions clés :</p>
@@ -224,6 +233,9 @@
       <li><code>newsletter-drafter</code></li>
       <li><code>newsletter-send</code></li>
       <li><code>newsletter-scheduler</code></li>
+      <li><code>send-prospect-emails</code></li>
+      <li><code>partner-review-drafter</code></li>
+      <li><code>partner-followup-send</code></li>
     </ul>
 
     <h2>11. Secrets critiques</h2>
@@ -268,6 +280,9 @@
     <h3>Où gère-t-on les contenus ?</h3>
     <p>Dans le back-office, principalement via Ressources, Brouillons IA et Newsletter IA.</p>
 
+    <h3>Où gère-t-on les demandes partenaires ?</h3>
+    <p>Dans le back-office, via l'onglet Partenaires.</p>
+
     <h3>Faut-il tout saisir à la main chaque semaine ?</h3>
     <p>Non. Le système est déjà préparé pour générer des brouillons hebdomadaires. La validation humaine reste recommandée avant envoi.</p>
 
@@ -283,6 +298,16 @@
       <li>ajout de la newsletter par domaine</li>
       <li>automatisation hebdomadaire newsletter</li>
       <li>fiabilisation des flux admin et email</li>
+      <li>simplification éditoriale de plusieurs pages denses</li>
+      <li>mise en place du pipeline partenaire</li>
+    </ul>
+
+    <h2>16. Derniers points de gouvernance</h2>
+    <ul>
+      <li>l'audit IA gratuit est devenu un point d'entrée B2B important</li>
+      <li>le site privilégie désormais des pages plus courtes et plus lisibles</li>
+      <li>les réponses partenaires passent par un workflow administré et non par un email improvisé</li>
+      <li>les emails automatiques utilisent <code>Bonjour</code> avant 12h et <code>Bonsoir</code> après 12h, selon l'heure Côte d'Ivoire</li>
     </ul>
 
     <h2>15. Utilisation pour assistant IA / chatbot</h2>

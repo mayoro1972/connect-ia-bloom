@@ -186,6 +186,8 @@ Le blog n'est pas un simple espace d'articles. Il sert à :
 - résumé orienté utilité
 - article individuel propre
 - CTA lisible
+- éviter de répéter le type dans le titre quand le badge l'indique déjà
+- alléger les textes de section pour réduire la surcharge visuelle
 
 ### Pipeline IA
 
@@ -230,6 +232,14 @@ Le système peut :
 - préparer une édition FR
 - envoyer un test
 - envoyer la campagne si approuvée
+- adresser des contenus utiles au contexte Côte d'Ivoire / Afrique
+- servir aussi de canal de nurturing vers formations, audit et accompagnement
+
+### Règle de ton email
+
+Les courriers automatiques utilisent maintenant une salutation horaire basée sur la Côte d'Ivoire :
+- `Bonjour` avant 12h
+- `Bonsoir` à partir de 12h
 
 ## 9. Matrice des outils IA
 
@@ -282,6 +292,7 @@ Le back-office est le poste de pilotage interne du site.
 - suivre les analytics
 - piloter les flux éditoriaux IA
 - piloter la newsletter
+- gérer les demandes partenaires et leurs réponses
 
 ### Dépendance critique
 
@@ -310,11 +321,29 @@ Sans token valide :
 ### Email
 
 - Resend
+- logique de salutation automatique selon l'heure d'envoi
 
 ### Déploiement
 
 - GitHub
 - Cloudflare pour le front
+
+## 12.1. Pipeline partenaire
+
+La brique partenaires ne se limite plus à une simple page publique.
+
+Elle comprend désormais :
+- une page publique `Partenaires`
+- un formulaire de demande de référencement
+- un stockage structuré des demandes
+- un back-office partenaire pour revue
+- une recommandation IA de formule
+- un email de réponse envoyé au prospect après validation
+
+La logique métier :
+- le site ne doit pas afficher trop d'informations commerciales sensibles
+- la proposition détaillée est envoyée au prospect par email après analyse du dossier
+- l'équipe garde la main sur la validation finale
 
 ## 12. Principes pour le futur assistant IA / chatbot
 
@@ -323,6 +352,7 @@ Sans token valide :
 - expliquer TransferAI clairement
 - orienter vers la bonne page
 - distinguer formation, certification, entreprise, blog et outils
+- distinguer aussi la logique partenaires / référencement
 - répondre sans inventer
 - respecter FR d'abord
 
@@ -331,6 +361,7 @@ Sans token valide :
 - inventer des prix
 - inventer des dates de session
 - inventer des partenaires
+- inventer des conditions de référencement non confirmées
 - promettre un accès humain immédiat si cela n'est pas confirmé
 
 ### Style de réponse recommandé
@@ -340,6 +371,15 @@ Sans token valide :
 - concret
 - orienté solution
 - jamais agressif commercialement
+
+## 13. Mise à jour opérationnelle du 11 avril 2026
+
+Les éléments suivants sont désormais vrais pour le site :
+- plusieurs pages ont été simplifiées pour gagner en lisibilité : accueil, à propos, catalogue, parcours, certification, education hub, blog, entreprises et partenaires
+- l'audit IA gratuit est davantage mis en avant comme porte d'entrée B2B
+- le blog est pensé comme un hub éditorial utile, moins répétitif et plus lisible
+- le back-office comporte maintenant une logique partenaires en plus de la logique contenus et newsletter
+- les emails automatiques suivent une logique de salutation horaire cohérente
 
 ## 13. Mots-clés de gouvernance
 

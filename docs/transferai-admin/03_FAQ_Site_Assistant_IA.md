@@ -40,6 +40,10 @@ Oui. La page Entreprises présente l'accompagnement, l'audit IA, le conseil, les
 
 Oui. Une offre d'audit IA est intégrée à la partie Entreprises / Services.
 
+### Le site propose-t-il un espace partenaires ?
+
+Oui. La page Partenaires présente les organisations déjà visibles dans l'écosystème TransferAI Africa et permet aussi de soumettre une demande de référencement ou de partenariat.
+
 ### La newsletter est-elle générale ou ciblée ?
 
 Elle est ciblée par domaine. L'abonné choisit les domaines qui l'intéressent.
@@ -124,6 +128,12 @@ Ca peut venir :
 - d'un problème de clé Resend
 - d'un problème de domaine expéditeur
 
+### Pourquoi certains emails commencent par "Bonjour" et d'autres par "Bonsoir" ?
+
+Parce que les courriers automatiques prennent maintenant en compte l'heure d'envoi côté Côte d'Ivoire :
+- avant midi : `Bonjour`
+- après midi : `Bonsoir`
+
 ### Pourquoi un email a été envoyé en test mais pas en campagne ?
 
 Parce qu'un test n'est pas une diffusion complète. L'édition doit ensuite être approuvée ou planifiée pour passer en campagne.
@@ -141,6 +151,10 @@ Dans `Back-office > Brouillons IA`.
 ### Où gère-t-on la newsletter ?
 
 Dans `Back-office > Newsletter IA`.
+
+### Où gère-t-on les demandes partenaires ?
+
+Dans `Back-office > Partenaires`.
 
 ### Pourquoi le back-office demande un token ?
 
@@ -211,6 +225,15 @@ Vérifier :
 - le lien utilisé par le bouton
 - la page cible réelle
 - le déploiement Cloudflare si le fix a déjà été poussé
+
+### Une demande partenaire existe mais aucune réponse ne part
+
+Vérifier :
+- qu'un dossier réel est bien sélectionné
+- que l'email du prospect est présent
+- que le corps de réponse a été généré ou rédigé
+- que la fonction `partner-followup-send` est bien déployée
+- que la clé Resend est correcte
 
 ### Le blog charge mal ou certaines cartes débordent
 

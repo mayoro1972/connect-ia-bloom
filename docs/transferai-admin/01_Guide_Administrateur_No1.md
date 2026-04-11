@@ -35,6 +35,7 @@ Pages principales :
 - Blog
 - Article blog
 - Domaines blog
+- Partenaires
 - Contact / formulaires
 - Pages preview et hubs secondaires
 
@@ -45,6 +46,7 @@ Onglets actuels :
 - Ressources
 - Brouillons IA
 - Newsletter IA
+- Partenaires
 - Emplois IA
 - Mode d'emploi
 
@@ -62,6 +64,10 @@ Tables et flux principaux :
 - `newsletter_subscriptions`
 - `newsletter_issues`
 - `newsletter_delivery_logs`
+- `partner_offer_catalog`
+- `partner_email_templates`
+- `partner_listing_reviews`
+- `partner_followup_jobs`
 
 Edge Functions principales :
 - `content-admin`
@@ -73,6 +79,8 @@ Edge Functions principales :
 - `newsletter-send`
 - `newsletter-scheduler`
 - `send-prospect-emails`
+- `partner-review-drafter`
+- `partner-followup-send`
 
 ## 3. Règles de fonctionnement
 
@@ -109,6 +117,7 @@ Ne jamais :
 
 - vérifier les demandes de contact et d'inscription
 - vérifier le blog, la page entreprises, la certification et le formulaire d'audit
+- vérifier les nouvelles demandes partenaires si la rubrique est active
 - vérifier que le back-office charge bien
 - vérifier qu'aucun message d'erreur critique n'est visible sur les pages commerciales
 
@@ -191,6 +200,23 @@ Dans `Newsletter IA` :
 - envoyer un test
 - approuver ou planifier
 
+### E. Gestion des partenaires
+
+Dans `Partenaires` :
+- sélectionner une demande réelle reçue depuis le formulaire public
+- relire les informations société, secteur, besoin et calendrier
+- générer la recommandation IA si nécessaire
+- ajuster la formule recommandée
+- relire le sujet et le corps de la réponse
+- marquer `approved` quand la réponse est prête
+- envoyer la réponse finale au prospect
+
+Bonnes pratiques :
+- ne pas envoyer une réponse si le corps email est vide
+- vérifier que le secteur / activité est correctement renseigné
+- conserver une approche sélective et crédible
+- utiliser le back-office pour répondre, pas un email improvisé hors process
+
 ## 6. Workflow newsletter : ce qui est automatique et ce qui reste humain
 
 ### Ce qui est automatisé
@@ -216,7 +242,22 @@ Conclusion :
 - oui, le système peut tourner chaque semaine
 - non, il n'est pas conseillé de laisser partir les emails sans validation au départ
 
-## 7. Secrets et accès critiques
+## 7.1. Logique email transactionnelle à retenir
+
+Les emails automatiques du site suivent désormais une règle horaire simple basée sur la Côte d'Ivoire :
+- avant `12:00` : utiliser `Bonjour`
+- à partir de `12:00` : utiliser `Bonsoir`
+
+Cette règle s'applique aux principaux flux automatisés :
+- accusés de réception prospects
+- confirmations newsletter
+- réponses partenaires
+
+Important :
+- pour les réponses partenaires, la salutation est réajustée au moment de l'envoi réel
+- cela évite qu'un brouillon généré le matin parte encore avec `Bonjour` le soir
+
+## 8. Secrets et accès critiques
 
 ### Secrets principaux
 
@@ -242,7 +283,7 @@ Quand un secret est remplacé :
 - remplacer la valeur dans Supabase ou dans l'environnement concerné
 - retester immédiatement le workflow lié
 
-## 8. Déploiements
+## 9. Déploiements
 
 ### Front
 
@@ -263,7 +304,7 @@ Flux normal :
 - vérifier les secrets
 - tester les flux critiques après déploiement
 
-## 9. Gestion des incidents
+## 10. Gestion des incidents
 
 ### Si une page front casse
 
@@ -291,7 +332,16 @@ Flux normal :
 5. vérifier `RESEND_API_KEY`
 6. vérifier le domaine email expéditeur
 
-## 10. Checklist avant publication
+### Si une réponse partenaire ne part pas
+
+1. vérifier que le dossier sélectionné est réel
+2. vérifier que `prospect_email` est bien renseigné
+3. vérifier que `response_email_body_fr` n'est pas vide
+4. vérifier `partner-followup-send`
+5. vérifier `RESEND_API_KEY`
+6. vérifier le token admin si l'action part du back-office
+
+## 11. Checklist avant publication
 
 ### Avant toute mise en ligne front
 
@@ -319,10 +369,28 @@ Flux normal :
 - rendu email validé
 - statut `approved` ou `scheduled`
 
-## 11. Documentation à garder vivante
+### Avant envoi d'une réponse partenaire
+
+- dossier partenaire réel chargé
+- formule recommandée cohérente
+- sujet email relu
+- corps email relu
+- salutation correcte
+- statut `approved` si le workflow l'exige
+
+## 12. Documentation à garder vivante
 
 Ce guide doit être mis à jour :
 - à chaque nouvelle rubrique du site
 - à chaque nouveau flux automatisé
 - à chaque changement de secret ou de procédure
 - à chaque évolution importante du back-office
+
+## 13. Derniers changements à retenir au 11 avril 2026
+
+Les changements structurants les plus récents sont :
+- simplification de pages denses pour améliorer la lisibilité et la conversion
+- audit IA gratuit mieux mis en avant dans le parcours visiteur
+- pipeline partenaire complet avec formulaire public, back-office, recommandation et email de suivi
+- nouvelle discipline éditoriale sur le blog : badge de type visible, titres allégés, moins de répétitions
+- logique `FR d'abord`, EN seulement pour les contenus et usages stratégiques

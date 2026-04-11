@@ -51,8 +51,21 @@ Le site couvre aujourd'hui les briques suivantes :
 - formulaire de contact et formulaires de leads
 - audit IA
 - back-office contenus / brouillons IA / newsletter / emplois
+- back-office partenaires et revue de référencement
 - pipeline éditorial Supabase
 - pipeline newsletter avec abonnement, génération, test et envoi
+- pipeline partenaires avec recommandation IA, validation et réponse email
+- logique de salutation automatique des emails selon l'heure d'envoi
+
+## Dernière mise à jour importante du pack
+
+Cette version du pack inclut désormais les évolutions suivantes réalisées le 11 avril 2026 :
+- simplification éditoriale de plusieurs pages denses : accueil, à propos, catalogue, parcours, certification, education hub, blog, entreprises et partenaires
+- mise en avant plus claire de l'audit IA gratuit dans les parcours B2B
+- consolidation du blog dynamique avec filtres, pages article, SEO par domaine et newsletter ciblée
+- mise en place du pipeline partenaire : formulaire public, revue en back-office, recommandation IA, email de suivi
+- fiabilisation des emails transactionnels et ajout d'une salutation horaire `Bonjour` / `Bonsoir` côté Côte d'Ivoire
+- confirmation que le modèle d'exploitation reste : `FR d'abord`, validation humaine avant diffusion large
 
 ## Architecture résumée
 
