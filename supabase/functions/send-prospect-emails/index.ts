@@ -410,7 +410,57 @@ const buildContactNeedTopic = (copy: TranslationCopy, payload: ProspectEmailPayl
   sentenceCase(payload.message?.split(/[.!?\n]/)[0]) ||
   copy.missingValue;
 
-const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectEmailPayload, intentLabel: string) => {
+const isTrainingSupportRequest = (payload: ProspectEmailPayload) =>
+  (payload.intent === "contact-devis" || payload.intent === "demande-renseignement") &&
+  Boolean(payload.domain?.trim() || payload.formationTitle?.trim() || payload.message?.trim());
+
+const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  if (payload.intent === "demande-catalogue") {
+    return copy.acknowledgementSubject;
+  }
+
+  if (payload.intent === "demande-referencement") {
+    return copy.acknowledgementSubject;
+  }
+
+  if (payload.intent === "prise-rdv") {
+    return copy === translations.fr
+      ? "Nous avons bien reçu votre demande de rendez-vous - TransferAI Africa"
+      : "We received your meeting request - TransferAI Africa";
+  }
+
+  if (isTrainingSupportRequest(payload)) {
+    return copy === translations.fr
+      ? "Nous avons bien reçu votre demande de formation - TransferAI Africa"
+      : "We received your training request - TransferAI Africa";
+  }
+
+  return copy.acknowledgementSubject;
+};
+
+const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  if (payload.intent === "demande-catalogue") {
+    return copy.catalogueReadyNextStep;
+  }
+
+  if (payload.intent === "demande-referencement") {
+    return copy.listingResponseDelay;
+  }
+
+  if (payload.intent === "prise-rdv") {
+    return copy.acknowledgementNextStep;
+  }
+
+  if (isTrainingSupportRequest(payload)) {
+    return copy === translations.fr
+      ? "Notre équipe reviendra vers vous avec une réponse claire sur le programme, le format recommandé, les modalités pratiques et la suite la plus pertinente pour votre besoin."
+      : "Our team will come back to you with a clear response covering the programme, recommended format, delivery details, and the most relevant next step for your need.";
+  }
+
+  return copy.acknowledgementNextStep;
+};
+
+const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
   if (payload.intent === "demande-referencement") {
     return copy.listingAcknowledgementBody;
   }
@@ -432,10 +482,10 @@ const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectE
     : "";
 
   if (copy === translations.fr) {
-    return `Nous avons bien reçu votre besoin concernant ${topic}${participantsLine}${timelineLine}. Notre équipe va reformuler votre demande, vérifier le bon format et vous revenir avec la suite la plus utile : cadrage, programme, modalités ou proposition adaptée.`;
+    return `Nous avons bien reçu votre besoin concernant ${topic}${participantsLine}${timelineLine}. Notre équipe va analyser votre demande et vous revenir avec une réponse utile, structurée et adaptée à votre contexte.`;
   }
 
-  return `We have received your need regarding ${topic}${participantsLine}${timelineLine}. Our team will restate your request, validate the right format, and come back with the most useful next step: scoping, programme, delivery options, or a tailored proposal.`;
+  return `We have received your need regarding ${topic}${participantsLine}${timelineLine}. Our team will review your request and come back with a useful, structured response adapted to your context.`;
 };
 
 const isFastTrackIntent = (intent: ProspectEmailIntent): intent is "contact-devis" | "demande-renseignement" | "prise-rdv" =>
@@ -454,7 +504,7 @@ const getFastTrackScore = (payload: ProspectEmailPayload) => {
 };
 
 const shouldSendQualifiedResponse = (payload: ProspectEmailPayload) =>
-  isFastTrackIntent(payload.intent) && getFastTrackScore(payload) >= 3;
+  payload.intent === "prise-rdv" && getFastTrackScore(payload) >= 3;
 
 const buildQualifiedResponse = (payload: ProspectEmailPayload): EmailMessage | null => {
   if (!shouldSendQualifiedResponse(payload) || !isFastTrackIntent(payload.intent)) {
@@ -620,17 +670,14 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     ? resolveDomainCatalogueAsset(payload.domain, payload.formationTitle, payload.message)
     : null;
   const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
+  const shouldShowAppointmentCta = payload.intent === "prise-rdv";
   const subject = catalogueAsset
     ? copy.catalogueReadySubject(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
-    : copy.acknowledgementSubject;
+    : buildSmartAcknowledgementSubject(copy, payload);
   const body = catalogueAsset
     ? copy.catalogueReadyBody(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
-    : buildSmartAcknowledgementBody(copy, payload, intentLabel);
-  const nextStep = catalogueAsset
-    ? copy.catalogueReadyNextStep
-    : isListingRequest
-      ? copy.listingResponseDelay
-      : copy.acknowledgementNextStep;
+    : buildSmartAcknowledgementBody(copy, payload);
+  const nextStep = buildSmartAcknowledgementNextStep(copy, payload);
   const detailsTitle = copy.summaryTitle;
   const closing = copy.closing;
   const catalogueAccessBlock = catalogueAsset
@@ -667,6 +714,14 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
         ...copy.listingFormatsItems.map((item) => `- ${item}`),
       ].join("\n")
     : "";
+  const summaryLines = [
+    `${copy.fieldLabels.type} : ${intentLabel}`,
+    `${domainLabel} : ${asTextValue(copy, payload.domain)}`,
+    payload.formationTitle ? `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}` : "",
+    `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
+    payload.participants ? `${copy.fieldLabels.participants} : ${asTextValue(copy, payload.participants)}` : "",
+    payload.timeline ? `${copy.fieldLabels.timeline} : ${asTextValue(copy, payload.timeline)}` : "",
+  ].filter(Boolean);
 
   const html = `
     <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
@@ -678,15 +733,15 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
         <p style="margin:0 0 18px;color:#475467;">${escapeHtml(nextStep)}</p>
         <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
           <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(detailsTitle)}</p>
-          <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.type)} :</strong> ${escapeHtml(intentLabel)}</p>
-          <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(domainLabel)} :</strong> ${escapeHtml(asTextValue(copy, payload.domain))}</p>
-          <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.formation)} :</strong> ${escapeHtml(asTextValue(copy, payload.formationTitle))}</p>
-          <p style="margin:0;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.company)} :</strong> ${escapeHtml(asTextValue(copy, payload.company))}</p>
+          ${summaryLines.map((line, index) => {
+            const [label, ...rest] = line.split(" : ");
+            return `<p style="margin:0 0 ${index === summaryLines.length - 1 ? "0" : "8px"};color:#475467;"><strong>${escapeHtml(label)} :</strong> ${escapeHtml(rest.join(" : "))}</p>`;
+          }).join("")}
         </div>
         ${catalogueAccessBlock}
         ${listingReviewBlock}
         ${
-          appointmentUrl
+          shouldShowAppointmentCta && appointmentUrl
             ? `<p style="margin:24px 0 0;"><a href="${escapeHtml(appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.reviewAppointment)}</a></p>`
             : ""
         }
@@ -702,15 +757,12 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     nextStep,
     "",
     `${detailsTitle} :`,
-    `${copy.fieldLabels.type} : ${intentLabel}`,
-    `${domainLabel} : ${asTextValue(copy, payload.domain)}`,
-    `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}`,
-    `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
+    ...summaryLines,
     catalogueAsset ? `${copy.catalogueButtons.pdf} : ${catalogueAsset.pdfUrl}` : "",
     catalogueAsset ? `${copy.catalogueButtons.web} : ${catalogueAsset.htmlUrl}` : "",
     catalogueAsset ? `${copy.catalogueButtons.audit} : ${SITE_URL}/audit-ia-gratuit` : "",
     listingReviewText,
-    appointmentUrl ? `${copy.reviewAppointment} : ${appointmentUrl}` : "",
+    shouldShowAppointmentCta && appointmentUrl ? `${copy.reviewAppointment} : ${appointmentUrl}` : "",
     "",
     closing,
   ]

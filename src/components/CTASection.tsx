@@ -58,12 +58,12 @@ const CTASection = () => {
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              to={buildContactPath("contact-devis")}
+              to={buildContactPath("demande-renseignement")}
               onClick={() =>
                 trackCtaClick({
                   ctaName: copy.button,
                   ctaLocation: "home_final_cta",
-                  destination: buildContactPath("contact-devis"),
+                  destination: buildContactPath("demande-renseignement"),
                 })
               }
               className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition-all hover:scale-105 hover:opacity-95"
