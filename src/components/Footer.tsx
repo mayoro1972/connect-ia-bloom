@@ -32,7 +32,7 @@ const Footer = () => {
             { label: "Conseil & adoption", to: "/consulting-ia" },
             { label: "Automatisation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, veille & emploi", to: "/createur-contenu-ia" },
-            { label: "Demander un devis", to: buildContactPath("contact-devis") },
+            { label: "Parler à un expert IA", to: buildContactPath("demande-renseignement") },
           ],
           legal: "Juridique",
           legalLinks: [
@@ -69,7 +69,7 @@ const Footer = () => {
             { label: "Advisory & adoption", to: "/consulting-ia" },
             { label: "Automation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, watch & jobs", to: "/createur-contenu-ia" },
-            { label: "Request a quote", to: buildContactPath("contact-devis") },
+            { label: "Speak with an AI expert", to: buildContactPath("demande-renseignement") },
           ],
           legal: "Legal",
           legalLinks: [
