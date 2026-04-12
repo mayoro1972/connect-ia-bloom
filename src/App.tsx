@@ -49,6 +49,12 @@ const RouteLoader = () => <div className="min-h-screen bg-background" aria-hidde
 const CHUNK_RELOAD_KEY = "transferai-chunk-reload-at";
 const CHUNK_RELOAD_WINDOW_MS = 30_000;
 
+const buildCacheBustedUrl = (currentLocation: Location) => {
+  const nextUrl = new URL(currentLocation.href);
+  nextUrl.searchParams.set("_reload", String(Date.now()));
+  return `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+};
+
 const shouldRecoverFromChunkError = (error: unknown) => {
   if (!(error instanceof Error)) {
     return false;
@@ -92,7 +98,19 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Err
       } catch {
         // Ignore sessionStorage failures in privacy-restricted browsers.
       }
-      window.location.reload();
+      window.location.replace(buildCacheBustedUrl(window.location));
+    }
+  }
+
+  componentDidMount() {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      window.sessionStorage.removeItem(CHUNK_RELOAD_KEY);
+    } catch {
+      // Ignore sessionStorage failures in privacy-restricted browsers.
     }
   }
 
@@ -100,6 +118,9 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Err
     if (!this.state.error) {
       return this.props.children;
     }
+
+    const retryHref =
+      typeof window === "undefined" ? "/" : buildCacheBustedUrl(window.location);
 
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -111,10 +132,10 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Err
             Si la page ne se recharge pas automatiquement, rafraichissez-la pour charger la version la plus recente.
           </p>
           <a
-            href="/"
+            href={retryHref}
             className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Revenir a l'accueil
+            Recharger cette page
           </a>
         </div>
       </div>
@@ -127,7 +148,7 @@ const AnimatedRoutes = () => {
   const { language } = useLanguage();
   usePageView();
   return (
-    <ChunkErrorBoundary key={location.pathname}>
+    <ChunkErrorBoundary key={`${location.pathname}${location.search}`}>
       <Suspense fallback={<RouteLoader />}>
         <Routes location={location} key={`${language}:${location.pathname}`}>
           <Route path="/" element={<Index />} />
