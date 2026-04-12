@@ -49,6 +49,13 @@ const toOptionalValue = (value: string) => {
   return trimmed ? trimmed : null;
 };
 
+const supportedIntents = new Set([
+  "demande-catalogue",
+  "demande-renseignement",
+  "contact-devis",
+  "demande-referencement",
+]);
+
 const contactPageModel = {
   fr: {
     quickStartBadge: "Choisissez l'entrée la plus simple",
@@ -153,6 +160,7 @@ const ContactPage = () => {
   const pageModel = contactPageModel[language === "en" ? "en" : "fr"];
   const requestedDomain = searchParams.get("domain") ?? "";
   const requestedIntent = searchParams.get("intent") ?? "contact-devis";
+  const resolvedIntent = supportedIntents.has(requestedIntent) ? requestedIntent : "contact-devis";
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
@@ -216,7 +224,7 @@ const ContactPage = () => {
 
     setIsSubmitting(true);
 
-    const { error } = await supabase.rpc("submit_contact_request", {
+    const { data: requestId, error } = await supabase.rpc("submit_contact_request", {
       full_name_input: form.name.trim(),
       email_input: form.email.trim(),
       phone_input: form.phone.trim(),
@@ -228,8 +236,8 @@ const ContactPage = () => {
       message_input: toOptionalValue(form.message),
       source_page_input: "/contact",
       language_input: activeLanguage,
-      request_intent_input: "contact-devis",
-      requested_domain_input: null,
+      request_intent_input: resolvedIntent,
+      requested_domain_input: toOptionalValue(form.formations || requestedDomain),
       privacy_consent_input: form.privacyAccepted,
       honeypot_input: form.botField.trim() || null,
     });
@@ -251,7 +259,8 @@ const ContactPage = () => {
     })();
 
     const { error: notificationError } = await sendProspectEmailNotifications({
-      intent: "contact-devis",
+      requestId,
+      intent: resolvedIntent,
       fullName: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim(),
@@ -264,7 +273,7 @@ const ContactPage = () => {
       sourcePage: "/contact",
       language: activeLanguage,
       appointmentUrl: `${window.location.origin}/prise-rdv?${new URLSearchParams({
-        source: "contact-devis",
+        source: resolvedIntent,
         domain: form.formations.trim(),
         company: form.company.trim(),
         fullName: form.name.trim(),
@@ -279,7 +288,7 @@ const ContactPage = () => {
     });
 
     trackAnalyticsEvent("lead_request_submitted", {
-      intent: "contact-devis",
+      intent: resolvedIntent,
       language: activeLanguage,
       requested_domain: form.formations.trim() || null,
       participants: participantsCount,

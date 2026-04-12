@@ -13,6 +13,7 @@ export type ProspectEmailIntent =
   | "prise-rdv";
 
 export type ProspectEmailPayload = {
+  requestId?: string | null;
   intent: ProspectEmailIntent;
   fullName: string;
   email: string;

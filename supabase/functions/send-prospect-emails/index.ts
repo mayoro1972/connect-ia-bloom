@@ -1,4 +1,6 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { getEmailGreeting } from "../_shared/email-greetings.ts";
+import { resolveDomainCatalogueAsset } from "../_shared/domain-catalogues.ts";
 
 type ProspectEmailIntent =
   | "demande-catalogue"
@@ -9,6 +11,7 @@ type ProspectEmailIntent =
   | "prise-rdv";
 
 type ProspectEmailPayload = {
+  requestId?: string | null;
   intent: ProspectEmailIntent;
   fullName: string;
   email: string;
@@ -70,6 +73,15 @@ type TranslationCopy = {
   listingResponseDelay: string;
   summaryTitle: string;
   reviewAppointment: string;
+  catalogueReadySubject: (domainLabel: string) => string;
+  catalogueReadyBody: (domainLabel: string) => string;
+  catalogueReadyNextStep: string;
+  catalogueDownloadTitle: string;
+  catalogueButtons: {
+    pdf: string;
+    web: string;
+    audit: string;
+  };
   closing: string;
   intentLabels: Record<ProspectEmailIntent, string>;
   defaultTrainingLabel: string;
@@ -84,6 +96,19 @@ const corsHeaders = {
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <contact@transferai.ci>";
 const MAIL_TO = Deno.env.get("MAIL_TO") ?? "contact@transferai.ci";
+const SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
+const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+
+const supabase =
+  supabaseUrl && serviceRoleKey
+    ? createClient(supabaseUrl, serviceRoleKey, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+        },
+      })
+    : null;
 
 const translations: Record<"fr" | "en", TranslationCopy> = {
   fr: {
@@ -133,6 +158,17 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "Notre retour intervient en général sous 7 à 10 jours ouvrés après réception d'un dossier exploitable. Les modalités précises et la proposition associée sont communiquées ensuite par email.",
     summaryTitle: "Recapitulatif de votre demande",
     reviewAppointment: "Verifier mon lien de RDV",
+    catalogueReadySubject: (domainLabel: string) => `Votre catalogue ${domainLabel} est prêt | TransferAI Africa`,
+    catalogueReadyBody: (domainLabel: string) =>
+      `Nous avons bien pris en compte votre demande. Le catalogue du domaine ${domainLabel} est prêt et peut être consulté immédiatement en version PDF ou web.`,
+    catalogueReadyNextStep:
+      "Si vous le souhaitez, nous pouvons ensuite vous aider à identifier les formations prioritaires pour votre équipe et vous proposer un audit IA gratuit pour cadrer la suite.",
+    catalogueDownloadTitle: "Accès direct au catalogue demandé",
+    catalogueButtons: {
+      pdf: "Télécharger le PDF",
+      web: "Voir la version web",
+      audit: "Réserver un audit IA gratuit",
+    },
     closing: "Merci pour votre confiance,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Demande de catalogue",
@@ -191,6 +227,17 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "We usually reply within 7 to 10 business days after receiving a workable file. Exact terms and the related proposal are then shared by email.",
     summaryTitle: "Summary of your request",
     reviewAppointment: "Review my meeting link",
+    catalogueReadySubject: (domainLabel: string) => `Your ${domainLabel} catalogue is ready | TransferAI Africa`,
+    catalogueReadyBody: (domainLabel: string) =>
+      `We have received your request. The catalogue for ${domainLabel} is ready and can now be accessed immediately in PDF or web format.`,
+    catalogueReadyNextStep:
+      "If useful, we can then help you prioritize the most relevant courses for your team and start with a free AI audit based on your context.",
+    catalogueDownloadTitle: "Direct access to the requested catalogue",
+    catalogueButtons: {
+      pdf: "Download PDF",
+      web: "View web version",
+      audit: "Book a free AI audit",
+    },
     closing: "Thank you for your trust,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Catalogue request",
@@ -312,14 +359,38 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
 const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
   const copy = getCopy(payload.language);
   const intentLabel = copy.intentLabels[payload.intent];
-  const subject = copy.acknowledgementSubject;
   const intro = getEmailGreeting(payload.language === "en" ? "en" : "fr", payload.fullName);
   const isListingRequest = payload.intent === "demande-referencement";
+  const isCatalogueRequest = payload.intent === "demande-catalogue";
+  const catalogueAsset = isCatalogueRequest ? resolveDomainCatalogueAsset(payload.domain) : null;
   const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
-  const body = isListingRequest ? copy.listingAcknowledgementBody : copy.acknowledgementBody(intentLabel);
-  const nextStep = isListingRequest ? copy.listingResponseDelay : copy.acknowledgementNextStep;
+  const subject = catalogueAsset
+    ? copy.catalogueReadySubject(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
+    : copy.acknowledgementSubject;
+  const body = catalogueAsset
+    ? copy.catalogueReadyBody(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
+    : isListingRequest
+      ? copy.listingAcknowledgementBody
+      : copy.acknowledgementBody(intentLabel);
+  const nextStep = catalogueAsset
+    ? copy.catalogueReadyNextStep
+    : isListingRequest
+      ? copy.listingResponseDelay
+      : copy.acknowledgementNextStep;
   const detailsTitle = copy.summaryTitle;
   const closing = copy.closing;
+  const catalogueAccessBlock = catalogueAsset
+    ? `
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
+          <p style="margin:0 0 14px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.catalogueDownloadTitle)}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <a href="${escapeHtml(catalogueAsset.pdfUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.catalogueButtons.pdf)}</a>
+            <a href="${escapeHtml(catalogueAsset.htmlUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#ffffff;color:#101828;text-decoration:none;font-weight:700;border:1px solid #e4e7ec;">${escapeHtml(copy.catalogueButtons.web)}</a>
+            <a href="${escapeHtml(`${SITE_URL}/audit-ia-gratuit`)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.catalogueButtons.audit)}</a>
+          </div>
+        </div>
+      `
+    : "";
   const listingReviewBlock = isListingRequest
     ? `
         <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
@@ -358,6 +429,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
           <p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.formation)} :</strong> ${escapeHtml(asTextValue(copy, payload.formationTitle))}</p>
           <p style="margin:0;color:#475467;"><strong>${escapeHtml(copy.fieldLabels.company)} :</strong> ${escapeHtml(asTextValue(copy, payload.company))}</p>
         </div>
+        ${catalogueAccessBlock}
         ${listingReviewBlock}
         ${
           payload.appointmentUrl
@@ -380,6 +452,9 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     `${domainLabel} : ${asTextValue(copy, payload.domain)}`,
     `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}`,
     `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
+    catalogueAsset ? `${copy.catalogueButtons.pdf} : ${catalogueAsset.pdfUrl}` : "",
+    catalogueAsset ? `${copy.catalogueButtons.web} : ${catalogueAsset.htmlUrl}` : "",
+    catalogueAsset ? `${copy.catalogueButtons.audit} : ${SITE_URL}/audit-ia-gratuit` : "",
     listingReviewText,
     payload.appointmentUrl ? `${copy.reviewAppointment} : ${payload.appointmentUrl}` : "",
     "",
@@ -425,6 +500,58 @@ const sendEmail = async (to: string, message: EmailMessage) => {
   return response.json();
 };
 
+const logCatalogueDelivery = async (payload: ProspectEmailPayload) => {
+  if (!supabase || payload.intent !== "demande-catalogue") {
+    return;
+  }
+
+  const catalogueAsset = resolveDomainCatalogueAsset(payload.domain);
+
+  if (!catalogueAsset) {
+    return;
+  }
+
+  let assetId: string | null = null;
+
+  const assetResult = await supabase
+    .from("domain_catalogue_assets")
+    .select("id")
+    .eq("domain_key", catalogueAsset.domainKey)
+    .maybeSingle();
+
+  if (assetResult.error) {
+    throw assetResult.error;
+  }
+
+  assetId = assetResult.data?.id ?? null;
+
+  const insertResult = await supabase.from("catalogue_delivery_logs").insert({
+    contact_request_id: payload.requestId ?? null,
+    domain_key: catalogueAsset.domainKey,
+    recipient_email: payload.email.trim().toLowerCase(),
+    delivery_channel: "email",
+    asset_id: assetId,
+    status: "sent",
+    sent_at: new Date().toISOString(),
+    delivery_context: {
+      company: payload.company ?? null,
+      full_name: payload.fullName,
+      source_page: payload.sourcePage ?? null,
+      requested_domain: payload.domain ?? null,
+      language: payload.language ?? "fr",
+      catalogue_urls: {
+        html: catalogueAsset.htmlUrl,
+        pdf: catalogueAsset.pdfUrl,
+        page: catalogueAsset.pageUrl,
+      },
+    },
+  });
+
+  if (insertResult.error) {
+    throw insertResult.error;
+  }
+};
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -454,12 +581,20 @@ Deno.serve(async (request) => {
       sendEmail(MAIL_TO, internalMessage),
       sendEmail(payload.email, acknowledgement),
     ]);
+    let catalogueDeliveryLogError: string | null = null;
+
+    try {
+      await logCatalogueDelivery(payload);
+    } catch (logError) {
+      catalogueDeliveryLogError = logError instanceof Error ? logError.message : "catalogue_delivery_log_failed";
+    }
 
     return new Response(
       JSON.stringify({
         ok: true,
         internal: internalResult,
         acknowledgement: acknowledgementResult,
+        catalogueDeliveryLogError,
       }),
       {
         status: 200,

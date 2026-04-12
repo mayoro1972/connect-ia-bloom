@@ -28,10 +28,10 @@ const Footer = () => {
           resources: "Services",
           resourceLinks: [
             { label: "Vue d'ensemble", to: "/services" },
+            { label: "Audit IA gratuit", to: "/audit-ia-gratuit" },
             { label: "Conseil & adoption", to: "/consulting-ia" },
             { label: "Automatisation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, veille & emploi", to: "/createur-contenu-ia" },
-            { label: "Audit IA gratuit", to: "/prise-rdv" },
             { label: "Demander un devis", to: buildContactPath("contact-devis") },
           ],
           legal: "Juridique",
@@ -65,10 +65,10 @@ const Footer = () => {
           resources: "Services",
           resourceLinks: [
             { label: "Overview", to: "/services" },
+            { label: "Free AI audit", to: "/audit-ia-gratuit" },
             { label: "Advisory & adoption", to: "/consulting-ia" },
             { label: "Automation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, watch & jobs", to: "/createur-contenu-ia" },
-            { label: "Free AI audit", to: "/prise-rdv" },
             { label: "Request a quote", to: buildContactPath("contact-devis") },
           ],
           legal: "Legal",

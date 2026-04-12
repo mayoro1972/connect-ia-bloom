@@ -247,6 +247,17 @@ const getSeoMeta = (pathname: string, language: "fr" | "en"): SeoMeta => {
           },
         },
         {
+          path: "/audit-ia-gratuit",
+          meta: {
+            title: `Audit IA gratuit pour entreprises | ${SITE_NAME}`,
+            description:
+              "Comprenez où l'IA peut créer de la valeur dans votre organisation grâce à un audit IA gratuit pensé pour les entreprises en Côte d'Ivoire et en Afrique.",
+            robots: "index,follow",
+            canonicalPath: "/audit-ia-gratuit",
+            ogType: "website",
+          },
+        },
+        {
           path: "/blog",
           meta: {
             title: `Blog, ressources & veille IA | ${SITE_NAME}`,

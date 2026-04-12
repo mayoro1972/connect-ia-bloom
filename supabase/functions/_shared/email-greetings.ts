@@ -1,5 +1,13 @@
 const DEFAULT_TIME_ZONE = "Africa/Abidjan";
 
+const titleCaseName = (value: string) =>
+  value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((chunk) => chunk.charAt(0).toUpperCase() + chunk.slice(1).toLowerCase())
+    .join(" ");
+
 const getHourInTimeZone = (date: Date, timeZone = DEFAULT_TIME_ZONE) => {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     hour: "2-digit",
@@ -17,7 +25,7 @@ export const getEmailGreeting = (
   timeZone = DEFAULT_TIME_ZONE,
 ) => {
   const hour = getHourInTimeZone(date, timeZone);
-  const normalizedName = recipientName?.trim();
+  const normalizedName = recipientName?.trim() ? titleCaseName(recipientName) : null;
   const baseGreeting = language === "fr"
     ? hour < 12 ? "Bonjour" : "Bonsoir"
     : hour < 12 ? "Good morning" : "Good evening";

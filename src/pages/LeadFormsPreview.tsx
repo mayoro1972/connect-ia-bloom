@@ -123,6 +123,7 @@ const LeadFormsPreview = () => {
       ? form.domain.trim() || null
       : form.domain.trim() || requestedDomain || null;
     let error: { message?: string } | null = null;
+    let requestId: string | null = null;
 
     if (isReferencingIntent) {
       const listingResult = await (supabase as any).rpc("submit_partner_listing_request", {
@@ -162,6 +163,7 @@ const LeadFormsPreview = () => {
           honeypot_input: botField.trim() || null,
         });
 
+        requestId = fallbackResult.data ?? null;
         error = fallbackResult.error;
       }
     } else {
@@ -183,6 +185,7 @@ const LeadFormsPreview = () => {
         honeypot_input: botField.trim() || null,
       });
 
+      requestId = defaultResult.data ?? null;
       error = defaultResult.error;
     }
 
@@ -191,7 +194,7 @@ const LeadFormsPreview = () => {
     const appointmentUrl = isReferencingIntent
       ? null
       : `${window.location.origin}/prise-rdv?${new URLSearchParams({ source: activeIntent, domain: form.domain || requestedDomain, company: form.company, fullName: form.fullName }).toString()}`;
-    const { error: notificationError } = await sendProspectEmailNotifications({ intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), website: form.website.trim() || null, role: form.role.trim() || null, city: form.country.trim() || null, domain: effectiveDomain, participants: isReferencingIntent ? null : participantsCount, format: isReferencingIntent ? null : form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
+    const { error: notificationError } = await sendProspectEmailNotifications({ requestId, intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), website: form.website.trim() || null, role: form.role.trim() || null, city: form.country.trim() || null, domain: effectiveDomain, participants: isReferencingIntent ? null : participantsCount, format: isReferencingIntent ? null : form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
     const successDescription = notificationError
       ? copy.page.successPending
       : isReferencingIntent
