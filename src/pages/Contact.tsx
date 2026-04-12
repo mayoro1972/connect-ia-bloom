@@ -49,6 +49,13 @@ const toOptionalValue = (value: string) => {
   return trimmed ? trimmed : null;
 };
 
+const normalizeIntentLabel = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+
 const supportedIntents = new Set([
   "demande-catalogue",
   "demande-renseignement",
@@ -164,6 +171,11 @@ const ContactPage = () => {
   const isCatalogIntent = resolvedIntent === "demande-catalogue";
   const isGuidanceIntent = resolvedIntent === "demande-renseignement";
   const isListingIntent = resolvedIntent === "demande-referencement";
+  const normalizedRequestedDomain = normalizeIntentLabel(requestedDomain);
+  const isStrategicPartnershipIntent =
+    isGuidanceIntent &&
+    (normalizedRequestedDomain.includes("partenariat strategique") ||
+      normalizedRequestedDomain === "partenariats");
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
@@ -182,30 +194,50 @@ const ContactPage = () => {
     ? language === "en"
       ? "Request visibility on TransferAI Africa"
       : "Demander un référencement"
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Discuss a strategic partnership"
+        : "Parler partenariat stratégique"
     : t("contact.title");
 
   const resolvedHeaderSubtitle = isListingIntent
     ? language === "en"
       ? "Present your organization for an editorial and commercial review of a listing or featured presence."
       : "Présentez votre organisation pour une étude éditoriale et commerciale de présence sur TransferAI Africa."
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Describe your institution or company so we can review a possible collaboration, program support, certification, or joint initiative."
+        : "Présentez votre institution ou votre entreprise afin que nous puissions étudier une collaboration, un soutien de programme, une certification ou une action commune."
     : t("contact.subtitle");
 
   const resolvedQuickStartBadge = isListingIntent
     ? language === "en"
       ? "Partner listing"
       : "Référencement partenaire"
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Strategic partnership"
+        : "Partenariat stratégique"
     : pageModel.quickStartBadge;
 
   const resolvedQuickStartTitle = isListingIntent
     ? language === "en"
       ? "Submit the right listing request"
       : "Soumettre la bonne demande de référencement"
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Open the right partnership discussion"
+        : "Ouvrir la bonne discussion de partenariat"
     : pageModel.quickStartTitle;
 
   const resolvedQuickStartDesc = isListingIntent
     ? language === "en"
       ? "Start with the most useful action: review the partners page, describe your organization, or contact us directly if you need a quick clarification."
       : "Commencez par l'action la plus utile : relire la page partenaires, présenter votre organisation ou nous écrire directement pour une clarification rapide."
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Start by presenting the collaboration you have in mind: academic partnership, institutional support, co-branded program, certification, or shared event."
+        : "Commencez par présenter le type de collaboration envisagé : partenariat académique, soutien institutionnel, programme co-construit, certification ou événement commun."
     : pageModel.quickStartDesc;
 
   const resolvedPathways = isListingIntent
@@ -237,12 +269,45 @@ const ContactPage = () => {
           href: directLinks.whatsapp,
         },
       ]
+    : isStrategicPartnershipIntent
+      ? [
+          {
+            title: language === "en" ? "Review partnership page" : "Relire la page partenaires",
+            desc:
+              language === "en"
+                ? "Review our positioning before proposing a strategic collaboration."
+                : "Relisez notre positionnement avant de proposer une collaboration stratégique.",
+            cta: language === "en" ? "Open partners page" : "Ouvrir la page partenaires",
+            href: "/partenaires",
+          },
+          {
+            title: language === "en" ? "Describe the partnership" : "Décrire le partenariat",
+            desc:
+              language === "en"
+                ? "Explain the institution, the expected collaboration model, and the objective you would like to pursue with us."
+                : "Expliquez la structure, le modèle de collaboration attendu et l'objectif que vous souhaitez poursuivre avec nous.",
+            cta: language === "en" ? "Describe my request" : "Décrire ma demande",
+          },
+          {
+            title: "WhatsApp",
+            desc:
+              language === "en"
+                ? "For a quick qualification before you submit the full request."
+                : "Pour une première qualification rapide avant d'envoyer la demande complète.",
+            cta: language === "en" ? "Write on WhatsApp" : "Écrire sur WhatsApp",
+            href: directLinks.whatsapp,
+          },
+        ]
     : pageModel.pathways;
 
   const resolvedIntroBadge = isListingIntent
     ? language === "en"
       ? "Listing request"
       : "Demande de référencement"
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Strategic partnership request"
+        : "Demande de partenariat stratégique"
     : pageModel.formIntroBadge;
 
   const resolvedIntroTitle = isCatalogIntent
@@ -250,9 +315,13 @@ const ContactPage = () => {
       ? "Request a domain catalogue"
       : "Demander un catalogue de domaine"
     : isGuidanceIntent
-      ? language === "en"
-        ? "Clarify your need"
-        : "Clarifier votre besoin"
+      ? isStrategicPartnershipIntent
+        ? language === "en"
+          ? "Present your partnership project"
+          : "Présentez votre projet de partenariat"
+        : language === "en"
+          ? "Clarify your need"
+          : "Clarifier votre besoin"
       : isListingIntent
         ? language === "en"
           ? "Present your organization"
@@ -264,9 +333,13 @@ const ContactPage = () => {
       ? "Use this form to receive the right catalogue and give us just enough context to guide you well."
       : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
     : isGuidanceIntent
-      ? language === "en"
-        ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
-        : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
+      ? isStrategicPartnershipIntent
+        ? language === "en"
+          ? "Tell us who you are, what kind of collaboration you are considering, and what result you would like to achieve together with TransferAI Africa."
+          : "Dites-nous qui vous êtes, le type de collaboration envisagé et le résultat que vous souhaitez construire avec TransferAI Africa."
+        : language === "en"
+          ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
+          : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
       : isListingIntent
         ? language === "en"
           ? "Describe your activity, positioning, and the type of visibility you would like us to review."
@@ -277,13 +350,21 @@ const ContactPage = () => {
     ? language === "en"
       ? "Send my catalogue request"
       : "Envoyer ma demande de Catalogue"
+    : isStrategicPartnershipIntent
+      ? language === "en"
+        ? "Send my partnership request"
+        : "Envoyer ma demande de partenariat"
     : isListingIntent
       ? language === "en"
         ? "Send my listing request"
         : "Envoyer ma demande de référencement"
       : t("contact.submit");
 
-  const resolvedCoreFieldLabel = isListingIntent
+  const resolvedCoreFieldLabel = isStrategicPartnershipIntent
+    ? language === "en"
+      ? "Partnership type, program, or collaboration angle"
+      : "Type de partenariat, programme ou angle de collaboration"
+    : isListingIntent
     ? language === "en"
       ? "Organization, activity or positioning angle"
       : "Organisation, activité ou angle de présence"
@@ -295,7 +376,19 @@ const ContactPage = () => {
       : "Ce que vous obtenez ensuite"
     : pageModel.responseCardTitle;
 
-  const resolvedResponsePoints = isListingIntent
+  const resolvedResponsePoints = isStrategicPartnershipIntent
+    ? language === "en"
+      ? [
+          "An automatic acknowledgement email",
+          "A review of the collaboration scope and strategic fit",
+          "A response by email with the most relevant next step",
+        ]
+      : [
+          "Un accusé de réception automatique",
+          "Une étude du périmètre de collaboration et de l'alignement stratégique",
+          "Un retour par email avec la prochaine étape la plus pertinente",
+        ]
+    : isListingIntent
     ? language === "en"
       ? [
           "An automatic acknowledgement email",
@@ -315,7 +408,19 @@ const ContactPage = () => {
       : "Pour faciliter la revue du dossier"
     : pageModel.helperTitle;
 
-  const resolvedHelperPoints = isListingIntent
+  const resolvedHelperPoints = isStrategicPartnershipIntent
+    ? language === "en"
+      ? [
+          "Mention the institution or company and the partnership you are considering",
+          "State the expected result: training, certification, event, deployment, or sponsorship",
+          "Add any useful context on timing, audience, and geographic scope",
+        ]
+      : [
+          "Indiquez la structure et le partenariat envisagé",
+          "Précisez le résultat attendu : formation, certification, événement, déploiement ou sponsoring",
+          "Ajoutez les éléments utiles sur le calendrier, le public visé et le périmètre géographique",
+        ]
+    : isListingIntent
     ? language === "en"
       ? [
           "State clearly what your organization does and who it serves",
