@@ -15,90 +15,90 @@ const PreviewHub = () => {
     language === "fr"
       ? {
           badge: "Catalogues par domaine",
-          title: "Catalogue & Parcours Prospect",
+          title: "Choisir le bon catalogue, puis la bonne suite",
           subtitle:
-            "Explore les catalogues par domaine, les formulaires de demande et le parcours de prise de rendez-vous pensés pour transformer une demande en échange qualifié.",
+            "Explorez les catalogues par domaine, identifiez le bon point d'entrée et avancez simplement vers une demande ou un échange avec notre équipe.",
           stats: [
             { label: "Domaines couverts", value: catalogueStats.totalDomains.toString() },
             { label: "Formations listées", value: `${catalogueStats.totalFormations}+` },
             { label: "Formats disponibles", value: `${catalogueStats.totalFormats}` },
             { label: "Prix dans le catalogue", value: "Sur demande" },
           ],
-          journeyBadge: "Parcours mis en place",
-          journeyTitle: "Le téléchargement catalogue, les demandes et la prise de RDV sont maintenant structurés dans un parcours complet.",
+          journeyBadge: "Parcours simple",
+          journeyTitle: "Un parcours plus clair pour passer du catalogue à la bonne action",
           journeyText:
-            "Le téléchargement catalogue devient un parcours par domaine. Les formulaires sont spécialisés par besoin. La prise de RDV devient l'étape suivante logique après une demande de catalogue, de renseignement ou de devis.",
+            "Le visiteur commence par le domaine qui l'intéresse, accède au bon catalogue, puis choisit la suite la plus utile : demander des informations, parler à un expert IA ou préparer une demande plus structurée.",
           cards: {
-            cataloguesTitle: "Catalogues par domaine",
-            cataloguesDesc: "1 page dédiée par domaine, sans prix affichés, prête pour un téléchargement domaine par domaine.",
-            leadsTitle: "Fiches prospects",
-            leadsDesc: "Demande de catalogue, demande de renseignement et fiche contact/devis avec contenus enrichis.",
-            appointmentTitle: "Prise de RDV",
-            appointmentDesc: "Flux de rendez-vous attaché à la demande pour fluidifier la conversion avant intégration du calendrier final.",
+            cataloguesTitle: "13 catalogues sectoriels",
+            cataloguesDesc: "Chaque domaine dispose de sa propre page, avec une lecture plus simple et un accès direct au catalogue correspondant.",
+            leadsTitle: "Demandes guidées",
+            leadsDesc: "Le visiteur peut demander un catalogue, une orientation ou un accompagnement sans passer par un formulaire trop générique.",
+            appointmentTitle: "Échange avec un expert",
+            appointmentDesc: "Quand le besoin est plus avancé, la page oriente vers un échange utile plutôt que vers une étape floue.",
             consistencyTitle: "Parcours cohérent",
-            consistencyDesc: "Le visiteur peut désormais passer d'un catalogue à une demande puis à une prise de rendez-vous sans rupture.",
+            consistencyDesc: "Le passage du catalogue à la demande puis à l'échange se fait dans un ordre plus naturel et plus rassurant.",
           },
           sectionBadge: "Catalogue par domaine",
           sectionTitle: "Explorer les 13 catalogues sectoriels",
-          formsCta: "Voir les fiches",
+          formsCta: "Parler à un expert",
           domainLabel: "Domaine",
           formationsSuffix: "formations",
           viewCatalogue: "Voir le catalogue",
-          quickBadge: "Parcours disponibles",
-          quickTitle: "Accès rapides au parcours prospect",
-          leadCardsTitle: "Fiches prospects",
-          leadCardsDesc: "Demande de catalogue, renseignement, contact/devis.",
-          appointmentFlowTitle: "Flux RDV",
-          appointmentFlowDesc: "Page de rendez-vous rattachée au formulaire et prête à recevoir le lien calendrier final.",
-          installedBadge: "Parcours en place",
+          quickBadge: "Accès utiles",
+          quickTitle: "Accéder rapidement à la bonne suite",
+          leadCardsTitle: "Faire une demande",
+          leadCardsDesc: "Demander un catalogue, une orientation ou une réponse adaptée à votre besoin.",
+          appointmentFlowTitle: "Parler à un expert IA",
+          appointmentFlowDesc: "Passer directement à un échange plus qualifié lorsque le besoin est déjà mûr.",
+          installedBadge: "Ce que cette page permet",
           installed: [
-            'Le bouton "Télécharger le catalogue" mène désormais vers les catalogues par domaine.',
-            "Les demandes orientent ensuite vers la bonne fiche prospect selon le besoin exprimé.",
-            "La prise de RDV peut être reliée au lien calendrier final dès que tu me donnes l'URL de réservation.",
+            'Le bouton "Télécharger le catalogue" mène vers une page domaine plus claire.',
+            "Chaque domaine renvoie ensuite vers la bonne action sans faire perdre de temps au visiteur.",
+            "Le parcours prépare mieux la conversion vers une demande, une orientation ou un échange expert.",
           ],
         }
       : {
           badge: "Domain catalogues",
-          title: "Catalogue & Prospect Journey",
+          title: "Choose the right catalogue, then the right next step",
           subtitle:
-            "Explore domain catalogues, request forms and the appointment flow designed to turn an inquiry into a qualified conversation.",
+            "Explore domain catalogues, identify the right entry point, and move smoothly toward a request or a conversation with our team.",
           stats: [
             { label: "Domains covered", value: catalogueStats.totalDomains.toString() },
             { label: "Courses listed", value: `${catalogueStats.totalFormations}+` },
             { label: "Available formats", value: `${catalogueStats.totalFormats}` },
             { label: "Pricing in catalogue", value: "On request" },
           ],
-          journeyBadge: "Journey now in place",
-          journeyTitle: "Catalogue download, requests and booking are now organized as one complete prospect journey.",
+          journeyBadge: "Simple journey",
+          journeyTitle: "A clearer path from catalogue to the right next action",
           journeyText:
-            "Catalogue access now starts by domain. Forms are specialized by intent. Booking becomes the natural next step after a catalogue request, information request or quote request.",
+            "Visitors start from the domain they care about, access the right catalogue, then choose the most useful next step: request information, speak with an AI expert, or submit a more structured request.",
           cards: {
-            cataloguesTitle: "Domain catalogues",
-            cataloguesDesc: "One dedicated page per domain, with no prices shown, ready for domain-by-domain download.",
-            leadsTitle: "Prospect forms",
-            leadsDesc: "Catalogue request, information request and contact/quote forms with richer content.",
-            appointmentTitle: "Booking flow",
-            appointmentDesc: "Appointment flow attached to the request to improve conversion before the final calendar is integrated.",
+            cataloguesTitle: "13 sector catalogues",
+            cataloguesDesc: "Each domain has its own page with simpler reading and direct access to the relevant catalogue.",
+            leadsTitle: "Guided requests",
+            leadsDesc: "Visitors can request a catalogue, guidance, or support without going through an overly generic form.",
+            appointmentTitle: "Conversation with an expert",
+            appointmentDesc: "When the need is more advanced, the page points toward a useful conversation instead of a vague step.",
             consistencyTitle: "Consistent journey",
-            consistencyDesc: "Visitors can now move from a catalogue to a request and then to booking without friction.",
+            consistencyDesc: "The transition from catalogue to request to expert conversation feels more natural and reassuring.",
           },
           sectionBadge: "Domain catalogue",
           sectionTitle: "Explore the 13 sector catalogues",
-          formsCta: "View forms",
+          formsCta: "Speak with an expert",
           domainLabel: "Domain",
           formationsSuffix: "courses",
           viewCatalogue: "View catalogue",
-          quickBadge: "Available journeys",
-          quickTitle: "Quick access to the prospect flow",
-          leadCardsTitle: "Prospect forms",
-          leadCardsDesc: "Catalogue request, information request, contact/quote.",
-          appointmentFlowTitle: "Booking flow",
-          appointmentFlowDesc: "Appointment page connected to the form and ready for the final calendar link.",
-          installedBadge: "Journey already connected",
+          quickBadge: "Useful access points",
+          quickTitle: "Move quickly to the right next step",
+          leadCardsTitle: "Submit a request",
+          leadCardsDesc: "Request a catalogue, guidance, or a response adapted to your need.",
+          appointmentFlowTitle: "Speak with an AI expert",
+          appointmentFlowDesc: "Move directly to a more qualified conversation when the need is already mature.",
+          installedBadge: "What this page now enables",
           installed: [
-            'The "Download catalogue" button now leads to domain catalogues.',
-            "Requests then route visitors to the right form depending on their need.",
-            "The booking step can be connected to the final calendar link as soon as you share the booking URL.",
+            'The "Download catalogue" button leads to a clearer domain page.',
+            "Each domain then points visitors to the right next action without friction.",
+            "The journey better prepares conversion toward a request, guidance, or an expert conversation.",
           ],
         };
 
@@ -164,7 +164,7 @@ const PreviewHub = () => {
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{copy.sectionBadge}</p>
                     <h2 className="mt-2 font-heading text-2xl font-bold text-card-foreground">{copy.sectionTitle}</h2>
                   </div>
-                  <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted">
+                  <Link to={language === "fr" ? "/contact?intent=demande-renseignement" : "/contact?intent=demande-renseignement"} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted">
                     {copy.formsCta} <ArrowRight size={14} />
                   </Link>
                 </div>
@@ -203,14 +203,14 @@ const PreviewHub = () => {
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{copy.quickBadge}</p>
                   <h2 className="mt-2 font-heading text-2xl font-bold text-card-foreground">{copy.quickTitle}</h2>
                   <div className="mt-6 space-y-4">
-                    <Link to="/contact" className="flex items-start gap-3 rounded-2xl border border-border bg-background/80 p-4 hover:border-primary/40">
+                    <Link to="/contact?intent=demande-renseignement" className="flex items-start gap-3 rounded-2xl border border-border bg-background/80 p-4 hover:border-primary/40">
                       <FileText size={18} className="mt-1 text-primary" />
                       <div>
                         <p className="font-semibold text-card-foreground">{copy.leadCardsTitle}</p>
                         <p className="text-sm text-muted-foreground">{copy.leadCardsDesc}</p>
                       </div>
                     </Link>
-                    <Link to="/prise-rdv" className="flex items-start gap-3 rounded-2xl border border-border bg-background/80 p-4 hover:border-primary/40">
+                    <Link to="/contact?intent=demande-renseignement" className="flex items-start gap-3 rounded-2xl border border-border bg-background/80 p-4 hover:border-primary/40">
                       <CalendarDays size={18} className="mt-1 text-primary" />
                       <div>
                         <p className="font-semibold text-card-foreground">{copy.appointmentFlowTitle}</p>

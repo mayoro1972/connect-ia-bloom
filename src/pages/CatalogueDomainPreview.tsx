@@ -67,7 +67,7 @@ const pageCopy = {
       "Tarif communiqué sur demande",
       "Session intra ou inter selon besoin",
       "Supports remis aux participants",
-      "Attestation de participation incluse",
+      "Attestation ou certificat selon le format retenu",
     ],
   },
   en: {
@@ -95,7 +95,7 @@ const pageCopy = {
       "Pricing available on request",
       "In-house or open-enrollment session depending on the need",
       "Learning materials provided",
-      "Attendance certificate included",
+      "Attendance certificate or certification depending on the selected format",
     ],
   },
 } as const;
