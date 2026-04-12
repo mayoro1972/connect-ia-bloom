@@ -61,7 +61,7 @@ const contactPageModel = {
     quickStartBadge: "Choisissez l'entrée la plus simple",
     quickStartTitle: "Parler à la bonne porte d'entrée",
     quickStartDesc:
-      "Commencez par l'action la plus utile selon votre situation : réserver un audit IA gratuit, demander un devis ou nous écrire directement.",
+      "Commencez par l'action la plus utile selon votre situation : réserver un audit IA gratuit, parler à un expert IA ou nous écrire directement.",
     pathways: [
       {
         title: "Réserver un audit IA gratuit",
@@ -70,9 +70,9 @@ const contactPageModel = {
         href: directLinks.appointment,
       },
       {
-        title: "Demander un devis",
-        desc: "Pour une formation, une session intra-entreprise ou une demande déjà suffisamment structurée.",
-        cta: "Remplir le formulaire",
+        title: "Parler à un expert IA",
+        desc: "Pour expliquer votre besoin, obtenir une orientation claire et être dirigé vers la bonne suite.",
+        cta: "Décrire mon besoin",
       },
       {
         title: "WhatsApp",
@@ -82,9 +82,9 @@ const contactPageModel = {
       },
     ],
     formIntroBadge: "Demande structurée",
-    formIntroTitle: "Préparer une demande claire",
+    formIntroTitle: "Décrivez votre besoin",
     formIntroDesc:
-      "Renseignez d'abord l'essentiel. Les informations de contexte peuvent être ajoutées ensuite pour nous aider à préparer une réponse plus précise.",
+      "Commencez par l'essentiel. Nous utilisons ensuite votre contexte pour reformuler le besoin et préparer la bonne réponse.",
     coreFieldsTitle: "Informations essentielles",
     optionalFieldsTitle: "Contexte complémentaire",
     optionalFieldsDesc:
@@ -107,7 +107,7 @@ const contactPageModel = {
     quickStartBadge: "Choose the simplest entry point",
     quickStartTitle: "Reach the right door first",
     quickStartDesc:
-      "Start with the most useful action for your situation: book a free AI audit, request a quote, or message us directly.",
+      "Start with the most useful action for your situation: book a free AI audit, speak with an AI expert, or message us directly.",
     pathways: [
       {
         title: "Book a free AI audit",
@@ -116,9 +116,9 @@ const contactPageModel = {
         href: directLinks.appointment,
       },
       {
-        title: "Request a quote",
-        desc: "For a training request, an in-company session, or a need that is already fairly scoped.",
-        cta: "Fill the form",
+        title: "Speak with an AI expert",
+        desc: "Explain your need, get clear orientation, and be guided to the right next step.",
+        cta: "Describe my need",
       },
       {
         title: "WhatsApp",
@@ -128,9 +128,9 @@ const contactPageModel = {
       },
     ],
     formIntroBadge: "Structured request",
-    formIntroTitle: "Prepare a clear request",
+    formIntroTitle: "Describe your need",
     formIntroDesc:
-      "Start with the essentials. You can then add more context to help us prepare a more precise response.",
+      "Start with the essentials. We then use your context to restate the need and prepare the right response.",
     coreFieldsTitle: "Essential information",
     optionalFieldsTitle: "Additional context",
     optionalFieldsDesc:
@@ -183,7 +183,7 @@ const ContactPage = () => {
       : requestedIntent === "demande-renseignement"
         ? language === "en"
           ? "Clarify your need"
-          : "Clarifier votre besoin"
+        : "Clarifier votre besoin"
         : pageModel.formIntroTitle;
 
   const resolvedIntroDesc =

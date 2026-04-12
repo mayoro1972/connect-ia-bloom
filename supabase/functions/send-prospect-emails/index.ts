@@ -394,6 +394,50 @@ const sanitizeAppointmentUrl = (rawUrl?: string | null) => {
   }
 };
 
+const sentenceCase = (value?: string | null) => {
+  const trimmed = value?.trim();
+
+  if (!trimmed) {
+    return null;
+  }
+
+  return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+};
+
+const buildContactNeedTopic = (copy: TranslationCopy, payload: ProspectEmailPayload) =>
+  sentenceCase(payload.domain) ||
+  sentenceCase(payload.formationTitle) ||
+  sentenceCase(payload.message?.split(/[.!?\n]/)[0]) ||
+  copy.missingValue;
+
+const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectEmailPayload, intentLabel: string) => {
+  if (payload.intent === "demande-referencement") {
+    return copy.listingAcknowledgementBody;
+  }
+
+  if (payload.intent === "demande-catalogue") {
+    return copy.acknowledgementBody(intentLabel);
+  }
+
+  const topic = buildContactNeedTopic(copy, payload);
+  const participantsLine = payload.participants && payload.participants > 0
+    ? copy === translations.fr
+      ? ` pour ${payload.participants} participant${payload.participants > 1 ? "s" : ""}`
+      : ` for ${payload.participants} participant${payload.participants > 1 ? "s" : ""}`
+    : "";
+  const timelineLine = payload.timeline?.trim()
+    ? copy === translations.fr
+      ? ` avec une échéance indiquée à ${payload.timeline.trim()}`
+      : ` with a timeline set for ${payload.timeline.trim()}`
+    : "";
+
+  if (copy === translations.fr) {
+    return `Nous avons bien reçu votre besoin concernant ${topic}${participantsLine}${timelineLine}. Notre équipe va reformuler votre demande, vérifier le bon format et vous revenir avec la suite la plus utile : cadrage, programme, modalités ou proposition adaptée.`;
+  }
+
+  return `We have received your need regarding ${topic}${participantsLine}${timelineLine}. Our team will restate your request, validate the right format, and come back with the most useful next step: scoping, programme, delivery options, or a tailored proposal.`;
+};
+
 const isFastTrackIntent = (intent: ProspectEmailIntent): intent is "contact-devis" | "demande-renseignement" | "prise-rdv" =>
   intent === "contact-devis" || intent === "demande-renseignement" || intent === "prise-rdv";
 
@@ -581,9 +625,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     : copy.acknowledgementSubject;
   const body = catalogueAsset
     ? copy.catalogueReadyBody(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
-    : isListingRequest
-      ? copy.listingAcknowledgementBody
-      : copy.acknowledgementBody(intentLabel);
+    : buildSmartAcknowledgementBody(copy, payload, intentLabel);
   const nextStep = catalogueAsset
     ? copy.catalogueReadyNextStep
     : isListingRequest
