@@ -72,11 +72,22 @@ const shouldRecoverFromChunkError = (error: unknown) => {
   ].some((token) => message.includes(token));
 };
 
-class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
-  state = { error: null };
+type ChunkBoundaryState = {
+  error: Error | null;
+  isChunkError: boolean;
+};
+
+class ChunkErrorBoundary extends Component<{ children: ReactNode }, ChunkBoundaryState> {
+  state: ChunkBoundaryState = {
+    error: null,
+    isChunkError: false,
+  };
 
   static getDerivedStateFromError(error: Error) {
-    return { error };
+    return {
+      error,
+      isChunkError: shouldRecoverFromChunkError(error),
+    };
   }
 
   componentDidCatch(error: Error, _info: ErrorInfo) {
@@ -117,6 +128,35 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, { error: Err
   render() {
     if (!this.state.error) {
       return this.props.children;
+    }
+
+    if (!this.state.isChunkError) {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-background px-4">
+          <div className="max-w-lg rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
+            <h1 className="font-heading text-2xl font-bold text-card-foreground">
+              Une erreur d&apos;affichage est survenue
+            </h1>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              La page a rencontre une erreur inattendue. Rechargez-la ou revenez a l&apos;accueil si le probleme persiste.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={typeof window === "undefined" ? "/" : window.location.href}
+                className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Recharger cette page
+              </a>
+              <a
+                href="/"
+                className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground transition-colors hover:bg-muted"
+              >
+                Retour a l&apos;accueil
+              </a>
+            </div>
+          </div>
+        </div>
+      );
     }
 
     const retryHref =
