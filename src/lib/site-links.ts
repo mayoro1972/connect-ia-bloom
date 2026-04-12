@@ -15,6 +15,9 @@ const auditFormUrl =
   import.meta.env.VITE_AUDIT_FORM_URL ||
   "/formulaire-audit-ia/index.html";
 
+export const publicSiteUrl =
+  (import.meta.env.VITE_PUBLIC_SITE_URL || "https://www.transferai.ci").replace(/\/$/, "");
+
 export const socialLinks: SocialLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/transfert-ai-africa/", kind: "social" },
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61573275622415", kind: "social" },
@@ -182,4 +185,34 @@ export const buildAppointmentPath = (source: string, domain?: string) => {
   }
 
   return `/prise-rdv?${params.toString()}`;
+};
+
+export const buildAbsoluteSiteUrl = (path: string) => {
+  if (!path) {
+    return publicSiteUrl;
+  }
+
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+
+  return `${publicSiteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+};
+
+export const buildAbsoluteAppointmentUrl = (source: string, domain?: string, extras?: Record<string, string | null | undefined>) => {
+  const params = new URLSearchParams({ source });
+
+  if (domain) {
+    params.set("domain", domain);
+  }
+
+  if (extras) {
+    Object.entries(extras).forEach(([key, value]) => {
+      if (typeof value === "string" && value.trim()) {
+        params.set(key, value);
+      }
+    });
+  }
+
+  return `${publicSiteUrl}/prise-rdv?${params.toString()}`;
 };

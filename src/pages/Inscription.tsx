@@ -13,7 +13,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
 import { trackAnalyticsEvent } from "@/lib/analytics";
-import { buildContactPath } from "@/lib/site-links";
+import { buildAbsoluteAppointmentUrl, buildContactPath } from "@/lib/site-links";
 
 type InscriptionFormState = {
   firstName: string;
@@ -189,12 +189,10 @@ const InscriptionPage = () => {
       message: form.message.trim() || null,
       sourcePage: "/inscription",
       language: activeLanguage,
-      appointmentUrl: `${window.location.origin}/prise-rdv?${new URLSearchParams({
-        source: "contact-devis",
-        domain: getTitle(selectedFormation),
+      appointmentUrl: buildAbsoluteAppointmentUrl("contact-devis", getTitle(selectedFormation), {
         company: form.company.trim(),
         fullName: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
-      }).toString()}`,
+      }),
     });
 
     toast({

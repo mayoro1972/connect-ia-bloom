@@ -44,6 +44,20 @@ type TranslationCopy = {
   websiteRequest: string;
   requestLabel: string;
   listingSectorLabel: string;
+  qualifiedResponseSubject: string;
+  qualifiedResponseIntro: (topic: string) => string;
+  qualifiedResponseBridge: string;
+  qualifiedResponseQualificationLine: string;
+  qualifiedResponseRecapTitle: string;
+  qualifiedResponseRecapItems: {
+    domain: string;
+    participants: string;
+    format: string;
+    timeline: string;
+  };
+  qualifiedResponseNextStepsTitle: string;
+  qualifiedResponseNextSteps: Record<"contact-devis" | "demande-renseignement" | "prise-rdv", string[]>;
+  qualifiedResponseCta: string;
   fieldLabels: {
     name: string;
     email: string;
@@ -117,6 +131,39 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     websiteRequest: "Nouvelle demande site web",
     requestLabel: "Nouvelle demande",
     listingSectorLabel: "Secteur / activite",
+    qualifiedResponseSubject: "Votre demande a été qualifiée | TransferAI Africa",
+    qualifiedResponseIntro: (topic: string) =>
+      `Nous avons analysé votre demande concernant ${topic} et elle est suffisamment claire pour vous proposer une suite immédiate.`,
+    qualifiedResponseBridge:
+      "Autrement dit, votre besoin est déjà assez structuré pour éviter un échange exploratoire long et passer à une réponse utile rapidement.",
+    qualifiedResponseQualificationLine:
+      "Vous pouvez donc recevoir automatiquement une première orientation opérationnelle, puis confirmer la suite avec notre équipe si nécessaire.",
+    qualifiedResponseRecapTitle: "Éléments déjà compris dans votre demande",
+    qualifiedResponseRecapItems: {
+      domain: "Domaine / sujet",
+      participants: "Volume / participants",
+      format: "Format souhaité",
+      timeline: "Échéance",
+    },
+    qualifiedResponseNextStepsTitle: "Prochaine étape recommandée",
+    qualifiedResponseNextSteps: {
+      "contact-devis": [
+        "Préparer une proposition ciblée à partir du domaine demandé et du volume indiqué",
+        "Valider le bon format, le niveau attendu et les contraintes terrain lors d’un audit IA gratuit",
+        "Accélérer ensuite l’émission du devis final",
+      ],
+      "demande-renseignement": [
+        "Confirmer le bon domaine et les priorités de montée en compétence",
+        "Identifier 2 à 3 formats de formation réellement adaptés à votre contexte",
+        "Transformer votre besoin en recommandation claire et actionnable",
+      ],
+      "prise-rdv": [
+        "Confirmer votre créneau de cadrage",
+        "Arriver à l’échange avec un besoin déjà synthétisé par notre système",
+        "Décider rapidement de la meilleure suite : audit, catalogue, devis ou parcours",
+      ],
+    },
+    qualifiedResponseCta: "Réserver l’audit IA gratuit",
     fieldLabels: {
       name: "Nom",
       email: "Email",
@@ -186,6 +233,39 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     websiteRequest: "New website request",
     requestLabel: "New request",
     listingSectorLabel: "Sector / activity",
+    qualifiedResponseSubject: "Your request has been qualified | TransferAI Africa",
+    qualifiedResponseIntro: (topic: string) =>
+      `We reviewed your request regarding ${topic} and it is already clear enough for us to suggest an immediate next step.`,
+    qualifiedResponseBridge:
+      "In other words, your need is structured enough to avoid a long exploratory exchange and move toward a useful response quickly.",
+    qualifiedResponseQualificationLine:
+      "You can therefore receive an initial operational orientation automatically, then confirm the next step with our team if needed.",
+    qualifiedResponseRecapTitle: "What we already understand from your request",
+    qualifiedResponseRecapItems: {
+      domain: "Domain / topic",
+      participants: "Volume / participants",
+      format: "Preferred format",
+      timeline: "Timeline",
+    },
+    qualifiedResponseNextStepsTitle: "Recommended next step",
+    qualifiedResponseNextSteps: {
+      "contact-devis": [
+        "Prepare a targeted proposal based on the requested domain and expected volume",
+        "Confirm the right format, expected level, and delivery constraints through a free AI audit",
+        "Then accelerate the final quote preparation",
+      ],
+      "demande-renseignement": [
+        "Confirm the right domain and the most relevant upskilling priorities",
+        "Identify 2 to 3 realistic training formats for your context",
+        "Turn your need into a clear and actionable recommendation",
+      ],
+      "prise-rdv": [
+        "Confirm your scoping slot",
+        "Start the conversation with a need already summarized by our system",
+        "Quickly decide the best next step: audit, catalogue, quote, or pathway",
+      ],
+    },
+    qualifiedResponseCta: "Book the free AI audit",
     fieldLabels: {
       name: "Name",
       email: "Email",
@@ -280,9 +360,138 @@ const asHtmlList = (items: string[]) =>
     .map((item) => `<li style="margin:0 0 8px;">${escapeHtml(item)}</li>`)
     .join("")}</ul>`;
 
+const isLocalHost = (hostname: string) =>
+  hostname === "localhost" ||
+  hostname === "127.0.0.1" ||
+  hostname === "0.0.0.0" ||
+  hostname.endsWith(".local");
+
+const sanitizeAppointmentUrl = (rawUrl?: string | null) => {
+  if (!rawUrl?.trim()) {
+    return null;
+  }
+
+  const trimmed = rawUrl.trim();
+
+  try {
+    const parsed = new URL(trimmed, SITE_URL);
+
+    if (isLocalHost(parsed.hostname)) {
+      return `${SITE_URL}${parsed.pathname}${parsed.search}${parsed.hash}`;
+    }
+
+    if (!/^https?:$/i.test(parsed.protocol)) {
+      return null;
+    }
+
+    return parsed.toString();
+  } catch {
+    if (trimmed.startsWith("/")) {
+      return `${SITE_URL}${trimmed}`;
+    }
+
+    return null;
+  }
+};
+
+const isFastTrackIntent = (intent: ProspectEmailIntent): intent is "contact-devis" | "demande-renseignement" | "prise-rdv" =>
+  intent === "contact-devis" || intent === "demande-renseignement" || intent === "prise-rdv";
+
+const getFastTrackScore = (payload: ProspectEmailPayload) => {
+  let score = 0;
+
+  if (payload.company?.trim()) score += 1;
+  if (payload.domain?.trim() || payload.formationTitle?.trim()) score += 1;
+  if ((payload.message?.trim().length ?? 0) >= 24) score += 1;
+  if (payload.participants && payload.participants > 0) score += 1;
+  if (payload.format?.trim() || payload.timeline?.trim()) score += 1;
+
+  return score;
+};
+
+const shouldSendQualifiedResponse = (payload: ProspectEmailPayload) =>
+  isFastTrackIntent(payload.intent) && getFastTrackScore(payload) >= 3;
+
+const buildQualifiedResponse = (payload: ProspectEmailPayload): EmailMessage | null => {
+  if (!shouldSendQualifiedResponse(payload) || !isFastTrackIntent(payload.intent)) {
+    return null;
+  }
+
+  const copy = getCopy(payload.language);
+  const intro = getEmailGreeting(payload.language === "en" ? "en" : "fr", payload.fullName);
+  const topic = payload.domain?.trim() || payload.formationTitle?.trim() || copy.missingValue;
+  const recapLines = [
+    `${copy.qualifiedResponseRecapItems.domain} : ${asTextValue(copy, payload.domain || payload.formationTitle)}`,
+    `${copy.qualifiedResponseRecapItems.participants} : ${asTextValue(copy, payload.participants)}`,
+    `${copy.qualifiedResponseRecapItems.format} : ${asTextValue(copy, payload.format)}`,
+    `${copy.qualifiedResponseRecapItems.timeline} : ${asTextValue(copy, payload.timeline)}`,
+  ];
+  const nextSteps = copy.qualifiedResponseNextSteps[payload.intent];
+  const ctaUrl = sanitizeAppointmentUrl(payload.appointmentUrl) || `${SITE_URL}/audit-ia-gratuit`;
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
+      <div style="max-width:720px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
+        <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#f28c28;">TransferAI Africa</p>
+        <h1 style="margin:0 0 20px;font-size:28px;line-height:1.2;color:#101828;">${escapeHtml(copy.qualifiedResponseSubject)}</h1>
+        <p style="margin:0 0 14px;color:#101828;">${escapeHtml(intro)}</p>
+        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(copy.qualifiedResponseIntro(topic))}</p>
+        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(copy.qualifiedResponseBridge)}</p>
+        <p style="margin:0 0 18px;color:#475467;">${escapeHtml(copy.qualifiedResponseQualificationLine)}</p>
+
+        <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.qualifiedResponseRecapTitle)}</p>
+          ${recapLines
+            .map((line) => {
+              const [label, ...rest] = line.split(" : ");
+              return `<p style="margin:0 0 8px;color:#475467;"><strong>${escapeHtml(label)} :</strong> ${escapeHtml(rest.join(" : "))}</p>`;
+            })
+            .join("")}
+        </div>
+
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.qualifiedResponseNextStepsTitle)}</p>
+          ${asHtmlList(nextSteps)}
+        </div>
+
+        <p style="margin:24px 0 0;">
+          <a href="${escapeHtml(ctaUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.qualifiedResponseCta)}</a>
+        </p>
+        <p style="margin:24px 0 0;color:#475467;white-space:pre-line;">${escapeHtml(copy.closing)}</p>
+      </div>
+    </div>
+  `;
+
+  const text = [
+    intro,
+    "",
+    copy.qualifiedResponseIntro(topic),
+    copy.qualifiedResponseBridge,
+    copy.qualifiedResponseQualificationLine,
+    "",
+    `${copy.qualifiedResponseRecapTitle} :`,
+    ...recapLines,
+    "",
+    `${copy.qualifiedResponseNextStepsTitle} :`,
+    ...nextSteps.map((item) => `- ${item}`),
+    "",
+    `${copy.qualifiedResponseCta} : ${ctaUrl}`,
+    "",
+    copy.closing,
+  ].join("\n");
+
+  return {
+    subject: copy.qualifiedResponseSubject,
+    html,
+    text,
+    replyTo: MAIL_TO,
+  };
+};
+
 const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage => {
   const copy = getCopy(payload.language);
   const isListingRequest = payload.intent === "demande-referencement";
+  const appointmentUrl = sanitizeAppointmentUrl(payload.appointmentUrl);
   const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
   const topic =
     payload.intent === "inscription"
@@ -316,8 +525,8 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
           ${asHtmlParagraphs(copy, payload.message)}
         </div>
         ${
-          payload.appointmentUrl
-            ? `<p style="margin:24px 0 0;"><a href="${escapeHtml(payload.appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.appointmentCta)}</a></p>`
+          appointmentUrl
+            ? `<p style="margin:24px 0 0;"><a href="${escapeHtml(appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.appointmentCta)}</a></p>`
             : ""
         }
       </div>
@@ -343,7 +552,7 @@ const buildInternalNotification = (payload: ProspectEmailPayload): EmailMessage 
     `${copy.prospectMessage} :`,
     payload.message?.trim() || copy.noExtraMessage,
     "",
-    payload.appointmentUrl ? `${copy.appointmentCta} : ${payload.appointmentUrl}` : "",
+    appointmentUrl ? `${copy.appointmentCta} : ${appointmentUrl}` : "",
   ]
     .filter(Boolean)
     .join("\n");
@@ -360,9 +569,12 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
   const copy = getCopy(payload.language);
   const intentLabel = copy.intentLabels[payload.intent];
   const intro = getEmailGreeting(payload.language === "en" ? "en" : "fr", payload.fullName);
+  const appointmentUrl = sanitizeAppointmentUrl(payload.appointmentUrl);
   const isListingRequest = payload.intent === "demande-referencement";
   const isCatalogueRequest = payload.intent === "demande-catalogue";
-  const catalogueAsset = isCatalogueRequest ? resolveDomainCatalogueAsset(payload.domain) : null;
+  const catalogueAsset = isCatalogueRequest
+    ? resolveDomainCatalogueAsset(payload.domain, payload.formationTitle, payload.message)
+    : null;
   const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
   const subject = catalogueAsset
     ? copy.catalogueReadySubject(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
@@ -432,8 +644,8 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
         ${catalogueAccessBlock}
         ${listingReviewBlock}
         ${
-          payload.appointmentUrl
-            ? `<p style="margin:24px 0 0;"><a href="${escapeHtml(payload.appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.reviewAppointment)}</a></p>`
+          appointmentUrl
+            ? `<p style="margin:24px 0 0;"><a href="${escapeHtml(appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">${escapeHtml(copy.reviewAppointment)}</a></p>`
             : ""
         }
         <p style="margin:24px 0 0;color:#475467;white-space:pre-line;">${escapeHtml(closing)}</p>
@@ -456,7 +668,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     catalogueAsset ? `${copy.catalogueButtons.web} : ${catalogueAsset.htmlUrl}` : "",
     catalogueAsset ? `${copy.catalogueButtons.audit} : ${SITE_URL}/audit-ia-gratuit` : "",
     listingReviewText,
-    payload.appointmentUrl ? `${copy.reviewAppointment} : ${payload.appointmentUrl}` : "",
+    appointmentUrl ? `${copy.reviewAppointment} : ${appointmentUrl}` : "",
     "",
     closing,
   ]
@@ -505,7 +717,7 @@ const logCatalogueDelivery = async (payload: ProspectEmailPayload) => {
     return;
   }
 
-  const catalogueAsset = resolveDomainCatalogueAsset(payload.domain);
+  const catalogueAsset = resolveDomainCatalogueAsset(payload.domain, payload.formationTitle, payload.message);
 
   if (!catalogueAsset) {
     return;
@@ -576,11 +788,15 @@ Deno.serve(async (request) => {
 
     const internalMessage = buildInternalNotification(payload);
     const acknowledgement = buildAcknowledgement(payload);
+    const qualifiedResponse = buildQualifiedResponse(payload);
 
-    const [internalResult, acknowledgementResult] = await Promise.all([
+    const deliveries = await Promise.all([
       sendEmail(MAIL_TO, internalMessage),
       sendEmail(payload.email, acknowledgement),
+      qualifiedResponse ? sendEmail(payload.email, qualifiedResponse) : Promise.resolve(null),
     ]);
+
+    const [internalResult, acknowledgementResult, qualifiedResponseResult] = deliveries;
     let catalogueDeliveryLogError: string | null = null;
 
     try {
@@ -594,6 +810,8 @@ Deno.serve(async (request) => {
         ok: true,
         internal: internalResult,
         acknowledgement: acknowledgementResult,
+        qualifiedResponse: qualifiedResponseResult,
+        qualifiedResponseTriggered: Boolean(qualifiedResponse),
         catalogueDeliveryLogError,
       }),
       {

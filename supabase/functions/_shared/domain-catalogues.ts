@@ -155,18 +155,113 @@ const normalize = (value?: string | null) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-export const resolveDomainCatalogueAsset = (domain?: string | null) => {
-  const normalized = normalize(domain);
+const domainAliasMap: Record<string, string> = {
+  "assistanat": "assistanat-et-secretariat",
+  "secretariat": "assistanat-et-secretariat",
+  "assistant-de-direction": "assistanat-et-secretariat",
+  "executive-assistance": "assistanat-et-secretariat",
+  "executive-support": "assistanat-et-secretariat",
+  "rh": "ressources-humaines",
+  "hr": "ressources-humaines",
+  "ressource-humaine": "ressources-humaines",
+  "ressources-humaines": "ressources-humaines",
+  "human-resources": "ressources-humaines",
+  "marketing": "marketing-et-communication",
+  "communication": "marketing-et-communication",
+  "marketing-communication": "marketing-et-communication",
+  "finance": "finance-et-comptabilite",
+  "comptabilite": "finance-et-comptabilite",
+  "finance-comptabilite": "finance-et-comptabilite",
+  "accounting": "finance-et-comptabilite",
+  "legal": "juridique-et-conformite",
+  "juridique": "juridique-et-conformite",
+  "conformite": "juridique-et-conformite",
+  "compliance": "juridique-et-conformite",
+  "service-client": "service-client",
+  "customer-service": "service-client",
+  "support-client": "service-client",
+  "data": "data-analyse",
+  "analyse": "data-analyse",
+  "data-analyse": "data-analyse",
+  "analytics": "data-analyse",
+  "administration": "administration-et-gestion",
+  "gestion": "administration-et-gestion",
+  "operations": "administration-et-gestion",
+  "leadership": "management-et-leadership",
+  "management": "management-et-leadership",
+  "manager": "management-et-leadership",
+  "it": "it-et-transformation-digitale",
+  "info": "it-et-transformation-digitale",
+  "informatique": "it-et-transformation-digitale",
+  "transformation-digitale": "it-et-transformation-digitale",
+  "digital-transformation": "it-et-transformation-digitale",
+  "formation": "formation-et-pedagogie",
+  "pedagogie": "formation-et-pedagogie",
+  "learning": "formation-et-pedagogie",
+  "instructional-design": "formation-et-pedagogie",
+  "sante": "sante-et-bien-etre",
+  "bien-etre": "sante-et-bien-etre",
+  "health": "sante-et-bien-etre",
+  "wellbeing": "sante-et-bien-etre",
+  "diplomatie": "diplomatie-et-affaires-internationales",
+  "affaires-internationales": "diplomatie-et-affaires-internationales",
+  "international-affairs": "diplomatie-et-affaires-internationales",
+  "diplomacy": "diplomatie-et-affaires-internationales",
+};
 
-  if (!normalized) {
+const domainKeywordMap: Array<{ domainKey: string; keywords: string[] }> = [
+  { domainKey: "assistanat-et-secretariat", keywords: ["assistanat", "secretariat", "assistant", "executive-support"] },
+  { domainKey: "ressources-humaines", keywords: ["ressources-humaines", "ressource-humaine", "human-resources", "rh", "hr"] },
+  { domainKey: "marketing-et-communication", keywords: ["marketing", "communication", "content", "brand"] },
+  { domainKey: "finance-et-comptabilite", keywords: ["finance", "comptabilite", "accounting", "audit-financier"] },
+  { domainKey: "juridique-et-conformite", keywords: ["juridique", "conformite", "legal", "compliance", "rgpd"] },
+  { domainKey: "service-client", keywords: ["service-client", "support-client", "customer-service", "cx"] },
+  { domainKey: "data-analyse", keywords: ["data", "analyse", "analytics", "dashboard", "bi"] },
+  { domainKey: "administration-et-gestion", keywords: ["administration", "gestion", "operations", "operationnel"] },
+  { domainKey: "management-et-leadership", keywords: ["management", "leadership", "manager", "dirigeant"] },
+  { domainKey: "it-et-transformation-digitale", keywords: ["it", "info", "informatique", "transformation-digitale", "digital", "tech"] },
+  { domainKey: "formation-et-pedagogie", keywords: ["formation", "pedagogie", "learning", "lms"] },
+  { domainKey: "sante-et-bien-etre", keywords: ["sante", "bien-etre", "health", "wellbeing", "qvt"] },
+  { domainKey: "diplomatie-et-affaires-internationales", keywords: ["diplomatie", "affaires-internationales", "diplomacy", "international"] },
+];
+
+const findByKey = (domainKey: string) =>
+  domainCatalogueAssets.find((item) => item.domainKey === domainKey) ?? null;
+
+export const resolveDomainCatalogueAsset = (...values: Array<string | null | undefined>) => {
+  const normalizedCandidates = values
+    .map((value) => normalize(value))
+    .filter((value) => value.length > 0);
+
+  if (!normalizedCandidates.length) {
     return null;
   }
 
-  return (
-    domainCatalogueAssets.find((item) =>
+  for (const normalized of normalizedCandidates) {
+    const directMatch = domainCatalogueAssets.find((item) =>
       [item.domainKey, item.domainLabelFr, item.domainLabelEn, item.slug]
         .map((candidate) => normalize(candidate))
         .includes(normalized)
-    ) ?? null
-  );
+    );
+
+    if (directMatch) {
+      return directMatch;
+    }
+
+    const aliasMatch = domainAliasMap[normalized];
+
+    if (aliasMatch) {
+      return findByKey(aliasMatch);
+    }
+  }
+
+  for (const normalized of normalizedCandidates) {
+    for (const keywordEntry of domainKeywordMap) {
+      if (keywordEntry.keywords.some((keyword) => normalized.includes(keyword))) {
+        return findByKey(keywordEntry.domainKey);
+      }
+    }
+  }
+
+  return null;
 };

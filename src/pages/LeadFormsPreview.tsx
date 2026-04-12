@@ -7,7 +7,7 @@ import PageTransition from "@/components/PageTransition";
 import PageHeader from "@/components/PageHeader";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { domainPreviews, getLocalizedDomainLabel } from "@/lib/catalogue-preview";
-import { contactDetails, directLinks, socialLinks } from "@/lib/site-links";
+import { buildAbsoluteAppointmentUrl, contactDetails, directLinks, socialLinks } from "@/lib/site-links";
 import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -193,7 +193,10 @@ const LeadFormsPreview = () => {
     if (error) return toast({ title: copy.page.error, description: copy.page.errorDesc, variant: "destructive" });
     const appointmentUrl = isReferencingIntent
       ? null
-      : `${window.location.origin}/prise-rdv?${new URLSearchParams({ source: activeIntent, domain: form.domain || requestedDomain, company: form.company, fullName: form.fullName }).toString()}`;
+      : buildAbsoluteAppointmentUrl(activeIntent, form.domain || requestedDomain, {
+          company: form.company,
+          fullName: form.fullName,
+        });
     const { error: notificationError } = await sendProspectEmailNotifications({ requestId, intent: activeIntent, fullName: form.fullName.trim(), email: form.email.trim(), phone: form.phone.trim(), company: form.company.trim(), website: form.website.trim() || null, role: form.role.trim() || null, city: form.country.trim() || null, domain: effectiveDomain, participants: isReferencingIntent ? null : participantsCount, format: isReferencingIntent ? null : form.format.trim() || null, timeline: form.timeline.trim() || null, message: form.message.trim() || null, sourcePage: "/contact", language: activeLanguage, appointmentUrl });
     const successDescription = notificationError
       ? copy.page.successPending

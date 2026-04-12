@@ -12,7 +12,7 @@ import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
-import { contactDetails, directLinks } from "@/lib/site-links";
+import { buildAbsoluteAppointmentUrl, contactDetails, directLinks } from "@/lib/site-links";
 import { resolveOutboundLanguage, sendProspectEmailNotifications } from "@/lib/prospect-emails";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
@@ -279,12 +279,10 @@ const ContactPage = () => {
       message: form.message.trim() || null,
       sourcePage: "/contact",
       language: activeLanguage,
-      appointmentUrl: `${window.location.origin}/prise-rdv?${new URLSearchParams({
-        source: resolvedIntent,
-        domain: form.formations.trim(),
+      appointmentUrl: buildAbsoluteAppointmentUrl(resolvedIntent, form.formations.trim(), {
         company: form.company.trim(),
         fullName: form.name.trim(),
-      }).toString()}`,
+      }),
     });
 
     toast({
