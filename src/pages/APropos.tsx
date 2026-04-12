@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Award, Briefcase, Globe, GraduationCap, ShieldCheck, Sparkles, Target, Users } from "lucide-react";
+import { ArrowRight, Award, Globe, ShieldCheck, Sparkles, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -28,7 +28,6 @@ const teamPhotoPosition: Record<string, string> = {
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
-const actionIcons = [GraduationCap, Briefcase, Sparkles];
 
 const pageCopy = {
   fr: {
@@ -42,32 +41,32 @@ const pageCopy = {
     introPoints: [
       "Un ancrage fort en Côte d'Ivoire, avec une ambition africaine claire.",
       "Une approche orientée usages métier, pas démonstration technologique.",
-      "Un pont entre expertise de la diaspora, besoins locaux et mise en action rapide.",
+      "Un lien direct entre expertise, besoin terrain et mise en action.",
     ],
     missionTitle: "Notre mission",
     missionPillars: [
       {
         title: "Former utile",
-        desc: "Développer des compétences IA immédiatement applicables dans les métiers, les équipes et les organisations.",
+        desc: "Développer des compétences IA directement utilisables dans les métiers, les équipes et les organisations.",
       },
       {
         title: "Accompagner sérieusement",
-        desc: "Aider les structures à cadrer leurs priorités, choisir les bons cas d'usage et avancer sans dispersion.",
+        desc: "Aider les structures à cadrer leurs priorités et choisir les bons cas d'usage sans dispersion.",
       },
       {
         title: "Ancrer l'impact",
-        desc: "Transformer l'IA en résultats concrets : productivité, qualité, structuration, meilleure prise de décision.",
+        desc: "Transformer l'IA en résultats concrets : productivité, qualité et meilleure prise de décision.",
       },
     ],
     trustTitle: "Pourquoi nous faire confiance",
     trustItems: [
       {
         title: "Expertise reliée au terrain",
-        desc: "Notre approche relie l'exigence technique aux contraintes réelles des entreprises, institutions et équipes africaines.",
+        desc: "Notre approche relie l'exigence technique aux réalités des entreprises, institutions et équipes africaines.",
       },
       {
         title: "Approche métier avant tout",
-        desc: "Nous partons des usages, des processus et des résultats attendus, pas d'un discours IA trop abstrait.",
+        desc: "Nous partons des usages, des processus et des résultats attendus, pas d'un discours trop abstrait.",
       },
       {
         title: "Ancrage Côte d'Ivoire, portée Afrique",
@@ -78,31 +77,9 @@ const pageCopy = {
         desc: "Nous combinons formation, conseil, cas d'usage sectoriels et logique d'exécution concrète.",
       },
     ],
-    actionsTitle: "Ce que nous faisons concrètement",
-    actions: [
-      {
-        title: "Former",
-        desc: "Catalogue, parcours, certification et formats live pour aider les professionnels à intégrer l'IA dans leur métier.",
-      },
-      {
-        title: "Accompagner",
-        desc: "Audit, cadrage, conseil et orientation pour aider les organisations à choisir la bonne trajectoire.",
-      },
-      {
-        title: "Déployer",
-        desc: "Automatisation, solutions IA, contenus sectoriels et outillage pour passer de l'idée à la mise en oeuvre.",
-      },
-    ],
-    statsTitle: "Quelques repères de crédibilité",
-    stats: [
-      { value: "130+", label: "formations", sub: "Un catalogue structuré couvrant 13 domaines d'expertise" },
-      { value: "500+", label: "professionnels formés", sub: "Des profils issus d'entreprises, institutions et fonctions support" },
-      { value: "98%", label: "de satisfaction", sub: "Une exigence forte sur la qualité pédagogique et l'applicabilité" },
-      { value: "10+", label: "pays touchés", sub: "Une portée régionale qui dépasse le seul marché local" },
-    ],
     teamTitle: "Une équipe construite pour délivrer",
     teamIntro:
-      "Notre équipe ne se limite pas à parler d'IA. Elle combine vision, développement, innovation et qualité pédagogique pour transformer les besoins en résultats.",
+      "Notre équipe combine vision, développement, innovation et qualité pédagogique pour transformer les besoins en résultats.",
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -133,7 +110,7 @@ const pageCopy = {
     ctaBadge: "Prochaine étape",
     ctaTitle: "Découvrir l'offre, cadrer le besoin ou entrer en contact",
     ctaDesc:
-      "Si vous voulez aller plus vite, nous vous recommandons de commencer par l'option la plus adaptée : audit IA gratuit, catalogue ou page entreprises.",
+      "Si vous voulez aller plus vite, commencez par l'option la plus adaptée : audit IA gratuit, catalogue ou page entreprises.",
     ctas: [
       { label: "Réserver un audit IA gratuit", to: "/prise-rdv", primary: true },
       { label: "Voir le catalogue", to: "/catalogue", primary: false },
@@ -151,7 +128,7 @@ const pageCopy = {
     introPoints: [
       "Strong Côte d'Ivoire grounding with a clear African ambition.",
       "A use-case and business-first approach rather than technology theater.",
-      "A bridge between diaspora expertise, local needs, and practical execution.",
+      "A direct bridge between expertise, local needs, and practical execution.",
     ],
     missionTitle: "Our mission",
     missionPillars: [
@@ -165,7 +142,7 @@ const pageCopy = {
       },
       {
         title: "Create measurable impact",
-        desc: "Turn AI into concrete outcomes: productivity, quality, structure, and better decision-making.",
+        desc: "Turn AI into concrete outcomes: productivity, quality, and better decision-making.",
       },
     ],
     trustTitle: "Why trust us",
@@ -187,31 +164,9 @@ const pageCopy = {
         desc: "We combine training, advisory, sector use cases, and implementation logic.",
       },
     ],
-    actionsTitle: "What we do in practice",
-    actions: [
-      {
-        title: "Train",
-        desc: "Catalogues, pathways, certification, and live formats to help professionals integrate AI into their roles.",
-      },
-      {
-        title: "Advise",
-        desc: "Audit, scoping, advisory, and orientation to help organizations choose the right direction.",
-      },
-      {
-        title: "Deploy",
-        desc: "Automation, AI solutions, sector content, and tools to move from idea to execution.",
-      },
-    ],
-    statsTitle: "A few credibility markers",
-    stats: [
-      { value: "130+", label: "courses", sub: "A structured catalogue across 13 fields of expertise" },
-      { value: "500+", label: "professionals trained", sub: "Across companies, institutions, and support functions" },
-      { value: "98%", label: "satisfaction", sub: "Strong quality standards and practical applicability" },
-      { value: "10+", label: "countries reached", sub: "Regional relevance beyond a single local market" },
-    ],
     teamTitle: "A team built to deliver",
     teamIntro:
-      "Our team does not simply talk about AI. It combines vision, business development, innovation, and learning design to turn needs into results.",
+      "Our team combines vision, business development, innovation, and learning design to turn needs into results.",
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -326,51 +281,6 @@ const AProposPage = () => {
                     </motion.div>
                   );
                 })}
-              </div>
-            </div>
-
-            <div className="mb-10">
-              <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.actionsTitle}</h2>
-              <div className="grid gap-4 md:grid-cols-3">
-                {copy.actions.map((action, index) => {
-                  const Icon = actionIcons[index];
-                  return (
-                    <motion.div
-                      key={action.title}
-                      initial={{ opacity: 0, y: 15 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.08 }}
-                      className="rounded-3xl border border-border bg-card p-6"
-                    >
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent">
-                        <Icon size={20} className="text-primary" />
-                      </div>
-                      <p className="mt-4 font-heading text-lg font-semibold text-card-foreground">{action.title}</p>
-                      <p className="mt-3 text-sm leading-7 text-muted-foreground">{action.desc}</p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="mb-12 rounded-3xl border border-border bg-card p-8">
-              <h2 className="mb-6 font-heading text-2xl font-bold text-card-foreground">{copy.statsTitle}</h2>
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                {copy.stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.08 }}
-                    className="rounded-2xl border border-border bg-background p-5"
-                  >
-                    <p className="font-heading text-3xl font-bold text-card-foreground">{stat.value}</p>
-                    <p className="mt-2 font-semibold text-card-foreground">{stat.label}</p>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{stat.sub}</p>
-                  </motion.div>
-                ))}
               </div>
             </div>
 

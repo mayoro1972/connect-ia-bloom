@@ -161,6 +161,9 @@ const ContactPage = () => {
   const requestedDomain = searchParams.get("domain") ?? "";
   const requestedIntent = searchParams.get("intent") ?? "contact-devis";
   const resolvedIntent = supportedIntents.has(requestedIntent) ? requestedIntent : "contact-devis";
+  const isCatalogIntent = resolvedIntent === "demande-catalogue";
+  const isGuidanceIntent = resolvedIntent === "demande-renseignement";
+  const isListingIntent = resolvedIntent === "demande-referencement";
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
@@ -175,34 +178,156 @@ const ContactPage = () => {
     }));
   }, [requestedDomain]);
 
-  const resolvedIntroTitle =
-    requestedIntent === "demande-catalogue"
+  const resolvedHeaderTitle = isListingIntent
+    ? language === "en"
+      ? "Request visibility on TransferAI Africa"
+      : "Demander un référencement"
+    : t("contact.title");
+
+  const resolvedHeaderSubtitle = isListingIntent
+    ? language === "en"
+      ? "Present your organization for an editorial and commercial review of a listing or featured presence."
+      : "Présentez votre organisation pour une étude éditoriale et commerciale de présence sur TransferAI Africa."
+    : t("contact.subtitle");
+
+  const resolvedQuickStartBadge = isListingIntent
+    ? language === "en"
+      ? "Partner listing"
+      : "Référencement partenaire"
+    : pageModel.quickStartBadge;
+
+  const resolvedQuickStartTitle = isListingIntent
+    ? language === "en"
+      ? "Submit the right listing request"
+      : "Soumettre la bonne demande de référencement"
+    : pageModel.quickStartTitle;
+
+  const resolvedQuickStartDesc = isListingIntent
+    ? language === "en"
+      ? "Start with the most useful action: review the partners page, describe your organization, or contact us directly if you need a quick clarification."
+      : "Commencez par l'action la plus utile : relire la page partenaires, présenter votre organisation ou nous écrire directement pour une clarification rapide."
+    : pageModel.quickStartDesc;
+
+  const resolvedPathways = isListingIntent
+    ? [
+        {
+          title: language === "en" ? "Review the partners page" : "Relire la page partenaires",
+          desc:
+            language === "en"
+              ? "Revisit the public positioning before submitting your request."
+              : "Revoir le positionnement public avant d'envoyer votre demande.",
+          cta: language === "en" ? "Open partners page" : "Ouvrir la page partenaires",
+          href: "/partenaires",
+        },
+        {
+          title: language === "en" ? "Describe your organization" : "Présenter votre organisation",
+          desc:
+            language === "en"
+              ? "Explain your activity, audience fit, and the type of visibility you are looking for."
+              : "Expliquez votre activité, votre alignement avec notre audience et la présence recherchée.",
+          cta: language === "en" ? "Describe my request" : "Décrire ma demande",
+        },
+        {
+          title: "WhatsApp",
+          desc:
+            language === "en"
+              ? "For a quick clarification before submitting the request."
+              : "Pour une clarification rapide avant d'envoyer la demande.",
+          cta: language === "en" ? "Write on WhatsApp" : "Écrire sur WhatsApp",
+          href: directLinks.whatsapp,
+        },
+      ]
+    : pageModel.pathways;
+
+  const resolvedIntroBadge = isListingIntent
+    ? language === "en"
+      ? "Listing request"
+      : "Demande de référencement"
+    : pageModel.formIntroBadge;
+
+  const resolvedIntroTitle = isCatalogIntent
+    ? language === "en"
+      ? "Request a domain catalogue"
+      : "Demander un catalogue de domaine"
+    : isGuidanceIntent
       ? language === "en"
-        ? "Request a domain catalogue"
-        : "Demander un catalogue de domaine"
-      : requestedIntent === "demande-renseignement"
-        ? language === "en"
-          ? "Clarify your need"
+        ? "Clarify your need"
         : "Clarifier votre besoin"
+      : isListingIntent
+        ? language === "en"
+          ? "Present your organization"
+          : "Présentez votre organisation"
         : pageModel.formIntroTitle;
 
-  const resolvedIntroDesc =
-    requestedIntent === "demande-catalogue"
+  const resolvedIntroDesc = isCatalogIntent
+    ? language === "en"
+      ? "Use this form to receive the right catalogue and give us just enough context to guide you well."
+      : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
+    : isGuidanceIntent
       ? language === "en"
-        ? "Use this form to receive the right catalogue and give us just enough context to guide you well."
-        : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
-      : requestedIntent === "demande-renseignement"
-        ? language === "en"
         ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
-          : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
+        : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
+      : isListingIntent
+        ? language === "en"
+          ? "Describe your activity, positioning, and the type of visibility you would like us to review."
+          : "Décrivez votre activité, votre positionnement et le type de présence que vous souhaitez nous voir étudier."
         : pageModel.formIntroDesc;
 
-  const resolvedSubmitLabel =
-    requestedIntent === "demande-catalogue"
+  const resolvedSubmitLabel = isCatalogIntent
+    ? language === "en"
+      ? "Send my catalogue request"
+      : "Envoyer ma demande de Catalogue"
+    : isListingIntent
       ? language === "en"
-        ? "Send my catalogue request"
-        : "Envoyer ma demande de Catalogue"
+        ? "Send my listing request"
+        : "Envoyer ma demande de référencement"
       : t("contact.submit");
+
+  const resolvedCoreFieldLabel = isListingIntent
+    ? language === "en"
+      ? "Organization, activity or positioning angle"
+      : "Organisation, activité ou angle de présence"
+    : t("contact.formations");
+
+  const resolvedResponseCardTitle = isListingIntent
+    ? language === "en"
+      ? "What happens after submission"
+      : "Ce que vous obtenez ensuite"
+    : pageModel.responseCardTitle;
+
+  const resolvedResponsePoints = isListingIntent
+    ? language === "en"
+      ? [
+          "An automatic acknowledgement email",
+          "An editorial and commercial review of your request",
+          "An email response with the possible listing format after review",
+        ]
+      : [
+          "Un accusé de réception automatique",
+          "Une revue éditoriale et commerciale de votre demande",
+          "Un retour par email avec le format de présence possible après étude",
+        ]
+    : pageModel.responsePoints;
+
+  const resolvedHelperTitle = isListingIntent
+    ? language === "en"
+      ? "To help us review faster"
+      : "Pour faciliter la revue du dossier"
+    : pageModel.helperTitle;
+
+  const resolvedHelperPoints = isListingIntent
+    ? language === "en"
+      ? [
+          "State clearly what your organization does and who it serves",
+          "Mention the sector, positioning, or visibility angle you want us to review",
+          "Add your website or key public link when available",
+        ]
+      : [
+          "Présentez clairement votre activité et le public que vous adressez",
+          "Indiquez le secteur, le positionnement ou l'angle de présence souhaité",
+          "Ajoutez votre site web ou votre lien public principal si disponible",
+        ]
+    : pageModel.helperPoints;
 
   const update = <K extends keyof ContactFormState>(key: K, value: ContactFormState[K]) =>
     setForm((current) => ({ ...current, [key]: value }));
@@ -311,22 +436,22 @@ const ContactPage = () => {
       <div className="min-h-screen bg-background relative overflow-hidden">
         <AnimatedLogoWatermarks />
         <Navbar />
-        <PageHeader title={t("contact.title")} subtitle={t("contact.subtitle")} />
+        <PageHeader title={resolvedHeaderTitle} subtitle={resolvedHeaderSubtitle} />
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="mx-auto mb-12 max-w-6xl rounded-[28px] border border-border bg-card p-8 md:p-10">
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
                 <Sparkles size={14} />
-                {pageModel.quickStartBadge}
+                {resolvedQuickStartBadge}
               </div>
               <div className="mb-8 max-w-3xl">
-                <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground md:text-3xl">{pageModel.quickStartTitle}</h2>
-                <p className="text-sm leading-7 text-muted-foreground md:text-base md:leading-8">{pageModel.quickStartDesc}</p>
+                <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground md:text-3xl">{resolvedQuickStartTitle}</h2>
+                <p className="text-sm leading-7 text-muted-foreground md:text-base md:leading-8">{resolvedQuickStartDesc}</p>
               </div>
 
               <div className="grid gap-5 md:grid-cols-3">
-                {pageModel.pathways.map((pathway, index) => (
+                {resolvedPathways.map((pathway, index) => (
                   <motion.div
                     key={pathway.title}
                     initial={{ opacity: 0, y: 16 }}
@@ -341,6 +466,12 @@ const ContactPage = () => {
                     <h3 className="mb-3 font-heading text-xl font-bold text-card-foreground">{pathway.title}</h3>
                     <p className="mb-6 flex-1 text-sm leading-7 text-muted-foreground">{pathway.desc}</p>
                     {pathway.href ? (
+                      pathway.href.startsWith("/") ? (
+                        <Link to={pathway.href} className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-opacity hover:opacity-80">
+                          {pathway.cta}
+                          <ArrowRight size={15} />
+                        </Link>
+                      ) : (
                       <a
                         href={pathway.href}
                         target="_blank"
@@ -350,6 +481,7 @@ const ContactPage = () => {
                         {pathway.cta}
                         <ArrowRight size={15} />
                       </a>
+                      )
                     ) : (
                       <a href="#contact-form" className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-opacity hover:opacity-80">
                         {pathway.cta}
@@ -366,7 +498,7 @@ const ContactPage = () => {
                 <div className="mb-6">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
                     <Mail size={14} />
-                    {pageModel.formIntroBadge}
+                    {resolvedIntroBadge}
                   </div>
                   <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
                   <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
@@ -380,7 +512,7 @@ const ContactPage = () => {
                       <input placeholder={t("contact.email")} type="email" required value={form.email} onChange={(e) => update("email", e.target.value)} className={inputClass} />
                       <input placeholder={t("contact.phone")} required value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass} />
                       <input placeholder={t("contact.company")} required value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass} />
-                      <input placeholder={t("contact.formations")} value={form.formations} onChange={(e) => update("formations", e.target.value)} className={inputClass + " sm:col-span-2"} />
+                      <input placeholder={resolvedCoreFieldLabel} value={form.formations} onChange={(e) => update("formations", e.target.value)} className={inputClass + " sm:col-span-2"} />
                     </div>
                   </div>
 
@@ -430,9 +562,9 @@ const ContactPage = () => {
 
               <div className="space-y-5">
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
-                  <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{pageModel.responseCardTitle}</h3>
+                  <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedResponseCardTitle}</h3>
                   <div className="space-y-3">
-                    {pageModel.responsePoints.map((point) => (
+                    {resolvedResponsePoints.map((point) => (
                       <div key={point} className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
                         <CheckCircle2 size={16} className="mt-1 shrink-0 text-primary" />
                         <span>{point}</span>
@@ -467,9 +599,9 @@ const ContactPage = () => {
                 </motion.a>
 
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="rounded-3xl border border-border bg-card p-6">
-                  <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{pageModel.helperTitle}</h3>
+                  <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedHelperTitle}</h3>
                   <div className="space-y-3">
-                    {pageModel.helperPoints.map((point) => (
+                    {resolvedHelperPoints.map((point) => (
                       <div key={point} className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
                         <CheckCircle2 size={16} className="mt-1 shrink-0 text-primary" />
                         <span>{point}</span>
