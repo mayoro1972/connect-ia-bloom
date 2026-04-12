@@ -14,7 +14,7 @@ const sectionCopy = {
     title2: " ?",
     subtitle: "Choisissez le bon prochain pas : former vos équipes, découvrir les parcours ou demander un accompagnement.",
     button: "Demander un accompagnement",
-    catalogue: "Explorer le catalogue",
+    catalogue: "Demander un catalogue",
   },
   en: {
     title1: "Ready to turn ",
@@ -22,7 +22,7 @@ const sectionCopy = {
     title2: "?",
     subtitle: "Choose the right next step: train your teams, explore the paths, or request support.",
     button: "Request support",
-    catalogue: "Explore the catalogue",
+    catalogue: "Request a catalogue",
   },
 } as const;
 
@@ -71,12 +71,12 @@ const CTASection = () => {
               {copy.button} <ArrowRight size={18} />
             </Link>
             <Link
-              to="/catalogue"
+              to={buildContactPath("demande-catalogue")}
               onClick={() =>
                 trackCtaClick({
                   ctaName: copy.catalogue,
                   ctaLocation: "home_final_cta",
-                  destination: "/catalogue",
+                  destination: buildContactPath("demande-catalogue"),
                 })
               }
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/95 transition-all hover:scale-105 hover:bg-white/[0.08]"

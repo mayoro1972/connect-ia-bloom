@@ -193,9 +193,16 @@ const ContactPage = () => {
         : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
       : requestedIntent === "demande-renseignement"
         ? language === "en"
-          ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
+        ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
           : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
         : pageModel.formIntroDesc;
+
+  const resolvedSubmitLabel =
+    requestedIntent === "demande-catalogue"
+      ? language === "en"
+        ? "Send my catalogue request"
+        : "Envoyer ma demande de Catalogue"
+      : t("contact.submit");
 
   const update = <K extends keyof ContactFormState>(key: K, value: ContactFormState[K]) =>
     setForm((current) => ({ ...current, [key]: value }));
@@ -417,7 +424,7 @@ const ContactPage = () => {
                     </span>
                   </label>
                   <button type="submit" disabled={isSubmitting} className="inline-flex items-center gap-2 rounded-full bg-coral-gradient px-6 py-3 font-semibold transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70" style={{ color: "hsl(0 0% 100%)" }}>
-                    {isSubmitting ? t("contact.submitPending") : t("contact.submit")}
+                    {isSubmitting ? t("contact.submitPending") : resolvedSubmitLabel}
                     <ArrowRight size={16} />
                   </button>
                 </form>
