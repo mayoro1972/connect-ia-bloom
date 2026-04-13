@@ -23,8 +23,8 @@ export const socialLinks: SocialLink[] = [
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61573275622415", kind: "social" },
   { label: "Instagram", href: "https://www.instagram.com/transferai.africa", kind: "social" },
   { label: "YouTube", href: "https://www.youtube.com/@transferai-africa", kind: "video" },
-  { label: "X / Twitter", href: "https://x.com/transferai_afr", kind: "social" },
-  { label: "TikTok", href: "https://www.tiktok.com/@transferai.africa", kind: "video" },
+  { label: "X / Twitter", href: "https://x.com/AfricaAi89298", kind: "social" },
+  { label: "TikTok", href: "https://www.tiktok.com/@transfer_ai_africa", kind: "video" },
   { label: "Telegram", href: "https://t.me/transferaiafrica", kind: "messaging" },
   { label: "WhatsApp", href: "https://wa.me/225071657733990", kind: "messaging" },
 ];

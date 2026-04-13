@@ -97,7 +97,7 @@ const educationCopy = {
     finalCtaTitle: "Passez à l'action",
     finalCtaDesc:
       "Nous pouvons vous orienter vers le bon format ou vous aider à candidater rapidement.",
-    finalCtaPrimary: "Deposer ma candidature",
+    finalCtaPrimary: "Déposer ma candidature",
     finalCtaSecondary: "Demander une orientation",
   },
   en: {
