@@ -79,6 +79,9 @@ type TranslationCopy = {
   acknowledgementSubject: string;
   acknowledgementBody: (intentLabel: string) => string;
   acknowledgementNextStep: string;
+  registrationAcknowledgementSubject: string;
+  registrationAcknowledgementBody: (formationLabel: string, participantsLabel?: string | null) => string;
+  registrationAcknowledgementNextStep: string;
   listingAcknowledgementBody: string;
   listingReviewTitle: string;
   listingReviewItems: string[];
@@ -187,6 +190,11 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       `Nous confirmons la bonne reception de votre ${intentLabel.toLowerCase()}. Notre equipe va l'etudier et vous repondra depuis contact@transferai.ci dans les meilleurs delais.`,
     acknowledgementNextStep:
       "Si votre demande concerne un rendez-vous, un devis ou une orientation formation, nous pourrons vous recontacter afin de preciser votre besoin avant l'etape suivante.",
+    registrationAcknowledgementSubject: "Nous avons bien reçu votre demande d'inscription - TransferAI Africa",
+    registrationAcknowledgementBody: (formationLabel: string, participantsLabel?: string | null) =>
+      `Nous confirmons la bonne réception de votre demande d'inscription pour ${formationLabel}${participantsLabel ? `, avec ${participantsLabel}` : ""}. Notre équipe va vérifier les éléments transmis et revenir vers vous avec une réponse claire et adaptée à votre contexte.`,
+    registrationAcknowledgementNextStep:
+      "Nous reviendrons vers vous pour confirmer la formation, le format le plus pertinent, les modalités pratiques et la prochaine étape de finalisation de l'inscription.",
     listingAcknowledgementBody:
       "Nous confirmons la bonne reception de votre demande de référencement. Votre dossier va être relu par notre équipe afin d'évaluer la cohérence éditoriale, la forme de présence la plus adaptée et les prochaines modalités à vous proposer.",
     listingReviewTitle: "Ce que nous allons étudier",
@@ -289,6 +297,11 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       `We confirm that we received your ${intentLabel.toLowerCase()}. Our team will review it and reply from contact@transferai.ci as soon as possible.`,
     acknowledgementNextStep:
       "If your request concerns a meeting, quote or training recommendation, we may contact you to refine your need before sending the next step.",
+    registrationAcknowledgementSubject: "We received your registration request - TransferAI Africa",
+    registrationAcknowledgementBody: (formationLabel: string, participantsLabel?: string | null) =>
+      `We confirm that we received your registration request for ${formationLabel}${participantsLabel ? `, with ${participantsLabel}` : ""}. Our team will review the submitted details and come back with a clear response adapted to your context.`,
+    registrationAcknowledgementNextStep:
+      "We will get back to you to confirm the course, the most relevant format, the practical arrangements, and the next step to finalize the registration.",
     listingAcknowledgementBody:
       "We confirm that we received your listing request. Our team will review your file to assess editorial fit, the most relevant visibility format, and the next steps we can propose.",
     listingReviewTitle: "What we will review",
@@ -415,6 +428,10 @@ const isTrainingSupportRequest = (payload: ProspectEmailPayload) =>
   Boolean(payload.domain?.trim() || payload.formationTitle?.trim() || payload.message?.trim());
 
 const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  if (payload.intent === "inscription") {
+    return copy.registrationAcknowledgementSubject;
+  }
+
   if (payload.intent === "demande-catalogue") {
     return copy.acknowledgementSubject;
   }
@@ -439,6 +456,10 @@ const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: Prospe
 };
 
 const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  if (payload.intent === "inscription") {
+    return copy.registrationAcknowledgementNextStep;
+  }
+
   if (payload.intent === "demande-catalogue") {
     return copy.catalogueReadyNextStep;
   }
@@ -461,6 +482,18 @@ const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: Prosp
 };
 
 const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  if (payload.intent === "inscription") {
+    const formationLabel = payload.formationTitle?.trim() || copy.defaultTrainingLabel;
+    const participantsLabel =
+      payload.participants && payload.participants > 0
+        ? copy === translations.fr
+          ? `${payload.participants} participant${payload.participants > 1 ? "s" : ""}`
+          : `${payload.participants} participant${payload.participants > 1 ? "s" : ""}`
+        : null;
+
+    return copy.registrationAcknowledgementBody(formationLabel, participantsLabel);
+  }
+
   if (payload.intent === "demande-referencement") {
     return copy.listingAcknowledgementBody;
   }
@@ -716,7 +749,9 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     : "";
   const summaryLines = [
     `${copy.fieldLabels.type} : ${intentLabel}`,
-    `${domainLabel} : ${asTextValue(copy, payload.domain)}`,
+    payload.intent !== "inscription" && payload.domain
+      ? `${domainLabel} : ${asTextValue(copy, payload.domain)}`
+      : "",
     payload.formationTitle ? `${copy.fieldLabels.formation} : ${asTextValue(copy, payload.formationTitle)}` : "",
     `${copy.fieldLabels.company} : ${asTextValue(copy, payload.company)}`,
     payload.participants ? `${copy.fieldLabels.participants} : ${asTextValue(copy, payload.participants)}` : "",
