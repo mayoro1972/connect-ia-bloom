@@ -42,7 +42,9 @@ Aider les organisations et les professionnels à :
 
 - comprendre l'offre TransferAI
 - trouver une formation
+- parler à un expert IA
 - demander un devis ou un accompagnement entreprise
+- demander un catalogue domaine
 - consulter des contenus IA fiables
 - s'abonner à la newsletter
 - se repérer dans les domaines couverts
@@ -93,11 +95,14 @@ Ce pilier couvre :
 - `/education` : porte d'entrée formation
 - `/catalogue` : vue large de l'offre de formation
 - `/catalogue/:id` : détail d'une formation
+- `/catalogues-domaines` : hub des catalogues par domaine
+- `/catalogues-domaines/:slug` : catalogue sectoriel individuel
 - `/parcours` : trajectoires guidées selon profil
 - `/certification` : certification sectorielle avec objectifs et programme
 - `/outils-ia` : matrice des outils IA par domaine
 - `/entreprises` : offre entreprise et services
 - `/services` : alias de la page entreprises
+- `/audit-ia-gratuit` : formulaire et parcours d'audit IA
 - `/blog` : hub ressources et veille
 - `/blog/domaine/:domainSlug` : page SEO ciblée par domaine
 - `/blog/:slug` : page article individuelle
@@ -241,7 +246,64 @@ Les courriers automatiques utilisent maintenant une salutation horaire basée su
 - `Bonjour` avant 12h
 - `Bonsoir` à partir de 12h
 
-## 9. Matrice des outils IA
+## 8.1. Logique actuelle de la page Contact
+
+La page `Contact` a été recadrée pour éviter une entrée trop confuse.
+
+La porte d'entrée publique de référence est désormais :
+- `Parler à un expert IA`
+
+La logique associée est :
+- CTA home plus simple
+- titre formulaire plus neutre et plus premium
+- champ principal renommé en `Domaine ou formation visée`
+- bouton d'envoi simplifié en `Envoyer ma demande`
+
+Des variantes existent ensuite selon l'intention :
+- référencement partenaire
+- partenariat stratégique
+- demande de catalogue
+- demande d'inscription
+- demande de formation ou d'accompagnement
+
+Le but n'est plus de montrer trop d'options au visiteur, mais de :
+- capter le besoin réel
+- reformuler intelligemment ce besoin
+- déclencher la bonne réponse email
+- orienter ensuite vers la prochaine étape utile
+
+## 9. Emails transactionnels prospects
+
+Les emails prospects sont désormais pensés comme une couche de conversion et non comme de simples accusés techniques.
+
+Ils doivent :
+- confirmer clairement ce qui a été compris
+- éviter les CTA non pertinents
+- annoncer la prochaine étape logique
+- garder une tonalité simple, professionnelle et orientée action
+
+Exemples :
+- une inscription formation reçoit un accusé de réception propre centré sur la candidature
+- une demande catalogue peut conduire vers un accès immédiat au bon catalogue
+- un partenariat stratégique ne doit pas être présenté comme un simple référencement
+- une demande formation bien formulée doit recevoir une réponse utile sans imposer un rendez-vous ambigu
+
+## 9.1. Logique catalogue
+
+Le parcours catalogue a été renforcé pour devenir une vraie brique commerciale.
+
+Objectif :
+- donner rapidement au prospect le bon catalogue sectoriel
+- éviter de le renvoyer dans un parcours trop flou
+- proposer ensuite une suite logique : lecture web, PDF, audit ou échange si besoin
+
+Le bon comportement attendu :
+- accusé de réception clair
+- réponse enrichie quand le besoin est assez structuré
+- accès direct au bon catalogue domaine
+- ton orienté formation, pas prise de rendez-vous forcée
+
+## 10. Matrice des outils IA
 
 ### Rôle de la page outils
 
@@ -345,6 +407,17 @@ La logique métier :
 - la proposition détaillée est envoyée au prospect par email après analyse du dossier
 - l'équipe garde la main sur la validation finale
 
+## 12.2. Liens profonds sensibles à surveiller
+
+Les liens suivants doivent rester testables après chaque déploiement car ils sont utilisés dans des parcours réels :
+- `/contact?intent=demande-referencement`
+- `/contact?intent=demande-renseignement&domain=Partenariat%20strategique`
+- `/contact?intent=demande-catalogue&domain=...`
+- `/contact?intent=demande-renseignement`
+- `/audit-ia-gratuit`
+
+Si l'un de ces liens affiche un écran "mise à jour du site en cours", il faut considérer cela comme un incident visible côté business.
+
 ## 12. Principes pour le futur assistant IA / chatbot
 
 ### Ce qu'il doit savoir faire
@@ -380,6 +453,7 @@ Les éléments suivants sont désormais vrais pour le site :
 - le blog est pensé comme un hub éditorial utile, moins répétitif et plus lisible
 - le back-office comporte maintenant une logique partenaires en plus de la logique contenus et newsletter
 - les emails automatiques suivent une logique de salutation horaire cohérente
+- les parcours catalogue, contact, inscription et partenaires sont davantage différenciés pour éviter les réponses floues
 
 ## 13. Mots-clés de gouvernance
 

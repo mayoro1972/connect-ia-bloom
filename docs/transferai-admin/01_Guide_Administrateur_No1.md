@@ -55,6 +55,7 @@ Onglets actuels :
 Tables et flux principaux :
 - `contact_requests`
 - `registration_requests`
+- `form_responses`
 - `page_views`
 - `resource_posts`
 - `job_opportunities`
@@ -116,8 +117,10 @@ Ne jamais :
 ### Chaque jour ouvré
 
 - vérifier les demandes de contact et d'inscription
+- vérifier les demandes catalogue et leur email automatique associé
 - vérifier le blog, la page entreprises, la certification et le formulaire d'audit
 - vérifier les nouvelles demandes partenaires si la rubrique est active
+- vérifier les variantes importantes de la page contact selon les paramètres d'URL
 - vérifier que le back-office charge bien
 - vérifier qu'aucun message d'erreur critique n'est visible sur les pages commerciales
 
@@ -217,6 +220,37 @@ Bonnes pratiques :
 - conserver une approche sélective et crédible
 - utiliser le back-office pour répondre, pas un email improvisé hors process
 
+### F. Gestion des parcours contact
+
+La page `Contact` n'est plus une page unique et générique. Elle sert désormais de conteneur pour plusieurs variantes de formulaires selon l'intention exprimée par le visiteur.
+
+Les cas principaux à connaître sont :
+- `Parler à un expert IA` : porte d'entrée commerciale standard pour une demande de formation, d'accompagnement ou d'orientation
+- `demande-referencement` : variante dédiée au référencement partenaire
+- `demande-renseignement + Partenariat stratégique` : variante dédiée aux discussions de partenariat institutionnel ou stratégique
+- demande catalogue : parcours pensé pour recevoir un catalogue domaine
+- inscription formation : demande plus directe liée à une formation ou une cohorte
+
+Bon réflexe admin :
+- vérifier les liens profonds après chaque déploiement front
+- tester la version standard ET la version paramétrée par `intent`
+- ne pas supposer qu'un lien `Contact` public affichera toujours le même formulaire
+
+### G. Gestion des demandes catalogue
+
+Le site gère désormais un parcours catalogue plus direct.
+
+À retenir :
+- une demande catalogue claire peut déclencher un email enrichi avec accès immédiat au catalogue demandé
+- ce flux passe par `send-prospect-emails`
+- l'objectif n'est pas de ralentir le prospect, mais de lui donner rapidement la bonne ressource puis une suite logique
+
+Checklist admin :
+- vérifier que le domaine demandé est bien compris
+- vérifier que l'email de réponse pointe vers le bon catalogue
+- vérifier que le CTA audit n'apparaît que s'il a du sens comme prochaine étape
+- vérifier que le ton du message reste orienté formation et non rendez-vous générique
+
 ## 6. Workflow newsletter : ce qui est automatique et ce qui reste humain
 
 ### Ce qui est automatisé
@@ -252,12 +286,40 @@ Cette règle s'applique aux principaux flux automatisés :
 - accusés de réception prospects
 - confirmations newsletter
 - réponses partenaires
+- réponses catalogue
+- confirmations d'inscription ou de demande formation
 
 Important :
 - pour les réponses partenaires, la salutation est réajustée au moment de l'envoi réel
 - cela évite qu'un brouillon généré le matin parte encore avec `Bonjour` le soir
 
+## 7.2. Qualité attendue des emails prospects
+
+Les emails automatiques doivent maintenant respecter une logique de clarté par cas d'usage :
+- une demande d'inscription ne doit pas afficher un lien de RDV ambigu si le besoin est déjà une candidature
+- une demande de formation doit reformuler le besoin, résumer les éléments compris et annoncer la prochaine étape utile
+- une demande catalogue doit proposer l'accès direct au bon catalogue sans détour inutile
+- une demande partenaire doit distinguer clairement référencement, visibilité ou partenariat stratégique
+
+Règle simple :
+- ne pas injecter un CTA de rendez-vous dans un email si ce rendez-vous n'est pas la prochaine étape logique
+- ne pas mélanger devis, audit, inscription et orientation dans un même accusé de réception
+
 ## 8. Secrets et accès critiques
+
+## 9. Déploiement manuel utile à retenir
+
+Quand une évolution touche la fonction `send-prospect-emails`, le point important est :
+- se placer dans le dépôt racine `connect-ia-bloom`
+- ne pas lancer la commande depuis `~` ou un autre dossier
+
+Commande-type :
+
+```bash
+supabase functions deploy send-prospect-emails --project-ref wlhznciwuofueffyoflo
+```
+
+Si l'erreur mentionne `Entry path does not exist`, cela signifie généralement que la commande n'a pas été lancée depuis la racine du dépôt.
 
 ### Secrets principaux
 
@@ -394,3 +456,5 @@ Les changements structurants les plus récents sont :
 - pipeline partenaire complet avec formulaire public, back-office, recommandation et email de suivi
 - nouvelle discipline éditoriale sur le blog : badge de type visible, titres allégés, moins de répétitions
 - logique `FR d'abord`, EN seulement pour les contenus et usages stratégiques
+- fiabilisation des parcours `Contact` avec variantes publiques plus cohérentes
+- amélioration des réponses automatiques pour les demandes de catalogue, de formation et d'inscription

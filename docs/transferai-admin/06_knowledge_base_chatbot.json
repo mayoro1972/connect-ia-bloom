@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-11-evening",
+  "version": "2026-04-13-evening",
   "site": {
     "name": "TransferAI Africa",
     "positioning": "Plateforme de formation, contenus, conseil et solutions IA orientee Cote d'Ivoire et Afrique.",
@@ -44,6 +44,16 @@
         "when_to_send_user": "quand le visiteur demande une formation precise"
       },
       {
+        "path": "/catalogues-domaines",
+        "purpose": "catalogues sectoriels",
+        "when_to_send_user": "quand le visiteur veut recevoir ou parcourir un catalogue par domaine"
+      },
+      {
+        "path": "/catalogues-domaines/:slug",
+        "purpose": "catalogue domaine individuel",
+        "when_to_send_user": "quand le visiteur cherche un catalogue sectoriel precis"
+      },
+      {
         "path": "/parcours",
         "purpose": "parcours guides",
         "when_to_send_user": "quand le visiteur ne sait pas encore quelle trajectoire choisir"
@@ -69,6 +79,11 @@
         "when_to_send_user": "quand un lien historique ou un ancien CTA pointe sur services"
       },
       {
+        "path": "/audit-ia-gratuit",
+        "purpose": "audit IA gratuit",
+        "when_to_send_user": "quand le visiteur veut cadrer un besoin entreprise avant devis ou projet"
+      },
+      {
         "path": "/blog",
         "purpose": "hub ressources",
         "when_to_send_user": "quand le visiteur veut lire des contenus ou commencer par la veille"
@@ -86,7 +101,7 @@
       {
         "path": "/contact",
         "purpose": "formulaires et demandes",
-        "when_to_send_user": "quand le visiteur veut poser une question ou faire une demande"
+        "when_to_send_user": "quand le visiteur veut parler a un expert IA, clarifier un besoin, demander un catalogue ou soumettre une demande structuree"
       },
       {
         "path": "/back-office",
@@ -119,6 +134,38 @@
         "description": "Matrice officielle des outils IA recommandes par domaine."
       }
     ]
+  },
+  "contact_flows": [
+    {
+      "entry_label": "Parler a un expert IA",
+      "purpose": "porte d'entree principale pour une demande de formation, d'accompagnement ou d'orientation",
+      "expected_next_step": "formulaire structure puis reponse email adaptee"
+    },
+    {
+      "entry_label": "Demande de referencement",
+      "purpose": "presentation d'une organisation voulant une presence sur TransferAI Africa",
+      "expected_next_step": "revue partenaire puis recommandation ou reponse email"
+    },
+    {
+      "entry_label": "Partenariat strategique",
+      "purpose": "demande institutionnelle ou de co-construction au-dela du simple referencement",
+      "expected_next_step": "formulaire contact specialise puis relecture equipe"
+    },
+    {
+      "entry_label": "Demande de catalogue",
+      "purpose": "recevoir un catalogue domaine directement exploitable",
+      "expected_next_step": "accuse de reception puis acces au catalogue demande, version web ou PDF"
+    },
+    {
+      "entry_label": "Inscription formation",
+      "purpose": "deposer une demande liee a une formation ou une cohorte",
+      "expected_next_step": "accuse de reception clair centre sur la candidature ou la demande de formation"
+    }
+  ],
+  "email_rules": {
+    "greeting_before_noon": "Bonjour",
+    "greeting_after_noon": "Bonsoir",
+    "principle": "la prochaine etape proposee doit correspondre au besoin reel du prospect et ne doit pas injecter un rendez-vous si ce n'est pas logique"
   },
   "domains": [
     {
@@ -384,6 +431,10 @@
       "answer": "La certification repose sur un socle commun puis une specialisation par domaine, avec evaluation continue."
     },
     {
+      "question": "Comment fonctionne une demande de catalogue ?",
+      "answer": "Si le besoin est clair, le prospect peut recevoir un email avec acces direct a la version web et au PDF du catalogue demande."
+    },
+    {
       "question": "Ou gere-t-on les contenus ?",
       "answer": "Dans le back-office, onglets Ressources, Brouillons IA, Newsletter IA et Emplois IA."
     },
@@ -426,6 +477,8 @@
     "meilleure mise en avant de l'audit IA gratuit sur le parcours entreprise",
     "ajout d'un flux partenaires avec formulaire public, revue admin et email de suivi",
     "professionnalisation des emails automatiques avec salutation selon l'heure",
-    "confirmation que la logique editoriale reste FR d'abord et validation humaine avant diffusion"
+    "confirmation que la logique editoriale reste FR d'abord et validation humaine avant diffusion",
+    "distribution catalogue plus directe avec email enrichi et acces web ou PDF",
+    "harmonisation des emails formation, inscription, catalogue et partenaires"
   ]
 }

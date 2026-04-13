@@ -59,12 +59,19 @@ Le site couvre aujourd'hui les briques suivantes :
 
 ## Dernière mise à jour importante du pack
 
-Cette version du pack inclut désormais les évolutions suivantes réalisées le 11 avril 2026 :
+Cette version du pack inclut désormais les évolutions suivantes réalisées entre le 11 et le 13 avril 2026 :
 - simplification éditoriale de plusieurs pages denses : accueil, à propos, catalogue, parcours, certification, education hub, blog, entreprises et partenaires
 - mise en avant plus claire de l'audit IA gratuit dans les parcours B2B
 - consolidation du blog dynamique avec filtres, pages article, SEO par domaine et newsletter ciblée
 - mise en place du pipeline partenaire : formulaire public, revue en back-office, recommandation IA, email de suivi
 - fiabilisation des emails transactionnels et ajout d'une salutation horaire `Bonjour` / `Bonsoir` côté Côte d'Ivoire
+- clarification de la page `Contact` autour d'une seule logique publique plus lisible : `Parler à un expert IA`
+- ajout de variantes de formulaires contact selon l'intention réelle : référencement partenaire, partenariat stratégique, demande de catalogue, demande d'information ou demande formation
+- automatisation plus directe des demandes catalogue avec accès au bon catalogue et CTA cohérents vers la version web, le PDF et l'audit IA lorsque c'est pertinent
+- harmonisation progressive des emails d'inscription, de formation, de catalogue et de partenariat pour éviter les liens de RDV ambigus
+- correction d'un incident de rendu qui cassait certains liens profonds `contact?intent=...` en production
+- amélioration des emails automatiques liés aux demandes d'inscription, de formation et de contact pour supprimer les liens de RDV ambigus lorsqu'ils ne sont pas pertinents
+- validation du déploiement manuel de la fonction `send-prospect-emails` depuis le dépôt racine
 - confirmation que le modèle d'exploitation reste : `FR d'abord`, validation humaine avant diffusion large
 
 ## Architecture résumée

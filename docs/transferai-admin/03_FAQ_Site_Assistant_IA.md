@@ -52,6 +52,10 @@ Elle est ciblée par domaine. L'abonné choisit les domaines qui l'intéressent.
 
 Veille utile, signal clé, conseil pratique, outil à connaître, prompt métier, lien vers des ressources et prochaines étapes concrètes.
 
+### Peut-on recevoir directement un catalogue par domaine ?
+
+Oui. Lorsqu'une demande catalogue est suffisamment claire, le prospect peut recevoir un email enrichi donnant accès à la version web et au PDF du catalogue demandé.
+
 ### Est-ce que l'anglais est disponible partout ?
 
 Non. La logique du site est FR d'abord. L'anglais est réservé aux contenus stratégiques.
@@ -67,6 +71,10 @@ Non. La matrice outils a été pensée pour refléter des usages concrets en ent
 ### Comment entrer en contact ?
 
 Le visiteur peut passer par la page Contact, la page Entreprises, les CTA du site ou les formulaires dédiés.
+
+### Que signifie "Parler à un expert IA" ?
+
+Cela signifie demander une orientation humaine et claire sur le bon domaine, la bonne formation, le bon format ou la bonne prochaine étape, sans obliger le visiteur à connaître toute l'architecture du site.
 
 ## 2. FAQ blog et contenus
 
@@ -134,6 +142,21 @@ Parce que les courriers automatiques prennent maintenant en compte l'heure d'env
 - avant midi : `Bonjour`
 - après midi : `Bonsoir`
 
+### Pourquoi certains prospects ne reçoivent pas le même type d'email ?
+
+Parce que les courriers automatiques sont maintenant adaptés à l'intention :
+- inscription
+- demande de formation
+- demande catalogue
+- partenaire / référencement
+- demande de contact plus générale
+
+L'objectif est d'éviter les réponses floues ou contradictoires.
+
+### Pourquoi une demande de catalogue ne doit pas forcément contenir un lien de RDV ?
+
+Parce que la prochaine étape logique n'est pas toujours un rendez-vous. Si le besoin est clair, il vaut mieux donner directement le bon catalogue puis proposer un audit ou un échange seulement si cela apporte une vraie valeur.
+
 ### Pourquoi un email a été envoyé en test mais pas en campagne ?
 
 Parce qu'un test n'est pas une diffusion complète. L'édition doit ensuite être approuvée ou planifiée pour passer en campagne.
@@ -187,6 +210,10 @@ Le backend se déploie via Supabase :
 - edge functions
 - secrets si nécessaire
 
+### Pourquoi le déploiement d'une edge function peut échouer avec "Entry path does not exist" ?
+
+Parce que la commande Supabase a été lancée depuis le mauvais dossier. Il faut se placer dans la racine du dépôt avant de déployer.
+
 ### Faut-il toujours déployer le front et Supabase ensemble ?
 
 Non. Seulement quand une évolution front dépend d'une évolution base de données ou edge functions.
@@ -212,6 +239,21 @@ Il doit rester prudent et proposer une prise de contact ou une demande d'informa
 
 Oui, mais seulement lorsque le contexte ou le contenu stratégique le justifie.
 
+### Comment le chatbot doit-il parler de la page Contact ?
+
+Il doit orienter le visiteur vers une seule promesse simple :
+- parler à un expert IA
+
+Puis, si nécessaire, il peut préciser qu'une variante du formulaire sera affichée selon le type de besoin.
+
+### Comment le chatbot doit-il orienter un visiteur entreprise ?
+
+La logique recommandée est :
+- découverte de l'offre : page `Entreprises`
+- cadrage initial : audit IA gratuit
+- besoin encore flou : `Parler à un expert IA`
+- besoin catalogue : demande de catalogue
+
 ### Le chatbot doit-il pousser les visiteurs vers une seule offre ?
 
 Non. Il doit d'abord comprendre l'intention du visiteur puis orienter vers la page pertinente.
@@ -226,6 +268,14 @@ Vérifier :
 - la page cible réelle
 - le déploiement Cloudflare si le fix a déjà été poussé
 
+### Un lien `contact?intent=...` affiche "Une mise à jour du site est en cours"
+
+Vérifier :
+- qu'aucune erreur runtime ne casse le rendu de la page `Contact`
+- que la route paramétrée existe toujours
+- que le build déployé en production embarque bien le dernier correctif
+- que le lien ne pointe pas vers une ancienne logique de formulaire
+
 ### Une demande partenaire existe mais aucune réponse ne part
 
 Vérifier :
@@ -234,6 +284,14 @@ Vérifier :
 - que le corps de réponse a été généré ou rédigé
 - que la fonction `partner-followup-send` est bien déployée
 - que la clé Resend est correcte
+
+### Une demande catalogue ou formation reçoit un email incohérent
+
+Vérifier :
+- l'intention réelle reconnue par `send-prospect-emails`
+- le domaine ou la formation remontés dans la demande
+- la présence éventuelle d'un ancien bloc RDV non pertinent
+- que la fonction déployée en production est bien la dernière version
 
 ### Le blog charge mal ou certaines cartes débordent
 
@@ -258,6 +316,15 @@ Vérifier :
 - la clé Resend
 - l'adresse expéditrice
 - les spams et promotions
+
+### Un email de demande formation contient un lien RDV qui n'a pas de sens
+
+Cela ne doit plus arriver dans la version actuelle.
+
+Si cela revient :
+- vérifier `send-prospect-emails`
+- vérifier que l'intention `registration` ou `training` est bien reconnue
+- vérifier que le template n'hérite pas d'un ancien bloc générique `rdv`
 
 ### Le brouillon hebdomadaire ne se crée pas
 

@@ -171,6 +171,33 @@ Livrables :
 - email automatique de réponse au prospect
 - normalisation horaire des salutations `Bonjour / Bonsoir`
 
+### Phase 13. Clarification de la page Contact et des réponses prospects
+
+Objectif :
+- unifier la promesse de contact
+- réduire la confusion sur les CTA
+- rendre les emails plus cohérents avec le besoin réel
+
+Livrables :
+- porte d'entrée `Parler à un expert IA`
+- formulaire `Décrivez votre besoin`
+- champ `Domaine ou formation visée`
+- variantes contact par intention réelle
+- correction des liens profonds `contact?intent=...`
+- meilleure différenciation des emails inscription, formation, catalogue et partenaires
+
+### Phase 14. Distribution catalogue et cohérence des emails transactionnels
+
+Objectif :
+- accélérer la réponse aux demandes les plus directes
+- supprimer les ambiguïtés entre catalogue, formation, audit et rendez-vous
+
+Livrables :
+- demandes catalogue par domaine plus actionnables
+- emails catalogue enrichis avec accès direct au bon contenu
+- meilleure cohérence entre accusé de réception et prochaine étape utile
+- réduction des CTA de rendez-vous lorsqu'ils n'apportent pas de valeur immédiate
+
 ## 3. Jalons visibles dans l'historique git récent
 
 Les jalons majeurs récents identifiés dans le dépôt :
@@ -202,6 +229,10 @@ Les jalons majeurs récents identifiés dans le dépôt :
 - `39400fe` Refine partner listing flow and email follow-up
 - `2d385f2` Add partner listing admin pipeline
 - `d1c8428` Add time-based email greetings
+- `53c5a7d` Fix contact deep-link runtime error
+- `566ed50` Refine strategic partnership contact flow
+- `70de516` Clarify partner request call-to-actions
+- `2cc463b` Refine registration acknowledgement emails
 
 ## 4. Ce qui existe maintenant
 
@@ -217,6 +248,8 @@ Le site dispose maintenant de :
 - un audit IA gratuit mieux visible dans le parcours B2B
 - une page partenaires administrable
 - une relation email plus professionnelle et plus cohérente
+- une page contact plus claire, plus pilotable et moins ambiguë
+- une logique catalogue plus directe et plus exploitable commercialement
 
 ## 5. Ce qui reste logique pour la suite
 
@@ -226,7 +259,7 @@ Les prochains axes rationnels sont :
 - améliorer la relation email au-delà de la seule veille
 - renforcer les dashboards analytics utiles à l'admin
 - préparer davantage de contenus stratégiques EN
-- finaliser la simplification des pages les plus denses restantes, notamment services et contact
+- finaliser la simplification des pages les plus denses restantes, notamment à propos et certains parcours secondaires
 
 ## 6. Lecture business de l'évolution
 

@@ -103,6 +103,11 @@ Depuis la première version de cette note, plusieurs améliorations ont été ap
 - meilleure mise en avant de l'audit IA comme porte d'entrée entreprise
 - création d'un véritable parcours partenaires / référencement
 - amélioration des emails automatiques avec une logique horaire plus naturelle
+- clarification de la page contact autour d'une seule porte d'entrée plus compréhensible : `Parler à un expert IA`
+- meilleure distinction entre référencement partenaire et partenariat stratégique
+- correction de plusieurs liens profonds de formulaires en production
+- amélioration du parcours catalogue avec une réponse plus directe quand le besoin du prospect est clair
+- meilleure cohérence entre demandes formation, inscription, catalogue et prochaine étape proposée
 
 ## 9. Conclusion
 
