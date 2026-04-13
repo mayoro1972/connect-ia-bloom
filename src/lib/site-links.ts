@@ -33,6 +33,7 @@ export const directLinks = {
   email: "mailto:contact@transferai.ci?subject=Contact%20TransferAI%20Africa",
   phone: "tel:+225071657733990",
   whatsapp: "https://wa.me/225071657733990",
+  auditLanding: "/audit-ia-gratuit",
   appointment: "/prise-rdv",
   auditForm: auditFormUrl,
   calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",

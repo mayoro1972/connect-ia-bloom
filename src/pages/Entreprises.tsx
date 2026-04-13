@@ -17,7 +17,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { buildContactPath } from "@/lib/site-links";
+import { directLinks } from "@/lib/site-links";
 
 const servicesHubCopy = {
   fr: {
@@ -193,7 +193,7 @@ const EntreprisesPage = () => {
                   <p className="text-base leading-relaxed text-muted-foreground">{copy.diagnosisDesc}</p>
                 </div>
                 <Link
-                  to={buildContactPath("contact-devis")}
+                  to={directLinks.auditLanding}
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   {copy.ctaPrimary}
@@ -291,7 +291,7 @@ const EntreprisesPage = () => {
               <p className="mx-auto mb-8 max-w-3xl text-sm leading-7 text-white/75">{copy.ctaDesc}</p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  to={buildContactPath("contact-devis")}
+                  to={directLinks.auditLanding}
                   className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   {copy.ctaPrimary} <ArrowRight size={16} />

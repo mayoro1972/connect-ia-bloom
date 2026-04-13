@@ -1,9 +1,10 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { FileSearch, Gift, ShieldCheck, TimerReset } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { trackCtaClick } from "@/lib/analytics";
-import { buildContactPath, directLinks } from "@/lib/site-links";
+import { directLinks } from "@/lib/site-links";
 
 const sectionCopy = {
   fr: {
@@ -58,32 +59,32 @@ const HomeAuditSection = () => {
                 </div>
                 <p className="max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">{copy.subtitle}</p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    href={directLinks.auditForm}
+                  <Link
+                    to={directLinks.auditLanding}
                     onClick={() =>
                       trackCtaClick({
                         ctaName: copy.primaryCta,
                         ctaLocation: "home_audit_section",
-                        destination: directLinks.auditForm,
+                        destination: directLinks.auditLanding,
                       })
                     }
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                   >
                     {copy.primaryCta}
-                  </a>
-                  <a
-                    href={buildContactPath("contact-devis")}
+                  </Link>
+                  <Link
+                    to="/entreprises"
                     onClick={() =>
                       trackCtaClick({
                         ctaName: copy.secondaryCta,
                         ctaLocation: "home_audit_section",
-                        destination: buildContactPath("contact-devis"),
+                        destination: "/entreprises",
                       })
                     }
                     className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-6 py-3 text-sm font-semibold text-card-foreground transition-colors hover:border-primary/30 hover:text-primary"
                   >
                     {copy.secondaryCta}
-                  </a>
+                  </Link>
                 </div>
               </div>
 

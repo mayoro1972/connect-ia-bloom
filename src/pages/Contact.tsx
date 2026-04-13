@@ -71,10 +71,10 @@ const contactPageModel = {
       "Commencez par l'action la plus utile selon votre situation : réserver un audit IA gratuit, parler à un expert IA ou nous écrire directement.",
     pathways: [
       {
-        title: "Réserver un audit IA gratuit",
+        title: "Audit IA gratuit",
         desc: "Pour un premier échange de cadrage avec l'équipe et identifier les prochaines actions utiles.",
-        cta: "Réserver mon audit gratuit",
-        href: directLinks.appointment,
+        cta: "Découvrir l'audit gratuit",
+        href: directLinks.auditLanding,
       },
       {
         title: "Parler à un expert IA",
@@ -117,10 +117,10 @@ const contactPageModel = {
       "Start with the most useful action for your situation: book a free AI audit, speak with an AI expert, or message us directly.",
     pathways: [
       {
-        title: "Book a free AI audit",
+        title: "Free AI audit",
         desc: "For an initial scoping conversation with the team and a clearer next-step recommendation.",
-        cta: "Book my free audit",
-        href: directLinks.appointment,
+        cta: "Explore the free audit",
+        href: directLinks.auditLanding,
       },
       {
         title: "Speak with an AI expert",
