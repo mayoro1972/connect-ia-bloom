@@ -81,11 +81,11 @@ const pageCopy = {
         icon: Megaphone,
       },
     ],
-    ctaTitle: "Soumettre une demande de référencement ou de partenariat",
+    ctaTitle: "Choisir la bonne demande",
     ctaDesc:
-      "Si votre organisation souhaite être étudiée pour une présence sur TransferAI Africa, transmettez-nous votre demande. Notre équipe reviendra vers vous par email après revue du dossier.",
-    primaryCta: "Envoyer une demande",
-    secondaryCta: "Parler à l'équipe",
+      "Si votre organisation souhaite être visible sur TransferAI Africa ou construire un partenariat plus structurant, choisissez directement le bon parcours. Cela nous permet de vous répondre plus clairement et plus vite.",
+    primaryCta: "Demander un référencement",
+    secondaryCta: "Parler partenariat stratégique",
   },
   en: {
     title: "Partners & listing",
@@ -131,11 +131,11 @@ const pageCopy = {
         icon: Megaphone,
       },
     ],
-    ctaTitle: "Submit a partnership or listing request",
+    ctaTitle: "Choose the right request",
     ctaDesc:
-      "If your organization would like to be considered for visibility on TransferAI Africa, send us your request. Our team will reply by email after reviewing the file.",
-    primaryCta: "Send a request",
-    secondaryCta: "Talk to the team",
+      "If your organization wants visibility on TransferAI Africa or a more strategic collaboration, choose the right path directly. This helps us respond faster and with better clarity.",
+    primaryCta: "Request listing",
+    secondaryCta: "Discuss strategic partnership",
   },
 } as const;
 
@@ -300,7 +300,7 @@ const PartenairesPage = () => {
                     <ArrowRight size={16} />
                   </Link>
                   <Link
-                    to={buildContactPath("demande-renseignement", "Partenariats")}
+                    to={buildContactPath("demande-renseignement", "Partenariat stratégique")}
                     className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-card-foreground transition-colors hover:bg-background"
                   >
                     {copy.secondaryCta}
