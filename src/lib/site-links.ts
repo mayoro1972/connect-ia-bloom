@@ -60,7 +60,7 @@ export const contactDetails = {
 };
 
 export const metierKeyToDomain: Record<string, string> = {
-  assistanat: "Assistanat & Secretariat",
+  assistanat: "Assistanat & Secrétariat",
   rh: "Ressources Humaines",
   marketing: "Marketing & Communication",
   finance: "Finance & Comptabilite",

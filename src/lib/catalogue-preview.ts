@@ -15,7 +15,7 @@ export type DomainPreview = {
 
 const domainPreviewContent: Omit<DomainPreview, "slug">[] = [
   {
-    domain: "Assistanat & Secretariat",
+    domain: "Assistanat & Secrétariat",
     headline: "Des parcours pratiques pour digitaliser l'assistanat de direction et les fonctions support.",
     summary:
       "Ce catalogue regroupe des formations courtes et operationnelles pour ameliorer la productivite, la redaction, l'organisation et l'automatisation des taches administratives avec l'IA.",

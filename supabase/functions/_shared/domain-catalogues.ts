@@ -16,7 +16,7 @@ const buildUrl = (path: string) => `${SITE_URL}${path}`;
 export const domainCatalogueAssets: DomainCatalogueAsset[] = [
   {
     domainKey: "assistanat-et-secretariat",
-    domainLabelFr: "Assistanat & Secretariat",
+    domainLabelFr: "Assistanat & Secrétariat",
     domainLabelEn: "Executive Assistance & Secretariat",
     slug: "assistanat-et-secretariat",
     htmlUrl: buildUrl("/catalogues-domaines-assets/assistanat-et-secretariat/catalogue.html"),

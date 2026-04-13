@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { trackCtaClick } from "@/lib/analytics";
-import { buildContactPath } from "@/lib/site-links";
 
 const sectionCopy = {
   fr: {
@@ -22,8 +21,8 @@ const sectionCopy = {
       {
         title: "Je représente une entreprise",
         desc: "Identifier un dispositif adapté à mon équipe et à mes objectifs.",
-        cta: "Parler de mon besoin",
-        href: buildContactPath("contact-devis"),
+        cta: "Voir les services entreprises",
+        href: "/entreprises",
         icon: BriefcaseBusiness,
       },
       {
@@ -50,8 +49,8 @@ const sectionCopy = {
       {
         title: "I represent a company",
         desc: "Identify a program aligned with my team and upskilling goals.",
-        cta: "Discuss my needs",
-        href: buildContactPath("contact-devis"),
+        cta: "View enterprise services",
+        href: "/entreprises",
         icon: BriefcaseBusiness,
       },
       {

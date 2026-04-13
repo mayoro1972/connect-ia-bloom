@@ -8,6 +8,7 @@ import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import { directLinks } from "@/lib/site-links";
 import teamCasimir from "@/assets/team-casimir.jpg";
 import teamMarius from "@/assets/team-marius.jpg";
 import teamSouleymane from "@/assets/team-souleymane.jpg";
@@ -112,7 +113,7 @@ const pageCopy = {
     ctaDesc:
       "Si vous voulez aller plus vite, commencez par l'option la plus adaptée : audit IA gratuit, catalogue ou page entreprises.",
     ctas: [
-      { label: "Réserver un audit IA gratuit", to: "/prise-rdv", primary: true },
+      { label: "Réserver un audit IA gratuit", to: directLinks.auditLanding, primary: true },
       { label: "Voir le catalogue", to: "/catalogue", primary: false },
       { label: "Explorer la page Entreprises", to: "/entreprises", primary: false },
     ],
@@ -199,7 +200,7 @@ const pageCopy = {
     ctaDesc:
       "If you want to move faster, start with the entry point that fits best: free AI audit, catalogue, or the enterprise page.",
     ctas: [
-      { label: "Book a free AI audit", to: "/prise-rdv", primary: true },
+      { label: "Book a free AI audit", to: directLinks.auditLanding, primary: true },
       { label: "View the catalogue", to: "/catalogue", primary: false },
       { label: "Explore the enterprise page", to: "/entreprises", primary: false },
     ],
