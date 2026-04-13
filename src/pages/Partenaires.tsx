@@ -65,7 +65,7 @@ const pageCopy = {
           "Visibilité institutionnelle et éditoriale",
           "Accès à des actions communes à plus forte portée",
         ],
-        cta: "Parler partenariat stratégique",
+        cta: "Présenter un partenariat stratégique",
         icon: Handshake,
       },
       {
@@ -81,11 +81,11 @@ const pageCopy = {
         icon: Megaphone,
       },
     ],
-    ctaTitle: "Choisir la bonne demande",
+    ctaTitle: "Choisir le bon parcours",
     ctaDesc:
-      "Si votre organisation souhaite être visible sur TransferAI Africa ou construire un partenariat plus structurant, choisissez directement le bon parcours. Cela nous permet de vous répondre plus clairement et plus vite.",
+      "Pour apparaître sur le site, choisissez la demande de référencement. Pour proposer une collaboration académique, institutionnelle ou un programme commun, choisissez le partenariat stratégique.",
     primaryCta: "Demander un référencement",
-    secondaryCta: "Parler partenariat stratégique",
+    secondaryCta: "Présenter un partenariat stratégique",
   },
   en: {
     title: "Partners & listing",
@@ -115,7 +115,7 @@ const pageCopy = {
           "Institutional and editorial visibility",
           "Access to higher-impact joint initiatives",
         ],
-        cta: "Discuss strategic partnership",
+        cta: "Present a strategic partnership",
         icon: Handshake,
       },
       {
@@ -131,11 +131,11 @@ const pageCopy = {
         icon: Megaphone,
       },
     ],
-    ctaTitle: "Choose the right request",
+    ctaTitle: "Choose the right path",
     ctaDesc:
-      "If your organization wants visibility on TransferAI Africa or a more strategic collaboration, choose the right path directly. This helps us respond faster and with better clarity.",
+      "Choose listing if you want visibility on the site. Choose strategic partnership if you want to discuss an academic, institutional, or program collaboration.",
     primaryCta: "Request listing",
-    secondaryCta: "Discuss strategic partnership",
+    secondaryCta: "Present a strategic partnership",
   },
 } as const;
 

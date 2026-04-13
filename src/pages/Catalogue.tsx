@@ -198,12 +198,12 @@ const CataloguePage = () => {
         finalTitle: "Besoin d'un choix plus simple ?",
         finalDesc:
           "Nous pouvons vous orienter vers la bonne formation selon votre métier, votre niveau et votre objectif.",
-        primaryCta: "Demander une orientation",
+        primaryCta: "Parler à un expert IA",
         secondaryCta: "Déposer ma candidature",
         quickLinks: [
           { title: "Certification", desc: "Objectifs, programme et valeur métier.", href: "/certification" },
           { title: "Outils IA", desc: "Stacks, workflows et outils recommandés.", href: "/outils-ia" },
-          { title: "Orientation", desc: "Recevoir une recommandation claire.", href: buildContactPath("demande-renseignement") },
+          { title: "Expert IA", desc: "Recevoir une recommandation claire.", href: buildContactPath("demande-renseignement") },
         ],
       }
     : {
@@ -223,12 +223,12 @@ const CataloguePage = () => {
         finalTitle: "Need a simpler choice?",
         finalDesc:
           "We can guide you toward the right training based on your role, level, and objective.",
-        primaryCta: "Request guidance",
+        primaryCta: "Speak with an AI expert",
         secondaryCta: "Apply now",
         quickLinks: [
           { title: "Certification", desc: "Goals, program, and business value.", href: "/certification" },
           { title: "AI tools", desc: "Stacks, workflows, and recommended tools.", href: "/outils-ia" },
-          { title: "Guidance", desc: "Receive a clear recommendation.", href: buildContactPath("demande-renseignement") },
+          { title: "AI expert", desc: "Receive a clear recommendation.", href: buildContactPath("demande-renseignement") },
         ],
       };
 

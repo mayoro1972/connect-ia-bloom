@@ -72,7 +72,7 @@ const inscriptionCopy = {
     alternativeTitle: "Vous hésitez encore ?",
     alternativeText:
       "Si vous n'êtes pas encore certain de la bonne formation, nous pouvons d'abord vous orienter vers le parcours le plus adapté.",
-    alternativeCta: "Demander une orientation",
+    alternativeCta: "Parler à un expert IA",
     formTitle: "Votre demande d'inscription",
     formNote:
       "Prix sur demande, confirmation sous 24h, accompagnement possible si vous hésitez entre plusieurs formations.",
@@ -95,7 +95,7 @@ const inscriptionCopy = {
     alternativeTitle: "Still hesitating?",
     alternativeText:
       "If you are not fully sure which course is right for you, we can first guide you toward the best-fit path.",
-    alternativeCta: "Request guidance",
+    alternativeCta: "Speak with an AI expert",
     formTitle: "Your registration request",
     formNote:
       "Pricing available on request, confirmation within 24 hours, and guidance available if you are hesitating between several courses.",

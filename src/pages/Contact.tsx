@@ -226,8 +226,8 @@ const ContactPage = () => {
       : "Soumettre la bonne demande de référencement"
     : isStrategicPartnershipIntent
       ? language === "en"
-        ? "Open the right partnership discussion"
-        : "Ouvrir la bonne discussion de partenariat"
+        ? "Present your partnership project"
+        : "Présenter votre projet de partenariat"
     : pageModel.quickStartTitle;
 
   const resolvedQuickStartDesc = isListingIntent
@@ -252,12 +252,12 @@ const ContactPage = () => {
           href: "/partenaires",
         },
         {
-          title: language === "en" ? "Describe your organization" : "Présenter votre organisation",
+          title: language === "en" ? "Present your organization" : "Présenter votre organisation",
           desc:
             language === "en"
               ? "Explain your activity, audience fit, and the type of visibility you are looking for."
               : "Expliquez votre activité, votre alignement avec notre audience et la présence recherchée.",
-          cta: language === "en" ? "Describe my request" : "Décrire ma demande",
+          cta: language === "en" ? "Present my organization" : "Présenter mon organisation",
         },
         {
           title: "WhatsApp",
@@ -281,12 +281,12 @@ const ContactPage = () => {
             href: "/partenaires",
           },
           {
-            title: language === "en" ? "Describe the partnership" : "Décrire le partenariat",
+            title: language === "en" ? "Present the partnership" : "Présenter le partenariat",
             desc:
               language === "en"
                 ? "Explain the institution, the expected collaboration model, and the objective you would like to pursue with us."
                 : "Expliquez la structure, le modèle de collaboration attendu et l'objectif que vous souhaitez poursuivre avec nous.",
-            cta: language === "en" ? "Describe my request" : "Décrire ma demande",
+            cta: language === "en" ? "Present the partnership" : "Présenter le partenariat",
           },
           {
             title: "WhatsApp",
