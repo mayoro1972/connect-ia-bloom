@@ -65,19 +65,19 @@ const Navbar = () => {
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 border-b border-stone-200/90 bg-[#f7f2ea]/95 backdrop-blur-xl">
-      <div className="container mx-auto flex h-[74px] items-center justify-between gap-3 px-4 lg:px-5 xl:px-6">
-        <Link to="/" className="flex shrink-0 items-center gap-2.5">
+      <div className="container mx-auto flex h-[74px] items-center justify-between gap-2 px-3 lg:px-4 xl:px-5">
+        <Link to="/" className="flex shrink-0 items-center gap-2">
           <img
             src={logoTransferAI}
             alt="TransferAI Africa"
-            className="h-9 w-auto max-w-[112px] object-contain mix-blend-multiply lg:max-w-[124px]"
+            className="h-8 w-auto max-w-[96px] object-contain mix-blend-multiply lg:h-9 lg:max-w-[108px] xl:max-w-[116px]"
           />
-          <span className="hidden font-heading text-lg font-semibold tracking-[-0.03em] text-slate-950 2xl:block">
+          <span className="hidden font-heading text-lg font-semibold tracking-[-0.03em] text-slate-950 3xl:block">
             Transfer<span className="text-[hsl(20_92%_52%)]">AI</span> Africa
           </span>
         </Link>
 
-        <div className="hidden min-w-0 flex-1 items-center justify-center gap-4 lg:flex xl:gap-5 2xl:gap-6">
+        <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 pl-2 lg:flex xl:gap-4 2xl:gap-5">
           {navItems.map((item) => {
             const active = isActive(item.href) || isChildActive(item.children);
 
@@ -86,7 +86,7 @@ const Navbar = () => {
                 <Link
                   key={item.key}
                   to={item.href!}
-                  className={`relative inline-flex h-[74px] items-center whitespace-nowrap text-[11px] font-heading font-bold uppercase tracking-[0.12em] transition-colors xl:text-[12px] xl:tracking-[0.14em] ${
+                  className={`relative inline-flex h-[74px] items-center whitespace-nowrap text-[10px] font-heading font-bold uppercase tracking-[0.1em] transition-colors xl:text-[11px] xl:tracking-[0.12em] 2xl:text-[12px] 2xl:tracking-[0.14em] ${
                     active ? "text-slate-950" : "text-slate-600 hover:text-slate-950"
                   }`}
                 >
@@ -110,7 +110,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   onClick={() => setDesktopOpenMenu((current) => (current === item.key ? null : item.key))}
-                  className={`relative inline-flex h-[74px] items-center gap-1 whitespace-nowrap text-[11px] font-heading font-bold uppercase tracking-[0.12em] transition-colors xl:text-[12px] xl:tracking-[0.14em] ${
+                  className={`relative inline-flex h-[74px] items-center gap-0.5 whitespace-nowrap text-[10px] font-heading font-bold uppercase tracking-[0.1em] transition-colors xl:gap-1 xl:text-[11px] xl:tracking-[0.12em] 2xl:text-[12px] 2xl:tracking-[0.14em] ${
                     active || desktopOpenMenu === item.key ? "text-slate-950" : "text-slate-600 hover:text-slate-950"
                   }`}
                   aria-expanded={desktopOpenMenu === item.key}

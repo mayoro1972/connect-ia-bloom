@@ -191,7 +191,7 @@ const GlobalSearch = () => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="hidden h-10 min-w-[152px] items-center gap-2.5 rounded-full border border-stone-200 bg-white px-3.5 text-left shadow-sm transition-colors hover:border-stone-300 md:flex xl:min-w-[220px] 2xl:min-w-[250px]"
+        className="hidden h-10 min-w-[136px] items-center gap-2 rounded-full border border-stone-200 bg-white px-3 text-left shadow-sm transition-colors hover:border-stone-300 md:flex xl:min-w-[190px] 2xl:min-w-[230px]"
         aria-label={copy.trigger}
       >
         <Search size={16} className="text-slate-400" />
