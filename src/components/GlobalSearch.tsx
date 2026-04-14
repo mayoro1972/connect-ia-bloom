@@ -191,7 +191,7 @@ const GlobalSearch = () => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="hidden h-11 min-w-[180px] items-center gap-3 rounded-full border border-stone-200 bg-white px-4 text-left shadow-sm transition-colors hover:border-stone-300 lg:flex xl:min-w-[250px]"
+        className="hidden h-11 min-w-[170px] items-center gap-3 rounded-full border border-stone-200 bg-white px-4 text-left shadow-sm transition-colors hover:border-stone-300 md:flex xl:min-w-[250px]"
         aria-label={copy.trigger}
       >
         <Search size={16} className="text-slate-400" />
@@ -207,7 +207,7 @@ const GlobalSearch = () => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-slate-800 shadow-sm transition-colors hover:border-stone-300 lg:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-slate-800 shadow-sm transition-colors hover:border-stone-300 md:hidden"
         aria-label={copy.trigger}
       >
         <Search size={18} />
