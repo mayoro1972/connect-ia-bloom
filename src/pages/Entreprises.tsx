@@ -54,7 +54,7 @@ const servicesHubCopy = {
         icon: Cog,
       },
       {
-        title: "Media, veille & opportunités",
+        title: "Média, veille & opportunités",
         desc: "Pour former dans la durée, nourrir l'audience et faire circuler les nouveautés vraiment utiles.",
         highlights: [
           "Newsletter métier et signaux utiles",

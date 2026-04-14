@@ -10,7 +10,7 @@ const NotFound = () => {
     language === "fr"
       ? {
           title: "Oups ! Page introuvable",
-          cta: "Retour a l'accueil",
+          cta: "Retour à l'accueil",
         }
       : {
           title: "Oops! Page not found",

@@ -11,42 +11,42 @@ import { buildContactPath } from "@/lib/site-links";
 
 const liveFormatsCopy = {
   fr: {
-    title: "Formats live & decouverte",
+    title: "Formats live & découverte",
     subtitle:
-      "Une seule porte d'entree pour les seminaires, webinars et replays. Le bon format pour decouvrir TransferAI Africa, monter en competence vite et passer ensuite a l'inscription.",
+      "Une seule porte d'entrée pour les séminaires, webinaires et replays. Le bon format pour découvrir TransferAI Africa, monter en compétence rapidement et passer ensuite à l'inscription.",
     overviewTitle: "Pourquoi regrouper les formats live",
     overviewPoints: [
-      "Le visiteur comprend immediatement ou commencer s'il veut tester avant de s'engager.",
-      "Les seminaires et les webinars jouent la meme fonction commerciale : faire decouvrir l'offre et convertir vers une formation plus complete.",
-      "Les replays rassurent et prouvent la qualite pedagogique avant la candidature ou l'inscription.",
+      "Le visiteur comprend immédiatement où commencer s'il veut tester avant de s'engager.",
+      "Les séminaires et les webinaires remplissent la même fonction commerciale : faire découvrir l'offre et convertir vers une formation plus complète.",
+      "Les replays rassurent et prouvent la qualité pédagogique avant la candidature ou l'inscription.",
     ],
     comparisonTitle: "Choisir le bon format",
     comparisonCards: [
       {
-        title: "Seminaires intensifs",
-        desc: "Formats courts en presentiel ou hybrides pour les equipes, promotions executives et groupes metiers.",
-        meta: "Ideal pour une montee en competence rapide et concrete",
+        title: "Séminaires intensifs",
+        desc: "Formats courts en présentiel ou hybrides pour les équipes, promotions executives et groupes métier.",
+        meta: "Idéal pour une montée en compétence rapide et concrète",
       },
       {
-        title: "Webinars pratiques",
-        desc: "Sessions a distance pour decouvrir un sujet, tester l'approche pedagogique et capter des leads qualifies.",
-        meta: "Ideal pour les prospects qui veulent commencer sans friction",
+        title: "Webinaires pratiques",
+        desc: "Sessions à distance pour découvrir un sujet, tester l'approche pédagogique et qualifier plus vite le besoin.",
+        meta: "Idéal pour les prospects qui veulent commencer sans friction",
       },
       {
-        title: "Replays selectionnes",
-        desc: "Contenus a revoir a la demande pour garder le lien avec les visiteurs et nourrir l'intention d'achat.",
-        meta: "Ideal pour nourrir la newsletter et les campagnes de conversion",
+        title: "Replays sélectionnés",
+        desc: "Contenus à revoir à la demande pour garder le lien avec les visiteurs et nourrir l'intention d'achat.",
+        meta: "Idéal pour nourrir la newsletter et les campagnes de conversion",
       },
     ],
-    seminarTitle: "Seminaires a venir",
-    webinarTitle: "Webinars a venir",
-    replayTitle: "Replays a forte intention",
+    seminarTitle: "Séminaires à venir",
+    webinarTitle: "Webinaires à venir",
+    replayTitle: "Replays à forte intention",
     register: "Demander ma place",
     replayCta: "Voir ce replay",
     ctaTitle: "Le meilleur usage commercial des formats live",
     ctaDesc:
-      "Les formats live doivent servir d'entree basse friction dans ton tunnel Education : decouverte, reassurance, puis orientation vers la bonne formation ou la certification signature.",
-    ctaPrimary: "Deposer ma candidature",
+      "Les formats live doivent servir d'entrée basse friction dans le parcours Éducation : découverte, réassurance, puis orientation vers la bonne formation ou la certification signature.",
+    ctaPrimary: "Déposer ma candidature",
     ctaSecondary: "Demander une orientation",
   },
   en: {

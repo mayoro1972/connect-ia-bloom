@@ -37,6 +37,7 @@ const CatalogueDomainPreview = lazy(() => import("./pages/CatalogueDomainPreview
 const LeadFormsPreview = lazy(() => import("./pages/LeadFormsPreview"));
 const AppointmentPreview = lazy(() => import("./pages/AppointmentPreview"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
 const BackOffice = lazy(() => import("./pages/BackOffice"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -138,7 +139,7 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, ChunkBoundar
               Une erreur d&apos;affichage est survenue
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              La page a rencontre une erreur inattendue. Rechargez-la ou revenez a l&apos;accueil si le probleme persiste.
+              La page a rencontré une erreur inattendue. Rechargez-la ou revenez à l&apos;accueil si le problème persiste.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <a
@@ -151,7 +152,7 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, ChunkBoundar
                 href="/"
                 className="inline-flex items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold text-card-foreground transition-colors hover:bg-muted"
               >
-                Retour a l&apos;accueil
+                Retour à l&apos;accueil
               </a>
             </div>
           </div>
@@ -166,10 +167,10 @@ class ChunkErrorBoundary extends Component<{ children: ReactNode }, ChunkBoundar
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
         <div className="max-w-lg rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
           <h1 className="font-heading text-2xl font-bold text-card-foreground">
-            Une mise a jour du site est en cours
+            Une mise à jour du site est en cours
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Si la page ne se recharge pas automatiquement, rafraichissez-la pour charger la version la plus recente.
+            Si la page ne se recharge pas automatiquement, rafraîchissez-la pour charger la version la plus récente.
           </p>
           <a
             href={retryHref}
@@ -211,6 +212,8 @@ const AnimatedRoutes = () => {
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/confidentialite" element={<Privacy />} />
+          <Route path="/plan-du-site" element={<Sitemap />} />
+          <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/seminaires" element={<Seminaires />} />
           <Route path="/webinars" element={<Webinars />} />
           <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
