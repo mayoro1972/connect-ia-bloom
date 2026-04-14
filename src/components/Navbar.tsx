@@ -6,6 +6,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { fr } from "@/i18n/translations/fr";
 import { en } from "@/i18n/translations/en";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
+import GlobalSearch from "@/components/GlobalSearch";
 
 interface NavItem {
   key: string;
@@ -156,7 +157,9 @@ const Navbar = () => {
           })}
         </div>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="flex items-center gap-3">
+          <GlobalSearch />
+
           <div className="flex items-center rounded-full border border-stone-200 bg-white p-1 shadow-sm">
             <button
               type="button"
