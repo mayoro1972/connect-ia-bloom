@@ -150,11 +150,11 @@ const supabase =
 
 const translations: Record<"fr" | "en", TranslationCopy> = {
   fr: {
-    missingValue: "Non precise",
-    noExtraMessage: "Aucun message complementaire.",
-    websiteRequest: "Nouvelle demande site web",
+    missingValue: "Non précisé",
+    noExtraMessage: "Aucun message complémentaire.",
+    websiteRequest: "Nouvelle demande depuis le site",
     requestLabel: "Nouvelle demande",
-    listingSectorLabel: "Secteur / activite",
+    listingSectorLabel: "Secteur / activité",
     qualifiedResponseSubject: "Votre demande a été qualifiée | TransferAI Africa",
     qualifiedResponseIntro: (topic: string) =>
       `Nous avons analysé votre demande concernant ${topic} et elle est suffisamment claire pour vous proposer une suite immédiate.`,
@@ -190,8 +190,8 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     qualifiedResponseCta: "Réserver l’audit IA gratuit",
     fieldLabels: {
       name: "Nom",
-      email: "Email",
-      phone: "Telephone",
+      email: "E-mail",
+      phone: "Téléphone",
       company: "Organisation",
       website: "Site web",
       role: "Fonction",
@@ -200,24 +200,24 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       formation: "Formation",
       participants: "Participants",
       format: "Format",
-      timeline: "Echeance",
+      timeline: "Échéance",
       source: "Source",
       type: "Type",
     },
     prospectMessage: "Message du prospect",
-    appointmentCta: "Ouvrir le lien de RDV",
-    acknowledgementSubject: "Nous avons bien recu votre demande - TransferAI Africa",
+    appointmentCta: "Ouvrir le lien de rendez-vous",
+    acknowledgementSubject: "Nous avons bien reçu votre demande - TransferAI Africa",
     acknowledgementBody: (intentLabel: string) =>
-      `Nous confirmons la bonne reception de votre ${intentLabel.toLowerCase()}. Notre equipe va l'etudier et vous repondra depuis contact@transferai.ci dans les meilleurs delais.`,
+      `Nous confirmons la bonne réception de votre ${intentLabel.toLowerCase()}. Notre équipe l’examinera et vous répondra depuis contact@transferai.ci dans les meilleurs délais.`,
     acknowledgementNextStep:
-      "Si votre demande concerne un rendez-vous, un devis ou une orientation formation, nous pourrons vous recontacter afin de preciser votre besoin avant l'etape suivante.",
+      "Si votre demande concerne un rendez-vous, un devis ou une orientation de formation, nous pourrons vous recontacter afin de préciser votre besoin avant l’étape suivante.",
     registrationAcknowledgementSubject: "Nous avons bien reçu votre demande d'inscription - TransferAI Africa",
     registrationAcknowledgementBody: (formationLabel: string, participantsLabel?: string | null) =>
       `Nous confirmons la bonne réception de votre demande d'inscription pour ${formationLabel}${participantsLabel ? `, avec ${participantsLabel}` : ""}. Notre équipe va vérifier les éléments transmis et revenir vers vous avec une réponse claire et adaptée à votre contexte.`,
     registrationAcknowledgementNextStep:
       "Nous reviendrons vers vous pour confirmer la formation, le format le plus pertinent, les modalités pratiques et la prochaine étape de finalisation de l'inscription.",
     listingAcknowledgementBody:
-      "Nous confirmons la bonne reception de votre demande de référencement. Votre dossier va être relu par notre équipe afin d'évaluer la cohérence éditoriale, la forme de présence la plus adaptée et les prochaines modalités à vous proposer.",
+      "Nous confirmons la bonne réception de votre demande de référencement. Votre dossier sera relu par notre équipe afin d’évaluer sa cohérence éditoriale, le format de présence le plus adapté et les prochaines modalités à vous proposer.",
     listingReviewTitle: "Ce que nous allons étudier",
     listingReviewItems: [
       "L'alignement de votre activité avec l'audience TransferAI Africa",
@@ -231,9 +231,9 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "Une mise en avant plus éditoriale pour les profils les plus alignés",
     ],
     listingResponseDelay:
-      "Notre retour intervient en général sous 7 à 10 jours ouvrés après réception d'un dossier exploitable. Les modalités précises et la proposition associée sont communiquées ensuite par email.",
-    summaryTitle: "Recapitulatif de votre demande",
-    reviewAppointment: "Verifier mon lien de RDV",
+      "Notre retour intervient en général sous 7 à 10 jours ouvrés après réception d’un dossier exploitable. Les modalités précises et la proposition associée vous seront ensuite communiquées par e-mail.",
+    summaryTitle: "Récapitulatif de votre demande",
+    reviewAppointment: "Vérifier mon lien de rendez-vous",
     catalogueReadySubject: (domainLabel: string) => `Votre catalogue ${domainLabel} est prêt | TransferAI Africa`,
     catalogueReadyBody: (domainLabel: string) =>
       `Nous avons bien pris en compte votre demande. Le catalogue du domaine ${domainLabel} est prêt et peut être consulté immédiatement en version PDF ou web.`,
@@ -246,9 +246,9 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       audit: "Réserver un audit IA gratuit",
     },
     auditExplainerSubject: (domainLabel: string) =>
-      `Ce que notre audit IA va regarder pour ${domainLabel} - TransferAI Africa`,
+      `Ce que notre audit IA examinera pour ${domainLabel} - TransferAI Africa`,
     auditExplainerIntro: (domainLabel: string) =>
-      `Avant de vous envoyer le formulaire d'audit, voici l'angle que nous utilisons le plus souvent pour analyser les besoins du domaine ${domainLabel}. L'objectif est de vous donner un cadre simple avant le questionnaire et avant un éventuel échange avec notre expert IA.`,
+      `Avant de vous adresser le formulaire d’audit, voici l’angle que nous utilisons le plus souvent pour analyser les besoins du domaine ${domainLabel}. L’objectif est de vous donner un cadre clair avant le questionnaire et avant un éventuel échange avec notre expert IA.`,
     auditExplainerGenericDomain: "votre domaine",
     auditExplainerWhatYouReceiveTitle: "Ce que votre entreprise obtient",
     auditExplainerWhatYouReceiveItems: [
@@ -266,17 +266,17 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "Orientation vers la bonne suite : formation, accompagnement, automatisation ou déploiement métier",
     ],
     auditExplainerMeetingNote:
-      "Si vous avez demandé un rendez-vous, cet échange servira à clarifier vos priorités avant de remplir complètement la fiche d'audit.",
+      "Si vous avez demandé un rendez-vous, cet échange servira à clarifier vos priorités avant de compléter la fiche d’audit.",
     auditExplainerFormDelayNote:
-      "Le formulaire d'audit personnalisé vous sera ensuite envoyé séparément sous environ 30 minutes.",
+      "Le formulaire d’audit personnalisé vous sera ensuite envoyé séparément sous environ 30 minutes.",
     closing: "Merci pour votre confiance,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Demande de catalogue",
       "demande-renseignement": "Demande de renseignement",
       "contact-devis": "Demande de devis",
-      "demande-referencement": "Demande de referencement",
+      "demande-referencement": "Demande de référencement",
       "demande-audit": "Demande d'audit gratuit",
-      inscription: "Inscription a une formation",
+      inscription: "Inscription à une formation",
       "prise-rdv": "Demande de prise de rendez-vous",
     } satisfies Record<ProspectEmailIntent, string>,
     defaultTrainingLabel: "Formation",
@@ -1017,7 +1017,7 @@ const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: Prospe
 
   if (payload.intent === "demande-audit") {
     return copy === translations.fr
-      ? "Nous avons bien recu votre demande d'audit - TransferAI Africa"
+      ? "Nous avons bien reçu votre demande d'audit - TransferAI Africa"
       : "We received your audit request - TransferAI Africa";
   }
 
@@ -1051,7 +1051,7 @@ const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: Prosp
 
   if (payload.intent === "demande-audit") {
     return copy === translations.fr
-      ? "Nous vous envoyons le formulaire d'audit sous environ 30 minutes. Si vous avez demandé un échange avec un expert, le lien de rendez-vous sera également proposé après réception du formulaire."
+      ? "Nous vous enverrons le formulaire d’audit sous environ 30 minutes. Si vous avez demandé un échange avec un expert, la possibilité de prendre rendez-vous vous sera également proposée après réception du formulaire."
       : "We will send the audit questionnaire in about 30 minutes. If you asked to discuss it with an expert, the meeting option will also be included after the questionnaire is delivered.";
   }
 
@@ -1089,7 +1089,7 @@ const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectE
 
   if (payload.intent === "demande-audit") {
     if (copy === translations.fr) {
-      return `Nous confirmons la bonne reception de votre demande d'audit gratuit. Un accuse de reception vous est envoye immediatement et le formulaire d'audit sera transmis a cette adresse sous environ 30 minutes.${payload.wantsExpertAppointment ? " Vous avez egalement confirme votre souhait d'echanger avec un expert apres reception du formulaire." : ""}`;
+      return `Nous confirmons la bonne réception de votre demande d’audit gratuit. Un accusé de réception vous est envoyé immédiatement et le formulaire d’audit sera transmis à cette adresse sous environ 30 minutes.${payload.wantsExpertAppointment ? " Vous avez également indiqué que vous souhaitiez échanger avec un expert après réception du formulaire." : ""}`;
     }
 
     return `We confirm receipt of your free audit request. An acknowledgement email is sent immediately and the audit questionnaire will be delivered to this address in about 30 minutes.${payload.wantsExpertAppointment ? " You also confirmed that you would like to discuss the questionnaire with an expert after receiving it." : ""}`;
@@ -1112,7 +1112,7 @@ const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectE
     : "";
 
   if (copy === translations.fr) {
-    return `Nous avons bien reçu votre besoin concernant ${topic}${participantsLine}${timelineLine}. Notre équipe va analyser votre demande et vous revenir avec une réponse utile, structurée et adaptée à votre contexte.`;
+    return `Nous avons bien reçu votre besoin concernant ${topic}${participantsLine}${timelineLine}. Notre équipe analysera votre demande et reviendra vers vous avec une réponse utile, structurée et adaptée à votre contexte.`;
   }
 
   return `We have received your need regarding ${topic}${participantsLine}${timelineLine}. Our team will review your request and come back with a useful, structured response adapted to your context.`;
