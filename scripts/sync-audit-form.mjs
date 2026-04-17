@@ -4,12 +4,19 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = resolve(__dirname, "..");
-const auditDistDir = resolve(rootDir, "..", "formulaire-audit-ia-2", "dist");
 const publicAuditDir = resolve(rootDir, "public", "formulaire-audit-ia");
 
-if (!existsSync(auditDistDir)) {
+const candidateAuditDistDirs = [
+  resolve(rootDir, "..", "formulaire-audit-ia", "dist"),
+  resolve(rootDir, "..", "formulaire-audit-ia-2", "dist"),
+  resolve("/Users/marius_ayoro/Documents/Playground/formulaire-audit-ia", "dist"),
+];
+
+const auditDistDir = candidateAuditDistDirs.find((candidate) => existsSync(candidate));
+
+if (!auditDistDir) {
   throw new Error(
-    `Audit form build not found at ${auditDistDir}. Run the audit form build first in ../formulaire-audit-ia-2.`,
+    `Audit form build not found. Checked: ${candidateAuditDistDirs.join(", ")}. Run the audit form build first.`,
   );
 }
 
@@ -17,4 +24,4 @@ rmSync(publicAuditDir, { recursive: true, force: true });
 mkdirSync(publicAuditDir, { recursive: true });
 cpSync(auditDistDir, publicAuditDir, { recursive: true });
 
-console.log(`Synced audit form into ${publicAuditDir}`);
+console.log(`Synced audit form from ${auditDistDir} into ${publicAuditDir}`);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LockKeyhole } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -21,7 +21,6 @@ type ProspectAuditFormState = {
   sector: string;
   city: string;
   message: string;
-  username: string;
   password: string;
   confirmPassword: string;
   wantsExpertAppointment: boolean;
@@ -39,7 +38,6 @@ const emptyForm: ProspectAuditFormState = {
   sector: "",
   city: "",
   message: "",
-  username: "",
   password: "",
   confirmPassword: "",
   wantsExpertAppointment: false,
@@ -84,10 +82,13 @@ const prospectTypeOptions = {
 
 const pageCopy = {
   fr: {
-    badge: "Demande d'audit IA",
-    title: "Demande d'Audit",
+    badge: "Demande de formulaire d'audit IA",
+    title: "",
     formLead:
-      "Renseignez les informations essentielles pour créer votre fiche prospect, préparer l'envoi du formulaire d'audit et sécuriser votre accès.",
+      "Renseignez les informations essentielles pour recevoir votre formulaire, préparer le suivi et cadrer le besoin avec notre équipe.",
+    secureTitle: "Accès sécurisé",
+    secureLead:
+      "Votre adresse email servira d'identifiant sécurisé. Définissez uniquement le mot de passe qui vous permettra d'ouvrir le formulaire lorsqu'il vous sera envoyé.",
     appointmentPreference:
       "Je souhaite un rendez-vous pour discuter de la fiche d'audit avant de la remplir.",
     privacy:
@@ -106,13 +107,12 @@ const pageCopy = {
     labels: {
       fullName: "Nom complet",
       prospectType: "Qualification du prospect",
-      profession: "Profession",
+      profession: "Profession / Fonction",
       email: "Adresse email",
       phone: "Téléphone",
       city: "Ville",
       country: "Pays",
       sector: "Secteur d'activité",
-      username: "Username",
       password: "Mot de passe",
       confirmPassword: "Confirmer le mot de passe",
       message: "Décrivez votre besoin",
@@ -120,12 +120,17 @@ const pageCopy = {
     placeholders: {
       sector: "Choisissez votre secteur d'activité",
       prospectType: "Choisissez votre profil",
+      message:
+        "Ex. : nous voulons identifier les tâches répétitives, réduire le temps de traitement des demandes, mieux structurer le reporting et préparer un premier plan d'action IA adapté à notre secteur.",
     },
   },
   en: {
-    badge: "AI audit request",
-    title: "Audit Request",
-    formLead: "Share the key details needed to receive your audit questionnaire.",
+    badge: "AI audit form request",
+    title: "",
+    formLead: "Share the essential details needed to receive your questionnaire and prepare the follow-up.",
+    secureTitle: "Secure access",
+    secureLead:
+      "Your email address will serve as your secure login. You only need to create the password that will let you open the questionnaire when it is sent to you.",
     appointmentPreference:
       "I would like to schedule a meeting to discuss the audit questionnaire before filling it in.",
     privacy:
@@ -144,13 +149,12 @@ const pageCopy = {
     labels: {
       fullName: "Full name",
       prospectType: "Prospect type",
-      profession: "Profession",
+      profession: "Profession / Role",
       email: "Email address",
       phone: "Phone",
       city: "City",
       country: "Country",
       sector: "Business sector",
-      username: "Username",
       password: "Password",
       confirmPassword: "Confirm password",
       message: "Describe your need",
@@ -158,6 +162,8 @@ const pageCopy = {
     placeholders: {
       sector: "Choose your business sector",
       prospectType: "Choose your profile",
+      message:
+        "Example: we want to identify repetitive tasks, reduce request processing time, improve reporting, and define a first AI action plan adapted to our sector.",
     },
   },
 } as const;
@@ -174,7 +180,6 @@ const ProspectRequestPage = () => {
 
   const inputClass =
     "w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary/25";
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -229,7 +234,7 @@ const ProspectRequestPage = () => {
       privacy_consent_input: form.privacyAccepted,
       honeypot_input: form.botField.trim() || null,
       wants_expert_appointment_input: form.wantsExpertAppointment,
-      prospect_username_input: form.username.trim().toLowerCase(),
+      prospect_username_input: form.email.trim().toLowerCase(),
       prospect_password_hash_input: passwordHash,
     });
 
@@ -289,14 +294,14 @@ const ProspectRequestPage = () => {
 
         <main className="relative z-10">
           <section className="px-4 py-16 lg:px-8">
-            <div className="container mx-auto max-w-3xl">
-              <div className="rounded-[30px] border border-border bg-card p-8 shadow-[0_28px_80px_-58px_rgba(16,33,61,0.28)] md:p-10">
-                <p className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            <div className="container mx-auto max-w-5xl">
+              <div className="rounded-[34px] border border-[hsl(32_46%_84%)] bg-card p-8 shadow-[0_28px_80px_-58px_rgba(16,33,61,0.28)] md:p-10">
+                <p className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                   {copy.badge}
                 </p>
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">{copy.formLead}</p>
+                <p className="mt-5 max-w-3xl text-[1.05rem] leading-9 text-muted-foreground">{copy.formLead}</p>
 
-                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                   <div className="grid gap-4 md:grid-cols-2">
                     <input
                       placeholder={copy.labels.fullName}
@@ -305,19 +310,6 @@ const ProspectRequestPage = () => {
                       onChange={(event) => update("fullName", event.target.value)}
                       className={inputClass}
                     />
-                    <select
-                      required
-                      value={form.prospectType}
-                      onChange={(event) => update("prospectType", event.target.value)}
-                      className={inputClass}
-                    >
-                      <option value="">{copy.placeholders.prospectType}</option>
-                      {(language === "en" ? prospectTypeOptions.en : prospectTypeOptions.fr).map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
                     <input
                       placeholder={copy.labels.profession}
                       required
@@ -367,38 +359,47 @@ const ProspectRequestPage = () => {
                         </option>
                       ))}
                     </select>
-                    <input
-                      placeholder={copy.labels.username}
-                      required
-                      value={form.username}
-                      onChange={(event) => update("username", event.target.value)}
-                      className={inputClass}
-                    />
-                    <input
-                      placeholder={copy.labels.password}
-                      type="password"
-                      required
-                      value={form.password}
-                      onChange={(event) => update("password", event.target.value)}
-                      className={inputClass}
-                    />
-                    <input
-                      placeholder={copy.labels.confirmPassword}
-                      type="password"
-                      required
-                      value={form.confirmPassword}
-                      onChange={(event) => update("confirmPassword", event.target.value)}
-                      className={`${inputClass} md:col-span-2`}
-                    />
                   </div>
 
                   <textarea
-                    placeholder={copy.labels.message}
+                    placeholder={copy.placeholders.message}
                     required
                     value={form.message}
                     onChange={(event) => update("message", event.target.value)}
-                    className={`${inputClass} min-h-32`}
+                    className={`${inputClass} min-h-40`}
                   />
+
+                  <div className="rounded-[30px] border border-[hsl(32_46%_84%)] bg-[hsl(32_100%_98%)] p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="rounded-2xl bg-primary/10 p-3 text-primary">
+                        <LockKeyhole className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-2xl font-semibold text-card-foreground">{copy.secureTitle}</p>
+                        <p className="mt-3 max-w-2xl text-[1.02rem] leading-8 text-muted-foreground">
+                          {copy.secureLead}
+                        </p>
+                        <div className="mt-6 grid gap-4 md:grid-cols-2">
+                          <input
+                            placeholder={copy.labels.password}
+                            type="password"
+                            required
+                            value={form.password}
+                            onChange={(event) => update("password", event.target.value)}
+                            className={inputClass}
+                          />
+                          <input
+                            placeholder={copy.labels.confirmPassword}
+                            type="password"
+                            required
+                            value={form.confirmPassword}
+                            onChange={(event) => update("confirmPassword", event.target.value)}
+                            className={inputClass}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <input
                     tabIndex={-1}
@@ -408,7 +409,7 @@ const ProspectRequestPage = () => {
                     onChange={(event) => update("botField", event.target.value)}
                   />
 
-                  <label className="flex items-start gap-3 rounded-3xl border border-[hsl(30_52%_84%)] bg-[hsl(32_100%_98%)] p-5 text-sm leading-7 text-card-foreground">
+                  <label className="flex items-start gap-3 rounded-3xl border border-[hsl(30_52%_84%)] bg-[hsl(32_100%_98%)] p-5 text-sm leading-8 text-card-foreground">
                     <input
                       type="checkbox"
                       checked={form.wantsExpertAppointment}
@@ -418,7 +419,7 @@ const ProspectRequestPage = () => {
                     <span>{copy.appointmentPreference}</span>
                   </label>
 
-                  <label className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
+                  <label className="flex items-start gap-3 text-sm leading-8 text-muted-foreground">
                     <input
                       type="checkbox"
                       checked={form.privacyAccepted}
@@ -431,10 +432,10 @@ const ProspectRequestPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isSubmitting ? copy.submitting : copy.submit}
-                    <ArrowRight size={16} />
+                    <ArrowRight size={18} />
                   </button>
                 </form>
               </div>
