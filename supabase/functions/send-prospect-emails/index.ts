@@ -114,6 +114,7 @@ type TranslationCopy = {
   auditExplainerSubject: (domainLabel: string) => string;
   auditExplainerIntro: (domainLabel: string) => string;
   auditExplainerGenericDomain: string;
+  auditExplainerObjectiveTitle: string;
   auditExplainerWhatYouReceiveTitle: string;
   auditExplainerWhatYouReceiveItems: string[];
   auditExplainerProcessTitle: string;
@@ -248,8 +249,9 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     auditExplainerSubject: (domainLabel: string) =>
       `Ce que notre audit IA examinera pour ${domainLabel} - TransferAI Africa`,
     auditExplainerIntro: (domainLabel: string) =>
-      `Avant de vous adresser le formulaire d’audit, voici l’angle que nous utilisons le plus souvent pour analyser les besoins du domaine ${domainLabel}. L’objectif est de vous donner un cadre clair avant le questionnaire et avant un éventuel échange avec notre expert IA.`,
+      `Avant l’envoi de votre formulaire d’audit, nous vous partageons le cadrage que nous utilisons le plus souvent pour analyser les besoins du domaine ${domainLabel}. Ce repère vous permet d’aborder le questionnaire avec une vision plus claire des priorités, des points d’attention et des résultats attendus.`,
     auditExplainerGenericDomain: "votre domaine",
+    auditExplainerObjectiveTitle: "Objectif de l'audit",
     auditExplainerWhatYouReceiveTitle: "Ce que votre entreprise obtient",
     auditExplainerWhatYouReceiveItems: [
       "Un diagnostic synthétique des priorités IA",
@@ -380,8 +382,9 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     auditExplainerSubject: (domainLabel: string) =>
       `What our AI audit will focus on for ${domainLabel} - TransferAI Africa`,
     auditExplainerIntro: (domainLabel: string) =>
-      `Before sending your audit questionnaire, here is the angle we most often use to assess needs in ${domainLabel}. The goal is to give you a clear frame before the questionnaire and before any discussion with our AI expert.`,
+      `Before sending your audit questionnaire, we are sharing the framing we most often use to assess needs in ${domainLabel}. This gives you a clearer view of the priorities, watchpoints, and expected outcomes before the questionnaire and before any discussion with our AI expert.`,
     auditExplainerGenericDomain: "your domain",
+    auditExplainerObjectiveTitle: "Audit objective",
     auditExplainerWhatYouReceiveTitle: "What your organization receives",
     auditExplainerWhatYouReceiveItems: [
       "A concise diagnosis of AI priorities",
@@ -998,6 +1001,20 @@ const buildContactNeedTopic = (copy: TranslationCopy, payload: ProspectEmailPayl
   sentenceCase(payload.message?.split(/[.!?\n]/)[0]) ||
   copy.missingValue;
 
+const buildAuditSectorPhrase = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  const domain = payload.domain?.trim();
+
+  if (!domain || normalizeForMatch(domain) === "autres" || normalizeForMatch(domain) === "other") {
+    return copy === translations.fr
+      ? " dans votre secteur d'activité"
+      : " in your business sector";
+  }
+
+  return copy === translations.fr
+    ? ` en ${domain}`
+    : ` in ${domain}`;
+};
+
 const isTrainingSupportRequest = (payload: ProspectEmailPayload) =>
   (payload.intent === "contact-devis" || payload.intent === "demande-renseignement") &&
   Boolean(payload.domain?.trim() || payload.formationTitle?.trim() || payload.message?.trim());
@@ -1051,8 +1068,12 @@ const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: Prosp
 
   if (payload.intent === "demande-audit") {
     return copy === translations.fr
-      ? "Nous vous enverrons le formulaire d’audit sous environ 30 minutes. Si vous avez demandé un échange avec un expert, la possibilité de prendre rendez-vous vous sera également proposée après réception du formulaire."
-      : "We will send the audit questionnaire in about 30 minutes. If you asked to discuss it with an expert, the meeting option will also be included after the questionnaire is delivered.";
+      ? `${payload.wantsExpertAppointment
+        ? "Si vous avez souhaité échanger avec un expert, une option de prise de rendez-vous vous sera proposée après réception et étude de votre formulaire. "
+        : ""}Nous vous remercions pour votre confiance et restons à votre disposition pour toute information complémentaire.`
+      : `${payload.wantsExpertAppointment
+        ? "If you asked to speak with an expert, a meeting option will be offered after we receive and review your questionnaire. "
+        : ""}Thank you for your trust. We remain available should you need any additional information.`;
   }
 
   if (payload.intent === "prise-rdv") {
@@ -1088,11 +1109,13 @@ const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectE
   }
 
   if (payload.intent === "demande-audit") {
+    const sectorPhrase = buildAuditSectorPhrase(copy, payload);
+
     if (copy === translations.fr) {
-      return `Nous confirmons la bonne réception de votre demande d’audit gratuit. Un accusé de réception vous est envoyé immédiatement et le formulaire d’audit sera transmis à cette adresse sous environ 30 minutes.${payload.wantsExpertAppointment ? " Vous avez également indiqué que vous souhaitiez échanger avec un expert après réception du formulaire." : ""}`;
+      return `Nous vous confirmons la bonne réception de votre demande d’audit gratuit${sectorPhrase}. Notre équipe vous fera parvenir le formulaire d’audit dans les plus brefs délais, généralement sous environ 30 minutes. Celui-ci nous permettra de mieux comprendre vos besoins et de vous proposer une analyse adaptée.`;
     }
 
-    return `We confirm receipt of your free audit request. An acknowledgement email is sent immediately and the audit questionnaire will be delivered to this address in about 30 minutes.${payload.wantsExpertAppointment ? " You also confirmed that you would like to discuss the questionnaire with an expert after receiving it." : ""}`;
+    return `We confirm receipt of your free audit request${sectorPhrase}. Our team will send you the audit questionnaire as soon as possible, usually within about 30 minutes. It will help us better understand your needs and provide an assessment adapted to your context.`;
   }
 
   if (payload.intent === "demande-catalogue") {
@@ -1421,7 +1444,7 @@ const buildAuditExplainer = (payload: ProspectEmailPayload): EmailMessage | null
   const benefitItems = guide?.benefitItems ?? copy.auditExplainerProcessItems;
   const focusTitle = guide?.focusTitle ?? copy.auditExplainerWhatYouReceiveTitle;
   const benefitsTitle = guide?.benefitsTitle ?? copy.auditExplainerProcessTitle;
-  const domainIntro = guide?.intro ?? copy.auditExplainerIntro(domainLabel);
+  const objectiveText = guide?.intro ?? copy.auditExplainerIntro(domainLabel);
 
   const html = `
     <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
@@ -1431,8 +1454,11 @@ const buildAuditExplainer = (payload: ProspectEmailPayload): EmailMessage | null
         <p style="margin:0 0 14px;color:#101828;">${escapeHtml(intro)}</p>
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(copy.auditExplainerIntro(domainLabel))}</p>
         <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
-          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(domainLabel)}</p>
-          <p style="margin:0;color:#475467;">${escapeHtml(domainIntro)}</p>
+          <p style="margin:0;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(domainLabel)}</p>
+        </div>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.auditExplainerObjectiveTitle)}</p>
+          <p style="margin:0;color:#475467;">${escapeHtml(objectiveText)}</p>
         </div>
         <div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
           <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(focusTitle)}</p>
@@ -1467,7 +1493,9 @@ const buildAuditExplainer = (payload: ProspectEmailPayload): EmailMessage | null
     copy.auditExplainerIntro(domainLabel),
     "",
     `${domainLabel}`,
-    domainIntro,
+    "",
+    `${copy.auditExplainerObjectiveTitle} :`,
+    objectiveText,
     "",
     `${focusTitle} :`,
     ...focusItems.map((item) => `- ${item}`),
