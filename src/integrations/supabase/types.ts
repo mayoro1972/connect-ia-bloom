@@ -17,6 +17,8 @@ export type Database = {
       contact_requests: {
         Row: {
           audit_followup_error: string | null
+          audit_invite_expires_at: string | null
+          audit_invite_token: string | null
           audit_followup_scheduled_at: string | null
           audit_followup_sent_at: string | null
           audit_followup_status: string | null
@@ -28,11 +30,15 @@ export type Database = {
           full_name: string
           id: string
           language: string
+          last_portal_login_at: string | null
           message: string | null
           participants: number | null
           phone: string
           privacy_consent: boolean
           profession: string | null
+          prospect_password_hash: string | null
+          prospect_portal_status: string
+          prospect_username: string | null
           request_intent: string
           requested_domain: string | null
           requested_formations: string | null
@@ -42,6 +48,8 @@ export type Database = {
         }
         Insert: {
           audit_followup_error?: string | null
+          audit_invite_expires_at?: string | null
+          audit_invite_token?: string | null
           audit_followup_scheduled_at?: string | null
           audit_followup_sent_at?: string | null
           audit_followup_status?: string | null
@@ -53,11 +61,15 @@ export type Database = {
           full_name: string
           id?: string
           language?: string
+          last_portal_login_at?: string | null
           message?: string | null
           participants?: number | null
           phone: string
           privacy_consent?: boolean
           profession?: string | null
+          prospect_password_hash?: string | null
+          prospect_portal_status?: string
+          prospect_username?: string | null
           request_intent?: string
           requested_domain?: string | null
           requested_formations?: string | null
@@ -67,6 +79,8 @@ export type Database = {
         }
         Update: {
           audit_followup_error?: string | null
+          audit_invite_expires_at?: string | null
+          audit_invite_token?: string | null
           audit_followup_scheduled_at?: string | null
           audit_followup_sent_at?: string | null
           audit_followup_status?: string | null
@@ -78,11 +92,15 @@ export type Database = {
           full_name?: string
           id?: string
           language?: string
+          last_portal_login_at?: string | null
           message?: string | null
           participants?: number | null
           phone?: string
           privacy_consent?: boolean
           profession?: string | null
+          prospect_password_hash?: string | null
+          prospect_portal_status?: string
+          prospect_username?: string | null
           request_intent?: string
           requested_domain?: string | null
           requested_formations?: string | null
@@ -280,6 +298,59 @@ export type Database = {
           subscribed_domains?: string[]
         }
         Relationships: []
+      }
+      prospect_email_delivery_logs: {
+        Row: {
+          contact_request_id: string | null
+          created_at: string
+          delivery_type: string
+          error_message: string | null
+          id: string
+          metadata: Json
+          provider: string
+          provider_message_id: string | null
+          recipient_email: string
+          sent_at: string | null
+          status: string
+          subject: string | null
+        }
+        Insert: {
+          contact_request_id?: string | null
+          created_at?: string
+          delivery_type: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json
+          provider?: string
+          provider_message_id?: string | null
+          recipient_email: string
+          sent_at?: string | null
+          status?: string
+          subject?: string | null
+        }
+        Update: {
+          contact_request_id?: string | null
+          created_at?: string
+          delivery_type?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json
+          provider?: string
+          provider_message_id?: string | null
+          recipient_email?: string
+          sent_at?: string | null
+          status?: string
+          subject?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prospect_email_delivery_logs_contact_request_id_fkey"
+            columns: ["contact_request_id"]
+            isOneToOne: false
+            referencedRelation: "contact_requests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       newsletter_issues: {
         Row: {

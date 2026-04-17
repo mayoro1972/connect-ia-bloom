@@ -14,6 +14,7 @@ import { invokeContentAdmin } from "@/lib/content-admin";
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
 import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
+import AuditProspectAdminPanel, { type AuditProspectSnapshot } from "@/components/backoffice/AuditProspectAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -206,6 +207,7 @@ const BackOfficePage = () => {
   const [jobs, setJobs] = useState<JobAdminItem[]>([]);
   const [analytics, setAnalytics] = useState<AnalyticsSnapshot | null>(null);
   const [editorial, setEditorial] = useState<EditorialSnapshot | null>(null);
+  const [prospects, setProspects] = useState<AuditProspectSnapshot | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isBusy, setIsBusy] = useState(false);
@@ -229,17 +231,19 @@ const BackOfficePage = () => {
   const isReady = useMemo(() => token.trim().length > 0 && isSupabaseConfigured, [token]);
 
   const loadData = async (adminToken: string) => {
-    const [resourceResult, jobResult, analyticsResult, editorialResult] = await Promise.all([
+    const [resourceResult, jobResult, analyticsResult, editorialResult, prospectResult] = await Promise.all([
       invokeContentAdmin<{ data: ResourceAdminItem[] }>(adminToken, { entity: "resource", action: "list" }),
       invokeContentAdmin<{ data: JobAdminItem[] }>(adminToken, { entity: "job", action: "list" }),
       invokeContentAdmin<{ data: AnalyticsSnapshot }>(adminToken, { entity: "analytics", action: "list" }),
       invokeContentAdmin<{ data: EditorialSnapshot }>(adminToken, { entity: "editorial", action: "list" }),
+      invokeContentAdmin<{ data: AuditProspectSnapshot }>(adminToken, { entity: "prospects", action: "list" }),
     ]);
 
     setResources(resourceResult.data ?? []);
     setJobs(jobResult.data ?? []);
     setAnalytics(analyticsResult.data ?? null);
     setEditorial(editorialResult.data ?? null);
+    setProspects(prospectResult.data ?? null);
   };
 
   useEffect(() => {
@@ -457,6 +461,7 @@ const BackOfficePage = () => {
             >
               <TabsList className="mb-8 h-auto flex-wrap">
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                <TabsTrigger value="prospects">Prospects Audit</TabsTrigger>
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
                 <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
                 <TabsTrigger value="partners">Partenaires IA</TabsTrigger>
@@ -595,6 +600,10 @@ const BackOfficePage = () => {
                     </div>
                   </div>
                 </div>
+              </TabsContent>
+
+              <TabsContent value="prospects">
+                <AuditProspectAdminPanel snapshot={prospects} />
               </TabsContent>
 
               <TabsContent value="resources">

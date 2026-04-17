@@ -757,6 +757,47 @@ const setPartnerStatus = async (payload: Record<string, unknown>) =>
     .select("*")
     .single();
 
+const listProspects = async () => {
+  const [requestsResult, deliveriesResult] = await Promise.all([
+    supabase
+      .from("contact_requests")
+      .select("id, created_at, full_name, email, phone, profession, city, country, sector, wants_expert_appointment, audit_followup_status, audit_followup_scheduled_at, audit_followup_sent_at, audit_followup_error, prospect_username, prospect_portal_status, last_portal_login_at")
+      .eq("request_intent", "demande-audit")
+      .order("created_at", { ascending: false })
+      .limit(80),
+    supabase
+      .from("prospect_email_delivery_logs")
+      .select("id, contact_request_id, recipient_email, delivery_type, status, subject, sent_at, error_message")
+      .order("created_at", { ascending: false })
+      .limit(300),
+  ]);
+
+  const resultList = [requestsResult, deliveriesResult];
+  const failingResult = resultList.find((result) => result.error);
+
+  if (failingResult?.error) {
+    return { data: null, error: failingResult.error };
+  }
+
+  const requests = requestsResult.data ?? [];
+
+  return {
+    data: {
+      overview: {
+        totalRequests: requests.length,
+        pendingFollowups: requests.filter((item) => item.audit_followup_status === "pending").length,
+        sentFollowups: requests.filter((item) => item.audit_followup_status === "sent").length,
+        failedFollowups: requests.filter((item) => item.audit_followup_status === "failed").length,
+        requestedAppointments: requests.filter((item) => item.wants_expert_appointment).length,
+        activePortals: requests.filter((item) => item.prospect_portal_status === "active").length,
+      },
+      requests,
+      deliveries: deliveriesResult.data ?? [],
+    },
+    error: null,
+  };
+};
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -803,6 +844,7 @@ Deno.serve(async (request) => {
   if (entity === "partners" && action === "list") result = await listPartners();
   if (entity === "partners" && action === "save") result = await savePartner(payload);
   if (entity === "partners" && action === "set-status") result = await setPartnerStatus(payload);
+  if (entity === "prospects" && action === "list") result = await listProspects();
 
   if (!result) {
     return json(400, { error: "Unsupported admin action." });

@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { resolveAuditDomainAccess } from "../_shared/audit-domain-access.ts";
 
 type ProspectFollowupRow = {
   id: string;
@@ -24,6 +25,8 @@ const MAIL_TO = Deno.env.get("MAIL_TO") ?? "contact@transferai.ci";
 const SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
 const AUDIT_FORM_URL =
   (Deno.env.get("PUBLIC_AUDIT_FORM_URL") ?? `${SITE_URL}/formulaire-audit-ia/index.html`).trim();
+const AUDIT_LOGIN_URL =
+  (Deno.env.get("PUBLIC_AUDIT_LOGIN_URL") ?? `${SITE_URL}/acces-formulaire-audit`).trim();
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const batchSize = Number.parseInt(Deno.env.get("AUDIT_FOLLOWUP_BATCH_SIZE") ?? "25", 10);
@@ -67,9 +70,10 @@ const buildMessage = (row: ProspectFollowupRow) => {
   const body = isEnglish
     ? `A new audit questionnaire request${row.sector?.trim() ? ` tailored to the ${row.sector.trim()} sector` : ""} has been prepared for follow-up.`
     : `Votre formulaire d'audit${row.sector?.trim() ? ` personnalisé pour le secteur ${row.sector.trim()}` : " IA"} est prêt.`;
+  const { domainTitle } = resolveAuditDomainAccess(row.sector);
   const guidance = isEnglish
-    ? "Use the link below from the contact mailbox to handle the next step:"
-    : "Vous pouvez utiliser le lien ci-dessous pour accéder au formulaire :";
+    ? "Use the secure portal below with the username and password you created in your request."
+    : "Utilisez le portail sécurisé ci-dessous avec le username et le mot de passe créés lors de votre demande.";
   const appointmentLine = row.wants_expert_appointment
     ? isEnglish
       ? "Because you asked to discuss the questionnaire with an expert, you can also book a conversation after reviewing it."
@@ -88,9 +92,10 @@ const buildMessage = (row: ProspectFollowupRow) => {
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(body)}</p>
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Prospect email: ${row.email}` : `Adresse e-mail du prospect : ${row.email}`)}</p>
         <p style="margin:0 0 18px;color:#475467;">${escapeHtml(guidance)}</p>
+        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Sector prepared: ${domainTitle}` : `Secteur préparé : ${domainTitle}`)}</p>
         <p style="margin:0 0 18px;">
-          <a href="${escapeHtml(`${AUDIT_FORM_URL}${AUDIT_FORM_URL.includes("?") ? "&" : "?"}sector=${encodeURIComponent(row.sector?.trim() || "")}&profession=${encodeURIComponent(row.profession?.trim() || "")}&country=${encodeURIComponent(row.country?.trim() || "")}`)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">
-            ${escapeHtml(isEnglish ? "Open the audit questionnaire" : "Ouvrir le formulaire d'audit")}
+          <a href="${escapeHtml(AUDIT_LOGIN_URL)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">
+            ${escapeHtml(isEnglish ? "Open the secure audit portal" : "Ouvrir le portail sécurisé")}
           </a>
         </p>
         ${
@@ -114,7 +119,7 @@ const buildMessage = (row: ProspectFollowupRow) => {
     body,
     isEnglish ? `Prospect email: ${row.email}` : `Adresse e-mail du prospect : ${row.email}`,
     guidance,
-    `${AUDIT_FORM_URL}${AUDIT_FORM_URL.includes("?") ? "&" : "?"}sector=${encodeURIComponent(row.sector?.trim() || "")}&profession=${encodeURIComponent(row.profession?.trim() || "")}&country=${encodeURIComponent(row.country?.trim() || "")}`,
+    AUDIT_LOGIN_URL,
     "",
     appointmentLine ?? "",
     appointmentLine ? appointmentUrl : "",
@@ -201,7 +206,22 @@ Deno.serve(async (request) => {
   for (const row of rows) {
     try {
       const message = buildMessage(row);
-      await sendEmail(MAIL_TO, message);
+      const emailResult = await sendEmail(row.email, message);
+
+      await supabase.from("prospect_email_delivery_logs").insert({
+        contact_request_id: row.id,
+        recipient_email: row.email,
+        delivery_type: "audit_form_access",
+        provider: "resend",
+        provider_message_id: emailResult?.id ?? null,
+        status: "sent",
+        subject: message.subject,
+        sent_at: new Date().toISOString(),
+        metadata: {
+          audit_form_url: AUDIT_FORM_URL,
+          audit_login_url: AUDIT_LOGIN_URL,
+        },
+      });
 
       const { error: updateError } = await supabase
         .from("contact_requests")
