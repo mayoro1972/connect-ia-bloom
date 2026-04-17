@@ -66,14 +66,14 @@ const buildMessage = (row: ProspectFollowupRow) => {
   const intro = isEnglish ? `Hello ${row.full_name},` : `Bonjour ${row.full_name},`;
   const body = isEnglish
     ? `A new audit questionnaire request${row.sector?.trim() ? ` tailored to the ${row.sector.trim()} sector` : ""} has been prepared for follow-up.`
-    : `Une nouvelle demande de formulaire d'audit${row.sector?.trim() ? ` personnalise pour le secteur ${row.sector.trim()}` : " IA"} a ete preparee pour suivi.`;
+    : `Votre formulaire d'audit${row.sector?.trim() ? ` personnalisé pour le secteur ${row.sector.trim()}` : " IA"} est prêt.`;
   const guidance = isEnglish
     ? "Use the link below from the contact mailbox to handle the next step:"
-    : "Utilisez le lien ci-dessous depuis la boite contact pour traiter la suite :";
+    : "Vous pouvez utiliser le lien ci-dessous pour accéder au formulaire :";
   const appointmentLine = row.wants_expert_appointment
     ? isEnglish
       ? "Because you asked to discuss the questionnaire with an expert, you can also book a conversation after reviewing it."
-      : "Comme vous avez demandé un échange avec un expert, vous pouvez aussi réserver une conversation après avoir pris connaissance du formulaire."
+      : "Comme vous avez demandé un échange avec un expert, vous pourrez également réserver un rendez-vous après avoir pris connaissance du formulaire."
     : null;
   const closing = isEnglish
     ? "Best regards,\nTransferAI Africa"
@@ -86,7 +86,7 @@ const buildMessage = (row: ProspectFollowupRow) => {
         <h1 style="margin:0 0 20px;font-size:28px;line-height:1.2;color:#101828;">${escapeHtml(subject)}</h1>
         <p style="margin:0 0 14px;color:#101828;">${escapeHtml(intro)}</p>
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(body)}</p>
-        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Prospect email: ${row.email}` : `Email du prospect : ${row.email}`)}</p>
+        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Prospect email: ${row.email}` : `Adresse e-mail du prospect : ${row.email}`)}</p>
         <p style="margin:0 0 18px;color:#475467;">${escapeHtml(guidance)}</p>
         <p style="margin:0 0 18px;">
           <a href="${escapeHtml(`${AUDIT_FORM_URL}${AUDIT_FORM_URL.includes("?") ? "&" : "?"}sector=${encodeURIComponent(row.sector?.trim() || "")}&profession=${encodeURIComponent(row.profession?.trim() || "")}&country=${encodeURIComponent(row.country?.trim() || "")}`)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">
@@ -112,7 +112,7 @@ const buildMessage = (row: ProspectFollowupRow) => {
     intro,
     "",
     body,
-    isEnglish ? `Prospect email: ${row.email}` : `Email du prospect : ${row.email}`,
+    isEnglish ? `Prospect email: ${row.email}` : `Adresse e-mail du prospect : ${row.email}`,
     guidance,
     `${AUDIT_FORM_URL}${AUDIT_FORM_URL.includes("?") ? "&" : "?"}sector=${encodeURIComponent(row.sector?.trim() || "")}&profession=${encodeURIComponent(row.profession?.trim() || "")}&country=${encodeURIComponent(row.country?.trim() || "")}`,
     "",
