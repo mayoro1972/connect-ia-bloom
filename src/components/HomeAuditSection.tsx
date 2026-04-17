@@ -60,12 +60,12 @@ const HomeAuditSection = () => {
                 <p className="max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">{copy.subtitle}</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    to={directLinks.auditLanding}
+                    to={directLinks.auditForm}
                     onClick={() =>
                       trackCtaClick({
                         ctaName: copy.primaryCta,
                         ctaLocation: "home_audit_section",
-                        destination: directLinks.auditLanding,
+                        destination: directLinks.auditForm,
                       })
                     }
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
