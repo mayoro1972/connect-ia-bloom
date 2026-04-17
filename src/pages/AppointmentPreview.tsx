@@ -19,6 +19,7 @@ const appointmentCopy = {
       "demande-renseignement": "Demande de renseignement",
       "contact-devis": "Demande de contact / devis",
       "demande-referencement": "Demande de référencement",
+      "demande-audit": "Demande d'audit gratuit",
       brochure: "Lecture du catalogue domaine",
     },
     pageBadge: "Audit IA gratuit",
@@ -56,6 +57,7 @@ const appointmentCopy = {
       "demande-renseignement": "Audit de cadrage besoin",
       "contact-devis": "Audit de cadrage devis",
       "demande-referencement": "Qualification référencement",
+      "demande-audit": "Echange preparatoire audit",
       brochure: "Audit après lecture du catalogue",
     },
     duration: "Durée conseillée",
@@ -122,6 +124,19 @@ const appointmentCopy = {
         confirmation:
           "Merci pour votre demande. Réservez un échange de qualification si vous souhaitez préciser votre projet de présence sur TransferAI Africa.",
       },
+      "demande-audit": {
+        title: "Échange préparatoire après réception du formulaire d'audit",
+        intro:
+          "Ce rendez-vous intervient après l'envoi du formulaire d'audit. Il permet de clarifier les attentes, expliquer comment remplir le document et éviter les blocages avant l'analyse.",
+        agenda: [
+          "Revenir sur votre contexte et l'objectif de l'audit",
+          "Expliquer comment remplir le formulaire efficacement",
+          "Répondre aux questions avant soumission",
+          "Confirmer la prochaine étape côté TransferAI Africa",
+        ],
+        confirmation:
+          "Merci pour votre demande d'audit. Choisissez un créneau si vous souhaitez échanger avec un expert après réception du formulaire.",
+      },
       brochure: {
         title: "Audit IA gratuit après lecture du catalogue",
         intro:
@@ -142,6 +157,7 @@ const appointmentCopy = {
       "demande-renseignement": "Information request",
       "contact-devis": "Contact / quote request",
       "demande-referencement": "Listing request",
+      "demande-audit": "Free audit request",
       brochure: "Domain catalogue review",
     },
     pageBadge: "Free AI audit",
@@ -179,6 +195,7 @@ const appointmentCopy = {
       "demande-renseignement": "Needs scoping audit",
       "contact-devis": "Quote scoping audit",
       "demande-referencement": "Listing qualification",
+      "demande-audit": "Post-form audit discussion",
       brochure: "Post-catalogue audit",
     },
     duration: "Recommended duration",
@@ -244,6 +261,19 @@ const appointmentCopy = {
         ],
         confirmation:
           "Thank you for your request. Book a qualification call if you would like to discuss your visibility project on TransferAI Africa.",
+      },
+      "demande-audit": {
+        title: "Discussion after receiving the audit form",
+        intro:
+          "This meeting happens after the audit form has been sent. It helps clarify expectations, explain how to complete the questionnaire, and remove blockers before the review starts.",
+        agenda: [
+          "Review your context and the goal of the audit",
+          "Explain how to complete the form efficiently",
+          "Answer open questions before submission",
+          "Confirm the next step with TransferAI Africa",
+        ],
+        confirmation:
+          "Thank you for your audit request. Choose a time slot if you want to discuss the form with an expert after receiving it.",
       },
       brochure: {
         title: "Free AI audit after catalogue review",

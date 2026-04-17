@@ -9,6 +9,7 @@ export type ProspectEmailIntent =
   | "demande-renseignement"
   | "contact-devis"
   | "demande-referencement"
+  | "demande-audit"
   | "inscription"
   | "prise-rdv";
 
@@ -31,6 +32,7 @@ export type ProspectEmailPayload = {
   sourcePage?: string | null;
   language?: string | null;
   appointmentUrl?: string | null;
+  wantsExpertAppointment?: boolean | null;
 };
 
 export const resolveOutboundLanguage = (preferred?: string | null): "fr" | "en" => {

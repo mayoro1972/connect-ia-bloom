@@ -16,6 +16,10 @@ export type Database = {
     Tables: {
       contact_requests: {
         Row: {
+          audit_followup_error: string | null
+          audit_followup_scheduled_at: string | null
+          audit_followup_sent_at: string | null
+          audit_followup_status: string | null
           city: string | null
           company: string
           created_at: string
@@ -32,8 +36,13 @@ export type Database = {
           requested_formations: string | null
           sector: string | null
           source_page: string
+          wants_expert_appointment: boolean
         }
         Insert: {
+          audit_followup_error?: string | null
+          audit_followup_scheduled_at?: string | null
+          audit_followup_sent_at?: string | null
+          audit_followup_status?: string | null
           city?: string | null
           company: string
           created_at?: string
@@ -50,8 +59,13 @@ export type Database = {
           requested_formations?: string | null
           sector?: string | null
           source_page?: string
+          wants_expert_appointment?: boolean
         }
         Update: {
+          audit_followup_error?: string | null
+          audit_followup_scheduled_at?: string | null
+          audit_followup_sent_at?: string | null
+          audit_followup_status?: string | null
           city?: string | null
           company?: string
           created_at?: string
@@ -68,6 +82,7 @@ export type Database = {
           requested_formations?: string | null
           sector?: string | null
           source_page?: string
+          wants_expert_appointment?: boolean
         }
         Relationships: []
       }
@@ -760,6 +775,7 @@ export type Database = {
           requested_formations_input?: string | null
           sector_input?: string | null
           source_page_input?: string | null
+          wants_expert_appointment_input?: boolean | null
         }
         Returns: string
       }

@@ -14,6 +14,9 @@ describe("appointment booking routing", () => {
     expect(appointmentBookings["contact-devis"]).toBe(
       sharedBookingLink,
     );
+    expect(appointmentBookings["demande-audit"]).toBe(
+      sharedBookingLink,
+    );
     expect(appointmentBookings.brochure).toBe(sharedBookingLink);
   });
 
@@ -25,6 +28,7 @@ describe("appointment booking routing", () => {
   });
 
   it("routes the audit form through the integrated public path", () => {
-    expect(directLinks.auditForm).toBe("/formulaire-audit-ia/index.html");
+    expect(directLinks.auditForm).toBe("/demande-audit-gratuit");
+    expect(directLinks.auditQuestionnaire).toBe("/formulaire-audit-ia/index.html");
   });
 });

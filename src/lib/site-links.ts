@@ -3,7 +3,7 @@ export type ContactIntent =
   | "demande-renseignement"
   | "contact-devis"
   | "demande-referencement";
-export type AppointmentSource = ContactIntent | "brochure";
+export type AppointmentSource = ContactIntent | "demande-audit" | "brochure";
 
 export type SocialLink = {
   label: string;
@@ -11,7 +11,11 @@ export type SocialLink = {
   kind: "social" | "messaging" | "video";
 };
 
-const auditFormUrl =
+const auditRequestUrl =
+  import.meta.env.VITE_AUDIT_REQUEST_URL ||
+  "/demande-audit-gratuit";
+
+const auditQuestionnaireUrl =
   import.meta.env.VITE_AUDIT_FORM_URL ||
   "/formulaire-audit-ia/index.html";
 
@@ -35,7 +39,8 @@ export const directLinks = {
   whatsapp: "https://wa.me/225071657733990",
   auditLanding: "/audit-ia-gratuit",
   appointment: "/prise-rdv",
-  auditForm: auditFormUrl,
+  auditForm: auditRequestUrl,
+  auditQuestionnaire: auditQuestionnaireUrl,
   calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   map: "https://www.google.com/maps/search/?api=1&query=Nettelecomci%2C+Residence+de+la+Paix%2C+Riviera+3%2C+carrefour+Sainte+Famille%2C+Abidjan%2C+Cote+d%27Ivoire",
 };
@@ -45,6 +50,7 @@ export const appointmentBookings: Record<AppointmentSource, string> = {
   "demande-catalogue": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   "demande-renseignement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   "demande-referencement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+  "demande-audit": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   brochure: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
 };
 

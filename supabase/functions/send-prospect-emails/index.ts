@@ -7,6 +7,7 @@ type ProspectEmailIntent =
   | "demande-renseignement"
   | "contact-devis"
   | "demande-referencement"
+  | "demande-audit"
   | "inscription"
   | "prise-rdv";
 
@@ -29,6 +30,7 @@ type ProspectEmailPayload = {
   sourcePage?: string | null;
   language?: string | null;
   appointmentUrl?: string | null;
+  wantsExpertAppointment?: boolean | null;
 };
 
 type EmailMessage = {
@@ -230,6 +232,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "demande-renseignement": "Demande de renseignement",
       "contact-devis": "Demande de devis",
       "demande-referencement": "Demande de referencement",
+      "demande-audit": "Demande d'audit gratuit",
       inscription: "Inscription a une formation",
       "prise-rdv": "Demande de prise de rendez-vous",
     } satisfies Record<ProspectEmailIntent, string>,
@@ -337,6 +340,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       "demande-renseignement": "Information request",
       "contact-devis": "Quote request",
       "demande-referencement": "Listing request",
+      "demande-audit": "Free audit request",
       inscription: "Training registration",
       "prise-rdv": "Meeting request",
     } satisfies Record<ProspectEmailIntent, string>,
@@ -440,6 +444,12 @@ const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: Prospe
     return copy.acknowledgementSubject;
   }
 
+  if (payload.intent === "demande-audit") {
+    return copy === translations.fr
+      ? "Nous avons bien recu votre demande d'audit - TransferAI Africa"
+      : "We received your audit request - TransferAI Africa";
+  }
+
   if (payload.intent === "prise-rdv") {
     return copy === translations.fr
       ? "Nous avons bien reçu votre demande de rendez-vous - TransferAI Africa"
@@ -468,6 +478,12 @@ const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: Prosp
     return copy.listingResponseDelay;
   }
 
+  if (payload.intent === "demande-audit") {
+    return copy === translations.fr
+      ? "Nous vous envoyons le formulaire d'audit sous environ 30 minutes. Si vous avez demandé un échange avec un expert, le lien de rendez-vous sera également proposé après réception du formulaire."
+      : "We will send the audit questionnaire in about 30 minutes. If you asked to discuss it with an expert, the meeting option will also be included after the questionnaire is delivered.";
+  }
+
   if (payload.intent === "prise-rdv") {
     return copy.acknowledgementNextStep;
   }
@@ -482,6 +498,8 @@ const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: Prosp
 };
 
 const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
+  const intentLabel = copy.intentLabels[payload.intent];
+
   if (payload.intent === "inscription") {
     const formationLabel = payload.formationTitle?.trim() || copy.defaultTrainingLabel;
     const participantsLabel =
@@ -496,6 +514,14 @@ const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectE
 
   if (payload.intent === "demande-referencement") {
     return copy.listingAcknowledgementBody;
+  }
+
+  if (payload.intent === "demande-audit") {
+    if (copy === translations.fr) {
+      return `Nous confirmons la bonne reception de votre demande d'audit gratuit. Un accuse de reception vous est envoye immediatement et le formulaire d'audit sera transmis a cette adresse sous environ 30 minutes.${payload.wantsExpertAppointment ? " Vous avez egalement confirme votre souhait d'echanger avec un expert apres reception du formulaire." : ""}`;
+    }
+
+    return `We confirm receipt of your free audit request. An acknowledgement email is sent immediately and the audit questionnaire will be delivered to this address in about 30 minutes.${payload.wantsExpertAppointment ? " You also confirmed that you would like to discuss the questionnaire with an expert after receiving it." : ""}`;
   }
 
   if (payload.intent === "demande-catalogue") {
