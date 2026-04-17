@@ -23,6 +23,7 @@ export type Database = {
           city: string | null
           company: string
           created_at: string
+          country: string | null
           email: string
           full_name: string
           id: string
@@ -31,6 +32,7 @@ export type Database = {
           participants: number | null
           phone: string
           privacy_consent: boolean
+          profession: string | null
           request_intent: string
           requested_domain: string | null
           requested_formations: string | null
@@ -46,6 +48,7 @@ export type Database = {
           city?: string | null
           company: string
           created_at?: string
+          country?: string | null
           email: string
           full_name: string
           id?: string
@@ -54,6 +57,7 @@ export type Database = {
           participants?: number | null
           phone: string
           privacy_consent?: boolean
+          profession?: string | null
           request_intent?: string
           requested_domain?: string | null
           requested_formations?: string | null
@@ -69,6 +73,7 @@ export type Database = {
           city?: string | null
           company?: string
           created_at?: string
+          country?: string | null
           email?: string
           full_name?: string
           id?: string
@@ -77,6 +82,7 @@ export type Database = {
           participants?: number | null
           phone?: string
           privacy_consent?: boolean
+          profession?: string | null
           request_intent?: string
           requested_domain?: string | null
           requested_formations?: string | null
@@ -770,9 +776,11 @@ export type Database = {
           participants_input?: number | null
           phone_input: string
           privacy_consent_input?: boolean | null
+          profession_input?: string | null
           request_intent_input?: string | null
           requested_domain_input?: string | null
           requested_formations_input?: string | null
+          country_input?: string | null
           sector_input?: string | null
           source_page_input?: string | null
           wants_expert_appointment_input?: boolean | null

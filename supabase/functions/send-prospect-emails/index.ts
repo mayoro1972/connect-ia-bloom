@@ -40,6 +40,16 @@ type EmailMessage = {
   replyTo?: string;
 };
 
+type AuditDomainGuide = {
+  keywords: string[];
+  title: string;
+  intro: string;
+  focusTitle: string;
+  focusItems: string[];
+  benefitsTitle: string;
+  benefitItems: string[];
+};
+
 type TranslationCopy = {
   missingValue: string;
   noExtraMessage: string;
@@ -101,6 +111,15 @@ type TranslationCopy = {
     web: string;
     audit: string;
   };
+  auditExplainerSubject: (domainLabel: string) => string;
+  auditExplainerIntro: (domainLabel: string) => string;
+  auditExplainerGenericDomain: string;
+  auditExplainerWhatYouReceiveTitle: string;
+  auditExplainerWhatYouReceiveItems: string[];
+  auditExplainerProcessTitle: string;
+  auditExplainerProcessItems: string[];
+  auditExplainerMeetingNote: string;
+  auditExplainerFormDelayNote: string;
   closing: string;
   intentLabels: Record<ProspectEmailIntent, string>;
   defaultTrainingLabel: string;
@@ -226,6 +245,30 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       web: "Voir la version web",
       audit: "Réserver un audit IA gratuit",
     },
+    auditExplainerSubject: (domainLabel: string) =>
+      `Ce que notre audit IA va regarder pour ${domainLabel} - TransferAI Africa`,
+    auditExplainerIntro: (domainLabel: string) =>
+      `Avant de vous envoyer le formulaire d'audit, voici l'angle que nous utilisons le plus souvent pour analyser les besoins du domaine ${domainLabel}. L'objectif est de vous donner un cadre simple avant le questionnaire et avant un éventuel échange avec notre expert IA.`,
+    auditExplainerGenericDomain: "votre domaine",
+    auditExplainerWhatYouReceiveTitle: "Ce que votre entreprise obtient",
+    auditExplainerWhatYouReceiveItems: [
+      "Un diagnostic synthétique des priorités IA",
+      "Les irritants et opportunités les plus pertinents",
+      "Des cas d'usage concrets par métier ou par équipe",
+      "Une première feuille de route 30 / 60 / 90 jours",
+      "Une orientation vers la bonne suite : formation, accompagnement ou solution",
+    ],
+    auditExplainerProcessTitle: "Comment se déroule l'audit",
+    auditExplainerProcessItems: [
+      "Prise de contact pour comprendre votre contexte, vos enjeux et votre secteur",
+      "Audit ciblé sur les irritants, tâches critiques et zones de gains potentiels",
+      "Restitution claire des priorités, risques et opportunités",
+      "Orientation vers la bonne suite : formation, accompagnement, automatisation ou déploiement métier",
+    ],
+    auditExplainerMeetingNote:
+      "Si vous avez demandé un rendez-vous, cet échange servira à clarifier vos priorités avant de remplir complètement la fiche d'audit.",
+    auditExplainerFormDelayNote:
+      "Le formulaire d'audit personnalisé vous sera ensuite envoyé séparément sous environ 30 minutes.",
     closing: "Merci pour votre confiance,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Demande de catalogue",
@@ -334,6 +377,30 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
       web: "View web version",
       audit: "Book a free AI audit",
     },
+    auditExplainerSubject: (domainLabel: string) =>
+      `What our AI audit will focus on for ${domainLabel} - TransferAI Africa`,
+    auditExplainerIntro: (domainLabel: string) =>
+      `Before sending your audit questionnaire, here is the angle we most often use to assess needs in ${domainLabel}. The goal is to give you a clear frame before the questionnaire and before any discussion with our AI expert.`,
+    auditExplainerGenericDomain: "your domain",
+    auditExplainerWhatYouReceiveTitle: "What your organization receives",
+    auditExplainerWhatYouReceiveItems: [
+      "A concise diagnosis of AI priorities",
+      "The most relevant frictions and opportunities",
+      "Concrete use cases by function or team",
+      "An initial 30 / 60 / 90 day roadmap",
+      "Guidance toward the right next step: training, support, or solution",
+    ],
+    auditExplainerProcessTitle: "How the audit works",
+    auditExplainerProcessItems: [
+      "Initial contact to understand your context, challenges, and sector",
+      "Targeted audit of friction points, critical tasks, and quick-win areas",
+      "Clear restitution of priorities, risks, and opportunities",
+      "Guidance toward the right next step: training, support, automation, or deployment",
+    ],
+    auditExplainerMeetingNote:
+      "If you requested a meeting, that conversation will help clarify your priorities before you fully complete the audit questionnaire.",
+    auditExplainerFormDelayNote:
+      "Your personalized audit questionnaire will then be sent separately in about 30 minutes.",
     closing: "Thank you for your trust,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Catalogue request",
@@ -419,6 +486,510 @@ const sentenceCase = (value?: string | null) => {
   }
 
   return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+};
+
+const normalizeForMatch = (value?: string | null) =>
+  (value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+const auditDomainGuides: Record<"fr" | "en", AuditDomainGuide[]> = {
+  fr: [
+    {
+      keywords: ["assistanat", "secretariat", "assistant", "office manager", "support executif"],
+      title: "Assistanat & Secrétariat",
+      intro:
+        "Dans ce domaine, l'audit sert à repérer où l'IA peut faire gagner du temps sur les e-mails, comptes rendus, agendas, notes et coordination sans dégrader la fiabilité.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Flux documentaires et rédactionnels répétitifs",
+        "Préparation des réunions et synthèses de direction",
+        "Coordination, relances et organisation du quotidien",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Réduire le temps administratif à faible valeur",
+        "Mieux structurer les livrables de direction",
+        "Fiabiliser la circulation d'information",
+      ],
+    },
+    {
+      keywords: ["ressources humaines", "rh", "drh", "recrutement", "people", "human resources"],
+      title: "Ressources Humaines",
+      intro:
+        "Dans les RH, l'audit sert à cadrer des usages responsables de l'IA sur le recrutement, l'onboarding, la communication RH et la montée en compétences.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Tri, présélection et préparation des entretiens",
+        "Communication RH et accompagnement des managers",
+        "Plans de formation et structuration des compétences",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Réduire le temps de recrutement",
+        "Mieux personnaliser les parcours de développement",
+        "Concilier efficacité, équité et conformité",
+      ],
+    },
+    {
+      keywords: ["marketing", "communication", "contenu", "growth", "marcom"],
+      title: "Marketing & Communication",
+      intro:
+        "Ici, l'audit sert à prioriser les usages IA entre production de contenu, segmentation, analyse d'audience et pilotage des campagnes.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Création de contenu et adaptation multiformat",
+        "Segmentation, personnalisation et campagnes",
+        "Veille, insights et analyse d'audience",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Produire plus vite sans dégrader la cohérence de marque",
+        "Mieux piloter les campagnes et les messages",
+        "Transformer la veille en décisions marketing",
+      ],
+    },
+    {
+      keywords: ["finance", "comptabilite", "comptable", "controle", "audit interne"],
+      title: "Finance & Comptabilité",
+      intro:
+        "L'audit aide à choisir les usages IA les plus pertinents entre reporting, analyse, conformité, fraude et automatisation comptable.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Reporting, consolidation et production d'analyses",
+        "Détection d'anomalies, audit et conformité",
+        "Automatisation des workflows comptables et financiers",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Fiabiliser les analyses et contrôles",
+        "Réduire le temps de production des livrables",
+        "Identifier les cas d'usage à ROI rapide",
+      ],
+    },
+    {
+      keywords: ["juridique", "compliance", "conformite", "dpo", "risques", "legal"],
+      title: "Juridique & Conformité",
+      intro:
+        "Dans ce domaine, l'audit sert à cadrer des usages IA responsables sur la recherche, la revue documentaire, la conformité et la rédaction sensible.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Recherche documentaire et veille réglementaire",
+        "Analyse contractuelle et revue de clauses",
+        "Gouvernance, confidentialité et validation humaine",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Réduire le temps de recherche et de revue",
+        "Fiabiliser les processus documentaires",
+        "Encadrer l'usage de l'IA sur les sujets sensibles",
+      ],
+    },
+    {
+      keywords: ["service client", "support client", "cx", "centre de contact", "customer support"],
+      title: "Service Client",
+      intro:
+        "Ici, l'audit sert à voir où l'IA peut améliorer la qualité de réponse, la vitesse de traitement et la structuration du support.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Demandes entrantes et priorisation",
+        "Réponses, scripts, base de connaissance et FAQ",
+        "Chatbots, relais humains et qualité de service",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Réduire les délais de réponse",
+        "Améliorer la qualité et la cohérence",
+        "Mieux structurer les escalades et la FAQ",
+      ],
+    },
+    {
+      keywords: ["data", "analyse", "analytique", "business intelligence", "dashboard", "bi"],
+      title: "Data & Analyse",
+      intro:
+        "L'audit sert à identifier les zones où l'IA peut renforcer l'analyse, la visualisation, la synthèse et l'aide à la décision.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Sources de données, reporting et dashboards",
+        "Synthèse, interprétation et aide à la décision",
+        "Automatisation analytique et culture data",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Réduire le temps passé à consolider les données",
+        "Créer des analyses plus utiles aux décideurs",
+        "Monter en maturité analytique avec méthode",
+      ],
+    },
+    {
+      keywords: ["administration", "gestion", "coordination", "operations", "operatoire", "operational"],
+      title: "Administration & Gestion",
+      intro:
+        "L'audit sert à repérer les tâches administratives, validations, suivis et reporting qui peuvent être fluidifiés rapidement.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Processus répétitifs et gestion documentaire",
+        "Suivi des demandes et coordination interne",
+        "Reporting, tableaux de bord et traçabilité",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Réduire la charge de ressaisie et de suivi",
+        "Mieux structurer les processus internes",
+        "Améliorer la traçabilité et la visibilité",
+      ],
+    },
+    {
+      keywords: ["management", "leadership", "direction generale", "manager", "transformation", "direction"],
+      title: "Management & Leadership",
+      intro:
+        "Dans ce domaine, l'audit sert à clarifier la bonne trajectoire d'adoption, les priorités d'équipe et la gouvernance des usages IA.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Vision, cas d'usage et priorités stratégiques",
+        "Conduite du changement et alignement des équipes",
+        "Gouvernance, qualité et pilotage de l'adoption",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Éviter les projets IA dispersés",
+        "Installer une trajectoire claire pour les équipes",
+        "Faire de l'IA un levier managérial concret",
+      ],
+    },
+    {
+      keywords: ["it", "informatique", "transformation digitale", "dsi", "integration", "digitale", "digital"],
+      title: "IT & Transformation Digitale",
+      intro:
+        "C'est le domaine où l'audit est le plus utile pour choisir les bons copilotes, workflows, outils no-code et cas d'automatisation sans créer de dette inutile.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Copilotes, outils IA et stacks à prioriser",
+        "Workflows, no-code, low-code et automatisation",
+        "Architecture d'usage, gouvernance et sécurité",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Choisir les bons outils avant d'empiler les solutions",
+        "Réduire les cycles de test et d'intégration",
+        "Installer une logique d'adoption plus maintenable",
+      ],
+    },
+    {
+      keywords: ["formation", "pedagogie", "academie", "lms", "apprenant", "teaching", "education"],
+      title: "Formation & Pédagogie",
+      intro:
+        "L'audit sert à identifier où l'IA peut moderniser la conception, la personnalisation, la production de contenus et le suivi apprenant.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Conception de parcours et supports pédagogiques",
+        "Tutorat, assistants IA et personnalisation",
+        "Évaluation, LMS et analytics de formation",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Produire plus vite des contenus pédagogiques utiles",
+        "Améliorer l'expérience apprenant",
+        "Structurer une pédagogie augmentée et mesurable",
+      ],
+    },
+    {
+      keywords: ["sante", "bien-etre", "hse", "qvt", "prevention", "wellness", "health"],
+      title: "Santé & Bien-être",
+      intro:
+        "L'audit sert à voir où l'IA peut aider à la prévention, au suivi, à la documentation et aux programmes santé en entreprise.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Prévention des risques et conformité HSE",
+        "Suivi, reporting et documentation",
+        "Programmes bien-être, QVT et vigilance terrain",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Mieux structurer la prévention",
+        "Rendre le suivi plus visible et traçable",
+        "Identifier les gains rapides sans complexifier les équipes",
+      ],
+    },
+    {
+      keywords: ["diplomatie", "affaires internationales", "affaires publiques", "institutions", "international"],
+      title: "Diplomatie & Affaires Internationales",
+      intro:
+        "L'audit aide à repérer comment l'IA peut renforcer la veille, la préparation de notes, l'analyse et les communications multilingues.",
+      focusTitle: "Ce que l'audit regarde",
+      focusItems: [
+        "Veille géopolitique, pays et secteurs",
+        "Notes, briefings et préparation décisionnelle",
+        "Communication multilingue et contexte international",
+      ],
+      benefitsTitle: "Bénéfices attendus",
+      benefitItems: [
+        "Accélérer les notes et synthèses",
+        "Mieux structurer l'analyse stratégique",
+        "Renforcer la préparation des messages et positions",
+      ],
+    },
+  ],
+  en: [
+    {
+      keywords: ["assistanat", "secretariat", "assistant", "office manager", "executive support"],
+      title: "Executive Assistance & Administration",
+      intro:
+        "In this area, the audit helps identify where AI can save time on emails, meeting notes, calendars, internal coordination, and executive support without reducing reliability.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Repetitive documentation and writing flows",
+        "Meeting preparation and executive summaries",
+        "Coordination, follow-ups, and day-to-day organization",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Reduce low-value administrative time",
+        "Structure executive deliverables more clearly",
+        "Improve information flow reliability",
+      ],
+    },
+    {
+      keywords: ["human resources", "hr", "recruitment", "people", "drh", "ressources humaines"],
+      title: "Human Resources",
+      intro:
+        "In HR, the audit helps frame responsible AI use cases for recruitment, onboarding, HR communication, and capability building.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Screening, pre-selection, and interview preparation",
+        "HR communication and manager support",
+        "Training plans and skills structuring",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Reduce recruitment cycle time",
+        "Personalize development paths more effectively",
+        "Balance efficiency, fairness, and compliance",
+      ],
+    },
+    {
+      keywords: ["marketing", "communication", "content", "growth", "brand"],
+      title: "Marketing & Communication",
+      intro:
+        "Here, the audit helps prioritize AI use cases across content production, segmentation, audience analysis, and campaign steering.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Content creation and multi-format adaptation",
+        "Segmentation, personalization, and campaigns",
+        "Monitoring, insights, and audience analysis",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Produce faster without weakening brand consistency",
+        "Pilot campaigns and messaging more effectively",
+        "Turn monitoring into marketing decisions",
+      ],
+    },
+    {
+      keywords: ["finance", "accounting", "comptabilite", "controller", "internal audit"],
+      title: "Finance & Accounting",
+      intro:
+        "The audit helps select the most relevant AI use cases across reporting, analysis, compliance, fraud detection, and accounting automation.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Reporting, consolidation, and analytical production",
+        "Anomaly detection, audit, and compliance",
+        "Automation of accounting and financial workflows",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Strengthen analysis and control reliability",
+        "Reduce time spent producing deliverables",
+        "Identify fast-ROI use cases",
+      ],
+    },
+    {
+      keywords: ["legal", "compliance", "risk", "dpo", "juridique", "conformite"],
+      title: "Legal & Compliance",
+      intro:
+        "In this domain, the audit frames responsible AI use for research, document review, compliance, and sensitive drafting.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Document research and regulatory monitoring",
+        "Contract analysis and clause review",
+        "Governance, confidentiality, and human validation",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Reduce research and review time",
+        "Improve documentary process reliability",
+        "Set clear guardrails for sensitive AI use",
+      ],
+    },
+    {
+      keywords: ["customer service", "support", "cx", "contact center", "service client"],
+      title: "Customer Service",
+      intro:
+        "Here, the audit helps identify where AI can improve response quality, treatment speed, and support structuring.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Incoming requests and prioritization",
+        "Responses, scripts, knowledge base, and FAQ",
+        "Chatbots, human escalation, and service quality",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Reduce response times",
+        "Improve quality and consistency",
+        "Structure escalations and FAQ more effectively",
+      ],
+    },
+    {
+      keywords: ["data", "analytics", "analysis", "bi", "dashboard", "business intelligence"],
+      title: "Data & Analytics",
+      intro:
+        "The audit identifies where AI can strengthen analysis, visualization, synthesis, and decision support.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Data sources, reporting, and dashboards",
+        "Synthesis, interpretation, and decision support",
+        "Analytical automation and data culture",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Reduce time spent consolidating data",
+        "Create analysis that is more useful for decision-makers",
+        "Raise analytical maturity with method",
+      ],
+    },
+    {
+      keywords: ["administration", "operations", "coordination", "management support", "gestion"],
+      title: "Administration & Operations",
+      intro:
+        "The audit helps spot administrative tasks, validations, follow-ups, and reporting that can be streamlined quickly.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Repetitive processes and document handling",
+        "Request tracking and internal coordination",
+        "Reporting, dashboards, and traceability",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Reduce re-entry and tracking workload",
+        "Structure internal processes more clearly",
+        "Improve traceability and visibility",
+      ],
+    },
+    {
+      keywords: ["management", "leadership", "general management", "manager", "transformation", "direction"],
+      title: "Management & Leadership",
+      intro:
+        "In this area, the audit clarifies the right adoption path, team priorities, and governance for AI use.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Vision, strategic use cases, and priorities",
+        "Change management and team alignment",
+        "Governance, quality, and adoption steering",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Avoid scattered AI initiatives",
+        "Set a clear path for teams",
+        "Turn AI into a concrete management lever",
+      ],
+    },
+    {
+      keywords: ["it", "digital transformation", "cio", "integration", "dsi", "informatique"],
+      title: "IT & Digital Transformation",
+      intro:
+        "This is where the audit is especially useful to choose the right copilots, workflows, no-code tools, and automation cases without creating unnecessary debt.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Copilots, AI tools, and stacks to prioritize",
+        "Workflows, no-code, low-code, and automation",
+        "Usage architecture, governance, and security",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Choose the right tools before stacking solutions",
+        "Reduce test and integration cycles",
+        "Install a more maintainable adoption logic",
+      ],
+    },
+    {
+      keywords: ["training", "learning", "pedagogy", "lms", "education", "formation"],
+      title: "Training & Learning Design",
+      intro:
+        "The audit helps identify where AI can modernize instructional design, personalization, content production, and learner follow-up.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Learning journey design and teaching materials",
+        "Tutoring, AI assistants, and personalization",
+        "Assessment, LMS, and training analytics",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Produce useful learning content faster",
+        "Improve the learner experience",
+        "Structure a measurable augmented pedagogy",
+      ],
+    },
+    {
+      keywords: ["health", "well-being", "wellbeing", "hse", "prevention", "sante"],
+      title: "Health & Well-being",
+      intro:
+        "The audit helps identify where AI can support prevention, follow-up, documentation, and workplace health programmes.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Risk prevention and HSE compliance",
+        "Follow-up, reporting, and documentation",
+        "Well-being programmes and field vigilance",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Structure prevention more clearly",
+        "Make follow-up more visible and traceable",
+        "Identify quick wins without overcomplicating team work",
+      ],
+    },
+    {
+      keywords: ["diplomacy", "international affairs", "public affairs", "institutions", "international"],
+      title: "Diplomacy & International Affairs",
+      intro:
+        "The audit helps identify how AI can strengthen monitoring, briefing preparation, analysis, and multilingual communication.",
+      focusTitle: "What the audit looks at",
+      focusItems: [
+        "Geopolitical, country, and sector monitoring",
+        "Notes, briefings, and decision preparation",
+        "Multilingual communication and international context",
+      ],
+      benefitsTitle: "Expected benefits",
+      benefitItems: [
+        "Accelerate notes and synthesis work",
+        "Structure strategic analysis more clearly",
+        "Improve preparation of messages and positions",
+      ],
+    },
+  ],
+};
+
+const resolveAuditDomainGuide = (payload: ProspectEmailPayload) => {
+  const language = payload.language === "en" ? "en" : "fr";
+  const haystack = normalizeForMatch(
+    [payload.domain, payload.role, payload.company, payload.message].filter(Boolean).join(" "),
+  );
+
+  const matchedGuide =
+    auditDomainGuides[language].find((guide) =>
+      guide.keywords.some((keyword) => haystack.includes(normalizeForMatch(keyword))),
+    ) ?? null;
+
+  return {
+    copyLanguage: language,
+    guide: matchedGuide,
+    domainLabel:
+      matchedGuide?.title ||
+      sentenceCase(payload.domain) ||
+      sentenceCase(payload.role) ||
+      getCopy(payload.language).auditExplainerGenericDomain,
+  };
 };
 
 const buildContactNeedTopic = (copy: TranslationCopy, payload: ProspectEmailPayload) =>
@@ -838,6 +1409,94 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
   };
 };
 
+const buildAuditExplainer = (payload: ProspectEmailPayload): EmailMessage | null => {
+  if (payload.intent !== "demande-audit") {
+    return null;
+  }
+
+  const copy = getCopy(payload.language);
+  const intro = getEmailGreeting(payload.language === "en" ? "en" : "fr", payload.fullName);
+  const { guide, domainLabel } = resolveAuditDomainGuide(payload);
+  const focusItems = guide?.focusItems ?? copy.auditExplainerWhatYouReceiveItems;
+  const benefitItems = guide?.benefitItems ?? copy.auditExplainerProcessItems;
+  const focusTitle = guide?.focusTitle ?? copy.auditExplainerWhatYouReceiveTitle;
+  const benefitsTitle = guide?.benefitsTitle ?? copy.auditExplainerProcessTitle;
+  const domainIntro = guide?.intro ?? copy.auditExplainerIntro(domainLabel);
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
+      <div style="max-width:720px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
+        <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#f28c28;">TransferAI Africa</p>
+        <h1 style="margin:0 0 20px;font-size:28px;line-height:1.2;color:#101828;">${escapeHtml(copy.auditExplainerSubject(domainLabel))}</h1>
+        <p style="margin:0 0 14px;color:#101828;">${escapeHtml(intro)}</p>
+        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(copy.auditExplainerIntro(domainLabel))}</p>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(domainLabel)}</p>
+          <p style="margin:0;color:#475467;">${escapeHtml(domainIntro)}</p>
+        </div>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(focusTitle)}</p>
+          ${asHtmlList(focusItems)}
+        </div>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(benefitsTitle)}</p>
+          ${asHtmlList(benefitItems)}
+        </div>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.auditExplainerWhatYouReceiveTitle)}</p>
+          ${asHtmlList(copy.auditExplainerWhatYouReceiveItems)}
+        </div>
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#101828;">${escapeHtml(copy.auditExplainerProcessTitle)}</p>
+          ${asHtmlList(copy.auditExplainerProcessItems)}
+        </div>
+        <p style="margin:24px 0 0;color:#475467;">${escapeHtml(copy.auditExplainerFormDelayNote)}</p>
+        ${
+          payload.wantsExpertAppointment
+            ? `<p style="margin:14px 0 0;color:#475467;">${escapeHtml(copy.auditExplainerMeetingNote)}</p>`
+            : ""
+        }
+        <p style="margin:24px 0 0;color:#475467;white-space:pre-line;">${escapeHtml(copy.closing)}</p>
+      </div>
+    </div>
+  `;
+
+  const text = [
+    intro,
+    "",
+    copy.auditExplainerIntro(domainLabel),
+    "",
+    `${domainLabel}`,
+    domainIntro,
+    "",
+    `${focusTitle} :`,
+    ...focusItems.map((item) => `- ${item}`),
+    "",
+    `${benefitsTitle} :`,
+    ...benefitItems.map((item) => `- ${item}`),
+    "",
+    `${copy.auditExplainerWhatYouReceiveTitle} :`,
+    ...copy.auditExplainerWhatYouReceiveItems.map((item) => `- ${item}`),
+    "",
+    `${copy.auditExplainerProcessTitle} :`,
+    ...copy.auditExplainerProcessItems.map((item) => `- ${item}`),
+    "",
+    copy.auditExplainerFormDelayNote,
+    payload.wantsExpertAppointment ? copy.auditExplainerMeetingNote : "",
+    "",
+    copy.closing,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return {
+    subject: copy.auditExplainerSubject(domainLabel),
+    html,
+    text,
+    replyTo: MAIL_TO,
+  };
+};
+
 const sendEmail = async (to: string, message: EmailMessage) => {
   if (!RESEND_API_KEY) {
     throw new Error("email_provider_not_configured");
@@ -944,14 +1603,16 @@ Deno.serve(async (request) => {
     const internalMessage = buildInternalNotification(payload);
     const acknowledgement = buildAcknowledgement(payload);
     const qualifiedResponse = buildQualifiedResponse(payload);
+    const auditExplainer = buildAuditExplainer(payload);
 
     const deliveries = await Promise.all([
       sendEmail(MAIL_TO, internalMessage),
       sendEmail(payload.email, acknowledgement),
+      auditExplainer ? sendEmail(payload.email, auditExplainer) : Promise.resolve(null),
       qualifiedResponse ? sendEmail(payload.email, qualifiedResponse) : Promise.resolve(null),
     ]);
 
-    const [internalResult, acknowledgementResult, qualifiedResponseResult] = deliveries;
+    const [internalResult, acknowledgementResult, auditExplainerResult, qualifiedResponseResult] = deliveries;
     let catalogueDeliveryLogError: string | null = null;
 
     try {
@@ -965,6 +1626,8 @@ Deno.serve(async (request) => {
         ok: true,
         internal: internalResult,
         acknowledgement: acknowledgementResult,
+        auditExplainer: auditExplainerResult,
+        auditExplainerTriggered: Boolean(auditExplainer),
         qualifiedResponse: qualifiedResponseResult,
         qualifiedResponseTriggered: Boolean(qualifiedResponse),
         catalogueDeliveryLogError,

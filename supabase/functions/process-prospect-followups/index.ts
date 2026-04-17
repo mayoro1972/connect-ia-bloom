@@ -5,6 +5,9 @@ type ProspectFollowupRow = {
   full_name: string;
   email: string;
   company: string;
+  profession: string | null;
+  country: string | null;
+  sector: string | null;
   language: string;
   wants_expert_appointment: boolean;
 };
@@ -17,6 +20,7 @@ const corsHeaders = {
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <contact@transferai.ci>";
+const MAIL_TO = Deno.env.get("MAIL_TO") ?? "contact@transferai.ci";
 const SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
 const AUDIT_FORM_URL =
   (Deno.env.get("PUBLIC_AUDIT_FORM_URL") ?? `${SITE_URL}/formulaire-audit-ia/index.html`).trim();
@@ -45,8 +49,8 @@ const escapeHtml = (value: string) =>
 const buildAppointmentUrl = (row: ProspectFollowupRow) => {
   const params = new URLSearchParams({
     source: "demande-audit",
-    domain: "Audit IA gratuit",
-    company: row.company,
+    domain: row.sector?.trim() || "Audit IA gratuit",
+    company: row.profession?.trim() || row.company,
     fullName: row.full_name,
   });
 
@@ -57,15 +61,15 @@ const buildMessage = (row: ProspectFollowupRow) => {
   const isEnglish = row.language?.toLowerCase().startsWith("en");
   const appointmentUrl = buildAppointmentUrl(row);
   const subject = isEnglish
-    ? "Your AI audit questionnaire is ready - TransferAI Africa"
-    : "Votre formulaire d'audit IA est prêt - TransferAI Africa";
+    ? `Your ${row.sector?.trim() || "AI"} audit questionnaire is ready - TransferAI Africa`
+    : `Votre formulaire d'audit ${row.sector?.trim() || "IA"} est prêt - TransferAI Africa`;
   const intro = isEnglish ? `Hello ${row.full_name},` : `Bonjour ${row.full_name},`;
   const body = isEnglish
-    ? "As promised, here is your AI audit questionnaire. You can now review it and complete it at your pace."
-    : "Comme convenu, voici votre formulaire d'audit IA. Vous pouvez maintenant le consulter et le remplir à votre rythme.";
+    ? `A new audit questionnaire request${row.sector?.trim() ? ` tailored to the ${row.sector.trim()} sector` : ""} has been prepared for follow-up.`
+    : `Une nouvelle demande de formulaire d'audit${row.sector?.trim() ? ` personnalise pour le secteur ${row.sector.trim()}` : " IA"} a ete preparee pour suivi.`;
   const guidance = isEnglish
-    ? "Please use the link below to access the questionnaire:"
-    : "Utilisez le lien ci-dessous pour accéder au formulaire :";
+    ? "Use the link below from the contact mailbox to handle the next step:"
+    : "Utilisez le lien ci-dessous depuis la boite contact pour traiter la suite :";
   const appointmentLine = row.wants_expert_appointment
     ? isEnglish
       ? "Because you asked to discuss the questionnaire with an expert, you can also book a conversation after reviewing it."
@@ -82,9 +86,10 @@ const buildMessage = (row: ProspectFollowupRow) => {
         <h1 style="margin:0 0 20px;font-size:28px;line-height:1.2;color:#101828;">${escapeHtml(subject)}</h1>
         <p style="margin:0 0 14px;color:#101828;">${escapeHtml(intro)}</p>
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(body)}</p>
+        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Prospect email: ${row.email}` : `Email du prospect : ${row.email}`)}</p>
         <p style="margin:0 0 18px;color:#475467;">${escapeHtml(guidance)}</p>
         <p style="margin:0 0 18px;">
-          <a href="${escapeHtml(AUDIT_FORM_URL)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">
+          <a href="${escapeHtml(`${AUDIT_FORM_URL}${AUDIT_FORM_URL.includes("?") ? "&" : "?"}sector=${encodeURIComponent(row.sector?.trim() || "")}&profession=${encodeURIComponent(row.profession?.trim() || "")}&country=${encodeURIComponent(row.country?.trim() || "")}`)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">
             ${escapeHtml(isEnglish ? "Open the audit questionnaire" : "Ouvrir le formulaire d'audit")}
           </a>
         </p>
@@ -107,8 +112,9 @@ const buildMessage = (row: ProspectFollowupRow) => {
     intro,
     "",
     body,
+    isEnglish ? `Prospect email: ${row.email}` : `Email du prospect : ${row.email}`,
     guidance,
-    AUDIT_FORM_URL,
+    `${AUDIT_FORM_URL}${AUDIT_FORM_URL.includes("?") ? "&" : "?"}sector=${encodeURIComponent(row.sector?.trim() || "")}&profession=${encodeURIComponent(row.profession?.trim() || "")}&country=${encodeURIComponent(row.country?.trim() || "")}`,
     "",
     appointmentLine ?? "",
     appointmentLine ? appointmentUrl : "",
@@ -174,7 +180,7 @@ Deno.serve(async (request) => {
 
   const { data, error } = await supabase
     .from("contact_requests")
-    .select("id, full_name, email, company, language, wants_expert_appointment")
+    .select("id, full_name, email, company, profession, country, sector, language, wants_expert_appointment")
     .eq("request_intent", "demande-audit")
     .eq("audit_followup_status", "pending")
     .lte("audit_followup_scheduled_at", new Date().toISOString())
@@ -195,7 +201,7 @@ Deno.serve(async (request) => {
   for (const row of rows) {
     try {
       const message = buildMessage(row);
-      await sendEmail(row.email, message);
+      await sendEmail(MAIL_TO, message);
 
       const { error: updateError } = await supabase
         .from("contact_requests")
