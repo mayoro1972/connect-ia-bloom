@@ -27,6 +27,11 @@ const AUDIT_FORM_URL =
   (Deno.env.get("PUBLIC_AUDIT_FORM_URL") ?? `${SITE_URL}/formulaire-audit-ia/index.html`).trim();
 const AUDIT_LOGIN_URL =
   (Deno.env.get("PUBLIC_AUDIT_LOGIN_URL") ?? `${SITE_URL}/acces-formulaire-audit`).trim();
+const AUDIT_BOOKING_URL =
+  (
+    Deno.env.get("PUBLIC_AUDIT_BOOKING_URL") ??
+    "https://calendly.com/marius-ayoro70/devis-quote-preparation-call"
+  ).trim();
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const batchSize = Number.parseInt(Deno.env.get("AUDIT_FOLLOWUP_BATCH_SIZE") ?? "25", 10);
@@ -49,16 +54,7 @@ const escapeHtml = (value: string) =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 
-const buildAppointmentUrl = (row: ProspectFollowupRow) => {
-  const params = new URLSearchParams({
-    source: "demande-audit",
-    domain: row.sector?.trim() || "Audit IA gratuit",
-    company: row.profession?.trim() || row.company,
-    fullName: row.full_name,
-  });
-
-  return `${SITE_URL}/prise-rdv?${params.toString()}`;
-};
+const buildAppointmentUrl = (_row: ProspectFollowupRow) => AUDIT_BOOKING_URL;
 
 const buildMessage = (row: ProspectFollowupRow) => {
   const isEnglish = row.language?.toLowerCase().startsWith("en");
