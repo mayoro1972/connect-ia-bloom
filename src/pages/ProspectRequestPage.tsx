@@ -20,6 +20,9 @@ type ProspectAuditFormState = {
   sector: string;
   city: string;
   message: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
   wantsExpertAppointment: boolean;
   privacyAccepted: boolean;
   botField: string;
@@ -34,9 +37,20 @@ const emptyForm: ProspectAuditFormState = {
   sector: "",
   city: "",
   message: "",
+  username: "",
+  password: "",
+  confirmPassword: "",
   wantsExpertAppointment: false,
   privacyAccepted: false,
   botField: "",
+};
+
+const hashPassword = async (value: string) => {
+  const data = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
 };
 
 const toOptionalValue = (value: string) => {
@@ -48,7 +62,8 @@ const pageCopy = {
   fr: {
     badge: "Demande d'audit IA",
     title: "Demande d'Audit",
-    formLead: "Renseignez les informations utiles pour recevoir votre fiche d'audit.",
+    formLead:
+      "Renseignez les informations essentielles pour créer votre fiche prospect, préparer l'envoi du formulaire d'audit et sécuriser votre accès.",
     appointmentPreference:
       "Je souhaite un rendez-vous pour discuter de la fiche d'audit avant de la remplir.",
     privacy:
@@ -60,6 +75,8 @@ const pageCopy = {
       "Votre demande a bien été enregistrée. Un accusé de réception part immédiatement, puis le formulaire d'audit sera envoyé sous environ 30 minutes.",
     privacyErrorTitle: "Consentement requis",
     privacyErrorDesc: "Merci d'accepter le traitement de vos informations avant l'envoi.",
+    passwordErrorTitle: "Mot de passe invalide",
+    passwordErrorDesc: "Le mot de passe doit contenir au moins 8 caractères et correspondre à la confirmation.",
     errorTitle: "Envoi impossible",
     errorDesc: "La demande n'a pas pu être envoyée. Vérifiez la configuration et réessayez.",
     labels: {
@@ -69,7 +86,10 @@ const pageCopy = {
       phone: "Téléphone",
       city: "Ville",
       country: "Pays",
-      sector: "Secteur d'activite",
+      sector: "Secteur d'activité",
+      username: "Username",
+      password: "Mot de passe",
+      confirmPassword: "Confirmer le mot de passe",
       message: "Décrivez votre besoin",
     },
   },
@@ -88,6 +108,8 @@ const pageCopy = {
       "Your request has been recorded. An acknowledgement email goes out immediately, then the audit questionnaire will be sent in about 30 minutes.",
     privacyErrorTitle: "Consent required",
     privacyErrorDesc: "Please accept data processing before sending the request.",
+    passwordErrorTitle: "Invalid password",
+    passwordErrorDesc: "The password must be at least 8 characters long and match the confirmation field.",
     errorTitle: "Unable to send",
     errorDesc: "The request could not be sent. Check the configuration and try again.",
     labels: {
@@ -98,6 +120,9 @@ const pageCopy = {
       city: "City",
       country: "Country",
       sector: "Business sector",
+      username: "Username",
+      password: "Password",
+      confirmPassword: "Confirm password",
       message: "Describe your need",
     },
   },
@@ -137,8 +162,18 @@ const ProspectRequestPage = () => {
       return;
     }
 
+    if (form.password.length < 8 || form.password !== form.confirmPassword) {
+      toast({
+        title: copy.passwordErrorTitle,
+        description: copy.passwordErrorDesc,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     const activeLanguage = resolveOutboundLanguage(language);
+    const passwordHash = await hashPassword(form.password);
 
     const { data: requestId, error } = await supabase.rpc("submit_contact_request", {
       full_name_input: form.fullName.trim(),
@@ -159,6 +194,8 @@ const ProspectRequestPage = () => {
       privacy_consent_input: form.privacyAccepted,
       honeypot_input: form.botField.trim() || null,
       wants_expert_appointment_input: form.wantsExpertAppointment,
+      prospect_username_input: form.username.trim().toLowerCase(),
+      prospect_password_hash_input: passwordHash,
     });
 
     if (!error) {
@@ -171,12 +208,12 @@ const ProspectRequestPage = () => {
         company: form.profession.trim(),
         role: form.profession.trim() || null,
         city: [form.city.trim(), form.country.trim()].filter(Boolean).join(", ") || null,
-        domain: "Audit IA gratuit",
+        domain: form.sector.trim() || "Audit IA gratuit",
         message: form.message.trim() || null,
         sourcePage: "/demande-audit-gratuit",
         language: activeLanguage,
         wantsExpertAppointment: form.wantsExpertAppointment,
-        appointmentUrl: buildAbsoluteAppointmentUrl("demande-audit", "Audit IA gratuit", {
+        appointmentUrl: buildAbsoluteAppointmentUrl("demande-audit", form.sector.trim() || "Audit IA gratuit", {
           company: form.profession.trim(),
           fullName: form.fullName.trim(),
         }),
@@ -276,6 +313,29 @@ const ProspectRequestPage = () => {
                       required
                       value={form.sector}
                       onChange={(event) => update("sector", event.target.value)}
+                      className={`${inputClass} md:col-span-2`}
+                    />
+                    <input
+                      placeholder={copy.labels.username}
+                      required
+                      value={form.username}
+                      onChange={(event) => update("username", event.target.value)}
+                      className={inputClass}
+                    />
+                    <input
+                      placeholder={copy.labels.password}
+                      type="password"
+                      required
+                      value={form.password}
+                      onChange={(event) => update("password", event.target.value)}
+                      className={inputClass}
+                    />
+                    <input
+                      placeholder={copy.labels.confirmPassword}
+                      type="password"
+                      required
+                      value={form.confirmPassword}
+                      onChange={(event) => update("confirmPassword", event.target.value)}
                       className={`${inputClass} md:col-span-2`}
                     />
                   </div>

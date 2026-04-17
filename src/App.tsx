@@ -23,6 +23,7 @@ const Certification = lazy(() => import("./pages/Certification"));
 const AIToolsMatrix = lazy(() => import("./pages/AIToolsMatrix"));
 const AuditIA = lazy(() => import("./pages/AuditIA"));
 const ProspectRequestPage = lazy(() => import("./pages/ProspectRequestPage"));
+const ProspectAuditLoginPage = lazy(() => import("./pages/ProspectAuditLoginPage"));
 const Entreprises = lazy(() => import("./pages/Entreprises"));
 const Evenements = lazy(() => import("./pages/Evenements"));
 const APropos = lazy(() => import("./pages/APropos"));
@@ -203,6 +204,7 @@ const AnimatedRoutes = () => {
           <Route path="/outils-ia" element={<AIToolsMatrix />} />
           <Route path="/audit-ia-gratuit" element={<AuditIA />} />
           <Route path="/demande-audit-gratuit" element={<ProspectRequestPage />} />
+          <Route path="/acces-formulaire-audit" element={<ProspectAuditLoginPage />} />
           <Route path="/entreprises" element={<Entreprises />} />
           <Route path="/services" element={<Entreprises />} />
           <Route path="/partenaires" element={<Partenaires />} />

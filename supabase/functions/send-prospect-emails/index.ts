@@ -1578,6 +1578,32 @@ const logCatalogueDelivery = async (payload: ProspectEmailPayload) => {
   }
 };
 
+const logProspectDelivery = async (payload: {
+  requestId?: string | null;
+  recipientEmail: string;
+  deliveryType: "internal_notification" | "acknowledgement" | "audit_explainer" | "qualified_response";
+  subject: string;
+  providerMessageId?: string | null;
+  status: "sent" | "failed";
+  errorMessage?: string | null;
+}) => {
+  if (!supabase) {
+    return;
+  }
+
+  await supabase.from("prospect_email_delivery_logs").insert({
+    contact_request_id: payload.requestId ?? null,
+    recipient_email: payload.recipientEmail,
+    delivery_type: payload.deliveryType,
+    provider: "resend",
+    provider_message_id: payload.providerMessageId ?? null,
+    status: payload.status,
+    subject: payload.subject,
+    error_message: payload.errorMessage ?? null,
+    sent_at: payload.status === "sent" ? new Date().toISOString() : null,
+  });
+};
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -1616,6 +1642,42 @@ Deno.serve(async (request) => {
     let catalogueDeliveryLogError: string | null = null;
 
     try {
+      await logProspectDelivery({
+        requestId: payload.requestId,
+        recipientEmail: MAIL_TO,
+        deliveryType: "internal_notification",
+        subject: internalMessage.subject,
+        providerMessageId: internalResult?.id ?? null,
+        status: "sent",
+      });
+      await logProspectDelivery({
+        requestId: payload.requestId,
+        recipientEmail: payload.email,
+        deliveryType: "acknowledgement",
+        subject: acknowledgement.subject,
+        providerMessageId: acknowledgementResult?.id ?? null,
+        status: "sent",
+      });
+      if (auditExplainer && auditExplainerResult) {
+        await logProspectDelivery({
+          requestId: payload.requestId,
+          recipientEmail: payload.email,
+          deliveryType: "audit_explainer",
+          subject: auditExplainer.subject,
+          providerMessageId: auditExplainerResult?.id ?? null,
+          status: "sent",
+        });
+      }
+      if (qualifiedResponse && qualifiedResponseResult) {
+        await logProspectDelivery({
+          requestId: payload.requestId,
+          recipientEmail: payload.email,
+          deliveryType: "qualified_response",
+          subject: qualifiedResponse.subject,
+          providerMessageId: qualifiedResponseResult?.id ?? null,
+          status: "sent",
+        });
+      }
       await logCatalogueDelivery(payload);
     } catch (logError) {
       catalogueDeliveryLogError = logError instanceof Error ? logError.message : "catalogue_delivery_log_failed";

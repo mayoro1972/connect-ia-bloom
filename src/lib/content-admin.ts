@@ -1,6 +1,6 @@
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 
-export type AdminEntity = "resource" | "job" | "analytics" | "editorial" | "newsletter" | "partners";
+export type AdminEntity = "resource" | "job" | "analytics" | "editorial" | "newsletter" | "partners" | "prospects";
 export type AdminAction = "list" | "create" | "set-status" | "create-feed" | "save";
 
 type AdminRequest = {
