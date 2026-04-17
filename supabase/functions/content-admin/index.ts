@@ -761,7 +761,7 @@ const listProspects = async () => {
   const [requestsResult, deliveriesResult] = await Promise.all([
     supabase
       .from("contact_requests")
-      .select("id, created_at, full_name, email, phone, profession, city, country, sector, wants_expert_appointment, audit_followup_status, audit_followup_scheduled_at, audit_followup_sent_at, audit_followup_error, prospect_username, prospect_portal_status, last_portal_login_at")
+      .select("id, created_at, full_name, email, phone, prospect_type, profession, city, country, sector, wants_expert_appointment, audit_followup_status, audit_followup_scheduled_at, audit_followup_sent_at, audit_followup_error, prospect_username, prospect_portal_status, last_portal_login_at")
       .eq("request_intent", "demande-audit")
       .order("created_at", { ascending: false })
       .limit(80),

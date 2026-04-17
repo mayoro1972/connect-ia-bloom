@@ -36,6 +36,7 @@ export type Database = {
           phone: string
           privacy_consent: boolean
           profession: string | null
+          prospect_type: string | null
           prospect_password_hash: string | null
           prospect_portal_status: string
           prospect_username: string | null
@@ -67,6 +68,7 @@ export type Database = {
           phone: string
           privacy_consent?: boolean
           profession?: string | null
+          prospect_type?: string | null
           prospect_password_hash?: string | null
           prospect_portal_status?: string
           prospect_username?: string | null
@@ -98,6 +100,7 @@ export type Database = {
           phone?: string
           privacy_consent?: boolean
           profession?: string | null
+          prospect_type?: string | null
           prospect_password_hash?: string | null
           prospect_portal_status?: string
           prospect_username?: string | null
