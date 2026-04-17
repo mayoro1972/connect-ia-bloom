@@ -15,6 +15,7 @@ type ProspectAuditFormState = {
   fullName: string;
   email: string;
   phone: string;
+  prospectType: string;
   profession: string;
   country: string;
   sector: string;
@@ -32,6 +33,7 @@ const emptyForm: ProspectAuditFormState = {
   fullName: "",
   email: "",
   phone: "",
+  prospectType: "",
   profession: "",
   country: "",
   sector: "",
@@ -58,6 +60,28 @@ const toOptionalValue = (value: string) => {
   return trimmed ? trimmed : null;
 };
 
+const sectorOptions = [
+  "Assistanat & Secrétariat",
+  "Ressources Humaines",
+  "Marketing & Communication",
+  "Finance & Comptabilité",
+  "Juridique & Conformité",
+  "Service Client",
+  "Data & Analyse",
+  "Administration & Gestion",
+  "Management & Leadership",
+  "IT & Transformation Digitale",
+  "Formation & Pédagogie",
+  "Santé & Bien-être",
+  "Diplomatie & Affaires Internationales",
+  "Autres",
+] as const;
+
+const prospectTypeOptions = {
+  fr: ["Entreprise", "Indépendant", "Particulier", "Institution", "ONG / Association"],
+  en: ["Company", "Independent", "Individual", "Institution", "NGO / Association"],
+} as const;
+
 const pageCopy = {
   fr: {
     badge: "Demande d'audit IA",
@@ -81,6 +105,7 @@ const pageCopy = {
     errorDesc: "La demande n'a pas pu être envoyée. Vérifiez la configuration et réessayez.",
     labels: {
       fullName: "Nom complet",
+      prospectType: "Qualification du prospect",
       profession: "Profession",
       email: "Adresse email",
       phone: "Téléphone",
@@ -91,6 +116,10 @@ const pageCopy = {
       password: "Mot de passe",
       confirmPassword: "Confirmer le mot de passe",
       message: "Décrivez votre besoin",
+    },
+    placeholders: {
+      sector: "Choisissez votre secteur d'activité",
+      prospectType: "Choisissez votre profil",
     },
   },
   en: {
@@ -114,6 +143,7 @@ const pageCopy = {
     errorDesc: "The request could not be sent. Check the configuration and try again.",
     labels: {
       fullName: "Full name",
+      prospectType: "Prospect type",
       profession: "Profession",
       email: "Email address",
       phone: "Phone",
@@ -124,6 +154,10 @@ const pageCopy = {
       password: "Password",
       confirmPassword: "Confirm password",
       message: "Describe your need",
+    },
+    placeholders: {
+      sector: "Choose your business sector",
+      prospectType: "Choose your profile",
     },
   },
 } as const;
@@ -181,6 +215,7 @@ const ProspectRequestPage = () => {
       phone_input: form.phone.trim(),
       company_input: form.profession.trim(),
       profession_input: form.profession.trim(),
+      prospect_type_input: toOptionalValue(form.prospectType),
       sector_input: toOptionalValue(form.sector),
       city_input: toOptionalValue(form.city),
       country_input: toOptionalValue(form.country),
@@ -224,6 +259,7 @@ const ProspectRequestPage = () => {
         language: activeLanguage,
         wants_expert_appointment: form.wantsExpertAppointment,
         profession: form.profession.trim() || null,
+        prospect_type: form.prospectType || null,
         sector: form.sector.trim() || null,
         source_page: "/demande-audit-gratuit",
       });
@@ -258,10 +294,7 @@ const ProspectRequestPage = () => {
                 <p className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                   {copy.badge}
                 </p>
-                <h1 className="mt-5 font-heading text-4xl font-bold leading-tight text-card-foreground md:text-5xl">
-                  {copy.title}
-                </h1>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">{copy.formLead}</p>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">{copy.formLead}</p>
 
                 <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                   <div className="grid gap-4 md:grid-cols-2">
@@ -272,6 +305,19 @@ const ProspectRequestPage = () => {
                       onChange={(event) => update("fullName", event.target.value)}
                       className={inputClass}
                     />
+                    <select
+                      required
+                      value={form.prospectType}
+                      onChange={(event) => update("prospectType", event.target.value)}
+                      className={inputClass}
+                    >
+                      <option value="">{copy.placeholders.prospectType}</option>
+                      {(language === "en" ? prospectTypeOptions.en : prospectTypeOptions.fr).map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                     <input
                       placeholder={copy.labels.profession}
                       required
@@ -308,13 +354,19 @@ const ProspectRequestPage = () => {
                       onChange={(event) => update("country", event.target.value)}
                       className={inputClass}
                     />
-                    <input
-                      placeholder={copy.labels.sector}
+                    <select
                       required
                       value={form.sector}
                       onChange={(event) => update("sector", event.target.value)}
                       className={`${inputClass} md:col-span-2`}
-                    />
+                    >
+                      <option value="">{copy.placeholders.sector}</option>
+                      {sectorOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                     <input
                       placeholder={copy.labels.username}
                       required

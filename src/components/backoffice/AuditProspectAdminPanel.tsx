@@ -6,6 +6,7 @@ export type AuditProspectItem = {
   full_name: string;
   email: string;
   phone: string;
+  prospect_type: string | null;
   profession: string | null;
   city: string | null;
   country: string | null;
@@ -133,7 +134,7 @@ const AuditProspectAdminPanel = ({ snapshot }: Props) => {
                       {request.email} · {request.phone}
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      {request.profession || "Profession non précisée"} · {[request.city, request.country].filter(Boolean).join(", ") || "Localisation non précisée"}
+                      {request.prospect_type || "Qualification non précisée"} · {request.profession || "Profession non précisée"} · {[request.city, request.country].filter(Boolean).join(", ") || "Localisation non précisée"}
                     </p>
                     <p className="mt-1 text-sm text-card-foreground">{request.sector || "Secteur non précisé"}</p>
                   </div>
