@@ -1,5 +1,7 @@
 alter table public.contact_requests
   add column if not exists wants_expert_appointment boolean not null default false,
+  add column if not exists profession text,
+  add column if not exists country text,
   add column if not exists audit_followup_status text,
   add column if not exists audit_followup_scheduled_at timestamp with time zone,
   add column if not exists audit_followup_sent_at timestamp with time zone,
@@ -34,7 +36,9 @@ create or replace function public.submit_contact_request(
   requested_domain_input text default null,
   privacy_consent_input boolean default false,
   honeypot_input text default null,
-  wants_expert_appointment_input boolean default false
+  wants_expert_appointment_input boolean default false,
+  profession_input text default null,
+  country_input text default null
 )
 returns uuid
 language plpgsql
@@ -66,7 +70,7 @@ begin
     raise exception 'invalid_phone';
   end if;
 
-  if company_input is null or length(btrim(company_input)) < 2 then
+  if normalized_intent <> 'demande-audit' and (company_input is null or length(btrim(company_input)) < 2) then
     raise exception 'invalid_company';
   end if;
 
@@ -86,6 +90,8 @@ begin
     requested_domain,
     privacy_consent,
     wants_expert_appointment,
+    profession,
+    country,
     audit_followup_status,
     audit_followup_scheduled_at,
     audit_followup_sent_at,
@@ -95,7 +101,7 @@ begin
     btrim(full_name_input),
     lower(btrim(email_input)),
     btrim(phone_input),
-    btrim(company_input),
+    coalesce(nullif(btrim(company_input), ''), nullif(btrim(profession_input), ''), btrim(full_name_input)),
     nullif(btrim(sector_input), ''),
     nullif(btrim(city_input), ''),
     participants_input,
@@ -107,6 +113,8 @@ begin
     nullif(btrim(requested_domain_input), ''),
     true,
     coalesce(wants_expert_appointment_input, false),
+    nullif(btrim(profession_input), ''),
+    nullif(btrim(country_input), ''),
     case when schedule_audit_followup then 'pending' else null end,
     case when schedule_audit_followup then now() + interval '30 minutes' else null end,
     null,
