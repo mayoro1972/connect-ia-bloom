@@ -204,6 +204,12 @@ const ProspectRequestPage = () => {
       return language === "en" ? "Please enter a valid email address." : "Merci de renseigner une adresse email valide.";
     }
 
+    if (message.includes("contact_requests_prospect_username_idx") || message.includes("duplicate key value")) {
+      return language === "en"
+        ? "An audit request already exists for this email address. Please wait a few moments and try again; the latest update will reuse the existing prospect account."
+        : "Une demande d'audit existe déjà pour cette adresse email. Merci de patienter quelques instants puis de réessayer ; la dernière mise à jour réutilise désormais le compte prospect existant.";
+    }
+
     return message;
   };
 
