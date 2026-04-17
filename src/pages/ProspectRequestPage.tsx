@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, LockKeyhole } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, LockKeyhole } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -174,12 +174,39 @@ const ProspectRequestPage = () => {
   const copy = language === "en" ? pageCopy.en : pageCopy.fr;
   const [form, setForm] = useState<ProspectAuditFormState>(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
   const update = <K extends keyof ProspectAuditFormState>(key: K, value: ProspectAuditFormState[K]) =>
     setForm((current) => ({ ...current, [key]: value }));
 
   const inputClass =
     "w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary/25";
+
+  const resolveSubmissionError = (message?: string | null) => {
+    if (!message) {
+      return copy.errorDesc;
+    }
+
+    if (message.includes("submit_contact_request")) {
+      return language === "en"
+        ? "The public database configuration for this form is not synchronized yet. Please try again once the latest backend update is deployed."
+        : "La configuration publique de la base pour ce formulaire n'est pas encore synchronisée. Merci de réessayer après déploiement de la dernière mise à jour backend.";
+    }
+
+    if (message.includes("invalid_phone")) {
+      return language === "en"
+        ? "Please enter a valid phone number with at least 8 digits."
+        : "Merci de renseigner un numéro de téléphone valide avec au moins 8 chiffres.";
+    }
+
+    if (message.includes("invalid_email")) {
+      return language === "en" ? "Please enter a valid email address." : "Merci de renseigner une adresse email valide.";
+    }
+
+    return message;
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -278,7 +305,7 @@ const ProspectRequestPage = () => {
     } else {
       toast({
         title: copy.errorTitle,
-        description: copy.errorDesc,
+        description: resolveSubmissionError(error.message),
         variant: "destructive",
       });
     }
@@ -380,22 +407,44 @@ const ProspectRequestPage = () => {
                           {copy.secureLead}
                         </p>
                         <div className="mt-6 grid gap-4 md:grid-cols-2">
-                          <input
-                            placeholder={copy.labels.password}
-                            type="password"
-                            required
-                            value={form.password}
-                            onChange={(event) => update("password", event.target.value)}
-                            className={inputClass}
-                          />
-                          <input
-                            placeholder={copy.labels.confirmPassword}
-                            type="password"
-                            required
-                            value={form.confirmPassword}
-                            onChange={(event) => update("confirmPassword", event.target.value)}
-                            className={inputClass}
-                          />
+                          <div className="relative">
+                            <input
+                              placeholder={copy.labels.password}
+                              type={isPasswordVisible ? "text" : "password"}
+                              required
+                              value={form.password}
+                              onChange={(event) => update("password", event.target.value)}
+                              className={`${inputClass} pr-12`}
+                            />
+                            <button
+                              type="button"
+                              aria-label={isPasswordVisible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                              onClick={() => setIsPasswordVisible((current) => !current)}
+                              className="absolute inset-y-0 right-4 flex items-center text-muted-foreground transition-colors hover:text-card-foreground"
+                            >
+                              {isPasswordVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                            </button>
+                          </div>
+                          <div className="relative">
+                            <input
+                              placeholder={copy.labels.confirmPassword}
+                              type={isConfirmPasswordVisible ? "text" : "password"}
+                              required
+                              value={form.confirmPassword}
+                              onChange={(event) => update("confirmPassword", event.target.value)}
+                              className={`${inputClass} pr-12`}
+                            />
+                            <button
+                              type="button"
+                              aria-label={
+                                isConfirmPasswordVisible ? "Masquer la confirmation du mot de passe" : "Afficher la confirmation du mot de passe"
+                              }
+                              onClick={() => setIsConfirmPasswordVisible((current) => !current)}
+                              className="absolute inset-y-0 right-4 flex items-center text-muted-foreground transition-colors hover:text-card-foreground"
+                            >
+                              {isConfirmPasswordVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
