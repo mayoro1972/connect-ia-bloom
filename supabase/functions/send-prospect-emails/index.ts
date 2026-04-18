@@ -1323,7 +1323,8 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     ? resolveDomainCatalogueAsset(payload.domain, payload.formationTitle, payload.message)
     : null;
   const domainLabel = isListingRequest ? copy.listingSectorLabel : copy.fieldLabels.domain;
-  const shouldShowAppointmentCta = payload.intent === "prise-rdv";
+  const shouldShowAppointmentCta =
+    payload.intent === "prise-rdv" || (payload.intent === "demande-audit" && Boolean(payload.wantsExpertAppointment));
   const subject = catalogueAsset
     ? copy.catalogueReadySubject(payload.language === "en" ? catalogueAsset.domainLabelEn : catalogueAsset.domainLabelFr)
     : buildSmartAcknowledgementSubject(copy, payload);
