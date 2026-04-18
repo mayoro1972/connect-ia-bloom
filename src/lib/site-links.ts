@@ -207,6 +207,10 @@ export const buildAbsoluteSiteUrl = (path: string) => {
 };
 
 export const buildAbsoluteAppointmentUrl = (source: string, domain?: string, extras?: Record<string, string | null | undefined>) => {
+  if (source === "demande-audit") {
+    return appointmentBookings["demande-audit"];
+  }
+
   const params = new URLSearchParams({ source });
 
   if (domain) {
