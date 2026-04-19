@@ -15,7 +15,7 @@ const sectionCopy = {
         title: "Je veux me former",
         desc: "Recevoir le catalogue complet (130+ formations, 13 domaines) directement par email.",
         cta: "Recevoir le catalogue",
-        href: "/catalogue?request=1",
+        href: "/contact?intent=demande-catalogue",
         icon: GraduationCap,
       },
       {
@@ -43,7 +43,7 @@ const sectionCopy = {
         title: "I want to train",
         desc: "Receive the full catalogue (130+ courses, 13 domains) directly by email.",
         cta: "Receive the catalogue",
-        href: "/catalogue?request=1",
+        href: "/contact?intent=demande-catalogue",
         icon: GraduationCap,
       },
       {
