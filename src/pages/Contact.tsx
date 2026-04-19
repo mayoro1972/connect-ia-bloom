@@ -185,6 +185,7 @@ const ContactPage = () => {
   const requestedDomain = searchParams.get("domain") ?? "";
   const requestedIntent = searchParams.get("intent") ?? "contact-devis";
   const resolvedIntent = supportedIntents.has(requestedIntent) ? requestedIntent : "contact-devis";
+  const isCompactMode = searchParams.get("compact") === "1";
   const isCatalogIntent = resolvedIntent === "demande-catalogue";
   const isGuidanceIntent = resolvedIntent === "demande-renseignement";
   const isListingIntent = resolvedIntent === "demande-referencement";
