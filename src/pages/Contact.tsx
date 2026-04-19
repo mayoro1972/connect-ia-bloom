@@ -1383,6 +1383,30 @@ const ContactPage = () => {
             </div>
           </div>
         </section>
+
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                <Calendar size={14} />
+                {language === "en" ? "Book a free 30-min diagnostic" : "Réserver un diagnostic gratuit (30 min)"}
+              </div>
+              <h2 className="mt-4 font-heading text-3xl md:text-4xl font-bold text-card-foreground">
+                {language === "en" ? "Pick a slot that suits you" : "Choisissez un créneau qui vous convient"}
+              </h2>
+              <p className="mt-3 text-base text-muted-foreground max-w-2xl mx-auto">
+                {language === "en"
+                  ? "An AI expert from TransferAI Africa will join the call to scope your need and recommend the right next step."
+                  : "Un expert IA de TransferAI Africa vous rejoint pour cadrer votre besoin et orienter la suite."}
+              </p>
+            </div>
+            <AppointmentBooking
+              prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
+              analyticsLocation="contact_page_bottom"
+            />
+          </div>
+        </section>
+
         <Footer />
       </div>
     </PageTransition>
