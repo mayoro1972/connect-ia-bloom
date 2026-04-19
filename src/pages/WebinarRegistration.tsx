@@ -206,6 +206,20 @@ const WebinarRegistration = () => {
         honeypot_input: form.honeypot,
       });
       if (rpcError) throw rpcError;
+
+      // Envoi email d'accusé de réception (non bloquant)
+      const scheduledDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+      supabase.functions.invoke("webinar-notify", {
+        body: {
+          full_name: form.full_name,
+          email: form.email,
+          language: form.language,
+          domain_label: form.domain_key === "other" ? form.domain_other : form.domain_key,
+          formation_label: formationLabel || form.formation_other || "",
+          scheduled_date: scheduledDate,
+        },
+      }).catch((e) => console.warn("webinar-notify failed", e));
+
       setDone(true);
     } catch (err) {
       console.error(err);
