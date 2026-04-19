@@ -209,11 +209,11 @@ const CataloguePage = () => {
         newTitle: "Nouvelles formations à découvrir",
         newDesc:
           "Retrouvez ici les dernières formations ajoutées au catalogue.",
-        finalTitle: "Besoin d'un choix plus simple ?",
+        finalTitle: "Besoin d'aide pour choisir votre formation ?",
         finalDesc:
-          "Nous pouvons vous orienter vers la bonne formation selon votre métier, votre niveau et votre objectif.",
+          "Si vous hésitez, réservez un créneau avec un expert IA qui vous orientera. Si vous savez déjà ce que vous voulez, inscrivez-vous directement à la formation choisie.",
         primaryCta: "Parler à un expert IA",
-        secondaryCta: "Déposer ma candidature",
+        secondaryCta: "M'inscrire à une formation",
         quickLinks: [
           { title: "Certification", desc: "Objectifs, programme et valeur métier.", href: "/certification" },
           { title: "Outils IA", desc: "Stacks, workflows et outils recommandés.", href: "/outils-ia" },
