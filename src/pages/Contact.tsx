@@ -1339,7 +1339,7 @@ const ContactPage = () => {
 
 
               {!isCompactMode && (
-              <div className={isDefaultContactLanding ? "lg:col-span-2 grid gap-5 md:grid-cols-2" : "space-y-5"}>
+              <div className={isDefaultContactLanding ? "lg:col-span-2 space-y-5" : "space-y-5"}>
                 {isBriefSolutionIntent && (
                   <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-[28px] border border-primary/30 bg-primary/[0.03] p-6">
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
