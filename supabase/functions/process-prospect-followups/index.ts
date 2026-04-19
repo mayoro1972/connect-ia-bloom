@@ -86,17 +86,17 @@ const buildMessage = (row: ProspectFollowupRow) => {
         <h1 style="margin:0 0 20px;font-size:28px;line-height:1.2;color:#101828;">${escapeHtml(subject)}</h1>
         <p style="margin:0 0 14px;color:#101828;">${escapeHtml(intro)}</p>
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(body)}</p>
-        <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Prospect email: ${row.email}` : `Adresse e-mail du prospect : ${row.email}`)}</p>
-        <p style="margin:0 0 18px;color:#475467;">${escapeHtml(guidance)}</p>
+        <p style="margin:0 0 18px;color:#475467;">${escapeHtml(isEnglish ? "Click the button below to open the audit questionnaire. It takes about 15 minutes to complete." : "Cliquez sur le bouton ci-dessous pour ouvrir le questionnaire d'audit. Comptez environ 15 minutes pour le remplir.")}</p>
         <p style="margin:0 0 14px;color:#475467;">${escapeHtml(isEnglish ? `Sector prepared: ${domainTitle}` : `Secteur préparé : ${domainTitle}`)}</p>
         <p style="margin:0 0 18px;">
-          <a href="${escapeHtml(AUDIT_LOGIN_URL)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;">
-            ${escapeHtml(isEnglish ? "Open the secure audit portal" : "Ouvrir le portail sécurisé")}
+          <a href="${escapeHtml(AUDIT_FORM_URL)}" style="display:inline-block;padding:14px 22px;border-radius:999px;background:#f28c28;color:#ffffff;text-decoration:none;font-weight:700;font-size:15px;">
+            ${escapeHtml(isEnglish ? "Open the audit questionnaire" : "Ouvrir le questionnaire d'audit")}
           </a>
         </p>
+        <p style="margin:18px 0 0;color:#98a2b3;font-size:13px;">${escapeHtml(isEnglish ? "Tip: complete the form in one sitting. Your responses are saved as you type." : "Astuce : remplissez le formulaire en une seule fois. Vos réponses sont sauvegardées au fur et à mesure.")}</p>
         ${
           appointmentLine
-            ? `<div style="margin-top:18px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+            ? `<div style="margin-top:24px;padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
                 <p style="margin:0 0 14px;color:#475467;">${escapeHtml(appointmentLine)}</p>
                 <a href="${escapeHtml(appointmentUrl)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;">
                   ${escapeHtml(isEnglish ? "Book the discussion" : "Réserver l'échange")}
@@ -114,8 +114,8 @@ const buildMessage = (row: ProspectFollowupRow) => {
     "",
     body,
     isEnglish ? `Prospect email: ${row.email}` : `Adresse e-mail du prospect : ${row.email}`,
-    guidance,
-    AUDIT_LOGIN_URL,
+    isEnglish ? "Open the audit questionnaire:" : "Ouvrir le questionnaire d'audit :",
+    AUDIT_FORM_URL,
     "",
     appointmentLine ?? "",
     appointmentLine ? appointmentUrl : "",
