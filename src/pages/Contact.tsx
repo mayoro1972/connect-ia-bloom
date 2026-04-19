@@ -1018,8 +1018,8 @@ const ContactPage = () => {
                     </h2>
                     <p className="text-sm leading-7 text-muted-foreground md:text-base">
                       {language === "en"
-                        ? "Share the essentials below — we'll come back to you within 24–48 business hours with a clear next step."
-                        : "Partagez l'essentiel ci-dessous — nous revenons vers vous sous 24 à 48h ouvrées avec une orientation claire."}
+                        ? "Talk to an AI expert by booking your free slot, or describe your need and we'll get back to you."
+                        : "Parlez à un expert IA, en réservant votre créneau gratuit ou décrivez votre besoin et nous reviendrons."}
                     </p>
                   </div>
                 ) : (
