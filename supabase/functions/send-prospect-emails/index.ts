@@ -1533,9 +1533,67 @@ const buildAuditExplainer = (payload: ProspectEmailPayload): EmailMessage | null
   };
 };
 
+const fetchPdfAsBase64 = async (url: string): Promise<string | null> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error(`pdf_fetch_failed: ${response.status} for ${url}`);
+      return null;
+    }
+    const buffer = new Uint8Array(await response.arrayBuffer());
+    let binary = "";
+    const chunkSize = 0x8000;
+    for (let i = 0; i < buffer.length; i += chunkSize) {
+      binary += String.fromCharCode(...buffer.subarray(i, i + chunkSize));
+    }
+    return btoa(binary);
+  } catch (error) {
+    console.error("pdf_fetch_error", error);
+    return null;
+  }
+};
+
+const attachCatalogueIfNeeded = async (
+  payload: ProspectEmailPayload,
+  message: EmailMessage,
+): Promise<EmailMessage> => {
+  if (payload.intent !== "demande-catalogue") return message;
+  const asset = resolveDomainCatalogueAsset(payload.domain, payload.formationTitle, payload.message);
+  if (!asset) return message;
+  const base64 = await fetchPdfAsBase64(asset.pdfUrl);
+  if (!base64) return message;
+  return {
+    ...message,
+    attachments: [
+      {
+        filename: `TransferAI-Catalogue-${asset.slug}.pdf`,
+        content: base64,
+        contentType: "application/pdf",
+      },
+    ],
+  };
+};
+
 const sendEmail = async (to: string, message: EmailMessage) => {
   if (!RESEND_API_KEY) {
     throw new Error("email_provider_not_configured");
+  }
+
+  const body: Record<string, unknown> = {
+    from: MAIL_FROM,
+    to: [to],
+    subject: message.subject,
+    html: message.html,
+    text: message.text,
+    replyTo: message.replyTo,
+  };
+
+  if (message.attachments && message.attachments.length > 0) {
+    body.attachments = message.attachments.map((a) => ({
+      filename: a.filename,
+      content: a.content,
+      content_type: a.contentType ?? "application/pdf",
+    }));
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -1544,14 +1602,7 @@ const sendEmail = async (to: string, message: EmailMessage) => {
       Authorization: `Bearer ${RESEND_API_KEY}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      from: MAIL_FROM,
-      to: [to],
-      subject: message.subject,
-      html: message.html,
-      text: message.text,
-      replyTo: message.replyTo,
-    }),
+    body: JSON.stringify(body),
   });
 
   if (!response.ok) {
