@@ -961,7 +961,7 @@ const ContactPage = () => {
                 <p className="text-sm leading-7 text-muted-foreground md:text-base md:leading-8">{resolvedQuickStartDesc}</p>
               </div>
 
-              <div className="grid gap-5 md:grid-cols-3">
+              <div className={`grid gap-5 ${resolvedPathways.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
                 {resolvedPathways.map((pathway, index) => (
                   <motion.div
                     key={pathway.title}
