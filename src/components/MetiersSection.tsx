@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { metierKeyToCatalogueSlug } from "@/lib/site-links";
+import { useMonthlyDomainTrends } from "@/hooks/useMonthlyDomainTrends";
 
 const metierKeys = [
   { key: "assistanat", icon: Briefcase },
@@ -35,7 +36,7 @@ const metierKeys = [
   { key: "diplomatie", icon: Globe },
 ] as const;
 
-const featuredMetierKeys = ["assistanat", "rh", "marketing"] as const;
+const fallbackFeaturedKeys = ["assistanat", "rh", "marketing"] as const;
 
 const sectionCopy = {
   fr: {
