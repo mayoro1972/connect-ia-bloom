@@ -139,7 +139,7 @@ const DeveloppementSolutionsIA = () => {
                 {content.ctaDesc}
               </p>
               <Link
-                to={buildContactPath("contact-devis", "IT & Transformation Digitale")}
+                to="/contact?intent=brief-solution-ia"
                 className="inline-flex items-center gap-2 rounded-lg bg-orange-gradient px-8 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
                 style={{ color: "hsl(0 0% 100%)" }}
               >

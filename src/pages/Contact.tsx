@@ -32,6 +32,12 @@ type ContactFormState = {
   scopingHorizon: string;
   engagementFormat: string[];
   budgetRange: string;
+  // Brief Solution IA
+  solutionTypes: string[];
+  processFrequency: string;
+  existingTools: string[];
+  dataAvailability: string[];
+  hasTechReferent: string;
   privacyAccepted: boolean;
   botField: string;
 };
@@ -51,6 +57,11 @@ const emptyForm: ContactFormState = {
   scopingHorizon: "",
   engagementFormat: [],
   budgetRange: "",
+  solutionTypes: [],
+  processFrequency: "",
+  existingTools: [],
+  dataAvailability: [],
+  hasTechReferent: "",
   privacyAccepted: false,
   botField: "",
 };
@@ -186,7 +197,141 @@ const supportedIntents = new Set([
   "demande-renseignement",
   "contact-devis",
   "demande-referencement",
+  "brief-solution-ia",
 ]);
+
+const briefSolutionOptions = {
+  fr: {
+    sectionTitle: "Brief projet — Solution IA",
+    sectionDesc:
+      "Décrivez le projet à construire : type de solution, processus à transformer, écosystème existant, données disponibles et contraintes. Plus c'est précis, plus la proposition sera juste.",
+    solutionTypesLabel: "Type de solution recherchée (plusieurs choix possibles)",
+    solutionTypesOptions: [
+      "Automatisation de workflow / processus",
+      "Assistant IA / chatbot métier",
+      "Outil interne sur mesure",
+      "Dashboard & reporting intelligent",
+      "Intégration IA dans un outil existant",
+      "Document / contrat / rapport automatisé",
+    ],
+    frequencyLabel: "Fréquence du processus à automatiser",
+    frequencyOptions: [
+      { value: "temps-reel", label: "Temps réel / continu" },
+      { value: "quotidien", label: "Quotidien" },
+      { value: "hebdomadaire", label: "Hebdomadaire" },
+      { value: "mensuel", label: "Mensuel" },
+      { value: "ponctuel", label: "Ponctuel / à la demande" },
+    ],
+    toolsLabel: "Outils & systèmes déjà utilisés (plusieurs choix possibles)",
+    toolsOptions: [
+      "Google Workspace",
+      "Microsoft 365",
+      "Notion",
+      "HubSpot",
+      "Salesforce",
+      "WhatsApp Business",
+      "Excel / tableurs",
+      "ERP / outil métier interne",
+      "Site web / e-commerce",
+      "Autre",
+    ],
+    dataLabel: "Données disponibles aujourd'hui",
+    dataOptions: [
+      "Documents (PDF, Word…)",
+      "Base de données structurée",
+      "API / services connectés",
+      "Tableurs Excel / Google Sheets",
+      "Pas encore structurées",
+    ],
+    techReferentLabel: "Avez-vous un référent technique en interne ?",
+    techReferentOptions: [
+      { value: "oui", label: "Oui" },
+      { value: "non", label: "Non" },
+      { value: "partiel", label: "Partiellement" },
+    ],
+    horizonLabel: "Délai souhaité pour une première version",
+    horizonOptions: [
+      { value: "urgent", label: "Urgent (moins de 30 jours)" },
+      { value: "1-3-mois", label: "1 à 3 mois" },
+      { value: "3-6-mois", label: "3 à 6 mois" },
+      { value: "non-defini", label: "Pas encore défini" },
+    ],
+    budgetLabel: "Budget indicatif (optionnel)",
+    budgetOptions: [
+      { value: "", label: "Préfère ne pas préciser" },
+      { value: "<5k", label: "Moins de 5 000 €" },
+      { value: "5-15k", label: "5 000 – 15 000 €" },
+      { value: "15-50k", label: "15 000 – 50 000 €" },
+      { value: ">50k", label: "Plus de 50 000 €" },
+      { value: "a-definir", label: "À définir avec vous" },
+    ],
+  },
+  en: {
+    sectionTitle: "Project brief — AI solution",
+    sectionDesc:
+      "Describe the project to build: solution type, process to transform, existing ecosystem, available data, and constraints. The more precise, the better our proposal.",
+    solutionTypesLabel: "Type of solution you are looking for (multiple choices)",
+    solutionTypesOptions: [
+      "Workflow / process automation",
+      "AI assistant / business chatbot",
+      "Custom internal tool",
+      "Smart dashboard & reporting",
+      "AI integration into an existing tool",
+      "Automated document / contract / report",
+    ],
+    frequencyLabel: "Frequency of the process to automate",
+    frequencyOptions: [
+      { value: "temps-reel", label: "Real-time / continuous" },
+      { value: "quotidien", label: "Daily" },
+      { value: "hebdomadaire", label: "Weekly" },
+      { value: "mensuel", label: "Monthly" },
+      { value: "ponctuel", label: "On-demand / occasional" },
+    ],
+    toolsLabel: "Tools & systems already in use (multiple choices)",
+    toolsOptions: [
+      "Google Workspace",
+      "Microsoft 365",
+      "Notion",
+      "HubSpot",
+      "Salesforce",
+      "WhatsApp Business",
+      "Excel / spreadsheets",
+      "ERP / internal business tool",
+      "Website / e-commerce",
+      "Other",
+    ],
+    dataLabel: "Data available today",
+    dataOptions: [
+      "Documents (PDF, Word…)",
+      "Structured database",
+      "API / connected services",
+      "Excel / Google Sheets",
+      "Not structured yet",
+    ],
+    techReferentLabel: "Do you have an internal technical referent?",
+    techReferentOptions: [
+      { value: "oui", label: "Yes" },
+      { value: "non", label: "No" },
+      { value: "partiel", label: "Partially" },
+    ],
+    horizonLabel: "Expected timeline for a first version",
+    horizonOptions: [
+      { value: "urgent", label: "Urgent (less than 30 days)" },
+      { value: "1-3-mois", label: "1 to 3 months" },
+      { value: "3-6-mois", label: "3 to 6 months" },
+      { value: "non-defini", label: "Not defined yet" },
+    ],
+    budgetLabel: "Indicative budget (optional)",
+    budgetOptions: [
+      { value: "", label: "Prefer not to say" },
+      { value: "<5k", label: "Under €5,000" },
+      { value: "5-15k", label: "€5,000 – 15,000" },
+      { value: "15-50k", label: "€15,000 – 50,000" },
+      { value: ">50k", label: "Over €50,000" },
+      { value: "a-definir", label: "To be defined together" },
+    ],
+  },
+} as const;
 
 const contactPageModel = {
   fr: {
@@ -297,6 +442,7 @@ const ContactPage = () => {
   const isCatalogIntent = resolvedIntent === "demande-catalogue";
   const isGuidanceIntent = resolvedIntent === "demande-renseignement";
   const isListingIntent = resolvedIntent === "demande-referencement";
+  const isBriefSolutionIntent = resolvedIntent === "brief-solution-ia";
   const normalizedRequestedDomain = normalizeIntentLabel(requestedDomain);
   const isStrategicPartnershipIntent =
     isGuidanceIntent &&
@@ -305,6 +451,7 @@ const ContactPage = () => {
   const isEnterpriseScopingFlow =
     (isGuidanceIntent && !isStrategicPartnershipIntent) || resolvedIntent === "contact-devis";
   const scoping = scopingOptions[language === "en" ? "en" : "fr"];
+  const briefSolution = briefSolutionOptions[language === "en" ? "en" : "fr"];
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
@@ -319,7 +466,11 @@ const ContactPage = () => {
     }));
   }, [requestedDomain]);
 
-  const resolvedHeaderTitle = isListingIntent
+  const resolvedHeaderTitle = isBriefSolutionIntent
+    ? language === "en"
+      ? "Brief your AI solution project"
+      : "Brief de votre projet — Solution IA"
+    : isListingIntent
     ? language === "en"
       ? "Request visibility on TransferAI Africa"
       : "Demander un référencement"
@@ -329,7 +480,11 @@ const ContactPage = () => {
         : "Parler partenariat stratégique"
     : t("contact.title");
 
-  const resolvedHeaderSubtitle = isListingIntent
+  const resolvedHeaderSubtitle = isBriefSolutionIntent
+    ? language === "en"
+      ? "Tell us about the AI solution you want to build (workflow, assistant, internal tool, dashboard…) and book a call to align on it."
+      : "Présentez la solution IA à construire (workflow, assistant, outil interne, dashboard…) et réservez un échange pour la cadrer ensemble."
+    : isListingIntent
     ? language === "en"
       ? "Present your organization for an editorial and commercial review of a listing or featured presence."
       : "Présentez votre organisation pour une étude éditoriale et commerciale de présence sur TransferAI Africa."
@@ -429,7 +584,11 @@ const ContactPage = () => {
         ]
     : pageModel.pathways;
 
-  const resolvedIntroBadge = isListingIntent
+  const resolvedIntroBadge = isBriefSolutionIntent
+    ? language === "en"
+      ? "AI solution brief"
+      : "Brief solution IA"
+    : isListingIntent
     ? language === "en"
       ? "Listing request"
       : "Demande de référencement"
@@ -439,7 +598,11 @@ const ContactPage = () => {
         : "Demande de partenariat stratégique"
     : pageModel.formIntroBadge;
 
-  const resolvedIntroTitle = isCatalogIntent
+  const resolvedIntroTitle = isBriefSolutionIntent
+    ? language === "en"
+      ? "Brief your AI solution project"
+      : "Brief de votre projet IA"
+    : isCatalogIntent
     ? language === "en"
       ? "Request a domain catalogue"
       : "Demander un catalogue de domaine"
@@ -457,7 +620,11 @@ const ContactPage = () => {
           : "Présentez votre organisation"
         : pageModel.formIntroTitle;
 
-  const resolvedIntroDesc = isCatalogIntent
+  const resolvedIntroDesc = isBriefSolutionIntent
+    ? language === "en"
+      ? "Describe the solution to build, the process to transform, the tools you already use, and the data available. Then book a 30-min call to align on the approach."
+      : "Décrivez la solution à construire, le processus à transformer, les outils déjà utilisés et les données disponibles. Réservez ensuite un échange de 30 min pour cadrer l'approche."
+    : isCatalogIntent
     ? language === "en"
       ? "Use this form to receive the right catalogue and give us just enough context to guide you well."
       : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
@@ -475,7 +642,11 @@ const ContactPage = () => {
           : "Décrivez votre activité, votre positionnement et le type de présence que vous souhaitez nous voir étudier."
         : pageModel.formIntroDesc;
 
-  const resolvedSubmitLabel = isCatalogIntent
+  const resolvedSubmitLabel = isBriefSolutionIntent
+    ? language === "en"
+      ? "Send my AI project brief"
+      : "Envoyer mon brief projet"
+    : isCatalogIntent
     ? language === "en"
       ? "Send my catalogue request"
       : "Envoyer ma demande de Catalogue"
@@ -493,7 +664,11 @@ const ContactPage = () => {
           : "Envoyer ma demande de référencement"
         : t("contact.submit");
 
-  const resolvedCoreFieldLabel = isStrategicPartnershipIntent
+  const resolvedCoreFieldLabel = isBriefSolutionIntent
+    ? language === "en"
+      ? "Project name or process to transform (e.g. invoice processing, customer support…)"
+      : "Nom du projet ou processus à transformer (ex : traitement factures, support client…)"
+    : isStrategicPartnershipIntent
     ? language === "en"
       ? "Partnership type, program, or collaboration angle"
       : "Type de partenariat, programme ou angle de collaboration"
@@ -623,6 +798,23 @@ const ContactPage = () => {
 
     setIsSubmitting(true);
 
+    // Enrich message body with brief details so admins see them in /contact-requests
+    const buildEnrichedMessage = () => {
+      if (!isBriefSolutionIntent) return toOptionalValue(form.message);
+      const lines: string[] = [];
+      if (form.message.trim()) lines.push(form.message.trim());
+      lines.push("");
+      lines.push("--- Brief Solution IA ---");
+      if (form.solutionTypes.length) lines.push(`Type(s) de solution : ${form.solutionTypes.join(", ")}`);
+      if (form.processFrequency) lines.push(`Fréquence : ${form.processFrequency}`);
+      if (form.existingTools.length) lines.push(`Outils existants : ${form.existingTools.join(", ")}`);
+      if (form.dataAvailability.length) lines.push(`Données disponibles : ${form.dataAvailability.join(", ")}`);
+      if (form.hasTechReferent) lines.push(`Référent technique interne : ${form.hasTechReferent}`);
+      if (form.scopingHorizon) lines.push(`Délai souhaité : ${form.scopingHorizon}`);
+      if (form.budgetRange) lines.push(`Budget indicatif : ${form.budgetRange}`);
+      return lines.join("\n");
+    };
+
     const { data: requestId, error } = await supabase.rpc("submit_contact_request", {
       full_name_input: form.name.trim(),
       email_input: form.email.trim(),
@@ -632,7 +824,7 @@ const ContactPage = () => {
       city_input: toOptionalValue(form.city),
       participants_input: form.participants.trim() || null,
       requested_formations_input: toOptionalValue(form.formations),
-      message_input: toOptionalValue(form.message),
+      message_input: buildEnrichedMessage(),
       source_page_input: "/contact",
       language_input: activeLanguage,
       request_intent_input: resolvedIntent,
@@ -640,11 +832,30 @@ const ContactPage = () => {
       privacy_consent_input: form.privacyAccepted,
       honeypot_input: form.botField.trim() || null,
       ai_maturity_input: isEnterpriseScopingFlow ? toOptionalValue(form.aiMaturity) : null,
-      use_cases_input: isEnterpriseScopingFlow && form.useCases.length > 0 ? form.useCases : null,
-      scoping_horizon_input: isEnterpriseScopingFlow ? toOptionalValue(form.scopingHorizon) : null,
+      use_cases_input:
+        isBriefSolutionIntent && form.solutionTypes.length > 0
+          ? form.solutionTypes
+          : isEnterpriseScopingFlow && form.useCases.length > 0
+            ? form.useCases
+            : null,
+      scoping_horizon_input:
+        isBriefSolutionIntent
+          ? toOptionalValue(form.scopingHorizon)
+          : isEnterpriseScopingFlow
+            ? toOptionalValue(form.scopingHorizon)
+            : null,
       engagement_format_input:
-        isEnterpriseScopingFlow && form.engagementFormat.length > 0 ? form.engagementFormat : null,
-      budget_range_input: isEnterpriseScopingFlow ? toOptionalValue(form.budgetRange) : null,
+        isBriefSolutionIntent && form.existingTools.length > 0
+          ? form.existingTools
+          : isEnterpriseScopingFlow && form.engagementFormat.length > 0
+            ? form.engagementFormat
+            : null,
+      budget_range_input:
+        isBriefSolutionIntent
+          ? toOptionalValue(form.budgetRange)
+          : isEnterpriseScopingFlow
+            ? toOptionalValue(form.budgetRange)
+            : null,
     });
 
     setIsSubmitting(false);
@@ -665,7 +876,12 @@ const ContactPage = () => {
 
     const { error: notificationError } = await sendProspectEmailNotifications({
       requestId,
-      intent: resolvedIntent as "demande-catalogue" | "demande-renseignement" | "contact-devis" | "demande-referencement",
+      intent: resolvedIntent as
+        | "demande-catalogue"
+        | "demande-renseignement"
+        | "contact-devis"
+        | "demande-referencement"
+        | "brief-solution-ia",
       fullName: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim(),
@@ -682,11 +898,30 @@ const ContactPage = () => {
         fullName: form.name.trim(),
       }),
       aiMaturity: isEnterpriseScopingFlow ? form.aiMaturity || null : null,
-      useCases: isEnterpriseScopingFlow && form.useCases.length > 0 ? form.useCases : null,
-      scopingHorizon: isEnterpriseScopingFlow ? form.scopingHorizon || null : null,
+      useCases:
+        isBriefSolutionIntent && form.solutionTypes.length > 0
+          ? form.solutionTypes
+          : isEnterpriseScopingFlow && form.useCases.length > 0
+            ? form.useCases
+            : null,
+      scopingHorizon:
+        isBriefSolutionIntent
+          ? form.scopingHorizon || null
+          : isEnterpriseScopingFlow
+            ? form.scopingHorizon || null
+            : null,
       engagementFormat:
-        isEnterpriseScopingFlow && form.engagementFormat.length > 0 ? form.engagementFormat : null,
-      budgetRange: isEnterpriseScopingFlow ? form.budgetRange || null : null,
+        isBriefSolutionIntent && form.existingTools.length > 0
+          ? form.existingTools
+          : isEnterpriseScopingFlow && form.engagementFormat.length > 0
+            ? form.engagementFormat
+            : null,
+      budgetRange:
+        isBriefSolutionIntent
+          ? form.budgetRange || null
+          : isEnterpriseScopingFlow
+            ? form.budgetRange || null
+            : null,
     });
 
     toast({
@@ -886,6 +1121,102 @@ const ContactPage = () => {
                     </div>
                   )}
 
+                  {isBriefSolutionIntent && (
+                    <div className="rounded-3xl border border-primary/30 bg-primary/[0.03] p-5 md:p-6">
+                      <div className="mb-5">
+                        <h3 className="font-heading text-lg font-semibold text-card-foreground">{briefSolution.sectionTitle}</h3>
+                        <p className="mt-2 text-sm leading-7 text-muted-foreground">{briefSolution.sectionDesc}</p>
+                      </div>
+                      <div className="space-y-5">
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.solutionTypesLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {briefSolution.solutionTypesOptions.map((opt) => {
+                              const checked = form.solutionTypes.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("solutionTypes", e.target.checked ? [...form.solutionTypes, opt] : form.solutionTypes.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.frequencyLabel}</label>
+                            <select value={form.processFrequency} onChange={(e) => update("processFrequency", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {briefSolution.frequencyOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.techReferentLabel}</label>
+                            <select value={form.hasTechReferent} onChange={(e) => update("hasTechReferent", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {briefSolution.techReferentOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.toolsLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {briefSolution.toolsOptions.map((opt) => {
+                              const checked = form.existingTools.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("existingTools", e.target.checked ? [...form.existingTools, opt] : form.existingTools.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.dataLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {briefSolution.dataOptions.map((opt) => {
+                              const checked = form.dataAvailability.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("dataAvailability", e.target.checked ? [...form.dataAvailability, opt] : form.dataAvailability.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.horizonLabel}</label>
+                            <select value={form.scopingHorizon} onChange={(e) => update("scopingHorizon", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {briefSolution.horizonOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.budgetLabel}</label>
+                            <select value={form.budgetRange} onChange={(e) => update("budgetRange", e.target.value)} className={inputClass}>
+                              {briefSolution.budgetOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="rounded-3xl border border-border bg-background p-5 md:p-6">
                     <div className="mb-4">
 
@@ -987,6 +1318,23 @@ const ContactPage = () => {
 
               {!isCompactMode && (
               <div className="space-y-5">
+                {isBriefSolutionIntent && (
+                  <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-[28px] border border-primary/30 bg-primary/[0.03] p-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Calendar size={14} />
+                      {language === "en" ? "Book a 30-min project call" : "Réserver un échange projet (30 min)"}
+                    </div>
+                    <h3 className="mb-2 font-heading text-xl font-bold text-card-foreground">
+                      {language === "en" ? "Talk directly to an AI builder" : "Parlez directement à un expert IA"}
+                    </h3>
+                    <p className="mb-4 text-sm leading-7 text-muted-foreground">
+                      {language === "en"
+                        ? "Pick a time that suits you. We will align on your project, the right approach, and the next concrete steps."
+                        : "Choisissez un créneau qui vous convient. Nous cadrerons votre projet, la bonne approche et les prochaines étapes concrètes."}
+                    </p>
+                    <CalendlyEmbed url={directLinks.calendlyBooking} />
+                  </motion.div>
+                )}
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedResponseCardTitle}</h3>
                   <div className="space-y-3">
