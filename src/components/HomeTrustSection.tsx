@@ -90,16 +90,6 @@ const HomeTrustSection = () => {
           </div>
         </ScrollReveal>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {copy.proofs.map((proof, index) => (
-            <ScrollReveal key={proof.title} delay={0.12 + index * 0.08} direction="up">
-              <div className="rounded-2xl border border-border bg-card p-5 hover-lift">
-                <h3 className="mb-3 font-heading text-xl font-semibold text-card-foreground">{proof.title}</h3>
-                <p className="text-sm leading-6 text-muted-foreground">{proof.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
 
         <ScrollReveal delay={0.28} className="mt-10 text-center">
           <Link
