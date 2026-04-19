@@ -217,7 +217,7 @@ const CataloguePage = () => {
         quickLinks: [
           { title: "Certification", desc: "Objectifs, programme et valeur métier.", href: "/certification" },
           { title: "Outils IA", desc: "Stacks, workflows et outils recommandés.", href: "/outils-ia" },
-          { title: "Expert IA", desc: "Recevoir une recommandation claire.", href: buildContactPath("demande-renseignement") },
+          { title: "Expert IA", desc: "Recevoir une recommandation claire.", href: "/contact" },
         ],
       }
     : {
@@ -242,7 +242,7 @@ const CataloguePage = () => {
         quickLinks: [
           { title: "Certification", desc: "Goals, program, and business value.", href: "/certification" },
           { title: "AI tools", desc: "Stacks, workflows, and recommended tools.", href: "/outils-ia" },
-          { title: "AI expert", desc: "Receive a clear recommendation.", href: buildContactPath("demande-renseignement") },
+          { title: "AI expert", desc: "Receive a clear recommendation.", href: "/contact" },
         ],
       };
 
@@ -540,7 +540,7 @@ const CataloguePage = () => {
               </div>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  to={buildContactPath("demande-renseignement")}
+                  to="/contact"
                   className="inline-flex items-center gap-2 bg-coral-gradient font-semibold text-sm px-7 py-3 rounded-lg hover:opacity-90 transition-opacity"
                   style={{ color: "hsl(0 0% 100%)" }}
                 >
