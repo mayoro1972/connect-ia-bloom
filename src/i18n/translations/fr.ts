@@ -124,8 +124,8 @@ const rawFr = {
     rights: "© 2026 TransferAI Africa. Tous droits réservés.",
   },
   catalogue: {
-    title: "Trouvez la formation IA adaptée à votre métier",
-    subtitle: "Explorez plus de 130 formations pratiques dans 13 domaines d'expertise. Filtrez selon votre métier, votre niveau et votre format préféré pour trouver rapidement la formation qui vous correspond.",
+    title: "Trouvez la formation adaptée à votre métier",
+    subtitle: "130+ formations dans 13 domaines. Filtrez par métier, niveau et format.",
     search: "Rechercher...",
     allMetiers: "Tous les domaines d'expertise",
     allLevels: "Tous les niveaux",
