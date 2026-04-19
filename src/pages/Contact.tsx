@@ -584,7 +584,11 @@ const ContactPage = () => {
         ]
     : pageModel.pathways;
 
-  const resolvedIntroBadge = isListingIntent
+  const resolvedIntroBadge = isBriefSolutionIntent
+    ? language === "en"
+      ? "AI solution brief"
+      : "Brief solution IA"
+    : isListingIntent
     ? language === "en"
       ? "Listing request"
       : "Demande de référencement"
