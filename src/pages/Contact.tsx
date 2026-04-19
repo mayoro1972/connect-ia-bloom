@@ -1007,15 +1007,30 @@ const ContactPage = () => {
 
             <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
-                {!isDefaultContactLanding && (
-                <div className="mb-6">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                    <Mail size={14} />
-                    {resolvedIntroBadge}
+                {isDefaultContactLanding ? (
+                  <div className="mb-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Mail size={14} />
+                      {language === "en" ? "Write to us" : "Nous écrire"}
+                    </div>
+                    <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground md:text-3xl">
+                      {language === "en" ? "Tell us about your need" : "Parlez-nous de votre besoin"}
+                    </h2>
+                    <p className="text-sm leading-7 text-muted-foreground md:text-base">
+                      {language === "en"
+                        ? "Share the essentials below — we'll come back to you within 24–48 business hours with a clear next step."
+                        : "Partagez l'essentiel ci-dessous — nous revenons vers vous sous 24 à 48h ouvrées avec une orientation claire."}
+                    </p>
                   </div>
-                  <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
-                  <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
-                </div>
+                ) : (
+                  <div className="mb-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Mail size={14} />
+                      {resolvedIntroBadge}
+                    </div>
+                    <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
+                    <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
+                  </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -1339,17 +1354,50 @@ const ContactPage = () => {
 
                 {!isBriefSolutionIntent && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-3xl border border-border bg-card p-6">
-                  <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{pageModel.contactCardTitle}</h3>
-                  <div className="space-y-3 text-sm">
-                    <a href={directLinks.phone} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                      <Phone size={16} /> {contactDetails.phoneDisplay}
+                  <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">
+                    {isDefaultContactLanding
+                      ? language === "en" ? "Key information" : "Informations clés"
+                      : pageModel.contactCardTitle}
+                  </h3>
+                  <div className="space-y-4 text-sm">
+                    <a href={directLinks.phone} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors group">
+                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <Phone size={16} />
+                      </span>
+                      <span className="flex flex-col">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Phone" : "Téléphone"}</span>
+                        <span className="font-medium">{contactDetails.phoneDisplay}</span>
+                      </span>
                     </a>
-                    <a href={directLinks.email} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                      <Mail size={16} /> {contactDetails.email}
+                    <a href={directLinks.email} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
+                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <Mail size={16} />
+                      </span>
+                      <span className="flex flex-col">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Email</span>
+                        <span className="font-medium break-all">{contactDetails.email}</span>
+                      </span>
                     </a>
-                    <a href={directLinks.map} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                      <MapPin size={16} /> {contactDetails.addressShort}
+                    <a href={directLinks.map} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
+                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <MapPin size={16} />
+                      </span>
+                      <span className="flex flex-col">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Address" : "Adresse"}</span>
+                        <span className="font-medium leading-6">{contactDetails.addressShort}</span>
+                      </span>
                     </a>
+                    {isDefaultContactLanding && (
+                      <div className="flex items-start gap-3 text-card-foreground">
+                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <CheckCircle2 size={16} />
+                        </span>
+                        <span className="flex flex-col">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Response time" : "Délai de réponse"}</span>
+                          <span className="font-medium">{language === "en" ? "Within 24–48 business hours" : "Sous 24 à 48h ouvrées"}</span>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
                 )}
