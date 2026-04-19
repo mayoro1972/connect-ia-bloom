@@ -1703,22 +1703,33 @@ const logProspectDelivery = async (payload: {
   providerMessageId?: string | null;
   status: "sent" | "failed";
   errorMessage?: string | null;
+  intent?: string | null;
+  language?: string | null;
 }) => {
   if (!supabase) {
     return;
   }
 
-  await supabase.from("prospect_email_delivery_logs").insert({
-    contact_request_id: payload.requestId ?? null,
+  const recipientType =
+    payload.deliveryType === "internal_notification" ? "admin" : "prospect";
+
+  const { error } = await supabase.from("prospect_email_delivery_logs").insert({
+    request_id: payload.requestId ?? null,
     recipient_email: payload.recipientEmail,
-    delivery_type: payload.deliveryType,
-    provider: "resend",
+    recipient_type: recipientType,
+    intent: payload.intent ?? null,
+    language: payload.language ?? null,
     provider_message_id: payload.providerMessageId ?? null,
     status: payload.status,
     subject: payload.subject,
     error_message: payload.errorMessage ?? null,
     sent_at: payload.status === "sent" ? new Date().toISOString() : null,
+    meta: { delivery_type: payload.deliveryType, provider: "resend" },
   });
+
+  if (error) {
+    console.error("logProspectDelivery insert failed", error);
+  }
 };
 
 Deno.serve(async (request) => {
@@ -1766,6 +1777,8 @@ Deno.serve(async (request) => {
         subject: internalMessage.subject,
         providerMessageId: internalResult?.id ?? null,
         status: "sent",
+        intent: payload.intent,
+        language: payload.language,
       });
       await logProspectDelivery({
         requestId: payload.requestId,
@@ -1774,6 +1787,8 @@ Deno.serve(async (request) => {
         subject: acknowledgement.subject,
         providerMessageId: acknowledgementResult?.id ?? null,
         status: "sent",
+        intent: payload.intent,
+        language: payload.language,
       });
       if (auditExplainer && auditExplainerResult) {
         await logProspectDelivery({
@@ -1783,6 +1798,8 @@ Deno.serve(async (request) => {
           subject: auditExplainer.subject,
           providerMessageId: auditExplainerResult?.id ?? null,
           status: "sent",
+          intent: payload.intent,
+          language: payload.language,
         });
       }
       if (qualifiedResponse && qualifiedResponseResult) {
@@ -1793,6 +1810,8 @@ Deno.serve(async (request) => {
           subject: qualifiedResponse.subject,
           providerMessageId: qualifiedResponseResult?.id ?? null,
           status: "sent",
+          intent: payload.intent,
+          language: payload.language,
         });
       }
       await logCatalogueDelivery(payload);
