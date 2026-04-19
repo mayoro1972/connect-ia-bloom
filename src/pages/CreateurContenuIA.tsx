@@ -161,6 +161,13 @@ const creatorHubCopy = {
       { title: "La nouveauté qui compte", desc: "1 mise à jour IA traduite en impact business pour l'Afrique." },
       { title: "L'opportunité à saisir", desc: "1 mission, job, stage ou appel à projet à surveiller." },
     ],
+    replaysTitle: "Replays & masterclass",
+    replaysSubtitle:
+      "Reprenez à la demande nos webinaires passés et masterclass métier. Idéal pour découvrir notre approche pédagogique avant de vous inscrire à une session live.",
+    replaysBadge: "À regarder à la demande",
+    replaysCta: "Voir ce replay",
+    replaysEmpty: "De nouveaux replays seront ajoutés ici régulièrement.",
+    replaysLiveLink: "Voir les prochains webinaires en direct",
     ctaTitle: "Construire la communauté, former et ouvrir des débouchés",
     ctaDesc:
       "Nous pouvons faire de cette rubrique un vrai moteur d'acquisition et de transformation: contenus dynamiques, veille sectorielle, opportunités emploi et contact direct pour la mise en relation.",
@@ -299,6 +306,13 @@ const creatorHubCopy = {
       { title: "The update that matters", desc: "1 AI update translated into African business impact." },
       { title: "The opportunity to watch", desc: "1 mission, job, internship or call worth tracking." },
     ],
+    replaysTitle: "Replays & masterclasses",
+    replaysSubtitle:
+      "Catch up on our past webinars and profession masterclasses on demand. A great way to test our teaching approach before joining a live session.",
+    replaysBadge: "Watch on demand",
+    replaysCta: "Watch this replay",
+    replaysEmpty: "New replays will be added here regularly.",
+    replaysLiveLink: "See upcoming live webinars",
     ctaTitle: "Build the community, train people and open career paths",
     ctaDesc:
       "We can turn this section into a true acquisition and conversion engine: dynamic content, sector watch, job opportunities and direct contact for introductions.",
