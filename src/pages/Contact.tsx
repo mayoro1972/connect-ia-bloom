@@ -1318,6 +1318,23 @@ const ContactPage = () => {
 
               {!isCompactMode && (
               <div className="space-y-5">
+                {isBriefSolutionIntent && (
+                  <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-[28px] border border-primary/30 bg-primary/[0.03] p-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Calendar size={14} />
+                      {language === "en" ? "Book a 30-min project call" : "Réserver un échange projet (30 min)"}
+                    </div>
+                    <h3 className="mb-2 font-heading text-xl font-bold text-card-foreground">
+                      {language === "en" ? "Talk directly to an AI builder" : "Parlez directement à un expert IA"}
+                    </h3>
+                    <p className="mb-4 text-sm leading-7 text-muted-foreground">
+                      {language === "en"
+                        ? "Pick a time that suits you. We will align on your project, the right approach, and the next concrete steps."
+                        : "Choisissez un créneau qui vous convient. Nous cadrerons votre projet, la bonne approche et les prochaines étapes concrètes."}
+                    </p>
+                    <CalendlyEmbed url={directLinks.calendlyBooking} />
+                  </motion.div>
+                )}
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedResponseCardTitle}</h3>
                   <div className="space-y-3">
