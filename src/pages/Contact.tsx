@@ -480,7 +480,11 @@ const ContactPage = () => {
         : "Parler partenariat stratégique"
     : t("contact.title");
 
-  const resolvedHeaderSubtitle = isListingIntent
+  const resolvedHeaderSubtitle = isBriefSolutionIntent
+    ? language === "en"
+      ? "Tell us about the AI solution you want to build (workflow, assistant, internal tool, dashboard…) and book a call to align on it."
+      : "Présentez la solution IA à construire (workflow, assistant, outil interne, dashboard…) et réservez un échange pour la cadrer ensemble."
+    : isListingIntent
     ? language === "en"
       ? "Present your organization for an editorial and commercial review of a listing or featured presence."
       : "Présentez votre organisation pour une étude éditoriale et commerciale de présence sur TransferAI Africa."
