@@ -1005,7 +1005,7 @@ const ContactPage = () => {
             </div>
             )}
 
-            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? "" : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               {isDefaultContactLanding && (
                 <div className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                   <div className="mb-6">
