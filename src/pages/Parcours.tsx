@@ -255,14 +255,6 @@ const ParcoursPage = () => {
                         );
                       })}
                     </div>
-                    <div className="mt-6">
-                      <Link
-                        to={buildContactPath("demande-renseignement")}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80"
-                      >
-                        {language === "fr" ? "Être orienté sur ce parcours" : "Get guidance for this path"} <ArrowRight size={14} />
-                      </Link>
-                    </div>
                   </div>
                 </ScrollReveal>
               ))}
