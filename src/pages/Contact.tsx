@@ -32,6 +32,12 @@ type ContactFormState = {
   scopingHorizon: string;
   engagementFormat: string[];
   budgetRange: string;
+  // Brief Solution IA
+  solutionTypes: string[];
+  processFrequency: string;
+  existingTools: string[];
+  dataAvailability: string[];
+  hasTechReferent: string;
   privacyAccepted: boolean;
   botField: string;
 };
@@ -51,6 +57,11 @@ const emptyForm: ContactFormState = {
   scopingHorizon: "",
   engagementFormat: [],
   budgetRange: "",
+  solutionTypes: [],
+  processFrequency: "",
+  existingTools: [],
+  dataAvailability: [],
+  hasTechReferent: "",
   privacyAccepted: false,
   botField: "",
 };
