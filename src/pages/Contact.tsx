@@ -1364,7 +1364,7 @@ const ContactPage = () => {
                 </motion.div>
                 )}
 
-                {!isBriefSolutionIntent && (
+                {!isBriefSolutionIntent && !isDefaultContactLanding && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">
                     {isDefaultContactLanding
