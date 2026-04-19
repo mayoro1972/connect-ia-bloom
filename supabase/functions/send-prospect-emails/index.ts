@@ -33,11 +33,18 @@ type ProspectEmailPayload = {
   wantsExpertAppointment?: boolean | null;
 };
 
+type EmailAttachment = {
+  filename: string;
+  content: string; // base64-encoded
+  contentType?: string;
+};
+
 type EmailMessage = {
   subject: string;
   html: string;
   text: string;
   replyTo?: string;
+  attachments?: EmailAttachment[];
 };
 
 type AuditDomainGuide = {
