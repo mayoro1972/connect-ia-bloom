@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X, CheckCircle2, Compass, ArrowRight } from "lucide-react";
+import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X, CheckCircle2, Compass, ArrowRight, Layers, TrendingUp, Award, Route } from "lucide-react";
 import {
   Briefcase, Users, Megaphone, Calculator, Scale, HeadphonesIcon,
   BarChart3, ClipboardList, Crown, GraduationCap, Heart, Globe,
@@ -21,6 +21,14 @@ import { Badge } from "@/components/ui/badge";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { fixMojibake } from "@/lib/fixMojibake";
 import { buildContactPath, resolveCertificationSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
+import { fr } from "@/i18n/translations/fr";
+import { en } from "@/i18n/translations/en";
+
+const levelIcons: Record<string, React.ElementType> = {
+  "Débutant": Layers,
+  "Intermédiaire": TrendingUp,
+  "Avancé": Award,
+};
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
@@ -192,6 +200,37 @@ const CataloguePage = () => {
     return formations.filter(f => newFormationIds.has(f.id));
   }, []);
 
+  const parcoursTrans = (language === "fr" ? fr : en).parcours;
+  const metierParcours = useMemo(() => {
+    return parcoursTrans.paths.map((path) => {
+      const metierFormations = formations.filter((formation) => fixMojibake(formation.metier) === path.metierKey);
+      return {
+        ...path,
+        levels: [
+          { level: "Débutant" as const, formations: metierFormations.filter((f) => f.level === "Débutant") },
+          { level: "Intermédiaire" as const, formations: metierFormations.filter((f) => f.level === "Intermédiaire") },
+          { level: "Avancé" as const, formations: metierFormations.filter((f) => f.level === "Avancé") },
+        ],
+      };
+    });
+  }, [parcoursTrans]);
+
+  const parcoursCopy = language === "fr"
+    ? {
+        tab: "Parcours thématiques",
+        title: "Parcours guidés par domaine",
+        desc: "Plutôt qu'une formation isolée, suivez une trajectoire claire : du socle aux usages avancés, dans votre domaine d'expertise.",
+        coursesLabel: "formations",
+        seeAll: "Voir toutes les formations du parcours",
+      }
+    : {
+        tab: "Thematic paths",
+        title: "Guided paths by domain",
+        desc: "Rather than a standalone course, follow a clear trajectory: from fundamentals to advanced use, in your area of expertise.",
+        coursesLabel: "courses",
+        seeAll: "View all courses in this path",
+      };
+
   const totalFormations = formations.length;
   const totalDomains = metiers.length;
   const guideCopy = language === "fr"
@@ -323,6 +362,13 @@ const CataloguePage = () => {
                 >
                   <Search size={16} className="mr-2" />
                   {t("catalogue.tabSearch")}
+                </TabsTrigger>
+                <TabsTrigger
+                  value="parcours"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg px-6 py-2.5 text-sm font-semibold transition-all"
+                >
+                  <Route size={16} className="mr-2" />
+                  {parcoursCopy.tab}
                 </TabsTrigger>
                 <TabsTrigger
                   value="nouveautes"
@@ -525,6 +571,68 @@ const CataloguePage = () => {
                   {newFormations.map((f, i) => (
                     <FormationCard key={f.id} f={f} i={i} isNew />
                   ))}
+                </div>
+              </TabsContent>
+
+              {/* TAB 4: PARCOURS THÉMATIQUES */}
+              <TabsContent value="parcours">
+                <div className="mb-8">
+                  <h3 className="font-heading text-xl font-bold text-card-foreground mb-2">{parcoursCopy.title}</h3>
+                  <p className="text-sm text-muted-foreground max-w-3xl">{parcoursCopy.desc}</p>
+                </div>
+
+                <div className="space-y-8">
+                  {metierParcours.map((path) => {
+                    const totalCourses = path.levels.reduce((sum, lg) => sum + lg.formations.length, 0);
+                    if (totalCourses === 0) return null;
+                    return (
+                      <div key={path.title} className="bg-card border border-border rounded-2xl p-6 md:p-8">
+                        <div className="flex items-start justify-between flex-wrap gap-4 mb-6">
+                          <div>
+                            <h4 className="font-heading text-lg font-bold text-card-foreground">{path.title}</h4>
+                            <p className="text-sm text-muted-foreground mt-1">{path.desc}</p>
+                          </div>
+                          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary inline-flex items-center gap-1 shrink-0">
+                            <BookOpen size={14} />
+                            {totalCourses} {parcoursCopy.coursesLabel}
+                          </span>
+                        </div>
+
+                        <div className="space-y-5">
+                          {path.levels.map((levelGroup) => {
+                            if (levelGroup.formations.length === 0) return null;
+                            const Icon = levelIcons[levelGroup.level];
+                            return (
+                              <div key={levelGroup.level}>
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Icon size={16} className="text-primary" />
+                                  <span className="font-semibold text-sm text-card-foreground">
+                                    {t(`parcours.levels.${levelGroup.level}`) || levelGroup.level}
+                                  </span>
+                                  <span className="text-xs text-muted-foreground">
+                                    ({levelGroup.formations.length})
+                                  </span>
+                                </div>
+                                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                  {levelGroup.formations.slice(0, 3).map((formation) => (
+                                    <Link
+                                      key={formation.id}
+                                      to={`/catalogue/${formation.id}`}
+                                      className="p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 hover:border-primary/30 transition-colors group"
+                                    >
+                                      <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors">
+                                        {getTitle(formation)}
+                                      </p>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </TabsContent>
             </Tabs>
