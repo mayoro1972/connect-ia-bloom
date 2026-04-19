@@ -442,6 +442,7 @@ const ContactPage = () => {
   const isCatalogIntent = resolvedIntent === "demande-catalogue";
   const isGuidanceIntent = resolvedIntent === "demande-renseignement";
   const isListingIntent = resolvedIntent === "demande-referencement";
+  const isBriefSolutionIntent = resolvedIntent === "brief-solution-ia";
   const normalizedRequestedDomain = normalizeIntentLabel(requestedDomain);
   const isStrategicPartnershipIntent =
     isGuidanceIntent &&
@@ -450,6 +451,7 @@ const ContactPage = () => {
   const isEnterpriseScopingFlow =
     (isGuidanceIntent && !isStrategicPartnershipIntent) || resolvedIntent === "contact-devis";
   const scoping = scopingOptions[language === "en" ? "en" : "fr"];
+  const briefSolution = briefSolutionOptions[language === "en" ? "en" : "fr"];
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
