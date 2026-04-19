@@ -1714,7 +1714,7 @@ Deno.serve(async (request) => {
     }
 
     const internalMessage = buildInternalNotification(payload);
-    const acknowledgement = buildAcknowledgement(payload);
+    const acknowledgement = await attachCatalogueIfNeeded(payload, buildAcknowledgement(payload));
     const qualifiedResponse = buildQualifiedResponse(payload);
     const auditExplainer = buildAuditExplainer(payload);
 
