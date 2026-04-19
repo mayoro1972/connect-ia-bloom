@@ -811,8 +811,78 @@ const ContactPage = () => {
                     </div>
                   </div>
 
+                  {isEnterpriseScopingFlow && (
+                    <div className="rounded-3xl border border-primary/30 bg-primary/[0.03] p-5 md:p-6">
+                      <div className="mb-5">
+                        <h3 className="font-heading text-lg font-semibold text-card-foreground">{scoping.sectionTitle}</h3>
+                        <p className="mt-2 text-sm leading-7 text-muted-foreground">{scoping.sectionDesc}</p>
+                      </div>
+                      <div className="space-y-5">
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{scoping.maturityLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {scoping.maturityOptions.map((opt) => (
+                              <label key={opt.value} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                <input type="radio" name="aiMaturity" value={opt.value} checked={form.aiMaturity === opt.value} onChange={(e) => update("aiMaturity", e.target.value)} className="mt-1 h-4 w-4 text-primary focus:ring-primary/30" />
+                                <span>{opt.label}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{scoping.useCasesLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {scoping.useCasesOptions.map((opt) => {
+                              const checked = form.useCases.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("useCases", e.target.checked ? [...form.useCases, opt] : form.useCases.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{scoping.horizonLabel}</label>
+                            <select value={form.scopingHorizon} onChange={(e) => update("scopingHorizon", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {scoping.horizonOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{scoping.budgetLabel}</label>
+                            <select value={form.budgetRange} onChange={(e) => update("budgetRange", e.target.value)} className={inputClass}>
+                              {scoping.budgetOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{scoping.formatLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {scoping.formatOptions.map((opt) => {
+                              const checked = form.engagementFormat.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("engagementFormat", e.target.checked ? [...form.engagementFormat, opt] : form.engagementFormat.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="rounded-3xl border border-border bg-background p-5 md:p-6">
                     <div className="mb-4">
+
                       <h3 className="font-heading text-lg font-semibold text-card-foreground">{pageModel.optionalFieldsTitle}</h3>
                       <p className="mt-2 text-sm leading-7 text-muted-foreground">{pageModel.optionalFieldsDesc}</p>
                     </div>
