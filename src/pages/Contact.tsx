@@ -339,8 +339,8 @@ const ContactPage = () => {
           ? "Present your partnership project"
           : "Présentez votre projet de partenariat"
         : language === "en"
-          ? "Clarify your need"
-          : "Clarifier votre besoin"
+          ? "Speak with an AI expert"
+          : "Parler à un expert IA"
       : isListingIntent
         ? language === "en"
           ? "Present your organization"
@@ -357,8 +357,8 @@ const ContactPage = () => {
           ? "Tell us who you are, what kind of collaboration you are considering, and what result you would like to achieve together with TransferAI Africa."
           : "Dites-nous qui vous êtes, le type de collaboration envisagé et le résultat que vous souhaitez construire avec TransferAI Africa."
         : language === "en"
-          ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
-          : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
+          ? "Present your company and the AI scoping need. Our experts review your context and come back with a clear orientation — and you can also book a 30-min call directly below."
+          : "Présentez votre entreprise et le besoin de cadrage IA. Nos experts étudient votre contexte et reviennent vers vous avec une orientation claire — vous pouvez aussi réserver un échange de 30 min directement ci-dessous."
       : isListingIntent
         ? language === "en"
           ? "Describe your activity, positioning, and the type of visibility you would like us to review."
