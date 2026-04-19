@@ -1040,8 +1040,8 @@ const ContactPage = () => {
                     </h2>
                     <p className="text-sm leading-7 text-muted-foreground md:text-base">
                       {language === "en"
-                        ? "Talk to an AI expert by booking your free slot, or describe your need and we'll get back to you."
-                        : "Parlez à un expert IA, en réservant votre créneau gratuit ou décrivez votre besoin et nous reviendrons."}
+                        ? "Book a free slot with an AI expert, or describe your need and we'll get back to you."
+                        : "Réservez un créneau gratuit avec un expert IA, ou décrivez votre besoin et nous vous recontacterons."}
                     </p>
                   </div>
                 ) : (
