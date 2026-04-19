@@ -91,7 +91,7 @@ export function useResourcePost(slug?: string) {
     const loadResource = async () => {
       setIsLoading(true);
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("resource_posts")
         .select("*")
         .eq("status", "published")

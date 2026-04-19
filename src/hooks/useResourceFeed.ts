@@ -39,7 +39,7 @@ export function useResourceFeed() {
     const loadResources = async () => {
       setIsLoading(true);
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("resource_posts")
         .select(
           "id, slug, category_key, sector_key, title_fr, title_en, excerpt_fr, excerpt_en, read_time_minutes, published_at, source_name, source_url, tags, is_featured, is_new_manual",
