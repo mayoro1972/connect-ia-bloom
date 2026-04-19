@@ -381,6 +381,66 @@ export type Database = {
         }
         Relationships: []
       }
+      monthly_domain_trends: {
+        Row: {
+          ai_model: string | null
+          ai_provider: string | null
+          badge_label_en: string
+          badge_label_fr: string
+          created_at: string
+          domain_key: string
+          id: string
+          justification_en: string | null
+          justification_fr: string | null
+          rank: number
+          source_signals: Json | null
+          status: string
+          target_sectors_en: string[]
+          target_sectors_fr: string[]
+          trend_month: string
+          updated_at: string
+          webinar_url: string | null
+        }
+        Insert: {
+          ai_model?: string | null
+          ai_provider?: string | null
+          badge_label_en?: string
+          badge_label_fr?: string
+          created_at?: string
+          domain_key: string
+          id?: string
+          justification_en?: string | null
+          justification_fr?: string | null
+          rank: number
+          source_signals?: Json | null
+          status?: string
+          target_sectors_en?: string[]
+          target_sectors_fr?: string[]
+          trend_month: string
+          updated_at?: string
+          webinar_url?: string | null
+        }
+        Update: {
+          ai_model?: string | null
+          ai_provider?: string | null
+          badge_label_en?: string
+          badge_label_fr?: string
+          created_at?: string
+          domain_key?: string
+          id?: string
+          justification_en?: string | null
+          justification_fr?: string | null
+          rank?: number
+          source_signals?: Json | null
+          status?: string
+          target_sectors_en?: string[]
+          target_sectors_fr?: string[]
+          trend_month?: string
+          updated_at?: string
+          webinar_url?: string | null
+        }
+        Relationships: []
+      }
       newsletter_delivery_logs: {
         Row: {
           created_at: string
