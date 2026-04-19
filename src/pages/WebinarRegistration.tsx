@@ -106,7 +106,7 @@ const copy = {
     error: "An error occurred. Please try again.",
     other: "Other",
     none: "— Select —",
-    plannedDate: (date: string) => `Tentative date: ${date} (confirmed by our team within 14 days)`,
+    plannedDate: (date: string) => `Tentative dates: ${date} — times to be confirmed (final confirmation by email)`,
   },
 } as const;
 
