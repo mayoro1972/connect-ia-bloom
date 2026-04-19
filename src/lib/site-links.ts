@@ -175,6 +175,20 @@ export const slugifySiteValue = (value: string) =>
     .toLowerCase();
 
 export const buildContactPath = (intent: ContactIntent, domain?: string) => {
+  // Intents avec page dédiée (formulaire compact + URL propre)
+  if (intent === "demande-catalogue") {
+    const params = new URLSearchParams();
+    if (domain) params.set("domain", domain);
+    const qs = params.toString();
+    return qs ? `/demande-catalogue?${qs}` : "/demande-catalogue";
+  }
+  if (intent === "demande-renseignement") {
+    const params = new URLSearchParams();
+    if (domain) params.set("domain", domain);
+    const qs = params.toString();
+    return qs ? `/parler-expert-ia?${qs}` : "/parler-expert-ia";
+  }
+
   const params = new URLSearchParams({ intent });
 
   if (domain) {
