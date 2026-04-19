@@ -302,6 +302,9 @@ const ContactPage = () => {
     isGuidanceIntent &&
     (normalizedRequestedDomain.includes("partenariat strategique") ||
       normalizedRequestedDomain === "partenariats");
+  const isEnterpriseScopingFlow =
+    (isGuidanceIntent && !isStrategicPartnershipIntent) || resolvedIntent === "contact-devis";
+  const scoping = scopingOptions[language === "en" ? "en" : "fr"];
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
