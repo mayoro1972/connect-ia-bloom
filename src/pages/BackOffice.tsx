@@ -15,6 +15,7 @@ import { isSupabaseConfigured } from "@/integrations/supabase/client";
 import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
 import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
 import AuditProspectAdminPanel, { type AuditProspectSnapshot } from "@/components/backoffice/AuditProspectAdminPanel";
+import WebinarAdminPanel from "@/components/backoffice/WebinarAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -467,6 +468,7 @@ const BackOfficePage = () => {
                 <TabsTrigger value="partners">Partenaires IA</TabsTrigger>
                 <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
+                <TabsTrigger value="webinars">Webinaires</TabsTrigger>
                 <TabsTrigger value="help">Mode d'emploi</TabsTrigger>
               </TabsList>
 
@@ -977,6 +979,10 @@ const BackOfficePage = () => {
                     </div>
                   </div>
                 </div>
+              </TabsContent>
+
+              <TabsContent value="webinars">
+                <WebinarAdminPanel token={token} />
               </TabsContent>
 
               <TabsContent value="help">
