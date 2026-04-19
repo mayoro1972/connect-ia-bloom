@@ -459,6 +459,49 @@ const asHtmlList = (items: string[]) =>
     .map((item) => `<li style="margin:0 0 8px;">${escapeHtml(item)}</li>`)
     .join("")}</ul>`;
 
+type ScopingRecapItem = { label: string; value: string };
+
+const buildScopingRecap = (
+  payload: ProspectEmailPayload,
+  isFrench: boolean,
+): { items: ScopingRecapItem[]; title: string; intro: string } | null => {
+  const items: ScopingRecapItem[] = [];
+  const labels = isFrench
+    ? {
+        title: "Récapitulatif de votre cadrage IA",
+        intro:
+          "Voici les éléments que vous avez sélectionnés. Ils nous serviront de base pour préparer notre échange et vous proposer une orientation pertinente.",
+        maturity: "Maturité IA",
+        useCases: "Cas d'usage envisagés",
+        horizon: "Horizon de mise en œuvre",
+        format: "Format d'engagement",
+        budget: "Budget indicatif",
+      }
+    : {
+        title: "Recap of your AI scoping inputs",
+        intro:
+          "Here is what you selected. We will use it as the foundation to prepare our exchange and recommend a relevant next step.",
+        maturity: "AI maturity",
+        useCases: "Use cases considered",
+        horizon: "Implementation horizon",
+        format: "Engagement format",
+        budget: "Indicative budget",
+      };
+
+  if (payload.aiMaturity?.trim()) items.push({ label: labels.maturity, value: payload.aiMaturity.trim() });
+  if (payload.useCases && payload.useCases.length > 0)
+    items.push({ label: labels.useCases, value: payload.useCases.join(" • ") });
+  if (payload.scopingHorizon?.trim())
+    items.push({ label: labels.horizon, value: payload.scopingHorizon.trim() });
+  if (payload.engagementFormat && payload.engagementFormat.length > 0)
+    items.push({ label: labels.format, value: payload.engagementFormat.join(" • ") });
+  if (payload.budgetRange?.trim()) items.push({ label: labels.budget, value: payload.budgetRange.trim() });
+
+  if (items.length === 0) return null;
+  return { items, title: labels.title, intro: labels.intro };
+};
+
+
 const isLocalHost = (hostname: string) =>
   hostname === "localhost" ||
   hostname === "127.0.0.1" ||
