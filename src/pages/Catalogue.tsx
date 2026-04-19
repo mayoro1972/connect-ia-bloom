@@ -267,7 +267,7 @@ const CataloguePage = () => {
                 </p>
               </div>
               <Button asChild className="shrink-0 bg-coral-gradient text-white hover:opacity-90">
-                <Link to={buildContactPath("demande-catalogue")}>
+                <Link to="/demande-catalogue">
                   <Download size={16} className="mr-2" />
                   {language === "fr" ? "Demander le catalogue" : "Request catalogue"}
                 </Link>
