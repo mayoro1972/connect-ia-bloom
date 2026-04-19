@@ -85,7 +85,7 @@ const ConsultingIA = () => {
             <div className="bg-indigo-gradient rounded-2xl p-8 md:p-12 text-center">
               <h3 className="font-heading text-2xl font-bold mb-4" style={{ color: "hsl(0 0% 96%)" }}>{t("consultingIA.ctaTitle")}</h3>
               <p className="text-sm mb-6" style={{ color: "hsl(210 20% 70%)" }}>{t("consultingIA.ctaDesc")}</p>
-              <Link to={buildContactPath("contact-devis")} className="inline-flex items-center gap-2 bg-orange-gradient font-semibold text-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
+              <Link to={buildContactPath("demande-renseignement")} className="inline-flex items-center gap-2 bg-orange-gradient font-semibold text-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity" style={{ color: "hsl(0 0% 100%)" }}>
                 {t("consultingIA.ctaCta")} <ArrowRight size={16} />
               </Link>
             </div>
