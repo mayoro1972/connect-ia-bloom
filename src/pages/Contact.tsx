@@ -27,6 +27,11 @@ type ContactFormState = {
   participants: string;
   formations: string;
   message: string;
+  aiMaturity: string;
+  useCases: string[];
+  scopingHorizon: string;
+  engagementFormat: string[];
+  budgetRange: string;
   privacyAccepted: boolean;
   botField: string;
 };
@@ -41,9 +46,111 @@ const emptyForm: ContactFormState = {
   participants: "",
   formations: "",
   message: "",
+  aiMaturity: "",
+  useCases: [],
+  scopingHorizon: "",
+  engagementFormat: [],
+  budgetRange: "",
   privacyAccepted: false,
   botField: "",
 };
+
+const scopingOptions = {
+  fr: {
+    sectionTitle: "Cadrage IA",
+    sectionDesc: "Aidez-nous à préparer un échange utile : maturité, cas d'usage envisagés, horizon et format d'accompagnement souhaité.",
+    maturityLabel: "Maturité IA actuelle",
+    maturityOptions: [
+      { value: "decouverte", label: "Découverte — premières réflexions" },
+      { value: "experimentation", label: "Expérimentations en cours" },
+      { value: "premiers-cas", label: "Premiers cas d'usage en production" },
+      { value: "echelle", label: "Déploiement à l'échelle" },
+    ],
+    useCasesLabel: "Cas d'usage envisagés (plusieurs choix possibles)",
+    useCasesOptions: [
+      "Automatisation de processus",
+      "Assistant IA interne (RH, juridique, support…)",
+      "Relation client / chatbot",
+      "Analyse de données & reporting",
+      "Génération de contenu",
+      "Aide à la décision",
+      "Autre",
+    ],
+    horizonLabel: "Horizon souhaité pour les premiers résultats",
+    horizonOptions: [
+      { value: "moins-30j", label: "Moins de 30 jours" },
+      { value: "30-60-90", label: "30 / 60 / 90 jours" },
+      { value: "3-6-mois", label: "3 à 6 mois" },
+      { value: "6-12-mois", label: "6 à 12 mois" },
+      { value: "non-defini", label: "Pas encore défini" },
+    ],
+    formatLabel: "Format d'accompagnement souhaité (plusieurs choix possibles)",
+    formatOptions: [
+      "Diagnostic de maturité IA",
+      "Cartographie des cas d'usage",
+      "Feuille de route 30 / 60 / 90 jours",
+      "Cadre d'adoption & gouvernance",
+      "Construction d'automatisations / assistants IA",
+      "Formation & montée en compétence des équipes",
+    ],
+    budgetLabel: "Budget indicatif (optionnel)",
+    budgetOptions: [
+      { value: "", label: "Préfère ne pas préciser" },
+      { value: "<5k", label: "Moins de 5 000 €" },
+      { value: "5-15k", label: "5 000 – 15 000 €" },
+      { value: "15-50k", label: "15 000 – 50 000 €" },
+      { value: ">50k", label: "Plus de 50 000 €" },
+      { value: "a-definir", label: "À définir avec vous" },
+    ],
+  },
+  en: {
+    sectionTitle: "AI scoping",
+    sectionDesc: "Help us prepare a useful conversation: maturity, use cases, horizon, and preferred engagement format.",
+    maturityLabel: "Current AI maturity",
+    maturityOptions: [
+      { value: "decouverte", label: "Discovery — first reflections" },
+      { value: "experimentation", label: "Experimentations underway" },
+      { value: "premiers-cas", label: "First use cases in production" },
+      { value: "echelle", label: "Scaling deployment" },
+    ],
+    useCasesLabel: "Use cases considered (multiple choices)",
+    useCasesOptions: [
+      "Process automation",
+      "Internal AI assistant (HR, legal, support…)",
+      "Customer relationship / chatbot",
+      "Data analysis & reporting",
+      "Content generation",
+      "Decision support",
+      "Other",
+    ],
+    horizonLabel: "Expected horizon for first results",
+    horizonOptions: [
+      { value: "moins-30j", label: "Less than 30 days" },
+      { value: "30-60-90", label: "30 / 60 / 90 days" },
+      { value: "3-6-mois", label: "3 to 6 months" },
+      { value: "6-12-mois", label: "6 to 12 months" },
+      { value: "non-defini", label: "Not defined yet" },
+    ],
+    formatLabel: "Preferred engagement format (multiple choices)",
+    formatOptions: [
+      "AI maturity diagnostic",
+      "Use case mapping",
+      "30 / 60 / 90 day roadmap",
+      "Adoption framework & governance",
+      "Build of AI automations / assistants",
+      "Team training & upskilling",
+    ],
+    budgetLabel: "Indicative budget (optional)",
+    budgetOptions: [
+      { value: "", label: "Prefer not to say" },
+      { value: "<5k", label: "Under €5,000" },
+      { value: "5-15k", label: "€5,000 – 15,000" },
+      { value: "15-50k", label: "€15,000 – 50,000" },
+      { value: ">50k", label: "Over €50,000" },
+      { value: "a-definir", label: "To be defined together" },
+    ],
+  },
+} as const;
 
 const toOptionalValue = (value: string) => {
   const trimmed = value.trim();
