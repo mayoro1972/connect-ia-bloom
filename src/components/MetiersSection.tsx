@@ -35,17 +35,17 @@ const metierKeys = [
   { key: "diplomatie", icon: Globe },
 ] as const;
 
-const featuredMetierKeys = ["assistanat", "rh", "marketing", "finance", "management", "it"] as const;
+const featuredMetierKeys = ["assistanat", "rh", "marketing"] as const;
 
 const sectionCopy = {
   fr: {
-    eyebrow: "Catalogue de formation · Abidjan & Afrique de l'Ouest",
-    title: "Les domaines les plus demandés",
+    eyebrow: "Aperçu · 3 domaines phares sur 13",
+    title: "Un aperçu des domaines phares",
     subtitle:
-      "Commencez par les domaines qui génèrent le plus d'intérêt, puis explorez le reste de l'offre si besoin.",
-    primaryCta: "Voir les 13 domaines",
-    secondaryCta: "Explorer le catalogue",
-    hiddenCount: "7 autres domaines disponibles",
+      "Voici 3 exemples parmi les 13 domaines couverts. Recevez le catalogue complet pour explorer toute l'offre.",
+    primaryCta: "Recevoir le catalogue complet",
+    secondaryCta: "Parcourir le catalogue",
+    hiddenCount: "10 autres domaines dans le catalogue",
     formationsCount: "10 formations",
     badges: {
       assistanat: "Très demandé",
@@ -72,13 +72,13 @@ const sectionCopy = {
     },
   },
   en: {
-    eyebrow: "Training catalogue · Abidjan & West Africa",
-    title: "The most requested domains",
+    eyebrow: "Preview · 3 featured domains out of 13",
+    title: "A glimpse of our featured domains",
     subtitle:
-      "Start with the domains attracting the most interest, then explore the rest of the offer if needed.",
-    primaryCta: "View all 13 domains",
-    secondaryCta: "Explore the catalogue",
-    hiddenCount: "7 other domains available",
+      "Here are 3 examples among the 13 domains we cover. Get the full catalogue to explore the whole offer.",
+    primaryCta: "Get the full catalogue",
+    secondaryCta: "Browse the catalogue",
+    hiddenCount: "10 more domains in the catalogue",
     formationsCount: "10 courses",
     badges: {
       assistanat: "Highly requested",
@@ -151,17 +151,17 @@ const MetiersSection = () => {
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                to="/catalogue"
+                to="/catalogue?request=1"
                 className="inline-flex items-center gap-2 rounded-lg bg-coral-gradient px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:opacity-90"
                 style={{ color: "hsl(0 0% 100%)" }}
               >
-                {copy.secondaryCta} ↗
+                {copy.primaryCta} ↗
               </Link>
               <Link
-                to="/catalogues-domaines"
+                to="/catalogue"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:bg-muted"
               >
-                {copy.primaryCta} →
+                {copy.secondaryCta} →
               </Link>
             </div>
             <p className="text-sm text-muted-foreground">{copy.hiddenCount}</p>
