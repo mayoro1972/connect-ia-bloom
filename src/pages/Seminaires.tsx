@@ -301,7 +301,7 @@ const Seminaires = () => {
                   {copy.ctaPrimary} <ArrowRight size={16} />
                 </Link>
                 <Link
-                  to={buildContactPath("demande-renseignement")}
+                  to="/contact"
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white hover:bg-white/5"
                 >
                   {copy.ctaSecondary}
