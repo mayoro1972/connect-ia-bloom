@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react";
+import CalendlyEmbed from "@/components/CalendlyEmbed";
 import { Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
@@ -384,8 +385,8 @@ const ContactPage = () => {
       : "Type de partenariat, programme ou angle de collaboration"
     : isGuidanceIntent
     ? language === "en"
-      ? "Topic, project, or area you would like to scope"
-      : "Sujet, projet ou domaine à cadrer"
+      ? "Topic, project or business area to scope (e.g. customer service, finance, HR...)"
+      : "Sujet, projet ou domaine métier à cadrer (ex : relation client, finance, RH...)"
     : isListingIntent
     ? language === "en"
       ? "Organization, activity or positioning angle"
