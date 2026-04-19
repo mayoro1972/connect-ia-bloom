@@ -50,7 +50,7 @@ const sectionCopy = {
         title: "Request guidance",
         desc: "For visitors hesitating between several courses, paths, or formats and wanting a clear recommendation.",
         cta: "Get guidance",
-        href: buildContactPath("demande-renseignement"),
+        href: "/contact",
         badge: "Simplest",
         icon: Compass,
       },
