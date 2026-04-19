@@ -338,12 +338,13 @@ const PartnerAdminPanel = ({
       response_email_body_fr: renderPartnerRecommendationEmail({
         ...fallbackPartnerReview,
         ...current,
+        ai_score: Number(current.ai_score) || 72,
+        recommended_duration_months: Number(current.recommended_duration_months) || recommendedOffer.duration_months,
+        recommended_price_fcfa: Number(current.recommended_price_fcfa) || recommendedOffer.price_fcfa,
         prospect_name: current.prospect_name || fallbackPartnerReview.prospect_name,
         sector_activity: current.sector_activity || fallbackPartnerReview.sector_activity,
         recommended_offer_key: recommendedOffer.offer_key,
-        recommended_duration_months: recommendedOffer.duration_months,
-        recommended_price_fcfa: recommendedOffer.price_fcfa,
-      }),
+      } as PartnerReviewPreview),
     }));
   };
 

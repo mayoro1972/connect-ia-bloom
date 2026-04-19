@@ -41,7 +41,7 @@ export function useJobFeed() {
     const loadJobs = async () => {
       setIsLoading(true);
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("job_opportunities")
         .select(
           "id, slug, title, summary_fr, summary_en, market_key, source_name, source_url, apply_url, location_fr, location_en, work_mode, opportunity_type, compensation_label, published_at, is_featured, is_new_manual",

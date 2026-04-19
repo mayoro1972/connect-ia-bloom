@@ -497,7 +497,7 @@ const ContactPage = () => {
 
     const { error: notificationError } = await sendProspectEmailNotifications({
       requestId,
-      intent: resolvedIntent,
+      intent: resolvedIntent as "demande-catalogue" | "demande-renseignement" | "contact-devis" | "demande-referencement",
       fullName: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim(),
