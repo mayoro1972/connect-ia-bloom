@@ -1777,6 +1777,8 @@ Deno.serve(async (request) => {
         subject: internalMessage.subject,
         providerMessageId: internalResult?.id ?? null,
         status: "sent",
+        intent: payload.intent,
+        language: payload.language,
       });
       await logProspectDelivery({
         requestId: payload.requestId,
@@ -1785,6 +1787,8 @@ Deno.serve(async (request) => {
         subject: acknowledgement.subject,
         providerMessageId: acknowledgementResult?.id ?? null,
         status: "sent",
+        intent: payload.intent,
+        language: payload.language,
       });
       if (auditExplainer && auditExplainerResult) {
         await logProspectDelivery({
@@ -1794,6 +1798,8 @@ Deno.serve(async (request) => {
           subject: auditExplainer.subject,
           providerMessageId: auditExplainerResult?.id ?? null,
           status: "sent",
+          intent: payload.intent,
+          language: payload.language,
         });
       }
       if (qualifiedResponse && qualifiedResponseResult) {
@@ -1804,6 +1810,8 @@ Deno.serve(async (request) => {
           subject: qualifiedResponse.subject,
           providerMessageId: qualifiedResponseResult?.id ?? null,
           status: "sent",
+          intent: payload.intent,
+          language: payload.language,
         });
       }
       await logCatalogueDelivery(payload);
