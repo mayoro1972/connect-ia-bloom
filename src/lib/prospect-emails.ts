@@ -11,7 +11,8 @@ export type ProspectEmailIntent =
   | "demande-referencement"
   | "demande-audit"
   | "inscription"
-  | "prise-rdv";
+  | "prise-rdv"
+  | "brief-solution-ia";
 
 export type ProspectEmailPayload = {
   requestId?: string | null;
