@@ -338,7 +338,7 @@ const contactPageModel = {
     quickStartBadge: "Choisissez l'entrée la plus simple",
     quickStartTitle: "Parler à la bonne porte d'entrée",
     quickStartDesc:
-      "Commencez par l'action la plus utile selon votre situation : parlez à un expert IA ou écrivez-nous directement pour exprimer votre besoin.",
+      "Commencez par l'action la plus utile selon votre situation : parlez à un expert en prenant un RDV ou nous écrire IA ou écrivez-nous directement pour exprimer votre besoin.",
     pathways: [
       {
         title: "Parler à un expert IA",
