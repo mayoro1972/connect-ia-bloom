@@ -556,6 +556,7 @@ const CataloguePage = () => {
           </div>
         </section>
         <Footer />
+        <CatalogueDownloadModal isOpen={isDownloadOpen} onClose={() => setIsDownloadOpen(false)} />
       </div>
     </PageTransition>
   );
