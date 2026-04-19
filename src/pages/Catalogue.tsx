@@ -254,6 +254,27 @@ const CataloguePage = () => {
         <Navbar />
         <PageHeader title={t("catalogue.title")} subtitle={t("catalogue.subtitle")} badge={guideCopy.badge} />
 
+        <section className="py-6">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="flex flex-col items-start justify-between gap-4 rounded-3xl border border-primary/30 bg-primary/5 p-5 sm:flex-row sm:items-center">
+              <div>
+                <h3 className="font-heading text-lg font-semibold text-card-foreground">
+                  {language === "fr" ? "Recevez le catalogue complet par email" : "Receive the full catalogue by email"}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {language === "fr"
+                    ? "PDF détaillé des 13 domaines et 130+ formations, livré en quelques minutes."
+                    : "Detailed PDF of 13 domains and 130+ courses, delivered within minutes."}
+                </p>
+              </div>
+              <Button onClick={() => setIsDownloadOpen(true)} className="shrink-0 bg-coral-gradient text-white hover:opacity-90">
+                <Download size={16} className="mr-2" />
+                {language === "fr" ? "Demander le catalogue" : "Request catalogue"}
+              </Button>
+            </div>
+          </div>
+        </section>
+
         <section className="py-10">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="mb-6 rounded-3xl border border-border bg-card p-6">
