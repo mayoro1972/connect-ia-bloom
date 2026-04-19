@@ -8,7 +8,7 @@ interface PageHeaderProps {
 
 const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
   return (
-    <section className="relative overflow-hidden pb-16 pt-28 lg:pt-32">
+    <section className="relative overflow-hidden pb-8 pt-20 md:pb-12 md:pt-24 lg:pb-16 lg:pt-28">
       {/* Background image */}
       <div className="absolute inset-0">
         <img src={headerBg} alt="" className="w-full h-full object-cover" />
@@ -34,14 +34,14 @@ const PageHeader = ({ title, subtitle, badge }: PageHeaderProps) => {
           </span>
         )}
         <h1
-          className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-4"
+          className="font-heading text-2xl md:text-4xl lg:text-5xl font-bold mb-3"
           style={{ color: "hsl(0 0% 98%)" }}
         >
           {title}
         </h1>
         {subtitle && (
           <p
-            className="text-lg max-w-2xl mx-auto"
+            className="text-sm md:text-base max-w-xl mx-auto"
             style={{ color: "hsl(210 20% 75%)" }}
           >
             {subtitle}
