@@ -713,6 +713,10 @@ const ContactPage = () => {
                             ? language === "en"
                               ? "Describe your catalogue need: target audience, intended use, deadline... *"
                               : "Précisez votre besoin de catalogue : public visé, usage prévu, échéance... *"
+                            : isGuidanceIntent
+                            ? language === "en"
+                              ? "Describe in a few sentences your context, the result you want, and any constraint we should know about..."
+                              : "Décrivez en quelques phrases votre contexte, le résultat attendu et les contraintes éventuelles à prendre en compte..."
                             : t("contact.message")
                         }
                         required={isCatalogIntent}
