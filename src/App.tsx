@@ -34,6 +34,7 @@ const Inscription = lazy(() => import("./pages/Inscription"));
 const Seminaires = lazy(() => import("./pages/Seminaires"));
 const Webinars = lazy(() => import("./pages/Webinars"));
 const WebinarRegistration = lazy(() => import("./pages/WebinarRegistration"));
+const WebinarSeatRequest = lazy(() => import("./pages/WebinarSeatRequest"));
 const CreateurContenuIA = lazy(() => import("./pages/CreateurContenuIA"));
 const ConsultingIA = lazy(() => import("./pages/ConsultingIA"));
 const DeveloppementSolutionsIA = lazy(() => import("./pages/DeveloppementSolutionsIA"));
@@ -227,6 +228,8 @@ const AnimatedRoutes = () => {
           <Route path="/webinars" element={<Webinars />} />
           <Route path="/webinaires/inscription" element={<WebinarRegistration />} />
           <Route path="/webinars/register" element={<WebinarRegistration />} />
+          <Route path="/webinaires/demande-place" element={<WebinarSeatRequest />} />
+          <Route path="/webinars/seat-request" element={<WebinarSeatRequest />} />
           <Route path="/createur-contenu-ia" element={<CreateurContenuIA />} />
           <Route path="/consulting-ia" element={<ConsultingIA />} />
           <Route path="/developpement-solutions-ia" element={<DeveloppementSolutionsIA />} />

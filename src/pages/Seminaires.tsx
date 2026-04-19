@@ -222,7 +222,7 @@ const Seminaires = () => {
                     </div>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                       {webinars.map((web, i) => {
-                        const webinarHref = `/webinaires/inscription?topic=${encodeURIComponent(pickTitle(web))}`;
+                        const webinarHref = `/webinaires/demande-place?topic=${encodeURIComponent(pickTitle(web))}`;
                         return (
                           <motion.div
                             key={web.id}
