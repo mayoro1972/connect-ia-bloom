@@ -486,7 +486,7 @@ const rawFr = {
   },
   contact: {
     title: "Contactez-nous",
-    subtitle: "",
+    subtitle: "Réservez un créneau gratuit avec un expert IA, ou décrivez votre besoin et nous vous recontacterons.",
     formTitle: "Décrivez votre besoin",
     name: "Nom complet *",
     email: "Email professionnel *",
