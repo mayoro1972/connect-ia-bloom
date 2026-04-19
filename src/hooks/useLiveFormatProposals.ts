@@ -45,19 +45,20 @@ export const useLiveFormatProposals = () => {
     (async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase
+        // Cast en `any` car la table est nouvelle et types.ts est auto-généré
+        const sb = supabase as any;
+        const { data, error } = await sb
           .from("live_format_proposals")
           .select("*")
           .eq("status", "published")
           .order("cycle_start_date", { ascending: false })
-          .order("format_type")
-          .order("rank")
+          .order("format_type", { ascending: true })
+          .order("rank", { ascending: true })
           .limit(50);
 
         if (error) throw error;
         if (cancelled) return;
 
-        // Garder uniquement le cycle le plus récent
         const items = (data ?? []) as LiveFormatProposal[];
         const latestCycle = items[0]?.cycle_start_date;
         const current = latestCycle
