@@ -106,17 +106,15 @@ Renvoie STRICTEMENT au format JSON via l'outil fourni. N'utilise QUE les clés d
             properties: {
               trends: {
                 type: "array",
-                minItems: 3,
-                maxItems: 3,
                 items: {
                   type: "object",
                   properties: {
-                    rank: { type: "integer", enum: [1, 2, 3] },
+                    rank: { type: "integer" },
                     domain_key: { type: "string", enum: DOMAINS.map((d) => d.key) },
                     badge_label_fr: { type: "string" },
                     badge_label_en: { type: "string" },
-                    target_sectors_fr: { type: "array", minItems: 2, maxItems: 4, items: { type: "string" } },
-                    target_sectors_en: { type: "array", minItems: 2, maxItems: 4, items: { type: "string" } },
+                    target_sectors_fr: { type: "array", items: { type: "string" } },
+                    target_sectors_en: { type: "array", items: { type: "string" } },
                     justification_fr: { type: "string" },
                     justification_en: { type: "string" },
                   },
@@ -124,12 +122,10 @@ Renvoie STRICTEMENT au format JSON via l'outil fourni. N'utilise QUE les clés d
                     "rank", "domain_key", "badge_label_fr", "badge_label_en",
                     "target_sectors_fr", "target_sectors_en", "justification_fr", "justification_en",
                   ],
-                  additionalProperties: false,
                 },
               },
             },
             required: ["trends"],
-            additionalProperties: false,
           },
         },
       },
