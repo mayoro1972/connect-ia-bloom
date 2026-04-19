@@ -21,7 +21,7 @@ import { directLinks } from "@/lib/site-links";
 
 const servicesHubCopy = {
   fr: {
-    title: "Des services IA clairs pour passer de l'idée à l'impact",
+    title: "Des services clairs pour passer de l'idée à l'impact",
     subtitle:
       "Trois points d'entrée simples pour cadrer, déployer et faire vivre une dynamique IA utile dans votre organisation.",
     diagnosisTitle: "Choisissez votre point d'entrée",
@@ -94,7 +94,7 @@ const servicesHubCopy = {
     ctaSecondary: "Voir le catalogue formations",
   },
   en: {
-    title: "Clear AI services to move from idea to impact",
+    title: "Clear services to move from idea to impact",
     subtitle:
       "Three simple entry points to frame, deploy and sustain useful AI adoption inside your organization.",
     diagnosisTitle: "Choose your entry point",
