@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, Clock3, Globe2, Vide
 import { useLanguage } from "@/i18n/LanguageContext";
 import { directLinks } from "@/lib/site-links";
 import { trackAnalyticsEvent } from "@/lib/analytics";
-import logoTransferAI from "@/assets/logo-transferai.png";
+import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 
 interface AppointmentBookingProps {
   /** URL Calendly cible (ouverte au clic sur "Réserver") */
