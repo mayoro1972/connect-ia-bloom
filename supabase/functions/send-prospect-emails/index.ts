@@ -1464,6 +1464,30 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     payload.timeline ? `${copy.fieldLabels.timeline} : ${asTextValue(copy, payload.timeline)}` : "",
   ].filter(Boolean);
 
+  const scopingRecap = buildScopingRecap(payload, copy === translations.fr);
+  const scopingRecapBlock = scopingRecap
+    ? `
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#ecfeff;border:1px solid #a5f3fc;">
+          <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#0e7490;">${escapeHtml(scopingRecap.title)}</p>
+          <p style="margin:0 0 14px;color:#0e7490;font-size:13px;">${escapeHtml(scopingRecap.intro)}</p>
+          ${scopingRecap.items
+            .map(
+              (item, index) =>
+                `<p style="margin:0 0 ${index === scopingRecap.items.length - 1 ? "0" : "8px"};color:#0f172a;"><strong>${escapeHtml(item.label)} :</strong> ${escapeHtml(item.value)}</p>`,
+            )
+            .join("")}
+        </div>
+      `
+    : "";
+  const scopingRecapText = scopingRecap
+    ? [
+        "",
+        `${scopingRecap.title} :`,
+        scopingRecap.intro,
+        ...scopingRecap.items.map((item) => `- ${item.label} : ${item.value}`),
+      ].join("\n")
+    : "";
+
   const html = `
     <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
       <div style="max-width:720px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
