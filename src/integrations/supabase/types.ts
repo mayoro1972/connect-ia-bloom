@@ -16,17 +16,20 @@ export type Database = {
     Tables: {
       contact_requests: {
         Row: {
+          ai_maturity: string | null
           audit_followup_error: string | null
           audit_followup_scheduled_at: string | null
           audit_followup_sent_at: string | null
           audit_followup_status: string | null
           audit_invite_expires_at: string | null
           audit_invite_token: string | null
+          budget_range: string | null
           city: string | null
           company: string | null
           country: string | null
           created_at: string
           email: string
+          engagement_format: string[] | null
           full_name: string
           id: string
           language: string
@@ -43,24 +46,29 @@ export type Database = {
           request_intent: string
           requested_domain: string | null
           requested_formations: string | null
+          scoping_horizon: string | null
           sector: string | null
           source_page: string | null
           status: string
           updated_at: string
+          use_cases: string[] | null
           wants_expert_appointment: boolean
         }
         Insert: {
+          ai_maturity?: string | null
           audit_followup_error?: string | null
           audit_followup_scheduled_at?: string | null
           audit_followup_sent_at?: string | null
           audit_followup_status?: string | null
           audit_invite_expires_at?: string | null
           audit_invite_token?: string | null
+          budget_range?: string | null
           city?: string | null
           company?: string | null
           country?: string | null
           created_at?: string
           email: string
+          engagement_format?: string[] | null
           full_name: string
           id?: string
           language?: string
@@ -77,24 +85,29 @@ export type Database = {
           request_intent?: string
           requested_domain?: string | null
           requested_formations?: string | null
+          scoping_horizon?: string | null
           sector?: string | null
           source_page?: string | null
           status?: string
           updated_at?: string
+          use_cases?: string[] | null
           wants_expert_appointment?: boolean
         }
         Update: {
+          ai_maturity?: string | null
           audit_followup_error?: string | null
           audit_followup_scheduled_at?: string | null
           audit_followup_sent_at?: string | null
           audit_followup_status?: string | null
           audit_invite_expires_at?: string | null
           audit_invite_token?: string | null
+          budget_range?: string | null
           city?: string | null
           company?: string | null
           country?: string | null
           created_at?: string
           email?: string
+          engagement_format?: string[] | null
           full_name?: string
           id?: string
           language?: string
@@ -111,10 +124,12 @@ export type Database = {
           request_intent?: string
           requested_domain?: string | null
           requested_formations?: string | null
+          scoping_horizon?: string | null
           sector?: string | null
           source_page?: string | null
           status?: string
           updated_at?: string
+          use_cases?: string[] | null
           wants_expert_appointment?: boolean
         }
         Relationships: []
@@ -1238,26 +1253,52 @@ export type Database = {
           views_today: number
         }[]
       }
-      submit_contact_request: {
-        Args: {
-          city_input: string
-          company_input: string
-          email_input: string
-          full_name_input: string
-          honeypot_input: string
-          language_input: string
-          message_input: string
-          participants_input: string
-          phone_input: string
-          privacy_consent_input: boolean
-          request_intent_input: string
-          requested_domain_input: string
-          requested_formations_input: string
-          sector_input: string
-          source_page_input: string
-        }
-        Returns: string
-      }
+      submit_contact_request:
+        | {
+            Args: {
+              city_input: string
+              company_input: string
+              email_input: string
+              full_name_input: string
+              honeypot_input: string
+              language_input: string
+              message_input: string
+              participants_input: string
+              phone_input: string
+              privacy_consent_input: boolean
+              request_intent_input: string
+              requested_domain_input: string
+              requested_formations_input: string
+              sector_input: string
+              source_page_input: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              ai_maturity_input?: string
+              budget_range_input?: string
+              city_input: string
+              company_input: string
+              email_input: string
+              engagement_format_input?: string[]
+              full_name_input: string
+              honeypot_input: string
+              language_input: string
+              message_input: string
+              participants_input: string
+              phone_input: string
+              privacy_consent_input: boolean
+              request_intent_input: string
+              requested_domain_input: string
+              requested_formations_input: string
+              scoping_horizon_input?: string
+              sector_input: string
+              source_page_input: string
+              use_cases_input?: string[]
+            }
+            Returns: string
+          }
       submit_registration_request: {
         Args: {
           company_input: string
