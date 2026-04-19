@@ -639,6 +639,12 @@ const ContactPage = () => {
       requested_domain_input: toOptionalValue(form.formations || requestedDomain),
       privacy_consent_input: form.privacyAccepted,
       honeypot_input: form.botField.trim() || null,
+      ai_maturity_input: isEnterpriseScopingFlow ? toOptionalValue(form.aiMaturity) : null,
+      use_cases_input: isEnterpriseScopingFlow && form.useCases.length > 0 ? form.useCases : null,
+      scoping_horizon_input: isEnterpriseScopingFlow ? toOptionalValue(form.scopingHorizon) : null,
+      engagement_format_input:
+        isEnterpriseScopingFlow && form.engagementFormat.length > 0 ? form.engagementFormat : null,
+      budget_range_input: isEnterpriseScopingFlow ? toOptionalValue(form.budgetRange) : null,
     });
 
     setIsSubmitting(false);
