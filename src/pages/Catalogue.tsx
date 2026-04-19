@@ -234,11 +234,11 @@ const CataloguePage = () => {
         newTitle: "New trainings to discover",
         newDesc:
           "Find the latest training additions to the catalogue here.",
-        finalTitle: "Need a simpler choice?",
+        finalTitle: "Need help choosing your training?",
         finalDesc:
-          "We can guide you toward the right training based on your role, level, and objective.",
+          "If you're unsure, book a slot with an AI expert who will guide you. If you already know what you want, enrol directly in the chosen training.",
         primaryCta: "Speak with an AI expert",
-        secondaryCta: "Apply now",
+        secondaryCta: "Enrol in a training",
         quickLinks: [
           { title: "Certification", desc: "Goals, program, and business value.", href: "/certification" },
           { title: "AI tools", desc: "Stacks, workflows, and recommended tools.", href: "/outils-ia" },
