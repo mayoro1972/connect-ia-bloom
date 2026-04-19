@@ -268,12 +268,12 @@ const EntreprisesPage = () => {
               </div>
             </div>
 
-            <div className="rounded-[30px] bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))] p-8 text-center md:p-12">
-              <p className="mx-auto mb-8 max-w-3xl text-base leading-7 text-white/85">{copy.ctaDesc}</p>
+            <div className="rounded-2xl bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))] p-5 text-center md:p-6">
+              <p className="mx-auto mb-4 max-w-2xl text-sm leading-6 text-white/85">{copy.ctaDesc}</p>
               <div className="flex justify-center">
                 <Link
                   to="/parler-expert-ia"
-                  className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   {copy.ctaPrimary} <ArrowRight size={16} />
                 </Link>
