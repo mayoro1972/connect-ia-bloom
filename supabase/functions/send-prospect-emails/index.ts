@@ -1030,14 +1030,54 @@ const auditDomainGuides: Record<"fr" | "en", AuditDomainGuide[]> = {
 
 const resolveAuditDomainGuide = (payload: ProspectEmailPayload) => {
   const language = payload.language === "en" ? "en" : "fr";
-  const haystack = normalizeForMatch(
-    [payload.domain, payload.role, payload.company, payload.message].filter(Boolean).join(" "),
-  );
+  const guides = auditDomainGuides[language];
 
-  const matchedGuide =
-    auditDomainGuides[language].find((guide) =>
-      guide.keywords.some((keyword) => haystack.includes(normalizeForMatch(keyword))),
-    ) ?? null;
+  // 1) Exact-title match on the user-selected sector (payload.domain)
+  //    This is the source of truth: the form sends the canonical sector label.
+  //    We compare both languages so that a FR-labelled sector still resolves
+  //    correctly when the prospect navigates in EN.
+  const normalizedDomain = normalizeForMatch(payload.domain);
+  let matchedGuide: AuditDomainGuide | null = null;
+
+  if (normalizedDomain) {
+    matchedGuide =
+      guides.find((guide) => normalizeForMatch(guide.title) === normalizedDomain) ?? null;
+
+    // Cross-language fallback: try the other language's titles
+    if (!matchedGuide) {
+      const otherLang = language === "fr" ? "en" : "fr";
+      const crossMatch = auditDomainGuides[otherLang].find(
+        (guide) => normalizeForMatch(guide.title) === normalizedDomain,
+      );
+      if (crossMatch) {
+        // Map by index to the same-language guide
+        const idx = auditDomainGuides[otherLang].indexOf(crossMatch);
+        matchedGuide = guides[idx] ?? crossMatch;
+      }
+    }
+
+    // 2) Keyword match restricted to the domain field only (no contamination
+    //    from role/company/message which caused the wrong domain to be picked)
+    if (!matchedGuide) {
+      matchedGuide =
+        guides.find((guide) =>
+          guide.keywords.some((keyword) => normalizedDomain.includes(normalizeForMatch(keyword))),
+        ) ?? null;
+    }
+  }
+
+  // 3) Last-resort fallback: scan role/company/message
+  if (!matchedGuide) {
+    const fallbackHaystack = normalizeForMatch(
+      [payload.role, payload.company, payload.message].filter(Boolean).join(" "),
+    );
+    if (fallbackHaystack) {
+      matchedGuide =
+        guides.find((guide) =>
+          guide.keywords.some((keyword) => fallbackHaystack.includes(normalizeForMatch(keyword))),
+        ) ?? null;
+    }
+  }
 
   return {
     copyLanguage: language,
