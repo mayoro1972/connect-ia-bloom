@@ -119,6 +119,14 @@ const WebinarRegistration = () => {
   const t = copy[lang];
   const [params] = useSearchParams();
 
+  const initialTopic = params.get("topic") ?? "";
+  const initialDate = params.get("date") ?? "";
+  const initialMotivation = initialTopic
+    ? lang === "fr"
+      ? `Je souhaite participer au webinaire « ${initialTopic} »${initialDate ? ` du ${initialDate}` : ""}.`
+      : `I would like to attend the webinar "${initialTopic}"${initialDate ? ` on ${initialDate}` : ""}.`
+    : "";
+
   const [form, setForm] = useState({
     full_name: "",
     email: "",
@@ -135,7 +143,7 @@ const WebinarRegistration = () => {
     formation_other: "",
     participants: 1,
     language: lang,
-    motivation: "",
+    motivation: initialMotivation,
     privacy_consent: false,
     honeypot: "",
   });

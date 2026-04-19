@@ -135,7 +135,12 @@ const Seminaires = () => {
             </div>
 
             <div className="mb-16">
-              <h2 className="mb-8 font-heading text-2xl font-bold text-foreground">{copy.seminarTitle}</h2>
+              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+                <h2 className="font-heading text-2xl font-bold text-foreground">{copy.seminarTitle}</h2>
+                <span className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground">
+                  {priceLabel}
+                </span>
+              </div>
               <div className="grid gap-6 md:grid-cols-2">
                 {seminaires.map((sem, i) => (
                   <motion.div
@@ -156,9 +161,11 @@ const Seminaires = () => {
                       <span className="flex items-center gap-1"><Clock size={14} /> {sem.duration}</span>
                       <span className="flex items-center gap-1"><Users size={14} /> {sem.capacity}</span>
                     </div>
-                    <div className="flex items-center justify-between border-t border-border pt-4">
-                      <span className="font-semibold text-card-foreground">{priceLabel}</span>
-                      <Link to="/inscription" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                    <div className="flex items-center justify-end border-t border-border pt-4">
+                      <Link
+                        to={`/inscription?formation=${encodeURIComponent(sem.title)}`}
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                      >
                         {copy.register} <ArrowRight size={14} />
                       </Link>
                     </div>
@@ -168,33 +175,45 @@ const Seminaires = () => {
             </div>
 
             <div className="mb-16">
-              <h2 className="mb-8 flex items-center gap-2 font-heading text-2xl font-bold text-foreground">
-                <Globe size={24} className="text-primary" /> {copy.webinarTitle}
-              </h2>
+              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+                <h2 className="flex items-center gap-2 font-heading text-2xl font-bold text-foreground">
+                  <Globe size={24} className="text-primary" /> {copy.webinarTitle}
+                </h2>
+                <span className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground">
+                  {priceLabel}
+                </span>
+              </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {upcoming.map((webinar, i) => (
-                  <motion.div
-                    key={`${webinar.title}-${i}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="flex flex-col rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.3)]"
-                  >
-                    <span className="mb-3 self-start rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">{webinar.audience}</span>
-                    <h3 className="mb-2 font-heading text-base font-bold text-card-foreground">{webinar.title}</h3>
-                    <p className="mb-4 flex-1 text-sm text-muted-foreground">{webinar.desc}</p>
-                    <div className="mb-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1"><Calendar size={12} /> {webinar.date}</span>
-                      <span className="flex items-center gap-1"><Clock size={12} /> {webinar.time}</span>
-                    </div>
-                    <div className="flex items-center justify-between border-t border-border pt-3">
-                      <span className="text-sm font-semibold text-primary">{priceLabel}</span>
-                      <Link to={buildContactPath("demande-renseignement")} className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
-                        {copy.register} <ArrowRight size={12} />
+                {upcoming.map((webinar, i) => {
+                  const webinarHref = `/webinaires/inscription?topic=${encodeURIComponent(webinar.title)}&date=${encodeURIComponent(webinar.date)}`;
+                  return (
+                    <motion.div
+                      key={`${webinar.title}-${i}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      className="flex flex-col rounded-3xl border border-border bg-card p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.3)]"
+                    >
+                      <span className="mb-3 self-start rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">{webinar.audience}</span>
+                      <Link
+                        to={webinarHref}
+                        className="mb-2 font-heading text-base font-bold text-card-foreground hover:text-primary transition-colors"
+                      >
+                        {webinar.title}
                       </Link>
-                    </div>
-                  </motion.div>
-                ))}
+                      <p className="mb-4 flex-1 text-sm text-muted-foreground">{webinar.desc}</p>
+                      <div className="mb-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1"><Calendar size={12} /> {webinar.date}</span>
+                        <span className="flex items-center gap-1"><Clock size={12} /> {webinar.time}</span>
+                      </div>
+                      <div className="flex items-center justify-end border-t border-border pt-3">
+                        <Link to={webinarHref} className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                          {copy.register} <ArrowRight size={12} />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 
