@@ -335,6 +335,7 @@ const CreateurContenuIA = () => {
   const { items: jobs, stats: jobStats, isLoading: jobsLoading } = useJobFeed();
   const highlightedResources = resources.slice(0, 6);
   const highlightedJobs = jobs.slice(0, 6);
+  const replays = (t("webinars.replays") as Array<Record<string, string>>) ?? [];
 
   const formatDate = (value: string) => {
     const date = new Date(value);
