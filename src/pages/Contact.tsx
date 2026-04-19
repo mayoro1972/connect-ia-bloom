@@ -1005,7 +1005,29 @@ const ContactPage = () => {
             </div>
             )}
 
-            <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
+              {isDefaultContactLanding && (
+                <div className="rounded-[28px] border border-border bg-card p-8 md:p-10">
+                  <div className="mb-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Calendar size={14} />
+                      {language === "en" ? "Book a free slot" : "Réserver un créneau gratuit"}
+                    </div>
+                    <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground md:text-3xl">
+                      {language === "en" ? "Talk to an AI expert" : "Parlez à un expert IA"}
+                    </h2>
+                    <p className="text-sm leading-7 text-muted-foreground md:text-base">
+                      {language === "en"
+                        ? "Pick a 30-min slot. An AI expert will scope your need and recommend the right next step."
+                        : "Choisissez un créneau de 30 min. Un expert IA cadrera votre besoin et vous orientera vers la bonne suite."}
+                    </p>
+                  </div>
+                  <AppointmentBooking
+                    prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
+                    analyticsLocation="contact_default_landing_left"
+                  />
+                </div>
+              )}
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                 {isDefaultContactLanding ? (
                   <div className="mb-6">
