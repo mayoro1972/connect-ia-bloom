@@ -12,7 +12,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { supabase, isSupabaseConfigured } from "@/integrations/supabase/client";
 import { metierKeyToDomain } from "@/lib/site-links";
-import formationsData from "@/data/formations";
+import { formations as formationsData } from "@/data/formations";
 import { CheckCircle2, CalendarDays, Sparkles } from "lucide-react";
 
 const sectorOptions = [
