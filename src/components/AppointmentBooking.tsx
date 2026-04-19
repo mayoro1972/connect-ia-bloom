@@ -298,7 +298,7 @@ const AppointmentBooking = ({
                       key={slot}
                       onClick={() => setSelectedSlot(slot)}
                       className={[
-                        "rounded-xl border px-3 py-2 text-sm font-semibold transition",
+                        "rounded-xl border px-1.5 py-2 text-center text-xs sm:text-sm font-semibold tabular-nums whitespace-nowrap transition",
                         isActive
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border bg-background text-card-foreground hover:border-primary/50 hover:text-primary",
