@@ -373,11 +373,15 @@ const ContactPage = () => {
       ? language === "en"
         ? "Send my partnership request"
         : "Envoyer ma demande de partenariat"
-    : isListingIntent
-      ? language === "en"
-        ? "Send my listing request"
-        : "Envoyer ma demande de référencement"
-      : t("contact.submit");
+      : isGuidanceIntent
+        ? language === "en"
+          ? "Send my scoping request"
+          : "Envoyer ma demande de cadrage"
+      : isListingIntent
+        ? language === "en"
+          ? "Send my listing request"
+          : "Envoyer ma demande de référencement"
+        : t("contact.submit");
 
   const resolvedCoreFieldLabel = isStrategicPartnershipIntent
     ? language === "en"
@@ -716,8 +720,8 @@ const ContactPage = () => {
                               : "Précisez votre besoin de catalogue : public visé, usage prévu, échéance... *"
                             : isGuidanceIntent
                             ? language === "en"
-                              ? "Describe in a few sentences your context, the result you want, and any constraint we should know about..."
-                              : "Décrivez en quelques phrases votre contexte, le résultat attendu et les contraintes éventuelles à prendre en compte..."
+                              ? "Describe your context (company, sector, current situation), the result you want, the expected timeline and any constraint we should know..."
+                              : "Décrivez votre contexte (entreprise, secteur, situation actuelle), le résultat attendu, l'échéance souhaitée et les contraintes éventuelles..."
                             : t("contact.message")
                         }
                         required={isCatalogIntent}
