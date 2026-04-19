@@ -69,7 +69,7 @@ const copy = {
     error: "Une erreur est survenue. Merci de réessayer.",
     other: "Autre",
     none: "— Sélectionner —",
-    plannedDate: (date: string) => `Date prévisionnelle : ${date} (confirmée par notre équipe sous 14 jours)`,
+    plannedDate: (date: string) => `Dates prévisionnelles : ${date} — heures à préciser (confirmation par email)`,
   },
   en: {
     badge: "Free webinar",
