@@ -174,7 +174,7 @@ const LeadFormsPreview = () => {
         company_input: form.company.trim(),
         sector_input: form.role.trim() || null,
         city_input: form.country.trim() || null,
-        participants_input: participantsCount,
+        participants_input: participantsCount != null ? String(participantsCount) : null,
         requested_formations_input: effectiveDomain,
         message_input: form.message.trim() || null,
         source_page_input: "/contact",
