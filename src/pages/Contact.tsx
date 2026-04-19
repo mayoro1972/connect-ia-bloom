@@ -659,7 +659,27 @@ const ContactPage = () => {
                       <input placeholder={t("contact.email")} type="email" required value={form.email} onChange={(e) => update("email", e.target.value)} className={inputClass} />
                       <input placeholder={t("contact.phone")} required value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass} />
                       <input placeholder={t("contact.company")} required value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass} />
-                      <input placeholder={resolvedCoreFieldLabel} value={form.formations} onChange={(e) => update("formations", e.target.value)} className={inputClass + " sm:col-span-2"} />
+                      {isCatalogIntent ? (
+                        <select
+                          required
+                          value={form.formations}
+                          onChange={(e) => update("formations", e.target.value)}
+                          className={inputClass + " sm:col-span-2"}
+                        >
+                          <option value="">
+                            {language === "en"
+                              ? "Select the catalogue domain *"
+                              : "Sélectionnez le domaine du catalogue *"}
+                          </option>
+                          {catalogueDomainOptions.map((domain) => (
+                            <option key={domain} value={domain}>
+                              {domain}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <input placeholder={resolvedCoreFieldLabel} value={form.formations} onChange={(e) => update("formations", e.target.value)} className={inputClass + " sm:col-span-2"} />
+                      )}
                     </div>
                   </div>
 
@@ -680,7 +700,20 @@ const ContactPage = () => {
                       <input placeholder={t("contact.city")} value={form.city} onChange={(e) => update("city", e.target.value)} className={inputClass} />
                       <input type="number" min="1" placeholder={t("contact.participants")} value={form.participants} onChange={(e) => update("participants", e.target.value)} className={inputClass} />
                       <div className="hidden sm:block" />
-                      <textarea placeholder={t("contact.message")} rows={4} value={form.message} onChange={(e) => update("message", e.target.value)} className={inputClass + " resize-none sm:col-span-2"} />
+                      <textarea
+                        placeholder={
+                          isCatalogIntent
+                            ? language === "en"
+                              ? "Describe your catalogue need: target audience, intended use, deadline... *"
+                              : "Précisez votre besoin de catalogue : public visé, usage prévu, échéance... *"
+                            : t("contact.message")
+                        }
+                        required={isCatalogIntent}
+                        rows={4}
+                        value={form.message}
+                        onChange={(e) => update("message", e.target.value)}
+                        className={inputClass + " resize-none sm:col-span-2"}
+                      />
                     </div>
                   </div>
 
