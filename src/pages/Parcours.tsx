@@ -212,45 +212,39 @@ const ParcoursPage = () => {
                       </span>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="grid md:grid-cols-3 gap-4">
                       {path.levels.map((levelGroup) => {
                         if (levelGroup.formations.length === 0) {
                           return null;
                         }
 
                         const Icon = levelIcons[levelGroup.level];
+                        const formation = levelGroup.formations[0];
 
                         return (
-                          <div key={levelGroup.level}>
-                            <div className="flex items-center gap-2 mb-3">
-                              <Icon size={16} className="text-primary" />
-                              <span className="font-semibold text-sm text-card-foreground">
+                          <div key={levelGroup.level} className="flex flex-col">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Icon size={14} className="text-primary" />
+                              <span className="font-semibold text-xs text-card-foreground">
                                 {t(`parcours.levels.${levelGroup.level}`) || levelGroup.level}
                               </span>
-                              <span className="text-xs text-muted-foreground">
-                                ({levelGroup.formations.length} {t("parcours.coursesLabel")})
-                              </span>
                             </div>
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                              {levelGroup.formations.slice(0, 1).map((formation) => (
-                                <Link
-                                  key={formation.id}
-                                  to={`/catalogue/${formation.id}`}
-                                  className="p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 transition-colors group"
-                                >
-                                  <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors">
-                                    {getTitle(formation)}
-                                  </p>
-                                  <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                                    <span className="flex items-center gap-1">
-                                      <Clock size={12} />
-                                      {getDuration(formation)}
-                                    </span>
-                                    <span>{getPrice(formation)}</span>
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
+                            <Link
+                              key={formation.id}
+                              to={`/catalogue/${formation.id}`}
+                              className="flex-1 p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 transition-colors group"
+                            >
+                              <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors line-clamp-2">
+                                {getTitle(formation)}
+                              </p>
+                              <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                                <span className="flex items-center gap-1">
+                                  <Clock size={12} />
+                                  {getDuration(formation)}
+                                </span>
+                                <span>{getPrice(formation)}</span>
+                              </div>
+                            </Link>
                           </div>
                         );
                       })}
