@@ -584,7 +584,7 @@ const ContactPage = () => {
       <div className="min-h-screen bg-background relative overflow-hidden">
         <AnimatedLogoWatermarks />
         <Navbar />
-        <PageHeader title={resolvedHeaderTitle} subtitle={resolvedHeaderSubtitle} />
+        {!isCompactMode && <PageHeader title={resolvedHeaderTitle} subtitle={resolvedHeaderSubtitle} />}
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
