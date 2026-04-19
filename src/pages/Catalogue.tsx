@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X, CheckCircle2, Compass, ArrowRight } from "lucide-react";
+import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X, CheckCircle2, Compass, ArrowRight, Layers, TrendingUp, Award, Route } from "lucide-react";
 import {
   Briefcase, Users, Megaphone, Calculator, Scale, HeadphonesIcon,
   BarChart3, ClipboardList, Crown, GraduationCap, Heart, Globe,
@@ -21,6 +21,14 @@ import { Badge } from "@/components/ui/badge";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { fixMojibake } from "@/lib/fixMojibake";
 import { buildContactPath, resolveCertificationSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
+import { fr } from "@/i18n/translations/fr";
+import { en } from "@/i18n/translations/en";
+
+const levelIcons: Record<string, React.ElementType> = {
+  "Débutant": Layers,
+  "Intermédiaire": TrendingUp,
+  "Avancé": Award,
+};
 
 const domainIcons: Record<string, React.ElementType> = {
   "Assistanat & Secrétariat": Briefcase,
