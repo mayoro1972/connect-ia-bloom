@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react";
-import CalendlyEmbed from "@/components/CalendlyEmbed";
+import AppointmentBooking from "@/components/AppointmentBooking";
 import { Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
@@ -1294,27 +1294,14 @@ const ContactPage = () => {
                         ? "Pick a time that suits you. One of our AI experts will join the call to scope your need and recommend the right next step."
                         : "Choisissez un créneau qui vous convient. Un expert IA vous rejoint pour cadrer votre besoin et vous orienter vers la bonne suite."}
                     </p>
-                    <CalendlyEmbed url={directLinks.calendlyBooking} />
-                  </div>
-
-                  <div className="rounded-3xl border border-border bg-card p-6">
-                    <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">
-                      {language === "en" ? "Other ways to reach us" : "Autres moyens de nous joindre"}
-                    </h3>
-                    <div className="space-y-3 text-sm">
-                      <a href={directLinks.phone} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                        <Phone size={16} /> {contactDetails.phoneDisplay}
-                      </a>
-                      <a href={directLinks.email} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                        <Mail size={16} /> {contactDetails.email}
-                      </a>
-                      <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                        <MessageCircle size={16} /> {contactDetails.whatsappDisplay}
-                      </a>
-                    </div>
+                    <AppointmentBooking
+                      prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
+                      analyticsLocation="contact_compact_guidance"
+                    />
                   </div>
                 </div>
               )}
+
 
               {!isCompactMode && (
               <div className="space-y-5">
@@ -1332,7 +1319,10 @@ const ContactPage = () => {
                         ? "Pick a time that suits you. We will align on your project, the right approach, and the next concrete steps."
                         : "Choisissez un créneau qui vous convient. Nous cadrerons votre projet, la bonne approche et les prochaines étapes concrètes."}
                     </p>
-                    <CalendlyEmbed url={directLinks.calendlyBooking} />
+                    <AppointmentBooking
+                      prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
+                      analyticsLocation="contact_brief_solution"
+                    />
                   </motion.div>
                 )}
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
