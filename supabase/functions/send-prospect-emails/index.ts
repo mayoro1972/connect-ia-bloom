@@ -31,6 +31,11 @@ type ProspectEmailPayload = {
   language?: string | null;
   appointmentUrl?: string | null;
   wantsExpertAppointment?: boolean | null;
+  aiMaturity?: string | null;
+  useCases?: string[] | null;
+  scopingHorizon?: string | null;
+  engagementFormat?: string[] | null;
+  budgetRange?: string | null;
 };
 
 type EmailAttachment = {
@@ -453,6 +458,49 @@ const asHtmlList = (items: string[]) =>
   `<ul style="margin:0;padding-left:18px;color:#475467;">${items
     .map((item) => `<li style="margin:0 0 8px;">${escapeHtml(item)}</li>`)
     .join("")}</ul>`;
+
+type ScopingRecapItem = { label: string; value: string };
+
+const buildScopingRecap = (
+  payload: ProspectEmailPayload,
+  isFrench: boolean,
+): { items: ScopingRecapItem[]; title: string; intro: string } | null => {
+  const items: ScopingRecapItem[] = [];
+  const labels = isFrench
+    ? {
+        title: "Récapitulatif de votre cadrage IA",
+        intro:
+          "Voici les éléments que vous avez sélectionnés. Ils nous serviront de base pour préparer notre échange et vous proposer une orientation pertinente.",
+        maturity: "Maturité IA",
+        useCases: "Cas d'usage envisagés",
+        horizon: "Horizon de mise en œuvre",
+        format: "Format d'engagement",
+        budget: "Budget indicatif",
+      }
+    : {
+        title: "Recap of your AI scoping inputs",
+        intro:
+          "Here is what you selected. We will use it as the foundation to prepare our exchange and recommend a relevant next step.",
+        maturity: "AI maturity",
+        useCases: "Use cases considered",
+        horizon: "Implementation horizon",
+        format: "Engagement format",
+        budget: "Indicative budget",
+      };
+
+  if (payload.aiMaturity?.trim()) items.push({ label: labels.maturity, value: payload.aiMaturity.trim() });
+  if (payload.useCases && payload.useCases.length > 0)
+    items.push({ label: labels.useCases, value: payload.useCases.join(" • ") });
+  if (payload.scopingHorizon?.trim())
+    items.push({ label: labels.horizon, value: payload.scopingHorizon.trim() });
+  if (payload.engagementFormat && payload.engagementFormat.length > 0)
+    items.push({ label: labels.format, value: payload.engagementFormat.join(" • ") });
+  if (payload.budgetRange?.trim()) items.push({ label: labels.budget, value: payload.budgetRange.trim() });
+
+  if (items.length === 0) return null;
+  return { items, title: labels.title, intro: labels.intro };
+};
+
 
 const isLocalHost = (hostname: string) =>
   hostname === "localhost" ||
@@ -1416,6 +1464,30 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     payload.timeline ? `${copy.fieldLabels.timeline} : ${asTextValue(copy, payload.timeline)}` : "",
   ].filter(Boolean);
 
+  const scopingRecap = buildScopingRecap(payload, copy === translations.fr);
+  const scopingRecapBlock = scopingRecap
+    ? `
+        <div style="margin-top:18px;padding:20px;border-radius:12px;background:#ecfeff;border:1px solid #a5f3fc;">
+          <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#0e7490;">${escapeHtml(scopingRecap.title)}</p>
+          <p style="margin:0 0 14px;color:#0e7490;font-size:13px;">${escapeHtml(scopingRecap.intro)}</p>
+          ${scopingRecap.items
+            .map(
+              (item, index) =>
+                `<p style="margin:0 0 ${index === scopingRecap.items.length - 1 ? "0" : "8px"};color:#0f172a;"><strong>${escapeHtml(item.label)} :</strong> ${escapeHtml(item.value)}</p>`,
+            )
+            .join("")}
+        </div>
+      `
+    : "";
+  const scopingRecapText = scopingRecap
+    ? [
+        "",
+        `${scopingRecap.title} :`,
+        scopingRecap.intro,
+        ...scopingRecap.items.map((item) => `- ${item.label} : ${item.value}`),
+      ].join("\n")
+    : "";
+
   const html = `
     <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
       <div style="max-width:720px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
@@ -1431,6 +1503,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
             return `<p style="margin:0 0 ${index === summaryLines.length - 1 ? "0" : "8px"};color:#475467;"><strong>${escapeHtml(label)} :</strong> ${escapeHtml(rest.join(" : "))}</p>`;
           }).join("")}
         </div>
+        ${scopingRecapBlock}
         ${catalogueAccessBlock}
         ${listingReviewBlock}
         ${
@@ -1455,6 +1528,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     catalogueAsset ? `${copy.catalogueButtons.web} : ${catalogueAsset.htmlUrl}` : "",
     catalogueAsset ? `${copy.catalogueButtons.audit} : ${SITE_URL}/audit-ia-gratuit` : "",
     listingReviewText,
+    scopingRecapText,
     shouldShowAppointmentCta && appointmentUrl ? `${copy.reviewAppointment} : ${appointmentUrl}` : "",
     "",
     closing,

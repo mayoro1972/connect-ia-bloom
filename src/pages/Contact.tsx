@@ -681,6 +681,12 @@ const ContactPage = () => {
         company: form.company.trim(),
         fullName: form.name.trim(),
       }),
+      aiMaturity: isEnterpriseScopingFlow ? form.aiMaturity || null : null,
+      useCases: isEnterpriseScopingFlow && form.useCases.length > 0 ? form.useCases : null,
+      scopingHorizon: isEnterpriseScopingFlow ? form.scopingHorizon || null : null,
+      engagementFormat:
+        isEnterpriseScopingFlow && form.engagementFormat.length > 0 ? form.engagementFormat : null,
+      budgetRange: isEnterpriseScopingFlow ? form.budgetRange || null : null,
     });
 
     toast({

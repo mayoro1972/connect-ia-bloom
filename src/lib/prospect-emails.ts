@@ -33,6 +33,11 @@ export type ProspectEmailPayload = {
   language?: string | null;
   appointmentUrl?: string | null;
   wantsExpertAppointment?: boolean | null;
+  aiMaturity?: string | null;
+  useCases?: string[] | null;
+  scopingHorizon?: string | null;
+  engagementFormat?: string[] | null;
+  budgetRange?: string | null;
 };
 
 export const resolveOutboundLanguage = (preferred?: string | null): "fr" | "en" => {
