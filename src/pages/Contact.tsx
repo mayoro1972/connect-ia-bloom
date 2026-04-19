@@ -1323,6 +1323,7 @@ const ContactPage = () => {
                     />
                   </motion.div>
                 )}
+                {!isDefaultContactLanding && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedResponseCardTitle}</h3>
                   <div className="space-y-3">
@@ -1334,6 +1335,7 @@ const ContactPage = () => {
                     ))}
                   </div>
                 </motion.div>
+                )}
 
                 {!isBriefSolutionIntent && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-3xl border border-border bg-card p-6">
