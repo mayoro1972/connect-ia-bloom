@@ -1299,6 +1299,32 @@ export type Database = {
             }
             Returns: string
           }
+        | {
+            Args: {
+              city_input: string
+              company_input: string
+              country_input: string
+              email_input: string
+              full_name_input: string
+              honeypot_input: string
+              language_input: string
+              message_input: string
+              participants_input: string
+              phone_input: string
+              privacy_consent_input: boolean
+              profession_input: string
+              prospect_password_hash_input: string
+              prospect_type_input: string
+              prospect_username_input: string
+              request_intent_input: string
+              requested_domain_input: string
+              requested_formations_input: string
+              sector_input: string
+              source_page_input: string
+              wants_expert_appointment_input: boolean
+            }
+            Returns: string
+          }
       submit_registration_request: {
         Args: {
           company_input: string
