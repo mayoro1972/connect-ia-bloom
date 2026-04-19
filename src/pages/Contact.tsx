@@ -1007,6 +1007,7 @@ const ContactPage = () => {
 
             <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
+                {!isDefaultContactLanding && (
                 <div className="mb-6">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
                     <Mail size={14} />
@@ -1015,6 +1016,7 @@ const ContactPage = () => {
                   <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
                   <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
                 </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="rounded-3xl border border-border bg-background p-5 md:p-6">
