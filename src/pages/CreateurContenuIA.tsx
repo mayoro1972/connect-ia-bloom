@@ -504,10 +504,62 @@ const CreateurContenuIA = () => {
             </div>
 
             <div className="mb-16">
-              <div className="mb-8">
-                <h2 className="font-heading text-2xl font-bold text-foreground">{copy.jobsTitle}</h2>
-                <p className="mt-3 max-w-3xl text-muted-foreground">{copy.jobsSubtitle}</p>
+              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h2 className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">
+                    <PlayCircle size={24} className="text-primary" />
+                    {copy.replaysTitle}
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{copy.replaysSubtitle}</p>
+                </div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                  {copy.replaysBadge}
+                </span>
               </div>
+
+              {replays.length === 0 ? (
+                <div className="rounded-2xl border border-dashed border-border bg-card p-8 text-center text-sm text-muted-foreground">
+                  {copy.replaysEmpty}
+                </div>
+              ) : (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  {replays.map((replay, index) => (
+                    <motion.div
+                      key={`${replay.title}-${index}`}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex flex-col rounded-2xl border border-border bg-card p-5 hover-lift"
+                    >
+                      <div className="mb-4 flex aspect-video w-full items-center justify-center rounded-xl bg-[linear-gradient(135deg,hsl(225_48%_18%),hsl(226_40%_12%))]">
+                        <PlayCircle size={40} className="text-white/80" />
+                      </div>
+                      <h3 className="font-heading text-base font-semibold text-card-foreground mb-2 line-clamp-2">{replay.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1">{replay.desc}</p>
+                      <div className="mb-4 flex items-center gap-3 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1"><Users size={12} /> {replay.viewers}</span>
+                        <span className="flex items-center gap-1"><Clock size={12} /> {replay.duration}</span>
+                      </div>
+                      <Link
+                        to={buildContactPath("demande-renseignement", `Replay : ${replay.title}`)}
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                      >
+                        {copy.replaysCta} <ArrowRight size={14} />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-6">
+                <Link
+                  to="/seminaires"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                >
+                  {copy.replaysLiveLink} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
 
               <div className="grid gap-4 md:grid-cols-5 mb-8">
                 <div className="rounded-xl border border-border bg-card p-5">
