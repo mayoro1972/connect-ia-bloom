@@ -972,7 +972,7 @@ const ContactPage = () => {
                     className="flex h-full flex-col rounded-3xl border border-border bg-background p-6"
                   >
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      {index === 0 ? <Calendar size={20} /> : index === 1 ? <Mail size={20} /> : <MessageCircle size={20} />}
+                      {pathway.href?.includes("wa.me") || pathway.title.toLowerCase().includes("whatsapp") ? <MessageCircle size={20} /> : pathway.href?.startsWith("/") ? <Calendar size={20} /> : <Mail size={20} />}
                     </div>
                     <h3 className="mb-3 font-heading text-xl font-bold text-card-foreground">{pathway.title}</h3>
                     <p className="mb-6 flex-1 text-sm leading-7 text-muted-foreground">{pathway.desc}</p>
