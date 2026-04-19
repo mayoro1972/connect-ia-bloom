@@ -8,7 +8,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { buildAppointmentMailto } from "@/lib/prospect-emails";
 import { getLocalizedDomainLabel } from "@/lib/catalogue-preview";
 import { useLanguage } from "@/i18n/LanguageContext";
-import CalendlyEmbed from "@/components/CalendlyEmbed";
+import AppointmentBooking from "@/components/AppointmentBooking";
 import { appointmentBookings, directLinks, type AppointmentSource } from "@/lib/site-links";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
@@ -450,26 +450,17 @@ const AppointmentPreview = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 rounded-3xl border border-border bg-background/90 p-3 shadow-inner">
-                  <CalendlyEmbed url={calendlyUrl} className="w-full" />
-                  <div className="flex justify-end px-2 pb-2 pt-4">
-                    <a
-                      href={calendlyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() =>
-                        trackAnalyticsEvent("appointment_booking_started", {
-                          source,
-                          domain,
-                          company,
-                          location: "appointment_embed_footer_cta",
-                        })
-                      }
-                      className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted"
-                    >
-                      <ArrowUpRight size={14} /> {copy.openExternal}
-                    </a>
-                  </div>
+                <div className="mt-6">
+                  <AppointmentBooking
+                    calendlyUrl={calendlyUrl}
+                    eventTitle={{
+                      fr: currentEventType,
+                      en: currentEventType,
+                    }}
+                    description={{ fr: currentCopy.intro, en: currentCopy.intro }}
+                    prefill={{ name: fullName, company, domain }}
+                    analyticsLocation="appointment_preview_main"
+                  />
                 </div>
 
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
