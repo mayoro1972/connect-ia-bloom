@@ -620,7 +620,11 @@ const ContactPage = () => {
           : "Présentez votre organisation"
         : pageModel.formIntroTitle;
 
-  const resolvedIntroDesc = isCatalogIntent
+  const resolvedIntroDesc = isBriefSolutionIntent
+    ? language === "en"
+      ? "Describe the solution to build, the process to transform, the tools you already use, and the data available. Then book a 30-min call to align on the approach."
+      : "Décrivez la solution à construire, le processus à transformer, les outils déjà utilisés et les données disponibles. Réservez ensuite un échange de 30 min pour cadrer l'approche."
+    : isCatalogIntent
     ? language === "en"
       ? "Use this form to receive the right catalogue and give us just enough context to guide you well."
       : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
@@ -638,7 +642,11 @@ const ContactPage = () => {
           : "Décrivez votre activité, votre positionnement et le type de présence que vous souhaitez nous voir étudier."
         : pageModel.formIntroDesc;
 
-  const resolvedSubmitLabel = isCatalogIntent
+  const resolvedSubmitLabel = isBriefSolutionIntent
+    ? language === "en"
+      ? "Send my AI project brief"
+      : "Envoyer mon brief projet"
+    : isCatalogIntent
     ? language === "en"
       ? "Send my catalogue request"
       : "Envoyer ma demande de Catalogue"
@@ -656,7 +664,11 @@ const ContactPage = () => {
           : "Envoyer ma demande de référencement"
         : t("contact.submit");
 
-  const resolvedCoreFieldLabel = isStrategicPartnershipIntent
+  const resolvedCoreFieldLabel = isBriefSolutionIntent
+    ? language === "en"
+      ? "Project name or process to transform (e.g. invoice processing, customer support…)"
+      : "Nom du projet ou processus à transformer (ex : traitement factures, support client…)"
+    : isStrategicPartnershipIntent
     ? language === "en"
       ? "Partnership type, program, or collaboration angle"
       : "Type de partenariat, programme ou angle de collaboration"
