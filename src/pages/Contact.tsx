@@ -1347,6 +1347,7 @@ const ContactPage = () => {
                   </div>
                 </motion.div>
 
+                {!isBriefSolutionIntent && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{pageModel.contactCardTitle}</h3>
                   <div className="space-y-3 text-sm">
@@ -1361,6 +1362,7 @@ const ContactPage = () => {
                     </a>
                   </div>
                 </motion.div>
+                )}
 
                 <motion.a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="rounded-3xl border border-border bg-card p-6 flex items-center gap-4 hover-lift block">
                   <div className="w-11 h-11 rounded-2xl bg-accent flex items-center justify-center">
