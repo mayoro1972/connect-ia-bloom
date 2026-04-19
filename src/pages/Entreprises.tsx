@@ -183,24 +183,6 @@ const EntreprisesPage = () => {
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="mx-auto mb-12 max-w-5xl rounded-[28px] border border-border bg-card p-8 md:p-10">
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                <div className="max-w-3xl">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                    <Sparkles size={14} />
-                    {copy.diagnosisTitle}
-                  </div>
-                  <p className="text-base leading-relaxed text-muted-foreground">{copy.diagnosisDesc}</p>
-                </div>
-                <Link
-                  to={directLinks.auditLanding}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                  {copy.ctaPrimary}
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-            </div>
 
             <div className="mb-16 rounded-[28px] border border-border bg-card p-8 md:p-10">
               <div className="mb-8 flex items-center gap-3">
