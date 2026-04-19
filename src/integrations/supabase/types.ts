@@ -396,6 +396,135 @@ export type Database = {
         }
         Relationships: []
       }
+      live_format_proposals: {
+        Row: {
+          admin_notes: string | null
+          agenda_en: Json | null
+          agenda_fr: Json | null
+          ai_model: string | null
+          ai_provider: string | null
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          cycle_start_date: string
+          description_en: string | null
+          description_fr: string | null
+          domain_key: string | null
+          duration_minutes: number | null
+          format_label_en: string | null
+          format_label_fr: string | null
+          format_type: string
+          generation_meta: Json | null
+          id: string
+          key_benefits_en: string[] | null
+          key_benefits_fr: string[] | null
+          published_at: string | null
+          rank: number
+          rejection_reason: string | null
+          scheduled_date: string | null
+          speaker_profile_en: string | null
+          speaker_profile_fr: string | null
+          status: string
+          subtitle_en: string | null
+          subtitle_fr: string | null
+          target_audience_en: string | null
+          target_audience_fr: string | null
+          target_sectors_en: string[]
+          target_sectors_fr: string[]
+          title_en: string
+          title_fr: string
+          trend_justification_en: string | null
+          trend_justification_fr: string | null
+          trend_score: number | null
+          trend_signals: Json | null
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          agenda_en?: Json | null
+          agenda_fr?: Json | null
+          ai_model?: string | null
+          ai_provider?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          cycle_start_date: string
+          description_en?: string | null
+          description_fr?: string | null
+          domain_key?: string | null
+          duration_minutes?: number | null
+          format_label_en?: string | null
+          format_label_fr?: string | null
+          format_type: string
+          generation_meta?: Json | null
+          id?: string
+          key_benefits_en?: string[] | null
+          key_benefits_fr?: string[] | null
+          published_at?: string | null
+          rank: number
+          rejection_reason?: string | null
+          scheduled_date?: string | null
+          speaker_profile_en?: string | null
+          speaker_profile_fr?: string | null
+          status?: string
+          subtitle_en?: string | null
+          subtitle_fr?: string | null
+          target_audience_en?: string | null
+          target_audience_fr?: string | null
+          target_sectors_en?: string[]
+          target_sectors_fr?: string[]
+          title_en: string
+          title_fr: string
+          trend_justification_en?: string | null
+          trend_justification_fr?: string | null
+          trend_score?: number | null
+          trend_signals?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          agenda_en?: Json | null
+          agenda_fr?: Json | null
+          ai_model?: string | null
+          ai_provider?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          cycle_start_date?: string
+          description_en?: string | null
+          description_fr?: string | null
+          domain_key?: string | null
+          duration_minutes?: number | null
+          format_label_en?: string | null
+          format_label_fr?: string | null
+          format_type?: string
+          generation_meta?: Json | null
+          id?: string
+          key_benefits_en?: string[] | null
+          key_benefits_fr?: string[] | null
+          published_at?: string | null
+          rank?: number
+          rejection_reason?: string | null
+          scheduled_date?: string | null
+          speaker_profile_en?: string | null
+          speaker_profile_fr?: string | null
+          status?: string
+          subtitle_en?: string | null
+          subtitle_fr?: string | null
+          target_audience_en?: string | null
+          target_audience_fr?: string | null
+          target_sectors_en?: string[]
+          target_sectors_fr?: string[]
+          title_en?: string
+          title_fr?: string
+          trend_justification_en?: string | null
+          trend_justification_fr?: string | null
+          trend_score?: number | null
+          trend_signals?: Json | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       monthly_domain_trends: {
         Row: {
           ai_model: string | null
