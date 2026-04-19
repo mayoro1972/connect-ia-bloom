@@ -1381,12 +1381,12 @@ const ContactPage = () => {
                       ? language === "en" ? "Key information" : "Informations clés"
                       : pageModel.contactCardTitle}
                   </h3>
-                  <div className="space-y-4 text-sm">
+                  <div className={isDefaultContactLanding ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 text-sm" : "space-y-4 text-sm"}>
                     <a href={directLinks.phone} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors group">
                       <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Phone size={16} />
                       </span>
-                      <span className="flex flex-col">
+                      <span className="flex flex-col min-w-0">
                         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Phone" : "Téléphone"}</span>
                         <span className="font-medium">{contactDetails.phoneDisplay}</span>
                       </span>
@@ -1395,7 +1395,7 @@ const ContactPage = () => {
                       <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Mail size={16} />
                       </span>
-                      <span className="flex flex-col">
+                      <span className="flex flex-col min-w-0">
                         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Email</span>
                         <span className="font-medium break-all">{contactDetails.email}</span>
                       </span>
@@ -1404,17 +1404,28 @@ const ContactPage = () => {
                       <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <MapPin size={16} />
                       </span>
-                      <span className="flex flex-col">
+                      <span className="flex flex-col min-w-0">
                         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Address" : "Adresse"}</span>
                         <span className="font-medium leading-6">{contactDetails.addressShort}</span>
                       </span>
                     </a>
                     {isDefaultContactLanding && (
+                      <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
+                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <MessageCircle size={16} />
+                        </span>
+                        <span className="flex flex-col min-w-0">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">WhatsApp</span>
+                          <span className="font-medium">{contactDetails.whatsappDisplay}</span>
+                        </span>
+                      </a>
+                    )}
+                    {isDefaultContactLanding && (
                       <div className="flex items-start gap-3 text-card-foreground">
                         <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                           <CheckCircle2 size={16} />
                         </span>
-                        <span className="flex flex-col">
+                        <span className="flex flex-col min-w-0">
                           <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Response time" : "Délai de réponse"}</span>
                           <span className="font-medium">{language === "en" ? "Within 24–48 business hours" : "Sous 24 à 48h ouvrées"}</span>
                         </span>
@@ -1424,6 +1435,7 @@ const ContactPage = () => {
                 </motion.div>
                 )}
 
+                {!isDefaultContactLanding && (
                 <motion.a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="rounded-3xl border border-border bg-card p-6 flex items-center gap-4 hover-lift block">
                   <div className="w-11 h-11 rounded-2xl bg-accent flex items-center justify-center">
                     <MessageCircle size={20} className="text-primary" />
@@ -1433,6 +1445,7 @@ const ContactPage = () => {
                     <p className="text-xs text-muted-foreground">{contactDetails.whatsappDisplay}</p>
                   </div>
                 </motion.a>
+                )}
 
                 {!isBriefSolutionIntent && !isDefaultContactLanding && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="rounded-3xl border border-border bg-card p-6">
