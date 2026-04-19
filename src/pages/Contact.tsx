@@ -1121,6 +1121,102 @@ const ContactPage = () => {
                     </div>
                   )}
 
+                  {isBriefSolutionIntent && (
+                    <div className="rounded-3xl border border-primary/30 bg-primary/[0.03] p-5 md:p-6">
+                      <div className="mb-5">
+                        <h3 className="font-heading text-lg font-semibold text-card-foreground">{briefSolution.sectionTitle}</h3>
+                        <p className="mt-2 text-sm leading-7 text-muted-foreground">{briefSolution.sectionDesc}</p>
+                      </div>
+                      <div className="space-y-5">
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.solutionTypesLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {briefSolution.solutionTypesOptions.map((opt) => {
+                              const checked = form.solutionTypes.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("solutionTypes", e.target.checked ? [...form.solutionTypes, opt] : form.solutionTypes.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.frequencyLabel}</label>
+                            <select value={form.processFrequency} onChange={(e) => update("processFrequency", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {briefSolution.frequencyOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.techReferentLabel}</label>
+                            <select value={form.hasTechReferent} onChange={(e) => update("hasTechReferent", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {briefSolution.techReferentOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.toolsLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {briefSolution.toolsOptions.map((opt) => {
+                              const checked = form.existingTools.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("existingTools", e.target.checked ? [...form.existingTools, opt] : form.existingTools.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.dataLabel}</label>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {briefSolution.dataOptions.map((opt) => {
+                              const checked = form.dataAvailability.includes(opt);
+                              return (
+                                <label key={opt} className="flex cursor-pointer items-start gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-card-foreground hover:border-primary/40">
+                                  <input type="checkbox" checked={checked} onChange={(e) => update("dataAvailability", e.target.checked ? [...form.dataAvailability, opt] : form.dataAvailability.filter((x) => x !== opt))} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30" />
+                                  <span>{opt}</span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.horizonLabel}</label>
+                            <select value={form.scopingHorizon} onChange={(e) => update("scopingHorizon", e.target.value)} className={inputClass}>
+                              <option value="">—</option>
+                              {briefSolution.horizonOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-card-foreground">{briefSolution.budgetLabel}</label>
+                            <select value={form.budgetRange} onChange={(e) => update("budgetRange", e.target.value)} className={inputClass}>
+                              {briefSolution.budgetOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="rounded-3xl border border-border bg-background p-5 md:p-6">
                     <div className="mb-4">
 
