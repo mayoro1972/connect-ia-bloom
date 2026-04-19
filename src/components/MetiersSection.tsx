@@ -160,7 +160,7 @@ const MetiersSection = () => {
             const sectors = trend
               ? (lang === "fr" ? trend.target_sectors_fr : trend.target_sectors_en)
               : [];
-            const webinarUrl = trend?.webinar_url ?? "/webinars";
+            const webinarUrl = trend?.webinar_url ?? `/webinaires/inscription?domain=${m.key}`;
 
             return (
               <ScrollReveal key={m.key} delay={i * 0.06} direction="up" distance={30}>
