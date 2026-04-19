@@ -305,7 +305,7 @@ const BlogArticlePage = () => {
                       </Link>
                     )}
                     <Link
-                      to={buildContactPath("demande-renseignement", item.sectorKey ?? undefined)}
+                      to="/contact"
                       className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-3 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
                     >
                       {content.articleSecondaryCta}
