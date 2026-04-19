@@ -121,10 +121,6 @@ const Footer = () => {
             <p className="mt-5 max-w-[28rem] text-sm leading-7 text-slate-600">{t("footer.desc")}</p>
 
             <div className="mt-8 max-w-[29rem] space-y-3 text-sm text-slate-700">
-              <a href={directLinks.phone} className="flex items-start gap-2.5 transition-colors hover:text-[hsl(20_92%_42%)]">
-                <Phone size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
-                {contactDetails.phoneDisplay}
-              </a>
               <a
                 href={directLinks.whatsapp}
                 target="_blank"
