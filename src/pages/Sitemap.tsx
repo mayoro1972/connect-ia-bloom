@@ -24,7 +24,7 @@ const sitemapCopy = {
         links: [
           { label: "Accueil", to: "/" },
           { label: "Audit IA gratuit", to: "/audit-ia-gratuit" },
-          { label: "Parler à un expert IA", to: "/contact?intent=demande-renseignement" },
+          { label: "Parler à un expert IA", to: "/parler-expert-ia" },
           { label: "Page Entreprises", to: "/entreprises" },
         ],
       },
