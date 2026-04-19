@@ -13,12 +13,12 @@ const liveFormatsCopy = {
   fr: {
     title: "Formats live & découverte",
     subtitle:
-      "Une seule porte d'entrée pour les séminaires, webinaires et replays. Le bon format pour découvrir TransferAI Africa, monter en compétence rapidement et passer ensuite à l'inscription.",
+      "La porte d'entrée pour découvrir TransferAI Africa en live : séminaires intensifs et webinaires pratiques pour monter en compétence rapidement avant de s'inscrire.",
     overviewTitle: "Pourquoi regrouper les formats live",
     overviewPoints: [
       "Le visiteur comprend immédiatement où commencer s'il veut tester avant de s'engager.",
       "Les séminaires et les webinaires remplissent la même fonction commerciale : faire découvrir l'offre et convertir vers une formation plus complète.",
-      "Les replays rassurent et prouvent la qualité pédagogique avant la candidature ou l'inscription.",
+      "Les sessions en direct permettent d'échanger avec nos experts et de qualifier rapidement votre besoin.",
     ],
     comparisonTitle: "Choisir le bon format",
     comparisonCards: [
@@ -31,11 +31,6 @@ const liveFormatsCopy = {
         title: "Webinaires pratiques",
         desc: "Sessions à distance pour découvrir un sujet, tester l'approche pédagogique et qualifier plus vite le besoin.",
         meta: "Idéal pour les prospects qui veulent commencer sans friction",
-      },
-      {
-        title: "Replays sélectionnés",
-        desc: "Contenus à revoir à la demande pour garder le lien avec les visiteurs et nourrir l'intention d'achat.",
-        meta: "Idéal pour nourrir la newsletter et les campagnes de conversion",
       },
     ],
     seminarTitle: "Séminaires à venir",
@@ -54,12 +49,12 @@ const liveFormatsCopy = {
   en: {
     title: "Live formats & discovery",
     subtitle:
-      "One clear entry point for seminars, webinars and replays. The right format to discover TransferAI Africa, upskill fast and then move toward registration.",
+      "The entry point to discover TransferAI Africa live: intensive seminars and practical webinars to upskill fast before registering.",
     overviewTitle: "Why bring live formats together",
     overviewPoints: [
       "Visitors instantly understand where to start if they want to test before committing.",
       "Seminars and webinars play the same commercial role: introduce the offer and convert into fuller training.",
-      "Replays reassure prospects and prove teaching quality before application or registration.",
+      "Live sessions create direct conversations with our experts and qualify your needs faster.",
     ],
     comparisonTitle: "Choose the right format",
     comparisonCards: [
@@ -72,11 +67,6 @@ const liveFormatsCopy = {
         title: "Practical webinars",
         desc: "Remote sessions to discover a topic, test the teaching approach and capture qualified leads.",
         meta: "Best for prospects who want a low-friction starting point",
-      },
-      {
-        title: "Selected replays",
-        desc: "On-demand content that keeps visitors engaged and nurtures buying intent.",
-        meta: "Best for newsletter growth and conversion campaigns",
       },
     ],
     seminarTitle: "Upcoming seminars",
