@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -152,14 +151,14 @@ const CataloguePage = () => {
   const [filterFormat, setFilterFormat] = useState("");
   const [filterMetier, setFilterMetier] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
 
   useEffect(() => {
     if (searchParams.get("request") === "1") {
-      setIsDownloadOpen(true);
       const next = new URLSearchParams(searchParams);
       next.delete("request");
       setSearchParams(next, { replace: true });
+      // Redirect legacy ?request=1 deep-link to the structured contact form
+      window.location.assign(buildContactPath("demande-catalogue"));
     }
   }, [searchParams, setSearchParams]);
 
@@ -267,9 +266,11 @@ const CataloguePage = () => {
                     : "Detailed PDF of 13 domains and 130+ courses, delivered within minutes."}
                 </p>
               </div>
-              <Button onClick={() => setIsDownloadOpen(true)} className="shrink-0 bg-coral-gradient text-white hover:opacity-90">
-                <Download size={16} className="mr-2" />
-                {language === "fr" ? "Demander le catalogue" : "Request catalogue"}
+              <Button asChild className="shrink-0 bg-coral-gradient text-white hover:opacity-90">
+                <Link to={buildContactPath("demande-catalogue")}>
+                  <Download size={16} className="mr-2" />
+                  {language === "fr" ? "Demander le catalogue" : "Request catalogue"}
+                </Link>
               </Button>
             </div>
           </div>
@@ -556,7 +557,7 @@ const CataloguePage = () => {
           </div>
         </section>
         <Footer />
-        <CatalogueDownloadModal isOpen={isDownloadOpen} onClose={() => setIsDownloadOpen(false)} />
+        
       </div>
     </PageTransition>
   );
