@@ -466,7 +466,11 @@ const ContactPage = () => {
     }));
   }, [requestedDomain]);
 
-  const resolvedHeaderTitle = isListingIntent
+  const resolvedHeaderTitle = isBriefSolutionIntent
+    ? language === "en"
+      ? "Brief your AI solution project"
+      : "Brief de votre projet — Solution IA"
+    : isListingIntent
     ? language === "en"
       ? "Request visibility on TransferAI Africa"
       : "Demander un référencement"
