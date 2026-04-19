@@ -503,7 +503,7 @@ const CreateurContenuIA = () => {
               </div>
             </div>
 
-            <div className="mb-16">
+            <div id="replays" className="mb-16 scroll-mt-24">
               <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <h2 className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">

@@ -99,7 +99,6 @@ const Seminaires = () => {
   const copy = liveFormatsCopy[language === "en" ? "en" : "fr"];
   const seminaires = t("seminaires.items") as Array<Record<string, string>>;
   const upcoming = t("webinars.upcoming") as Array<Record<string, string>>;
-  const replays = t("webinars.replays") as Array<Record<string, string>>;
   const priceLabel = t("pricing.availableOnRequest");
 
   return (
