@@ -48,6 +48,9 @@ const sectionCopy = {
     secondaryCta: "Parcourir le catalogue",
     hiddenCount: "10 autres domaines dans le catalogue",
     formationsCount: "10 formations",
+    sectorsLabel: "Secteurs porteurs",
+    webinarCta: "S'inscrire au webinaire gratuit",
+    monthlyEyebrow: (month: string) => `Tendance ${month} · 3 domaines les plus demandés`,
     badges: {
       assistanat: "Très demandé",
       rh: "Très demandé",
@@ -55,7 +58,7 @@ const sectionCopy = {
       finance: "En forte hausse",
       management: "Stratégique",
       it: "Stratégique",
-    },
+    } as Record<string, string>,
     items: {
       assistanat: { title: "Assistanat & Secrétariat de Direction", desc: "Automatisation des tâches, gestion intelligente de l'agenda, rédaction assistée." },
       rh: { title: "Ressources Humaines", desc: "Recrutement prédictif, gestion des talents, formation personnalisée." },
@@ -70,7 +73,7 @@ const sectionCopy = {
       formation: { title: "Formation & Pédagogie", desc: "Conception pédagogique assistée, e-learning adaptatif." },
       sante: { title: "Santé & Bien-être au Travail", desc: "Prévention des risques, analyse ergonomique, suivi du bien-être." },
       diplomatie: { title: "Diplomatie & Affaires Internationales", desc: "Diplomatie digitale, analyse géopolitique, cybersécurité, négociation internationale avec l'IA." },
-    },
+    } as Record<string, { title: string; desc: string }>,
   },
   en: {
     eyebrow: "Preview · 3 featured domains out of 13",
@@ -81,6 +84,9 @@ const sectionCopy = {
     secondaryCta: "Browse the catalogue",
     hiddenCount: "10 more domains in the catalogue",
     formationsCount: "10 courses",
+    sectorsLabel: "Top sectors",
+    webinarCta: "Register for the free webinar",
+    monthlyEyebrow: (month: string) => `${month} trend · 3 most in-demand domains`,
     badges: {
       assistanat: "Highly requested",
       rh: "Highly requested",
@@ -88,7 +94,7 @@ const sectionCopy = {
       finance: "Fast growing",
       management: "Strategic",
       it: "Strategic",
-    },
+    } as Record<string, string>,
     items: {
       assistanat: { title: "Executive Assistants & Secretaries", desc: "Task automation, smart calendar management, AI-assisted writing." },
       rh: { title: "Human Resources", desc: "Predictive recruitment, talent management, personalized training." },
@@ -103,9 +109,18 @@ const sectionCopy = {
       formation: { title: "Training & Education", desc: "AI-assisted instructional design, adaptive e-learning." },
       sante: { title: "Health & Workplace Wellness", desc: "Risk prevention, ergonomic analysis, wellness monitoring." },
       diplomatie: { title: "Diplomacy & International Affairs", desc: "Digital diplomacy, geopolitical analysis, cybersecurity, international negotiations with AI." },
-    },
+    } as Record<string, { title: string; desc: string }>,
   },
 } as const;
+
+const FR_MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const EN_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+const formatTrendMonth = (iso: string, lang: "fr" | "en") => {
+  const d = new Date(`${iso}T00:00:00Z`);
+  const months = lang === "fr" ? FR_MONTHS : EN_MONTHS;
+  return `${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+};
 
 const MetiersSection = () => {
   const { language } = useLanguage();
