@@ -598,7 +598,11 @@ const ContactPage = () => {
         : "Demande de partenariat stratégique"
     : pageModel.formIntroBadge;
 
-  const resolvedIntroTitle = isCatalogIntent
+  const resolvedIntroTitle = isBriefSolutionIntent
+    ? language === "en"
+      ? "Brief your AI solution project"
+      : "Brief de votre projet IA"
+    : isCatalogIntent
     ? language === "en"
       ? "Request a domain catalogue"
       : "Demander un catalogue de domaine"
