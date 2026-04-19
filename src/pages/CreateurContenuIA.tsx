@@ -3,12 +3,14 @@ import {
   ArrowRight,
   BellRing,
   BriefcaseBusiness,
+  Clock,
   ExternalLink,
   Mail,
   MapPin,
   Mic,
   Music2,
   Newspaper,
+  PlayCircle,
   Radar,
   Sparkles,
   Users,
@@ -159,6 +161,13 @@ const creatorHubCopy = {
       { title: "La nouveauté qui compte", desc: "1 mise à jour IA traduite en impact business pour l'Afrique." },
       { title: "L'opportunité à saisir", desc: "1 mission, job, stage ou appel à projet à surveiller." },
     ],
+    replaysTitle: "Replays & masterclass",
+    replaysSubtitle:
+      "Reprenez à la demande nos webinaires passés et masterclass métier. Idéal pour découvrir notre approche pédagogique avant de vous inscrire à une session live.",
+    replaysBadge: "À regarder à la demande",
+    replaysCta: "Voir ce replay",
+    replaysEmpty: "De nouveaux replays seront ajoutés ici régulièrement.",
+    replaysLiveLink: "Voir les prochains webinaires en direct",
     ctaTitle: "Construire la communauté, former et ouvrir des débouchés",
     ctaDesc:
       "Nous pouvons faire de cette rubrique un vrai moteur d'acquisition et de transformation: contenus dynamiques, veille sectorielle, opportunités emploi et contact direct pour la mise en relation.",
@@ -297,6 +306,13 @@ const creatorHubCopy = {
       { title: "The update that matters", desc: "1 AI update translated into African business impact." },
       { title: "The opportunity to watch", desc: "1 mission, job, internship or call worth tracking." },
     ],
+    replaysTitle: "Replays & masterclasses",
+    replaysSubtitle:
+      "Catch up on our past webinars and profession masterclasses on demand. A great way to test our teaching approach before joining a live session.",
+    replaysBadge: "Watch on demand",
+    replaysCta: "Watch this replay",
+    replaysEmpty: "New replays will be added here regularly.",
+    replaysLiveLink: "See upcoming live webinars",
     ctaTitle: "Build the community, train people and open career paths",
     ctaDesc:
       "We can turn this section into a true acquisition and conversion engine: dynamic content, sector watch, job opportunities and direct contact for introductions.",
@@ -319,6 +335,7 @@ const CreateurContenuIA = () => {
   const { items: jobs, stats: jobStats, isLoading: jobsLoading } = useJobFeed();
   const highlightedResources = resources.slice(0, 6);
   const highlightedJobs = jobs.slice(0, 6);
+  const replays = (t("webinars.replays") as Array<Record<string, string>>) ?? [];
 
   const formatDate = (value: string) => {
     const date = new Date(value);
@@ -483,6 +500,64 @@ const CreateurContenuIA = () => {
                     </motion.div>
                   );
                 })}
+              </div>
+            </div>
+
+            <div id="replays" className="mb-16 scroll-mt-24">
+              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h2 className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">
+                    <PlayCircle size={24} className="text-primary" />
+                    {copy.replaysTitle}
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{copy.replaysSubtitle}</p>
+                </div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                  {copy.replaysBadge}
+                </span>
+              </div>
+
+              {replays.length === 0 ? (
+                <div className="rounded-2xl border border-dashed border-border bg-card p-8 text-center text-sm text-muted-foreground">
+                  {copy.replaysEmpty}
+                </div>
+              ) : (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  {replays.map((replay, index) => (
+                    <motion.div
+                      key={`${replay.title}-${index}`}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex flex-col rounded-2xl border border-border bg-card p-5 hover-lift"
+                    >
+                      <div className="mb-4 flex aspect-video w-full items-center justify-center rounded-xl bg-[linear-gradient(135deg,hsl(225_48%_18%),hsl(226_40%_12%))]">
+                        <PlayCircle size={40} className="text-white/80" />
+                      </div>
+                      <h3 className="font-heading text-base font-semibold text-card-foreground mb-2 line-clamp-2">{replay.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1">{replay.desc}</p>
+                      <div className="mb-4 flex items-center gap-3 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1"><Users size={12} /> {replay.viewers}</span>
+                        <span className="flex items-center gap-1"><Clock size={12} /> {replay.duration}</span>
+                      </div>
+                      <Link
+                        to={buildContactPath("demande-renseignement", `Replay : ${replay.title}`)}
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                      >
+                        {copy.replaysCta} <ArrowRight size={14} />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-6">
+                <Link
+                  to="/seminaires"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                >
+                  {copy.replaysLiveLink} <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
 
