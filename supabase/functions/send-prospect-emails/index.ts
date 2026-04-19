@@ -281,7 +281,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     closing: "Merci pour votre confiance,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Demande de catalogue",
-      "demande-renseignement": "Demande de renseignement",
+      "demande-renseignement": "Demande de cadrage",
       "contact-devis": "Demande de devis",
       "demande-referencement": "Demande de référencement",
       "demande-audit": "Demande d'audit gratuit",
@@ -414,7 +414,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     closing: "Thank you for your trust,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Catalogue request",
-      "demande-renseignement": "Information request",
+      "demande-renseignement": "Scoping request",
       "contact-devis": "Quote request",
       "demande-referencement": "Listing request",
       "demande-audit": "Free audit request",
