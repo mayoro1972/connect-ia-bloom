@@ -1933,6 +1933,23 @@ Deno.serve(async (request) => {
       catalogueDeliveryLogError = logError instanceof Error ? logError.message : "catalogue_delivery_log_failed";
     }
 
+    // Schedule the audit form follow-up email 30 minutes after acknowledgement.
+    if (payload.intent === "demande-audit" && payload.requestId) {
+      try {
+        const scheduledFor = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+        await supabase
+          .from("contact_requests")
+          .update({
+            audit_followup_status: "pending",
+            audit_followup_scheduled_at: scheduledFor,
+            audit_followup_error: null,
+          })
+          .eq("id", payload.requestId);
+      } catch (scheduleError) {
+        console.error("[send-prospect-emails] failed to schedule audit followup", scheduleError);
+      }
+    }
+
     return new Response(
       JSON.stringify({
         ok: true,
