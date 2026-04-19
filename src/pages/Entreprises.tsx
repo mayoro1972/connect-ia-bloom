@@ -269,7 +269,7 @@ const EntreprisesPage = () => {
             </div>
 
             <div className="rounded-2xl bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))] p-5 text-center md:p-6">
-              <p className="mx-auto mb-4 max-w-2xl text-sm leading-6 text-white/85">{copy.ctaDesc}</p>
+              <p className="mx-auto mb-4 max-w-4xl text-sm leading-6 text-white/85 md:whitespace-nowrap">{copy.ctaDesc}</p>
               <div className="flex justify-center">
                 <Link
                   to="/parler-expert-ia"
