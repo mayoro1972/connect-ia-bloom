@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react";
+import CalendlyEmbed from "@/components/CalendlyEmbed";
 import { Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
@@ -338,8 +339,8 @@ const ContactPage = () => {
           ? "Present your partnership project"
           : "Présentez votre projet de partenariat"
         : language === "en"
-          ? "Clarify your need"
-          : "Clarifier votre besoin"
+          ? "Speak with an AI expert"
+          : "Parler à un expert IA"
       : isListingIntent
         ? language === "en"
           ? "Present your organization"
@@ -356,8 +357,8 @@ const ContactPage = () => {
           ? "Tell us who you are, what kind of collaboration you are considering, and what result you would like to achieve together with TransferAI Africa."
           : "Dites-nous qui vous êtes, le type de collaboration envisagé et le résultat que vous souhaitez construire avec TransferAI Africa."
         : language === "en"
-          ? "Use this form if your need is clear but you would like help choosing the right domain, pathway, or format."
-          : "Utilisez ce formulaire si votre besoin est clair mais que vous souhaitez être aidé pour choisir le bon domaine, le bon parcours ou le bon format."
+          ? "Present your company and the AI scoping need. Our experts review your context and come back with a clear orientation — and you can also book a 30-min call directly below."
+          : "Présentez votre entreprise et le besoin de cadrage IA. Nos experts étudient votre contexte et reviennent vers vous avec une orientation claire — vous pouvez aussi réserver un échange de 30 min directement ci-dessous."
       : isListingIntent
         ? language === "en"
           ? "Describe your activity, positioning, and the type of visibility you would like us to review."
@@ -372,11 +373,15 @@ const ContactPage = () => {
       ? language === "en"
         ? "Send my partnership request"
         : "Envoyer ma demande de partenariat"
-    : isListingIntent
-      ? language === "en"
-        ? "Send my listing request"
-        : "Envoyer ma demande de référencement"
-      : t("contact.submit");
+      : isGuidanceIntent
+        ? language === "en"
+          ? "Send my scoping request"
+          : "Envoyer ma demande de cadrage"
+      : isListingIntent
+        ? language === "en"
+          ? "Send my listing request"
+          : "Envoyer ma demande de référencement"
+        : t("contact.submit");
 
   const resolvedCoreFieldLabel = isStrategicPartnershipIntent
     ? language === "en"
@@ -384,8 +389,8 @@ const ContactPage = () => {
       : "Type de partenariat, programme ou angle de collaboration"
     : isGuidanceIntent
     ? language === "en"
-      ? "Topic, project, or area you would like to scope"
-      : "Sujet, projet ou domaine à cadrer"
+      ? "Topic, project or business area to scope (e.g. customer service, finance, HR...)"
+      : "Sujet, projet ou domaine métier à cadrer (ex : relation client, finance, RH...)"
     : isListingIntent
     ? language === "en"
       ? "Organization, activity or positioning angle"
@@ -647,7 +652,7 @@ const ContactPage = () => {
             </div>
             )}
 
-            <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? "" : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                 <div className="mb-6">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
@@ -715,8 +720,8 @@ const ContactPage = () => {
                               : "Précisez votre besoin de catalogue : public visé, usage prévu, échéance... *"
                             : isGuidanceIntent
                             ? language === "en"
-                              ? "Describe in a few sentences your context, the result you want, and any constraint we should know about..."
-                              : "Décrivez en quelques phrases votre contexte, le résultat attendu et les contraintes éventuelles à prendre en compte..."
+                              ? "Describe your context (company, sector, current situation), the result you want, the expected timeline and any constraint we should know..."
+                              : "Décrivez votre contexte (entreprise, secteur, situation actuelle), le résultat attendu, l'échéance souhaitée et les contraintes éventuelles..."
                             : t("contact.message")
                         }
                         required={isCatalogIntent}
@@ -750,6 +755,43 @@ const ContactPage = () => {
                   </button>
                 </form>
               </div>
+
+              {isCompactMode && isGuidanceIntent && (
+                <div className="space-y-5">
+                  <div className="rounded-[28px] border border-border bg-card p-6 md:p-8">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Calendar size={14} />
+                      {language === "en" ? "Book a 30-min expert call" : "Réserver un échange expert (30 min)"}
+                    </div>
+                    <h3 className="mb-2 font-heading text-xl font-bold text-card-foreground">
+                      {language === "en" ? "Prefer a direct conversation?" : "Vous préférez un échange direct ?"}
+                    </h3>
+                    <p className="mb-4 text-sm leading-7 text-muted-foreground">
+                      {language === "en"
+                        ? "Pick a time that suits you. One of our AI experts will join the call to scope your need and recommend the right next step."
+                        : "Choisissez un créneau qui vous convient. Un expert IA vous rejoint pour cadrer votre besoin et vous orienter vers la bonne suite."}
+                    </p>
+                    <CalendlyEmbed url={directLinks.calendlyBooking} />
+                  </div>
+
+                  <div className="rounded-3xl border border-border bg-card p-6">
+                    <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">
+                      {language === "en" ? "Other ways to reach us" : "Autres moyens de nous joindre"}
+                    </h3>
+                    <div className="space-y-3 text-sm">
+                      <a href={directLinks.phone} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                        <Phone size={16} /> {contactDetails.phoneDisplay}
+                      </a>
+                      <a href={directLinks.email} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                        <Mail size={16} /> {contactDetails.email}
+                      </a>
+                      <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                        <MessageCircle size={16} /> {contactDetails.whatsappDisplay}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {!isCompactMode && (
               <div className="space-y-5">
