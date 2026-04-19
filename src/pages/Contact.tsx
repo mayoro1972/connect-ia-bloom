@@ -378,14 +378,8 @@ const contactPageModel = {
     quickStartBadge: "Choose the simplest entry point",
     quickStartTitle: "Reach the right door first",
     quickStartDesc:
-      "Start with the most useful action for your situation: book a free AI audit, speak with an AI expert, or message us directly.",
+      "Start with the most useful action for your situation: speak with an AI expert, or message us directly to share your need.",
     pathways: [
-      {
-        title: "Free AI audit",
-        desc: "For an initial scoping conversation with the team and a clearer next-step recommendation.",
-        cta: "Explore the free audit",
-        href: directLinks.auditLanding,
-      },
       {
         title: "Speak with an AI expert",
         desc: "Explain your need, get clear orientation, and be guided to the right next step.",
