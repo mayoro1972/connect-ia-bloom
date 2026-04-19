@@ -1016,11 +1016,6 @@ const ContactPage = () => {
                     <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground md:text-3xl">
                       {language === "en" ? "Talk to an AI expert" : "Parlez à un expert IA"}
                     </h2>
-                    <p className="text-sm leading-7 text-muted-foreground md:text-base">
-                      {language === "en"
-                        ? "Pick a 30-min slot. An AI expert will scope your need and recommend the right next step."
-                        : "Choisissez un créneau de 30 min. Un expert IA cadrera votre besoin et vous orientera vers la bonne suite."}
-                    </p>
                   </div>
                   <AppointmentBooking
                     prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
