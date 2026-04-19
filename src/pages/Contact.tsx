@@ -641,8 +641,9 @@ const ContactPage = () => {
                 ))}
               </div>
             </div>
+            )}
 
-            <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 max-w-6xl mx-auto">
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? "" : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                 <div className="mb-6">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
