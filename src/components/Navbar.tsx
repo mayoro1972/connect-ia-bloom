@@ -21,7 +21,6 @@ const navItems: NavItem[] = [
     children: [
       { key: "educationOverview", href: "/education" },
       { key: "formations", href: "/catalogue" },
-      { key: "paths", href: "/parcours" },
       { key: "certification", href: "/certification" },
       { key: "liveFormats", href: "/seminaires" },
     ],
