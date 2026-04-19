@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { buildContactPath, contactDetails, directLinks, socialLinks } from "@/lib/site-links";
@@ -124,6 +124,18 @@ const Footer = () => {
               <a href={directLinks.phone} className="flex items-start gap-2.5 transition-colors hover:text-[hsl(20_92%_42%)]">
                 <Phone size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
                 {contactDetails.phoneDisplay}
+              </a>
+              <a
+                href={directLinks.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 transition-colors hover:text-[hsl(20_92%_42%)]"
+              >
+                <MessageCircle size={16} className="mt-0.5 shrink-0 text-[hsl(20_92%_52%)]" />
+                <span className="flex flex-col">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">WhatsApp</span>
+                  <span>{contactDetails.whatsappDisplay ?? contactDetails.phoneDisplay}</span>
+                </span>
               </a>
               <a
                 href={directLinks.email}
