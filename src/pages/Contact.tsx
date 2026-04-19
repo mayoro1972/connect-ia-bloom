@@ -49,6 +49,23 @@ const toOptionalValue = (value: string) => {
   return trimmed ? trimmed : null;
 };
 
+const catalogueDomainOptions = [
+  "Catalogue complet (13 domaines)",
+  "Assistanat & Secrétariat",
+  "Ressources Humaines",
+  "Marketing & Communication",
+  "Finance & Comptabilité",
+  "Juridique & Conformité",
+  "Service Client",
+  "Data & Analyse",
+  "Administration & Gestion",
+  "Management & Leadership",
+  "IT & Transformation Digitale",
+  "Formation & Pédagogie",
+  "Santé & Bien-être",
+  "Diplomatie & Affaires Internationales",
+] as const;
+
 const normalizeIntentLabel = (value: string) =>
   value
     .normalize("NFD")
@@ -448,6 +465,31 @@ const ContactPage = () => {
         variant: "destructive",
       });
       return;
+    }
+
+    if (isCatalogIntent) {
+      if (!form.formations.trim()) {
+        toast({
+          title: t("contact.toastErrorTitle"),
+          description:
+            language === "en"
+              ? "Please select the domain of expertise for your catalogue request."
+              : "Veuillez sélectionner le domaine du catalogue souhaité.",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (form.message.trim().length < 10) {
+        toast({
+          title: t("contact.toastErrorTitle"),
+          description:
+            language === "en"
+              ? "Please describe in a few words your specific catalogue need."
+              : "Merci de préciser en quelques mots votre besoin de catalogue.",
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     if (!isSupabaseConfigured) {
