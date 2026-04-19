@@ -382,6 +382,10 @@ const ContactPage = () => {
     ? language === "en"
       ? "Partnership type, program, or collaboration angle"
       : "Type de partenariat, programme ou angle de collaboration"
+    : isGuidanceIntent
+    ? language === "en"
+      ? "Topic, project, or area you would like to scope"
+      : "Sujet, projet ou domaine à cadrer"
     : isListingIntent
     ? language === "en"
       ? "Organization, activity or positioning angle"
