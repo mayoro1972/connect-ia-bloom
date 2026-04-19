@@ -151,6 +151,17 @@ const CataloguePage = () => {
   const [filterLevel, setFilterLevel] = useState("");
   const [filterFormat, setFilterFormat] = useState("");
   const [filterMetier, setFilterMetier] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get("request") === "1") {
+      setIsDownloadOpen(true);
+      const next = new URLSearchParams(searchParams);
+      next.delete("request");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const levels = ["Débutant", "Intermédiaire", "Avancé"];
   const formats = ["Présentiel", "Hybride", "En ligne"];
