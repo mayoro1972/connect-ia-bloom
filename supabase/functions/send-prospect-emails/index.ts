@@ -1528,6 +1528,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
     catalogueAsset ? `${copy.catalogueButtons.web} : ${catalogueAsset.htmlUrl}` : "",
     catalogueAsset ? `${copy.catalogueButtons.audit} : ${SITE_URL}/audit-ia-gratuit` : "",
     listingReviewText,
+    scopingRecapText,
     shouldShowAppointmentCta && appointmentUrl ? `${copy.reviewAppointment} : ${appointmentUrl}` : "",
     "",
     closing,
