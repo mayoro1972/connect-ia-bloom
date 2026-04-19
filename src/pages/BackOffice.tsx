@@ -16,6 +16,7 @@ import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
 import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
 import AuditProspectAdminPanel, { type AuditProspectSnapshot } from "@/components/backoffice/AuditProspectAdminPanel";
 import WebinarAdminPanel from "@/components/backoffice/WebinarAdminPanel";
+import LiveFormatsAdminPanel from "@/components/backoffice/LiveFormatsAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -469,6 +470,7 @@ const BackOfficePage = () => {
                 <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="webinars">Webinaires</TabsTrigger>
+                <TabsTrigger value="live-formats">Formats live IA</TabsTrigger>
                 <TabsTrigger value="help">Mode d'emploi</TabsTrigger>
               </TabsList>
 
@@ -993,6 +995,9 @@ const BackOfficePage = () => {
                   <p className="text-sm text-muted-foreground">3. Les contenus publiés alimentent automatiquement `Blog & Ressources` et `Créateur de Contenu IA`.</p>
                   <p className="text-sm text-muted-foreground">4. La veille quotidienne peut ensuite utiliser cette même fonction pour injecter les nouveautés et les opportunités qualifiées.</p>
                 </div>
+              </TabsContent>
+              <TabsContent value="live-formats" className="space-y-6">
+                <LiveFormatsAdminPanel />
               </TabsContent>
             </Tabs>
           </div>
