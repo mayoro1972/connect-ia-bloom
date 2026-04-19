@@ -17,7 +17,7 @@ const sectionCopy = {
         title: "Demander une orientation",
         desc: "Pour les visiteurs qui hésitent encore entre plusieurs formations, parcours ou formats et veulent un conseil clair.",
         cta: "Être orienté",
-        href: buildContactPath("demande-renseignement"),
+        href: "/contact",
         badge: "Le plus simple",
         icon: Compass,
       },
