@@ -34,9 +34,9 @@ const parseSources = (value: Json | null): ResourceSource[] => {
         url,
         publisher,
         publishedAt,
-      };
+      } as ResourceSource;
     })
-    .filter((item): item is ResourceSource => Boolean(item));
+    .filter((item): item is ResourceSource => item !== null);
 };
 
 const mapResourceRow = (row: ResourcePostRow): ResourcePost => ({
