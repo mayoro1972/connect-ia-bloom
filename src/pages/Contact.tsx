@@ -798,6 +798,23 @@ const ContactPage = () => {
 
     setIsSubmitting(true);
 
+    // Enrich message body with brief details so admins see them in /contact-requests
+    const buildEnrichedMessage = () => {
+      if (!isBriefSolutionIntent) return toOptionalValue(form.message);
+      const lines: string[] = [];
+      if (form.message.trim()) lines.push(form.message.trim());
+      lines.push("");
+      lines.push("--- Brief Solution IA ---");
+      if (form.solutionTypes.length) lines.push(`Type(s) de solution : ${form.solutionTypes.join(", ")}`);
+      if (form.processFrequency) lines.push(`Fréquence : ${form.processFrequency}`);
+      if (form.existingTools.length) lines.push(`Outils existants : ${form.existingTools.join(", ")}`);
+      if (form.dataAvailability.length) lines.push(`Données disponibles : ${form.dataAvailability.join(", ")}`);
+      if (form.hasTechReferent) lines.push(`Référent technique interne : ${form.hasTechReferent}`);
+      if (form.scopingHorizon) lines.push(`Délai souhaité : ${form.scopingHorizon}`);
+      if (form.budgetRange) lines.push(`Budget indicatif : ${form.budgetRange}`);
+      return lines.join("\n");
+    };
+
     const { data: requestId, error } = await supabase.rpc("submit_contact_request", {
       full_name_input: form.name.trim(),
       email_input: form.email.trim(),
@@ -807,7 +824,7 @@ const ContactPage = () => {
       city_input: toOptionalValue(form.city),
       participants_input: form.participants.trim() || null,
       requested_formations_input: toOptionalValue(form.formations),
-      message_input: toOptionalValue(form.message),
+      message_input: buildEnrichedMessage(),
       source_page_input: "/contact",
       language_input: activeLanguage,
       request_intent_input: resolvedIntent,
@@ -815,11 +832,30 @@ const ContactPage = () => {
       privacy_consent_input: form.privacyAccepted,
       honeypot_input: form.botField.trim() || null,
       ai_maturity_input: isEnterpriseScopingFlow ? toOptionalValue(form.aiMaturity) : null,
-      use_cases_input: isEnterpriseScopingFlow && form.useCases.length > 0 ? form.useCases : null,
-      scoping_horizon_input: isEnterpriseScopingFlow ? toOptionalValue(form.scopingHorizon) : null,
+      use_cases_input:
+        isBriefSolutionIntent && form.solutionTypes.length > 0
+          ? form.solutionTypes
+          : isEnterpriseScopingFlow && form.useCases.length > 0
+            ? form.useCases
+            : null,
+      scoping_horizon_input:
+        isBriefSolutionIntent
+          ? toOptionalValue(form.scopingHorizon)
+          : isEnterpriseScopingFlow
+            ? toOptionalValue(form.scopingHorizon)
+            : null,
       engagement_format_input:
-        isEnterpriseScopingFlow && form.engagementFormat.length > 0 ? form.engagementFormat : null,
-      budget_range_input: isEnterpriseScopingFlow ? toOptionalValue(form.budgetRange) : null,
+        isBriefSolutionIntent && form.existingTools.length > 0
+          ? form.existingTools
+          : isEnterpriseScopingFlow && form.engagementFormat.length > 0
+            ? form.engagementFormat
+            : null,
+      budget_range_input:
+        isBriefSolutionIntent
+          ? toOptionalValue(form.budgetRange)
+          : isEnterpriseScopingFlow
+            ? toOptionalValue(form.budgetRange)
+            : null,
     });
 
     setIsSubmitting(false);
