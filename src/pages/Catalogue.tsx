@@ -364,6 +364,13 @@ const CataloguePage = () => {
                   {t("catalogue.tabSearch")}
                 </TabsTrigger>
                 <TabsTrigger
+                  value="parcours"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg px-6 py-2.5 text-sm font-semibold transition-all"
+                >
+                  <Route size={16} className="mr-2" />
+                  {parcoursCopy.tab}
+                </TabsTrigger>
+                <TabsTrigger
                   value="nouveautes"
                   className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg px-6 py-2.5 text-sm font-semibold transition-all"
                 >
@@ -564,6 +571,68 @@ const CataloguePage = () => {
                   {newFormations.map((f, i) => (
                     <FormationCard key={f.id} f={f} i={i} isNew />
                   ))}
+                </div>
+              </TabsContent>
+
+              {/* TAB 4: PARCOURS THÉMATIQUES */}
+              <TabsContent value="parcours">
+                <div className="mb-8">
+                  <h3 className="font-heading text-xl font-bold text-card-foreground mb-2">{parcoursCopy.title}</h3>
+                  <p className="text-sm text-muted-foreground max-w-3xl">{parcoursCopy.desc}</p>
+                </div>
+
+                <div className="space-y-8">
+                  {metierParcours.map((path) => {
+                    const totalCourses = path.levels.reduce((sum, lg) => sum + lg.formations.length, 0);
+                    if (totalCourses === 0) return null;
+                    return (
+                      <div key={path.title} className="bg-card border border-border rounded-2xl p-6 md:p-8">
+                        <div className="flex items-start justify-between flex-wrap gap-4 mb-6">
+                          <div>
+                            <h4 className="font-heading text-lg font-bold text-card-foreground">{path.title}</h4>
+                            <p className="text-sm text-muted-foreground mt-1">{path.desc}</p>
+                          </div>
+                          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary inline-flex items-center gap-1 shrink-0">
+                            <BookOpen size={14} />
+                            {totalCourses} {parcoursCopy.coursesLabel}
+                          </span>
+                        </div>
+
+                        <div className="space-y-5">
+                          {path.levels.map((levelGroup) => {
+                            if (levelGroup.formations.length === 0) return null;
+                            const Icon = levelIcons[levelGroup.level];
+                            return (
+                              <div key={levelGroup.level}>
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Icon size={16} className="text-primary" />
+                                  <span className="font-semibold text-sm text-card-foreground">
+                                    {t(`parcours.levels.${levelGroup.level}`) || levelGroup.level}
+                                  </span>
+                                  <span className="text-xs text-muted-foreground">
+                                    ({levelGroup.formations.length})
+                                  </span>
+                                </div>
+                                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                  {levelGroup.formations.slice(0, 3).map((formation) => (
+                                    <Link
+                                      key={formation.id}
+                                      to={`/catalogue/${formation.id}`}
+                                      className="p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/60 hover:border-primary/30 transition-colors group"
+                                    >
+                                      <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors">
+                                        {getTitle(formation)}
+                                      </p>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </TabsContent>
             </Tabs>
