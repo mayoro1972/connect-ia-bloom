@@ -1007,15 +1007,30 @@ const ContactPage = () => {
 
             <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
-                {!isDefaultContactLanding && (
-                <div className="mb-6">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                    <Mail size={14} />
-                    {resolvedIntroBadge}
+                {isDefaultContactLanding ? (
+                  <div className="mb-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Mail size={14} />
+                      {language === "en" ? "Write to us" : "Nous écrire"}
+                    </div>
+                    <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground md:text-3xl">
+                      {language === "en" ? "Tell us about your need" : "Parlez-nous de votre besoin"}
+                    </h2>
+                    <p className="text-sm leading-7 text-muted-foreground md:text-base">
+                      {language === "en"
+                        ? "Share the essentials below — we'll come back to you within 24–48 business hours with a clear next step."
+                        : "Partagez l'essentiel ci-dessous — nous revenons vers vous sous 24 à 48h ouvrées avec une orientation claire."}
+                    </p>
                   </div>
-                  <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
-                  <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
-                </div>
+                ) : (
+                  <div className="mb-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      <Mail size={14} />
+                      {resolvedIntroBadge}
+                    </div>
+                    <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
+                    <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
+                  </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
