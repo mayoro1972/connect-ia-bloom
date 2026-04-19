@@ -13,9 +13,9 @@ const sectionCopy = {
     items: [
       {
         title: "Je veux me former",
-        desc: "Découvrir les parcours, le catalogue et la certification selon mon métier.",
-        cta: "Découvrir l'offre formation",
-        href: "/education",
+        desc: "Recevoir le catalogue complet (130+ formations, 13 domaines) directement par email.",
+        cta: "Recevoir le catalogue",
+        href: "/catalogue?request=1",
         icon: GraduationCap,
       },
       {
