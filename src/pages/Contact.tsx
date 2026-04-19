@@ -185,6 +185,7 @@ const ContactPage = () => {
   const requestedDomain = searchParams.get("domain") ?? "";
   const requestedIntent = searchParams.get("intent") ?? "contact-devis";
   const resolvedIntent = supportedIntents.has(requestedIntent) ? requestedIntent : "contact-devis";
+  const isCompactMode = searchParams.get("compact") === "1";
   const isCatalogIntent = resolvedIntent === "demande-catalogue";
   const isGuidanceIntent = resolvedIntent === "demande-renseignement";
   const isListingIntent = resolvedIntent === "demande-referencement";
@@ -587,6 +588,7 @@ const ContactPage = () => {
 
         <section className="py-16">
           <div className="container mx-auto px-4 lg:px-8">
+            {!isCompactMode && (
             <div className="mx-auto mb-12 max-w-6xl rounded-[28px] border border-border bg-card p-8 md:p-10">
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
                 <Sparkles size={14} />
@@ -639,8 +641,9 @@ const ContactPage = () => {
                 ))}
               </div>
             </div>
+            )}
 
-            <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 max-w-6xl mx-auto">
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? "" : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                 <div className="mb-6">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
@@ -740,6 +743,7 @@ const ContactPage = () => {
                 </form>
               </div>
 
+              {!isCompactMode && (
               <div className="space-y-5">
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedResponseCardTitle}</h3>
@@ -791,6 +795,7 @@ const ContactPage = () => {
                 </motion.div>
 
               </div>
+              )}
             </div>
           </div>
         </section>
