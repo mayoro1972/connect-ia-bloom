@@ -40,9 +40,11 @@ const liveFormatsCopy = {
     ],
     seminarTitle: "Séminaires à venir",
     webinarTitle: "Webinaires à venir",
-    replayTitle: "Replays à forte intention",
+    replayBannerTitle: "Vous avez manqué un webinaire ?",
+    replayBannerDesc:
+      "Retrouvez tous nos replays et masterclasses dans notre médiathèque éditoriale. Idéal pour découvrir notre approche pédagogique avant de vous inscrire en live.",
+    replayBannerCta: "Voir tous les replays dans la médiathèque",
     register: "Demander ma place",
-    replayCta: "Voir ce replay",
     ctaTitle: "Le meilleur usage commercial des formats live",
     ctaDesc:
       "Les formats live doivent servir d'entrée basse friction dans le parcours Éducation : découverte, réassurance, puis orientation vers la bonne formation ou la certification signature.",
@@ -79,9 +81,11 @@ const liveFormatsCopy = {
     ],
     seminarTitle: "Upcoming seminars",
     webinarTitle: "Upcoming webinars",
-    replayTitle: "High-intent replays",
+    replayBannerTitle: "Missed a webinar?",
+    replayBannerDesc:
+      "Find all our replays and masterclasses in the editorial media hub. A great way to test our teaching approach before joining a live session.",
+    replayBannerCta: "Browse all replays in the media hub",
     register: "Request my seat",
-    replayCta: "Watch this replay",
     ctaTitle: "The strongest commercial use of live formats",
     ctaDesc:
       "Live formats should work as the low-friction front door of your Education funnel: discovery, reassurance and then orientation toward the right training or signature certification.",
