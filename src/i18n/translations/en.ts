@@ -486,7 +486,7 @@ const rawEn = {
   },
   contact: {
     title: "Contact Us",
-    subtitle: "Talk to an AI expert by booking your free slot, or describe your need and we'll get back to you.",
+    subtitle: "",
     formTitle: "Describe your need",
     name: "Full name *",
     email: "Professional email *",
