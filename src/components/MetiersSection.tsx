@@ -232,7 +232,7 @@ const MetiersSection = () => {
                 {copy.secondaryCta} →
               </Link>
             </div>
-            <p className="text-sm text-muted-foreground">{copy.hiddenCount}</p>
+            
           </div>
         </ScrollReveal>
       </div>
