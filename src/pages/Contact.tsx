@@ -338,14 +338,8 @@ const contactPageModel = {
     quickStartBadge: "Choisissez l'entrée la plus simple",
     quickStartTitle: "Parler à la bonne porte d'entrée",
     quickStartDesc:
-      "Commencez par l'action la plus utile selon votre situation : réserver un audit IA gratuit, parler à un expert IA ou nous écrire directement.",
+      "Commencez par l'action la plus utile selon votre situation : parlez à un expert IA ou écrivez-nous directement pour exprimer votre besoin.",
     pathways: [
-      {
-        title: "Audit IA gratuit",
-        desc: "Pour un premier échange de cadrage avec l'équipe et identifier les prochaines actions utiles.",
-        cta: "Découvrir l'audit gratuit",
-        href: directLinks.auditLanding,
-      },
       {
         title: "Parler à un expert IA",
         desc: "Pour expliquer votre besoin, obtenir une orientation claire et être dirigé vers la bonne suite.",
@@ -384,14 +378,8 @@ const contactPageModel = {
     quickStartBadge: "Choose the simplest entry point",
     quickStartTitle: "Reach the right door first",
     quickStartDesc:
-      "Start with the most useful action for your situation: book a free AI audit, speak with an AI expert, or message us directly.",
+      "Start with the most useful action for your situation: speak with an AI expert, or message us directly to share your need.",
     pathways: [
-      {
-        title: "Free AI audit",
-        desc: "For an initial scoping conversation with the team and a clearer next-step recommendation.",
-        cta: "Explore the free audit",
-        href: directLinks.auditLanding,
-      },
       {
         title: "Speak with an AI expert",
         desc: "Explain your need, get clear orientation, and be guided to the right next step.",
@@ -452,6 +440,14 @@ const ContactPage = () => {
     (isGuidanceIntent && !isStrategicPartnershipIntent) || resolvedIntent === "contact-devis";
   const scoping = scopingOptions[language === "en" ? "en" : "fr"];
   const briefSolution = briefSolutionOptions[language === "en" ? "en" : "fr"];
+  // Default contact landing (no special intent) → ultra-épuré : juste "porte d'entrée" + form essentiel + RDV
+  const isDefaultContactLanding =
+    !isCompactMode &&
+    resolvedIntent === "contact-devis" &&
+    !isCatalogIntent &&
+    !isGuidanceIntent &&
+    !isListingIntent &&
+    !isBriefSolutionIntent;
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
@@ -965,7 +961,7 @@ const ContactPage = () => {
                 <p className="text-sm leading-7 text-muted-foreground md:text-base md:leading-8">{resolvedQuickStartDesc}</p>
               </div>
 
-              <div className="grid gap-5 md:grid-cols-3">
+              <div className={`grid gap-5 ${resolvedPathways.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
                 {resolvedPathways.map((pathway, index) => (
                   <motion.div
                     key={pathway.title}
@@ -976,7 +972,7 @@ const ContactPage = () => {
                     className="flex h-full flex-col rounded-3xl border border-border bg-background p-6"
                   >
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      {index === 0 ? <Calendar size={20} /> : index === 1 ? <Mail size={20} /> : <MessageCircle size={20} />}
+                      {pathway.href?.includes("wa.me") || pathway.title.toLowerCase().includes("whatsapp") ? <MessageCircle size={20} /> : pathway.href?.startsWith("/") ? <Calendar size={20} /> : <Mail size={20} />}
                     </div>
                     <h3 className="mb-3 font-heading text-xl font-bold text-card-foreground">{pathway.title}</h3>
                     <p className="mb-6 flex-1 text-sm leading-7 text-muted-foreground">{pathway.desc}</p>
@@ -1011,6 +1007,7 @@ const ContactPage = () => {
 
             <div className={`grid gap-10 max-w-6xl mx-auto ${isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               <div id="contact-form" className="rounded-[28px] border border-border bg-card p-8 md:p-10">
+                {!isDefaultContactLanding && (
                 <div className="mb-6">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
                     <Mail size={14} />
@@ -1019,6 +1016,7 @@ const ContactPage = () => {
                   <h2 className="mb-3 font-heading text-2xl font-bold text-card-foreground">{resolvedIntroTitle}</h2>
                   <p className="text-sm leading-7 text-muted-foreground">{resolvedIntroDesc}</p>
                 </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="rounded-3xl border border-border bg-background p-5 md:p-6">
@@ -1052,7 +1050,7 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  {isEnterpriseScopingFlow && (
+                  {isEnterpriseScopingFlow && !isDefaultContactLanding && (
                     <div className="rounded-3xl border border-primary/30 bg-primary/[0.03] p-5 md:p-6">
                       <div className="mb-5">
                         <h3 className="font-heading text-lg font-semibold text-card-foreground">{scoping.sectionTitle}</h3>
@@ -1325,6 +1323,7 @@ const ContactPage = () => {
                     />
                   </motion.div>
                 )}
+                {!isDefaultContactLanding && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedResponseCardTitle}</h3>
                   <div className="space-y-3">
@@ -1336,6 +1335,7 @@ const ContactPage = () => {
                     ))}
                   </div>
                 </motion.div>
+                )}
 
                 {!isBriefSolutionIntent && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-3xl border border-border bg-card p-6">
@@ -1364,7 +1364,7 @@ const ContactPage = () => {
                   </div>
                 </motion.a>
 
-                {!isBriefSolutionIntent && (
+                {!isBriefSolutionIntent && !isDefaultContactLanding && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">{resolvedHelperTitle}</h3>
                   <div className="space-y-3">
