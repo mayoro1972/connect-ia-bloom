@@ -798,6 +798,50 @@ const listProspects = async () => {
   };
 };
 
+const listWebinarRegistrations = async () => {
+  const { data, error } = await supabase
+    .from("webinar_registrations")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(500);
+
+  if (error) {
+    return { data: null, error };
+  }
+
+  const rows = data ?? [];
+  return {
+    data: {
+      overview: {
+        total: rows.length,
+        received: rows.filter((r) => r.status === "received").length,
+        confirmed: rows.filter((r) => r.status === "date_confirmed").length,
+        completed: rows.filter((r) => r.status === "completed").length,
+        cancelled: rows.filter((r) => r.status === "cancelled").length,
+      },
+      registrations: rows,
+    },
+    error: null,
+  };
+};
+
+const updateWebinarRegistration = async (payload: Record<string, unknown>) => {
+  const id = asString(payload.id);
+  if (!id) return { data: null, error: { message: "Missing id." } };
+  const update: Record<string, unknown> = {};
+  if (payload.status !== undefined) update.status = asString(payload.status, "received");
+  if (payload.scheduled_date !== undefined) update.scheduled_date = asNullableString(payload.scheduled_date);
+  if (payload.admin_notes !== undefined) update.admin_notes = asNullableString(payload.admin_notes);
+  if (payload.status === "date_confirmed") update.date_confirmed_at = new Date().toISOString();
+
+  return supabase
+    .from("webinar_registrations")
+    .update(update)
+    .eq("id", id)
+    .select("*")
+    .single();
+};
+
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -845,6 +889,8 @@ Deno.serve(async (request) => {
   if (entity === "partners" && action === "save") result = await savePartner(payload);
   if (entity === "partners" && action === "set-status") result = await setPartnerStatus(payload);
   if (entity === "prospects" && action === "list") result = await listProspects();
+  if (entity === "webinars" && action === "list") result = await listWebinarRegistrations();
+  if (entity === "webinars" && action === "update") result = await updateWebinarRegistration(payload);
 
   if (!result) {
     return json(400, { error: "Unsupported admin action." });

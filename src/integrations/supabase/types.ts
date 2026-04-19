@@ -1126,6 +1126,96 @@ export type Database = {
           },
         ]
       }
+      webinar_registrations: {
+        Row: {
+          admin_notes: string | null
+          city: string | null
+          country: string | null
+          created_at: string
+          date_confirmed_at: string | null
+          domain_key: string | null
+          domain_other: string | null
+          email: string
+          formation_id: string | null
+          formation_other: string | null
+          formation_title: string | null
+          full_name: string
+          id: string
+          language: string
+          motivation: string | null
+          organization: string | null
+          participants: number
+          phone: string | null
+          position: string | null
+          privacy_consent: boolean
+          reminder_sent_at: string | null
+          scheduled_date: string
+          sector: string | null
+          sector_other: string | null
+          source_page: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          date_confirmed_at?: string | null
+          domain_key?: string | null
+          domain_other?: string | null
+          email: string
+          formation_id?: string | null
+          formation_other?: string | null
+          formation_title?: string | null
+          full_name: string
+          id?: string
+          language?: string
+          motivation?: string | null
+          organization?: string | null
+          participants?: number
+          phone?: string | null
+          position?: string | null
+          privacy_consent?: boolean
+          reminder_sent_at?: string | null
+          scheduled_date?: string
+          sector?: string | null
+          sector_other?: string | null
+          source_page?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          date_confirmed_at?: string | null
+          domain_key?: string | null
+          domain_other?: string | null
+          email?: string
+          formation_id?: string | null
+          formation_other?: string | null
+          formation_title?: string | null
+          full_name?: string
+          id?: string
+          language?: string
+          motivation?: string | null
+          organization?: string | null
+          participants?: number
+          phone?: string | null
+          position?: string | null
+          privacy_consent?: boolean
+          reminder_sent_at?: string | null
+          scheduled_date?: string
+          sector?: string | null
+          sector_other?: string | null
+          source_page?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       page_view_stats: {
@@ -1183,6 +1273,31 @@ export type Database = {
           phone_input: string
           position_input: string
           privacy_consent_input: boolean
+          source_page_input: string
+        }
+        Returns: string
+      }
+      submit_webinar_registration: {
+        Args: {
+          city_input: string
+          country_input: string
+          domain_key_input: string
+          domain_other_input: string
+          email_input: string
+          formation_id_input: string
+          formation_other_input: string
+          formation_title_input: string
+          full_name_input: string
+          honeypot_input: string
+          language_input: string
+          motivation_input: string
+          organization_input: string
+          participants_input: number
+          phone_input: string
+          position_input: string
+          privacy_consent_input: boolean
+          sector_input: string
+          sector_other_input: string
           source_page_input: string
         }
         Returns: string
