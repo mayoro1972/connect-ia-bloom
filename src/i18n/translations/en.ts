@@ -277,6 +277,9 @@ const rawEn = {
     location: "Location",
     nextSession: "First session",
     enrollCta: "Apply / Request a Quote",
+    enrollIndividualCta: "Enroll (individual)",
+    enrollQuoteCta: "Request a quote (company)",
+    enrollCtaHelper: "Choose enroll for an individual application, or request a quote for a team or company-funded participation.",
   },
   enterprises: {
     title: "Enterprise Solutions",

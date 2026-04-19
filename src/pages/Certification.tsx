@@ -12,7 +12,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { deepFixMojibake } from "@/lib/fixMojibake";
 import { certificationDomainProfiles, getCertificationDomainProfile, type LocalizedText } from "@/data/certification-curricula";
 import { getCertificationOfferMeta, type CertificationMetaText } from "@/data/certification-meta";
-import { resolveCatalogueSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
+import { buildContactPath, resolveCatalogueSlugFromSector, resolveToolSlugFromSector } from "@/lib/site-links";
 
 const CertificationPage = () => {
   const { language } = useLanguage();
@@ -250,13 +250,22 @@ const CertificationPage = () => {
                     ))}
                   </div>
 
-                  <Link
-                    to={`/inscription?formation=certification-signature&domaine=${activeProfile.slug}`}
-                    className="block w-full rounded-lg bg-coral-gradient py-3 text-center font-semibold transition-opacity hover:opacity-90"
-                    style={{ color: "hsl(0 0% 100%)" }}
-                  >
-                    {content.enrollCta}
-                  </Link>
+                  <div className="space-y-3">
+                    <Link
+                      to={`/inscription?formation=certification-signature&domaine=${activeProfile.slug}`}
+                      className="block w-full rounded-lg bg-coral-gradient py-3 text-center font-semibold transition-opacity hover:opacity-90"
+                      style={{ color: "hsl(0 0% 100%)" }}
+                    >
+                      {content.enrollIndividualCta}
+                    </Link>
+                    <Link
+                      to={buildContactPath("contact-devis", activeProfile.domainKey)}
+                      className="block w-full rounded-lg border border-coral bg-card py-3 text-center font-semibold text-coral transition-colors hover:bg-coral/5"
+                    >
+                      {content.enrollQuoteCta}
+                    </Link>
+                    <p className="text-center text-xs text-muted-foreground">{content.enrollCtaHelper}</p>
+                  </div>
                   <p className="mt-4 text-center text-xs leading-6 text-muted-foreground">{localizeMeta(offerMeta.cohortNote)}</p>
                 </motion.div>
               </div>

@@ -277,6 +277,9 @@ const rawFr = {
     location: "Lieu",
     nextSession: "Première session",
     enrollCta: "Candidater / Demander un devis",
+    enrollIndividualCta: "S'inscrire (individuel)",
+    enrollQuoteCta: "Demander un devis (entreprise)",
+    enrollCtaHelper: "Choisissez s'inscrire pour une candidature individuelle, ou demander un devis pour une équipe ou une prise en charge entreprise.",
   },
   enterprises: {
     title: "Solutions Entreprises",
