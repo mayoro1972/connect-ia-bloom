@@ -281,7 +281,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     closing: "Merci pour votre confiance,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Demande de catalogue",
-      "demande-renseignement": "Demande de renseignement",
+      "demande-renseignement": "Demande de cadrage",
       "contact-devis": "Demande de devis",
       "demande-referencement": "Demande de référencement",
       "demande-audit": "Demande d'audit gratuit",
@@ -414,7 +414,7 @@ const translations: Record<"fr" | "en", TranslationCopy> = {
     closing: "Thank you for your trust,\nTransferAI Africa",
     intentLabels: {
       "demande-catalogue": "Catalogue request",
-      "demande-renseignement": "Information request",
+      "demande-renseignement": "Scoping request",
       "contact-devis": "Quote request",
       "demande-referencement": "Listing request",
       "demande-audit": "Free audit request",
@@ -1023,8 +1023,11 @@ const buildAuditSectorPhrase = (copy: TranslationCopy, payload: ProspectEmailPay
 };
 
 const isTrainingSupportRequest = (payload: ProspectEmailPayload) =>
-  (payload.intent === "contact-devis" || payload.intent === "demande-renseignement") &&
+  payload.intent === "contact-devis" &&
   Boolean(payload.domain?.trim() || payload.formationTitle?.trim() || payload.message?.trim());
+
+const isGuidanceRequest = (payload: ProspectEmailPayload) =>
+  payload.intent === "demande-renseignement";
 
 const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: ProspectEmailPayload) => {
   if (payload.intent === "inscription") {
@@ -1049,6 +1052,12 @@ const buildSmartAcknowledgementSubject = (copy: TranslationCopy, payload: Prospe
     return copy === translations.fr
       ? "Nous avons bien reçu votre demande de rendez-vous - TransferAI Africa"
       : "We received your meeting request - TransferAI Africa";
+  }
+
+  if (isGuidanceRequest(payload)) {
+    return copy === translations.fr
+      ? "Nous avons bien reçu votre demande de cadrage - TransferAI Africa"
+      : "We received your scoping request - TransferAI Africa";
   }
 
   if (isTrainingSupportRequest(payload)) {
@@ -1085,6 +1094,12 @@ const buildSmartAcknowledgementNextStep = (copy: TranslationCopy, payload: Prosp
 
   if (payload.intent === "prise-rdv") {
     return copy.acknowledgementNextStep;
+  }
+
+  if (isGuidanceRequest(payload)) {
+    return copy === translations.fr
+      ? "Un membre de notre équipe va relire votre contexte, reformuler votre besoin et revenir vers vous avec une orientation claire : audit IA gratuit, parcours de formation, accompagnement ou solution sur-mesure selon ce qui sert le mieux votre objectif."
+      : "A team member will review your context, restate your need, and come back with a clear orientation: free AI audit, training pathway, advisory support, or a tailored solution depending on what best serves your goal.";
   }
 
   if (isTrainingSupportRequest(payload)) {
@@ -1127,6 +1142,21 @@ const buildSmartAcknowledgementBody = (copy: TranslationCopy, payload: ProspectE
 
   if (payload.intent === "demande-catalogue") {
     return copy.acknowledgementBody(intentLabel);
+  }
+
+  if (isGuidanceRequest(payload)) {
+    const topic = buildContactNeedTopic(copy, payload);
+    const hasTopic = topic && topic !== copy.missingValue;
+
+    if (copy === translations.fr) {
+      return hasTopic
+        ? `Nous avons bien reçu votre demande de cadrage concernant ${topic}. Notre équipe va relire votre contexte afin de clarifier votre besoin, identifier la bonne porte d'entrée (audit, formation, accompagnement ou solution) et vous proposer une orientation utile.`
+        : "Nous avons bien reçu votre demande de cadrage. Notre équipe va relire votre contexte afin de clarifier votre besoin, identifier la bonne porte d'entrée (audit, formation, accompagnement ou solution) et vous proposer une orientation utile.";
+    }
+
+    return hasTopic
+      ? `We have received your scoping request regarding ${topic}. Our team will review your context to clarify your need, identify the right entry point (audit, training, advisory, or solution), and come back with a useful orientation.`
+      : "We have received your scoping request. Our team will review your context to clarify your need, identify the right entry point (audit, training, advisory, or solution), and come back with a useful orientation.";
   }
 
   const topic = buildContactNeedTopic(copy, payload);
