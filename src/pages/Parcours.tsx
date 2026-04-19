@@ -255,24 +255,25 @@ const ParcoursPage = () => {
           </div>
         </section>
 
-        <section className="py-16">
-          <div className="container mx-auto px-4 lg:px-8 max-w-5xl mb-12">
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h2 className="font-heading text-2xl font-bold text-card-foreground mb-6">{pageCopy.outcomesTitle}</h2>
-              <div className="grid md:grid-cols-2 gap-4">
+        <section className="py-10">
+          <div className="container mx-auto px-4 lg:px-8 max-w-5xl mb-8">
+            <div className="bg-card border border-border rounded-2xl p-5">
+              <h2 className="font-heading text-lg font-bold text-card-foreground mb-3">{pageCopy.outcomesTitle}</h2>
+              <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5">
                 {pageCopy.outcomes.map((outcome) => (
-                  <div key={outcome} className="rounded-2xl border border-border bg-background p-4 text-sm leading-relaxed text-muted-foreground">
-                    {outcome}
-                  </div>
+                  <li key={outcome} className="flex gap-2 text-sm leading-snug text-muted-foreground">
+                    <span className="text-primary mt-0.5">•</span>
+                    <span>{outcome}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
 
           <div className="container mx-auto px-4 lg:px-8 text-center">
-            <h2 className="font-heading text-2xl font-bold mb-4">{pageCopy.ctaTitle}</h2>
-            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">{pageCopy.ctaDesc}</p>
-            <div className="flex justify-center gap-4 flex-wrap">
+            <h2 className="font-heading text-xl font-bold mb-2">{pageCopy.ctaTitle}</h2>
+            <p className="text-sm text-muted-foreground mb-4 max-w-xl mx-auto">{pageCopy.ctaDesc}</p>
+            <div className="flex justify-center gap-3 flex-wrap">
               <Link
                 to="/contact"
                 className="bg-orange-gradient font-semibold text-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity inline-flex items-center gap-2"
