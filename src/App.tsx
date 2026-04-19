@@ -23,6 +23,7 @@ const Certification = lazy(() => import("./pages/Certification"));
 const AIToolsMatrix = lazy(() => import("./pages/AIToolsMatrix"));
 const AuditIA = lazy(() => import("./pages/AuditIA"));
 const ProspectRequestPage = lazy(() => import("./pages/ProspectRequestPage"));
+const DemandeCataloguePage = lazy(() => import("./pages/DemandeCataloguePage"));
 const ProspectAuditLoginPage = lazy(() => import("./pages/ProspectAuditLoginPage"));
 const Entreprises = lazy(() => import("./pages/Entreprises"));
 const Evenements = lazy(() => import("./pages/Evenements"));
@@ -215,6 +216,7 @@ const AnimatedRoutes = () => {
           <Route path="/blog/domain/:domainSlug" element={<BlogDomainPage />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/demande-catalogue" element={<DemandeCataloguePage />} />
           <Route path="/confidentialite" element={<Privacy />} />
           <Route path="/plan-du-site" element={<Sitemap />} />
           <Route path="/sitemap" element={<Sitemap />} />
