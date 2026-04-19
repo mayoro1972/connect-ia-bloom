@@ -200,6 +200,37 @@ const CataloguePage = () => {
     return formations.filter(f => newFormationIds.has(f.id));
   }, []);
 
+  const parcoursTrans = (language === "fr" ? fr : en).parcours;
+  const metierParcours = useMemo(() => {
+    return parcoursTrans.paths.map((path) => {
+      const metierFormations = formations.filter((formation) => fixMojibake(formation.metier) === path.metierKey);
+      return {
+        ...path,
+        levels: [
+          { level: "Débutant" as const, formations: metierFormations.filter((f) => f.level === "Débutant") },
+          { level: "Intermédiaire" as const, formations: metierFormations.filter((f) => f.level === "Intermédiaire") },
+          { level: "Avancé" as const, formations: metierFormations.filter((f) => f.level === "Avancé") },
+        ],
+      };
+    });
+  }, [parcoursTrans]);
+
+  const parcoursCopy = language === "fr"
+    ? {
+        tab: "Parcours thématiques",
+        title: "Parcours guidés par domaine",
+        desc: "Plutôt qu'une formation isolée, suivez une trajectoire claire : du socle aux usages avancés, dans votre domaine d'expertise.",
+        coursesLabel: "formations",
+        seeAll: "Voir toutes les formations du parcours",
+      }
+    : {
+        tab: "Thematic paths",
+        title: "Guided paths by domain",
+        desc: "Rather than a standalone course, follow a clear trajectory: from fundamentals to advanced use, in your area of expertise.",
+        coursesLabel: "courses",
+        seeAll: "View all courses in this path",
+      };
+
   const totalFormations = formations.length;
   const totalDomains = metiers.length;
   const guideCopy = language === "fr"
