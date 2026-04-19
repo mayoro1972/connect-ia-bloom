@@ -338,14 +338,8 @@ const contactPageModel = {
     quickStartBadge: "Choisissez l'entrée la plus simple",
     quickStartTitle: "Parler à la bonne porte d'entrée",
     quickStartDesc:
-      "Commencez par l'action la plus utile selon votre situation : réserver un audit IA gratuit, parler à un expert IA ou nous écrire directement.",
+      "Commencez par l'action la plus utile selon votre situation : parlez à un expert IA ou écrivez-nous directement pour exprimer votre besoin.",
     pathways: [
-      {
-        title: "Audit IA gratuit",
-        desc: "Pour un premier échange de cadrage avec l'équipe et identifier les prochaines actions utiles.",
-        cta: "Découvrir l'audit gratuit",
-        href: directLinks.auditLanding,
-      },
       {
         title: "Parler à un expert IA",
         desc: "Pour expliquer votre besoin, obtenir une orientation claire et être dirigé vers la bonne suite.",
