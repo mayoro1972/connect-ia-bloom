@@ -12,7 +12,8 @@ interface Payload {
   language?: string;
   domain_label?: string;
   formation_label?: string;
-  scheduled_date?: string; // YYYY-MM-DD
+  scheduled_date?: string; // YYYY-MM-DD (legacy)
+  scheduled_date_label?: string; // Texte libre prioritaire (ex: "14 juin 2026 et 16 juin 2026")
 }
 
 const FROM = Deno.env.get("MAIL_FROM") || Deno.env.get("FROM_EMAIL") || "TransferAI Africa <contact@transferai.ci>";
@@ -47,7 +48,8 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: "missing_fields" }), { status: 400, headers: corsHeaders });
     }
     const lang = (p.language || "fr").toLowerCase().startsWith("en") ? "en" : "fr";
-    const dateLabel = fmtDate(p.scheduled_date, lang);
+    // Priorité au libellé texte envoyé par le formulaire (dates fixes), sinon fallback sur la date ISO
+    const dateLabel = p.scheduled_date_label?.trim() || fmtDate(p.scheduled_date, lang);
 
     const subjectUser = lang === "en"
       ? "Your free webinar registration has been received"
