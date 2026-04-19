@@ -148,13 +148,9 @@ const WebinarRegistration = () => {
   }, [lang]);
 
   const plannedDate = useMemo(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 14);
-    return d.toLocaleDateString(lang === "fr" ? "fr-FR" : "en-US", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
+    return lang === "fr"
+      ? "14 juin 2026 et 16 juin 2026"
+      : "June 14, 2026 and June 16, 2026";
   }, [lang]);
 
   const formationsForDomain = useMemo(() => {
