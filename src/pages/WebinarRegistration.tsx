@@ -69,7 +69,7 @@ const copy = {
     error: "Une erreur est survenue. Merci de réessayer.",
     other: "Autre",
     none: "— Sélectionner —",
-    plannedDate: (date: string) => `Date prévisionnelle : ${date} (confirmée par notre équipe sous 14 jours)`,
+    plannedDate: (date: string) => `Dates prévisionnelles : ${date} — heures à préciser (confirmation par email)`,
   },
   en: {
     badge: "Free webinar",
@@ -106,7 +106,7 @@ const copy = {
     error: "An error occurred. Please try again.",
     other: "Other",
     none: "— Select —",
-    plannedDate: (date: string) => `Tentative date: ${date} (confirmed by our team within 14 days)`,
+    plannedDate: (date: string) => `Tentative dates: ${date} — times to be confirmed (final confirmation by email)`,
   },
 } as const;
 
@@ -148,13 +148,9 @@ const WebinarRegistration = () => {
   }, [lang]);
 
   const plannedDate = useMemo(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 14);
-    return d.toLocaleDateString(lang === "fr" ? "fr-FR" : "en-US", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
+    return lang === "fr"
+      ? "14 juin 2026 et 16 juin 2026"
+      : "June 14, 2026 and June 16, 2026";
   }, [lang]);
 
   const formationsForDomain = useMemo(() => {
