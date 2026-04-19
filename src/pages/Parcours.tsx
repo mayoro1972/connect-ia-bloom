@@ -289,7 +289,7 @@ const ParcoursPage = () => {
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">{pageCopy.ctaDesc}</p>
             <div className="flex justify-center gap-4 flex-wrap">
               <Link
-                to={buildContactPath("demande-renseignement")}
+                to="/contact"
                 className="bg-orange-gradient font-semibold text-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity inline-flex items-center gap-2"
                 style={{ color: "hsl(0 0% 100%)" }}
               >
