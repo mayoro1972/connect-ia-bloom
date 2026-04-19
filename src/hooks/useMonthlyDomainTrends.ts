@@ -25,7 +25,21 @@ export const useMonthlyDomainTrends = () => {
   useEffect(() => {
     let cancelled = false;
     const fetchTrends = async () => {
-      const { data, error } = await supabase
+      // Cast to any: the new monthly_domain_trends table is not yet in the generated types.
+      const client = supabase as unknown as {
+        from: (table: string) => {
+          select: (cols: string) => {
+            eq: (col: string, val: string) => {
+              order: (col: string, opts: { ascending: boolean }) => {
+                order: (col: string, opts: { ascending: boolean }) => {
+                  limit: (n: number) => Promise<{ data: MonthlyDomainTrend[] | null; error: unknown }>;
+                };
+              };
+            };
+          };
+        };
+      };
+      const { data, error } = await client
         .from("monthly_domain_trends")
         .select(
           "id, trend_month, rank, domain_key, badge_label_fr, badge_label_en, target_sectors_fr, target_sectors_en, justification_fr, justification_en, webinar_url",
