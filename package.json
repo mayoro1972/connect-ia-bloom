@@ -12,6 +12,7 @@
     "sync:audit-form": "node scripts/sync-audit-form.mjs",
     "generate:catalogues": "node scripts/generate-catalogue-exports.mjs",
     "generate:domain-catalogues": "node scripts/generate-domain-catalogues.mjs",
+    "generate:catalogue-pdfs": "node scripts/generate-catalogue-pdfs.mjs",
     "test": "vitest run",
     "deploy": "VITE_BASE_PATH=/connect-ia-bloom/ vite build && node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\" && gh-pages -d dist",
     "test:watch": "vitest"
