@@ -1319,7 +1319,10 @@ const ContactPage = () => {
                         ? "Pick a time that suits you. We will align on your project, the right approach, and the next concrete steps."
                         : "Choisissez un créneau qui vous convient. Nous cadrerons votre projet, la bonne approche et les prochaines étapes concrètes."}
                     </p>
-                    <CalendlyEmbed url={directLinks.calendlyBooking} />
+                    <AppointmentBooking
+                      prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
+                      analyticsLocation="contact_brief_solution"
+                    />
                   </motion.div>
                 )}
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-card p-6">
