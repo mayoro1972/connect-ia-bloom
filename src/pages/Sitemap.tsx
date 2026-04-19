@@ -89,7 +89,7 @@ const sitemapCopy = {
         links: [
           { label: "Home", to: "/" },
           { label: "Free AI audit", to: "/audit-ia-gratuit" },
-          { label: "Speak with an AI expert", to: "/contact?intent=demande-renseignement" },
+          { label: "Speak with an AI expert", to: "/parler-expert-ia" },
           { label: "Enterprise page", to: "/entreprises" },
         ],
       },
