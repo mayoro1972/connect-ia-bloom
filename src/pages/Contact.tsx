@@ -1005,7 +1005,7 @@ const ContactPage = () => {
             </div>
             )}
 
-            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? "" : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               {isDefaultContactLanding && (
                 <div className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                   <div className="mb-6">
@@ -1304,28 +1304,6 @@ const ContactPage = () => {
                 </form>
               </div>
 
-              {isCompactMode && isGuidanceIntent && (
-                <div className="space-y-5">
-                  <div className="rounded-[28px] border border-border bg-card p-6 md:p-8">
-                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                      <Calendar size={14} />
-                      {language === "en" ? "Book a 30-min expert call" : "Réserver un échange expert (30 min)"}
-                    </div>
-                    <h3 className="mb-2 font-heading text-xl font-bold text-card-foreground">
-                      {language === "en" ? "Prefer a direct conversation?" : "Vous préférez un échange direct ?"}
-                    </h3>
-                    <p className="mb-4 text-sm leading-7 text-muted-foreground">
-                      {language === "en"
-                        ? "Pick a time that suits you. One of our AI experts will join the call to scope your need and recommend the right next step."
-                        : "Choisissez un créneau qui vous convient. Un expert IA vous rejoint pour cadrer votre besoin et vous orienter vers la bonne suite."}
-                    </p>
-                    <AppointmentBooking
-                      prefill={{ name: form.name, email: form.email, company: form.company, domain: form.formations }}
-                      analyticsLocation="contact_compact_guidance"
-                    />
-                  </div>
-                </div>
-              )}
 
 
               {!isCompactMode && (
