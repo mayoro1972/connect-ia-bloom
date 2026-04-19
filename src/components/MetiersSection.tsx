@@ -45,7 +45,7 @@ const sectionCopy = {
     subtitle:
       "Voici 3 exemples parmi les 13 domaines couverts. Recevez le catalogue complet pour explorer toute l'offre.",
     primaryCta: "Recevoir le catalogue complet",
-    secondaryCta: "Parcourir le catalogue",
+    secondaryCta: "Parcourir les autres domaines",
     hiddenCount: "10 autres domaines dans le catalogue",
     formationsCount: "10 formations",
     sectorsLabel: "Secteurs porteurs",
@@ -81,7 +81,7 @@ const sectionCopy = {
     subtitle:
       "Here are 3 examples among the 13 domains we cover. Get the full catalogue to explore the whole offer.",
     primaryCta: "Get the full catalogue",
-    secondaryCta: "Browse the catalogue",
+    secondaryCta: "Browse the other domains",
     hiddenCount: "10 more domains in the catalogue",
     formationsCount: "10 courses",
     sectorsLabel: "Top sectors",
@@ -225,13 +225,6 @@ const MetiersSection = () => {
         <ScrollReveal delay={0.3} className="mt-10">
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link
-                to="/demande-catalogue"
-                className="inline-flex items-center gap-2 rounded-lg bg-coral-gradient px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:opacity-90"
-                style={{ color: "hsl(0 0% 100%)" }}
-              >
-                {copy.primaryCta} ↗
-              </Link>
               <Link
                 to="/catalogue"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-8 py-3 font-semibold transition-all hover:scale-[1.02] hover:bg-muted"
