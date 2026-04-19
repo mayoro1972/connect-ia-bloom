@@ -199,14 +199,14 @@ const ParcoursPage = () => {
             <div className="space-y-4">
               {metierParcours.map((path, pathIndex) => (
                 <ScrollReveal key={path.title} delay={pathIndex * 0.05}>
-                  <div className="bg-card border border-border rounded-xl p-8">
-                    <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
+                  <div className="bg-card border border-border rounded-xl p-5">
+                    <div className="flex items-start justify-between mb-4 flex-wrap gap-3">
                       <div>
-                        <h3 className="font-heading text-xl font-bold text-card-foreground">{path.title}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">{path.desc}</p>
+                        <h3 className="font-heading text-base font-bold text-card-foreground">{path.title}</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{path.desc}</p>
                       </div>
-                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary flex items-center gap-1">
-                        <BookOpen size={14} />
+                      <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary flex items-center gap-1 shrink-0">
+                        <BookOpen size={12} />
                         {path.levels.reduce((total, levelGroup) => total + levelGroup.formations.length, 0)} {t("parcours.coursesLabel")}
                       </span>
                     </div>
