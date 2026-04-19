@@ -440,6 +440,14 @@ const ContactPage = () => {
     (isGuidanceIntent && !isStrategicPartnershipIntent) || resolvedIntent === "contact-devis";
   const scoping = scopingOptions[language === "en" ? "en" : "fr"];
   const briefSolution = briefSolutionOptions[language === "en" ? "en" : "fr"];
+  // Default contact landing (no special intent) → ultra-épuré : juste "porte d'entrée" + form essentiel + RDV
+  const isDefaultContactLanding =
+    !isCompactMode &&
+    resolvedIntent === "contact-devis" &&
+    !isCatalogIntent &&
+    !isGuidanceIntent &&
+    !isListingIntent &&
+    !isBriefSolutionIntent;
 
   const [form, setForm] = useState<ContactFormState>({
     ...emptyForm,
