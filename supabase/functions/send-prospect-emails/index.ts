@@ -1503,6 +1503,7 @@ const buildAcknowledgement = (payload: ProspectEmailPayload): EmailMessage => {
             return `<p style="margin:0 0 ${index === summaryLines.length - 1 ? "0" : "8px"};color:#475467;"><strong>${escapeHtml(label)} :</strong> ${escapeHtml(rest.join(" : "))}</p>`;
           }).join("")}
         </div>
+        ${scopingRecapBlock}
         ${catalogueAccessBlock}
         ${listingReviewBlock}
         ${
