@@ -141,46 +141,45 @@ const ParcoursPage = () => {
         <Navbar />
         <PageHeader title={pageCopy.title} subtitle={pageCopy.subtitle} badge="Parcours" />
 
-        <section className="py-12">
+        <section className="py-8">
           <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
-            <div className="grid lg:grid-cols-2 gap-6 mb-12">
-              <div className="bg-card border border-border rounded-3xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <CheckCircle2 size={22} className="text-primary" />
+            <div className="grid lg:grid-cols-2 gap-4 mb-8">
+              <div className="bg-card border border-border rounded-2xl p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <CheckCircle2 size={18} className="text-primary" />
                   </div>
-                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{pageCopy.reassuranceTitle}</h2>
+                  <h2 className="font-heading text-lg font-bold text-card-foreground">{pageCopy.reassuranceTitle}</h2>
                 </div>
-                <div className="space-y-4">
+                <ul className="space-y-1.5">
                   {pageCopy.reassurancePoints.map((point) => (
-                    <div key={point} className="rounded-2xl border border-border bg-background p-4 text-sm leading-relaxed text-muted-foreground">
-                      {point}
-                    </div>
+                    <li key={point} className="flex gap-2 text-sm leading-snug text-muted-foreground">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span>{point}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
-              <div className="bg-card border border-border rounded-3xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <Compass size={22} className="text-primary" />
+              <div className="bg-card border border-border rounded-2xl p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Compass size={18} className="text-primary" />
                   </div>
-                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{pageCopy.howItWorks}</h2>
+                  <h2 className="font-heading text-lg font-bold text-card-foreground">{pageCopy.howItWorks}</h2>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {pageCopy.steps.map((step, index) => {
                     const Icon = [Layers, TrendingUp, Award][index];
 
                     return (
-                      <div key={step.title} className="rounded-2xl border border-border bg-background p-4">
-                        <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                            <Icon size={18} className="text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-heading font-semibold text-base text-card-foreground mb-1">{step.title}</h3>
-                            <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-                          </div>
+                      <div key={step.title} className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon size={14} className="text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-heading font-semibold text-sm text-card-foreground">{step.title}</h3>
+                          <p className="text-xs text-muted-foreground leading-snug">{step.desc}</p>
                         </div>
                       </div>
                     );
@@ -191,13 +190,13 @@ const ParcoursPage = () => {
           </div>
         </section>
 
-        <section className="py-12">
+        <section className="pb-8">
           <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-            <div className="max-w-3xl mb-10">
-              <h2 className="font-heading text-3xl font-bold text-card-foreground mb-3">{pageCopy.pathsTitle}</h2>
-              <p className="text-muted-foreground leading-relaxed">{pageCopy.pathsDesc}</p>
+            <div className="max-w-3xl mb-6">
+              <h2 className="font-heading text-2xl font-bold text-card-foreground mb-2">{pageCopy.pathsTitle}</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">{pageCopy.pathsDesc}</p>
             </div>
-            <div className="space-y-12">
+            <div className="space-y-4">
               {metierParcours.map((path, pathIndex) => (
                 <ScrollReveal key={path.title} delay={pathIndex * 0.05}>
                   <div className="bg-card border border-border rounded-xl p-8">
