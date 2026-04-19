@@ -876,7 +876,12 @@ const ContactPage = () => {
 
     const { error: notificationError } = await sendProspectEmailNotifications({
       requestId,
-      intent: resolvedIntent as "demande-catalogue" | "demande-renseignement" | "contact-devis" | "demande-referencement",
+      intent: resolvedIntent as
+        | "demande-catalogue"
+        | "demande-renseignement"
+        | "contact-devis"
+        | "demande-referencement"
+        | "brief-solution-ia",
       fullName: form.name.trim(),
       email: form.email.trim(),
       phone: form.phone.trim(),
@@ -893,11 +898,30 @@ const ContactPage = () => {
         fullName: form.name.trim(),
       }),
       aiMaturity: isEnterpriseScopingFlow ? form.aiMaturity || null : null,
-      useCases: isEnterpriseScopingFlow && form.useCases.length > 0 ? form.useCases : null,
-      scopingHorizon: isEnterpriseScopingFlow ? form.scopingHorizon || null : null,
+      useCases:
+        isBriefSolutionIntent && form.solutionTypes.length > 0
+          ? form.solutionTypes
+          : isEnterpriseScopingFlow && form.useCases.length > 0
+            ? form.useCases
+            : null,
+      scopingHorizon:
+        isBriefSolutionIntent
+          ? form.scopingHorizon || null
+          : isEnterpriseScopingFlow
+            ? form.scopingHorizon || null
+            : null,
       engagementFormat:
-        isEnterpriseScopingFlow && form.engagementFormat.length > 0 ? form.engagementFormat : null,
-      budgetRange: isEnterpriseScopingFlow ? form.budgetRange || null : null,
+        isBriefSolutionIntent && form.existingTools.length > 0
+          ? form.existingTools
+          : isEnterpriseScopingFlow && form.engagementFormat.length > 0
+            ? form.engagementFormat
+            : null,
+      budgetRange:
+        isBriefSolutionIntent
+          ? form.budgetRange || null
+          : isEnterpriseScopingFlow
+            ? form.budgetRange || null
+            : null,
     });
 
     toast({
