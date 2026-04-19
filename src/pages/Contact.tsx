@@ -1050,7 +1050,7 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  {isEnterpriseScopingFlow && (
+                  {isEnterpriseScopingFlow && !isDefaultContactLanding && (
                     <div className="rounded-3xl border border-primary/30 bg-primary/[0.03] p-5 md:p-6">
                       <div className="mb-5">
                         <h3 className="font-heading text-lg font-semibold text-card-foreground">{scoping.sectionTitle}</h3>
