@@ -1381,7 +1381,8 @@ const ContactPage = () => {
                       ? language === "en" ? "Key information" : "Informations clés"
                       : pageModel.contactCardTitle}
                   </h3>
-                  <div className={isDefaultContactLanding ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 text-sm" : "space-y-4 text-sm"}>
+                  <div className={isDefaultContactLanding ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-sm" : "space-y-4 text-sm"}>
+                    {!isDefaultContactLanding && (
                     <a href={directLinks.phone} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors group">
                       <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Phone size={16} />
@@ -1391,6 +1392,7 @@ const ContactPage = () => {
                         <span className="font-medium">{contactDetails.phoneDisplay}</span>
                       </span>
                     </a>
+                    )}
                     <a href={directLinks.email} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
                       <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Mail size={16} />
