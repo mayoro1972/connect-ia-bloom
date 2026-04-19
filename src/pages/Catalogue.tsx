@@ -1,4 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import CatalogueDownloadModal from "@/components/CatalogueDownloadModal";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Clock, Monitor, ChevronRight, Sparkles, BookOpen, Filter, X, CheckCircle2, Compass, ArrowRight } from "lucide-react";
 import {
