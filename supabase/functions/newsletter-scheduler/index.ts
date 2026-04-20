@@ -174,7 +174,7 @@ Deno.serve(async (request) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !CONTENT_ADMIN_TOKEN || !NEWSLETTER_SCHEDULER_TOKEN) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !CONTENT_ADMIN_TOKEN) {
     return json(500, { error: "Missing scheduler configuration." });
   }
 
