@@ -471,7 +471,6 @@ const BackOfficePage = () => {
                 </p>
               </div>
             </div>
-            <Footer />
           </section>
         ) : (
         <section className="py-12">
