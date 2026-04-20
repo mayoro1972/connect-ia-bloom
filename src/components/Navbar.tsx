@@ -25,13 +25,21 @@ const navItems: NavItem[] = [
       { key: "liveFormats", href: "/seminaires" },
     ],
   },
-  { key: "services", href: "/services" },
+  {
+    key: "services",
+    children: [
+      { key: "enterprises", href: "/entreprises" },
+      { key: "consultingIA", href: "/consulting-ia" },
+      { key: "devSolutionsIA", href: "/developpement-solutions-ia" },
+      { key: "contenuIA", href: "/createur-contenu-ia" },
+      { key: "auditIA", href: "/audit-ia-gratuit" },
+    ],
+  },
   {
     key: "resources",
     children: [
       { key: "blog", href: "/blog" },
       { key: "aiTools", href: "/outils-ia" },
-      { key: "contenuIA", href: "/createur-contenu-ia" },
     ],
   },
   { key: "partners", href: "/partenaires" },
@@ -41,6 +49,7 @@ const navItems: NavItem[] = [
 
 const dropdownWidths: Record<string, string> = {
   education: "w-[320px]",
+  services: "w-[340px]",
   resources: "w-[320px]",
 };
 

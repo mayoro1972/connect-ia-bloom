@@ -4,7 +4,8 @@ const rawFr = {
   nav: {
     home: "ACCUEIL",
     education: "SE FORMER",
-    services: "ENTREPRISES",
+    services: "SERVICES",
+    auditIA: "AUDIT IA GRATUIT",
     resources: "RESSOURCES",
     about: "À PROPOS",
     educationOverview: "VUE D'ENSEMBLE",
