@@ -608,7 +608,7 @@ const CreateurContenuIA = () => {
                     {copy.ctaPrimary}
                   </button>
                   <Link
-                    to={newsletterContactLink}
+                    to={emploiContactLink}
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold hover:bg-white/5"
                     style={{ color: "hsl(0 0% 98%)" }}
                   >
