@@ -9,6 +9,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import SeoManager from "./components/SeoManager";
 import ScrollToTop from "./components/ScrollToTop";
 import { usePageView } from "./hooks/usePageView";
+import { useAdminShortcut } from "./hooks/useAdminShortcut";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
@@ -194,6 +195,7 @@ const AnimatedRoutes = () => {
   const location = useLocation();
   const { language } = useLanguage();
   usePageView();
+  useAdminShortcut();
   return (
     <ChunkErrorBoundary key={`${location.pathname}${location.search}`}>
       <Suspense fallback={<RouteLoader />}>
