@@ -72,7 +72,7 @@ const educationCopy = {
         title: "Je veux être orienté",
         desc: "Recevoir une recommandation claire selon mon profil.",
         cta: "Demander une orientation",
-        href: buildContactPath("demande-renseignement"),
+        href: "/contact",
       },
       {
         title: "Je suis prêt à candidater",
@@ -155,7 +155,7 @@ const educationCopy = {
         title: "I want guidance",
         desc: "Receive a clear recommendation based on my profile.",
         cta: "Request guidance",
-        href: buildContactPath("demande-renseignement"),
+        href: "/contact",
       },
       {
         title: "I am ready to apply",
