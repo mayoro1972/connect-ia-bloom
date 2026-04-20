@@ -35,7 +35,38 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
   const domainList = domains.join(", ");
   const greeting = getEmailGreeting(language);
 
+  const pillarCardStyle =
+    "padding:16px 18px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;margin:0 0 12px;";
+  const pillarTitleStyle =
+    "margin:0 0 6px;color:#9a3412;font-weight:700;font-size:14px;letter-spacing:0.02em;";
+  const pillarBodyStyle = "margin:0;color:#475467;font-size:14px;line-height:1.5;";
+
   if (language === "en") {
+    const pillars = [
+      {
+        title: "1. Weekly business newsletter",
+        body: "A practical, domain-focused brief: trends, tools and AI use cases adapted to your role and sector.",
+      },
+      {
+        title: "2. High-impact micro-content",
+        body: "Short, actionable insights (prompts, tips, mini case studies) to apply AI immediately at work.",
+      },
+      {
+        title: "3. AI Africa watch + jobs",
+        body: "Curated signals on AI in Africa and a selection of opportunities (jobs, calls, programs) to act on.",
+      },
+    ];
+
+    const pillarsHtml = pillars
+      .map(
+        (p) => `
+            <div style="${pillarCardStyle}">
+              <p style="${pillarTitleStyle}">${escapeHtml(p.title)}</p>
+              <p style="${pillarBodyStyle}">${escapeHtml(p.body)}</p>
+            </div>`,
+      )
+      .join("");
+
     return {
       subject: "Your TransferAI Africa subscription is confirmed",
       html: `
@@ -44,12 +75,12 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
             <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#f28c28;">TransferAI Africa</p>
             <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2;color:#101828;">Subscription confirmed</h1>
             <p style="margin:0 0 14px;color:#101828;">${escapeHtml(greeting)}</p>
-            <p style="margin:0 0 14px;color:#475467;">Your domain-based AI watch subscription is now active.</p>
-            <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+            <p style="margin:0 0 14px;color:#475467;">Your subscription to the TransferAI Africa newsletter is now active. You will receive our three editorial pillars:</p>
+            ${pillarsHtml}
+            <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;margin-top:18px;">
               <p style="margin:0 0 10px;color:#101828;font-weight:700;">Selected domains</p>
               <p style="margin:0;color:#475467;">${escapeHtml(domainList)}</p>
             </div>
-            <p style="margin:18px 0 0;color:#475467;">We will send practical signals, curated resources and useful updates for your selected domains.</p>
             <p style="margin:24px 0 0;color:#475467;">If you need tailored support, reply to this email or write to ${escapeHtml(MAIL_TO)}.</p>
           </div>
         </div>
@@ -59,16 +90,42 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
         "",
         greeting,
         "",
-        "Your domain-based AI watch subscription is now active.",
+        "Your subscription to the TransferAI Africa newsletter is now active. You will receive our three editorial pillars:",
+        "",
+        ...pillars.flatMap((p) => [p.title, p.body, ""]),
         `Selected domains: ${domainList}`,
         "",
-        "We will send practical signals, curated resources and useful updates for your selected domains.",
         `Need tailored support? Reply to this email or write to ${MAIL_TO}.`,
         "",
         `Subscriber: ${email}`,
       ].join("\n"),
     };
   }
+
+  const pillars = [
+    {
+      title: "1. Newsletter métier hebdomadaire",
+      body: "Un brief pratique par domaine : tendances, outils et cas d'usage IA adaptés à votre rôle et à votre secteur.",
+    },
+    {
+      title: "2. Micro-contenus à forte portée",
+      body: "Des contenus courts et actionnables (prompts, astuces, mini études de cas) pour appliquer l'IA immédiatement au travail.",
+    },
+    {
+      title: "3. Veille IA Afrique + emploi",
+      body: "Une veille ciblée sur l'IA en Afrique et une sélection d'opportunités (offres d'emploi, appels, programmes) à activer.",
+    },
+  ];
+
+  const pillarsHtml = pillars
+    .map(
+      (p) => `
+          <div style="${pillarCardStyle}">
+            <p style="${pillarTitleStyle}">${escapeHtml(p.title)}</p>
+            <p style="${pillarBodyStyle}">${escapeHtml(p.body)}</p>
+          </div>`,
+    )
+    .join("");
 
   return {
     subject: "Votre inscription TransferAI Africa est confirmée",
@@ -78,12 +135,12 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
           <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#f28c28;">TransferAI Africa</p>
           <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2;color:#101828;">Inscription confirmée</h1>
           <p style="margin:0 0 14px;color:#101828;">${escapeHtml(greeting)}</p>
-          <p style="margin:0 0 14px;color:#475467;">Votre abonnement à la veille IA par domaine est maintenant actif.</p>
-          <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;">
+          <p style="margin:0 0 14px;color:#475467;">Votre abonnement à la newsletter TransferAI Africa est maintenant actif. Vous recevrez nos trois piliers éditoriaux :</p>
+          ${pillarsHtml}
+          <div style="padding:20px;border-radius:12px;background:#f9fafb;border:1px solid #eaecf0;margin-top:18px;">
             <p style="margin:0 0 10px;color:#101828;font-weight:700;">Domaines sélectionnés</p>
             <p style="margin:0;color:#475467;">${escapeHtml(domainList)}</p>
           </div>
-          <p style="margin:18px 0 0;color:#475467;">Vous recevrez désormais des signaux utiles, des ressources ciblées et des mises à jour concrètes sur vos domaines prioritaires.</p>
           <p style="margin:24px 0 0;color:#475467;">Si vous souhaitez un accompagnement adapté à votre organisation, répondez à cet email ou écrivez à ${escapeHtml(MAIL_TO)}.</p>
         </div>
       </div>
@@ -93,10 +150,11 @@ const buildNewsletterConfirmation = (email: string, domains: string[], language:
       "",
       greeting,
       "",
-      "Votre abonnement à la veille IA par domaine est maintenant actif.",
+      "Votre abonnement à la newsletter TransferAI Africa est maintenant actif. Vous recevrez nos trois piliers éditoriaux :",
+      "",
+      ...pillars.flatMap((p) => [p.title, p.body, ""]),
       `Domaines sélectionnés : ${domainList}`,
       "",
-      "Vous recevrez désormais des signaux utiles, des ressources ciblées et des mises à jour concrètes sur vos domaines prioritaires.",
       `Besoin d'un accompagnement ? Répondez à cet email ou écrivez à ${MAIL_TO}.`,
       "",
       `Abonné : ${email}`,
