@@ -257,12 +257,25 @@ Deno.serve(async (request) => {
         systemPrompt: draftingSystemPrompt,
         userPrompt: JSON.stringify(promptPayload),
       }).catch(() => null);
+    } else if (Deno.env.get("LOVABLE_API_KEY")) {
+      aiDraft = await callLovableAIJson({
+        systemPrompt: draftingSystemPrompt,
+        userPrompt: JSON.stringify(promptPayload),
+      }).catch((error) => {
+        console.error("Lovable AI draft failed:", error);
+        return null;
+      });
     }
+
+    const finalStatus = autoPublish ? "approved" : "review";
+    const nowIso = new Date().toISOString();
 
     const issue = {
       issue_date: issueDate,
       language,
-      status: "review",
+      status: finalStatus,
+      scheduled_for: autoPublish ? nowIso : null,
+      approved_at: autoPublish ? nowIso : null,
       title: asString(aiDraft?.title, fallbackDraft.title),
       subject: asString(aiDraft?.subject, fallbackDraft.subject),
       preheader: asNullableString(aiDraft?.preheader) ?? fallbackDraft.preheader,
