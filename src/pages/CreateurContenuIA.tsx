@@ -125,12 +125,12 @@ const creatorHubCopy = {
       sources: "Sources à suivre",
     },
     jobSources: [
-      "Sites emploi ivoiriens",
-      "Plateformes Afrique francophone",
-      "Upwork",
-      "Fiverr",
-      "PeoplePerHour",
-      "Veille missions remote IA",
+      { label: "Sites emploi ivoiriens", href: "https://www.jobafrique.com/" },
+      { label: "Plateformes Afrique francophone", href: "https://www.jobafrique.com/" },
+      { label: "Upwork", href: "https://www.upwork.com/" },
+      { label: "Fiverr", href: "https://www.fiverr.com/" },
+      { label: "PeoplePerHour", href: "https://www.peopleperhour.com/" },
+      { label: "Veille missions remote IA", href: "https://remotive.com/remote-jobs/software-dev" },
     ],
     jobsEmptyTitle: "La veille emploi IA est prête à être alimentée",
     jobsEmptyDesc:
@@ -263,12 +263,12 @@ const creatorHubCopy = {
       sources: "Sources to monitor",
     },
     jobSources: [
-      "Ivorian job boards",
-      "Francophone African platforms",
-      "Upwork",
-      "Fiverr",
-      "PeoplePerHour",
-      "Remote AI mission watch",
+      { label: "Ivorian job boards", href: "https://www.jobafrique.com/" },
+      { label: "Francophone African platforms", href: "https://www.jobafrique.com/" },
+      { label: "Upwork", href: "https://www.upwork.com/" },
+      { label: "Fiverr", href: "https://www.fiverr.com/" },
+      { label: "PeoplePerHour", href: "https://www.peopleperhour.com/" },
+      { label: "Remote AI mission watch", href: "https://remotive.com/remote-jobs/software-dev" },
     ],
     jobsEmptyTitle: "The AI jobs watch is ready to be populated",
     jobsEmptyDesc:
@@ -517,9 +517,16 @@ const CreateurContenuIA = () => {
 
               <div className="mb-6 flex flex-wrap gap-3">
                 {copy.jobSources.map((source) => (
-                  <span key={source} className="rounded-full border border-border bg-card px-4 py-2 text-xs font-medium text-muted-foreground">
-                    {source}
-                  </span>
+                  <a
+                    key={source.label}
+                    href={source.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    {source.label}
+                    <ExternalLink size={12} />
+                  </a>
                 ))}
               </div>
 
@@ -569,8 +576,21 @@ const CreateurContenuIA = () => {
                             <MapPin size={13} />
                             {location}
                           </span>
-                          <span>{copy.jobsSourceLabel}: {job.sourceName}</span>
+                          {job.sourceUrl ? (
+                            <a
+                              href={job.sourceUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 text-primary hover:opacity-80"
+                            >
+                              {copy.jobsSourceLabel}: {job.sourceName}
+                              <ExternalLink size={12} />
+                            </a>
+                          ) : (
+                            <span>{copy.jobsSourceLabel}: {job.sourceName}</span>
+                          )}
                           <span>{formatDate(job.publishedAt)}</span>
+                          {job.compensationLabel ? <span>{job.compensationLabel}</span> : null}
                         </div>
                         <div className="flex flex-wrap gap-3">
                           {job.applyUrl ? (
