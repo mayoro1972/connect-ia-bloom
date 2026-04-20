@@ -1459,7 +1459,7 @@ const ContactPage = () => {
           </div>
         </section>
 
-        {!isDefaultContactLanding && (
+        {!isDefaultContactLanding && !isCompactMode && (
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div className="text-center mb-8">
