@@ -16,17 +16,21 @@ import {
   Users,
   Youtube,
 } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { buildContactPath } from "@/lib/site-links";
 import { isResourceNew } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { useJobFeed } from "@/hooks/useJobFeed";
+import { getAvailableBlogSectors } from "@/lib/blog-domains";
 
 const creatorHubCopy = {
   fr: {
@@ -333,6 +337,8 @@ const CreateurContenuIA = () => {
   const copy = creatorHubCopy[language === "en" ? "en" : "fr"];
   const { items: resources } = useResourceFeed();
   const { items: jobs, stats: jobStats, isLoading: jobsLoading } = useJobFeed();
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+  const availableSectors = getAvailableBlogSectors(resources.map((item) => item.sectorKey));
   const highlightedResources = resources.slice(0, 6);
   const highlightedJobs = jobs.slice(0, 6);
   const replays = (t("webinars.replays") as Array<Record<string, string>>) ?? [];
@@ -695,13 +701,14 @@ const CreateurContenuIA = () => {
                   {copy.ctaDesc}
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Link
-                    to={newsletterContactLink}
-                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-3 text-sm font-semibold"
+                  <button
+                    type="button"
+                    onClick={() => setIsNewsletterOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
                     style={{ color: "hsl(0 0% 100%)" }}
                   >
                     {copy.ctaPrimary}
-                  </Link>
+                  </button>
                   <Link
                     to={newsletterContactLink}
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold hover:bg-white/5"
@@ -714,6 +721,18 @@ const CreateurContenuIA = () => {
             </div>
           </div>
         </section>
+
+        <Dialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen}>
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 bg-transparent border-0 shadow-none">
+            <DialogHeader className="sr-only">
+              <DialogTitle>{copy.ctaPrimary}</DialogTitle>
+            </DialogHeader>
+            <BlogNewsletterSignup
+              availableSectors={availableSectors}
+              sourcePage="/createur-contenu-ia"
+            />
+          </DialogContent>
+        </Dialog>
         <Footer />
       </div>
     </PageTransition>
