@@ -130,6 +130,7 @@ Deno.serve(async (request) => {
     target_domains?: string[];
     source_post_ids?: string[];
     dry_run?: boolean;
+    auto_publish?: boolean;
   } = {};
 
   try {
@@ -143,21 +144,30 @@ Deno.serve(async (request) => {
   const targetDomains = normalizeDomains(body.target_domains);
   const sourcePostIds = normalizeDomains(body.source_post_ids);
   const dryRun = body.dry_run === true;
+  const autoPublish = body.auto_publish === true;
+
+  const provider = Deno.env.get("ANTHROPIC_API_KEY")
+    ? "anthropic"
+    : Deno.env.get("OPENAI_API_KEY")
+      ? "openai"
+      : Deno.env.get("LOVABLE_API_KEY")
+        ? "lovable-ai"
+        : "heuristic";
+
+  const model = provider === "anthropic"
+    ? "claude-3-7-sonnet-latest"
+    : provider === "openai"
+      ? "gpt-4.1-mini"
+      : provider === "lovable-ai"
+        ? "google/gemini-2.5-flash"
+        : "heuristic-v1";
 
   const { data: job } = await editorialClient
     .from("editorial_jobs")
     .insert({
       job_type: "newsletter_draft",
-      provider: Deno.env.get("ANTHROPIC_API_KEY")
-        ? "anthropic"
-        : Deno.env.get("OPENAI_API_KEY")
-          ? "openai"
-          : "heuristic",
-      model: Deno.env.get("ANTHROPIC_API_KEY")
-        ? "claude-3-7-sonnet-latest"
-        : Deno.env.get("OPENAI_API_KEY")
-          ? "gpt-4.1-mini"
-          : "heuristic-v1",
+      provider,
+      model,
       input_payload: {
         issueDate,
         language,
