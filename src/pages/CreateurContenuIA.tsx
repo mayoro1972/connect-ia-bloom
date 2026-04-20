@@ -489,7 +489,7 @@ const CreateurContenuIA = () => {
             <div className="mb-16">
               <div className="mb-8">
                 <h2 className="font-heading text-2xl font-bold text-foreground">{copy.jobsTitle}</h2>
-                <p className="mt-3 max-w-3xl text-muted-foreground">{copy.jobsSubtitle}</p>
+                <p className="mt-3 text-muted-foreground lg:text-[0.95rem] lg:whitespace-nowrap">{copy.jobsSubtitle}</p>
               </div>
 
               <div className="grid gap-4 md:grid-cols-5 mb-8">
