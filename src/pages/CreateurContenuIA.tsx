@@ -12,6 +12,7 @@ import {
   PlayCircle,
   Radar,
   Sparkles,
+  Users,
   Youtube,
 } from "lucide-react";
 import { useState } from "react";
