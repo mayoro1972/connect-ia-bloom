@@ -96,51 +96,80 @@ const AuditIAPage = () => {
             </div>
           </section>
 
-          <section className="bg-[#fcfaf5] px-4 py-16 lg:px-8">
+          <section className="bg-[#fcfaf5] px-4 py-20 lg:px-8">
             <div className="container mx-auto">
-              <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-                <div className="rounded-[28px] border border-[hsl(30_52%_84%)] bg-white p-8 shadow-[0_24px_70px_-52px_rgba(16,33,61,0.24)]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                    {isFr ? auditOfferContent.deliverablesTitle.fr : auditOfferContent.deliverablesTitle.en}
-                  </p>
-                  <ul className="mt-6 space-y-4">
-                    {(isFr ? auditOfferContent.deliverables.fr : auditOfferContent.deliverables.en).map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <CheckCircle2 size={18} className="mt-1 shrink-0 text-primary" />
-                        <span className="text-sm leading-7 text-card-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="mx-auto max-w-3xl text-center">
+                <p className="inline-flex rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  {isFr ? "Ce que l'entreprise reçoit" : "What the company receives"}
+                </p>
+                <h2 className="mt-5 font-heading text-3xl font-bold text-card-foreground md:text-4xl">
+                  {isFr ? auditOfferContent.deliverablesTitle.fr : auditOfferContent.deliverablesTitle.en}
+                </h2>
+                <p className="mt-4 text-base leading-8 text-muted-foreground">
+                  {isFr
+                    ? "Des livrables concrets et exploitables, remis à l'issue de l'audit."
+                    : "Concrete, actionable deliverables handed over at the end of the audit."}
+                </p>
+              </div>
 
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                    {isFr ? auditOfferContent.processTitle.fr : auditOfferContent.processTitle.en}
-                  </p>
-                  <div className="mt-6 grid gap-4">
-                    {auditOfferContent.processSteps.map((step, index) => {
-                      const Icon = processIcons[index];
-                      return (
-                        <article key={step.step} className="rounded-[24px] border border-border bg-card p-5">
-                          <div className="flex items-start gap-4">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                              <Icon size={20} />
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{step.step}</p>
-                              <h3 className="mt-1 font-heading text-xl font-bold text-card-foreground">
-                                {isFr ? step.title.fr : step.title.en}
-                              </h3>
-                              <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                                {isFr ? step.desc.fr : step.desc.en}
-                              </p>
-                            </div>
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </div>
+              <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {(isFr ? auditOfferContent.deliverables.fr : auditOfferContent.deliverables.en).map((item, index) => (
+                  <article
+                    key={item}
+                    className="flex gap-4 rounded-[24px] border border-[hsl(30_52%_84%)] bg-white p-6 shadow-[0_24px_60px_-48px_rgba(16,33,61,0.24)]"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 font-heading text-sm font-bold text-primary">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+                    <p className="text-sm leading-7 text-card-foreground">{item}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="px-4 py-20 lg:px-8">
+            <div className="container mx-auto">
+              <div className="mx-auto max-w-3xl text-center">
+                <p className="inline-flex rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  {isFr ? "Comment se déroule l'audit" : "How the audit unfolds"}
+                </p>
+                <h2 className="mt-5 font-heading text-3xl font-bold text-card-foreground md:text-4xl">
+                  {isFr ? auditOfferContent.processTitle.fr : auditOfferContent.processTitle.en}
+                </h2>
+                <p className="mt-4 text-base leading-8 text-muted-foreground">
+                  {isFr
+                    ? "Un parcours structuré en étapes claires, du premier échange à la remise du plan d'action."
+                    : "A structured journey in clear steps, from the first exchange to the delivery of the action plan."}
+                </p>
+              </div>
+
+              <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {auditOfferContent.processSteps.map((step, index) => {
+                  const Icon = processIcons[index];
+                  return (
+                    <article
+                      key={step.step}
+                      className="relative flex flex-col rounded-[24px] border border-border bg-card p-6 shadow-[0_24px_60px_-48px_rgba(16,33,61,0.24)]"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                          <Icon size={20} />
+                        </div>
+                        <span className="font-heading text-3xl font-bold text-primary/30">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">{step.step}</p>
+                      <h3 className="mt-2 font-heading text-xl font-bold text-card-foreground">
+                        {isFr ? step.title.fr : step.title.en}
+                      </h3>
+                      <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                        {isFr ? step.desc.fr : step.desc.en}
+                      </p>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </section>
