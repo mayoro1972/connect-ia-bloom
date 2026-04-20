@@ -425,19 +425,22 @@ const ContactPage = () => {
   const pageModel = contactPageModel[language === "en" ? "en" : "fr"];
   const requestedDomain = searchParams.get("domain") ?? "";
   const requestedIntent = searchParams.get("intent") ?? "contact-devis";
+  const requestedFlow = searchParams.get("flow") ?? "";
   const resolvedIntent = supportedIntents.has(requestedIntent) ? requestedIntent : "contact-devis";
   const isCompactMode = searchParams.get("compact") === "1";
   const isCatalogIntent = resolvedIntent === "demande-catalogue";
   const isGuidanceIntent = resolvedIntent === "demande-renseignement";
   const isListingIntent = resolvedIntent === "demande-referencement";
   const isBriefSolutionIntent = resolvedIntent === "brief-solution-ia";
+  const isEmploymentFlow = isGuidanceIntent && requestedFlow === "emploi";
   const normalizedRequestedDomain = normalizeIntentLabel(requestedDomain);
   const isStrategicPartnershipIntent =
     isGuidanceIntent &&
+    !isEmploymentFlow &&
     (normalizedRequestedDomain.includes("partenariat strategique") ||
       normalizedRequestedDomain === "partenariats");
   const isEnterpriseScopingFlow =
-    (isGuidanceIntent && !isStrategicPartnershipIntent) || resolvedIntent === "contact-devis";
+    (isGuidanceIntent && !isStrategicPartnershipIntent && !isEmploymentFlow) || resolvedIntent === "contact-devis";
   const scoping = scopingOptions[language === "en" ? "en" : "fr"];
   const briefSolution = briefSolutionOptions[language === "en" ? "en" : "fr"];
   // Default contact landing (no special intent) → ultra-épuré : juste "porte d'entrée" + form essentiel + RDV
@@ -474,6 +477,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Discuss a strategic partnership"
         : "Parler partenariat stratégique"
+    : isEmploymentFlow
+      ? language === "en"
+        ? "Jobs & introduction request"
+        : "Emploi & mise en relation"
     : t("contact.title");
 
   const resolvedHeaderSubtitle = isBriefSolutionIntent
@@ -488,6 +495,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Describe your institution or company so we can review a possible collaboration, program support, certification, or joint initiative."
         : "Présentez votre institution ou votre entreprise afin que nous puissions étudier une collaboration, un soutien de programme, une certification ou une action commune."
+    : isEmploymentFlow
+      ? language === "en"
+        ? "Share the role, mission, or type of introduction you are looking for. We use this form to qualify job and AI opportunity requests before a human follow-up."
+        : "Présentez le poste, la mission ou le type de mise en relation recherché. Ce formulaire nous permet de qualifier les demandes emploi et opportunités IA avant retour humain."
     : t("contact.subtitle");
 
   const resolvedQuickStartBadge = isListingIntent
@@ -498,6 +509,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Strategic partnership"
         : "Partenariat stratégique"
+    : isEmploymentFlow
+      ? language === "en"
+        ? "Jobs & introductions"
+        : "Emploi & mise en relation"
     : pageModel.quickStartBadge;
 
   const resolvedQuickStartTitle = isListingIntent
@@ -508,6 +523,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Present your partnership project"
         : "Présenter votre projet de partenariat"
+    : isEmploymentFlow
+      ? language === "en"
+        ? "Describe the opportunity you want help with"
+        : "Décrire l'opportunité pour laquelle vous souhaitez une aide"
     : pageModel.quickStartTitle;
 
   const resolvedQuickStartDesc = isListingIntent
@@ -518,6 +537,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Start by presenting the collaboration you have in mind: academic partnership, institutional support, co-branded program, certification, or shared event."
         : "Commencez par présenter le type de collaboration envisagé : partenariat académique, soutien institutionnel, programme co-construit, certification ou événement commun."
+    : isEmploymentFlow
+      ? language === "en"
+        ? "Tell us whether you are looking for a job, freelance mission, internship, talent introduction, or strategic hiring support linked to AI."
+        : "Indiquez si vous cherchez un emploi, une mission freelance, un stage, une mise en relation talent, ou un appui de recrutement lié à l'IA."
     : pageModel.quickStartDesc;
 
   const resolvedPathways = isListingIntent
@@ -578,6 +601,35 @@ const ContactPage = () => {
             href: directLinks.whatsapp,
           },
         ]
+    : isEmploymentFlow
+      ? [
+          {
+            title: language === "en" ? "Describe the need" : "Décrire le besoin",
+            desc:
+              language === "en"
+                ? "Specify the role, mission, profile, or introduction needed so we can qualify the request properly."
+                : "Précisez le poste, la mission, le profil ou la mise en relation souhaitée afin que nous puissions qualifier correctement la demande.",
+            cta: language === "en" ? "Open the form" : "Ouvrir le formulaire",
+          },
+          {
+            title: language === "en" ? "Track AI opportunities" : "Suivre les opportunités IA",
+            desc:
+              language === "en"
+                ? "Review the AI jobs and opportunities page before submitting a tailored introduction request."
+                : "Consultez la page Emploi IA & opportunités avant d'envoyer une demande de mise en relation ciblée.",
+            cta: language === "en" ? "Open jobs page" : "Voir la page emploi",
+            href: "/createur-contenu-ia",
+          },
+          {
+            title: "WhatsApp",
+            desc:
+              language === "en"
+                ? "For a short clarification before sending the full request."
+                : "Pour une clarification rapide avant l'envoi de la demande complète.",
+            cta: language === "en" ? "Write on WhatsApp" : "Écrire sur WhatsApp",
+            href: directLinks.whatsapp,
+          },
+        ]
     : pageModel.pathways;
 
   const resolvedIntroBadge = isBriefSolutionIntent
@@ -592,6 +644,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Strategic partnership request"
         : "Demande de partenariat stratégique"
+    : isEmploymentFlow
+      ? language === "en"
+        ? "Jobs & introductions"
+        : "Emploi & mise en relation"
     : pageModel.formIntroBadge;
 
   const resolvedIntroTitle = isBriefSolutionIntent
@@ -603,7 +659,11 @@ const ContactPage = () => {
       ? "Request a domain catalogue"
       : "Demander un catalogue de domaine"
     : isGuidanceIntent
-      ? isStrategicPartnershipIntent
+      ? isEmploymentFlow
+        ? language === "en"
+          ? "Submit a jobs or introduction request"
+          : "Soumettre une demande emploi ou mise en relation"
+        : isStrategicPartnershipIntent
         ? language === "en"
           ? "Present your partnership project"
           : "Présentez votre projet de partenariat"
@@ -625,7 +685,11 @@ const ContactPage = () => {
       ? "Use this form to receive the right catalogue and give us just enough context to guide you well."
       : "Utilisez ce formulaire pour recevoir le bon catalogue et nous donner juste assez de contexte pour bien vous orienter."
     : isGuidanceIntent
-      ? isStrategicPartnershipIntent
+      ? isEmploymentFlow
+        ? language === "en"
+          ? "Use this form to explain the opportunity, the target profile, your context, and the type of support or introduction you expect from TransferAI Africa."
+          : "Utilisez ce formulaire pour préciser l'opportunité, le profil visé, votre contexte et le type d'appui ou de mise en relation attendu de TransferAI Africa."
+        : isStrategicPartnershipIntent
         ? language === "en"
           ? "Tell us who you are, what kind of collaboration you are considering, and what result you would like to achieve together with TransferAI Africa."
           : "Dites-nous qui vous êtes, le type de collaboration envisagé et le résultat que vous souhaitez construire avec TransferAI Africa."
@@ -650,6 +714,10 @@ const ContactPage = () => {
       ? language === "en"
         ? "Send my partnership request"
         : "Envoyer ma demande de partenariat"
+      : isEmploymentFlow
+        ? language === "en"
+          ? "Send my jobs request"
+          : "Envoyer ma demande emploi"
       : isGuidanceIntent
         ? language === "en"
           ? "Send my scoping request"
@@ -669,9 +737,13 @@ const ContactPage = () => {
       ? "Partnership type, program, or collaboration angle"
       : "Type de partenariat, programme ou angle de collaboration"
     : isGuidanceIntent
-    ? language === "en"
-      ? "Topic, project or business area to scope (e.g. customer service, finance, HR...)"
-      : "Sujet, projet ou domaine métier à cadrer (ex : relation client, finance, RH...)"
+    ? isEmploymentFlow
+      ? language === "en"
+        ? "Role, mission, profile or type of introduction requested"
+        : "Poste, mission, profil ou type de mise en relation recherché"
+      : language === "en"
+        ? "Topic, project or business area to scope (e.g. customer service, finance, HR...)"
+        : "Sujet, projet ou domaine métier à cadrer (ex : relation client, finance, RH...)"
     : isListingIntent
     ? language === "en"
       ? "Organization, activity or positioning angle"
@@ -682,6 +754,10 @@ const ContactPage = () => {
     ? language === "en"
       ? "What happens after submission"
       : "Ce que vous obtenez ensuite"
+    : isEmploymentFlow
+      ? language === "en"
+        ? "What happens after submission"
+        : "Ce qui se passe après votre demande"
     : pageModel.responseCardTitle;
 
   const resolvedResponsePoints = isStrategicPartnershipIntent
@@ -706,7 +782,19 @@ const ContactPage = () => {
       : [
           "Un accusé de réception automatique",
           "Une revue éditoriale et commerciale de votre demande",
-          "Un retour par email avec le format de présence possible après étude",
+        "Un retour par email avec le format de présence possible après étude",
+      ]
+    : isEmploymentFlow
+    ? language === "en"
+      ? [
+          "An acknowledgement of your request",
+          "A review of the role, mission, or introduction requested",
+          "A human follow-up by email when a relevant connection or next step exists",
+        ]
+      : [
+          "Un accusé de réception de votre demande",
+          "Une revue du poste, de la mission ou de la mise en relation recherchée",
+          "Un retour humain par email lorsqu'une connexion ou une suite pertinente existe",
         ]
     : pageModel.responsePoints;
 
@@ -714,6 +802,10 @@ const ContactPage = () => {
     ? language === "en"
       ? "To help us review faster"
       : "Pour faciliter la revue du dossier"
+    : isEmploymentFlow
+      ? language === "en"
+        ? "To help us qualify faster"
+        : "Pour qualifier plus vite"
     : pageModel.helperTitle;
 
   const resolvedHelperPoints = isStrategicPartnershipIntent
@@ -738,7 +830,19 @@ const ContactPage = () => {
       : [
           "Présentez clairement votre activité et le public que vous adressez",
           "Indiquez le secteur, le positionnement ou l'angle de présence souhaité",
-          "Ajoutez votre site web ou votre lien public principal si disponible",
+        "Ajoutez votre site web ou votre lien public principal si disponible",
+      ]
+    : isEmploymentFlow
+    ? language === "en"
+      ? [
+          "State clearly whether this is a job, freelance mission, internship, or talent introduction request",
+          "Mention the profile sought, the location, and the preferred work mode if known",
+          "Explain the business context and what kind of follow-up you expect from us",
+        ]
+      : [
+          "Précisez clairement s'il s'agit d'un emploi, d'une mission freelance, d'un stage ou d'une demande de mise en relation talent",
+          "Indiquez le profil recherché, la localisation et le mode de travail si vous les connaissez",
+          "Expliquez le contexte business et le type de retour attendu de notre part",
         ]
     : pageModel.helperPoints;
 
@@ -1005,7 +1109,7 @@ const ContactPage = () => {
             </div>
             )}
 
-            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? (isGuidanceIntent ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
+            <div className={`grid gap-10 max-w-6xl mx-auto ${isDefaultContactLanding ? "lg:grid-cols-2" : isCompactMode ? (isGuidanceIntent && !isEmploymentFlow ? "lg:grid-cols-[1.05fr_0.95fr]" : "") : "lg:grid-cols-[1.35fr_0.65fr]"}`}>
               {isDefaultContactLanding && (
                 <div className="rounded-[28px] border border-border bg-card p-8 md:p-10">
                   <div className="mb-6">
@@ -1266,10 +1370,14 @@ const ContactPage = () => {
                             ? language === "en"
                               ? "Describe your catalogue need: target audience, intended use, deadline... *"
                               : "Précisez votre besoin de catalogue : public visé, usage prévu, échéance... *"
+                            : isEmploymentFlow
+                              ? language === "en"
+                                ? "Describe the job, mission, profile sought, expected geography, and the kind of introduction or follow-up you would like from us..."
+                                : "Décrivez le poste, la mission, le profil recherché, la zone géographique visée et le type de mise en relation ou de retour attendu..."
                             : isGuidanceIntent
-                            ? language === "en"
-                              ? "Describe your context (company, sector, current situation), the result you want, the expected timeline and any constraint we should know..."
-                              : "Décrivez votre contexte (entreprise, secteur, situation actuelle), le résultat attendu, l'échéance souhaitée et les contraintes éventuelles..."
+                              ? language === "en"
+                                ? "Describe your context (company, sector, current situation), the result you want, the expected timeline and any constraint we should know..."
+                                : "Décrivez votre contexte (entreprise, secteur, situation actuelle), le résultat attendu, l'échéance souhaitée et les contraintes éventuelles..."
                             : t("contact.message")
                         }
                         required={isCatalogIntent}
@@ -1305,7 +1413,7 @@ const ContactPage = () => {
               </div>
 
 
-              {isCompactMode && isGuidanceIntent && (
+              {isCompactMode && isGuidanceIntent && !isEmploymentFlow && (
                 <div className="space-y-5">
                   <div className="rounded-[28px] border border-border bg-card p-6 md:p-8">
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">

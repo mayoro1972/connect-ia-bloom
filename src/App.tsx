@@ -26,6 +26,7 @@ const AuditIA = lazy(() => import("./pages/AuditIA"));
 const ProspectRequestPage = lazy(() => import("./pages/ProspectRequestPage"));
 const DemandeCataloguePage = lazy(() => import("./pages/DemandeCataloguePage"));
 const ParlerExpertPage = lazy(() => import("./pages/ParlerExpertPage"));
+const ParlerEmploiPage = lazy(() => import("./pages/ParlerEmploiPage"));
 const ProspectAuditLoginPage = lazy(() => import("./pages/ProspectAuditLoginPage"));
 const Entreprises = lazy(() => import("./pages/Entreprises"));
 const Evenements = lazy(() => import("./pages/Evenements"));
@@ -223,6 +224,7 @@ const AnimatedRoutes = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/demande-catalogue" element={<DemandeCataloguePage />} />
           <Route path="/parler-expert-ia" element={<ParlerExpertPage />} />
+          <Route path="/parler-emploi-ia" element={<ParlerEmploiPage />} />
           <Route path="/confidentialite" element={<Privacy />} />
           <Route path="/plan-du-site" element={<Sitemap />} />
           <Route path="/sitemap" element={<Sitemap />} />

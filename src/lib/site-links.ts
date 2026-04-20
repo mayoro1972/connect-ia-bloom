@@ -198,6 +198,14 @@ export const buildContactPath = (intent: ContactIntent, domain?: string) => {
   return `/contact?${params.toString()}`;
 };
 
+export const buildEmploymentContactPath = (domain?: string) => {
+  const params = new URLSearchParams({ flow: "emploi" });
+  if (domain) {
+    params.set("domain", domain);
+  }
+  return `/parler-emploi-ia?${params.toString()}`;
+};
+
 export const buildAppointmentPath = (source: string, domain?: string) => {
   const params = new URLSearchParams({ source });
 

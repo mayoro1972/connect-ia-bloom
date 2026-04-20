@@ -25,7 +25,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { buildContactPath } from "@/lib/site-links";
+import { buildContactPath, buildEmploymentContactPath } from "@/lib/site-links";
 import { isResourceNew } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { useJobFeed } from "@/hooks/useJobFeed";
@@ -303,7 +303,7 @@ const CreateurContenuIA = () => {
   };
 
   const jobSourceCount = copy.jobSources.length;
-  const emploiContactLink = buildContactPath("demande-renseignement", "Emploi IA");
+  const emploiContactLink = buildEmploymentContactPath("Emploi IA & mise en relation");
   const newsletterContactLink = buildContactPath("demande-renseignement", "Newsletter IA");
 
   return (
