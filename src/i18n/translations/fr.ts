@@ -8,7 +8,7 @@ const rawFr = {
     auditIA: "AUDIT IA GRATUIT",
     resources: "RESSOURCES",
     about: "À PROPOS",
-    educationOverview: "DÉCOUVRIR",
+    educationOverview: "HUB FORMATION",
     domainCatalogues: "CATALOGUES",
     formations: "CATALOGUE",
     paths: "PARCOURS",
