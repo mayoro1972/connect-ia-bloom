@@ -17,6 +17,7 @@ import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
 import AuditProspectAdminPanel, { type AuditProspectSnapshot } from "@/components/backoffice/AuditProspectAdminPanel";
 import WebinarAdminPanel from "@/components/backoffice/WebinarAdminPanel";
 import LiveFormatsAdminPanel from "@/components/backoffice/LiveFormatsAdminPanel";
+import VendorFeedsAdminPanel from "@/components/backoffice/VendorFeedsAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -741,6 +742,7 @@ const BackOfficePage = () => {
 
               <TabsContent value="editorial">
                 <div className="space-y-8">
+                  <VendorFeedsAdminPanel token={token} />
                   <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                     <div className="rounded-2xl border border-border bg-card p-6">
                       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Flux suivis</p>

@@ -193,6 +193,7 @@ export type Database = {
           classification: Json | null
           created_at: string
           detected_at: string
+          external_id: string | null
           feed_id: string | null
           id: string
           language: string | null
@@ -206,6 +207,7 @@ export type Database = {
           classification?: Json | null
           created_at?: string
           detected_at?: string
+          external_id?: string | null
           feed_id?: string | null
           id?: string
           language?: string | null
@@ -219,6 +221,7 @@ export type Database = {
           classification?: Json | null
           created_at?: string
           detected_at?: string
+          external_id?: string | null
           feed_id?: string | null
           id?: string
           language?: string | null
