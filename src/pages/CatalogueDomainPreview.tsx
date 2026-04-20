@@ -273,14 +273,6 @@ const CatalogueDomainPreview = () => {
                             ))}
                           </div>
                         </div>
-                        <div className="min-w-[220px] rounded-2xl border border-primary/15 bg-primary/5 p-5">
-                          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{copy.brochure}</p>
-                          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                            {copy.brochureItems.map((item) => (
-                              <li key={item}>{item}</li>
-                            ))}
-                          </ul>
-                        </div>
                       </div>
                     </article>
                   );
