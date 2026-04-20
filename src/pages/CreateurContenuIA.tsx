@@ -701,13 +701,14 @@ const CreateurContenuIA = () => {
                   {copy.ctaDesc}
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Link
-                    to={newsletterContactLink}
-                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-3 text-sm font-semibold"
+                  <button
+                    type="button"
+                    onClick={() => setIsNewsletterOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
                     style={{ color: "hsl(0 0% 100%)" }}
                   >
                     {copy.ctaPrimary}
-                  </Link>
+                  </button>
                   <Link
                     to={newsletterContactLink}
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold hover:bg-white/5"
@@ -720,6 +721,18 @@ const CreateurContenuIA = () => {
             </div>
           </div>
         </section>
+
+        <Dialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen}>
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 bg-transparent border-0 shadow-none">
+            <DialogHeader className="sr-only">
+              <DialogTitle>{copy.ctaPrimary}</DialogTitle>
+            </DialogHeader>
+            <BlogNewsletterSignup
+              availableSectors={availableSectors}
+              sourcePage="/createur-contenu-ia"
+            />
+          </DialogContent>
+        </Dialog>
         <Footer />
       </div>
     </PageTransition>
