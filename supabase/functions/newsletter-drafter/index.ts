@@ -1,5 +1,6 @@
 import {
   callAnthropicText,
+  callLovableAIJson,
   callOpenAIJson,
   corsHeaders,
   editorialClient,
