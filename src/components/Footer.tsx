@@ -27,12 +27,11 @@ const Footer = () => {
           ],
           resources: "Services",
           resourceLinks: [
-            { label: "Nos services", to: "/services" },
-            { label: "Audit IA gratuit", to: "/audit-ia-gratuit" },
+            { label: "Entreprises", to: "/entreprises" },
             { label: "Conseil & adoption", to: "/consulting-ia" },
             { label: "Automatisation & solutions", to: "/developpement-solutions-ia" },
             { label: "Média, veille & opportunités", to: "/createur-contenu-ia" },
-            { label: "Parler à un expert IA", to: buildContactPath("demande-renseignement") },
+            { label: "Audit IA gratuit", to: "/audit-ia-gratuit" },
           ],
           legal: "Juridique",
           legalLinks: [
@@ -65,12 +64,11 @@ const Footer = () => {
           ],
           resources: "Services",
           resourceLinks: [
-            { label: "Our services", to: "/services" },
-            { label: "Free AI audit", to: "/audit-ia-gratuit" },
+            { label: "Enterprises", to: "/entreprises" },
             { label: "Advisory & adoption", to: "/consulting-ia" },
             { label: "Automation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, watch & jobs", to: "/createur-contenu-ia" },
-            { label: "Speak with an AI expert", to: buildContactPath("demande-renseignement") },
+            { label: "Free AI audit", to: "/audit-ia-gratuit" },
           ],
           legal: "Legal",
           legalLinks: [
