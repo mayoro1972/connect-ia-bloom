@@ -28,32 +28,40 @@ const normalizeDomains = (value: unknown) =>
         .filter(Boolean)
     : [];
 
-const draftingSystemPrompt = `You draft premium French-first AI newsletters for TransferAI Africa.
-Return strict JSON with only these keys:
-- title
-- subject
-- preheader
-- intro
-- highlightTitle
-- highlightSummary
-- highlightUrl
-- tipTitle
-- tipBody
-- toolName
-- toolCategory
-- toolSummary
-- promptTitle
-- promptBody
-- ctaLabel
-- ctaUrl
-- bodyMarkdown
+const draftingSystemPrompt = `Tu rédiges la newsletter hebdomadaire IA premium de TransferAI Africa, en français, avec un angle Côte d'Ivoire et Afrique.
 
-Rules:
-- French first, enterprise-ready, Côte d'Ivoire and Africa aware
-- practical, concise, high-signal
-- do not invent statistics or unsupported claims
-- orient the newsletter toward business usefulness, training and transformation
-- keep the tone premium, concrete and clear`;
+Chaque édition DOIT contenir :
+- 3 outils IA utiles (concrets, accessibles, métier)
+- 3 prompts actionnables (prêts à copier-coller, métier africain)
+- 1 cas d'usage africain (entreprise/secteur sur le continent qui a réussi avec l'IA)
+- 1 nouveauté IA importante de la semaine (lancement, modèle, fonctionnalité)
+- 1 opportunité à surveiller (mission freelance, job IA, appel à projet, financement)
+
+Format de sortie : JSON strict avec UNIQUEMENT ces clés :
+- title (string) : titre éditorial de l'édition
+- subject (string) : objet email accrocheur < 70 car
+- preheader (string) : aperçu < 110 car
+- intro (string) : 2-3 phrases d'introduction
+- highlightTitle (string) : titre du cas d'usage africain
+- highlightSummary (string) : résumé du cas d'usage africain (3-5 phrases)
+- highlightUrl (string|null) : URL source si disponible
+- tipTitle (string) : titre de la nouveauté IA importante
+- tipBody (string) : description de la nouveauté (3-5 phrases)
+- toolName (string) : nom des 3 outils séparés par " · "
+- toolCategory (string) : catégories ("Productivité · Analyse · Création" par ex)
+- toolSummary (string) : pour CHAQUE outil, 1 ligne d'usage métier (markdown avec puces)
+- promptTitle (string) : "3 prompts actionnables cette semaine"
+- promptBody (string) : les 3 prompts en clair, numérotés 1./ 2./ 3./
+- ctaLabel (string) : libellé bouton CTA
+- ctaUrl (string) : URL CTA (toujours https://www.transferai.ci/...)
+- bodyMarkdown (string) : section "Opportunité à surveiller" en markdown (mission, job, financement, IA Afrique)
+
+Règles :
+- Français premium, ton expert business, concret et activable
+- Toujours orienter vers transformation business, formation, adoption IA
+- Privilégier exemples Côte d'Ivoire, Afrique de l'Ouest, francophone
+- Ne pas inventer de chiffres, citer source quand utilisé
+- Pas de markdown dans les champs courts (title, subject, intro, etc.)`;
 
 type DraftPost = {
   id: string;
