@@ -2,12 +2,21 @@ import { corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const CONTENT_ADMIN_TOKEN = Deno.env.get("CONTENT_ADMIN_TOKEN") ?? "";
 const NEWSLETTER_SCHEDULER_TOKEN = Deno.env.get("NEWSLETTER_SCHEDULER_TOKEN") ?? "";
 
 const requireScheduler = (request: Request) => {
+  // Accept either the explicit scheduler token OR a valid service_role bearer (used by pg_cron)
   const token = request.headers.get("x-scheduler-token") ?? "";
-  return NEWSLETTER_SCHEDULER_TOKEN.length > 0 && token === NEWSLETTER_SCHEDULER_TOKEN;
+  if (NEWSLETTER_SCHEDULER_TOKEN.length > 0 && token === NEWSLETTER_SCHEDULER_TOKEN) {
+    return true;
+  }
+  const authHeader = request.headers.get("authorization") ?? "";
+  if (authHeader.startsWith("Bearer ") && SUPABASE_SERVICE_ROLE_KEY.length > 0) {
+    return authHeader.slice(7) === SUPABASE_SERVICE_ROLE_KEY;
+  }
+  return false;
 };
 
 const todayIsoDate = () => new Date().toISOString().slice(0, 10);
