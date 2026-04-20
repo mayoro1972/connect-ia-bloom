@@ -1,0 +1,360 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Plan de D\'e9ploiement et d'Exploitation\
+\
+## 1. Vue d'ensemble\
+\
+Le site repose sur une s\'e9paration simple :\
+\
+- front : React / Vite / TypeScript\
+- base de donn\'e9es et logique serveur : Supabase\
+- emails : Resend\
+- h\'e9bergement front : Cloudflare\
+- d\'e9p\'f4t source : GitHub\
+\
+## 2. Environnements \'e0 conna\'eetre\
+\
+### Environnement local\
+\
+Usage :\
+- d\'e9veloppement\
+- preview\
+- test UI\
+- validation avant commit\
+\
+### Environnement de production\
+\
+Usage :\
+- site public\
+- back-office r\'e9el\
+- edge functions r\'e9elles\
+- envoi email r\'e9el\
+\
+## 3. D\'e9ploiement du front\
+\
+### Cas d'usage\
+\
+\'c0 faire lorsqu'on modifie :\
+- pages\
+- composants\
+- styles\
+- routes\
+- logique front du back-office\
+\
+### Proc\'e9dure standard\
+\
+1. lancer la preview locale\
+2. tester les pages concern\'e9es\
+3. lancer le build\
+4. corriger les erreurs s'il y en a\
+5. faire un commit clair\
+6. pousser sur `main`\
+7. laisser Cloudflare d\'e9ployer\
+8. v\'e9rifier la page en production\
+\
+### Checklist front post-d\'e9ploiement\
+\
+- la page principale concern\'e9e s'ouvre\
+- les routes associ\'e9es s'ouvrent\
+- les boutons critiques fonctionnent\
+- les formulaires critiques s'ouvrent\
+- les alignements sont corrects\
+- le mobile ne casse pas\
+\
+### Point de vigilance confirm\'e9 le 20 avril 2026\
+\
+Un correctif peut \'eatre :\
+- bien cod\'e9 localement\
+- bien build\'e9\
+- bien push\'e9 sur GitHub\
+\
+...sans \'eatre visible sur `transferai.ci` si :\
+- il n'est pas sur `main`\
+- ou si le site principal n'a pas \'e9t\'e9 republi\'e9 sur son vrai canal de production\
+\
+Avant d'annoncer qu'un fix est "en ligne", il faut donc v\'e9rifier :\
+1. le commit sur `origin/main`\
+2. la publication effective du site principal\
+3. la page r\'e9elle servie en production\
+\
+## 4. D\'e9ploiement Supabase\
+\
+### Cas d'usage\
+\
+\'c0 faire lorsqu'on modifie :\
+- migrations SQL\
+- edge functions\
+- secrets\
+- automatisations planifi\'e9es\
+\
+### Ordre recommand\'e9\
+\
+1. v\'e9rifier les fichiers `supabase/migrations`\
+2. v\'e9rifier les fonctions `supabase/functions`\
+3. v\'e9rifier les secrets requis\
+4. pousser les migrations\
+5. d\'e9ployer les fonctions concern\'e9es\
+6. tester le flux r\'e9el\
+\
+### Quand front et Supabase doivent \'eatre d\'e9ploy\'e9s ensemble\
+\
+Lorsque :\
+- une nouvelle page d\'e9pend d'une nouvelle table\
+- le back-office appelle une nouvelle edge function\
+- une edge function change de payload et que le front doit suivre\
+\
+## 5. Secrets critiques\
+\
+### Secrets administratifs\
+\
+- `CONTENT_ADMIN_TOKEN`\
+- `NEWSLETTER_SCHEDULER_TOKEN`\
+\
+### Secrets email\
+\
+- `RESEND_API_KEY`\
+- `MAIL_FROM`\
+\
+### Secrets Supabase\
+\
+- `SUPABASE_URL`\
+- `SUPABASE_ANON_KEY`\
+- `SUPABASE_SERVICE_ROLE_KEY`\
+\
+### Bonnes pratiques\
+\
+- stocker les secrets uniquement dans les environnements s\'e9curis\'e9s\
+- documenter le r\'f4le de chaque secret\
+- retester tout flux critique apr\'e8s rotation\
+\
+## 6. Plan d'exploitation hebdomadaire\
+\
+### Blog\
+\
+- v\'e9rifier les derniers contenus publi\'e9s\
+- relire les brouillons IA int\'e9ressants\
+- v\'e9rifier qu'aucun titre ou r\'e9sum\'e9 n'est incoh\'e9rent\
+\
+### Newsletter\
+\
+- v\'e9rifier si un brouillon a \'e9t\'e9 g\'e9n\'e9r\'e9\
+- ajuster si besoin\
+- envoyer un test\
+- approuver ou planifier\
+- v\'e9rifier les diffusions\
+\
+### Entreprises et formulaires\
+\
+- v\'e9rifier la page entreprises\
+- v\'e9rifier le lien audit IA\
+- v\'e9rifier le CTA home `Voir les services entreprises`\
+- v\'e9rifier les demandes entrantes\
+\
+### Partenaires\
+\
+- v\'e9rifier la page partenaires\
+- v\'e9rifier le formulaire public de r\'e9f\'e9rencement\
+- v\'e9rifier le lien `Parler partenariat strat\'e9gique`\
+- v\'e9rifier que la demande remonte bien dans `Back-office > Partenaires`\
+- v\'e9rifier que la g\'e9n\'e9ration de recommandation fonctionne\
+- v\'e9rifier qu'un email de r\'e9ponse test peut \'eatre envoy\'e9\
+\
+### Contact\
+\
+- v\'e9rifier la version standard `Parler \'e0 un expert IA`\
+- v\'e9rifier la version compacte `Parler emploi & mise en relation`\
+- v\'e9rifier les liens profonds `intent=...` les plus sensibles\
+- v\'e9rifier la demande catalogue et son email associ\'e9\
+- v\'e9rifier la demande formation / accompagnement et son email associ\'e9\
+- v\'e9rifier qu'aucun \'e9cran de secours "mise \'e0 jour du site" n'appara\'eet sur un cas nominal\
+- v\'e9rifier que l'email automatique re\'e7u correspond bien au besoin r\'e9el\
+\
+### Media / replays / emploi\
+\
+\'c0 v\'e9rifier aussi apr\'e8s d\'e9ploiement :\
+- le CTA newsletter de la page m\'e9dia\
+- le CTA `Parler emploi & mise en relation`, qui doit pointer vers `/parler-emploi-ia`\
+- les cartes opportunit\'e9s emploi\
+- les liens `Voir ce replay`, qui ne doivent pas pointer vers Contact\
+\
+## 7. Automatisation newsletter actuelle\
+\
+### Brouillon hebdomadaire\
+\
+Objectif :\
+- cr\'e9er une \'e9dition FR \'e0 partir des domaines les plus actifs\
+\
+Programmation :\
+- mercredi \'e0 06:00\
+\
+### Envoi hebdomadaire\
+\
+Objectif :\
+- envoyer l'\'e9dition valid\'e9e aux abonn\'e9s cibl\'e9s\
+\
+Programmation :\
+- vendredi \'e0 08:30\
+\
+### Garde-fou\
+\
+L'envoi ne doit partir que si une \'e9dition est dans un statut compatible :\
+- `approved`\
+- `scheduled`\
+\
+Pr\'e9cision d'exploitation ajout\'e9e le 20 avril 2026 :\
+- la cadence automatique observ\'e9e reste orient\'e9e vendredi\
+- un envoi ponctuel du lundi doit \'eatre d\'e9clench\'e9 manuellement\
+- avant le vendredi, v\'e9rifier qu'aucune ancienne issue approuv\'e9e n'est encore \'e9ligible par erreur\
+\
+## 8. Proc\'e9dure d'urgence en cas d'incident\
+\
+### Incident front\
+\
+1. identifier l'URL cass\'e9e\
+2. reproduire localement\
+3. corriger\
+4. rebuild\
+5. push\
+6. v\'e9rifier Cloudflare\
+\
+### Incident back-office\
+\
+1. v\'e9rifier le token admin\
+2. v\'e9rifier l'appel `content-admin`\
+3. v\'e9rifier les variables Supabase du front\
+4. v\'e9rifier la fonction edge concern\'e9e\
+\
+### Incident email\
+\
+1. v\'e9rifier Resend\
+2. v\'e9rifier la fonction `newsletter-send`\
+3. v\'e9rifier les logs de diffusion\
+4. v\'e9rifier l'exp\'e9diteur\
+5. v\'e9rifier le secret API\
+\
+### Incident partenaire\
+\
+1. v\'e9rifier la page `/partenaires`\
+2. v\'e9rifier le formulaire de r\'e9f\'e9rencement c\'f4t\'e9 public\
+3. v\'e9rifier `partner-review-drafter`\
+4. v\'e9rifier `partner-followup-send`\
+5. v\'e9rifier la table `partner_listing_reviews`\
+6. v\'e9rifier que la r\'e9ponse contient bien un destinataire et un corps email\
+\
+## 9. Validation fonctionnelle minimale avant annonce "c'est d\'e9ploy\'e9"\
+\
+### Pour un changement front\
+\
+- homepage si impact navigation\
+- page directement concern\'e9e\
+- CTA principal concern\'e9\
+- mobile si la page est commerciale\
+\
+### Pour un changement blog\
+\
+- `/blog`\
+- un article individuel\
+- un filtre domaine\
+- la newsletter blog si impact\'e9e\
+\
+### Pour un changement newsletter\
+\
+- chargement de `Newsletter IA`\
+- sauvegarde d'une \'e9dition\
+- envoi test\
+- v\'e9rification de `Derni\'e8res diffusions`\
+\
+### Pour un changement partenaires\
+\
+- `/partenaires`\
+- `/contact?intent=demande-referencement`\
+- `/contact?intent=demande-renseignement&domain=Partenariat%20strat%C3%A9gique`\
+- `Back-office > Partenaires`\
+- g\'e9n\'e9ration d'une recommandation\
+- envoi d'un test si le flux email a \'e9t\'e9 touch\'e9\
+\
+### Pour un changement catalogue / demandes prospects\
+\
+- `/catalogues-domaines`\
+- un catalogue secteur individuel\
+- `/contact?intent=demande-catalogue&domain=...`\
+- r\'e9ception de l'email catalogue\
+- coh\'e9rence des CTA : PDF, web, audit si pertinent\
+\
+### Pour un changement audit / entreprise\
+\
+- `/audit-ia-gratuit`\
+- CTA home li\'e9 \'e0 l'offre entreprise\
+- `/entreprises`\
+- coh\'e9rence entre audit, contact et offre B2B\
+\
+### Pour un changement contact / emails prospects\
+\
+- `/contact`\
+- un lien profond `intent=...` r\'e9ellement utilis\'e9\
+- envoi d'une demande r\'e9elle ou de test\
+- r\'e9ception de l'email automatique\
+- coh\'e9rence entre le besoin exprim\'e9 et la prochaine \'e9tape propos\'e9e\
+\
+## 10. Strat\'e9gie de rollback\
+\
+### Front\
+\
+Si un push casse le site :\
+- identifier le commit fautif\
+- pr\'e9parer un correctif rapide\
+- si n\'e9cessaire revenir \'e0 une version stable via git\
+- repusher puis v\'e9rifier Cloudflare\
+\
+### Supabase\
+\
+Si une fonction edge casse un flux :\
+- red\'e9ployer la derni\'e8re version stable\
+- corriger localement\
+- retester avant nouveau d\'e9ploiement\
+\
+### Principe\
+\
+Toujours privil\'e9gier :\
+- correctif rapide et propre\
+- v\'e9rification r\'e9elle\
+- documentation du probl\'e8me et de la solution\
+\
+## 12. Mise \'e0 jour op\'e9rationnelle des 11 au 13 avril 2026\
+\
+Les nouveaux points d'attention d'exploitation sont :\
+- plusieurs pages ont \'e9t\'e9 simplifi\'e9es, donc les tests doivent v\'e9rifier la lisibilit\'e9 autant que le fonctionnement\
+- l'audit IA gratuit est devenu un point d'entr\'e9e commercial important \'e0 surveiller\
+- la page `Contact` fonctionne maintenant avec plusieurs variantes pilot\'e9es par l'URL\
+- le flux partenaires distingue mieux r\'e9f\'e9rencement et partenariat strat\'e9gique\
+- la fonction `send-prospect-emails` doit \'eatre red\'e9ploy\'e9e \'e0 chaque changement de logique sur les courriers prospects\
+- les v\'e9rifications post-d\'e9ploiement doivent inclure au moins un test r\'e9el d'email quand un template prospect a chang\'e9\
+- le pipeline partenaire est d\'e9sormais un flux critique \'e0 part enti\'e8re\
+- les emails automatiques utilisent une salutation horaire \'e0 v\'e9rifier lors des tests r\'e9els\
+\
+## 11. Gouvernance recommand\'e9e\
+\
+### Administrateur No1\
+\
+Responsable de :\
+- la coh\'e9rence globale\
+- la qualit\'e9 des contenus\
+- la validation avant diffusion\
+- la documentation\
+\
+### Administrateur No2\
+\
+Responsable de soutien sur :\
+- v\'e9rifications\
+- publication\
+- back-office\
+- relais en cas d'absence\
+\
+### R\'e8gle de continuit\'e9\
+\
+Aucun flux critique ne doit d\'e9pendre uniquement d'une seule personne et d'une seule m\'e9moire non document\'e9e.\
+}

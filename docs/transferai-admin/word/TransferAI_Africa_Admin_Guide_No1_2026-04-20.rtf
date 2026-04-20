@@ -1,0 +1,501 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Guide Administrateur No1\
+\
+## 1. Mission de l'administrateur principal\
+\
+L'administrateur No1 est responsable de 6 piliers :\
+\
+1. Gouvernance du contenu\
+2. Pilotage du back-office\
+3. Supervision technique l\'e9g\'e8re du site\
+4. Contr\'f4le des acc\'e8s, tokens et secrets\
+5. Validation avant publication et d\'e9ploiement\
+6. Transmission de la m\'e9thode aux autres administrateurs\
+\
+Son r\'f4le n'est pas seulement de publier. Il doit garantir que le site reste :\
+- coh\'e9rent\
+- lisible\
+- exploitable commercialement\
+- fiable techniquement\
+- document\'e9 pour l'\'e9quipe\
+\
+## 2. Ce que vous administrez concr\'e8tement\
+\
+### Front office\
+\
+Pages principales :\
+- Accueil\
+- A propos\
+- Education\
+- Catalogue\
+- D\'e9tail formation\
+- Parcours\
+- Certification\
+- Outils IA\
+- Entreprises / Services\
+- Blog\
+- Article blog\
+- Domaines blog\
+- Partenaires\
+- Contact / formulaires\
+- Pages preview et hubs secondaires\
+\
+### Back-office\
+\
+Onglets actuels :\
+- Analytics\
+- Ressources\
+- Brouillons IA\
+- Newsletter IA\
+- Partenaires\
+- Emplois IA\
+- Mode d'emploi\
+\
+### Backend Supabase\
+\
+Tables et flux principaux :\
+- `contact_requests`\
+- `registration_requests`\
+- `form_responses`\
+- `page_views`\
+- `resource_posts`\
+- `job_opportunities`\
+- `source_feeds`\
+- `source_signals`\
+- `editorial_jobs`\
+- `newsletter_subscriptions`\
+- `newsletter_issues`\
+- `newsletter_delivery_logs`\
+- `partner_offer_catalog`\
+- `partner_email_templates`\
+- `partner_listing_reviews`\
+- `partner_followup_jobs`\
+\
+Edge Functions principales :\
+- `content-admin`\
+- `content-discovery`\
+- `content-classifier`\
+- `content-drafter`\
+- `newsletter-subscribe`\
+- `newsletter-drafter`\
+- `newsletter-send`\
+- `newsletter-scheduler`\
+- `send-prospect-emails`\
+- `partner-review-drafter`\
+- `partner-followup-send`\
+\
+## 3. R\'e8gles de fonctionnement\
+\
+### Ligne \'e9ditoriale\
+\
+- FR d'abord\
+- EN ensuite pour les contenus strat\'e9giques\
+- C\'f4te d'Ivoire d'abord, Afrique de l'Ouest ensuite\
+- contenu orient\'e9 usages m\'e9tiers et valeur business\
+- \'e9viter le jargon vide\
+- privil\'e9gier les formulations courtes, utiles et cr\'e9dibles\
+\
+### Discipline de publication\
+\
+La bonne s\'e9quence est :\
+1. preview locale\
+2. validation\
+3. commit\
+4. push\
+5. d\'e9ploiement front ou Supabase selon le cas\
+6. v\'e9rification post-d\'e9ploiement\
+\
+### R\'e8gle de prudence\
+\
+Ne jamais :\
+- publier sans v\'e9rifier la page concern\'e9e\
+- pousser un changement front qui d\'e9pend d'une migration non d\'e9ploy\'e9e\
+- remplacer un secret sans savoir o\'f9 il est utilis\'e9\
+- annoncer une fonctionnalit\'e9 non v\'e9rifi\'e9e\
+\
+## 4. Routine d'exploitation recommand\'e9e\
+\
+### Chaque jour ouvr\'e9\
+\
+- v\'e9rifier les demandes de contact et d'inscription\
+- v\'e9rifier les demandes catalogue et leur email automatique associ\'e9\
+- v\'e9rifier le blog, la page entreprises, la certification et le formulaire d'audit\
+- v\'e9rifier les nouvelles demandes partenaires si la rubrique est active\
+- v\'e9rifier les variantes importantes de la page contact selon les param\'e8tres d'URL\
+- v\'e9rifier que le back-office charge bien\
+- v\'e9rifier qu'aucun message d'erreur critique n'est visible sur les pages commerciales\
+\
+### Chaque semaine\
+\
+- ouvrir `Back-office > Brouillons IA`\
+- relire les nouveaux brouillons utiles\
+- ouvrir `Back-office > Newsletter IA`\
+- v\'e9rifier l'\'e9dition de la semaine\
+- envoyer un test email\
+- approuver l'\'e9dition si elle est correcte\
+- v\'e9rifier les inscriptions newsletter r\'e9centes\
+- revoir les contenus blog les plus importants\
+\
+### Chaque mois\
+\
+- revoir les rubriques les plus consult\'e9es\
+- revoir les CTA et formulaires\
+- mettre \'e0 jour la FAQ si de nouvelles questions reviennent\
+- revoir les secrets et acc\'e8s critiques\
+- ajuster la roadmap et les priorit\'e9s business\
+\
+## 5. Proc\'e9dure d'utilisation du back-office\
+\
+### A. Token administrateur\
+\
+Le back-office exige un token administrateur.\
+\
+\'c0 faire :\
+- coller le token dans le champ `Acc\'e8s admin`\
+- cliquer sur `Enregistrer le token`\
+- v\'e9rifier que les compteurs et listes se chargent\
+\
+Si le token ne fonctionne pas :\
+- v\'e9rifier qu'il s'agit bien du `CONTENT_ADMIN_TOKEN`\
+- v\'e9rifier qu'il n'y a pas d'espace au d\'e9but ou \'e0 la fin\
+- v\'e9rifier que le secret Supabase n'a pas \'e9t\'e9 remplac\'e9 r\'e9cemment\
+\
+### B. Gestion des ressources\
+\
+Dans `Ressources` :\
+- cr\'e9er un slug propre\
+- choisir le type de contenu\
+- choisir le domaine\
+- remplir les titres FR\
+- remplir les r\'e9sum\'e9s\
+- remplir le contenu complet FR\
+- renseigner la source et la date\
+- publier ou garder en brouillon\
+\
+Bonnes pratiques :\
+- garder le badge de type mais \'e9viter de r\'e9p\'e9ter le mot dans le titre\
+- utiliser des r\'e9sum\'e9s clairs, courts, concrets\
+- lier le contenu aux formations et \'e0 l'offre entreprise quand c'est pertinent\
+\
+### C. Gestion des brouillons IA\
+\
+Dans `Brouillons IA` :\
+- v\'e9rifier les sources suivies\
+- relire les signaux d\'e9tect\'e9s\
+- relire les brouillons g\'e9n\'e9r\'e9s\
+- corriger si n\'e9cessaire\
+- approuver, publier ou archiver\
+\
+### D. Gestion de la newsletter\
+\
+Dans `Newsletter IA` :\
+- charger l'\'e9dition\
+- v\'e9rifier les domaines cibl\'e9s\
+- v\'e9rifier le titre\
+- v\'e9rifier l'objet email\
+- v\'e9rifier le pr\'e9header\
+- v\'e9rifier l'introduction\
+- v\'e9rifier le signal cl\'e9\
+- v\'e9rifier le conseil pratique\
+- v\'e9rifier l'outil \'e0 conna\'eetre\
+- v\'e9rifier le prompt de la semaine\
+- v\'e9rifier le bloc \'e9ditorial\
+- enregistrer\
+- envoyer un test\
+- approuver ou planifier\
+\
+Point d'exploitation ajout\'e9 au 20 avril 2026 :\
+- une \'e9dition peut \'eatre envoy\'e9e manuellement un lundi pour une campagne exceptionnelle\
+- l'automatisation standard reste centr\'e9e sur le vendredi pour l'envoi de campagne\
+- une \'e9dition d\'e9j\'e0 approuv\'e9e plus ancienne doit \'eatre repass\'e9e en `draft` si elle risque de polluer le prochain envoi automatique\
+- la newsletter fondatrice du 20 avril 2026 a \'e9t\'e9 envoy\'e9e avec succ\'e8s \'e0 8 abonn\'e9s actifs\
+- le back-office newsletter sert aussi \'e0 v\'e9rifier `status`, `send_count`, `recipient_count` et `sent_at`\
+\
+### E. Gestion des partenaires\
+\
+Dans `Partenaires` :\
+- s\'e9lectionner une demande r\'e9elle re\'e7ue depuis le formulaire public\
+- relire les informations soci\'e9t\'e9, secteur, besoin et calendrier\
+- g\'e9n\'e9rer la recommandation IA si n\'e9cessaire\
+- ajuster la formule recommand\'e9e\
+- relire le sujet et le corps de la r\'e9ponse\
+- marquer `approved` quand la r\'e9ponse est pr\'eate\
+- envoyer la r\'e9ponse finale au prospect\
+\
+Bonnes pratiques :\
+- ne pas envoyer une r\'e9ponse si le corps email est vide\
+- v\'e9rifier que le secteur / activit\'e9 est correctement renseign\'e9\
+- conserver une approche s\'e9lective et cr\'e9dible\
+\
+### F. Gestion des opportunit\'e9s emploi et mise en relation\
+\
+Au 20 avril 2026, la page `Media, veille & opportunit\'e9s IA` a \'e9t\'e9 clarifi\'e9e et le flux emploi a chang\'e9 :\
+- le bouton `Parler emploi & mise en relation` ne doit plus pointer vers la prise de RDV\
+- il doit pointer vers le formulaire compact d\'e9di\'e9 `/parler-emploi-ia`\
+- ce formulaire r\'e9utilise `Contact` avec `intent=demande-renseignement`, `compact=1` et `flow=emploi`\
+- le bloc de rendez-vous expert doit \'eatre masqu\'e9 pour ce flux\
+- la demande collect\'e9e sert \'e0 qualifier un besoin emploi, mission, stage ou mise en relation avant retour humain\
+- le CTA secondaire du bloc de fin de page m\'e9dia a \'e9t\'e9 corrig\'e9 pour pointer vers ce flux\
+\
+### G. Gestion des cartes replay\
+\
+Le lien `Voir ce replay` ne doit pas pointer vers Contact.\
+\
+R\'e8gle d\'e9sormais act\'e9e :\
+- si une URL vid\'e9o individuelle existe, elle doit \'eatre utilis\'e9e\
+- si aucune URL vid\'e9o individuelle n'est encore disponible, la carte doit pointer vers une destination vid\'e9o cr\'e9dible\
+- au 20 avril 2026, la d\'e9cision op\'e9rationnelle retenue est d'ouvrir une recherche YouTube sur le canal TransferAI Africa avec le titre du replay\
+\
+### H. Vigilance publication / synchronisation\
+\
+Le 20 avril 2026 a montr\'e9 un point important pour l'administrateur No1 :\
+- un correctif peut \'eatre bien pouss\'e9 sur GitHub sans \'eatre visible sur `transferai.ci`\
+- il faut v\'e9rifier que le correctif est bien sur `main`\
+- il faut ensuite republier le site principal depuis le bon canal\
+- il faut distinguer clairement GitHub Pages, Lovable et le d\'e9ploiement r\'e9ellement utilis\'e9 par `transferai.ci`\
+- utiliser le back-office pour r\'e9pondre, pas un email improvis\'e9 hors process\
+\
+### F. Gestion des parcours contact\
+\
+La page `Contact` n'est plus une page unique et g\'e9n\'e9rique. Elle sert d\'e9sormais de conteneur pour plusieurs variantes de formulaires selon l'intention exprim\'e9e par le visiteur.\
+\
+Les cas principaux \'e0 conna\'eetre sont :\
+- `Parler \'e0 un expert IA` : porte d'entr\'e9e commerciale standard pour une demande de formation, d'accompagnement ou d'orientation\
+- `demande-referencement` : variante d\'e9di\'e9e au r\'e9f\'e9rencement partenaire\
+- `demande-renseignement + Partenariat strat\'e9gique` : variante d\'e9di\'e9e aux discussions de partenariat institutionnel ou strat\'e9gique\
+- demande catalogue : parcours pens\'e9 pour recevoir un catalogue domaine\
+- inscription formation : demande plus directe li\'e9e \'e0 une formation ou une cohorte\
+\
+Bon r\'e9flexe admin :\
+- v\'e9rifier les liens profonds apr\'e8s chaque d\'e9ploiement front\
+- tester la version standard ET la version param\'e9tr\'e9e par `intent`\
+- ne pas supposer qu'un lien `Contact` public affichera toujours le m\'eame formulaire\
+\
+### G. Gestion des demandes catalogue\
+\
+Le site g\'e8re d\'e9sormais un parcours catalogue plus direct.\
+\
+\'c0 retenir :\
+- une demande catalogue claire peut d\'e9clencher un email enrichi avec acc\'e8s imm\'e9diat au catalogue demand\'e9\
+- ce flux passe par `send-prospect-emails`\
+- l'objectif n'est pas de ralentir le prospect, mais de lui donner rapidement la bonne ressource puis une suite logique\
+\
+Checklist admin :\
+- v\'e9rifier que le domaine demand\'e9 est bien compris\
+- v\'e9rifier que l'email de r\'e9ponse pointe vers le bon catalogue\
+- v\'e9rifier que le CTA audit n'appara\'eet que s'il a du sens comme prochaine \'e9tape\
+- v\'e9rifier que le ton du message reste orient\'e9 formation et non rendez-vous g\'e9n\'e9rique\
+\
+## 6. Workflow newsletter : ce qui est automatique et ce qui reste humain\
+\
+### Ce qui est automatis\'e9\
+\
+Le syst\'e8me hebdomadaire est d\'e9j\'e0 pr\'e9par\'e9 pour fonctionner avec Supabase :\
+- g\'e9n\'e9ration d'un brouillon hebdomadaire\
+- ciblage par domaines abonn\'e9s\
+- garde-fou d'envoi uniquement si l'\'e9dition est `approved` ou `scheduled`\
+\
+Programmation actuelle :\
+- mercredi \'e0 06:00 : g\'e9n\'e9ration du brouillon hebdomadaire\
+- vendredi \'e0 08:30 : tentative d'envoi de l'\'e9dition valid\'e9e\
+\
+### Ce qui reste recommand\'e9 c\'f4t\'e9 humain\
+\
+Avant l'envoi r\'e9el, il faut id\'e9alement :\
+- relire le contenu\
+- envoyer un email test\
+- corriger l'objet, le conseil, l'outil ou le prompt si besoin\
+- passer l'\'e9dition en `approved`\
+\
+Conclusion :\
+- oui, le syst\'e8me peut tourner chaque semaine\
+- non, il n'est pas conseill\'e9 de laisser partir les emails sans validation au d\'e9part\
+\
+## 7.1. Logique email transactionnelle \'e0 retenir\
+\
+Les emails automatiques du site suivent d\'e9sormais une r\'e8gle horaire simple bas\'e9e sur la C\'f4te d'Ivoire :\
+- avant `12:00` : utiliser `Bonjour`\
+- \'e0 partir de `12:00` : utiliser `Bonsoir`\
+\
+Cette r\'e8gle s'applique aux principaux flux automatis\'e9s :\
+- accus\'e9s de r\'e9ception prospects\
+- confirmations newsletter\
+- r\'e9ponses partenaires\
+- r\'e9ponses catalogue\
+- confirmations d'inscription ou de demande formation\
+\
+Important :\
+- pour les r\'e9ponses partenaires, la salutation est r\'e9ajust\'e9e au moment de l'envoi r\'e9el\
+- cela \'e9vite qu'un brouillon g\'e9n\'e9r\'e9 le matin parte encore avec `Bonjour` le soir\
+\
+## 7.2. Qualit\'e9 attendue des emails prospects\
+\
+Les emails automatiques doivent maintenant respecter une logique de clart\'e9 par cas d'usage :\
+- une demande d'inscription ne doit pas afficher un lien de RDV ambigu si le besoin est d\'e9j\'e0 une candidature\
+- une demande de formation doit reformuler le besoin, r\'e9sumer les \'e9l\'e9ments compris et annoncer la prochaine \'e9tape utile\
+- une demande catalogue doit proposer l'acc\'e8s direct au bon catalogue sans d\'e9tour inutile\
+- une demande partenaire doit distinguer clairement r\'e9f\'e9rencement, visibilit\'e9 ou partenariat strat\'e9gique\
+\
+R\'e8gle simple :\
+- ne pas injecter un CTA de rendez-vous dans un email si ce rendez-vous n'est pas la prochaine \'e9tape logique\
+- ne pas m\'e9langer devis, audit, inscription et orientation dans un m\'eame accus\'e9 de r\'e9ception\
+\
+## 8. Secrets et acc\'e8s critiques\
+\
+## 9. D\'e9ploiement manuel utile \'e0 retenir\
+\
+Quand une \'e9volution touche la fonction `send-prospect-emails`, le point important est :\
+- se placer dans le d\'e9p\'f4t racine `connect-ia-bloom`\
+- ne pas lancer la commande depuis `~` ou un autre dossier\
+\
+Commande-type :\
+\
+```bash\
+supabase functions deploy send-prospect-emails --project-ref wlhznciwuofueffyoflo\
+```\
+\
+Si l'erreur mentionne `Entry path does not exist`, cela signifie g\'e9n\'e9ralement que la commande n'a pas \'e9t\'e9 lanc\'e9e depuis la racine du d\'e9p\'f4t.\
+\
+### Secrets principaux\
+\
+- `CONTENT_ADMIN_TOKEN`\
+- `NEWSLETTER_SCHEDULER_TOKEN`\
+- `RESEND_API_KEY`\
+- `MAIL_FROM`\
+- `SUPABASE_URL`\
+- `SUPABASE_ANON_KEY`\
+- `SUPABASE_SERVICE_ROLE_KEY`\
+\
+### R\'e8gles de s\'e9curit\'e9\
+\
+- ne jamais publier un secret dans le front\
+- ne jamais envoyer un secret dans un message non s\'e9curis\'e9\
+- si un secret est perdu, le remplacer proprement\
+- documenter toute rotation de secret\
+\
+### Rotation d'un secret\
+\
+Quand un secret est remplac\'e9 :\
+- v\'e9rifier o\'f9 il est utilis\'e9\
+- remplacer la valeur dans Supabase ou dans l'environnement concern\'e9\
+- retester imm\'e9diatement le workflow li\'e9\
+\
+## 9. D\'e9ploiements\
+\
+### Front\
+\
+Flux normal :\
+- d\'e9veloppement local\
+- preview\
+- `npm run build`\
+- commit\
+- push sur `main`\
+- d\'e9ploiement Cloudflare\
+- v\'e9rification sur le site public\
+\
+### Backend Supabase\
+\
+\'c0 faire si n\'e9cessaire :\
+- pousser les migrations SQL\
+- d\'e9ployer les edge functions concern\'e9es\
+- v\'e9rifier les secrets\
+- tester les flux critiques apr\'e8s d\'e9ploiement\
+\
+## 10. Gestion des incidents\
+\
+### Si une page front casse\
+\
+1. identifier l'URL concern\'e9e\
+2. reproduire en local\
+3. v\'e9rifier le router et le composant\
+4. corriger\
+5. rebuild\
+6. push\
+7. v\'e9rifier Cloudflare\
+\
+### Si le back-office ne charge pas\
+\
+1. v\'e9rifier le token admin\
+2. v\'e9rifier les variables Supabase du front\
+3. v\'e9rifier la fonction `content-admin`\
+4. v\'e9rifier la r\'e9ponse r\'e9seau\
+\
+### Si la newsletter ne part pas\
+\
+1. v\'e9rifier que l'\'e9dition existe\
+2. v\'e9rifier son statut\
+3. v\'e9rifier `Derni\'e8res diffusions`\
+4. v\'e9rifier la fonction `newsletter-send`\
+5. v\'e9rifier `RESEND_API_KEY`\
+6. v\'e9rifier le domaine email exp\'e9diteur\
+\
+### Si une r\'e9ponse partenaire ne part pas\
+\
+1. v\'e9rifier que le dossier s\'e9lectionn\'e9 est r\'e9el\
+2. v\'e9rifier que `prospect_email` est bien renseign\'e9\
+3. v\'e9rifier que `response_email_body_fr` n'est pas vide\
+4. v\'e9rifier `partner-followup-send`\
+5. v\'e9rifier `RESEND_API_KEY`\
+6. v\'e9rifier le token admin si l'action part du back-office\
+\
+## 11. Checklist avant publication\
+\
+### Avant toute mise en ligne front\
+\
+- la page est lisible en desktop\
+- la page est lisible en mobile\
+- les CTA sont align\'e9s\
+- les formulaires s'ouvrent\
+- le build passe\
+- le contenu est coh\'e9rent FR\
+\
+### Avant publication d'une ressource\
+\
+- titre propre\
+- domaine correct\
+- r\'e9sum\'e9 utile\
+- source renseign\'e9e\
+- date correcte\
+- page article accessible\
+\
+### Avant envoi newsletter\
+\
+- \'e9dition charg\'e9e\
+- objet correct\
+- test email envoy\'e9\
+- rendu email valid\'e9\
+- statut `approved` ou `scheduled`\
+\
+### Avant envoi d'une r\'e9ponse partenaire\
+\
+- dossier partenaire r\'e9el charg\'e9\
+- formule recommand\'e9e coh\'e9rente\
+- sujet email relu\
+- corps email relu\
+- salutation correcte\
+- statut `approved` si le workflow l'exige\
+\
+## 12. Documentation \'e0 garder vivante\
+\
+Ce guide doit \'eatre mis \'e0 jour :\
+- \'e0 chaque nouvelle rubrique du site\
+- \'e0 chaque nouveau flux automatis\'e9\
+- \'e0 chaque changement de secret ou de proc\'e9dure\
+- \'e0 chaque \'e9volution importante du back-office\
+\
+## 13. Derniers changements \'e0 retenir au 11 avril 2026\
+\
+Les changements structurants les plus r\'e9cents sont :\
+- simplification de pages denses pour am\'e9liorer la lisibilit\'e9 et la conversion\
+- audit IA gratuit mieux mis en avant dans le parcours visiteur\
+- pipeline partenaire complet avec formulaire public, back-office, recommandation et email de suivi\
+- nouvelle discipline \'e9ditoriale sur le blog : badge de type visible, titres all\'e9g\'e9s, moins de r\'e9p\'e9titions\
+- logique `FR d'abord`, EN seulement pour les contenus et usages strat\'e9giques\
+- fiabilisation des parcours `Contact` avec variantes publiques plus coh\'e9rentes\
+- am\'e9lioration des r\'e9ponses automatiques pour les demandes de catalogue, de formation et d'inscription\
+}

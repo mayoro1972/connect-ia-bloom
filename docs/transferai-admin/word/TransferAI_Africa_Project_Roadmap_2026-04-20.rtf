@@ -1,0 +1,312 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Roadmap Historique du Projet\
+\
+## 1. Vision g\'e9n\'e9rale\
+\
+Le projet TransferAI Africa a \'e9volu\'e9 d'un site vitrine orient\'e9 formation vers une plateforme beaucoup plus structur\'e9e, combinant :\
+- formation\
+- certification\
+- offre entreprise\
+- contenus dynamiques\
+- outils IA par domaine\
+- back-office\
+- pipeline \'e9ditorial\
+- newsletter cibl\'e9e et automatis\'e9e\
+\
+## 2. Phases de construction\
+\
+### Phase 1. Construction du socle front\
+\
+Objectif :\
+- mettre en place les pages principales du site\
+\
+Livrables majeurs :\
+- accueil\
+- \'e9ducation\
+- catalogue\
+- d\'e9tail formation\
+- parcours\
+- certification\
+- entreprises / services\
+- contact\
+\
+### Phase 2. Stabilisation et compatibilit\'e9\
+\
+Objectif :\
+- r\'e9soudre les probl\'e8mes de chargement et de compatibilit\'e9 navigateur\
+\
+Signaux observ\'e9s dans l'historique git :\
+- diagnostics Safari\
+- ajustements Vite\
+- s\'e9curisation du chargement dynamique\
+\
+### Phase 3. Refonte de lisibilit\'e9 et simplification UX\
+\
+Objectif :\
+- rendre les pages plus claires\
+- all\'e9ger les parcours\
+- mieux hi\'e9rarchiser l'information\
+\
+R\'e9sultats :\
+- simplification des navigations\
+- simplification de la page entreprises\
+- simplification de certaines pages certification et outils\
+- alignement des cartes et CTA\
+\
+### Phase 4. Naissance du blog dynamique\
+\
+Objectif :\
+- cr\'e9er un vrai hub ressources\
+\
+\'c9tapes majeures :\
+- page blog dynamique\
+- filtres domaine + type\
+- pages article individuelles\
+- pages blog par domaine\
+- 13 contenus de veille couvrant les 13 domaines\
+- dates d'articles rendues dynamiques\
+\
+### Phase 5. Construction du pipeline \'e9ditorial IA\
+\
+Objectif :\
+- permettre \'e0 l'\'e9quipe de d\'e9tecter, classer et r\'e9diger des contenus avec assistance IA\
+\
+Livrables :\
+- tables \'e9ditoriales\
+- sources suivies\
+- signaux d\'e9tect\'e9s\
+- brouillons IA\
+- back-office d\'e9di\'e9\
+- fonctions discovery / classifier / drafter\
+\
+### Phase 6. Construction de la matrice outils IA\
+\
+Objectif :\
+- structurer le discours formation et B2B autour des outils r\'e9ellement utilis\'e9s\
+\
+Livrables :\
+- page outils IA\
+- matrice par domaine\
+- formats de formation\
+- catalogue outils / usages / niveaux\
+\
+### Phase 7. Refonte de la certification sectorielle\
+\
+Objectif :\
+- sortir d'une certification trop g\'e9n\'e9rique\
+\
+Livrables :\
+- objectifs par domaine\
+- programme 5 jours par domaine\
+- sp\'e9cialisation sectorielle\
+- \'e9valuation continue plus simple\
+- suppression de la logique de soutenance jury\
+\
+### Phase 8. Newsletter par domaine\
+\
+Objectif :\
+- fid\'e9liser l'audience et prolonger la valeur du blog\
+\
+Livrables :\
+- inscription newsletter par domaine sur le blog\
+- table abonnements\
+- confirmations email\
+- interface back-office newsletter\
+- structure \'e9ditoriale officielle\
+\
+### Phase 9. Pipeline newsletter et automatisation hebdomadaire\
+\
+Objectif :\
+- pr\'e9parer un syst\'e8me quasi autonome mais pilotable\
+\
+Livrables :\
+- table `newsletter_issues`\
+- table `newsletter_delivery_logs`\
+- fonction `newsletter-drafter`\
+- fonction `newsletter-send`\
+- fonction `newsletter-scheduler`\
+- cron hebdomadaire de g\'e9n\'e9ration\
+- cron hebdomadaire d'envoi\
+- garde-fou d'approbation humaine\
+\
+### Phase 10. Correction et fiabilisation des flux admin\
+\
+Objectif :\
+- rendre le back-office r\'e9ellement exploitable\
+\
+Livrables et corrections marquantes :\
+- fix du formulaire d'audit\
+- fix des liens cass\'e9s\
+- fix d'auth des edge functions admin pour la newsletter\
+- validation d'un test email r\'e9el\
+\
+### Phase 11. Simplification \'e9ditoriale et fluidit\'e9 UX\
+\
+Objectif :\
+- r\'e9duire la surcharge d'information\
+- rendre les pages plus lisibles\
+- am\'e9liorer la compr\'e9hension d\'e8s la premi\'e8re lecture\
+\
+Livrables et r\'e9sultats :\
+- simplification de l'accueil\
+- simplification de la page \'e0 propos\
+- simplification du catalogue\
+- simplification des parcours\
+- simplification de la certification\
+- simplification de l'education hub\
+- simplification du blog et des pages entreprises\
+- meilleure mise en avant de l'audit IA gratuit\
+\
+### Phase 12. Pipeline partenaires et relation email\
+\
+Objectif :\
+- transformer la rubrique partenaires en vrai parcours administrable\
+- industrialiser la r\'e9ponse aux demandes de r\'e9f\'e9rencement\
+\
+Livrables :\
+- page partenaires clarifi\'e9e\
+- formulaire public de demande de r\'e9f\'e9rencement\
+- back-office partenaires\
+- grille officielle des formules partenaires\
+- recommandation IA de formule\
+- email automatique de r\'e9ponse au prospect\
+- normalisation horaire des salutations `Bonjour / Bonsoir`\
+\
+### Phase 13. Clarification de la page Contact et des r\'e9ponses prospects\
+\
+Objectif :\
+- unifier la promesse de contact\
+- r\'e9duire la confusion sur les CTA\
+- rendre les emails plus coh\'e9rents avec le besoin r\'e9el\
+\
+Livrables :\
+- porte d'entr\'e9e `Parler \'e0 un expert IA`\
+- formulaire `D\'e9crivez votre besoin`\
+- champ `Domaine ou formation vis\'e9e`\
+- variantes contact par intention r\'e9elle\
+- correction des liens profonds `contact?intent=...`\
+- meilleure diff\'e9renciation des emails inscription, formation, catalogue et partenaires\
+\
+### Phase 14. Distribution catalogue et coh\'e9rence des emails transactionnels\
+\
+Objectif :\
+- acc\'e9l\'e9rer la r\'e9ponse aux demandes les plus directes\
+- supprimer les ambigu\'eft\'e9s entre catalogue, formation, audit et rendez-vous\
+\
+Livrables :\
+- demandes catalogue par domaine plus actionnables\
+- emails catalogue enrichis avec acc\'e8s direct au bon contenu\
+- meilleure coh\'e9rence entre accus\'e9 de r\'e9ception et prochaine \'e9tape utile\
+- r\'e9duction des CTA de rendez-vous lorsqu'ils n'apportent pas de valeur imm\'e9diate\
+\
+### Phase 15. Newsletter fondatrice, page m\'e9dia et flux emploi\
+\
+Objectif :\
+- transformer la page m\'e9dia et la newsletter en actifs r\'e9ellement exploitables\
+- aligner les CTA avec des parcours utiles\
+- pr\'e9parer une exploitation hebdomadaire plus rigoureuse\
+\
+Livrables et r\'e9sultats :\
+- \'e9dition fondatrice de la newsletter du 20 avril 2026 r\'e9\'e9crite et envoy\'e9e\
+- \'e9ditorial fondateur avec photo int\'e9gr\'e9 dans la newsletter\
+- signature automatique renforc\'e9e dans le rendu newsletter\
+- bloc `Prompt \'e0 copier imm\'e9diatement` rendu beaucoup plus visible\
+- ajout et activation de nouveaux abonn\'e9s newsletter\
+- envoi r\'e9el de campagne confirm\'e9 \'e0 8 abonn\'e9s actifs\
+- v\'e9rification du fonctionnement r\'e9el du scheduler : logique du vendredi confirm\'e9e\
+- extension de l'automation \'e9ditoriale pour produire un package hebdomadaire plus structur\'e9\
+- rotation planifi\'e9e de 3 prompts assistanat / secr\'e9tariat\
+- simplification suppl\'e9mentaire de la page `Media, veille & opportunit\'e9s IA`\
+- suppression de blocs trop conceptuels sur la page m\'e9dia\
+- cr\'e9ation du flux `/parler-emploi-ia`\
+- correction du CTA emploi pour sortir de la logique prise de rendez-vous\
+- correction des cartes replay pour ne plus envoyer vers Contact\
+- mise en \'e9vidence d'un enjeu d'exploitation : un correctif doit \'eatre sur `main` et republi\'e9 via le canal de production r\'e9el pour \'eatre visible sur `transferai.ci`\
+\
+## 3. Jalons visibles dans l'historique git r\'e9cent\
+\
+Les jalons majeurs r\'e9cents identifi\'e9s dans le d\'e9p\'f4t :\
+\
+- `48ae469` Build article pages for blog resources\
+- `99abf8c` Seed watch articles and add dynamic article dates\
+- `b10fd3a` Add blog domain and type filters\
+- `1e7407f` Build editorial pipeline and admin drafts workflow\
+- `2a8dcfd` Add SEO-ready blog domain pages\
+- `afda68c` Add domain newsletter signup for blog\
+- `891f6ae` Polish card alignment across blog and learning pages\
+- `3378901` Refine certification specialization content\
+- `8ba01cf` Simplify navigation and learning journeys\
+- `73b5240` Simplify certification tools and catalogue pages\
+- `0332c0d` Polish blog enterprise flows and fix audit form link\
+- `339c666` Simplify enterprise services page\
+- `c9bfbd4` Add newsletter confirmation emails\
+- `b74da84` Add weekly newsletter editorial pipeline\
+- `655499a` Automate weekly newsletter scheduling\
+- `8ac7720` Fix admin edge auth for newsletter actions\
+- `ab98d46` Refine blog and enterprise page messaging\
+- `15d3550` Externalize certification offer metadata\
+- `a6fa61f` Simplify catalogue page messaging\
+- `efd3a34` Simplify education hub messaging\
+- `001f682` Simplify parcours page messaging\
+- `086e06d` Simplify home page and add audit CTA\
+- `8daf826` Simplify about page messaging\
+- `23e63d1` Refine partners page structure and offers\
+- `39400fe` Refine partner listing flow and email follow-up\
+- `2d385f2` Add partner listing admin pipeline\
+- `d1c8428` Add time-based email greetings\
+- `53c5a7d` Fix contact deep-link runtime error\
+- `566ed50` Refine strategic partnership contact flow\
+- `70de516` Clarify partner request call-to-actions\
+- `2cc463b` Refine registration acknowledgement emails\
+- `f6bca26` Polish French site copy and newsletter content\
+- `bebcdb9` Revise founder newsletter editorial\
+- `701aa35` Refine media page newsletter sections\
+- `50f60df` Remove obsolete media page copy blocks\
+- `80e4498` Add employment introduction request flow\
+- `da9ea0e` Fix employment CTA target\
+\
+## 4. Ce qui existe maintenant\
+\
+Le site dispose maintenant de :\
+- un front structur\'e9\
+- un blog \'e9ditorial coh\'e9rent\
+- des pages articles\
+- un back-office utilisable\
+- un pipeline \'e9ditorial IA\
+- une newsletter par domaine\
+- un envoi test r\'e9el valid\'e9\
+- une base de connaissance outils / certification / domaines\
+- un audit IA gratuit mieux visible dans le parcours B2B\
+- une page partenaires administrable\
+- une relation email plus professionnelle et plus coh\'e9rente\
+- une page contact plus claire, plus pilotable et moins ambigu\'eb\
+- une logique catalogue plus directe et plus exploitable commercialement\
+- une newsletter envoyable et envoy\'e9e en conditions r\'e9elles\
+- une page m\'e9dia plus lisible et davantage orient\'e9e usage r\'e9el\
+- un flux emploi d\'e9di\'e9 distinct de la prise de rendez-vous\
+- une base plus claire pour les prochains chantiers de synchronisation production\
+\
+## 5. Ce qui reste logique pour la suite\
+\
+Les prochains axes rationnels sont :\
+- industrialiser encore la g\'e9n\'e9ration \'e9ditoriale\
+- enrichir la base de connaissance du futur assistant IA\
+- am\'e9liorer la relation email au-del\'e0 de la seule veille\
+- renforcer les dashboards analytics utiles \'e0 l'admin\
+- pr\'e9parer davantage de contenus strat\'e9giques EN\
+- finaliser la simplification des pages les plus denses restantes, notamment \'e0 propos et certains parcours secondaires\
+\
+## 6. Lecture business de l'\'e9volution\
+\
+Le projet n'est plus simplement un site. Il est devenu :\
+- un outil de conversion\
+- un outil de cr\'e9dibilit\'e9\
+- un outil d'animation \'e9ditoriale\
+- un socle de future relation automatis\'e9e avec prospects et abonn\'e9s\
+- une base exploitable pour un assistant IA TransferAI\
+}

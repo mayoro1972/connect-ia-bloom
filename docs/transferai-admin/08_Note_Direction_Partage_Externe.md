@@ -109,6 +109,37 @@ Depuis la première version de cette note, plusieurs améliorations ont été ap
 - amélioration du parcours catalogue avec une réponse plus directe quand le besoin du prospect est clair
 - meilleure cohérence entre demandes formation, inscription, catalogue et prochaine étape proposée
 
+## 8.2. Mise à jour du 20 avril 2026
+
+Les avancées de la journée du 20 avril 2026 portent sur 4 axes :
+
+### A. Newsletter et relation audience
+
+- réécriture complète de la newsletter fondatrice du 20 avril 2026
+- ajout de l'éditorial fondateur avec photo
+- correction des accents, formulations et signature
+- renforcement visuel du bloc `Prompt à copier immédiatement`
+- ajout de nouveaux abonnés et confirmation d'un envoi réel à 8 abonnés actifs
+
+### B. Industrialisation éditoriale
+
+- renforcement de l'automation `veille-ia-quotidienne`
+- cadrage d'un package éditorial hebdomadaire plus structuré
+- rotation planifiée de 3 prompts métier assistanat / secrétariat
+
+### C. Page média et opportunités
+
+- nettoyage de la page `Media, veille & opportunités IA`
+- suppression de blocs trop conceptuels qui alourdissaient la lecture
+- clarification des CTA et du rôle de la page dans l'acquisition et la mise en relation
+
+### D. Emploi, CTA et replays
+
+- création d'un vrai flux `Parler emploi & mise en relation`
+- nouvelle route dédiée `/parler-emploi-ia`
+- correction du CTA emploi pour ne plus ouvrir une prise de RDV
+- correction des cartes `Voir ce replay`, qui ne doivent plus renvoyer vers Contact mais vers une destination de visionnage cohérente
+
 ## 9. Conclusion
 
 TransferAI Africa dispose aujourd'hui d'un site beaucoup plus mature qu'un simple site institutionnel. Le socle construit permet déjà de former, convertir, informer, administrer et préparer la prochaine couche : assistant IA, automatisation éditoriale et relation audience plus structurée.

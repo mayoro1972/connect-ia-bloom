@@ -117,6 +117,8 @@ Ce pilier couvre :
 - `/partenaires`
 - `/evenements`
 - `/prise-rdv`
+- `/parler-expert-ia`
+- `/parler-emploi-ia`
 - pages preview et hubs catalogues
 
 ## 5. Domaines couverts
@@ -213,6 +215,62 @@ La newsletter sert à :
 - prolonger la valeur du blog
 - créer un rendez-vous hebdomadaire
 - nourrir la relation avant formation ou mission
+
+### État réel au 20 avril 2026
+
+Le 20 avril 2026, la newsletter fondatrice a été :
+- réécrite et nettoyée au niveau éditorial
+- signée par le fondateur
+- enrichie d'un éditorial avec photo
+- corrigée sur les accents et formulations
+- renforcée visuellement sur le bloc `Prompt à copier immédiatement`
+- testée puis envoyée en campagne réelle à 8 abonnés actifs
+
+Le système réel fonctionne ainsi :
+- génération programmée dans le scheduler le vendredi
+- envoi automatique prévu le vendredi si l'édition est dans un statut compatible
+- possibilité d'envoi manuel ponctuel pour une édition exceptionnelle hors cadence
+- importance de vérifier qu'aucune ancienne issue `approved` n'est encore éligible par erreur
+
+### Rôle éditorial renforcé
+
+L'automation `veille-ia-quotidienne` ne se limite plus à une veille brute.
+
+Elle doit désormais nourrir chaque semaine :
+- un tip IA actionnable
+- un prompt prêt à copier
+- une nouveauté traduite en impact concret
+- une opportunité à saisir
+- une veille multi-domaines
+- des idées de contenus réutilisables
+
+Une rotation spécifique de 3 prompts assistanat / secrétariat a aussi été programmée sur 3 semaines à partir de la semaine du 27 avril 2026.
+
+## 9. Page Media, veille & opportunités
+
+### Rôle
+
+Cette page sert à :
+- pousser les contenus récents
+- montrer les opportunités IA
+- capter des abonnés newsletter
+- créer des demandes de mise en relation sur l'emploi et les missions
+- donner accès aux replays et masterclasses
+
+### Ajustements validés au 20 avril 2026
+
+- suppression de blocs trop conceptuels sur la page pour réduire la surcharge visuelle
+- maintien d'un CTA newsletter fort
+- création d'un flux dédié `Parler emploi & mise en relation`
+- correction du CTA emploi pour qu'il n'ouvre plus un rendez-vous Calendly
+- correction du lien des cartes replay pour qu'il ne renvoie plus vers Contact
+
+### Règle métier sur les replays
+
+`Voir ce replay` doit pointer vers une destination de visionnage, pas vers un formulaire de contact.
+
+Faute d'URL vidéo individuelle stockée à ce jour, la destination retenue est :
+- la recherche YouTube du canal TransferAI Africa préremplie avec le titre du replay
 
 ### Structure officielle
 

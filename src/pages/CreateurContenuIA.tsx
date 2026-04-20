@@ -25,7 +25,7 @@ import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { buildContactPath, buildEmploymentContactPath } from "@/lib/site-links";
+import { buildContactPath, buildEmploymentContactPath, buildReplayWatchUrl } from "@/lib/site-links";
 import { isResourceNew } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { useJobFeed } from "@/hooks/useJobFeed";
@@ -457,12 +457,14 @@ const CreateurContenuIA = () => {
                         <span className="flex items-center gap-1"><Users size={12} /> {replay.viewers}</span>
                         <span className="flex items-center gap-1"><Clock size={12} /> {replay.duration}</span>
                       </div>
-                      <Link
-                        to={buildContactPath("demande-renseignement", `Replay : ${replay.title}`)}
+                      <a
+                        href={buildReplayWatchUrl(replay.title)}
+                        target="_blank"
+                        rel="noreferrer"
                         className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
                       >
                         {copy.replaysCta} <ArrowRight size={14} />
-                      </Link>
+                      </a>
                     </motion.div>
                   ))}
                 </div>

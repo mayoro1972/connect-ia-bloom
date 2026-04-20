@@ -203,6 +203,13 @@ Dans `Newsletter IA` :
 - envoyer un test
 - approuver ou planifier
 
+Point d'exploitation ajouté au 20 avril 2026 :
+- une édition peut être envoyée manuellement un lundi pour une campagne exceptionnelle
+- l'automatisation standard reste centrée sur le vendredi pour l'envoi de campagne
+- une édition déjà approuvée plus ancienne doit être repassée en `draft` si elle risque de polluer le prochain envoi automatique
+- la newsletter fondatrice du 20 avril 2026 a été envoyée avec succès à 8 abonnés actifs
+- le back-office newsletter sert aussi à vérifier `status`, `send_count`, `recipient_count` et `sent_at`
+
 ### E. Gestion des partenaires
 
 Dans `Partenaires` :
@@ -218,6 +225,33 @@ Bonnes pratiques :
 - ne pas envoyer une réponse si le corps email est vide
 - vérifier que le secteur / activité est correctement renseigné
 - conserver une approche sélective et crédible
+
+### F. Gestion des opportunités emploi et mise en relation
+
+Au 20 avril 2026, la page `Media, veille & opportunités IA` a été clarifiée et le flux emploi a changé :
+- le bouton `Parler emploi & mise en relation` ne doit plus pointer vers la prise de RDV
+- il doit pointer vers le formulaire compact dédié `/parler-emploi-ia`
+- ce formulaire réutilise `Contact` avec `intent=demande-renseignement`, `compact=1` et `flow=emploi`
+- le bloc de rendez-vous expert doit être masqué pour ce flux
+- la demande collectée sert à qualifier un besoin emploi, mission, stage ou mise en relation avant retour humain
+- le CTA secondaire du bloc de fin de page média a été corrigé pour pointer vers ce flux
+
+### G. Gestion des cartes replay
+
+Le lien `Voir ce replay` ne doit pas pointer vers Contact.
+
+Règle désormais actée :
+- si une URL vidéo individuelle existe, elle doit être utilisée
+- si aucune URL vidéo individuelle n'est encore disponible, la carte doit pointer vers une destination vidéo crédible
+- au 20 avril 2026, la décision opérationnelle retenue est d'ouvrir une recherche YouTube sur le canal TransferAI Africa avec le titre du replay
+
+### H. Vigilance publication / synchronisation
+
+Le 20 avril 2026 a montré un point important pour l'administrateur No1 :
+- un correctif peut être bien poussé sur GitHub sans être visible sur `transferai.ci`
+- il faut vérifier que le correctif est bien sur `main`
+- il faut ensuite republier le site principal depuis le bon canal
+- il faut distinguer clairement GitHub Pages, Lovable et le déploiement réellement utilisé par `transferai.ci`
 - utiliser le back-office pour répondre, pas un email improvisé hors process
 
 ### F. Gestion des parcours contact

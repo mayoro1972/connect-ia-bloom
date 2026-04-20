@@ -198,6 +198,30 @@ Livrables :
 - meilleure cohérence entre accusé de réception et prochaine étape utile
 - réduction des CTA de rendez-vous lorsqu'ils n'apportent pas de valeur immédiate
 
+### Phase 15. Newsletter fondatrice, page média et flux emploi
+
+Objectif :
+- transformer la page média et la newsletter en actifs réellement exploitables
+- aligner les CTA avec des parcours utiles
+- préparer une exploitation hebdomadaire plus rigoureuse
+
+Livrables et résultats :
+- édition fondatrice de la newsletter du 20 avril 2026 réécrite et envoyée
+- éditorial fondateur avec photo intégré dans la newsletter
+- signature automatique renforcée dans le rendu newsletter
+- bloc `Prompt à copier immédiatement` rendu beaucoup plus visible
+- ajout et activation de nouveaux abonnés newsletter
+- envoi réel de campagne confirmé à 8 abonnés actifs
+- vérification du fonctionnement réel du scheduler : logique du vendredi confirmée
+- extension de l'automation éditoriale pour produire un package hebdomadaire plus structuré
+- rotation planifiée de 3 prompts assistanat / secrétariat
+- simplification supplémentaire de la page `Media, veille & opportunités IA`
+- suppression de blocs trop conceptuels sur la page média
+- création du flux `/parler-emploi-ia`
+- correction du CTA emploi pour sortir de la logique prise de rendez-vous
+- correction des cartes replay pour ne plus envoyer vers Contact
+- mise en évidence d'un enjeu d'exploitation : un correctif doit être sur `main` et republié via le canal de production réel pour être visible sur `transferai.ci`
+
 ## 3. Jalons visibles dans l'historique git récent
 
 Les jalons majeurs récents identifiés dans le dépôt :
@@ -233,6 +257,12 @@ Les jalons majeurs récents identifiés dans le dépôt :
 - `566ed50` Refine strategic partnership contact flow
 - `70de516` Clarify partner request call-to-actions
 - `2cc463b` Refine registration acknowledgement emails
+- `f6bca26` Polish French site copy and newsletter content
+- `bebcdb9` Revise founder newsletter editorial
+- `701aa35` Refine media page newsletter sections
+- `50f60df` Remove obsolete media page copy blocks
+- `80e4498` Add employment introduction request flow
+- `da9ea0e` Fix employment CTA target
 
 ## 4. Ce qui existe maintenant
 
@@ -250,6 +280,10 @@ Le site dispose maintenant de :
 - une relation email plus professionnelle et plus cohérente
 - une page contact plus claire, plus pilotable et moins ambiguë
 - une logique catalogue plus directe et plus exploitable commercialement
+- une newsletter envoyable et envoyée en conditions réelles
+- une page média plus lisible et davantage orientée usage réel
+- un flux emploi dédié distinct de la prise de rendez-vous
+- une base plus claire pour les prochains chantiers de synchronisation production
 
 ## 5. Ce qui reste logique pour la suite
 

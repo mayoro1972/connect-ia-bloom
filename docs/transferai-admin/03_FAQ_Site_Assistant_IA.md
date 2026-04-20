@@ -116,6 +116,12 @@ Il reçoit prioritairement les contenus correspondant aux domaines qu'il a chois
 
 Le système est conçu pour fonctionner automatiquement chaque semaine, avec une étape de validation humaine recommandée avant envoi réel.
 
+### La newsletter part-elle automatiquement le lundi ?
+
+Non, pas dans l'état réel constaté au 20 avril 2026.
+
+Le scheduler newsletter prépare et envoie par défaut sur une logique du vendredi. Un envoi du lundi doit donc être déclenché manuellement si l'on veut une campagne exceptionnelle ce jour-là.
+
 ### Faut-il remplir la newsletter manuellement chaque semaine ?
 
 Pas forcément. Le brouillon peut être généré automatiquement. En revanche, il est conseillé de le relire, envoyer un test puis l'approuver.
@@ -161,6 +167,10 @@ Parce que la prochaine étape logique n'est pas toujours un rendez-vous. Si le b
 
 Parce qu'un test n'est pas une diffusion complète. L'édition doit ensuite être approuvée ou planifiée pour passer en campagne.
 
+### Combien d'abonnés actifs étaient présents au moment du premier envoi fonddateur du 20 avril 2026 ?
+
+Au moment de l'envoi réel du 20 avril 2026, 8 abonnés actifs étaient présents dans la base.
+
 ## 4. FAQ back-office
 
 ### Où gère-t-on les ressources ?
@@ -178,6 +188,17 @@ Dans `Back-office > Newsletter IA`.
 ### Où gère-t-on les demandes partenaires ?
 
 Dans `Back-office > Partenaires`.
+
+### Où gère-t-on les opportunités emploi ?
+
+Dans `Back-office > Emplois IA`, et côté site public dans la page `Media, veille & opportunités IA`.
+
+### Le bouton `Parler emploi & mise en relation` doit-il ouvrir Calendly ?
+
+Non. Au 20 avril 2026, la règle correcte est :
+- il doit ouvrir un formulaire dédié de qualification
+- la route attendue est `/parler-emploi-ia`
+- ce flux sert à recueillir un besoin emploi, mission, stage ou mise en relation avant retour humain
 
 ### Pourquoi le back-office demande un token ?
 
@@ -202,6 +223,23 @@ Non, pas si le projet lit déjà le secret par son nom. Il suffit surtout :
 ### Comment se déploie le front ?
 
 Le front suit le flux GitHub puis Cloudflare.
+
+### Pourquoi un push GitHub peut-il ne pas suffire pour voir le changement en ligne ?
+
+Parce qu'il faut vérifier 2 choses :
+- que le correctif est bien sur la branche réellement publiée, en pratique `main`
+- que le site principal `transferai.ci` a bien été republié sur son vrai canal de publication
+
+Le 20 avril 2026, cela a été un point d'attention important.
+
+### Le lien `Voir ce replay` doit-il aller vers Contact ?
+
+Non.
+
+La logique correcte est :
+- si un replay vidéo existe, on ouvre la vidéo
+- si aucune URL individuelle n'est encore stockée, on ouvre une destination vidéo cohérente
+- au 20 avril 2026, la destination retenue est une recherche YouTube sur le canal TransferAI Africa avec le titre du replay
 
 ### Comment se déploie le backend ?
 

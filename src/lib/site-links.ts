@@ -206,6 +206,15 @@ export const buildEmploymentContactPath = (domain?: string) => {
   return `/parler-emploi-ia?${params.toString()}`;
 };
 
+export const buildReplayWatchUrl = (title: string) => {
+  const replayTitle = title.trim();
+  if (!replayTitle) {
+    return socialLinks.find((link) => link.label === "YouTube")?.href ?? "https://www.youtube.com/@transferai-africa";
+  }
+
+  return `https://www.youtube.com/@transferai-africa/search?query=${encodeURIComponent(replayTitle)}`;
+};
+
 export const buildAppointmentPath = (source: string, domain?: string) => {
   const params = new URLSearchParams({ source });
 

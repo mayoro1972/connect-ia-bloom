@@ -59,7 +59,7 @@ Le site couvre aujourd'hui les briques suivantes :
 
 ## Dernière mise à jour importante du pack
 
-Cette version du pack inclut désormais les évolutions suivantes réalisées entre le 11 et le 13 avril 2026 :
+Cette version du pack inclut désormais les évolutions suivantes réalisées entre le 11 et le 20 avril 2026 :
 - simplification éditoriale de plusieurs pages denses : accueil, à propos, catalogue, parcours, certification, education hub, blog, entreprises et partenaires
 - mise en avant plus claire de l'audit IA gratuit dans les parcours B2B
 - consolidation du blog dynamique avec filtres, pages article, SEO par domaine et newsletter ciblée
@@ -73,6 +73,21 @@ Cette version du pack inclut désormais les évolutions suivantes réalisées en
 - amélioration des emails automatiques liés aux demandes d'inscription, de formation et de contact pour supprimer les liens de RDV ambigus lorsqu'ils ne sont pas pertinents
 - validation du déploiement manuel de la fonction `send-prospect-emails` depuis le dépôt racine
 - confirmation que le modèle d'exploitation reste : `FR d'abord`, validation humaine avant diffusion large
+
+### Complément du 20 avril 2026
+
+Les travaux du 20 avril ont ajouté ou clarifié :
+- l'envoi réel de la newsletter fondatrice du lundi 20 avril 2026
+- la mise à jour éditoriale complète de cette newsletter avec éditorial fondateur, photo, signature, accents corrigés et bloc `Prompt à copier immédiatement`
+- l'ajout de 5 abonnés supplémentaires et la confirmation d'un total de 8 abonnés actifs au moment de l'envoi
+- la vérification du scheduler newsletter : génération et envoi automatiques le vendredi, pas le lundi
+- l'extension de l'automation `veille-ia-quotidienne` pour produire chaque semaine un package éditorial plus structuré
+- la rotation planifiée de 3 prompts métier assistanat / secrétariat sur 3 semaines
+- le nettoyage de la page `Media, veille & opportunités IA` avec suppression de blocs trop conceptuels
+- la création d'un vrai flux `Parler emploi & mise en relation` via le formulaire dédié `/parler-emploi-ia`
+- la correction du CTA emploi de la page média pour qu'il n'envoie plus vers la prise de RDV
+- la correction des liens `Voir ce replay`, qui ne doivent plus pointer vers Contact mais vers une destination vidéo exploitable
+- la mise en évidence d'un point de gouvernance important : `transferai.ci` ne reflète pas forcément un simple push GitHub sans publication du site principal
 
 ## Architecture résumée
 

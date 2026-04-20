@@ -1,0 +1,150 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Pack Administration TransferAI Africa\
+\
+Ce dossier regroupe la documentation de r\'e9f\'e9rence du site TransferAI Africa.\
+\
+Il a 4 objectifs :\
+- donner \'e0 l'administrateur No1 une vue compl\'e8te du site\
+- permettre \'e0 d'autres administrateurs de prendre le relais rapidement\
+- servir de base de connaissance pour un assistant IA interne ou un chatbot public\
+- conserver une m\'e9moire claire du projet, de son architecture et de ses \'e9volutions\
+\
+## Contenu du pack\
+\
+1. [Guide Administrateur No1](./01_Guide_Administrateur_No1.md)\
+2. [Base de Connaissance du Site](./02_Base_Connaissance_Site.md)\
+3. [FAQ Site, Back-office et Support](./03_FAQ_Site_Assistant_IA.md)\
+4. [Plan de D\'e9ploiement et d'Exploitation](./04_Plan_Deploiement_Exploitation.md)\
+5. [Roadmap Historique du Projet](./05_Roadmap_Historique_Projet.md)\
+6. [Base de Connaissance Chatbot JSON](./06_knowledge_base_chatbot.json)\
+7. [Export Word Friendly HTML](./07_Export_Word_TransferAI_Admin_Pack.html)\
+8. [Note Direction / Partage Externe](./08_Note_Direction_Partage_Externe.md)\
+9. [Export Word Friendly Direction / Externe](./09_Export_Word_Direction_Externe.html)\
+\
+## Ordre de lecture recommand\'e9\
+\
+Pour l'administrateur principal :\
+- commencer par le guide administrateur\
+- lire ensuite le plan de d\'e9ploiement et la roadmap\
+- garder la FAQ sous la main pour les cas fr\'e9quents\
+\
+Pour les autres administrateurs :\
+- commencer par le guide administrateur\
+- relire la base de connaissance du site\
+- utiliser la FAQ comme socle de r\'e9ponses standardis\'e9es\
+\
+Pour la future IA assistant / chatbot :\
+- utiliser en priorit\'e9 la base de connaissance du site\
+- charger ensuite la FAQ\
+- utiliser enfin le fichier JSON comme format structur\'e9 de d\'e9part\
+\
+## P\'e9rim\'e8tre actuel du site\
+\
+Le site couvre aujourd'hui les briques suivantes :\
+- vitrine institutionnelle\
+- hub \'e9ducation\
+- catalogue de formation\
+- pages parcours\
+- certification sectorielle\
+- page entreprises / services\
+- blog / ressources dynamiques\
+- matrice des outils IA par domaine\
+- formulaire de contact et formulaires de leads\
+- audit IA\
+- back-office contenus / brouillons IA / newsletter / emplois\
+- back-office partenaires et revue de r\'e9f\'e9rencement\
+- pipeline \'e9ditorial Supabase\
+- pipeline newsletter avec abonnement, g\'e9n\'e9ration, test et envoi\
+- pipeline partenaires avec recommandation IA, validation et r\'e9ponse email\
+- logique de salutation automatique des emails selon l'heure d'envoi\
+\
+## Derni\'e8re mise \'e0 jour importante du pack\
+\
+Cette version du pack inclut d\'e9sormais les \'e9volutions suivantes r\'e9alis\'e9es entre le 11 et le 20 avril 2026 :\
+- simplification \'e9ditoriale de plusieurs pages denses : accueil, \'e0 propos, catalogue, parcours, certification, education hub, blog, entreprises et partenaires\
+- mise en avant plus claire de l'audit IA gratuit dans les parcours B2B\
+- consolidation du blog dynamique avec filtres, pages article, SEO par domaine et newsletter cibl\'e9e\
+- mise en place du pipeline partenaire : formulaire public, revue en back-office, recommandation IA, email de suivi\
+- fiabilisation des emails transactionnels et ajout d'une salutation horaire `Bonjour` / `Bonsoir` c\'f4t\'e9 C\'f4te d'Ivoire\
+- clarification de la page `Contact` autour d'une seule logique publique plus lisible : `Parler \'e0 un expert IA`\
+- ajout de variantes de formulaires contact selon l'intention r\'e9elle : r\'e9f\'e9rencement partenaire, partenariat strat\'e9gique, demande de catalogue, demande d'information ou demande formation\
+- automatisation plus directe des demandes catalogue avec acc\'e8s au bon catalogue et CTA coh\'e9rents vers la version web, le PDF et l'audit IA lorsque c'est pertinent\
+- harmonisation progressive des emails d'inscription, de formation, de catalogue et de partenariat pour \'e9viter les liens de RDV ambigus\
+- correction d'un incident de rendu qui cassait certains liens profonds `contact?intent=...` en production\
+- am\'e9lioration des emails automatiques li\'e9s aux demandes d'inscription, de formation et de contact pour supprimer les liens de RDV ambigus lorsqu'ils ne sont pas pertinents\
+- validation du d\'e9ploiement manuel de la fonction `send-prospect-emails` depuis le d\'e9p\'f4t racine\
+- confirmation que le mod\'e8le d'exploitation reste : `FR d'abord`, validation humaine avant diffusion large\
+\
+### Compl\'e9ment du 20 avril 2026\
+\
+Les travaux du 20 avril ont ajout\'e9 ou clarifi\'e9 :\
+- l'envoi r\'e9el de la newsletter fondatrice du lundi 20 avril 2026\
+- la mise \'e0 jour \'e9ditoriale compl\'e8te de cette newsletter avec \'e9ditorial fondateur, photo, signature, accents corrig\'e9s et bloc `Prompt \'e0 copier imm\'e9diatement`\
+- l'ajout de 5 abonn\'e9s suppl\'e9mentaires et la confirmation d'un total de 8 abonn\'e9s actifs au moment de l'envoi\
+- la v\'e9rification du scheduler newsletter : g\'e9n\'e9ration et envoi automatiques le vendredi, pas le lundi\
+- l'extension de l'automation `veille-ia-quotidienne` pour produire chaque semaine un package \'e9ditorial plus structur\'e9\
+- la rotation planifi\'e9e de 3 prompts m\'e9tier assistanat / secr\'e9tariat sur 3 semaines\
+- le nettoyage de la page `Media, veille & opportunit\'e9s IA` avec suppression de blocs trop conceptuels\
+- la cr\'e9ation d'un vrai flux `Parler emploi & mise en relation` via le formulaire d\'e9di\'e9 `/parler-emploi-ia`\
+- la correction du CTA emploi de la page m\'e9dia pour qu'il n'envoie plus vers la prise de RDV\
+- la correction des liens `Voir ce replay`, qui ne doivent plus pointer vers Contact mais vers une destination vid\'e9o exploitable\
+- la mise en \'e9vidence d'un point de gouvernance important : `transferai.ci` ne refl\'e8te pas forc\'e9ment un simple push GitHub sans publication du site principal\
+\
+## Architecture r\'e9sum\'e9e\
+\
+Front :\
+- React + Vite + TypeScript\
+- d\'e9ploiement via GitHub puis Cloudflare\
+\
+Backend :\
+- Supabase pour la base de donn\'e9es, l'auth technique, les edge functions et les automatisations\
+\
+Email :\
+- Resend pour les emails transactionnels et newsletters\
+\
+## Logique \'e9ditoriale de r\'e9f\'e9rence\
+\
+- FR d'abord\
+- EN ensuite uniquement pour les contenus strat\'e9giques\
+- C\'f4te d'Ivoire d'abord\
+- Afrique de l'Ouest ensuite\
+- angle concret, m\'e9tier, actionnable\
+\
+## Export vers Word\
+\
+Le fichier [07_Export_Word_TransferAI_Admin_Pack.html](./07_Export_Word_TransferAI_Admin_Pack.html) peut \'eatre :\
+- ouvert directement dans Microsoft Word\
+- enregistr\'e9 au format `.docx`\
+- partag\'e9 aux autres administrateurs\
+- imprim\'e9 en PDF\
+\
+Le fichier [09_Export_Word_Direction_Externe.html](./09_Export_Word_Direction_Externe.html) a \'e9t\'e9 pens\'e9 pour :\
+- la direction\
+- les partenaires\
+- les administrateurs secondaires\
+- les pr\'e9sentations synth\'e9tiques de l'avancement du site\
+\
+## Recommandation de gouvernance\
+\
+Ce pack doit devenir un document vivant.\
+\
+\'c0 mettre \'e0 jour :\
+- apr\'e8s chaque \'e9volution majeure du site\
+- apr\'e8s chaque ajout d'edge function ou de secret critique\
+- apr\'e8s chaque changement de workflow admin\
+- apr\'e8s chaque nouvelle offre, rubrique ou domaine strat\'e9gique\
+\
+## Nomenclature des livrables Word\
+\
+Les fichiers source conservent une num\'e9rotation simple dans ce dossier pour rester faciles \'e0 maintenir.\
+\
+Les fichiers livrables Word du dossier `word/` suivent d\'e9sormais une nomenclature plus corporate :\
+- `TransferAI_Africa_Admin_...`\
+- `TransferAI_Africa_Executive_...`\
+- suffixe optionnel de date pour les versions partageables\
+}

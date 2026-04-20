@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-13-evening",
+  "version": "2026-04-20-evening",
   "site": {
     "name": "TransferAI Africa",
     "positioning": "Plateforme de formation, contenus, conseil et solutions IA orientee Cote d'Ivoire et Afrique.",
@@ -104,6 +104,16 @@
         "when_to_send_user": "quand le visiteur veut parler a un expert IA, clarifier un besoin, demander un catalogue ou soumettre une demande structuree"
       },
       {
+        "path": "/parler-expert-ia",
+        "purpose": "formulaire compact d'orientation et de cadrage",
+        "when_to_send_user": "quand le visiteur doit etre oriente rapidement vers un expert IA sans passer par la page Contact complete"
+      },
+      {
+        "path": "/parler-emploi-ia",
+        "purpose": "formulaire compact emploi et mise en relation",
+        "when_to_send_user": "quand le visiteur veut parler emploi, mission, stage ou mise en relation IA sans etre envoye vers la prise de RDV"
+      },
+      {
         "path": "/back-office",
         "purpose": "administration",
         "when_to_send_user": "jamais pour le public, seulement pour l'administration interne"
@@ -160,6 +170,11 @@
       "entry_label": "Inscription formation",
       "purpose": "deposer une demande liee a une formation ou une cohorte",
       "expected_next_step": "accuse de reception clair centre sur la candidature ou la demande de formation"
+    },
+    {
+      "entry_label": "Parler emploi et mise en relation",
+      "purpose": "qualifier un besoin emploi, mission, stage ou mise en relation avant retour humain",
+      "expected_next_step": "formulaire compact dedie puis relecture humaine, sans prise de RDV automatique"
     }
   ],
   "email_rules": {
@@ -427,6 +442,10 @@
       "answer": "Les visiteurs s'abonnent par domaine. Une edition peut etre preparee automatiquement, relue puis envoyee si elle est approuvee."
     },
     {
+      "question": "La newsletter part-elle automatiquement le lundi ?",
+      "answer": "Non. Au 20 avril 2026, la logique observee reste une generation et un envoi automatiques centres sur le vendredi. Un envoi du lundi doit etre declenche manuellement."
+    },
+    {
       "question": "Comment fonctionne la certification ?",
       "answer": "La certification repose sur un socle commun puis une specialisation par domaine, avec evaluation continue."
     },
@@ -445,6 +464,14 @@
     {
       "question": "Comment fonctionne la salutation dans les emails ?",
       "answer": "Les emails automatiques utilisent Bonjour avant midi et Bonsoir a partir de midi, selon l'heure de Cote d'Ivoire."
+    },
+    {
+      "question": "Ou doit pointer le bouton Parler emploi et mise en relation ?",
+      "answer": "Il doit pointer vers /parler-emploi-ia, c'est-a-dire un formulaire compact dedie a l'emploi et a la mise en relation, et non vers Calendly ou la prise de RDV."
+    },
+    {
+      "question": "Ou doit pointer Voir ce replay ?",
+      "answer": "Le lien doit pointer vers une destination de visionnage. En l'absence d'URL individuelle stockee, la destination retenue au 20 avril 2026 est une recherche YouTube sur le canal TransferAI Africa avec le titre du replay."
     }
   ],
   "assistant_policy": {
@@ -468,6 +495,7 @@
       "certification si intention premium ou sectorielle",
       "entreprises si intention B2B ou audit",
       "partenaires si intention visibilite, referencement ou partenariat",
+      "parler-emploi-ia si intention emploi, mission ou mise en relation",
       "blog si intention veille ou contenu",
       "contact si besoin humain explicite"
     ]
@@ -479,6 +507,14 @@
     "professionnalisation des emails automatiques avec salutation selon l'heure",
     "confirmation que la logique editoriale reste FR d'abord et validation humaine avant diffusion",
     "distribution catalogue plus directe avec email enrichi et acces web ou PDF",
-    "harmonisation des emails formation, inscription, catalogue et partenaires"
+    "harmonisation des emails formation, inscription, catalogue et partenaires",
+    "newsletter fondatrice du 20 avril 2026 envoyee a 8 abonnes actifs",
+    "edito fondateur, photo et signature reinforces dans la newsletter",
+    "automation veille-ia-quotidienne renforcee pour produire un package editorial hebdomadaire plus structure",
+    "rotation de 3 prompts assistanat et secretariat planifiee sur 3 semaines",
+    "page media nettoyee avec suppression de blocs trop conceptuels",
+    "creation du flux /parler-emploi-ia pour les demandes emploi et mise en relation",
+    "correction du CTA emploi pour sortir de la logique prise de rendez-vous",
+    "correction des liens replay pour ne plus pointer vers Contact"
   ]
 }
