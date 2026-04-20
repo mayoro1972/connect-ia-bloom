@@ -57,7 +57,7 @@ const getTopSubscribedDomains = async () => {
     .map(([domain]) => domain);
 };
 
-const runDraftWeekly = async () => {
+const runDraftWeekly = async (options: { autoPublish?: boolean } = {}) => {
   const issueDate = todayIsoDate();
 
   const { data: existingIssue, error: existingIssueError } = await editorialClient
@@ -88,13 +88,26 @@ const runDraftWeekly = async () => {
     issue_date: issueDate,
     language: "fr",
     target_domains: targetDomains,
+    auto_publish: options.autoPublish === true,
   });
 
   return {
     action: "draft-weekly",
     skipped: false,
+    autoPublish: options.autoPublish === true,
     targetDomains,
     result,
+  };
+};
+
+const runWeeklyAuto = async () => {
+  const draftResult = await runDraftWeekly({ autoPublish: true });
+  // Immediately try to send if a fresh approved issue exists
+  const sendResult = await runSendApproved();
+  return {
+    action: "weekly-auto",
+    draft: draftResult,
+    send: sendResult,
   };
 };
 
