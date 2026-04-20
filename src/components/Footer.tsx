@@ -19,7 +19,7 @@ const Footer = () => {
           ],
           product: "Formations",
           productLinks: [
-            { label: "Se former", to: "/education" },
+            { label: "Hub formation", to: "/education" },
             { label: "Catalogue complet", to: "/catalogue" },
             { label: "Parcours guidés", to: "/parcours" },
             { label: "Certification professionnelle", to: "/certification" },
@@ -56,7 +56,7 @@ const Footer = () => {
           ],
           product: "Training",
           productLinks: [
-            { label: "Learn", to: "/education" },
+            { label: "Learning hub", to: "/education" },
             { label: "Full catalogue", to: "/catalogue" },
             { label: "Guided paths", to: "/parcours" },
             { label: "Signature certification", to: "/certification" },
