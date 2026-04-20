@@ -64,12 +64,11 @@ const Footer = () => {
           ],
           resources: "Services",
           resourceLinks: [
-            { label: "Our services", to: "/services" },
-            { label: "Free AI audit", to: "/audit-ia-gratuit" },
+            { label: "Enterprises", to: "/entreprises" },
             { label: "Advisory & adoption", to: "/consulting-ia" },
             { label: "Automation & solutions", to: "/developpement-solutions-ia" },
             { label: "Media, watch & jobs", to: "/createur-contenu-ia" },
-            { label: "Speak with an AI expert", to: buildContactPath("demande-renseignement") },
+            { label: "Free AI audit", to: "/audit-ia-gratuit" },
           ],
           legal: "Legal",
           legalLinks: [
