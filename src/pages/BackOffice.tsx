@@ -425,31 +425,76 @@ const BackOfficePage = () => {
           subtitle="Publier des ressources, alimenter les opportunités IA et piloter le flux dynamique du site."
         />
 
+        {!isReady ? (
+          <section className="py-20">
+            <div className="container mx-auto px-4 lg:px-8 max-w-md">
+              <div className="rounded-2xl border border-border bg-card p-8 shadow-lg">
+                <h2 className="font-heading text-2xl font-bold text-card-foreground mb-2">
+                  Accès restreint
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Cette zone est réservée à l'administration de TransferAI. Saisissez votre token admin pour continuer.
+                </p>
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    persistToken();
+                  }}
+                  className="space-y-4"
+                >
+                  <Input
+                    type="password"
+                    value={token}
+                    onChange={(event) => setToken(event.target.value)}
+                    placeholder="Token admin"
+                    autoFocus
+                    autoComplete="current-password"
+                  />
+                  <button
+                    type="submit"
+                    disabled={!token.trim() || !isSupabaseConfigured}
+                    className="w-full rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+                  >
+                    Se connecter
+                  </button>
+                </form>
+                {!isSupabaseConfigured ? (
+                  <p className="mt-4 text-sm text-destructive">
+                    Supabase n'est pas configuré localement.
+                  </p>
+                ) : null}
+                {errorMessage ? (
+                  <p className="mt-4 text-sm text-destructive">{errorMessage}</p>
+                ) : null}
+                <p className="mt-6 text-xs text-muted-foreground">
+                  Le token est vérifié côté serveur. Toute tentative invalide est rejetée.
+                </p>
+              </div>
+            </div>
+          </section>
+        ) : (
         <section className="py-12">
           <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-            <div className="rounded-2xl border border-border bg-card p-6 mb-8">
-              <h2 className="font-heading text-xl font-bold text-card-foreground mb-4">Accès admin</h2>
-              <div className="grid gap-4 md:grid-cols-[1fr_auto]">
-                <Input
-                  type="password"
-                  value={token}
-                  onChange={(event) => setToken(event.target.value)}
-                  placeholder="Token admin Supabase"
-                />
-                <button
-                  type="button"
-                  onClick={persistToken}
-                  className="rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
-                >
-                  Enregistrer le token
-                </button>
+            <div className="rounded-2xl border border-border bg-card p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h2 className="font-heading text-lg font-bold text-card-foreground">Session admin active</h2>
+                <p className="text-xs text-muted-foreground">Token vérifié — toutes les actions sont tracées côté serveur.</p>
               </div>
-              {!isSupabaseConfigured ? (
-                <p className="mt-3 text-sm text-destructive">Supabase n'est pas configuré localement.</p>
-              ) : null}
-              {statusMessage ? <p className="mt-3 text-sm text-primary">{statusMessage}</p> : null}
-              {errorMessage ? <p className="mt-3 text-sm text-destructive">{errorMessage}</p> : null}
+              <button
+                type="button"
+                onClick={() => {
+                  window.localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
+                  setToken("");
+                  setStatusMessage(null);
+                  setErrorMessage(null);
+                }}
+                className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted"
+              >
+                Se déconnecter
+              </button>
             </div>
+            {statusMessage ? <p className="mb-4 text-sm text-primary">{statusMessage}</p> : null}
+            {errorMessage ? <p className="mb-4 text-sm text-destructive">{errorMessage}</p> : null}
 
             <Tabs
               value={activeTab}
@@ -1002,6 +1047,7 @@ const BackOfficePage = () => {
             </Tabs>
           </div>
         </section>
+        )}
         <Footer />
       </div>
     </PageTransition>
