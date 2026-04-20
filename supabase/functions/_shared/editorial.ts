@@ -306,6 +306,47 @@ export const callOpenAIJson = async (payload: {
   return parseJsonFromText(text);
 };
 
+export const callLovableAIJson = async (payload: {
+  systemPrompt: string;
+  userPrompt: string;
+  model?: string;
+}) => {
+  const apiKey = Deno.env.get("LOVABLE_API_KEY");
+
+  if (!apiKey) {
+    return null;
+  }
+
+  const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: payload.model || "google/gemini-2.5-flash",
+      messages: [
+        { role: "system", content: payload.systemPrompt },
+        { role: "user", content: payload.userPrompt },
+      ],
+      response_format: { type: "json_object" },
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => "");
+    throw new Error(`Lovable AI request failed with ${response.status}: ${errorText}`);
+  }
+
+  const data = await response.json();
+  const text = data.choices?.[0]?.message?.content;
+  if (typeof text !== "string" || !text.trim()) {
+    throw new Error("Lovable AI returned an empty response.");
+  }
+
+  return parseJsonFromText(text);
+};
+
 export const callAnthropicText = async (payload: {
   systemPrompt: string;
   userPrompt: string;
