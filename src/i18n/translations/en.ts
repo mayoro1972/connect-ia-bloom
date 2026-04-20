@@ -8,7 +8,7 @@ const rawEn = {
     auditIA: "FREE AI AUDIT",
     resources: "RESOURCES",
     about: "ABOUT",
-    educationOverview: "DISCOVER",
+    educationOverview: "EDUCATION HUB",
     domainCatalogues: "CATALOGUES",
     formations: "CATALOGUE",
     paths: "PATHS",
