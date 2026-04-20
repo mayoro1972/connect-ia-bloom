@@ -93,7 +93,7 @@ const ProspectAuditLoginPage = () => {
                 Connectez-vous pour ouvrir votre formulaire
               </h1>
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                Utilisez l&apos;identifiant et le mot de passe créés lors de votre demande. Nous vous redirigerons ensuite vers votre formulaire d&apos;audit personnalisé.
+                Utilisez l&apos;adresse email et le mot de passe définis lors de votre demande. Nous vous redirigerons ensuite vers votre formulaire d&apos;audit personnalisé.
               </p>
 
               <form onSubmit={submit} className="mt-8 space-y-5">
@@ -101,7 +101,7 @@ const ProspectAuditLoginPage = () => {
                   required
                   value={identifier}
                   onChange={(event) => setIdentifier(event.target.value)}
-                  placeholder="Votre email ou username"
+                  placeholder="Votre adresse email"
                   className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary/25"
                 />
                 <input

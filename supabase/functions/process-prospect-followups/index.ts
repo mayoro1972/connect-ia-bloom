@@ -68,8 +68,8 @@ const buildMessage = (row: ProspectFollowupRow) => {
     : `Votre formulaire d'audit${row.sector?.trim() ? ` personnalisé pour le secteur ${row.sector.trim()}` : " IA"} est prêt.`;
   const { domainTitle } = resolveAuditDomainAccess(row.sector);
   const guidance = isEnglish
-    ? "Use the secure portal below with the username and password you created in your request."
-    : "Utilisez le portail sécurisé ci-dessous avec le username et le mot de passe créés lors de votre demande.";
+    ? "Use the secure portal below with the email address and password you defined in your request."
+    : "Utilisez le portail sécurisé ci-dessous avec l'adresse email et le mot de passe définis lors de votre demande.";
   const appointmentLine = row.wants_expert_appointment
     ? isEnglish
       ? "Because you asked to discuss the questionnaire with an expert, you can also book a conversation after reviewing it."

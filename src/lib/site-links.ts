@@ -71,13 +71,13 @@ export const metierKeyToDomain: Record<string, string> = {
   marketing: "Marketing & Communication",
   finance: "Finance & Comptabilite",
   juridique: "Juridique & Conformite",
-  service: "Service Client",
-  data: "Data & Analyse",
+  service: "Service client & relation client",
+  data: "Données & Analyse",
   admin: "Administration & Gestion",
   management: "Management & Leadership",
-  it: "IT & Transformation Digitale",
+  it: "Systèmes d'information & Transformation digitale",
   formation: "Formation & Pedagogie",
-  sante: "Sante & Bien-etre",
+  sante: "Santé, social & bien-être",
   diplomatie: "Diplomatie & Affaires Internationales",
 };
 

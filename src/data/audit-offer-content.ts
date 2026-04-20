@@ -31,19 +31,19 @@ export const auditOfferContent = {
     "Identify your AI priorities before you invest"
   ),
   heroLead: text(
-    "TransferAI Africa aide les entreprises à comprendre où l'IA peut produire un gain concret, rapidement et sans dispersion. L'audit IA gratuit permet de cadrer les bons cas d'usage, d'identifier les premiers gains et d'orienter votre organisation vers la meilleure suite : formation, accompagnement, automatisation ou déploiement métier.",
-    "TransferAI Africa helps companies understand where AI can create concrete value quickly and without noise. The free AI audit clarifies the right use cases, identifies quick wins, and directs your organization toward the best next step: training, advisory, automation, or business deployment."
+    "TransferAI Africa aide les entreprises à comprendre où l'IA peut produire un gain concret, rapidement et sans dispersion. Vous commencez par une demande courte, puis nous vous envoyons un formulaire d'audit multi-sectoriel et un accès sécurisé pour préparer un échange utile avec notre équipe.",
+    "TransferAI Africa helps companies understand where AI can create concrete value quickly and without noise. You start with a short request, then we send you a multi-sector audit questionnaire and secure access so you can prepare a useful conversation with our team."
   ),
   proofPoints: {
     fr: [
       "100% gratuit et sans engagement",
       "Pensé pour les entreprises en Côte d'Ivoire et en Afrique",
-      "Premiers axes d'action, priorités et recommandations exploitables",
+      "Accusé de réception immédiat puis accès au formulaire sous environ 30 minutes",
     ],
     en: [
       "100% free and no commitment",
       "Built for companies in Côte d'Ivoire and across Africa",
-      "First action areas, priorities, and practical recommendations",
+      "Immediate acknowledgement, then questionnaire access in about 30 minutes",
     ],
   },
   whyTitle: text("Pourquoi commencer par un audit IA", "Why start with an AI audit"),
@@ -91,34 +91,34 @@ export const auditOfferContent = {
   processSteps: [
     {
       step: "01",
-      title: text("Prise de contact", "Initial contact"),
+      title: text("Demande rapide", "Short request"),
       desc: text(
-        "Vous partagez votre contexte, vos enjeux et votre secteur en quelques minutes.",
-        "You share your context, priorities, and sector in just a few minutes."
+        "Vous partagez votre contexte, votre secteur et votre besoin dans une demande courte pensée pour le mobile.",
+        "You share your context, sector, and need through a short mobile-friendly request."
       ),
     },
     {
       step: "02",
-      title: text("Audit ciblé", "Focused audit"),
+      title: text("Accusé de réception", "Acknowledgement"),
       desc: text(
-        "Nous analysons vos irritants, vos tâches critiques et les zones de gains potentiels.",
-        "We analyze friction points, critical tasks, and potential value areas."
+        "Notre équipe confirme la bonne réception de votre demande et prépare le bon angle d'audit selon votre secteur.",
+        "Our team confirms your request and prepares the right audit angle based on your sector."
       ),
     },
     {
       step: "03",
-      title: text("Restitution claire", "Clear restitution"),
+      title: text("Accès sécurisé au formulaire", "Secure questionnaire access"),
       desc: text(
-        "Vous recevez une lecture simple des priorités, des risques et des opportunités.",
-        "You receive a clear view of priorities, risks, and opportunities."
+        "Vous recevez sous environ 30 minutes l'accès sécurisé au formulaire d'audit à remplir.",
+        "Within about 30 minutes, you receive secure access to the audit questionnaire."
       ),
     },
     {
       step: "04",
-      title: text("Suite recommandée", "Recommended next step"),
+      title: text("Questionnaire et échange expert", "Questionnaire and expert discussion"),
       desc: text(
-        "Nous vous orientons vers la bonne suite : formation, certification, accompagnement ou automatisation.",
-        "We guide you toward the best next step: training, certification, advisory, or automation."
+        "Vous remplissez le questionnaire puis nous préparons avec vous la meilleure suite : cadrage, formation, accompagnement ou automatisation.",
+        "You complete the questionnaire, then we prepare the best next step with you: scoping, training, advisory, or automation."
       ),
     },
   ],
@@ -377,7 +377,7 @@ export const auditDomainMessages: AuditDomainMessage[] = [
   },
   {
     key: "customer-service",
-    domain: text("Service Client", "Customer Service"),
+    domain: text("Service client & relation client", "Customer Service & Customer Experience"),
     audience: text("Support client, CX, centres de contact", "Support teams, CX, contact centers"),
     whyAuditMatters: text(
       "Ici, l'audit sert à voir où l'IA peut améliorer la qualité de réponse, la vitesse de traitement et la structuration du support.",
@@ -393,7 +393,7 @@ export const auditDomainMessages: AuditDomainMessage[] = [
       text("Améliorer la qualité et la cohérence", "Improve quality and consistency"),
       text("Mieux structurer les escalades et la FAQ", "Better structure escalations and FAQ flows"),
     ],
-    cta: text("Réserver un audit IA Service Client", "Book a Customer Service AI audit"),
+    cta: text("Réserver un audit IA Service client", "Book a Customer Service AI audit"),
     emailSubject: text(
       "Audit IA gratuit - Accélérer et fiabiliser votre service client",
       "Free AI audit - Accelerate and strengthen your customer service"
@@ -425,7 +425,7 @@ export const auditDomainMessages: AuditDomainMessage[] = [
   },
   {
     key: "data-analytics",
-    domain: text("Data & Analyse", "Data & Analytics"),
+    domain: text("Données & Analyse", "Data & Analytics"),
     audience: text("Analystes, responsables data, managers métier", "Analysts, data leads, business managers"),
     whyAuditMatters: text(
       "L'audit sert à identifier les zones où l'IA peut renforcer l'analyse, la visualisation, la synthèse et l'aide à la décision.",
@@ -569,7 +569,7 @@ export const auditDomainMessages: AuditDomainMessage[] = [
   },
   {
     key: "it-digital-transformation",
-    domain: text("IT & Transformation Digitale", "IT & Digital Transformation"),
+    domain: text("Systèmes d'information & Transformation digitale", "Information Systems & Digital Transformation"),
     audience: text("DSI, projets digitaux, IT, intégration", "CIOs, digital projects, IT, integration teams"),
     whyAuditMatters: text(
       "C'est le domaine où l'audit est le plus utile pour choisir les bons copilotes, workflows, outils no-code et cas d'automatisation sans créer de dette inutile.",
@@ -665,7 +665,7 @@ export const auditDomainMessages: AuditDomainMessage[] = [
   },
   {
     key: "health-wellbeing",
-    domain: text("Santé & Bien-être", "Health & Well-being"),
+    domain: text("Santé, social & bien-être", "Health, Social Care & Well-being"),
     audience: text("Prévention, HSE, bien-être, RH", "Prevention, HSE, well-being, HR"),
     whyAuditMatters: text(
       "L'audit sert à voir où l'IA peut aider à la prévention, au suivi, à la documentation et aux programmes santé en entreprise.",
@@ -681,7 +681,7 @@ export const auditDomainMessages: AuditDomainMessage[] = [
       text("Rendre le suivi plus visible et traçable", "Make monitoring more visible and traceable"),
       text("Identifier les gains rapides sans complexifier les équipes", "Identify quick wins without overcomplicating the teams"),
     ],
-    cta: text("Réserver un audit IA Santé & Bien-être", "Book a Health & Well-being AI audit"),
+    cta: text("Réserver un audit IA Santé, social & bien-être", "Book a Health & Well-being AI audit"),
     emailSubject: text(
       "Audit IA gratuit - Structurer vos priorités en santé, prévention et HSE",
       "Free AI audit - Structure your health, prevention, and HSE priorities"

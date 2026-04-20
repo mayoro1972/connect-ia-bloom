@@ -15,9 +15,9 @@ const sectionCopy = {
     highlights: [
       "100% gratuit et sans engagement",
       "Pensé pour les entreprises en Côte d'Ivoire et en Afrique",
-      "Retour et premiers axes d'action sous 48h",
+      "Accusé immédiat, puis accès au formulaire sous environ 30 minutes",
     ],
-    primaryCta: "Demander mon audit gratuit",
+    primaryCta: "Demander le formulaire d'audit",
     secondaryCta: "Voir les services entreprises",
   },
   en: {
@@ -28,9 +28,9 @@ const sectionCopy = {
     highlights: [
       "100% free and no commitment",
       "Built for companies in Côte d'Ivoire and across Africa",
-      "Initial feedback and action areas within 48h",
+      "Immediate acknowledgement, then questionnaire access in about 30 minutes",
     ],
-    primaryCta: "Request my free audit",
+    primaryCta: "Request the audit questionnaire",
     secondaryCta: "View enterprise services",
   },
 } as const;

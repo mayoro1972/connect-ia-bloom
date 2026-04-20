@@ -41,13 +41,13 @@ const AuditIAPage = () => {
                     href={directLinks.auditForm}
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                   >
-                    {isFr ? "Demander l'audit gratuit" : "Request the free audit"} <ArrowRight size={16} />
+                    {isFr ? "Demander le formulaire d'audit" : "Request the audit questionnaire"} <ArrowRight size={16} />
                   </a>
                   <Link
                     to={buildContactPath("demande-renseignement", isFr ? "Audit IA gratuit" : "Free AI audit")}
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/15"
                   >
-                    {isFr ? "Parler à un conseiller" : "Talk to an advisor"}
+                    {isFr ? "Parler à un expert" : "Speak with an expert"}
                   </Link>
                 </div>
               </div>
@@ -188,7 +188,7 @@ const AuditIAPage = () => {
                     href={directLinks.auditForm}
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                   >
-                    {isFr ? "Demander l'audit gratuit" : "Request the free audit"} <ArrowRight size={16} />
+                    {isFr ? "Demander le formulaire d'audit" : "Request the audit questionnaire"} <ArrowRight size={16} />
                   </a>
                   <Link
                     to={buildContactPath("demande-renseignement", isFr ? "Audit IA gratuit" : "Free AI audit")}

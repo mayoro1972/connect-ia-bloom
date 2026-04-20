@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Eye, EyeOff, LockKeyhole } from "lucide-react";
+import { ArrowRight, Clock3, LockKeyhole, MessageSquareText } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -15,7 +15,6 @@ type ProspectAuditFormState = {
   fullName: string;
   email: string;
   phone: string;
-  prospectType: string;
   profession: string;
   country: string;
   sector: string;
@@ -32,7 +31,6 @@ const emptyForm: ProspectAuditFormState = {
   fullName: "",
   email: "",
   phone: "",
-  prospectType: "",
   profession: "",
   country: "",
   sector: "",
@@ -64,40 +62,50 @@ const sectorOptions = [
   "Marketing & Communication",
   "Finance & Comptabilité",
   "Juridique & Conformité",
-  "Service Client",
-  "Data & Analyse",
+  "Service client & relation client",
+  "Données & Analyse",
   "Administration & Gestion",
   "Management & Leadership",
-  "IT & Transformation Digitale",
+  "Systèmes d'information & Transformation digitale",
   "Formation & Pédagogie",
-  "Santé & Bien-être",
+  "Santé, social & bien-être",
   "Diplomatie & Affaires Internationales",
   "Autres",
 ] as const;
 
-const prospectTypeOptions = {
-  fr: ["Entreprise", "Indépendant", "Particulier", "Institution", "ONG / Association"],
-  en: ["Company", "Independent", "Individual", "Institution", "NGO / Association"],
-} as const;
-
 const pageCopy = {
   fr: {
     badge: "Demande de formulaire d'audit IA",
-    title: "",
+    title: "Demandez votre formulaire d'audit",
+    intro:
+      "Partagez votre contexte en quelques minutes. Nous accusons réception immédiatement, puis nous vous envoyons l'accès sécurisé au formulaire multi-sectoriel.",
+    formTitle: "Votre demande",
     formLead:
       "Renseignez les informations essentielles pour recevoir votre formulaire, préparer le suivi et cadrer le besoin avec notre équipe.",
-    secureTitle: "Accès sécurisé",
-    secureLead:
-      "Votre adresse email servira d'identifiant sécurisé. Définissez uniquement le mot de passe qui vous permettra d'ouvrir le formulaire lorsqu'il vous sera envoyé.",
+    processTitle: "Ce qui va se passer",
+    processSteps: [
+      "Vous envoyez une demande courte adaptée au mobile.",
+      "Vous recevez un accusé de réception immédiatement.",
+      "Le formulaire d'audit vous est envoyé sous environ 30 minutes.",
+    ],
+    expertTitle: "Échange expert inclus",
+    expertLead:
+      "Votre demande prépare aussi un rendez-vous de cadrage pour relire le besoin, le secteur concerné et la meilleure manière d'aborder le questionnaire.",
+    accessTitle: "Accès sécurisé",
+    accessLead:
+      "Vous utiliserez votre adresse email et le mot de passe ci-dessous pour ouvrir le formulaire quand il vous sera envoyé.",
     appointmentPreference:
-      "Je souhaite un rendez-vous pour discuter de la fiche d'audit avant de la remplir.",
+      "Je confirme souhaiter un échange avec un expert TransferAI Africa avant de commencer le formulaire complet.",
+    appointmentRequiredTitle: "Confirmation requise",
+    appointmentRequiredDesc:
+      "Merci de confirmer que vous souhaitez un échange avec notre expert avant l'ouverture du formulaire d'audit.",
     privacy:
       "J'accepte que mes informations soient utilisées pour traiter ma demande d'audit et les échanges associés.",
     submit: "Envoyer ma demande",
     submitting: "Envoi en cours...",
     successTitle: "Demande envoyée",
     successDesc:
-      "Votre demande a bien été enregistrée. Un accusé de réception part immédiatement, puis le formulaire d'audit sera envoyé sous environ 30 minutes.",
+      "Votre demande a bien été enregistrée. Un accusé de réception part immédiatement, puis l'accès sécurisé au formulaire d'audit sera envoyé sous environ 30 minutes.",
     privacyErrorTitle: "Consentement requis",
     privacyErrorDesc: "Merci d'accepter le traitement de vos informations avant l'envoi.",
     passwordErrorTitle: "Mot de passe invalide",
@@ -106,40 +114,53 @@ const pageCopy = {
     errorDesc: "La demande n'a pas pu être envoyée. Vérifiez la configuration et réessayez.",
     labels: {
       fullName: "Nom complet",
-      prospectType: "Qualification du prospect",
-      profession: "Profession / Fonction",
+      profession: "Profession / fonction",
       email: "Adresse email",
       phone: "Téléphone",
       city: "Ville",
       country: "Pays",
       sector: "Secteur d'activité",
-      password: "Mot de passe",
+      password: "Mot de passe d'accès",
       confirmPassword: "Confirmer le mot de passe",
-      message: "Décrivez votre besoin",
     },
     placeholders: {
       sector: "Choisissez votre secteur d'activité",
-      prospectType: "Choisissez votre profil",
       message:
-        "Ex. : nous voulons identifier les tâches répétitives, réduire le temps de traitement des demandes, mieux structurer le reporting et préparer un premier plan d'action IA adapté à notre secteur.",
+        "Ex. : je souhaite identifier les tâches prioritaires à automatiser, clarifier les usages IA utiles à mon équipe et préparer un échange avec votre expert.",
     },
   },
   en: {
     badge: "AI audit form request",
-    title: "",
-    formLead: "Share the essential details needed to receive your questionnaire and prepare the follow-up.",
-    secureTitle: "Secure access",
-    secureLead:
-      "Your email address will serve as your secure login. You only need to create the password that will let you open the questionnaire when it is sent to you.",
+    title: "Request your audit questionnaire",
+    intro:
+      "Share your context in just a few minutes. We acknowledge your request immediately, then send you secure access to the multi-sector audit questionnaire.",
+    formTitle: "Your request",
+    formLead:
+      "Provide the key details needed to receive your questionnaire, prepare the follow-up, and scope the need with our team.",
+    processTitle: "What happens next",
+    processSteps: [
+      "You submit a short mobile-friendly request.",
+      "You receive an acknowledgement email immediately.",
+      "Your audit questionnaire access is sent within about 30 minutes.",
+    ],
+    expertTitle: "Expert discussion included",
+    expertLead:
+      "Your request also prepares a scoping conversation to review the need, the relevant sector, and the best way to approach the questionnaire.",
+    accessTitle: "Secure access",
+    accessLead:
+      "You will use your email address and the password below to open the questionnaire when it is sent to you.",
     appointmentPreference:
-      "I would like to schedule a meeting to discuss the audit questionnaire before filling it in.",
+      "I confirm that I would like to speak with a TransferAI Africa expert before starting the full questionnaire.",
+    appointmentRequiredTitle: "Confirmation required",
+    appointmentRequiredDesc:
+      "Please confirm that you would like to speak with our expert before opening the audit questionnaire.",
     privacy:
       "I agree that my information may be used to process my audit request and the related follow-up.",
     submit: "Send my request",
     submitting: "Sending...",
     successTitle: "Request sent",
     successDesc:
-      "Your request has been recorded. An acknowledgement email goes out immediately, then the audit questionnaire will be sent in about 30 minutes.",
+      "Your request has been recorded. An acknowledgement email goes out immediately, then secure access to the audit questionnaire will be sent in about 30 minutes.",
     privacyErrorTitle: "Consent required",
     privacyErrorDesc: "Please accept data processing before sending the request.",
     passwordErrorTitle: "Invalid password",
@@ -148,22 +169,19 @@ const pageCopy = {
     errorDesc: "The request could not be sent. Check the configuration and try again.",
     labels: {
       fullName: "Full name",
-      prospectType: "Prospect type",
-      profession: "Profession / Role",
+      profession: "Role / profession",
       email: "Email address",
       phone: "Phone",
       city: "City",
       country: "Country",
       sector: "Business sector",
-      password: "Password",
+      password: "Access password",
       confirmPassword: "Confirm password",
-      message: "Describe your need",
     },
     placeholders: {
       sector: "Choose your business sector",
-      prospectType: "Choose your profile",
       message:
-        "Example: we want to identify repetitive tasks, reduce request processing time, improve reporting, and define a first AI action plan adapted to our sector.",
+        "Example: I want to identify priority tasks to augment, clarify the most useful AI use cases for my team, and prepare an expert discussion.",
     },
   },
 } as const;
@@ -174,8 +192,7 @@ const ProspectRequestPage = () => {
   const copy = language === "en" ? pageCopy.en : pageCopy.fr;
   const [form, setForm] = useState<ProspectAuditFormState>(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const processIcons = [MessageSquareText, Clock3, LockKeyhole];
 
   const update = <K extends keyof ProspectAuditFormState>(key: K, value: ProspectAuditFormState[K]) =>
     setForm((current) => ({ ...current, [key]: value }));
@@ -183,38 +200,17 @@ const ProspectRequestPage = () => {
   const inputClass =
     "w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary/25";
 
-  const resolveSubmissionError = (message?: string | null) => {
-    if (!message) {
-      return copy.errorDesc;
-    }
-
-    if (message.includes("submit_contact_request")) {
-      return language === "en"
-        ? "The public database configuration for this form is not synchronized yet. Please try again once the latest backend update is deployed."
-        : "La configuration publique de la base pour ce formulaire n'est pas encore synchronisée. Merci de réessayer après déploiement de la dernière mise à jour backend.";
-    }
-
-    if (message.includes("invalid_phone")) {
-      return language === "en"
-        ? "Please enter a valid phone number with at least 8 digits."
-        : "Merci de renseigner un numéro de téléphone valide avec au moins 8 chiffres.";
-    }
-
-    if (message.includes("invalid_email")) {
-      return language === "en" ? "Please enter a valid email address." : "Merci de renseigner une adresse email valide.";
-    }
-
-    if (message.includes("contact_requests_prospect_username_idx") || message.includes("duplicate key value")) {
-      return language === "en"
-        ? "An audit request already exists for this email address. Please wait a few moments and try again; the latest update will reuse the existing prospect account."
-        : "Une demande d'audit existe déjà pour cette adresse email. Merci de patienter quelques instants puis de réessayer ; la dernière mise à jour réutilise désormais le compte prospect existant.";
-    }
-
-    return message;
-  };
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!form.wantsExpertAppointment) {
+      toast({
+        title: copy.appointmentRequiredTitle,
+        description: copy.appointmentRequiredDesc,
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (!form.privacyAccepted) {
       toast({
@@ -253,7 +249,7 @@ const ProspectRequestPage = () => {
       phone_input: form.phone.trim(),
       company_input: form.profession.trim(),
       profession_input: form.profession.trim(),
-      prospect_type_input: toOptionalValue(form.prospectType),
+      prospect_type_input: null,
       sector_input: toOptionalValue(form.sector),
       city_input: toOptionalValue(form.city),
       country_input: toOptionalValue(form.country),
@@ -297,7 +293,6 @@ const ProspectRequestPage = () => {
         language: activeLanguage,
         wants_expert_appointment: form.wantsExpertAppointment,
         profession: form.profession.trim() || null,
-        prospect_type: form.prospectType || null,
         sector: form.sector.trim() || null,
         source_page: "/demande-audit-gratuit",
       });
@@ -311,7 +306,7 @@ const ProspectRequestPage = () => {
     } else {
       toast({
         title: copy.errorTitle,
-        description: resolveSubmissionError(error.message),
+        description: copy.errorDesc,
         variant: "destructive",
       });
     }
@@ -327,12 +322,43 @@ const ProspectRequestPage = () => {
 
         <main className="relative z-10">
           <section className="px-4 py-16 lg:px-8">
-            <div className="container mx-auto max-w-5xl">
-              <div className="rounded-[34px] border border-[hsl(32_46%_84%)] bg-card p-8 shadow-[0_28px_80px_-58px_rgba(16,33,61,0.28)] md:p-10">
-                <p className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                  {copy.badge}
-                </p>
-                <p className="mt-5 max-w-3xl text-[1.05rem] leading-9 text-muted-foreground">{copy.formLead}</p>
+            <div className="container mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+              <div className="space-y-6">
+                <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(16,33,61,0.98),rgba(20,52,101,0.94))] p-8 text-white shadow-[0_30px_90px_-60px_rgba(16,33,61,0.7)] md:p-10">
+                  <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange-300">
+                    {copy.badge}
+                  </p>
+                  <h1 className="mt-5 font-heading text-4xl font-bold leading-tight md:text-5xl">{copy.title}</h1>
+                  <p className="mt-5 max-w-2xl text-sm leading-7 text-white/78 md:text-base">{copy.intro}</p>
+
+                  <div className="mt-8">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-300">{copy.processTitle}</p>
+                    <div className="mt-4 grid gap-4">
+                      {copy.processSteps.map((step, index) => {
+                        const Icon = processIcons[index];
+
+                        return (
+                          <div key={step} className="flex items-start gap-4 rounded-3xl border border-white/10 bg-white/10 p-4">
+                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-orange-300">
+                              <Icon size={20} />
+                            </div>
+                            <p className="text-sm leading-6 text-white/85">{step}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-[30px] border border-[hsl(30_52%_84%)] bg-[hsl(32_100%_98%)] p-6 shadow-[0_24px_70px_-56px_rgba(249,115,22,0.28)]">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{copy.expertTitle}</p>
+                  <p className="mt-3 text-sm leading-7 text-card-foreground">{copy.expertLead}</p>
+                </div>
+              </div>
+
+              <div className="rounded-[30px] border border-border bg-card p-8 shadow-[0_28px_80px_-58px_rgba(16,33,61,0.28)] md:p-10">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{copy.formTitle}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{copy.formLead}</p>
 
                 <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                   <div className="grid gap-4 md:grid-cols-2">
@@ -399,60 +425,35 @@ const ProspectRequestPage = () => {
                     required
                     value={form.message}
                     onChange={(event) => update("message", event.target.value)}
-                    className={`${inputClass} min-h-40`}
+                    className={`${inputClass} min-h-32`}
                   />
 
-                  <div className="rounded-[30px] border border-[hsl(32_46%_84%)] bg-[hsl(32_100%_98%)] p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="rounded-2xl bg-primary/10 p-3 text-primary">
-                        <LockKeyhole className="h-5 w-5" />
+                  <div className="rounded-[28px] border border-border bg-muted/40 p-5">
+                    <div className="flex items-start gap-3">
+                      <LockKeyhole className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                      <div>
+                        <p className="font-semibold text-card-foreground">{copy.accessTitle}</p>
+                        <p className="mt-1 text-sm leading-6 text-muted-foreground">{copy.accessLead}</p>
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-2xl font-semibold text-card-foreground">{copy.secureTitle}</p>
-                        <p className="mt-3 max-w-2xl text-[1.02rem] leading-8 text-muted-foreground">
-                          {copy.secureLead}
-                        </p>
-                        <div className="mt-6 grid gap-4 md:grid-cols-2">
-                          <div className="relative">
-                            <input
-                              placeholder={copy.labels.password}
-                              type={isPasswordVisible ? "text" : "password"}
-                              required
-                              value={form.password}
-                              onChange={(event) => update("password", event.target.value)}
-                              className={`${inputClass} pr-12`}
-                            />
-                            <button
-                              type="button"
-                              aria-label={isPasswordVisible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                              onClick={() => setIsPasswordVisible((current) => !current)}
-                              className="absolute inset-y-0 right-4 flex items-center text-muted-foreground transition-colors hover:text-card-foreground"
-                            >
-                              {isPasswordVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                            </button>
-                          </div>
-                          <div className="relative">
-                            <input
-                              placeholder={copy.labels.confirmPassword}
-                              type={isConfirmPasswordVisible ? "text" : "password"}
-                              required
-                              value={form.confirmPassword}
-                              onChange={(event) => update("confirmPassword", event.target.value)}
-                              className={`${inputClass} pr-12`}
-                            />
-                            <button
-                              type="button"
-                              aria-label={
-                                isConfirmPasswordVisible ? "Masquer la confirmation du mot de passe" : "Afficher la confirmation du mot de passe"
-                              }
-                              onClick={() => setIsConfirmPasswordVisible((current) => !current)}
-                              className="absolute inset-y-0 right-4 flex items-center text-muted-foreground transition-colors hover:text-card-foreground"
-                            >
-                              {isConfirmPasswordVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+
+                    <div className="mt-4 grid gap-4 md:grid-cols-2">
+                      <input
+                        placeholder={copy.labels.password}
+                        type="password"
+                        required
+                        value={form.password}
+                        onChange={(event) => update("password", event.target.value)}
+                        className={inputClass}
+                      />
+                      <input
+                        placeholder={copy.labels.confirmPassword}
+                        type="password"
+                        required
+                        value={form.confirmPassword}
+                        onChange={(event) => update("confirmPassword", event.target.value)}
+                        className={inputClass}
+                      />
                     </div>
                   </div>
 
@@ -464,7 +465,7 @@ const ProspectRequestPage = () => {
                     onChange={(event) => update("botField", event.target.value)}
                   />
 
-                  <label className="flex items-start gap-3 rounded-3xl border border-[hsl(30_52%_84%)] bg-[hsl(32_100%_98%)] p-5 text-sm leading-8 text-card-foreground">
+                  <label className="flex items-start gap-3 rounded-3xl border border-[hsl(30_52%_84%)] bg-[hsl(32_100%_98%)] p-5 text-sm leading-7 text-card-foreground">
                     <input
                       type="checkbox"
                       checked={form.wantsExpertAppointment}
@@ -474,7 +475,7 @@ const ProspectRequestPage = () => {
                     <span>{copy.appointmentPreference}</span>
                   </label>
 
-                  <label className="flex items-start gap-3 text-sm leading-8 text-muted-foreground">
+                  <label className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
                     <input
                       type="checkbox"
                       checked={form.privacyAccepted}
@@ -487,10 +488,10 @@ const ProspectRequestPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                   >
                     {isSubmitting ? copy.submitting : copy.submit}
-                    <ArrowRight size={18} />
+                    <ArrowRight size={16} />
                   </button>
                 </form>
               </div>
