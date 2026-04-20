@@ -1048,6 +1048,7 @@ const BackOfficePage = () => {
             </Tabs>
           </div>
         </section>
+        )}
         <Footer />
       </div>
     </PageTransition>
