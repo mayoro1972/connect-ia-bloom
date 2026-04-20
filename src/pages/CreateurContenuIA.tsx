@@ -337,6 +337,8 @@ const CreateurContenuIA = () => {
   const copy = creatorHubCopy[language === "en" ? "en" : "fr"];
   const { items: resources } = useResourceFeed();
   const { items: jobs, stats: jobStats, isLoading: jobsLoading } = useJobFeed();
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+  const availableSectors = getAvailableBlogSectors(resources.map((item) => item.sectorKey));
   const highlightedResources = resources.slice(0, 6);
   const highlightedJobs = jobs.slice(0, 6);
   const replays = (t("webinars.replays") as Array<Record<string, string>>) ?? [];
