@@ -113,6 +113,27 @@ export const renderNewsletterHtml = (issue: NewsletterIssueRecord) => {
     `
     : "";
 
+  const signatureBlock = `
+      <div style="margin:32px 0 0;padding-top:24px;border-top:1px solid #e2e8f0;">
+        <p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#f97316;">
+          ${issue.language === "en" ? "Signature" : "Signature"}
+        </p>
+        <p style="margin:0 0 10px;font-size:15px;line-height:1.7;color:#475569;">
+          ${issue.language === "en"
+            ? "With gratitude,"
+            : "Avec reconnaissance,"}
+        </p>
+        <p style="margin:0;font-size:16px;line-height:1.7;color:#0f172a;font-weight:700;">
+          Marius Ayoro
+        </p>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.6;color:#64748b;">
+          ${issue.language === "en"
+            ? "Founder, TransferAI"
+            : "Fondateur, TransferAI"}
+        </p>
+      </div>
+    `;
+
   return `
     <!doctype html>
     <html lang="${issue.language}">
@@ -141,6 +162,7 @@ export const renderNewsletterHtml = (issue: NewsletterIssueRecord) => {
             ${promptBlock}
             ${bodyBlock}
             ${ctaBlock}
+            ${signatureBlock}
           </div>
         </div>
       </body>

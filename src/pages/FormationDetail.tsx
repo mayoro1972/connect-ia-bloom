@@ -260,7 +260,7 @@ const FormationDetailPage = () => {
   const { t, language } = useLanguage();
   const { getTitle, getDuration, getLevel, getFormat, getPrice } = useFormationLocale();
   const formation = formations.find((item) => item.id === id);
-  const locationLabel = language === "fr" ? "Abidjan, Cote d'Ivoire" : "Abidjan, Ivory Coast";
+  const locationLabel = language === "fr" ? "Abidjan, Côte d'Ivoire" : "Abidjan, Ivory Coast";
 
   if (!formation) {
     return (

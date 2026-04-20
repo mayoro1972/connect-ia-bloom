@@ -198,7 +198,7 @@ const InscriptionPage = () => {
     toast({
       title: t("inscription.toastTitle"),
       description: notificationError
-        ? "Votre inscription a bien ete enregistree. La confirmation email sera activee des que la messagerie sera configuree."
+        ? "Votre inscription a bien été enregistrée. L'email de confirmation sera activé dès que la messagerie sera configurée."
         : t("inscription.toastDesc"),
     });
     trackAnalyticsEvent("registration_request_submitted", {

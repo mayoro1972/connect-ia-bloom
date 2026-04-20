@@ -349,7 +349,7 @@ const ContactPage = () => {
   const resolvedSubmitLabel = isCatalogIntent
     ? language === "en"
       ? "Send my catalogue request"
-      : "Envoyer ma demande de Catalogue"
+      : "Envoyer ma demande de catalogue"
     : isStrategicPartnershipIntent
       ? language === "en"
         ? "Send my partnership request"
@@ -518,7 +518,7 @@ const ContactPage = () => {
     toast({
       title: t("contact.toastTitle"),
       description: notificationError
-        ? "Votre demande a bien ete enregistree. L'accuse de reception email sera active des que la messagerie sera configuree."
+        ? "Votre demande a bien été enregistrée. L'accusé de réception par email sera activé dès que la messagerie sera configurée."
         : t("contact.toastDesc"),
     });
 

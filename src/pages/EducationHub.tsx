@@ -18,7 +18,7 @@ import { buildContactPath } from "@/lib/site-links";
 
 const educationCopy = {
   fr: {
-    badge: "Education",
+    badge: "Éducation",
     title: "Choisissez le bon format pour apprendre l'IA",
     subtitle:
       "Allez directement vers le bon format selon votre métier, votre niveau et votre objectif.",
@@ -32,7 +32,7 @@ const educationCopy = {
         icon: BookOpen,
       },
       {
-        title: "Parcours guides",
+        title: "Parcours guidés",
         desc: "Être guidé vers le bon parcours selon son profil.",
         cta: "Voir les parcours",
         href: "/parcours",
