@@ -16,17 +16,21 @@ import {
   Users,
   Youtube,
 } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
+import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { buildContactPath } from "@/lib/site-links";
 import { isResourceNew } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { useJobFeed } from "@/hooks/useJobFeed";
+import { getAvailableBlogSectors } from "@/lib/blog-domains";
 
 const creatorHubCopy = {
   fr: {
