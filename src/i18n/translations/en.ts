@@ -4,7 +4,8 @@ const rawEn = {
   nav: {
     home: "HOME",
     education: "LEARN",
-    services: "BUSINESS",
+    services: "SERVICES",
+    auditIA: "FREE AI AUDIT",
     resources: "RESOURCES",
     about: "ABOUT",
     educationOverview: "OVERVIEW",
