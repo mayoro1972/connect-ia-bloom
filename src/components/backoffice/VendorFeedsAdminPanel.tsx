@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Loader2, RefreshCcw, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { invokeContentAdmin } from "@/lib/content-admin";
+import { invokeAdminEdgeFunction } from "@/lib/content-admin";
+
+type VendorFeedsAdminPanelProps = {
+  token: string;
+};
 
 type SyncResult = {
   feed: string;
@@ -22,21 +26,27 @@ type SyncResponse = {
   error?: string;
 };
 
-const VendorFeedsAdminPanel = () => {
+const VendorFeedsAdminPanel = ({ token }: VendorFeedsAdminPanelProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [lastResults, setLastResults] = useState<SyncResult[] | null>(null);
   const [summary, setSummary] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const runSync = async () => {
+    if (!token.trim()) {
+      setErrorMessage("Token admin manquant.");
+      return;
+    }
     setIsLoading(true);
     setErrorMessage("");
     setSummary("");
 
     try {
-      const response = (await invokeContentAdmin("ai-vendor-feeds-sync", {
-        per_feed_limit: 6,
-      })) as SyncResponse;
+      const response = await invokeAdminEdgeFunction<SyncResponse>(
+        token,
+        "ai-vendor-feeds-sync",
+        { per_feed_limit: 6 },
+      );
 
       if (response.error) {
         setErrorMessage(response.error);
