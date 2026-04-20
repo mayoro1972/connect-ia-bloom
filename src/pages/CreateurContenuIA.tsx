@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  BellRing,
   BriefcaseBusiness,
   Clock,
   ExternalLink,
@@ -13,7 +12,6 @@ import {
   PlayCircle,
   Radar,
   Sparkles,
-  Users,
   Youtube,
 } from "lucide-react";
 import { useState } from "react";
@@ -420,40 +418,6 @@ const CreateurContenuIA = () => {
               ))}
             </div>
 
-            <div className="grid gap-12 xl:grid-cols-[0.9fr_1.1fr] mb-16">
-              <div>
-                <h2 className="font-heading text-2xl font-bold text-foreground mb-6">{copy.valueTitle}</h2>
-                <div className="space-y-3">
-                  {copy.valueItems.map((item) => (
-                    <div key={item} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
-                      <BellRing size={18} className="mt-0.5 shrink-0 text-primary" />
-                      <p className="text-sm text-card-foreground">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h2 className="font-heading text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-                  <Users size={24} className="text-primary" /> {copy.audiencesTitle}
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {copy.audiences.map((audience, index) => (
-                    <motion.div
-                      key={audience.title}
-                      initial={{ opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.05 }}
-                      className="bg-card border border-border rounded-xl p-5 text-center hover-lift"
-                    >
-                      <h4 className="font-heading font-semibold text-sm text-card-foreground mb-1">{audience.title}</h4>
-                      <p className="text-xs text-muted-foreground">{audience.desc}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
             <div className="mb-16">
               <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
                 <h2 className="font-heading text-2xl font-bold text-foreground">{copy.recentTitle}</h2>
@@ -679,20 +643,7 @@ const CreateurContenuIA = () => {
               )}
             </div>
 
-            <div className="grid gap-12 xl:grid-cols-[1fr_0.95fr] mb-16">
-              <div className="rounded-2xl border border-border bg-card p-8">
-                <h2 className="font-heading text-2xl font-bold text-card-foreground mb-4">{copy.newsletterTitle}</h2>
-                <p className="text-muted-foreground mb-6">{copy.newsletterDesc}</p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {copy.newsletterBlocks.map((block) => (
-                    <div key={block.title} className="rounded-xl border border-border bg-muted/30 p-4">
-                      <h3 className="font-heading font-semibold text-sm text-card-foreground mb-1">{block.title}</h3>
-                      <p className="text-xs leading-relaxed text-muted-foreground">{block.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
+            <div className="mb-16">
               <div className="rounded-[28px] border border-primary/10 bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))] p-8">
                 <h3 className="font-heading text-2xl font-bold mb-4" style={{ color: "hsl(0 0% 98%)" }}>
                   {copy.ctaTitle}
