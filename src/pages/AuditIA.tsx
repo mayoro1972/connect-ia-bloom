@@ -145,62 +145,6 @@ const AuditIAPage = () => {
             </div>
           </section>
 
-          <section className="px-4 py-16 lg:px-8">
-            <div className="container mx-auto">
-              <div className="max-w-4xl">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                  {isFr ? auditOfferContent.sectorsTitle.fr : auditOfferContent.sectorsTitle.en}
-                </p>
-                <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
-                  {isFr ? auditOfferContent.sectorsLead.fr : auditOfferContent.sectorsLead.en}
-                </p>
-              </div>
-
-              <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-                {auditDomainMessages.map((sector) => (
-                  <article key={sector.key} className="rounded-[26px] border border-border bg-card p-6 shadow-[0_24px_60px_-48px_rgba(16,33,61,0.2)]">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                      {isFr ? sector.domain.fr : sector.domain.en}
-                    </p>
-                    <p className="mt-3 text-sm font-medium leading-6 text-card-foreground">
-                      {isFr ? sector.audience.fr : sector.audience.en}
-                    </p>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                      {isFr ? sector.whyAuditMatters.fr : sector.whyAuditMatters.en}
-                    </p>
-
-                    <div className="mt-5">
-                      <h3 className="font-heading text-base font-bold text-card-foreground">
-                        {isFr ? "Ce que l'audit regarde" : "What the audit examines"}
-                      </h3>
-                      <ul className="mt-3 space-y-2">
-                        {(isFr ? sector.auditFocus.map((item) => item.fr) : sector.auditFocus.map((item) => item.en)).map((item) => (
-                          <li key={item} className="flex items-start gap-2 text-sm leading-6 text-muted-foreground">
-                            <CheckCircle2 size={16} className="mt-1 shrink-0 text-primary" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mt-5 rounded-2xl border border-[hsl(30_52%_84%)] bg-[hsl(32_100%_98%)] p-4">
-                      <h4 className="font-heading text-sm font-bold text-card-foreground">
-                        {isFr ? "Bénéfices attendus" : "Expected benefits"}
-                      </h4>
-                      <ul className="mt-3 space-y-2">
-                        {(isFr ? sector.businessBenefits.map((item) => item.fr) : sector.businessBenefits.map((item) => item.en)).map((item) => (
-                          <li key={item} className="text-sm leading-6 text-muted-foreground">
-                            - {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
           <section className="px-4 pb-20 lg:px-8">
             <div className="container mx-auto">
               <div className="rounded-[30px] border border-[hsl(30_55%_82%)] bg-[linear-gradient(135deg,hsl(32_100%_98%),hsl(28_62%_95%))] p-8 shadow-[0_28px_80px_-56px_rgba(249,115,22,0.35)] md:p-10">
