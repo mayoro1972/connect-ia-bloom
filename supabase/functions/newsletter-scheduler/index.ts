@@ -192,6 +192,10 @@ Deno.serve(async (request) => {
       return json(200, { data: await runSendApproved() });
     }
 
+    if (action === "weekly-auto") {
+      return json(200, { data: await runWeeklyAuto() });
+    }
+
     return json(400, { error: "Unsupported action." });
   } catch (error) {
     return json(400, { error: error instanceof Error ? error.message : "newsletter_scheduler_failed" });
