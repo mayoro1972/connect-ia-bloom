@@ -180,10 +180,10 @@ const AuditIAPage = () => {
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
                   {isFr ? auditOfferContent.ctaTitle.fr : auditOfferContent.ctaTitle.en}
                 </p>
-                <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+                <p className="mt-4 text-base leading-8 text-muted-foreground">
                   {isFr ? auditOfferContent.ctaDesc.fr : auditOfferContent.ctaDesc.en}
                 </p>
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 flex flex-wrap justify-center gap-3">
                   <a
                     href={directLinks.auditForm}
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
