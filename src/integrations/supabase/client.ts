@@ -18,11 +18,13 @@ const createUnavailableSupabaseClient = () => {
     select: (...args: unknown[]) => typeof queryBuilder;
     eq: (...args: unknown[]) => typeof queryBuilder;
     order: (...args: unknown[]) => typeof queryBuilder;
+    limit: (...args: unknown[]) => typeof queryBuilder;
     then: (onFulfilled: (value: typeof result) => unknown) => Promise<unknown>;
   } = {
     select: () => queryBuilder,
     eq: () => queryBuilder,
     order: () => queryBuilder,
+    limit: () => queryBuilder,
     then: (onFulfilled) => Promise.resolve(onFulfilled(result)),
   };
 
