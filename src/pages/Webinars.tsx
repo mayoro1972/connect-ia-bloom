@@ -149,7 +149,7 @@ const Webinars = () => {
                   </div>
 
                   <Link
-                    to={`/webinaires/inscription?webinar=${encodeURIComponent(webinar.title)}`}
+                    to={`/webinaires/inscription?topic=${encodeURIComponent(webinar.title)}`}
                     className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-orange-gradient px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                   >
                     {copy.cta}

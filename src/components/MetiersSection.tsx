@@ -124,7 +124,7 @@ const MetiersSection = () => {
                   </span>
                 </div>
                 <Link
-                  to={`/webinaires/inscription?webinar=${encodeURIComponent(webinar.title)}`}
+                  to={`/webinaires/inscription?topic=${encodeURIComponent(webinar.title)}`}
                   className="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-coral-gradient px-4 py-2.5 text-sm font-semibold transition-all hover:scale-[1.02] hover:opacity-90"
                   style={{ color: "hsl(0 0% 100%)" }}
                 >

@@ -119,7 +119,7 @@ const WebinarRegistration = () => {
   const t = copy[lang];
   const [params] = useSearchParams();
 
-  const initialTopic = params.get("topic") ?? "";
+  const initialTopic = params.get("topic") ?? params.get("webinar") ?? "";
   const initialDate = params.get("date") ?? "";
   const initialMotivation = initialTopic
     ? lang === "fr"
