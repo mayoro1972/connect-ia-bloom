@@ -148,12 +148,17 @@ Deno.serve(async (req: Request) => {
     }
 
     if (inviteToken && targetResponseId) {
+      const invitationUpdate: Record<string, unknown> = {
+        response_id: targetResponseId,
+      };
+
+      if (completionPercentage >= 80) {
+        invitationUpdate.status = "completed";
+      }
+
       await supabase
         .from("form_invitations")
-        .update({
-          status: "completed",
-          response_id: targetResponseId,
-        })
+        .update(invitationUpdate)
         .eq("invite_token", inviteToken);
     }
 

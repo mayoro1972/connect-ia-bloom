@@ -70,6 +70,7 @@ Deno.serve(async (request) => {
     .select("id, full_name, email, profession, company, country, sector, prospect_username, prospect_password_hash, prospect_portal_status, audit_invite_token, audit_invite_expires_at")
     .eq("request_intent", "demande-audit")
     .or(`email.eq.${identifier},prospect_username.eq.${identifier}`)
+    .order("created_at", { ascending: false })
     .limit(5);
 
   if (error) {
@@ -91,13 +92,34 @@ Deno.serve(async (request) => {
     });
   }
 
-  const existingInviteStillValid =
+  const existingTokenStillValid =
     row.audit_invite_token &&
     row.audit_invite_expires_at &&
     new Date(row.audit_invite_expires_at).getTime() > Date.now();
 
   let inviteToken = row.audit_invite_token ?? null;
   let inviteExpiresAt = row.audit_invite_expires_at ?? null;
+  let existingInviteStillValid = false;
+
+  if (existingTokenStillValid && inviteToken) {
+    const { data: existingInvitation, error: existingInvitationError } = await supabase
+      .from("form_invitations")
+      .select("expires_at, status")
+      .eq("invite_token", inviteToken)
+      .maybeSingle();
+
+    if (existingInvitationError) {
+      return new Response(JSON.stringify({ error: existingInvitationError.message }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    existingInviteStillValid =
+      Boolean(existingInvitation) &&
+      existingInvitation?.status !== "expired" &&
+      new Date(existingInvitation?.expires_at ?? 0).getTime() > Date.now();
+  }
 
   if (!existingInviteStillValid) {
     inviteToken = generateInviteToken();

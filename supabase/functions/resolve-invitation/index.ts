@@ -46,7 +46,7 @@ Deno.serve(async (request: Request) => {
     const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
     const { data, error } = await supabase
       .from("form_invitations")
-      .select("invitee_name, invitee_email, expires_at, status, draft_form_data")
+      .select("invitee_name, invitee_email, expires_at, status, draft_form_data, response_id")
       .eq("invite_token", normalizedInviteToken)
       .maybeSingle();
 
@@ -58,10 +58,6 @@ Deno.serve(async (request: Request) => {
       return jsonResponse({ error: "Invitation invalide ou introuvable." }, 404);
     }
 
-    if (data.status === "completed") {
-      return jsonResponse({ error: "Cette invitation a deja ete utilisee." }, 409);
-    }
-
     if (new Date(data.expires_at).getTime() < Date.now()) {
       await supabase
         .from("form_invitations")
@@ -71,16 +67,60 @@ Deno.serve(async (request: Request) => {
       return jsonResponse({ error: "Cette invitation a expire." }, 410);
     }
 
+    let savedFormData: Record<string, unknown> | null = null;
+
+    if (data.response_id) {
+      const { data: responseData, error: responseError } = await supabase
+        .from("form_responses")
+        .select("form_data")
+        .eq("id", data.response_id)
+        .maybeSingle();
+
+      if (responseError) {
+        return jsonResponse({ error: responseError.message }, 500);
+      }
+
+      savedFormData =
+        responseData?.form_data && typeof responseData.form_data === "object" && !Array.isArray(responseData.form_data)
+          ? responseData.form_data
+          : null;
+    }
+
+    if (!savedFormData) {
+      const { data: latestResponse, error: latestResponseError } = await supabase
+        .from("form_responses")
+        .select("form_data")
+        .eq("invitation_token", normalizedInviteToken)
+        .order("submitted_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (latestResponseError) {
+        return jsonResponse({ error: latestResponseError.message }, 500);
+      }
+
+      savedFormData =
+        latestResponse?.form_data && typeof latestResponse.form_data === "object" && !Array.isArray(latestResponse.form_data)
+          ? latestResponse.form_data
+          : null;
+    }
+
+    const draftFormData =
+      data.draft_form_data && typeof data.draft_form_data === "object" && !Array.isArray(data.draft_form_data)
+        ? data.draft_form_data
+        : {};
+
     return jsonResponse({
       success: true,
       invitation: {
         invitee_name: data.invitee_name,
         invitee_email: data.invitee_email,
         expires_at: data.expires_at,
-        draft_form_data:
-          data.draft_form_data && typeof data.draft_form_data === "object" && !Array.isArray(data.draft_form_data)
-            ? data.draft_form_data
-            : {},
+        status: data.status,
+        draft_form_data: {
+          ...draftFormData,
+          ...(savedFormData ?? {}),
+        },
       },
     });
   } catch (error) {
