@@ -27,6 +27,25 @@ Important :
 ## Fonction concernee
 
 - `supabase/functions/send-prospect-emails/index.ts`
+- `supabase/functions/process-prospect-followups/index.ts`
+
+## Suivi automatique du formulaire d'audit
+
+Le probleme d'envoi differe du formulaire d'audit est regle pour les prochains prospects.
+
+Il n'est pas necessaire de faire un push ou un declenchement manuel a chaque nouvelle demande. Le cron Supabase `transferai-audit-followups` est actif toutes les 5 minutes et appelle automatiquement la fonction `process-prospect-followups`.
+
+Flux attendu :
+
+1. Le prospect demande l'audit.
+2. Il recoit l'accuse de reception immediatement.
+3. La demande est mise en attente avec une echeance a environ 30 minutes.
+4. Le cron passe toutes les 5 minutes.
+5. Des que l'echeance est atteinte, l'email d'acces au portail securise est envoye automatiquement.
+
+En pratique, l'email peut partir autour de 30 a 35 minutes apres la demande, selon le passage du cron.
+
+Apres correction et verification, aucun suivi audit n'etait en retard ni en echec.
 
 ## Langue des emails
 
