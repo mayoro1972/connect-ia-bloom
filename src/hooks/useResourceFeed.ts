@@ -23,6 +23,13 @@ const mapResourceRow = (row: ResourcePostRow): ResourceFeedItem => ({
   isNewManual: row.is_new_manual,
 });
 
+const mergeWithFallbackResources = (dynamicItems: ResourceFeedItem[]) => {
+  const seenSlugs = new Set(dynamicItems.map((item) => item.slug));
+  const missingFallbackItems = resourceFeedFallback.filter((item) => !seenSlugs.has(item.slug));
+
+  return sortResourceFeed([...dynamicItems, ...missingFallbackItems]);
+};
+
 export function useResourceFeed() {
   const [items, setItems] = useState<ResourceFeedItem[]>(sortResourceFeed(resourceFeedFallback));
   const [isLoading, setIsLoading] = useState(isSupabaseConfigured);
@@ -58,7 +65,7 @@ export function useResourceFeed() {
         return;
       }
 
-      setItems(sortResourceFeed(data.map(mapResourceRow)));
+      setItems(mergeWithFallbackResources(data.map(mapResourceRow)));
       setIsLoading(false);
     };
 
@@ -78,4 +85,3 @@ export function useResourceFeed() {
     [items, isLoading],
   );
 }
-
