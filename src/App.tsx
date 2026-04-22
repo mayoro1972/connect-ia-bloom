@@ -229,6 +229,7 @@ const AnimatedRoutes = () => {
           <Route path="/plan-du-site" element={<Sitemap />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/seminaires" element={<Seminaires />} />
+          <Route path="/webinaires-gratuits" element={<Webinars />} />
           <Route path="/webinars" element={<Webinars />} />
           <Route path="/webinaires/inscription" element={<WebinarRegistration />} />
           <Route path="/webinars/register" element={<WebinarRegistration />} />

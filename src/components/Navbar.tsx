@@ -39,6 +39,7 @@ const navItems: NavItem[] = [
     key: "resources",
     children: [
       { key: "blog", href: "/blog" },
+      { key: "freeWebinars", href: "/webinaires-gratuits" },
       { key: "aiTools", href: "/outils-ia" },
     ],
   },

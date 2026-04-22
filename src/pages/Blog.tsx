@@ -36,11 +36,13 @@ const BlogPage = () => {
   const content = t("blog");
   const quickLinks = language === "en"
     ? [
+        { label: "Free webinars", href: "/webinaires-gratuits" },
         { label: "AI certification", href: "/certification" },
         { label: "Recommended tools", href: "/outils-ia" },
         { label: "Training catalogue", href: "/catalogue" },
       ]
     : [
+        { label: "Webinaires gratuits", href: "/webinaires-gratuits" },
         { label: "Certification IA", href: "/certification" },
         { label: "Outils recommandés", href: "/outils-ia" },
         { label: "Catalogue de formation", href: "/catalogue" },
@@ -177,12 +179,25 @@ const BlogPage = () => {
           </div>
 
           {items.length === 0 ? (
-            <div className="rounded-2xl border border-border bg-card p-8 text-center">
-              <h2 className="font-heading text-2xl font-bold text-card-foreground">{content.emptyTitle}</h2>
-              <p className="mt-3 text-sm text-muted-foreground">{content.emptyDesc}</p>
+            <div className="space-y-8">
+              <BlogNewsletterSignup
+                availableSectors={availableSectors}
+                defaultSector={null}
+                sourcePage={`/blog${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+              />
+              <div className="rounded-2xl border border-border bg-card p-8 text-center">
+                <h2 className="font-heading text-2xl font-bold text-card-foreground">{content.emptyTitle}</h2>
+                <p className="mt-3 text-sm text-muted-foreground">{content.emptyDesc}</p>
+              </div>
             </div>
           ) : (
             <div className="space-y-10">
+              <BlogNewsletterSignup
+                availableSectors={availableSectors}
+                defaultSector={availableSectors.find((sector) => getBlogSectorSlug(sector) === activeDomain) ?? null}
+                sourcePage={`/blog${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+              />
+
               <div className="rounded-[1.75rem] border border-border bg-card p-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
@@ -325,12 +340,6 @@ const BlogPage = () => {
                   ) : null}
                 </>
               )}
-
-              <BlogNewsletterSignup
-                availableSectors={availableSectors}
-                defaultSector={availableSectors.find((sector) => getBlogSectorSlug(sector) === activeDomain) ?? null}
-                sourcePage={`/blog${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
-              />
             </div>
           )}
         </div>

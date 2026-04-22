@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, CheckCircle2, Mail, Sparkles } from "lucide-react";
 import { supabase, isSupabaseConfigured, supabaseUnavailableMessage } from "@/integrations/supabase/client";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getBlogSectorSlug, resolveBlogSectorLabel } from "@/lib/blog-domains";
+import { getBlogSectorSlug, resolveBlogSectorLabel, transferAiNewsletterDomains } from "@/lib/blog-domains";
 import { toast } from "@/components/ui/use-toast";
 
 type BlogNewsletterSignupProps = {
@@ -36,8 +36,16 @@ const BlogNewsletterSignup = ({
   }, [defaultSector]);
 
   const suggestedSectors = useMemo(
-    () => availableSectors.slice(0, compact ? 6 : 8),
-    [availableSectors, compact],
+    () =>
+      Array.from(
+        new Map(
+          [...transferAiNewsletterDomains, ...availableSectors].map((sector) => [
+            getBlogSectorSlug(sector),
+            sector,
+          ]),
+        ).values(),
+      ),
+    [availableSectors],
   );
 
   const toggleSector = (sector: string) => {
@@ -120,13 +128,39 @@ const BlogNewsletterSignup = ({
         </div>
 
         <div className="rounded-2xl bg-background px-4 py-3 text-sm text-muted-foreground">
-          <span className="font-semibold text-card-foreground">{selectedSectors.length}</span>{" "}
-          {content.newsletterSelectedLabel}
+          {selectedSectors.length > 0 ? (
+            <>
+              <span className="font-semibold text-card-foreground">{selectedSectors.length}</span>{" "}
+              {content.newsletterSelectedLabel}
+            </>
+          ) : (
+            <span className="font-semibold text-card-foreground">{content.newsletterSelectedEmptyLabel}</span>
+          )}
         </div>
       </div>
 
       <div className={`mt-6 grid gap-6 ${compact ? "lg:grid-cols-[1.2fr_0.8fr]" : "lg:grid-cols-[1.4fr_0.6fr]"}`}>
         <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="rounded-[1.5rem] border border-primary/15 bg-primary/5 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+              {content.newsletterWeeklyTitle}
+            </p>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {[
+                content.newsletterWeeklyPoint1,
+                content.newsletterWeeklyPoint2,
+                content.newsletterWeeklyPoint3,
+                content.newsletterWeeklyPoint4,
+                content.newsletterWeeklyPoint5,
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2 text-sm text-card-foreground">
+                  <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-2">
             <label htmlFor="newsletter-email" className="text-sm font-semibold text-card-foreground">
               {content.newsletterEmailLabel}
@@ -175,9 +209,7 @@ const BlogNewsletterSignup = ({
                 );
               })}
             </div>
-            {availableSectors.length > suggestedSectors.length ? (
-              <p className="text-xs text-muted-foreground">{content.newsletterMoreDomains}</p>
-            ) : null}
+            <p className="text-xs text-muted-foreground">{content.newsletterMoreDomains}</p>
           </div>
         </form>
 

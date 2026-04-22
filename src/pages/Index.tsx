@@ -17,9 +17,9 @@ const Index = () => {
         <AnimatedLogoWatermarks />
         <Navbar />
         <HeroSection />
+        <MetiersSection />
         <HomeEntrySection />
         <HomeAuditSection />
-        <MetiersSection />
         <WhyUsSection />
         <HomeTrustSection />
         <CTASection />

@@ -8,50 +8,44 @@ import {
   MapPin,
   Mic,
   Music2,
-  Newspaper,
   PlayCircle,
   Radar,
   Sparkles,
   Users,
   Youtube,
 } from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
-import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { buildContactPath, buildEmploymentContactPath, buildReplayWatchUrl } from "@/lib/site-links";
+import { buildEmploymentContactPath, buildReplayWatchUrl } from "@/lib/site-links";
 import { isResourceNew } from "@/lib/resource-feed";
-import { useResourceFeed } from "@/hooks/useResourceFeed";
 import { useJobFeed } from "@/hooks/useJobFeed";
-import { getAvailableBlogSectors } from "@/lib/blog-domains";
 
 const creatorHubCopy = {
   fr: {
-    title: "Media, veille & opportunites IA",
+    title: "Média IA & opportunités",
     subtitle:
-      "Le hub éditorial pour apprendre l'IA, suivre les nouveautés utiles, nourrir la newsletter et faire remonter les opportunités qui comptent pour l'Afrique et la Côte d'Ivoire.",
+      "Le pôle média et opportunités de TransferAI : produire des contenus courts, valoriser les replays, orienter vers la newsletter et connecter les talents aux débouchés IA.",
     missionTitle: "Notre mission : transformer l'IA en avantage concret",
     missionDesc:
-      "Nous ne publions pas du contenu pour faire joli. Nous construisons un média utile pour les professionnels, étudiants, entrepreneurs et talents africains qui veulent gagner du temps, trouver des cas d'usage métier, comprendre les nouveautés IA et accéder plus vite aux opportunités de formation et d'emploi.",
-    growthTitle: "Le moteur éditorial pour viser une forte audience qualifiée",
+      "Cette page présente le dispositif média et opportunités de TransferAI. La veille éditoriale complète vit désormais dans Ressources & Veille IA ; ici, nous mettons l'accent sur les formats de diffusion, les replays et la mise en relation emploi.",
+    growthTitle: "Le moteur média pour convertir l'audience en abonnés puis en apprenants",
     growthItems: [
       {
         title: "Newsletter métier hebdomadaire",
-        desc: "Chaque semaine : 3 outils utiles, 3 prompts actionnables, 1 cas d'usage africain, 1 nouveauté IA importante et 1 opportunité à surveiller.",
+        desc: "La newsletter est centralisée dans Ressources & Veille IA afin d'éviter les doublons et de concentrer toute la veille au même endroit.",
       },
       {
         title: "Micro-contenus à forte portée",
         desc: "TikTok et Shorts orientés résultats : astuces en 30 à 60 secondes, avant/après, workflows simples et appels à l'action vers la newsletter.",
       },
       {
-        title: "Veille IA Afrique + emploi",
-        desc: "Une veille ciblée sur ce qui peut réellement impacter la Côte d'Ivoire, les secteurs africains clés et les missions freelance ou jobs liés à l'IA.",
+        title: "Opportunités IA + mise en relation",
+        desc: "Un espace dédié aux emplois, missions, stages et collaborations IA à qualifier avant contact humain ou orientation vers les partenaires.",
       },
     ],
     channelsTitle: "Les canaux à privilégier pour attirer et retenir",
@@ -74,7 +68,7 @@ const creatorHubCopy = {
       },
       {
         title: "Newsletter",
-        desc: "Le format le plus rentable pour former dans le day-to-day job : outils, prompts, modèles, liens utiles, veille et opportunités.",
+        desc: "Le point d'entrée officiel vers Ressources & Veille IA : tips métier, prompts, nouveautés, 13 domaines et opportunités.",
         frequency: "1 édition / semaine",
         icon: Mail,
         color: "text-[hsl(174,70%,42%)]",
@@ -89,16 +83,14 @@ const creatorHubCopy = {
         bg: "bg-[hsl(145,65%,42%)]/10",
       },
       {
-        title: "Veille IA & opportunités",
-        desc: "Rubrique vivante pour pousser les nouveautés, les usages qui comptent pour l'Afrique et les opportunités emploi/freelance les plus pertinentes.",
+        title: "Opportunités & mise en relation",
+        desc: "Rubrique vivante pour qualifier les opportunités emploi/freelance et faciliter les demandes de mise en relation pertinentes.",
         frequency: "mise à jour continue",
         icon: Radar,
         color: "text-primary",
         bg: "bg-primary/10",
       },
     ],
-    recentTitle: "Contenus récents et signaux à forte valeur",
-    recentBadge: "Flux dynamique",
     newBadge: "Nouveau",
     sourceLabel: "Source",
     jobsTitle: "Emploi IA & opportunités",
@@ -119,7 +111,7 @@ const creatorHubCopy = {
       "PeoplePerHour",
       "Veille missions remote IA",
     ],
-    jobsEmptyTitle: "La veille emploi IA est prête à être alimentée",
+    jobsEmptyTitle: "La rubrique emploi IA est prête à être alimentée",
     jobsEmptyDesc:
       "La structure est en place pour publier des offres filtrées, qualifiées et orientées IA. Dès qu'une source est branchée ou qu'une veille manuelle est publiée, cette section devient active.",
     jobsLoading: "Chargement des opportunités...",
@@ -146,30 +138,30 @@ const creatorHubCopy = {
     replaysLiveLink: "Voir les prochains webinaires en direct",
     ctaTitle: "Construire la communauté, former et ouvrir des débouchés",
     ctaDesc:
-      "Nous pouvons faire de cette rubrique un vrai moteur d'acquisition et de transformation: contenus dynamiques, veille sectorielle, opportunités emploi et contact direct pour la mise en relation.",
-    ctaPrimary: "Recevoir la newsletter",
+      "Nous pouvons faire de cette rubrique un vrai moteur d'acquisition et de transformation : contenus courts, replays, opportunités emploi et contact direct pour la mise en relation.",
+    ctaPrimary: "Voir Ressources & Veille IA",
     ctaSecondary: "Parler emploi & mise en relation",
   },
   en: {
-    title: "Media, watch & AI opportunities",
+    title: "AI media & opportunities",
     subtitle:
-      "The editorial hub to learn AI, track useful updates, power the newsletter and surface the opportunities that matter for Africa and Côte d'Ivoire.",
+      "TransferAI's media and opportunities hub: produce short-form content, highlight replays, route visitors to the newsletter and connect talent with AI opportunities.",
     missionTitle: "Our mission: turn AI into concrete advantage",
     missionDesc:
-      "We do not publish content for vanity. We are building a useful media layer for professionals, students, entrepreneurs and African talent who want to save time, find business use cases, understand what is new in AI and access training and job opportunities faster.",
-    growthTitle: "The editorial engine to build a large qualified audience",
+      "This page presents TransferAI's media and opportunities system. The full editorial watch now lives under Resources & AI Watch; here, the focus is content formats, replays and job introductions.",
+    growthTitle: "The media engine to convert audiences into subscribers and learners",
     growthItems: [
       {
         title: "Weekly job-focused newsletter",
-        desc: "Every week: 3 useful tools, 3 actionable prompts, 1 African use case, 1 important AI update and 1 opportunity worth tracking.",
+        desc: "The newsletter is centralized under Resources & AI Watch to avoid duplication and keep the full watch in one place.",
       },
       {
         title: "High-reach short-form content",
         desc: "TikTok and Shorts focused on outcomes: 30 to 60 second tips, before/after examples, simple workflows and calls to action back to the newsletter.",
       },
       {
-        title: "Africa + jobs AI watch",
-        desc: "A focused watch on what can truly impact Côte d'Ivoire, key African sectors and freelance or job opportunities related to AI.",
+        title: "AI opportunities + introductions",
+        desc: "A dedicated space for AI jobs, missions, internships and collaborations to qualify before human follow-up or partner routing.",
       },
     ],
     channelsTitle: "Channels to prioritize for reach and retention",
@@ -192,7 +184,7 @@ const creatorHubCopy = {
       },
       {
         title: "Newsletter",
-        desc: "The highest-value format to teach daily-job AI: tools, prompts, templates, links, watch updates and opportunities.",
+        desc: "The official entry point to Resources & AI Watch: profession tips, prompts, updates, 13 domains and opportunities.",
         frequency: "1 issue / week",
         icon: Mail,
         color: "text-[hsl(174,70%,42%)]",
@@ -207,16 +199,14 @@ const creatorHubCopy = {
         bg: "bg-[hsl(145,65%,42%)]/10",
       },
       {
-        title: "AI watch & opportunities",
-        desc: "A live section to push important updates, Africa-relevant use cases and the most relevant AI jobs and freelance opportunities.",
+        title: "Opportunities & introductions",
+        desc: "A live section to qualify jobs and freelance opportunities, then support relevant introduction requests.",
         frequency: "continuous updates",
         icon: Radar,
         color: "text-primary",
         bg: "bg-primary/10",
       },
     ],
-    recentTitle: "Recent content and high-value signals",
-    recentBadge: "Dynamic feed",
     newBadge: "New",
     sourceLabel: "Source",
     jobsTitle: "AI jobs & opportunities",
@@ -264,27 +254,16 @@ const creatorHubCopy = {
     replaysLiveLink: "See upcoming live webinars",
     ctaTitle: "Build the community, train people and open career paths",
     ctaDesc:
-      "We can turn this section into a true acquisition and conversion engine: dynamic content, sector watch, job opportunities and direct contact for introductions.",
-    ctaPrimary: "Get the newsletter",
+      "We can turn this section into a true acquisition and conversion engine: short-form content, replays, job opportunities and direct contact for introductions.",
+    ctaPrimary: "Open Resources & AI Watch",
     ctaSecondary: "Talk jobs & introductions",
   },
-} as const;
-
-const resourceCategoryColors = {
-  "expertise-ai": "text-primary",
-  guides: "text-coral",
-  "case-studies": "text-destructive",
-  veille: "text-[hsl(145,65%,42%)]",
 } as const;
 
 const CreateurContenuIA = () => {
   const { language, t } = useLanguage();
   const copy = creatorHubCopy[language === "en" ? "en" : "fr"];
-  const { items: resources } = useResourceFeed();
   const { items: jobs, stats: jobStats, isLoading: jobsLoading } = useJobFeed();
-  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
-  const availableSectors = getAvailableBlogSectors(resources.map((item) => item.sectorKey));
-  const highlightedResources = resources.slice(0, 6);
   const highlightedJobs = jobs.slice(0, 6);
   const replays = (t("webinars.replays") as Array<Record<string, string>>) ?? [];
 
@@ -304,7 +283,6 @@ const CreateurContenuIA = () => {
 
   const jobSourceCount = copy.jobSources.length;
   const emploiContactLink = buildEmploymentContactPath("Emploi IA & mise en relation");
-  const newsletterContactLink = buildContactPath("demande-renseignement", "Newsletter IA");
 
   return (
     <PageTransition>
@@ -363,61 +341,6 @@ const CreateurContenuIA = () => {
                   <span className="text-xs text-muted-foreground">{channel.frequency}</span>
                 </motion.div>
               ))}
-            </div>
-
-            <div className="mb-16">
-              <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-heading text-2xl font-bold text-foreground">{copy.recentTitle}</h2>
-                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                  <Newspaper size={14} />
-                  {copy.recentBadge}
-                </span>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {highlightedResources.map((resource, index) => {
-                  const title = language === "en" ? resource.titleEn : resource.titleFr;
-                  const excerpt = language === "en" ? resource.excerptEn : resource.excerptFr;
-                  const categoryLabel = t(`blog.categories.${resource.categoryKey}`);
-                  const sourceUrl = resource.sourceUrl;
-                  const recent = isResourceNew(resource.publishedAt, resource.isNewManual);
-
-                  return (
-                    <motion.div
-                      key={resource.id}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <div className="bg-card border border-border rounded-xl p-5 hover-lift h-full">
-                        <div className="flex flex-wrap items-center gap-2 mb-3">
-                          <span className={`text-xs font-bold ${resourceCategoryColors[resource.categoryKey] || "text-primary"}`}>
-                            {categoryLabel}
-                          </span>
-                          {recent ? (
-                            <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
-                              {copy.newBadge}
-                            </span>
-                          ) : null}
-                        </div>
-                        <h3 className="font-heading font-semibold text-base text-card-foreground mb-2">{title}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{excerpt}</p>
-                        <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-                          <span>{formatDate(resource.publishedAt)}</span>
-                          <div className="flex items-center gap-2">
-                            {resource.sourceName ? <span>{copy.sourceLabel}: {resource.sourceName}</span> : null}
-                            {sourceUrl ? (
-                              <a href={sourceUrl} target="_blank" rel="noreferrer" className="text-primary hover:opacity-80">
-                                <ExternalLink size={14} />
-                              </a>
-                            ) : null}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
             </div>
 
             <div id="replays" className="mb-16 scroll-mt-24">
@@ -601,14 +524,14 @@ const CreateurContenuIA = () => {
                   {copy.ctaDesc}
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setIsNewsletterOpen(true)}
+                  <Link
+                    to="/blog"
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
                     style={{ color: "hsl(0 0% 100%)" }}
                   >
                     {copy.ctaPrimary}
-                  </button>
+                    <ArrowRight size={14} />
+                  </Link>
                   <Link
                     to={emploiContactLink}
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold hover:bg-white/5"
@@ -622,17 +545,6 @@ const CreateurContenuIA = () => {
           </div>
         </section>
 
-        <Dialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen}>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 bg-transparent border-0 shadow-none">
-            <DialogHeader className="sr-only">
-              <DialogTitle>{copy.ctaPrimary}</DialogTitle>
-            </DialogHeader>
-            <BlogNewsletterSignup
-              availableSectors={availableSectors}
-              sourcePage="/createur-contenu-ia"
-            />
-          </DialogContent>
-        </Dialog>
         <Footer />
       </div>
     </PageTransition>
