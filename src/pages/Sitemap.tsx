@@ -46,7 +46,7 @@ const sitemapCopy = {
         links: [
           { label: "Blog", to: "/blog" },
           { label: "Outils IA", to: "/outils-ia" },
-          { label: "Média, veille & opportunités", to: "/createur-contenu-ia" },
+          { label: "Média IA & opportunités", to: "/createur-contenu-ia" },
           { label: "Événements", to: "/evenements" },
         ],
       },
@@ -111,7 +111,7 @@ const sitemapCopy = {
         links: [
           { label: "Blog", to: "/blog" },
           { label: "AI tools", to: "/outils-ia" },
-          { label: "Media, insights & opportunities", to: "/createur-contenu-ia" },
+          { label: "AI media & opportunities", to: "/createur-contenu-ia" },
           { label: "Events", to: "/evenements" },
         ],
       },

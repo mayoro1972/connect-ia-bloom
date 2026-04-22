@@ -18,6 +18,22 @@ export const blogSectorSlugMap: Record<string, string> = {
 
 export const preferredBlogSectorOrder = Object.keys(blogSectorSlugMap);
 
+export const transferAiNewsletterDomains = [
+  "Assistanat & Secrétariat",
+  "Ressources Humaines",
+  "Marketing & Communication",
+  "Finance & Comptabilité",
+  "Juridique & Conformité",
+  "Service Client",
+  "Data & Analyse",
+  "Administration & Gestion",
+  "Management & Leadership",
+  "IT & Transformation Digitale",
+  "Formation & Pédagogie",
+  "Santé & Bien-être",
+  "Diplomatie & Affaires Internationales",
+];
+
 export const resolveBlogSectorLabel = (
   sector: string | null | undefined,
   translate: (key: string) => string,
