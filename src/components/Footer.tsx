@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 import logoTransferAI from "@/assets/logo-transferai-nettelecom.png";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { buildContactPath, contactDetails, directLinks, socialLinks } from "@/lib/site-links";
+import { contactDetails, directLinks, socialLinks } from "@/lib/site-links";
 
 const Footer = () => {
   const { language, t } = useLanguage();
@@ -24,6 +24,7 @@ const Footer = () => {
             { label: "Parcours guidés", to: "/parcours" },
             { label: "Certification professionnelle", to: "/certification" },
             { label: "Séminaires & formats live", to: "/seminaires" },
+            { label: "Webinaires gratuits", to: "/webinaires-gratuits" },
           ],
           resources: "Services",
           resourceLinks: [
@@ -61,6 +62,7 @@ const Footer = () => {
             { label: "Guided paths", to: "/parcours" },
             { label: "Signature certification", to: "/certification" },
             { label: "Live formats", to: "/seminaires" },
+            { label: "Free webinars", to: "/webinaires-gratuits" },
           ],
           resources: "Services",
           resourceLinks: [
@@ -73,7 +75,7 @@ const Footer = () => {
           legal: "Legal",
           legalLinks: [
             { label: "Privacy policy", to: "/confidentialite" },
-            { label: "Sitemap", to: "/sitemap" },
+            { label: "Sitemap", to: "/plan-du-site" },
             { label: "Contact", to: "/contact" },
             { label: "Email", href: directLinks.email },
             { label: "WhatsApp", href: directLinks.whatsapp },
