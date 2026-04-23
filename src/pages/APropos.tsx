@@ -80,32 +80,89 @@ const pageCopy = {
     ],
     teamTitle: "Une équipe construite pour délivrer",
     teamIntro:
-      "Notre équipe combine vision, développement, innovation et qualité pédagogique pour transformer les besoins en résultats.",
+      "Notre équipe fondatrice et nos consultants experts combinent vision, développement, innovation et qualité pédagogique pour transformer les besoins en résultats.",
+    teamMeta: {
+      capacityLabel: "Jusqu'à 10 experts mobilisables",
+      foundersLabel: "4 fondateurs",
+      consultantsLabel: "6 consultants experts",
+    },
     team: [
       {
         name: "Casimir Beda Kassi",
+        category: "Fondateur",
         role: "Co-fondateur · Directeur Général",
         contribution: "Pilote la vision, les orientations stratégiques et le positionnement de TransferAI Africa.",
         specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Transformation digitale"],
       },
       {
         name: "Marius Ayoro",
+        category: "Fondateur",
         role: "Fondateur · Directeur Développement & Partenariats",
         contribution: "Structure les demandes entreprises, les partenariats et la mise en relation avec l'offre TransferAI.",
         specialties: ["Transformation digitale", "Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "RGPD · ICAO"],
       },
       {
         name: "Souleymane Konate",
+        category: "Fondateur",
         role: "Co-fondateur · Directeur IA & Innovation",
         contribution: "Porte la logique IA, les cas d'usage avancés et la montée en compétence technologique.",
         specialties: ["PostgreSQL", "SQL", "Supabase", "Pinecone", "Vector DB"],
       },
       {
         name: "Eric N'Guessan",
+        category: "Fondateur",
         role: "Co-fondateur · Directeur de l'Audit, Pédagogie & Certifications",
         contribution:
           "Porte le dispositif d'audit gratuit, garantit la qualité pédagogique, la cohérence des parcours et l'exigence des livrables.",
         specialties: ["Audit certifié", "RGPD", "ICAO", "Enterprise Security", "Audit & Compliance"],
+      },
+      {
+        name: "Roland Coffi",
+        category: "Consultant expert",
+        role: "Consultant expert · Stratégie & transformation des organisations",
+        contribution:
+          "Accompagne le cadrage des priorités, la conduite du changement et l'adoption de l'IA dans les directions métier et les projets de transformation.",
+        specialties: ["Stratégie IA", "Transformation", "Conduite du changement", "Adoption métier"],
+      },
+      {
+        name: "Medard Seri",
+        category: "Consultant expert",
+        role: "Consultant expert · Data, pilotage & performance",
+        contribution:
+          "Intervient sur la structuration des données, le suivi des indicateurs et les usages IA qui améliorent l'analyse et la prise de décision.",
+        specialties: ["Data", "Pilotage", "Tableaux de bord", "Aide à la décision"],
+      },
+      {
+        name: "Christiane Konan",
+        category: "Consultante experte",
+        role: "Consultante experte · RH, pédagogie & montée en compétence",
+        contribution:
+          "Contribue aux parcours métiers, à l'accompagnement des équipes et aux dispositifs de formation utiles pour l'adoption de l'IA.",
+        specialties: ["RH", "Formation", "Compétences IA", "Accompagnement"],
+      },
+      {
+        name: "Emmanuelle Koffi",
+        category: "Consultante experte",
+        role: "Consultante experte · Marketing, contenus & expérience client",
+        contribution:
+          "Travaille sur les usages IA appliqués au marketing, à la production de contenu et à l'amélioration de l'expérience client.",
+        specialties: ["Marketing IA", "Contenus", "Expérience client", "Productivité"],
+      },
+      {
+        name: "Dorothy Blyo",
+        category: "Consultante experte",
+        role: "Consultante experte · Administration & efficacité opérationnelle",
+        contribution:
+          "Aide à simplifier les tâches administratives, la gestion documentaire et les processus de support grâce à des usages IA concrets.",
+        specialties: ["Administration", "Organisation", "Support opérationnel", "Automatisation"],
+      },
+      {
+        name: "Francois Adou",
+        category: "Consultant expert",
+        role: "Consultant expert · Risques, conformité & gouvernance",
+        contribution:
+          "Apporte une lecture orientée conformité, gestion des risques et gouvernance pour des déploiements IA crédibles et maîtrisés.",
+        specialties: ["Conformité", "Gouvernance", "Gestion des risques", "IA responsable"],
       },
     ],
     ctaBadge: "Prochaine étape",
@@ -167,32 +224,89 @@ const pageCopy = {
     ],
     teamTitle: "A team built to deliver",
     teamIntro:
-      "Our team combines vision, business development, innovation, and learning design to turn needs into results.",
+      "Our founding team and expert consultants combine vision, business development, innovation, and learning design to turn needs into results.",
+    teamMeta: {
+      capacityLabel: "Up to 10 experts available",
+      foundersLabel: "4 founders",
+      consultantsLabel: "6 expert consultants",
+    },
     team: [
       {
         name: "Casimir Beda Kassi",
+        category: "Founder",
         role: "Co-founder · CEO",
         contribution: "Leads the vision, strategic direction, and positioning of TransferAI Africa.",
         specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Digital transformation"],
       },
       {
         name: "Marius Ayoro",
+        category: "Founder",
         role: "Founder · Director of Business Development & Partnerships",
         contribution: "Structures enterprise opportunities, partnerships, and alignment between client needs and the TransferAI offer.",
         specialties: ["Digital transformation", "AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "GDPR · ICAO"],
       },
       {
         name: "Souleymane Konate",
+        category: "Founder",
         role: "Co-founder · Director of AI & Innovation",
         contribution: "Drives the AI layer, advanced use cases, and technology capability building.",
         specialties: ["PostgreSQL", "SQL", "Supabase", "Pinecone", "Vector DB"],
       },
       {
         name: "Eric N'Guessan",
+        category: "Founder",
         role: "Co-founder · Director of Audit, Learning & Certifications",
         contribution:
           "Leads the free audit process and ensures pedagogical quality, pathway coherence, and the quality of learning outcomes.",
         specialties: ["Certified Audit", "GDPR", "ICAO", "Enterprise Security", "Audit & Compliance"],
+      },
+      {
+        name: "Roland Coffi",
+        category: "Expert consultant",
+        role: "Expert consultant · Strategy & organizational transformation",
+        contribution:
+          "Supports priority setting, change management, and practical AI adoption across business teams and transformation programs.",
+        specialties: ["AI strategy", "Transformation", "Change management", "Business adoption"],
+      },
+      {
+        name: "Medard Seri",
+        category: "Expert consultant",
+        role: "Expert consultant · Data, reporting & performance",
+        contribution:
+          "Works on data structuring, KPI tracking, and AI use cases that strengthen analysis and decision-making.",
+        specialties: ["Data", "Reporting", "Dashboards", "Decision support"],
+      },
+      {
+        name: "Christiane Konan",
+        category: "Expert consultant",
+        role: "Expert consultant · HR, learning & upskilling",
+        contribution:
+          "Contributes to role-based pathways, team enablement, and practical learning systems that accelerate AI adoption.",
+        specialties: ["HR", "Learning", "AI skills", "Enablement"],
+      },
+      {
+        name: "Emmanuelle Koffi",
+        category: "Expert consultant",
+        role: "Expert consultant · Marketing, content & customer experience",
+        contribution:
+          "Focuses on AI use cases for marketing, content production, and improving customer experience with stronger execution speed.",
+        specialties: ["AI marketing", "Content", "Customer experience", "Productivity"],
+      },
+      {
+        name: "Dorothy Blyo",
+        category: "Expert consultant",
+        role: "Expert consultant · Administration & operational efficiency",
+        contribution:
+          "Helps simplify administrative tasks, document workflows, and support processes through practical AI-enabled operations.",
+        specialties: ["Administration", "Organization", "Operations support", "Automation"],
+      },
+      {
+        name: "Francois Adou",
+        category: "Expert consultant",
+        role: "Expert consultant · Risk, compliance & governance",
+        contribution:
+          "Brings a compliance, risk, and governance lens to ensure AI deployments remain credible, controlled, and responsible.",
+        specialties: ["Compliance", "Governance", "Risk management", "Responsible AI"],
       },
     ],
     ctaBadge: "Next step",
@@ -286,9 +400,24 @@ const AProposPage = () => {
             </div>
 
             <div className="mb-10 rounded-3xl border border-border bg-card p-8">
-              <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.teamTitle}</h2>
-              <p className="mt-4 max-w-4xl text-sm leading-7 text-muted-foreground">{copy.teamIntro}</p>
-              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
+                <div>
+                  <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.teamTitle}</h2>
+                  <p className="mt-4 max-w-4xl text-sm leading-7 text-muted-foreground">{copy.teamIntro}</p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold text-primary">
+                    {copy.teamMeta.capacityLabel}
+                  </span>
+                  <span className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-muted-foreground">
+                    {copy.teamMeta.foundersLabel}
+                  </span>
+                  <span className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-muted-foreground">
+                    {copy.teamMeta.consultantsLabel}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                 {copy.team.map((member, index) => (
                   <motion.div
                     key={member.name}
@@ -296,9 +425,9 @@ const AProposPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.08 }}
-                    className="rounded-3xl border border-border bg-background p-6"
+                    className="flex h-full flex-col rounded-3xl border border-border bg-background p-5"
                   >
-                    <div className="mb-4 h-40 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted">
+                    <div className="mb-4 h-32 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted md:h-36">
                       {teamPhotos[member.name] ? (
                         <img
                           src={teamPhotos[member.name]}
@@ -316,19 +445,31 @@ const AProposPage = () => {
                         </div>
                       )}
                     </div>
-                    <h3 className="font-heading text-lg font-semibold text-card-foreground">{member.name}</h3>
-                    <p className="mt-1 text-sm font-medium text-primary">{member.role}</p>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground">{member.contribution}</p>
+                    {"category" in member && member.category ? (
+                      <div className="mb-3">
+                        <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+                          {member.category}
+                        </span>
+                      </div>
+                    ) : null}
+                    <h3 className="font-heading text-base font-semibold text-card-foreground md:text-lg">{member.name}</h3>
+                    <p className="mt-1 text-sm font-medium leading-6 text-primary">{member.role}</p>
+                    <p className="mt-3 line-clamp-5 text-sm leading-6 text-muted-foreground">{member.contribution}</p>
                     {"specialties" in member && member.specialties ? (
                       <div className="mt-4 flex flex-wrap gap-2">
-                        {member.specialties.map((specialty) => (
+                        {member.specialties.slice(0, 5).map((specialty) => (
                           <span
                             key={specialty}
-                            className="rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-muted-foreground"
+                            className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
                           >
                             {specialty}
                           </span>
                         ))}
+                        {member.specialties.length > 5 ? (
+                          <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary">
+                            +{member.specialties.length - 5}
+                          </span>
+                        ) : null}
                       </div>
                     ) : null}
                   </motion.div>
