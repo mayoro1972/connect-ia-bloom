@@ -36,46 +36,46 @@ const pageCopy = {
     subtitle:
       "Nous relions l'expertise IA, les besoins concrets des organisations et les réalités du marché africain pour former, accompagner et faire passer à l'action.",
     introBadge: "En bref",
-    introTitle: "Une structure pensée pour rassurer, former et faire avancer",
+    introTitle: "Transformer l'IA en décisions, compétences et résultats",
     introLead:
-      "TransferAI Africa aide les professionnels, les entreprises et les institutions à intégrer l'IA avec méthode, impact concret et exigence de qualité.",
+      "TransferAI Africa aide les professionnels, les entreprises et les institutions à cadrer leurs priorités IA, faire monter les équipes en compétence et déployer des usages réellement utiles.",
     introPoints: [
       "Un ancrage fort en Côte d'Ivoire, avec une ambition africaine claire.",
-      "Une approche orientée usages métier, pas démonstration technologique.",
-      "Un lien direct entre expertise, besoin terrain et mise en action.",
+      "Un accompagnement de la stratégie au passage à l'action.",
+      "Une équipe fondatrice renforcée par 6 consultants experts mobilisables.",
     ],
     missionTitle: "Notre mission",
     missionPillars: [
       {
         title: "Former utile",
-        desc: "Développer des compétences IA directement utilisables dans les métiers, les équipes et les organisations.",
+        desc: "Développer des compétences IA directement activables dans les métiers, les équipes et les organisations.",
       },
       {
-        title: "Accompagner sérieusement",
-        desc: "Aider les structures à cadrer leurs priorités et choisir les bons cas d'usage sans dispersion.",
+        title: "Cadrer les bons usages",
+        desc: "Aider les structures à prioriser, choisir les bons cas d'usage et éviter la dispersion.",
       },
       {
-        title: "Ancrer l'impact",
-        desc: "Transformer l'IA en résultats concrets : productivité, qualité et meilleure prise de décision.",
+        title: "Déployer avec impact",
+        desc: "Transformer l'IA en gains concrets : productivité, qualité, gouvernance et meilleure prise de décision.",
       },
     ],
-    trustTitle: "Pourquoi nous faire confiance",
+    trustTitle: "Ce qui nous distingue",
     trustItems: [
       {
-        title: "Expertise reliée au terrain",
-        desc: "Notre approche relie l'exigence technique aux réalités des entreprises, institutions et équipes africaines.",
+        title: "Du cadrage à l'exécution",
+        desc: "Nous ne nous arrêtons pas au conseil : nous relions diagnostic, formation, cas d'usage et mise en œuvre.",
       },
       {
-        title: "Approche métier avant tout",
-        desc: "Nous partons des usages, des processus et des résultats attendus, pas d'un discours trop abstrait.",
+        title: "Méthode métier, pas effet de mode",
+        desc: "Chaque intervention part d'un besoin réel, d'un processus précis et d'un résultat attendu.",
       },
       {
-        title: "Ancrage Côte d'Ivoire, portée Afrique",
-        desc: "Nos contenus sont pensés pour les réalités locales tout en gardant un niveau de lecture international.",
+        title: "Gouvernance et exigence",
+        desc: "Nous intégrons pédagogie, conformité, qualité des livrables et maîtrise des risques dès le départ.",
       },
       {
-        title: "Crédibilité pédagogique et opérationnelle",
-        desc: "Nous combinons formation, conseil, cas d'usage sectoriels et logique d'exécution concrète.",
+        title: "Une équipe élargie et mobilisable",
+        desc: "La structure combine 4 fondateurs et 6 consultants experts pour répondre à des besoins plus larges sans diluer la qualité.",
       },
     ],
     teamTitle: "Une équipe construite pour délivrer",
@@ -180,46 +180,46 @@ const pageCopy = {
     subtitle:
       "We connect AI expertise, concrete organizational needs, and African market realities to train, advise, and help teams move into action.",
     introBadge: "At a glance",
-    introTitle: "A structure built to reassure, train, and move teams forward",
+    introTitle: "Turn AI into decisions, skills, and measurable results",
     introLead:
-      "TransferAI Africa helps professionals, companies, and institutions adopt AI with method, practical impact, and a strong standard of quality.",
+      "TransferAI Africa helps professionals, companies, and institutions frame their AI priorities, build team capability, and deploy use cases that actually matter.",
     introPoints: [
       "Strong Côte d'Ivoire grounding with a clear African ambition.",
-      "A use-case and business-first approach rather than technology theater.",
-      "A direct bridge between expertise, local needs, and practical execution.",
+      "Support that runs from strategy to execution.",
+      "A founding team strengthened by 6 expert consultants ready to mobilize.",
     ],
     missionTitle: "Our mission",
     missionPillars: [
       {
         title: "Train for action",
-        desc: "Build AI capabilities that can be used immediately in jobs, teams, and organizations.",
+        desc: "Build AI capabilities that teams can activate immediately in roles, workflows, and organizations.",
       },
       {
-        title: "Guide with rigor",
-        desc: "Help organizations frame priorities, choose the right use cases, and move forward without noise.",
+        title: "Frame the right use cases",
+        desc: "Help organizations prioritize, choose the right use cases, and move forward without noise.",
       },
       {
-        title: "Create measurable impact",
-        desc: "Turn AI into concrete outcomes: productivity, quality, and better decision-making.",
+        title: "Deploy for impact",
+        desc: "Turn AI into concrete gains: productivity, quality, governance, and stronger decision-making.",
       },
     ],
-    trustTitle: "Why trust us",
+    trustTitle: "What makes us different",
     trustItems: [
       {
-        title: "Expertise connected to reality",
-        desc: "Our approach links technical rigor with the operational realities of African companies, institutions, and teams.",
+        title: "From framing to execution",
+        desc: "We do not stop at advisory: we connect diagnosis, training, use cases, and implementation.",
       },
       {
-        title: "Business-first approach",
-        desc: "We begin with use cases, processes, and expected outcomes rather than abstract AI narratives.",
+        title: "Business method, not hype",
+        desc: "Every engagement starts from a real need, a defined process, and an expected outcome.",
       },
       {
-        title: "Côte d'Ivoire roots, African scope",
-        desc: "Our content is grounded in local realities while keeping an international level of quality.",
+        title: "Governance and rigor",
+        desc: "We integrate pedagogy, compliance, delivery quality, and risk discipline from the start.",
       },
       {
-        title: "Pedagogical and operational credibility",
-        desc: "We combine training, advisory, sector use cases, and implementation logic.",
+        title: "A broader team you can mobilize",
+        desc: "The structure combines 4 founders and 6 expert consultants to cover broader needs without losing quality.",
       },
     ],
     teamTitle: "A team built to deliver",
