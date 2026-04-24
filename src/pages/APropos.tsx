@@ -105,7 +105,7 @@ const pageCopy = {
     ],
     teamTitle: "Une équipe fondatrice qui porte la vision",
     teamIntro:
-      "L'équipe fondatrice réunit les profils qui structurent la vision, les partenariats, l'innovation, la pédagogie et l'exécution de TransferAI. Les consultants experts complètent ensuite ce socle dans le carousel dédié.",
+      "L'équipe fondatrice réunit les profils qui structurent la vision, les partenariats, l'innovation, la pédagogie et l'exécution de TransferAI.",
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -284,7 +284,7 @@ const pageCopy = {
     ],
     teamTitle: "A founding team that carries the vision",
     teamIntro:
-      "The founding team brings together the profiles shaping TransferAI's vision, partnerships, innovation, learning design, and execution. Expert consultants then extend this foundation through the dedicated carousel below.",
+      "The founding team brings together the profiles shaping TransferAI's vision, partnerships, innovation, learning design, and execution.",
     team: [
       {
         name: "Casimir Beda Kassi",
