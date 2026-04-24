@@ -60,6 +60,7 @@ const teamPhotoPosition: Record<string, string> = {
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
+const visibleSpecialtiesCount = 5;
 
 const pageCopy = {
   fr: {
@@ -534,7 +535,8 @@ const AProposPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.08 }}
-                    className="flex h-full flex-col rounded-3xl border border-border bg-background p-5"
+                    className="group relative flex h-full flex-col rounded-3xl border border-border bg-background p-5"
+                    tabIndex={0}
                   >
                     <div className="mb-4 h-32 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted md:h-36">
                       {teamPhotos[member.name] ? (
@@ -563,10 +565,31 @@ const AProposPage = () => {
                     ) : null}
                     <h3 className="font-heading text-base font-semibold text-card-foreground md:text-lg">{member.name}</h3>
                     <p className="mt-1 text-sm font-medium leading-6 text-primary">{member.role}</p>
-                    <p className="mt-3 line-clamp-5 text-sm leading-6 text-muted-foreground">{member.contribution}</p>
+                    <div className="relative mt-3">
+                      <p className="line-clamp-5 text-sm leading-6 text-muted-foreground" title={member.contribution}>
+                        {member.contribution}
+                      </p>
+                      {(member.contribution.length > 220 || member.specialties.length > visibleSpecialtiesCount) ? (
+                        <div className="pointer-events-none absolute left-0 right-0 top-full z-30 mt-3 hidden rounded-2xl border border-primary/20 bg-background/95 p-4 shadow-2xl backdrop-blur md:block md:opacity-0 md:transition md:duration-200 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
+                          <p className="text-sm leading-6 text-card-foreground">{member.contribution}</p>
+                          {member.specialties.length ? (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {member.specialties.map((specialty) => (
+                                <span
+                                  key={`${member.name}-${specialty}`}
+                                  className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
+                                >
+                                  {specialty}
+                                </span>
+                              ))}
+                            </div>
+                          ) : null}
+                        </div>
+                      ) : null}
+                    </div>
                     {"specialties" in member && member.specialties ? (
                       <div className="mt-4 flex flex-wrap gap-2">
-                        {member.specialties.slice(0, 5).map((specialty) => (
+                        {member.specialties.slice(0, visibleSpecialtiesCount).map((specialty) => (
                           <span
                             key={specialty}
                             className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
@@ -574,9 +597,12 @@ const AProposPage = () => {
                             {specialty}
                           </span>
                         ))}
-                        {member.specialties.length > 5 ? (
-                          <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary">
-                            +{member.specialties.length - 5}
+                        {member.specialties.length > visibleSpecialtiesCount ? (
+                          <span
+                            className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary"
+                            title={member.specialties.slice(visibleSpecialtiesCount).join(" · ")}
+                          >
+                            +{member.specialties.length - visibleSpecialtiesCount}
                           </span>
                         ) : null}
                       </div>
@@ -613,7 +639,8 @@ const AProposPage = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.06 }}
-                      className="flex min-w-[280px] max-w-[320px] flex-col rounded-3xl border border-border bg-card p-5 md:min-w-[320px]"
+                      className="group relative flex min-w-[280px] max-w-[320px] flex-col rounded-3xl border border-border bg-card p-5 md:min-w-[320px]"
+                      tabIndex={0}
                     >
                       <div className="mb-4 h-40 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted">
                         {teamPhotos[member.name] ? (
@@ -642,10 +669,31 @@ const AProposPage = () => {
                       ) : null}
                       <h3 className="font-heading text-lg font-semibold text-card-foreground">{member.name}</h3>
                       <p className="mt-1 text-sm font-medium leading-6 text-primary">{member.role}</p>
-                      <p className="mt-3 text-sm leading-6 text-muted-foreground">{member.contribution}</p>
+                      <div className="relative mt-3">
+                        <p className="line-clamp-5 text-sm leading-6 text-muted-foreground" title={member.contribution}>
+                          {member.contribution}
+                        </p>
+                        {(member.contribution.length > 220 || member.specialties.length > visibleSpecialtiesCount) ? (
+                          <div className="pointer-events-none absolute left-0 right-0 top-full z-30 mt-3 hidden rounded-2xl border border-primary/20 bg-background/95 p-4 shadow-2xl backdrop-blur md:block md:opacity-0 md:transition md:duration-200 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
+                            <p className="text-sm leading-6 text-card-foreground">{member.contribution}</p>
+                            {member.specialties.length ? (
+                              <div className="mt-3 flex flex-wrap gap-2">
+                                {member.specialties.map((specialty) => (
+                                  <span
+                                    key={`${member.name}-${specialty}`}
+                                    className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
+                                  >
+                                    {specialty}
+                                  </span>
+                                ))}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null}
+                      </div>
                       {member.specialties ? (
                         <div className="mt-4 flex flex-wrap gap-2">
-                          {member.specialties.slice(0, 5).map((specialty) => (
+                          {member.specialties.slice(0, visibleSpecialtiesCount).map((specialty) => (
                             <span
                               key={specialty}
                               className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-semibold text-muted-foreground"
@@ -653,9 +701,12 @@ const AProposPage = () => {
                               {specialty}
                             </span>
                           ))}
-                          {member.specialties.length > 5 ? (
-                            <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary">
-                              +{member.specialties.length - 5}
+                          {member.specialties.length > visibleSpecialtiesCount ? (
+                            <span
+                              className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary"
+                              title={member.specialties.slice(visibleSpecialtiesCount).join(" · ")}
+                            >
+                              +{member.specialties.length - visibleSpecialtiesCount}
                             </span>
                           ) : null}
                         </div>
