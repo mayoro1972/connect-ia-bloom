@@ -12,7 +12,7 @@ import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { directLinks } from "@/lib/site-links";
 import teamCasimir from "@/assets/team-casimir.jpg";
 import teamMarius from "@/assets/team-marius.jpg";
-import teamSouleymane from "@/assets/team-souleymane.jpg";
+import teamSoulemane from "@/assets/team-souleymane.png";
 import teamEric from "@/assets/team-eric.jpg";
 import teamEmmanuelle from "@/assets/team-emmanuelle.png";
 import teamMedard from "@/assets/team-medard.png";
@@ -22,11 +22,13 @@ import teamChristiane from "@/assets/team-christiane.png";
 import teamFrancois from "@/assets/team-francois.png";
 import teamAxel from "@/assets/team-axel.png";
 import teamCelestin from "@/assets/team-celestin.png";
+import teamMamoudou from "@/assets/team-mamoudou.png";
+import teamSimbara from "@/assets/team-simbara.png";
 
 const teamPhotos: Record<string, string> = {
   "Casimir Beda Kassi": teamCasimir,
   "Marius Ayoro": teamMarius,
-  "Souleymane Konate": teamSouleymane,
+  "Soulemane Konate": teamSoulemane,
   "Eric N'Guessan": teamEric,
   "Emmanuelle Koffi": teamEmmanuelle,
   "Medard Sery": teamMedard,
@@ -36,12 +38,14 @@ const teamPhotos: Record<string, string> = {
   "Francois Tanoh": teamFrancois,
   "Axel N'Guessan": teamAxel,
   "Dr Yao Célestin Djé": teamCelestin,
+  "Mamoudou Daffé": teamMamoudou,
+  "Simbara Daffé": teamSimbara,
 };
 
 const teamPhotoPosition: Record<string, string> = {
   "Casimir Beda Kassi": "center 28%",
   "Marius Ayoro": "center 22%",
-  "Souleymane Konate": "center 6%",
+  "Soulemane Konate": "center 16%",
   "Eric N'Guessan": "center 18%",
   "Emmanuelle Koffi": "center 18%",
   "Medard Sery": "center 18%",
@@ -51,6 +55,8 @@ const teamPhotoPosition: Record<string, string> = {
   "Francois Tanoh": "center 18%",
   "Axel N'Guessan": "center 14%",
   "Dr Yao Célestin Djé": "center 14%",
+  "Mamoudou Daffé": "center 18%",
+  "Simbara Daffé": "center 18%",
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
@@ -122,11 +128,12 @@ const pageCopy = {
         specialties: ["Transformation digitale", "Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "RGPD · ICAO"],
       },
       {
-        name: "Souleymane Konate",
+        name: "Soulemane Konate",
         category: "Co-fondateur",
         role: "Directeur IA & Innovation",
-        contribution: "Porte la logique IA, les cas d'usage avancés et la montée en compétence technologique.",
-        specialties: ["PostgreSQL", "SQL", "Supabase", "Pinecone", "Vector DB"],
+        contribution:
+          "Conçoit et pilote des plateformes data à grande échelle pour des organisations de premier plan. Il allie excellence technique et leadership pour transformer des problématiques data complexes en solutions performantes et scalables. Son expertise couvre le data engineering, le cloud, les architectures distribuées et l'intégration de l'intelligence artificielle dans les systèmes d'entreprise.",
+        specialties: ["Data Engineering", "Cloud", "Oracle", "Exadata", "SQL", "IA", "Leadership Tech"],
       },
       {
         name: "Eric N'Guessan",
@@ -209,7 +216,7 @@ const pageCopy = {
         specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
       },
       {
-        name: "MD",
+        name: "Mamoudou Daffé",
         category: "Consultant",
         role: "Consultant · Marketing, campagnes & expérience client",
         contribution:
@@ -217,7 +224,7 @@ const pageCopy = {
         specialties: ["Marketing IA", "Campagnes", "Expérience client", "Segmentation", "Performance"],
       },
       {
-        name: "SD",
+        name: "Simbara Daffé",
         category: "Consultant",
         role: "Consultant · Contenus, création & expérience client",
         contribution:
@@ -301,11 +308,12 @@ const pageCopy = {
         specialties: ["Digital transformation", "AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "GDPR · ICAO"],
       },
       {
-        name: "Souleymane Konate",
+        name: "Soulemane Konate",
         category: "Co-founder",
         role: "Director of AI & Innovation",
-        contribution: "Drives the AI layer, advanced use cases, and technology capability building.",
-        specialties: ["PostgreSQL", "SQL", "Supabase", "Pinecone", "Vector DB"],
+        contribution:
+          "Designs and leads large-scale data platforms for leading organizations. He combines technical excellence and leadership to turn complex data challenges into high-performance, scalable solutions. His expertise spans data engineering, cloud, distributed architectures, and the integration of artificial intelligence into enterprise systems.",
+        specialties: ["Data Engineering", "Cloud", "Oracle", "Exadata", "SQL", "AI", "Tech Leadership"],
       },
       {
         name: "Eric N'Guessan",
@@ -388,7 +396,7 @@ const pageCopy = {
         specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
       },
       {
-        name: "MD",
+        name: "Mamoudou Daffé",
         category: "Consultant",
         role: "Consultant · Marketing, campaigns & customer experience",
         contribution:
@@ -396,7 +404,7 @@ const pageCopy = {
         specialties: ["Marketing AI", "Campaigns", "Customer experience", "Segmentation", "Performance"],
       },
       {
-        name: "SD",
+        name: "Simbara Daffé",
         category: "Consultant",
         role: "Consultant · Content, creation & customer experience",
         contribution:
