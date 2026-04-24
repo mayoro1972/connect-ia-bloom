@@ -19,20 +19,8 @@ const sectionCopy = {
     title: "Une offre portée par des partenaires crédibles",
     subtitle:
       "Des partenaires académiques, institutionnels et entreprises qui renforcent la crédibilité de l'offre.",
-    proofs: [
-      {
-        title: "Crédibilité académique",
-        desc: "Des alliances qui renforcent la qualité pédagogique, les standards et la valeur perçue des programmes.",
-      },
-      {
-        title: "Ancrage Côte d'Ivoire",
-        desc: "Des partenaires présents dans l'éducation, les télécoms, l'administration publique et la formation professionnelle.",
-      },
-      {
-        title: "Impact concret",
-        desc: "Des programmes pensés pour répondre aux réalités du terrain, des entreprises et des institutions africaines.",
-      },
-    ],
+    carouselIntro: "Une sélection de partenaires qui renforcent la portée académique, institutionnelle et opérationnelle de TransferAI.",
+    carouselHint: "Glisser ou faire défiler",
     cta: "Voir tous nos partenaires",
   },
   en: {
@@ -40,20 +28,8 @@ const sectionCopy = {
     title: "An offer backed by credible partners",
     subtitle:
       "Academic, institutional, public, and corporate partners that reinforce the credibility of the offer.",
-    proofs: [
-      {
-        title: "Academic credibility",
-        desc: "Partnerships that strengthen pedagogy, standards, and the perceived value of the programs.",
-      },
-      {
-        title: "Côte d'Ivoire grounding",
-        desc: "Partners active in education, telecom, public administration, and professional training.",
-      },
-      {
-        title: "Concrete impact",
-        desc: "Programs designed for the realities of the field, businesses, and African institutions.",
-      },
-    ],
+    carouselIntro: "A selected group of partners that strengthens TransferAI's academic, institutional, and operational positioning.",
+    carouselHint: "Drag or scroll",
     cta: "View all partners",
   },
 } as const;
@@ -73,23 +49,31 @@ const HomeTrustSection = () => {
 
         <ScrollReveal delay={0.08}>
           <div className="rounded-[28px] border border-border bg-card p-6 md:p-8">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
-              {partnerLogos.map((logo, index) => (
-                <div
-                  key={partnerNames[index]}
-                  className="flex min-h-[116px] items-center justify-center rounded-2xl border border-border bg-background px-4 py-5"
-                >
-                  <img
-                    src={logo}
-                    alt={partnerNames[index]}
-                    className={`max-h-16 max-w-full object-contain ${partnerNames[index] === "SNDI" ? "scale-125" : ""}`}
-                  />
-                </div>
-              ))}
+            <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <p className="max-w-3xl text-sm leading-7 text-muted-foreground">{copy.carouselIntro}</p>
+              <p className="text-xs font-heading font-bold uppercase tracking-[0.2em] text-muted-foreground/80">
+                {copy.carouselHint}
+              </p>
+            </div>
+
+            <div className="-mx-2 overflow-x-auto px-2 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex min-w-max gap-4">
+                {partnerLogos.map((logo, index) => (
+                  <div
+                    key={partnerNames[index]}
+                    className="flex min-h-[132px] w-[240px] shrink-0 items-center justify-center rounded-2xl border border-border bg-background px-6 py-6 md:w-[260px]"
+                  >
+                    <img
+                      src={logo}
+                      alt={partnerNames[index]}
+                      className={`max-h-16 max-w-full object-contain ${partnerNames[index] === "SNDI" ? "scale-125" : ""}`}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </ScrollReveal>
-
 
         <ScrollReveal delay={0.28} className="mt-10 text-center">
           <Link
