@@ -208,14 +208,6 @@ const pageCopy = {
         specialties: ["Software Engineering", "Web & Mobile", "IA Python", "Bases de données", "3D & Simulation", "Pédagogie technique"],
       },
       {
-        name: "Gabriel Sallah",
-        category: "Consultant expert",
-        role: "Consultant expert · IA, cloud computing & infrastructures de calcul",
-        contribution:
-          "Apporte une expertise senior en high-performance computing, cloud et infrastructures Big Data pour aider les organisations à concevoir des environnements IA robustes, scalables et orientés résultats.",
-        specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
-      },
-      {
         name: "Mamoudou Daffé",
         category: "Consultant",
         role: "Consultant · Marketing, campagnes & expérience client",
@@ -230,6 +222,14 @@ const pageCopy = {
         contribution:
           "Travaille sur les usages IA appliqués à la production de contenu, à la création de supports et à l'amélioration de l'expérience client pour renforcer la clarté, l'engagement et la productivité.",
         specialties: ["Contenus", "Création de contenu", "Expérience client", "Productivité", "Activation"],
+      },
+      {
+        name: "Gabriel Sallah",
+        category: "Consultant expert",
+        role: "Consultant expert · IA, cloud computing & infrastructures de calcul",
+        contribution:
+          "Apporte une expertise senior en high-performance computing, cloud et infrastructures Big Data pour aider les organisations à concevoir des environnements IA robustes, scalables et orientés résultats.",
+        specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
       },
     ],
     ctaBadge: "Prochaine étape",
@@ -388,14 +388,6 @@ const pageCopy = {
         specialties: ["Software Engineering", "Web & Mobile", "Python AI", "Databases", "3D & Simulation", "Technical enablement"],
       },
       {
-        name: "Gabriel Sallah",
-        category: "Expert consultant",
-        role: "Expert consultant · AI, cloud computing & compute infrastructure",
-        contribution:
-          "Brings senior expertise in high-performance computing, cloud, and Big Data infrastructure to help organizations design AI environments that are robust, scalable, and outcome-driven.",
-        specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
-      },
-      {
         name: "Mamoudou Daffé",
         category: "Consultant",
         role: "Consultant · Marketing, campaigns & customer experience",
@@ -410,6 +402,14 @@ const pageCopy = {
         contribution:
           "Works on AI use cases for content production, asset creation, and customer experience to improve clarity, engagement, and day-to-day productivity.",
         specialties: ["Content", "Content creation", "Customer experience", "Productivity", "Activation"],
+      },
+      {
+        name: "Gabriel Sallah",
+        category: "Expert consultant",
+        role: "Expert consultant · AI, cloud computing & compute infrastructure",
+        contribution:
+          "Brings senior expertise in high-performance computing, cloud, and Big Data infrastructure to help organizations design AI environments that are robust, scalable, and outcome-driven.",
+        specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
       },
     ],
     ctaBadge: "Next step",
