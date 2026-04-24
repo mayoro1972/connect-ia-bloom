@@ -124,8 +124,9 @@ const pageCopy = {
         name: "Marius Ayoro",
         category: "Co-fondateur",
         role: "Directeur Développement & Partenariats",
-        contribution: "Structure les demandes entreprises, les partenariats et la mise en relation avec l'offre TransferAI.",
-        specialties: ["Transformation digitale", "Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "RGPD · ICAO"],
+        contribution:
+          "Structure les demandes entreprises, les partenariats et la mise en relation avec l'offre TransferAI. Il conçoit et déploie des solutions de communication, d'agents IA et d'intégration de données sensibles à grande échelle pour des environnements critiques, avec une approche qui associe précision technique, robustesse opérationnelle et impact métier.",
+        specialties: ["Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "Supabase", "Réseaux", "IA appliquée"],
       },
       {
         name: "Soulemane Konate",
@@ -304,8 +305,9 @@ const pageCopy = {
         name: "Marius Ayoro",
         category: "Co-founder",
         role: "Director of Business Development & Partnerships",
-        contribution: "Structures enterprise opportunities, partnerships, and alignment between client needs and the TransferAI offer.",
-        specialties: ["Digital transformation", "AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "GDPR · ICAO"],
+        contribution:
+          "Structures enterprise opportunities, partnerships, and alignment between client needs and the TransferAI offer. He designs and deploys communication solutions, AI agents, and large-scale sensitive data integration for critical environments, combining technical precision, operational robustness, and business impact.",
+        specialties: ["AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "Supabase", "Networks", "Applied AI"],
       },
       {
         name: "Soulemane Konate",
