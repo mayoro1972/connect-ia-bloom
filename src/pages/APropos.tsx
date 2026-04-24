@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Globe, ShieldCheck, Sparkles, Target } from "lucide-react";
@@ -21,6 +21,7 @@ import teamDorothe from "@/assets/team-dorothe.png";
 import teamChristiane from "@/assets/team-christiane.png";
 import teamFrancois from "@/assets/team-francois.png";
 import teamAxel from "@/assets/team-axel.png";
+import teamCelestin from "@/assets/team-celestin.png";
 
 const teamPhotos: Record<string, string> = {
   "Casimir Beda Kassi": teamCasimir,
@@ -34,6 +35,7 @@ const teamPhotos: Record<string, string> = {
   "Christiane Konan": teamChristiane,
   "Francois Tanoh": teamFrancois,
   "Axel N'Guessan": teamAxel,
+  "Dr Célestin Yao Dje": teamCelestin,
 };
 
 const teamPhotoPosition: Record<string, string> = {
@@ -48,6 +50,7 @@ const teamPhotoPosition: Record<string, string> = {
   "Christiane Konan": "center 16%",
   "Francois Tanoh": "center 18%",
   "Axel N'Guessan": "center 14%",
+  "Dr Célestin Yao Dje": "center 14%",
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
@@ -100,9 +103,9 @@ const pageCopy = {
         desc: "La structure réunit une équipe fondatrice et des consultants experts pour répondre à des besoins plus larges sans diluer la qualité.",
       },
     ],
-    teamTitle: "Une équipe construite pour délivrer",
+    teamTitle: "Une équipe fondatrice qui porte la vision",
     teamIntro:
-      "Notre équipe fondatrice et nos consultants experts combinent vision, développement, innovation et qualité pédagogique pour transformer les besoins en résultats.",
+      "L'équipe fondatrice réunit les profils qui structurent la vision, les partenariats, l'innovation, la pédagogie et l'exécution de TransferAI. Les consultants experts complètent ensuite ce socle dans le carousel dédié.",
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -182,6 +185,14 @@ const pageCopy = {
         specialties: ["Power BI", "Data Visualisation", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automatisation"],
       },
       {
+        name: "Dr Célestin Yao Dje",
+        category: "Consultant expert",
+        role: "Consultant expert · Santé publique, droit médical & IA appliquée",
+        contribution:
+          "Expert en santé publique, en accompagnement stratégique des institutions et en droit médical, il intervient sur la transformation des systèmes de santé, l'innovation et la gouvernance. Il apporte une vision pragmatique pour intégrer les nouvelles technologies, notamment l'intelligence artificielle, dans les politiques publiques et les projets à fort impact.",
+        specialties: ["Santé publique", "Droit médical", "Gouvernance", "Innovation", "IA appliquée"],
+      },
+      {
         name: "Axel N'Guessan",
         category: "Consultant",
         role: "Consultant · Software engineering, IA appliquée & produits digitaux",
@@ -196,6 +207,22 @@ const pageCopy = {
         contribution:
           "Apporte une expertise senior en high-performance computing, cloud et infrastructures Big Data pour aider les organisations à concevoir des environnements IA robustes, scalables et orientés résultats.",
         specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
+      },
+      {
+        name: "MD",
+        category: "Consultant",
+        role: "Consultant · Marketing, campagnes & expérience client",
+        contribution:
+          "Travaille sur les usages IA appliqués au marketing, au pilotage des campagnes et à l'amélioration de l'expérience client pour rendre les actions plus ciblées, plus fluides et plus mesurables.",
+        specialties: ["Marketing IA", "Campagnes", "Expérience client", "Segmentation", "Performance"],
+      },
+      {
+        name: "SD",
+        category: "Consultant",
+        role: "Consultant · Contenus, création & expérience client",
+        contribution:
+          "Travaille sur les usages IA appliqués à la production de contenu, à la création de supports et à l'amélioration de l'expérience client pour renforcer la clarté, l'engagement et la productivité.",
+        specialties: ["Contenus", "Création de contenu", "Expérience client", "Productivité", "Activation"],
       },
     ],
     ctaBadge: "Prochaine étape",
@@ -255,9 +282,9 @@ const pageCopy = {
         desc: "The structure brings together a founding team and expert consultants to cover broader needs without losing quality.",
       },
     ],
-    teamTitle: "A team built to deliver",
+    teamTitle: "A founding team that carries the vision",
     teamIntro:
-      "Our founding team and expert consultants combine vision, business development, innovation, and learning design to turn needs into results.",
+      "The founding team brings together the profiles shaping TransferAI's vision, partnerships, innovation, learning design, and execution. Expert consultants then extend this foundation through the dedicated carousel below.",
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -337,6 +364,14 @@ const pageCopy = {
         specialties: ["Power BI", "Data Visualization", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automation"],
       },
       {
+        name: "Dr Célestin Yao Dje",
+        category: "Expert consultant",
+        role: "Expert consultant · Public health, medical law & applied AI",
+        contribution:
+          "A public health expert with strong institutional advisory and medical law grounding, he works on health system transformation, innovation, and governance. He brings a pragmatic perspective to integrating new technologies, especially artificial intelligence, into public policy and high-impact programs.",
+        specialties: ["Public health", "Medical law", "Governance", "Innovation", "Applied AI"],
+      },
+      {
         name: "Axel N'Guessan",
         category: "Consultant",
         role: "Consultant · Software engineering, applied AI & digital products",
@@ -351,6 +386,22 @@ const pageCopy = {
         contribution:
           "Brings senior expertise in high-performance computing, cloud, and Big Data infrastructure to help organizations design AI environments that are robust, scalable, and outcome-driven.",
         specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
+      },
+      {
+        name: "MD",
+        category: "Consultant",
+        role: "Consultant · Marketing, campaigns & customer experience",
+        contribution:
+          "Works on AI use cases applied to marketing, campaign execution, and customer experience so outreach becomes more targeted, smoother, and easier to measure.",
+        specialties: ["Marketing AI", "Campaigns", "Customer experience", "Segmentation", "Performance"],
+      },
+      {
+        name: "SD",
+        category: "Consultant",
+        role: "Consultant · Content, creation & customer experience",
+        contribution:
+          "Works on AI use cases for content production, asset creation, and customer experience to improve clarity, engagement, and day-to-day productivity.",
+        specialties: ["Content", "Content creation", "Customer experience", "Productivity", "Activation"],
       },
     ],
     ctaBadge: "Next step",
@@ -376,15 +427,6 @@ const AProposPage = () => {
     () => copy.team.filter((member) => member.category !== "Co-fondateur" && member.category !== "Co-founder"),
     [copy.team],
   );
-  const [activeConsultantName, setActiveConsultantName] = useState(consultants[0]?.name ?? "");
-
-  useEffect(() => {
-    if (!consultants.some((member) => member.name === activeConsultantName)) {
-      setActiveConsultantName(consultants[0]?.name ?? "");
-    }
-  }, [activeConsultantName, consultants]);
-
-  const activeConsultant = consultants.find((member) => member.name === activeConsultantName) ?? consultants[0];
 
   return (
     <PageTransition>
@@ -472,7 +514,7 @@ const AProposPage = () => {
                   {language === "en" ? "Founding team" : "Équipe fondatrice"}
                 </p>
               </div>
-              <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {founders.map((member, index) => (
                   <motion.div
                     key={member.name}
@@ -531,68 +573,47 @@ const AProposPage = () => {
                 ))}
               </div>
 
-              {activeConsultant ? (
-                <div className="mt-10 rounded-3xl border border-border bg-background p-5 md:p-6">
-                  <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                        {language === "en" ? "Consultants" : "Consultants"}
-                      </p>
-                      <h3 className="mt-3 font-heading text-xl font-semibold text-card-foreground">
-                        {language === "en" ? "Hover to preview profiles" : "Survolez pour voir le profil"}
-                      </h3>
-                      <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                        {language === "en"
-                          ? "Keep the page lighter: move over a consultant name to reveal the full card, and tap on mobile."
-                          : "Pour alléger la page, passez sur un nom de consultant pour afficher sa fiche complète, ou touchez sur mobile."}
-                      </p>
-                      <div className="mt-5 space-y-2">
-                        {consultants.map((member) => {
-                          const isActive = member.name === activeConsultant.name;
-                          return (
-                            <button
-                              key={member.name}
-                              type="button"
-                              onMouseEnter={() => setActiveConsultantName(member.name)}
-                              onFocus={() => setActiveConsultantName(member.name)}
-                              onClick={() => setActiveConsultantName(member.name)}
-                              className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition ${
-                                isActive
-                                  ? "border-primary/30 bg-primary/5 text-card-foreground"
-                                  : "border-border bg-card text-muted-foreground hover:border-primary/20 hover:bg-accent/40"
-                              }`}
-                            >
-                              <span>
-                                <span className="block text-sm font-semibold">{member.name}</span>
-                                <span className="mt-1 block text-xs leading-5">{member.role}</span>
-                              </span>
-                              <span className="ml-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-                                {language === "en" ? "View" : "Voir"}
-                              </span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
+              <div className="mt-10 rounded-3xl border border-border bg-background p-5 md:p-6">
+                <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                  <div className="max-w-3xl">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                      {language === "en" ? "Consultants" : "Consultants"}
+                    </p>
+                    <h3 className="mt-3 font-heading text-xl font-semibold text-card-foreground">
+                      {language === "en" ? "Consultant carousel" : "Carousel consultants"}
+                    </h3>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                      {language === "en"
+                        ? "Scroll horizontally to explore the full consultant bench without overloading the page."
+                        : "Faites défiler horizontalement pour découvrir l’ensemble des consultants sans surcharger la page."}
+                    </p>
+                  </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    {language === "en" ? "Swipe or scroll" : "Glisser ou faire défiler"}
+                  </p>
+                </div>
 
+                <div className="mt-6 flex gap-5 overflow-x-auto pb-2">
+                  {consultants.map((member, index) => (
                     <motion.div
-                      key={activeConsultant.name}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.18 }}
-                      className="flex h-full flex-col rounded-3xl border border-border bg-card p-5"
+                      key={member.name}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.06 }}
+                      className="flex min-w-[280px] max-w-[320px] flex-col rounded-3xl border border-border bg-card p-5 md:min-w-[320px]"
                     >
-                      <div className="mb-4 h-40 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted md:h-48">
-                        {teamPhotos[activeConsultant.name] ? (
+                      <div className="mb-4 h-40 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted">
+                        {teamPhotos[member.name] ? (
                           <img
-                            src={teamPhotos[activeConsultant.name]}
-                            alt={activeConsultant.name}
+                            src={teamPhotos[member.name]}
+                            alt={member.name}
                             className="h-full w-full object-cover"
-                            style={{ objectPosition: teamPhotoPosition[activeConsultant.name] ?? "center 20%" }}
+                            style={{ objectPosition: teamPhotoPosition[member.name] ?? "center 20%" }}
                           />
                         ) : (
                           <div className="flex h-full w-full items-center justify-center bg-accent font-heading text-4xl font-bold text-primary">
-                            {activeConsultant.name
+                            {member.name
                               .split(" ")
                               .map((part) => part[0])
                               .join("")
@@ -600,19 +621,19 @@ const AProposPage = () => {
                           </div>
                         )}
                       </div>
-                      {activeConsultant.category ? (
+                      {member.category ? (
                         <div className="mb-3">
                           <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
-                            {activeConsultant.category}
+                            {member.category}
                           </span>
                         </div>
                       ) : null}
-                      <h3 className="font-heading text-lg font-semibold text-card-foreground">{activeConsultant.name}</h3>
-                      <p className="mt-1 text-sm font-medium leading-6 text-primary">{activeConsultant.role}</p>
-                      <p className="mt-3 text-sm leading-7 text-muted-foreground">{activeConsultant.contribution}</p>
-                      {activeConsultant.specialties ? (
+                      <h3 className="font-heading text-lg font-semibold text-card-foreground">{member.name}</h3>
+                      <p className="mt-1 text-sm font-medium leading-6 text-primary">{member.role}</p>
+                      <p className="mt-3 text-sm leading-6 text-muted-foreground">{member.contribution}</p>
+                      {member.specialties ? (
                         <div className="mt-4 flex flex-wrap gap-2">
-                          {activeConsultant.specialties.map((specialty) => (
+                          {member.specialties.slice(0, 5).map((specialty) => (
                             <span
                               key={specialty}
                               className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-semibold text-muted-foreground"
@@ -620,12 +641,17 @@ const AProposPage = () => {
                               {specialty}
                             </span>
                           ))}
+                          {member.specialties.length > 5 ? (
+                            <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary">
+                              +{member.specialties.length - 5}
+                            </span>
+                          ) : null}
                         </div>
                       ) : null}
                     </motion.div>
-                  </div>
+                  ))}
                 </div>
-              ) : null}
+              </div>
             </div>
 
             <motion.div
