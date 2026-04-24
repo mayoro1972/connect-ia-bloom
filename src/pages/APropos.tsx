@@ -114,11 +114,12 @@ const pageCopy = {
       "L'équipe fondatrice réunit les profils qui structurent la vision, les partenariats, l'innovation, la pédagogie et l'exécution de TransferAI.",
     team: [
       {
-        name: "Casimir Beda Kassi",
+        name: "Casimir Kassi BEDA",
         category: "Co-fondateur",
         role: "Directeur Général",
-        contribution: "Pilote la vision, les orientations stratégiques et le positionnement de TransferAI Africa.",
-        specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Transformation digitale"],
+        contribution:
+          "Pilote la vision, les orientations stratégiques et le positionnement de TransferAI Africa. Spécialiste des infrastructures télécoms et des systèmes réseaux, il accompagne les organisations dans la conception, le déploiement et l'optimisation de solutions de connectivité performantes et sécurisées. Il intervient sur des projets stratégiques liés à la transformation digitale, aux réseaux et à l'intégration des nouvelles technologies.",
+        specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Télécom", "Réseaux", "Infrastructures", "Connectivité", "Transformation digitale"],
       },
       {
         name: "Marius Ayoro",
@@ -295,11 +296,12 @@ const pageCopy = {
       "The founding team brings together the profiles shaping TransferAI's vision, partnerships, innovation, learning design, and execution.",
     team: [
       {
-        name: "Casimir Beda Kassi",
+        name: "Casimir Kassi BEDA",
         category: "Co-founder",
         role: "CEO",
-        contribution: "Leads the vision, strategic direction, and positioning of TransferAI Africa.",
-        specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Digital transformation"],
+        contribution:
+          "Leads the vision, strategic direction, and positioning of TransferAI Africa. A specialist in telecom infrastructure and network systems, he supports organizations in designing, deploying, and optimizing secure, high-performance connectivity solutions. He contributes to strategic initiatives linked to digital transformation, networks, and the integration of new technologies.",
+        specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Telecom", "Networks", "Infrastructure", "Connectivity", "Digital transformation"],
       },
       {
         name: "Marius Ayoro",
