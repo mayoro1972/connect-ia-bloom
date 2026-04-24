@@ -22,6 +22,7 @@ import teamChristiane from "@/assets/team-christiane.png";
 import teamFrancois from "@/assets/team-francois.png";
 import teamAxel from "@/assets/team-axel.png";
 import teamCelestin from "@/assets/team-celestin.png";
+import teamSimbara from "@/assets/team-simbara.jpeg";
 
 const teamPhotos: Record<string, string> = {
   "Casimir Beda Kassi": teamCasimir,
@@ -36,6 +37,7 @@ const teamPhotos: Record<string, string> = {
   "Francois Tanoh": teamFrancois,
   "Axel N'Guessan": teamAxel,
   "Dr Yao Célestin Djé": teamCelestin,
+  "Simbara Daffé": teamSimbara,
 };
 
 const teamPhotoPosition: Record<string, string> = {
@@ -51,6 +53,7 @@ const teamPhotoPosition: Record<string, string> = {
   "Francois Tanoh": "center 18%",
   "Axel N'Guessan": "center 14%",
   "Dr Yao Célestin Djé": "center 14%",
+  "Simbara Daffé": "center 18%",
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
@@ -217,7 +220,7 @@ const pageCopy = {
         specialties: ["Marketing IA", "Campagnes", "Expérience client", "Segmentation", "Performance"],
       },
       {
-        name: "SD",
+        name: "Simbara Daffé",
         category: "Consultant",
         role: "Consultant · Contenus, création & expérience client",
         contribution:
@@ -396,7 +399,7 @@ const pageCopy = {
         specialties: ["Marketing AI", "Campaigns", "Customer experience", "Segmentation", "Performance"],
       },
       {
-        name: "SD",
+        name: "Simbara Daffé",
         category: "Consultant",
         role: "Consultant · Content, creation & customer experience",
         contribution:
