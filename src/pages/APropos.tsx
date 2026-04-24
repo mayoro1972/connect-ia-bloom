@@ -163,10 +163,10 @@ const pageCopy = {
       {
         name: "Christiane Konan",
         category: "Consultante experte",
-        role: "Consultante experte · RH, pédagogie & efficacité opérationnelle",
+        role: "Consultante experte · RH, droit social & IA appliquée",
         contribution:
-          "Intervient sur les parcours métiers, la formation, l'accompagnement des équipes et l'organisation opérationnelle afin de faciliter l'adoption de l'IA et la montée en compétence durable.",
-        specialties: ["RH", "Formation", "Compétences IA", "Accompagnement", "Organisation", "Efficacité opérationnelle"],
+          "Accompagne les usages IA liés aux ressources humaines, aux documents à portée juridique et aux discussions contractuelles. Elle aide à mieux structurer les contenus, sécuriser les supports de travail et fluidifier les processus avec une approche à la fois humaine, rigoureuse et opérationnelle.",
+        specialties: ["RH", "Droit social", "Contrats", "Documents sensibles", "IA appliquée", "Support opérationnel"],
       },
       {
         name: "Roland Coffi",
@@ -342,10 +342,10 @@ const pageCopy = {
       {
         name: "Christiane Konan",
         category: "Expert consultant",
-        role: "Expert consultant · HR, learning & operational efficiency",
+        role: "Expert consultant · HR, employment law & applied AI",
         contribution:
-          "Supports role-based pathways, team enablement, learning systems, and operational organization to make AI adoption practical and sustainable.",
-        specialties: ["HR", "Learning", "AI skills", "Enablement", "Organization", "Operational efficiency"],
+          "Supports AI use cases related to human resources, legally sensitive documents, and contract discussions. She helps structure content, secure working materials, and streamline processes with an approach that is both people-centered, rigorous, and practical.",
+        specialties: ["HR", "Employment law", "Contracts", "Sensitive documents", "Applied AI", "Operational support"],
       },
       {
         name: "Roland Coffi",
@@ -584,8 +584,8 @@ const AProposPage = () => {
                     </h3>
                     <p className="mt-2 text-sm leading-7 text-muted-foreground">
                       {language === "en"
-                        ? "Scroll horizontally to explore the full consultant bench without overloading the page."
-                        : "Faites défiler horizontalement pour découvrir l’ensemble des consultants sans surcharger la page."}
+                        ? "Discover the consultant profiles that extend the founding team across key business needs."
+                        : "Découvrez les profils consultants qui complètent l’équipe fondatrice selon les besoins métier."}
                     </p>
                   </div>
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
