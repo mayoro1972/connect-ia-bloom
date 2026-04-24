@@ -140,10 +140,10 @@ const pageCopy = {
       {
         name: "Eric N'Guessan",
         category: "Co-fondateur",
-        role: "Directeur de l'Audit, Pédagogie & Certifications",
+        role: "Directeur Audit, Pédagogie & Certifications",
         contribution:
-          "Porte le dispositif d'audit gratuit, garantit la qualité pédagogique, la cohérence des parcours et l'exigence des livrables.",
-        specialties: ["Audit certifié", "RGPD", "ICAO", "Enterprise Security", "Audit & Compliance"],
+          "Expert en stratégie IT, transformation digitale et audit des systèmes, il accompagne les organisations dans la structuration, la sécurisation et l'optimisation de leurs environnements technologiques. Il intervient sur des problématiques d'audit IT, de conformité et d'intégration de solutions innovantes comme le cloud, l'IA et la digitalisation, tout en garantissant la qualité des parcours de formation et des dispositifs pédagogiques.",
+        specialties: ["Audit certifié & Compliance", "Transformation digitale", "Cloud", "IA", "RGPD", "ICAO", "Sécurité des systèmes"],
       },
       {
         name: "Francois Tanoh",
@@ -324,8 +324,8 @@ const pageCopy = {
         category: "Co-founder",
         role: "Director of Audit, Learning & Certifications",
         contribution:
-          "Leads the free audit process and ensures pedagogical quality, pathway coherence, and the quality of learning outcomes.",
-        specialties: ["Certified Audit", "GDPR", "ICAO", "Enterprise Security", "Audit & Compliance"],
+          "An expert in IT strategy, digital transformation, and systems audit, he supports organizations in structuring, securing, and optimizing their technology environments. He works across IT audit, compliance, and the integration of innovative solutions such as cloud, AI, and digitalization, while ensuring the quality of learning pathways and pedagogical frameworks.",
+        specialties: ["Certified Audit & Compliance", "Digital transformation", "Cloud", "AI", "GDPR", "ICAO", "Systems security"],
       },
       {
         name: "Francois Tanoh",
