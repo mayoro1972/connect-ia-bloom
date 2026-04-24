@@ -13,12 +13,26 @@ import teamCasimir from "@/assets/team-casimir.jpg";
 import teamMarius from "@/assets/team-marius.jpg";
 import teamSouleymane from "@/assets/team-souleymane.jpg";
 import teamEric from "@/assets/team-eric.jpg";
+import teamEmmanuelle from "@/assets/team-emmanuelle.png";
+import teamMedard from "@/assets/team-medard.png";
+import teamRoland from "@/assets/team-roland.png";
+import teamDorothe from "@/assets/team-dorothe.png";
+import teamChristiane from "@/assets/team-christiane.png";
+import teamFrancois from "@/assets/team-francois.png";
+import teamAxel from "@/assets/team-axel.png";
 
 const teamPhotos: Record<string, string> = {
   "Casimir Beda Kassi": teamCasimir,
   "Marius Ayoro": teamMarius,
   "Souleymane Konate": teamSouleymane,
   "Eric N'Guessan": teamEric,
+  "Emmanuelle Koffi": teamEmmanuelle,
+  "Medard Sery": teamMedard,
+  "Roland Coffi": teamRoland,
+  "Dorothe Dano": teamDorothe,
+  "Christiane Konan": teamChristiane,
+  "Francois Tanoh": teamFrancois,
+  "Axel N'Guessan": teamAxel,
 };
 
 const teamPhotoPosition: Record<string, string> = {
@@ -26,6 +40,13 @@ const teamPhotoPosition: Record<string, string> = {
   "Marius Ayoro": "center 22%",
   "Souleymane Konate": "center 6%",
   "Eric N'Guessan": "center 18%",
+  "Emmanuelle Koffi": "center 18%",
+  "Medard Sery": "center 18%",
+  "Roland Coffi": "center 16%",
+  "Dorothe Dano": "center 16%",
+  "Christiane Konan": "center 16%",
+  "Francois Tanoh": "center 18%",
+  "Axel N'Guessan": "center 14%",
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
@@ -42,7 +63,7 @@ const pageCopy = {
     introPoints: [
       "Un ancrage fort en Côte d'Ivoire, avec une ambition africaine claire.",
       "Un accompagnement de la stratégie au passage à l'action.",
-      "Une équipe fondatrice renforcée par 6 consultants experts mobilisables.",
+      "Une équipe fondatrice renforcée par des consultants experts mobilisables.",
     ],
     missionTitle: "Notre mission",
     missionPillars: [
@@ -75,17 +96,12 @@ const pageCopy = {
       },
       {
         title: "Une équipe élargie et mobilisable",
-        desc: "La structure combine 4 fondateurs et 6 consultants experts pour répondre à des besoins plus larges sans diluer la qualité.",
+        desc: "La structure réunit une équipe fondatrice et des consultants experts pour répondre à des besoins plus larges sans diluer la qualité.",
       },
     ],
     teamTitle: "Une équipe construite pour délivrer",
     teamIntro:
       "Notre équipe fondatrice et nos consultants experts combinent vision, développement, innovation et qualité pédagogique pour transformer les besoins en résultats.",
-    teamMeta: {
-      capacityLabel: "Jusqu'à 10 experts mobilisables",
-      foundersLabel: "4 fondateurs",
-      consultantsLabel: "6 consultants experts",
-    },
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -117,52 +133,68 @@ const pageCopy = {
         specialties: ["Audit certifié", "RGPD", "ICAO", "Enterprise Security", "Audit & Compliance"],
       },
       {
-        name: "Roland Coffi",
+        name: "Francois Tanoh",
         category: "Consultant expert",
-        role: "Consultant expert · Stratégie & transformation des organisations",
+        role: "Consultant expert · Support digital, outils Microsoft & adoption IA",
         contribution:
-          "Accompagne le cadrage des priorités, la conduite du changement et l'adoption de l'IA dans les directions métier et les projets de transformation.",
-        specialties: ["Stratégie IA", "Transformation", "Conduite du changement", "Adoption métier"],
+          "Apporte une expertise de support digital senior, de résolution opérationnelle et d'accompagnement des usages, avec une forte maîtrise de l'écosystème Microsoft et des assistants IA comme Copilot, Claude et OpenAI.",
+        specialties: ["Microsoft Certified", "MS Copilot", "OpenAI", "Claude", "Support digital", "Adoption IA"],
       },
       {
-        name: "Medard Seri",
+        name: "Medard Sery",
         category: "Consultant expert",
-        role: "Consultant expert · Data, pilotage & performance",
+        role: "Consultant expert · Data engineering, cloud & plateformes IA",
         contribution:
-          "Intervient sur la structuration des données, le suivi des indicateurs et les usages IA qui améliorent l'analyse et la prise de décision.",
-        specialties: ["Data", "Pilotage", "Tableaux de bord", "Aide à la décision"],
-      },
-      {
-        name: "Christiane Konan",
-        category: "Consultante experte",
-        role: "Consultante experte · RH, pédagogie & montée en compétence",
-        contribution:
-          "Contribue aux parcours métiers, à l'accompagnement des équipes et aux dispositifs de formation utiles pour l'adoption de l'IA.",
-        specialties: ["RH", "Formation", "Compétences IA", "Accompagnement"],
+          "Conçoit des plateformes data scalables et des architectures cloud orientées IA, avec une forte expertise en Big Data, data engineering et industrialisation des pipelines.",
+        specialties: ["Big Data", "Data Engineering", "AWS · Azure · GCP", "Spark", "Kafka", "Databricks"],
       },
       {
         name: "Emmanuelle Koffi",
         category: "Consultante experte",
-        role: "Consultante experte · Marketing, contenus & expérience client",
+        role: "Consultante experte · Automatisation, agents IA & workflows métier",
         contribution:
-          "Travaille sur les usages IA appliqués au marketing, à la production de contenu et à l'amélioration de l'expérience client.",
-        specialties: ["Marketing IA", "Contenus", "Expérience client", "Productivité"],
+          "Conçoit des automatisations opérationnelles, des agents IA et des workflows orientés performance pour les équipes métier, avec une base solide en prompt engineering, RAG et déploiement cloud.",
+        specialties: ["Automatisation", "Agents IA", "Prompt Engineering", "RAG", "n8n · Python", "Azure · AWS"],
       },
       {
-        name: "Dorothy Blyo",
+        name: "Christiane Konan",
         category: "Consultante experte",
-        role: "Consultante experte · Administration & efficacité opérationnelle",
+        role: "Consultante experte · RH, pédagogie & efficacité opérationnelle",
         contribution:
-          "Aide à simplifier les tâches administratives, la gestion documentaire et les processus de support grâce à des usages IA concrets.",
-        specialties: ["Administration", "Organisation", "Support opérationnel", "Automatisation"],
+          "Intervient sur les parcours métiers, la formation, l'accompagnement des équipes et l'organisation opérationnelle afin de faciliter l'adoption de l'IA et la montée en compétence durable.",
+        specialties: ["RH", "Formation", "Compétences IA", "Accompagnement", "Organisation", "Efficacité opérationnelle"],
       },
       {
-        name: "Francois Adou",
+        name: "Roland Coffi",
         category: "Consultant expert",
-        role: "Consultant expert · Risques, conformité & gouvernance",
+        role: "Consultant expert · Diplomatie, IA appliquée & formation",
         contribution:
-          "Apporte une lecture orientée conformité, gestion des risques et gouvernance pour des déploiements IA crédibles et maîtrisés.",
-        specialties: ["Conformité", "Gouvernance", "Gestion des risques", "IA responsable"],
+          "Apporte une expertise croisée en diplomatie, transmission des savoirs et usages concrets de l'IA, pour aider les organisations à intégrer l'IA avec méthode, pédagogie et sens du contexte institutionnel.",
+        specialties: ["Diplomatie", "IA appliquée", "Formation", "Communication stratégique", "Accompagnement", "Pédagogie"],
+      },
+      {
+        name: "Dorothe Dano",
+        category: "Consultante experte",
+        role: "Consultante experte · Power BI, data visualisation & automatisation décisionnelle",
+        contribution:
+          "Conserve son positionnement orienté pilotage et efficacité opérationnelle, renforcé par une expertise en Power BI, modélisation de données, visualisation et solutions Microsoft pour les usages métier.",
+        specialties: ["Power BI", "Data Visualisation", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automatisation"],
+      },
+      {
+        name: "Axel N'Guessan",
+        category: "Consultant expert",
+        role: "Consultant expert · Software engineering, IA appliquée & produits digitaux",
+        contribution:
+          "Contribue à la conception de produits web et mobiles, de bases de données, de briques IA en Python et de prototypes utiles, avec un profil alliant ingénierie logicielle, simulation et transmission technique.",
+        specialties: ["Software Engineering", "Web & Mobile", "IA Python", "Bases de données", "3D & Simulation", "Pédagogie technique"],
+      },
+      {
+        name: "Gabriel Sallah",
+        category: "Consultant expert",
+        role: "Consultant expert · IA, cloud computing & infrastructures de calcul",
+        contribution:
+          "Apporte une expertise senior en high-performance computing, cloud et infrastructures Big Data pour aider les organisations à concevoir des environnements IA robustes, scalables et orientés résultats.",
+        specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
       },
     ],
     ctaBadge: "Prochaine étape",
@@ -186,7 +218,7 @@ const pageCopy = {
     introPoints: [
       "Strong Côte d'Ivoire grounding with a clear African ambition.",
       "Support that runs from strategy to execution.",
-      "A founding team strengthened by 6 expert consultants ready to mobilize.",
+      "A founding team strengthened by expert consultants ready to mobilize.",
     ],
     missionTitle: "Our mission",
     missionPillars: [
@@ -219,17 +251,12 @@ const pageCopy = {
       },
       {
         title: "A broader team you can mobilize",
-        desc: "The structure combines 4 founders and 6 expert consultants to cover broader needs without losing quality.",
+        desc: "The structure brings together a founding team and expert consultants to cover broader needs without losing quality.",
       },
     ],
     teamTitle: "A team built to deliver",
     teamIntro:
       "Our founding team and expert consultants combine vision, business development, innovation, and learning design to turn needs into results.",
-    teamMeta: {
-      capacityLabel: "Up to 10 experts available",
-      foundersLabel: "4 founders",
-      consultantsLabel: "6 expert consultants",
-    },
     team: [
       {
         name: "Casimir Beda Kassi",
@@ -261,52 +288,68 @@ const pageCopy = {
         specialties: ["Certified Audit", "GDPR", "ICAO", "Enterprise Security", "Audit & Compliance"],
       },
       {
-        name: "Roland Coffi",
+        name: "Francois Tanoh",
         category: "Expert consultant",
-        role: "Expert consultant · Strategy & organizational transformation",
+        role: "Expert consultant · Digital support, Microsoft tools & AI adoption",
         contribution:
-          "Supports priority setting, change management, and practical AI adoption across business teams and transformation programs.",
-        specialties: ["AI strategy", "Transformation", "Change management", "Business adoption"],
+          "Brings senior digital support expertise, hands-on operational troubleshooting, and user enablement, with strong command of the Microsoft ecosystem and AI assistants such as Copilot, Claude, and OpenAI.",
+        specialties: ["Microsoft Certified", "MS Copilot", "OpenAI", "Claude", "Digital support", "AI adoption"],
       },
       {
-        name: "Medard Seri",
+        name: "Medard Sery",
         category: "Expert consultant",
-        role: "Expert consultant · Data, reporting & performance",
+        role: "Expert consultant · Data engineering, cloud & AI platforms",
         contribution:
-          "Works on data structuring, KPI tracking, and AI use cases that strengthen analysis and decision-making.",
-        specialties: ["Data", "Reporting", "Dashboards", "Decision support"],
-      },
-      {
-        name: "Christiane Konan",
-        category: "Expert consultant",
-        role: "Expert consultant · HR, learning & upskilling",
-        contribution:
-          "Contributes to role-based pathways, team enablement, and practical learning systems that accelerate AI adoption.",
-        specialties: ["HR", "Learning", "AI skills", "Enablement"],
+          "Designs scalable data platforms and cloud architectures for AI, with strong depth in Big Data, data engineering, and pipeline industrialization.",
+        specialties: ["Big Data", "Data Engineering", "AWS · Azure · GCP", "Spark", "Kafka", "Databricks"],
       },
       {
         name: "Emmanuelle Koffi",
         category: "Expert consultant",
-        role: "Expert consultant · Marketing, content & customer experience",
+        role: "Expert consultant · Automation, AI agents & business workflows",
         contribution:
-          "Focuses on AI use cases for marketing, content production, and improving customer experience with stronger execution speed.",
-        specialties: ["AI marketing", "Content", "Customer experience", "Productivity"],
+          "Designs operational automations, AI agents, and performance-oriented workflows for business teams, with strong grounding in prompt engineering, RAG, and cloud deployment.",
+        specialties: ["Automation", "AI agents", "Prompt Engineering", "RAG", "n8n · Python", "Azure · AWS"],
       },
       {
-        name: "Dorothy Blyo",
+        name: "Christiane Konan",
         category: "Expert consultant",
-        role: "Expert consultant · Administration & operational efficiency",
+        role: "Expert consultant · HR, learning & operational efficiency",
         contribution:
-          "Helps simplify administrative tasks, document workflows, and support processes through practical AI-enabled operations.",
-        specialties: ["Administration", "Organization", "Operations support", "Automation"],
+          "Supports role-based pathways, team enablement, learning systems, and operational organization to make AI adoption practical and sustainable.",
+        specialties: ["HR", "Learning", "AI skills", "Enablement", "Organization", "Operational efficiency"],
       },
       {
-        name: "Francois Adou",
+        name: "Roland Coffi",
         category: "Expert consultant",
-        role: "Expert consultant · Risk, compliance & governance",
+        role: "Expert consultant · Diplomacy, applied AI & training",
         contribution:
-          "Brings a compliance, risk, and governance lens to ensure AI deployments remain credible, controlled, and responsible.",
-        specialties: ["Compliance", "Governance", "Risk management", "Responsible AI"],
+          "Brings combined expertise in diplomacy, knowledge transfer, and practical AI use to help organizations adopt AI with method, pedagogy, and institutional awareness.",
+        specialties: ["Diplomacy", "Applied AI", "Training", "Strategic communication", "Enablement", "Pedagogy"],
+      },
+      {
+        name: "Dorothe Dano",
+        category: "Expert consultant",
+        role: "Expert consultant · Power BI, data visualization & decision automation",
+        contribution:
+          "Keeps her operational efficiency positioning, strengthened by expertise in Power BI, data modeling, visualization, and Microsoft solutions for business-facing use cases.",
+        specialties: ["Power BI", "Data Visualization", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automation"],
+      },
+      {
+        name: "Axel N'Guessan",
+        category: "Expert consultant",
+        role: "Expert consultant · Software engineering, applied AI & digital products",
+        contribution:
+          "Contributes to web and mobile product design, database engineering, Python-based AI building blocks, and useful prototypes, combining software engineering, simulation, and technical enablement.",
+        specialties: ["Software Engineering", "Web & Mobile", "Python AI", "Databases", "3D & Simulation", "Technical enablement"],
+      },
+      {
+        name: "Gabriel Sallah",
+        category: "Expert consultant",
+        role: "Expert consultant · AI, cloud computing & compute infrastructure",
+        contribution:
+          "Brings senior expertise in high-performance computing, cloud, and Big Data infrastructure to help organizations design AI environments that are robust, scalable, and outcome-driven.",
+        specialties: ["AI Infrastructure", "Cloud Computing", "HPC", "Big Data", "Enterprise IT", "TOGAF"],
       },
     ],
     ctaBadge: "Next step",
@@ -400,21 +443,10 @@ const AProposPage = () => {
             </div>
 
             <div className="mb-10 rounded-3xl border border-border bg-card p-8">
-              <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
+              <div>
                 <div>
                   <h2 className="font-heading text-2xl font-bold text-card-foreground">{copy.teamTitle}</h2>
                   <p className="mt-4 max-w-4xl text-sm leading-7 text-muted-foreground">{copy.teamIntro}</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold text-primary">
-                    {copy.teamMeta.capacityLabel}
-                  </span>
-                  <span className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-muted-foreground">
-                    {copy.teamMeta.foundersLabel}
-                  </span>
-                  <span className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-muted-foreground">
-                    {copy.teamMeta.consultantsLabel}
-                  </span>
                 </div>
               </div>
               <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
