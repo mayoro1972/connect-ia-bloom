@@ -35,7 +35,7 @@ const teamPhotos: Record<string, string> = {
   "Christiane Konan": teamChristiane,
   "Francois Tanoh": teamFrancois,
   "Axel N'Guessan": teamAxel,
-  "Dr Célestin Yao Dje": teamCelestin,
+  "Dr Yao Célestin Djé": teamCelestin,
 };
 
 const teamPhotoPosition: Record<string, string> = {
@@ -50,7 +50,7 @@ const teamPhotoPosition: Record<string, string> = {
   "Christiane Konan": "center 16%",
   "Francois Tanoh": "center 18%",
   "Axel N'Guessan": "center 14%",
-  "Dr Célestin Yao Dje": "center 14%",
+  "Dr Yao Célestin Djé": "center 14%",
 };
 
 const trustIcons = [Target, ShieldCheck, Globe, Award];
@@ -185,12 +185,12 @@ const pageCopy = {
         specialties: ["Power BI", "Data Visualisation", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automatisation"],
       },
       {
-        name: "Dr Célestin Yao Dje",
+        name: "Dr Yao Célestin Djé",
         category: "Consultant expert",
         role: "Consultant expert · Santé publique, droit médical & IA appliquée",
         contribution:
-          "Expert en santé publique, en accompagnement stratégique des institutions et en droit médical, il intervient sur la transformation des systèmes de santé, l'innovation et la gouvernance. Il apporte une vision pragmatique pour intégrer les nouvelles technologies, notamment l'intelligence artificielle, dans les politiques publiques et les projets à fort impact.",
-        specialties: ["Santé publique", "Droit médical", "Gouvernance", "Innovation", "IA appliquée"],
+          "Intervient sur la santé publique, l'urgence médicale, le droit médical et l'accompagnement stratégique des institutions. Il apporte une lecture pragmatique de la transformation des systèmes de santé, de l'innovation médicale et de l'intégration de l'intelligence artificielle dans les projets à fort impact.",
+        specialties: ["Santé publique", "Urgence médicale", "Droit médical", "Innovation médicale", "IA appliquée"],
       },
       {
         name: "Axel N'Guessan",
@@ -364,12 +364,12 @@ const pageCopy = {
         specialties: ["Power BI", "Data Visualization", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automation"],
       },
       {
-        name: "Dr Célestin Yao Dje",
+        name: "Dr Yao Célestin Djé",
         category: "Expert consultant",
         role: "Expert consultant · Public health, medical law & applied AI",
         contribution:
-          "A public health expert with strong institutional advisory and medical law grounding, he works on health system transformation, innovation, and governance. He brings a pragmatic perspective to integrating new technologies, especially artificial intelligence, into public policy and high-impact programs.",
-        specialties: ["Public health", "Medical law", "Governance", "Innovation", "Applied AI"],
+          "Works across public health, emergency medicine, medical law, and strategic institutional support. He brings a pragmatic view of health-system transformation, medical innovation, and the integration of artificial intelligence into high-impact projects.",
+        specialties: ["Public health", "Emergency medicine", "Medical law", "Medical innovation", "Applied AI"],
       },
       {
         name: "Axel N'Guessan",
