@@ -26,7 +26,7 @@ import teamMamoudou from "@/assets/team-mamoudou.png";
 import teamSimbara from "@/assets/team-simbara.png";
 
 const teamPhotos: Record<string, string> = {
-  "Casimir Beda Kassi": teamCasimir,
+  "Casimir Kassi BEDA": teamCasimir,
   "Marius Ayoro": teamMarius,
   "Soulemane Konate": teamSoulemane,
   "Eric N'Guessan": teamEric,
@@ -43,7 +43,7 @@ const teamPhotos: Record<string, string> = {
 };
 
 const teamPhotoPosition: Record<string, string> = {
-  "Casimir Beda Kassi": "center 28%",
+  "Casimir Kassi BEDA": "center 28%",
   "Marius Ayoro": "center 22%",
   "Soulemane Konate": "center 16%",
   "Eric N'Guessan": "center 18%",
