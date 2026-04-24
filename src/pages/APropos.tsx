@@ -179,10 +179,10 @@ const pageCopy = {
       {
         name: "Dorothe Dano",
         category: "Consultante experte",
-        role: "Consultante experte · Power BI, data visualisation & automatisation décisionnelle",
+        role: "Consultante experte · Power BI, efficacité opérationnelle & automatisation décisionnelle",
         contribution:
-          "Conserve son positionnement orienté pilotage et efficacité opérationnelle, renforcé par une expertise en Power BI, modélisation de données, visualisation et solutions Microsoft pour les usages métier.",
-        specialties: ["Power BI", "Data Visualisation", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automatisation"],
+          "Intervient sur le pilotage, l'administration et l'efficacité opérationnelle, avec une expertise en Power BI, modélisation de données, data visualisation et solutions Microsoft. Elle aide aussi à simplifier les tâches administratives, la gestion documentaire et les processus de support grâce à des usages IA concrets.",
+        specialties: ["Power BI", "Data Visualisation", "Administration", "Organisation", "Support opérationnel", "Automatisation"],
       },
       {
         name: "Dr Yao Célestin Djé",
@@ -358,10 +358,10 @@ const pageCopy = {
       {
         name: "Dorothe Dano",
         category: "Expert consultant",
-        role: "Expert consultant · Power BI, data visualization & decision automation",
+        role: "Expert consultant · Power BI, operational efficiency & decision automation",
         contribution:
-          "Keeps her operational efficiency positioning, strengthened by expertise in Power BI, data modeling, visualization, and Microsoft solutions for business-facing use cases.",
-        specialties: ["Power BI", "Data Visualization", "Data Modeling", "Azure Fundamentals", "Power Platform", "Automation"],
+          "Works across reporting, administration, and operational efficiency with strong expertise in Power BI, data modeling, data visualization, and Microsoft solutions. She also helps simplify administrative tasks, document management, and support processes through practical AI use cases.",
+        specialties: ["Power BI", "Data Visualization", "Administration", "Organization", "Operational support", "Automation"],
       },
       {
         name: "Dr Yao Célestin Djé",
