@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Globe, ShieldCheck, Sparkles, Target } from "lucide-react";
@@ -105,36 +106,36 @@ const pageCopy = {
     team: [
       {
         name: "Casimir Beda Kassi",
-        category: "Fondateur",
-        role: "Co-fondateur · Directeur Général",
+        category: "Co-fondateur",
+        role: "Directeur Général",
         contribution: "Pilote la vision, les orientations stratégiques et le positionnement de TransferAI Africa.",
         specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Transformation digitale"],
       },
       {
         name: "Marius Ayoro",
-        category: "Fondateur",
-        role: "Fondateur · Directeur Développement & Partenariats",
+        category: "Co-fondateur",
+        role: "Directeur Développement & Partenariats",
         contribution: "Structure les demandes entreprises, les partenariats et la mise en relation avec l'offre TransferAI.",
         specialties: ["Transformation digitale", "Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "RGPD · ICAO"],
       },
       {
         name: "Souleymane Konate",
-        category: "Fondateur",
-        role: "Co-fondateur · Directeur IA & Innovation",
+        category: "Co-fondateur",
+        role: "Directeur IA & Innovation",
         contribution: "Porte la logique IA, les cas d'usage avancés et la montée en compétence technologique.",
         specialties: ["PostgreSQL", "SQL", "Supabase", "Pinecone", "Vector DB"],
       },
       {
         name: "Eric N'Guessan",
-        category: "Fondateur",
-        role: "Co-fondateur · Directeur de l'Audit, Pédagogie & Certifications",
+        category: "Co-fondateur",
+        role: "Directeur de l'Audit, Pédagogie & Certifications",
         contribution:
           "Porte le dispositif d'audit gratuit, garantit la qualité pédagogique, la cohérence des parcours et l'exigence des livrables.",
         specialties: ["Audit certifié", "RGPD", "ICAO", "Enterprise Security", "Audit & Compliance"],
       },
       {
         name: "Francois Tanoh",
-        category: "Consultant expert",
+        category: "Co-fondateur",
         role: "Consultant expert · Support digital, outils Microsoft & adoption IA",
         contribution:
           "Apporte une expertise de support digital senior, de résolution opérationnelle et d'accompagnement des usages, avec une forte maîtrise de l'écosystème Microsoft et des assistants IA comme Copilot, Claude et OpenAI.",
@@ -142,7 +143,7 @@ const pageCopy = {
       },
       {
         name: "Medard Sery",
-        category: "Consultant expert",
+        category: "Co-fondateur",
         role: "Consultant expert · Data engineering, cloud & plateformes IA",
         contribution:
           "Conçoit des plateformes data scalables et des architectures cloud orientées IA, avec une forte expertise en Big Data, data engineering et industrialisation des pipelines.",
@@ -182,8 +183,8 @@ const pageCopy = {
       },
       {
         name: "Axel N'Guessan",
-        category: "Consultant expert",
-        role: "Consultant expert · Software engineering, IA appliquée & produits digitaux",
+        category: "Consultant",
+        role: "Consultant · Software engineering, IA appliquée & produits digitaux",
         contribution:
           "Contribue à la conception de produits web et mobiles, de bases de données, de briques IA en Python et de prototypes utiles, avec un profil alliant ingénierie logicielle, simulation et transmission technique.",
         specialties: ["Software Engineering", "Web & Mobile", "IA Python", "Bases de données", "3D & Simulation", "Pédagogie technique"],
@@ -260,36 +261,36 @@ const pageCopy = {
     team: [
       {
         name: "Casimir Beda Kassi",
-        category: "Founder",
-        role: "Co-founder · CEO",
+        category: "Co-founder",
+        role: "CEO",
         contribution: "Leads the vision, strategic direction, and positioning of TransferAI Africa.",
         specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Digital transformation"],
       },
       {
         name: "Marius Ayoro",
-        category: "Founder",
-        role: "Founder · Director of Business Development & Partnerships",
+        category: "Co-founder",
+        role: "Director of Business Development & Partnerships",
         contribution: "Structures enterprise opportunities, partnerships, and alignment between client needs and the TransferAI offer.",
         specialties: ["Digital transformation", "AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "n8n", "Automation", "GDPR · ICAO"],
       },
       {
         name: "Souleymane Konate",
-        category: "Founder",
-        role: "Co-founder · Director of AI & Innovation",
+        category: "Co-founder",
+        role: "Director of AI & Innovation",
         contribution: "Drives the AI layer, advanced use cases, and technology capability building.",
         specialties: ["PostgreSQL", "SQL", "Supabase", "Pinecone", "Vector DB"],
       },
       {
         name: "Eric N'Guessan",
-        category: "Founder",
-        role: "Co-founder · Director of Audit, Learning & Certifications",
+        category: "Co-founder",
+        role: "Director of Audit, Learning & Certifications",
         contribution:
           "Leads the free audit process and ensures pedagogical quality, pathway coherence, and the quality of learning outcomes.",
         specialties: ["Certified Audit", "GDPR", "ICAO", "Enterprise Security", "Audit & Compliance"],
       },
       {
         name: "Francois Tanoh",
-        category: "Expert consultant",
+        category: "Co-founder",
         role: "Expert consultant · Digital support, Microsoft tools & AI adoption",
         contribution:
           "Brings senior digital support expertise, hands-on operational troubleshooting, and user enablement, with strong command of the Microsoft ecosystem and AI assistants such as Copilot, Claude, and OpenAI.",
@@ -297,7 +298,7 @@ const pageCopy = {
       },
       {
         name: "Medard Sery",
-        category: "Expert consultant",
+        category: "Co-founder",
         role: "Expert consultant · Data engineering, cloud & AI platforms",
         contribution:
           "Designs scalable data platforms and cloud architectures for AI, with strong depth in Big Data, data engineering, and pipeline industrialization.",
@@ -337,8 +338,8 @@ const pageCopy = {
       },
       {
         name: "Axel N'Guessan",
-        category: "Expert consultant",
-        role: "Expert consultant · Software engineering, applied AI & digital products",
+        category: "Consultant",
+        role: "Consultant · Software engineering, applied AI & digital products",
         contribution:
           "Contributes to web and mobile product design, database engineering, Python-based AI building blocks, and useful prototypes, combining software engineering, simulation, and technical enablement.",
         specialties: ["Software Engineering", "Web & Mobile", "Python AI", "Databases", "3D & Simulation", "Technical enablement"],
@@ -367,6 +368,23 @@ const pageCopy = {
 const AProposPage = () => {
   const { language } = useLanguage();
   const copy = pageCopy[resolveActiveLanguage(language)];
+  const founders = useMemo(
+    () => copy.team.filter((member) => member.category === "Co-fondateur" || member.category === "Co-founder"),
+    [copy.team],
+  );
+  const consultants = useMemo(
+    () => copy.team.filter((member) => member.category !== "Co-fondateur" && member.category !== "Co-founder"),
+    [copy.team],
+  );
+  const [activeConsultantName, setActiveConsultantName] = useState(consultants[0]?.name ?? "");
+
+  useEffect(() => {
+    if (!consultants.some((member) => member.name === activeConsultantName)) {
+      setActiveConsultantName(consultants[0]?.name ?? "");
+    }
+  }, [activeConsultantName, consultants]);
+
+  const activeConsultant = consultants.find((member) => member.name === activeConsultantName) ?? consultants[0];
 
   return (
     <PageTransition>
@@ -449,8 +467,13 @@ const AProposPage = () => {
                   <p className="mt-4 max-w-4xl text-sm leading-7 text-muted-foreground">{copy.teamIntro}</p>
                 </div>
               </div>
-              <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                {copy.team.map((member, index) => (
+              <div className="mt-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                  {language === "en" ? "Founding team" : "Équipe fondatrice"}
+                </p>
+              </div>
+              <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                {founders.map((member, index) => (
                   <motion.div
                     key={member.name}
                     initial={{ opacity: 0, y: 15 }}
@@ -507,6 +530,102 @@ const AProposPage = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {activeConsultant ? (
+                <div className="mt-10 rounded-3xl border border-border bg-background p-5 md:p-6">
+                  <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                        {language === "en" ? "Consultants" : "Consultants"}
+                      </p>
+                      <h3 className="mt-3 font-heading text-xl font-semibold text-card-foreground">
+                        {language === "en" ? "Hover to preview profiles" : "Survolez pour voir le profil"}
+                      </h3>
+                      <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                        {language === "en"
+                          ? "Keep the page lighter: move over a consultant name to reveal the full card, and tap on mobile."
+                          : "Pour alléger la page, passez sur un nom de consultant pour afficher sa fiche complète, ou touchez sur mobile."}
+                      </p>
+                      <div className="mt-5 space-y-2">
+                        {consultants.map((member) => {
+                          const isActive = member.name === activeConsultant.name;
+                          return (
+                            <button
+                              key={member.name}
+                              type="button"
+                              onMouseEnter={() => setActiveConsultantName(member.name)}
+                              onFocus={() => setActiveConsultantName(member.name)}
+                              onClick={() => setActiveConsultantName(member.name)}
+                              className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition ${
+                                isActive
+                                  ? "border-primary/30 bg-primary/5 text-card-foreground"
+                                  : "border-border bg-card text-muted-foreground hover:border-primary/20 hover:bg-accent/40"
+                              }`}
+                            >
+                              <span>
+                                <span className="block text-sm font-semibold">{member.name}</span>
+                                <span className="mt-1 block text-xs leading-5">{member.role}</span>
+                              </span>
+                              <span className="ml-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+                                {language === "en" ? "View" : "Voir"}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <motion.div
+                      key={activeConsultant.name}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex h-full flex-col rounded-3xl border border-border bg-card p-5"
+                    >
+                      <div className="mb-4 h-40 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted md:h-48">
+                        {teamPhotos[activeConsultant.name] ? (
+                          <img
+                            src={teamPhotos[activeConsultant.name]}
+                            alt={activeConsultant.name}
+                            className="h-full w-full object-cover"
+                            style={{ objectPosition: teamPhotoPosition[activeConsultant.name] ?? "center 20%" }}
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-accent font-heading text-4xl font-bold text-primary">
+                            {activeConsultant.name
+                              .split(" ")
+                              .map((part) => part[0])
+                              .join("")
+                              .slice(0, 2)}
+                          </div>
+                        )}
+                      </div>
+                      {activeConsultant.category ? (
+                        <div className="mb-3">
+                          <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+                            {activeConsultant.category}
+                          </span>
+                        </div>
+                      ) : null}
+                      <h3 className="font-heading text-lg font-semibold text-card-foreground">{activeConsultant.name}</h3>
+                      <p className="mt-1 text-sm font-medium leading-6 text-primary">{activeConsultant.role}</p>
+                      <p className="mt-3 text-sm leading-7 text-muted-foreground">{activeConsultant.contribution}</p>
+                      {activeConsultant.specialties ? (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {activeConsultant.specialties.map((specialty) => (
+                            <span
+                              key={specialty}
+                              className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-semibold text-muted-foreground"
+                            >
+                              {specialty}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                    </motion.div>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             <motion.div
