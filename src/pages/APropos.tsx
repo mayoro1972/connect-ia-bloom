@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Award, Globe, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { ArrowRight, Award, Globe, ShieldCheck, Sparkles, Target, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -432,6 +432,7 @@ const pageCopy = {
 const AProposPage = () => {
   const { language } = useLanguage();
   const copy = pageCopy[resolveActiveLanguage(language)];
+  const [selectedMember, setSelectedMember] = useState<(typeof pageCopy.fr.team)[number] | null>(null);
   const founders = useMemo(
     () => copy.team.filter((member) => member.category === "Co-fondateur" || member.category === "Co-founder"),
     [copy.team],
@@ -440,6 +441,19 @@ const AProposPage = () => {
     () => copy.team.filter((member) => member.category !== "Co-fondateur" && member.category !== "Co-founder"),
     [copy.team],
   );
+
+  useEffect(() => {
+    if (!selectedMember) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedMember(null);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedMember]);
 
   return (
     <PageTransition>
@@ -535,8 +549,7 @@ const AProposPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.08 }}
-                    className="group relative flex h-full flex-col rounded-3xl border border-border bg-background p-5"
-                    tabIndex={0}
+                    className="flex h-full flex-col rounded-3xl border border-border bg-background p-5"
                   >
                     <div className="mb-4 h-32 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted md:h-36">
                       {teamPhotos[member.name] ? (
@@ -565,26 +578,18 @@ const AProposPage = () => {
                     ) : null}
                     <h3 className="font-heading text-base font-semibold text-card-foreground md:text-lg">{member.name}</h3>
                     <p className="mt-1 text-sm font-medium leading-6 text-primary">{member.role}</p>
-                    <div className="relative mt-3">
+                    <div className="mt-3">
                       <p className="line-clamp-5 text-sm leading-6 text-muted-foreground" title={member.contribution}>
                         {member.contribution}
                       </p>
                       {(member.contribution.length > 220 || member.specialties.length > visibleSpecialtiesCount) ? (
-                        <div className="pointer-events-none absolute left-0 right-0 top-full z-30 mt-3 hidden rounded-2xl border border-primary/20 bg-background/95 p-4 shadow-2xl backdrop-blur md:block md:opacity-0 md:transition md:duration-200 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
-                          <p className="text-sm leading-6 text-card-foreground">{member.contribution}</p>
-                          {member.specialties.length ? (
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              {member.specialties.map((specialty) => (
-                                <span
-                                  key={`${member.name}-${specialty}`}
-                                  className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
-                                >
-                                  {specialty}
-                                </span>
-                              ))}
-                            </div>
-                          ) : null}
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedMember(member)}
+                          className="mt-3 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition hover:bg-primary/10"
+                        >
+                          {language === "en" ? "View full profile" : "Voir le profil complet"}
+                        </button>
                       ) : null}
                     </div>
                     {"specialties" in member && member.specialties ? (
@@ -598,12 +603,14 @@ const AProposPage = () => {
                           </span>
                         ))}
                         {member.specialties.length > visibleSpecialtiesCount ? (
-                          <span
+                          <button
+                            type="button"
                             className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary"
+                            onClick={() => setSelectedMember(member)}
                             title={member.specialties.slice(visibleSpecialtiesCount).join(" · ")}
                           >
                             +{member.specialties.length - visibleSpecialtiesCount}
-                          </span>
+                          </button>
                         ) : null}
                       </div>
                     ) : null}
@@ -639,8 +646,7 @@ const AProposPage = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.06 }}
-                      className="group relative flex min-w-[280px] max-w-[320px] flex-col rounded-3xl border border-border bg-card p-5 md:min-w-[320px]"
-                      tabIndex={0}
+                      className="flex min-w-[280px] max-w-[320px] flex-col rounded-3xl border border-border bg-card p-5 md:min-w-[320px]"
                     >
                       <div className="mb-4 h-40 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted">
                         {teamPhotos[member.name] ? (
@@ -669,26 +675,18 @@ const AProposPage = () => {
                       ) : null}
                       <h3 className="font-heading text-lg font-semibold text-card-foreground">{member.name}</h3>
                       <p className="mt-1 text-sm font-medium leading-6 text-primary">{member.role}</p>
-                      <div className="relative mt-3">
+                      <div className="mt-3">
                         <p className="line-clamp-5 text-sm leading-6 text-muted-foreground" title={member.contribution}>
                           {member.contribution}
                         </p>
                         {(member.contribution.length > 220 || member.specialties.length > visibleSpecialtiesCount) ? (
-                          <div className="pointer-events-none absolute left-0 right-0 top-full z-30 mt-3 hidden rounded-2xl border border-primary/20 bg-background/95 p-4 shadow-2xl backdrop-blur md:block md:opacity-0 md:transition md:duration-200 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
-                            <p className="text-sm leading-6 text-card-foreground">{member.contribution}</p>
-                            {member.specialties.length ? (
-                              <div className="mt-3 flex flex-wrap gap-2">
-                                {member.specialties.map((specialty) => (
-                                  <span
-                                    key={`${member.name}-${specialty}`}
-                                    className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
-                                  >
-                                    {specialty}
-                                  </span>
-                                ))}
-                              </div>
-                            ) : null}
-                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedMember(member)}
+                            className="mt-3 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition hover:bg-primary/10"
+                          >
+                            {language === "en" ? "View full profile" : "Voir le profil complet"}
+                          </button>
                         ) : null}
                       </div>
                       {member.specialties ? (
@@ -702,12 +700,14 @@ const AProposPage = () => {
                             </span>
                           ))}
                           {member.specialties.length > visibleSpecialtiesCount ? (
-                            <span
+                            <button
+                              type="button"
                               className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary"
+                              onClick={() => setSelectedMember(member)}
                               title={member.specialties.slice(visibleSpecialtiesCount).join(" · ")}
                             >
                               +{member.specialties.length - visibleSpecialtiesCount}
-                            </span>
+                            </button>
                           ) : null}
                         </div>
                       ) : null}
@@ -744,6 +744,72 @@ const AProposPage = () => {
             </motion.div>
           </div>
         </section>
+
+        {selectedMember ? (
+          <div
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-foreground/45 px-4 py-8 backdrop-blur-sm"
+            onClick={() => setSelectedMember(null)}
+          >
+            <div
+              className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-border bg-background p-6 shadow-2xl md:p-8"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedMember(null)}
+                className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition hover:text-card-foreground"
+                aria-label={language === "en" ? "Close profile" : "Fermer le profil"}
+              >
+                <X size={18} />
+              </button>
+
+              <div className="mb-6 h-44 w-full overflow-hidden rounded-2xl border border-primary/10 bg-muted md:h-56">
+                {teamPhotos[selectedMember.name] ? (
+                  <img
+                    src={teamPhotos[selectedMember.name]}
+                    alt={selectedMember.name}
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: teamPhotoPosition[selectedMember.name] ?? "center 20%" }}
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-accent font-heading text-4xl font-bold text-primary">
+                    {selectedMember.name
+                      .split(" ")
+                      .map((part) => part[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </div>
+                )}
+              </div>
+
+              {selectedMember.category ? (
+                <div className="mb-3">
+                  <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+                    {selectedMember.category}
+                  </span>
+                </div>
+              ) : null}
+
+              <h3 className="font-heading text-2xl font-bold text-card-foreground">{selectedMember.name}</h3>
+              <p className="mt-2 text-base font-medium leading-7 text-primary">{selectedMember.role}</p>
+              <p className="mt-5 text-sm leading-7 text-muted-foreground md:text-base">{selectedMember.contribution}</p>
+
+              {selectedMember.specialties.length ? (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {selectedMember.specialties.map((specialty) => (
+                    <span
+                      key={`${selectedMember.name}-${specialty}`}
+                      className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold text-muted-foreground"
+                    >
+                      {specialty}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+
         <Footer />
       </div>
     </PageTransition>
