@@ -38,7 +38,7 @@ const teamPhotos: Record<string, string> = {
   "Francois Tanoh": teamFrancois,
   "Axel N'Guessan": teamAxel,
   "Dr Yao Célestin Djé": teamCelestin,
-  "Mamoudou Daffé": teamMamoudou,
+  "Mohammed Daffé": teamMamoudou,
   "Simbara Daffé": teamSimbara,
 };
 
@@ -55,7 +55,7 @@ const teamPhotoPosition: Record<string, string> = {
   "Francois Tanoh": "center 18%",
   "Axel N'Guessan": "center 14%",
   "Dr Yao Célestin Djé": "center 14%",
-  "Mamoudou Daffé": "center 18%",
+  "Mohammed Daffé": "center 18%",
   "Simbara Daffé": "center 18%",
 };
 
@@ -211,7 +211,7 @@ const pageCopy = {
         specialties: ["Software Engineering", "Web & Mobile", "IA Python", "Bases de données", "3D & Simulation", "Pédagogie technique"],
       },
       {
-        name: "Mamoudou Daffé",
+        name: "Mohammed Daffé",
         category: "Consultant",
         role: "Consultant · Marketing, campagnes & expérience client",
         contribution:
@@ -393,7 +393,7 @@ const pageCopy = {
         specialties: ["Software Engineering", "Web & Mobile", "Python AI", "Databases", "3D & Simulation", "Technical enablement"],
       },
       {
-        name: "Mamoudou Daffé",
+        name: "Mohammed Daffé",
         category: "Consultant",
         role: "Consultant · Marketing, campaigns & customer experience",
         contribution:
