@@ -12,6 +12,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { supabase, isSupabaseConfigured } from "@/integrations/supabase/client";
 import { metierKeyToDomain } from "@/lib/site-links";
+import { getWebinarSubmitErrorMessage } from "@/lib/webinar-submit-errors";
 import { formations as formationsData } from "@/data/formations";
 import { CheckCircle2, CalendarDays, Sparkles } from "lucide-react";
 
@@ -226,7 +227,7 @@ const WebinarRegistration = () => {
       setDone(true);
     } catch (err) {
       console.error(err);
-      setError(err instanceof Error ? err.message : t.error);
+      setError(getWebinarSubmitErrorMessage(err, lang, t.error));
     } finally {
       setSubmitting(false);
     }
