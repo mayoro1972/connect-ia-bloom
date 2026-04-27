@@ -56,6 +56,64 @@ const toOptionalValue = (value: string) => {
   return trimmed ? trimmed : null;
 };
 
+const extractDigits = (value: string) => value.replace(/\D/g, "");
+
+const normalizeAuditHoneypot = (form: ProspectAuditFormState) => {
+  const trimmed = form.botField.trim();
+  if (!trimmed) return null;
+
+  const normalized = trimmed.toLowerCase();
+  const autofillCandidates = [
+    form.fullName,
+    form.email,
+    form.phone,
+    form.profession,
+    form.city,
+    form.country,
+    form.password,
+    form.confirmPassword,
+  ]
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean);
+
+  if (autofillCandidates.includes(normalized)) {
+    return null;
+  }
+
+  return trimmed;
+};
+
+const getAuditRequestErrorDescription = (message: string | null | undefined, language: "fr" | "en") => {
+  switch (message) {
+    case "spam_detected":
+      return language === "en"
+        ? "Your browser or a form-filling extension pre-filled a technical field. Please retry after clearing autofill."
+        : "Votre navigateur ou une extension d'autoremplissage a rempli un champ technique. Merci de réessayer après avoir vidé l'autoremplissage.";
+    case "invalid_phone":
+      return language === "en"
+        ? "Please enter a valid phone number with at least 8 digits."
+        : "Merci de saisir un numéro de téléphone valide avec au moins 8 chiffres.";
+    case "invalid_email":
+      return language === "en"
+        ? "Please enter a valid email address."
+        : "Merci de saisir une adresse email valide.";
+    case "invalid_full_name":
+      return language === "en"
+        ? "Please enter your full name."
+        : "Merci de renseigner votre nom complet.";
+    case "privacy_consent_required":
+      return language === "en"
+        ? "Please accept data processing before sending the request."
+        : "Merci d'accepter le traitement des données avant l'envoi.";
+    case "invalid_prospect_password":
+      return language === "en"
+        ? "The access password could not be generated correctly. Please retry."
+        : "Le mot de passe d'accès n'a pas pu être généré correctement. Merci de réessayer.";
+    default:
+      return null;
+  }
+};
+
 const sectorOptions = [
   "Assistanat & Secrétariat",
   "Ressources Humaines",
@@ -108,6 +166,8 @@ const pageCopy = {
       "Votre demande a bien été enregistrée. Un accusé de réception part immédiatement, puis l'accès sécurisé au formulaire d'audit sera envoyé sous environ 30 minutes.",
     privacyErrorTitle: "Consentement requis",
     privacyErrorDesc: "Merci d'accepter le traitement de vos informations avant l'envoi.",
+    phoneErrorTitle: "Téléphone invalide",
+    phoneErrorDesc: "Merci de saisir un numéro valide avec au moins 8 chiffres.",
     passwordErrorTitle: "Mot de passe invalide",
     passwordErrorDesc: "Le mot de passe doit contenir au moins 8 caractères et correspondre à la confirmation.",
     errorTitle: "Envoi impossible",
@@ -163,6 +223,8 @@ const pageCopy = {
       "Your request has been recorded. An acknowledgement email goes out immediately, then secure access to the audit questionnaire will be sent in about 30 minutes.",
     privacyErrorTitle: "Consent required",
     privacyErrorDesc: "Please accept data processing before sending the request.",
+    phoneErrorTitle: "Invalid phone",
+    phoneErrorDesc: "Please enter a valid phone number with at least 8 digits.",
     passwordErrorTitle: "Invalid password",
     passwordErrorDesc: "The password must be at least 8 characters long and match the confirmation field.",
     errorTitle: "Unable to send",
@@ -203,6 +265,8 @@ const ProspectRequestPage = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    const activeLanguage = resolveOutboundLanguage(language);
+
     if (!form.wantsExpertAppointment) {
       toast({
         title: copy.appointmentRequiredTitle,
@@ -216,6 +280,15 @@ const ProspectRequestPage = () => {
       toast({
         title: copy.privacyErrorTitle,
         description: copy.privacyErrorDesc,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (extractDigits(form.phone).length < 8) {
+      toast({
+        title: copy.phoneErrorTitle,
+        description: copy.phoneErrorDesc,
         variant: "destructive",
       });
       return;
@@ -240,34 +313,42 @@ const ProspectRequestPage = () => {
     }
 
     setIsSubmitting(true);
-    const activeLanguage = resolveOutboundLanguage(language);
-    const passwordHash = await hashPassword(form.password);
+    try {
+      const passwordHash = await hashPassword(form.password);
 
-    const { data: requestId, error } = await supabase.rpc("submit_contact_request", {
-      full_name_input: form.fullName.trim(),
-      email_input: form.email.trim(),
-      phone_input: form.phone.trim(),
-      company_input: form.profession.trim(),
-      profession_input: form.profession.trim(),
-      prospect_type_input: null,
-      sector_input: toOptionalValue(form.sector),
-      city_input: toOptionalValue(form.city),
-      country_input: toOptionalValue(form.country),
-      participants_input: null,
-      requested_formations_input: null,
-      message_input: toOptionalValue(form.message),
-      source_page_input: "/demande-audit-gratuit",
-      language_input: activeLanguage,
-      request_intent_input: "demande-audit",
-      requested_domain_input: "Audit IA gratuit",
-      privacy_consent_input: form.privacyAccepted,
-      honeypot_input: form.botField.trim() || null,
-      wants_expert_appointment_input: form.wantsExpertAppointment,
-      prospect_username_input: form.email.trim().toLowerCase(),
-      prospect_password_hash_input: passwordHash,
-    });
+      const { data: requestId, error } = await supabase.rpc("submit_contact_request", {
+        full_name_input: form.fullName.trim(),
+        email_input: form.email.trim(),
+        phone_input: form.phone.trim(),
+        company_input: form.profession.trim(),
+        profession_input: form.profession.trim(),
+        prospect_type_input: null,
+        sector_input: toOptionalValue(form.sector),
+        city_input: toOptionalValue(form.city),
+        country_input: toOptionalValue(form.country),
+        participants_input: null,
+        requested_formations_input: null,
+        message_input: toOptionalValue(form.message),
+        source_page_input: "/demande-audit-gratuit",
+        language_input: activeLanguage,
+        request_intent_input: "demande-audit",
+        requested_domain_input: "Audit IA gratuit",
+        privacy_consent_input: form.privacyAccepted,
+        honeypot_input: normalizeAuditHoneypot(form),
+        wants_expert_appointment_input: form.wantsExpertAppointment,
+        prospect_username_input: form.email.trim().toLowerCase(),
+        prospect_password_hash_input: passwordHash,
+      });
 
-    if (!error) {
+      if (error) {
+        toast({
+          title: copy.errorTitle,
+          description: getAuditRequestErrorDescription(error.message, activeLanguage) ?? copy.errorDesc,
+          variant: "destructive",
+        });
+        return;
+      }
+
       await sendProspectEmailNotifications({
         requestId,
         intent: "demande-audit",
@@ -303,15 +384,16 @@ const ProspectRequestPage = () => {
       });
 
       setForm(emptyForm);
-    } else {
+    } catch (error) {
       toast({
         title: copy.errorTitle,
-        description: copy.errorDesc,
+        description:
+          getAuditRequestErrorDescription(error instanceof Error ? error.message : null, activeLanguage) ?? copy.errorDesc,
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   return (
@@ -364,6 +446,8 @@ const ProspectRequestPage = () => {
                   <div className="grid gap-4 md:grid-cols-2">
                     <input
                       placeholder={copy.labels.fullName}
+                      name="fullName"
+                      autoComplete="name"
                       required
                       value={form.fullName}
                       onChange={(event) => update("fullName", event.target.value)}
@@ -371,6 +455,8 @@ const ProspectRequestPage = () => {
                     />
                     <input
                       placeholder={copy.labels.profession}
+                      name="organizationTitle"
+                      autoComplete="organization-title"
                       required
                       value={form.profession}
                       onChange={(event) => update("profession", event.target.value)}
@@ -378,6 +464,8 @@ const ProspectRequestPage = () => {
                     />
                     <input
                       placeholder={copy.labels.email}
+                      name="email"
+                      autoComplete="email"
                       type="email"
                       required
                       value={form.email}
@@ -386,6 +474,9 @@ const ProspectRequestPage = () => {
                     />
                     <input
                       placeholder={copy.labels.phone}
+                      name="phone"
+                      autoComplete="tel"
+                      inputMode="tel"
                       required
                       value={form.phone}
                       onChange={(event) => update("phone", event.target.value)}
@@ -393,6 +484,8 @@ const ProspectRequestPage = () => {
                     />
                     <input
                       placeholder={copy.labels.city}
+                      name="city"
+                      autoComplete="address-level2"
                       required
                       value={form.city}
                       onChange={(event) => update("city", event.target.value)}
@@ -400,6 +493,8 @@ const ProspectRequestPage = () => {
                     />
                     <input
                       placeholder={copy.labels.country}
+                      name="country"
+                      autoComplete="country-name"
                       required
                       value={form.country}
                       onChange={(event) => update("country", event.target.value)}
@@ -441,6 +536,8 @@ const ProspectRequestPage = () => {
                       <input
                         placeholder={copy.labels.password}
                         type="password"
+                        name="new-password"
+                        autoComplete="new-password"
                         required
                         value={form.password}
                         onChange={(event) => update("password", event.target.value)}
@@ -449,6 +546,8 @@ const ProspectRequestPage = () => {
                       <input
                         placeholder={copy.labels.confirmPassword}
                         type="password"
+                        name="confirm-password"
+                        autoComplete="new-password"
                         required
                         value={form.confirmPassword}
                         onChange={(event) => update("confirmPassword", event.target.value)}
@@ -458,9 +557,14 @@ const ProspectRequestPage = () => {
                   </div>
 
                   <input
+                    type="text"
+                    name="contact_website"
                     tabIndex={-1}
-                    autoComplete="off"
+                    autoComplete="new-password"
+                    data-lpignore="true"
+                    data-1p-ignore="true"
                     className="hidden"
+                    aria-hidden="true"
                     value={form.botField}
                     onChange={(event) => update("botField", event.target.value)}
                   />
