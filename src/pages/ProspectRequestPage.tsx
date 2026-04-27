@@ -87,8 +87,8 @@ const getAuditRequestErrorDescription = (message: string | null | undefined, lan
   switch (message) {
     case "spam_detected":
       return language === "en"
-        ? "Your browser or a form-filling extension pre-filled a technical field. Please retry after clearing autofill."
-        : "Votre navigateur ou une extension d'autoremplissage a rempli un champ technique. Merci de réessayer après avoir vidé l'autoremplissage.";
+        ? "We could not finalize your request right now. Please try again in a few moments. If the issue continues, contact the site administrator at contact@transferai.ci."
+        : "Nous n'avons pas encore pu finaliser votre demande. Merci de réessayer dans quelques instants. Si le souci persiste, contactez l'administrateur du site à contact@transferai.ci.";
     case "invalid_phone":
       return language === "en"
         ? "Please enter a valid phone number with at least 8 digits."
@@ -171,7 +171,8 @@ const pageCopy = {
     passwordErrorTitle: "Mot de passe invalide",
     passwordErrorDesc: "Le mot de passe doit contenir au moins 8 caractères et correspondre à la confirmation.",
     errorTitle: "Envoi impossible",
-    errorDesc: "La demande n'a pas pu être envoyée. Vérifiez la configuration et réessayez.",
+    errorDesc:
+      "Nous n'avons pas encore pu finaliser votre demande. Merci de réessayer dans quelques instants. Si le souci persiste, contactez l'administrateur du site à contact@transferai.ci.",
     labels: {
       fullName: "Nom complet",
       profession: "Profession / fonction",
@@ -228,7 +229,8 @@ const pageCopy = {
     passwordErrorTitle: "Invalid password",
     passwordErrorDesc: "The password must be at least 8 characters long and match the confirmation field.",
     errorTitle: "Unable to send",
-    errorDesc: "The request could not be sent. Check the configuration and try again.",
+    errorDesc:
+      "We could not finalize your request right now. Please try again in a few moments. If the issue continues, contact the site administrator at contact@transferai.ci.",
     labels: {
       fullName: "Full name",
       profession: "Role / profession",
@@ -341,6 +343,13 @@ const ProspectRequestPage = () => {
       });
 
       if (error) {
+        console.error("[ProspectRequestPage] submit_contact_request failed", {
+          message: error.message,
+          code: "code" in error ? error.code : undefined,
+          email: form.email.trim(),
+          sourcePage: "/demande-audit-gratuit",
+          language: activeLanguage,
+        });
         toast({
           title: copy.errorTitle,
           description: getAuditRequestErrorDescription(error.message, activeLanguage) ?? copy.errorDesc,
@@ -385,6 +394,12 @@ const ProspectRequestPage = () => {
 
       setForm(emptyForm);
     } catch (error) {
+      console.error("[ProspectRequestPage] unexpected audit request error", {
+        error,
+        email: form.email.trim(),
+        sourcePage: "/demande-audit-gratuit",
+        language: activeLanguage,
+      });
       toast({
         title: copy.errorTitle,
         description:
