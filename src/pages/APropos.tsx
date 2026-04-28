@@ -70,7 +70,7 @@ const pageCopy = {
     introBadge: "En bref",
     introTitle: "Transformer l'IA en décisions, compétences et résultats",
     introLead:
-      "TransferAI Africa aide les professionnels, les entreprises et les institutions à cadrer leurs priorités IA, faire monter les équipes en compétence et déployer des usages réellement utiles.",
+      "Issu d'une collaboration avec Nettelecom CI, TransferAI Africa aide les professionnels, les entreprises et les institutions à cadrer leurs priorités IA, faire monter les équipes en compétence et déployer des usages réellement utiles.",
     introPoints: [
       "Un ancrage fort en Côte d'Ivoire, avec une ambition africaine claire.",
       "Un accompagnement de la stratégie au passage à l'action.",
@@ -252,7 +252,7 @@ const pageCopy = {
     introBadge: "At a glance",
     introTitle: "Turn AI into decisions, skills, and measurable results",
     introLead:
-      "TransferAI Africa helps professionals, companies, and institutions frame their AI priorities, build team capability, and deploy use cases that actually matter.",
+      "Built in collaboration with Nettelecom CI, TransferAI Africa helps professionals, companies, and institutions frame their AI priorities, build team capability, and deploy use cases that actually matter.",
     introPoints: [
       "Strong Côte d'Ivoire grounding with a clear African ambition.",
       "Support that runs from strategy to execution.",
