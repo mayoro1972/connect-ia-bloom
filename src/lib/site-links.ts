@@ -12,7 +12,7 @@ export type SocialLink = {
 };
 
 const whatsappPrefilledMessage =
-  "Bonjour TransferAI, je souhaite faire un transfert.";
+  "Bonjour TransferAI, je souhaite échanger avec votre équipe au sujet de vos services, formations ou solutions IA.";
 const whatsappDigits = "2250716573990";
 const whatsappPrefilledHref = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(whatsappPrefilledMessage)}`;
 
