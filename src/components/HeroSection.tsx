@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { BookOpen, Users, Award, Globe, Eye } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
+import { directLinks } from "@/lib/site-links";
 
 const sectionCopy = {
   fr: {
@@ -14,6 +17,8 @@ const sectionCopy = {
     title2: " utile pour les talents, les entreprises et les institutions d'Afrique",
     subtitle:
       "TransferAI Africa forme en Côte d'Ivoire et en Afrique celles et ceux qui veulent apprendre l'IA et l'appliquer concrètement à leur métier.",
+    whatsappCta: "Écrire sur WhatsApp",
+    whatsappHelper: "Réponse rapide pour parler transfert, IA et accompagnement.",
     stats: {
       formations: "Formations",
       metiers: "Domaines d'expertise",
@@ -29,6 +34,8 @@ const sectionCopy = {
     title2: " that serves African talent, companies, and institutions",
     subtitle:
       "TransferAI Africa trains people and teams in Côte d'Ivoire and across Africa who want to learn AI and apply it concretely to their work.",
+    whatsappCta: "Chat on WhatsApp",
+    whatsappHelper: "Quick contact for transfers, AI needs, and advisory support.",
     stats: {
       formations: "Courses",
       metiers: "Areas of expertise",
@@ -107,6 +114,22 @@ const HeroSection = () => {
           >
             {copy.subtitle}
           </p>
+
+          <div className="mb-12 flex flex-col items-center gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full bg-coral-gradient px-8 text-white shadow-[0_18px_34px_-18px_rgba(251,146,60,0.9)] hover:opacity-95"
+            >
+              <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={18} />
+                {copy.whatsappCta}
+              </a>
+            </Button>
+            <p className="max-w-xl text-sm text-slate-200/75 md:text-base">
+              {copy.whatsappHelper}
+            </p>
+          </div>
         </div>
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-5">

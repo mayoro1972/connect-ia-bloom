@@ -50,12 +50,12 @@ const videoFallback: SocialVideoItem[] = [
     id: "fallback-tiktok-featured",
     platform: "tiktok",
     slug: "tiktok-lancement-transferai-webinaire-ia",
-    titleFr: "Lancement TransferAI Côte d'Ivoire & webinaire IA",
-    titleEn: "TransferAI Côte d'Ivoire launch & AI webinar",
+    titleFr: "Lancement TransferAI CI",
+    titleEn: "TransferAI CI launch",
     summaryFr:
-      "Une capsule TikTok pour découvrir le lancement de TransferAI en Côte d'Ivoire et rejoindre le webinaire IA gratuit destiné aux professionnels, étudiants et entrepreneurs.",
+      "Capsule TikTok sur le lancement de TransferAI CI et le webinaire IA gratuit.",
     summaryEn:
-      "A TikTok capsule introducing TransferAI Côte d'Ivoire and inviting professionals, students, and entrepreneurs to join the free AI webinar.",
+      "TikTok capsule introducing TransferAI CI and the free AI webinar.",
     videoUrl: "https://www.tiktok.com/@transfer_ai_africa/video/7633069888805915912",
     thumbnailUrl: null,
     ctaLabelFr: "Voir la capsule",
@@ -71,12 +71,12 @@ const videoFallback: SocialVideoItem[] = [
     id: "fallback-tiktok-ia-pratique",
     platform: "tiktok",
     slug: "tiktok-ia-pratique-10-usages",
-    titleFr: "IA pratique en Côte d'Ivoire : 10 usages concrets",
-    titleEn: "Practical AI in Côte d'Ivoire: 10 practical use cases",
+    titleFr: "IA pratique : 10 usages",
+    titleEn: "Practical AI: 10 use cases",
     summaryFr:
-      "Une capsule courte pour montrer comment l'IA peut aider à gagner du temps, mieux s'organiser et produire plus vite, avec renvoi direct vers les ressources TransferAI.",
+      "Capsule courte sur 10 usages IA concrets pour gagner du temps et produire plus vite.",
     summaryEn:
-      "A short TikTok clip showing how AI can help people save time, get organised, and produce faster, with a direct path back to TransferAI resources.",
+      "Short TikTok clip on 10 practical AI use cases to save time and work faster.",
     videoUrl: "https://www.tiktok.com/@transfer_ai_africa/video/7632859962066226450",
     thumbnailUrl: null,
     ctaLabelFr: "Voir la capsule",
