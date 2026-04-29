@@ -226,6 +226,26 @@ const mapPartnerReviewPayload = (payload: Record<string, unknown>) => ({
   meta: asJson(payload.meta),
 });
 
+const mapVideoPayload = (payload: Record<string, unknown>) => ({
+  platform: asString(payload.platform, "tiktok"),
+  slug: asString(payload.slug),
+  title_fr: asString(payload.title_fr),
+  title_en: asString(payload.title_en),
+  summary_fr: asString(payload.summary_fr),
+  summary_en: asString(payload.summary_en),
+  video_url: asString(payload.video_url),
+  thumbnail_url: asNullableString(payload.thumbnail_url),
+  cta_label_fr: asNullableString(payload.cta_label_fr),
+  cta_label_en: asNullableString(payload.cta_label_en),
+  cta_url: asNullableString(payload.cta_url),
+  frequency_label_fr: asString(payload.frequency_label_fr, "5 capsules / semaine"),
+  frequency_label_en: asString(payload.frequency_label_en, "5 clips / week"),
+  sort_order: asNumber(payload.sort_order) ?? 100,
+  is_featured: asBoolean(payload.is_featured),
+  status: asString(payload.status, "draft"),
+  published_at: asString(payload.published_at) || new Date().toISOString(),
+});
+
 const listResources = async () =>
   supabase
     .from("resource_posts")
@@ -757,6 +777,38 @@ const setPartnerStatus = async (payload: Record<string, unknown>) =>
     .select("*")
     .single();
 
+const listVideos = async () =>
+  supabase
+    .from("social_video_posts")
+    .select("*")
+    .order("is_featured", { ascending: false })
+    .order("sort_order", { ascending: true })
+    .order("published_at", { ascending: false })
+    .limit(80);
+
+const createVideo = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("social_video_posts")
+    .insert(mapVideoPayload(payload))
+    .select("*")
+    .single();
+
+const updateVideo = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("social_video_posts")
+    .update(mapVideoPayload(payload))
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+
+const setVideoStatus = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("social_video_posts")
+    .update({ status: asString(payload.status, "draft") })
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+
 const listProspects = async () => {
   const [requestsResult, deliveriesResult] = await Promise.all([
     supabase
@@ -889,6 +941,10 @@ Deno.serve(async (request) => {
   if (entity === "partners" && action === "save") result = await savePartner(payload);
   if (entity === "partners" && action === "set-status") result = await setPartnerStatus(payload);
   if (entity === "prospects" && action === "list") result = await listProspects();
+  if (entity === "videos" && action === "list") result = await listVideos();
+  if (entity === "videos" && action === "create") result = await createVideo(payload);
+  if (entity === "videos" && action === "update") result = await updateVideo(payload);
+  if (entity === "videos" && action === "set-status") result = await setVideoStatus(payload);
   if (entity === "webinars" && action === "list") result = await listWebinarRegistrations();
   if (entity === "webinars" && action === "update") result = await updateWebinarRegistration(payload);
 

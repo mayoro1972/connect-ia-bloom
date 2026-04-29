@@ -18,6 +18,7 @@ import AuditProspectAdminPanel, { type AuditProspectSnapshot } from "@/component
 import WebinarAdminPanel from "@/components/backoffice/WebinarAdminPanel";
 import LiveFormatsAdminPanel from "@/components/backoffice/LiveFormatsAdminPanel";
 import VendorFeedsAdminPanel from "@/components/backoffice/VendorFeedsAdminPanel";
+import VideoCapsuleAdminPanel from "@/components/backoffice/VideoCapsuleAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -514,6 +515,7 @@ const BackOfficePage = () => {
                 <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
                 <TabsTrigger value="partners">Partenaires IA</TabsTrigger>
                 <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
+                <TabsTrigger value="videos">Capsules vidéo</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="webinars">Webinaires</TabsTrigger>
                 <TabsTrigger value="live-formats">Formats live IA</TabsTrigger>
@@ -937,6 +939,10 @@ const BackOfficePage = () => {
                   onStatus={setStatusMessage}
                   onError={setErrorMessage}
                 />
+              </TabsContent>
+
+              <TabsContent value="videos">
+                <VideoCapsuleAdminPanel token={token} />
               </TabsContent>
 
               <TabsContent value="partners">
