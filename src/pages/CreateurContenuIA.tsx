@@ -50,8 +50,8 @@ const creatorHubCopy = {
       },
     ],
     channelsTitle: "Les canaux à privilégier pour attirer et retenir",
-    featuredVideoLabel: "Capsule TikTok mise en avant",
-    featuredVideoCta: "Voir sur TikTok",
+    featuredVideoLabel: "Capsule en avant",
+    featuredVideoCta: "Voir la vidéo",
     featuredVideoLoading: "Chargement de la capsule publiée...",
     channels: [
       {
@@ -169,8 +169,8 @@ const creatorHubCopy = {
       },
     ],
     channelsTitle: "Channels to prioritize for reach and retention",
-    featuredVideoLabel: "Featured TikTok clip",
-    featuredVideoCta: "Watch on TikTok",
+    featuredVideoLabel: "Featured clip",
+    featuredVideoCta: "Watch video",
     featuredVideoLoading: "Loading published clip...",
     channels: [
       {
@@ -380,25 +380,25 @@ const CreateurContenuIA = () => {
                             className="relative flex aspect-[9/16] w-full flex-col justify-between overflow-hidden p-5"
                           >
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,hsl(25_95%_58%/.16),transparent_40%),radial-gradient(circle_at_bottom_right,hsl(330_95%_58%/.16),transparent_35%)]" />
-                            <div className="relative flex items-start justify-between gap-4">
+                            <div className="relative flex items-start justify-between gap-3">
                               <div className={`w-12 h-12 rounded-xl ${channel.bg} flex items-center justify-center shadow-sm`}>
                                 <channel.icon size={24} className={channel.color} />
                               </div>
-                              <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
+                              <span className="inline-flex max-w-[9.5rem] items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
                                 {copy.featuredVideoLabel}
                               </span>
                             </div>
-                            <div className="relative space-y-3">
-                              <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-lg backdrop-blur-sm">
-                                <PlayCircle size={28} />
+                            <div className="relative space-y-2.5">
+                              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-lg backdrop-blur-sm">
+                                <PlayCircle size={24} />
                               </div>
-                              <h3 className="font-heading text-lg font-bold text-white">
+                              <h3 className="line-clamp-3 font-heading text-[1.65rem] font-bold leading-tight text-white">
                                 {featuredTikTokTitle ?? channel.title}
                               </h3>
-                              <p className="line-clamp-5 text-sm leading-relaxed text-white/75">
+                              <p className="line-clamp-4 text-sm leading-relaxed text-white/75">
                                 {isTikTokLoading ? copy.featuredVideoLoading : featuredTikTokSummary ?? channel.desc}
                               </p>
-                              <div className="flex items-center justify-between gap-3 pt-2">
+                              <div className="flex items-center justify-between gap-3 pt-1">
                                 <span className="text-xs text-white/65">
                                   {featuredTikTokFrequency ?? channel.frequency}
                                 </span>

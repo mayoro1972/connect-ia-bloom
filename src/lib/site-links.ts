@@ -11,6 +11,11 @@ export type SocialLink = {
   kind: "social" | "messaging" | "video";
 };
 
+const whatsappPrefilledMessage =
+  "Bonjour TransferAI, je souhaite faire un transfert.";
+const whatsappDigits = "2250716573990";
+const whatsappPrefilledHref = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(whatsappPrefilledMessage)}`;
+
 const auditRequestUrl =
   import.meta.env.VITE_AUDIT_REQUEST_URL ||
   "/demande-audit-gratuit";
@@ -30,13 +35,13 @@ export const socialLinks: SocialLink[] = [
   { label: "X / Twitter", href: "https://x.com/AfricaAi89298", kind: "social" },
   { label: "TikTok", href: "https://www.tiktok.com/@transfer_ai_africa", kind: "video" },
   { label: "Telegram", href: "https://t.me/transferaiafrica", kind: "messaging" },
-  { label: "WhatsApp", href: "https://wa.me/225071657733990", kind: "messaging" },
+  { label: "WhatsApp", href: whatsappPrefilledHref, kind: "messaging" },
 ];
 
 export const directLinks = {
   email: "mailto:contact@transferai.ci?subject=Contact%20TransferAI%20Africa",
-  phone: "tel:+225071657733990",
-  whatsapp: "https://wa.me/225071657733990",
+  phone: "tel:+2250716573990",
+  whatsapp: whatsappPrefilledHref,
   auditLanding: "/audit-ia-gratuit",
   appointment: "/prise-rdv",
   auditForm: auditRequestUrl,
@@ -56,10 +61,10 @@ export const appointmentBookings: Record<AppointmentSource, string> = {
 
 export const contactDetails = {
   email: "contact@transferai.ci",
-  phoneDisplay: "+225 071657733990",
-  phoneDigits: "+225071657733990",
-  whatsappDisplay: "+225 071657733990",
-  whatsappDigits: "225071657733990",
+  phoneDisplay: "+225 0716573990",
+  phoneDigits: "+2250716573990",
+  whatsappDisplay: "+225 0716573990",
+  whatsappDigits,
   addressShort: "Riviera 3, carrefour Sainte Famille, Abidjan, Côte\u00A0d'Ivoire",
   addressFull: "Nettelecomci, Residence de la Paix, Riviera 3, carrefour Sainte Famille, Abidjan, Côte\u00A0d'Ivoire",
   mapsLabel: "Voir sur Google Maps",
