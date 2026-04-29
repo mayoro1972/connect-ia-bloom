@@ -24,6 +24,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { buildEmploymentContactPath, buildReplayWatchUrl } from "@/lib/site-links";
 import { isResourceNew } from "@/lib/resource-feed";
 import { useJobFeed } from "@/hooks/useJobFeed";
+import { useSocialVideoFeed } from "@/hooks/useSocialVideoFeed";
 
 const creatorHubCopy = {
   fr: {
@@ -49,6 +50,9 @@ const creatorHubCopy = {
       },
     ],
     channelsTitle: "Les canaux à privilégier pour attirer et retenir",
+    featuredVideoLabel: "Capsule TikTok mise en avant",
+    featuredVideoCta: "Voir sur TikTok",
+    featuredVideoLoading: "Chargement de la capsule publiée...",
     channels: [
       {
         title: "YouTube",
@@ -165,6 +169,9 @@ const creatorHubCopy = {
       },
     ],
     channelsTitle: "Channels to prioritize for reach and retention",
+    featuredVideoLabel: "Featured TikTok clip",
+    featuredVideoCta: "Watch on TikTok",
+    featuredVideoLoading: "Loading published clip...",
     channels: [
       {
         title: "YouTube",
@@ -260,10 +267,17 @@ const creatorHubCopy = {
   },
 } as const;
 
+const getTikTokEmbedUrl = (url: string | null | undefined) => {
+  if (!url) return null;
+  const match = url.match(/\/video\/(\d+)/);
+  return match?.[1] ? `https://www.tiktok.com/embed/v2/${match[1]}` : null;
+};
+
 const CreateurContenuIA = () => {
   const { language, t } = useLanguage();
   const copy = creatorHubCopy[language === "en" ? "en" : "fr"];
   const { items: jobs, stats: jobStats, isLoading: jobsLoading } = useJobFeed();
+  const { featured: featuredTikTok, isLoading: isTikTokLoading } = useSocialVideoFeed("tiktok");
   const highlightedJobs = jobs.slice(0, 6);
   const replays = (t("webinars.replays") as Array<Record<string, string>>) ?? [];
 
@@ -283,6 +297,16 @@ const CreateurContenuIA = () => {
 
   const jobSourceCount = copy.jobSources.length;
   const emploiContactLink = buildEmploymentContactPath("Emploi IA & mise en relation");
+  const featuredTikTokTitle = language === "en" ? featuredTikTok?.titleEn : featuredTikTok?.titleFr;
+  const featuredTikTokSummary = language === "en" ? featuredTikTok?.summaryEn : featuredTikTok?.summaryFr;
+  const featuredTikTokCtaLabel =
+    language === "en"
+      ? featuredTikTok?.ctaLabelEn || copy.featuredVideoCta
+      : featuredTikTok?.ctaLabelFr || copy.featuredVideoCta;
+  const featuredTikTokFrequency =
+    language === "en" ? featuredTikTok?.frequencyLabelEn : featuredTikTok?.frequencyLabelFr;
+  const featuredTikTokLink = featuredTikTok?.ctaUrl || featuredTikTok?.videoUrl || null;
+  const featuredTikTokEmbedUrl = getTikTokEmbedUrl(featuredTikTok?.videoUrl);
 
   return (
     <PageTransition>
@@ -333,12 +357,91 @@ const CreateurContenuIA = () => {
                   transition={{ delay: index * 0.08 }}
                   className="bg-card border border-border rounded-xl p-6 hover-lift"
                 >
-                  <div className={`w-12 h-12 rounded-xl ${channel.bg} flex items-center justify-center mb-4`}>
-                    <channel.icon size={24} className={channel.color} />
-                  </div>
-                  <h3 className="font-heading font-bold text-base text-card-foreground mb-2">{channel.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{channel.desc}</p>
-                  <span className="text-xs text-muted-foreground">{channel.frequency}</span>
+                  {channel.title === "TikTok" ? (
+                    <>
+                      <div className="mb-4 overflow-hidden rounded-2xl border border-border bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))]">
+                        {featuredTikTokEmbedUrl ? (
+                          <iframe
+                            title={featuredTikTokTitle ?? channel.title}
+                            src={featuredTikTokEmbedUrl}
+                            className="aspect-[9/16] w-full"
+                            allow="encrypted-media;"
+                            allowFullScreen
+                          />
+                        ) : featuredTikTok?.thumbnailUrl ? (
+                          <a
+                            href={featuredTikTokLink ?? "#"}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group relative block aspect-[9/16] w-full overflow-hidden"
+                          >
+                            <img
+                              src={featuredTikTok.thumbnailUrl}
+                              alt={featuredTikTokTitle ?? channel.title}
+                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                            />
+                            <div className="absolute inset-0 bg-black/25" />
+                            <div className="absolute inset-x-0 bottom-3 flex justify-center">
+                              <span className="inline-flex items-center gap-2 rounded-full bg-black/65 px-3 py-1 text-xs font-semibold text-white">
+                                <PlayCircle size={14} />
+                                {copy.featuredVideoCta}
+                              </span>
+                            </div>
+                          </a>
+                        ) : (
+                          <a
+                            href={featuredTikTokLink ?? "#"}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex aspect-[9/16] w-full flex-col justify-between p-4"
+                          >
+                            <div className={`w-12 h-12 rounded-xl ${channel.bg} flex items-center justify-center`}>
+                              <channel.icon size={24} className={channel.color} />
+                            </div>
+                            <div className="space-y-2">
+                              <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
+                                {copy.featuredVideoLabel}
+                              </span>
+                              <h3 className="font-heading text-lg font-bold text-white">
+                                {featuredTikTokTitle ?? channel.title}
+                              </h3>
+                              <p className="text-sm leading-relaxed text-white/75">
+                                {isTikTokLoading ? copy.featuredVideoLoading : featuredTikTokSummary ?? channel.desc}
+                              </p>
+                            </div>
+                          </a>
+                        )}
+                      </div>
+                      <h3 className="font-heading font-bold text-base text-card-foreground mb-2">{channel.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        {isTikTokLoading ? copy.featuredVideoLoading : featuredTikTokSummary ?? channel.desc}
+                      </p>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-xs text-muted-foreground">
+                          {featuredTikTokFrequency ?? channel.frequency}
+                        </span>
+                        {featuredTikTokLink ? (
+                          <a
+                            href={featuredTikTokLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+                          >
+                            {featuredTikTokCtaLabel} <ExternalLink size={12} />
+                          </a>
+                        ) : null}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={`w-12 h-12 rounded-xl ${channel.bg} flex items-center justify-center mb-4`}>
+                        <channel.icon size={24} className={channel.color} />
+                      </div>
+                      <h3 className="font-heading font-bold text-base text-card-foreground mb-2">{channel.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{channel.desc}</p>
+                      <span className="text-xs text-muted-foreground">{channel.frequency}</span>
+                    </>
+                  )}
                 </motion.div>
               ))}
             </div>
