@@ -267,12 +267,6 @@ const creatorHubCopy = {
   },
 } as const;
 
-const getTikTokEmbedUrl = (url: string | null | undefined) => {
-  if (!url) return null;
-  const match = url.match(/\/video\/(\d+)/);
-  return match?.[1] ? `https://www.tiktok.com/embed/v2/${match[1]}` : null;
-};
-
 const CreateurContenuIA = () => {
   const { language, t } = useLanguage();
   const copy = creatorHubCopy[language === "en" ? "en" : "fr"];
@@ -306,8 +300,6 @@ const CreateurContenuIA = () => {
   const featuredTikTokFrequency =
     language === "en" ? featuredTikTok?.frequencyLabelEn : featuredTikTok?.frequencyLabelFr;
   const featuredTikTokLink = featuredTikTok?.ctaUrl || featuredTikTok?.videoUrl || null;
-  const featuredTikTokEmbedUrl = getTikTokEmbedUrl(featuredTikTok?.videoUrl);
-
   return (
     <PageTransition>
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -360,15 +352,7 @@ const CreateurContenuIA = () => {
                   {channel.title === "TikTok" ? (
                     <>
                       <div className="mb-4 overflow-hidden rounded-2xl border border-border bg-[linear-gradient(135deg,hsl(225_48%_14%),hsl(226_40%_10%))]">
-                        {featuredTikTokEmbedUrl ? (
-                          <iframe
-                            title={featuredTikTokTitle ?? channel.title}
-                            src={featuredTikTokEmbedUrl}
-                            className="aspect-[9/16] w-full"
-                            allow="encrypted-media;"
-                            allowFullScreen
-                          />
-                        ) : featuredTikTok?.thumbnailUrl ? (
+                        {featuredTikTok?.thumbnailUrl ? (
                           <a
                             href={featuredTikTokLink ?? "#"}
                             target="_blank"
@@ -393,21 +377,35 @@ const CreateurContenuIA = () => {
                             href={featuredTikTokLink ?? "#"}
                             target="_blank"
                             rel="noreferrer"
-                            className="flex aspect-[9/16] w-full flex-col justify-between p-4"
+                            className="relative flex aspect-[9/16] w-full flex-col justify-between overflow-hidden p-5"
                           >
-                            <div className={`w-12 h-12 rounded-xl ${channel.bg} flex items-center justify-center`}>
-                              <channel.icon size={24} className={channel.color} />
-                            </div>
-                            <div className="space-y-2">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,hsl(25_95%_58%/.16),transparent_40%),radial-gradient(circle_at_bottom_right,hsl(330_95%_58%/.16),transparent_35%)]" />
+                            <div className="relative flex items-start justify-between gap-4">
+                              <div className={`w-12 h-12 rounded-xl ${channel.bg} flex items-center justify-center shadow-sm`}>
+                                <channel.icon size={24} className={channel.color} />
+                              </div>
                               <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
                                 {copy.featuredVideoLabel}
                               </span>
+                            </div>
+                            <div className="relative space-y-3">
+                              <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-lg backdrop-blur-sm">
+                                <PlayCircle size={28} />
+                              </div>
                               <h3 className="font-heading text-lg font-bold text-white">
                                 {featuredTikTokTitle ?? channel.title}
                               </h3>
-                              <p className="text-sm leading-relaxed text-white/75">
+                              <p className="line-clamp-5 text-sm leading-relaxed text-white/75">
                                 {isTikTokLoading ? copy.featuredVideoLoading : featuredTikTokSummary ?? channel.desc}
                               </p>
+                              <div className="flex items-center justify-between gap-3 pt-2">
+                                <span className="text-xs text-white/65">
+                                  {featuredTikTokFrequency ?? channel.frequency}
+                                </span>
+                                <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-900">
+                                  {featuredTikTokCtaLabel} <ExternalLink size={12} />
+                                </span>
+                              </div>
                             </div>
                           </a>
                         )}
