@@ -61,7 +61,37 @@ const getInternalGreeting = () => {
   return hour >= 18 ? "Bonsoir" : "Bonjour";
 };
 
+const logWhatsappEmailNotification = async (payload: {
+  whatsappMessageId?: string | null;
+  messageSid: string;
+  recipientEmail?: string | null;
+  status: "sent" | "failed" | "skipped";
+  subject?: string | null;
+  providerMessageId?: string | null;
+  errorMessage?: string | null;
+  meta?: Record<string, unknown>;
+}) => {
+  const { error } = await supabase.from("whatsapp_email_notification_logs").insert({
+    whatsapp_message_id: payload.whatsappMessageId ?? null,
+    message_sid: payload.messageSid,
+    recipient_email: payload.recipientEmail ?? null,
+    notification_type: "internal_notification",
+    provider: "resend",
+    provider_message_id: payload.providerMessageId ?? null,
+    status: payload.status,
+    subject: payload.subject ?? null,
+    error_message: payload.errorMessage ?? null,
+    meta: payload.meta ?? {},
+    sent_at: payload.status === "sent" ? new Date().toISOString() : null,
+  });
+
+  if (error) {
+    console.error("[twilio-whatsapp-webhook] failed to log email notification", error);
+  }
+};
+
 const sendInternalNotificationEmail = async (payload: {
+  whatsappMessageId?: string | null;
   fromNumber: string;
   toNumber: string;
   profileName: string;
@@ -72,6 +102,14 @@ const sendInternalNotificationEmail = async (payload: {
 }) => {
   if (!resendApiKey) {
     console.warn("[twilio-whatsapp-webhook] RESEND_API_KEY missing; skipping admin notification email");
+    await logWhatsappEmailNotification({
+      whatsappMessageId: payload.whatsappMessageId,
+      messageSid: payload.messageSid,
+      status: "skipped",
+      subject: `[TransferAI] Nouveau message WhatsApp - ${payload.profileName || payload.fromNumber}`,
+      errorMessage: "RESEND_API_KEY missing",
+      meta: { reason: "missing_resend_api_key" },
+    });
     return;
   }
 
@@ -82,17 +120,40 @@ const sendInternalNotificationEmail = async (payload: {
     .maybeSingle();
 
   if (adminSettings?.notification_enabled === false) {
+    await logWhatsappEmailNotification({
+      whatsappMessageId: payload.whatsappMessageId,
+      messageSid: payload.messageSid,
+      status: "skipped",
+      subject: `[TransferAI] Nouveau message WhatsApp - ${payload.profileName || payload.fromNumber}`,
+      errorMessage: "Admin notifications disabled",
+      meta: { reason: "notifications_disabled" },
+    });
     return;
   }
 
-  const adminEmail =
-    adminSettings?.admin_email?.trim() ||
-    Deno.env.get("ADMIN_EMAIL")?.trim() ||
-    Deno.env.get("MAIL_TO")?.trim() ||
-    "contact@transferai.ci";
+  const adminEmails = Array.from(
+    new Set(
+      [
+        adminSettings?.admin_email?.trim(),
+        Deno.env.get("ADMIN_EMAIL")?.trim(),
+        Deno.env.get("MAIL_TO")?.trim(),
+        "contact@transferai.ci",
+      ]
+        .filter((value): value is string => Boolean(value))
+        .map((value) => value.toLowerCase()),
+    ),
+  );
 
-  if (!adminEmail) {
+  if (!adminEmails.length) {
     console.warn("[twilio-whatsapp-webhook] admin email missing; skipping admin notification email");
+    await logWhatsappEmailNotification({
+      whatsappMessageId: payload.whatsappMessageId,
+      messageSid: payload.messageSid,
+      status: "skipped",
+      subject: `[TransferAI] Nouveau message WhatsApp - ${payload.profileName || payload.fromNumber}`,
+      errorMessage: "No recipient email configured",
+      meta: { reason: "missing_recipients" },
+    });
     return;
   }
 
@@ -145,24 +206,52 @@ ${backofficeUrl}
     </div>
   `;
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: mailFrom,
-      to: [adminEmail],
-      subject,
-      text,
-      html,
-    }),
-  });
+  for (const adminEmail of adminEmails) {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: mailFrom,
+        to: [adminEmail],
+        subject,
+        text,
+        html,
+      }),
+    });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("[twilio-whatsapp-webhook] failed to send admin notification email", response.status, errorText);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(
+        "[twilio-whatsapp-webhook] failed to send admin notification email",
+        adminEmail,
+        response.status,
+        errorText,
+      );
+      await logWhatsappEmailNotification({
+        whatsappMessageId: payload.whatsappMessageId,
+        messageSid: payload.messageSid,
+        recipientEmail: adminEmail,
+        status: "failed",
+        subject,
+        errorMessage: `HTTP ${response.status}: ${errorText}`,
+        meta: { num_media: payload.numMedia, to_number: payload.toNumber || null },
+      });
+      continue;
+    }
+
+    const responseJson = await response.json().catch(() => null) as { id?: string } | null;
+    await logWhatsappEmailNotification({
+      whatsappMessageId: payload.whatsappMessageId,
+      messageSid: payload.messageSid,
+      recipientEmail: adminEmail,
+      status: "sent",
+      subject,
+      providerMessageId: responseJson?.id ?? null,
+      meta: { num_media: payload.numMedia, to_number: payload.toNumber || null },
+    });
   }
 };
 
@@ -204,7 +293,7 @@ Deno.serve(async (req: Request) => {
       return xml('<?xml version="1.0" encoding="UTF-8"?><Response></Response>', 500);
     }
 
-    const { error } = await supabase
+    const { data: savedMessage, error } = await supabase
       .from("whatsapp_inbound_messages")
       .upsert(
         {
@@ -220,7 +309,9 @@ Deno.serve(async (req: Request) => {
           raw_payload: rawPayload,
         },
         { onConflict: "message_sid" },
-      );
+      )
+      .select("id")
+      .single();
 
     if (error) {
       console.error("Failed to persist WhatsApp message", error);
@@ -229,6 +320,7 @@ Deno.serve(async (req: Request) => {
 
     if (!existingMessage) {
       await sendInternalNotificationEmail({
+        whatsappMessageId: savedMessage?.id ?? null,
         fromNumber,
         toNumber,
         profileName,
