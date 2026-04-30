@@ -18,7 +18,7 @@ const sectionCopy = {
     subtitle:
       "TransferAI Africa forme en Côte d'Ivoire et en Afrique celles et ceux qui veulent apprendre l'IA et l'appliquer concrètement à leur métier.",
     whatsappCta: "Écrire sur WhatsApp",
-    whatsappHelper: "Réponse rapide pour parler transfert, IA et accompagnement.",
+    whatsappHelper: "Réponse rapide pour parler IA, formation et accompagnement.",
     stats: {
       formations: "Formations",
       metiers: "Domaines d'expertise",
@@ -35,7 +35,7 @@ const sectionCopy = {
     subtitle:
       "TransferAI Africa trains people and teams in Côte d'Ivoire and across Africa who want to learn AI and apply it concretely to their work.",
     whatsappCta: "Chat on WhatsApp",
-    whatsappHelper: "Quick contact for transfers, AI needs, and advisory support.",
+    whatsappHelper: "Quick contact for AI, training, and advisory support.",
     stats: {
       formations: "Courses",
       metiers: "Areas of expertise",
