@@ -27,10 +27,11 @@ export async function invokeContentAdmin<T>(token: string, request: AdminRequest
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
   const anonJwt =
     import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
-    import.meta.env.VITE_SUPABASE_LEGACY_ANON_KEY?.trim();
+    import.meta.env.VITE_SUPABASE_LEGACY_ANON_KEY?.trim() ||
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
 
   if (!supabaseUrl || !anonJwt) {
-    throw new Error("Ajoutez VITE_SUPABASE_ANON_KEY pour appeler le back-office admin.");
+    throw new Error("Ajoutez VITE_SUPABASE_ANON_KEY ou VITE_SUPABASE_PUBLISHABLE_KEY pour appeler le back-office admin.");
   }
 
   const response = await fetch(`${supabaseUrl}/functions/v1/content-admin`, {
@@ -69,10 +70,11 @@ export async function invokeAdminEdgeFunction<T>(
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
   const anonJwt =
     import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
-    import.meta.env.VITE_SUPABASE_LEGACY_ANON_KEY?.trim();
+    import.meta.env.VITE_SUPABASE_LEGACY_ANON_KEY?.trim() ||
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
 
   if (!supabaseUrl || !anonJwt) {
-    throw new Error("Ajoutez VITE_SUPABASE_ANON_KEY pour appeler les fonctions edge admin.");
+    throw new Error("Ajoutez VITE_SUPABASE_ANON_KEY ou VITE_SUPABASE_PUBLISHABLE_KEY pour appeler les fonctions edge admin.");
   }
 
   const response = await fetch(`${supabaseUrl}/functions/v1/${functionName}`, {
