@@ -1,0 +1,495 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Guide Administrateur No1\
+\
+## 1. Objet du guide\
+\
+Ce guide d\'e9crit le fonctionnement r\'e9el du **BackOffice TransferAI Africa** au 1er mai 2026.\
+\
+Il r\'e9pond \'e0 4 questions :\
+\
+1. comment acc\'e9der au back-office et au backend\
+2. \'e0 quoi sert chaque rubrique\
+3. quels r\'f4les op\'e9rationnels doivent \'eatre couverts\
+4. comment exploiter la plateforme sans casser les flux d\'e9j\'e0 en production\
+\
+---\
+\
+## 2. Mission de l\'92administrateur No1\
+\
+L\'92administrateur No1 ne se limite pas \'e0 publier.\
+\
+Il garantit que la plateforme reste :\
+\
+- coh\'e9rente \'e9ditorialement\
+- cr\'e9dible commercialement\
+- exploitable op\'e9rationnellement\
+- fiable techniquement\
+- tra\'e7able c\'f4t\'e9 back-office\
+\
+Responsabilit\'e9s principales :\
+\
+1. gouvernance du contenu et des CTA\
+2. supervision du BackOffice\
+3. suivi des leads, messages entrants et demandes\
+4. contr\'f4le l\'e9ger des d\'e9ploiements et acc\'e8s\
+5. coordination avec les administrateurs m\'e9tiers\
+6. documentation et transmission des proc\'e9dures\
+\
+---\
+\
+## 3. Acc\'e8s au BackOffice et au backend\
+\
+### 3.1. BackOffice public\
+\
+URL de production :\
+\
+- [https://www.transferai.ci/back-office](https://www.transferai.ci/back-office)\
+\
+Exemples de liens directs :\
+\
+- [https://www.transferai.ci/back-office?tab=whatsapp](https://www.transferai.ci/back-office?tab=whatsapp)\
+- [https://www.transferai.ci/back-office?tab=newsletters](https://www.transferai.ci/back-office?tab=newsletters)\
+- [https://www.transferai.ci/back-office?tab=partners](https://www.transferai.ci/back-office?tab=partners)\
+\
+### 3.2. BackOffice local\
+\
+Usage :\
+\
+- d\'e9veloppement\
+- tests UI\
+- validation avant commit\
+\
+Format :\
+\
+- `http://127.0.0.1:<port>/back-office`\
+\
+### 3.3. Token administrateur\
+\
+Le back-office public repose sur le secret backend :\
+\
+- `CONTENT_ADMIN_TOKEN`\
+\
+Ce token est v\'e9rifi\'e9 par :\
+\
+- [`/Users/marius_ayoro/.codex/worktrees/4df6/connect-ia-bloom/supabase/functions/content-admin/index.ts`](/Users/marius_ayoro/.codex/worktrees/4df6/connect-ia-bloom/supabase/functions/content-admin/index.ts)\
+\
+R\'e8gles :\
+\
+- ne jamais diffuser le token en clair dans un canal non s\'e9curis\'e9\
+- le remplacer en cas de doute\
+- retester imm\'e9diatement le back-office apr\'e8s rotation\
+\
+### 3.4. Acc\'e8s Supabase\
+\
+Supabase sert de backend principal.\
+\
+Zones critiques \'e0 conna\'eetre :\
+\
+- `Table Editor`\
+- `Edge Functions`\
+- `Secrets`\
+- `SQL Editor`\
+\
+### 3.5. Acc\'e8s Twilio\
+\
+Twilio sert \'e0 :\
+\
+- recevoir les messages WhatsApp\
+- journaliser les messages entrants\
+- appeler le webhook Supabase\
+\
+Sender valid\'e9 :\
+\
+- `+2250716573990`\
+\
+### 3.6. Acc\'e8s Resend\
+\
+Resend sert \'e0 :\
+\
+- envoyer les emails transactionnels\
+- envoyer la newsletter\
+- envoyer les notifications internes sur messages WhatsApp\
+\
+### 3.7. Acc\'e8s Cloudflare / GitHub\
+\
+GitHub :\
+\
+- d\'e9p\'f4t source\
+- source des commits et des branches\
+\
+Cloudflare :\
+\
+- diffusion du front public `transferai.ci`\
+\
+Point cl\'e9 :\
+\
+- un commit GitHub ne suffit pas \'e0 lui seul si `main` n\'92est pas la version r\'e9ellement servie\
+\
+---\
+\
+## 4. R\'f4les op\'e9rationnels\
+\
+Le syst\'e8me n\'92a pas encore de s\'e9paration fine des r\'f4les par utilisateur dans le BackOffice.  \
+Les r\'f4les sont donc **op\'e9rationnels**.\
+\
+### 4.1. Administrateur No1\
+\
+Responsable de :\
+\
+- acc\'e8s au back-office\
+- supervision globale\
+- validation finale avant mise en production\
+- suivi des incidents\
+\
+### 4.2. Responsable contenus\
+\
+Responsable de :\
+\
+- `Ressources`\
+- `Brouillons IA`\
+- `Capsules vid\'e9o`\
+\
+### 4.3. Responsable newsletter\
+\
+Responsable de :\
+\
+- `Newsletter IA`\
+- relecture\
+- test\
+- approbation\
+- suivi des rappels du jeudi\
+\
+### 4.4. Responsable prospects / audit\
+\
+Responsable de :\
+\
+- `Prospects Audit`\
+- qualification des demandes\
+- suivi du portail prospect\
+\
+### 4.5. Responsable partenaires\
+\
+Responsable de :\
+\
+- `Partenaires IA`\
+- revue des demandes\
+- recommandation de formule\
+- suivi des r\'e9ponses\
+\
+### 4.6. Responsable WhatsApp\
+\
+Responsable de :\
+\
+- `WhatsApp`\
+- lecture des messages entrants\
+- classement\
+- notes internes\
+- r\'e9ponse manuelle via WhatsApp\
+\
+### 4.7. Responsable webinaires / live\
+\
+Responsable de :\
+\
+- `Webinaires`\
+- `Formats live IA`\
+\
+### 4.8. Responsable opportunit\'e9s\
+\
+Responsable de :\
+\
+- `Emplois IA`\
+- publication et statut des opportunit\'e9s\
+\
+---\
+\
+## 5. Rubriques du BackOffice\
+\
+Onglets actuellement visibles :\
+\
+- `Analytics`\
+- `Prospects Audit`\
+- `Ressources`\
+- `Brouillons IA`\
+- `Partenaires IA`\
+- `Newsletter IA`\
+- `Capsules vid\'e9o`\
+- `WhatsApp`\
+- `Emplois IA`\
+- `Webinaires`\
+- `Formats live IA`\
+- `Mode d'emploi`\
+\
+### 5.1. Analytics\
+\
+Suivre :\
+\
+- trafic\
+- pages vues\
+- tendances\
+- formulaires et inscriptions\
+\
+### 5.2. Prospects Audit\
+\
+Suivre :\
+\
+- demandes audit IA\
+- qualification\
+- suivi prospect\
+\
+### 5.3. Ressources\
+\
+G\'e9rer :\
+\
+- articles\
+- r\'e9sum\'e9s\
+- statuts\
+- domaines\
+\
+### 5.4. Brouillons IA\
+\
+G\'e9rer :\
+\
+- sources suivies\
+- signaux\
+- brouillons propos\'e9s\
+- publication ou archivage\
+\
+### 5.5. Partenaires IA\
+\
+G\'e9rer :\
+\
+- demandes de r\'e9f\'e9rencement\
+- partenariats strat\'e9giques\
+- revue\
+- recommandation IA\
+- suivi de r\'e9ponse\
+\
+### 5.6. Newsletter IA\
+\
+G\'e9rer :\
+\
+- \'e9ditions\
+- objet\
+- pr\'e9header\
+- \'e9ditorial\
+- prompt\
+- CTA\
+- tests\
+- statuts\
+\
+### 5.7. Capsules vid\'e9o\
+\
+G\'e9rer :\
+\
+- flux vid\'e9o court\
+- capsule mise en avant\
+- fallback \'e9ditorial\
+\
+### 5.8. WhatsApp\
+\
+Le module WhatsApp V1 permet :\
+\
+- liste + filtres\
+- fiche d\'e9tail\
+- changement de statut\
+- changement de cat\'e9gorie\
+- note interne\
+- ouverture directe de la r\'e9ponse WhatsApp\
+\
+### 5.9. Emplois IA\
+\
+G\'e9rer :\
+\
+- opportunit\'e9s\
+- statuts\
+- visibilit\'e9\
+\
+### 5.10. Webinaires\
+\
+G\'e9rer :\
+\
+- webinaires\
+- statuts et mises \'e0 jour\
+\
+### 5.11. Formats live IA\
+\
+G\'e9rer :\
+\
+- formats live\
+- structuration de l\'92offre live\
+\
+### 5.12. Mode d\'92emploi\
+\
+R\'f4le :\
+\
+- rappeler \'e0 l\'92\'e9quipe comment utiliser correctement le syst\'e8me\
+\
+---\
+\
+## 6. Tables importantes\
+\
+- `contact_requests`\
+- `registration_requests`\
+- `form_responses`\
+- `page_views`\
+- `resource_posts`\
+- `job_opportunities`\
+- `source_feeds`\
+- `source_signals`\
+- `editorial_jobs`\
+- `newsletter_subscriptions`\
+- `newsletter_issues`\
+- `newsletter_delivery_logs`\
+- `partner_offer_catalog`\
+- `partner_email_templates`\
+- `partner_listing_reviews`\
+- `partner_followup_jobs`\
+- `social_video_posts`\
+- `whatsapp_inbound_messages`\
+- `whatsapp_email_notification_logs`\
+- `webinar_registrations`\
+\
+---\
+\
+## 7. Edge functions importantes\
+\
+- `content-admin`\
+- `content-discovery`\
+- `content-classifier`\
+- `content-drafter`\
+- `newsletter-subscribe`\
+- `newsletter-drafter`\
+- `newsletter-send`\
+- `newsletter-scheduler`\
+- `send-prospect-emails`\
+- `partner-review-drafter`\
+- `partner-followup-send`\
+- `twilio-whatsapp-webhook`\
+\
+---\
+\
+## 8. Workflows cl\'e9s\
+\
+### 8.1. WhatsApp\
+\
+Cha\'eene compl\'e8te :\
+\
+1. visiteur clique le bouton WhatsApp du site\
+2. message envoy\'e9 vers `+2250716573990`\
+3. Twilio re\'e7oit\
+4. Twilio appelle le webhook Supabase\
+5. le message est enregistr\'e9 dans `whatsapp_inbound_messages`\
+6. les notifications internes sont envoy\'e9es\
+7. le message devient visible dans `BackOffice > WhatsApp`\
+\
+### 8.2. Newsletter\
+\
+Mod\'e8le r\'e9el :\
+\
+- IA pr\'e9pare\
+- humain valide\
+- syst\'e8me envoie\
+\
+Cadence :\
+\
+- mercredi : g\'e9n\'e9ration\
+- jeudi : rappel si n\'e9cessaire\
+- vendredi : envoi si \'e9dition approuv\'e9e\
+\
+### 8.3. Partenaires\
+\
+Flux :\
+\
+1. demande publique\
+2. revue\
+3. recommandation\
+4. r\'e9ponse\
+\
+### 8.4. Capsules vid\'e9o\
+\
+Flux :\
+\
+1. enregistrement ou mise \'e0 jour d\'92une capsule\
+2. lecture par le front\
+3. affichage d\'92une vid\'e9o ou d\'92une carte fallback brand\'e9e\
+\
+---\
+\
+## 9. Routine d\'92exploitation\
+\
+### Quotidienne\
+\
+- v\'e9rifier les demandes contact / audit\
+- v\'e9rifier les messages WhatsApp\
+- v\'e9rifier que le back-office charge correctement\
+- v\'e9rifier qu\'92aucune page commerciale critique ne casse\
+\
+### Hebdomadaire\
+\
+- relire les brouillons IA\
+- v\'e9rifier l\'92\'e9dition newsletter\
+- envoyer un test\
+- v\'e9rifier les demandes partenaires\
+- v\'e9rifier la capsule vid\'e9o mise en avant\
+\
+### Mensuelle\
+\
+- revoir les pages les plus vues\
+- revoir les CTA critiques\
+- revoir les acc\'e8s et secrets\
+- mettre \'e0 jour la documentation\
+\
+---\
+\
+## 10. Incidents fr\'e9quents\
+\
+### Si le BackOffice ne charge pas\
+\
+V\'e9rifier :\
+\
+- token admin\
+- variables Supabase du front\
+- fonction `content-admin`\
+\
+### Si WhatsApp ne remonte pas\
+\
+V\'e9rifier :\
+\
+- logs Twilio\
+- invocations `twilio-whatsapp-webhook`\
+- table `whatsapp_inbound_messages`\
+\
+### Si l\'92email WhatsApp n\'92est pas visible\
+\
+V\'e9rifier :\
+\
+- `whatsapp_email_notification_logs`\
+- logs Resend\
+- Inbox / Spam / Promotions\
+\
+### Si une page front semble ancienne\
+\
+V\'e9rifier :\
+\
+- que le correctif est sur `main`\
+- que la prod sert bien la bonne version\
+- qu\'92un hard refresh a \'e9t\'e9 fait\
+\
+---\
+\
+## 11. R\'e8gle finale\
+\
+Le BackOffice doit \'eatre exploit\'e9 comme un **poste de pilotage op\'e9rationnel**, pas comme un simple \'e9cran de publication.\
+\
+Les r\'e8gles les plus s\'fbres restent :\
+\
+- validation humaine sur les contenus sensibles\
+- responsabilit\'e9 claire par rubrique\
+- contr\'f4le post-d\'e9ploiement r\'e9el\
+- journalisation des workflows critiques\
+}

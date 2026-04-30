@@ -1,12 +1,13 @@
 # Pack Administration TransferAI Africa
 
-Ce dossier regroupe la documentation de référence du site TransferAI Africa.
+Ce dossier regroupe la documentation de référence du site **TransferAI Africa**, de son back-office et de ses workflows de production.
 
-Il a 4 objectifs :
-- donner à l'administrateur No1 une vue complète du site
-- permettre à d'autres administrateurs de prendre le relais rapidement
-- servir de base de connaissance pour un assistant IA interne ou un chatbot public
-- conserver une mémoire claire du projet, de son architecture et de ses évolutions
+Le pack a 4 objectifs :
+
+- donner à l’administrateur principal une vue claire du système réel
+- permettre à d’autres administrateurs de prendre le relais rapidement
+- servir de base documentaire pour les automatisations et assistants IA
+- conserver une mémoire opérationnelle fiable du projet
 
 ## Contenu du pack
 
@@ -23,122 +24,125 @@ Il a 4 objectifs :
 
 ## Ordre de lecture recommandé
 
-Pour l'administrateur principal :
-- commencer par le guide administrateur
-- lire ensuite le plan de déploiement et la roadmap
-- garder la FAQ sous la main pour les cas fréquents
+Pour l’administrateur principal :
 
-Pour les autres administrateurs :
 - commencer par le guide administrateur
-- relire la base de connaissance du site
-- utiliser la FAQ comme socle de réponses standardisées
+- lire ensuite le plan d’exploitation et la roadmap
+- garder la FAQ à portée de main
 
-Pour la future IA assistant / chatbot :
-- utiliser en priorité la base de connaissance du site
-- charger ensuite la FAQ
-- utiliser enfin le fichier JSON comme format structuré de départ
+Pour les administrateurs relais :
+
+- commencer par le guide administrateur
+- relire ensuite la base de connaissance du site
+- utiliser la FAQ pour les cas récurrents
+
+Pour les futurs assistants IA :
+
+- charger d’abord la base de connaissance du site
+- compléter avec la FAQ
+- utiliser ensuite le JSON structuré
 
 ## Périmètre actuel du site
 
-Le site couvre aujourd'hui les briques suivantes :
-- vitrine institutionnelle
+Le système couvre aujourd’hui :
+
+- vitrine institutionnelle et commerciale
 - hub éducation
 - catalogue de formation
-- pages parcours
+- parcours guidés
 - certification sectorielle
 - page entreprises / services
 - blog / ressources dynamiques
-- matrice des outils IA par domaine
-- formulaire de contact et formulaires de leads
-- audit IA
-- back-office contenus / brouillons IA / newsletter / emplois
-- back-office partenaires et revue de référencement
-- pipeline éditorial Supabase
-- pipeline newsletter avec abonnement, génération, test et envoi
-- pipeline partenaires avec recommandation IA, validation et réponse email
-- logique de salutation automatique des emails selon l'heure d'envoi
+- matrice des outils IA
+- formulaires de contact et d’audit
+- pipeline partenaires
+- newsletter par domaine
+- capsules vidéo sociales
+- intake WhatsApp connecté à Twilio
+- back-office public d’administration
 
-## Dernière mise à jour importante du pack
+## Mise à jour importante au 1er mai 2026
 
-Cette version du pack inclut désormais les évolutions suivantes réalisées entre le 11 et le 20 avril 2026 :
-- simplification éditoriale de plusieurs pages denses : accueil, à propos, catalogue, parcours, certification, education hub, blog, entreprises et partenaires
-- mise en avant plus claire de l'audit IA gratuit dans les parcours B2B
-- consolidation du blog dynamique avec filtres, pages article, SEO par domaine et newsletter ciblée
-- mise en place du pipeline partenaire : formulaire public, revue en back-office, recommandation IA, email de suivi
-- fiabilisation des emails transactionnels et ajout d'une salutation horaire `Bonjour` / `Bonsoir` côté Côte d'Ivoire
-- clarification de la page `Contact` autour d'une seule logique publique plus lisible : `Parler à un expert IA`
-- ajout de variantes de formulaires contact selon l'intention réelle : référencement partenaire, partenariat stratégique, demande de catalogue, demande d'information ou demande formation
-- automatisation plus directe des demandes catalogue avec accès au bon catalogue et CTA cohérents vers la version web, le PDF et l'audit IA lorsque c'est pertinent
-- harmonisation progressive des emails d'inscription, de formation, de catalogue et de partenariat pour éviter les liens de RDV ambigus
-- correction d'un incident de rendu qui cassait certains liens profonds `contact?intent=...` en production
-- amélioration des emails automatiques liés aux demandes d'inscription, de formation et de contact pour supprimer les liens de RDV ambigus lorsqu'ils ne sont pas pertinents
-- validation du déploiement manuel de la fonction `send-prospect-emails` depuis le dépôt racine
-- confirmation que le modèle d'exploitation reste : `FR d'abord`, validation humaine avant diffusion large
+Cette version du pack inclut désormais explicitement :
 
-### Complément du 20 avril 2026
-
-Les travaux du 20 avril ont ajouté ou clarifié :
-- l'envoi réel de la newsletter fondatrice du lundi 20 avril 2026
-- la mise à jour éditoriale complète de cette newsletter avec éditorial fondateur, photo, signature, accents corrigés et bloc `Prompt à copier immédiatement`
-- l'ajout de 5 abonnés supplémentaires et la confirmation d'un total de 8 abonnés actifs au moment de l'envoi
-- la vérification du scheduler newsletter : génération et envoi automatiques le vendredi, pas le lundi
-- l'extension de l'automation `veille-ia-quotidienne` pour produire chaque semaine un package éditorial plus structuré
-- la rotation planifiée de 3 prompts métier assistanat / secrétariat sur 3 semaines
-- le nettoyage de la page `Media, veille & opportunités IA` avec suppression de blocs trop conceptuels
-- la création d'un vrai flux `Parler emploi & mise en relation` via le formulaire dédié `/parler-emploi-ia`
-- la correction du CTA emploi de la page média pour qu'il n'envoie plus vers la prise de RDV
-- la correction des liens `Voir ce replay`, qui ne doivent plus pointer vers Contact mais vers une destination vidéo exploitable
-- la mise en évidence d'un point de gouvernance important : `transferai.ci` ne reflète pas forcément un simple push GitHub sans publication du site principal
+- la simplification éditoriale des pages denses du site
+- la mise en avant de l’audit IA gratuit
+- le pipeline partenaires avec back-office et emails de suivi
+- la règle `Bonjour` / `Bonsoir` dans les emails
+- la clarification du rôle réel de la page `Contact`
+- la montée en charge du flux catalogue par domaine
+- la logique `Parler emploi & mise en relation`
+- la carte TikTok / capsules vidéo pilotée par backend
+- le module **BackOffice WhatsApp V1**
+- le webhook **Twilio WhatsApp** en production
+- les notifications email internes sur nouveau message WhatsApp
+- la table de logs `whatsapp_email_notification_logs`
+- la validation bout-en-bout WhatsApp -> Twilio -> Supabase -> BackOffice -> Resend -> boîtes mail
+- le guide administrateur BackOffice en anglais
 
 ## Architecture résumée
 
 Front :
-- React + Vite + TypeScript
-- déploiement via GitHub puis Cloudflare
+
+- React
+- TypeScript
+- Vite
+- React Router
 
 Backend :
-- Supabase pour la base de données, l'auth technique, les edge functions et les automatisations
 
-Email :
-- Resend pour les emails transactionnels et newsletters
+- Supabase base de données
+- Supabase Edge Functions
+- Supabase cron / scheduler
 
-## Logique éditoriale de référence
+Canaux opérationnels :
 
-- FR d'abord
-- EN ensuite uniquement pour les contenus stratégiques
-- Côte d'Ivoire d'abord
-- Afrique de l'Ouest ensuite
-- angle concret, métier, actionnable
+- Twilio pour WhatsApp
+- Resend pour les emails
+- GitHub pour le dépôt source
+- Cloudflare pour la diffusion du site public
 
 ## Export vers Word
 
-Le fichier [07_Export_Word_TransferAI_Admin_Pack.html](./07_Export_Word_TransferAI_Admin_Pack.html) peut être :
-- ouvert directement dans Microsoft Word
-- enregistré au format `.docx`
-- partagé aux autres administrateurs
-- imprimé en PDF
+Les exports Word sont produits dans :
 
-Le fichier [09_Export_Word_Direction_Externe.html](./09_Export_Word_Direction_Externe.html) a été pensé pour :
-- la direction
-- les partenaires
-- les administrateurs secondaires
-- les présentations synthétiques de l'avancement du site
+- `docs/transferai-admin/word/`
 
-## Recommandation de gouvernance
+Les fichiers HTML Word-friendly peuvent être ouverts directement dans Microsoft Word puis convertis en `.docx`.
 
-Ce pack doit devenir un document vivant.
+## Livrables Word régénérés au 1er mai 2026
 
-À mettre à jour :
-- après chaque évolution majeure du site
-- après chaque ajout d'edge function ou de secret critique
-- après chaque changement de workflow admin
-- après chaque nouvelle offre, rubrique ou domaine stratégique
+Les principaux livrables Word régénérés sont :
+
+- `TransferAI_Africa_Admin_Master_Pack_2026-05-01.docx`
+- `TransferAI_Africa_Executive_Brief_2026-05-01.docx`
+- `TransferAI_Africa_Admin_Guide_No1_2026-05-01.docx`
+- `TransferAI_Africa_Site_Knowledge_Base_2026-05-01.docx`
+- `TransferAI_Africa_FAQ_Assistant_Support_2026-05-01.docx`
+- `TransferAI_Africa_Deployment_Operations_Plan_2026-05-01.docx`
+- `TransferAI_Africa_Project_Roadmap_2026-05-01.docx`
 
 ## Nomenclature des livrables Word
 
-Les fichiers source conservent une numérotation simple dans ce dossier pour rester faciles à maintenir.
+La nomenclature suivie dans `word/` reste :
 
-Les fichiers livrables Word du dossier `word/` suivent désormais une nomenclature plus corporate :
-- `TransferAI_Africa_Admin_...`
-- `TransferAI_Africa_Executive_...`
-- suffixe optionnel de date pour les versions partageables
+- `TransferAI_Africa_Admin_Index_<date>`
+- `TransferAI_Africa_Admin_Guide_No1_<date>`
+- `TransferAI_Africa_Site_Knowledge_Base_<date>`
+- `TransferAI_Africa_FAQ_Assistant_Support_<date>`
+- `TransferAI_Africa_Deployment_Operations_Plan_<date>`
+- `TransferAI_Africa_Project_Roadmap_<date>`
+- `TransferAI_Africa_Admin_Master_Pack_<date>`
+- `TransferAI_Africa_Executive_Brief_<date>`
+
+## Règle de gouvernance
+
+Le pack documentaire doit toujours rester aligné avec :
+
+- l’état réel du site public
+- l’état réel du back-office
+- les tables réellement en production
+- les edge functions réellement déployées
+- les workflows réellement testés
+
+Si un flux change, la documentation doit suivre.
