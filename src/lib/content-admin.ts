@@ -1,7 +1,17 @@
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 
-export type AdminEntity = "resource" | "job" | "analytics" | "editorial" | "newsletter" | "partners" | "prospects" | "webinars" | "videos";
-export type AdminAction = "list" | "create" | "set-status" | "create-feed" | "save" | "update";
+export type AdminEntity =
+  | "resource"
+  | "job"
+  | "analytics"
+  | "editorial"
+  | "newsletter"
+  | "partners"
+  | "prospects"
+  | "webinars"
+  | "videos"
+  | "whatsapp-messages";
+export type AdminAction = "list" | "create" | "set-status" | "create-feed" | "save" | "update" | "mark-read";
 
 type AdminRequest = {
   entity: AdminEntity;

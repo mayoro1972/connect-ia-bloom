@@ -246,6 +246,15 @@ const mapVideoPayload = (payload: Record<string, unknown>) => ({
   published_at: asString(payload.published_at) || new Date().toISOString(),
 });
 
+const mapWhatsappMessageUpdatePayload = (payload: Record<string, unknown>) => ({
+  is_read: payload.is_read === undefined ? undefined : asBoolean(payload.is_read),
+  status: payload.status === undefined ? undefined : asString(payload.status, "new"),
+  category: payload.category === undefined ? undefined : asNullableString(payload.category),
+  internal_notes: payload.internal_notes === undefined ? undefined : asNullableString(payload.internal_notes),
+  handled_at: payload.handled_at === undefined ? undefined : asNullableString(payload.handled_at),
+  last_action_at: new Date().toISOString(),
+});
+
 const listResources = async () =>
   supabase
     .from("resource_posts")
@@ -809,6 +818,39 @@ const setVideoStatus = async (payload: Record<string, unknown>) =>
     .select("*")
     .single();
 
+const listWhatsappMessages = async () =>
+  supabase
+    .from("whatsapp_inbound_messages")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(200);
+
+const updateWhatsappMessage = async (payload: Record<string, unknown>) => {
+  const nextValues = mapWhatsappMessageUpdatePayload(payload);
+
+  if (nextValues.status && ["answered", "closed"].includes(nextValues.status) && !payload.handled_at) {
+    nextValues.handled_at = new Date().toISOString();
+  }
+
+  return supabase
+    .from("whatsapp_inbound_messages")
+    .update(nextValues)
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+};
+
+const markWhatsappMessageRead = async (payload: Record<string, unknown>) =>
+  supabase
+    .from("whatsapp_inbound_messages")
+    .update({
+      is_read: true,
+      last_action_at: new Date().toISOString(),
+    })
+    .eq("id", asString(payload.id))
+    .select("*")
+    .single();
+
 const listProspects = async () => {
   const [requestsResult, deliveriesResult] = await Promise.all([
     supabase
@@ -945,6 +987,9 @@ Deno.serve(async (request) => {
   if (entity === "videos" && action === "create") result = await createVideo(payload);
   if (entity === "videos" && action === "update") result = await updateVideo(payload);
   if (entity === "videos" && action === "set-status") result = await setVideoStatus(payload);
+  if (entity === "whatsapp-messages" && action === "list") result = await listWhatsappMessages();
+  if (entity === "whatsapp-messages" && action === "update") result = await updateWhatsappMessage(payload);
+  if (entity === "whatsapp-messages" && action === "mark-read") result = await markWhatsappMessageRead(payload);
   if (entity === "webinars" && action === "list") result = await listWebinarRegistrations();
   if (entity === "webinars" && action === "update") result = await updateWebinarRegistration(payload);
 
