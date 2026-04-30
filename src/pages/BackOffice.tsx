@@ -19,6 +19,7 @@ import WebinarAdminPanel from "@/components/backoffice/WebinarAdminPanel";
 import LiveFormatsAdminPanel from "@/components/backoffice/LiveFormatsAdminPanel";
 import VendorFeedsAdminPanel from "@/components/backoffice/VendorFeedsAdminPanel";
 import VideoCapsuleAdminPanel from "@/components/backoffice/VideoCapsuleAdminPanel";
+import WhatsAppMessagesAdminPanel from "@/components/backoffice/WhatsAppMessagesAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -516,6 +517,7 @@ const BackOfficePage = () => {
                 <TabsTrigger value="partners">Partenaires IA</TabsTrigger>
                 <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
                 <TabsTrigger value="videos">Capsules vidéo</TabsTrigger>
+                <TabsTrigger value="whatsapp">WhatsApp</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
                 <TabsTrigger value="webinars">Webinaires</TabsTrigger>
                 <TabsTrigger value="live-formats">Formats live IA</TabsTrigger>
@@ -943,6 +945,10 @@ const BackOfficePage = () => {
 
               <TabsContent value="videos">
                 <VideoCapsuleAdminPanel token={token} />
+              </TabsContent>
+
+              <TabsContent value="whatsapp">
+                <WhatsAppMessagesAdminPanel token={token} />
               </TabsContent>
 
               <TabsContent value="partners">
