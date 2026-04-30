@@ -19,6 +19,7 @@ Il a 4 objectifs :
 7. [Export Word Friendly HTML](./07_Export_Word_TransferAI_Admin_Pack.html)
 8. [Note Direction / Partage Externe](./08_Note_Direction_Partage_Externe.md)
 9. [Export Word Friendly Direction / Externe](./09_Export_Word_Direction_Externe.html)
+10. [BackOffice Admin User Guide (EN)](./10_BackOffice_Admin_User_Guide_EN.md)
 
 ## Ordre de lecture recommandé
 

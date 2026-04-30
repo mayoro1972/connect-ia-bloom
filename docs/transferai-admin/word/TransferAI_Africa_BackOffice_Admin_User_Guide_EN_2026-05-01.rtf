@@ -1,0 +1,527 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # TransferAI Africa BackOffice Administrator Guide\
+\
+## 1. Purpose of this guide\
+\
+This guide explains the real operating model of the **TransferAI Africa BackOffice** as it exists today across the public site, the Supabase backend, and the connected operational tools.\
+\
+It answers four practical questions:\
+\
+1. **How to access the back-office and backend**\
+2. **What each section is used for**\
+3. **Which operational roles are expected**\
+4. **How to manage the platform safely without breaking live workflows**\
+\
+This document is intended for the **primary administrator** and the team members responsible for:\
+\
+- content publishing\
+- audit and lead intake\
+- partner requests\
+- newsletter operations\
+- webinar and live format operations\
+- video capsules\
+- incoming WhatsApp conversations\
+\
+---\
+\
+## 2. Mission of the primary administrator\
+\
+The primary administrator is not just the person who publishes.\
+\
+This role ensures that the platform remains:\
+\
+- editorially coherent\
+- commercially credible\
+- clear for visitors\
+- technically reliable\
+- traceable from the back-office side\
+\
+Primary responsibilities:\
+\
+1. content and CTA governance\
+2. back-office supervision\
+3. incoming lead and conversation tracking\
+4. lightweight deployment and access control\
+5. coordination with the other operational admins\
+6. documentation and transmission of procedures\
+\
+---\
+\
+## 3. How to access the back-office and backend\
+\
+### 3.1. Public back-office access\
+\
+Production URL:\
+\
+- [https://www.transferai.ci/back-office](https://www.transferai.ci/back-office)\
+\
+Specific tabs can be opened directly with `?tab=...`, for example:\
+\
+- [https://www.transferai.ci/back-office?tab=whatsapp](https://www.transferai.ci/back-office?tab=whatsapp)\
+- [https://www.transferai.ci/back-office?tab=newsletters](https://www.transferai.ci/back-office?tab=newsletters)\
+- [https://www.transferai.ci/back-office?tab=partners](https://www.transferai.ci/back-office?tab=partners)\
+\
+### 3.2. Local access for the technical team\
+\
+During development or validation, the back-office can also be opened locally:\
+\
+- `http://127.0.0.1:<port>/back-office`\
+\
+### 3.3. Administrator token\
+\
+The public back-office relies on an **administrator token**.\
+\
+The backend secret currently used to validate this token is:\
+\
+- `CONTENT_ADMIN_TOKEN`\
+\
+This token is verified by the edge function:\
+\
+- [`/Users/marius_ayoro/.codex/worktrees/4df6/connect-ia-bloom/supabase/functions/content-admin/index.ts`](/Users/marius_ayoro/.codex/worktrees/4df6/connect-ia-bloom/supabase/functions/content-admin/index.ts)\
+\
+Good practice:\
+\
+- never share the token in an unsecured email\
+- avoid keeping it in open documents\
+- rotate it if there is any doubt about exposure\
+\
+### 3.4. Backend and database access\
+\
+The main backend is hosted on **Supabase**.\
+\
+Key areas used by administrators:\
+\
+- `Table Editor`\
+- `Edge Functions`\
+- `Secrets`\
+- `SQL Editor`\
+\
+Supabase is used to store and operate:\
+\
+- contact and audit requests\
+- WhatsApp inbound messages\
+- newsletter editions and deliveries\
+- partner review workflows\
+- video capsule feed records\
+- webinar registrations and follow-up flows\
+\
+### 3.5. Twilio / WhatsApp access\
+\
+Twilio is used to:\
+\
+- receive incoming WhatsApp messages\
+- forward them to the webhook\
+- expose message logs for validation\
+\
+The validated WhatsApp sender in use is:\
+\
+- `+2250716573990`\
+\
+### 3.6. Resend / email access\
+\
+Resend is used for:\
+\
+- admin notifications\
+- prospect and catalog responses\
+- partner follow-up emails\
+- newsletter delivery\
+- internal WhatsApp notification emails\
+\
+### 3.7. Public site and Cloudflare\
+\
+The public site is served on:\
+\
+- [https://www.transferai.ci](https://www.transferai.ci)\
+\
+Important reminder:\
+\
+- a change can be committed in GitHub and still not be visible if `main` is not the version served in production\
+- always verify the actual public page after deployment\
+\
+---\
+\
+## 4. Operational roles\
+\
+The current system does not yet expose formal role-based access control by individual user inside the back-office.\
+\
+At this stage, roles are **operational responsibilities**.\
+\
+### 4.1. Primary administrator\
+\
+Responsible for:\
+\
+- access to the back-office\
+- global supervision\
+- final validation before production\
+- incident follow-up\
+- production publishing decisions\
+\
+### 4.2. Content administrator\
+\
+Responsible for:\
+\
+- `Resources`\
+- `AI Drafts`\
+- `Video Capsules`\
+- visible text review and publishing quality\
+\
+### 4.3. Newsletter administrator\
+\
+Responsible for:\
+\
+- `AI Newsletter`\
+- editorial review\
+- test sends\
+- approval before dispatch\
+- Thursday reminder follow-up\
+\
+### 4.4. Audit / prospect administrator\
+\
+Responsible for:\
+\
+- `Audit Prospects`\
+- request qualification\
+- prospect portal tracking\
+- follow-up actions\
+\
+### 4.5. Partner administrator\
+\
+Responsible for:\
+\
+- `AI Partners`\
+- request review\
+- plan recommendation\
+- partner follow-up responses\
+\
+### 4.6. WhatsApp administrator\
+\
+Responsible for:\
+\
+- `WhatsApp`\
+- incoming message review\
+- categorization\
+- internal notes\
+- manual reply on WhatsApp\
+\
+### 4.7. Webinar / live administrator\
+\
+Responsible for:\
+\
+- `Webinars`\
+- `AI Live Formats`\
+- registrations and operational tracking\
+\
+### 4.8. Opportunity administrator\
+\
+Responsible for:\
+\
+- `AI Jobs`\
+- opportunity publication\
+- status changes\
+- job-oriented follow-up logic\
+\
+---\
+\
+## 5. BackOffice sections and what each one does\
+\
+Current visible tabs in the BackOffice:\
+\
+- `Analytics`\
+- `Audit Prospects`\
+- `Resources`\
+- `AI Drafts`\
+- `AI Partners`\
+- `AI Newsletter`\
+- `Video Capsules`\
+- `WhatsApp`\
+- `AI Jobs`\
+- `Webinars`\
+- `AI Live Formats`\
+- `How to Use`\
+\
+### 5.1. Analytics\
+\
+Purpose:\
+\
+- track traffic\
+- track requests and registrations\
+- identify the pages and domains that generate the most value\
+\
+Typical usage:\
+\
+- check the most visited pages weekly\
+- identify the CTAs that drive requests\
+- monitor demand trends\
+\
+### 5.2. Audit Prospects\
+\
+Purpose:\
+\
+- review AI audit requests\
+- follow intake and qualification\
+- support lead follow-up and next actions\
+\
+### 5.3. Resources\
+\
+Purpose:\
+\
+- create and manage articles and resource content\
+- publish or keep content in draft\
+- control metadata, summaries, domains, and visibility\
+\
+### 5.4. AI Drafts\
+\
+Purpose:\
+\
+- review AI-generated draft proposals\
+- decide which signals become publishable content\
+- validate, refine, publish, or archive\
+\
+### 5.5. AI Partners\
+\
+Purpose:\
+\
+- review partner submissions\
+- classify demand type\
+- recommend an offer or partnership path\
+- track partner follow-up\
+\
+### 5.6. AI Newsletter\
+\
+Purpose:\
+\
+- edit newsletter issues\
+- review subject line, preheader, editorial block, prompt block, and CTA\
+- save, test, approve, or schedule\
+\
+### 5.7. Video Capsules\
+\
+Purpose:\
+\
+- manage short-form media entries\
+- control featured and secondary items\
+- support TikTok/social video feed logic\
+\
+### 5.8. WhatsApp\
+\
+Purpose:\
+\
+- read incoming WhatsApp messages\
+- classify requests quickly\
+- add internal notes\
+- open a direct reply flow in WhatsApp\
+\
+This module currently supports:\
+\
+- list + filters\
+- detail panel\
+- status updates\
+- category updates\
+- internal notes\
+- direct WhatsApp reply link\
+\
+### 5.9. AI Jobs\
+\
+Purpose:\
+\
+- manage AI and digital opportunity posts\
+- track publication status\
+- support job-related visitor flows\
+\
+### 5.10. Webinars\
+\
+Purpose:\
+\
+- manage webinar-related records\
+- update visibility and operational details\
+\
+### 5.11. AI Live Formats\
+\
+Purpose:\
+\
+- manage live learning or media format records\
+- keep live offers aligned with public messaging\
+\
+### 5.12. How to Use\
+\
+Purpose:\
+\
+- give operators a built-in explanation of how the back-office should be used\
+- reduce operational errors\
+\
+---\
+\
+## 6. Key backend tables\
+\
+Important tables used by administrators include:\
+\
+- `contact_requests`\
+- `registration_requests`\
+- `form_responses`\
+- `page_views`\
+- `resource_posts`\
+- `job_opportunities`\
+- `source_feeds`\
+- `source_signals`\
+- `editorial_jobs`\
+- `newsletter_subscriptions`\
+- `newsletter_issues`\
+- `newsletter_delivery_logs`\
+- `partner_offer_catalog`\
+- `partner_email_templates`\
+- `partner_listing_reviews`\
+- `partner_followup_jobs`\
+- `social_video_posts`\
+- `whatsapp_inbound_messages`\
+- `whatsapp_email_notification_logs`\
+- `webinar_registrations`\
+\
+---\
+\
+## 7. Important edge functions\
+\
+Key operational edge functions currently include:\
+\
+- `content-admin`\
+- `content-discovery`\
+- `content-classifier`\
+- `content-drafter`\
+- `newsletter-subscribe`\
+- `newsletter-drafter`\
+- `newsletter-send`\
+- `newsletter-scheduler`\
+- `send-prospect-emails`\
+- `partner-review-drafter`\
+- `partner-followup-send`\
+- `twilio-whatsapp-webhook`\
+\
+These functions power the live workflows used by the site and the back-office.\
+\
+---\
+\
+## 8. Core operational workflows\
+\
+### 8.1. WhatsApp workflow\
+\
+Flow:\
+\
+1. visitor clicks the WhatsApp CTA on the site\
+2. WhatsApp message is sent to `+2250716573990`\
+3. Twilio receives the message\
+4. Twilio calls the Supabase webhook\
+5. the webhook stores the message in `whatsapp_inbound_messages`\
+6. internal email notifications are sent\
+7. the message appears in BackOffice > `WhatsApp`\
+\
+### 8.2. Newsletter workflow\
+\
+Current model:\
+\
+- AI prepares\
+- human validates\
+- system sends\
+\
+Typical weekly logic:\
+\
+- Wednesday: draft generation\
+- Thursday: reminder if approval is still pending\
+- Friday: approved issue can be sent\
+\
+### 8.3. Partner workflow\
+\
+Flow:\
+\
+1. partner submits a request\
+2. the request is reviewed\
+3. a plan or recommendation is assigned\
+4. follow-up is prepared and sent\
+5. the outcome is tracked in the back-office\
+\
+### 8.4. Video capsule workflow\
+\
+Flow:\
+\
+1. a social/video entry is added or updated\
+2. the site reads the feed data\
+3. the public page displays the selected capsule or branded fallback\
+\
+---\
+\
+## 9. Recommended operating routine\
+\
+### Daily\
+\
+- check contact and audit requests\
+- check WhatsApp incoming messages\
+- verify the back-office loads properly\
+- verify no critical front-end error is visible on the main commercial pages\
+\
+### Weekly\
+\
+- review AI drafts\
+- review the newsletter issue\
+- send a test before approval\
+- check partner requests and follow-up state\
+- verify the current featured video capsule\
+\
+### Monthly\
+\
+- review top pages and top CTAs\
+- review operational wording on key pages\
+- review secrets and access handling\
+- update documentation and operating priorities\
+\
+---\
+\
+## 10. Common issues and first checks\
+\
+### If the back-office does not load\
+\
+Check:\
+\
+- the admin token\
+- Supabase frontend environment variables\
+- the `content-admin` function status\
+\
+### If WhatsApp messages do not appear\
+\
+Check:\
+\
+- Twilio logs\
+- `twilio-whatsapp-webhook` recent invocations\
+- `whatsapp_inbound_messages`\
+\
+### If WhatsApp emails are not seen\
+\
+Check:\
+\
+- `whatsapp_email_notification_logs`\
+- Resend logs\
+- inbox, spam, and promotions folders\
+\
+### If a front-end page looks outdated\
+\
+Check:\
+\
+- whether the change was merged to `main`\
+- whether production is serving the latest build\
+- whether the browser is still showing cached content\
+\
+---\
+\
+## 11. Final recommendation\
+\
+The platform is now strong enough to be operated reliably, but the safest model remains:\
+\
+- human review for editorially sensitive content\
+- clear ownership by operational area\
+- disciplined deployment checks\
+- logging for every important workflow\
+\
+The BackOffice should be treated as a **live operations cockpit**, not just a publishing screen.\
+}
