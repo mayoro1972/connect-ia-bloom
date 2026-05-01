@@ -23,6 +23,10 @@ Le pack a 4 objectifs :
 10. [BackOffice Admin User Guide (EN)](./10_BackOffice_Admin_User_Guide_EN.md)
 11. [Prompt Pack n8n + Chatwoot](./11_Prompt_Pack_n8n_Chatwoot.md)
 12. [Workflow n8n nœud par nœud](./12_Workflow_n8n_Node_Par_Node.md)
+13. [Plan de travail binôme V1 sur une journée](./13_Plan_Travail_Binome_V1_Journee.md)
+14. [Tableau de suivi de journée binôme](./14_Tableau_Suivi_Journee_Binome_Checklist.md)
+15. [Blueprint n8n import-like JSON V1](./15_n8n_Import_Like_JSON_V1.md)
+16. [Checklist de construction n8n](./16_Checklist_Construction_n8n.md)
 
 ## Ordre de lecture recommandé
 

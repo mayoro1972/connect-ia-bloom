@@ -1,0 +1,180 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Tableau de suivi de journ\'e9e - bin\'f4me V1 Agent IA\
+\
+## Informations de session\
+\
+- Date :\
+- Heure de d\'e9but :\
+- Heure de fin :\
+- Personne A :\
+- Personne B :\
+- Lien Calendly valid\'e9 :\
+\
+## Objectif du jour\
+\
+Livrer une **V1 fonctionnelle** de l'agent IA TransferAI capable de :\
+\
+- recevoir un message WhatsApp entrant\
+- qualifier un prospect\
+- comprendre le besoin\
+- proposer une d\'e9mo si le prospect est s\'e9rieux\
+- enregistrer le lead\
+- permettre un handoff humain\
+\
+## Rappel des 3 questions obligatoires\
+\
+- [ ] Nom de l\'92entreprise\
+- [ ] Secteur d\'92activit\'e9\
+- [ ] Besoin principal : formation, veille ou automatisation\
+\
+## Tableau de suivi heure par heure\
+\
+| Cr\'e9neau | T\'e2ches Personne A | T\'e2ches Personne B | Statut | Notes |\
+|---|---|---|---|---|\
+| 9h00 - 9h30 | Cadrage m\'e9tier, ton, d\'e9finition du prospect s\'e9rieux | Cadrage technique, validation du p\'e9rim\'e8tre V1 | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 9h30 - 10h30 | Finaliser prompt syst\'e8me, qualification initiale, relance courte | Cr\'e9er le squelette du workflow n8n | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 10h30 - 11h30 | Finaliser qualification JSON, scoring, d\'e9mo, handoff, note interne | Brancher OpenAI qualification + scoring + r\'e9ponse | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 11h30 - 12h15 | Relecture des r\'e9ponses et qualit\'e9 m\'e9tier | Premier test technique WhatsApp / n8n / OpenAI | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 12h15 - 13h00 | Corriger ton, clart\'e9, relances | Corriger mappings, JSON, fallbacks | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 14h00 - 15h00 | Valider r\'e8gles de d\'e9mo et handoff humain | Impl\'e9menter les conditions IF / Switch | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 15h00 - 16h00 | D\'e9finir r\'e9sum\'e9 CRM, note interne, statuts | Brancher stockage Supabase / CRM / logs | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 16h00 - 17h00 | Jouer les sc\'e9narios de test m\'e9tier | V\'e9rifier les sc\'e9narios de test techniques | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 17h00 - 17h45 | Harmoniser le ton final | Nettoyer les n\'9cuds, nommage, export workflow | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+| 17h45 - 18h00 | Validation finale V1 | Validation finale V1 | \uc0\u9744  \'c0 faire \u9744  En cours \u9744  Fait | |\
+\
+## Checklist de cadrage initial\
+\
+- [ ] Objectif V1 valid\'e9 ensemble\
+- [ ] Lien Calendly valid\'e9\
+- [ ] Ton de voix valid\'e9\
+- [ ] D\'e9finition du prospect s\'e9rieux valid\'e9e\
+- [ ] Cas de handoff humain valid\'e9s\
+- [ ] Services prioritaires du jour valid\'e9s\
+\
+## Checklist prompts\
+\
+- [ ] Prompt syst\'e8me ma\'eetre valid\'e9\
+- [ ] Prompt qualification initiale valid\'e9\
+- [ ] Prompt qualification JSON valid\'e9\
+- [ ] Prompt scoring lead valid\'e9\
+- [ ] Prompt proposition de d\'e9mo valid\'e9\
+- [ ] Prompt relance si infos manquantes valid\'e9\
+- [ ] Prompt handoff humain valid\'e9\
+- [ ] Prompt note interne valid\'e9\
+\
+## Checklist workflow n8n\
+\
+- [ ] Webhook Twilio cr\'e9\'e9\
+- [ ] Normalisation du message cr\'e9\'e9e\
+- [ ] R\'e9cup\'e9ration historique branch\'e9e\
+- [ ] N\'9cud OpenAI qualification branch\'e9\
+- [ ] N\'9cud OpenAI scoring branch\'e9\
+- [ ] N\'9cud OpenAI r\'e9ponse branch\'e9\
+- [ ] N\'9cud IF / Switch configur\'e9\
+- [ ] Enregistrement base / CRM branch\'e9\
+- [ ] R\'e9ponse WhatsApp sortante branch\'e9e\
+- [ ] Notification interne branch\'e9e si pr\'e9vue\
+\
+## Checklist Chatwoot\
+\
+- [ ] Inbox Chatwoot v\'e9rifi\'e9e\
+- [ ] Prompt syst\'e8me inject\'e9\
+- [ ] Attributs contact cr\'e9\'e9s\
+- [ ] Test conversation Chatwoot lanc\'e9\
+- [ ] Handoff humain v\'e9rifi\'e9\
+\
+## Checklist de tests\
+\
+### Sc\'e9narios\
+\
+- [ ] Message vague : \'93Bonjour, je veux en savoir plus\'94\
+- [ ] Message formation\
+- [ ] Message audit IA\
+- [ ] Message automatisation\
+- [ ] Message partenariat\
+- [ ] Message s\'e9rieux demandant une d\'e9mo\
+\
+### V\'e9rifications \'e0 chaque test\
+\
+- [ ] Message re\'e7u c\'f4t\'e9 canal\
+- [ ] Workflow d\'e9clench\'e9\
+- [ ] Qualification correcte\
+- [ ] R\'e9ponse correcte\
+- [ ] D\'e9mo propos\'e9e au bon moment\
+- [ ] Donn\'e9es enregistr\'e9es\
+- [ ] Note interne g\'e9n\'e9r\'e9e\
+- [ ] Handoff humain si n\'e9cessaire\
+\
+## D\'e9finition du prospect s\'e9rieux\
+\
+Le prospect est consid\'e9r\'e9 comme s\'e9rieux si :\
+\
+- [ ] l\'92entreprise est identifi\'e9e\
+- [ ] le secteur est identifi\'e9\
+- [ ] le besoin est concret\
+- [ ] l\'92intention est B2B ou op\'e9rationnelle\
+- [ ] le prospect montre un projet r\'e9el\
+- [ ] la demande concerne formation, audit ou automatisation avec un besoin clair\
+\
+## Conditions de handoff humain\
+\
+D\'e9clencher un handoff humain si :\
+\
+- [ ] demande strat\'e9gique\
+- [ ] demande institutionnelle\
+- [ ] partenariat important\
+- [ ] besoin complexe\
+- [ ] prospect tr\'e8s qualifi\'e9\
+- [ ] demande urgente\
+- [ ] insatisfaction ou situation sensible\
+\
+## Bloc de suivi des bugs\
+\
+| Heure | Bug / point bloquant | Impact | Responsable | Corrig\'e9 |\
+|---|---|---|---|---|\
+| | | | | \uc0\u9744  |\
+| | | | | \uc0\u9744  |\
+| | | | | \uc0\u9744  |\
+| | | | | \uc0\u9744  |\
+| | | | | \uc0\u9744  |\
+\
+## Bloc de suivi des d\'e9cisions\
+\
+| Heure | D\'e9cision prise | Motif | Valid\'e9 par |\
+|---|---|---|---|\
+| | | | |\
+| | | | |\
+| | | | |\
+| | | | |\
+\
+## Validation finale V1\
+\
+- [ ] WhatsApp re\'e7oit et r\'e9pond correctement\
+- [ ] Les 3 questions de qualification sont bien pos\'e9es\
+- [ ] Le besoin est correctement compris\
+- [ ] La d\'e9mo est propos\'e9e quand le lead est s\'e9rieux\
+- [ ] Le handoff humain est possible\
+- [ ] Le lead est enregistr\'e9\
+- [ ] La note interne est g\'e9n\'e9r\'e9e\
+- [ ] La version du jour est jug\'e9e d\'e9montrable\
+\
+## Actions \'e0 reporter \'e0 demain\
+\
+- [ ]\
+- [ ]\
+- [ ]\
+- [ ]\
+- [ ]\
+\
+## Conclusion de session\
+\
+- V1 valid\'e9e : \uc0\u9744  Oui \u9744  Non\
+- Niveau de confiance : \uc0\u9744  Faible \u9744  Moyen \u9744  Bon \u9744  Tr\'e8s bon\
+- Recommandation de prochaine \'e9tape :\
+\
+}
