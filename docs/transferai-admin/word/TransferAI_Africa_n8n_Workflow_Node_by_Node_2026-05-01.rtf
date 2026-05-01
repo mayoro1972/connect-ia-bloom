@@ -1,0 +1,592 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Workflow n8n n\'9cud par n\'9cud \'e0 impl\'e9menter\
+\
+## 1. Objectif\
+\
+Ce document d\'e9crit le workflow **n8n** recommand\'e9 pour TransferAI Africa afin de :\
+\
+- recevoir les messages depuis WhatsApp et Chatwoot\
+- qualifier automatiquement les prospects avec OpenAI\
+- comprendre les besoins m\'e9tier\
+- orienter vers la bonne offre ou la bonne page\
+- proposer une d\'e9mo si le lead est s\'e9rieux\
+- cr\'e9er une note interne exploitable\
+- envoyer une r\'e9ponse courte et professionnelle\
+- pousser les donn\'e9es vers le back-office ou un CRM\
+\
+Le workflow est pens\'e9 pour fonctionner avec :\
+\
+- **Twilio WhatsApp**\
+- **Chatwoot**\
+- **OpenAI**\
+- **Calendly**\
+- **Supabase**\
+- **Resend**\
+\
+## 2. Cas d'usage prioritaires\
+\
+- nouveau message WhatsApp entrant\
+- nouveau message provenant du chat du site via Chatwoot\
+- r\'e9ponse \'e0 un email entrant\
+- demande B2B \'e0 qualifier\
+- demande de formation\
+- demande d'audit IA\
+- demande d'automatisation\
+- demande de partenariat\
+- demande d'emploi ou de mise en relation\
+- proposition de d\'e9mo\
+\
+## 3. Vue d'ensemble de l'architecture\
+\
+### Canaux d'entr\'e9e\
+\
+- WhatsApp\
+- Chat du site\
+- email entrant\
+\
+### Moteur IA\
+\
+- OpenAI pour :\
+  - qualification\
+  - scoring\
+  - routage\
+  - r\'e9daction de r\'e9ponse\
+  - r\'e9sum\'e9 CRM\
+  - note interne\
+\
+### Orchestration\
+\
+- n8n comme contr\'f4leur principal\
+\
+### Sorties possibles\
+\
+- r\'e9ponse WhatsApp\
+- r\'e9ponse Chatwoot\
+- r\'e9ponse email\
+- proposition de d\'e9mo via Calendly\
+- handoff humain\
+- mise \'e0 jour base / CRM / back-office\
+\
+## 4. Variables normalis\'e9es recommand\'e9es\
+\
+Le workflow doit standardiser ces champs tr\'e8s t\'f4t :\
+\
+- `channel`\
+- `contact_name`\
+- `company_name`\
+- `sector`\
+- `need_type`\
+- `intent`\
+- `lead_seriousness`\
+- `message_text`\
+- `conversation_history`\
+- `phone`\
+- `email`\
+- `should_offer_demo`\
+- `needs_human_handoff`\
+- `recommended_route`\
+- `calendly_link`\
+- `summary`\
+- `internal_note`\
+\
+## 5. Workflow principal WhatsApp\
+\
+### N\'9cud 1 : Trigger webhook Twilio WhatsApp\
+\
+**Type n8n**\
+- `Webhook`\
+\
+**R\'f4le**\
+- recevoir le message entrant de Twilio\
+\
+**Entr\'e9es attendues**\
+- `Body`\
+- `From`\
+- `To`\
+- `ProfileName`\
+- `MessageSid`\
+- `WaId`\
+- `NumMedia`\
+\
+**Sortie voulue**\
+- payload brut Twilio\
+\
+### N\'9cud 2 : Normalisation du message entrant\
+\
+**Type n8n**\
+- `Function` ou `Code`\
+\
+**R\'f4le**\
+- transformer le payload Twilio en structure interne propre\
+\
+**\'c0 produire**\
+\
+```json\
+\{\
+  "channel": "whatsapp",\
+  "contact_name": "Marius Ayoro",\
+  "phone": "whatsapp:+447595715838",\
+  "message_text": "Bonjour TransferAI...",\
+  "message_sid": "SMxxxx",\
+  "conversation_history": "",\
+  "calendly_link": "https://calendly.com/..."\
+\}\
+```\
+\
+### N\'9cud 3 : R\'e9cup\'e9ration de l'historique conversationnel\
+\
+**Type n8n**\
+- `Supabase`\
+\
+**R\'f4le**\
+- r\'e9cup\'e9rer les derniers messages li\'e9s au m\'eame num\'e9ro\
+\
+**Table sugg\'e9r\'e9e**\
+- `whatsapp_inbound_messages`\
+\
+**Filtre**\
+- `from_number = phone`\
+\
+**But**\
+- \'e9viter de reposer les m\'eames questions\
+- enrichir le contexte OpenAI\
+\
+### N\'9cud 4 : Construction du contexte IA\
+\
+**Type n8n**\
+- `Set`\
+\
+**R\'f4le**\
+- pr\'e9parer les variables \'e0 injecter dans OpenAI\
+\
+**Contenu**\
+- message courant\
+- historique compact\
+- base de connaissance utile\
+- lien Calendly\
+- routes principales du site\
+\
+### N\'9cud 5 : Qualification JSON via OpenAI\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- utiliser le prompt de qualification JSON du pack `11_Prompt_Pack_n8n_Chatwoot.md`\
+\
+**R\'f4le**\
+- extraire :\
+  - entreprise\
+  - secteur\
+  - besoin\
+  - intention\
+  - niveau de s\'e9rieux\
+  - informations manquantes\
+\
+**Sortie attendue**\
+\
+```json\
+\{\
+  "company_name": "ABC SARL",\
+  "sector": "logistique",\
+  "need_type": "automatisation",\
+  "intent": "automatisation",\
+  "lead_seriousness": "\'e9lev\'e9",\
+  "is_b2b": true,\
+  "wants_demo": true,\
+  "needs_human_handoff": false,\
+  "missing_fields": []\
+\}\
+```\
+\
+### N\'9cud 6 : Validation JSON / fallback\
+\
+**Type n8n**\
+- `IF` ou `Code`\
+\
+**R\'f4le**\
+- v\'e9rifier que le JSON OpenAI est exploitable\
+- fallback si r\'e9ponse mal form\'e9e\
+\
+**Action si erreur**\
+- utiliser une r\'e9ponse de reprise courte\
+- marquer la conversation \'e0 revoir\
+\
+### N\'9cud 7 : Scoring du lead\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt de scoring lead\
+\
+**R\'f4le**\
+- calculer :\
+  - score\
+  - niveau de qualification\
+  - proposition de d\'e9mo ou non\
+  - route recommand\'e9e\
+\
+### N\'9cud 8 : Routage du service\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt de routage par service\
+\
+**R\'f4le**\
+- choisir la meilleure orientation :\
+  - formation\
+  - audit IA\
+  - automatisation\
+  - contenus\
+  - partenariat\
+  - emploi\
+\
+### N\'9cud 9 : G\'e9n\'e9ration du r\'e9sum\'e9 CRM\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt de r\'e9sum\'e9 CRM\
+\
+**R\'f4le**\
+- g\'e9n\'e9rer un r\'e9sum\'e9 court et structur\'e9 pour exploitation commerciale\
+\
+### N\'9cud 10 : G\'e9n\'e9ration de la note interne\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt de note interne BackOffice\
+\
+**R\'f4le**\
+- fournir une note simple de suivi \'e9quipe\
+\
+### N\'9cud 11 : D\'e9cision m\'e9tier principale\
+\
+**Type n8n**\
+- `Switch`\
+\
+**R\'f4le**\
+- orienter le flux selon :\
+  - besoin incomplet\
+  - lead qualifi\'e9\
+  - lead tr\'e8s qualifi\'e9\
+  - handoff humain\
+\
+**Branches recommand\'e9es**\
+- `missing_fields`\
+- `offer_demo`\
+- `answer_faq_or_route`\
+- `human_handoff`\
+\
+### N\'9cud 12A : R\'e9ponse de qualification incompl\'e8te\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt de relance si informations manquantes\
+\
+**R\'f4le**\
+- demander uniquement les \'e9l\'e9ments manquants\
+\
+### N\'9cud 12B : R\'e9ponse avec proposition de d\'e9mo\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt de proposition de d\'e9mo\
+\
+**R\'f4le**\
+- proposer Calendly au prospect qualifi\'e9\
+\
+### N\'9cud 12C : R\'e9ponse simple orient\'e9e site\
+\
+**Type n8n**\
+- `OpenAI Chat`\
+\
+**Prompt**\
+- prompt FAQ / assistant site\
+\
+**R\'f4le**\
+- r\'e9pondre \'e0 la question\
+- orienter vers la bonne page\
+- reprendre la qualification si n\'e9cessaire\
+\
+### N\'9cud 12D : D\'e9clenchement handoff humain\
+\
+**Type n8n**\
+- `Set` + `Supabase` ou `CRM`\
+\
+**R\'f4le**\
+- marquer la conversation comme \'e0 traiter humainement\
+- notifier l'\'e9quipe si n\'e9cessaire\
+\
+## 6. Persistance des donn\'e9es\
+\
+### N\'9cud 13 : Upsert prospect / conversation\
+\
+**Type n8n**\
+- `Supabase`\
+\
+**But**\
+- enregistrer ou mettre \'e0 jour le prospect qualifi\'e9\
+\
+**Champs conseill\'e9s**\
+- `contact_name`\
+- `company_name`\
+- `sector`\
+- `need_type`\
+- `intent`\
+- `lead_seriousness`\
+- `summary`\
+- `recommended_route`\
+- `should_offer_demo`\
+- `internal_note`\
+\
+### N\'9cud 14 : Log d'automatisation\
+\
+**Type n8n**\
+- `Supabase`\
+\
+**But**\
+- tracer :\
+  - timestamp\
+  - canal\
+  - d\'e9cision prise\
+  - prompt utilis\'e9\
+  - r\'e9ponse envoy\'e9e\
+\
+## 7. R\'e9ponse sortante\
+\
+### N\'9cud 15 : Envoi de la r\'e9ponse WhatsApp\
+\
+**Type n8n**\
+- `HTTP Request` vers Twilio\
+ou\
+- n\'9cud Twilio\
+\
+**R\'f4le**\
+- renvoyer la r\'e9ponse finale au prospect\
+\
+### N\'9cud 16 : Notification interne facultative\
+\
+**Type n8n**\
+- `Resend`\
+\
+**R\'f4le**\
+- notifier l'\'e9quipe si :\
+  - lead fort\
+  - demande partenariat\
+  - demande strat\'e9gique\
+  - handoff humain\
+\
+## 8. Workflow Chatwoot\
+\
+### N\'9cud 1 : Trigger Chatwoot\
+\
+**Type n8n**\
+- `Webhook`\
+\
+**R\'f4le**\
+- recevoir un nouvel \'e9v\'e9nement conversation Chatwoot\
+\
+### N\'9cud 2 : Normalisation\
+\
+**R\'f4le**\
+- convertir le payload Chatwoot en format standard\
+\
+### N\'9cud 3 : Historique conversation\
+\
+**R\'f4le**\
+- r\'e9cup\'e9rer le contexte existant du contact\
+\
+### N\'9cud 4 : Prompt syst\'e8me ma\'eetre\
+\
+**R\'f4le**\
+- produire une r\'e9ponse visible courte et utile\
+\
+### N\'9cud 5 : Qualification JSON\
+\
+**R\'f4le**\
+- enrichir les attributs du contact\
+\
+### N\'9cud 6 : Mise \'e0 jour attributs Chatwoot\
+\
+**Attributs recommand\'e9s**\
+- `company_name`\
+- `sector`\
+- `need_type`\
+- `intent`\
+- `lead_score`\
+- `lead_seriousness`\
+- `demo_proposed`\
+- `human_handoff`\
+\
+### N\'9cud 7 : R\'e9ponse Chatwoot\
+\
+**R\'f4le**\
+- publier la r\'e9ponse dans la conversation\
+\
+### N\'9cud 8 : Escalade humaine\
+\
+**R\'f4le**\
+- assigner la conversation \'e0 un agent si besoin\
+\
+## 9. Workflow email entrant\
+\
+### N\'9cud 1 : Trigger email inbound\
+\
+**R\'f4le**\
+- recevoir l'email entrant\
+\
+### N\'9cud 2 : Nettoyage du contenu\
+\
+**R\'f4le**\
+- enlever signatures, bruit, historique excessif\
+\
+### N\'9cud 3 : Qualification JSON\
+\
+**R\'f4le**\
+- identifier entreprise, secteur, besoin, s\'e9rieux\
+\
+### N\'9cud 4 : R\'e9ponse email\
+\
+**Prompt**\
+- prompt de r\'e9ponse email\
+\
+### N\'9cud 5 : Proposition de d\'e9mo si lead fort\
+\
+**R\'f4le**\
+- ins\'e9rer Calendly si opportun\
+\
+### N\'9cud 6 : Enregistrement CRM / base\
+\
+**R\'f4le**\
+- persister le r\'e9sum\'e9 et les informations utiles\
+\
+## 10. Conditions m\'e9tiers recommand\'e9es\
+\
+### D\'e9mo \'e0 proposer si\
+\
+- entreprise identifi\'e9e\
+- secteur identifi\'e9\
+- besoin concret\
+- orientation B2B\
+- demande d'accompagnement, audit ou automatisation\
+\
+### Handoff humain si\
+\
+- partenariat important\
+- besoin institutionnel\
+- sujet strat\'e9gique\
+- insatisfaction\
+- demande complexe\
+- demande tarifaire sensible\
+\
+### R\'e9ponse simple sans d\'e9mo si\
+\
+- demande informative\
+- besoin encore flou\
+- personne en phase d\'e9couverte\
+\
+## 11. R\'e9ponses types \'e0 injecter\
+\
+### Qualification initiale\
+\
+```text\
+Bonjour et merci pour votre message.\
+\
+Pour bien vous orienter, pouvez-vous me pr\'e9ciser :\
+1. le nom de votre entreprise,\
+2. votre secteur d\'92activit\'e9,\
+3. votre besoin principal : formation, veille ou automatisation ?\
+\
+Si votre besoin est d\'e9j\'e0 bien cadr\'e9, nous pourrons ensuite vous proposer une d\'e9mo.\
+```\
+\
+### Proposition de d\'e9mo\
+\
+```text\
+Merci pour ces pr\'e9cisions.\
+\
+Votre besoin semble bien correspondre \'e0 un \'e9change de d\'e9monstration avec notre \'e9quipe.\
+Vous pouvez r\'e9server un cr\'e9neau ici :\
+\{\{ $json.calendly_link \}\}\
+\
+Nous pourrons y cadrer votre besoin et les options adapt\'e9es.\
+```\
+\
+### Relance courte si information manquante\
+\
+```text\
+Merci. Pour vous orienter au mieux, il me manque encore :\
+- le nom de votre entreprise\
+- votre secteur\
+- votre besoin principal : formation, veille ou automatisation\
+```\
+\
+## 12. Ordre d'impl\'e9mentation recommand\'e9\
+\
+Pour avancer vite et proprement :\
+\
+### Phase 1\
+\
+- WhatsApp inbound\
+- qualification JSON\
+- scoring\
+- r\'e9ponse simple\
+\
+### Phase 2\
+\
+- proposition de d\'e9mo\
+- r\'e9sum\'e9 CRM\
+- note interne\
+- notification \'e9quipe\
+\
+### Phase 3\
+\
+- Chatwoot\
+- email entrant\
+- handoff humain avanc\'e9\
+- analytics de conversion\
+\
+## 13. Livrables techniques minimum\
+\
+Pour la premi\'e8re version exploitable :\
+\
+- 1 workflow WhatsApp principal\
+- 1 workflow Chatwoot\
+- 1 workflow email entrant\
+- 1 table ou CRM de prospects\
+- 1 variable centrale `calendly_link`\
+- 1 pack de prompts valid\'e9\
+\
+## 14. Recommandation finale\
+\
+La meilleure voie pour TransferAI est :\
+\
+- **Chatwoot** pour la couche conversationnelle\
+- **n8n** pour l'orchestration\
+- **OpenAI** pour la qualification et le scoring\
+- **Calendly** pour la conversion\
+- **Supabase** pour la m\'e9moire op\'e9rationnelle\
+\
+Ce workflow est volontairement con\'e7u pour \'eatre :\
+\
+- lisible\
+- modulaire\
+- pilotable\
+- simple \'e0 faire \'e9voluer\
+}
