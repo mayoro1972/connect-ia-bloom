@@ -21,6 +21,7 @@ Le pack a 4 objectifs :
 8. [Note Direction / Partage Externe](./08_Note_Direction_Partage_Externe.md)
 9. [Export Word Friendly Direction / Externe](./09_Export_Word_Direction_Externe.html)
 10. [BackOffice Admin User Guide (EN)](./10_BackOffice_Admin_User_Guide_EN.md)
+11. [Prompt Pack n8n + Chatwoot](./11_Prompt_Pack_n8n_Chatwoot.md)
 
 ## Ordre de lecture recommandé
 
