@@ -1,58 +1,332 @@
 # Guide Administrateur No1
 
-## 1. Mission de l'administrateur principal
+## 1. Objet du guide
 
-L'administrateur No1 est responsable de 6 piliers :
+Ce guide décrit le fonctionnement réel du **BackOffice TransferAI Africa** au 1er mai 2026.
 
-1. Gouvernance du contenu
-2. Pilotage du back-office
-3. Supervision technique légère du site
-4. Contrôle des accès, tokens et secrets
-5. Validation avant publication et déploiement
-6. Transmission de la méthode aux autres administrateurs
+Il répond à 4 questions :
 
-Son rôle n'est pas seulement de publier. Il doit garantir que le site reste :
-- cohérent
-- lisible
-- exploitable commercialement
+1. comment accéder au back-office et au backend
+2. à quoi sert chaque rubrique
+3. quels rôles opérationnels doivent être couverts
+4. comment exploiter la plateforme sans casser les flux déjà en production
+
+---
+
+## 2. Mission de l’administrateur No1
+
+L’administrateur No1 ne se limite pas à publier.
+
+Il garantit que la plateforme reste :
+
+- cohérente éditorialement
+- crédible commercialement
+- exploitable opérationnellement
 - fiable techniquement
-- documenté pour l'équipe
+- traçable côté back-office
 
-## 2. Ce que vous administrez concrètement
+Responsabilités principales :
 
-### Front office
+1. gouvernance du contenu et des CTA
+2. supervision du BackOffice
+3. suivi des leads, messages entrants et demandes
+4. contrôle léger des déploiements et accès
+5. coordination avec les administrateurs métiers
+6. documentation et transmission des procédures
 
-Pages principales :
-- Accueil
-- A propos
-- Education
-- Catalogue
-- Détail formation
-- Parcours
-- Certification
-- Outils IA
-- Entreprises / Services
-- Blog
-- Article blog
-- Domaines blog
-- Partenaires
-- Contact / formulaires
-- Pages preview et hubs secondaires
+---
 
-### Back-office
+## 3. Accès au BackOffice et au backend
 
-Onglets actuels :
-- Analytics
-- Ressources
-- Brouillons IA
-- Newsletter IA
-- Partenaires
-- Emplois IA
-- Mode d'emploi
+### 3.1. BackOffice public
 
-### Backend Supabase
+URL de production :
 
-Tables et flux principaux :
+- [https://www.transferai.ci/back-office](https://www.transferai.ci/back-office)
+
+Exemples de liens directs :
+
+- [https://www.transferai.ci/back-office?tab=whatsapp](https://www.transferai.ci/back-office?tab=whatsapp)
+- [https://www.transferai.ci/back-office?tab=newsletters](https://www.transferai.ci/back-office?tab=newsletters)
+- [https://www.transferai.ci/back-office?tab=partners](https://www.transferai.ci/back-office?tab=partners)
+
+### 3.2. BackOffice local
+
+Usage :
+
+- développement
+- tests UI
+- validation avant commit
+
+Format :
+
+- `http://127.0.0.1:<port>/back-office`
+
+### 3.3. Token administrateur
+
+Le back-office public repose sur le secret backend :
+
+- `CONTENT_ADMIN_TOKEN`
+
+Ce token est vérifié par :
+
+- [`/Users/marius_ayoro/.codex/worktrees/4df6/connect-ia-bloom/supabase/functions/content-admin/index.ts`](/Users/marius_ayoro/.codex/worktrees/4df6/connect-ia-bloom/supabase/functions/content-admin/index.ts)
+
+Règles :
+
+- ne jamais diffuser le token en clair dans un canal non sécurisé
+- le remplacer en cas de doute
+- retester immédiatement le back-office après rotation
+
+### 3.4. Accès Supabase
+
+Supabase sert de backend principal.
+
+Zones critiques à connaître :
+
+- `Table Editor`
+- `Edge Functions`
+- `Secrets`
+- `SQL Editor`
+
+### 3.5. Accès Twilio
+
+Twilio sert à :
+
+- recevoir les messages WhatsApp
+- journaliser les messages entrants
+- appeler le webhook Supabase
+
+Sender validé :
+
+- `+2250716573990`
+
+### 3.6. Accès Resend
+
+Resend sert à :
+
+- envoyer les emails transactionnels
+- envoyer la newsletter
+- envoyer les notifications internes sur messages WhatsApp
+
+### 3.7. Accès Cloudflare / GitHub
+
+GitHub :
+
+- dépôt source
+- source des commits et des branches
+
+Cloudflare :
+
+- diffusion du front public `transferai.ci`
+
+Point clé :
+
+- un commit GitHub ne suffit pas à lui seul si `main` n’est pas la version réellement servie
+
+---
+
+## 4. Rôles opérationnels
+
+Le système n’a pas encore de séparation fine des rôles par utilisateur dans le BackOffice.  
+Les rôles sont donc **opérationnels**.
+
+### 4.1. Administrateur No1
+
+Responsable de :
+
+- accès au back-office
+- supervision globale
+- validation finale avant mise en production
+- suivi des incidents
+
+### 4.2. Responsable contenus
+
+Responsable de :
+
+- `Ressources`
+- `Brouillons IA`
+- `Capsules vidéo`
+
+### 4.3. Responsable newsletter
+
+Responsable de :
+
+- `Newsletter IA`
+- relecture
+- test
+- approbation
+- suivi des rappels du jeudi
+
+### 4.4. Responsable prospects / audit
+
+Responsable de :
+
+- `Prospects Audit`
+- qualification des demandes
+- suivi du portail prospect
+
+### 4.5. Responsable partenaires
+
+Responsable de :
+
+- `Partenaires IA`
+- revue des demandes
+- recommandation de formule
+- suivi des réponses
+
+### 4.6. Responsable WhatsApp
+
+Responsable de :
+
+- `WhatsApp`
+- lecture des messages entrants
+- classement
+- notes internes
+- réponse manuelle via WhatsApp
+
+### 4.7. Responsable webinaires / live
+
+Responsable de :
+
+- `Webinaires`
+- `Formats live IA`
+
+### 4.8. Responsable opportunités
+
+Responsable de :
+
+- `Emplois IA`
+- publication et statut des opportunités
+
+---
+
+## 5. Rubriques du BackOffice
+
+Onglets actuellement visibles :
+
+- `Analytics`
+- `Prospects Audit`
+- `Ressources`
+- `Brouillons IA`
+- `Partenaires IA`
+- `Newsletter IA`
+- `Capsules vidéo`
+- `WhatsApp`
+- `Emplois IA`
+- `Webinaires`
+- `Formats live IA`
+- `Mode d'emploi`
+
+### 5.1. Analytics
+
+Suivre :
+
+- trafic
+- pages vues
+- tendances
+- formulaires et inscriptions
+
+### 5.2. Prospects Audit
+
+Suivre :
+
+- demandes audit IA
+- qualification
+- suivi prospect
+
+### 5.3. Ressources
+
+Gérer :
+
+- articles
+- résumés
+- statuts
+- domaines
+
+### 5.4. Brouillons IA
+
+Gérer :
+
+- sources suivies
+- signaux
+- brouillons proposés
+- publication ou archivage
+
+### 5.5. Partenaires IA
+
+Gérer :
+
+- demandes de référencement
+- partenariats stratégiques
+- revue
+- recommandation IA
+- suivi de réponse
+
+### 5.6. Newsletter IA
+
+Gérer :
+
+- éditions
+- objet
+- préheader
+- éditorial
+- prompt
+- CTA
+- tests
+- statuts
+
+### 5.7. Capsules vidéo
+
+Gérer :
+
+- flux vidéo court
+- capsule mise en avant
+- fallback éditorial
+
+### 5.8. WhatsApp
+
+Le module WhatsApp V1 permet :
+
+- liste + filtres
+- fiche détail
+- changement de statut
+- changement de catégorie
+- note interne
+- ouverture directe de la réponse WhatsApp
+
+### 5.9. Emplois IA
+
+Gérer :
+
+- opportunités
+- statuts
+- visibilité
+
+### 5.10. Webinaires
+
+Gérer :
+
+- webinaires
+- statuts et mises à jour
+
+### 5.11. Formats live IA
+
+Gérer :
+
+- formats live
+- structuration de l’offre live
+
+### 5.12. Mode d’emploi
+
+Rôle :
+
+- rappeler à l’équipe comment utiliser correctement le système
+
+---
+
+## 6. Tables importantes
+
 - `contact_requests`
 - `registration_requests`
 - `form_responses`
@@ -69,8 +343,15 @@ Tables et flux principaux :
 - `partner_email_templates`
 - `partner_listing_reviews`
 - `partner_followup_jobs`
+- `social_video_posts`
+- `whatsapp_inbound_messages`
+- `whatsapp_email_notification_logs`
+- `webinar_registrations`
 
-Edge Functions principales :
+---
+
+## 7. Edge functions importantes
+
 - `content-admin`
 - `content-discovery`
 - `content-classifier`
@@ -82,413 +363,126 @@ Edge Functions principales :
 - `send-prospect-emails`
 - `partner-review-drafter`
 - `partner-followup-send`
+- `twilio-whatsapp-webhook`
 
-## 3. Règles de fonctionnement
+---
 
-### Ligne éditoriale
+## 8. Workflows clés
 
-- FR d'abord
-- EN ensuite pour les contenus stratégiques
-- Côte d'Ivoire d'abord, Afrique de l'Ouest ensuite
-- contenu orienté usages métiers et valeur business
-- éviter le jargon vide
-- privilégier les formulations courtes, utiles et crédibles
+### 8.1. WhatsApp
 
-### Discipline de publication
+Chaîne complète :
 
-La bonne séquence est :
-1. preview locale
-2. validation
-3. commit
-4. push
-5. déploiement front ou Supabase selon le cas
-6. vérification post-déploiement
+1. visiteur clique le bouton WhatsApp du site
+2. message envoyé vers `+2250716573990`
+3. Twilio reçoit
+4. Twilio appelle le webhook Supabase
+5. le message est enregistré dans `whatsapp_inbound_messages`
+6. les notifications internes sont envoyées
+7. le message devient visible dans `BackOffice > WhatsApp`
 
-### Règle de prudence
+### 8.2. Newsletter
 
-Ne jamais :
-- publier sans vérifier la page concernée
-- pousser un changement front qui dépend d'une migration non déployée
-- remplacer un secret sans savoir où il est utilisé
-- annoncer une fonctionnalité non vérifiée
+Modèle réel :
 
-## 4. Routine d'exploitation recommandée
+- IA prépare
+- humain valide
+- système envoie
 
-### Chaque jour ouvré
+Cadence :
 
-- vérifier les demandes de contact et d'inscription
-- vérifier les demandes catalogue et leur email automatique associé
-- vérifier le blog, la page entreprises, la certification et le formulaire d'audit
-- vérifier les nouvelles demandes partenaires si la rubrique est active
-- vérifier les variantes importantes de la page contact selon les paramètres d'URL
-- vérifier que le back-office charge bien
-- vérifier qu'aucun message d'erreur critique n'est visible sur les pages commerciales
+- mercredi : génération
+- jeudi : rappel si nécessaire
+- vendredi : envoi si édition approuvée
 
-### Chaque semaine
+### 8.3. Partenaires
 
-- ouvrir `Back-office > Brouillons IA`
-- relire les nouveaux brouillons utiles
-- ouvrir `Back-office > Newsletter IA`
-- vérifier l'édition de la semaine
-- envoyer un test email
-- approuver l'édition si elle est correcte
-- vérifier les inscriptions newsletter récentes
-- revoir les contenus blog les plus importants
+Flux :
 
-### Chaque mois
+1. demande publique
+2. revue
+3. recommandation
+4. réponse
 
-- revoir les rubriques les plus consultées
-- revoir les CTA et formulaires
-- mettre à jour la FAQ si de nouvelles questions reviennent
-- revoir les secrets et accès critiques
-- ajuster la roadmap et les priorités business
+### 8.4. Capsules vidéo
 
-## 5. Procédure d'utilisation du back-office
+Flux :
 
-### A. Token administrateur
+1. enregistrement ou mise à jour d’une capsule
+2. lecture par le front
+3. affichage d’une vidéo ou d’une carte fallback brandée
 
-Le back-office exige un token administrateur.
+---
 
-À faire :
-- coller le token dans le champ `Accès admin`
-- cliquer sur `Enregistrer le token`
-- vérifier que les compteurs et listes se chargent
+## 9. Routine d’exploitation
 
-Si le token ne fonctionne pas :
-- vérifier qu'il s'agit bien du `CONTENT_ADMIN_TOKEN`
-- vérifier qu'il n'y a pas d'espace au début ou à la fin
-- vérifier que le secret Supabase n'a pas été remplacé récemment
+### Quotidienne
 
-### B. Gestion des ressources
+- vérifier les demandes contact / audit
+- vérifier les messages WhatsApp
+- vérifier que le back-office charge correctement
+- vérifier qu’aucune page commerciale critique ne casse
 
-Dans `Ressources` :
-- créer un slug propre
-- choisir le type de contenu
-- choisir le domaine
-- remplir les titres FR
-- remplir les résumés
-- remplir le contenu complet FR
-- renseigner la source et la date
-- publier ou garder en brouillon
+### Hebdomadaire
 
-Bonnes pratiques :
-- garder le badge de type mais éviter de répéter le mot dans le titre
-- utiliser des résumés clairs, courts, concrets
-- lier le contenu aux formations et à l'offre entreprise quand c'est pertinent
-
-### C. Gestion des brouillons IA
-
-Dans `Brouillons IA` :
-- vérifier les sources suivies
-- relire les signaux détectés
-- relire les brouillons générés
-- corriger si nécessaire
-- approuver, publier ou archiver
-
-### D. Gestion de la newsletter
-
-Dans `Newsletter IA` :
-- charger l'édition
-- vérifier les domaines ciblés
-- vérifier le titre
-- vérifier l'objet email
-- vérifier le préheader
-- vérifier l'introduction
-- vérifier le signal clé
-- vérifier le conseil pratique
-- vérifier l'outil à connaître
-- vérifier le prompt de la semaine
-- vérifier le bloc éditorial
-- enregistrer
+- relire les brouillons IA
+- vérifier l’édition newsletter
 - envoyer un test
-- approuver ou planifier
-
-Point d'exploitation ajouté au 20 avril 2026 :
-- une édition peut être envoyée manuellement un lundi pour une campagne exceptionnelle
-- l'automatisation standard reste centrée sur le vendredi pour l'envoi de campagne
-- une édition déjà approuvée plus ancienne doit être repassée en `draft` si elle risque de polluer le prochain envoi automatique
-- la newsletter fondatrice du 20 avril 2026 a été envoyée avec succès à 8 abonnés actifs
-- le back-office newsletter sert aussi à vérifier `status`, `send_count`, `recipient_count` et `sent_at`
-
-### E. Gestion des partenaires
-
-Dans `Partenaires` :
-- sélectionner une demande réelle reçue depuis le formulaire public
-- relire les informations société, secteur, besoin et calendrier
-- générer la recommandation IA si nécessaire
-- ajuster la formule recommandée
-- relire le sujet et le corps de la réponse
-- marquer `approved` quand la réponse est prête
-- envoyer la réponse finale au prospect
-
-Bonnes pratiques :
-- ne pas envoyer une réponse si le corps email est vide
-- vérifier que le secteur / activité est correctement renseigné
-- conserver une approche sélective et crédible
-
-### F. Gestion des opportunités emploi et mise en relation
-
-Au 20 avril 2026, la page `Media, veille & opportunités IA` a été clarifiée et le flux emploi a changé :
-- le bouton `Parler emploi & mise en relation` ne doit plus pointer vers la prise de RDV
-- il doit pointer vers le formulaire compact dédié `/parler-emploi-ia`
-- ce formulaire réutilise `Contact` avec `intent=demande-renseignement`, `compact=1` et `flow=emploi`
-- le bloc de rendez-vous expert doit être masqué pour ce flux
-- la demande collectée sert à qualifier un besoin emploi, mission, stage ou mise en relation avant retour humain
-- le CTA secondaire du bloc de fin de page média a été corrigé pour pointer vers ce flux
-
-### G. Gestion des cartes replay
-
-Le lien `Voir ce replay` ne doit pas pointer vers Contact.
-
-Règle désormais actée :
-- si une URL vidéo individuelle existe, elle doit être utilisée
-- si aucune URL vidéo individuelle n'est encore disponible, la carte doit pointer vers une destination vidéo crédible
-- au 20 avril 2026, la décision opérationnelle retenue est d'ouvrir une recherche YouTube sur le canal TransferAI Africa avec le titre du replay
+- vérifier les demandes partenaires
+- vérifier la capsule vidéo mise en avant
 
-### H. Vigilance publication / synchronisation
-
-Le 20 avril 2026 a montré un point important pour l'administrateur No1 :
-- un correctif peut être bien poussé sur GitHub sans être visible sur `transferai.ci`
-- il faut vérifier que le correctif est bien sur `main`
-- il faut ensuite republier le site principal depuis le bon canal
-- il faut distinguer clairement GitHub Pages, Lovable et le déploiement réellement utilisé par `transferai.ci`
-- utiliser le back-office pour répondre, pas un email improvisé hors process
+### Mensuelle
 
-### F. Gestion des parcours contact
+- revoir les pages les plus vues
+- revoir les CTA critiques
+- revoir les accès et secrets
+- mettre à jour la documentation
 
-La page `Contact` n'est plus une page unique et générique. Elle sert désormais de conteneur pour plusieurs variantes de formulaires selon l'intention exprimée par le visiteur.
+---
 
-Les cas principaux à connaître sont :
-- `Parler à un expert IA` : porte d'entrée commerciale standard pour une demande de formation, d'accompagnement ou d'orientation
-- `demande-referencement` : variante dédiée au référencement partenaire
-- `demande-renseignement + Partenariat stratégique` : variante dédiée aux discussions de partenariat institutionnel ou stratégique
-- demande catalogue : parcours pensé pour recevoir un catalogue domaine
-- inscription formation : demande plus directe liée à une formation ou une cohorte
+## 10. Incidents fréquents
 
-Bon réflexe admin :
-- vérifier les liens profonds après chaque déploiement front
-- tester la version standard ET la version paramétrée par `intent`
-- ne pas supposer qu'un lien `Contact` public affichera toujours le même formulaire
+### Si le BackOffice ne charge pas
 
-### G. Gestion des demandes catalogue
+Vérifier :
 
-Le site gère désormais un parcours catalogue plus direct.
+- token admin
+- variables Supabase du front
+- fonction `content-admin`
 
-À retenir :
-- une demande catalogue claire peut déclencher un email enrichi avec accès immédiat au catalogue demandé
-- ce flux passe par `send-prospect-emails`
-- l'objectif n'est pas de ralentir le prospect, mais de lui donner rapidement la bonne ressource puis une suite logique
+### Si WhatsApp ne remonte pas
 
-Checklist admin :
-- vérifier que le domaine demandé est bien compris
-- vérifier que l'email de réponse pointe vers le bon catalogue
-- vérifier que le CTA audit n'apparaît que s'il a du sens comme prochaine étape
-- vérifier que le ton du message reste orienté formation et non rendez-vous générique
+Vérifier :
 
-## 6. Workflow newsletter : ce qui est automatique et ce qui reste humain
+- logs Twilio
+- invocations `twilio-whatsapp-webhook`
+- table `whatsapp_inbound_messages`
 
-### Ce qui est automatisé
+### Si l’email WhatsApp n’est pas visible
 
-Le système hebdomadaire est déjà préparé pour fonctionner avec Supabase :
-- génération d'un brouillon hebdomadaire
-- ciblage par domaines abonnés
-- garde-fou d'envoi uniquement si l'édition est `approved` ou `scheduled`
+Vérifier :
 
-Programmation actuelle :
-- mercredi à 06:00 : génération du brouillon hebdomadaire
-- vendredi à 08:30 : tentative d'envoi de l'édition validée
+- `whatsapp_email_notification_logs`
+- logs Resend
+- Inbox / Spam / Promotions
 
-### Ce qui reste recommandé côté humain
+### Si une page front semble ancienne
 
-Avant l'envoi réel, il faut idéalement :
-- relire le contenu
-- envoyer un email test
-- corriger l'objet, le conseil, l'outil ou le prompt si besoin
-- passer l'édition en `approved`
+Vérifier :
 
-Conclusion :
-- oui, le système peut tourner chaque semaine
-- non, il n'est pas conseillé de laisser partir les emails sans validation au départ
+- que le correctif est sur `main`
+- que la prod sert bien la bonne version
+- qu’un hard refresh a été fait
 
-## 7.1. Logique email transactionnelle à retenir
+---
 
-Les emails automatiques du site suivent désormais une règle horaire simple basée sur la Côte d'Ivoire :
-- avant `12:00` : utiliser `Bonjour`
-- à partir de `12:00` : utiliser `Bonsoir`
+## 11. Règle finale
 
-Cette règle s'applique aux principaux flux automatisés :
-- accusés de réception prospects
-- confirmations newsletter
-- réponses partenaires
-- réponses catalogue
-- confirmations d'inscription ou de demande formation
+Le BackOffice doit être exploité comme un **poste de pilotage opérationnel**, pas comme un simple écran de publication.
 
-Important :
-- pour les réponses partenaires, la salutation est réajustée au moment de l'envoi réel
-- cela évite qu'un brouillon généré le matin parte encore avec `Bonjour` le soir
+Les règles les plus sûres restent :
 
-## 7.2. Qualité attendue des emails prospects
-
-Les emails automatiques doivent maintenant respecter une logique de clarté par cas d'usage :
-- une demande d'inscription ne doit pas afficher un lien de RDV ambigu si le besoin est déjà une candidature
-- une demande de formation doit reformuler le besoin, résumer les éléments compris et annoncer la prochaine étape utile
-- une demande catalogue doit proposer l'accès direct au bon catalogue sans détour inutile
-- une demande partenaire doit distinguer clairement référencement, visibilité ou partenariat stratégique
-
-Règle simple :
-- ne pas injecter un CTA de rendez-vous dans un email si ce rendez-vous n'est pas la prochaine étape logique
-- ne pas mélanger devis, audit, inscription et orientation dans un même accusé de réception
-
-## 8. Secrets et accès critiques
-
-## 9. Déploiement manuel utile à retenir
-
-Quand une évolution touche la fonction `send-prospect-emails`, le point important est :
-- se placer dans le dépôt racine `connect-ia-bloom`
-- ne pas lancer la commande depuis `~` ou un autre dossier
-
-Commande-type :
-
-```bash
-supabase functions deploy send-prospect-emails --project-ref wlhznciwuofueffyoflo
-```
-
-Si l'erreur mentionne `Entry path does not exist`, cela signifie généralement que la commande n'a pas été lancée depuis la racine du dépôt.
-
-### Secrets principaux
-
-- `CONTENT_ADMIN_TOKEN`
-- `NEWSLETTER_SCHEDULER_TOKEN`
-- `RESEND_API_KEY`
-- `MAIL_FROM`
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
-
-### Règles de sécurité
-
-- ne jamais publier un secret dans le front
-- ne jamais envoyer un secret dans un message non sécurisé
-- si un secret est perdu, le remplacer proprement
-- documenter toute rotation de secret
-
-### Rotation d'un secret
-
-Quand un secret est remplacé :
-- vérifier où il est utilisé
-- remplacer la valeur dans Supabase ou dans l'environnement concerné
-- retester immédiatement le workflow lié
-
-## 9. Déploiements
-
-### Front
-
-Flux normal :
-- développement local
-- preview
-- `npm run build`
-- commit
-- push sur `main`
-- déploiement Cloudflare
-- vérification sur le site public
-
-### Backend Supabase
-
-À faire si nécessaire :
-- pousser les migrations SQL
-- déployer les edge functions concernées
-- vérifier les secrets
-- tester les flux critiques après déploiement
-
-## 10. Gestion des incidents
-
-### Si une page front casse
-
-1. identifier l'URL concernée
-2. reproduire en local
-3. vérifier le router et le composant
-4. corriger
-5. rebuild
-6. push
-7. vérifier Cloudflare
-
-### Si le back-office ne charge pas
-
-1. vérifier le token admin
-2. vérifier les variables Supabase du front
-3. vérifier la fonction `content-admin`
-4. vérifier la réponse réseau
-
-### Si la newsletter ne part pas
-
-1. vérifier que l'édition existe
-2. vérifier son statut
-3. vérifier `Dernières diffusions`
-4. vérifier la fonction `newsletter-send`
-5. vérifier `RESEND_API_KEY`
-6. vérifier le domaine email expéditeur
-
-### Si une réponse partenaire ne part pas
-
-1. vérifier que le dossier sélectionné est réel
-2. vérifier que `prospect_email` est bien renseigné
-3. vérifier que `response_email_body_fr` n'est pas vide
-4. vérifier `partner-followup-send`
-5. vérifier `RESEND_API_KEY`
-6. vérifier le token admin si l'action part du back-office
-
-## 11. Checklist avant publication
-
-### Avant toute mise en ligne front
-
-- la page est lisible en desktop
-- la page est lisible en mobile
-- les CTA sont alignés
-- les formulaires s'ouvrent
-- le build passe
-- le contenu est cohérent FR
-
-### Avant publication d'une ressource
-
-- titre propre
-- domaine correct
-- résumé utile
-- source renseignée
-- date correcte
-- page article accessible
-
-### Avant envoi newsletter
-
-- édition chargée
-- objet correct
-- test email envoyé
-- rendu email validé
-- statut `approved` ou `scheduled`
-
-### Avant envoi d'une réponse partenaire
-
-- dossier partenaire réel chargé
-- formule recommandée cohérente
-- sujet email relu
-- corps email relu
-- salutation correcte
-- statut `approved` si le workflow l'exige
-
-## 12. Documentation à garder vivante
-
-Ce guide doit être mis à jour :
-- à chaque nouvelle rubrique du site
-- à chaque nouveau flux automatisé
-- à chaque changement de secret ou de procédure
-- à chaque évolution importante du back-office
-
-## 13. Derniers changements à retenir au 11 avril 2026
-
-Les changements structurants les plus récents sont :
-- simplification de pages denses pour améliorer la lisibilité et la conversion
-- audit IA gratuit mieux mis en avant dans le parcours visiteur
-- pipeline partenaire complet avec formulaire public, back-office, recommandation et email de suivi
-- nouvelle discipline éditoriale sur le blog : badge de type visible, titres allégés, moins de répétitions
-- logique `FR d'abord`, EN seulement pour les contenus et usages stratégiques
-- fiabilisation des parcours `Contact` avec variantes publiques plus cohérentes
-- amélioration des réponses automatiques pour les demandes de catalogue, de formation et d'inscription
+- validation humaine sur les contenus sensibles
+- responsabilité claire par rubrique
+- contrôle post-déploiement réel
+- journalisation des workflows critiques

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TransferAI Africa - BackOffice Administrator Guide</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #1f2937;
+        margin: 30px;
+        line-height: 1.6;
+      }
+      h1, h2, h3 {
+        color: #0f172a;
+      }
+      h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+      h2 {
+        font-size: 21px;
+        margin-top: 28px;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 6px;
+      }
+      h3 {
+        font-size: 16px;
+        margin-top: 18px;
+      }
+      p, li {
+        font-size: 12pt;
+      }
+      .meta {
+        color: #6b7280;
+        margin-bottom: 22px;
+      }
+      .box {
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin: 14px 0;
+        background: #fafafa;
+      }
+      .highlight {
+        border-color: #fed7aa;
+        background: #fff7ed;
+      }
+      code {
+        background: #f3f4f6;
+        padding: 1px 4px;
+        border-radius: 4px;
+      }
+      ul, ol {
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>TransferAI Africa - BackOffice Administrator Guide</h1>
+    <p class="meta">Exportable Word version - updated on 1 May 2026</p>
+
+    <div class="box">
+      <strong>Purpose:</strong> provide administrators with a practical and current guide to operate the public BackOffice, the supporting backend, and the connected workflows without breaking live production.
+    </div>
+
+    <div class="box highlight">
+      <strong>Operational scope:</strong> this guide reflects the current production stack, including Analytics, Audit Prospects, Resources, AI Drafts, AI Partners, AI Newsletter, Video Capsules, WhatsApp, AI Jobs, Webinars, AI Live Formats, and the How to Use section.
+    </div>
+
+    <h2>1. Mission of the primary administrator</h2>
+    <p>The primary administrator keeps the platform coherent, commercially credible, operationally reliable, and traceable. This role supervises content governance, access control, live workflows, and final validation before publication.</p>
+
+    <h2>2. How to access the system</h2>
+    <ul>
+      <li>Public BackOffice: <code>https://www.transferai.ci/back-office</code></li>
+      <li>Direct tab example: <code>https://www.transferai.ci/back-office?tab=whatsapp</code></li>
+      <li>Local development access: <code>http://127.0.0.1:&lt;port&gt;/back-office</code></li>
+      <li>Supabase: Table Editor, Edge Functions, Secrets, SQL Editor</li>
+      <li>Twilio: inbound WhatsApp logs and sender controls</li>
+      <li>Resend: outbound email logs and domain configuration</li>
+    </ul>
+
+    <h2>3. Administrator token and backend access</h2>
+    <p>The public BackOffice requires a valid administrator token. The backend validates this against <code>CONTENT_ADMIN_TOKEN</code> through the <code>content-admin</code> edge function.</p>
+    <p>Good practice:</p>
+    <ul>
+      <li>do not share the token in unsecured channels</li>
+      <li>rotate it if exposure is suspected</li>
+      <li>retest the BackOffice immediately after any token rotation</li>
+    </ul>
+
+    <h2>4. Operational roles</h2>
+    <ul>
+      <li>Primary administrator: global supervision, deployment validation, incident follow-up</li>
+      <li>Content administrator: resources, drafts, and video capsules</li>
+      <li>Newsletter administrator: issue review, testing, approval, and scheduling</li>
+      <li>Audit / prospect administrator: audit leads and request qualification</li>
+      <li>Partner administrator: partner review and follow-up</li>
+      <li>WhatsApp administrator: incoming message handling and manual reply flow</li>
+      <li>Webinar / live administrator: webinar records and live format follow-up</li>
+      <li>Opportunity administrator: AI jobs and related opportunity flows</li>
+    </ul>
+
+    <h2>5. BackOffice sections</h2>
+    <ul>
+      <li><strong>Analytics:</strong> traffic, requests, and engagement review</li>
+      <li><strong>Audit Prospects:</strong> AI audit request review and lead follow-up</li>
+      <li><strong>Resources:</strong> content creation, editing, publication status</li>
+      <li><strong>AI Drafts:</strong> draft review, approval, publication, or archive</li>
+      <li><strong>AI Partners:</strong> partner request review and plan recommendation</li>
+      <li><strong>AI Newsletter:</strong> issue editing, testing, approval, and scheduling</li>
+      <li><strong>Video Capsules:</strong> short-form social media entries and featured items</li>
+      <li><strong>WhatsApp:</strong> incoming messages, categories, notes, and reply actions</li>
+      <li><strong>AI Jobs:</strong> opportunity record management and status updates</li>
+      <li><strong>Webinars:</strong> webinar-related records and follow-up</li>
+      <li><strong>AI Live Formats:</strong> operational management of live format entries</li>
+      <li><strong>How to Use:</strong> built-in operator guidance</li>
+    </ul>
+
+    <h2>6. Key backend tables</h2>
+    <ul>
+      <li><code>contact_requests</code></li>
+      <li><code>registration_requests</code></li>
+      <li><code>page_views</code></li>
+      <li><code>resource_posts</code></li>
+      <li><code>newsletter_issues</code></li>
+      <li><code>newsletter_delivery_logs</code></li>
+      <li><code>partner_listing_reviews</code></li>
+      <li><code>social_video_posts</code></li>
+      <li><code>whatsapp_inbound_messages</code></li>
+      <li><code>whatsapp_email_notification_logs</code></li>
+      <li><code>webinar_registrations</code></li>
+    </ul>
+
+    <h2>7. Key edge functions</h2>
+    <ul>
+      <li><code>content-admin</code></li>
+      <li><code>content-discovery</code></li>
+      <li><code>content-classifier</code></li>
+      <li><code>content-drafter</code></li>
+      <li><code>newsletter-drafter</code></li>
+      <li><code>newsletter-send</code></li>
+      <li><code>newsletter-scheduler</code></li>
+      <li><code>send-prospect-emails</code></li>
+      <li><code>partner-review-drafter</code></li>
+      <li><code>partner-followup-send</code></li>
+      <li><code>twilio-whatsapp-webhook</code></li>
+    </ul>
+
+    <h2>8. Core workflows</h2>
+    <h3>WhatsApp</h3>
+    <ol>
+      <li>visitor clicks the site WhatsApp CTA</li>
+      <li>message is sent to <code>+2250716573990</code></li>
+      <li>Twilio receives the message</li>
+      <li>Twilio calls the Supabase webhook</li>
+      <li>the message is stored in <code>whatsapp_inbound_messages</code></li>
+      <li>internal email notifications are sent</li>
+      <li>the message becomes visible in BackOffice &gt; WhatsApp</li>
+    </ol>
+
+    <h3>Newsletter</h3>
+    <p>The operating model remains: <strong>AI prepares, human validates, system sends.</strong></p>
+    <ul>
+      <li>Wednesday: draft generation</li>
+      <li>Thursday: approval reminder if still pending</li>
+      <li>Friday: approved issue can be sent</li>
+    </ul>
+
+    <h3>Partners</h3>
+    <ol>
+      <li>a partner request is submitted</li>
+      <li>the request is reviewed</li>
+      <li>a recommended path is assigned</li>
+      <li>follow-up is prepared and sent</li>
+    </ol>
+
+    <h2>9. Recommended operating routine</h2>
+    <h3>Daily</h3>
+    <ul>
+      <li>check contact and audit requests</li>
+      <li>check incoming WhatsApp messages</li>
+      <li>verify the BackOffice loads properly</li>
+      <li>verify no critical public-page issue is visible</li>
+    </ul>
+
+    <h3>Weekly</h3>
+    <ul>
+      <li>review AI drafts</li>
+      <li>review the newsletter issue and send a test</li>
+      <li>check partner requests and follow-up status</li>
+      <li>check the featured video capsule</li>
+    </ul>
+
+    <h3>Monthly</h3>
+    <ul>
+      <li>review top pages and CTAs</li>
+      <li>review operational copy on high-impact pages</li>
+      <li>review secrets and access handling</li>
+      <li>update priorities and documentation</li>
+    </ul>
+
+    <h2>10. Common issues and first checks</h2>
+    <ul>
+      <li>If the BackOffice does not load: verify the admin token, Supabase variables, and the <code>content-admin</code> function.</li>
+      <li>If WhatsApp messages do not appear: check Twilio logs, <code>twilio-whatsapp-webhook</code> recent invocations, and <code>whatsapp_inbound_messages</code>.</li>
+      <li>If WhatsApp notification emails are not seen: check <code>whatsapp_email_notification_logs</code>, Resend logs, and inbox / spam / promotions folders.</li>
+      <li>If the public page looks outdated: verify that the change reached <code>main</code>, production deployment, and browser cache refresh.</li>
+    </ul>
+
+    <h2>11. Final recommendation</h2>
+    <p>The BackOffice should be treated as a live operations cockpit, not just a publishing interface. The safest operating model remains clear ownership, human review for sensitive outputs, disciplined deployment checks, and systematic logging of critical workflows.</p>
+  </body>
+</html>

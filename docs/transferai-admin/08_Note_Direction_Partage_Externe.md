@@ -2,144 +2,143 @@
 
 ## 1. Objet
 
-Cette note synthétique présente l'état du site TransferAI Africa, ses briques déjà construites, sa valeur business actuelle et ses prochains axes de développement.
+Cette note présente l’état du site TransferAI Africa, sa valeur business actuelle, ses briques déjà construites et ses axes de développement les plus rationnels.
 
-Elle a été pensée pour :
+Elle est pensée pour :
+
 - la direction
 - les partenaires
-- les administrateurs secondaires
-- les personnes qui ont besoin d'une vision claire sans entrer dans le détail technique complet
+- les administrateurs relais
+- les parties prenantes qui ont besoin d’une vision claire sans entrer dans tous les détails techniques
 
-## 2. Ce qu'est aujourd'hui TransferAI Africa
+## 2. Ce qu’est aujourd’hui TransferAI Africa
 
-TransferAI Africa n'est plus seulement un site vitrine. C'est désormais une plateforme structurée qui combine :
+TransferAI Africa n’est plus seulement un site vitrine.
+
+C’est désormais une plateforme structurée qui combine :
+
 - formation
 - certification sectorielle
 - offre entreprise
-- ressources éditoriales
+- contenus éditoriaux
 - matrice outils IA
-- back-office d'administration
+- back-office d’administration
 - pipeline éditorial assisté par IA
-- newsletter ciblée par domaine
+- newsletter par domaine
+- intake WhatsApp administrable
 
 ## 3. Ce que le site permet déjà
 
 ### Côté visiteurs
 
-Le site permet déjà de :
-- découvrir l'offre TransferAI Africa
+Le site permet de :
+
+- découvrir l’offre TransferAI
 - trouver une formation ou une trajectoire adaptée
 - explorer une certification sectorielle
-- consulter des contenus IA ciblés par domaine
 - demander un accompagnement entreprise
 - demander un audit IA gratuit
+- demander un catalogue par domaine
 - demander un référencement partenaire
-- s'abonner à une newsletter IA par domaine
+- s’abonner à une newsletter ciblée
+- engager une conversation WhatsApp
 
 ### Côté administration
 
-Le site permet déjà de :
+Le site permet de :
+
 - publier des ressources
 - gérer des brouillons IA
 - piloter une newsletter éditoriale
-- gérer des demandes partenaires et préparer les réponses
-- suivre des emplois / opportunités
-- exploiter un back-office centralisé
+- gérer des demandes partenaires
+- piloter des capsules vidéo
+- suivre des opportunités emploi
+- suivre les messages WhatsApp entrants
 
 ## 4. Différenciation stratégique
 
-Les points de différenciation les plus forts sont :
-- FR d'abord, avec ancrage Côte d'Ivoire
+Les points différenciants les plus forts sont :
+
+- FR d’abord avec ancrage Côte d’Ivoire
 - approche métier et non gadget
-- couverture de 13 domaines d'expertise
+- couverture de 13 domaines
 - combinaison formation + contenus + entreprise + outils
-- logique de veille transformée en contenus actionnables
-- base déjà exploitable pour un futur assistant IA ou chatbot
+- logique de veille transformée en actions concrètes
+- back-office déjà exploitable pour l’équipe
 
 ## 5. Valeur business actuelle
 
 Le site agit déjà comme :
+
 - vitrine premium
 - support de conversion commerciale
-- socle de crédibilité éditoriale
-- outil de nurturing via la newsletter
-- base de connaissance pour futures automatisations IA
+- outil de crédibilité éditoriale
+- socle de nurturing via newsletter et contenus
+- base de connaissance pour futures couches IA
 
 ## 6. Briques techniques et opérationnelles en place
 
-Les briques déjà en place incluent :
-- front structuré React / Vite
+- front React / Vite
 - déploiement Cloudflare
 - backend Supabase
-- back-office interne
+- back-office public avec token admin
 - pipeline éditorial IA
-- abonnement newsletter par domaine
-- génération et envoi test de newsletter
-- pipeline partenaire avec recommandation et email de réponse
-- logique email transactionnelle plus professionnelle
-- base de connaissance documentée
+- newsletter par domaine
+- pipeline partenaires
+- flux vidéo / TikTok piloté par backend
+- pipeline WhatsApp connecté à Twilio
+- notifications email internes sur messages WhatsApp
 
-## 7. Gouvernance recommandée
+## 7. Lecture de maturité actuelle
+
+TransferAI Africa est désormais :
+
+- un site éditorial crédible
+- un outil de conversion plus structuré
+- un cockpit d’administration réel
+- un socle fiable pour automatisations futures
+
+## 8. Mise à jour importante au 1er mai 2026
+
+Les avancées récentes les plus significatives sont :
+
+- simplification éditoriale de plusieurs pages denses
+- meilleure exposition de l’audit IA gratuit
+- pipeline partenaires opérationnel avec back-office et emails
+- flux catalogue plus direct
+- page média et capsules vidéo mieux structurées
+- module **BackOffice WhatsApp V1** en production
+- chaîne complète WhatsApp -> Twilio -> Supabase -> BackOffice -> email validée
+- documentation et gouvernance documentaire renforcées
+
+## 9. Gouvernance recommandée
 
 Pour garder un site robuste et évolutif, il est recommandé de :
+
 - maintenir un administrateur principal
 - prévoir un administrateur relais
 - documenter systématiquement les secrets et workflows
-- conserver la validation humaine sur les contenus et newsletters clés
+- garder une validation humaine sur les contenus et newsletters sensibles
 
-## 8. Prochaines étapes rationnelles
+## 10. Prochaines étapes rationnelles
 
 Les prochaines étapes les plus logiques sont :
-- industrialiser l'édition newsletter hebdomadaire
-- enrichir l'assistant IA avec la base de connaissance produite
+
+- poursuivre la montée en qualité éditoriale
 - renforcer les analytics utiles à la décision
-- continuer à simplifier certaines pages très denses
-- développer progressivement les contenus EN les plus stratégiques
+- industrialiser encore la newsletter et la relation audience
+- affiner la gouvernance des canaux entrants
+- préparer la prochaine couche assistant IA / automatisation
 
-## 8.1. Mise à jour récente importante
+## 11. Conclusion
 
-Depuis la première version de cette note, plusieurs améliorations ont été apportées :
-- simplification éditoriale de pages clés pour réduire la surcharge de lecture
-- meilleure mise en avant de l'audit IA comme porte d'entrée entreprise
-- création d'un véritable parcours partenaires / référencement
-- amélioration des emails automatiques avec une logique horaire plus naturelle
-- clarification de la page contact autour d'une seule porte d'entrée plus compréhensible : `Parler à un expert IA`
-- meilleure distinction entre référencement partenaire et partenariat stratégique
-- correction de plusieurs liens profonds de formulaires en production
-- amélioration du parcours catalogue avec une réponse plus directe quand le besoin du prospect est clair
-- meilleure cohérence entre demandes formation, inscription, catalogue et prochaine étape proposée
+TransferAI Africa dispose aujourd’hui d’un site beaucoup plus mature qu’un simple site institutionnel.
 
-## 8.2. Mise à jour du 20 avril 2026
+Le socle construit permet déjà :
 
-Les avancées de la journée du 20 avril 2026 portent sur 4 axes :
-
-### A. Newsletter et relation audience
-
-- réécriture complète de la newsletter fondatrice du 20 avril 2026
-- ajout de l'éditorial fondateur avec photo
-- correction des accents, formulations et signature
-- renforcement visuel du bloc `Prompt à copier immédiatement`
-- ajout de nouveaux abonnés et confirmation d'un envoi réel à 8 abonnés actifs
-
-### B. Industrialisation éditoriale
-
-- renforcement de l'automation `veille-ia-quotidienne`
-- cadrage d'un package éditorial hebdomadaire plus structuré
-- rotation planifiée de 3 prompts métier assistanat / secrétariat
-
-### C. Page média et opportunités
-
-- nettoyage de la page `Media, veille & opportunités IA`
-- suppression de blocs trop conceptuels qui alourdissaient la lecture
-- clarification des CTA et du rôle de la page dans l'acquisition et la mise en relation
-
-### D. Emploi, CTA et replays
-
-- création d'un vrai flux `Parler emploi & mise en relation`
-- nouvelle route dédiée `/parler-emploi-ia`
-- correction du CTA emploi pour ne plus ouvrir une prise de RDV
-- correction des cartes `Voir ce replay`, qui ne doivent plus renvoyer vers Contact mais vers une destination de visionnage cohérente
-
-## 9. Conclusion
-
-TransferAI Africa dispose aujourd'hui d'un site beaucoup plus mature qu'un simple site institutionnel. Le socle construit permet déjà de former, convertir, informer, administrer et préparer la prochaine couche : assistant IA, automatisation éditoriale et relation audience plus structurée.
+- de former
+- de convertir
+- d’informer
+- d’administrer
+- de suivre les interactions entrantes
+- et de préparer la prochaine couche d’automatisation intelligente

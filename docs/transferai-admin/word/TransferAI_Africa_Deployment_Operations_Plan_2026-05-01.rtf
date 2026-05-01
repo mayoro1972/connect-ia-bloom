@@ -1,0 +1,280 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Plan de D\'e9ploiement et d'Exploitation\
+\
+## 1. Vue d\'92ensemble\
+\
+Le site repose sur une s\'e9paration simple :\
+\
+- front : React / Vite / TypeScript\
+- backend : Supabase\
+- emails : Resend\
+- WhatsApp : Twilio\
+- h\'e9bergement front : Cloudflare\
+- d\'e9p\'f4t source : GitHub\
+\
+## 2. Environnements \'e0 conna\'eetre\
+\
+### Local\
+\
+Usage :\
+\
+- d\'e9veloppement\
+- preview\
+- tests UI\
+- validation avant commit\
+\
+### Production\
+\
+Usage :\
+\
+- site public\
+- back-office r\'e9el\
+- edge functions r\'e9elles\
+- emails r\'e9els\
+- webhook WhatsApp r\'e9el\
+\
+## 3. D\'e9ploiement du front\
+\
+### \'c0 faire lorsque l\'92on modifie\
+\
+- pages\
+- composants\
+- styles\
+- routes\
+- logique front du BackOffice\
+\
+### Proc\'e9dure standard\
+\
+1. lancer la preview locale\
+2. tester les pages concern\'e9es\
+3. lancer le build\
+4. corriger si besoin\
+5. commit\
+6. push sur `publish-main`\
+7. merge vers `main`\
+8. laisser Cloudflare servir la version publi\'e9e\
+9. v\'e9rifier la page en production\
+\
+### Checklist front post-d\'e9ploiement\
+\
+- la page concern\'e9e s\'92ouvre\
+- les routes associ\'e9es s\'92ouvrent\
+- les boutons critiques fonctionnent\
+- les formulaires critiques s\'92ouvrent\
+- le mobile ne casse pas\
+\
+## 4. D\'e9ploiement Supabase\
+\
+### \'c0 faire lorsque l\'92on modifie\
+\
+- migrations SQL\
+- edge functions\
+- secrets\
+- automatisations planifi\'e9es\
+\
+### Ordre recommand\'e9\
+\
+1. v\'e9rifier les migrations\
+2. v\'e9rifier les fonctions\
+3. v\'e9rifier les secrets requis\
+4. appliquer les migrations\
+5. d\'e9ployer les fonctions concern\'e9es\
+6. tester le flux r\'e9el\
+\
+## 5. Secrets critiques\
+\
+### Secrets administratifs\
+\
+- `CONTENT_ADMIN_TOKEN`\
+- `NEWSLETTER_SCHEDULER_TOKEN`\
+\
+### Secrets email\
+\
+- `RESEND_API_KEY`\
+- `MAIL_FROM`\
+- `ADMIN_EMAIL`\
+\
+### Secrets Supabase\
+\
+- `SUPABASE_URL`\
+- `SUPABASE_ANON_KEY`\
+- `SUPABASE_SERVICE_ROLE_KEY`\
+\
+### Bonnes pratiques\
+\
+- stocker les secrets uniquement dans des environnements s\'e9curis\'e9s\
+- documenter leur r\'f4le\
+- retester tout flux critique apr\'e8s rotation\
+\
+## 6. Plan d\'92exploitation hebdomadaire\
+\
+### Blog et contenus\
+\
+- v\'e9rifier les derniers contenus publi\'e9s\
+- relire les brouillons IA int\'e9ressants\
+- v\'e9rifier les titres, r\'e9sum\'e9s et CTA\
+\
+### Newsletter\
+\
+- v\'e9rifier si un brouillon a \'e9t\'e9 g\'e9n\'e9r\'e9\
+- ajuster si besoin\
+- envoyer un test\
+- approuver ou planifier\
+- v\'e9rifier les diffusions\
+- surveiller les rappels du jeudi\
+\
+### Entreprises et formulaires\
+\
+- v\'e9rifier l\'92offre entreprise\
+- v\'e9rifier le lien audit IA\
+- v\'e9rifier les demandes entrantes\
+\
+### Partenaires\
+\
+- v\'e9rifier la page publique\
+- v\'e9rifier les demandes remont\'e9es dans `BackOffice > Partenaires IA`\
+- v\'e9rifier les recommandations\
+- v\'e9rifier un email test si le flux a chang\'e9\
+\
+### Contact et catalogue\
+\
+- v\'e9rifier `Parler \'e0 un expert IA`\
+- v\'e9rifier les variantes `intent=...`\
+- v\'e9rifier la demande catalogue et sa r\'e9ponse\
+\
+### Capsules vid\'e9o\
+\
+- v\'e9rifier la page `CreateurContenuIA`\
+- v\'e9rifier le bloc TikTok / vid\'e9o\
+- v\'e9rifier que la capsule mise en avant est correcte\
+\
+### WhatsApp\
+\
+- v\'e9rifier qu\'92un nouveau message remonte bien\
+- v\'e9rifier le BackOffice WhatsApp\
+- v\'e9rifier la notification email interne\
+\
+## 7. Automatisation newsletter actuelle\
+\
+### Brouillon hebdomadaire\
+\
+- objectif : pr\'e9parer une \'e9dition FR par domaines actifs\
+- cadence : g\'e9n\'e9ration milieu de semaine\
+\
+### Envoi hebdomadaire\
+\
+- objectif : envoyer l\'92\'e9dition valid\'e9e aux abonn\'e9s cibl\'e9s\
+- garde-fou : envoi seulement si le statut est compatible\
+\
+### R\'e8gle d\'92exploitation\
+\
+Le mod\'e8le recommand\'e9 reste :\
+\
+- IA pr\'e9pare\
+- humain valide\
+- syst\'e8me envoie\
+\
+## 8. Workflow WhatsApp en production\
+\
+### Cha\'eene r\'e9elle\
+\
+1. clic depuis le site\
+2. message envoy\'e9 au num\'e9ro du site\
+3. r\'e9ception Twilio\
+4. appel webhook Supabase\
+5. stockage dans `whatsapp_inbound_messages`\
+6. \'e9criture dans `whatsapp_email_notification_logs`\
+7. notification email interne\
+8. affichage dans `BackOffice > WhatsApp`\
+\
+### Table de logs email\
+\
+- `whatsapp_email_notification_logs`\
+\
+R\'f4le :\
+\
+- prouver qu\'92une notification a \'e9t\'e9 tent\'e9e\
+- voir le statut `sent` ou `failed`\
+- lire `provider_message_id`\
+- diagnostiquer la d\'e9livrabilit\'e9 si n\'e9cessaire\
+\
+## 9. Proc\'e9dure d\'92urgence en cas d\'92incident\
+\
+### Incident front\
+\
+1. identifier l\'92URL cass\'e9e\
+2. reproduire localement\
+3. corriger\
+4. rebuild\
+5. push\
+6. v\'e9rifier la page publique\
+\
+### Incident BackOffice\
+\
+1. v\'e9rifier le token admin\
+2. v\'e9rifier `content-admin`\
+3. v\'e9rifier les variables Supabase du front\
+4. v\'e9rifier la fonction edge concern\'e9e\
+\
+### Incident WhatsApp\
+\
+1. v\'e9rifier Twilio Logs\
+2. v\'e9rifier `twilio-whatsapp-webhook`\
+3. v\'e9rifier `whatsapp_inbound_messages`\
+4. v\'e9rifier `whatsapp_email_notification_logs`\
+5. v\'e9rifier Resend si l\'92email n\'92est pas vu\
+\
+### Incident email\
+\
+1. v\'e9rifier Resend\
+2. v\'e9rifier les logs applicatifs\
+3. v\'e9rifier l\'92exp\'e9diteur\
+4. v\'e9rifier Spam / Promotions / Tous les messages\
+\
+## 10. Validation minimale avant annonce \'93c\'92est d\'e9ploy\'e9\'94\
+\
+### Pour un changement front\
+\
+- page directement concern\'e9e\
+- CTA principal concern\'e9\
+- mobile si la page est commerciale\
+\
+### Pour un changement newsletter\
+\
+- chargement `Newsletter IA`\
+- sauvegarde\
+- envoi test\
+\
+### Pour un changement partenaires\
+\
+- page publique\
+- formulaire de demande\
+- `BackOffice > Partenaires IA`\
+- email de suivi si touch\'e9\
+\
+### Pour un changement catalogue / prospects\
+\
+- parcours catalogue\
+- email re\'e7u\
+- coh\'e9rence des CTA\
+\
+### Pour un changement audit / entreprise\
+\
+- page audit\
+- page entreprises\
+- CTA home li\'e9\
+\
+### Pour un changement WhatsApp\
+\
+- envoi r\'e9el d\'92un message test\
+- apparition dans Twilio\
+- apparition dans `whatsapp_inbound_messages`\
+- apparition dans le BackOffice\
+- apparition de la ligne dans `whatsapp_email_notification_logs`\
+- r\'e9ception de l\'92email interne\
+}

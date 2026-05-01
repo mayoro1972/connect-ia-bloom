@@ -4,89 +4,34 @@
     <meta charset="utf-8" />
     <title>TransferAI Africa - Pack Administration</title>
     <style>
-      body {
-        font-family: "Segoe UI", Arial, sans-serif;
-        color: #1f2937;
-        margin: 30px;
-        line-height: 1.6;
-      }
-      h1, h2, h3 {
-        color: #0f172a;
-      }
-      h1 {
-        font-size: 28px;
-        margin-bottom: 8px;
-      }
-      h2 {
-        font-size: 21px;
-        margin-top: 28px;
-        border-bottom: 1px solid #e5e7eb;
-        padding-bottom: 6px;
-      }
-      h3 {
-        font-size: 16px;
-        margin-top: 18px;
-      }
-      p, li {
-        font-size: 12pt;
-      }
-      .meta {
-        color: #6b7280;
-        margin-bottom: 22px;
-      }
-      .box {
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 14px 16px;
-        margin: 14px 0;
-        background: #fafafa;
-      }
-      .highlight {
-        border-color: #fed7aa;
-        background: #fff7ed;
-      }
-      .small {
-        color: #6b7280;
-      }
-      ul, ol {
-        margin-top: 8px;
-      }
-      code {
-        background: #f3f4f6;
-        padding: 1px 4px;
-        border-radius: 4px;
-      }
+      body { font-family: "Segoe UI", Arial, sans-serif; color: #1f2937; margin: 30px; line-height: 1.6; }
+      h1, h2, h3 { color: #0f172a; }
+      h1 { font-size: 28px; margin-bottom: 8px; }
+      h2 { font-size: 21px; margin-top: 28px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+      h3 { font-size: 16px; margin-top: 18px; }
+      p, li { font-size: 12pt; }
+      .meta { color: #6b7280; margin-bottom: 22px; }
+      .box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; margin: 14px 0; background: #fafafa; }
+      .highlight { border-color: #fed7aa; background: #fff7ed; }
+      code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+      ul, ol { margin-top: 8px; }
     </style>
   </head>
   <body>
     <h1>TransferAI Africa - Pack Administration et Exploitation</h1>
-    <p class="meta">Version exportable Word - mise à jour du 20 avril 2026</p>
+    <p class="meta">Version exportable Word - mise à jour du 1er mai 2026</p>
 
     <div class="box">
-      <strong>Objectif du document :</strong> donner à l'administrateur principal et aux administrateurs relais une vue claire, exploitable et à jour du site, du back-office, des flux automatisés et des prochains chantiers.
+      <strong>Objectif du document :</strong> donner à l’administrateur principal et aux administrateurs relais une vue claire, exploitable et à jour du site, du back-office, des flux automatisés et des chantiers critiques.
     </div>
 
     <div class="box highlight">
-      <strong>Mise à jour importante :</strong> ce pack reflète désormais la simplification des pages denses du site, la mise en avant de l'audit IA gratuit, le pipeline partenaires avec back-office et emails de suivi, l'amélioration des demandes catalogue, la règle <code>Bonjour</code> / <code>Bonsoir</code> dans les emails, l'état réel du back-office, des tables et des edge functions, ainsi que les travaux du 20 avril 2026 sur la newsletter fondatrice, la page media, le flux emploi et les liens replay.
+      <strong>Mise à jour importante :</strong> ce pack reflète désormais la simplification des pages denses, la mise en avant de l’audit IA gratuit, le pipeline partenaires avec back-office et emails, la logique vidéo / TikTok pilotée par backend, le BackOffice WhatsApp V1, le webhook Twilio WhatsApp et les notifications email internes associées.
     </div>
 
-    <h2>0. Complément du 20 avril 2026</h2>
-    <ul>
-      <li>newsletter fondatrice du 20 avril 2026 envoyée en campagne réelle</li>
-      <li>8 abonnés actifs confirmés au moment de l'envoi</li>
-      <li>éditorial fondateur, photo, signature et accents corrigés dans la newsletter</li>
-      <li>bloc <code>Prompt à copier immédiatement</code> renforcé visuellement</li>
-      <li>automation éditoriale renforcée pour produire un package hebdomadaire structuré</li>
-      <li>rotation de 3 prompts métier assistanat / secrétariat programmée</li>
-      <li>page <code>Media, veille &amp; opportunités IA</code> nettoyée et simplifiée</li>
-      <li>création du flux <code>/parler-emploi-ia</code> pour l'emploi et la mise en relation</li>
-      <li>correction du CTA emploi pour ne plus pointer vers la prise de RDV</li>
-      <li>correction du lien <code>Voir ce replay</code> pour éviter Contact et viser une destination vidéo cohérente</li>
-    </ul>
-
-    <h2>1. Vue d'ensemble du site</h2>
-    <p>TransferAI Africa est une plateforme de formation, contenus, conseil et solutions IA avec un ancrage fort en Côte d'Ivoire et une vocation africaine.</p>
-    <p>Le site s'organise autour de 4 piliers :</p>
+    <h2>1. Vue d’ensemble du site</h2>
+    <p>TransferAI Africa est une plateforme de formation, contenus, conseil et solutions IA avec un ancrage fort en Côte d’Ivoire et une vocation africaine.</p>
+    <p>Le site s’organise autour de 4 piliers :</p>
     <ul>
       <li>Education : hub, catalogue, parcours, certification, formats live</li>
       <li>Entreprises : audit IA, accompagnement, conseil, adoption et solutions</li>
@@ -94,61 +39,60 @@
       <li>Outils IA : matrice par domaine, usages, niveaux et formats de formation</li>
     </ul>
 
-    <h2>2. Ce qui a été clarifié récemment</h2>
+    <h2>2. Briques désormais en production</h2>
     <ul>
-      <li>allègement de plusieurs pages historiquement trop chargées</li>
-      <li>clarification de la page <code>Contact</code> autour de la porte d'entrée publique <strong>Parler à un expert IA</strong></li>
-      <li>meilleure mise en avant de l'audit IA gratuit dans les parcours B2B</li>
-      <li>renforcement des réponses catalogue pour donner plus vite le bon contenu</li>
-      <li>nettoyage progressif des CTA pour éviter les confusions entre audit, devis, catalogue et prise de rendez-vous</li>
-      <li>stabilisation des liens profonds <code>contact?intent=...</code> en production</li>
+      <li>blog dynamique et pages article</li>
+      <li>pipeline éditorial assisté par IA</li>
+      <li>newsletter par domaine</li>
+      <li>pipeline partenaires avec recommandation et email de suivi</li>
+      <li>capsules vidéo pilotées par backend</li>
+      <li>pipeline WhatsApp complet avec Twilio, Supabase, BackOffice et emails internes</li>
+      <li>BackOffice public avec token administrateur</li>
     </ul>
 
-    <h2>3. Pages structurantes</h2>
-    <ul>
-      <li><code>/</code> : accueil</li>
-      <li><code>/education</code> : hub formation</li>
-      <li><code>/catalogue</code> : catalogue</li>
-      <li><code>/parcours</code> : parcours guidés</li>
-      <li><code>/certification</code> : certification sectorielle</li>
-      <li><code>/outils-ia</code> : matrice des outils IA</li>
-      <li><code>/entreprises</code> et <code>/services</code> : offre entreprise</li>
-      <li><code>/blog</code> : hub ressources</li>
-      <li><code>/partenaires</code> : présence et partenariats</li>
-      <li><code>/contact</code> : formulaires et demandes qualifiées</li>
-      <li><code>/back-office</code> : administration</li>
-    </ul>
-
-    <h2>4. Back-office réel</h2>
-    <p>Le back-office comprend aujourd'hui :</p>
+    <h2>3. Back-office réel</h2>
+    <p>Le BackOffice comprend aujourd’hui :</p>
     <ul>
       <li>Analytics</li>
+      <li>Prospects Audit</li>
       <li>Ressources</li>
       <li>Brouillons IA</li>
+      <li>Partenaires IA</li>
       <li>Newsletter IA</li>
-      <li>Partenaires</li>
+      <li>Capsules vidéo</li>
+      <li>WhatsApp</li>
       <li>Emplois IA</li>
-      <li>Mode d'emploi</li>
+      <li>Webinaires</li>
+      <li>Formats live IA</li>
+      <li>Mode d’emploi</li>
     </ul>
     <p>Il nécessite un token administrateur valide basé sur le secret <code>CONTENT_ADMIN_TOKEN</code>.</p>
+
+    <h2>4. WhatsApp en production</h2>
+    <p>Le flux WhatsApp validé en production est :</p>
+    <ol>
+      <li>clic sur le bouton WhatsApp du site</li>
+      <li>message envoyé au numéro du site</li>
+      <li>réception Twilio</li>
+      <li>appel du webhook Supabase</li>
+      <li>stockage dans <code>whatsapp_inbound_messages</code></li>
+      <li>notification email interne</li>
+      <li>lecture dans <code>BackOffice &gt; WhatsApp</code></li>
+    </ol>
+    <p>La traçabilité email repose désormais sur <code>whatsapp_email_notification_logs</code>.</p>
 
     <h2>5. Tables et flux principaux</h2>
     <ul>
       <li><code>contact_requests</code></li>
       <li><code>registration_requests</code></li>
-      <li><code>page_views</code></li>
       <li><code>resource_posts</code></li>
-      <li><code>job_opportunities</code></li>
-      <li><code>source_feeds</code></li>
-      <li><code>source_signals</code></li>
-      <li><code>editorial_jobs</code></li>
-      <li><code>newsletter_subscriptions</code></li>
       <li><code>newsletter_issues</code></li>
       <li><code>newsletter_delivery_logs</code></li>
-      <li><code>partner_offer_catalog</code></li>
-      <li><code>partner_email_templates</code></li>
       <li><code>partner_listing_reviews</code></li>
-      <li><code>partner_followup_jobs</code></li>
+      <li><code>social_video_posts</code></li>
+      <li><code>whatsapp_inbound_messages</code></li>
+      <li><code>whatsapp_email_notification_logs</code></li>
+      <li><code>webinar_registrations</code></li>
     </ul>
 
     <h2>6. Edge functions et automatisations</h2>
@@ -157,94 +101,37 @@
       <li><code>content-discovery</code></li>
       <li><code>content-classifier</code></li>
       <li><code>content-drafter</code></li>
-      <li><code>newsletter-subscribe</code></li>
       <li><code>newsletter-drafter</code></li>
       <li><code>newsletter-send</code></li>
       <li><code>newsletter-scheduler</code></li>
       <li><code>send-prospect-emails</code></li>
       <li><code>partner-review-drafter</code></li>
       <li><code>partner-followup-send</code></li>
-    </ul>
-    <p><strong>Point important :</strong> la fonction <code>send-prospect-emails</code> est désormais au centre des accusés de réception, des réponses catalogue, des qualifications de demande et d'une partie des réponses partenaires.</p>
-
-    <h2>7. Blog et pipeline éditorial</h2>
-    <p>Le blog est un actif de crédibilité, de SEO et de conversion. Il repose sur :</p>
-    <ul>
-      <li>des contenus publiés manuellement</li>
-      <li>des sources suivies</li>
-      <li>des signaux détectés</li>
-      <li>des brouillons IA</li>
-      <li>une validation humaine</li>
-    </ul>
-    <p>Formats actuels :</p>
-    <ul>
-      <li>Veille</li>
-      <li>Guides</li>
-      <li>Études de cas</li>
-      <li>Expertise &amp; IA</li>
-    </ul>
-    <p>Décision éditoriale désormais stabilisée : le badge de type reste visible, mais le mot n'est plus répété inutilement au début des titres lorsque cela alourdit la lecture.</p>
-
-    <h2>8. Newsletter</h2>
-    <p>La newsletter est ciblée par domaine. Une édition contient :</p>
-    <ul>
-      <li>un signal clé</li>
-      <li>un conseil pratique</li>
-      <li>un outil à connaître</li>
-      <li>un prompt de la semaine</li>
-      <li>un bloc éditorial</li>
-      <li>un CTA</li>
-    </ul>
-    <p>Automatisation actuelle :</p>
-    <ul>
-      <li>mercredi 06:00 : génération hebdomadaire</li>
-      <li>vendredi 08:30 : tentative d'envoi de l'édition approuvée</li>
-    </ul>
-    <p>Le modèle recommandé reste : <strong>IA prépare, humain valide, système envoie</strong>.</p>
-
-    <h2>9. Pipeline partenaires</h2>
-    <p>Le parcours partenaires n'est plus un simple formulaire. Il inclut désormais :</p>
-    <ul>
-      <li>un formulaire public de référencement / présence</li>
-      <li>une distinction entre référencement partenaire et partenariat stratégique</li>
-      <li>une revue en back-office</li>
-      <li>une recommandation IA de formule</li>
-      <li>une validation humaine</li>
-      <li>un email de réponse au prospect</li>
-    </ul>
-    <p>Le site a donc quitté une logique purement informative pour entrer dans une logique de qualification et de suivi commercial plus structurée.</p>
-
-    <h2>10. Emails automatiques</h2>
-    <p>Les courriers automatiques ont été harmonisés pour être plus lisibles et plus cohérents selon l'intention du visiteur.</p>
-    <ul>
-      <li>salutation horaire : <code>Bonjour</code> avant 12h, <code>Bonsoir</code> après 12h</li>
-      <li>suppression progressive des liens de RDV ambigus lorsqu'ils ne sont pas pertinents</li>
-      <li>meilleure distinction entre demande catalogue, demande formation, demande de contact et parcours partenaires</li>
-      <li>accès plus direct au bon catalogue lorsque le besoin du prospect est clair</li>
-      <li>mise en avant d'un CTA audit uniquement quand il apporte une vraie suite logique</li>
+      <li><code>twilio-whatsapp-webhook</code></li>
     </ul>
 
-    <h2>11. Certification</h2>
-    <p>La certification est pensée pour plusieurs métiers. Elle repose sur un socle commun puis une spécialisation sectorielle.</p>
+    <h2>7. Gouvernance documentaire</h2>
+    <p>Le pack documentaire reste la référence pour :</p>
     <ul>
-      <li>durée : 5 jours</li>
-      <li>adaptation par domaine</li>
-      <li>évaluation continue</li>
-      <li>seuil de validation : 70/100</li>
-      <li>pas de soutenance jury</li>
-    </ul>
-
-    <h2>12. Export Word et gouvernance documentaire</h2>
-    <p>Le JSON chatbot est maintenant valide et le pack documentaire reste la référence pour :</p>
-    <ul>
-      <li>la continuité d'administration</li>
+      <li>la continuité d’administration</li>
       <li>la transmission aux autres administrateurs</li>
-      <li>la préparation d'un futur assistant IA</li>
+      <li>la préparation d’un futur assistant IA</li>
       <li>le partage direction / partenaires / support</li>
     </ul>
 
+    <h2>8. Livrables Word régénérés</h2>
+    <ul>
+      <li><code>TransferAI_Africa_Admin_Master_Pack_2026-05-01.docx</code></li>
+      <li><code>TransferAI_Africa_Executive_Brief_2026-05-01.docx</code></li>
+      <li><code>TransferAI_Africa_Admin_Guide_No1_2026-05-01.docx</code></li>
+      <li><code>TransferAI_Africa_Site_Knowledge_Base_2026-05-01.docx</code></li>
+      <li><code>TransferAI_Africa_FAQ_Assistant_Support_2026-05-01.docx</code></li>
+      <li><code>TransferAI_Africa_Deployment_Operations_Plan_2026-05-01.docx</code></li>
+      <li><code>TransferAI_Africa_Project_Roadmap_2026-05-01.docx</code></li>
+    </ul>
+
     <div class="box">
-      <strong>Conseil pratique :</strong> ouvrez ce fichier dans Microsoft Word, puis utilisez <em>Enregistrer sous</em> pour le convertir en <code>.docx</code> avant partage aux autres administrateurs.
+      <strong>Conseil pratique :</strong> ouvrez ce fichier dans Microsoft Word, puis utilisez <em>Enregistrer sous</em> pour le convertir en <code>.docx</code> ou l’imprimer en PDF pour diffusion.
     </div>
   </body>
 </html>

@@ -2,7 +2,8 @@
 
 ## 1. Vision générale
 
-Le projet TransferAI Africa a évolué d'un site vitrine orienté formation vers une plateforme beaucoup plus structurée, combinant :
+Le projet TransferAI Africa a évolué d’un site vitrine orienté formation vers une plateforme structurée combinant :
+
 - formation
 - certification
 - offre entreprise
@@ -10,16 +11,15 @@ Le projet TransferAI Africa a évolué d'un site vitrine orienté formation vers
 - outils IA par domaine
 - back-office
 - pipeline éditorial
-- newsletter ciblée et automatisée
+- newsletter ciblée
+- flux WhatsApp et notifications
 
 ## 2. Phases de construction
 
 ### Phase 1. Construction du socle front
 
-Objectif :
-- mettre en place les pages principales du site
+Livrables :
 
-Livrables majeurs :
 - accueil
 - éducation
 - catalogue
@@ -32,274 +32,210 @@ Livrables majeurs :
 ### Phase 2. Stabilisation et compatibilité
 
 Objectif :
-- résoudre les problèmes de chargement et de compatibilité navigateur
 
-Signaux observés dans l'historique git :
-- diagnostics Safari
-- ajustements Vite
-- sécurisation du chargement dynamique
+- résoudre les problèmes de chargement et compatibilité navigateur
 
 ### Phase 3. Refonte de lisibilité et simplification UX
 
 Objectif :
+
 - rendre les pages plus claires
 - alléger les parcours
-- mieux hiérarchiser l'information
-
-Résultats :
-- simplification des navigations
-- simplification de la page entreprises
-- simplification de certaines pages certification et outils
-- alignement des cartes et CTA
+- hiérarchiser l’information
 
 ### Phase 4. Naissance du blog dynamique
 
-Objectif :
-- créer un vrai hub ressources
+Livrables :
 
-Étapes majeures :
-- page blog dynamique
+- blog dynamique
 - filtres domaine + type
-- pages article individuelles
-- pages blog par domaine
-- 13 contenus de veille couvrant les 13 domaines
-- dates d'articles rendues dynamiques
+- pages article
+- 13 contenus initiaux de veille
 
-### Phase 5. Construction du pipeline éditorial IA
-
-Objectif :
-- permettre à l'équipe de détecter, classer et rédiger des contenus avec assistance IA
+### Phase 5. Pipeline éditorial IA
 
 Livrables :
+
 - tables éditoriales
 - sources suivies
 - signaux détectés
 - brouillons IA
-- back-office dédié
 - fonctions discovery / classifier / drafter
 
-### Phase 6. Construction de la matrice outils IA
-
-Objectif :
-- structurer le discours formation et B2B autour des outils réellement utilisés
+### Phase 6. Matrice des outils IA
 
 Livrables :
+
 - page outils IA
 - matrice par domaine
-- formats de formation
-- catalogue outils / usages / niveaux
+- formats recommandés
 
 ### Phase 7. Refonte de la certification sectorielle
 
-Objectif :
-- sortir d'une certification trop générique
-
 Livrables :
-- objectifs par domaine
-- programme 5 jours par domaine
-- spécialisation sectorielle
-- évaluation continue plus simple
-- suppression de la logique de soutenance jury
+
+- spécialisation métier
+- programme 5 jours
+- évaluation continue simplifiée
 
 ### Phase 8. Newsletter par domaine
 
-Objectif :
-- fidéliser l'audience et prolonger la valeur du blog
-
 Livrables :
-- inscription newsletter par domaine sur le blog
+
+- inscription newsletter
 - table abonnements
 - confirmations email
 - interface back-office newsletter
-- structure éditoriale officielle
 
 ### Phase 9. Pipeline newsletter et automatisation hebdomadaire
 
-Objectif :
-- préparer un système quasi autonome mais pilotable
+Livrables :
+
+- `newsletter_issues`
+- `newsletter_delivery_logs`
+- `newsletter-drafter`
+- `newsletter-send`
+- `newsletter-scheduler`
+
+### Phase 10. Fiabilisation des flux admin
 
 Livrables :
-- table `newsletter_issues`
-- table `newsletter_delivery_logs`
-- fonction `newsletter-drafter`
-- fonction `newsletter-send`
-- fonction `newsletter-scheduler`
-- cron hebdomadaire de génération
-- cron hebdomadaire d'envoi
-- garde-fou d'approbation humaine
 
-### Phase 10. Correction et fiabilisation des flux admin
-
-Objectif :
-- rendre le back-office réellement exploitable
-
-Livrables et corrections marquantes :
-- fix du formulaire d'audit
 - fix des liens cassés
-- fix d'auth des edge functions admin pour la newsletter
-- validation d'un test email réel
+- fix audit
+- validation de tests email réels
 
 ### Phase 11. Simplification éditoriale et fluidité UX
 
-Objectif :
-- réduire la surcharge d'information
-- rendre les pages plus lisibles
-- améliorer la compréhension dès la première lecture
+Résultats :
 
-Livrables et résultats :
-- simplification de l'accueil
-- simplification de la page à propos
-- simplification du catalogue
-- simplification des parcours
-- simplification de la certification
-- simplification de l'education hub
-- simplification du blog et des pages entreprises
-- meilleure mise en avant de l'audit IA gratuit
+- simplification accueil
+- simplification à propos
+- simplification catalogue
+- simplification parcours
+- simplification certification
+- meilleure mise en avant de l’audit IA gratuit
 
 ### Phase 12. Pipeline partenaires et relation email
 
-Objectif :
-- transformer la rubrique partenaires en vrai parcours administrable
-- industrialiser la réponse aux demandes de référencement
-
 Livrables :
+
 - page partenaires clarifiée
-- formulaire public de demande de référencement
+- formulaire public
 - back-office partenaires
-- grille officielle des formules partenaires
-- recommandation IA de formule
-- email automatique de réponse au prospect
-- normalisation horaire des salutations `Bonjour / Bonsoir`
+- recommandation IA
+- email de réponse
 
-### Phase 13. Clarification de la page Contact et des réponses prospects
-
-Objectif :
-- unifier la promesse de contact
-- réduire la confusion sur les CTA
-- rendre les emails plus cohérents avec le besoin réel
+### Phase 13. Clarification de la page Contact
 
 Livrables :
-- porte d'entrée `Parler à un expert IA`
-- formulaire `Décrivez votre besoin`
-- champ `Domaine ou formation visée`
-- variantes contact par intention réelle
-- correction des liens profonds `contact?intent=...`
-- meilleure différenciation des emails inscription, formation, catalogue et partenaires
 
-### Phase 14. Distribution catalogue et cohérence des emails transactionnels
+- `Parler à un expert IA`
+- variantes par intention
+- correction des liens profonds
 
-Objectif :
-- accélérer la réponse aux demandes les plus directes
-- supprimer les ambiguïtés entre catalogue, formation, audit et rendez-vous
+### Phase 14. Distribution catalogue et emails transactionnels
 
 Livrables :
-- demandes catalogue par domaine plus actionnables
-- emails catalogue enrichis avec accès direct au bon contenu
-- meilleure cohérence entre accusé de réception et prochaine étape utile
-- réduction des CTA de rendez-vous lorsqu'ils n'apportent pas de valeur immédiate
+
+- demandes catalogue plus actionnables
+- accès direct au bon contenu
+- emails plus cohérents
 
 ### Phase 15. Newsletter fondatrice, page média et flux emploi
 
+Livrables :
+
+- newsletter fondatrice envoyée
+- page média simplifiée
+- route `/parler-emploi-ia`
+- CTA emploi corrigé
+- liens replay corrigés
+
+### Phase 16. Capsules vidéo et flux TikTok
+
 Objectif :
-- transformer la page média et la newsletter en actifs réellement exploitables
-- aligner les CTA avec des parcours utiles
-- préparer une exploitation hebdomadaire plus rigoureuse
 
-Livrables et résultats :
-- édition fondatrice de la newsletter du 20 avril 2026 réécrite et envoyée
-- éditorial fondateur avec photo intégré dans la newsletter
-- signature automatique renforcée dans le rendu newsletter
-- bloc `Prompt à copier immédiatement` rendu beaucoup plus visible
-- ajout et activation de nouveaux abonnés newsletter
-- envoi réel de campagne confirmé à 8 abonnés actifs
-- vérification du fonctionnement réel du scheduler : logique du vendredi confirmée
-- extension de l'automation éditoriale pour produire un package hebdomadaire plus structuré
-- rotation planifiée de 3 prompts assistanat / secrétariat
-- simplification supplémentaire de la page `Media, veille & opportunités IA`
-- suppression de blocs trop conceptuels sur la page média
-- création du flux `/parler-emploi-ia`
-- correction du CTA emploi pour sortir de la logique prise de rendez-vous
-- correction des cartes replay pour ne plus envoyer vers Contact
-- mise en évidence d'un enjeu d'exploitation : un correctif doit être sur `main` et republié via le canal de production réel pour être visible sur `transferai.ci`
+- remplacer une logique statique par un flux piloté par backend
 
-## 3. Jalons visibles dans l'historique git récent
+Livrables :
 
-Les jalons majeurs récents identifiés dans le dépôt :
+- table `social_video_posts`
+- support admin `Capsules vidéo`
+- page `CreateurContenuIA` alimentée par backend
+- fallback brandé propre si embed non exploitable
 
-- `48ae469` Build article pages for blog resources
-- `99abf8c` Seed watch articles and add dynamic article dates
-- `b10fd3a` Add blog domain and type filters
-- `1e7407f` Build editorial pipeline and admin drafts workflow
-- `2a8dcfd` Add SEO-ready blog domain pages
-- `afda68c` Add domain newsletter signup for blog
-- `891f6ae` Polish card alignment across blog and learning pages
-- `3378901` Refine certification specialization content
-- `8ba01cf` Simplify navigation and learning journeys
-- `73b5240` Simplify certification tools and catalogue pages
-- `0332c0d` Polish blog enterprise flows and fix audit form link
-- `339c666` Simplify enterprise services page
-- `c9bfbd4` Add newsletter confirmation emails
-- `b74da84` Add weekly newsletter editorial pipeline
-- `655499a` Automate weekly newsletter scheduling
-- `8ac7720` Fix admin edge auth for newsletter actions
-- `ab98d46` Refine blog and enterprise page messaging
-- `15d3550` Externalize certification offer metadata
-- `a6fa61f` Simplify catalogue page messaging
-- `efd3a34` Simplify education hub messaging
-- `001f682` Simplify parcours page messaging
-- `086e06d` Simplify home page and add audit CTA
-- `8daf826` Simplify about page messaging
-- `23e63d1` Refine partners page structure and offers
-- `39400fe` Refine partner listing flow and email follow-up
-- `2d385f2` Add partner listing admin pipeline
-- `d1c8428` Add time-based email greetings
-- `53c5a7d` Fix contact deep-link runtime error
-- `566ed50` Refine strategic partnership contact flow
-- `70de516` Clarify partner request call-to-actions
-- `2cc463b` Refine registration acknowledgement emails
-- `f6bca26` Polish French site copy and newsletter content
-- `bebcdb9` Revise founder newsletter editorial
-- `701aa35` Refine media page newsletter sections
-- `50f60df` Remove obsolete media page copy blocks
-- `80e4498` Add employment introduction request flow
-- `da9ea0e` Fix employment CTA target
+### Phase 17. Pipeline WhatsApp et BackOffice WhatsApp V1
 
-## 4. Ce qui existe maintenant
+Objectif :
 
-Le site dispose maintenant de :
-- un front structuré
-- un blog éditorial cohérent
-- des pages articles
-- un back-office utilisable
-- un pipeline éditorial IA
-- une newsletter par domaine
-- un envoi test réel validé
-- une base de connaissance outils / certification / domaines
-- un audit IA gratuit mieux visible dans le parcours B2B
-- une page partenaires administrable
-- une relation email plus professionnelle et plus cohérente
-- une page contact plus claire, plus pilotable et moins ambiguë
-- une logique catalogue plus directe et plus exploitable commercialement
-- une newsletter envoyable et envoyée en conditions réelles
-- une page média plus lisible et davantage orientée usage réel
-- un flux emploi dédié distinct de la prise de rendez-vous
-- une base plus claire pour les prochains chantiers de synchronisation production
+- transformer WhatsApp en vrai canal opérationnel administrable
 
-## 5. Ce qui reste logique pour la suite
+Livrables :
 
-Les prochains axes rationnels sont :
-- industrialiser encore la génération éditoriale
-- enrichir la base de connaissance du futur assistant IA
-- améliorer la relation email au-delà de la seule veille
-- renforcer les dashboards analytics utiles à l'admin
-- préparer davantage de contenus stratégiques EN
-- finaliser la simplification des pages les plus denses restantes, notamment à propos et certains parcours secondaires
+- bouton WhatsApp orienté IA sur le site
+- webhook `twilio-whatsapp-webhook`
+- table `whatsapp_inbound_messages`
+- validation Twilio -> Supabase
+- module `BackOffice > WhatsApp`
+- statuts
+- catégories
+- notes internes
+- ouverture de réponse WhatsApp
 
-## 6. Lecture business de l'évolution
+### Phase 18. Notifications internes WhatsApp et observabilité
 
-Le projet n'est plus simplement un site. Il est devenu :
-- un outil de conversion
-- un outil de crédibilité
-- un outil d'animation éditoriale
-- un socle de future relation automatisée avec prospects et abonnés
-- une base exploitable pour un assistant IA TransferAI
+Objectif :
+
+- rendre visible et traçable chaque nouveau message entrant
+
+Livrables :
+
+- notification email interne sur nouveau message WhatsApp
+- double envoi vers `contact@transferai.ci` et `marius.ayoro70@gmail.com`
+- table `whatsapp_email_notification_logs`
+- validation bout-en-bout WhatsApp -> email
+
+### Phase 19. Documentation BackOffice et gouvernance documentaire
+
+Objectif :
+
+- réaligner la documentation avec l’état réel du site et du backend
+
+Livrables :
+
+- guide administrateur renforcé
+- base de connaissance site mise à jour
+- FAQ alignée sur les workflows réels
+- plan d’exploitation réaligné
+- note direction mise à jour
+- guide BackOffice en anglais
+- exports Word régénérés
+
+## 3. Jalons visibles dans l’historique récent
+
+Les jalons récents majeurs incluent notamment :
+
+- structuration du blog et des pages article
+- simplification éditoriale de plusieurs pages clés
+- mise en avant renforcée de l’audit IA
+- pipeline partenaires et emails de suivi
+- industrialisation de la newsletter
+- flux média / emploi / replay
+- flux vidéo / TikTok piloté par backend
+- pipeline WhatsApp complet
+- BackOffice WhatsApp V1
+- notifications email internes sur messages WhatsApp
+- documentation et exports Word mis à jour
+
+## 4. Lecture de maturité au 1er mai 2026
+
+Le projet n’est plus un simple site institutionnel.
+
+Il est devenu :
+
+- une vitrine commerciale crédible
+- une base éditoriale structurée
+- un cockpit d’administration
+- une base de connaissance exploitable
+- un socle pour automatisations IA plus avancées
