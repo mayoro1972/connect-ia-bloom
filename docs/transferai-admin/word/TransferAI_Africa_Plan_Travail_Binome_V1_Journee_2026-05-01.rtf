@@ -1,0 +1,396 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Plan de travail heure par heure - bin\'f4me V1 Agent IA\
+\
+## 1. Objectif\
+\
+Ce document propose un plan de travail **heure par heure**, pens\'e9 pour **2 personnes**, afin de livrer **une V1 fonctionnelle aujourd'hui** de l'agent IA TransferAI.\
+\
+La V1 doit \'eatre capable de :\
+\
+- recevoir un message WhatsApp entrant\
+- r\'e9pondre au nom de TransferAI\
+- poser les 3 questions de qualification obligatoires\
+- comprendre le besoin principal\
+- proposer une d\'e9mo si le prospect est s\'e9rieux\
+- enregistrer les donn\'e9es utiles\
+- permettre un handoff humain\
+\
+## 2. R\'e9partition des r\'f4les\
+\
+### Personne A\
+\
+Responsable de :\
+\
+- prompts\
+- logique m\'e9tier\
+- qualification\
+- ton de voix\
+- r\'e9ponses types\
+- crit\'e8res de s\'e9rieux du prospect\
+- cas de handoff humain\
+\
+### Personne B\
+\
+Responsable de :\
+\
+- n8n\
+- Twilio\
+- Chatwoot\
+- OpenAI\
+- Supabase\
+- stockage\
+- tests techniques\
+\
+## 3. R\'e9sultat attendu \'e0 la fin de la journ\'e9e\
+\
+\'c0 la fin de la journ\'e9e, l'\'e9quipe doit avoir :\
+\
+- une V1 fonctionnelle de qualification automatique\
+- un workflow n8n actif\
+- une logique de r\'e9ponse courte et professionnelle\
+- une proposition de d\'e9mo conditionnelle\
+- un stockage des leads\
+- un minimum de supervision et de logs\
+\
+## 4. Plan heure par heure\
+\
+## 9h00 - 9h30 : cadrage commun\
+\
+### Participants\
+\
+- Personne A\
+- Personne B\
+\
+### Objectif\
+\
+- aligner le p\'e9rim\'e8tre exact de la V1\
+- \'e9viter les ambigu\'eft\'e9s avant l'impl\'e9mentation\
+\
+### D\'e9cisions \'e0 prendre ensemble\
+\
+- objectif exact du bot\
+- lien Calendly \'e0 utiliser\
+- d\'e9finition du \'93prospect s\'e9rieux\'94\
+- services prioritaires \'e0 couvrir aujourd'hui\
+- ton de voix exact\
+- conditions d'escalade humaine\
+\
+### R\'e8gles \'e0 figer\
+\
+- toujours poser :\
+  1. nom de l'entreprise\
+  2. secteur d'activit\'e9\
+  3. besoin principal : formation, veille ou automatisation\
+- proposer une d\'e9mo si le lead est s\'e9rieux\
+- rester court, professionnel et clair\
+\
+### Livrable attendu\
+\
+- mini fiche de cadrage commune\
+- lien Calendly valid\'e9\
+- logique m\'e9tier V1 valid\'e9e\
+\
+## 9h30 - 10h30 : s\'e9paration des chantiers\
+\
+### Personne A\
+\
+R\'e9f\'e9rences \'e0 ouvrir :\
+\
+- `11_Prompt_Pack_n8n_Chatwoot.md`\
+- `02_Base_Connaissance_Site.md`\
+- `03_FAQ_Site_Assistant_IA.md`\
+\
+T\'e2ches :\
+\
+- finaliser le prompt syst\'e8me ma\'eetre\
+- finaliser le prompt de qualification initiale\
+- finaliser le prompt de relance si informations manquantes\
+- finaliser le prompt ultra-court WhatsApp\
+\
+### Personne B\
+\
+R\'e9f\'e9rence \'e0 ouvrir :\
+\
+- `12_Workflow_n8n_Node_Par_Node.md`\
+\
+T\'e2ches :\
+\
+- cr\'e9er le workflow n8n principal\
+- poser la structure :\
+  - webhook Twilio\
+  - normalisation\
+  - OpenAI\
+  - IF / Switch\
+  - r\'e9ponse\
+  - stockage\
+\
+### Livrable attendu\
+\
+- prompt ma\'eetre pr\'eat\
+- squelette n8n pos\'e9\
+\
+## 10h30 - 11h30 : qualification structur\'e9e\
+\
+### Personne A\
+\
+T\'e2ches :\
+\
+- finaliser le prompt qualification JSON\
+- finaliser le prompt scoring lead\
+- finaliser le prompt de proposition de d\'e9mo\
+- finaliser le prompt handoff humain\
+- finaliser le prompt note interne\
+\
+### Personne B\
+\
+T\'e2ches :\
+\
+- brancher le n\'9cud OpenAI qualification\
+- brancher le n\'9cud OpenAI scoring\
+- brancher le n\'9cud OpenAI proposition de d\'e9mo\
+- pr\'e9parer les variables :\
+  - `company_name`\
+  - `sector`\
+  - `need_type`\
+  - `intent`\
+  - `lead_seriousness`\
+  - `should_offer_demo`\
+\
+### Livrable attendu\
+\
+- prompts structur\'e9s valid\'e9s\
+- qualification OpenAI branch\'e9e dans n8n\
+\
+## 11h30 - 12h15 : premier test technique\
+\
+### Participants\
+\
+- Personne A\
+- Personne B\
+\
+### Tests \'e0 faire\
+\
+- message WhatsApp simple\
+- message vague\
+- message orient\'e9 formation\
+- message orient\'e9 automatisation\
+\
+### V\'e9rifications\
+\
+- Twilio re\'e7oit\
+- n8n d\'e9clenche\
+- OpenAI r\'e9pond\
+- r\'e9ponse envoy\'e9e\
+- donn\'e9es structur\'e9es disponibles\
+\
+### Livrable attendu\
+\
+- premier aller-retour r\'e9el WhatsApp fonctionnel\
+- liste des bugs imm\'e9diats\
+\
+## 12h15 - 13h00 : corrections cibl\'e9es\
+\
+### Personne A\
+\
+T\'e2ches :\
+\
+- corriger les formulations\
+- raccourcir les r\'e9ponses trop longues\
+- ajuster les relances\
+\
+### Personne B\
+\
+T\'e2ches :\
+\
+- corriger les mappings\
+- fiabiliser le JSON\
+- ajouter les fallbacks si la r\'e9ponse OpenAI est mal form\'e9e\
+\
+### Livrable attendu\
+\
+- V1 plus stable\
+- r\'e9ponses plus propres\
+\
+## 13h00 - 14h00 : pause\
+\
+Recommandation :\
+\
+- faire une vraie pause\
+- ne pas utiliser cette heure pour empiler des corrections mineures\
+\
+## 14h00 - 15h00 : int\'e9gration m\'e9tier utile\
+\
+### Personne A\
+\
+T\'e2ches :\
+\
+- valider la r\'e8gle finale \'93proposer une d\'e9mo si\'85\'94\
+- valider la r\'e8gle finale \'93escalader \'e0 un humain si\'85\'94\
+\
+#### D\'e9mo \'e0 proposer si\
+\
+- entreprise identifi\'e9e\
+- secteur identifi\'e9\
+- besoin concret\
+- logique B2B ou besoin op\'e9rationnel\
+- int\'e9r\'eat r\'e9el pour accompagnement, audit ou automatisation\
+\
+#### Escalade humaine si\
+\
+- partenariat\
+- demande institutionnelle\
+- demande strat\'e9gique\
+- besoin complexe\
+- insatisfaction\
+- prospect tr\'e8s qualifi\'e9\
+\
+### Personne B\
+\
+T\'e2ches :\
+\
+- impl\'e9menter ces r\'e8gles dans n8n avec :\
+  - `IF`\
+  - `Switch`\
+  - branche `offer_demo`\
+  - branche `human_handoff`\
+  - branche `ask_missing_info`\
+\
+### Livrable attendu\
+\
+- logique m\'e9tier cod\'e9e dans le workflow\
+\
+## 15h00 - 16h00 : stockage et supervision\
+\
+### Personne A\
+\
+T\'e2ches :\
+\
+- d\'e9finir le format r\'e9sum\'e9 CRM\
+- d\'e9finir le format note interne\
+- d\'e9finir les statuts finaux utiles\
+\
+### Personne B\
+\
+T\'e2ches :\
+\
+- brancher le stockage :\
+  - Supabase ou CRM\
+  - log conversation\
+  - log d\'e9cision\
+  - note interne\
+- v\'e9rifier la remont\'e9e en back-office si pr\'e9vue\
+\
+### Livrable attendu\
+\
+- prospect enregistr\'e9\
+- note interne g\'e9n\'e9r\'e9e\
+- r\'e9sum\'e9 exploitable stock\'e9\
+\
+## 16h00 - 17h00 : tests complets en conditions r\'e9elles\
+\
+### Participants\
+\
+- Personne A\
+- Personne B\
+\
+### Sc\'e9narios \'e0 tester\
+\
+1. prospect flou\
+2. prospect formation\
+3. prospect audit IA\
+4. prospect automatisation\
+5. prospect partenariat\
+6. prospect s\'e9rieux demandant une d\'e9mo\
+\
+### V\'e9rifications\
+\
+- bonne r\'e9ponse\
+- bonne relance\
+- bonne qualification\
+- bonne d\'e9cision d\'e9mo ou non\
+- bon stockage\
+- bon handoff si n\'e9cessaire\
+\
+### Livrable attendu\
+\
+- tableau de tests valid\'e9s / non valid\'e9s\
+\
+## 17h00 - 17h45 : finition\
+\
+### Personne A\
+\
+T\'e2ches :\
+\
+- relire toutes les r\'e9ponses types\
+- harmoniser le ton TransferAI\
+- retirer ce qui sonne trop robotique\
+\
+### Personne B\
+\
+T\'e2ches :\
+\
+- nettoyer le workflow n8n\
+- nommer clairement les n\'9cuds\
+- documenter les variables utiles\
+- pr\'e9parer un export ou une sauvegarde du workflow\
+\
+### Livrable attendu\
+\
+- workflow propre\
+- prompts propres\
+- version d\'e9montrable\
+\
+## 17h45 - 18h00 : cl\'f4ture\
+\
+### Participants\
+\
+- Personne A\
+- Personne B\
+\
+### T\'e2ches\
+\
+- test final unique\
+- d\'e9cision de validation V1\
+- noter les points \'e0 faire demain\
+\
+### Checklist finale\
+\
+- WhatsApp re\'e7oit et r\'e9pond\
+- qualification fonctionne\
+- d\'e9mo propos\'e9e au bon moment\
+- handoff humain possible\
+- lead enregistr\'e9\
+- note interne g\'e9n\'e9r\'e9e\
+\
+## 5. Priorit\'e9 absolue si le temps manque\
+\
+Si la journ\'e9e d\'e9rape, ne cherchez pas \'e0 tout faire.\
+\
+Concentrez-vous uniquement sur :\
+\
+1. WhatsApp entrant\
+2. 3 questions de qualification\
+3. scoring simple\
+4. proposition Calendly si lead s\'e9rieux\
+5. enregistrement du lead\
+6. handoff humain simple\
+\
+## 6. Recommandation finale\
+\
+Le vrai objectif n'est pas de sortir un bot parfait aujourd'hui.\
+\
+Le vrai objectif est de sortir :\
+\
+- une V1 fiable\
+- compr\'e9hensible\
+- test\'e9e\
+- utile\
+- am\'e9liorable demain\
+\
+Cette approche est la meilleure pour pr\'e9server la vitesse d'ex\'e9cution sans perdre la qualit\'e9.\
+}
