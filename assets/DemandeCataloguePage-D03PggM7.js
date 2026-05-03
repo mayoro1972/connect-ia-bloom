@@ -1,0 +1,1 @@
+import{r as s,j as c}from"./index-y7Pry1bp.js";import{I as o,af as m}from"./App-DpbszWt7.js";const f=()=>{const[t,r]=o();return s.useEffect(()=>{const e=new URLSearchParams(t);let a=!1;e.get("intent")!=="demande-catalogue"&&(e.set("intent","demande-catalogue"),a=!0),e.get("compact")!=="1"&&(e.set("compact","1"),a=!0),a&&r(e,{replace:!0})},[t,r]),c.jsx(m,{})};export{f as default};
