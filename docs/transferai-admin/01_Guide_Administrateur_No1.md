@@ -2,7 +2,7 @@
 
 ## 1. Objet du guide
 
-Ce guide décrit le fonctionnement réel du **BackOffice TransferAI Africa** au 1er mai 2026.
+Ce guide décrit le fonctionnement réel du **BackOffice TransferAI Africa** au 2 mai 2026.
 
 Il répond à 4 questions :
 
@@ -123,6 +123,21 @@ Cloudflare :
 Point clé :
 
 - un commit GitHub ne suffit pas à lui seul si `main` n’est pas la version réellement servie
+
+### 3.8. Accès Chatwoot et n8n
+
+Le chantier assistant IA s’appuie désormais sur :
+
+- Chatwoot pour le chat web
+- n8n pour l’orchestration des événements, de la qualification et des réponses
+
+Éléments déjà en place :
+
+- inbox website `TransferAI`
+- labels de qualification
+- custom attributes de conversation
+- canned responses et premières macros d’exploitation
+- webhook Chatwoot vers `chatwoot-inbound` validé en réception dans n8n
 
 ---
 

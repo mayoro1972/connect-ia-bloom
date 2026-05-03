@@ -36,6 +36,10 @@ Oui. La page `Partenaires` permet de consulter l’écosystème et de soumettre 
 
 Oui. Le site propose un bouton WhatsApp avec un message prérempli orienté IA, formation et accompagnement.
 
+### Le site propose-t-il aussi un chat web ?
+
+Oui. Un widget Chatwoot website est en cours de mise en production pour supporter le futur assistant IA TransferAI.
+
 ### Quel est le message WhatsApp prérempli actuel ?
 
 `Bonjour TransferAI, je souhaite échanger avec votre équipe au sujet de vos services, formations ou solutions IA.`
@@ -190,6 +194,31 @@ Via Supabase :
 Non. Seulement quand un changement front dépend d’une nouvelle table, d’une migration ou d’une edge function mise à jour.
 
 ## 7. FAQ assistant IA / chatbot
+
+### Le widget Chatwoot est-il déjà branché ?
+
+Oui, côté site et Chatwoot. Le webhook sortant Chatwoot -> n8n a déjà été reçu avec succès via `chatwoot-inbound`.
+
+### À quoi sert n8n dans cette architecture ?
+
+n8n sert à orchestrer :
+
+- la réception des événements Chatwoot
+- la qualification IA
+- le scoring
+- l’écriture en base
+- les réponses automatiques
+- le handoff humain
+
+### Quels éléments Chatwoot sont déjà prêts ?
+
+Sont déjà en place :
+
+- inbox website
+- labels
+- custom attributes
+- canned responses
+- premières macros d’exploitation
 
 ### Quelle doit être la priorité du chatbot ?
 
