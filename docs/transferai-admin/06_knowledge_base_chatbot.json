@@ -1,5 +1,5 @@
 {
-  "version": "2026-05-01-backoffice-whatsapp",
+  "version": "2026-05-02-chatwoot-n8n",
   "site": {
     "name": "TransferAI Africa",
     "positioning": "Plateforme de formation, contenus, conseil et solutions IA orientée Côte d'Ivoire et Afrique.",
@@ -82,6 +82,21 @@
       "whatsapp_email_notification_logs"
     ]
   },
+  "chatwoot": {
+    "website_inbox": "TransferAI",
+    "widget_status": "visible en local et prêt à être validé en production",
+    "website_domain": "transferai.ci",
+    "website_token_present": true,
+    "webhook_status": "webhook Chatwoot vers n8n reçu avec succès sur chatwoot-inbound",
+    "labels_ready": true,
+    "custom_attributes_ready": true,
+    "canned_responses_ready": true,
+    "macros_ready": [
+      "Handoff humain",
+      "Lead chaud",
+      "Démo proposée"
+    ]
+  },
   "newsletter": {
     "subscription_mode": "par domaine",
     "newsletter_structure": [
@@ -135,7 +150,8 @@
     "frontend": ["React", "TypeScript", "Vite", "React Router", "TanStack Query"],
     "backend": ["Supabase database", "Supabase Edge Functions", "Supabase scheduled jobs"],
     "email": ["Resend"],
-    "messaging": ["Twilio WhatsApp"],
+    "messaging": ["Twilio WhatsApp", "Chatwoot Website"],
+    "automation": ["n8n"],
     "deployment": ["GitHub", "Cloudflare"]
   },
   "supabase": {
@@ -200,6 +216,14 @@
     {
       "question": "Comment fonctionne le flux WhatsApp ?",
       "answer": "Le site ouvre WhatsApp, Twilio reçoit le message, Supabase l'enregistre, le BackOffice l'affiche et une notification email interne est envoyée."
+    },
+    {
+      "question": "Le site dispose-t-il d'un chat web ?",
+      "answer": "Oui. Le widget Chatwoot website est intégré et sa réception webhook vers n8n a été validée en local."
+    },
+    {
+      "question": "À quoi sert n8n dans le projet TransferAI ?",
+      "answer": "n8n sert à orchestrer les événements Chatwoot, la qualification IA, le scoring, l'écriture en base, les réponses automatiques et le handoff humain."
     }
   ],
   "assistant_policy": {

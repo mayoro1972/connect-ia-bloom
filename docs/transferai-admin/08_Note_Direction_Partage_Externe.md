@@ -98,7 +98,7 @@ TransferAI Africa est désormais :
 - un cockpit d’administration réel
 - un socle fiable pour automatisations futures
 
-## 8. Mise à jour importante au 1er mai 2026
+## 8. Mise à jour importante au 2 mai 2026
 
 Les avancées récentes les plus significatives sont :
 
@@ -110,6 +110,9 @@ Les avancées récentes les plus significatives sont :
 - module **BackOffice WhatsApp V1** en production
 - chaîne complète WhatsApp -> Twilio -> Supabase -> BackOffice -> email validée
 - documentation et gouvernance documentaire renforcées
+- widget **Chatwoot Website** visible en local
+- réception webhook **Chatwoot -> n8n** validée
+- socle concret prêt pour l’assistant IA TransferAI sur chat web
 
 ## 9. Gouvernance recommandée
 
@@ -129,6 +132,7 @@ Les prochaines étapes les plus logiques sont :
 - industrialiser encore la newsletter et la relation audience
 - affiner la gouvernance des canaux entrants
 - préparer la prochaine couche assistant IA / automatisation
+- unifier à terme chat web, WhatsApp et qualification IA dans un cockpit cohérent
 
 ## 11. Conclusion
 

@@ -212,6 +212,22 @@ Livrables :
 - guide BackOffice en anglais
 - exports Word régénérés
 
+### Phase 20. Chatwoot website et préparation assistant IA
+
+Objectif :
+
+- préparer le chat web TransferAI et la future couche assistant IA orchestrée
+
+Livrables :
+
+- inbox website `TransferAI`
+- labels et custom attributes Chatwoot
+- canned responses et macros de qualification
+- script widget Chatwoot intégré au site
+- widget visible en local
+- webhook `Chatwoot -> n8n` validé sur `chatwoot-inbound`
+- blueprint n8n, checklist et mapping Chatwoot disponibles
+
 ## 3. Jalons visibles dans l’historique récent
 
 Les jalons récents majeurs incluent notamment :
@@ -228,7 +244,7 @@ Les jalons récents majeurs incluent notamment :
 - notifications email internes sur messages WhatsApp
 - documentation et exports Word mis à jour
 
-## 4. Lecture de maturité au 1er mai 2026
+## 4. Lecture de maturité au 2 mai 2026
 
 Le projet n’est plus un simple site institutionnel.
 
@@ -239,3 +255,4 @@ Il est devenu :
 - un cockpit d’administration
 - une base de connaissance exploitable
 - un socle pour automatisations IA plus avancées
+- une base concrète pour un assistant IA web + WhatsApp

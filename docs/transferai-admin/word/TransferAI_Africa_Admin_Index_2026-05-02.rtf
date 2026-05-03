@@ -1,0 +1,170 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Light;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Pack Administration TransferAI Africa\
+\
+Ce dossier regroupe la documentation de r\'e9f\'e9rence du site **TransferAI Africa**, de son back-office et de ses workflows de production.\
+\
+Le pack a 4 objectifs :\
+\
+- donner \'e0 l\'92administrateur principal une vue claire du syst\'e8me r\'e9el\
+- permettre \'e0 d\'92autres administrateurs de prendre le relais rapidement\
+- servir de base documentaire pour les automatisations et assistants IA\
+- conserver une m\'e9moire op\'e9rationnelle fiable du projet\
+\
+## Contenu du pack\
+\
+1. [Guide Administrateur No1](./01_Guide_Administrateur_No1.md)\
+2. [Base de Connaissance du Site](./02_Base_Connaissance_Site.md)\
+3. [FAQ Site, Back-office et Support](./03_FAQ_Site_Assistant_IA.md)\
+4. [Plan de D\'e9ploiement et d'Exploitation](./04_Plan_Deploiement_Exploitation.md)\
+5. [Roadmap Historique du Projet](./05_Roadmap_Historique_Projet.md)\
+6. [Base de Connaissance Chatbot JSON](./06_knowledge_base_chatbot.json)\
+7. [Export Word Friendly HTML](./07_Export_Word_TransferAI_Admin_Pack.html)\
+8. [Note Direction / Partage Externe](./08_Note_Direction_Partage_Externe.md)\
+9. [Export Word Friendly Direction / Externe](./09_Export_Word_Direction_Externe.html)\
+10. [BackOffice Admin User Guide (EN)](./10_BackOffice_Admin_User_Guide_EN.md)\
+11. [Prompt Pack n8n + Chatwoot](./11_Prompt_Pack_n8n_Chatwoot.md)\
+12. [Workflow n8n n\'9cud par n\'9cud](./12_Workflow_n8n_Node_Par_Node.md)\
+13. [Plan de travail bin\'f4me V1 sur une journ\'e9e](./13_Plan_Travail_Binome_V1_Journee.md)\
+14. [Tableau de suivi de journ\'e9e bin\'f4me](./14_Tableau_Suivi_Journee_Binome_Checklist.md)\
+15. [Blueprint n8n import-like JSON V1](./15_n8n_Import_Like_JSON_V1.md)\
+16. [Checklist de construction n8n](./16_Checklist_Construction_n8n.md)\
+17. [Checklist pr\'e9paration Chatwoot](./17_Checklist_Chatwoot_Preparation.md)\
+18. [Mapping Chatwoot vers n8n](./18_Mapping_Chatwoot_Vers_n8n.md)\
+\
+## Ordre de lecture recommand\'e9\
+\
+Pour l\'92administrateur principal :\
+\
+- commencer par le guide administrateur\
+- lire ensuite le plan d\'92exploitation et la roadmap\
+- garder la FAQ \'e0 port\'e9e de main\
+\
+Pour les administrateurs relais :\
+\
+- commencer par le guide administrateur\
+- relire ensuite la base de connaissance du site\
+- utiliser la FAQ pour les cas r\'e9currents\
+\
+Pour les futurs assistants IA :\
+\
+- charger d\'92abord la base de connaissance du site\
+- compl\'e9ter avec la FAQ\
+- utiliser ensuite le JSON structur\'e9\
+\
+## P\'e9rim\'e8tre actuel du site\
+\
+Le syst\'e8me couvre aujourd\'92hui :\
+\
+- vitrine institutionnelle et commerciale\
+- hub \'e9ducation\
+- catalogue de formation\
+- parcours guid\'e9s\
+- certification sectorielle\
+- page entreprises / services\
+- blog / ressources dynamiques\
+- matrice des outils IA\
+- formulaires de contact et d\'92audit\
+- pipeline partenaires\
+- newsletter par domaine\
+- capsules vid\'e9o sociales\
+- intake WhatsApp connect\'e9 \'e0 Twilio\
+- back-office public d\'92administration\
+\
+## Mise \'e0 jour importante au 2 mai 2026\
+\
+Cette version du pack inclut d\'e9sormais explicitement :\
+\
+- la simplification \'e9ditoriale des pages denses du site\
+- la mise en avant de l\'92audit IA gratuit\
+- le pipeline partenaires avec back-office et emails de suivi\
+- la r\'e8gle `Bonjour` / `Bonsoir` dans les emails\
+- la clarification du r\'f4le r\'e9el de la page `Contact`\
+- la mont\'e9e en charge du flux catalogue par domaine\
+- la logique `Parler emploi & mise en relation`\
+- la carte TikTok / capsules vid\'e9o pilot\'e9e par backend\
+- le module **BackOffice WhatsApp V1**\
+- le webhook **Twilio WhatsApp** en production\
+- les notifications email internes sur nouveau message WhatsApp\
+- la table de logs `whatsapp_email_notification_logs`\
+- la validation bout-en-bout WhatsApp -> Twilio -> Supabase -> BackOffice -> Resend -> bo\'eetes mail\
+- le guide administrateur BackOffice en anglais\
+- le widget **Chatwoot Website** d\'e9sormais visible en local et pr\'eat pour validation publique\
+- les `Labels`, `Custom Attributes`, `Canned Responses` et macros Chatwoot de qualification\
+- le webhook **Chatwoot -> n8n** valid\'e9 en r\'e9ception sur `chatwoot-inbound`\
+- la pr\'e9paration op\'e9rationnelle de l\'92assistant IA TransferAI orchestr\'e9 avec `n8n`\
+\
+## Architecture r\'e9sum\'e9e\
+\
+Front :\
+\
+- React\
+- TypeScript\
+- Vite\
+- React Router\
+\
+Backend :\
+\
+- Supabase base de donn\'e9es\
+- Supabase Edge Functions\
+- Supabase cron / scheduler\
+\
+Canaux op\'e9rationnels :\
+\
+- Twilio pour WhatsApp\
+- Chatwoot pour le chat web\
+- n8n pour l\'92orchestration assistant IA\
+- Resend pour les emails\
+- GitHub pour le d\'e9p\'f4t source\
+- Cloudflare pour la diffusion du site public\
+\
+## Export vers Word\
+\
+Les exports Word sont produits dans :\
+\
+- `docs/transferai-admin/word/`\
+\
+Les fichiers HTML Word-friendly peuvent \'eatre ouverts directement dans Microsoft Word puis convertis en `.docx`.\
+\
+## Livrables Word r\'e9g\'e9n\'e9r\'e9s au 2 mai 2026\
+\
+Les principaux livrables Word r\'e9g\'e9n\'e9r\'e9s sont :\
+\
+- `TransferAI_Africa_Admin_Master_Pack_2026-05-02.docx`\
+- `TransferAI_Africa_Executive_Brief_2026-05-02.docx`\
+- `TransferAI_Africa_Admin_Guide_No1_2026-05-02.docx`\
+- `TransferAI_Africa_Site_Knowledge_Base_2026-05-02.docx`\
+- `TransferAI_Africa_FAQ_Assistant_Support_2026-05-02.docx`\
+- `TransferAI_Africa_Deployment_Operations_Plan_2026-05-02.docx`\
+- `TransferAI_Africa_Project_Roadmap_2026-05-02.docx`\
+- `TransferAI_Africa_Admin_Index_2026-05-02.docx`\
+\
+## Nomenclature des livrables Word\
+\
+La nomenclature suivie dans `word/` reste :\
+\
+- `TransferAI_Africa_Admin_Index_<date>`\
+- `TransferAI_Africa_Admin_Guide_No1_<date>`\
+- `TransferAI_Africa_Site_Knowledge_Base_<date>`\
+- `TransferAI_Africa_FAQ_Assistant_Support_<date>`\
+- `TransferAI_Africa_Deployment_Operations_Plan_<date>`\
+- `TransferAI_Africa_Project_Roadmap_<date>`\
+- `TransferAI_Africa_Admin_Master_Pack_<date>`\
+- `TransferAI_Africa_Executive_Brief_<date>`\
+\
+## R\'e8gle de gouvernance\
+\
+Le pack documentaire doit toujours rester align\'e9 avec :\
+\
+- l\'92\'e9tat r\'e9el du site public\
+- l\'92\'e9tat r\'e9el du back-office\
+- les tables r\'e9ellement en production\
+- les edge functions r\'e9ellement d\'e9ploy\'e9es\
+- les workflows r\'e9ellement test\'e9s\
+\
+Si un flux change, la documentation doit suivre.\
+}

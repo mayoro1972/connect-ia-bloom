@@ -153,6 +153,30 @@ Selon l’intention, le système peut ensuite orienter vers :
 - partenariat / référencement
 - emploi / mise en relation
 
+## 6 bis. Chat web et assistant conversationnel
+
+### Widget web
+
+Le site intègre désormais un widget **Chatwoot Website**.
+
+État au 2 mai 2026 :
+
+- le script Chatwoot est intégré au front
+- le widget est visible en local
+- l’inbox website `TransferAI` reçoit les messages
+- le webhook Chatwoot vers `n8n` est validé en réception
+
+### Rôle attendu du chat web
+
+Le chat web doit :
+
+- accueillir
+- qualifier
+- comprendre le besoin
+- orienter vers la bonne offre
+- proposer une démo si le prospect est sérieux
+- transférer à un humain si nécessaire
+
 ## 7. Blog et pipeline éditorial
 
 ### Rôle du blog

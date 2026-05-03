@@ -27,6 +27,11 @@ Le pack a 4 objectifs :
 14. [Tableau de suivi de journée binôme](./14_Tableau_Suivi_Journee_Binome_Checklist.md)
 15. [Blueprint n8n import-like JSON V1](./15_n8n_Import_Like_JSON_V1.md)
 16. [Checklist de construction n8n](./16_Checklist_Construction_n8n.md)
+17. [Checklist préparation Chatwoot](./17_Checklist_Chatwoot_Preparation.md)
+18. [Mapping Chatwoot vers n8n](./18_Mapping_Chatwoot_Vers_n8n.md)
+19. [Prompts opérationnels Chatwoot + n8n V1](./19_Prompts_Operationnels_Chatwoot_n8n_V1.md)
+20. [Workflow n8n Chatwoot Auto Reply V1 JSON](./20_n8n_Chatwoot_Auto_Reply_V1.json)
+21. [Workflow n8n Chatwoot Auto Reply V1 JSON Import Strict](./21_n8n_Chatwoot_Auto_Reply_V1_Import_Strict.json)
 
 ## Ordre de lecture recommandé
 
@@ -67,7 +72,7 @@ Le système couvre aujourd’hui :
 - intake WhatsApp connecté à Twilio
 - back-office public d’administration
 
-## Mise à jour importante au 1er mai 2026
+## Mise à jour importante au 2 mai 2026
 
 Cette version du pack inclut désormais explicitement :
 
@@ -85,6 +90,10 @@ Cette version du pack inclut désormais explicitement :
 - la table de logs `whatsapp_email_notification_logs`
 - la validation bout-en-bout WhatsApp -> Twilio -> Supabase -> BackOffice -> Resend -> boîtes mail
 - le guide administrateur BackOffice en anglais
+- le widget **Chatwoot Website** désormais visible en local et prêt pour validation publique
+- les `Labels`, `Custom Attributes`, `Canned Responses` et macros Chatwoot de qualification
+- le webhook **Chatwoot -> n8n** validé en réception sur `chatwoot-inbound`
+- la préparation opérationnelle de l’assistant IA TransferAI orchestré avec `n8n`
 
 ## Architecture résumée
 
@@ -104,6 +113,8 @@ Backend :
 Canaux opérationnels :
 
 - Twilio pour WhatsApp
+- Chatwoot pour le chat web
+- n8n pour l’orchestration assistant IA
 - Resend pour les emails
 - GitHub pour le dépôt source
 - Cloudflare pour la diffusion du site public
@@ -116,17 +127,18 @@ Les exports Word sont produits dans :
 
 Les fichiers HTML Word-friendly peuvent être ouverts directement dans Microsoft Word puis convertis en `.docx`.
 
-## Livrables Word régénérés au 1er mai 2026
+## Livrables Word régénérés au 2 mai 2026
 
 Les principaux livrables Word régénérés sont :
 
-- `TransferAI_Africa_Admin_Master_Pack_2026-05-01.docx`
-- `TransferAI_Africa_Executive_Brief_2026-05-01.docx`
-- `TransferAI_Africa_Admin_Guide_No1_2026-05-01.docx`
-- `TransferAI_Africa_Site_Knowledge_Base_2026-05-01.docx`
-- `TransferAI_Africa_FAQ_Assistant_Support_2026-05-01.docx`
-- `TransferAI_Africa_Deployment_Operations_Plan_2026-05-01.docx`
-- `TransferAI_Africa_Project_Roadmap_2026-05-01.docx`
+- `TransferAI_Africa_Admin_Master_Pack_2026-05-02.docx`
+- `TransferAI_Africa_Executive_Brief_2026-05-02.docx`
+- `TransferAI_Africa_Admin_Guide_No1_2026-05-02.docx`
+- `TransferAI_Africa_Site_Knowledge_Base_2026-05-02.docx`
+- `TransferAI_Africa_FAQ_Assistant_Support_2026-05-02.docx`
+- `TransferAI_Africa_Deployment_Operations_Plan_2026-05-02.docx`
+- `TransferAI_Africa_Project_Roadmap_2026-05-02.docx`
+- `TransferAI_Africa_Admin_Index_2026-05-02.docx`
 
 ## Nomenclature des livrables Word
 
