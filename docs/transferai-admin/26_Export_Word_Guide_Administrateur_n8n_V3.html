@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Guide Administrateur n8n V3 - TransferAI Africa</title>
+  <style>
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      line-height: 1.5;
+      color: #222;
+      margin: 40px;
+      max-width: 900px;
+    }
+    h1, h2, h3 {
+      color: #0f4c81;
+    }
+    h1 {
+      border-bottom: 2px solid #0f4c81;
+      padding-bottom: 8px;
+    }
+    code, pre {
+      font-family: Consolas, Menlo, monospace;
+      background: #f5f7fa;
+    }
+    pre {
+      padding: 12px;
+      border: 1px solid #d9e1ea;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    ul {
+      margin-top: 6px;
+      margin-bottom: 14px;
+    }
+    .meta {
+      color: #555;
+      margin-bottom: 24px;
+    }
+    .box {
+      border: 1px solid #d9e1ea;
+      background: #f9fbfd;
+      padding: 14px;
+      margin: 14px 0 22px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guide Administrateur n8n V3 - TransferAI Africa</h1>
+  <p class="meta">Version de reference : 5 mai 2026</p>
+
+  <div class="box">
+    <strong>Objet du document</strong><br>
+    Ce guide explique comment exploiter, maintenir et superviser le workflow n8n V3 de reponse IA Chatwoot pour TransferAI Africa.
+  </div>
+
+  <h2>1. Resume executif</h2>
+  <p>La V3 remplace la reponse statique de la V2 par une reponse generee par OpenAI, tout en gardant une architecture simple et un rollback rapide vers la V2 en cas de besoin.</p>
+
+  <h2>2. Workflow actif recommande</h2>
+  <ul>
+    <li><strong>Actif :</strong> ACTIVE - TransferAI Chatwoot Auto Reply V3 (OpenAI)</li>
+    <li><strong>Fallback :</strong> ACTIVE - TransferAI Chatwoot Auto Reply V2 (Fallback statique)</li>
+    <li><strong>Archives :</strong> workflows V1 desactives</li>
+  </ul>
+
+  <h2>3. Webhook de production V3</h2>
+  <pre>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v3</pre>
+
+  <h2>4. Architecture V3</h2>
+  <ul>
+    <li>Chatwoot Webhook</li>
+    <li>Filter + Build reply (Code)</li>
+    <li>OpenAI Chat Completions</li>
+    <li>Send reply to Chatwoot</li>
+  </ul>
+
+  <h2>5. Ce que fait le nœud Code</h2>
+  <ul>
+    <li>verifie l'evenement Chatwoot</li>
+    <li>ignore les messages sortants</li>
+    <li>ignore les messages vides</li>
+    <li>extrait <code>conversation_id</code></li>
+    <li>prepare le texte entrant et la reponse a envoyer</li>
+  </ul>
+
+  <h2>6. Configuration HTTP Chatwoot</h2>
+  <ul>
+    <li>Method : POST</li>
+    <li>URL : <code>https://app.chatwoot.com/api/v1/accounts/163278/conversations/{{$json.conversation_id}}/messages</code></li>
+    <li>Header : <code>api_access_token</code></li>
+    <li>Header : <code>Content-Type = application/json</code></li>
+  </ul>
+
+  <h2>7. Configuration OpenAI</h2>
+  <p>Le header <code>Authorization</code> doit utiliser la forme :</p>
+  <pre>Bearer sk-...</pre>
+  <p>La cle ne doit pas etre commit dans le repo. Utiliser des placeholders dans les exports de workflow.</p>
+
+  <h2>8. Test de fonctionnement</h2>
+  <ol>
+    <li>Envoyer un message depuis le widget Chatwoot.</li>
+    <li>Verifier qu'une execution apparait dans n8n.</li>
+    <li>Verifier que tous les nœuds V3 passent au vert.</li>
+    <li>Verifier que la reponse IA apparait dans la conversation Chatwoot.</li>
+  </ol>
+
+  <h2>9. Rollback rapide</h2>
+  <p>Si la V3 pose probleme, remettre temporairement l'URL du webhook Chatwoot sur le path V2 :</p>
+  <pre>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v2</pre>
+
+  <h2>10. Erreurs deja rencontrées</h2>
+  <ul>
+    <li>boucle infinie sur messages sortants</li>
+    <li>champ URL invalide a cause du prefixe <code>=</code></li>
+    <li>acces refuse aux variables d'environnement</li>
+    <li>header OpenAI sans prefixe <code>Bearer</code></li>
+    <li>instabilite du noeud <code>If</code></li>
+  </ul>
+
+  <h2>11. Regles de stabilite</h2>
+  <ul>
+    <li>ne pas reintroduire le nœud If a la place du nœud Code</li>
+    <li>ne pas commit de vrai token dans le repo</li>
+    <li>conserver une V2 active comme filet de securite pendant la phase de stabilisation</li>
+    <li>changer un seul parametre a la fois en cas de debug</li>
+  </ul>
+
+  <h2>12. Prochaine etape</h2>
+  <p>La suite recommandee est la V4 Memoire, qui reutilise l'historique Chatwoot pour eviter de reposer les memes questions au prospect.</p>
+</body>
+</html>

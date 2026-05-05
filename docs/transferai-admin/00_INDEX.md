@@ -32,6 +32,11 @@ Le pack a 4 objectifs :
 19. [Prompts opérationnels Chatwoot + n8n V1](./19_Prompts_Operationnels_Chatwoot_n8n_V1.md)
 20. [Workflow n8n Chatwoot Auto Reply V1 JSON](./20_n8n_Chatwoot_Auto_Reply_V1.json)
 21. [Workflow n8n Chatwoot Auto Reply V1 JSON Import Strict](./21_n8n_Chatwoot_Auto_Reply_V1_Import_Strict.json)
+22. [Configuration Finale Chatwoot + n8n V2](./22_Configuration_Finale_Chatwoot_n8n_V2.md)
+23. [Workflow n8n Chatwoot Auto Reply V3 OpenAI](./23_n8n_Chatwoot_Auto_Reply_V3_OpenAI.json)
+24. [Configuration Finale Chatwoot + n8n V3](./24_Configuration_Finale_Chatwoot_n8n_V3.md)
+25. [Configuration Cible Chatwoot + n8n V4 Memoire](./25_Configuration_Cible_Chatwoot_n8n_V4_Memoire.md)
+26. [Guide Administrateur n8n V3 Export Word Friendly](./26_Export_Word_Guide_Administrateur_n8n_V3.html)
 
 ## Ordre de lecture recommandé
 
@@ -94,6 +99,21 @@ Cette version du pack inclut désormais explicitement :
 - les `Labels`, `Custom Attributes`, `Canned Responses` et macros Chatwoot de qualification
 - le webhook **Chatwoot -> n8n** validé en réception sur `chatwoot-inbound`
 - la préparation opérationnelle de l’assistant IA TransferAI orchestré avec `n8n`
+
+## Mise à jour importante au 5 mai 2026
+
+Cette version du pack inclut désormais explicitement :
+
+- la stabilisation de la **V2 Chatwoot + n8n** sur le path `chatwoot-inbound-v2`
+- la validation de la **V3 OpenAI** avec réponse IA contextualisée
+- le remplacement du noeud `If` instable par un noeud `Code`
+- la séparation nette entre :
+  - `V2` fallback statique
+  - `V3` assistant IA OpenAI
+  - `V4` cible mémoire conversationnelle
+- la documentation de rollback V3 -> V2 en moins de 10 secondes
+- la préparation du guide administrateur V3 partageable
+- la feuille de route documentaire pour la future **V4 Memoire**
 
 ## Architecture résumée
 

@@ -256,3 +256,63 @@ Il est devenu :
 - une base de connaissance exploitable
 - un socle pour automatisations IA plus avancées
 - une base concrète pour un assistant IA web + WhatsApp
+
+## 5. Jalons Chatwoot + n8n observes au 5 mai 2026
+
+### Phase 21. Stabilisation V2 Chatwoot + n8n
+
+Objectif :
+
+- sortir d'un cycle de debug instable
+- obtenir une reponse automatique fiable sans boucle
+
+Livrables :
+
+- workflow `Chatwoot -> n8n -> reponse statique` stabilise
+- path dedie `chatwoot-inbound-v2`
+- remplacement du noeud `If` par un noeud `Code`
+- URL HTTP Chatwoot corrigee
+- boucle de reponse eliminee
+- webhook public valide en production
+
+### Phase 22. Validation V3 OpenAI
+
+Objectif :
+
+- remplacer la reponse statique par une vraie reponse IA contextualisee
+
+Livrables :
+
+- workflow V3 dedie sur `chatwoot-inbound-v3`
+- appel OpenAI stable
+- prompt systeme TransferAI exploitable
+- fallback statique conserve
+- message IA valide dans une conversation Chatwoot reelle
+- V2 conservee comme filet de securite
+
+### Phase 23. Cible V4 Memoire conversationnelle
+
+Objectif :
+
+- eviter que le bot repose les memes questions
+- reutiliser l'historique Chatwoot comme memoire
+
+Livrables cibles :
+
+- webhook V4 dedie sur `chatwoot-inbound-v4`
+- recuperation de l'historique de conversation Chatwoot
+- injection de l'historique dans le prompt OpenAI
+- deduplication du message courant
+- meilleure continuite conversationnelle
+
+## 6. Lecture de maturite au 5 mai 2026
+
+Le projet n'est plus seulement une base pour un assistant IA.
+
+Il est devenu :
+
+- un systeme Chatwoot + n8n fonctionnel en production
+- un socle stable avec fallback V2
+- une V3 IA contextualisee validee
+- une base prete pour une V4 avec memoire
+- une architecture modulaire evolutive vers qualification, scoring et handoff humain
