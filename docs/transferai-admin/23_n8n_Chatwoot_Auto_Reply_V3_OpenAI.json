@@ -1,0 +1,196 @@
+{
+  "name": "ACTIVE - TransferAI Chatwoot Auto Reply V3 (OpenAI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatwoot-inbound-v3",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-v3-chatwoot",
+      "name": "Chatwoot Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "chatwoot-inbound-v3"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// === Filtre + construction de la reponse (V3 OpenAI) ===\n// Objectif :\n// - ignorer les events Chatwoot parasites\n// - ne garder que les vrais messages entrants\n// - preparer le contexte minimal pour OpenAI puis Chatwoot\n\nconst item = $input.first()?.json ?? {};\nconst body = item.body ?? item;\n\n// 1. On ne traite QUE les nouveaux messages.\nif (body.event !== 'message_created') {\n  return [];\n}\n\n// 2. On ignore les messages sortants (sinon le bot se repond a lui-meme).\nconst isIncoming = body.message_type === 'incoming' || body.message_type === 0;\nif (!isIncoming) {\n  return [];\n}\n\n// 3. Il nous faut une conversation pour pouvoir repondre.\nconst conversationId = body.conversation?.id;\nif (!conversationId) {\n  return [];\n}\n\n// 4. Il nous faut du texte non vide.\nconst content = (body.content ?? '').toString().trim();\nif (!content) {\n  return [];\n}\n\nconst senderName = (body.sender?.name ?? 'prospect').toString().trim();\n\nconst systemPrompt = [\n  'Tu es l\\'assistant commercial de TransferAI Africa.',\n  'Tu reponds exclusivement en francais, de facon claire, courte et professionnelle.',\n  'Tu accueilles chaleureusement le prospect, reformules son besoin si utile, puis poses au maximum 3 questions de qualification.',\n  'Tu aides surtout les organisations en Afrique a avancer sur la formation IA, la veille strategique et l\\'automatisation.',\n  'Si le besoin parait serieux et B2B, tu peux proposer une demo ou un echange avec l\\'equipe.',\n  'Ne promets jamais un prix, un delai ou un resultat non confirme.',\n  'Reste concret, poli et utile.'\n].join(' ');\n\nconst userPrompt = [\n  `Nom du contact: ${senderName}`,\n  `Message du prospect: ${content}`,\n  'Reponds comme un conseiller TransferAI Africa et aide a qualifier le besoin.'\n].join('\\n');\n\nreturn [\n  {\n    json: {\n      conversation_id: conversationId,\n      incoming_text: content,\n      sender_name: senderName,\n      system_prompt: systemPrompt,\n      user_prompt: userPrompt,\n      fallback_reply: 'Bonjour et merci pour votre message. Pour bien vous orienter, pouvez-vous me preciser le nom de votre entreprise, votre secteur d\\'activite et votre besoin principal ?'\n    }\n  }\n];"
+      },
+      "id": "code-v3-filter-build",
+      "name": "Filter + Build reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "specifyHeaders": "usingFields",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer REPLACE_WITH_OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.4, max_tokens: 350, messages: [ { role: 'system', content: $json.system_prompt }, { role: 'user', content: $json.user_prompt } ] }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "http-v3-openai",
+      "name": "OpenAI Chat Completions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// === Normalisation de la reponse OpenAI ===\n// Si OpenAI echoue ou renvoie vide, on garde le fallback statique.\n\nconst item = $input.first()?.json ?? {};\nconst aiText = item.choices?.[0]?.message?.content?.toString().trim();\nconst replyText = aiText || item.fallback_reply || 'Bonjour et merci pour votre message. Pour bien vous orienter, pouvez-vous me preciser le nom de votre entreprise, votre secteur d\\'activite et votre besoin principal ?';\n\nreturn [\n  {\n    json: {\n      conversation_id: item.conversation_id,\n      incoming_text: item.incoming_text,\n      reply_text: replyText,\n      used_fallback: !aiText\n    }\n  }\n];"
+      },
+      "id": "code-v3-format-reply",
+      "name": "Format AI reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://app.chatwoot.com/api/v1/accounts/163278/conversations/{{$json.conversation_id}}/messages",
+        "authentication": "none",
+        "sendHeaders": true,
+        "specifyHeaders": "usingFields",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "REPLACE_WITH_CHATWOOT_API_TOKEN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ content: $json.reply_text, message_type: 'outgoing', private: false }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "http-v3-chatwoot-reply",
+      "name": "Send reply to Chatwoot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Chatwoot Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter + Build reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter + Build reply": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat Completions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Completions": {
+      "main": [
+        [
+          {
+            "node": "Format AI reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format AI reply": {
+      "main": [
+        [
+          {
+            "node": "Send reply to Chatwoot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "v3-openai-reference-export",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "chatwoot"
+    },
+    {
+      "name": "n8n"
+    }
+  ]
+}
