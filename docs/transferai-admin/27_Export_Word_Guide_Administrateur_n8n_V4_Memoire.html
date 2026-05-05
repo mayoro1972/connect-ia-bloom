@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide Administrateur n8n V4 Memoire - TransferAI</title>
+  <style>
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      line-height: 1.45;
+      color: #1f2937;
+      margin: 40px;
+      max-width: 980px;
+    }
+    h1, h2, h3 {
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+    h3 {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    p, li {
+      font-size: 12pt;
+    }
+    ul, ol {
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f4f6;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 10.5pt;
+    }
+    .meta {
+      color: #4b5563;
+      font-size: 11pt;
+      margin-bottom: 20px;
+    }
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #2563eb;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+    .warning {
+      border-left-color: #dc2626;
+      background: #fef2f2;
+    }
+    .success {
+      border-left-color: #16a34a;
+      background: #f0fdf4;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11pt;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+    .small {
+      font-size: 10.5pt;
+      color: #4b5563;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guide Administrateur n8n V4 Memoire</h1>
+  <div class="meta">
+    TransferAI Africa<br />
+    Version cible : V4 Memoire conversationnelle<br />
+    Base documentaire : <code>25_Configuration_Cible_Chatwoot_n8n_V4_Memoire.md</code><br />
+    Statut : documentation cible prête, sans modification de la V3 active
+  </div>
+
+  <div class="box success">
+    <strong>Objet du document</strong><br />
+    Ce guide décrit la version cible V4 du workflow Chatwoot + n8n pour TransferAI. La V4 ajoute une mémoire conversationnelle en utilisant l’historique natif de Chatwoot, afin d’éviter que l’assistant redemande les mêmes informations déjà fournies par l’utilisateur.
+  </div>
+
+  <h2>1. Résumé exécutif</h2>
+  <p>
+    La V3 permet déjà une réponse IA contextualisée via OpenAI. La V4 ne remplace pas cette base ; elle l’étend. Le principe est simple :
+    avant d’interroger OpenAI, le workflow récupère l’historique de la conversation Chatwoot et le réinjecte dans le prompt.
+  </p>
+  <p>
+    Résultat attendu : l’assistant garde le contexte de la discussion, évite les répétitions, et progresse plus naturellement vers la qualification commerciale.
+  </p>
+
+  <h2>2. Objectif fonctionnel</h2>
+  <ul>
+    <li>Se souvenir des informations déjà partagées par le prospect.</li>
+    <li>Éviter de reposer les mêmes questions.</li>
+    <li>Maintenir une expérience fluide et crédible dans Chatwoot.</li>
+    <li>Préparer la suite logique vers V5 : qualification structurée, scoring et handoff humain.</li>
+  </ul>
+
+  <h2>3. Workflow actif / workflow cible</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Nom recommandé</th>
+        <th>Rôle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Production actuelle</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V3 (OpenAI)</code></td>
+        <td>Version IA actuellement stable en production.</td>
+      </tr>
+      <tr>
+        <td>Version cible</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V4 (Memoire)</code></td>
+        <td>Version avec mémoire conversationnelle basée sur l’historique Chatwoot.</td>
+      </tr>
+      <tr>
+        <td>Rollback</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V2 (Fallback)</code></td>
+        <td>Filet de sécurité statique pendant validation V4.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box warning">
+    <strong>Règle de stabilité</strong><br />
+    Ne pas désactiver la V3 tant que la V4 n’a pas été validée pendant au moins 24 à 48 heures sur de vrais échanges.
+  </div>
+
+  <h2>4. Webhook cible V4</h2>
+  <ul>
+    <li>Path : <code>chatwoot-inbound-v4</code></li>
+    <li>URL production :<br />
+      <code>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v4</code>
+    </li>
+  </ul>
+
+  <h2>5. Architecture recommandée</h2>
+  <ol>
+    <li><code>Chatwoot Webhook V4</code></li>
+    <li><code>Filter Chatwoot event</code></li>
+    <li><code>Fetch conversation history</code></li>
+    <li><code>Build OpenAI payload with history</code></li>
+    <li><code>OpenAI Chat Completions</code></li>
+    <li><code>Format AI reply</code></li>
+    <li><code>Send reply to Chatwoot</code></li>
+  </ol>
+
+  <h2>6. Principe de mémoire</h2>
+  <p>
+    La V4 n’ajoute pas une base mémoire externe en premier recours. Elle s’appuie sur Chatwoot comme source de vérité :
+  </p>
+  <ul>
+    <li>Chatwoot stocke déjà l’historique complet de la conversation.</li>
+    <li>Le workflow appelle l’API Chatwoot en <code>GET /conversations/{id}/messages</code>.</li>
+    <li>Les messages pertinents sont transformés au format OpenAI.</li>
+    <li>OpenAI répond en tenant compte de ce contexte.</li>
+  </ul>
+
+  <div class="box">
+    <strong>Pourquoi cette approche est bonne pour TransferAI</strong><br />
+    Une seule source de vérité, zéro stockage supplémentaire à maintenir, et une mise en œuvre plus simple qu’une mémoire externe dès cette étape.
+  </div>
+
+  <h2>7. Exemple de comportement attendu</h2>
+  <h3>Sans mémoire</h3>
+  <p class="small">
+    Utilisateur : « Je suis chez TransLog SA, dans le transport. »<br />
+    Bot : « Pouvez-vous me préciser le nom de votre entreprise, votre secteur et votre besoin principal ? »
+  </p>
+
+  <h3>Avec mémoire V4</h3>
+  <p class="small">
+    Utilisateur : « Je suis chez TransLog SA, dans le transport. »<br />
+    Bot : « Merci. Je vois que vous êtes chez TransLog SA dans le transport. Quel est votre besoin principal : formation, veille ou automatisation ? »
+  </p>
+
+  <h2>8. Risques connus</h2>
+  <ul>
+    <li>Historique trop long, donc augmentation du nombre de tokens et du coût OpenAI.</li>
+    <li>Doublon du message courant si l’historique renvoyé par Chatwoot contient déjà le dernier message.</li>
+    <li>Latence légèrement plus élevée à cause de l’appel supplémentaire à Chatwoot.</li>
+    <li>Réponses trop longues si la fenêtre de contexte n’est pas maîtrisée.</li>
+  </ul>
+
+  <h2>9. Garde-fous recommandés</h2>
+  <ul>
+    <li>Limiter la mémoire aux <strong>N derniers messages pertinents</strong>.</li>
+    <li>Dédupliquer explicitement le dernier message utilisateur.</li>
+    <li>Limiter <code>max_tokens</code> côté OpenAI.</li>
+    <li>Conserver la V3 active en rollback pendant la validation.</li>
+    <li>Garder une réponse de secours si OpenAI échoue.</li>
+  </ul>
+
+  <h2>10. Procédure recommandée de mise en place</h2>
+  <ol>
+    <li>Créer le workflow V4 sur un path séparé : <code>chatwoot-inbound-v4</code>.</li>
+    <li>Conserver la V3 active pendant toute la phase de test.</li>
+    <li>Tester V4 en simulation ou sur conversation dédiée.</li>
+    <li>Valider que la mémoire reprend bien les informations précédentes sans répétition.</li>
+    <li>Bascule Chatwoot vers V4 uniquement après validation.</li>
+    <li>Conserver V3 en filet de sécurité pendant 24 à 48 heures.</li>
+  </ol>
+
+  <h2>11. Critères de validation</h2>
+  <ul>
+    <li>Le workflow V4 traite les vrais messages entrants sans boucle.</li>
+    <li>Le bot n’exige plus des informations déjà données plus tôt dans la conversation.</li>
+    <li>Les réponses restent courtes, professionnelles et orientées qualification.</li>
+    <li>En cas d’échec, le fallback reste exploitable.</li>
+    <li>Le coût et la latence restent acceptables.</li>
+  </ul>
+
+  <h2>12. Exploitation / support</h2>
+  <ul>
+    <li>Surveiller les premières conversations V4 en production.</li>
+    <li>Comparer qualité des réponses V3 vs V4.</li>
+    <li>Vérifier les cas de répétition, confusion ou perte de contexte.</li>
+    <li>Observer le coût OpenAI et le temps moyen de réponse.</li>
+  </ul>
+
+  <h2>13. Ce que la V4 ne fait pas encore</h2>
+  <ul>
+    <li>Qualification JSON structurée.</li>
+    <li>Écriture dans les <code>custom_attributes</code> Chatwoot.</li>
+    <li>Scoring automatique de lead.</li>
+    <li>Handoff humain automatique.</li>
+    <li>Logs analytiques avancés.</li>
+  </ul>
+
+  <h2>14. Feuille de route après V4</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Version</th>
+        <th>Objectif</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>V5</td>
+        <td>Qualification structurée + écriture dans Chatwoot</td>
+      </tr>
+      <tr>
+        <td>V5.5</td>
+        <td>Proposition de démo Calendly conditionnelle</td>
+      </tr>
+      <tr>
+        <td>V6</td>
+        <td>Handoff humain automatique</td>
+      </tr>
+      <tr>
+        <td>V7</td>
+        <td>Logs et supervision</td>
+      </tr>
+      <tr>
+        <td>V8</td>
+        <td>Multi-canal</td>
+      </tr>
+      <tr>
+        <td>V9</td>
+        <td>RAG sur la base de connaissance</td>
+      </tr>
+      <tr>
+        <td>V10</td>
+        <td>Voix / assistant vocal</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>15. Recommandation finale</h2>
+  <p>
+    La V4 doit être considérée comme la prochaine évolution naturelle de la V3, pas comme une refonte. La bonne approche consiste à
+    la préparer en parallèle, la valider sur des échanges réels, puis la promouvoir progressivement sans casser la chaîne déjà stable.
+  </p>
+
+  <div class="box success">
+    <strong>Décision recommandée</strong><br />
+    Garder la V3 active en production, préparer la V4 mémoire à côté, documenter la configuration cible, puis basculer seulement après validation fonctionnelle et métier.
+  </div>
+</body>
+</html>
