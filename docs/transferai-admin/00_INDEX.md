@@ -38,6 +38,7 @@ Le pack a 4 objectifs :
 25. [Configuration Cible Chatwoot + n8n V4 Memoire](./25_Configuration_Cible_Chatwoot_n8n_V4_Memoire.md)
 26. [Guide Administrateur n8n V3 Export Word Friendly](./26_Export_Word_Guide_Administrateur_n8n_V3.html)
 27. [Guide Administrateur n8n V4 Memoire Export Word Friendly](./27_Export_Word_Guide_Administrateur_n8n_V4_Memoire.html)
+28. [Workflow n8n Chatwoot Auto Reply V4 Memoire](./28_n8n_Chatwoot_Auto_Reply_V4_Memoire.json)
 
 ## Ordre de lecture recommandé
 
@@ -116,6 +117,7 @@ Cette version du pack inclut désormais explicitement :
 - la préparation du guide administrateur V3 partageable
 - la feuille de route documentaire pour la future **V4 Memoire**
 - le guide administrateur **V4 Memoire** exportable en HTML Word-friendly et `.docx`
+- le workflow exportable **V4 Memoire** pret pour import dans n8n
 
 ## Architecture résumée
 
