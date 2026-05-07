@@ -1,0 +1,269 @@
+{
+  "name": "ACTIVE - TransferAI Chatwoot Auto Reply V4 (Memoire)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatwoot-inbound-v4",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-v4-chatwoot",
+      "name": "Chatwoot Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "chatwoot-inbound-v4"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const item = $input.first()?.json ?? {};\nconst body = item.body ?? item;\n\nif (body.event !== 'message_created') {\n  return [];\n}\n\nconst isIncoming = body.message_type === 'incoming' || body.message_type === 0;\nif (!isIncoming) {\n  return [];\n}\n\nconst conversationId = body.conversation?.id;\nif (!conversationId) {\n  return [];\n}\n\nconst content = (body.content ?? '').toString().trim();\nif (!content) {\n  return [];\n}\n\nconst senderName =\n  (body.sender?.name ?? 'prospect').toString().trim() || 'prospect';\n\nconst fallbackReply =\n  \"Bonjour et merci pour votre message. Pour bien vous orienter, pouvez-vous me preciser le nom de votre entreprise, votre secteur d'activite et votre besoin principal ?\";\n\nreturn [\n  {\n    json: {\n      conversation_id: conversationId,\n      incoming_text: content,\n      sender_name: senderName,\n      fallback_reply: fallbackReply\n    }\n  }\n];"
+      },
+      "id": "code-v4-filter-event",
+      "name": "Filter Chatwoot event",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://app.chatwoot.com/api/v1/accounts/163278/conversations/{{$json.conversation_id}}/messages",
+        "authentication": "none",
+        "sendHeaders": true,
+        "specifyHeaders": "usingFields",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "REPLACE_WITH_CHATWOOT_API_TOKEN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "http-v4-chatwoot-history",
+      "name": "Fetch conversation history",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const context = $('Filter Chatwoot event').first()?.json ?? {};\nconst historyResponse = $input.first()?.json ?? {};\n\nconst payload =\n  historyResponse.payload ??\n  historyResponse.data ??\n  historyResponse.messages ??\n  historyResponse;\n\nconst rawMessages = Array.isArray(payload) ? payload : [];\n\nconst MAX_HISTORY = 20;\n\nconst normalizedHistory = rawMessages\n  .map((msg) => {\n    const text = (msg.content ?? msg.processed_message_content ?? '')\n      .toString()\n      .trim();\n    if (!text) return null;\n\n    const isAssistant =\n      msg.message_type === 1 || msg.message_type === 'outgoing';\n\n    return {\n      role: isAssistant ? 'assistant' : 'user',\n      content: text\n    };\n  })\n  .filter(Boolean)\n  .slice(-MAX_HISTORY);\n\nconst currentText = (context.incoming_text ?? '').toString().trim();\nconst lastUserInHistory =\n  [...normalizedHistory].reverse().find((m) => m.role === 'user')?.content ?? '';\n\nconst alreadyIncluded = lastUserInHistory === currentText;\n\nconst systemPrompt = [\n  \"Tu es l'assistant commercial de TransferAI Africa.\",\n  \"Tu reponds exclusivement en francais, de facon claire, courte et professionnelle.\",\n  \"Tu exploites l'historique de conversation pour ne pas redemander les informations deja fournies.\",\n  \"Tu accueilles chaleureusement le prospect, reformules son besoin si utile, puis poses au maximum 3 questions de qualification si des informations manquent encore.\",\n  \"Tu aides surtout les organisations en Afrique sur la formation IA, la veille strategique et l'automatisation.\",\n  \"Si le besoin parait serieux et B2B, tu peux proposer une demo ou un echange avec l'equipe.\",\n  \"Ne promets jamais un prix, un delai ou un resultat non confirme.\",\n  \"Reste concret, poli et utile.\"\n].join(' ');\n\nconst messages = [\n  { role: 'system', content: systemPrompt },\n  ...normalizedHistory\n];\n\nif (!alreadyIncluded && currentText) {\n  messages.push({ role: 'user', content: currentText });\n}\n\nreturn [\n  {\n    json: {\n      conversation_id: context.conversation_id,\n      incoming_text: context.incoming_text,\n      sender_name: context.sender_name,\n      fallback_reply: context.fallback_reply,\n      history_count: normalizedHistory.length,\n      already_included: alreadyIncluded,\n      openai_payload: {\n        model: 'gpt-4.1-mini',\n        temperature: 0.4,\n        max_tokens: 350,\n        messages\n      }\n    }\n  }\n];"
+      },
+      "id": "code-v4-build-openai-payload",
+      "name": "Build OpenAI payload with history",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "specifyHeaders": "usingFields",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer REPLACE_WITH_OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.openai_payload) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "http-v4-openai",
+      "name": "OpenAI Chat Completions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const context = $('Build OpenAI payload with history').first()?.json ?? {};\nconst openai = $input.first()?.json ?? {};\n\nconst aiText = openai.choices?.[0]?.message?.content?.toString().trim();\nconst replyText = aiText || context.fallback_reply;\n\nreturn [\n  {\n    json: {\n      conversation_id: context.conversation_id,\n      incoming_text: context.incoming_text,\n      reply_text: replyText,\n      used_fallback: !aiText,\n      history_count: context.history_count,\n      already_included: context.already_included\n    }\n  }\n];"
+      },
+      "id": "code-v4-format-ai-reply",
+      "name": "Format AI reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://app.chatwoot.com/api/v1/accounts/163278/conversations/{{$json.conversation_id}}/messages",
+        "authentication": "none",
+        "sendHeaders": true,
+        "specifyHeaders": "usingFields",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "REPLACE_WITH_CHATWOOT_API_TOKEN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ content: $json.reply_text, message_type: 'outgoing', private: false }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "http-v4-chatwoot-reply",
+      "name": "Send reply to Chatwoot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Chatwoot Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter Chatwoot event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Chatwoot event": {
+      "main": [
+        [
+          {
+            "node": "Fetch conversation history",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch conversation history": {
+      "main": [
+        [
+          {
+            "node": "Build OpenAI payload with history",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build OpenAI payload with history": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat Completions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Completions": {
+      "main": [
+        [
+          {
+            "node": "Format AI reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format AI reply": {
+      "main": [
+        [
+          {
+            "node": "Send reply to Chatwoot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "v4-memory-reference-export",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "chatwoot"
+    },
+    {
+      "name": "n8n"
+    }
+  ]
+}

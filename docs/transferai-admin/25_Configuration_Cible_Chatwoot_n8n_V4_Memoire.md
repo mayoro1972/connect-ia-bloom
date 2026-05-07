@@ -1,54 +1,35 @@
-# Configuration Cible Chatwoot + n8n V4 Memoire
+# 25. Configuration Cible Chatwoot n8n V4 Memoire
 
-## Statut
+Statut : cible preparee, V3 active en production, V4 en preparation et non basculee.
 
-La V4 est la prochaine cible d'evolution apres la validation de la V3 OpenAI.
+## Objectif
 
-Son objectif n'est pas de remplacer la V3 dans l'urgence, mais d'ajouter une memoire conversationnelle stable sans casser le filet de securite V2/V3.
+La V4 ajoute une memoire conversationnelle au workflow Chatwoot afin d'eviter que l'assistant redemande des informations que le prospect a deja fournies. La source de verite de cette memoire est l'historique de conversation stocke dans Chatwoot lui-meme.
 
-## Objectif principal
+Cette V4 ne remplace pas encore la V3 en production. La V3 reste le workflow actif tant que la V4 n'a pas ete validee en test puis en observation de production.
 
-Eviter que l'assistant IA redemande des informations deja fournies par le prospect.
+## Garde-fou de production
 
-La V4 doit permettre au bot :
+- V3 reste active pendant toute la phase de preparation V4.
+- V4 est configuree et testee en parallele.
+- Le webhook Chatwoot ne doit etre bascule vers `chatwoot-inbound-v4` qu'apres validation complete.
+- En cas de souci, le rollback consiste a remettre l'URL webhook Chatwoot vers `chatwoot-inbound-v3`.
 
-- de relire les messages precedents de la conversation
-- de reutiliser le contexte deja donne
-- d'eviter les questions redondantes
-- de paraitre plus intelligent et plus fluide
+## Workflow cible
 
-## Workflow actif cible
-
-Nom recommande pour le workflow V4 quand il sera valide :
-
-`ACTIVE - TransferAI Chatwoot Auto Reply V4 (Memoire)`
-
-## Workflows filet de securite a conserver
-
-Tant que la V4 n'est pas stabilisee, conserver :
-
-- `ACTIVE - TransferAI Chatwoot Auto Reply V3 (OpenAI)`
-- `ACTIVE - TransferAI Chatwoot Auto Reply V2 (Fallback statique)`
-
-## Webhook production V4 cible
-
-URL webhook production cible :
+- Nom cible du workflow : `ACTIVE - TransferAI Chatwoot Auto Reply V4 (Memoire)`
+- Path webhook : `chatwoot-inbound-v4`
+- URL production :
 
 ```text
 https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v4
 ```
 
-Path n8n :
+## Architecture cible
 
-```text
-chatwoot-inbound-v4
-```
+Le workflow V4 est compose de 7 noeuds en ligne droite :
 
-## Architecture cible V4
-
-La V4 doit suivre cette architecture simple :
-
-1. `Chatwoot Webhook V4`
+1. `Chatwoot Webhook`
 2. `Filter Chatwoot event`
 3. `Fetch conversation history`
 4. `Build OpenAI payload with history`
@@ -56,90 +37,339 @@ La V4 doit suivre cette architecture simple :
 6. `Format AI reply`
 7. `Send reply to Chatwoot`
 
-## Principe de memoire retenu
+## Runbook detaille noeud par noeud
 
-La source de memoire retenue doit etre Chatwoot lui-meme.
+### 1. Chatwoot Webhook
 
-Au lieu de stocker l'historique dans une base annexe des le depart :
+Configuration attendue :
 
-- on fait un `GET` sur les messages de la conversation courante
-- on recupere un historique recent
-- on le convertit au format attendu par OpenAI
-- on laisse le modele repondre avec ce contexte
+- HTTP Method : `POST`
+- Path : `chatwoot-inbound-v4`
+- Respond : `Immediately`
+- Authentication : `None`
 
-## Pourquoi cette approche est recommandee
+Rien a modifier si le noeud est importe depuis le JSON de reference.
 
-Avantages :
+## 2. Filter Chatwoot event
 
-- une seule source de verite
-- pas de table supplementaire a maintenir au debut
-- les agents humains et le bot lisent le meme historique
-- passage naturel de V3 vers V4
+Type : `Code`
 
-## Points de stabilite a respecter
+Configuration attendue :
 
-La V4 doit conserver les acquis des versions precedentes :
+- Mode : `Run Once for All Items`
+- Language : `JavaScript`
 
-- webhook dedie et distinct
-- filtre `Code` robuste
-- fallback possible vers V3
-- URL Chatwoot stable
-- pas de dependance fragile a des `$env` bloques
+Le code doit verifier, dans cet ordre :
 
-## Risques principaux de la V4
+- `event === 'message_created'`
+- message entrant (`message_type === 'incoming'` ou `message_type === 0`)
+- presence de `conversation.id`
+- `content` non vide apres `trim()`
 
-Les risques a surveiller :
+Il doit egalement transporter :
 
-- historique trop long -> cout OpenAI augmente
-- duplication du message courant dans le prompt
-- latence plus forte qu'en V3
-- reponse trop verbeuse si le contexte n'est pas borne
+- `conversation_id`
+- `incoming_text`
+- `sender_name`
+- `fallback_reply`
 
-## Garde-fous recommandes
+Le `fallback_reply` sert de filet de securite si OpenAI echoue plus loin.
 
-Pour limiter ces risques :
+### 3. Fetch conversation history
 
-- ne charger que les N derniers messages pertinents
-- dedupliquer le message courant
-- plafonner `max_tokens`
-- garder la V3 active comme rollback
+Type : `HTTP Request`
 
-## Benefice attendu
+Configuration attendue :
 
-Exemple de gain attendu :
+- Method : `GET`
+- URL :
 
-- V3 : "Bonjour, quel est le nom de votre entreprise ?"
-- prospect : "TransLog SA"
-- prospect suivant : "Nous faisons du transport"
-- V3 peut encore reposer une question deja couverte
+```text
+https://app.chatwoot.com/api/v1/accounts/163278/conversations/{{$json.conversation_id}}/messages
+```
 
-Avec la V4 :
+- Authentication : `None`
+- Send Headers : `ON`
 
-- le bot sait deja que l'entreprise est `TransLog SA`
-- il enchaine sur le besoin reel sans reposer le nom
+Point critique :
 
-## Ce qui viendra apres la V4
+- le champ `URL` doit etre en mode `Expression`
 
-La V4 n'est pas la fin de la feuille de route.
+Headers attendus :
 
-Apres stabilisation V4 :
+1. `api_access_token`
+   - valeur initiale dans le JSON : `REPLACE_WITH_CHATWOOT_API_TOKEN`
+   - a remplacer par le vrai token Chatwoot
+   - pas de prefixe `Bearer`
 
-1. `V5` qualification structuree
-2. `V5.5` proposition conditionnelle de demo
-3. `V6` handoff humain
-4. `V7` logs et supervision
-5. `V8` multi-canal
-6. `V9` RAG sur la base de connaissance
-7. `V10` voix
+2. `Content-Type`
+   - valeur : `application/json`
 
-## Recommandation de migration
+### 4. Build OpenAI payload with history
 
-Ne pas couper directement la V3.
+Type : `Code`
 
-Ordre recommande :
+Configuration attendue :
 
-1. construire la V4 a cote de la V3
-2. tester la V4 avec mock data puis en conversation reelle
-3. basculer Chatwoot de `-v3` vers `-v4`
-4. garder la V3 active 24 a 48 heures
-5. n'archiver la V3 qu'apres stabilisation observee
+- Mode : `Run Once for All Items`
+- Language : `JavaScript`
+
+Responsabilites du noeud :
+
+- recuperer le contexte original depuis `$('Filter Chatwoot event').first()`
+- recuperer l'historique renvoye par Chatwoot
+- convertir l'historique au format OpenAI :
+  - messages entrants -> `role: 'user'`
+  - messages sortants -> `role: 'assistant'`
+- dedupliquer le message courant si Chatwoot l'a deja enregistre dans l'historique
+- construire `openai_payload`
+
+Parametre important :
+
+- `MAX_HISTORY = 20`
+
+Ce plafond est volontaire :
+
+- il limite les couts OpenAI
+- il borne la latence
+- il reste suffisant pour les conversations commerciales courtes
+
+### 5. OpenAI Chat Completions
+
+Type : `HTTP Request`
+
+Configuration attendue :
+
+- Method : `POST`
+- URL :
+
+```text
+https://api.openai.com/v1/chat/completions
+```
+
+- Authentication : `None`
+- Send Headers : `ON`
+- Send Body : `ON`
+- Body Content Type : `JSON`
+- JSON Body :
+
+```text
+={{ JSON.stringify($json.openai_payload) }}
+```
+
+Headers attendus :
+
+1. `Authorization`
+   - valeur initiale dans le JSON : `Bearer REPLACE_WITH_OPENAI_API_KEY`
+   - a remplacer par une vraie cle OpenAI
+   - le mot `Bearer` doit etre conserve, suivi d'une espace
+
+2. `Content-Type`
+   - valeur : `application/json`
+
+Bonne pratique :
+
+- si une cle OpenAI a ete exposee dans des captures ou des essais, il faut la regenerer puis supprimer l'ancienne.
+
+### 6. Format AI reply
+
+Type : `Code`
+
+Configuration attendue :
+
+- Mode : `Run Once for All Items`
+- Language : `JavaScript`
+
+Responsabilites :
+
+- lire `choices[0].message.content`
+- construire `reply_text`
+- basculer automatiquement sur `fallback_reply` si OpenAI n'a pas renvoye de contenu exploitable
+
+Sortie attendue :
+
+- `reply_text`
+- `used_fallback`
+- `history_count`
+- `already_included`
+
+### 7. Send reply to Chatwoot
+
+Type : `HTTP Request`
+
+Configuration attendue :
+
+- Method : `POST`
+- URL :
+
+```text
+https://app.chatwoot.com/api/v1/accounts/163278/conversations/{{$json.conversation_id}}/messages
+```
+
+- Authentication : `None`
+- Send Body : `ON`
+- Body Content Type : `JSON`
+- JSON Body :
+
+```text
+={{ JSON.stringify({ content: $json.reply_text, message_type: 'outgoing', private: false }) }}
+```
+
+Point critique :
+
+- le champ `URL` doit etre en mode `Expression`
+
+Headers attendus :
+
+1. `api_access_token`
+   - valeur initiale dans le JSON : `REPLACE_WITH_CHATWOOT_API_TOKEN`
+   - a remplacer par le meme token Chatwoot que dans `Fetch conversation history`
+
+2. `Content-Type`
+   - valeur : `application/json`
+
+## Sauvegarde et activation
+
+Une fois les trois secrets/configurations remplaces :
+
+- sauvegarder le workflow
+- le laisser `Inactive` pendant la phase de test
+- ne l'activer qu'apres validation complete
+
+## Test pas a pas avant production
+
+### Etape 1. Mock data sur le webhook
+
+Dans `Chatwoot Webhook` :
+
+- utiliser `set mock data`
+- coller le mock de travail deja utilise pour V3
+
+### Etape 2. Executer les noeuds un par un
+
+Ordre d'execution recommande :
+
+1. `Filter Chatwoot event`
+   - sortie attendue :
+
+```json
+{
+  "conversation_id": 3,
+  "incoming_text": "...",
+  "sender_name": "...",
+  "fallback_reply": "..."
+}
+```
+
+2. `Fetch conversation history`
+   - sortie attendue :
+     - `200 OK`
+     - liste de messages ou payload contenant l'historique
+   - si `401` ou `403` :
+     - verifier le token Chatwoot
+
+3. `Build OpenAI payload with history`
+   - sortie attendue :
+     - `openai_payload`
+     - `history_count`
+     - `already_included`
+
+4. `OpenAI Chat Completions`
+   - sortie attendue :
+     - `choices[0].message.content`
+   - si erreur sur la cle :
+     - verifier le header `Authorization`
+
+5. `Format AI reply`
+   - sortie attendue :
+     - `reply_text`
+     - `used_fallback: false`
+
+6. `Send reply to Chatwoot`
+   - sortie attendue :
+
+```json
+{
+  "id": "...",
+  "content": "...",
+  "message_type": 1,
+  "status": "sent"
+}
+```
+
+Note importante :
+
+- ce dernier test poste un vrai message dans la conversation cible
+
+### Etape 3. Retirer les donnees mockees
+
+Avant toute mise en production :
+
+- `Unpin Data` ou suppression des mock data sur le webhook
+
+Sinon, la V4 reutiliserait un faux payload au lieu des vrais evenements.
+
+## Migration V3 vers V4
+
+Quand tous les tests sont verts :
+
+1. activer la V4 dans n8n
+2. dans Chatwoot :
+   - `Settings -> Integrations -> Webhooks`
+   - remplacer l'URL `chatwoot-inbound-v3` par `chatwoot-inbound-v4`
+3. effectuer un test reel avec au moins deux messages successifs
+
+Exemple de validation attendue :
+
+- message 1 :
+  - `Bonjour, je suis chez TransLog SA`
+- message 2 :
+  - `Notre besoin est l'automatisation`
+
+La deuxieme reponse ne doit pas redemander le nom de l'entreprise si la memoire fonctionne correctement.
+
+## Strategie de rollback
+
+Pendant 24 a 48 heures apres la bascule :
+
+- garder la V3 active dans n8n
+- si V4 pose un souci :
+  - remettre l'URL du webhook Chatwoot vers `chatwoot-inbound-v3`
+  - ne pas tenter de corriger en urgence directement sur la prod
+
+Une fois la V4 stable :
+
+- renommer la V3 en :
+
+```text
+ARCHIVE - TransferAI Chatwoot Auto Reply V3 (filet memoire down)
+```
+
+- puis desactiver la V3
+
+## Regles de stabilite
+
+- ne pas modifier la V3 active pendant la phase de validation V4
+- ne pas remettre `$env` dans les noeuds HTTP si l'instance n8n bloque l'acces aux variables d'environnement
+- ne jamais committer de secrets reels dans le repo
+- conserver des placeholders dans les JSON exportables
+- tester d'abord avec mock data puis avec une vraie conversation
+- garder `MAX_HISTORY = 20` tant qu'aucune raison metier ne justifie une hausse
+
+## Benefices attendus de la V4
+
+- l'assistant se souvient des informations deja donnees
+- il evite de reposer les memes questions
+- il enchaine mieux les tours de conversation
+- l'experience utilisateur parait plus humaine et moins robotique
+
+## Suite logique apres V4
+
+La roadmap cible reste la suivante :
+
+- V5 : qualification structuree, `custom_attributes`, labels Chatwoot
+- V5.5 : proposition conditionnelle de demo / Calendly
+- V6 : handoff humain automatique
+- V7 : logs, supervision, observabilite
+
+La V4 doit d'abord etre stable avant de passer a ces etapes.
