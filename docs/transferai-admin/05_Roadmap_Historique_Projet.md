@@ -305,6 +305,59 @@ Livrables cibles :
 - deduplication du message courant
 - meilleure continuite conversationnelle
 
+### Phase 24. V5 Qualification structuree
+
+Objectif :
+
+- qualifier automatiquement les conversations
+- remplir Chatwoot avec des attributs utiles aux agents
+- appliquer des labels actionnables
+- capter l'email de suivi avant la proposition de demo si necessaire
+
+Livrables :
+
+- workflow V5 dedie sur `chatwoot-inbound-v5`
+- deuxieme appel OpenAI dedie a la qualification JSON
+- extraction de :
+  - `company_name`
+  - `sector`
+  - `need_type`
+  - `intent`
+  - `lead_seriousness`
+  - `wants_demo`
+  - `needs_human_handoff`
+- push des `custom_attributes` Chatwoot
+- push des labels Chatwoot
+- prise en compte de `lead_email` et `lead_phone`
+- logique Option B de capture contact avant proposition de demo
+
+Validation observee :
+
+- tests pas a pas valides
+- labels Chatwoot confirmes visuellement
+- `custom_attributes` de qualification pousses
+- `lead_email` et `lead_phone` recuperes depuis Chatwoot ou la conversation
+- email demande seulement s'il manque avant proposition de demo
+
+### Phase 25. V5.5 Calendly conditionnel
+
+Objectif :
+
+- proposer un creneau de demo seulement quand le lead est suffisamment mature
+- ne jamais pousser un lien de prise de rendez-vous sans email connu
+- garder une proposition naturelle, non agressive et contextuelle
+
+Livrables cibles :
+
+- workflow V5.5 dedie sur `chatwoot-inbound-v5-5`
+- logique conditionnelle de proposition de demo / Calendly
+- lien Calendly injecte seulement si :
+  - `wants_demo === true`
+  - email connu
+  - lead suffisamment serieux
+- maintien des labels et `custom_attributes` V5
+- maintien de la V5 comme rollback rapide pendant observation V5.5
+
 ## 6. Lecture de maturite au 5 mai 2026
 
 Le projet n'est plus seulement une base pour un assistant IA.
@@ -315,4 +368,6 @@ Il est devenu :
 - un socle stable avec fallback V2
 - une V3 IA contextualisee validee
 - une base prete pour une V4 avec memoire
-- une architecture modulaire evolutive vers qualification, scoring et handoff humain
+- une V5 de qualification structuree validee fonctionnellement
+- une V5.5 en preparation pour industrialiser la conversion demo
+- une architecture modulaire evolutive vers scoring, handoff humain et conversion demo

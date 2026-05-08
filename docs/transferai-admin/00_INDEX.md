@@ -39,6 +39,10 @@ Le pack a 4 objectifs :
 26. [Guide Administrateur n8n V3 Export Word Friendly](./26_Export_Word_Guide_Administrateur_n8n_V3.html)
 27. [Guide Administrateur n8n V4 Memoire Export Word Friendly](./27_Export_Word_Guide_Administrateur_n8n_V4_Memoire.html)
 28. [Workflow n8n Chatwoot Auto Reply V4 Memoire](./28_n8n_Chatwoot_Auto_Reply_V4_Memoire.json)
+29. [Workflow n8n Chatwoot Auto Reply V5 Qualification](./29_n8n_Chatwoot_Auto_Reply_V5_Qualification.json)
+30. [Configuration Cible Chatwoot + n8n V5 Qualification](./30_Configuration_Cible_Chatwoot_n8n_V5_Qualification.md)
+31. [Workflow n8n Chatwoot Auto Reply V5.5 Calendly Conditionnel](./31_n8n_Chatwoot_Auto_Reply_V5_5_Calendly_Conditionnel.json)
+32. [Configuration Cible Chatwoot + n8n V5.5 Calendly Conditionnel](./32_Configuration_Cible_Chatwoot_n8n_V5_5_Calendly_Conditionnel.md)
 
 ## Ordre de lecture recommandé
 
@@ -118,6 +122,34 @@ Cette version du pack inclut désormais explicitement :
 - la feuille de route documentaire pour la future **V4 Memoire**
 - le guide administrateur **V4 Memoire** exportable en HTML Word-friendly et `.docx`
 - le workflow exportable **V4 Memoire** pret pour import dans n8n
+
+## Mise à jour importante au 7 mai 2026
+
+Cette version du pack inclut désormais explicitement :
+
+- la preparation repo de la **V5 Qualification**
+- le workflow exportable `29_n8n_Chatwoot_Auto_Reply_V5_Qualification.json`
+- la documentation cible `30_Configuration_Cible_Chatwoot_n8n_V5_Qualification.md`
+- la logique de qualification JSON OpenAI avec :
+  - `custom_attributes` Chatwoot
+  - labels automatiques
+  - capture `lead_email` / `lead_phone`
+- l'option B de collecte de contact :
+  - formulaire pre-chat recommande
+  - demande d'email dans le flux conversationnel si necessaire avant proposition de demo
+
+## Mise à jour importante au 8 mai 2026
+
+Cette version du pack inclut désormais explicitement :
+
+- la validation fonctionnelle de la **V5 Qualification**
+- la confirmation de l'Option B en production controlee :
+  - `Pre Chat Form` actif
+  - `lead_email` et `lead_phone` mappes vers Chatwoot
+  - recuperation / demande d'email avant proposition de demo si necessaire
+- la preparation repo de la **V5.5 Calendly conditionnel**
+- le workflow exportable `31_n8n_Chatwoot_Auto_Reply_V5_5_Calendly_Conditionnel.json`
+- la documentation cible `32_Configuration_Cible_Chatwoot_n8n_V5_5_Calendly_Conditionnel.md`
 
 ## Architecture résumée
 
