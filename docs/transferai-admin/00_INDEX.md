@@ -43,6 +43,8 @@ Le pack a 4 objectifs :
 30. [Configuration Cible Chatwoot + n8n V5 Qualification](./30_Configuration_Cible_Chatwoot_n8n_V5_Qualification.md)
 31. [Workflow n8n Chatwoot Auto Reply V5.5 Calendly Conditionnel](./31_n8n_Chatwoot_Auto_Reply_V5_5_Calendly_Conditionnel.json)
 32. [Configuration Cible Chatwoot + n8n V5.5 Calendly Conditionnel](./32_Configuration_Cible_Chatwoot_n8n_V5_5_Calendly_Conditionnel.md)
+33. [Guide Administrateur n8n V5 Qualification Export Word Friendly](./33_Export_Word_Guide_Administrateur_n8n_V5.html)
+34. [Guide Administrateur n8n V5.5 Calendly Conditionnel Export Word Friendly](./34_Export_Word_Guide_Administrateur_n8n_V5_5_Calendly.html)
 
 ## Ordre de lecture recommandé
 
@@ -150,6 +152,7 @@ Cette version du pack inclut désormais explicitement :
 - la preparation repo de la **V5.5 Calendly conditionnel**
 - le workflow exportable `31_n8n_Chatwoot_Auto_Reply_V5_5_Calendly_Conditionnel.json`
 - la documentation cible `32_Configuration_Cible_Chatwoot_n8n_V5_5_Calendly_Conditionnel.md`
+- les guides administrateur Word-friendly de la **V5 Qualification** et de la **V5.5 Calendly conditionnel**
 
 ## Architecture résumée
 

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide Administrateur n8n V5 Qualification - TransferAI</title>
+  <style>
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      line-height: 1.45;
+      color: #1f2937;
+      margin: 40px;
+      max-width: 980px;
+    }
+    h1, h2, h3 {
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+    h3 {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    p, li {
+      font-size: 12pt;
+    }
+    ul, ol {
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f4f6;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 10.5pt;
+    }
+    pre {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      padding: 10px 12px;
+      white-space: pre-wrap;
+      font-size: 10.5pt;
+    }
+    .meta {
+      color: #4b5563;
+      font-size: 11pt;
+      margin-bottom: 20px;
+    }
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #2563eb;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+    .warning {
+      border-left-color: #dc2626;
+      background: #fef2f2;
+    }
+    .success {
+      border-left-color: #16a34a;
+      background: #f0fdf4;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11pt;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guide Administrateur n8n V5 Qualification</h1>
+  <div class="meta">
+    TransferAI Africa<br />
+    Version de reference : 8 mai 2026<br />
+    Base documentaire : <code>30_Configuration_Cible_Chatwoot_n8n_V5_Qualification.md</code><br />
+    Statut : V5 configuree et validee fonctionnellement, V4 a conserver comme rollback court terme
+  </div>
+
+  <div class="box success">
+    <strong>Objet du document</strong><br />
+    Ce guide explique comment exploiter, superviser et maintenir la V5 du workflow Chatwoot + n8n de TransferAI. La V5 ajoute la qualification structuree, l’ecriture dans les custom attributes Chatwoot, l’application automatique de labels et la capture de contact renforcee.
+  </div>
+
+  <h2>1. Resume executif</h2>
+  <p>
+    La V5 conserve les acquis des V3 et V4 : reponse IA contextualisee et memoire conversationnelle. Elle ajoute une deuxieme brique OpenAI dediee a la qualification commerciale, puis ecrit les resultats dans Chatwoot pour rendre les conversations directement actionnables par les agents.
+  </p>
+
+  <h2>2. Workflow actif recommande</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Nom recommande</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Production</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V5 (Qualification)</code></td>
+        <td>Workflow principal en charge de la reponse, qualification, labels et custom attributes.</td>
+      </tr>
+      <tr>
+        <td>Rollback</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V4 (Memoire)</code></td>
+        <td>Filet de securite si la V5 doit etre contournee rapidement.</td>
+      </tr>
+      <tr>
+        <td>Reference historique</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V3 (OpenAI)</code></td>
+        <td>Base stable historique, conservee comme reference documentaire.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Webhook de production V5</h2>
+  <pre>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v5</pre>
+
+  <h2>4. Architecture V5</h2>
+  <ol>
+    <li><code>Chatwoot Webhook V5</code></li>
+    <li><code>Filter Chatwoot event</code></li>
+    <li><code>Fetch conversation history</code></li>
+    <li><code>Build OpenAI reply payload</code></li>
+    <li><code>OpenAI Chat Completions (reply)</code></li>
+    <li><code>Format AI reply</code></li>
+    <li><code>Send reply to Chatwoot</code></li>
+    <li><code>Build qualification payload</code></li>
+    <li><code>OpenAI Qualification JSON</code></li>
+    <li><code>Parse qualification + Compute labels</code></li>
+    <li><code>Update Chatwoot custom_attributes</code></li>
+    <li><code>Apply Chatwoot labels</code></li>
+  </ol>
+
+  <h2>5. Ce que la V5 ajoute</h2>
+  <ul>
+    <li>Extraction JSON stricte du besoin commercial.</li>
+    <li>Calcul automatique de labels de traitement.</li>
+    <li>Ecriture des champs de qualification dans Chatwoot.</li>
+    <li>Capture de contact renforcee avec Option B.</li>
+    <li>Preparation de la suite commerciale vers demo ou handoff humain.</li>
+  </ul>
+
+  <h2>6. Option B de collecte de contact</h2>
+  <div class="box">
+    <strong>Strategie retenue</strong><br />
+    TransferAI utilise une double securite : un <code>Pre Chat Form</code> Chatwoot pour capter le nom et l’email en amont, et une logique de workflow qui redemande l’email seulement s’il manque au moment opportun.
+  </div>
+  <ul>
+    <li><strong>Pre Chat Form</strong> :
+      <ul>
+        <li><code>fullName</code> obligatoire</li>
+        <li><code>emailAddress</code> obligatoire</li>
+        <li><code>phoneNumber</code> optionnel</li>
+      </ul>
+    </li>
+    <li><strong>Workflow V5</strong> :
+      <ul>
+        <li>ne re-demande jamais l’email s’il est deja connu</li>
+        <li>demande l’email s’il manque avant une proposition de demo</li>
+        <li>mappe <code>lead_email</code> et <code>lead_phone</code> dans Chatwoot</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>7. Labels et custom attributes attendus</h2>
+  <h3>Labels</h3>
+  <p>Les labels suivants doivent exister dans Chatwoot avec l’orthographe exacte :</p>
+  <p><code>formation</code>, <code>audit-ia</code>, <code>veille</code>, <code>automatisation</code>, <code>catalogue</code>, <code>certification</code>, <code>webinar</code>, <code>partenariat</code>, <code>emploi</code>, <code>support</code>, <code>lead-chaud</code>, <code>infos-manquantes</code>, <code>handoff-humain</code>, <code>demo-proposee</code>.</p>
+
+  <h3>Custom attributes</h3>
+  <p>Au minimum :</p>
+  <p><code>company_name</code>, <code>sector</code>, <code>need_type</code>, <code>intent</code>, <code>lead_seriousness</code>, <code>internal_summary</code>, <code>next_best_action</code>, <code>is_b2b</code>, <code>demo_proposed</code>, <code>human_handoff</code>, <code>lead_email</code>, <code>lead_phone</code>.</p>
+
+  <h2>8. Configuration OpenAI et Chatwoot</h2>
+  <p>La V5 utilise :</p>
+  <ul>
+    <li>4 noeuds avec token Chatwoot dans les headers</li>
+    <li>2 noeuds avec cle OpenAI prefixed par <code>Bearer </code></li>
+  </ul>
+  <div class="box warning">
+    <strong>Regle de securite</strong><br />
+    Les vraies cles et tokens ne doivent jamais etre commit dans le repo. Les exports versionnes doivent conserver les placeholders.
+  </div>
+
+  <h2>9. Validation fonctionnelle observee</h2>
+  <ul>
+    <li>les 12 noeuds ont ete testes pas a pas</li>
+    <li>la reponse IA est bien renvoyee dans Chatwoot</li>
+    <li>les labels sont bien appliques</li>
+    <li>les custom attributes sont bien ecrits</li>
+    <li><code>lead_email</code> et <code>lead_phone</code> sont bien pris en compte</li>
+    <li>si l’email est deja connu, il n’est pas redemande</li>
+    <li>si l’email est absent, le bot peut le demander avant une demo</li>
+  </ul>
+
+  <h2>10. Test de fonctionnement recommande</h2>
+  <ol>
+    <li>Envoyer un message de qualification riche depuis le widget.</li>
+    <li>Verifier qu’une execution apparait dans n8n.</li>
+    <li>Verifier que les 12 noeuds passent au vert.</li>
+    <li>Verifier la reponse IA dans Chatwoot.</li>
+    <li>Verifier la presence des labels et des custom attributes.</li>
+    <li>Tester un cas sans email explicite pour confirmer la logique Option B.</li>
+  </ol>
+
+  <h2>11. Rollback</h2>
+  <p>Si la V5 pose probleme, remettre temporairement le webhook Chatwoot sur la V4 :</p>
+  <pre>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v4</pre>
+
+  <h2>12. Regles de stabilite</h2>
+  <ul>
+    <li>ne pas activer de mock data sur le webhook en production</li>
+    <li>ne pas modifier plusieurs noeuds a la fois sans re-test</li>
+    <li>garder la V4 active 24 a 48h apres bascule</li>
+    <li>surveiller les erreurs OpenAI et Chatwoot dans l’onglet Executions</li>
+    <li>regenerer un token s’il a ete expose dans une capture</li>
+  </ul>
+
+  <h2>13. Prochaine etape</h2>
+  <p>La suite logique est la V5.5 Calendly conditionnel : meme socle que la V5, mais avec une proposition de demo plus stricte, seulement si l’email est connu et le lead suffisamment mature.</p>
+</body>
+</html>

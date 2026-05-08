@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide Administrateur n8n V5.5 Calendly Conditionnel - TransferAI</title>
+  <style>
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      line-height: 1.45;
+      color: #1f2937;
+      margin: 40px;
+      max-width: 980px;
+    }
+    h1, h2, h3 {
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+    h3 {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    p, li {
+      font-size: 12pt;
+    }
+    ul, ol {
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f4f6;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 10.5pt;
+    }
+    pre {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      padding: 10px 12px;
+      white-space: pre-wrap;
+      font-size: 10.5pt;
+    }
+    .meta {
+      color: #4b5563;
+      font-size: 11pt;
+      margin-bottom: 20px;
+    }
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #2563eb;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+    .warning {
+      border-left-color: #dc2626;
+      background: #fef2f2;
+    }
+    .success {
+      border-left-color: #16a34a;
+      background: #f0fdf4;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11pt;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guide Administrateur n8n V5.5 Calendly Conditionnel</h1>
+  <div class="meta">
+    TransferAI Africa<br />
+    Version de reference : 8 mai 2026<br />
+    Base documentaire : <code>32_Configuration_Cible_Chatwoot_n8n_V5_5_Calendly_Conditionnel.md</code><br />
+    Statut : V5.5 preparee pour import, V5 a conserver comme reference active tant que la stabilisation n’est pas faite
+  </div>
+
+  <div class="box success">
+    <strong>Objet du document</strong><br />
+    Ce guide decrit la V5.5 de l’assistant Chatwoot + n8n TransferAI. La V5.5 n’ajoute pas de nouvelle brique technique majeure ; elle raffine la logique commerciale pour proposer un lien de demonstration seulement si le lead est suffisamment qualifie et si l’email de suivi est deja connu.
+  </div>
+
+  <h2>1. Resume executif</h2>
+  <p>
+    La V5.5 conserve tout le socle V5 : memoire conversationnelle, reponse IA, qualification JSON, labels et custom attributes. Elle ajoute une regle de conversion plus stricte autour de la proposition de demo et du lien Calendly.
+  </p>
+
+  <h2>2. Principe metier</h2>
+  <ul>
+    <li>ne jamais pousser un lien de rendez-vous trop tot</li>
+    <li>ne jamais proposer Calendly sans email connu</li>
+    <li>utiliser le lien seulement si le besoin est concret ou si la demande de demo est explicite</li>
+    <li>continuer la qualification si le lead reste incomplet</li>
+  </ul>
+
+  <h2>3. Workflow cible</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Nom recommande</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Version cible</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V5.5 (Calendly conditionnel)</code></td>
+        <td>Version candidate avec logique stricte de proposition de demo.</td>
+      </tr>
+      <tr>
+        <td>Rollback</td>
+        <td><code>ACTIVE - TransferAI Chatwoot Auto Reply V5 (Qualification)</code></td>
+        <td>Version stable a conserver pendant toute la phase de validation V5.5.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Webhook V5.5</h2>
+  <pre>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v5-5</pre>
+
+  <h2>5. Architecture</h2>
+  <p>La V5.5 garde les 12 noeuds de la V5 :</p>
+  <ol>
+    <li><code>Chatwoot Webhook V5.5</code></li>
+    <li><code>Filter Chatwoot event</code></li>
+    <li><code>Fetch conversation history</code></li>
+    <li><code>Build OpenAI reply payload</code></li>
+    <li><code>OpenAI Chat Completions (reply)</code></li>
+    <li><code>Format AI reply</code></li>
+    <li><code>Send reply to Chatwoot</code></li>
+    <li><code>Build qualification payload</code></li>
+    <li><code>OpenAI Qualification JSON</code></li>
+    <li><code>Parse qualification + Compute labels</code></li>
+    <li><code>Update Chatwoot custom_attributes</code></li>
+    <li><code>Apply Chatwoot labels</code></li>
+  </ol>
+
+  <h2>6. Ce qui change par rapport a la V5</h2>
+  <ul>
+    <li>path du webhook distinct : <code>chatwoot-inbound-v5-5</code></li>
+    <li>constante de lien Calendly introduite dans le prompt</li>
+    <li>regles plus strictes dans <code>Build OpenAI reply payload</code></li>
+    <li>temperature de reponse legerement abaissee pour garder un ton plus cadre</li>
+  </ul>
+
+  <h2>7. Regles de proposition de demo</h2>
+  <div class="box">
+    <strong>Rappel central</strong><br />
+    Le lien Calendly n’est pas un reflexe. C’est une option commerciale qui ne doit apparaitre que si le lead est suffisamment mur et qu’un email de suivi est deja connu.
+  </div>
+  <ul>
+    <li>Si <code>sender_email</code> est vide : demander d’abord l’email.</li>
+    <li>Si <code>sender_email</code> est connu et que le besoin est concret : la demo peut etre proposee.</li>
+    <li>Si le lead est encore flou : continuer la qualification, sans lien.</li>
+    <li>Le ton doit rester consultatif, jamais agressif.</li>
+  </ul>
+
+  <h2>8. Valeur a configurer</h2>
+  <p>Le noeud <code>Build OpenAI reply payload</code> contient la constante :</p>
+  <pre>REPLACE_WITH_CALENDLY_URL</pre>
+  <p>Exemple attendu :</p>
+  <pre>https://calendly.com/transferai/demo</pre>
+
+  <h2>9. Cas de test recommandes</h2>
+  <h3>Cas 1. Lead incomplet sans email</h3>
+  <pre>Bonjour, je dirige une PME et je veux automatiser certains process.</pre>
+  <p>Attendu : le bot pose une ou plusieurs questions utiles et demande l’email avant toute proposition de demo.</p>
+
+  <h3>Cas 2. Lead complet sans demande explicite de demo</h3>
+  <pre>Bonjour, je dirige TransLog SA dans la logistique. Nous voulons automatiser le suivi de flotte.</pre>
+  <p>Attendu : reponse contextualisee, qualification progressive, pas de lien pousse trop tot.</p>
+
+  <h3>Cas 3. Lead chaud avec demande explicite de demo</h3>
+  <pre>Bonjour, je m'appelle Marius. Je dirige TransLog SA, une PME ivoirienne dans la logistique avec 30 employes. Nous voulons automatiser le suivi de flotte et nous voulons une demo cette semaine.</pre>
+  <p>Attendu : reponse contextualisee, lien Calendly possible si l’email est connu, labels coherents comme <code>automatisation</code>, <code>lead-chaud</code> et <code>demo-proposee</code>.</p>
+
+  <h2>10. Procedure de migration V5 vers V5.5</h2>
+  <ol>
+    <li>Importer le workflow V5.5 dans n8n.</li>
+    <li>Remplacer les placeholders de secrets et le lien Calendly.</li>
+    <li>Tester en parallele de la V5 avec mock ou conversation dediee.</li>
+    <li>Retirer tout pin / mock data du webhook.</li>
+    <li>Activer la V5.5.</li>
+    <li>Modifier dans Chatwoot l’URL webhook de <code>chatwoot-inbound-v5</code> vers <code>chatwoot-inbound-v5-5</code>.</li>
+    <li>Observer les executions 24 a 48h avant archivage de la V5.</li>
+  </ol>
+
+  <h2>11. Rollback</h2>
+  <p>En cas de souci, remettre le webhook Chatwoot sur :</p>
+  <pre>https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/chatwoot-inbound-v5</pre>
+
+  <h2>12. Regles de stabilite</h2>
+  <ul>
+    <li>ne jamais tester la V5.5 directement sur tous les leads sans observation initiale</li>
+    <li>garder la V5 active comme filet de securite</li>
+    <li>surveiller le comportement sur les leads chauds et les demandes de demo</li>
+    <li>verifier que l’email n’est jamais redemande s’il est deja connu</li>
+    <li>verifier qu’aucun lien Calendly n’est envoye si l’email manque</li>
+  </ul>
+
+  <h2>13. Suite logique</h2>
+  <p>Apres stabilisation V5.5, la suite recommandee reste la meme : V6 pour le handoff humain conditionnel, puis V7 pour la supervision et les logs analytiques.</p>
+</body>
+</html>
