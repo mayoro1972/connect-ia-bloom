@@ -205,20 +205,28 @@ Deno.serve(async (request) => {
       const message = buildMessage(row);
       const emailResult = await sendEmail(row.email, message);
 
-      await supabase.from("prospect_email_delivery_logs").insert({
-        contact_request_id: row.id,
-        recipient_email: row.email,
-        delivery_type: "audit_form_access",
-        provider: "resend",
-        provider_message_id: emailResult?.id ?? null,
-        status: "sent",
-        subject: message.subject,
-        sent_at: new Date().toISOString(),
-        metadata: {
-          audit_form_url: AUDIT_FORM_URL,
-          audit_login_url: AUDIT_LOGIN_URL,
-        },
-      });
+      try {
+        await supabase.from("prospect_email_delivery_logs").insert({
+          contact_request_id: row.id,
+          recipient_email: row.email,
+          delivery_type: "audit_form_access",
+          provider: "resend",
+          provider_message_id: emailResult?.id ?? null,
+          status: "sent",
+          subject: message.subject,
+          sent_at: new Date().toISOString(),
+          metadata: {
+            audit_form_url: AUDIT_FORM_URL,
+            audit_login_url: AUDIT_LOGIN_URL,
+          },
+        });
+      } catch (logError) {
+        console.error("[process-prospect-followups] delivery log insert failed", {
+          requestId: row.id,
+          email: row.email,
+          error: logError instanceof Error ? logError.message : "unknown_log_error",
+        });
+      }
 
       const { error: updateError } = await supabase
         .from("contact_requests")

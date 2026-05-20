@@ -1757,6 +1757,44 @@ const sendEmail = async (to: string, message: EmailMessage) => {
   return response.json();
 };
 
+type DeliveryAttempt = {
+  key: "internal" | "acknowledgement" | "auditExplainer" | "qualifiedResponse";
+  recipientEmail: string;
+  deliveryType: "internal_notification" | "acknowledgement" | "audit_explainer" | "qualified_response";
+  message: EmailMessage;
+};
+
+type DeliveryOutcome = DeliveryAttempt & {
+  providerMessageId: string | null;
+  rawResult: Record<string, unknown> | null;
+  status: "sent" | "failed";
+  errorMessage: string | null;
+};
+
+const attemptDelivery = async (attempt: DeliveryAttempt): Promise<DeliveryOutcome> => {
+  try {
+    const rawResult = await sendEmail(attempt.recipientEmail, attempt.message) as Record<string, unknown>;
+    const providerMessageId =
+      typeof rawResult?.id === "string" && rawResult.id.trim().length > 0 ? rawResult.id : null;
+
+    return {
+      ...attempt,
+      rawResult,
+      providerMessageId,
+      status: "sent",
+      errorMessage: null,
+    };
+  } catch (error) {
+    return {
+      ...attempt,
+      rawResult: null,
+      providerMessageId: null,
+      status: "failed",
+      errorMessage: error instanceof Error ? error.message : "unknown_email_error",
+    };
+  }
+};
+
 const logCatalogueDelivery = async (payload: ProspectEmailPayload) => {
   if (!supabase || payload.intent !== "demande-catalogue") {
     return;
@@ -1828,17 +1866,20 @@ const logProspectDelivery = async (payload: {
     payload.deliveryType === "internal_notification" ? "admin" : "prospect";
 
   const { error } = await supabase.from("prospect_email_delivery_logs").insert({
-    request_id: payload.requestId ?? null,
+    contact_request_id: payload.requestId ?? null,
     recipient_email: payload.recipientEmail,
-    recipient_type: recipientType,
-    intent: payload.intent ?? null,
-    language: payload.language ?? null,
+    delivery_type: payload.deliveryType,
+    provider: "resend",
     provider_message_id: payload.providerMessageId ?? null,
     status: payload.status,
     subject: payload.subject,
     error_message: payload.errorMessage ?? null,
     sent_at: payload.status === "sent" ? new Date().toISOString() : null,
-    meta: { delivery_type: payload.deliveryType, provider: "resend" },
+    metadata: {
+      recipient_type: recipientType,
+      intent: payload.intent ?? null,
+      language: payload.language ?? null,
+    },
   });
 
   if (error) {
@@ -1873,67 +1914,74 @@ Deno.serve(async (request) => {
     const qualifiedResponse = buildQualifiedResponse(payload);
     const auditExplainer = buildAuditExplainer(payload);
 
-    const deliveries = await Promise.all([
-      sendEmail(MAIL_TO, internalMessage),
-      sendEmail(payload.email, acknowledgement),
-      auditExplainer ? sendEmail(payload.email, auditExplainer) : Promise.resolve(null),
-      qualifiedResponse ? sendEmail(payload.email, qualifiedResponse) : Promise.resolve(null),
-    ]);
+    const deliveryQueue: DeliveryAttempt[] = [
+      {
+        key: "internal",
+        recipientEmail: MAIL_TO,
+        deliveryType: "internal_notification",
+        message: internalMessage,
+      },
+      {
+        key: "acknowledgement",
+        recipientEmail: payload.email,
+        deliveryType: "acknowledgement",
+        message: acknowledgement,
+      },
+    ];
 
-    const [internalResult, acknowledgementResult, auditExplainerResult, qualifiedResponseResult] = deliveries;
+    if (auditExplainer) {
+      deliveryQueue.push({
+        key: "auditExplainer",
+        recipientEmail: payload.email,
+        deliveryType: "audit_explainer",
+        message: auditExplainer,
+      });
+    }
+
+    if (qualifiedResponse) {
+      deliveryQueue.push({
+        key: "qualifiedResponse",
+        recipientEmail: payload.email,
+        deliveryType: "qualified_response",
+        message: qualifiedResponse,
+      });
+    }
+
+    const deliveryOutcomes: DeliveryOutcome[] = [];
+    for (const delivery of deliveryQueue) {
+      deliveryOutcomes.push(await attemptDelivery(delivery));
+    }
+
+    const getOutcome = (key: DeliveryAttempt["key"]) => deliveryOutcomes.find((item) => item.key === key) ?? null;
+    const internalOutcome = getOutcome("internal");
+    const acknowledgementOutcome = getOutcome("acknowledgement");
+    const auditExplainerOutcome = getOutcome("auditExplainer");
+    const qualifiedResponseOutcome = getOutcome("qualifiedResponse");
     let catalogueDeliveryLogError: string | null = null;
 
     try {
-      await logProspectDelivery({
-        requestId: payload.requestId,
-        recipientEmail: MAIL_TO,
-        deliveryType: "internal_notification",
-        subject: internalMessage.subject,
-        providerMessageId: internalResult?.id ?? null,
-        status: "sent",
-        intent: payload.intent,
-        language: payload.language,
-      });
-      await logProspectDelivery({
-        requestId: payload.requestId,
-        recipientEmail: payload.email,
-        deliveryType: "acknowledgement",
-        subject: acknowledgement.subject,
-        providerMessageId: acknowledgementResult?.id ?? null,
-        status: "sent",
-        intent: payload.intent,
-        language: payload.language,
-      });
-      if (auditExplainer && auditExplainerResult) {
+      for (const outcome of deliveryOutcomes) {
         await logProspectDelivery({
           requestId: payload.requestId,
-          recipientEmail: payload.email,
-          deliveryType: "audit_explainer",
-          subject: auditExplainer.subject,
-          providerMessageId: auditExplainerResult?.id ?? null,
-          status: "sent",
+          recipientEmail: outcome.recipientEmail,
+          deliveryType: outcome.deliveryType,
+          subject: outcome.message.subject,
+          providerMessageId: outcome.providerMessageId,
+          status: outcome.status,
+          errorMessage: outcome.errorMessage,
           intent: payload.intent,
           language: payload.language,
         });
       }
-      if (qualifiedResponse && qualifiedResponseResult) {
-        await logProspectDelivery({
-          requestId: payload.requestId,
-          recipientEmail: payload.email,
-          deliveryType: "qualified_response",
-          subject: qualifiedResponse.subject,
-          providerMessageId: qualifiedResponseResult?.id ?? null,
-          status: "sent",
-          intent: payload.intent,
-          language: payload.language,
-        });
+
+      if (acknowledgementOutcome?.status === "sent") {
+        await logCatalogueDelivery(payload);
       }
-      await logCatalogueDelivery(payload);
     } catch (logError) {
       catalogueDeliveryLogError = logError instanceof Error ? logError.message : "catalogue_delivery_log_failed";
     }
 
-    // Schedule the audit form follow-up email 30 minutes after acknowledgement.
+    // Keep the audit follow-up on track even if one of the other transactional emails fails.
     if (payload.intent === "demande-audit" && payload.requestId) {
       try {
         const scheduledFor = new Date(Date.now() + 30 * 60 * 1000).toISOString();
@@ -1952,13 +2000,19 @@ Deno.serve(async (request) => {
 
     return new Response(
       JSON.stringify({
-        ok: true,
-        internal: internalResult,
-        acknowledgement: acknowledgementResult,
-        auditExplainer: auditExplainerResult,
+        ok: deliveryOutcomes.every((item) => item.status === "sent"),
+        internal: internalOutcome?.rawResult ?? null,
+        acknowledgement: acknowledgementOutcome?.rawResult ?? null,
+        auditExplainer: auditExplainerOutcome?.rawResult ?? null,
         auditExplainerTriggered: Boolean(auditExplainer),
-        qualifiedResponse: qualifiedResponseResult,
+        qualifiedResponse: qualifiedResponseOutcome?.rawResult ?? null,
         qualifiedResponseTriggered: Boolean(qualifiedResponse),
+        deliveryStatuses: deliveryOutcomes.map((item) => ({
+          key: item.key,
+          status: item.status,
+          recipientEmail: item.recipientEmail,
+          errorMessage: item.errorMessage,
+        })),
         catalogueDeliveryLogError,
       }),
       {
