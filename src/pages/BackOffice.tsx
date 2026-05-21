@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
-import { invokeContentAdmin } from "@/lib/content-admin";
+import { invokeAdminEdgeFunction, invokeContentAdmin } from "@/lib/content-admin";
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
 import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
 import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
@@ -185,6 +185,77 @@ const emptyFeedForm = {
   is_active: true,
 };
 
+const emptyManualSignalForm = {
+  title: "",
+  url: "",
+  published_at: new Date().toISOString().slice(0, 16),
+  raw_summary: "",
+};
+
+const regulatoryFeedPresets = [
+  {
+    label: "BCEAO",
+    values: {
+      name: "BCEAO",
+      url: "https://www.bceao.int/fr/publications",
+      feed_type: "site",
+      publisher: "Banque Centrale des États de l'Afrique de l'Ouest",
+      country_focus: "Côte d'Ivoire",
+      region_focus: "UEMOA",
+      domain_focus: "Finance & Fintech",
+      language: "fr",
+      trust_score: "95",
+      notes: "Vérifié le 9 mai 2026 sur le site officiel BCEAO. Page utile pour publications, notes et signaux de gouvernance bancaire.",
+      is_active: true,
+    },
+  },
+  {
+    label: "UEMOA",
+    values: {
+      name: "UEMOA",
+      url: "https://www.uemoa.int/actualites",
+      feed_type: "site",
+      publisher: "Union Économique et Monétaire Ouest Africaine",
+      country_focus: "Côte d'Ivoire",
+      region_focus: "Afrique de l'Ouest",
+      domain_focus: "Finance & Fintech",
+      language: "fr",
+      trust_score: "92",
+      notes: "Vérifié le 9 mai 2026 sur le site officiel UEMOA. À suivre pour règlements régionaux, finance numérique et coordination prudentielle.",
+      is_active: true,
+    },
+  },
+  {
+    label: "ARTCI / Données",
+    values: {
+      name: "ARTCI / données & numérique",
+      url: "https://www.artci.ci/index.php/decisions",
+      feed_type: "site",
+      publisher: "ARTCI",
+      country_focus: "Côte d'Ivoire",
+      region_focus: "Afrique de l'Ouest",
+      domain_focus: "Droit & LegalTech IA",
+      language: "fr",
+      trust_score: "90",
+      notes: "Vérifié le 9 mai 2026 sur le site officiel ARTCI. Utile pour données personnelles, numérique, cybersécurité et conformité locale.",
+      is_active: true,
+    },
+  },
+];
+
+const regulatoryTagGuide = [
+  "jurisdiction:cote-divoire",
+  "jurisdiction:uemoa-bceao",
+  "jurisdiction:international",
+  "authority:bceao",
+  "authority:uemoa",
+  "authority:artci",
+  "theme:gouvernance-ia",
+  "theme:donnees-personnelles",
+  "theme:conformite-bancaire",
+  "impact:high",
+];
+
 const fieldClass = "w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
 
 const intentLabels: Record<string, string> = {
@@ -208,6 +279,7 @@ const BackOfficePage = () => {
   const [resourceForm, setResourceForm] = useState(emptyResourceForm);
   const [jobForm, setJobForm] = useState(emptyJobForm);
   const [feedForm, setFeedForm] = useState(emptyFeedForm);
+  const [manualSignalForm, setManualSignalForm] = useState(emptyManualSignalForm);
   const [resources, setResources] = useState<ResourceAdminItem[]>([]);
   const [jobs, setJobs] = useState<JobAdminItem[]>([]);
   const [analytics, setAnalytics] = useState<AnalyticsSnapshot | null>(null);
@@ -347,6 +419,74 @@ const BackOfficePage = () => {
     } finally {
       setIsBusy(false);
     }
+  };
+
+  const submitManualSignal = async () => {
+    setIsBusy(true);
+    setStatusMessage(null);
+    setErrorMessage(null);
+
+    try {
+      await invokeAdminEdgeFunction(token, "content-discovery", {
+        manual_signals: [
+          {
+            title: manualSignalForm.title,
+            url: manualSignalForm.url,
+            published_at: new Date(manualSignalForm.published_at).toISOString(),
+            raw_summary: manualSignalForm.raw_summary,
+          },
+        ],
+      });
+
+      setManualSignalForm(emptyManualSignalForm);
+      await loadData(token);
+      setStatusMessage("Signal réglementaire ajouté à la file de veille.");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Ajout du signal impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  const runEditorialStep = async (
+    functionName: "content-discovery" | "content-classifier" | "content-drafter",
+    successMessage: string,
+  ) => {
+    setIsBusy(true);
+    setStatusMessage(null);
+    setErrorMessage(null);
+
+    try {
+      await invokeAdminEdgeFunction(token, functionName, { limit: 10 });
+      await loadData(token);
+      setStatusMessage(successMessage);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Exécution du pipeline impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  const applyFeedPreset = (preset: (typeof regulatoryFeedPresets)[number]["values"]) => {
+    setFeedForm(preset);
+    setStatusMessage("Source réglementaire préremplie. Vérifiez l'URL réelle du flux avant enregistrement.");
+    setErrorMessage(null);
+  };
+
+  const addTagToResourceForm = (tag: string) => {
+    const existingTags = resourceForm.tags
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    if (existingTags.includes(tag)) {
+      return;
+    }
+
+    setResourceForm({
+      ...resourceForm,
+      tags: [...existingTags, tag].join(", "),
+    });
   };
 
   const setResourceStatus = async (id: string, status: string) => {
@@ -687,6 +827,24 @@ const BackOfficePage = () => {
                       <input className={fieldClass} value={resourceForm.tags} onChange={(e) => setResourceForm({ ...resourceForm, tags: e.target.value })} placeholder="Tags séparés par des virgules" />
                       <input className={fieldClass} type="number" min="1" value={resourceForm.read_time_minutes} onChange={(e) => setResourceForm({ ...resourceForm, read_time_minutes: e.target.value })} placeholder="Temps de lecture" />
                     </div>
+                    <div className="rounded-2xl border border-border bg-background/60 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Tags métier rapides</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Cliquez pour injecter les tags banque/régulation directement dans le champ tags.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {regulatoryTagGuide.map((tag) => (
+                          <button
+                            key={tag}
+                            type="button"
+                            onClick={() => addTagToResourceForm(tag)}
+                            className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-card-foreground transition hover:border-primary/40 hover:text-primary"
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                     <Textarea
                       value={resourceForm.sources_json}
                       onChange={(e) => setResourceForm({ ...resourceForm, sources_json: e.target.value })}
@@ -778,7 +936,56 @@ const BackOfficePage = () => {
                     </div>
                   </div>
 
-                  <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+                  <div className="rounded-2xl border border-border bg-card p-6">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <h2 className="font-heading text-xl font-bold text-card-foreground">Accélérateurs banque & régulation</h2>
+                        <p className="mt-2 text-sm text-muted-foreground">
+                          Préremplissez les sources prioritaires et imposez une taxonomie simple pour garder une veille propre et exploitable.
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {regulatoryFeedPresets.map((preset) => (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => applyFeedPreset(preset.values)}
+                            className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:border-primary/40 hover:text-primary"
+                          >
+                            Préremplir {preset.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-5 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+                      <div className="rounded-2xl border border-border bg-background/60 p-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Taxonomie conseillée</p>
+                        <p className="mt-2 text-sm text-muted-foreground">
+                          Glissez ces tags dans les contenus publiés ou dans vos notes éditoriales pour standardiser le classement.
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {regulatoryTagGuide.map((tag) => (
+                            <span key={tag} className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="rounded-2xl border border-border bg-background/60 p-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Routine d'exploitation</p>
+                        <div className="mt-3 space-y-2 text-sm text-muted-foreground">
+                          <p>1. Ajouter le signal dès réception.</p>
+                          <p>2. Classer et générer un brouillon FR.</p>
+                          <p>3. Publier avec juridiction, autorité et impact.</p>
+                          <p>4. Utiliser la page publique comme feed de direction ou de conformité.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 xl:grid-cols-3">
                     <div className="rounded-2xl border border-border bg-card p-6 space-y-4">
                       <h2 className="font-heading text-xl font-bold text-card-foreground">Ajouter une source de veille</h2>
                       <p className="text-sm text-muted-foreground">
@@ -814,6 +1021,76 @@ const BackOfficePage = () => {
                       </button>
                     </div>
 
+                    <div className="rounded-2xl border border-border bg-card p-6 space-y-4">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Injecter un signal réglementaire</h2>
+                      <p className="text-sm text-muted-foreground">
+                        Collez ici une nouvelle note BCEAO, un texte de conformité, une annonce régulateur ou un article sectoriel dès sa sortie.
+                      </p>
+                      <Input
+                        value={manualSignalForm.title}
+                        onChange={(e) => setManualSignalForm({ ...manualSignalForm, title: e.target.value })}
+                        placeholder="Titre du signal"
+                      />
+                      <Input
+                        value={manualSignalForm.url}
+                        onChange={(e) => setManualSignalForm({ ...manualSignalForm, url: e.target.value })}
+                        placeholder="URL source"
+                      />
+                      <Input
+                        type="datetime-local"
+                        value={manualSignalForm.published_at}
+                        onChange={(e) => setManualSignalForm({ ...manualSignalForm, published_at: e.target.value })}
+                      />
+                      <Textarea
+                        value={manualSignalForm.raw_summary}
+                        onChange={(e) => setManualSignalForm({ ...manualSignalForm, raw_summary: e.target.value })}
+                        placeholder="Résumé ou extrait important"
+                      />
+                      <button
+                        type="button"
+                        onClick={submitManualSignal}
+                        disabled={!isReady || isBusy || !manualSignalForm.title.trim() || !manualSignalForm.url.trim()}
+                        className="rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+                      >
+                        Ajouter à la file
+                      </button>
+                    </div>
+
+                    <div className="rounded-2xl border border-border bg-card p-6">
+                      <h2 className="font-heading text-xl font-bold text-card-foreground">Piloter le pipeline</h2>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Exécutez les étapes dans l'ordre pour transformer les signaux entrants en brouillons puis en notes publiées.
+                      </p>
+                      <div className="mt-4 space-y-3">
+                        <button
+                          type="button"
+                          onClick={() => runEditorialStep("content-discovery", "Collecte automatique relancée.")}
+                          disabled={!isReady || isBusy}
+                          className="w-full rounded-lg border border-border px-4 py-3 text-left text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50"
+                        >
+                          1. Lancer la collecte des sources
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => runEditorialStep("content-classifier", "Classification des nouveaux signaux terminée.")}
+                          disabled={!isReady || isBusy}
+                          className="w-full rounded-lg border border-border px-4 py-3 text-left text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50"
+                        >
+                          2. Classer les nouveaux signaux
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => runEditorialStep("content-drafter", "Brouillons réglementaires générés.")}
+                          disabled={!isReady || isBusy}
+                          className="w-full rounded-lg border border-border px-4 py-3 text-left text-sm font-semibold text-card-foreground hover:bg-muted disabled:opacity-50"
+                        >
+                          3. Générer les brouillons FR
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 xl:grid-cols-[1fr_1fr]">
                     <div className="rounded-2xl border border-border bg-card p-6">
                       <h2 className="font-heading text-xl font-bold text-card-foreground">Sources suivies</h2>
                       <div className="mt-4 space-y-3">

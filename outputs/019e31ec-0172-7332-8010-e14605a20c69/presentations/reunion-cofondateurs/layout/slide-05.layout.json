@@ -1,0 +1,1525 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/7agt3p",
+    "id": "7agt3p",
+    "slide": 5,
+    "layoutId": "d2eebd49-e6da-4e29-835b-19b42cf6bb83",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "5125f506-8cb9-4439-8230-9a099370288f",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d2eebd49-e6da-4e29-835b-19b42cf6bb83",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "5125f506-8cb9-4439-8230-9a099370288f",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "5125f506-8cb9-4439-8230-9a099370288f",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mhk3q5o7",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t83itgfm",
+      "id": "2",
+      "bbox": [
+        60,
+        36,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "TOP DOMAINES",
+      "textPreview": "TOP DOMAINES",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TOP DOMAINES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TOP DOMAINES",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TOP DOMAINES",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4nap4r65",
+      "id": "3",
+      "bbox": [
+        60,
+        78,
+        760,
+        60
+      ],
+      "geometry": "rect",
+      "text": "Les 5 domaines à pousser immédiatement",
+      "textPreview": "Les 5 domaines à pousser immédiatement",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les 5 domaines à pousser immédiatement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les 5 domaines à pousser immédiatement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les 5 domaines à pousser immédiatement",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bq1oryts",
+      "id": "4",
+      "bbox": [
+        60,
+        170,
+        350,
+        220
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m58z25kb",
+      "id": "5",
+      "bbox": [
+        78,
+        186,
+        76,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/twra5gbq",
+      "id": "6",
+      "bbox": [
+        78,
+        192,
+        76,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Tier 1",
+      "textPreview": "Tier 1",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tier 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tier 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tier 1",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4byhgn29",
+      "id": "7",
+      "bbox": [
+        78,
+        222,
+        314,
+        52
+      ],
+      "geometry": "rect",
+      "text": "IT & Transformation Digitale",
+      "textPreview": "IT & Transformation Digitale",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IT & Transformation Digitale"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IT & Transformation Digitale",
+          "runs": [
+            {
+              "index": 1,
+              "text": "IT & Transformation Digitale",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bm58z25k",
+      "id": "8",
+      "bbox": [
+        78,
+        276,
+        314,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Automatiser un workflow interne de bout en bout avec validation humaine.",
+      "textPreview": "Automatiser un workflow interne de bout en bout avec validation humaine.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Automatiser un workflow interne de bout en bout avec"
+          },
+          {
+            "index": 2,
+            "text": "validation humaine."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Automatiser un workflow interne de bout en bout avec validation humaine.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Automatiser un workflow interne de bout en bout avec validation humaine.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m1cfa9w3",
+      "id": "9",
+      "bbox": [
+        78,
+        336,
+        314,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Réduction des tâches manuelles, baisse du temps de cycle, meilleure traçabilité, déploiement plus rapide qu'un projet applicatif classique.",
+      "textPreview": "Réduction des tâches manuelles, baisse du temps de cycle, meilleure traçabilité, déploiement plus rapide qu'un projet applicatif classique.",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Réduction des tâches manuelles, baisse du temps de cycle,"
+          },
+          {
+            "index": 2,
+            "text": "meilleure traçabilité, déploiement plus rapide qu'un projet"
+          },
+          {
+            "index": 3,
+            "text": "applicatif classique."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Réduction des tâches manuelles, baisse du temps de cycle, meilleure traçabilité, déploiement plus rapide qu'un projet applicatif classique.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Réduction des tâches manuelles, baisse du temps de cycle, meilleure traçabilité, déploiement plus rapide qu'un projet applicatif classique.",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cfa9w3m9",
+      "id": "10",
+      "bbox": [
+        435,
+        170,
+        350,
+        220
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1032lszq",
+      "id": "11",
+      "bbox": [
+        453,
+        186,
+        76,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u9knih4b",
+      "id": "12",
+      "bbox": [
+        453,
+        192,
+        76,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Tier 1",
+      "textPreview": "Tier 1",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tier 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tier 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tier 1",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/judg7ads",
+      "id": "13",
+      "bbox": [
+        453,
+        222,
+        314,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Service Client",
+      "textPreview": "Service Client",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Service Client"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Service Client",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Service Client",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u54zid",
+      "id": "14",
+      "bbox": [
+        453,
+        276,
+        314,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Assistant de réponses multicanales et qualification automatique des demandes.",
+      "textPreview": "Assistant de réponses multicanales et qualification automatique des demandes.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Assistant de réponses multicanales et qualification"
+          },
+          {
+            "index": 2,
+            "text": "automatique des demandes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Assistant de réponses multicanales et qualification automatique des demandes.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Assistant de réponses multicanales et qualification automatique des demandes.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "15",
+      "bbox": [
+        453,
+        336,
+        314,
+        42
+      ],
+      "geometry": "rect",
+      "text": "20% à 50% de réduction du temps de traitement, hausse de satisfaction, plus grand volume traité sans recruter.",
+      "textPreview": "20% à 50% de réduction du temps de traitement, hausse de satisfaction, plus grand volume traité sans recruter.",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "20% à 50% de réduction du temps de traitement, hausse de"
+          },
+          {
+            "index": 2,
+            "text": "satisfaction, plus grand volume traité sans recruter."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "20% à 50% de réduction du temps de traitement, hausse de satisfaction, plus grand volume traité sans recruter.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "20% à 50% de réduction du temps de traitement, hausse de satisfaction, plus grand volume traité sans recruter.",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "16",
+      "bbox": [
+        810,
+        170,
+        350,
+        220
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "17",
+      "bbox": [
+        828,
+        186,
+        76,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "18",
+      "bbox": [
+        828,
+        192,
+        76,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Tier 1",
+      "textPreview": "Tier 1",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tier 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tier 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tier 1",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "19",
+      "bbox": [
+        828,
+        222,
+        314,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Marketing & Communication",
+      "textPreview": "Marketing & Communication",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Marketing & Communication"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Marketing & Communication",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Marketing & Communication",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "20",
+      "bbox": [
+        828,
+        276,
+        314,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Machine à contenu multiformat pour campagnes, WhatsApp, email, scripts vidéo et fiches commerciales.",
+      "textPreview": "Machine à contenu multiformat pour campagnes, WhatsApp, email, scripts vidéo et fiches commerciales.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Machine à contenu multiformat pour campagnes,"
+          },
+          {
+            "index": 2,
+            "text": "WhatsApp, email, scripts vidéo et fiches commerciales."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Machine à contenu multiformat pour campagnes, WhatsApp, email, scripts vidéo et fiches commerciales.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Machine à contenu multiformat pour campagnes, WhatsApp, email, scripts vidéo et fiches commerciales.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "21",
+      "bbox": [
+        828,
+        336,
+        314,
+        42
+      ],
+      "geometry": "rect",
+      "text": "3 à 5 fois plus de contenus avec la même équipe, baisse du coût de production, meilleure vitesse de relance.",
+      "textPreview": "3 à 5 fois plus de contenus avec la même équipe, baisse du coût de production, meilleure vitesse de relance.",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3 à 5 fois plus de contenus avec la même équipe, baisse du"
+          },
+          {
+            "index": 2,
+            "text": "coût de production, meilleure vitesse de relance."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3 à 5 fois plus de contenus avec la même équipe, baisse du coût de production, meilleure vitesse de relance.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3 à 5 fois plus de contenus avec la même équipe, baisse du coût de production, meilleure vitesse de relance.",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "22",
+      "bbox": [
+        245,
+        396,
+        350,
+        220
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "23",
+      "bbox": [
+        263,
+        412,
+        76,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "24",
+      "bbox": [
+        263,
+        418,
+        76,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Tier 1",
+      "textPreview": "Tier 1",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tier 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tier 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tier 1",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "25",
+      "bbox": [
+        263,
+        448,
+        314,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Administration & Gestion",
+      "textPreview": "Administration & Gestion",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Administration & Gestion"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Administration & Gestion",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Administration & Gestion",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "26",
+      "bbox": [
+        263,
+        502,
+        314,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Standardiser procédures, notes de service, suivis et dossiers administratifs.",
+      "textPreview": "Standardiser procédures, notes de service, suivis et dossiers administratifs.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Standardiser procédures, notes de service, suivis et"
+          },
+          {
+            "index": 2,
+            "text": "dossiers administratifs."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Standardiser procédures, notes de service, suivis et dossiers administratifs.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Standardiser procédures, notes de service, suivis et dossiers administratifs.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "27",
+      "bbox": [
+        263,
+        562,
+        314,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Moins de dispersion, moins de relectures, meilleure standardisation, meilleure exécution.",
+      "textPreview": "Moins de dispersion, moins de relectures, meilleure standardisation, meilleure exécution.",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Moins de dispersion, moins de relectures, meilleure"
+          },
+          {
+            "index": 2,
+            "text": "standardisation, meilleure exécution."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Moins de dispersion, moins de relectures, meilleure standardisation, meilleure exécution.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Moins de dispersion, moins de relectures, meilleure standardisation, meilleure exécution.",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5o7qpg3e",
+      "id": "28",
+      "bbox": [
+        620,
+        396,
+        350,
+        220
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g3ex0nux",
+      "id": "29",
+      "bbox": [
+        638,
+        412,
+        76,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 1
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/adsji5sn",
+      "id": "30",
+      "bbox": [
+        638,
+        418,
+        76,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Tier 1",
+      "textPreview": "Tier 1",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tier 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tier 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tier 1",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ylc7u54",
+      "id": "31",
+      "bbox": [
+        638,
+        448,
+        314,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Assistanat & Secrétariat",
+      "textPreview": "Assistanat & Secrétariat",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Assistanat & Secrétariat"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Assistanat & Secrétariat",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Assistanat & Secrétariat",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sji5snel",
+      "id": "32",
+      "bbox": [
+        638,
+        502,
+        314,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Production accélérée des comptes rendus, notes, relances et dossiers de réunion.",
+      "textPreview": "Production accélérée des comptes rendus, notes, relances et dossiers de réunion.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Production accélérée des comptes rendus, notes,"
+          },
+          {
+            "index": 2,
+            "text": "relances et dossiers de réunion."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Production accélérée des comptes rendus, notes, relances et dossiers de réunion.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Production accélérée des comptes rendus, notes, relances et dossiers de réunion.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h4byhgn2",
+      "id": "33",
+      "bbox": [
+        638,
+        562,
+        314,
+        42
+      ],
+      "geometry": "rect",
+      "text": "40% à 70% de temps gagné sur la production documentaire et meilleure réactivité de direction.",
+      "textPreview": "40% à 70% de temps gagné sur la production documentaire et meilleure réactivité de direction.",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "40% à 70% de temps gagné sur la production"
+          },
+          {
+            "index": 2,
+            "text": "documentaire et meilleure réactivité de direction."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "40% à 70% de temps gagné sur la production documentaire et meilleure réactivité de direction.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "40% à 70% de temps gagné sur la production documentaire et meilleure réactivité de direction.",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a5gbq1or",
+      "id": "34",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3m94fu18",
+      "id": "35",
+      "bbox": [
+        60,
+        689,
+        950,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Ces 5 domaines combinent transversalité, facilité de démonstration et potentiel de conversion rapide.",
+      "textPreview": "Ces 5 domaines combinent transversalité, facilité de démonstration et potentiel de conversion rapide.",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ces 5 domaines combinent transversalité, facilité de démonstration et potentiel de conversion rapide."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ces 5 domaines combinent transversalité, facilité de démonstration et potentiel de conversion rapide.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ces 5 domaines combinent transversalité, facilité de démonstration et potentiel de conversion rapide.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s72x4nap",
+      "id": "36",
+      "bbox": [
+        1140,
+        686,
+        60,
+        20
+      ],
+      "geometry": "rect",
+      "text": "05",
+      "textPreview": "05",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05",
+          "runs": [
+            {
+              "index": 1,
+              "text": "05",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

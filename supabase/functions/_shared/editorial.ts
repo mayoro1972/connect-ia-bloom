@@ -77,6 +77,123 @@ export const parseRssItems = (xml: string) => {
   }).filter((item) => item.title && item.url);
 };
 
+const blockedHtmlTitles = new Set([
+  "contact",
+  "sitemap",
+  "legal notice",
+  "recruitment",
+  "read more",
+  "lire plus",
+  "voir plus",
+  "see more",
+  "download",
+  "telecharger",
+]);
+
+const cleanHtmlAnchorText = (value: string) =>
+  normalizeText(
+    value
+      .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
+      .replace(/<img[^>]*>/gi, " ")
+      .replace(/<span[^>]*class="[^"]*visually-hidden[^"]*"[^>]*>[\s\S]*?<\/span>/gi, " "),
+  );
+
+const looksLikeArticleLink = (title: string, href: string) => {
+  const normalizedTitle = normalizeText(title).toLowerCase();
+  const normalizedHref = href.toLowerCase();
+
+  if (!normalizedTitle || blockedHtmlTitles.has(normalizedTitle)) {
+    return false;
+  }
+
+  if (normalizedTitle.length < 18 || normalizedTitle.length > 240) {
+    return false;
+  }
+
+  if (
+    normalizedHref.startsWith("mailto:") ||
+    normalizedHref.startsWith("tel:") ||
+    normalizedHref.startsWith("javascript:") ||
+    normalizedHref.includes("#")
+  ) {
+    return false;
+  }
+
+  if (
+    normalizedHref.includes("/actualites") ||
+    normalizedHref.includes("/communique") ||
+    normalizedHref.includes("/publications") ||
+    normalizedHref.includes("/decisions") ||
+    normalizedHref.includes("/appels-offres") ||
+    normalizedHref.includes("/content/") ||
+    normalizedHref.includes("/newsletters/")
+  ) {
+    return true;
+  }
+
+  return /\b(ia|intelligence artificielle|conformite|compliance|regulation|banque|bank|donnees|privacy)\b/i.test(normalizedTitle);
+};
+
+export const parseHtmlItems = (html: string, pageUrl: string) => {
+  const withoutNoise = html
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ");
+
+  const matches = Array.from(withoutNoise.matchAll(/<a\b[^>]*href=(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a>/gi));
+  const seen = new Set<string>();
+
+  return matches
+    .map((match, index) => {
+      const href = normalizeText(match[2]);
+      const title = cleanHtmlAnchorText(match[3]);
+
+      if (!looksLikeArticleLink(title, href)) {
+        return null;
+      }
+
+      let absoluteUrl = href;
+      try {
+        absoluteUrl = new URL(href, pageUrl).toString();
+      } catch {
+        return null;
+      }
+
+      if (seen.has(absoluteUrl)) {
+        return null;
+      }
+      seen.add(absoluteUrl);
+
+      const context = withoutNoise.slice(Math.max(0, (match.index ?? 0) - 240), Math.min(withoutNoise.length, (match.index ?? 0) + 900));
+      const rawSummary = normalizeText(
+        context
+          .replace(match[0], " ")
+          .slice(0, 420),
+      );
+
+      const dateMatch =
+        context.match(/\b(\d{4}-\d{2}-\d{2})\b/) ??
+        context.match(/\b(\d{2}\/\d{2}\/\d{4})\b/);
+
+      let publishedAt: string | null = null;
+      if (dateMatch?.[1]) {
+        const parsed = new Date(dateMatch[1]);
+        if (!Number.isNaN(parsed.getTime())) {
+          publishedAt = parsed.toISOString();
+        }
+      }
+
+      return {
+        externalId: `${absoluteUrl}-${index}`,
+        title,
+        url: absoluteUrl,
+        rawSummary: rawSummary || title,
+        rawText: rawSummary || title,
+        publishedAt,
+      };
+    })
+    .filter((item): item is { externalId: string; title: string; url: string; rawSummary: string; rawText: string; publishedAt: string | null } => item !== null);
+};
+
 const domainRules = [
   {
     domain: "IT & Transformation Digitale",

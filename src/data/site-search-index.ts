@@ -91,6 +91,15 @@ const pageEntries = {
       priority: 84,
     },
     {
+      id: "page-regulatory-watch",
+      kind: "page" as const,
+      title: "Veille réglementaire IA",
+      description: "Suivre un flux dynamique de signaux IA, conformité et banque pour la Côte d'Ivoire.",
+      href: "/veille-reglementaire-ia",
+      keywords: ["veille réglementaire", "banque", "compliance", "bceao", "uemoa", "cote d'ivoire", "ia"],
+      priority: 89,
+    },
+    {
       id: "page-tools",
       kind: "page" as const,
       title: "Outils IA",
@@ -208,6 +217,15 @@ const pageEntries = {
       href: "/blog",
       keywords: ["blog", "insights", "guides", "resources", "articles"],
       priority: 84,
+    },
+    {
+      id: "page-regulatory-watch",
+      kind: "page" as const,
+      title: "AI regulatory watch",
+      description: "Track a dynamic feed of AI, compliance and banking signals for Côte d'Ivoire.",
+      href: "/veille-reglementaire-ia",
+      keywords: ["regulatory watch", "banking", "compliance", "bceao", "uemoa", "cote d'ivoire", "ai"],
+      priority: 89,
     },
     {
       id: "page-tools",

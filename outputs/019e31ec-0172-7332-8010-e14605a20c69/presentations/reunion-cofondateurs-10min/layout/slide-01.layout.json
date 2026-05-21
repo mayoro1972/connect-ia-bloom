@@ -1,0 +1,1156 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/hov87d",
+    "id": "hov87d",
+    "slide": 1,
+    "layoutId": "9d654de1-c9ea-4407-9204-1c76e22d2572",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "6f043f0c-71c5-4940-be11-1bb05e7f55c3",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "9d654de1-c9ea-4407-9204-1c76e22d2572",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "6f043f0c-71c5-4940-be11-1bb05e7f55c3",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "6f043f0c-71c5-4940-be11-1bb05e7f55c3",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ih4byhgn",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8nqxs72",
+      "id": "2",
+      "bbox": [
+        900,
+        0,
+        380,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#16324F",
+      "lineColor": "#16324F",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nuxc3yl",
+      "id": "3",
+      "bbox": [
+        60,
+        48,
+        220,
+        18
+      ],
+      "geometry": "rect",
+      "text": "RÉUNION STRATÉGIQUE",
+      "textPreview": "RÉUNION STRATÉGIQUE",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "RÉUNION STRATÉGIQUE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "RÉUNION STRATÉGIQUE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "RÉUNION STRATÉGIQUE",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ed8bat4",
+      "id": "4",
+      "bbox": [
+        60,
+        110,
+        720,
+        110
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa - Réunion des cofondateurs",
+      "textPreview": "TransferAI Africa - Réunion des cofondateurs",
+      "resolvedFontSize": 36,
+      "resolvedTextStyle": {
+        "fontSize": 36,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa - Réunion des"
+          },
+          {
+            "index": 2,
+            "text": "cofondateurs"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa - Réunion des cofondateurs",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa - Réunion des cofondateurs",
+              "fontSize": 36,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itgfmlkj",
+      "id": "5",
+      "bbox": [
+        60,
+        238,
+        700,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Domaines d'expertise, cas d'usage et stratégie de prospection Côte d'Ivoire",
+      "textPreview": "Domaines d'expertise, cas d'usage et stratégie de prospection Côte d'Ivoire",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Domaines d'expertise, cas d'usage et stratégie de prospection Côte d'Ivoire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Domaines d'expertise, cas d'usage et stratégie de prospection Côte d'Ivoire",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Domaines d'expertise, cas d'usage et stratégie de prospection Côte d'Ivoire",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pkzupwb2",
+      "id": "6",
+      "bbox": [
+        60,
+        308,
+        220,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Date : 16 mai 2026",
+      "textPreview": "Date : 16 mai 2026",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Date : 16 mai 2026"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Date : 16 mai 2026",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Date : 16 mai 2026",
+              "fontSize": 12,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0z61032l",
+      "id": "7",
+      "bbox": [
+        944,
+        92,
+        240,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Objet de la séance",
+      "textPreview": "Objet de la séance",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Objet de la séance"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Objet de la séance",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Objet de la séance",
+              "fontSize": 20,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7qpg3ex0",
+      "id": "8",
+      "bbox": [
+        944,
+        134,
+        260,
+        128
+      ],
+      "geometry": "rect",
+      "text": "Aligner les cofondateurs sur les domaines les plus porteurs, les cas d'usage les plus vendeurs et les priorités commerciales à 90 jours.",
+      "textPreview": "Aligner les cofondateurs sur les domaines les plus porteurs, les cas d'usage les plus vendeurs et les priorités commerciales à 90 jours.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Aligner les cofondateurs sur les"
+          },
+          {
+            "index": 2,
+            "text": "domaines les plus porteurs, les cas"
+          },
+          {
+            "index": 3,
+            "text": "d'usage les plus vendeurs et les"
+          },
+          {
+            "index": 4,
+            "text": "priorités commerciales à 90 jours."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Aligner les cofondateurs sur les domaines les plus porteurs, les cas d'usage les plus vendeurs et les priorités commerciales à 90 jours.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Aligner les cofondateurs sur les domaines les plus porteurs, les cas d'usage les plus vendeurs et les priorités commerciales à 90 jours.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#DCE5EF"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i5sneloj",
+      "id": "9",
+      "bbox": [
+        944,
+        304,
+        256,
+        140
+      ],
+      "geometry": "rect",
+      "text": "Question centrale : sur quels domaines concentrer la prospection et quelles offres pousser en priorité ?",
+      "textPreview": "Question centrale : sur quels domaines concentrer la prospection et quelles offres pousser en priorité ?",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Question centrale : sur quels"
+          },
+          {
+            "index": 2,
+            "text": "domaines concentrer la"
+          },
+          {
+            "index": 3,
+            "text": "prospection et quelles offres"
+          },
+          {
+            "index": 4,
+            "text": "pousser en priorité ?"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Question centrale : sur quels domaines concentrer la prospection et quelles offres pousser en priorité ?",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Question centrale : sur quels domaines concentrer la prospection et quelles offres pousser en priorité ?",
+              "fontSize": 17,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nuxc3yl",
+      "id": "10",
+      "bbox": [
+        60,
+        510,
+        250,
+        120
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8nqxs72",
+      "id": "11",
+      "bbox": [
+        78,
+        526,
+        4,
+        48
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ih4byhgn",
+      "id": "12",
+      "bbox": [
+        94,
+        522,
+        198,
+        34
+      ],
+      "geometry": "rect",
+      "text": "13",
+      "textPreview": "13",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "13"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "13",
+          "runs": [
+            {
+              "index": 1,
+              "text": "13",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/72x4nap4",
+      "id": "13",
+      "bbox": [
+        94,
+        558,
+        198,
+        20
+      ],
+      "geometry": "rect",
+      "text": "domaines structurés",
+      "textPreview": "domaines structurés",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "domaines structurés"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "domaines structurés",
+          "runs": [
+            {
+              "index": 1,
+              "text": "domaines structurés",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#4C5B6A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0z61032l",
+      "id": "14",
+      "bbox": [
+        94,
+        578,
+        198,
+        22
+      ],
+      "geometry": "rect",
+      "text": "base déjà présente sur le site et dans le catalogue",
+      "textPreview": "base déjà présente sur le site et dans le catalogue",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "base déjà présente sur le site et dans le"
+          },
+          {
+            "index": 2,
+            "text": "catalogue"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "base déjà présente sur le site et dans le catalogue",
+          "runs": [
+            {
+              "index": 1,
+              "text": "base déjà présente sur le site et dans le catalogue",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pkzupwb2",
+      "id": "15",
+      "bbox": [
+        330,
+        510,
+        250,
+        120
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itgfmlkj",
+      "id": "16",
+      "bbox": [
+        348,
+        526,
+        4,
+        48
+      ],
+      "geometry": "rect",
+      "fillColor": "#3E7C78",
+      "lineColor": "#3E7C78",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ed8bat4",
+      "id": "17",
+      "bbox": [
+        364,
+        522,
+        198,
+        34
+      ],
+      "geometry": "rect",
+      "text": "05",
+      "textPreview": "05",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05",
+          "runs": [
+            {
+              "index": 1,
+              "text": "05",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bi9s36h",
+      "id": "18",
+      "bbox": [
+        364,
+        558,
+        198,
+        20
+      ],
+      "geometry": "rect",
+      "text": "priorités court terme",
+      "textPreview": "priorités court terme",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "priorités court terme"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "priorités court terme",
+          "runs": [
+            {
+              "index": 1,
+              "text": "priorités court terme",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#4C5B6A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pwb2hwfy",
+      "id": "19",
+      "bbox": [
+        364,
+        578,
+        198,
+        22
+      ],
+      "geometry": "rect",
+      "text": "domaines à pousser sans attendre",
+      "textPreview": "domaines à pousser sans attendre",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "domaines à pousser sans attendre"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "domaines à pousser sans attendre",
+          "runs": [
+            {
+              "index": 1,
+              "text": "domaines à pousser sans attendre",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94fu18jq",
+      "id": "20",
+      "bbox": [
+        600,
+        510,
+        250,
+        120
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjm1cfa9",
+      "id": "21",
+      "bbox": [
+        618,
+        526,
+        4,
+        48
+      ],
+      "geometry": "rect",
+      "fillColor": "#7E8B99",
+      "lineColor": "#7E8B99",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "22",
+      "bbox": [
+        634,
+        522,
+        198,
+        34
+      ],
+      "geometry": "rect",
+      "text": "90j",
+      "textPreview": "90j",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "90j"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "90j",
+          "runs": [
+            {
+              "index": 1,
+              "text": "90j",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hwfyxob",
+      "id": "23",
+      "bbox": [
+        634,
+        558,
+        198,
+        20
+      ],
+      "geometry": "rect",
+      "text": "fenêtre d'exécution",
+      "textPreview": "fenêtre d'exécution",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "fenêtre d'exécution"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "fenêtre d'exécution",
+          "runs": [
+            {
+              "index": 1,
+              "text": "fenêtre d'exécution",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#4C5B6A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gr2p8nq",
+      "id": "24",
+      "bbox": [
+        634,
+        578,
+        198,
+        22
+      ],
+      "geometry": "rect",
+      "text": "pour convertir l'offre en pipeline concret",
+      "textPreview": "pour convertir l'offre en pipeline concret",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "pour convertir l'offre en pipeline concret"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "pour convertir l'offre en pipeline concret",
+          "runs": [
+            {
+              "index": 1,
+              "text": "pour convertir l'offre en pipeline concret",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gvy90je9",
+      "id": "25",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ra5gbq1o",
+      "id": "26",
+      "bbox": [
+        60,
+        689,
+        950,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Réunion des cofondateurs | Synthèse stratégique Côte d'Ivoire",
+      "textPreview": "TransferAI Africa | Réunion des cofondateurs | Synthèse stratégique Côte d'Ivoire",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Réunion des cofondateurs | Synthèse stratégique Côte d'Ivoire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Réunion des cofondateurs | Synthèse stratégique Côte d'Ivoire",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Réunion des cofondateurs | Synthèse stratégique Côte d'Ivoire",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2p8nqxs7",
+      "id": "27",
+      "bbox": [
+        1140,
+        686,
+        60,
+        20
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

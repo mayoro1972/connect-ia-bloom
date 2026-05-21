@@ -71,8 +71,28 @@ export function useResourceFeed() {
 
     loadResources();
 
+    const canSubscribe =
+      typeof (supabase as any).channel === "function" &&
+      typeof (supabase as any).removeChannel === "function";
+
+    const channel = canSubscribe
+      ? (supabase as any)
+          .channel("resource-posts-feed")
+          .on(
+            "postgres_changes",
+            { event: "*", schema: "public", table: "resource_posts" },
+            () => {
+              void loadResources();
+            },
+          )
+          .subscribe()
+      : null;
+
     return () => {
       isCancelled = true;
+      if (channel && typeof (supabase as any).removeChannel === "function") {
+        void (supabase as any).removeChannel(channel);
+      }
     };
   }, []);
 

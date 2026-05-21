@@ -1,0 +1,1514 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/tndlx8",
+    "id": "tndlx8",
+    "slide": 2,
+    "layoutId": "d2eebd49-e6da-4e29-835b-19b42cf6bb83",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "5125f506-8cb9-4439-8230-9a099370288f",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d2eebd49-e6da-4e29-835b-19b42cf6bb83",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "5125f506-8cb9-4439-8230-9a099370288f",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "5125f506-8cb9-4439-8230-9a099370288f",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#FFFDFC",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "2",
+      "bbox": [
+        60,
+        36,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "VUE D'ENSEMBLE",
+      "textPreview": "VUE D'ENSEMBLE",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "VUE D'ENSEMBLE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "VUE D'ENSEMBLE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "VUE D'ENSEMBLE",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "3",
+      "bbox": [
+        60,
+        78,
+        760,
+        60
+      ],
+      "geometry": "rect",
+      "text": "Ce que les cofondateurs doivent retenir",
+      "textPreview": "Ce que les cofondateurs doivent retenir",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que les cofondateurs doivent retenir"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que les cofondateurs doivent retenir",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que les cofondateurs doivent retenir",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "4",
+      "bbox": [
+        60,
+        170,
+        640,
+        360
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "5",
+      "bbox": [
+        84,
+        206,
+        18,
+        20
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "6",
+      "bbox": [
+        106,
+        204,
+        570,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Le site et le catalogue TransferAI Africa structurent déjà 13 domaines d'expertise distincts.",
+      "textPreview": "Le site et le catalogue TransferAI Africa structurent déjà 13 domaines d'expertise distincts.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le site et le catalogue TransferAI Africa structurent déjà 13 domaines"
+          },
+          {
+            "index": 2,
+            "text": "d'expertise distincts."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le site et le catalogue TransferAI Africa structurent déjà 13 domaines d'expertise distincts.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le site et le catalogue TransferAI Africa structurent déjà 13 domaines d'expertise distincts.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "7",
+      "bbox": [
+        84,
+        268,
+        18,
+        20
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "8",
+      "bbox": [
+        106,
+        266,
+        570,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Tous les domaines ne se vendent pas avec la même vitesse : 5 domaines doivent porter l'effort commercial court terme.",
+      "textPreview": "Tous les domaines ne se vendent pas avec la même vitesse : 5 domaines doivent porter l'effort commercial court terme.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Tous les domaines ne se vendent pas avec la même vitesse : 5 domaines"
+          },
+          {
+            "index": 2,
+            "text": "doivent porter l'effort commercial court terme."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Tous les domaines ne se vendent pas avec la même vitesse : 5 domaines doivent porter l'effort commercial court terme.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Tous les domaines ne se vendent pas avec la même vitesse : 5 domaines doivent porter l'effort commercial court terme.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "9",
+      "bbox": [
+        84,
+        330,
+        18,
+        20
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qd4vmtwr",
+      "id": "10",
+      "bbox": [
+        106,
+        328,
+        570,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Les cas d'usage les plus faciles à vendre en Côte d'Ivoire sont ceux qui réduisent le temps administratif, améliorent la réactivité commerciale ou fluidifient les workflows internes.",
+      "textPreview": "Les cas d'usage les plus faciles à vendre en Côte d'Ivoire sont ceux qui réduisent le temps administratif, améliorent la réactivité comme...",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les cas d'usage les plus faciles à vendre en Côte d'Ivoire sont ceux qui"
+          },
+          {
+            "index": 2,
+            "text": "réduisent le temps administratif, améliorent la réactivité commerciale ou"
+          },
+          {
+            "index": 3,
+            "text": "fluidifient les workflows internes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les cas d'usage les plus faciles à vendre en Côte d'Ivoire sont ceux qui réduisent le temps administratif, améliorent la réactivité commerciale ou fluidifient les workflows internes.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les cas d'usage les plus faciles à vendre en Côte d'Ivoire sont ceux qui réduisent le temps administratif, améliorent la réactivité commerciale ou fluidifient les workflows internes.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fyxobm58",
+      "id": "11",
+      "bbox": [
+        84,
+        392,
+        18,
+        20
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jqh0fep",
+      "id": "12",
+      "bbox": [
+        106,
+        390,
+        570,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Le meilleur angle de vente n'est pas la technologie, mais le ROI métier visible en moins de 90 jours.",
+      "textPreview": "Le meilleur angle de vente n'est pas la technologie, mais le ROI métier visible en moins de 90 jours.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le meilleur angle de vente n'est pas la technologie, mais le ROI métier visible"
+          },
+          {
+            "index": 2,
+            "text": "en moins de 90 jours."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le meilleur angle de vente n'est pas la technologie, mais le ROI métier visible en moins de 90 jours.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le meilleur angle de vente n'est pas la technologie, mais le ROI métier visible en moins de 90 jours.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4nap4r6",
+      "id": "13",
+      "bbox": [
+        84,
+        454,
+        18,
+        20
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "14",
+      "bbox": [
+        106,
+        452,
+        570,
+        56
+      ],
+      "geometry": "rect",
+      "text": "La prospection doit s'organiser autour d'offres simples : audit, formation métier, pilote de workflow, puis déploiement.",
+      "textPreview": "La prospection doit s'organiser autour d'offres simples : audit, formation métier, pilote de workflow, puis déploiement.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La prospection doit s'organiser autour d'offres simples : audit, formation métier,"
+          },
+          {
+            "index": 2,
+            "text": "pilote de workflow, puis déploiement."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La prospection doit s'organiser autour d'offres simples : audit, formation métier, pilote de workflow, puis déploiement.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La prospection doit s'organiser autour d'offres simples : audit, formation métier, pilote de workflow, puis déploiement.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa9w3m94",
+      "id": "15",
+      "bbox": [
+        750,
+        170,
+        430,
+        260
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8v6psfil",
+      "id": "16",
+      "bbox": [
+        782,
+        196,
+        160,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi agir maintenant",
+      "textPreview": "Pourquoi agir maintenant",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi agir maintenant"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi agir maintenant",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi agir maintenant",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#FFE9DB",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xczed8v6",
+      "id": "17",
+      "bbox": [
+        782,
+        226,
+        340,
+        94
+      ],
+      "geometry": "rect",
+      "text": "5 domaines peuvent porter l'effort commercial des 90 prochains jours.",
+      "textPreview": "5 domaines peuvent porter l'effort commercial des 90 prochains jours.",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "5 domaines peuvent porter"
+          },
+          {
+            "index": 2,
+            "text": "l'effort commercial des 90"
+          },
+          {
+            "index": 3,
+            "text": "prochains jours."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "5 domaines peuvent porter l'effort commercial des 90 prochains jours.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "5 domaines peuvent porter l'effort commercial des 90 prochains jours.",
+              "fontSize": 26,
+              "typeface": "Aptos Display",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "18",
+      "bbox": [
+        782,
+        330,
+        340,
+        72
+      ],
+      "geometry": "rect",
+      "text": "Le but n'est pas d'élargir le catalogue. Le but est de concentrer la vente sur ce qui est démontrable, répétable et transformable en mission.",
+      "textPreview": "Le but n'est pas d'élargir le catalogue. Le but est de concentrer la vente sur ce qui est démontrable, répétable et transformable en miss...",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le but n'est pas d'élargir le catalogue. Le but est de"
+          },
+          {
+            "index": 2,
+            "text": "concentrer la vente sur ce qui est démontrable, répétable"
+          },
+          {
+            "index": 3,
+            "text": "et transformable en mission."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le but n'est pas d'élargir le catalogue. Le but est de concentrer la vente sur ce qui est démontrable, répétable et transformable en mission.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le but n'est pas d'élargir le catalogue. Le but est de concentrer la vente sur ce qui est démontrable, répétable et transformable en mission.",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#FFF5EE"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "19",
+      "bbox": [
+        60,
+        576,
+        250,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#F4D8C6",
+      "lineColor": "#F4D8C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "20",
+      "bbox": [
+        60,
+        582,
+        250,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Demande marché",
+      "textPreview": "Demande marché",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Demande marché"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Demande marché",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Demande marché",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "21",
+      "bbox": [
+        330,
+        576,
+        250,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#DCEAE8",
+      "lineColor": "#DCEAE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3m94fu",
+      "id": "22",
+      "bbox": [
+        330,
+        582,
+        250,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Vitesse de ROI",
+      "textPreview": "Vitesse de ROI",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vitesse de ROI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vitesse de ROI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vitesse de ROI",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kb6xkf6d",
+      "id": "23",
+      "bbox": [
+        600,
+        576,
+        250,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#E3E8EE",
+      "lineColor": "#E3E8EE",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re1w7mp0",
+      "id": "24",
+      "bbox": [
+        600,
+        582,
+        250,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Facilité de démonstration",
+      "textPreview": "Facilité de démonstration",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Facilité de démonstration"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Facilité de démonstration",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Facilité de démonstration",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2t83itgf",
+      "id": "25",
+      "bbox": [
+        870,
+        576,
+        250,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#F0E9DF",
+      "lineColor": "#F0E9DF",
+      "lineWidth": 1
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9knih4by",
+      "id": "26",
+      "bbox": [
+        870,
+        582,
+        250,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Réplicabilité",
+      "textPreview": "Réplicabilité",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Réplicabilité"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Réplicabilité",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Réplicabilité",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzupwb2h",
+      "id": "27",
+      "bbox": [
+        60,
+        614,
+        250,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Fréquence potentielle des besoins dans les entreprises ivoiriennes privées, publiques et parapubliques.",
+      "textPreview": "Fréquence potentielle des besoins dans les entreprises ivoiriennes privées, publiques et parapubliques.",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Fréquence potentielle des besoins dans les"
+          },
+          {
+            "index": 2,
+            "text": "entreprises ivoiriennes privées, publiques et"
+          },
+          {
+            "index": 3,
+            "text": "parapubliques."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Fréquence potentielle des besoins dans les entreprises ivoiriennes privées, publiques et parapubliques.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Fréquence potentielle des besoins dans les entreprises ivoiriennes privées, publiques et parapubliques.",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ra5gbq1o",
+      "id": "28",
+      "bbox": [
+        330,
+        614,
+        250,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Capacité à démontrer un gain visible rapidement, sans projet SI lourd.",
+      "textPreview": "Capacité à démontrer un gain visible rapidement, sans projet SI lourd.",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Capacité à démontrer un gain visible rapidement,"
+          },
+          {
+            "index": 2,
+            "text": "sans projet SI lourd."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Capacité à démontrer un gain visible rapidement, sans projet SI lourd.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Capacité à démontrer un gain visible rapidement, sans projet SI lourd.",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2p8nqxs7",
+      "id": "29",
+      "bbox": [
+        600,
+        614,
+        250,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Possibilité de montrer un avant/après concret en rendez-vous.",
+      "textPreview": "Possibilité de montrer un avant/après concret en rendez-vous.",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Possibilité de montrer un avant/après concret en"
+          },
+          {
+            "index": 2,
+            "text": "rendez-vous."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Possibilité de montrer un avant/après concret en rendez-vous.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Possibilité de montrer un avant/après concret en rendez-vous.",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "30",
+      "bbox": [
+        870,
+        614,
+        250,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Capacité à réutiliser la même offre dans plusieurs secteurs et clients.",
+      "textPreview": "Capacité à réutiliser la même offre dans plusieurs secteurs et clients.",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Capacité à réutiliser la même offre dans plusieurs"
+          },
+          {
+            "index": 2,
+            "text": "secteurs et clients."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Capacité à réutiliser la même offre dans plusieurs secteurs et clients.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Capacité à réutiliser la même offre dans plusieurs secteurs et clients.",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "31",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "32",
+      "bbox": [
+        60,
+        689,
+        950,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Thèse : la prochaine croissance commerciale viendra des domaines à ROI court terme, pas d'un discours IA générique.",
+      "textPreview": "Thèse : la prochaine croissance commerciale viendra des domaines à ROI court terme, pas d'un discours IA générique.",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Thèse : la prochaine croissance commerciale viendra des domaines à ROI court terme, pas d'un discours IA générique."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Thèse : la prochaine croissance commerciale viendra des domaines à ROI court terme, pas d'un discours IA générique.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Thèse : la prochaine croissance commerciale viendra des domaines à ROI court terme, pas d'un discours IA générique.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#4C5B6A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "33",
+      "bbox": [
+        1140,
+        686,
+        60,
+        20
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#12355B",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

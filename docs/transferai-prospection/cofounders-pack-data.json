@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "title": "TransferAI Africa - Réunion des cofondateurs",
+    "subtitle": "Domaines d'expertise, cas d'usage et stratégie de prospection Côte d'Ivoire",
+    "date": "16 mai 2026",
+    "meetingPurpose": "Aligner les cofondateurs sur les domaines les plus porteurs, les cas d'usage les plus vendeurs et les priorités commerciales à 90 jours."
+  },
+  "executiveSummary": [
+    "Le site et le catalogue TransferAI Africa structurent déjà 13 domaines d'expertise distincts.",
+    "Tous les domaines ne se vendent pas avec la même vitesse : 5 domaines doivent porter l'effort commercial court terme.",
+    "Les cas d'usage les plus faciles à vendre en Côte d'Ivoire sont ceux qui réduisent le temps administratif, améliorent la réactivité commerciale ou fluidifient les workflows internes.",
+    "Le meilleur angle de vente n'est pas la technologie, mais le ROI métier visible en moins de 90 jours.",
+    "La prospection doit s'organiser autour d'offres simples : audit, formation métier, pilote de workflow, puis déploiement."
+  ],
+  "selectionCriteria": [
+    {
+      "label": "Demande marché",
+      "detail": "Fréquence potentielle des besoins dans les entreprises ivoiriennes privées, publiques et parapubliques."
+    },
+    {
+      "label": "Vitesse de ROI",
+      "detail": "Capacité à démontrer un gain visible rapidement, sans projet SI lourd."
+    },
+    {
+      "label": "Facilité de démonstration",
+      "detail": "Possibilité de montrer un avant/après concret en rendez-vous."
+    },
+    {
+      "label": "Réplicabilité",
+      "detail": "Capacité à réutiliser la même offre dans plusieurs secteurs et clients."
+    }
+  ],
+  "priorityTiers": [
+    {
+      "tier": "Tier 1",
+      "label": "À pousser immédiatement",
+      "rationale": "Domaines transverses, faciles à démontrer, avec ROI court terme et cycle de vente plus court."
+    },
+    {
+      "tier": "Tier 2",
+      "label": "À développer en deuxième vague",
+      "rationale": "Domaines à fort potentiel mais demandant un cadrage métier plus poussé."
+    },
+    {
+      "tier": "Tier 3",
+      "label": "À adresser de façon opportuniste",
+      "rationale": "Domaines plus institutionnels, plus sensibles ou avec cycle de vente plus long."
+    }
+  ],
+  "topPriorities": [
+    {
+      "domain": "IT & Transformation Digitale",
+      "tier": "Tier 1",
+      "whyNow": "Le domaine le plus naturel pour vendre l'automatisation, les assistants métier et les workflows IA.",
+      "flagshipUseCase": "Automatiser un workflow interne de bout en bout avec validation humaine.",
+      "roiStory": "Réduction des tâches manuelles, baisse du temps de cycle, meilleure traçabilité, déploiement plus rapide qu'un projet applicatif classique.",
+      "commercialTargets": ["DSI", "responsables transformation", "PMO", "innovation"],
+      "proofPoints": [
+        "Cas démontrable en live",
+        "Applicable à RH, ventes, conformité, opérations",
+        "Très bon point d'entrée pour vendre ensuite formation et déploiement"
+      ]
+    },
+    {
+      "domain": "Service Client",
+      "tier": "Tier 1",
+      "whyNow": "Le ROI est immédiat sur la vitesse de réponse, la cohérence des réponses et le volume traité.",
+      "flagshipUseCase": "Assistant de réponses multicanales et qualification automatique des demandes.",
+      "roiStory": "20% à 50% de réduction du temps de traitement, hausse de satisfaction, plus grand volume traité sans recruter.",
+      "commercialTargets": ["SAV", "front office", "centres de relation client", "télécoms", "banques", "e-commerce"],
+      "proofPoints": [
+        "Use case facile à faire comprendre au client",
+        "Mesurable en quelques semaines",
+        "Fort impact sur image de marque et expérience client"
+      ]
+    },
+    {
+      "domain": "Marketing & Communication",
+      "tier": "Tier 1",
+      "whyNow": "Les dirigeants comprennent vite la valeur d'une cadence éditoriale plus élevée et d'une meilleure conversion.",
+      "flagshipUseCase": "Machine à contenu multiformat pour campagnes, WhatsApp, email, scripts vidéo et fiches commerciales.",
+      "roiStory": "3 à 5 fois plus de contenus avec la même équipe, baisse du coût de production, meilleure vitesse de relance.",
+      "commercialTargets": ["marketing", "communication", "agences", "PME en croissance"],
+      "proofPoints": [
+        "Très visuel en démonstration",
+        "Applicable à presque tous les secteurs",
+        "Peut ouvrir rapidement sur CRM et automatisation"
+      ]
+    },
+    {
+      "domain": "Administration & Gestion",
+      "tier": "Tier 1",
+      "whyNow": "Le terrain ivoirien reste fortement structuré par les documents, procédures et suivis interservices.",
+      "flagshipUseCase": "Standardiser procédures, notes de service, suivis et dossiers administratifs.",
+      "roiStory": "Moins de dispersion, moins de relectures, meilleure standardisation, meilleure exécution.",
+      "commercialTargets": ["directions administratives", "secrétariats généraux", "ONG", "établissements d'enseignement"],
+      "proofPoints": [
+        "Besoin fréquent et transversal",
+        "Faible résistance au changement si le gain est tangible",
+        "Très bonne porte d'entrée pour secteur public et parapublic"
+      ]
+    },
+    {
+      "domain": "Assistanat & Secrétariat",
+      "tier": "Tier 1",
+      "whyNow": "Le besoin est immédiat sur les comptes rendus, notes, relances et préparation des dossiers dirigeants.",
+      "flagshipUseCase": "Production accélérée des comptes rendus, notes, relances et dossiers de réunion.",
+      "roiStory": "40% à 70% de temps gagné sur la production documentaire et meilleure réactivité de direction.",
+      "commercialTargets": ["assistants de direction", "office managers", "directions générales"],
+      "proofPoints": [
+        "Très simple à démontrer",
+        "ROI compréhensible sans jargon technique",
+        "Peut être vendu comme quick win avant des projets plus larges"
+      ]
+    }
+  ],
+  "tier2Domains": [
+    {
+      "domain": "Ressources Humaines",
+      "focus": "Recrutement, onboarding, communication RH",
+      "reason": "Fort potentiel, mais demande davantage de garde-fous et de cadrage."
+    },
+    {
+      "domain": "Data & Analyse",
+      "focus": "Commentaires de données, reporting, préparation de fichiers",
+      "reason": "Valeur forte, mais dépend du niveau de maturité data du client."
+    },
+    {
+      "domain": "Finance & Comptabilité",
+      "focus": "Commentaires de gestion, clôture, contrôle",
+      "reason": "Très bon ROI, mais cycle de validation souvent plus prudent."
+    },
+    {
+      "domain": "Formation & Pédagogie",
+      "focus": "Conception de contenus, quiz, personnalisation",
+      "reason": "Bon levier pour écoles et centres de formation, avec forte valeur démonstrative."
+    }
+  ],
+  "tier3Domains": [
+    {
+      "domain": "Juridique & Conformité",
+      "focus": "Recherche, veille, synthèse réglementaire",
+      "reason": "Pertinent mais nécessite plus de confiance, plus de validation humaine et souvent des cycles longs."
+    },
+    {
+      "domain": "Management & Leadership",
+      "focus": "Aide à la décision, réunions, pilotage",
+      "reason": "Très utile, mais souvent vendu en complément d'un domaine plus opérationnel."
+    },
+    {
+      "domain": "Santé & Bien-être",
+      "focus": "Documentation, prévention, reporting non clinique",
+      "reason": "Prometteur mais à cadrer avec prudence et précision."
+    },
+    {
+      "domain": "Diplomatie & Affaires Internationales",
+      "focus": "Veille, notes, synthèses multilingues",
+      "reason": "Marché plus ciblé et plus institutionnel."
+    }
+  ],
+  "offers": [
+    {
+      "name": "Audit Express IA Métier",
+      "promise": "Identifier en 5 à 10 jours les tâches à plus fort ROI et les cas d'usage prioritaires.",
+      "value": "Porte d'entrée simple, rassurante et vendable à presque tous les prospects."
+    },
+    {
+      "name": "Bootcamp Métier IA",
+      "promise": "Former une équipe métier sur ses usages concrets, ses prompts, ses workflows et ses garde-fous.",
+      "value": "Permet d'encaisser rapidement tout en préparant l'adoption."
+    },
+    {
+      "name": "Pilote Workflow ou Assistant",
+      "promise": "Déployer un premier workflow ou assistant IA sur un périmètre précis et mesurable.",
+      "value": "Transforme la formation en preuve d'impact et ouvre les déploiements plus larges."
+    }
+  ],
+  "actionPlan90Days": [
+    {
+      "phase": "Jours 1 à 15",
+      "goal": "Finaliser les argumentaires par domaine et les fiches ROI.",
+      "ownerHint": "Direction commerciale + contenu"
+    },
+    {
+      "phase": "Jours 16 à 30",
+      "goal": "Construire 3 démonstrations fortes : service client, marketing, workflow administratif.",
+      "ownerHint": "Produit + delivery"
+    },
+    {
+      "phase": "Jours 31 à 60",
+      "goal": "Lancer une prospection ciblée sur 5 domaines prioritaires et mesurer les retours.",
+      "ownerHint": "Founders + commerciaux"
+    },
+    {
+      "phase": "Jours 61 à 90",
+      "goal": "Convertir les premiers audits en pilotes et formaliser les cas clients internes.",
+      "ownerHint": "Sales + consulting"
+    }
+  ],
+  "fullDomainList": [
+    {
+      "domain": "Assistanat & Secrétariat",
+      "tier": "Tier 1",
+      "flagshipUseCase": "Comptes rendus, courriers, notes et relances",
+      "roi": "40% à 70% de gain de temps documentaire"
+    },
+    {
+      "domain": "Ressources Humaines",
+      "tier": "Tier 2",
+      "flagshipUseCase": "Recrutement augmenté et onboarding",
+      "roi": "30% à 50% de réduction du temps de présélection"
+    },
+    {
+      "domain": "Marketing & Communication",
+      "tier": "Tier 1",
+      "flagshipUseCase": "Contenus multiformats et relances de campagne",
+      "roi": "3 à 5 fois plus de contenus avec la même équipe"
+    },
+    {
+      "domain": "Finance & Comptabilité",
+      "tier": "Tier 2",
+      "flagshipUseCase": "Commentaires de gestion et reporting",
+      "roi": "40% à 60% de gain sur les packs de reporting"
+    },
+    {
+      "domain": "Juridique & Conformité",
+      "tier": "Tier 3",
+      "flagshipUseCase": "Recherche et synthèse réglementaire",
+      "roi": "30% à 60% de temps gagné sur la recherche documentaire"
+    },
+    {
+      "domain": "Service Client",
+      "tier": "Tier 1",
+      "flagshipUseCase": "Réponses assistées et routage des demandes",
+      "roi": "20% à 50% de réduction du temps de traitement"
+    },
+    {
+      "domain": "Data & Analyse",
+      "tier": "Tier 2",
+      "flagshipUseCase": "Commentaires de données et reporting exécutif",
+      "roi": "Réduction forte du délai de reporting"
+    },
+    {
+      "domain": "Administration & Gestion",
+      "tier": "Tier 1",
+      "flagshipUseCase": "Procédures, suivis et synthèse de dossiers",
+      "roi": "Moins de dispersion et meilleure exécution interservices"
+    },
+    {
+      "domain": "Management & Leadership",
+      "tier": "Tier 3",
+      "flagshipUseCase": "Préparation des réunions et aide à la décision",
+      "roi": "30% à 50% de temps gagné sur la préparation managériale"
+    },
+    {
+      "domain": "IT & Transformation Digitale",
+      "tier": "Tier 1",
+      "flagshipUseCase": "Automatisation de workflows et assistants métier",
+      "roi": "Réduction des tâches manuelles et du temps de cycle"
+    },
+    {
+      "domain": "Formation & Pédagogie",
+      "tier": "Tier 2",
+      "flagshipUseCase": "Conception de contenus et quiz",
+      "roi": "40% à 70% de gain sur la conception pédagogique"
+    },
+    {
+      "domain": "Santé & Bien-être",
+      "tier": "Tier 3",
+      "flagshipUseCase": "Documentation non clinique et prévention",
+      "roi": "Réduction du temps administratif"
+    },
+    {
+      "domain": "Diplomatie & Affaires Internationales",
+      "tier": "Tier 3",
+      "flagshipUseCase": "Veille pays et briefings multilingues",
+      "roi": "Forte réduction du temps de veille et de préparation"
+    }
+  ],
+  "decisionPoints": [
+    "Valider les 5 domaines à pousser en priorité sur les 90 prochains jours.",
+    "Valider les 3 offres d'entrée commerciales : audit, bootcamp, pilote.",
+    "Valider les 3 démonstrations à construire en priorité pour la prospection.",
+    "Valider la répartition des rôles entre cofondateurs sur la vente, la démo et la delivery."
+  ]
+}

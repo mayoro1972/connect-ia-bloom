@@ -24,6 +24,7 @@ const rawFr = {
     aiTools: "OUTILS IA",
     events: "ÉVÉNEMENTS",
     blog: "RESSOURCES & VEILLE IA",
+    regulatoryWatch: "VEILLE RÉGLEMENTAIRE IA",
     partners: "PARTENAIRES",
     contact: "CONTACT",
     cta: "PARLER À UN EXPERT",

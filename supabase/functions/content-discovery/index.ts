@@ -1,4 +1,4 @@
-import { corsHeaders, editorialClient, json, parseRssItems } from "../_shared/editorial.ts";
+import { corsHeaders, editorialClient, json, parseHtmlItems, parseRssItems } from "../_shared/editorial.ts";
 
 type ManualSignal = {
   title: string;
@@ -90,8 +90,12 @@ Deno.serve(async (request) => {
         continue;
       }
 
-      const xml = await response.text();
-      const items = parseRssItems(xml).slice(0, limit);
+      const payload = await response.text();
+      const items = (
+        feed.feed_type === "rss"
+          ? parseRssItems(payload)
+          : parseHtmlItems(payload, feed.url)
+      ).slice(0, limit);
 
       for (const item of items) {
         discoveredSignals.push({

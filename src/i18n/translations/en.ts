@@ -24,6 +24,7 @@ const rawEn = {
     aiTools: "AI TOOLS",
     events: "EVENTS",
     blog: "RESOURCES & AI WATCH",
+    regulatoryWatch: "AI REGULATORY WATCH",
     partners: "PARTNERS",
     contact: "CONTACT",
     cta: "TALK TO AN EXPERT",
