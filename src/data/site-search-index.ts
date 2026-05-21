@@ -1,10 +1,11 @@
 import type { Language } from "@/i18n/LanguageContext";
 import { formations } from "@/data/formations";
 import { domainPreviews } from "@/lib/catalogue-preview";
+import { jobFeedFallback } from "@/lib/job-feed";
 import { resourceFeedFallback } from "@/lib/resource-feed";
 import { buildContactPath, directLinks } from "@/lib/site-links";
 
-export type SearchEntryKind = "action" | "page" | "catalogue" | "formation" | "resource";
+export type SearchEntryKind = "action" | "page" | "catalogue" | "formation" | "resource" | "job";
 
 export type SearchEntry = {
   id: string;
@@ -447,5 +448,25 @@ export const buildSiteSearchIndex = (language: Language): SearchEntry[] => {
     priority: resource.isFeatured ? 78 : 66,
   }));
 
-  return [...actions, ...pages, ...catalogueEntries, ...formationEntries, ...resourceEntries];
+  const jobEntries: SearchEntry[] = jobFeedFallback.map((job) => ({
+    id: `job-${job.id}`,
+    kind: "job",
+    title: isEnglish ? job.title : job.title,
+    description: isEnglish ? job.summaryEn : job.summaryFr,
+    href: "/createur-contenu-ia",
+    keywords: [
+      job.title,
+      job.summaryFr,
+      job.summaryEn,
+      job.sourceName,
+      job.locationFr,
+      job.locationEn,
+      job.marketKey,
+      job.opportunityType,
+      job.workMode,
+    ],
+    priority: job.isFeatured ? 76 : 62,
+  }));
+
+  return [...actions, ...pages, ...catalogueEntries, ...formationEntries, ...resourceEntries, ...jobEntries];
 };

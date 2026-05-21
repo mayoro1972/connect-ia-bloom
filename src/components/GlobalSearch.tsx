@@ -36,6 +36,7 @@ const copyByLanguage = {
       catalogue: "Catalogue",
       formation: "Formation",
       resource: "Ressource",
+      job: "Emploi",
     },
     groups: {
       action: "Actions rapides",
@@ -43,6 +44,7 @@ const copyByLanguage = {
       catalogue: "Catalogues domaine",
       formation: "Formations",
       resource: "Ressources",
+      job: "Emplois",
     },
   },
   en: {
@@ -58,6 +60,7 @@ const copyByLanguage = {
       catalogue: "Catalogue",
       formation: "Training",
       resource: "Resource",
+      job: "Job",
     },
     groups: {
       action: "Quick actions",
@@ -65,6 +68,7 @@ const copyByLanguage = {
       catalogue: "Domain catalogues",
       formation: "Training",
       resource: "Resources",
+      job: "Jobs",
     },
   },
 } as const;
@@ -75,6 +79,7 @@ const kindIcons: Record<SearchEntryKind, typeof Sparkles> = {
   catalogue: FileText,
   formation: BookOpen,
   resource: Newspaper,
+  job: Briefcase,
 };
 
 const normalizeSearchText = (value: string) =>
@@ -111,7 +116,7 @@ const getSearchScore = (entry: SearchEntry, rawQuery: string) => {
   return score;
 };
 
-const groupOrder: SearchEntryKind[] = ["action", "page", "catalogue", "formation", "resource"];
+const groupOrder: SearchEntryKind[] = ["action", "page", "catalogue", "formation", "resource", "job"];
 
 const GlobalSearch = () => {
   const navigate = useNavigate();
