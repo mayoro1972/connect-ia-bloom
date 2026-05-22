@@ -32,13 +32,122 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+const fullDocumentHtmlPattern = /<(?:!doctype|html|body)\b/i;
+
+const formatInlineMarkdown = (value: string) =>
+  escapeHtml(value)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" style="color:#f97316;font-weight:700;text-decoration:none;">$1</a>');
+
 const paragraphize = (value: string) =>
   value
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean)
-    .map((paragraph) => `<p style="margin:0 0 14px;line-height:1.7;color:#475569;font-size:15px;">${escapeHtml(paragraph)}</p>`)
+    .map((paragraph) => `<p style="margin:0 0 14px;line-height:1.7;color:#475569;font-size:15px;">${formatInlineMarkdown(paragraph)}</p>`)
     .join("");
+
+const renderMarkdownBlock = (value: string) => {
+  const lines = value.split("\n");
+  const blocks: string[] = [];
+  let paragraphLines: string[] = [];
+  let unorderedListItems: string[] = [];
+  let orderedListItems: string[] = [];
+
+  const flushParagraph = () => {
+    if (paragraphLines.length === 0) {
+      return;
+    }
+
+    blocks.push(
+      `<p style="margin:0 0 14px;line-height:1.8;color:#475569;font-size:15px;">${formatInlineMarkdown(paragraphLines.join(" "))}</p>`,
+    );
+    paragraphLines = [];
+  };
+
+  const flushUnorderedList = () => {
+    if (unorderedListItems.length === 0) {
+      return;
+    }
+
+    blocks.push(
+      `<ul style="margin:0 0 18px;padding-left:20px;color:#475569;font-size:15px;line-height:1.8;">${unorderedListItems
+        .map((item) => `<li style="margin:0 0 8px;">${formatInlineMarkdown(item)}</li>`)
+        .join("")}</ul>`,
+    );
+    unorderedListItems = [];
+  };
+
+  const flushOrderedList = () => {
+    if (orderedListItems.length === 0) {
+      return;
+    }
+
+    blocks.push(
+      `<ol style="margin:0 0 18px;padding-left:20px;color:#475569;font-size:15px;line-height:1.8;">${orderedListItems
+        .map((item) => `<li style="margin:0 0 8px;">${formatInlineMarkdown(item)}</li>`)
+        .join("")}</ol>`,
+    );
+    orderedListItems = [];
+  };
+
+  const flushAll = () => {
+    flushParagraph();
+    flushUnorderedList();
+    flushOrderedList();
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+
+    if (!line) {
+      flushAll();
+      continue;
+    }
+
+    const imageMatch = line.match(/^!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)$/);
+    if (imageMatch) {
+      flushAll();
+      const [, alt, url] = imageMatch;
+      blocks.push(
+        `<div style="margin:0 0 18px;"><img src="${url}" alt="${escapeHtml(alt)}" style="display:block;max-width:100%;height:auto;border-radius:18px;" /></div>`,
+      );
+      continue;
+    }
+
+    const headingMatch = line.match(/^##\s+(.+)$/);
+    if (headingMatch) {
+      flushAll();
+      blocks.push(
+        `<h2 style="margin:24px 0 12px;font-size:24px;line-height:1.3;color:#0f172a;">${formatInlineMarkdown(headingMatch[1])}</h2>`,
+      );
+      continue;
+    }
+
+    const unorderedListMatch = line.match(/^-\s+(.+)$/);
+    if (unorderedListMatch) {
+      flushParagraph();
+      flushOrderedList();
+      unorderedListItems.push(unorderedListMatch[1]);
+      continue;
+    }
+
+    const orderedListMatch = line.match(/^\d+\.\s+(.+)$/);
+    if (orderedListMatch) {
+      flushParagraph();
+      flushUnorderedList();
+      orderedListItems.push(orderedListMatch[1]);
+      continue;
+    }
+
+    flushUnorderedList();
+    flushOrderedList();
+    paragraphLines.push(line);
+  }
+
+  flushAll();
+  return blocks.join("");
+};
 
 export const normalizeDomains = (domains: unknown) =>
   Array.isArray(domains)
@@ -60,7 +169,11 @@ export const domainsIntersect = (left: string[], right: string[]) => {
 export const renderNewsletterHtml = (issue: NewsletterIssueRecord) => {
   const domains = issue.target_domains.length > 0 ? issue.target_domains.join(" · ") : issue.language === "en" ? "All domains" : "Tous les domaines";
   const introBlock = issue.intro ? paragraphize(issue.intro) : "";
-  const bodyBlock = issue.body_html?.trim() ? issue.body_html : issue.body_markdown ? paragraphize(issue.body_markdown) : "";
+  const customBodyBlock = issue.body_html?.trim() && !fullDocumentHtmlPattern.test(issue.body_html)
+    ? issue.body_html.trim()
+    : "";
+  const markdownBodyBlock = issue.body_markdown ? renderMarkdownBlock(issue.body_markdown) : "";
+  const bodyBlock = [customBodyBlock, markdownBodyBlock].filter(Boolean).join("");
   const highlightBlock = issue.highlight_title || issue.highlight_summary
     ? `
       <div style="margin:28px 0;padding:22px;border:1px solid #fed7aa;border-radius:20px;background:#fff7ed;">

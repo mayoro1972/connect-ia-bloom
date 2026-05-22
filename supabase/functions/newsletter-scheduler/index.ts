@@ -111,46 +111,58 @@ const getTopSubscribedDomains = async () => {
     .map(([domain]) => domain);
 };
 
+const supportedLanguages = ["fr", "en"] as const;
+
 const runDraftWeekly = async (options: { autoPublish?: boolean } = {}) => {
   const issueDate = todayIsoDate();
-
-  const { data: existingIssue, error: existingIssueError } = await editorialClient
-    .from("newsletter_issues")
-    .select("id, title, status")
-    .eq("issue_date", issueDate)
-    .eq("language", "fr")
-    .in("status", ["draft", "review", "approved", "scheduled", "sent"])
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  if (existingIssueError) {
-    throw existingIssueError;
-  }
-
-  if (existingIssue) {
-    return {
-      action: "draft-weekly",
-      skipped: true,
-      reason: "issue_already_exists",
-      issue: existingIssue,
-    };
-  }
-
   const targetDomains = await getTopSubscribedDomains();
-  const result = await invokeEdgeFunction("newsletter-drafter", {
-    issue_date: issueDate,
-    language: "fr",
-    target_domains: targetDomains,
-    auto_publish: options.autoPublish === true,
-  });
+  const results: Array<Record<string, unknown>> = [];
+
+  for (const language of supportedLanguages) {
+    const { data: existingIssue, error: existingIssueError } = await editorialClient
+      .from("newsletter_issues")
+      .select("id, title, status, language")
+      .eq("issue_date", issueDate)
+      .eq("language", language)
+      .in("status", ["draft", "review", "approved", "scheduled", "sent"])
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (existingIssueError) {
+      throw existingIssueError;
+    }
+
+    if (existingIssue) {
+      results.push({
+        language,
+        skipped: true,
+        reason: "issue_already_exists",
+        issue: existingIssue,
+      });
+      continue;
+    }
+
+    const result = await invokeEdgeFunction("newsletter-drafter", {
+      issue_date: issueDate,
+      language,
+      target_domains: targetDomains,
+      auto_publish: options.autoPublish === true,
+    });
+
+    results.push({
+      language,
+      skipped: false,
+      result,
+    });
+  }
 
   return {
     action: "draft-weekly",
-    skipped: false,
+    skipped: results.every((result) => result.skipped === true),
     autoPublish: options.autoPublish === true,
     targetDomains,
-    result,
+    results,
   };
 };
 
@@ -169,7 +181,7 @@ const runReviewReminder = async () => {
   const { data: pendingIssues, error } = await editorialClient
     .from("newsletter_issues")
     .select("id, title, status, issue_date, created_at, updated_at")
-    .eq("language", "fr")
+    .in("language", [...supportedLanguages])
     .in("status", ["draft", "review"])
     .is("sent_at", null)
     .order("created_at", { ascending: false })
@@ -228,19 +240,20 @@ const runSendApproved = async () => {
 
   const { data: dueIssues, error } = await editorialClient
     .from("newsletter_issues")
-    .select("id, title, status, scheduled_for, issue_date, send_count, sent_at")
-    .eq("language", "fr")
+    .select("id, title, status, scheduled_for, issue_date, send_count, sent_at, language")
+    .in("language", [...supportedLanguages])
     .in("status", ["approved", "scheduled"])
     .is("sent_at", null)
     .order("scheduled_for", { ascending: true, nullsFirst: false })
     .order("issue_date", { ascending: true })
-    .limit(5);
+    .order("language", { ascending: true })
+    .limit(10);
 
   if (error) {
     throw error;
   }
 
-  const dueIssue = (dueIssues ?? []).find((issue) => {
+  const readyIssues = (dueIssues ?? []).filter((issue) => {
     if (issue.send_count && issue.send_count > 0) {
       return false;
     }
@@ -252,7 +265,7 @@ const runSendApproved = async () => {
     return issue.issue_date <= todayIsoDate();
   });
 
-  if (!dueIssue) {
+  if (readyIssues.length === 0) {
     return {
       action: "send-approved",
       skipped: true,
@@ -260,15 +273,23 @@ const runSendApproved = async () => {
     };
   }
 
-  const result = await invokeEdgeFunction("newsletter-send", {
-    issue_id: dueIssue.id,
-  });
+  const sentIssues: Array<Record<string, unknown>> = [];
+
+  for (const dueIssue of readyIssues) {
+    const result = await invokeEdgeFunction("newsletter-send", {
+      issue_id: dueIssue.id,
+    });
+
+    sentIssues.push({
+      issue: dueIssue,
+      result,
+    });
+  }
 
   return {
     action: "send-approved",
     skipped: false,
-    issue: dueIssue,
-    result,
+    sentIssues,
   };
 };
 
