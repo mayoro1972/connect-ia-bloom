@@ -36,6 +36,12 @@ Le pack a 4 objectifs :
 23. [Matrice de protection LLM - donnees prospects / clients](./33_Matrice_Protection_LLM_Prospects_Clients.md)
 24. [Argumentaire client - protection des donnees sensibles et LLM sur mesure](./34_Argumentaire_Protection_Donnees_Sensibles_LLM_Sur_Mesure.md)
 25. [Messages commerciaux - protection des donnees et LLM sur mesure](./35_Messages_Commerciaux_Protection_Donnees_LLM.md)
+26. [Systeme de prospection IA automatisee avec n8n](./36_Systeme_Prospection_IA_n8n.md)
+27. [Prompt maitre - assistant IA de prospection n8n](./37_Prompt_Assistant_Prospection_IA_n8n.md)
+28. [Blueprint n8n V1 - prospection IA ciblee](./38_Blueprint_n8n_Prospection_IA_V1.md)
+29. [Workflow n8n - prospection ciblee modele Elton](./39_Workflow_n8n_Prospection_Modele_Elton.md)
+30. [n8n import-like blueprint - prospection modele Elton V1](./40_n8n_Import_Like_Prospection_Modele_Elton_V1.md)
+31. [Matrice de priorites commerciales et cas d'usage phares](./41_Matrice_Priorites_Commerciales_Cas_Usage.md)
 
 ## Ordre de lecture recommandé
 
