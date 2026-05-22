@@ -36,6 +36,8 @@ Chaque édition DOIT contenir :
 - 1 cas d'usage africain (entreprise/secteur sur le continent qui a réussi avec l'IA)
 - 1 nouveauté IA importante de la semaine (lancement, modèle, fonctionnalité)
 - 1 opportunité à surveiller (mission freelance, job IA, appel à projet, financement)
+- Si des consignes éditoriales sont fournies dans generation_notes, les respecter en priorité.
+- Pour les rotations du fondateur, garder le bloc éditorial visible et sobre, sans diluer le message business.
 
 Format de sortie : JSON strict avec UNIQUEMENT ces clés :
 - title (string) : titre éditorial de l'édition
@@ -129,6 +131,7 @@ Deno.serve(async (request) => {
     language?: "fr" | "en";
     target_domains?: string[];
     source_post_ids?: string[];
+    generation_notes?: string;
     dry_run?: boolean;
     auto_publish?: boolean;
   } = {};
@@ -143,6 +146,7 @@ Deno.serve(async (request) => {
   const language = body.language === "en" ? "en" : "fr";
   const targetDomains = normalizeDomains(body.target_domains);
   const sourcePostIds = normalizeDomains(body.source_post_ids);
+  const generationNotes = asNullableString(body.generation_notes);
   const dryRun = body.dry_run === true;
   const autoPublish = body.auto_publish === true;
 
@@ -173,6 +177,7 @@ Deno.serve(async (request) => {
         language,
         targetDomains,
         sourcePostIds,
+        generationNotes,
       },
       status: "running",
       started_at: new Date().toISOString(),
@@ -231,6 +236,7 @@ Deno.serve(async (request) => {
       targetDomains,
       selectedPosts,
       fallbackDraft,
+      generationNotes,
       officialStructure: [
         "Signal clé",
         "Conseil pratique",
@@ -281,6 +287,7 @@ Deno.serve(async (request) => {
       preheader: asNullableString(aiDraft?.preheader) ?? fallbackDraft.preheader,
       intro: asNullableString(aiDraft?.intro) ?? fallbackDraft.intro,
       target_domains: targetDomains,
+      generation_notes: generationNotes,
       highlight_title: asNullableString(aiDraft?.highlightTitle) ?? fallbackDraft.highlightTitle,
       highlight_summary: asNullableString(aiDraft?.highlightSummary) ?? fallbackDraft.highlightSummary,
       highlight_url: asNullableString(aiDraft?.highlightUrl) ?? fallbackDraft.highlightUrl,

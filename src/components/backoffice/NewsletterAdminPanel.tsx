@@ -330,6 +330,7 @@ const NewsletterAdminPanel = ({
           issue_date: form.issue_date,
           language: form.language,
           target_domains: form.target_domains,
+          generation_notes: form.generation_notes || null,
         },
       );
 
@@ -477,6 +478,9 @@ const NewsletterAdminPanel = ({
 
           <div className="space-y-3">
             <p className="text-sm font-semibold text-card-foreground">Domaines ciblés</p>
+            <p className="text-xs text-muted-foreground">
+              Laisser vide = diffusion à tous les abonnés actifs. Utile pour maximiser la visibilité du message éditorial.
+            </p>
             <div className="flex flex-wrap gap-3">
               {domainOptions.map((domain) => {
                 const isActive = form.target_domains.includes(domain);
@@ -495,6 +499,13 @@ const NewsletterAdminPanel = ({
                   </button>
                 );
               })}
+              <button
+                type="button"
+                onClick={() => setForm({ ...form, target_domains: [] })}
+                className="rounded-full border px-4 py-2 text-sm font-medium transition border-border bg-background text-card-foreground hover:border-primary/40"
+              >
+                Diffusion maximale
+              </button>
             </div>
           </div>
 
@@ -542,7 +553,7 @@ const NewsletterAdminPanel = ({
           <Textarea
             value={form.generation_notes}
             onChange={(e) => setForm({ ...form, generation_notes: e.target.value })}
-            placeholder="Notes éditoriales / consignes"
+            placeholder="Notes éditoriales / consignes (ex. conserver le bloc fondateur sur 5 parutions)"
           />
 
           <div className="flex flex-wrap gap-3">

@@ -121,9 +121,6 @@ type EditorialSnapshot = {
 };
 
 const ADMIN_TOKEN_STORAGE_KEY = "transferai-admin-token";
-const LOCAL_DEV_ADMIN_TOKEN = import.meta.env.DEV
-  ? import.meta.env.VITE_LOCAL_ADMIN_TOKEN?.trim() ?? ""
-  : "";
 
 const emptyResourceForm = {
   slug: "",
@@ -273,7 +270,8 @@ const formatDateLabel = (value: string) =>
 
 const BackOfficePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [token, setToken] = useState("");
+  const [tokenInput, setTokenInput] = useState("");
+  const [adminToken, setAdminToken] = useState("");
   const requestedTab = searchParams.get("tab") ?? "resources";
   const [activeTab, setActiveTab] = useState(requestedTab);
   const [resourceForm, setResourceForm] = useState(emptyResourceForm);
@@ -292,12 +290,7 @@ const BackOfficePage = () => {
   useEffect(() => {
     const storedToken = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY) ?? "";
     if (storedToken) {
-      setToken(storedToken);
-      return;
-    }
-
-    if (LOCAL_DEV_ADMIN_TOKEN) {
-      setToken(LOCAL_DEV_ADMIN_TOKEN);
+      setTokenInput(storedToken);
     }
   }, []);
 
@@ -305,15 +298,15 @@ const BackOfficePage = () => {
     setActiveTab(requestedTab);
   }, [requestedTab]);
 
-  const isReady = useMemo(() => token.trim().length > 0 && isSupabaseConfigured, [token]);
+  const isReady = useMemo(() => adminToken.trim().length > 0 && isSupabaseConfigured, [adminToken]);
 
-  const loadData = async (adminToken: string) => {
+  const loadData = async (currentToken: string) => {
     const [resourceResult, jobResult, analyticsResult, editorialResult, prospectResult] = await Promise.all([
-      invokeContentAdmin<{ data: ResourceAdminItem[] }>(adminToken, { entity: "resource", action: "list" }),
-      invokeContentAdmin<{ data: JobAdminItem[] }>(adminToken, { entity: "job", action: "list" }),
-      invokeContentAdmin<{ data: AnalyticsSnapshot }>(adminToken, { entity: "analytics", action: "list" }),
-      invokeContentAdmin<{ data: EditorialSnapshot }>(adminToken, { entity: "editorial", action: "list" }),
-      invokeContentAdmin<{ data: AuditProspectSnapshot }>(adminToken, { entity: "prospects", action: "list" }),
+      invokeContentAdmin<{ data: ResourceAdminItem[] }>(currentToken, { entity: "resource", action: "list" }),
+      invokeContentAdmin<{ data: JobAdminItem[] }>(currentToken, { entity: "job", action: "list" }),
+      invokeContentAdmin<{ data: AnalyticsSnapshot }>(currentToken, { entity: "analytics", action: "list" }),
+      invokeContentAdmin<{ data: EditorialSnapshot }>(currentToken, { entity: "editorial", action: "list" }),
+      invokeContentAdmin<{ data: AuditProspectSnapshot }>(currentToken, { entity: "prospects", action: "list" }),
     ]);
 
     setResources(resourceResult.data ?? []);
@@ -331,17 +324,51 @@ const BackOfficePage = () => {
     setIsBusy(true);
     setErrorMessage(null);
 
-    loadData(token)
+    loadData(adminToken)
       .catch((error: unknown) => {
         setErrorMessage(error instanceof Error ? error.message : "Impossible de charger les données admin.");
       })
       .finally(() => setIsBusy(false));
-  }, [isReady, token]);
+  }, [isReady, adminToken]);
 
-  const persistToken = () => {
-    window.localStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, token.trim());
-    setStatusMessage("Token admin enregistré localement sur ce navigateur.");
+  const clearToken = () => {
+    window.localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
+    setTokenInput("");
+    setAdminToken("");
+    setStatusMessage("Token admin retiré de ce navigateur.");
     setErrorMessage(null);
+  };
+
+  const persistToken = async () => {
+    const nextToken = tokenInput.trim();
+
+    if (!nextToken) {
+      setErrorMessage("Saisissez d'abord un token admin.");
+      return;
+    }
+
+    setIsBusy(true);
+    setStatusMessage(null);
+    setErrorMessage(null);
+
+    try {
+      await loadData(nextToken);
+      window.localStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, nextToken);
+      setAdminToken(nextToken);
+      setStatusMessage("Token admin validé et enregistré localement sur ce navigateur.");
+    } catch (error) {
+      window.localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
+      setAdminToken("");
+      setErrorMessage(
+        error instanceof Error && /unauthorized/i.test(error.message)
+          ? "Token admin invalide. Vérifiez la valeur saisie."
+          : error instanceof Error
+            ? error.message
+            : "Validation du token impossible.",
+      );
+    } finally {
+      setIsBusy(false);
+    }
   };
 
   const submitResource = async () => {
@@ -350,7 +377,7 @@ const BackOfficePage = () => {
     setErrorMessage(null);
 
     try {
-      await invokeContentAdmin(token, {
+      await invokeContentAdmin(adminToken, {
         entity: "resource",
         action: "create",
         payload: {
@@ -362,7 +389,7 @@ const BackOfficePage = () => {
       });
 
       setResourceForm(emptyResourceForm);
-      await loadData(token);
+      await loadData(adminToken);
       setStatusMessage("Contenu publié avec succès.");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Publication du contenu impossible.");
@@ -377,7 +404,7 @@ const BackOfficePage = () => {
     setErrorMessage(null);
 
     try {
-      await invokeContentAdmin(token, {
+      await invokeContentAdmin(adminToken, {
         entity: "job",
         action: "create",
         payload: {
@@ -387,7 +414,7 @@ const BackOfficePage = () => {
       });
 
       setJobForm(emptyJobForm);
-      await loadData(token);
+      await loadData(adminToken);
       setStatusMessage("Opportunité publiée avec succès.");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Publication de l'opportunité impossible.");
@@ -402,7 +429,7 @@ const BackOfficePage = () => {
     setErrorMessage(null);
 
     try {
-      await invokeContentAdmin(token, {
+      await invokeContentAdmin(adminToken, {
         entity: "editorial",
         action: "create-feed",
         payload: {
@@ -412,7 +439,7 @@ const BackOfficePage = () => {
       });
 
       setFeedForm(emptyFeedForm);
-      await loadData(token);
+      await loadData(adminToken);
       setStatusMessage("Source de veille enregistrée avec succès.");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Création du flux impossible.");
@@ -427,7 +454,7 @@ const BackOfficePage = () => {
     setErrorMessage(null);
 
     try {
-      await invokeAdminEdgeFunction(token, "content-discovery", {
+      await invokeAdminEdgeFunction(adminToken, "content-discovery", {
         manual_signals: [
           {
             title: manualSignalForm.title,
@@ -439,7 +466,7 @@ const BackOfficePage = () => {
       });
 
       setManualSignalForm(emptyManualSignalForm);
-      await loadData(token);
+      await loadData(adminToken);
       setStatusMessage("Signal réglementaire ajouté à la file de veille.");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Ajout du signal impossible.");
@@ -457,8 +484,8 @@ const BackOfficePage = () => {
     setErrorMessage(null);
 
     try {
-      await invokeAdminEdgeFunction(token, functionName, { limit: 10 });
-      await loadData(token);
+      await invokeAdminEdgeFunction(adminToken, functionName, { limit: 10 });
+      await loadData(adminToken);
       setStatusMessage(successMessage);
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Exécution du pipeline impossible.");
@@ -492,8 +519,8 @@ const BackOfficePage = () => {
   const setResourceStatus = async (id: string, status: string) => {
     setIsBusy(true);
     try {
-      await invokeContentAdmin(token, { entity: "resource", action: "set-status", payload: { id, status } });
-      await loadData(token);
+      await invokeContentAdmin(adminToken, { entity: "resource", action: "set-status", payload: { id, status } });
+      await loadData(adminToken);
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Mise à jour impossible.");
     } finally {
@@ -504,8 +531,8 @@ const BackOfficePage = () => {
   const setJobStatus = async (id: string, status: string) => {
     setIsBusy(true);
     try {
-      await invokeContentAdmin(token, { entity: "job", action: "set-status", payload: { id, status } });
-      await loadData(token);
+      await invokeContentAdmin(adminToken, { entity: "job", action: "set-status", payload: { id, status } });
+      await loadData(adminToken);
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Mise à jour impossible.");
     } finally {
@@ -516,12 +543,12 @@ const BackOfficePage = () => {
   const setEditorialSignalStatus = async (id: string, status: string) => {
     setIsBusy(true);
     try {
-      await invokeContentAdmin(token, {
+      await invokeContentAdmin(adminToken, {
         entity: "editorial",
         action: "set-status",
         payload: { kind: "signal", id, status },
       });
-      await loadData(token);
+      await loadData(adminToken);
       setStatusMessage("Signal éditorial mis à jour.");
       setErrorMessage(null);
     } catch (error) {
@@ -538,7 +565,7 @@ const BackOfficePage = () => {
   ) => {
     setIsBusy(true);
     try {
-      await invokeContentAdmin(token, {
+      await invokeContentAdmin(adminToken, {
         entity: "editorial",
         action: "set-status",
         payload: {
@@ -548,7 +575,7 @@ const BackOfficePage = () => {
           origin_signal_id: originSignalId ?? null,
         },
       });
-      await loadData(token);
+      await loadData(adminToken);
       setStatusMessage("Brouillon IA mis à jour.");
       setErrorMessage(null);
     } catch (error) {
@@ -581,26 +608,33 @@ const BackOfficePage = () => {
                 <form
                   onSubmit={(event) => {
                     event.preventDefault();
-                    persistToken();
+                    void persistToken();
                   }}
                   className="space-y-4"
                 >
                   <Input
-                    type="password"
-                    value={token}
-                    onChange={(event) => setToken(event.target.value)}
+                    type="text"
+                    value={tokenInput}
+                    onChange={(event) => setTokenInput(event.target.value)}
                     placeholder="Token admin"
                     autoFocus
-                    autoComplete="current-password"
+                    autoComplete="off"
                   />
                   <button
                     type="submit"
-                    disabled={!token.trim() || !isSupabaseConfigured}
+                    disabled={!tokenInput.trim() || !isSupabaseConfigured || isBusy}
                     className="w-full rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
                   >
-                    Se connecter
+                    {isBusy ? "Vérification..." : "Se connecter"}
                   </button>
                 </form>
+                <button
+                  type="button"
+                  onClick={clearToken}
+                  className="mt-3 w-full rounded-lg border border-border px-5 py-2 text-sm font-medium text-muted-foreground hover:bg-muted"
+                >
+                  Effacer le token enregistré
+                </button>
                 {!isSupabaseConfigured ? (
                   <p className="mt-4 text-sm text-destructive">
                     Supabase n'est pas configuré localement.
@@ -625,15 +659,10 @@ const BackOfficePage = () => {
               </div>
               <button
                 type="button"
-                onClick={() => {
-                  window.localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
-                  setToken("");
-                  setStatusMessage(null);
-                  setErrorMessage(null);
-                }}
+                onClick={clearToken}
                 className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted"
               >
-                Se déconnecter
+                Changer de token
               </button>
             </div>
             {statusMessage ? <p className="mb-4 text-sm text-primary">{statusMessage}</p> : null}
@@ -904,7 +933,7 @@ const BackOfficePage = () => {
 
               <TabsContent value="editorial">
                 <div className="space-y-8">
-                  <VendorFeedsAdminPanel token={token} />
+                  <VendorFeedsAdminPanel token={adminToken} />
                   <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                     <div className="rounded-2xl border border-border bg-card p-6">
                       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Flux suivis</p>
@@ -1212,7 +1241,7 @@ const BackOfficePage = () => {
 
               <TabsContent value="newsletters">
                 <NewsletterAdminPanel
-                  token={token}
+                  token={adminToken}
                   isReady={isReady}
                   isBusyGlobal={isBusy}
                   onStatus={setStatusMessage}
@@ -1221,16 +1250,16 @@ const BackOfficePage = () => {
               </TabsContent>
 
               <TabsContent value="videos">
-                <VideoCapsuleAdminPanel token={token} />
+                <VideoCapsuleAdminPanel token={adminToken} />
               </TabsContent>
 
               <TabsContent value="whatsapp">
-                <WhatsAppMessagesAdminPanel token={token} />
+                <WhatsAppMessagesAdminPanel token={adminToken} />
               </TabsContent>
 
               <TabsContent value="partners">
                 <PartnerAdminPanel
-                  token={token}
+                  token={adminToken}
                   isReady={isReady}
                   isBusyGlobal={isBusy}
                   onStatus={setStatusMessage}
@@ -1320,7 +1349,7 @@ const BackOfficePage = () => {
               </TabsContent>
 
               <TabsContent value="webinars">
-                <WebinarAdminPanel token={token} />
+                <WebinarAdminPanel token={adminToken} />
               </TabsContent>
 
               <TabsContent value="help">
