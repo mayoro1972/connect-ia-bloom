@@ -1,10 +1,12 @@
-# n8n Import-Like Blueprint - Prospection modèle Elton V1
+# n8n Import-Like Blueprint - Prospection multi-prospects V1
 
 Date : 2026-05-22
 
 ## 1. Objet
 
-Ce document fournit une version **quasi import-like** du workflow n8n de prospection ciblée inspiré du modèle Elton.
+Ce document fournit une version **quasi import-like** du workflow n8n de prospection ciblée **multi-prospects**.
+
+Le nom du fichier est conservé pour garder l’historique, mais le blueprint vise désormais une utilisation sur un portefeuille de prospects extensible.
 
 Ce n'est pas un export natif garanti.
 
@@ -52,7 +54,7 @@ En revanche, la structure est volontairement proche de ce qu'il faudra reconstru
 
 ```json
 {
-  "name": "TransferAI Prospecting Elton Model V1",
+  "name": "TransferAI Prospecting Multi-Prospect V1",
   "settings": {
     "executionOrder": "v1"
   },
@@ -72,13 +74,16 @@ En revanche, la structure est volontairement proche de ce qu'il faudra reconstru
       "parameters": {
         "values": {
           "string": [
-            { "name": "organization_name", "value": "ELTON Oil CI" },
-            { "name": "website", "value": "https://www.eltonoil.com" },
+            { "name": "prospect_id", "value": "manual-prospect-001" },
+            { "name": "organization_name", "value": "Organisation cible à qualifier" },
+            { "name": "website", "value": "https://www.example.org" },
             { "name": "country", "value": "Côte d'Ivoire" },
-            { "name": "organization_type", "value": "entreprise privée" },
-            { "name": "sector_guess", "value": "distribution d'énergie et services B2B" },
-            { "name": "decision_maker_name", "value": "Directeur Général" },
-            { "name": "booking_link_45min", "value": "={{$env.BOOKING_LINK_45MIN}}" }
+            { "name": "organization_type", "value": "organisation à qualifier" },
+            { "name": "sector_guess", "value": "secteur à confirmer" },
+            { "name": "decision_maker_name", "value": "Décideur à confirmer" },
+            { "name": "custom_page_paths_csv", "value": "" },
+            { "name": "booking_link_45min", "value": "={{$env.BOOKING_LINK_45MIN}}" },
+            { "name": "commercial_priority_default", "value": "tier1" }
           ]
         }
       }
@@ -90,7 +95,7 @@ En revanche, la structure est volontairement proche de ce qu'il faudra reconstru
       "position": [660, 240],
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const base = $json.website.replace(/\\/$/, ''); return [{ json: { ...$json, source_urls: [base, base + '/produits-et-services/offres-professionnelles/', base + '/produits-et-services/carte-oasis/', base + '/produits-et-services/espace-auto/', base + '/carrieres/'] } }];"
+        "jsCode": "const base = String($json.website || '').trim().replace(/\\/$/, ''); const customPaths = String($json.custom_page_paths_csv || '').split(',').map((value) => value.trim()).filter(Boolean); const defaultPaths = ['/', '/a-propos/', '/about/', '/services/', '/solutions/', '/expertise/', '/produits-et-services/', '/products/', '/contact/', '/carrieres/', '/careers/', '/blog/']; const selectedPaths = [...new Set([...customPaths, ...defaultPaths])].slice(0, 5); return [{ json: { ...$json, source_urls: selectedPaths.map((path) => /^https?:\\/\\//i.test(path) ? path : `${base}${path === '/' ? '' : path}`) } }];"
       }
     },
     {
@@ -386,7 +391,7 @@ En revanche, la structure est volontairement proche de ce qu'il faudra reconstru
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ { organization_id: null, person_id: null, channel: 'email', message_variant: 'executive_elton_model_v1', sent_at: new Date().toISOString(), delivery_status: 'submitted', response_status: 'pending', stop_reason: null } }}"
+        "jsonBody": "={{ { organization_id: null, person_id: null, channel: 'email', message_variant: 'executive_multi_prospect_model_v1', sent_at: new Date().toISOString(), delivery_status: 'submitted', response_status: 'pending', stop_reason: null } }}"
       }
     }
   ]

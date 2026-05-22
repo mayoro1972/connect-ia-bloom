@@ -1,10 +1,12 @@
-# Workflow n8n - Prospection ciblée modèle Elton
+# Workflow n8n - Prospection ciblée multi-prospects
 
 Date : 2026-05-22
 
 ## 1. Objet
 
-Ce document décrit le workflow **n8n** recommandé pour une prospection commerciale de type **Elton CI**.
+Ce document décrit le workflow **n8n** recommandé pour une prospection commerciale **multi-prospects**.
+
+Le nom du fichier reste historique, mais le workflow doit maintenant être compris comme un moteur de prospection réutilisable pour **100 entreprises ou plus**, et non comme un flux réservé à Elton CI.
 
 Il s'appuie sur une logique très précise :
 
@@ -31,7 +33,7 @@ Il doit aussi produire un message commercial plus convaincant pour un décideur 
 
 ## 2. Logique métier à respecter
 
-Le modèle Elton repose sur 4 piliers.
+Le workflow repose sur 4 piliers.
 
 ## 2.0 Priorités commerciales à intégrer dans le workflow
 
@@ -181,7 +183,7 @@ Le workflow doit prévoir au minimum trois variantes de cas d'usage et d'exemple
 - `distribution_retail`
 - `institution_publique`
 
-Le modèle Elton relève plutôt d'une logique :
+Le cas Elton relevait plutôt d'une logique :
 
 - `distribution_b2b_operations`
 
@@ -368,12 +370,12 @@ Entrées minimales :
 
 ```json
 {
-  "organization_name": "ELTON Oil CI",
-  "website": "https://www.eltonoil.com",
-  "sector_guess": "distribution d'energie et services B2B",
+  "organization_name": "Organisation cible à qualifier",
+  "website": "https://www.example.org",
+  "sector_guess": "secteur à confirmer",
   "visible_services": [],
   "public_signals": [],
-  "decision_maker_name": "Directeur Général",
+  "decision_maker_name": "Décideur à confirmer",
   "target_mode": "executive_outreach"
 }
 ```
@@ -758,7 +760,7 @@ Cette personnalisation doit être faite :
 
 ## 8. Position finale
 
-Le modèle Elton doit devenir la référence du système :
+Le workflow multi-prospects doit devenir la référence du système :
 
 - analyse publique sérieuse ;
 - hypothèses métier crédibles ;
