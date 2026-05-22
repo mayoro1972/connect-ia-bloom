@@ -134,12 +134,12 @@ export const renderNewsletterHtml = (issue: NewsletterIssueRecord) => {
             <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#64748b;">
               ${escapeHtml(issue.issue_date)} · ${escapeHtml(domains)}
             </p>
+            ${bodyBlock}
             ${introBlock}
             ${highlightBlock}
             ${tipBlock}
             ${toolBlock}
             ${promptBlock}
-            ${bodyBlock}
             ${ctaBlock}
           </div>
         </div>
