@@ -32,6 +32,10 @@ Le pack a 4 objectifs :
 19. [Prompts opérationnels Chatwoot + n8n V1](./19_Prompts_Operationnels_Chatwoot_n8n_V1.md)
 20. [Workflow n8n Chatwoot Auto Reply V1 JSON](./20_n8n_Chatwoot_Auto_Reply_V1.json)
 21. [Workflow n8n Chatwoot Auto Reply V1 JSON Import Strict](./21_n8n_Chatwoot_Auto_Reply_V1_Import_Strict.json)
+22. [Inventaire des donnees prospects / clients - RGPD et protection LLM](./32_Inventory_Form_Fields_RGPD.md)
+23. [Matrice de protection LLM - donnees prospects / clients](./33_Matrice_Protection_LLM_Prospects_Clients.md)
+24. [Argumentaire client - protection des donnees sensibles et LLM sur mesure](./34_Argumentaire_Protection_Donnees_Sensibles_LLM_Sur_Mesure.md)
+25. [Messages commerciaux - protection des donnees et LLM sur mesure](./35_Messages_Commerciaux_Protection_Donnees_LLM.md)
 
 ## Ordre de lecture recommandé
 
