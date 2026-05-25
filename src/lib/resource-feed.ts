@@ -558,7 +558,182 @@ const editorialSeedItems: ResourcePost[] = [...caseStudySeeds, ...expertiseSeeds
   coverImageUrl: null,
 }));
 
+const WEEKLY_HEADLINE_TAG = "weekly-headline";
+
+const toFeedItem = (item: ResourcePost): ResourceFeedItem => ({
+  id: item.id,
+  slug: item.slug,
+  categoryKey: item.categoryKey,
+  sectorKey: item.sectorKey,
+  titleFr: item.titleFr,
+  titleEn: item.titleEn,
+  excerptFr: item.excerptFr,
+  excerptEn: item.excerptEn,
+  readTimeMinutes: item.readTimeMinutes,
+  publishedAt: item.publishedAt,
+  sourceName: item.sourceName,
+  sourceUrl: item.sourceUrl,
+  tags: item.tags,
+  isFeatured: item.isFeatured,
+  isNewManual: item.isNewManual,
+});
+
+const getWeekStartUtc = (reference = new Date()) => {
+  const start = new Date(Date.UTC(reference.getUTCFullYear(), reference.getUTCMonth(), reference.getUTCDate()));
+  const diffToMonday = (start.getUTCDay() + 6) % 7;
+  start.setUTCDate(start.getUTCDate() - diffToMonday);
+  start.setUTCHours(0, 0, 0, 0);
+  return start;
+};
+
+const buildWeeklyWatchDate = (dayOffset: number, hour: number) => {
+  const date = new Date(getWeekStartUtc());
+  date.setUTCDate(date.getUTCDate() + dayOffset);
+  date.setUTCHours(hour, 0, 0, 0);
+  return date.toISOString();
+};
+
+const buildWeekRangeLabel = (language: "fr" | "en") => {
+  const start = getWeekStartUtc();
+  const end = new Date(start);
+  end.setUTCDate(end.getUTCDate() + 6);
+
+  return `${new Intl.DateTimeFormat(language === "en" ? "en-GB" : "fr-FR", {
+    day: "numeric",
+    month: "long",
+  }).format(start)} - ${new Intl.DateTimeFormat(language === "en" ? "en-GB" : "fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(end)}`;
+};
+
+const weeklyHeadlinePosts: ResourcePost[] = [
+  {
+    id: "weekly-openai-headline",
+    slug: "a-la-une-openai-semaine",
+    categoryKey: "veille",
+    sectorKey: null,
+    titleFr: "OpenAI : les nouveautés à suivre cette semaine",
+    titleEn: "OpenAI: the updates to track this week",
+    excerptFr:
+      "Un point hebdomadaire sur les annonces OpenAI les plus utiles pour la Côte d'Ivoire et l'Afrique : modèles, usages métiers, automatisation et bonnes pratiques à surveiller.",
+    excerptEn:
+      "A weekly briefing on the OpenAI announcements that matter most for Côte d'Ivoire and Africa: models, practical use cases, automation, and rollout signals to monitor.",
+    contentFr: [
+      `Semaine suivie : ${buildWeekRangeLabel("fr")}.`,
+      "Cette note \"À la une\" met l'accent sur ce qui compte vraiment dans l'écosystème OpenAI pour les équipes africaines : changements produit, nouvelles capacités, usages rapidement activables et points de vigilance.",
+      "Ce que nous regardons en priorité",
+      "1. Les nouveaux modèles ou modes publiés par OpenAI.",
+      "2. Les fonctionnalités ChatGPT et API qui réduisent le temps de production, de synthèse ou d'automatisation.",
+      "3. Les annonces assez concrètes pour créer un cas d'usage en Côte d'Ivoire ou plus largement en Afrique francophone.",
+      "Comment utiliser cette veille",
+      "Repérez d'abord les nouveautés qui peuvent améliorer un flux métier déjà existant, puis transformez-les en test simple : un prompt, un workflow, une procédure d'équipe ou un mini pilote.",
+    ].join("\n\n"),
+    contentEn: [
+      `Week covered: ${buildWeekRangeLabel("en")}.`,
+      "This featured briefing focuses on what really matters in the OpenAI ecosystem for African teams: product changes, new capabilities, practical deployment paths, and operational watchpoints.",
+      "What we prioritize",
+      "1. Newly released OpenAI models or interaction modes.",
+      "2. ChatGPT and API features that reduce production, synthesis, or automation time.",
+      "3. Announcements concrete enough to become a business use case in Côte d'Ivoire or across francophone Africa.",
+      "How to use this watch",
+      "Start with the updates that can improve an existing workflow, then turn them into a simple test: a prompt, a workflow, a team procedure, or a lightweight pilot.",
+    ].join("\n\n"),
+    readTimeMinutes: 4,
+    publishedAt: buildWeeklyWatchDate(1, 9),
+    sourceName: "OpenAI",
+    sourceUrl: "https://openai.com/news/",
+    tags: ["veille", "openai", "weekly", WEEKLY_HEADLINE_TAG],
+    isFeatured: true,
+    isNewManual: false,
+    sources: [
+      {
+        label: "OpenAI News",
+        url: "https://openai.com/news/",
+        publisher: "OpenAI",
+      },
+      {
+        label: "OpenAI API Changelog",
+        url: "https://developers.openai.com/api/docs/changelog",
+        publisher: "OpenAI",
+      },
+    ],
+    seoTitleFr: "OpenAI : la veille hebdomadaire utile pour l'Afrique | TransferAI Africa",
+    seoTitleEn: "OpenAI weekly watch for Africa | TransferAI Africa",
+    seoDescriptionFr:
+      "Les nouveautés OpenAI suivies chaque semaine par TransferAI Africa pour des usages concrets en Côte d'Ivoire et en Afrique.",
+    seoDescriptionEn:
+      "The OpenAI updates tracked every week by TransferAI Africa for concrete use cases in Côte d'Ivoire and across Africa.",
+    coverImageUrl: null,
+  },
+  {
+    id: "weekly-claude-headline",
+    slug: "a-la-une-claude-semaine",
+    categoryKey: "veille",
+    sectorKey: null,
+    titleFr: "Claude : les nouveautés à suivre cette semaine",
+    titleEn: "Claude: the updates to track this week",
+    excerptFr:
+      "Une veille hebdomadaire dédiée à Claude pour suivre les sorties, les évolutions produit et les usages longs formats les plus utiles pour les équipes et dirigeants africains.",
+    excerptEn:
+      "A weekly Claude briefing tracking releases, product changes, and long-form AI workflows that matter most for African teams and decision-makers.",
+    contentFr: [
+      `Semaine suivie : ${buildWeekRangeLabel("fr")}.`,
+      "Cette note \"À la une\" suit l'écosystème Claude avec un angle très opérationnel : rédaction longue, analyse de documents, assistance métier et qualité de synthèse.",
+      "Ce que nous regardons en priorité",
+      "1. Les annonces produit et plateforme autour de Claude.",
+      "2. Les capacités utiles pour traiter des documents longs, des procédures, des comptes rendus et des dossiers complexes.",
+      "3. Les signaux qui peuvent aider les entreprises africaines à mieux structurer leur travail intellectuel.",
+      "Comment utiliser cette veille",
+      "Cherchez les usages où la qualité de rédaction, la synthèse fiable et la relecture stratégique comptent plus que la simple génération rapide, puis testez-les sur un corpus métier réel.",
+    ].join("\n\n"),
+    contentEn: [
+      `Week covered: ${buildWeekRangeLabel("en")}.`,
+      "This featured briefing follows the Claude ecosystem with an operational lens: long-form writing, document analysis, professional assistance, and synthesis quality.",
+      "What we prioritize",
+      "1. Claude product and platform announcements.",
+      "2. Capabilities useful for long documents, procedures, minutes, and complex files.",
+      "3. Signals that can help African organizations structure knowledge work more effectively.",
+      "How to use this watch",
+      "Look for workflows where writing quality, reliable synthesis, and strategic review matter more than raw speed, then test them on a real business corpus.",
+    ].join("\n\n"),
+    readTimeMinutes: 4,
+    publishedAt: buildWeeklyWatchDate(3, 9),
+    sourceName: "Claude",
+    sourceUrl: "https://www.anthropic.com/news",
+    tags: ["veille", "claude", "weekly", WEEKLY_HEADLINE_TAG],
+    isFeatured: true,
+    isNewManual: false,
+    sources: [
+      {
+        label: "Anthropic Newsroom",
+        url: "https://www.anthropic.com/news",
+        publisher: "Anthropic",
+      },
+      {
+        label: "Claude Release Notes",
+        url: "https://platform.claude.com/docs/en/release-notes/overview",
+        publisher: "Anthropic",
+      },
+    ],
+    seoTitleFr: "Claude : la veille hebdomadaire utile pour l'Afrique | TransferAI Africa",
+    seoTitleEn: "Claude weekly watch for Africa | TransferAI Africa",
+    seoDescriptionFr:
+      "Les nouveautés Claude suivies chaque semaine par TransferAI Africa pour des usages concrets en Côte d'Ivoire et en Afrique.",
+    seoDescriptionEn:
+      "The Claude updates tracked every week by TransferAI Africa for concrete use cases in Côte d'Ivoire and across Africa.",
+    coverImageUrl: null,
+  },
+];
+
+export const isWeeklyHeadlineResource = (item: Pick<ResourceFeedItem, "id" | "tags">) =>
+  item.id === "weekly-openai-headline" ||
+  item.id === "weekly-claude-headline" ||
+  item.tags.includes(WEEKLY_HEADLINE_TAG);
+
 export const resourceFeedFallback: ResourceFeedItem[] = [
+  ...weeklyHeadlinePosts.map(toFeedItem),
   ...editorialSeedItems,
   {
     id: "resource-assistant-africa",
@@ -667,31 +842,36 @@ const buildFallbackContent = (item: ResourceFeedItem, language: "fr" | "en") => 
   ].join("\n\n");
 };
 
-export const resourcePostFallback: ResourcePost[] = resourceFeedFallback.map((item) => {
-  const seededPost = item as Partial<ResourcePost>;
+export const resourcePostFallback: ResourcePost[] = [
+  ...weeklyHeadlinePosts,
+  ...resourceFeedFallback
+    .filter((item) => !isWeeklyHeadlineResource(item))
+    .map((item) => {
+      const seededPost = item as Partial<ResourcePost>;
 
-  return {
-    ...item,
-    contentFr: seededPost.contentFr ?? buildFallbackContent(item, "fr"),
-    contentEn: seededPost.contentEn ?? buildFallbackContent(item, "en"),
-    sources:
-      seededPost.sources ??
-      (item.sourceUrl && item.sourceName
-        ? [
-            {
-              label: item.sourceName,
-              url: item.sourceUrl,
-              publisher: item.sourceName,
-            },
-          ]
-        : []),
-    seoTitleFr: seededPost.seoTitleFr ?? null,
-    seoTitleEn: seededPost.seoTitleEn ?? null,
-    seoDescriptionFr: seededPost.seoDescriptionFr ?? null,
-    seoDescriptionEn: seededPost.seoDescriptionEn ?? null,
-    coverImageUrl: seededPost.coverImageUrl ?? null,
-  };
-});
+      return {
+        ...item,
+        contentFr: seededPost.contentFr ?? buildFallbackContent(item, "fr"),
+        contentEn: seededPost.contentEn ?? buildFallbackContent(item, "en"),
+        sources:
+          seededPost.sources ??
+          (item.sourceUrl && item.sourceName
+            ? [
+                {
+                  label: item.sourceName,
+                  url: item.sourceUrl,
+                  publisher: item.sourceName,
+                },
+              ]
+            : []),
+        seoTitleFr: seededPost.seoTitleFr ?? null,
+        seoTitleEn: seededPost.seoTitleEn ?? null,
+        seoDescriptionFr: seededPost.seoDescriptionFr ?? null,
+        seoDescriptionEn: seededPost.seoDescriptionEn ?? null,
+        coverImageUrl: seededPost.coverImageUrl ?? null,
+      };
+    }),
+];
 
 export const sortResourceFeed = (items: ResourceFeedItem[]) =>
   [...items].sort((left, right) => {

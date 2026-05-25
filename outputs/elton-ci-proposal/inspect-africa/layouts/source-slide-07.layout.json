@@ -1,0 +1,937 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/0z61032l",
+    "id": "0z61032l",
+    "slide": 8,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "DEFAULT",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "backgroundColor": "#0D1B2A",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office",
+    "colors": {
+      "accent1": "#4472C4",
+      "accent2": "#ED7D31",
+      "accent3": "#A5A5A5",
+      "accent4": "#FFC000",
+      "accent5": "#5B9BD5",
+      "accent6": "#70AD47",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#44546A",
+      "lt2": "#E7E6E6",
+      "hlink": "#0563C1",
+      "folHlink": "#954F72"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "DEFAULT",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4nap4r6",
+      "id": "2",
+      "name": "Shape 0",
+      "bbox": [
+        0,
+        0,
+        960,
+        81.6
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jqh0fep",
+      "id": "3",
+      "name": "Text 1",
+      "bbox": [
+        38.4,
+        0,
+        883.2,
+        81.6
+      ],
+      "geometry": "rect",
+      "text": "Gouvernance, Sécurité & Conformité — Notre engagement contractuel",
+      "textPreview": "Gouvernance, Sécurité & Conformité — Notre engagement contractuel",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Gouvernance, Sécurité & Conformité — Notre engagement contractuel"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Gouvernance, Sécurité & Conformité — Notre engagement contractuel",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Gouvernance, Sécurité & Conformité — Notre engagement contractuel",
+              "fontSize": 22.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/u18jqh0f",
+      "id": "28",
+      "name": "Image 0",
+      "bbox": [
+        33.6,
+        100.8,
+        96,
+        96
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-7-1.png",
+        "contentType": "image/png",
+        "byteLength": 4695
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-7-1.png",
+        "contentType": "image/png",
+        "byteLength": 4695
+      }
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "5",
+      "name": "Text 2",
+      "bbox": [
+        144,
+        105.6,
+        777.6,
+        81.6
+      ],
+      "geometry": "rect",
+      "text": "Sur le marché africain, la confiance autour des données\nest le premier frein à l'adoption de l'IA.",
+      "textPreview": "Sur le marché africain, la confiance autour des données | est le premier frein à l'adoption de l'IA.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sur le marché africain, la confiance autour des données"
+          },
+          {
+            "index": 2,
+            "text": "est le premier frein à l'adoption de l'IA."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sur le marché africain, la confiance autour des données",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sur le marché africain, la confiance autour des données",
+              "fontSize": 19.33,
+              "color": "#A8C4B8",
+              "italic": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "est le premier frein à l'adoption de l'IA.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "est le premier frein à l'adoption de l'IA.",
+              "fontSize": 19.33,
+              "color": "#A8C4B8",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xczed8v6",
+      "id": "6",
+      "name": "Text 3",
+      "bbox": [
+        144,
+        184.32,
+        777.6,
+        33.6
+      ],
+      "geometry": "rect",
+      "text": "Nous avons construit notre solution sur ce principe.",
+      "textPreview": "Nous avons construit notre solution sur ce principe.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nous avons construit notre solution sur ce principe."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nous avons construit notre solution sur ce principe.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nous avons construit notre solution sur ce principe.",
+              "fontSize": 16,
+              "color": "#F4A61D",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8v6psfil",
+      "id": "7",
+      "name": "Shape 4",
+      "bbox": [
+        26.88,
+        238.08,
+        439.68,
+        117.12
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A2030",
+      "lineColor": "#0E9E76",
+      "lineWidth": 1.07
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "8",
+      "name": "Shape 5",
+      "bbox": [
+        40.32,
+        266.88,
+        59.52,
+        59.52
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#F4A61D",
+      "lineColor": "#F4A61D",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 8,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/jm1cfa9w",
+      "id": "29",
+      "name": "Image 1",
+      "bbox": [
+        46.08,
+        272.64,
+        48,
+        48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-7-2.png",
+        "contentType": "image/png",
+        "byteLength": 3461
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-7-2.png",
+        "contentType": "image/png",
+        "byteLength": 3461
+      }
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/svu9knih",
+      "id": "10",
+      "name": "Text 6",
+      "bbox": [
+        113.28,
+        247.68,
+        340.8,
+        40.32
+      ],
+      "geometry": "rect",
+      "text": "Données 100 % hébergées localement",
+      "textPreview": "Données 100 % hébergées localement",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Données 100 % hébergées localement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Données 100 % hébergées localement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Données 100 % hébergées localement",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hgn29gr2",
+      "id": "11",
+      "name": "Text 7",
+      "bbox": [
+        113.28,
+        289.92,
+        340.8,
+        59.52
+      ],
+      "geometry": "rect",
+      "text": "Vos données ne quittent jamais votre infrastructure. Souveraineté totale garantie par contrat.",
+      "textPreview": "Vos données ne quittent jamais votre infrastructure. Souveraineté totale garantie par contrat.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vos données ne quittent jamais votre infrastructure."
+          },
+          {
+            "index": 2,
+            "text": "Souveraineté totale garantie par contrat."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vos données ne quittent jamais votre infrastructure. Souveraineté totale garantie par contrat.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vos données ne quittent jamais votre infrastructure. Souveraineté totale garantie par contrat.",
+              "fontSize": 12.67,
+              "color": "#A8C4B8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ap4r65wj",
+      "id": "12",
+      "name": "Shape 8",
+      "bbox": [
+        493.44,
+        238.08,
+        439.68,
+        117.12
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A2030",
+      "lineColor": "#0E9E76",
+      "lineWidth": 1.07
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/za1gvy90",
+      "id": "13",
+      "name": "Shape 9",
+      "bbox": [
+        506.88,
+        266.88,
+        59.52,
+        59.52
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 13,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/9knih4by",
+      "id": "30",
+      "name": "Image 2",
+      "bbox": [
+        512.64,
+        272.64,
+        48,
+        48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-7-3.png",
+        "contentType": "image/png",
+        "byteLength": 4695
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-7-3.png",
+        "contentType": "image/png",
+        "byteLength": 4695
+      }
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hoza1gvy",
+      "id": "15",
+      "name": "Text 10",
+      "bbox": [
+        579.84,
+        247.68,
+        340.8,
+        40.32
+      ],
+      "geometry": "rect",
+      "text": "Conformité RGPD & régulations africaines",
+      "textPreview": "Conformité RGPD & régulations africaines",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Conformité RGPD & régulations africaines"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Conformité RGPD & régulations africaines",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Conformité RGPD & régulations africaines",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1gvy90j",
+      "id": "16",
+      "name": "Text 11",
+      "bbox": [
+        579.84,
+        289.92,
+        340.8,
+        59.52
+      ],
+      "geometry": "rect",
+      "text": "Audit de conformité inclus. Alignement avec les cadres CEDEAO, OHADA et réglementations locales.",
+      "textPreview": "Audit de conformité inclus. Alignement avec les cadres CEDEAO, OHADA et réglementations locales.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Audit de conformité inclus. Alignement avec les cadres"
+          },
+          {
+            "index": 2,
+            "text": "CEDEAO, OHADA et réglementations locales."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Audit de conformité inclus. Alignement avec les cadres CEDEAO, OHADA et réglementations locales.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Audit de conformité inclus. Alignement avec les cadres CEDEAO, OHADA et réglementations locales.",
+              "fontSize": 12.67,
+              "color": "#A8C4B8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zidonyd0",
+      "id": "17",
+      "name": "Shape 12",
+      "bbox": [
+        26.88,
+        370.56,
+        439.68,
+        117.12
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A2030",
+      "lineColor": "#0E9E76",
+      "lineWidth": 1.07
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s72x4nap",
+      "id": "18",
+      "name": "Shape 13",
+      "bbox": [
+        40.32,
+        399.36,
+        59.52,
+        59.52
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0E9E76",
+      "lineColor": "#0E9E76",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 18,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/kzupwb2h",
+      "id": "31",
+      "name": "Image 3",
+      "bbox": [
+        46.08,
+        405.12,
+        48,
+        48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-7-4.png",
+        "contentType": "image/png",
+        "byteLength": 4616
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-7-4.png",
+        "contentType": "image/png",
+        "byteLength": 4616
+      }
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "20",
+      "name": "Text 14",
+      "bbox": [
+        113.28,
+        380.16,
+        340.8,
+        40.32
+      ],
+      "geometry": "rect",
+      "text": "Accès restreint & traçabilité totale",
+      "textPreview": "Accès restreint & traçabilité totale",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Accès restreint & traçabilité totale"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Accès restreint & traçabilité totale",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Accès restreint & traçabilité totale",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "21",
+      "name": "Text 15",
+      "bbox": [
+        113.28,
+        422.4,
+        340.8,
+        59.52
+      ],
+      "geometry": "rect",
+      "text": "Journaux d'accès complets, authentification multifacteur, rôles et permissions granulaires.",
+      "textPreview": "Journaux d'accès complets, authentification multifacteur, rôles et permissions granulaires.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Journaux d'accès complets, authentification multifacteur,"
+          },
+          {
+            "index": 2,
+            "text": "rôles et permissions granulaires."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Journaux d'accès complets, authentification multifacteur, rôles et permissions granulaires.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Journaux d'accès complets, authentification multifacteur, rôles et permissions granulaires.",
+              "fontSize": 12.67,
+              "color": "#A8C4B8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "22",
+      "name": "Shape 16",
+      "bbox": [
+        493.44,
+        370.56,
+        439.68,
+        117.12
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A2030",
+      "lineColor": "#0E9E76",
+      "lineWidth": 1.07
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "23",
+      "name": "Shape 17",
+      "bbox": [
+        506.88,
+        399.36,
+        59.52,
+        59.52
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1A5276",
+      "lineColor": "#1A5276",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 23,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/re1w7mp0",
+      "id": "32",
+      "name": "Image 4",
+      "bbox": [
+        512.64,
+        405.12,
+        48,
+        48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-7-5.png",
+        "contentType": "image/png",
+        "byteLength": 4868
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-7-5.png",
+        "contentType": "image/png",
+        "byteLength": 4868
+      }
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "25",
+      "name": "Text 18",
+      "bbox": [
+        579.84,
+        380.16,
+        340.8,
+        40.32
+      ],
+      "geometry": "rect",
+      "text": "Équipe dédiée & SLA contractuel",
+      "textPreview": "Équipe dédiée & SLA contractuel",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Équipe dédiée & SLA contractuel"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Équipe dédiée & SLA contractuel",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Équipe dédiée & SLA contractuel",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "26",
+      "name": "Text 19",
+      "bbox": [
+        579.84,
+        422.4,
+        340.8,
+        59.52
+      ],
+      "geometry": "rect",
+      "text": "Interlocuteur unique, support 24/5, temps de réponse garanti <4h, astreinte critique <1h.",
+      "textPreview": "Interlocuteur unique, support 24/5, temps de réponse garanti <4h, astreinte critique <1h.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Interlocuteur unique, support 24/5, temps de réponse"
+          },
+          {
+            "index": 2,
+            "text": "garanti <4h, astreinte critique <1h."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Interlocuteur unique, support 24/5, temps de réponse garanti <4h, astreinte critique <1h.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Interlocuteur unique, support 24/5, temps de réponse garanti <4h, astreinte critique <1h.",
+              "fontSize": 12.67,
+              "color": "#A8C4B8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "27",
+      "name": "Text 20",
+      "bbox": [
+        28.8,
+        508.8,
+        902.4,
+        21.12
+      ],
+      "geometry": "rect",
+      "text": "Toutes ces garanties sont inscrites dans votre contrat — pas de promesses verbales.",
+      "textPreview": "Toutes ces garanties sont inscrites dans votre contrat — pas de promesses verbales.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Toutes ces garanties sont inscrites dans votre contrat — pas de promesses verbales."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Toutes ces garanties sont inscrites dans votre contrat — pas de promesses verbales.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Toutes ces garanties sont inscrites dans votre contrat — pas de promesses verbales.",
+              "fontSize": 12,
+              "color": "#0A7C5C",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

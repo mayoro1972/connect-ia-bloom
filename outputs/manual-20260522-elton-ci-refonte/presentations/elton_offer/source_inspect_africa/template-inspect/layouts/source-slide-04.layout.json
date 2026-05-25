@@ -1,0 +1,969 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/val87ed8",
+    "id": "val87ed8",
+    "slide": 5,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "DEFAULT",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office",
+    "colors": {
+      "accent1": "#4472C4",
+      "accent2": "#ED7D31",
+      "accent3": "#A5A5A5",
+      "accent4": "#FFC000",
+      "accent5": "#5B9BD5",
+      "accent6": "#70AD47",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#44546A",
+      "lt2": "#E7E6E6",
+      "hlink": "#0563C1",
+      "folHlink": "#954F72"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "DEFAULT",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "2",
+      "name": "Shape 0",
+      "bbox": [
+        0,
+        0,
+        960,
+        81.6
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "3",
+      "name": "Text 1",
+      "bbox": [
+        38.4,
+        0,
+        883.2,
+        81.6
+      ],
+      "geometry": "rect",
+      "text": "ROI démontré — Ce que nos clients obtiennent concrètement",
+      "textPreview": "ROI démontré — Ce que nos clients obtiennent concrètement",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ROI démontré — Ce que nos clients obtiennent concrètement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ROI démontré — Ce que nos clients obtiennent concrètement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "ROI démontré — Ce que nos clients obtiennent concrètement",
+              "fontSize": 23.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "4",
+      "name": "Shape 2",
+      "bbox": [
+        19.2,
+        96,
+        218.88,
+        163.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "5",
+      "name": "Text 3",
+      "bbox": [
+        19.2,
+        107.52,
+        218.88,
+        76.8
+      ],
+      "geometry": "rect",
+      "text": "+31 %",
+      "textPreview": "+31 %",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+31 %"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+31 %",
+          "runs": [
+            {
+              "index": 1,
+              "text": "+31 %",
+              "fontSize": 45.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1orytsv",
+      "id": "6",
+      "name": "Text 4",
+      "bbox": [
+        19.2,
+        184.32,
+        218.88,
+        42.24
+      ],
+      "geometry": "rect",
+      "text": "Productivité opérationnelle",
+      "textPreview": "Productivité opérationnelle",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Productivité opérationnelle"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Productivité opérationnelle",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Productivité opérationnelle",
+              "fontSize": 12.67,
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fmlkjm1c",
+      "id": "7",
+      "name": "Text 5",
+      "bbox": [
+        19.2,
+        228.48,
+        218.88,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "dès J+60",
+      "textPreview": "dès J+60",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "dès J+60"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "dès J+60",
+          "runs": [
+            {
+              "index": 1,
+              "text": "dès J+60",
+              "fontSize": 11.33,
+              "color": "#D4E8DC",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jqh0fep",
+      "id": "8",
+      "name": "Shape 6",
+      "bbox": [
+        251.52,
+        96,
+        218.88,
+        163.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4nap4r6",
+      "id": "9",
+      "name": "Text 7",
+      "bbox": [
+        251.52,
+        107.52,
+        218.88,
+        76.8
+      ],
+      "geometry": "rect",
+      "text": "−45 %",
+      "textPreview": "−45 %",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "−45 %"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "−45 %",
+          "runs": [
+            {
+              "index": 1,
+              "text": "−45 %",
+              "fontSize": 45.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1w7mp0bi",
+      "id": "10",
+      "name": "Text 8",
+      "bbox": [
+        251.52,
+        184.32,
+        218.88,
+        42.24
+      ],
+      "geometry": "rect",
+      "text": "Coût de formation & onboarding",
+      "textPreview": "Coût de formation & onboarding",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Coût de formation & onboarding"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Coût de formation & onboarding",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Coût de formation & onboarding",
+              "fontSize": 12.67,
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8bat47y1",
+      "id": "11",
+      "name": "Text 9",
+      "bbox": [
+        251.52,
+        228.48,
+        218.88,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "sur 12 mois",
+      "textPreview": "sur 12 mois",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "sur 12 mois"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "sur 12 mois",
+          "runs": [
+            {
+              "index": 1,
+              "text": "sur 12 mois",
+              "fontSize": 11.33,
+              "color": "#D4E8DC",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jqh0fepk",
+      "id": "12",
+      "name": "Shape 10",
+      "bbox": [
+        483.84,
+        96,
+        218.88,
+        163.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#B85C00",
+      "lineColor": "#B85C00",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5o7qpg3",
+      "id": "13",
+      "name": "Text 11",
+      "bbox": [
+        483.84,
+        107.52,
+        218.88,
+        76.8
+      ],
+      "geometry": "rect",
+      "text": "3,2×",
+      "textPreview": "3,2×",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3,2×"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3,2×",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3,2×",
+              "fontSize": 45.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/18jqh0fe",
+      "id": "14",
+      "name": "Text 12",
+      "bbox": [
+        483.84,
+        184.32,
+        218.88,
+        42.24
+      ],
+      "geometry": "rect",
+      "text": "Retour sur investissement",
+      "textPreview": "Retour sur investissement",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Retour sur investissement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Retour sur investissement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Retour sur investissement",
+              "fontSize": 12.67,
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8nqxs72x",
+      "id": "15",
+      "name": "Text 13",
+      "bbox": [
+        483.84,
+        228.48,
+        218.88,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "en moyenne an 1",
+      "textPreview": "en moyenne an 1",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "en moyenne an 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "en moyenne an 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "en moyenne an 1",
+              "fontSize": 11.33,
+              "color": "#D4E8DC",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j2t83itg",
+      "id": "16",
+      "name": "Shape 14",
+      "bbox": [
+        716.16,
+        96,
+        218.88,
+        163.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#1A5276",
+      "lineColor": "#1A5276",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qh0fepkz",
+      "id": "17",
+      "name": "Text 15",
+      "bbox": [
+        716.16,
+        107.52,
+        218.88,
+        76.8
+      ],
+      "geometry": "rect",
+      "text": "J+15",
+      "textPreview": "J+15",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "J+15"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "J+15",
+          "runs": [
+            {
+              "index": 1,
+              "text": "J+15",
+              "fontSize": 45.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfa9w3m",
+      "id": "18",
+      "name": "Text 16",
+      "bbox": [
+        716.16,
+        184.32,
+        218.88,
+        42.24
+      ],
+      "geometry": "rect",
+      "text": "Premier livrable concret",
+      "textPreview": "Premier livrable concret",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Premier livrable concret"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Premier livrable concret",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Premier livrable concret",
+              "fontSize": 12.67,
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/crmhk3q5",
+      "id": "19",
+      "name": "Text 17",
+      "bbox": [
+        716.16,
+        228.48,
+        218.88,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "après l'audit initial",
+      "textPreview": "après l'audit initial",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "après l'audit initial"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "après l'audit initial",
+          "runs": [
+            {
+              "index": 1,
+              "text": "après l'audit initial",
+              "fontSize": 11.33,
+              "color": "#D4E8DC",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 19,
+      "kind": "chart",
+      "scope": "slide",
+      "aid": "ch/dg7adsji",
+      "id": "25",
+      "name": "Chart 0",
+      "bbox": [
+        24,
+        273.6,
+        595.2,
+        240
+      ],
+      "chartType": "bar"
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0fepkzu",
+      "id": "21",
+      "name": "Shape 18",
+      "bbox": [
+        638.4,
+        273.6,
+        297.6,
+        240
+      ],
+      "geometry": "rect",
+      "fillColor": "#D4EDE5",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 21,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/xs72x4na",
+      "id": "26",
+      "name": "Image 0",
+      "bbox": [
+        654.72,
+        283.2,
+        36.48,
+        36.48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-4-1.png",
+        "contentType": "image/png",
+        "byteLength": 3758
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-4-1.png",
+        "contentType": "image/png",
+        "byteLength": 3758
+      }
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zupwb2hw",
+      "id": "23",
+      "name": "Text 19",
+      "bbox": [
+        696,
+        285.12,
+        232.32,
+        33.6
+      ],
+      "geometry": "rect",
+      "text": "Cas client — Secteur Banque",
+      "textPreview": "Cas client — Secteur Banque",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Cas client — Secteur Banque"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Cas client — Secteur Banque",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Cas client — Secteur Banque",
+              "fontSize": 14,
+              "color": "#0D1B2A",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orytsvu9",
+      "id": "24",
+      "name": "Text 20",
+      "bbox": [
+        645.12,
+        328.32,
+        278.4,
+        174.72
+      ],
+      "geometry": "rect",
+      "text": "→ Automatisation du traitement KYC\n→ 2 800 dossiers/mois traités vs 950\n→ Délai moyen : 4h → 22 min\n→ Économie annuelle : 420 k€\n→ Déploiement en 6 semaines",
+      "textPreview": "→ Automatisation du traitement KYC | → 2 800 dossiers/mois traités vs 950 | → Délai moyen : 4h → 22 min | → Économie annuelle : 420 k€ | ...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "→ Automatisation du traitement KYC"
+          },
+          {
+            "index": 2,
+            "text": "→ 2 800 dossiers/mois traités vs 950"
+          },
+          {
+            "index": 3,
+            "text": "→ Délai moyen : 4h → 22 min"
+          },
+          {
+            "index": 4,
+            "text": "→ Économie annuelle : 420 k€"
+          },
+          {
+            "index": 5,
+            "text": "→ Déploiement en 6 semaines"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "→ Automatisation du traitement KYC",
+          "runs": [
+            {
+              "index": 1,
+              "text": "→ Automatisation du traitement KYC",
+              "fontSize": 13.33,
+              "color": "#1A1A2E"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "→ 2 800 dossiers/mois traités vs 950",
+          "runs": [
+            {
+              "index": 1,
+              "text": "→ 2 800 dossiers/mois traités vs 950",
+              "fontSize": 13.33,
+              "color": "#1A1A2E"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "→ Délai moyen : 4h → 22 min",
+          "runs": [
+            {
+              "index": 1,
+              "text": "→ Délai moyen : 4h → 22 min",
+              "fontSize": 13.33,
+              "color": "#1A1A2E"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "→ Économie annuelle : 420 k€",
+          "runs": [
+            {
+              "index": 1,
+              "text": "→ Économie annuelle : 420 k€",
+              "fontSize": 13.33,
+              "color": "#0A7C5C"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "→ Déploiement en 6 semaines",
+          "runs": [
+            {
+              "index": 1,
+              "text": "→ Déploiement en 6 semaines",
+              "fontSize": 13.33,
+              "color": "#1A1A2E"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

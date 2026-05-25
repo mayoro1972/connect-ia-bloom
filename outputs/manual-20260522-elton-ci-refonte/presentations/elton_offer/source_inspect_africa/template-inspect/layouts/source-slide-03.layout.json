@@ -1,0 +1,1249 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/s72x4nap",
+    "id": "s72x4nap",
+    "slide": 4,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "DEFAULT",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "backgroundColor": "#F7F9F8",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office",
+    "colors": {
+      "accent1": "#4472C4",
+      "accent2": "#ED7D31",
+      "accent3": "#A5A5A5",
+      "accent4": "#FFC000",
+      "accent5": "#5B9BD5",
+      "accent6": "#70AD47",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#44546A",
+      "lt2": "#E7E6E6",
+      "hlink": "#0563C1",
+      "folHlink": "#954F72"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "DEFAULT",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "2",
+      "name": "Shape 0",
+      "bbox": [
+        0,
+        0,
+        960,
+        81.6
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "3",
+      "name": "Text 1",
+      "bbox": [
+        38.4,
+        0,
+        883.2,
+        81.6
+      ],
+      "geometry": "rect",
+      "text": "Notre solution — 4 objectifs d'intégration opérationnelle",
+      "textPreview": "Notre solution — 4 objectifs d'intégration opérationnelle",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Notre solution — 4 objectifs d'intégration opérationnelle"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Notre solution — 4 objectifs d'intégration opérationnelle",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Notre solution — 4 objectifs d'intégration opérationnelle",
+              "fontSize": 23.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "4",
+      "name": "Shape 2",
+      "bbox": [
+        21.12,
+        96,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "5",
+      "name": "Text 3",
+      "bbox": [
+        21.12,
+        96,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 29.33,
+              "color": "#F4A61D",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "6",
+      "name": "Shape 4",
+      "bbox": [
+        91.2,
+        107.52,
+        67.2,
+        67.2
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/p0bi9s36",
+      "id": "37",
+      "name": "Image 0",
+      "bbox": [
+        98.88,
+        115.2,
+        51.84,
+        51.84
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-3-1.png",
+        "contentType": "image/png",
+        "byteLength": 5134
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-3-1.png",
+        "contentType": "image/png",
+        "byteLength": 5134
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "8",
+      "name": "Text 5",
+      "bbox": [
+        172.8,
+        97.92,
+        528,
+        36.48
+      ],
+      "geometry": "rect",
+      "text": "Automatiser les tâches répétitives",
+      "textPreview": "Automatiser les tâches répétitives",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Automatiser les tâches répétitives"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Automatiser les tâches répétitives",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Automatiser les tâches répétitives",
+              "fontSize": 16.67,
+              "color": "#0D1B2A",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "9",
+      "name": "Text 6",
+      "bbox": [
+        172.8,
+        136.32,
+        528,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Identifier et automatiser les processus à faible valeur : saisie, reporting, tri d'e-mails, gestion documentaire. Résultat : 30 % de temps libéré pour vos équipes.",
+      "textPreview": "Identifier et automatiser les processus à faible valeur : saisie, reporting, tri d'e-mails, gestion documentaire. Résultat : 30 % de temp...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Identifier et automatiser les processus à faible valeur : saisie, reporting, tri d'e-mails, gestion"
+          },
+          {
+            "index": 2,
+            "text": "documentaire. Résultat : 30 % de temps libéré pour vos équipes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Identifier et automatiser les processus à faible valeur : saisie, reporting, tri d'e-mails, gestion documentaire. Résultat : 30 % de temps libéré pour vos équipes.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Identifier et automatiser les processus à faible valeur : saisie, reporting, tri d'e-mails, gestion documentaire. Résultat : 30 % de temps libéré pour vos équipes.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "10",
+      "name": "Shape 7",
+      "bbox": [
+        724.8,
+        115.2,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "fillColor": "#D4EDE5",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "11",
+      "name": "Text 8",
+      "bbox": [
+        724.8,
+        115.2,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "text": "−30 % tâches manuelles",
+      "textPreview": "−30 % tâches manuelles",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "−30 % tâches manuelles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "−30 % tâches manuelles",
+          "runs": [
+            {
+              "index": 1,
+              "text": "−30 % tâches manuelles",
+              "fontSize": 14,
+              "color": "#0A7C5C",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "12",
+      "name": "Shape 9",
+      "bbox": [
+        21.12,
+        203.52,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "13",
+      "name": "Text 10",
+      "bbox": [
+        21.12,
+        203.52,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 29.33,
+              "color": "#F4A61D",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "14",
+      "name": "Shape 11",
+      "bbox": [
+        91.2,
+        215.04,
+        67.2,
+        67.2
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 14,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/idonyd0z",
+      "id": "38",
+      "name": "Image 1",
+      "bbox": [
+        98.88,
+        222.72,
+        51.84,
+        51.84
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-3-2.png",
+        "contentType": "image/png",
+        "byteLength": 2544
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-3-2.png",
+        "contentType": "image/png",
+        "byteLength": 2544
+      }
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "16",
+      "name": "Text 12",
+      "bbox": [
+        172.8,
+        205.44,
+        528,
+        36.48
+      ],
+      "geometry": "rect",
+      "text": "Activer vos données en temps réel",
+      "textPreview": "Activer vos données en temps réel",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Activer vos données en temps réel"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Activer vos données en temps réel",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Activer vos données en temps réel",
+              "fontSize": 16.67,
+              "color": "#0D1B2A",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "17",
+      "name": "Text 13",
+      "bbox": [
+        172.8,
+        243.84,
+        528,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Transformer vos bases de données en tableaux de bord décisionnels. Alertes automatiques, prévisions de ventes, analyse de performance en continu.",
+      "textPreview": "Transformer vos bases de données en tableaux de bord décisionnels. Alertes automatiques, prévisions de ventes, analyse de performance en ...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Transformer vos bases de données en tableaux de bord décisionnels. Alertes automatiques,"
+          },
+          {
+            "index": 2,
+            "text": "prévisions de ventes, analyse de performance en continu."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Transformer vos bases de données en tableaux de bord décisionnels. Alertes automatiques, prévisions de ventes, analyse de performance en continu.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Transformer vos bases de données en tableaux de bord décisionnels. Alertes automatiques, prévisions de ventes, analyse de performance en continu.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "18",
+      "name": "Shape 14",
+      "bbox": [
+        724.8,
+        222.72,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "fillColor": "#D4EDE5",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6tovahoz",
+      "id": "19",
+      "name": "Text 15",
+      "bbox": [
+        724.8,
+        222.72,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "text": "Décisions 3× plus rapides",
+      "textPreview": "Décisions 3× plus rapides",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Décisions 3× plus rapides"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Décisions 3× plus rapides",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Décisions 3× plus rapides",
+              "fontSize": 14,
+              "color": "#0A7C5C",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "20",
+      "name": "Shape 16",
+      "bbox": [
+        21.12,
+        311.04,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "21",
+      "name": "Text 17",
+      "bbox": [
+        21.12,
+        311.04,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03",
+          "runs": [
+            {
+              "index": 1,
+              "text": "03",
+              "fontSize": 29.33,
+              "color": "#F4A61D",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "22",
+      "name": "Shape 18",
+      "bbox": [
+        91.2,
+        322.56,
+        67.2,
+        67.2
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 22,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/byhgn29g",
+      "id": "39",
+      "name": "Image 2",
+      "bbox": [
+        98.88,
+        330.24,
+        51.84,
+        51.84
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-3-3.png",
+        "contentType": "image/png",
+        "byteLength": 6297
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-3-3.png",
+        "contentType": "image/png",
+        "byteLength": 6297
+      }
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "24",
+      "name": "Text 19",
+      "bbox": [
+        172.8,
+        312.96,
+        528,
+        36.48
+      ],
+      "geometry": "rect",
+      "text": "Standardiser vos processus métier",
+      "textPreview": "Standardiser vos processus métier",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Standardiser vos processus métier"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Standardiser vos processus métier",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Standardiser vos processus métier",
+              "fontSize": 16.67,
+              "color": "#0D1B2A",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "25",
+      "name": "Text 20",
+      "bbox": [
+        172.8,
+        351.36,
+        528,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Documenter, harmoniser et optimiser vos workflows à travers les départements. L'IA impose une cohérence opérationnelle bénéfique et traçable.",
+      "textPreview": "Documenter, harmoniser et optimiser vos workflows à travers les départements. L'IA impose une cohérence opérationnelle bénéfique et traça...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Documenter, harmoniser et optimiser vos workflows à travers les départements. L'IA impose"
+          },
+          {
+            "index": 2,
+            "text": "une cohérence opérationnelle bénéfique et traçable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Documenter, harmoniser et optimiser vos workflows à travers les départements. L'IA impose une cohérence opérationnelle bénéfique et traçable.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Documenter, harmoniser et optimiser vos workflows à travers les départements. L'IA impose une cohérence opérationnelle bénéfique et traçable.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "26",
+      "name": "Shape 21",
+      "bbox": [
+        724.8,
+        330.24,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "fillColor": "#D4EDE5",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psfil0rq",
+      "id": "27",
+      "name": "Text 22",
+      "bbox": [
+        724.8,
+        330.24,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "text": "+25 % cohérence inter-équipes",
+      "textPreview": "+25 % cohérence inter-équipes",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+25 % cohérence inter-équipes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+25 % cohérence inter-équipes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "+25 % cohérence inter-équipes",
+              "fontSize": 14,
+              "color": "#0A7C5C",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "28",
+      "name": "Shape 23",
+      "bbox": [
+        21.12,
+        418.56,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "29",
+      "name": "Text 24",
+      "bbox": [
+        21.12,
+        418.56,
+        57.6,
+        91.2
+      ],
+      "geometry": "rect",
+      "text": "04",
+      "textPreview": "04",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "04"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "04",
+          "runs": [
+            {
+              "index": 1,
+              "text": "04",
+              "fontSize": 29.33,
+              "color": "#F4A61D",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/twra5gbq",
+      "id": "30",
+      "name": "Shape 25",
+      "bbox": [
+        91.2,
+        430.08,
+        67.2,
+        67.2
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 30,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/fil0rqd4",
+      "id": "40",
+      "name": "Image 3",
+      "bbox": [
+        98.88,
+        437.76,
+        51.84,
+        51.84
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-3-4.png",
+        "contentType": "image/png",
+        "byteLength": 4616
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-3-4.png",
+        "contentType": "image/png",
+        "byteLength": 4616
+      }
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bq1oryts",
+      "id": "32",
+      "name": "Text 26",
+      "bbox": [
+        172.8,
+        420.48,
+        528,
+        36.48
+      ],
+      "geometry": "rect",
+      "text": "Former & autonomiser vos équipes",
+      "textPreview": "Former & autonomiser vos équipes",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Former & autonomiser vos équipes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Former & autonomiser vos équipes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Former & autonomiser vos équipes",
+              "fontSize": 16.67,
+              "color": "#0D1B2A",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m58z25kb",
+      "id": "33",
+      "name": "Text 27",
+      "bbox": [
+        172.8,
+        458.88,
+        528,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Déployer 130+ modules de formation IA adaptés à votre secteur. Onboarding accéléré, montée en compétences continue, knowledge base centralisée.",
+      "textPreview": "Déployer 130+ modules de formation IA adaptés à votre secteur. Onboarding accéléré, montée en compétences continue, knowledge base centra...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Déployer 130+ modules de formation IA adaptés à votre secteur. Onboarding accéléré,"
+          },
+          {
+            "index": 2,
+            "text": "montée en compétences continue, knowledge base centralisée."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Déployer 130+ modules de formation IA adaptés à votre secteur. Onboarding accéléré, montée en compétences continue, knowledge base centralisée.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Déployer 130+ modules de formation IA adaptés à votre secteur. Onboarding accéléré, montée en compétences continue, knowledge base centralisée.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t83itgfm",
+      "id": "34",
+      "name": "Shape 28",
+      "bbox": [
+        724.8,
+        437.76,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "fillColor": "#D4EDE5",
+      "lineColor": "#0A7C5C",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4nap4r65",
+      "id": "35",
+      "name": "Text 29",
+      "bbox": [
+        724.8,
+        437.76,
+        211.2,
+        52.8
+      ],
+      "geometry": "rect",
+      "text": "−45 % coût formation",
+      "textPreview": "−45 % coût formation",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "−45 % coût formation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "−45 % coût formation",
+          "runs": [
+            {
+              "index": 1,
+              "text": "−45 % coût formation",
+              "fontSize": 14,
+              "color": "#0A7C5C",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b2hwfyxo",
+      "id": "36",
+      "name": "Text 30",
+      "bbox": [
+        28.8,
+        508.8,
+        902.4,
+        21.12
+      ],
+      "geometry": "rect",
+      "text": "Ces 4 objectifs sont traduits en livrables mesurables à chaque étape du déploiement.",
+      "textPreview": "Ces 4 objectifs sont traduits en livrables mesurables à chaque étape du déploiement.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ces 4 objectifs sont traduits en livrables mesurables à chaque étape du déploiement."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ces 4 objectifs sont traduits en livrables mesurables à chaque étape du déploiement.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ces 4 objectifs sont traduits en livrables mesurables à chaque étape du déploiement.",
+              "fontSize": 12,
+              "color": "#64748B",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

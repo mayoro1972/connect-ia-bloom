@@ -1,0 +1,914 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/yemk8m",
+    "id": "yemk8m",
+    "slide": 7,
+    "layoutId": "aa906b0f-cfa2-4345-80aa-11a2a5e72829",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "589248e3-4d86-444d-bc5f-610e1cacec16",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "aa906b0f-cfa2-4345-80aa-11a2a5e72829",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "589248e3-4d86-444d-bc5f-610e1cacec16",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "589248e3-4d86-444d-bc5f-610e1cacec16",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8v6psf",
+      "id": "2",
+      "bbox": [
+        60,
+        40,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CAS D'USAGE",
+      "textPreview": "CAS D'USAGE",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CAS D'USAGE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CAS D'USAGE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CAS D'USAGE",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7y1kre1w",
+      "id": "3",
+      "bbox": [
+        60,
+        78,
+        760,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Ce que cette offre peut adresser concrètement",
+      "textPreview": "Ce que cette offre peut adresser concrètement",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que cette offre peut adresser concrètement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que cette offre peut adresser concrètement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que cette offre peut adresser concrètement",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bi9s36h",
+      "id": "4",
+      "bbox": [
+        60,
+        140,
+        780,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Pour une entreprise comme Elton CI, l'offre formation prend de la valeur si elle prépare des usages utiles sur des terrains bien identifiés.",
+      "textPreview": "Pour une entreprise comme Elton CI, l'offre formation prend de la valeur si elle prépare des usages utiles sur des terrains bien identifiés.",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pour une entreprise comme Elton CI, l'offre formation prend de la valeur si elle prépare des usages utiles sur des terrains"
+          },
+          {
+            "index": 2,
+            "text": "bien identifiés."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pour une entreprise comme Elton CI, l'offre formation prend de la valeur si elle prépare des usages utiles sur des terrains bien identifiés.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pour une entreprise comme Elton CI, l'offre formation prend de la valeur si elle prépare des usages utiles sur des terrains bien identifiés.",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pwb2hwfy",
+      "id": "5",
+      "bbox": [
+        60,
+        210,
+        520,
+        136
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i5sneloj",
+      "id": "6",
+      "bbox": [
+        82,
+        230,
+        300,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Comptes professionnels et recouvrement",
+      "textPreview": "Comptes professionnels et recouvrement",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Comptes professionnels et"
+          },
+          {
+            "index": 2,
+            "text": "recouvrement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Comptes professionnels et recouvrement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Comptes professionnels et recouvrement",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7qpg3ex0",
+      "id": "7",
+      "bbox": [
+        82,
+        276,
+        470,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Mieux suivre les comptes clients, les échéances, les relances et les revues de portefeuille.",
+      "textPreview": "Mieux suivre les comptes clients, les échéances, les relances et les revues de portefeuille.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Mieux suivre les comptes clients, les échéances, les relances et les revues de"
+          },
+          {
+            "index": 2,
+            "text": "portefeuille."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Mieux suivre les comptes clients, les échéances, les relances et les revues de portefeuille.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Mieux suivre les comptes clients, les échéances, les relances et les revues de portefeuille.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0z61032l",
+      "id": "8",
+      "bbox": [
+        620,
+        210,
+        520,
+        136
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pkzupwb2",
+      "id": "9",
+      "bbox": [
+        642,
+        230,
+        300,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Flotte, carte carburant et pilotage",
+      "textPreview": "Flotte, carte carburant et pilotage",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Flotte, carte carburant et pilotage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Flotte, carte carburant et pilotage",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Flotte, carte carburant et pilotage",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5sneloj2",
+      "id": "10",
+      "bbox": [
+        642,
+        276,
+        470,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Mieux exploiter les données de consommation, les cartes et les tableaux de bord de suivi.",
+      "textPreview": "Mieux exploiter les données de consommation, les cartes et les tableaux de bord de suivi.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Mieux exploiter les données de consommation, les cartes et les tableaux de"
+          },
+          {
+            "index": 2,
+            "text": "bord de suivi."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Mieux exploiter les données de consommation, les cartes et les tableaux de bord de suivi.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Mieux exploiter les données de consommation, les cartes et les tableaux de bord de suivi.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cbulwval",
+      "id": "11",
+      "bbox": [
+        60,
+        382,
+        520,
+        136
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqxs72x4",
+      "id": "12",
+      "bbox": [
+        82,
+        402,
+        300,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Service auto et relation client",
+      "textPreview": "Service auto et relation client",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Service auto et relation client"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Service auto et relation client",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Service auto et relation client",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u54zidon",
+      "id": "13",
+      "bbox": [
+        82,
+        448,
+        470,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Renforcer les rappels, la qualité de service, la réactivité et le suivi des interactions clients.",
+      "textPreview": "Renforcer les rappels, la qualité de service, la réactivité et le suivi des interactions clients.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Renforcer les rappels, la qualité de service, la réactivité et le suivi des"
+          },
+          {
+            "index": 2,
+            "text": "interactions clients."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Renforcer les rappels, la qualité de service, la réactivité et le suivi des interactions clients.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Renforcer les rappels, la qualité de service, la réactivité et le suivi des interactions clients.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5kb6xkf6",
+      "id": "14",
+      "bbox": [
+        620,
+        382,
+        520,
+        136
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czed8v6p",
+      "id": "15",
+      "bbox": [
+        642,
+        402,
+        300,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Procédures, standards et diffusion interne",
+      "textPreview": "Procédures, standards et diffusion interne",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Procédures, standards et diffusion"
+          },
+          {
+            "index": 2,
+            "text": "interne"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Procédures, standards et diffusion interne",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Procédures, standards et diffusion interne",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "16",
+      "bbox": [
+        642,
+        448,
+        470,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Aider les équipes à accéder plus vite aux bonnes pratiques, réponses et informations utiles.",
+      "textPreview": "Aider les équipes à accéder plus vite aux bonnes pratiques, réponses et informations utiles.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Aider les équipes à accéder plus vite aux bonnes pratiques, réponses et"
+          },
+          {
+            "index": 2,
+            "text": "informations utiles."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Aider les équipes à accéder plus vite aux bonnes pratiques, réponses et informations utiles.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Aider les équipes à accéder plus vite aux bonnes pratiques, réponses et informations utiles.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "17",
+      "bbox": [
+        60,
+        594,
+        1120,
+        44
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFF7F1",
+      "lineColor": "#FFF7F1",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58z25kb6",
+      "id": "18",
+      "bbox": [
+        84,
+        607,
+        1070,
+        18
+      ],
+      "geometry": "rect",
+      "text": "La formation prépare ici des usages métier précis : elle rend les équipes plus prêtes, plus rapides et plus cohérentes avant le déploiement d'un pilote.",
+      "textPreview": "La formation prépare ici des usages métier précis : elle rend les équipes plus prêtes, plus rapides et plus cohérentes avant le déploieme...",
+      "resolvedFontSize": 11.8,
+      "resolvedTextStyle": {
+        "fontSize": 11.8,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La formation prépare ici des usages métier précis : elle rend les équipes plus prêtes, plus rapides et plus cohérentes avant le déploiement d'un pilote."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La formation prépare ici des usages métier précis : elle rend les équipes plus prêtes, plus rapides et plus cohérentes avant le déploiement d'un pilote.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La formation prépare ici des usages métier précis : elle rend les équipes plus prêtes, plus rapides et plus cohérentes avant le déploiement d'un pilote.",
+              "fontSize": 11.8,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gn29gr2p",
+      "id": "19",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "20",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "L'objectif n'est pas d'ajouter de l'IA partout, mais de relier la formation à des cas d'usage visibles et crédibles.",
+      "textPreview": "L'objectif n'est pas d'ajouter de l'IA partout, mais de relier la formation à des cas d'usage visibles et crédibles.",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L'objectif n'est pas d'ajouter de l'IA partout, mais de relier la formation à des cas d'usage visibles et crédibles."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L'objectif n'est pas d'ajouter de l'IA partout, mais de relier la formation à des cas d'usage visibles et crédibles.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'objectif n'est pas d'ajouter de l'IA partout, mais de relier la formation à des cas d'usage visibles et crédibles.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "21",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "07",
+      "textPreview": "07",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "07"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "07",
+          "runs": [
+            {
+              "index": 1,
+              "text": "07",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,1092 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/phzxz8",
+    "id": "phzxz8",
+    "slide": 9,
+    "layoutId": "9c5b7c48-5774-41b5-8daa-f26e25836fc6",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "017b17e9-ae8f-408d-a89a-4de42886218e",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "9c5b7c48-5774-41b5-8daa-f26e25836fc6",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "017b17e9-ae8f-408d-a89a-4de42886218e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "017b17e9-ae8f-408d-a89a-4de42886218e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6psfil0r",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/svu9knih",
+      "id": "2",
+      "bbox": [
+        60,
+        58,
+        200,
+        72
+      ],
+      "alt": "TransferAI Africa logo",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "3813d30d-d395-4c75-83e2-ce92667b0807",
+        "contentType": "image/png",
+        "byteLength": 196122
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "3",
+      "bbox": [
+        60,
+        146,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROCHAINE ÉTAPE",
+      "textPreview": "PROCHAINE ÉTAPE",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROCHAINE ÉTAPE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROCHAINE ÉTAPE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROCHAINE ÉTAPE",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "4",
+      "bbox": [
+        60,
+        182,
+        620,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Présenter TransferAI, puis ouvrir sur une action simple",
+      "textPreview": "Présenter TransferAI, puis ouvrir sur une action simple",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Présenter TransferAI, puis ouvrir sur une"
+          },
+          {
+            "index": 2,
+            "text": "action simple"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Présenter TransferAI, puis ouvrir sur une action simple",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Présenter TransferAI, puis ouvrir sur une action simple",
+              "fontSize": 32,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "5",
+      "bbox": [
+        60,
+        278,
+        620,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Le message commercial le plus simple à faire passer : commençons par un audit IA gratuit et un échange expert de 30 à 45 minutes.",
+      "textPreview": "Le message commercial le plus simple à faire passer : commençons par un audit IA gratuit et un échange expert de 30 à 45 minutes.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le message commercial le plus simple à faire passer : commençons par un audit IA"
+          },
+          {
+            "index": 2,
+            "text": "gratuit et un échange expert de 30 à 45 minutes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le message commercial le plus simple à faire passer : commençons par un audit IA gratuit et un échange expert de 30 à 45 minutes.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le message commercial le plus simple à faire passer : commençons par un audit IA gratuit et un échange expert de 30 à 45 minutes.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/donyd0z6",
+      "id": "6",
+      "bbox": [
+        60,
+        370,
+        620,
+        202
+      ],
+      "geometry": "rect",
+      "fillColor": "#16324F",
+      "lineColor": "#16324F",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3q5o7qp",
+      "id": "7",
+      "bbox": [
+        90,
+        398,
+        320,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Appel à l'action recommandé",
+      "textPreview": "Appel à l'action recommandé",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Appel à l'action recommandé"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Appel à l'action recommandé",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Appel à l'action recommandé",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "8",
+      "bbox": [
+        90,
+        448,
+        340,
+        20
+      ],
+      "geometry": "rect",
+      "text": "1. Réserver un audit IA gratuit",
+      "textPreview": "1. Réserver un audit IA gratuit",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. Réserver un audit IA gratuit"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1. Réserver un audit IA gratuit",
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. Réserver un audit IA gratuit",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "9",
+      "bbox": [
+        90,
+        478,
+        420,
+        20
+      ],
+      "geometry": "rect",
+      "text": "2. Tenir un échange expert de 30 à 45 minutes",
+      "textPreview": "2. Tenir un échange expert de 30 à 45 minutes",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2. Tenir un échange expert de 30 à 45 minutes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2. Tenir un échange expert de 30 à 45 minutes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. Tenir un échange expert de 30 à 45 minutes",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "10",
+      "bbox": [
+        90,
+        508,
+        470,
+        40
+      ],
+      "geometry": "rect",
+      "text": "3. Recevoir une première orientation : formation, accompagnement ou solution",
+      "textPreview": "3. Recevoir une première orientation : formation, accompagnement ou solution",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3. Recevoir une première orientation : formation,"
+          },
+          {
+            "index": 2,
+            "text": "accompagnement ou solution"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3. Recevoir une première orientation : formation, accompagnement ou solution",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. Recevoir une première orientation : formation, accompagnement ou solution",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbulwva",
+      "id": "11",
+      "bbox": [
+        742,
+        140,
+        438,
+        474
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6psfil0r",
+      "id": "12",
+      "bbox": [
+        770,
+        170,
+        280,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Coordonnées à partager",
+      "textPreview": "Coordonnées à partager",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Coordonnées à partager"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Coordonnées à partager",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Coordonnées à partager",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/val87ed8",
+      "id": "13",
+      "bbox": [
+        770,
+        230,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "www.transferai.ci",
+      "textPreview": "www.transferai.ci",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "www.transferai.ci"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "www.transferai.ci",
+          "runs": [
+            {
+              "index": 1,
+              "text": "www.transferai.ci",
+              "fontSize": 15,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3q5o7qp",
+      "id": "14",
+      "bbox": [
+        770,
+        272,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "contact@transferai.ci",
+      "textPreview": "contact@transferai.ci",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "contact@transferai.ci"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "contact@transferai.ci",
+          "runs": [
+            {
+              "index": 1,
+              "text": "contact@transferai.ci",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/donyd0z6",
+      "id": "15",
+      "bbox": [
+        770,
+        308,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "+225 07 16 57 39 90",
+      "textPreview": "+225 07 16 57 39 90",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+225 07 16 57 39 90"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+225 07 16 57 39 90",
+          "runs": [
+            {
+              "index": 1,
+              "text": "+225 07 16 57 39 90",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "16",
+      "bbox": [
+        770,
+        344,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "WhatsApp : +225 07 16 57 39 90",
+      "textPreview": "WhatsApp : +225 07 16 57 39 90",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "WhatsApp : +225 07 16 57 39 90"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "WhatsApp : +225 07 16 57 39 90",
+          "runs": [
+            {
+              "index": 1,
+              "text": "WhatsApp : +225 07 16 57 39 90",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "17",
+      "bbox": [
+        770,
+        380,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "linkedin.com/company/transfert-ai-africa",
+      "textPreview": "linkedin.com/company/transfert-ai-africa",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "linkedin.com/company/transfert-ai-africa"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "linkedin.com/company/transfert-ai-africa",
+          "runs": [
+            {
+              "index": 1,
+              "text": "linkedin.com/company/transfert-ai-africa",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kf6dcbul",
+      "id": "18",
+      "bbox": [
+        770,
+        428,
+        350,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+      "textPreview": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0z61032",
+      "id": "19",
+      "bbox": [
+        770,
+        500,
+        340,
+        98
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFF7F1",
+      "lineColor": "#FFF7F1",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "20",
+      "bbox": [
+        792,
+        520,
+        180,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Formule courte à utiliser",
+      "textPreview": "Formule courte à utiliser",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formule courte à utiliser"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formule courte à utiliser",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formule courte à utiliser",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "21",
+      "bbox": [
+        792,
+        544,
+        290,
+        30
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa vous aide à identifier les usages de l'IA les plus utiles, à former vos équipes sur des cas concrets, puis à choisir la bonne suite.",
+      "textPreview": "TransferAI Africa vous aide à identifier les usages de l'IA les plus utiles, à former vos équipes sur des cas concrets, puis à choisir la...",
+      "resolvedFontSize": 11.2,
+      "resolvedTextStyle": {
+        "fontSize": 11.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa vous aide à identifier les usages de l'IA"
+          },
+          {
+            "index": 2,
+            "text": "les plus utiles, à former vos équipes sur des cas concrets,"
+          },
+          {
+            "index": 3,
+            "text": "puis à choisir la bonne suite."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa vous aide à identifier les usages de l'IA les plus utiles, à former vos équipes sur des cas concrets, puis à choisir la bonne suite.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa vous aide à identifier les usages de l'IA les plus utiles, à former vos équipes sur des cas concrets, puis à choisir la bonne suite.",
+              "fontSize": 11.2,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "22",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61032lsz",
+      "id": "23",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une suite simple et un point de contact évident.",
+      "textPreview": "Sortie recommandée du rendez-vous : un besoin clarifié, une suite simple et un point de contact évident.",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une suite simple et un point de contact évident."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une suite simple et un point de contact évident.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une suite simple et un point de contact évident.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "24",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "09",
+      "textPreview": "09",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "09",
+          "runs": [
+            {
+              "index": 1,
+              "text": "09",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

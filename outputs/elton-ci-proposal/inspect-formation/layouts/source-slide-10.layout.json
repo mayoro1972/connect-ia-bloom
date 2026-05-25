@@ -1,0 +1,1111 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/29gr2p8n",
+    "id": "29gr2p8n",
+    "slide": 11,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt",
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jqh0fep",
+      "id": "25",
+      "name": "Rectangle 24",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/wfyxobm5",
+      "id": "26",
+      "name": "Picture 1",
+      "bbox": [
+        78.23,
+        58,
+        163.54,
+        72
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image2.png",
+        "contentType": "image/png",
+        "byteLength": 196122
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image2.png",
+        "contentType": "image/png",
+        "byteLength": 196122
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gvy90je9",
+      "id": "3",
+      "name": "Rectangle 2",
+      "bbox": [
+        60,
+        146,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROCHAINE ÉTAPE",
+      "textPreview": "PROCHAINE ÉTAPE",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROCHAINE ÉTAPE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROCHAINE ÉTAPE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROCHAINE ÉTAPE",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "4",
+      "name": "Rectangle 3",
+      "bbox": [
+        60,
+        182,
+        620,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Ouvrir sur une action simple, crédible et utile",
+      "textPreview": "Ouvrir sur une action simple, crédible et utile",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ouvrir sur une action simple, crédible et"
+          },
+          {
+            "index": 2,
+            "text": "utile"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ouvrir sur une action simple, crédible et utile",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ouvrir sur une action simple, crédible et utile",
+              "fontSize": 32,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hwfyxob",
+      "id": "5",
+      "name": "Rectangle 4",
+      "bbox": [
+        60,
+        278,
+        620,
+        64
+      ],
+      "geometry": "rect",
+      "text": "Le message le plus simple à faire passer : commençons par un échange de 45 minutes et un audit gratuit pour identifier la bonne combinaison entre formation, accompagnement et cas d'usage.",
+      "textPreview": "Le message le plus simple à faire passer : commençons par un échange de 45 minutes et un audit gratuit pour identifier la bonne combinais...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le message le plus simple à faire passer : commençons par un échange de 45"
+          },
+          {
+            "index": 2,
+            "text": "minutes et un audit gratuit pour identifier la bonne combinaison entre formation,"
+          },
+          {
+            "index": 3,
+            "text": "accompagnement et cas d'usage."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le message le plus simple à faire passer : commençons par un échange de 45 minutes et un audit gratuit pour identifier la bonne combinaison entre formation, accompagnement et cas d'usage.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le message le plus simple à faire passer : commençons par un échange de 45 minutes et un audit gratuit pour identifier la bonne combinaison entre formation, accompagnement et cas d'usage.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94fu18jq",
+      "id": "6",
+      "name": "Rectangle 5",
+      "bbox": [
+        60,
+        370,
+        620,
+        202
+      ],
+      "geometry": "rect",
+      "fillColor": "#16324F",
+      "lineColor": "#16324F",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjm1cfa9",
+      "id": "7",
+      "name": "Rectangle 6",
+      "bbox": [
+        90,
+        398,
+        320,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Appel à l'action recommandé",
+      "textPreview": "Appel à l'action recommandé",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Appel à l'action recommandé"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Appel à l'action recommandé",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Appel à l'action recommandé",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "8",
+      "name": "Rectangle 7",
+      "bbox": [
+        90,
+        448,
+        400,
+        20
+      ],
+      "geometry": "rect",
+      "text": "1. Tenir un échange expert de 45 minutes",
+      "textPreview": "1. Tenir un échange expert de 45 minutes",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. Tenir un échange expert de 45 minutes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1. Tenir un échange expert de 45 minutes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. Tenir un échange expert de 45 minutes",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "9",
+      "name": "Rectangle 8",
+      "bbox": [
+        90,
+        478,
+        400,
+        20
+      ],
+      "geometry": "rect",
+      "text": "2. Lancer un audit IA gratuit",
+      "textPreview": "2. Lancer un audit IA gratuit",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2. Lancer un audit IA gratuit"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2. Lancer un audit IA gratuit",
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. Lancer un audit IA gratuit",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4fu18jqh",
+      "id": "10",
+      "name": "Rectangle 9",
+      "bbox": [
+        90,
+        508,
+        470,
+        40
+      ],
+      "geometry": "rect",
+      "text": "3. Recevoir une orientation ciblée : formation, accompagnement ou pilote",
+      "textPreview": "3. Recevoir une orientation ciblée : formation, accompagnement ou pilote",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3. Recevoir une orientation ciblée : formation, accompagnement"
+          },
+          {
+            "index": 2,
+            "text": "ou pilote"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3. Recevoir une orientation ciblée : formation, accompagnement ou pilote",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. Recevoir une orientation ciblée : formation, accompagnement ou pilote",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x0nuxc3y",
+      "id": "11",
+      "name": "Rectangle 10",
+      "bbox": [
+        742,
+        140,
+        438,
+        474
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m94fu18j",
+      "id": "12",
+      "name": "Rectangle 11",
+      "bbox": [
+        770,
+        170,
+        280,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Coordonnées à partager",
+      "textPreview": "Coordonnées à partager",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Coordonnées à partager"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Coordonnées à partager",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Coordonnées à partager",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fu18jqh0",
+      "id": "13",
+      "name": "Rectangle 12",
+      "bbox": [
+        770,
+        230,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "www.transferai.ci",
+      "textPreview": "www.transferai.ci",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "www.transferai.ci"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "www.transferai.ci",
+          "runs": [
+            {
+              "index": 1,
+              "text": "www.transferai.ci",
+              "fontSize": 15,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/83itgfml",
+      "id": "14",
+      "name": "Rectangle 13",
+      "bbox": [
+        770,
+        272,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "contact@transferai.ci",
+      "textPreview": "contact@transferai.ci",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "contact@transferai.ci"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "contact@transferai.ci",
+          "runs": [
+            {
+              "index": 1,
+              "text": "contact@transferai.ci",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xobm58z2",
+      "id": "15",
+      "name": "Rectangle 14",
+      "bbox": [
+        770,
+        308,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "+225 07 16 57 39 90",
+      "textPreview": "+225 07 16 57 39 90",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+225 07 16 57 39 90"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+225 07 16 57 39 90",
+          "runs": [
+            {
+              "index": 1,
+              "text": "+225 07 16 57 39 90",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qxs72x4n",
+      "id": "16",
+      "name": "Rectangle 15",
+      "bbox": [
+        770,
+        344,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "WhatsApp : +225 07 16 57 39 90",
+      "textPreview": "WhatsApp : +225 07 16 57 39 90",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "WhatsApp : +225 07 16 57 39 90"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "WhatsApp : +225 07 16 57 39 90",
+          "runs": [
+            {
+              "index": 1,
+              "text": "WhatsApp : +225 07 16 57 39 90",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fil0rqd4",
+      "id": "17",
+      "name": "Rectangle 16",
+      "bbox": [
+        770,
+        380,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "linkedin.com/company/transfert-ai-africa",
+      "textPreview": "linkedin.com/company/transfert-ai-africa",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "linkedin.com/company/transfert-ai-africa"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "linkedin.com/company/transfert-ai-africa",
+          "runs": [
+            {
+              "index": 1,
+              "text": "linkedin.com/company/transfert-ai-africa",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4zidonyd",
+      "id": "18",
+      "name": "Rectangle 17",
+      "bbox": [
+        770,
+        428,
+        350,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+      "textPreview": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xkf6dcbu",
+      "id": "19",
+      "name": "Rectangle 18",
+      "bbox": [
+        770,
+        500,
+        340,
+        98
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFF7F1",
+      "lineColor": "#FFF7F1",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xczed8v6",
+      "id": "20",
+      "name": "Rectangle 19",
+      "bbox": [
+        792,
+        520,
+        180,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Formule courte à utiliser",
+      "textPreview": "Formule courte à utiliser",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formule courte à utiliser"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formule courte à utiliser",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formule courte à utiliser",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8v6psfil",
+      "id": "21",
+      "name": "Rectangle 20",
+      "bbox": [
+        792,
+        544,
+        290,
+        34
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa vous aide à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite pour l'entreprise.",
+      "textPreview": "TransferAI Africa vous aide à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite pour l'entre...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa vous aide à identifier les usages les plus"
+          },
+          {
+            "index": 2,
+            "text": "utiles, à former les bonnes équipes et à choisir la bonne"
+          },
+          {
+            "index": 3,
+            "text": "suite pour l'entreprise."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa vous aide à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite pour l'entreprise.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa vous aide à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite pour l'entreprise.",
+              "fontSize": 11.2,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa9w3m94",
+      "id": "22",
+      "name": "Rectangle 21",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "23",
+      "name": "Rectangle 22",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une proposition de formation ciblée et un premier terrain d'action.",
+      "textPreview": "Sortie recommandée du rendez-vous : un besoin clarifié, une proposition de formation ciblée et un premier terrain d'action.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une proposition de formation ciblée et un premier terrain d'action."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une proposition de formation ciblée et un premier terrain d'action.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sortie recommandée du rendez-vous : un besoin clarifié, une proposition de formation ciblée et un premier terrain d'action.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4nap4r6",
+      "id": "24",
+      "name": "Rectangle 23",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

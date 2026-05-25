@@ -1,0 +1,1135 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/9rnnor",
+    "id": "9rnnor",
+    "slide": 3,
+    "layoutId": "56aabc3c-cfa9-4cde-b91a-106f1d74a36f",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "b94fbcb9-a389-4778-a704-66dd01770dce",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "56aabc3c-cfa9-4cde-b91a-106f1d74a36f",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "b94fbcb9-a389-4778-a704-66dd01770dce",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "b94fbcb9-a389-4778-a704-66dd01770dce",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3ylc7u5",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ji5snelo",
+      "id": "2",
+      "bbox": [
+        60,
+        40,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CRÉDIBILITÉ",
+      "textPreview": "CRÉDIBILITÉ",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CRÉDIBILITÉ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CRÉDIBILITÉ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CRÉDIBILITÉ",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxc3ylc7",
+      "id": "3",
+      "bbox": [
+        60,
+        78,
+        760,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Une structure ancrée, crédible et mobilisable",
+      "textPreview": "Une structure ancrée, crédible et mobilisable",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une structure ancrée, crédible et mobilisable"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une structure ancrée, crédible et mobilisable",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une structure ancrée, crédible et mobilisable",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/4byhgn29",
+      "id": "4",
+      "bbox": [
+        930,
+        56,
+        220,
+        78
+      ],
+      "alt": "TransferAI Africa logo",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "fc8f7a68-82da-43ec-83db-a69ae11141ca",
+        "contentType": "image/png",
+        "byteLength": 196122
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/crmhk3q5",
+      "id": "5",
+      "bbox": [
+        750,
+        146,
+        430,
+        40
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa est issu d'une collaboration avec Nettelecom CI et s'appuie sur une équipe fondatrice renforcée par des consultants experts.",
+      "textPreview": "TransferAI Africa est issu d'une collaboration avec Nettelecom CI et s'appuie sur une équipe fondatrice renforcée par des consultants exp...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa est issu d'une collaboration avec Nettelecom CI et s'appuie"
+          },
+          {
+            "index": 2,
+            "text": "sur une équipe fondatrice renforcée par des consultants experts."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa est issu d'une collaboration avec Nettelecom CI et s'appuie sur une équipe fondatrice renforcée par des consultants experts.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa est issu d'une collaboration avec Nettelecom CI et s'appuie sur une équipe fondatrice renforcée par des consultants experts.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6tovaho",
+      "id": "6",
+      "bbox": [
+        60,
+        192,
+        495,
+        160
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulwval87",
+      "id": "7",
+      "bbox": [
+        84,
+        216,
+        360,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Ancrage local, ambition Afrique",
+      "textPreview": "Ancrage local, ambition Afrique",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ancrage local, ambition Afrique"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ancrage local, ambition Afrique",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ancrage local, ambition Afrique",
+              "fontSize": 19,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/18jqh0fe",
+      "id": "8",
+      "bbox": [
+        84,
+        262,
+        432,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Structure portée depuis Abidjan, pensée pour la Côte d'Ivoire et les réalités des organisations africaines.",
+      "textPreview": "Structure portée depuis Abidjan, pensée pour la Côte d'Ivoire et les réalités des organisations africaines.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Structure portée depuis Abidjan, pensée pour la Côte d'Ivoire et les"
+          },
+          {
+            "index": 2,
+            "text": "réalités des organisations africaines."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Structure portée depuis Abidjan, pensée pour la Côte d'Ivoire et les réalités des organisations africaines.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Structure portée depuis Abidjan, pensée pour la Côte d'Ivoire et les réalités des organisations africaines.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8nqxs72x",
+      "id": "9",
+      "bbox": [
+        625,
+        192,
+        495,
+        160
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/al87ed8b",
+      "id": "10",
+      "bbox": [
+        649,
+        216,
+        360,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Équipe fondatrice + consultants experts",
+      "textPreview": "Équipe fondatrice + consultants experts",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Équipe fondatrice + consultants"
+          },
+          {
+            "index": 2,
+            "text": "experts"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Équipe fondatrice + consultants experts",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Équipe fondatrice + consultants experts",
+              "fontSize": 19,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z61032ls",
+      "id": "11",
+      "bbox": [
+        649,
+        262,
+        432,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Vision, partenariats, data, audit, pédagogie, conformité, automatisation et adoption réunis dans une même offre.",
+      "textPreview": "Vision, partenariats, data, audit, pédagogie, conformité, automatisation et adoption réunis dans une même offre.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vision, partenariats, data, audit, pédagogie, conformité, automatisation"
+          },
+          {
+            "index": 2,
+            "text": "et adoption réunis dans une même offre."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vision, partenariats, data, audit, pédagogie, conformité, automatisation et adoption réunis dans une même offre.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vision, partenariats, data, audit, pédagogie, conformité, automatisation et adoption réunis dans une même offre.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orytsvu9",
+      "id": "12",
+      "bbox": [
+        60,
+        404,
+        495,
+        160
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcrmhk3q",
+      "id": "13",
+      "bbox": [
+        84,
+        428,
+        360,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Adossée à des partenaires crédibles",
+      "textPreview": "Adossée à des partenaires crédibles",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Adossée à des partenaires crédibles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Adossée à des partenaires crédibles",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Adossée à des partenaires crédibles",
+              "fontSize": 19,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9w3m94f",
+      "id": "14",
+      "bbox": [
+        84,
+        474,
+        432,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Des partenaires académiques, institutionnels et opérationnels renforcent la crédibilité de l'écosystème TransferAI.",
+      "textPreview": "Des partenaires académiques, institutionnels et opérationnels renforcent la crédibilité de l'écosystème TransferAI.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Des partenaires académiques, institutionnels et opérationnels"
+          },
+          {
+            "index": 2,
+            "text": "renforcent la crédibilité de l'écosystème TransferAI."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Des partenaires académiques, institutionnels et opérationnels renforcent la crédibilité de l'écosystème TransferAI.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Des partenaires académiques, institutionnels et opérationnels renforcent la crédibilité de l'écosystème TransferAI.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zupwb2hw",
+      "id": "15",
+      "bbox": [
+        625,
+        404,
+        495,
+        160
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sfil0rqd",
+      "id": "16",
+      "bbox": [
+        649,
+        428,
+        360,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Du conseil au passage à l'action",
+      "textPreview": "Du conseil au passage à l'action",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Du conseil au passage à l'action"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Du conseil au passage à l'action",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Du conseil au passage à l'action",
+              "fontSize": 19,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0fepkzu",
+      "id": "17",
+      "bbox": [
+        649,
+        474,
+        432,
+        58
+      ],
+      "geometry": "rect",
+      "text": "La valeur n'est pas seulement dans le discours IA, mais dans la capacité à produire un résultat lisible et maintenable.",
+      "textPreview": "La valeur n'est pas seulement dans le discours IA, mais dans la capacité à produire un résultat lisible et maintenable.",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La valeur n'est pas seulement dans le discours IA, mais dans la"
+          },
+          {
+            "index": 2,
+            "text": "capacité à produire un résultat lisible et maintenable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La valeur n'est pas seulement dans le discours IA, mais dans la capacité à produire un résultat lisible et maintenable.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La valeur n'est pas seulement dans le discours IA, mais dans la capacité à produire un résultat lisible et maintenable.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65wjudg7",
+      "id": "18",
+      "bbox": [
+        60,
+        572,
+        220,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Partenaires visibles sur le site",
+      "textPreview": "Partenaires visibles sur le site",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Partenaires visibles sur le site"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Partenaires visibles sur le site",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Partenaires visibles sur le site",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#516072",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zqtcj6to",
+      "id": "19",
+      "bbox": [
+        60,
+        596,
+        162,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/cfa9w3m9",
+      "id": "20",
+      "bbox": [
+        74,
+        608,
+        134,
+        36
+      ],
+      "alt": "Partner logo 1",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "0ea6a5ad-1684-4ea9-8fdb-cc83b161a8a5",
+        "contentType": "image/png",
+        "byteLength": 226105
+      }
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/idonyd0z",
+      "id": "21",
+      "bbox": [
+        250,
+        596,
+        162,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 22,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/u9knih4b",
+      "id": "22",
+      "bbox": [
+        264,
+        608,
+        134,
+        36
+      ],
+      "alt": "Partner logo 2",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "ca210b4d-6db0-4329-ae23-0d8f303f848c",
+        "contentType": "image/png",
+        "byteLength": 100471
+      }
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0je9cvix",
+      "id": "23",
+      "bbox": [
+        440,
+        596,
+        162,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/c7u54zid",
+      "id": "24",
+      "bbox": [
+        454,
+        608,
+        134,
+        36
+      ],
+      "alt": "Partner logo 3",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "07e5a27a-cf7f-4796-a0d7-a8785b8ca18f",
+        "contentType": "image/png",
+        "byteLength": 182908
+      }
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "25",
+      "bbox": [
+        630,
+        596,
+        162,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 26,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/u18jqh0f",
+      "id": "26",
+      "bbox": [
+        644,
+        608,
+        134,
+        36
+      ],
+      "alt": "Partner logo 4",
+      "contentType": "image/jpeg",
+      "asset": {
+        "assetId": "7ac4b8cb-9aad-489d-b331-b1d8b3522e5f",
+        "contentType": "image/jpeg",
+        "byteLength": 17551
+      }
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rqd4vmt",
+      "id": "27",
+      "bbox": [
+        820,
+        596,
+        162,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 28,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/cvixczed",
+      "id": "28",
+      "bbox": [
+        834,
+        608,
+        134,
+        36
+      ],
+      "alt": "Partner logo 5",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "dfae6470-41b5-407a-968e-2e219def1601",
+        "contentType": "image/png",
+        "byteLength": 189608
+      }
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixczed8v",
+      "id": "29",
+      "bbox": [
+        1010,
+        596,
+        162,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 30,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/val87ed8",
+      "id": "30",
+      "bbox": [
+        1024,
+        608,
+        134,
+        36
+      ],
+      "alt": "Partner logo 6",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "b32eef3d-a014-48d8-b7d8-01362576cd19",
+        "contentType": "image/png",
+        "byteLength": 273834
+      }
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hoza1gvy",
+      "id": "31",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1gvy90j",
+      "id": "32",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Signaux de confiance visibles : équipe pluridisciplinaire, partenaires académiques et institutionnels, ancrage Côte d'Ivoire.",
+      "textPreview": "Signaux de confiance visibles : équipe pluridisciplinaire, partenaires académiques et institutionnels, ancrage Côte d'Ivoire.",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Signaux de confiance visibles : équipe pluridisciplinaire, partenaires académiques et institutionnels, ancrage Côte d'Ivoire."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Signaux de confiance visibles : équipe pluridisciplinaire, partenaires académiques et institutionnels, ancrage Côte d'Ivoire.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Signaux de confiance visibles : équipe pluridisciplinaire, partenaires académiques et institutionnels, ancrage Côte d'Ivoire.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zidonyd0",
+      "id": "33",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03",
+          "runs": [
+            {
+              "index": 1,
+              "text": "03",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import BlogNewsletterSignup from "@/components/BlogNewsletterSignup";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { isResourceNew, type ResourceCategoryKey } from "@/lib/resource-feed";
+import { isResourceNew, isWeeklyHeadlineResource, type ResourceCategoryKey } from "@/lib/resource-feed";
 import { useResourceFeed } from "@/hooks/useResourceFeed";
 import {
   getAvailableBlogSectors,
@@ -77,7 +77,12 @@ const BlogPage = () => {
     return domainMatches && typeMatches;
   });
 
-  const featuredItems = filteredItems.filter((item) => item.isFeatured).slice(0, 3);
+  const weeklyHeadlineItems = filteredItems
+    .filter(isWeeklyHeadlineResource)
+    .slice(0, 2);
+  const featuredItems = weeklyHeadlineItems.length > 0
+    ? weeklyHeadlineItems
+    : filteredItems.filter((item) => item.isFeatured).slice(0, 3);
   const featuredIds = new Set(featuredItems.map((item) => item.id));
   const latestItems = filteredItems.filter((item) => !featuredIds.has(item.id));
 

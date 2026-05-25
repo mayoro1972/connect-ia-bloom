@@ -1,0 +1,983 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/xkgoei",
+    "id": "xkgoei",
+    "slide": 5,
+    "layoutId": "c86286a2-50c4-412e-9eaa-44d808bab499",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "63687533-61ce-41b6-a861-5742f33e5edf",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Avenir Next",
+      "Georgia"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "c86286a2-50c4-412e-9eaa-44d808bab499",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "63687533-61ce-41b6-a861-5742f33e5edf",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "63687533-61ce-41b6-a861-5742f33e5edf",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F6F1EA",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "2",
+      "bbox": [
+        58,
+        51,
+        10,
+        10
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "3",
+      "bbox": [
+        80,
+        48,
+        460,
+        18
+      ],
+      "geometry": "rect",
+      "text": "A R C H I T E C T U R E   D ' O F F R E",
+      "textPreview": "A R C H I T E C T U R E   D ' O F F R E",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A R C H I T E C T U R E   D ' O F F R E"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A R C H I T E C T U R E   D ' O F F R E",
+          "runs": [
+            {
+              "index": 1,
+              "text": "A R C H I T E C T U R E   D ' O F F R E",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cfa9w3m9",
+      "id": "4",
+      "bbox": [
+        58,
+        84,
+        900,
+        86
+      ],
+      "geometry": "rect",
+      "text": "L'offre complète relie diagnostic, compétences et mise en œuvre.",
+      "textPreview": "L'offre complète relie diagnostic, compétences et mise en œuvre.",
+      "resolvedFontSize": 33,
+      "resolvedTextStyle": {
+        "fontSize": 33,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L'offre complète relie diagnostic, compétences et"
+          },
+          {
+            "index": 2,
+            "text": "mise en œuvre."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L'offre complète relie diagnostic, compétences et mise en œuvre.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'offre complète relie diagnostic, compétences et mise en œuvre.",
+              "fontSize": 33,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1032lszq",
+      "id": "5",
+      "bbox": [
+        58,
+        176,
+        980,
+        54
+      ],
+      "geometry": "rect",
+      "text": "La proposition gagne en crédibilité quand elle montre clairement que la valeur ne vient pas d'un outil isolé, mais de la combinaison entre priorisation, formation utile, cadre de confiance et premier terrain d'exécution.",
+      "textPreview": "La proposition gagne en crédibilité quand elle montre clairement que la valeur ne vient pas d'un outil isolé, mais de la combinaison entr...",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La proposition gagne en crédibilité quand elle montre clairement que la valeur ne vient pas d'un outil isolé, mais de la combinaison entre priorisation,"
+          },
+          {
+            "index": 2,
+            "text": "formation utile, cadre de confiance et premier terrain d'exécution."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La proposition gagne en crédibilité quand elle montre clairement que la valeur ne vient pas d'un outil isolé, mais de la combinaison entre priorisation, formation utile, cadre de confiance et premier terrain d'exécution.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La proposition gagne en crédibilité quand elle montre clairement que la valeur ne vient pas d'un outil isolé, mais de la combinaison entre priorisation, formation utile, cadre de confiance et premier terrain d'exécution.",
+              "fontSize": 14,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u9knih4b",
+      "id": "6",
+      "bbox": [
+        58,
+        258,
+        540,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/judg7ads",
+      "id": "7",
+      "bbox": [
+        58,
+        258,
+        8,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "8",
+      "bbox": [
+        86,
+        282,
+        496,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Audit, cadrage et feuille de route",
+      "textPreview": "Audit, cadrage et feuille de route",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Audit, cadrage et feuille de route"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Audit, cadrage et feuille de route",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Audit, cadrage et feuille de route",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "9",
+      "bbox": [
+        86,
+        342,
+        488,
+        56
+      ],
+      "geometry": "rect",
+      "text": "• diagnostic des points de friction critiques\n• lecture simple des gains rapides et des prérequis",
+      "textPreview": "• diagnostic des points de friction critiques | • lecture simple des gains rapides et des prérequis",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• diagnostic des points de friction critiques"
+          },
+          {
+            "index": 2,
+            "text": "• lecture simple des gains rapides et des prérequis"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• diagnostic des points de friction critiques",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• diagnostic des points de friction critiques",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• lecture simple des gains rapides et des prérequis",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• lecture simple des gains rapides et des prérequis",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t47y1kre",
+      "id": "10",
+      "bbox": [
+        642,
+        258,
+        496,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "#DE6A1F",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0je9cvix",
+      "id": "11",
+      "bbox": [
+        642,
+        258,
+        8,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/byhgn29g",
+      "id": "12",
+      "bbox": [
+        670,
+        282,
+        452,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Formation dirigeants et managers",
+      "textPreview": "Formation dirigeants et managers",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formation dirigeants et managers"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formation dirigeants et managers",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formation dirigeants et managers",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/idonyd0z",
+      "id": "13",
+      "bbox": [
+        670,
+        342,
+        444,
+        56
+      ],
+      "geometry": "rect",
+      "text": "• vision, arbitrage et gouvernance de l'IA\n• conduite du changement et lecture des risques",
+      "textPreview": "• vision, arbitrage et gouvernance de l'IA | • conduite du changement et lecture des risques",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• vision, arbitrage et gouvernance de l'IA"
+          },
+          {
+            "index": 2,
+            "text": "• conduite du changement et lecture des risques"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• vision, arbitrage et gouvernance de l'IA",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• vision, arbitrage et gouvernance de l'IA",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#F8E7D8"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• conduite du changement et lecture des risques",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• conduite du changement et lecture des risques",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#F8E7D8"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcj6tova",
+      "id": "14",
+      "bbox": [
+        58,
+        436,
+        540,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rqd4vmt",
+      "id": "15",
+      "bbox": [
+        58,
+        436,
+        8,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#1D8A78",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6xkf6dc",
+      "id": "16",
+      "bbox": [
+        86,
+        460,
+        496,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Formation équipes métier",
+      "textPreview": "Formation équipes métier",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formation équipes métier"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formation équipes métier",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formation équipes métier",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "17",
+      "bbox": [
+        86,
+        520,
+        488,
+        56
+      ],
+      "geometry": "rect",
+      "text": "• reporting, rédaction, synthèse et exploitation de l'information\n• service client, flotte, opérations, fonctions support",
+      "textPreview": "• reporting, rédaction, synthèse et exploitation de l'information | • service client, flotte, opérations, fonctions support",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• reporting, rédaction, synthèse et exploitation de l'information"
+          },
+          {
+            "index": 2,
+            "text": "• service client, flotte, opérations, fonctions support"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• reporting, rédaction, synthèse et exploitation de l'information",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• reporting, rédaction, synthèse et exploitation de l'information",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• service client, flotte, opérations, fonctions support",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• service client, flotte, opérations, fonctions support",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tovahoza",
+      "id": "18",
+      "bbox": [
+        642,
+        436,
+        496,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/032lszqt",
+      "id": "19",
+      "bbox": [
+        642,
+        436,
+        8,
+        156
+      ],
+      "geometry": "rect",
+      "fillColor": "#17263E",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czed8v6p",
+      "id": "20",
+      "bbox": [
+        670,
+        460,
+        452,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Pilote et accompagnement de mise en œuvre",
+      "textPreview": "Pilote et accompagnement de mise en œuvre",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pilote et accompagnement de mise en"
+          },
+          {
+            "index": 2,
+            "text": "œuvre"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pilote et accompagnement de mise en œuvre",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pilote et accompagnement de mise en œuvre",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5kb6xkf6",
+      "id": "21",
+      "bbox": [
+        670,
+        520,
+        444,
+        56
+      ],
+      "geometry": "rect",
+      "text": "• assistant métier ciblé, tableau de bord ou base interne\n• mise en place progressive avec validation humaine",
+      "textPreview": "• assistant métier ciblé, tableau de bord ou base interne | • mise en place progressive avec validation humaine",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• assistant métier ciblé, tableau de bord ou base interne"
+          },
+          {
+            "index": 2,
+            "text": "• mise en place progressive avec validation humaine"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• assistant métier ciblé, tableau de bord ou base interne",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• assistant métier ciblé, tableau de bord ou base interne",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• mise en place progressive avec validation humaine",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• mise en place progressive avec validation humaine",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "22",
+      "bbox": [
+        58,
+        682,
+        1164,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D1C6",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "23",
+      "bbox": [
+        58,
+        689,
+        920,
+        14
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Architecture d'offre",
+      "textPreview": "TransferAI Africa | Offre ciblée ELTON Oil CI | Architecture d'offre",
+      "resolvedFontSize": 7.51,
+      "resolvedTextStyle": {
+        "fontSize": 7.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Architecture d'offre"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Architecture d'offre",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Architecture d'offre",
+              "fontSize": 7.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cbulwval",
+      "id": "24",
+      "bbox": [
+        1180,
+        685,
+        44,
+        18
+      ],
+      "geometry": "rect",
+      "text": "05",
+      "textPreview": "05",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05",
+          "runs": [
+            {
+              "index": 1,
+              "text": "05",
+              "fontSize": 11,
+              "typeface": "Georgia",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
