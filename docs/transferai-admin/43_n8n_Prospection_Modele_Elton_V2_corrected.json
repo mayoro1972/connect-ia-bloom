@@ -7,13 +7,19 @@
       "name": "Manual Trigger",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
-      "position": [220, 320]
+      "position": [
+        220,
+        320
+      ]
     },
     {
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
-      "position": [200, 380],
+      "position": [
+        200,
+        380
+      ],
       "parameters": {}
     },
     {
@@ -23,18 +29,66 @@
         "includeOtherFields": false,
         "fields": {
           "values": [
-            { "name": "prospect_id",               "type": "string", "stringValue": "test-prospect-001" },
-            { "name": "organization_name",          "type": "string", "stringValue": "Orange Côte d'Ivoire" },
-            { "name": "website",                    "type": "string", "stringValue": "https://www.orange.ci" },
-            { "name": "country",                    "type": "string", "stringValue": "Côte d'Ivoire" },
-            { "name": "organization_type",          "type": "string", "stringValue": "Entreprise de télécommunications" },
-            { "name": "sector_guess",               "type": "string", "stringValue": "Télécommunications" },
-            { "name": "decision_maker_name",        "type": "string", "stringValue": "Directeur Général" },
-            { "name": "target_email",               "type": "string", "stringValue": "VOTRE_EMAIL_TEST@gmail.com" },
-            { "name": "custom_page_paths_csv",      "type": "string", "stringValue": "" },
-            { "name": "booking_link_45min",         "type": "string", "stringValue": "https://calendly.com/transferai/45min" },
-            { "name": "commercial_priority_default","type": "string", "stringValue": "tier1" },
-            { "name": "research_scope",             "type": "string", "stringValue": "public_web_only" }
+            {
+              "name": "prospect_id",
+              "type": "string",
+              "stringValue": "test-prospect-001"
+            },
+            {
+              "name": "organization_name",
+              "type": "string",
+              "stringValue": "Orange Côte d'Ivoire"
+            },
+            {
+              "name": "website",
+              "type": "string",
+              "stringValue": "https://www.orange.ci"
+            },
+            {
+              "name": "country",
+              "type": "string",
+              "stringValue": "Côte d'Ivoire"
+            },
+            {
+              "name": "organization_type",
+              "type": "string",
+              "stringValue": "Entreprise de télécommunications"
+            },
+            {
+              "name": "sector_guess",
+              "type": "string",
+              "stringValue": "Télécommunications"
+            },
+            {
+              "name": "decision_maker_name",
+              "type": "string",
+              "stringValue": "Directeur Général"
+            },
+            {
+              "name": "target_email",
+              "type": "string",
+              "stringValue": "VOTRE_EMAIL_TEST@gmail.com"
+            },
+            {
+              "name": "custom_page_paths_csv",
+              "type": "string",
+              "stringValue": ""
+            },
+            {
+              "name": "booking_link_45min",
+              "type": "string",
+              "stringValue": "https://calendly.com/transferai/45min"
+            },
+            {
+              "name": "commercial_priority_default",
+              "type": "string",
+              "stringValue": "tier1"
+            },
+            {
+              "name": "research_scope",
+              "type": "string",
+              "stringValue": "public_web_only"
+            }
           ]
         }
       },
@@ -42,7 +96,10 @@
       "name": "Set Target",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [460, 320]
+      "position": [
+        460,
+        320
+      ]
     },
     {
       "parameters": {
@@ -53,7 +110,10 @@
       "name": "Build Source URLs",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [700, 320]
+      "position": [
+        700,
+        320
+      ]
     },
     {
       "parameters": {
@@ -61,14 +121,22 @@
         "url": "={{$('Build Source URLs').first().json.page_1_url}}",
         "options": {
           "allowUnauthorizedCerts": true,
-          "response": { "response": { "neverError": true, "responseFormat": "text" } }
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
         }
       },
       "id": "node-004",
       "name": "Fetch Public Page 1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [960, 80]
+      "position": [
+        960,
+        80
+      ]
     },
     {
       "parameters": {
@@ -76,14 +144,22 @@
         "url": "={{$('Build Source URLs').first().json.page_2_url}}",
         "options": {
           "allowUnauthorizedCerts": true,
-          "response": { "response": { "neverError": true, "responseFormat": "text" } }
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
         }
       },
       "id": "node-005",
       "name": "Fetch Public Page 2",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [960, 200]
+      "position": [
+        960,
+        200
+      ]
     },
     {
       "parameters": {
@@ -91,14 +167,22 @@
         "url": "={{$('Build Source URLs').first().json.page_3_url}}",
         "options": {
           "allowUnauthorizedCerts": true,
-          "response": { "response": { "neverError": true, "responseFormat": "text" } }
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
         }
       },
       "id": "node-006",
       "name": "Fetch Public Page 3",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [960, 320]
+      "position": [
+        960,
+        320
+      ]
     },
     {
       "parameters": {
@@ -106,14 +190,22 @@
         "url": "={{$('Build Source URLs').first().json.page_4_url}}",
         "options": {
           "allowUnauthorizedCerts": true,
-          "response": { "response": { "neverError": true, "responseFormat": "text" } }
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
         }
       },
       "id": "node-007",
       "name": "Fetch Public Page 4",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [960, 440]
+      "position": [
+        960,
+        440
+      ]
     },
     {
       "parameters": {
@@ -121,14 +213,22 @@
         "url": "={{$('Build Source URLs').first().json.page_5_url}}",
         "options": {
           "allowUnauthorizedCerts": true,
-          "response": { "response": { "neverError": true, "responseFormat": "text" } }
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
         }
       },
       "id": "node-008",
       "name": "Fetch Public Page 5",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [960, 560]
+      "position": [
+        960,
+        560
+      ]
     },
     {
       "parameters": {
@@ -139,7 +239,10 @@
       "name": "Normalize Public Signals",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1240, 320]
+      "position": [
+        1240,
+        320
+      ]
     },
     {
       "parameters": {
@@ -150,7 +253,10 @@
       "name": "Sanitize Prospect Data For LLM",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1490, 620]
+      "position": [
+        1490,
+        620
+      ]
     },
     {
       "parameters": {
@@ -160,8 +266,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -173,7 +285,10 @@
       "name": "Call OpenAI Pre-Audit",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1500, 100]
+      "position": [
+        1500,
+        100
+      ]
     },
     {
       "parameters": {
@@ -183,8 +298,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -196,7 +317,10 @@
       "name": "Call OpenAI Problems Solutions",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1500, 260]
+      "position": [
+        1500,
+        260
+      ]
     },
     {
       "parameters": {
@@ -206,8 +330,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -219,7 +349,10 @@
       "name": "Call OpenAI ROI",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1500, 420]
+      "position": [
+        1500,
+        420
+      ]
     },
     {
       "parameters": {
@@ -230,7 +363,10 @@
       "name": "Assemble Prospect Context",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1760, 320]
+      "position": [
+        1760,
+        320
+      ]
     },
     {
       "parameters": {
@@ -240,8 +376,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -253,7 +395,10 @@
       "name": "Generate Executive Letter",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2020, 100]
+      "position": [
+        2020,
+        100
+      ]
     },
     {
       "parameters": {
@@ -263,8 +408,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -276,7 +427,10 @@
       "name": "Generate Tailored Catalogue",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2020, 220]
+      "position": [
+        2020,
+        220
+      ]
     },
     {
       "parameters": {
@@ -286,8 +440,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -299,7 +459,10 @@
       "name": "Generate Tailored Audit Form",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2020, 340]
+      "position": [
+        2020,
+        340
+      ]
     },
     {
       "parameters": {
@@ -309,8 +472,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "=Bearer {{$env.OPENAI_API_KEY}}" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -322,7 +491,10 @@
       "name": "Generate Deck Brief",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2020, 460]
+      "position": [
+        2020,
+        460
+      ]
     },
     {
       "parameters": {
@@ -333,7 +505,10 @@
       "name": "Assemble Prospect Pack",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [2280, 320]
+      "position": [
+        2280,
+        320
+      ]
     },
     {
       "parameters": {
@@ -343,10 +518,22 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey",         "value": "VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Authorization",   "value": "Bearer VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Content-Type",    "value": "application/json" },
-            { "name": "Prefer",          "value": "return=representation" }
+            {
+              "name": "apikey",
+              "value": "VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
           ]
         },
         "sendBody": true,
@@ -358,7 +545,10 @@
       "name": "Store Pack In Supabase",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2520, 320]
+      "position": [
+        2520,
+        320
+      ]
     },
     {
       "parameters": {
@@ -369,7 +559,10 @@
       "name": "Build Approval Email",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [2760, 320]
+      "position": [
+        2760,
+        320
+      ]
     },
     {
       "parameters": {
@@ -379,8 +572,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer VOTRE_CLE_RESEND" },
-            { "name": "Content-Type",  "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_CLE_RESEND"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -392,7 +591,10 @@
       "name": "Send Internal Approval Email",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [3000, 320]
+      "position": [
+        3000,
+        320
+      ]
     },
     {
       "parameters": {
@@ -405,7 +607,10 @@
       "name": "Approval Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [220, 780]
+      "position": [
+        220,
+        780
+      ]
     },
     {
       "parameters": {
@@ -416,7 +621,10 @@
       "name": "Parse Approval Query",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [480, 780]
+      "position": [
+        480,
+        780
+      ]
     },
     {
       "parameters": {
@@ -426,17 +634,33 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey",       "value": "VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Authorization","value": "Bearer VOTRE_SERVICE_ROLE_KEY" }
+            {
+              "name": "apikey",
+              "value": "VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_SERVICE_ROLE_KEY"
+            }
           ]
         },
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
       },
       "id": "node-024",
       "name": "Get Pack From Supabase",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [740, 780]
+      "position": [
+        740,
+        780
+      ]
     },
     {
       "parameters": {
@@ -447,7 +671,10 @@
       "name": "Extract Pack Payload",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [980, 780]
+      "position": [
+        980,
+        780
+      ]
     },
     {
       "parameters": {
@@ -465,7 +692,10 @@
       "name": "If Approved",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
-      "position": [1220, 780]
+      "position": [
+        1220,
+        780
+      ]
     },
     {
       "parameters": {
@@ -475,9 +705,18 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey",       "value": "VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Authorization","value": "Bearer VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "apikey",
+              "value": "VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -489,7 +728,10 @@
       "name": "Mark Pack Approved",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1460, 700]
+      "position": [
+        1460,
+        700
+      ]
     },
     {
       "parameters": {
@@ -499,8 +741,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer VOTRE_CLE_RESEND" },
-            { "name": "Content-Type",  "value": "application/json" }
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_CLE_RESEND"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -512,7 +760,10 @@
       "name": "Send External Prospect Email",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1700, 700]
+      "position": [
+        1700,
+        700
+      ]
     },
     {
       "parameters": {
@@ -522,9 +773,18 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey",       "value": "VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Authorization","value": "Bearer VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "apikey",
+              "value": "VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -536,7 +796,10 @@
       "name": "Log Outreach Attempt",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1940, 700]
+      "position": [
+        1940,
+        700
+      ]
     },
     {
       "parameters": {
@@ -548,7 +811,10 @@
       "name": "Approval Success Response",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [2180, 700]
+      "position": [
+        2180,
+        700
+      ]
     },
     {
       "parameters": {
@@ -558,9 +824,18 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey",       "value": "VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Authorization","value": "Bearer VOTRE_SERVICE_ROLE_KEY" },
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "apikey",
+              "value": "VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer VOTRE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -572,7 +847,10 @@
       "name": "Mark Pack Rejected",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1460, 900]
+      "position": [
+        1460,
+        900
+      ]
     },
     {
       "parameters": {
@@ -584,64 +862,353 @@
       "name": "Rejection Response",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [1700, 900]
+      "position": [
+        1700,
+        900
+      ]
     }
   ],
   "connections": {
-    "Manual Trigger": { "main": [[{ "node": "Set Target", "type": "main", "index": 0 }]] },
-    "Execute Workflow Trigger": { "main": [[{ "node": "Set Target", "type": "main", "index": 0 }]] },
-    "Set Target": { "main": [[{ "node": "Build Source URLs", "type": "main", "index": 0 }]] },
-    "Build Source URLs": { "main": [[{ "node": "Fetch Public Page 1", "type": "main", "index": 0 }]] },
-    "Fetch Public Page 1": { "main": [[{ "node": "Fetch Public Page 2", "type": "main", "index": 0 }]] },
-    "Fetch Public Page 2": { "main": [[{ "node": "Fetch Public Page 3", "type": "main", "index": 0 }]] },
-    "Fetch Public Page 3": { "main": [[{ "node": "Fetch Public Page 4", "type": "main", "index": 0 }]] },
-    "Fetch Public Page 4": { "main": [[{ "node": "Fetch Public Page 5", "type": "main", "index": 0 }]] },
-    "Fetch Public Page 5": { "main": [[{ "node": "Normalize Public Signals", "type": "main", "index": 0 }]] },
-    "Normalize Public Signals": { "main": [[{ "node": "Sanitize Prospect Data For LLM", "type": "main", "index": 0 }]] },
-    "Sanitize Prospect Data For LLM": {
-      "main": [[
-        { "node": "Call OpenAI Pre-Audit",          "type": "main", "index": 0 },
-        { "node": "Call OpenAI Problems Solutions",  "type": "main", "index": 0 },
-        { "node": "Call OpenAI ROI",                 "type": "main", "index": 0 }
-      ]]
-    },
-    "Call OpenAI Pre-Audit": { "main": [[{ "node": "Assemble Prospect Context", "type": "main", "index": 0 }]] },
-    "Assemble Prospect Context": {
-      "main": [[
-        { "node": "Generate Executive Letter",   "type": "main", "index": 0 },
-        { "node": "Generate Tailored Catalogue", "type": "main", "index": 0 },
-        { "node": "Generate Tailored Audit Form","type": "main", "index": 0 },
-        { "node": "Generate Deck Brief",         "type": "main", "index": 0 }
-      ]]
-    },
-    "Generate Executive Letter": { "main": [[{ "node": "Assemble Prospect Pack", "type": "main", "index": 0 }]] },
-    "Assemble Prospect Pack":    { "main": [[{ "node": "Store Pack In Supabase", "type": "main", "index": 0 }]] },
-    "Store Pack In Supabase":    { "main": [[{ "node": "Build Approval Email",   "type": "main", "index": 0 }]] },
-    "Build Approval Email":      { "main": [[{ "node": "Send Internal Approval Email", "type": "main", "index": 0 }]] },
-    "Approval Webhook":          { "main": [[{ "node": "Parse Approval Query",    "type": "main", "index": 0 }]] },
-    "Parse Approval Query":      { "main": [[{ "node": "Get Pack From Supabase", "type": "main", "index": 0 }]] },
-    "Get Pack From Supabase":    { "main": [[{ "node": "Extract Pack Payload",   "type": "main", "index": 0 }]] },
-    "Extract Pack Payload":      { "main": [[{ "node": "If Approved",            "type": "main", "index": 0 }]] },
-    "If Approved": {
+    "Manual Trigger": {
       "main": [
-        [{ "node": "Mark Pack Approved", "type": "main", "index": 0 }],
-        [{ "node": "Mark Pack Rejected", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Mark Pack Approved":        { "main": [[{ "node": "Send External Prospect Email", "type": "main", "index": 0 }]] },
-    "Send External Prospect Email": { "main": [[{ "node": "Log Outreach Attempt",      "type": "main", "index": 0 }]] },
-    "Log Outreach Attempt":      { "main": [[{ "node": "Approval Success Response",    "type": "main", "index": 0 }]] },
-    "Mark Pack Rejected":        { "main": [[{ "node": "Rejection Response",           "type": "main", "index": 0 }]] }
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Target": {
+      "main": [
+        [
+          {
+            "node": "Build Source URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Source URLs": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 1": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 2": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 3": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 4": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 5": {
+      "main": [
+        [
+          {
+            "node": "Normalize Public Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Public Signals": {
+      "main": [
+        [
+          {
+            "node": "Sanitize Prospect Data For LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanitize Prospect Data For LLM": {
+      "main": [
+        [
+          {
+            "node": "Call OpenAI Pre-Audit",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call OpenAI Problems Solutions",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call OpenAI ROI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call OpenAI Pre-Audit": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Prospect Context": {
+      "main": [
+        [
+          {
+            "node": "Generate Executive Letter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Tailored Catalogue",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Tailored Audit Form",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Deck Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Executive Letter": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Prospect Pack": {
+      "main": [
+        [
+          {
+            "node": "Store Pack In Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Pack In Supabase": {
+      "main": [
+        [
+          {
+            "node": "Build Approval Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Approval Email": {
+      "main": [
+        [
+          {
+            "node": "Send Internal Approval Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approval Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Approval Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Approval Query": {
+      "main": [
+        [
+          {
+            "node": "Get Pack From Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pack From Supabase": {
+      "main": [
+        [
+          {
+            "node": "Extract Pack Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Pack Payload": {
+      "main": [
+        [
+          {
+            "node": "If Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approved": {
+      "main": [
+        [
+          {
+            "node": "Mark Pack Approved",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Pack Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approved": {
+      "main": [
+        [
+          {
+            "node": "Send External Prospect Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send External Prospect Email": {
+      "main": [
+        [
+          {
+            "node": "Log Outreach Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Outreach Attempt": {
+      "main": [
+        [
+          {
+            "node": "Approval Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Rejected": {
+      "main": [
+        [
+          {
+            "node": "Rejection Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "active": false,
-  "settings": { "executionOrder": "v1" },
+  "settings": {
+    "executionOrder": "v1"
+  },
   "versionId": "transferai-prospecting-v2-supabase-approval-email-corrected",
-  "meta": { "templateCredsSetupCompleted": false },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
   "pinData": {},
   "tags": [
-    { "name": "transferai" },
-    { "name": "prospection" },
-    { "name": "n8n" },
-    { "name": "v2" }
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "n8n"
+    },
+    {
+      "name": "v2"
+    }
   ]
 }

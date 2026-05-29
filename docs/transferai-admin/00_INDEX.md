@@ -56,6 +56,10 @@ Le pack a 4 objectifs :
 43. [Policies RLS - prospection multi-prospects](./54_RLS_Policies_Prospection_Multi_Prospects.md)
 44. [Checklist ultra simple - installation du workflow V1 dans n8n](./55_Checklist_Installation_n8n_V1.md)
 45. [Guide copier-coller - blocs de code exacts pour n8n V1](./56_Guide_Copier_Coller_Blocs_Code_n8n_V1.md)
+46. [Ou le CRM entre dans le pipeline V4 / V5](./59_CRM_Entrypoint_V4_V5.md)
+47. [Workflow JSON n8n - prospection CRM V5 growth loop](./60_n8n_Prospection_CRM_V5_Growth_Loop.json)
+48. [Guide V5 - boucle de croissance CRM](./61_Guide_V5_CRM_Growth_Loop.md)
+49. [Workflow JSON n8n - prospection multi-prospects V3 CRM ready export](./62_n8n_Prospection_Multi_Prospect_V3_CRM_Ready_Export.json)
 
 ## Ordre de lecture recommandé
 
