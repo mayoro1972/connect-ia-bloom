@@ -15,7 +15,6 @@ import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
 import logoMiddlesex from "@/assets/logo-middlesex.png";
 import logoNettelecom from "@/assets/logo-nettelecom.png";
-import logoFdfp from "@/assets/logo-fdfp.png";
 import logoIads from "@/assets/logo-iads.png";
 import logoSndi from "@/assets/logo-sndi.png";
 import logoPigier from "@/assets/logo-pigier.png";
@@ -25,12 +24,11 @@ import { en } from "@/i18n/translations/en";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { buildContactPath } from "@/lib/site-links";
 
-const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP", "IADS", "SNDI", "Pigier CI"];
-const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp, logoIads, logoSndi, logoPigier];
+const partnerNames = ["Middlesex University", "Nettelecom CI", "IADS", "SNDI", "Pigier CI"];
+const partnerLogos = [logoMiddlesex, logoNettelecom, logoIads, logoSndi, logoPigier];
 const partnerColors = [
   "hsl(220 60% 50%)",
   "hsl(174 70% 42%)",
-  "hsl(15 85% 57%)",
   "hsl(220 70% 30%)",
   "hsl(145 70% 35%)",
   "hsl(215 80% 25%)",
