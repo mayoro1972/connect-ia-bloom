@@ -2,7 +2,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { Link } from "react-router-dom";
 import logoMiddlesex from "@/assets/logo-middlesex.png";
 import logoNettelecom from "@/assets/logo-nettelecom.png";
-import logoFdfp from "@/assets/logo-fdfp.png";
 import logoIads from "@/assets/logo-iads.png";
 import logoSndi from "@/assets/logo-sndi.png";
 import logoPigier from "@/assets/logo-pigier.png";
@@ -10,8 +9,8 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
 import { trackCtaClick } from "@/lib/analytics";
 
-const partnerNames = ["Middlesex University", "Nettelecom CI", "FDFP", "IADS", "SNDI", "Pigier CI"];
-const partnerLogos = [logoMiddlesex, logoNettelecom, logoFdfp, logoIads, logoSndi, logoPigier];
+const partnerNames = ["Middlesex University", "Nettelecom CI", "IADS", "SNDI", "Pigier CI"];
+const partnerLogos = [logoMiddlesex, logoNettelecom, logoIads, logoSndi, logoPigier];
 
 const sectionCopy = {
   fr: {
