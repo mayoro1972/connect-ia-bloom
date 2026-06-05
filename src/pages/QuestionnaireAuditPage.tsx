@@ -159,22 +159,21 @@ const QuestionnaireAuditPage = () => {
     setSubmitError(null);
     try {
       const res = await fetch(
-        `${supabaseUrl}/rest/v1/ai_prospecting_packs?pack_id=eq.${encodeURIComponent(packId)}`,
+        `${supabaseUrl}/functions/v1/get-audit-pack`,
         {
-          method: "PATCH",
+          method: "POST",
           headers: {
             apikey: supabaseAnonKey,
             Authorization: `Bearer ${supabaseAnonKey}`,
             "Content-Type": "application/json",
-            Prefer: "return=minimal",
           },
-          body: JSON.stringify({ status: "questionnaire_submitted", questionnaire_answers: answers }),
+          body: JSON.stringify({ pack_id: packId, answers }),
         }
       );
 
+      const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.message || "Envoi impossible.");
+        throw new Error(json.error || "Envoi impossible.");
       }
 
       localStorage.removeItem(localKey(packId));
