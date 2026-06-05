@@ -5,7 +5,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
-import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+const supabaseAnonKey =
+  (import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim()) ?? "";
+const isConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
 type PackPayload = {
   organization_name?: string;
@@ -98,9 +103,9 @@ const QuestionnaireAuditPage = () => {
       }
     }
 
-    if (!isSupabaseConfigured) {
+    if (!isConfigured) {
       setFetchError(
-        "La connexion à la base de données n'est pas configurée. Vérifiez les variables d'environnement Supabase."
+        "La connexion à la base de données n'est pas configurée. Contactez l'équipe TransferAI."
       );
       setLoading(false);
       return;
@@ -108,20 +113,25 @@ const QuestionnaireAuditPage = () => {
 
     (async () => {
       try {
-        const { data, error } = await (supabase as ReturnType<typeof import("@supabase/supabase-js").createClient>)
-          .from("ai_prospecting_packs")
-          .select("pack_id, organization_name, target_email, status, payload")
-          .eq("pack_id", packId)
-          .maybeSingle();
+        const res = await fetch(
+          `${supabaseUrl}/functions/v1/get-audit-pack?pack_id=${encodeURIComponent(packId)}`,
+          {
+            headers: {
+              apikey: supabaseAnonKey,
+              Authorization: `Bearer ${supabaseAnonKey}`,
+            },
+          }
+        );
 
-        if (error) throw new Error(error.message);
-        if (!data) throw new Error("Ce formulaire n'existe pas ou n'est plus disponible.");
+        const json = await res.json().catch(() => ({}));
 
-        const p = data as Pack;
+        if (!res.ok || !json.pack) {
+          throw new Error(json.error || "Ce formulaire n'existe pas ou n'est plus disponible.");
+        }
+
+        const p = json.pack as Pack;
         setPack(p);
-
-        const formText = p.payload?.tailored_audit_form || "";
-        setBlocks(parseQuestionBlocks(formText));
+        setBlocks(parseQuestionBlocks(p.payload?.tailored_audit_form || ""));
       } catch (err) {
         setFetchError(err instanceof Error ? err.message : "Impossible de charger le questionnaire.");
       } finally {
@@ -141,16 +151,29 @@ const QuestionnaireAuditPage = () => {
   };
 
   const handleSubmit = async () => {
-    if (!packId || !isSupabaseConfigured) return;
+    if (!packId || !isConfigured) return;
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const { error } = await (supabase as ReturnType<typeof import("@supabase/supabase-js").createClient>)
-        .from("ai_prospecting_packs")
-        .update({ status: "questionnaire_submitted", questionnaire_answers: answers } as never)
-        .eq("pack_id", packId);
+      const res = await fetch(
+        `${supabaseUrl}/rest/v1/ai_prospecting_packs?pack_id=eq.${encodeURIComponent(packId)}`,
+        {
+          method: "PATCH",
+          headers: {
+            apikey: supabaseAnonKey,
+            Authorization: `Bearer ${supabaseAnonKey}`,
+            "Content-Type": "application/json",
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify({ status: "questionnaire_submitted", questionnaire_answers: answers }),
+        }
+      );
 
-      if (error) throw new Error(error.message);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || "Envoi impossible.");
+      }
+
       localStorage.removeItem(localKey(packId));
       setSubmitted(true);
     } catch (err) {
@@ -332,7 +355,7 @@ const QuestionnaireAuditPage = () => {
 
                   <button
                     type="button"
-                    disabled={submitting || !isSupabaseConfigured}
+                    disabled={submitting || !isConfigured}
                     onClick={handleSubmit}
                     className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                   >
