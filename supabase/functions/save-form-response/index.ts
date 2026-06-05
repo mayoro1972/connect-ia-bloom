@@ -13,6 +13,10 @@ interface RequestBody {
   sessionId?: string;
   inviteToken?: string;
   responseId?: string;
+  packId?: string;
+  contextSnapshot?: Record<string, unknown>;
+  internalEmailTo?: string;
+  nextActionDelayDays?: number;
 }
 
 function getTrimmedString(value: unknown) {
@@ -54,6 +58,12 @@ Deno.serve(async (req: Request) => {
     const sessionId = getTrimmedString(body.sessionId);
     const inviteToken = getTrimmedString(body.inviteToken);
     const incomingResponseId = getTrimmedString(body.responseId);
+    const packId = getTrimmedString(body.packId);
+    const contextSnapshot = body.contextSnapshot && typeof body.contextSnapshot === "object" && !Array.isArray(body.contextSnapshot)
+      ? body.contextSnapshot
+      : {};
+    const internalEmailTo = getTrimmedString(body.internalEmailTo);
+    const nextActionDelayDays = typeof body.nextActionDelayDays === "number" ? body.nextActionDelayDays : 1;
 
     if (!sessionId && !inviteToken) {
       return jsonResponse({ error: "Missing session or invitation token" }, 400);
@@ -112,7 +122,7 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    const payload = {
+    const payload: Record<string, unknown> = {
       user_name: getTrimmedString(formData.c_nom),
       user_email: getTrimmedString(formData.c_email),
       user_position: getTrimmedString(formData.c_poste),
@@ -122,7 +132,9 @@ Deno.serve(async (req: Request) => {
       completion_percentage: completionPercentage,
       session_id: sessionId,
       invitation_token: inviteToken,
+      context_snapshot: contextSnapshot,
     };
+    if (packId) payload.pack_id = packId;
 
     if (targetResponseId) {
       const { error } = await supabase
@@ -160,6 +172,26 @@ Deno.serve(async (req: Request) => {
         .from("form_invitations")
         .update(invitationUpdate)
         .eq("invite_token", inviteToken);
+    }
+
+    if (completionPercentage >= 80) {
+      const n8nWebhookUrl = Deno.env.get("N8N_POST_AUDIT_WEBHOOK_URL");
+      if (n8nWebhookUrl) {
+        const webhookPayload = {
+          pack_id: packId || null,
+          response_id: targetResponseId,
+          completion_percentage: completionPercentage,
+          is_completed: true,
+          trigger_source: "save-form-response",
+          internal_email_to: internalEmailTo || Deno.env.get("POST_AUDIT_INTERNAL_EMAIL") || "contact@transferai.ci",
+          next_action_delay_days: nextActionDelayDays,
+        };
+        fetch(n8nWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(webhookPayload),
+        }).catch(() => {});
+      }
     }
 
     return jsonResponse({
