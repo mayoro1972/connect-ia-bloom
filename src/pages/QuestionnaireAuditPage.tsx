@@ -6,11 +6,14 @@ import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+const supabaseUrl =
+  import.meta.env.VITE_SUPABASE_URL?.trim() ||
+  "https://wlhznciwuofueffyoflo.supabase.co";
 const supabaseAnonKey =
-  (import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
-    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim()) ?? "";
-const isConfigured = Boolean(supabaseUrl && supabaseAnonKey);
+  import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ||
+  "sb_publishable_RxVxXCVvH9NmaVgOOLzmPw_6zDeP6IH";
+const isConfigured = true;
 
 type PackPayload = {
   organization_name?: string;
