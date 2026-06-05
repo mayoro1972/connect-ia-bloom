@@ -48,6 +48,7 @@ const AppointmentPreview = lazy(() => import("./pages/AppointmentPreview"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Sitemap = lazy(() => import("./pages/Sitemap"));
 const BackOffice = lazy(() => import("./pages/BackOffice"));
+const QuestionnaireAuditPage = lazy(() => import("./pages/QuestionnaireAuditPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -247,6 +248,7 @@ const AnimatedRoutes = () => {
           <Route path="/preview/catalogues/:slug" element={<CatalogueDomainPreview />} />
           <Route path="/preview/formulaires" element={<LeadFormsPreview />} />
           <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
+          <Route path="/questionnaire-audit" element={<QuestionnaireAuditPage />} />
           <Route path="/back-office" element={<BackOffice />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
