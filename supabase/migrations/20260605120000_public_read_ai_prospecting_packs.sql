@@ -9,4 +9,5 @@ DROP POLICY IF EXISTS "Public read by pack_id" ON public.ai_prospecting_packs;
 CREATE POLICY "Public read by pack_id"
   ON public.ai_prospecting_packs
   FOR SELECT
-  USING (true);
+  -- Allow anonymous reads; exclude packs explicitly rejected by the admin
+  USING (status IS DISTINCT FROM 'rejected');
