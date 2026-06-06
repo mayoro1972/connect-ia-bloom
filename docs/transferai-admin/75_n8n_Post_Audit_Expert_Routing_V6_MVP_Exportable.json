@@ -135,13 +135,13 @@
       "position": [1240, 220],
       "parameters": {
         "method": "GET",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*'}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*'}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -155,13 +155,13 @@
       "position": [1240, 520],
       "parameters": {
         "method": "GET",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_responses?select=*&pack_id=not.is.null&is_completed=eq.true&order=submitted_at.desc.nullslast&limit=' + encodeURIComponent(String($json.max_candidates || 20))}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/form_responses?select=*&pack_id=not.is.null&is_completed=eq.true&order=submitted_at.desc.nullslast&limit=' + encodeURIComponent(String($json.max_candidates || 20))}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -221,13 +221,13 @@
       "position": [2020, 220],
       "parameters": {
         "method": "GET",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_responses?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*&order=submitted_at.desc.nullslast&limit=1'}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/form_responses?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*&order=submitted_at.desc.nullslast&limit=1'}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -264,13 +264,13 @@
       "position": [2800, 220],
       "parameters": {
         "method": "GET",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_invitations?pack_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.pack_id || '') + '&select=*&order=created_at.desc&limit=1'}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/form_invitations?pack_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.pack_id || '') + '&select=*&order=created_at.desc&limit=1'}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -297,13 +297,13 @@
       "position": [3320, 220],
       "parameters": {
         "method": "GET",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.prospect_id || '') + '&select=*'}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.prospect_id || '') + '&select=*'}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -368,7 +368,7 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.OPENAI_API_KEY}}" },
+            { "name": "Authorization", "value": "Bearer VOTRE-OPENAI-API-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -385,13 +385,13 @@
       "position": [4880, 220],
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($('Build Post-Audit CRM Context').first().json.prospect_id || '')}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($('Build Post-Audit CRM Context').first().json.prospect_id || '')}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -408,13 +408,13 @@
       "position": [5140, 220],
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($('Build Post-Audit CRM Context').first().json.pack_id || '')}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($('Build Post-Audit CRM Context').first().json.pack_id || '')}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -431,13 +431,13 @@
       "position": [5400, 220],
       "parameters": {
         "method": "POST",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/post_audit_follow_ups?on_conflict=pack_id'}}",
+        "url": "={{'https://VOTRE-URL.supabase.co' + '/rest/v1/post_audit_follow_ups?on_conflict=pack_id'}}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "apikey", "value": "VOTRE-SERVICE-ROLE-KEY" },
+            { "name": "Authorization", "value": "Bearer VOTRE-SERVICE-ROLE-KEY" },
             { "name": "Content-Type", "value": "application/json" },
             { "name": "Prefer", "value": "resolution=merge-duplicates" }
           ]
@@ -460,13 +460,13 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.RESEND_API_KEY}}" },
+            { "name": "Authorization", "value": "Bearer VOTRE-RESEND-API-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'onboarding@resend.dev', to: String($('Build Post-Audit CRM Context').first().json.internal_email_to || 'contact@transferai.ci').split(',').map(v => v.trim()).filter(Boolean), subject: 'Fiche pre-RDV post-audit - ' + ($('Build Post-Audit CRM Context').first().json.organization_name || 'Prospect a confirmer'), html: String(((($('Generate Internal Pre-RDV Brief').first().json || {}).choices || [])[0] || {}).message?.content || 'Aucune fiche generee.').replace(/\\n/g, '<br>') })}}",
+        "jsonBody": "={{JSON.stringify({ from: 'onboarding@resend.dev', to: String($('Build Post-Audit CRM Context').first().json.internal_email_to || 'contact@transferai.ci').split(',').map(v => v.trim()).filter(Boolean), subject: 'Fiche pre-RDV post-audit - ' + ($('Build Post-Audit CRM Context').first().json.organization_name || 'Prospect a confirmer'), html: String(((($('Generate Internal Pre-RDV Brief').first().json || {}).choices || [])[0] || {}).message?.content || 'Aucune fiche generee.').replace(/\\n/g, '<br>') })}}",
         "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } } }
       }
     },
@@ -491,7 +491,7 @@
       "disabled": true,
       "parameters": {
         "method": "POST",
-        "url": "={{$env.POST_AUDIT_SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/REPLACE'}}",
+        "url": "https://hooks.slack.com/services/REPLACE",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
@@ -614,13 +614,13 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "={{'Bearer ' + $env.RESEND_API_KEY}}" },
+            { "name": "Authorization", "value": "Bearer VOTRE-RESEND-API-KEY" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({\n  from: $env.OUTREACH_FROM_EMAIL || 'onboarding@resend.dev',\n  to: [$('Build Post-Audit Result').first().json.assigned_expert_email || 'contact@transferai.ci'],\n  subject: '[PRIORITE HAUTE] Nouveau dossier post-audit a traiter - ' + ($('Build Post-Audit Result').first().json.organization_name || 'Prospect'),\n  html: '<h2>Dossier post-audit - Action requise</h2>' +\n    '<p><strong>Organisation:</strong> ' + ($('Build Post-Audit Result').first().json.organization_name || 'N/A') + '</p>' +\n    '<p><strong>Contact:</strong> ' + ($('Build Post-Audit Result').first().json.decision_maker_name || 'N/A') + ' — ' + ($('Build Post-Audit Result').first().json.target_email || 'N/A') + '</p>' +\n    '<p><strong>Secteur:</strong> ' + ($('Build Post-Audit Result').first().json.sector_guess || 'N/A') + '</p>' +\n    '<p><strong>Maturité IA:</strong> ' + ($('Build Post-Audit Result').first().json.maturity_level || 'N/A') + '</p>' +\n    '<p><strong>Service recommandé:</strong> ' + ($('Build Post-Audit Result').first().json.primary_service || 'N/A') + '</p>' +\n    '<p><strong>Prochaine action:</strong> ' + ($('Build Post-Audit Result').first().json.next_action_at || 'N/A') + '</p>' +\n    '<p><strong>Pack ID:</strong> ' + ($('Build Post-Audit Result').first().json.pack_id || 'N/A') + '</p>' +\n    ($('Build Post-Audit Result').first().json.booking_link ? '<p><a href=\"' + $('Build Post-Audit Result').first().json.booking_link + '\">Prendre rendez-vous</a></p>' : '') +\n    '<hr><p><em>Fiche complète transmise en parallèle par email interne.</em></p>'\n})}}",
+        "jsonBody": "={{JSON.stringify({\n  from: 'onboarding@resend.dev',\n  to: [$('Build Post-Audit Result').first().json.assigned_expert_email || 'contact@transferai.ci'],\n  subject: '[PRIORITE HAUTE] Nouveau dossier post-audit a traiter - ' + ($('Build Post-Audit Result').first().json.organization_name || 'Prospect'),\n  html: '<h2>Dossier post-audit - Action requise</h2>' +\n    '<p><strong>Organisation:</strong> ' + ($('Build Post-Audit Result').first().json.organization_name || 'N/A') + '</p>' +\n    '<p><strong>Contact:</strong> ' + ($('Build Post-Audit Result').first().json.decision_maker_name || 'N/A') + ' — ' + ($('Build Post-Audit Result').first().json.target_email || 'N/A') + '</p>' +\n    '<p><strong>Secteur:</strong> ' + ($('Build Post-Audit Result').first().json.sector_guess || 'N/A') + '</p>' +\n    '<p><strong>Maturité IA:</strong> ' + ($('Build Post-Audit Result').first().json.maturity_level || 'N/A') + '</p>' +\n    '<p><strong>Service recommandé:</strong> ' + ($('Build Post-Audit Result').first().json.primary_service || 'N/A') + '</p>' +\n    '<p><strong>Prochaine action:</strong> ' + ($('Build Post-Audit Result').first().json.next_action_at || 'N/A') + '</p>' +\n    '<p><strong>Pack ID:</strong> ' + ($('Build Post-Audit Result').first().json.pack_id || 'N/A') + '</p>' +\n    ($('Build Post-Audit Result').first().json.booking_link ? '<p><a href=\"' + $('Build Post-Audit Result').first().json.booking_link + '\">Prendre rendez-vous</a></p>' : '') +\n    '<hr><p><em>Fiche complète transmise en parallèle par email interne.</em></p>'\n})}}",
         "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } } }
       }
     },
