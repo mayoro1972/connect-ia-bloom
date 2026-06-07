@@ -892,6 +892,50 @@ const listProspects = async () => {
   };
 };
 
+const listPostAuditPipeline = async () => {
+  const [packsResult, followUpsResult, formResponsesResult] = await Promise.all([
+    supabase
+      .from("ai_prospecting_packs")
+      .select("pack_id, organization_name, prospect_id, post_audit_processed, post_audit_processed_at, routing_priority, assigned_expert_email, next_action_at, payload, created_at")
+      .order("post_audit_processed_at", { ascending: false })
+      .limit(100),
+    supabase
+      .from("post_audit_follow_ups")
+      .select("id, pack_id, prospect_id, status, routing_priority, assigned_expert_email, resend_brief_id, processed_at, next_action_at, trigger_source, primary_service, organization_name, decision_maker_name, decision_maker_role, target_email, country, sector_guess, maturity_level, completion_percentage")
+      .order("processed_at", { ascending: false })
+      .limit(100),
+    supabase
+      .from("form_responses")
+      .select("id, pack_id, user_name, user_email, user_position, user_entity, completion_percentage, is_completed, submitted_at")
+      .gte("completion_percentage", 80)
+      .order("submitted_at", { ascending: false })
+      .limit(100),
+  ]);
+
+  const packs = packsResult.data ?? [];
+  const followUps = followUpsResult.data ?? [];
+  const formResponses = formResponsesResult.data ?? [];
+
+  const processedPackIds = new Set(followUps.map((f) => f.pack_id));
+
+  return {
+    data: {
+      overview: {
+        totalPacks: packs.length,
+        processedPacks: packs.filter((p) => p.post_audit_processed).length,
+        pendingPacks: formResponses.filter((r) => !processedPackIds.has(r.pack_id)).length,
+        highPriority: followUps.filter((f) => f.routing_priority === "high").length,
+        totalFollowUps: followUps.length,
+        completedForms: formResponses.length,
+      },
+      packs,
+      followUps,
+      formResponses,
+    },
+    error: null,
+  };
+};
+
 const listWebinarRegistrations = async () => {
   const { data, error } = await supabase
     .from("webinar_registrations")
@@ -990,6 +1034,7 @@ Deno.serve(async (request) => {
   if (entity === "whatsapp-messages" && action === "list") result = await listWhatsappMessages();
   if (entity === "whatsapp-messages" && action === "update") result = await updateWhatsappMessage(payload);
   if (entity === "whatsapp-messages" && action === "mark-read") result = await markWhatsappMessageRead(payload);
+  if (entity === "post-audit" && action === "list") result = await listPostAuditPipeline();
   if (entity === "webinars" && action === "list") result = await listWebinarRegistrations();
   if (entity === "webinars" && action === "update") result = await updateWebinarRegistration(payload);
 

@@ -10,7 +10,8 @@ export type AdminEntity =
   | "prospects"
   | "webinars"
   | "videos"
-  | "whatsapp-messages";
+  | "whatsapp-messages"
+  | "post-audit";
 export type AdminAction = "list" | "create" | "set-status" | "create-feed" | "save" | "update" | "mark-read";
 
 type AdminRequest = {

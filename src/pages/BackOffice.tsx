@@ -20,6 +20,7 @@ import LiveFormatsAdminPanel from "@/components/backoffice/LiveFormatsAdminPanel
 import VendorFeedsAdminPanel from "@/components/backoffice/VendorFeedsAdminPanel";
 import VideoCapsuleAdminPanel from "@/components/backoffice/VideoCapsuleAdminPanel";
 import WhatsAppMessagesAdminPanel from "@/components/backoffice/WhatsAppMessagesAdminPanel";
+import PostAuditPipelineAdminPanel from "@/components/backoffice/PostAuditPipelineAdminPanel";
 
 type ResourceAdminItem = {
   id: string;
@@ -680,6 +681,7 @@ const BackOfficePage = () => {
             >
               <TabsList className="mb-8 h-auto flex-wrap">
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                <TabsTrigger value="post-audit">Pipeline Post-Audit</TabsTrigger>
                 <TabsTrigger value="prospects">Prospects Audit</TabsTrigger>
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
                 <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
@@ -823,6 +825,10 @@ const BackOfficePage = () => {
                     </div>
                   </div>
                 </div>
+              </TabsContent>
+
+              <TabsContent value="post-audit">
+                <PostAuditPipelineAdminPanel token={adminToken} />
               </TabsContent>
 
               <TabsContent value="prospects">
