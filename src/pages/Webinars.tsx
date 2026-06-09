@@ -12,8 +12,8 @@ const pageCopy = {
   fr: {
     title: "Webinaires gratuits TransferAI Côte d'Ivoire",
     subtitle:
-      "En juin 2026, TransferAI lance ses activités en Côte d'Ivoire. Inscrivez-vous gratuitement pour découvrir comment l'IA peut transformer les métiers, les entreprises et les opportunités professionnelles.",
-    badge: "Lancement · Juin 2026",
+      "En juillet 2026, TransferAI lance ses activités en Côte d'Ivoire. Inscrivez-vous gratuitement pour découvrir comment l'IA peut transformer les métiers, les entreprises et les opportunités professionnelles.",
+    badge: "Lancement · Juillet 2026",
     introTitle: "Trois portes d'entrée pour passer de la curiosité à l'action",
     introDesc:
       "Chaque webinaire est conçu pour une audience précise, avec des exemples concrets, des prompts utiles et une orientation claire vers les prochaines étapes TransferAI.",
@@ -51,8 +51,8 @@ const pageCopy = {
   en: {
     title: "Free TransferAI Webinars for Côte d'Ivoire",
     subtitle:
-      "In June 2026, TransferAI launches its operations in Côte d'Ivoire. Register for free to discover how AI can transform professions, companies and career opportunities.",
-    badge: "Launch · June 2026",
+      "In July 2026, TransferAI launches its operations in Côte d'Ivoire. Register for free to discover how AI can transform professions, companies and career opportunities.",
+    badge: "Launch · July 2026",
     introTitle: "Three entry points to move from curiosity to action",
     introDesc:
       "Each webinar is designed for a specific audience, with concrete examples, useful prompts and a clear next step into TransferAI.",
@@ -125,7 +125,7 @@ const Webinars = () => {
                   <div className="mt-5 space-y-2 text-xs text-muted-foreground">
                     <span className="flex items-center gap-2">
                       <CalendarDays size={14} className="text-primary" />
-                      {lang === "fr" ? "Session de lancement · Juin 2026" : "Launch session · June 2026"}
+                      {lang === "fr" ? "Session de lancement · Juillet 2026" : "Launch session · July 2026"}
                     </span>
                     <span className="flex items-center gap-2">
                       <Clock size={14} className="text-primary" />
