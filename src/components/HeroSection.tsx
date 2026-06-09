@@ -6,7 +6,12 @@ import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
-import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
+import {
+  isSupabaseConfigured,
+  SUPABASE_PUBLISHABLE_KEY,
+  SUPABASE_URL,
+  supabase,
+} from "@/integrations/supabase/client";
 import { directLinks } from "@/lib/site-links";
 
 const sectionCopy = {
@@ -46,6 +51,24 @@ const sectionCopy = {
   },
 } as const;
 
+const extractPublicPageViews = (data: unknown) => {
+  const stats = Array.isArray(data) ? data[0] : data;
+
+  if (!stats || typeof stats !== "object") {
+    return null;
+  }
+
+  if ("total_views" in stats && typeof stats.total_views === "number") {
+    return stats.total_views;
+  }
+
+  if ("unique_visitors" in stats && typeof stats.unique_visitors === "number") {
+    return stats.unique_visitors;
+  }
+
+  return null;
+};
+
 const HeroSection = () => {
   const { language } = useLanguage();
   const activeLanguage = resolveActiveLanguage(language);
@@ -59,22 +82,36 @@ const HeroSection = () => {
 
     const fetchViews = async () => {
       const { data, error } = await supabase.rpc("get_public_page_view_stats");
-      if (error) {
+      const rpcViews = error ? null : extractPublicPageViews(data);
+
+      if (rpcViews != null) {
+        setTotalViews(rpcViews);
         return;
       }
 
-      const stats = Array.isArray(data) ? data[0] : data;
-      const nextValue =
-        stats && typeof stats === "object"
-          ? "total_views" in stats && typeof stats.total_views === "number"
-            ? stats.total_views
-            : "unique_visitors" in stats && typeof stats.unique_visitors === "number"
-              ? stats.unique_visitors
-              : null
-          : null;
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_public_page_view_stats`, {
+          method: "POST",
+          headers: {
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
 
-      if (nextValue != null) {
-        setTotalViews(nextValue);
+        if (!response.ok) {
+          return;
+        }
+
+        const fallbackData = await response.json();
+        const fallbackViews = extractPublicPageViews(fallbackData);
+
+        if (fallbackViews != null) {
+          setTotalViews(fallbackViews);
+        }
+      } catch {
+        return;
       }
     };
 
