@@ -58,11 +58,23 @@ const HeroSection = () => {
     }
 
     const fetchViews = async () => {
-      const { data } = await supabase.rpc("get_public_page_view_stats");
-      const stats = Array.isArray(data) ? data[0] : null;
+      const { data, error } = await supabase.rpc("get_public_page_view_stats");
+      if (error) {
+        return;
+      }
 
-      if (stats?.total_views != null) {
-        setTotalViews(stats.total_views);
+      const stats = Array.isArray(data) ? data[0] : data;
+      const nextValue =
+        stats && typeof stats === "object"
+          ? "total_views" in stats && typeof stats.total_views === "number"
+            ? stats.total_views
+            : "unique_visitors" in stats && typeof stats.unique_visitors === "number"
+              ? stats.unique_visitors
+              : null
+          : null;
+
+      if (nextValue != null) {
+        setTotalViews(nextValue);
       }
     };
 
