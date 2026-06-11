@@ -1,159 +1,313 @@
 {
-  "name": "TransferAI Prospecting Multi-Prospect V3 CRM Compat Import",
+  "name": "TransferAI Prospecting V3 CRM Enhanced [FINAL]",
   "nodes": [
     {
       "parameters": {},
-      "id": "node-001",
+      "id": "ef2ade42-d9b8-4d28-a9c6-9fef2bcda778",
       "name": "Manual Trigger",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        220,
-        320
+        -976,
+        432
       ]
     },
     {
+      "parameters": {},
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        200,
-        380
+        -976,
+        704
       ],
-      "parameters": {}
+      "id": "302eddfc-42ef-42ef-8a3d-84dba1c80995"
     },
     {
       "parameters": {
-        "jsCode": "const input = $json || {};\nconst bookingLink = input.booking_link_30min || input.booking_link_45min || $env.BOOKING_LINK_30MIN || $env.BOOKING_LINK_45MIN || 'https://calendly.com/transferai/30min';\nreturn [{\n  json: {\n    ...input,\n    prospect_id: input.prospect_id || 'manual-prospect-001',\n    organization_name: input.organization_name || 'Organisation cible à qualifier',\n    website: input.website || 'https://www.example.org',\n    country: input.country || \"Côte d'Ivoire\",\n    organization_type: input.organization_type || 'organisation à qualifier',\n    sector_guess: input.sector_guess || 'secteur à confirmer',\n    decision_maker_name: input.decision_maker_name || 'Décideur à confirmer',\n    target_email: input.target_email || 'contact@example.org',\n    custom_page_paths_csv: input.custom_page_paths_csv || '',\n    booking_link_30min: bookingLink,\n    booking_link_45min: bookingLink,\n    commercial_priority_default: input.commercial_priority_default || 'tier1',\n    research_scope: input.research_scope || 'public_web_only',\n    source_backend: input.source_backend || 'manual',\n    source_label: input.source_label || '',\n    raw_source_id: input.raw_source_id || '',\n    niche_status: input.niche_status || '',\n    last_response_status: input.last_response_status || '',\n    last_sequence_result: input.last_sequence_result || ''\n  }\n}];"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "72257cf7-3650-4255-881f-8613262aed84",
+              "name": "prospect_id",
+              "value": "={{$json.prospect_id || 'manual-prospect-001'}}",
+              "type": "string"
+            },
+            {
+              "id": "5b3cde03-6214-4d76-85b2-103560c495dc",
+              "name": "organization_name",
+              "value": "={{$json.organization_name || \"Orange Côte d'Ivoire\"}}",
+              "type": "string"
+            },
+            {
+              "id": "e2cd6ff7-3a33-4457-be95-9d74368e6a03",
+              "name": "=website",
+              "value": "={{$json.website || 'https://www.orange.ci'}}",
+              "type": "string"
+            },
+            {
+              "id": "127bce9c-db71-4ae0-8787-05beff005fc2",
+              "name": "=country",
+              "value": "={{$json.country || \"Cote d'Ivoire\"}}",
+              "type": "string"
+            },
+            {
+              "id": "1759d87c-c698-47a9-b7dc-1e85a1302512",
+              "name": "=organization_type",
+              "value": "={{$json.organization_type || 'organisation a qualifier'}}",
+              "type": "string"
+            },
+            {
+              "id": "f3d41c1a-8af0-4e39-83ba-37710f33014f",
+              "name": "=sector_guess",
+              "value": "={{$json.sector_guess || 'secteur a confirmer'}}",
+              "type": "string"
+            },
+            {
+              "id": "bffd6a53-2974-44e0-a4c9-24958d8bbacb",
+              "name": "=decision_maker_name",
+              "value": "={{$json.decision_maker_name || 'Decideur a confirmer'}}",
+              "type": "string"
+            },
+            {
+              "id": "c3c91c48-6724-4616-b592-abbd6228f482",
+              "name": "=target_email",
+              "value": "={{$json.target_email || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "0f4f6d6e-9971-42ad-b009-ced7a569a586",
+              "name": "=custom_page_paths_csv",
+              "value": "={{$json.custom_page_paths_csv || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "6c04401f-1d5a-40fd-b10e-e774316558ce",
+              "name": "booking_link_45min",
+              "value": "https://calendly.com/contact-transferai/30min",
+              "type": "string"
+            },
+            {
+              "id": "ab023150-e45d-4a33-afe4-d8d54a1e6cce",
+              "name": "commercial_priority_default",
+              "value": "={{$json.commercial_priority_default || 'tier1'}}",
+              "type": "string"
+            },
+            {
+              "id": "a928a2c7-6409-465a-b8ac-2c3988c74dd7",
+              "name": "research_scope",
+              "value": "={{$json.research_scope || 'public_web_only'}}",
+              "type": "string"
+            },
+            {
+              "id": "1b671d53-2c39-49c8-ba84-4ad195624c48",
+              "name": "source_backend",
+              "value": "={{$json.source_backend || 'manual'}}",
+              "type": "string"
+            },
+            {
+              "id": "895ff269-d0f1-4604-85f3-7259dac2aa01",
+              "name": "source_label",
+              "value": "={{$json.source_label || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "d6a07002-d8df-42a6-8a64-479870b81bc5",
+              "name": "raw_source_id",
+              "value": "={{$json.raw_source_id || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "98699013-ce0d-4f49-a1c2-c7d8c9cf498e",
+              "name": "niche_status",
+              "value": "={{$json.niche_status || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "69df16f3-f8a5-4c28-b532-e146fc54d44e",
+              "name": "last_response_status",
+              "value": "={{$json.last_response_status || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "bdcc7617-e6f9-4561-a457-9837b9934713",
+              "name": "last_sequence_result",
+              "value": "={{$json.last_sequence_result || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "dfd1e19b-4fa8-4319-83ee-ee6f36d1da4f",
+              "name": "prospect_language",
+              "value": "={{$json.prospect_language || 'auto'}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
       },
-      "id": "node-002",
+      "id": "a031aa09-e1ce-44d9-a6a9-8e5a43c1e64d",
       "name": "Set Target",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        460,
-        320
+        -624,
+        528
       ]
     },
     {
       "parameters": {
-        "jsCode": "const base = String($json.website || '').trim().replace(/\\/$/, '');\nconst customPaths = String($json.custom_page_paths_csv || '')\n  .split(',')\n  .map((value) => value.trim())\n  .filter(Boolean);\n\nconst defaultPaths = [\n  '/',\n  '/a-propos/',\n  '/about/',\n  '/services/',\n  '/solutions/',\n  '/expertise/',\n  '/produits-et-services/',\n  '/products/',\n  '/contact/',\n  '/carrieres/',\n  '/careers/',\n  '/blog/'\n];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : `/${path}`;\n}\n\nconst selectedPaths = [...new Set([...customPaths, ...defaultPaths].map(normalizePath))].slice(0, 5);\nconst sourcePages = selectedPaths.map((path, index) => {\n  const isAbsolute = /^https?:\\/\\//i.test(path);\n  const normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  const url = isAbsolute ? path : `${base}${normalizedPath === '/' ? '' : normalizedPath}`;\n  return {\n    key: `page_${index + 1}`,\n    path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? `public_source_${index + 1}` : normalizedPath,\n    url,\n  };\n});\n\nconst output = { ...$json, source_pages: sourcePages };\nsourcePages.forEach((page, index) => {\n  output[`page_${index + 1}_url`] = page.url;\n  output[`page_${index + 1}_label`] = page.label;\n});\n\nreturn [{ json: output }];"
+        "jsCode": "// FIX: JSON.parse/stringify pour éviter le bug Proxy n8n\nvar inp = JSON.parse(JSON.stringify($input.first().json));\nvar base = String(inp.website || '').trim().replace(/\\/$/, '');\nvar customPaths = String(inp.custom_page_paths_csv || '')\n  .split(',')\n  .map(function(v){ return v.trim(); })\n  .filter(Boolean);\nvar defaultPaths = ['/','/a-propos/','/about/','/services/','/solutions/','/expertise/',\n  '/produits-et-services/','/products/','/contact/','/carrieres/','/careers/','/blog/'];\nfunction normalizePath(p) {\n  if (!p) return '/';\n  if (/^https?:\\/\\//i.test(p)) return p;\n  return p.startsWith('/') ? p : '/' + p;\n}\nvar seen = {}; var selectedPaths = [];\ncustomPaths.concat(defaultPaths).forEach(function(p) {\n  var n = normalizePath(p);\n  if (!seen[n] && selectedPaths.length < 5) { seen[n] = true; selectedPaths.push(n); }\n});\nvar sourcePages = selectedPaths.map(function(p, i) {\n  var isAbs = /^https?:\\/\\//i.test(p);\n  var norm  = isAbs ? p : p.replace(/^\\/+/, '/');\n  var url   = isAbs ? p : base + (norm === '/' ? '' : norm);\n  return { key: 'page_' + (i+1), path: isAbs ? null : norm,\n           label: isAbs ? 'public_source_' + (i+1) : norm, url: url };\n});\nvar output = Object.assign({}, inp, { source_pages: sourcePages });\nsourcePages.forEach(function(p, i) {\n  output['page_' + (i+1) + '_url']   = p.url;\n  output['page_' + (i+1) + '_label'] = p.label;\n});\nreturn [{ json: output }];"
       },
-      "id": "node-003",
+      "id": "a55d9e73-c124-42bf-bfbf-3ae8e3e9cda5",
       "name": "Build Source URLs",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        700,
-        320
+        -352,
+        528
       ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "={{$('Build Source URLs').first().json.page_1_url}}",
-        "options": {}
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
       },
-      "id": "node-004",
+      "id": "6810ca6d-f850-4fe5-97a1-98b0f62c6717",
       "name": "Fetch Public Page 1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        960,
-        80
+        0,
+        0
       ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "={{$('Build Source URLs').first().json.page_2_url}}",
-        "options": {}
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
       },
-      "id": "node-005",
+      "id": "de4f9bcf-5068-4b32-9141-d08f0c4aa51b",
       "name": "Fetch Public Page 2",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        960,
-        200
+        32,
+        240
       ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "={{$('Build Source URLs').first().json.page_3_url}}",
-        "options": {}
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
       },
-      "id": "node-006",
+      "id": "f2f1585a-d55b-4485-93e9-2e5249a286dc",
       "name": "Fetch Public Page 3",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        960,
-        320
+        16,
+        480
       ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "={{$('Build Source URLs').first().json.page_4_url}}",
-        "options": {}
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
       },
-      "id": "node-007",
+      "id": "ec449f9c-6f68-4aab-b5cd-95285f482397",
       "name": "Fetch Public Page 4",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        960,
-        440
+        0,
+        704
       ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "={{$('Build Source URLs').first().json.page_5_url}}",
-        "options": {}
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
       },
-      "id": "node-008",
+      "id": "945b4555-be21-4f69-8edb-44786f08d0f5",
       "name": "Fetch Public Page 5",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        960,
-        560
+        32,
+        928
       ]
     },
     {
       "parameters": {
-        "jsCode": "const target = $('Build Source URLs').first().json;\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/a-propos/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/services/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/solutions/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/contact/' }, raw: $('Fetch Public Page 5').first().json }\n];\n\nfunction toText(raw) {\n  const html = raw?.body || raw?.data || raw || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nconst pageTexts = pages\n  .map((page) => ({\n    key: page.meta.key,\n    label: page.meta.label,\n    text: toText(page.raw).slice(0, 12000)\n  }))\n  .filter((page) => page.text);\n\nconst combinedPublicText = pageTexts.map((page) => `[${page.key.toUpperCase()} - ${page.label}]\\n${page.text}`).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\n\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'réseaux sociaux', 'reseaux sociaux'],\n  workflow_administratif: ['procédure', 'procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilité', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carrière', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['santé', 'sante', 'patient', 'clinique', 'hôpital', 'hopital', 'télémédecine', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformité', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'opérations', 'operations']\n};\n\nconst roiClues = Object.entries(clueTaxonomy)\n  .filter(([, keywords]) => keywords.some((keyword) => normalizedText.includes(keyword.toLowerCase())))\n  .map(([key]) => key);\n\nreturn [{\n  json: {\n    ...target,\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : [\n      'workflow_administratif',\n      'service_client_multicanal',\n      'assistant_direction_documentaire'\n    ]\n  }\n}];"
+        "jsCode": "// FIX: JSON.parse/stringify pour éviter le bug Proxy n8n\nvar target = JSON.parse(JSON.stringify($('Build Source URLs').first().json));\nvar configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nvar pages = [\n  { meta: configuredPages[0] || { key:'page_1', label:'/' },            raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key:'page_2', label:'/a-propos/' },   raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key:'page_3', label:'/services/' },   raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key:'page_4', label:'/solutions/' },  raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key:'page_5', label:'/contact/' },    raw: $('Fetch Public Page 5').first().json }\n];\nfunction toText(raw) {\n  var html = (raw && (raw.body || raw.data)) || '';\n  return String(html).replace(/<script[\\s\\S]*?<\\/script>/gi,' ').replace(/<style[\\s\\S]*?<\\/style>/gi,' ')\n    .replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();\n}\nvar pageTexts = pages.map(function(p) {\n  return { key: p.meta.key, label: p.meta.label, text: toText(p.raw).slice(0,12000) };\n}).filter(function(p){ return p.text; });\nvar combinedPublicText = pageTexts.map(function(p){ return '['+p.key.toUpperCase()+' - '+p.label+']\\n'+p.text; }).join('\\n\\n');\nvar normalizedText = combinedPublicText.toLowerCase();\nvar clueTaxonomy = {\n  support_it_intelligent: ['support','helpdesk','incident','ticket','sla','maintenance'],\n  service_client_multicanal: ['service client','relation client','support client','contact','crm'],\n  machine_contenu_marketing: ['marketing','communication','campagne','contenu','reseaux sociaux'],\n  workflow_administratif: ['procedure','validation','reporting','back-office','administratif'],\n  assistant_direction_documentaire: ['direction','rapport','compte rendu','documentation','pilotage'],\n  reporting_financier_assiste: ['finance','facturation','comptabilite','recouvrement','paiement'],\n  recrutement_onboarding_augmente: ['recrutement','talent','carriere','onboarding','rh'],\n  telemedecine_triage_orientation: ['sante','patient','clinique','hopital','telemedecine'],\n  banque_kyc_reporting: ['banque','kyc','conformite','compliance','risque'],\n  operations_terrain_coordination: ['terrain','flotte','logistique','livraison','intervention','operations']\n};\nvar roiClues = Object.keys(clueTaxonomy).filter(function(key){\n  return clueTaxonomy[key].some(function(kw){ return normalizedText.indexOf(kw) !== -1; });\n});\nreturn [{ json: Object.assign({}, target, {\n  page_texts: pageTexts,\n  public_text: combinedPublicText.slice(0,45000),\n  roi_clues: roiClues.length ? roiClues : ['workflow_administratif','service_client_multicanal','assistant_direction_documentaire']\n}) }];"
       },
-      "id": "node-009",
+      "id": "d5814eb5-582f-488b-a252-f58b9f8b91d4",
       "name": "Normalize Public Signals",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1240,
-        320
+        320,
+        528
       ]
     },
     {
       "parameters": {
-        "jsCode": "const source = $json;\nconst orgName = (source.organization_name || '').trim();\nconst decisionMaker = (source.decision_maker_name || '').trim();\nconst website = (source.website || '').trim();\nconst domain = website.replace(/^https?:\\/\\//i, '').replace(/^www\\./i, '').split('/')[0];\n\nfunction escapeRegex(value) {\n  return value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n}\n\nlet sanitizedText = String(source.public_text || '');\n\nconst genericPatterns = [\n  [/https?:\\/\\/\\S+/gi, '[URL_REDACTED]'],\n  [/\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b/gi, '[EMAIL_REDACTED]'],\n  [/\\+?\\d[\\d\\s().-]{7,}\\d/g, '[PHONE_REDACTED]']\n];\n\nfor (const [pattern, replacement] of genericPatterns) {\n  sanitizedText = sanitizedText.replace(pattern, replacement);\n}\n\nconst sensitiveTokens = [\n  { value: orgName, replacement: 'ORG_TARGET' },\n  { value: decisionMaker, replacement: 'DECISION_MAKER_TARGET' },\n  { value: domain, replacement: '[URL_REDACTED]' }\n].filter((item) => item.value && item.value.length > 2);\n\nfor (const token of sensitiveTokens) {\n  const pattern = new RegExp(escapeRegex(token.value), 'gi');\n  sanitizedText = sanitizedText.replace(pattern, token.replacement);\n}\n\nconst normalized = sanitizedText.toLowerCase();\nconst signalTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact center', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'marque', 'réseaux sociaux', 'reseaux sociaux'],\n  workflow_administratif: ['procédure', 'procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'pilotage', 'rapport', 'documentation', 'compte rendu'],\n  reporting_financier_assiste: ['facturation', 'finance', 'comptabilité', 'comptabilite', 'paiement', 'recouvrement'],\n  recrutement_onboarding_augmente: ['recrutement', 'carrière', 'carriere', 'rh', 'talent', 'onboarding'],\n  commentaire_donnees_reporting: ['données', 'donnees', 'dashboard', 'analytics', 'indicateurs', 'tableau de bord'],\n  telemedecine_triage_orientation: ['santé', 'sante', 'patient', 'clinique', 'hôpital', 'hopital', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'compliance', 'conformité', 'conformite', 'risque'],\n  operations_terrain_coordination: ['flotte', 'terrain', 'logistique', 'livraison', 'intervention', 'opérations', 'operations'],\n  energie_industrie_services: ['énergie', 'energie', 'oil', 'gas', 'station', 'industrie', 'industriel'],\n  formation_montee_en_competence: ['formation', 'certification', 'academy', 'apprentissage', 'compétence', 'competence']\n};\n\nconst signalTags = Object.entries(signalTaxonomy)\n  .filter(([, keywords]) => keywords.some((keyword) => normalized.includes(keyword.toLowerCase())))\n  .map(([key]) => key);\n\nconst allowedFields = [\n  'organization_type',\n  'sector_guess',\n  'country',\n  'signal_tags',\n  'roi_clues',\n  'page_keys',\n  'public_text_sanitized_excerpt'\n];\n\nconst blockedFields = [\n  'organization_name',\n  'website',\n  'decision_maker_name',\n  'target_email',\n  'page_texts',\n  'public_text'\n];\n\nconst sanitizedExcerpt = sanitizedText.slice(0, 12000);\n\nconst llmAllowedPayload = {\n  llm_policy: 'deny-by-default',\n  organization_ref: 'ORG_TARGET',\n  decision_maker_ref: decisionMaker ? 'DECISION_MAKER_TARGET' : null,\n  organization_type: source.organization_type || null,\n  sector_guess: source.sector_guess || null,\n  country: source.country || null,\n  signal_tags: signalTags,\n  roi_clues: Array.isArray(source.roi_clues) ? source.roi_clues : [],\n  page_keys: Array.isArray(source.page_texts) ? source.page_texts.map((p) => p.key) : [],\n  public_text_sanitized_excerpt: sanitizedExcerpt,\n  allowed_fields: allowedFields,\n  blocked_fields: blockedFields\n};\n\nconst llmGenerationPayload = {\n  ...llmAllowedPayload,\n  organization_display: '{{ORGANIZATION_NAME}}',\n  decision_maker_display: '{{DECISION_MAKER_NAME}}',\n  website_display: '{{WEBSITE}}'\n};\n\nreturn [{\n  json: {\n    ...source,\n    public_text_sanitized: sanitizedExcerpt,\n    llm_allowed_payload: llmAllowedPayload,\n    llm_generation_payload: llmGenerationPayload,\n    llm_redaction_summary: {\n      policy: 'deny-by-default',\n      blocked_fields: blockedFields,\n      allowed_fields: allowedFields,\n      pseudonymized_identifiers: ['organization_name', 'decision_maker_name', 'website'],\n      text_sent_to_llm: 'sanitized_public_text_excerpt_only'\n    }\n  }\n}];"
+        "jsCode": "// FIX: JSON.parse/stringify pour éviter le bug Proxy n8n\nvar source = JSON.parse(JSON.stringify($input.first().json));\nvar orgName = (source.organization_name || '').trim();\nvar decisionMaker = (source.decision_maker_name || '').trim();\nvar website = (source.website || '').trim();\nvar domain = website.replace(/^https?:\\/\\//i,'').replace(/^www\\./i,'').split('/')[0];\n\nfunction escapeRegex(v){ return v.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&'); }\n\nvar sanitizedText = String(source.public_text || '');\nvar genericPatterns = [\n  [/https?:\\/\\/\\S+/gi,'[URL_REDACTED]'],\n  [/\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b/gi,'[EMAIL_REDACTED]'],\n  [/\\+?\\d[\\d\\s().-]{7,}\\d/g,'[PHONE_REDACTED]']\n];\nfor(var i=0;i<genericPatterns.length;i++) sanitizedText=sanitizedText.replace(genericPatterns[i][0],genericPatterns[i][1]);\n\nvar sensitiveTokens=[\n  {value:orgName,replacement:'ORG_TARGET'},\n  {value:decisionMaker,replacement:'DECISION_MAKER_TARGET'},\n  {value:domain,replacement:'[URL_REDACTED]'}\n].filter(function(t){return t.value&&t.value.length>2;});\nfor(var j=0;j<sensitiveTokens.length;j++){\n  var pat=new RegExp(escapeRegex(sensitiveTokens[j].value),'gi');\n  sanitizedText=sanitizedText.replace(pat,sensitiveTokens[j].replacement);\n}\n\nvar normalized=sanitizedText.toLowerCase();\n\n// 13 SECTEURS STRATEGIQUES TRANSFERAI\nvar signalTaxonomy={\n  support_it_intelligent:{\n    keywords:['support','helpdesk','incident','ticket','sla','maintenance'],\n    pitch:'optimisation du support IT et gestion des incidents par IA'\n  },\n  service_client_multicanal:{\n    keywords:['service client','relation client','support client','contact center','crm'],\n    pitch:'transformation du service client multicanal avec agents IA'\n  },\n  machine_contenu_marketing:{\n    keywords:['marketing','communication','campagne','contenu','marque','reseaux sociaux'],\n    pitch:'generation automatisee de contenu marketing personnalise'\n  },\n  workflow_administratif:{\n    keywords:['procedure','validation','reporting','back-office','administratif'],\n    pitch:'automatisation des workflows administratifs et back-office'\n  },\n  assistant_direction_documentaire:{\n    keywords:['direction','pilotage','rapport','documentation','compte rendu'],\n    pitch:'assistant IA pour la direction et la gestion documentaire'\n  },\n  reporting_financier_assiste:{\n    keywords:['facturation','finance','comptabilite','paiement','recouvrement'],\n    pitch:'reporting financier automatise et suivi comptable par IA'\n  },\n  recrutement_onboarding_augmente:{\n    keywords:['recrutement','carriere','rh','talent','onboarding'],\n    pitch:'recrutement augmente et onboarding automatise par IA'\n  },\n  commentaire_donnees_reporting:{\n    keywords:['donnees','dashboard','analytics','indicateurs','tableau de bord'],\n    pitch:'analyse et commentaire automatique des donnees et KPIs'\n  },\n  telemedecine_triage_orientation:{\n    keywords:['sante','patient','clinique','hopital','telemedecine'],\n    pitch:'triage intelligent et orientation patient par IA medicale'\n  },\n  banque_kyc_reporting:{\n    keywords:['banque','kyc','compliance','conformite','risque'],\n    pitch:'automatisation KYC, conformite et reporting bancaire par IA'\n  },\n  operations_terrain_coordination:{\n    keywords:['flotte','terrain','logistique','livraison','intervention','operations'],\n    pitch:'coordination des operations terrain et gestion de flotte par IA'\n  },\n  energie_industrie_services:{\n    keywords:['energie','oil','gas','station','industrie','industriel'],\n    pitch:'optimisation des processus industriels et energetiques par IA'\n  },\n  formation_montee_en_competence:{\n    keywords:['formation','certification','academy','apprentissage','competence'],\n    pitch:'formation acceleree et montee en competence assistee par IA'\n  }\n};\n\n// DETECTION AUTOMATIQUE NOUVEAUX SECTEURS\nvar genericSectorKeywords={\n  agriculture:['agriculture','farming','recolte','irrigation','elevage'],\n  tourisme:['tourisme','hotel','reservation','voyage','hospitality'],\n  immobilier:['immobilier','foncier','location','promotion','construction'],\n  transport:['transport','mobilite','conducteur','passager','trajet'],\n  education:['ecole','universite','enseignement','etudiant','pedagogie'],\n  retail:['commerce','vente','magasin','stock','caisse'],\n  telecom:['telecom','operateur','reseau','connectivite','mobile'],\n  assurance:['assurance','sinistre','police','prime','indemnisation'],\n  juridique:['juridique','legal','contrat','avocat','tribunal'],\n  media:['media','presse','radio','television','journalisme']\n};\n\nvar detectedSectors=[];\nvar sectorPitches=[];\n\nObject.keys(signalTaxonomy).forEach(function(key){\n  var found=signalTaxonomy[key].keywords.some(function(kw){return normalized.indexOf(kw)!==-1;});\n  if(found){\n    detectedSectors.push(key);\n    sectorPitches.push(signalTaxonomy[key].pitch);\n  }\n});\n\nvar isNewSector=false;\nvar newSectorName='';\nif(detectedSectors.length===0){\n  Object.keys(genericSectorKeywords).forEach(function(key){\n    var found=genericSectorKeywords[key].some(function(kw){return normalized.indexOf(kw)!==-1;});\n    if(found && !isNewSector){\n      isNewSector=true;\n      newSectorName=key;\n      detectedSectors.push('nouveau_secteur_'+key);\n      sectorPitches.push(\"application de l'IA aux processus specifiques du secteur \"+key);\n    }\n  });\n}\n\nif(detectedSectors.length===0){\n  detectedSectors=['workflow_administratif','assistant_direction_documentaire'];\n  sectorPitches=['automatisation des processus metier par IA'];\n}\n\n// DETECTION LANGUE PAR TLD + TEXTE\nvar websiteDomain = String(source.website || '').toLowerCase();\nvar tld = websiteDomain.replace(/^https?:\\/\\//,'').replace(/^www\\./,'').split('/')[0].split('.').pop();\n\nvar frenchTlds = ['ci','sn','ml','bf','bj','tg','cd','cg','ga','cm','mg','tn','ma','dz','gn','ne','td','cf','km','bi','rw','fr','be','ch','lu','mc'];\nvar englishTlds = ['uk','gh','ng','ke','tz','za','zw','ug','us','au','nz','ie','in','sg','my'];\nvar spanishTlds = ['es','mx','co','ar','pe','cl','ve','ec','uy','py','bo','cr','gt','hn','ni','pa','do','cu','pr'];\n\nvar detectedLanguage = 'fr';\n\nif(frenchTlds.indexOf(tld) !== -1){\n  detectedLanguage = 'fr';\n} else if(englishTlds.indexOf(tld) !== -1){\n  detectedLanguage = 'en';\n} else if(spanishTlds.indexOf(tld) !== -1){\n  detectedLanguage = 'es';\n} else {\n  // TLD neutre (.com .org .net) → analyser le texte\n  var langDetectionText = normalized.slice(0, 2000);\n  var frenchSignals = ['les','des','pour','avec','nous','votre','notre','vous','est','une','dans'];\n  var englishSignals = ['the','and','for','with','our','your','we','are','this','that','have'];\n  var spanishSignals = ['los','las','para','con','nuestro','vuestra','somos','este','tiene','una'];\n  function countSignals(signals, text){\n    return signals.filter(function(w){ return text.indexOf(' '+w+' ') !== -1; }).length;\n  }\n  var frScore = countSignals(frenchSignals, langDetectionText);\n  var enScore = countSignals(englishSignals, langDetectionText);\n  var esScore = countSignals(spanishSignals, langDetectionText);\n  if(enScore > frScore && enScore > esScore) detectedLanguage = 'en';\n  if(esScore > frScore && esScore > enScore) detectedLanguage = 'es';\n}\n\n// Priorite a la langue forcee manuellement\nvar finalLanguage = source.prospect_language && source.prospect_language !== 'auto'\n  ? source.prospect_language\n  : detectedLanguage;\n\nvar languageInstructions = {\n  'fr': 'Redige UNIQUEMENT en francais standard avec accents.',\n  'en': 'Write ONLY in standard English with proper grammar.',\n  'es': 'Redacta UNICAMENTE en espanol estandar con acentos.'\n};\n\n// CONSTRUCTION PAYLOAD LLM\nvar llmAllowedPayload={\n  llm_policy:'deny-by-default',\n  organization_ref:'ORG_TARGET',\n  decision_maker_ref:decisionMaker?'DECISION_MAKER_TARGET':null,\n  organization_type:source.organization_type||null,\n  sector_guess:source.sector_guess||null,\n  country:source.country||null,\n  signal_tags:detectedSectors,\n  sector_pitches:sectorPitches,\n  is_new_sector:isNewSector,\n  new_sector_name:newSectorName||null,\n  roi_clues:Array.isArray(source.roi_clues)?source.roi_clues:[],\n  page_keys:Array.isArray(source.page_texts)?source.page_texts.map(function(p){return p.key;}):[],\n  public_text_sanitized_excerpt:sanitizedText.slice(0,12000),\n  strategic_sectors_coverage:'13 secteurs strategiques TransferAI + detection automatique nouveaux secteurs',\n  language:finalLanguage,\n  language_instruction:languageInstructions[finalLanguage],\n  detected_tld:tld\n};\n\nvar llmGenerationPayload=Object.assign({},llmAllowedPayload,{\n  organization_display:'{{ORGANIZATION_NAME}}',\n  decision_maker_display:'{{DECISION_MAKER_NAME}}',\n  website_display:'{{WEBSITE}}'\n});\n\nreturn [{ json: Object.assign({},source,{\n  public_text_sanitized:sanitizedText.slice(0,12000),\n  signal_tags:detectedSectors,\n  sector_pitches:sectorPitches,\n  is_new_sector:isNewSector,\n  detected_language:finalLanguage,\n  detected_tld:tld,\n  llm_allowed_payload:llmAllowedPayload,\n  llm_generation_payload:llmGenerationPayload,\n  llm_redaction_summary:{\n    policy:'deny-by-default',\n    strategic_sectors:Object.keys(signalTaxonomy),\n    detected_sectors:detectedSectors,\n    is_new_sector:isNewSector,\n    language:finalLanguage,\n    tld:tld\n  }\n}) }];"
       },
-      "id": "node-009a",
+      "id": "e8bae9d7-cfd7-4470-99cd-5e0b07429e59",
       "name": "Sanitize Prospect Data For LLM",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1490,
-        620
+        656,
+        784
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -169,23 +323,22 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es l'assistant IA de prospection de TransferAI. Analyse uniquement des signaux pseudonymisés et retourne uniquement un JSON valide avec: organization_summary, probable_strengths, probable_weaknesses, probable_needs, entry_point_niche, confidence_score. N'utilise jamais de noms réels; raisonne sur ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es l'assistant IA de prospection de TransferAI. Analyse uniquement des signaux pseudonymisés et retourne uniquement un JSON valide avec: organization_summary, probable_strengths, probable_weaknesses, probable_needs, entry_point_niche, confidence_score. N'utilise jamais de noms réels; raisonne sur ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
         "options": {}
       },
-      "id": "node-010",
+      "id": "6e530703-77db-4df6-8021-fd7e0c40ba50",
       "name": "Call OpenAI Pre-Audit",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1500,
-        100
+        576,
+        320
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -201,23 +354,22 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste commercial TransferAI. Retourne uniquement un JSON valide avec: probable_problems, probable_quick_wins, recommended_offer, offer_sequence, recommended_training_bundle, recommended_use_case, best_selling_use_case, commercial_priority_tier, recommended_meeting_angle. Les problèmes doivent être formulés comme hypothèses. Privilégie les cas les plus vendables à court terme: support IT intelligent, service client multicanal, machine à contenu marketing, workflow administratif, assistant documentaire de direction. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste commercial TransferAI. Retourne uniquement un JSON valide avec: probable_problems, probable_quick_wins, recommended_offer, offer_sequence, recommended_training_bundle, recommended_use_case, best_selling_use_case, commercial_priority_tier, recommended_meeting_angle. Les problèmes doivent être formulés comme hypothèses. Privilégie les cas les plus vendables à court terme: support IT intelligent, service client multicanal, machine à contenu marketing, workflow administratif, assistant documentaire de direction. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
         "options": {}
       },
-      "id": "node-011",
+      "id": "2017d384-a380-4a62-aa44-bfe7648bdc0e",
       "name": "Call OpenAI Problems Solutions",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1500,
-        260
+        576,
+        480
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -233,36 +385,35 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste de valeur TransferAI. Retourne uniquement un JSON valide avec: roi_hypothesis, expected_time_savings, expected_service_improvements, expected_quick_wins, delivery_timeline. Présente les chiffres comme hypothèses ou benchmarks à valider. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste de valeur TransferAI. Retourne uniquement un JSON valide avec: roi_hypothesis, expected_time_savings, expected_service_improvements, expected_quick_wins, delivery_timeline. Présente les chiffres comme hypothèses ou benchmarks à valider. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
         "options": {}
       },
-      "id": "node-012",
+      "id": "f8a4c9ac-f09a-484b-954c-289860b3fe6d",
       "name": "Call OpenAI ROI",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1500,
-        420
+        576,
+        640
       ]
     },
     {
       "parameters": {
-        "jsCode": "const base = $('Normalize Public Signals').first().json;\n\nfunction parseOpenAI(nodeName) {\n  const raw = $(nodeName).first().json?.choices?.[0]?.message?.content || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return { parse_error: `${nodeName}: ${e.message}` };\n  }\n}\n\nfunction slugify(value) {\n  return String(value || '')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '');\n}\n\nconst preAudit = parseOpenAI('Call OpenAI Pre-Audit');\nconst problems = parseOpenAI('Call OpenAI Problems Solutions');\nconst roi = parseOpenAI('Call OpenAI ROI');\nconst sectorVariant = problems.sector_variant || slugify(base.sector_guess) || 'multi_sector_operations';\n\nreturn [{\n  json: {\n    ...base,\n    ...preAudit,\n    ...problems,\n    ...roi,\n    single_primary_cta: 'Planifier un audit stratégique gratuit suivi d\\'un échange de 30 minutes',\n    sector_variant: sectorVariant\n  }\n}];"
+        "jsCode": "// FIX: JSON.parse/stringify + référence Sanitize (non Normalize)\nvar base = JSON.parse(JSON.stringify($('Sanitize Prospect Data For LLM').first().json));\n\nfunction parseOpenAI(nodeName) {\n  try {\n    var n = $(nodeName).first().json;\n    var raw = (n && n.choices && n.choices[0] && n.choices[0].message && n.choices[0].message.content) || '{}';\n    try {\n      return JSON.parse(raw);\n    } catch (e) {\n      return { parse_error: nodeName + ': ' + e.message, raw: raw };\n    }\n  } catch (e) {\n    return { parse_error: nodeName + ': not executed' };\n  }\n}\n\nfunction slugify(v) {\n  return String(v || '')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '');\n}\n\nvar preAudit = parseOpenAI('Call OpenAI Pre-Audit');\nvar problems = parseOpenAI('Call OpenAI Problems Solutions');\nvar roi = parseOpenAI('Call OpenAI ROI');\n\nvar bookingLink =\n  base.booking_link_30min ||\n  base.booking_link_45min ||\n  $env.BOOKING_LINK_30MIN ||\n  $env.BOOKING_LINK_45MIN ||\n  'https://calendly.com/contact-transferai/30min';\n\nvar sectorVariant =\n  problems.sector_variant ||\n  slugify(base.sector_guess) ||\n  'multi_sector_operations';\n\nreturn [{\n  json: Object.assign({}, base, preAudit, problems, roi, {\n    booking_link_30min: bookingLink,\n    booking_link_45min: bookingLink,\n    prospect_language: base.prospect_language || 'auto',\n    single_primary_cta: \"Planifier un audit strategique gratuit et un rendez-vous expert de 30 minutes\",\n    sector_variant: sectorVariant\n  })\n}];"
       },
-      "id": "node-013",
+      "id": "ec00b822-afe0-41fc-93ce-035958b5184a",
       "name": "Assemble Prospect Context",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1760,
-        320
+        768,
+        464
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -278,23 +429,22 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.4, messages: [ { role: 'system', content: \\\"Redige un courrier professionnel. IDENTITE TRANSFERAI: TransferAI est la branche Intelligence Artificielle de NettelecomCI, entreprise de renom etablie en Cote d Ivoire. Hub IA compose de 13 experts ivoiriens bases en Cote d Ivoire, Royaume-Uni, Etats-Unis et en Inde. Cas d usage impressionnants. Mobilite internationale sans frein. Presence locale forte grace a NettelecomCI en Cote d Ivoire. REGLES: 1. Resultat attendu client en premier. 2. Ancrage local NettelecomCI ET 13 experts UK USA Inde. 3. Utilise sector_pitches du contexte ainsi que les signaux, besoins probables, quick wins, hypotheses de ROI et angle de rencontre quand ils existent. 4. Audit gratuit + rendez-vous 30 minutes. 5. Lien RDV TOUJOURS https://calendly.com/contact-transferai/30min. 6. Tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d entre doubles accolades. 7. IMPORTANT: annonce que 3 documents accompagnent ce courrier: (a) un Mini-Catalogue TransferAI personnalise pour decouvrir nos offres adaptees a leur secteur, (b) un Brief de presentation que nos experts partageront lors du rendez-vous, (c) un Formulaire d audit pre-RDV a completer via ce lien : https://audit.transferai.ci/ ; precise que ce formulaire est IMPORTANT car il permet a nos experts de preparer un audit sur mesure avant la rencontre et de maximiser les 30 minutes de rendez-vous. 8. Le courrier doit convenir a toutes les societes, institutions, organisations et personnes physiques susceptibles de beneficier de nos services. 9. Commence par le resultat attendu pour le prospect, jamais par un catalogue. 10. Les problemes, gains et ROI doivent etre formules comme hypotheses prudentes, reperes ou points a confirmer, jamais comme certitudes. 11. Le courrier doit montrer que la reponse TransferAI combine audit, formation ciblee, accompagnement, gouvernance et premier terrain d execution. 12. Fais apparaitre clairement la difference entre une structure de formation classique et TransferAI: une structure de formation transmet un contenu, tandis que TransferAI forme puis accompagne la mise en pratique sur 90 jours. 13. Mentionne brievement les familles de formation ou chantiers prioritaires les plus pertinents sans derouler une longue liste. 14. Fais comprendre qu un accompagnement structure sur 90 jours aide a consolider l usage reel, relire les premiers KPI, ajuster les pratiques et decider la suite entre pilote, extension ou reajustement. 15. Integre le differentiel TransferAI: apres la formation, les personnes et structures formees gardent un acces gratuit a la communaute TransferAI pour partager leurs cas d entreprise, les problemes rencontres et recevoir de l assistance ainsi que des conseils pratiques pour mieux realiser leurs taches. 16. Si pertinent, rappelle le cadre de confidentialite, de gouvernance, de supervision humaine et de progression par pilote. 17. N invente ni chiffres, ni prix, ni details internes. 18. Adapte naturellement la posture si l organisation ressemble a une entreprise privee, une institution publique, une institution financiere, une organisation internationale ou une personne physique. 19. Regles de langue: si le contexte indique le francais, redige exclusivement en francais professionnel sans accents; si le contexte indique l anglais, redige exclusivement en anglais professionnel standard; si le contexte indique l espagnol, redige exclusivement en espagnol professionnel standard sans accents; ne melange jamais les langues. 20. FORMAT: Objet personnalise selon secteur, 4 a 5 paragraphes, 1 seul CTA Calendly, puis signature. 21. SIGNATURE: Casimir Kassi Beda - Directeur General TransferAI NettelecomCI contact@transferai.ci https://transferai.ci | Marius Ayoro - Directeur Developpement Partenariats marius.ayoro@transferai.ci | Eric N Guessan - Directeur Audit Pedagogie Certification eric.nguessan@transferai.ci\\\" }, { role: 'user', content: `Contexte prospect:\\\\n${JSON.stringify({ llm_generation_payload: $json.llm_generation_payload || {}, organization_type: $json.organization_type || null, sector_guess: $json.sector_guess || null, country: $json.country || null, signal_tags: $json.llm_allowed_payload?.signal_tags || [], roi_clues: $json.roi_clues || [], organization_summary: $json.organization_summary || '', probable_strengths: $json.probable_strengths || [], probable_weaknesses: $json.probable_weaknesses || [], probable_needs: $json.probable_needs || [], entry_point_niche: $json.entry_point_niche || '', probable_problems: $json.probable_problems || [], probable_quick_wins: $json.probable_quick_wins || [], recommended_offer: $json.recommended_offer || '', offer_sequence: $json.offer_sequence || [], recommended_training_bundle: $json.recommended_training_bundle || [], recommended_use_case: $json.recommended_use_case || '', best_selling_use_case: $json.best_selling_use_case || '', commercial_priority_tier: $json.commercial_priority_tier || '', recommended_meeting_angle: $json.recommended_meeting_angle || '', roi_hypothesis: $json.roi_hypothesis || [], expected_time_savings: $json.expected_time_savings || [], expected_service_improvements: $json.expected_service_improvements || [], expected_quick_wins: $json.expected_quick_wins || [], delivery_timeline: $json.delivery_timeline || [], sector_pitches: $json.sector_pitches || [], public_text_sanitized_excerpt: $json.llm_allowed_payload?.public_text_sanitized_excerpt || '' }, null, 2)}` } ] })}}",
+        "jsonBody": "=\n{{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.1, messages: [ { role: 'system', content: \"Redige un courrier professionnel. IDENTITE TRANSFERAI: TransferAI est la branche Intelligence Artificielle de NettelecomCI, entreprise de renom etablie en Cote d Ivoire. Hub IA compose de 13 experts ivoiriens bases en Cote d Ivoire, Royaume-Uni, Etats-Unis et en Inde. Cas d usage impressionnants. Mobilite internationale sans frein. Presence locale forte grace a NettelecomCI en Cote d Ivoire. REGLES: 1. Resultat attendu client en premier. 2. Ancrage local NettelecomCI ET 13 experts UK USA Inde. 3. Utilise sector_pitches du contexte ainsi que les signaux, besoins probables, quick wins, hypotheses de ROI et angle de rencontre quand ils existent. 4. Audit gratuit + rendez-vous 30 minutes. 5. Lien RDV TOUJOURS https://calendly.com/contact-transferai/30min. 6. Tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d entre doubles accolades. 7. IMPORTANT: annonce que 3 documents accompagnent ce courrier: (a) un Mini-Catalogue TransferAI personnalise pour decouvrir nos offres adaptees a leur secteur, (b) un Brief de presentation que nos experts partageront lors du rendez-vous, (c) un Formulaire d audit pre-RDV a completer via le lien audit_form_url fourni dans le contexte prospect ; precise que ce formulaire est IMPORTANT car il permet a nos experts de preparer un audit sur mesure avant la rencontre et de maximiser les 30 minutes de rendez-vous. 8. Le courrier doit convenir a toutes les societes, institutions, organisations et personnes physiques susceptibles de beneficier de nos services. 9. Commence par le resultat attendu pour le prospect, jamais par un catalogue. 10. Les problemes, gains et ROI doivent etre formules comme hypotheses prudentes, reperes ou points a confirmer, jamais comme certitudes. 11. Le courrier doit montrer que la reponse TransferAI combine audit, formation ciblee, accompagnement, gouvernance et premier terrain d execution. 12. Fais apparaitre clairement la difference entre une structure de formation classique et TransferAI: une structure de formation transmet un contenu, tandis que TransferAI forme puis accompagne la mise en pratique sur 90 jours. 13. Mentionne brievement les familles de formation ou chantiers prioritaires les plus pertinents sans derouler une longue liste. 14. Fais comprendre qu un accompagnement structure sur 90 jours aide a consolider l usage reel, relire les premiers KPI, ajuster les pratiques et decider la suite entre pilote, extension ou reajustement. 15. Integre le differentiel TransferAI: apres la formation, les personnes et structures formees gardent un acces gratuit a la communaute TransferAI pour partager leurs cas d entreprise, les problemes rencontres et recevoir de l assistance ainsi que des conseils pratiques pour mieux realiser leurs taches. 16. Si pertinent, rappelle le cadre de confidentialite, de gouvernance, de supervision humaine et de progression par pilote. 17. N invente ni chiffres, ni prix, ni details internes. 18. Adapte naturellement la posture si l organisation ressemble a une entreprise privee, une institution publique, une institution financiere, une organisation internationale ou une personne physique. 19. Regles de langue: si le contexte indique le francais, redige exclusivement en francais professionnel sans accents; si le contexte indique l anglais, redige exclusivement en anglais professionnel standard; si le contexte indique l espagnol, redige exclusivement en espagnol professionnel standard sans accents; ne melange jamais les langues. 20. FORMAT: Objet personnalise selon secteur, 4 a 5 paragraphes, 1 seul CTA Calendly, puis signature. 21. SIGNATURE: Casimir Kassi Beda - Directeur General TransferAI NettelecomCI contact@transferai.ci https://transferai.ci | Marius Ayoro - Directeur Developpement Partenariats marius.ayoro@transferai.ci | Eric N Guessan - Directeur Audit Pedagogie Certification eric.nguessan@transferai.ci\" }, { role: 'user', content: `Contexte prospect:\\n${JSON.stringify({ llm_generation_payload: $json.llm_generation_payload || {}, organization_type: $json.organization_type || null, sector_guess: $json.sector_guess || null, country: $json.country || null, signal_tags: $json.llm_allowed_payload?.signal_tags || [], roi_clues: $json.roi_clues || [], organization_summary: $json.organization_summary || '', probable_strengths: $json.probable_strengths || [], probable_weaknesses: $json.probable_weaknesses || [], probable_needs: $json.probable_needs || [], entry_point_niche: $json.entry_point_niche || '', probable_problems: $json.probable_problems || [], probable_quick_wins: $json.probable_quick_wins || [], recommended_offer: $json.recommended_offer || '', offer_sequence: $json.offer_sequence || [], recommended_training_bundle: $json.recommended_training_bundle || [], recommended_use_case: $json.recommended_use_case || '', best_selling_use_case: $json.best_selling_use_case || '', commercial_priority_tier: $json.commercial_priority_tier || '', recommended_meeting_angle: $json.recommended_meeting_angle || '', roi_hypothesis: $json.roi_hypothesis || [], expected_time_savings: $json.expected_time_savings || [], expected_service_improvements: $json.expected_service_improvements || [], expected_quick_wins: $json.expected_quick_wins || [], delivery_timeline: $json.delivery_timeline || [], sector_pitches: $json.sector_pitches || [], public_text_sanitized_excerpt: $json.llm_allowed_payload?.public_text_sanitized_excerpt || '', audit_form_url: $json.audit_form_url || ('https://www.transferai.ci/questionnaire-audit?pack_id=' + encodeURIComponent($json.pack_id || '')) }, null, 2)}` } ] })}}",
         "options": {}
       },
-      "id": "node-014",
+      "id": "8226b98a-9f0a-45fd-ac38-db41e0b46e36",
       "name": "Generate Executive Letter",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2020,
-        100
+        1088,
+        96
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -310,23 +460,22 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.3, messages: [ { role: 'system', content: \\\"Tu rediges pour TransferAI un document commercial cible, a mi-chemin entre mini-catalogue, note d'orientation et support de lecture du deck executive. Le document doit s'appuyer sur le contexte prospect assemble apres analyse et jamais sur un catalogue generique. OBJECTIF: produire un catalogue cible, propre et professionnel qui relie priorites metier, audit, formation ciblee, accompagnement, cas d'usage, gouvernance et premiere feuille de route. POSITIONNEMENT: ce document doit completer le courrier executif, le formulaire d'audit et le deck de presentation; il doit donc reprendre la meme logique de ciblage et de prudence commerciale. FORMAT OBLIGATOIRE: Markdown propre avec les sections visibles suivantes seulement: 1. Titre, 2. Synthese executive, 3. Lecture du contexte du prospect, 4. Priorites metier et irritants visibles, 5. Cas d'usage et quick wins recommandes, 6. Porte d'entree recommandee, 7. Parcours recommande, 8. Formations prioritaires, 9. Livrables attendus, 10. Gouvernance, confidentialite et conduite du changement, 11. Accompagnement post-formation, 12. Accompagnement 90 jours, 13. Proposition immediate. N'ajoute aucune section visible supplementaire apres la proposition immediate. REGLES DE FOND: 1. Maximum 6 formations prioritaires. 2. Regroupe si utile les formations en 3 ou 4 familles metier. 3. Choisis seulement les formations coherentes avec les besoins identifies, les quick wins probables, le ou les cas d'usage recommandes et les populations a former. 4. Pour chaque formation, fournis obligatoirement: intitule, public concerne, objectifs, prerequis, livrables, format/duree si cela peut etre deduit du contexte ou sinon la mention a confirmer, et pourquoi cette formation est utile pour ce prospect. 5. Le document doit clairement montrer comment il s'articule avec le deck de presentation: les cas d'usage, hypothese de ROI, KPI, feuille de route 90 jours et prochaine etape doivent rester coherents. 6. N'ecris jamais comme si TransferAI vendait un catalogue de masse; la logique doit rester ciblee, executive, sectorielle et terrain. 7. Le bloc livrables attendus doit couvrir les livrables globaux du dispositif et pas seulement ceux d'une session. 8. Le bloc gouvernance, confidentialite et conduite du changement est obligatoire si le contexte le justifie; il doit rappeler supervision humaine, cadre de confidentialite, progression par pilote et validation avant extension. 9. Le bloc accompagnement post-formation est obligatoire et doit expliquer clairement le differentiel TransferAI: acces gratuit a la communaute TransferAI pour les personnes et societes formees, afin de partager leurs cas d'entreprise, les problemes rencontres, et recevoir de l'assistance ainsi que des conseils pratiques dans la realisation de leurs taches. 10. Le bloc accompagnement 90 jours est obligatoire et doit expliquer clairement la difference entre une structure de formation classique et TransferAI: une structure de formation transmet un contenu, tandis que TransferAI forme puis accompagne la mise en pratique, la revue des premiers KPI, l'ajustement des usages et la decision d'extension sur 90 jours. 11. Les gains doivent etre presentes comme hypotheses, reperes ou benchmarks a confirmer pendant l'audit. 12. N'invente ni prix, ni details internes, ni cas client non verifies. 13. Utilise les tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d, \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d et \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d au lieu des identifiants reels. 14. Adapte naturellement la posture si l'organisation ressemble a une entreprise privee, une institution publique, une institution financiere ou une organisation internationale. 15. Regles de langue: si le contexte indique le francais, redige exclusivement en francais standard avec accents; si le contexte indique l'anglais, redige exclusivement en anglais professionnel standard; si le contexte indique l'espagnol, redige exclusivement en espagnol professionnel standard avec accents; ne melange jamais les langues. 16. Tout document lie a la formation, au mini-catalogue ou a l'accompagnement doit comporter en cloture un simple bloc de signatures non numerote, sans titre de section, avec exactement: Soulemane Konate — Directeur IA & Innovation, puis Medard Sery — Consultant expert · Data engineering, cloud & plateformes IA. 17. Le document doit etre pense pour un habillage standard utilisant le logo co-brande TransferAi Africa × Nettelecom et le pied de page suivant, sans en faire une section visible: TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | www.transferai.ci | +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan. 18. Le bloc de signatures et le cadre documentaire sont des exigences de production, pas des chapitres du document. TON: sobre, professionnel, credible, oriente decision et execution.\\\" }, { role: 'user', content: `Contexte prospect assemble et sanitise:\\\\n${JSON.stringify({ llm_policy: $json.llm_allowed_payload?.llm_policy || 'deny-by-default', organization_display: $json.llm_generation_payload?.organization_display || '{{ORGANIZATION_NAME}}', decision_maker_display: $json.llm_generation_payload?.decision_maker_display || '{{DECISION_MAKER_NAME}}', website_display: $json.llm_generation_payload?.website_display || '{{WEBSITE}}', organization_type: $json.organization_type || null, sector_guess: $json.sector_guess || null, country: $json.country || null, signal_tags: $json.llm_allowed_payload?.signal_tags || [], roi_clues: $json.roi_clues || [], organization_summary: $json.organization_summary || '', probable_strengths: $json.probable_strengths || [], probable_weaknesses: $json.probable_weaknesses || [], probable_needs: $json.probable_needs || [], entry_point_niche: $json.entry_point_niche || '', confidence_score: $json.confidence_score || null, probable_problems: $json.probable_problems || [], probable_quick_wins: $json.probable_quick_wins || [], recommended_offer: $json.recommended_offer || '', offer_sequence: $json.offer_sequence || [], recommended_training_bundle: $json.recommended_training_bundle || [], recommended_use_case: $json.recommended_use_case || '', best_selling_use_case: $json.best_selling_use_case || '', commercial_priority_tier: $json.commercial_priority_tier || '', recommended_meeting_angle: $json.recommended_meeting_angle || '', roi_hypothesis: $json.roi_hypothesis || [], expected_time_savings: $json.expected_time_savings || [], expected_service_improvements: $json.expected_service_improvements || [], expected_quick_wins: $json.expected_quick_wins || [], delivery_timeline: $json.delivery_timeline || [], public_text_sanitized_excerpt: $json.llm_allowed_payload?.public_text_sanitized_excerpt || '' }, null, 2)}` } ] })}}",
+        "jsonBody": "={{JSON.stringify({ model:'gpt-4.1-mini', temperature: 0.3, messages: [ { role: 'system', content: \"Tu rediges pour TransferAI un document commercial cible, a mi-chemin entre mini-catalogue, note d orientation et support de lecture du deck executive. Le document doit s appuyer sur le contexte prospect assemble apres analyse et jamais sur un catalogue generique. OBJECTIF: produire un catalogue cible, propre et professionnel qui relie priorites metier, audit, formation ciblee, accompagnement, cas d usage, gouvernance et premiere feuille de route. POSITIONNEMENT: ce document doit completer le courrier executif, le formulaire d audit et le deck de presentation; il doit donc reprendre la meme logique de ciblage et de prudence commerciale. FORMAT OBLIGATOIRE: Markdown propre avec les sections visibles suivantes seulement: 1. Titre, 2. Synthese executive, 3. Lecture du contexte du prospect, 4. Priorites metier et irritants visibles, 5. Cas d usage et quick wins recommandes, 6. Porte d entree recommandee, 7. Parcours recommande, 8. Formations prioritaires, 9. Livrables attendus, 10. Gouvernance confidentialite et conduite du changement, 11. Accompagnement post-formation, 12. Accompagnement 90 jours, 13. Proposition immediate. N ajoute aucune section visible supplementaire apres la proposition immediate. REGLES DE FOND: 1. Maximum 6 formations prioritaires. 2. Regroupe si utile les formations en 3 ou 4 familles metier. 3. Choisis seulement les formations coherentes avec les besoins identifies. 4. Pour chaque formation: intitule, public concerne, objectifs, prerequis, livrables, format/duree, utilite pour ce prospect. 5. Articulation avec le deck: cas d usage, ROI, KPI, feuille de route 90 jours coherents. 6. Logique ciblee executive sectorielle et terrain. 7. Livrables globaux du dispositif. 8. Gouvernance: supervision humaine, confidentialite, pilote avant extension. 9. Accompagnement post-formation: acces gratuit communaute TransferAI, partage cas d entreprise, assistance pratique. 10. Accompagnement 90 jours: TransferAI forme ET accompagne mise en pratique, revue KPI, ajustement usages, decision extension. 11. Gains = hypotheses benchmarks a confirmer pendant audit. 12. Pas de prix ni details internes ni cas client non verifies. 13. Tokens \\x7b\\x7bORGANIZATION_NAME\\x7d\\x7d \\x7b\\x7bDECISION_MAKER_NAME\\x7d\\x7d \\x7b\\x7bWEBSITE\\x7d\\x7d. 14. Adapte posture: entreprise privee, institution publique, institution financiere, organisation internationale. 15. Langue: francais sans accents si contexte FR, anglais professionnel si EN, espagnol sans accents si ES, jamais melanger. 16. Signatures en cloture non numerotees: Soulemane Konate - Directeur IA & Innovation, puis Medard Sery - Consultant expert Data engineering cloud & plateformes IA. 17. Pied de page non visible: TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | www.transferai.ci | Assistant IA +225 07 16 57 39 90 | Riviera 3 carrefour Sainte Famille Abidjan. 18. Signatures et cadre documentaire sont des exigences de production pas des chapitres. TON: sobre professionnel credible oriente decision et execution.\" }, { role: 'user', content: \"Contexte prospect assemble et sanitise:\\n\" + JSON.stringify({ llm_policy: ($json.llm_allowed_payload && $json.llm_allowed_payload.llm_policy) || 'deny-by-default', organization_display: ($json.llm_generation_payload && $json.llm_generation_payload.organization_display) || '\\x7b\\x7bORGANIZATION_NAME\\x7d\\x7d', decision_maker_display: ($json.llm_generation_payload && $json.llm_generation_payload.decision_maker_display) || '\\x7b\\x7bDECISION_MAKER_NAME\\x7d\\x7d', website_display: ($json.llm_generation_payload && $json.llm_generation_payload.website_display) || '\\x7b\\x7bWEBSITE\\x7d\\x7d', organization_type: $json.organization_type || null, sector_guess: $json.sector_guess || null, country: $json.country || null, signal_tags: ($json.llm_allowed_payload && $json.llm_allowed_payload.signal_tags) || [], roi_clues: $json.roi_clues || [], organization_summary: $json.organization_summary || '', probable_strengths: $json.probable_strengths || [], probable_weaknesses: $json.probable_weaknesses || [], probable_needs: $json.probable_needs || [], entry_point_niche: $json.entry_point_niche || '', confidence_score: $json.confidence_score || null, probable_problems: $json.probable_problems || [], probable_quick_wins: $json.probable_quick_wins || [], recommended_offer: $json.recommended_offer || '', offer_sequence: $json.offer_sequence || [], recommended_training_bundle: $json.recommended_training_bundle || [], recommended_use_case: $json.recommended_use_case || '', best_selling_use_case: $json.best_selling_use_case || '', commercial_priority_tier: $json.commercial_priority_tier || '', recommended_meeting_angle: $json.recommended_meeting_angle || '', roi_hypothesis: $json.roi_hypothesis || [], expected_time_savings: $json.expected_time_savings || [], expected_service_improvements: $json.expected_service_improvements || [], expected_quick_wins: $json.expected_quick_wins || [], delivery_timeline: $json.delivery_timeline || [], public_text_sanitized_excerpt: ($json.llm_allowed_payload && $json.llm_allowed_payload.public_text_sanitized_excerpt) || '' }, null, 2) } ] })}}",
         "options": {}
       },
-      "id": "node-015",
+      "id": "2a1f1e14-3769-438c-825e-4cb814c9a43c",
       "name": "Generate Tailored Catalogue",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2020,
-        220
+        1088,
+        336
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -342,23 +491,22 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.3, messages: [ { role: 'system', content: \"Crée une forme d'audit courte à envoyer avant un appel de 30 minutes. Elle doit être adaptée au secteur et couvrir: priorités métier, irritants, outils actuels, données, attentes de formation, confidentialité, objectifs à 3 mois, volumes traités, délais actuels et objectifs de performance. Utilise les tokens {{ORGANIZATION_NAME}} et {{WEBSITE}} au lieu des identifiants réels.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, messages: [ { role: 'system', content: \"Cree un formulaire d audit pre-RDV court, propre et tres utile a envoyer avant un rendez-vous expert de 30 minutes avec TransferAI. IDENTITE TRANSFERAI: TransferAI est la branche Intelligence Artificielle de NettelecomCI, entreprise de renom etablie en Cote d Ivoire. Hub IA compose de 13 experts ivoiriens bases en Cote d Ivoire, Royaume-Uni, Etats-Unis et en Inde. Cas d usage impressionnants. Mobilite internationale sans frein. Presence locale forte grace a NettelecomCI en Cote d Ivoire. OBJECTIF: permettre a nos experts de preparer un audit sur mesure avant la rencontre, mieux qualifier les priorites du prospect et maximiser les 30 minutes de rendez-vous. POSITIONNEMENT: ce formulaire complete le courrier executif, le mini-catalogue cible et le brief de presentation; il ne doit donc pas etre generique. Il doit etre adapte au secteur, au type d organisation, aux irritants probables, aux cas d usage envisages, aux besoins de formation et a la logique d accompagnement sur 90 jours. REGLES: 1. Le formulaire doit convenir a une entreprise privee, une institution publique, une institution financiere, une organisation internationale ou une personne physique. 2. Commence par une courte introduction expliquant que ce formulaire est important pour preparer un audit sur mesure avant le rendez-vous. 3. Le ton doit etre sobre, professionnel, rassurant et facile a remplir. 4. Le formulaire doit etre concis: idealement 10 a 14 questions maximum. 5. Les questions doivent couvrir au minimum: priorites metier, irritants, processus cibles, outils actuels, donnees disponibles, confidentialite, populations a former, attentes de formation, attentes d accompagnement, objectifs a 3 mois, volumes ou charge de travail, KPI ou indicateurs de succes, disponibilite pour un pilote, contraintes ou risques internes. 6. Si pertinent, fais apparaitre les sujets suivants: gouvernance, supervision humaine, progression par pilote, qualite de service, standardisation, reporting, relation client, automatisation, base de connaissances, documentation, finance, operations ou support. 7. Fais ressortir ce qui aidera TransferAI a distinguer une simple attente de formation d un vrai besoin d accompagnement sur 90 jours. 8. Le formulaire doit aider a identifier les cas d usage les plus credibles et les quick wins les plus realistes. 9. Les gains et resultats attendus doivent etre demandes comme hypotheses a confirmer, pas comme certitudes. 10. Utilise les tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d, \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d et \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d au lieu des identifiants reels si necessaire. 11. Regles de langue: si le contexte indique le francais, redige exclusivement en francais professionnel sans accents; si le contexte indique l anglais, redige exclusivement en anglais professionnel standard; si le contexte indique l espagnol, redige exclusivement en espagnol professionnel standard sans accents; ne melange jamais les langues. 12. FORMAT DE SORTIE: Markdown propre avec: Titre, courte introduction, sections courtes, questions numerotees, et pour chaque question une indication breve du type de reponse attendu, par exemple texte libre, liste, oui/non, nombre, pourcentage, selection multiple. 13. Termine par une courte note rappelant que les reponses permettront a nos experts de preparer un audit plus utile avant le rendez-vous de 30 minutes. SIGNATURE: Casimir Kassi Beda - Directeur General TransferAI NettelecomCI contact@transferai.ci https://transferai.ci | Marius Ayoro - Directeur Developpement Partenariats marius.ayoro@transferai.ci | Eric N Guessan - Directeur Audit Pedagogie Certification eric.nguessan@transferai.ci. N ajoute aucun commentaire hors du formulaire.\" }, { role: 'user', content: `Contexte prospect:\\n${JSON.stringify({ llm_generation_payload: $json.llm_generation_payload || {}, organization_type: $json.organization_type || null, sector_guess: $json.sector_guess || null, country: $json.country || null, signal_tags: $json.llm_allowed_payload?.signal_tags || [], roi_clues: $json.roi_clues || [], organization_summary: $json.organization_summary || '', probable_strengths: $json.probable_strengths || [], probable_weaknesses: $json.probable_weaknesses || [], probable_needs: $json.probable_needs || [], entry_point_niche: $json.entry_point_niche || '', probable_problems: $json.probable_problems || [], probable_quick_wins: $json.probable_quick_wins || [], recommended_offer: $json.recommended_offer || '', offer_sequence: $json.offer_sequence || [], recommended_training_bundle: $json.recommended_training_bundle || [], recommended_use_case: $json.recommended_use_case || '', best_selling_use_case: $json.best_selling_use_case || '', commercial_priority_tier: $json.commercial_priority_tier || '', recommended_meeting_angle: $json.recommended_meeting_angle || '', roi_hypothesis: $json.roi_hypothesis || [], expected_time_savings: $json.expected_time_savings || [], expected_service_improvements: $json.expected_service_improvements || [], expected_quick_wins: $json.expected_quick_wins || [], delivery_timeline: $json.delivery_timeline || [], sector_pitches: $json.sector_pitches || [], public_text_sanitized_excerpt: $json.llm_allowed_payload?.public_text_sanitized_excerpt || '' }, null, 2)}` } ] })}}",
         "options": {}
       },
-      "id": "node-016",
+      "id": "1342241a-f913-4579-999f-a24b27c575d6",
       "name": "Generate Tailored Audit Form",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2020,
-        340
+        1104,
+        528
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -374,46 +522,173 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \\\"Retourne uniquement un JSON valide avec les clés suivantes: deck_profile, slide_objective, key_messages, sector_pain_points, recommended_case_study, training_focus, roi_hypothesis, delivery_timeline, sector_variant, single_primary_cta. Tu produis le brief d'un deck PowerPoint executive TransferAI taillé sur mesure pour un prospect. IDENTITE TRANSFERAI: TransferAI est la branche IA de NettelecomCI en Côte d'Ivoire. Le hub s'appuie sur 13 experts ivoiriens basés en Côte d'Ivoire, au Royaume-Uni, aux États-Unis et en Inde. OBJECTIF: préparer un deck de 10 slides, propre, décisionnel et orienté DG, sponsor projet, secrétaire général ou décideur institutionnel. REGLE DE ROUTAGE: choisis d'abord deck_profile. Utilise commercial_enterprise pour les entreprises privées et les contextes où le langage dominant doit être business, performance, ROI, gains rapides et pilotage opérationnel. Utilise institutional pour les institutions publiques, structures parapubliques, banques, assurances, institutions financières, ONG, bailleurs, fondations et organisations internationales, avec un langage dominant de mission, qualité de service, gouvernance, conformité, supervision et renforcement des capacités. Le type d'organisation, le secteur, les signaux métier visibles et la nature des irritants doivent guider ce choix. NARRATION OBLIGATOIRE: si deck_profile = commercial_enterprise, suis cette logique: 1. couverture orientée résultat, 2. identité et crédibilité TransferAI, 3. contexte et irritants métier, 4. ROI de référence et KPI à instrumenter, 5. cas d'usage prioritaires, 6. détail des deux premiers cas d'usage, 7. usages de standardisation et qualité de service, 8. parcours 90 jours, 9. offre recommandée en 4 briques, 10. confiance et prochaine étape. Si deck_profile = institutional, suis cette logique: 1. couverture orientée impact et mission, 2. identité et crédibilité TransferAI, 3. contexte institutionnel et enjeux de service, 4. résultats attendus et indicateurs de preuve, 5. cas d'usage prioritaires, 6. gouvernance, confidentialité et supervision, 7. renforcement des capacités et conduite du changement, 8. feuille de route 90 jours, 9. dispositif d'accompagnement recommandé, 10. confiance et prochaine étape. REGLES: chaque slide porte une conclusion claire; aucun catalogue générique; les gains sont formulés comme hypothèses ou benchmarks à confirmer pendant l'audit; les cas d'usage doivent être crédibles, visibles et reliés à des flux métier réels; l'accompagnement post-formation sur 90 jours doit apparaitre clairement dans la narration, au minimum dans le parcours, l'offre recommandee et la prochaine etape; le deck doit faire comprendre la difference entre une structure de formation classique et TransferAI, qui forme puis accompagne la mise en pratique, la gouvernance et la lecture des premiers KPI; un seul CTA principal; utilise les tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d, \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d et \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d au lieu des identifiants réels. REGLES DE LANGUE: si le contexte indique le français, rédige exclusivement en français standard avec accents; si le contexte indique l'anglais, rédige exclusivement en anglais professionnel standard; si le contexte indique l'espagnol, rédige exclusivement en espagnol professionnel standard avec accents; ne mélange jamais les langues; adapte naturellement les titres, CTA, formulations ROI et transitions à la langue du prospect. FORMAT: deck_profile = commercial_enterprise ou institutional; slide_objective = phrase de couverture; key_messages = 4 à 6 messages; sector_pain_points = 3 à 5 irritants; recommended_case_study = 3 à 4 cas d'usage avec logique avant/après; training_focus = 4 à 8 axes de formation réellement utiles pour ce prospect; roi_hypothesis = 3 à 5 hypothèses de gains ou KPI; delivery_timeline = 4 étapes max audit -> premier livrable -> formation/pilote -> mesure/extension; sector_variant = variante métier courte et claire; single_primary_cta = un seul appel à l'action. N'ajoute aucun commentaire hors JSON.\\\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\\\\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Retourne uniquement un JSON valide avec les cles suivantes: deck_profile, slide_objective, key_messages, sector_pain_points, recommended_case_study, training_focus, roi_hypothesis, delivery_timeline, sector_variant, single_primary_cta. Tu produis le brief d un deck PowerPoint executive TransferAI taille sur mesure pour un prospect. IDENTITE TRANSFERAI: TransferAI est la branche IA de NettelecomCI en Cote d Ivoire. Le hub s appuie sur 13 experts ivoiriens bases en Cote d Ivoire, au Royaume-Uni, aux Etats-Unis et en Inde. OBJECTIF: preparer un deck de 10 slides, propre, decisionnel et oriente DG, sponsor projet, secretaire general ou decideur institutionnel. REGLE DE ROUTAGE: choisis d abord deck_profile. Utilise commercial_enterprise pour les entreprises privees et les contextes ou le langage dominant doit etre business, performance, ROI, gains rapides et pilotage operationnel. Utilise institutional pour les institutions publiques, structures parapubliques, banques, assurances, institutions financieres, ONG, bailleurs, fondations et organisations internationales, avec un langage dominant de mission, qualite de service, gouvernance, conformite, supervision et renforcement des capacites. Le type d organisation, le secteur, les signaux metier visibles et la nature des irritants doivent guider ce choix. NARRATION OBLIGATOIRE: si deck_profile = commercial_enterprise, suis cette logique: 1. couverture orientee resultat, 2. identite et credibilite TransferAI, 3. contexte et irritants metier, 4. ROI de reference et KPI a instrumenter, 5. cas d usage prioritaires, 6. detail des deux premiers cas d usage, 7. usages de standardisation et qualite de service, 8. parcours 90 jours, 9. offre recommandee en 4 briques, 10. confiance et prochaine etape. Si deck_profile = institutional, suis cette logique: 1. couverture orientee impact et mission, 2. identite et credibilite TransferAI, 3. contexte institutionnel et enjeux de service, 4. resultats attendus et indicateurs de preuve, 5. cas d usage prioritaires, 6. gouvernance, confidentialite et supervision, 7. renforcement des capacites et conduite du changement, 8. feuille de route 90 jours, 9. dispositif d accompagnement recommande, 10. confiance et prochaine etape. REGLES: chaque slide porte une conclusion claire; aucun catalogue generique; les gains sont formules comme hypotheses ou benchmarks a confirmer pendant l audit; les cas d usage doivent etre credibles, visibles et relies a des flux metier reels; l accompagnement post-formation sur 90 jours doit apparaitre clairement dans la narration, au minimum dans le parcours, l offre recommandee et la prochaine etape; le deck doit faire comprendre la difference entre une structure de formation classique et TransferAI, qui forme puis accompagne la mise en pratique, la gouvernance et la lecture des premiers KPI; un seul CTA principal; utilise les tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d, \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d et \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d au lieu des identifiants reels. REGLES DE LANGUE: si le contexte indique le francais, redige exclusivement en francais professionnel sans accents; si le contexte indique l anglais, redige exclusivement en anglais professionnel standard; si le contexte indique l espagnol, redige exclusivement en espagnol professionnel standard sans accents; ne melange jamais les langues; adapte naturellement les titres, CTA, formulations ROI et transitions a la langue du prospect. FORMAT: deck_profile = commercial_enterprise ou institutional; slide_objective = phrase de couverture; key_messages = 4 a 6 messages; sector_pain_points = 3 a 5 irritants; recommended_case_study = 3 a 4 cas d usage avec logique avant/apres; training_focus = 4 a 8 axes de formation reellement utiles pour ce prospect; roi_hypothesis = 3 a 5 hypotheses de gains ou KPI; delivery_timeline = 4 etapes max audit -> premier livrable -> formation/pilote -> mesure/extension; sector_variant = variante metier courte et claire; single_primary_cta = un seul appel a l action. N ajoute aucun commentaire hors JSON.\" }, { role: 'user', content: `Contexte prospect pseudonymise:\\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}\n",
         "options": {}
       },
-      "id": "node-017",
+      "id": "0bd51c3f-ecef-460b-bdaf-3742501cec5b",
       "name": "Generate Deck Brief",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2020,
-        460
+        1136,
+        688
       ]
     },
     {
       "parameters": {
-        "jsCode": "function textFrom(nodeName) {\n  return $(nodeName).first().json?.choices?.[0]?.message?.content || '';\n}\n\nfunction jsonFrom(nodeName) {\n  const raw = textFrom(nodeName) || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return { parse_error: `${nodeName}: ${e.message}`, raw };\n  }\n}\n\nfunction hydrateString(value, ctx) {\n  return String(value)\n    .replace(/\\{\\{ORGANIZATION_NAME\\}\\}/g, ctx.organization_name || '')\n    .replace(/\\{\\{DECISION_MAKER_NAME\\}\\}/g, ctx.decision_maker_name || '')\n    .replace(/\\{\\{WEBSITE\\}\\}/g, ctx.website || '');\n}\n\nfunction hydrateValue(value, ctx) {\n  if (typeof value === 'string') return hydrateString(value, ctx);\n  if (Array.isArray(value)) return value.map((item) => hydrateValue(item, ctx));\n  if (value && typeof value === 'object') {\n    const out = {};\n    for (const [key, inner] of Object.entries(value)) out[key] = hydrateValue(inner, ctx);\n    return out;\n  }\n  return value;\n}\n\nconst ctx = $('Assemble Prospect Context').first().json;\nconst executiveLetter = hydrateString(textFrom('Generate Executive Letter'), ctx);\nconst tailoredCatalogue = hydrateString(textFrom('Generate Tailored Catalogue'), ctx);\nconst tailoredAuditForm = hydrateString(textFrom('Generate Tailored Audit Form'), ctx);\nconst deckBrief = hydrateValue(jsonFrom('Generate Deck Brief'), ctx);\nconst requiresEmail = Object.prototype.hasOwnProperty.call(ctx, 'target_email');\nconst approvedForSend = Boolean(ctx.organization_name && ctx.entry_point_niche && ctx.recommended_offer && (!requiresEmail || ctx.target_email));\nconst packId = ctx.pack_id || `pack-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;\n\nreturn [{\n  json: {\n    ...ctx,\n    pack_id: packId,\n    executive_letter: executiveLetter,\n    tailored_catalogue: tailoredCatalogue,\n    tailored_audit_form: tailoredAuditForm,\n    deck_brief: deckBrief,\n    approved_for_send: approvedForSend,\n    llm_redaction_summary: ctx.llm_redaction_summary,\n    llm_allowed_payload: ctx.llm_allowed_payload,\n    llm_generation_payload: ctx.llm_generation_payload\n  }\n}];"
+        "jsCode": "// FIX: JSON.parse/stringify pour éviter le bug Proxy n8n\nfunction textFrom(nodeName) {\n  try {\n    var n = $(nodeName).first().json;\n    return (n && n.choices && n.choices[0] && n.choices[0].message && n.choices[0].message.content) || '';\n  } catch (e) {\n    return '';\n  }\n}\n\nfunction jsonFrom(nodeName) {\n  var raw = textFrom(nodeName) || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return { parse_error: nodeName + ': ' + e.message, raw: raw };\n  }\n}\n\nfunction hydrateString(value, ctx) {\n  return String(value)\n    .replace(/\\{\\{ORGANIZATION_NAME\\}\\}/g, ctx.organization_name || '')\n    .replace(/\\{\\{DECISION_MAKER_NAME\\}\\}/g, ctx.decision_maker_name || '')\n    .replace(/\\{\\{WEBSITE\\}\\}/g, ctx.website || '');\n}\n\nfunction hydrateValue(value, ctx) {\n  if (typeof value === 'string') return hydrateString(value, ctx);\n  if (Array.isArray(value)) {\n    return value.map(function (item) {\n      return hydrateValue(item, ctx);\n    });\n  }\n  if (value && typeof value === 'object') {\n    var out = {};\n    var keys = Object.keys(value);\n    for (var i = 0; i < keys.length; i++) {\n      out[keys[i]] = hydrateValue(value[keys[i]], ctx);\n    }\n    return out;\n  }\n  return value;\n}\n\nvar ctx = JSON.parse(JSON.stringify($('Assemble Prospect Context').first().json));\n\nvar executiveLetter = hydrateString(textFrom('Generate Executive Letter'), ctx);\nvar tailoredCatalogue = hydrateString(textFrom('Generate Tailored Catalogue'), ctx);\nvar tailoredAuditForm = hydrateString(textFrom('Generate Tailored Audit Form'), ctx);\nvar deckBrief = hydrateValue(jsonFrom('Generate Deck Brief'), ctx);\n\nvar requiresEmail = Object.prototype.hasOwnProperty.call(ctx, 'target_email');\nvar approvedForSend = !!(\n  ctx.organization_name &&\n  ctx.entry_point_niche &&\n  ctx.recommended_offer &&\n  (!requiresEmail || ctx.target_email)\n);\n\nvar packId =\n  ctx.pack_id ||\n  ('pack-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10));\n\nreturn [{\n  json: Object.assign({}, ctx, {\n    pack_id: packId,\n    generated_at: new Date().toISOString(),\n    source_backend: ctx.source_backend || 'manual',\n    source_label: ctx.source_label || '',\n    raw_source_id: ctx.raw_source_id || '',\n    executive_letter: executiveLetter,\n    executive_letter_html: executiveLetter.replace(/\\n/g, '<br>'),\n    tailored_catalogue: tailoredCatalogue,\n    tailored_audit_form: tailoredAuditForm,\n    deck_brief: deckBrief,\n    approved_for_send: approvedForSend,\n    llm_redaction_summary: ctx.llm_redaction_summary,\n    llm_allowed_payload: ctx.llm_allowed_payload,\n    llm_generation_payload: ctx.llm_generation_payload\n  })\n}];"
       },
-      "id": "node-018",
+      "id": "1e9af5af-f4f3-42e5-9972-9aac910e3137",
       "name": "Assemble Prospect Pack",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2280,
-        320
+        1424,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var src = JSON.parse(JSON.stringify($('Assemble Prospect Pack').first().json));\n\nfunction safeString(value) {\n  return value === undefined || value === null ? '' : String(value);\n}\n\nfunction safeList(value) {\n  return Array.isArray(value) ? value : [];\n}\n\nfunction safeFileStem(value) {\n  return safeString(value || 'Prospect')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .replace(/[^a-zA-Z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '')\n    .slice(0, 120) || 'Prospect';\n}\n\nvar org = safeFileStem(src.organization_name || 'Prospect');\nvar packId = safeString(src.pack_id);\nvar calendlyUrl = safeString(src.booking_link_30min || src.booking_link_45min || 'https://calendly.com/contact-transferai/30min');\nvar auditFormUrl = safeString(src.audit_form_url || ('https://www.transferai.ci/questionnaire-audit?pack_id=' + encodeURIComponent(packId)));\n\nreturn [{\n  json: {\n    catalogue_render_payload: {\n      pack_id: packId,\n      organization_name: safeString(src.organization_name),\n      decision_maker_name: safeString(src.decision_maker_name),\n      website: safeString(src.website),\n      country: safeString(src.country),\n      prospect_language: safeString(src.prospect_language || 'auto'),\n      sector_guess: safeString(src.sector_guess),\n      organization_type: safeString(src.organization_type),\n      organization_summary: safeString(src.organization_summary),\n      entry_point_niche: safeString(src.entry_point_niche),\n      recommended_offer: safeString(src.recommended_offer),\n      recommended_use_case: safeString(src.recommended_use_case),\n      best_selling_use_case: safeString(src.best_selling_use_case),\n      single_primary_cta: safeString(src.single_primary_cta),\n      commercial_priority_tier: safeString(src.commercial_priority_tier),\n      catalogue_domain_slug: safeString(src.catalogue_domain_slug || src.sector_variant || src.sector_guess),\n      probable_needs: safeList(src.probable_needs),\n      probable_problems: safeList(src.probable_problems),\n      probable_quick_wins: safeList(src.probable_quick_wins),\n      roi_hypothesis: safeList(src.roi_hypothesis),\n      expected_quick_wins: safeList(src.expected_quick_wins),\n      expected_time_savings: safeList(src.expected_time_savings),\n      expected_service_improvements: safeList(src.expected_service_improvements),\n      delivery_timeline: safeList(src.delivery_timeline),\n      recommended_training_bundle: safeList(src.recommended_training_bundle),\n      signal_tags: safeList((src.llm_allowed_payload && src.llm_allowed_payload.signal_tags) || src.signal_tags),\n      roi_clues: safeList(src.roi_clues),\n      sector_pitches: safeList(src.sector_pitches),\n      public_text_sanitized_excerpt: safeString(src.llm_allowed_payload && src.llm_allowed_payload.public_text_sanitized_excerpt),\n      tailored_catalogue_markdown: safeString(src.tailored_catalogue),\n      audit_form_url: auditFormUrl,\n      calendly_url: calendlyUrl,\n      storage: {\n        bucket: 'prospecting-artifacts',\n        base_path: 'prospecting-packs/' + packId,\n        pdf_filename: 'Mini_Catalogue_TransferAI_' + org + '.pdf',\n        docx_filename: 'Mini_Catalogue_TransferAI_' + org + '.docx'\n      }\n    }\n  }\n}];"
+      },
+      "id": "efb51b5e-1b7a-42c7-b560-c94aac69d900",
+      "name": "Build Catalogue Render Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        384
       ]
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs'}}",
-        "authentication": "none",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/functions/v1/catalogue-renderer",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-admin-token",
+              "value": "={{$env.CONTENT_ADMIN_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json.catalogue_render_payload)}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a197c0e6-b753-4be0-a2c0-b18950b89050",
+      "name": "Render Catalogue Artifact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1840,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var pack = JSON.parse(JSON.stringify($('Assemble Prospect Pack').first().json));\nvar render = JSON.parse(JSON.stringify($input.first().json || {}));\n\nfunction normalizeAttachment(att) {\n  if (!att || !att.filename) return null;\n  var normalized = { filename: String(att.filename) };\n  if (att.content) normalized.content = String(att.content);\n  if (att.path) normalized.path = String(att.path);\n  if (!normalized.content && !normalized.path) return null;\n  return normalized;\n}\n\nvar attachments = Array.isArray(render.mail_attachments)\n  ? render.mail_attachments.map(normalizeAttachment).filter(Boolean)\n  : [];\n\nvar renderErrors = pack.render_errors || {};\nif (render.error) {\n  renderErrors.catalogue = {\n    error: render.error,\n    detail: render.detail || null\n  };\n}\n\nreturn [{\n  json: Object.assign({}, pack, {\n    catalogue_artifact: render.catalogue_artifact || null,\n    mail_attachments: attachments,\n    attachments_count: attachments.length,\n    render_diagnostics: Object.assign({}, pack.render_diagnostics || {}, {\n      catalogue: render.diagnostics || null\n    }),\n    render_errors: renderErrors\n  })\n}];"
+      },
+      "id": "d4e264ff-0cd9-4d7e-bfff-a926c3093f4c",
+      "name": "Merge Catalogue Artifact",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var src = JSON.parse(JSON.stringify($('Merge Catalogue Artifact').first().json));\n\nfunction safeString(value) {\n  return value === undefined || value === null ? '' : String(value);\n}\n\nfunction safeList(value) {\n  return Array.isArray(value) ? value : [];\n}\n\nfunction safeFileStem(value) {\n  return safeString(value || 'Prospect')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .replace(/[^a-zA-Z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '')\n    .slice(0, 120) || 'Prospect';\n}\n\nvar org = safeFileStem(src.organization_name || 'Prospect');\nvar packId = safeString(src.pack_id);\nvar calendlyUrl = safeString(src.booking_link_30min || src.booking_link_45min || 'https://calendly.com/contact-transferai/30min');\nvar auditFormUrl = safeString(src.audit_form_url || 'https://audit.transferai.ci/');\n\nreturn [{\n  json: {\n    deck_render_payload: {\n      pack_id: packId,\n      organization_name: safeString(src.organization_name),\n      decision_maker_name: safeString(src.decision_maker_name),\n      website: safeString(src.website),\n      country: safeString(src.country),\n      prospect_language: safeString(src.prospect_language || 'auto'),\n      sector_guess: safeString(src.sector_guess),\n      organization_type: safeString(src.organization_type),\n      organization_summary: safeString(src.organization_summary),\n      entry_point_niche: safeString(src.entry_point_niche),\n      recommended_offer: safeString(src.recommended_offer),\n      recommended_use_case: safeString(src.recommended_use_case),\n      best_selling_use_case: safeString(src.best_selling_use_case),\n      single_primary_cta: safeString(src.single_primary_cta),\n      commercial_priority_tier: safeString(src.commercial_priority_tier),\n      signal_tags: safeList((src.llm_allowed_payload && src.llm_allowed_payload.signal_tags) || src.signal_tags),\n      roi_clues: safeList(src.roi_clues),\n      probable_needs: safeList(src.probable_needs),\n      probable_problems: safeList(src.probable_problems),\n      probable_quick_wins: safeList(src.probable_quick_wins),\n      roi_hypothesis: safeList(src.roi_hypothesis),\n      delivery_timeline: safeList(src.delivery_timeline),\n      recommended_training_bundle: safeList(src.recommended_training_bundle),\n      expected_time_savings: safeList(src.expected_time_savings),\n      expected_service_improvements: safeList(src.expected_service_improvements),\n      expected_quick_wins: safeList(src.expected_quick_wins),\n      deck_brief: src.deck_brief || {},\n      audit_form_url: auditFormUrl,\n      calendly_url: calendlyUrl,\n      storage: {\n        bucket: 'prospecting-artifacts',\n        base_path: 'prospecting-packs/' + packId,\n        pptx_filename: 'Deck_TransferAI_' + org + '.pptx'\n      }\n    }\n  }\n}];"
+      },
+      "id": "65dc4de6-cfe4-4754-a73c-959cc8478698",
+      "name": "Build Deck Render Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/functions/v1/deck-renderer",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-admin-token",
+              "value": "={{$env.CONTENT_ADMIN_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json.deck_render_payload)}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "1cd6a671-9d7c-48d7-98c9-bcbe3f2ef8a3",
+      "name": "Render Deck Artifact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2560,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var pack = JSON.parse(JSON.stringify($('Merge Catalogue Artifact').first().json));\nvar render = JSON.parse(JSON.stringify($('Render Deck Artifact').first().json || {}));\n\nfunction normalizeAttachment(att) {\n  if (!att || !att.filename) return null;\n  var normalized = { filename: String(att.filename) };\n  if (att.content) normalized.content = String(att.content);\n  if (att.path) normalized.path = String(att.path);\n  if (!normalized.content && !normalized.path) return null;\n  return normalized;\n}\n\nfunction dedupeAttachments(list) {\n  var seen = {};\n  var deduped = [];\n  for (var i = 0; i < list.length; i++) {\n    var att = list[i];\n    var key = [att.filename || '', att.path || '', att.content || ''].join('|');\n    if (seen[key]) continue;\n    seen[key] = true;\n    deduped.push(att);\n  }\n  return deduped;\n}\n\nvar existingAttachments = Array.isArray(pack.mail_attachments)\n  ? pack.mail_attachments.map(normalizeAttachment).filter(Boolean)\n  : [];\nvar deckAttachments = Array.isArray(render.mail_attachments)\n  ? render.mail_attachments.map(normalizeAttachment).filter(Boolean)\n  : [];\nvar attachments = dedupeAttachments(existingAttachments.concat(deckAttachments));\n\nvar renderErrors = pack.render_errors || {};\nif (render.error) {\n  renderErrors.deck = {\n    error: render.error,\n    detail: render.detail || null\n  };\n}\n\nreturn [{\n  json: Object.assign({}, pack, {\n    deck_artifact: render.deck_artifact || null,\n    mail_attachments: attachments,\n    attachments_count: attachments.length,\n    render_diagnostics: Object.assign({}, pack.render_diagnostics || {}, {\n      deck: render.diagnostics || null\n    }),\n    render_errors: renderErrors\n  })\n}];"
+      },
+      "id": "c5c22c0c-7d3e-423b-b95d-f04b2d7c86f3",
+      "name": "Merge Deck Artifact",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2800,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/ai_prospecting_packs",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -427,42 +702,41 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ pack_id: $json.pack_id, prospect_id: $json.prospect_id || null, organization_name: $json.organization_name, decision_maker_name: $json.decision_maker_name, target_email: $json.target_email, website: $json.website, status: 'pending_approval', payload: $json, llm_redaction_summary: $json.llm_redaction_summary || null, reviewer_email: null, error_reason: null, created_at: new Date().toISOString() })}}",
+        "jsonBody": "={{JSON.stringify({\n  pack_id: $json.pack_id,\n  prospect_id: $json.prospect_id || null,\n  organization_name: $json.organization_name || null,\n  target_email: $json.target_email || null,\n  status: 'pending_approval',\n  payload: $json,\n  llm_redaction_summary: $json.llm_redaction_summary || null\n})}}",
         "options": {}
       },
-      "id": "node-019",
+      "id": "7e275316-c7ba-431b-a297-be8116c503a0",
       "name": "Store Pack In Supabase",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2520,
-        320
+        3040,
+        528
       ]
     },
     {
       "parameters": {
-        "jsCode": "const pack = $('Assemble Prospect Pack').first().json;\nconst baseUrl = $env.N8N_BASE_URL || 'https://your-n8n.example.com';\nconst approveUrl = `${baseUrl}/webhook/approve-prospect-pack-v3?pack_id=${encodeURIComponent(pack.pack_id)}&decision=approved`;\nconst rejectUrl = `${baseUrl}/webhook/approve-prospect-pack-v3?pack_id=${encodeURIComponent(pack.pack_id)}&decision=rejected`;\nconst summary = [`Organisation: ${pack.organization_name}`, `Cas d'usage: ${pack.best_selling_use_case || pack.recommended_use_case || 'à confirmer'}`, `Tier: ${pack.commercial_priority_tier || 'n/a'}`, `CTA: ${pack.single_primary_cta}`].join('<br>');\nreturn [{ json: { ...pack, approve_url: approveUrl, reject_url: rejectUrl, internal_review_html: `<p>Un nouveau prospect pack est prêt à valider.</p><p>${summary}</p><p><a href=\"${approveUrl}\">Approuver et envoyer</a></p><p><a href=\"${rejectUrl}\">Rejeter</a></p>` } }];"
+        "jsCode": "var pack = JSON.parse(JSON.stringify($('Store Pack In Supabase').first().json));\n\nfunction safe(value, fallback) {\n  return value === undefined || value === null || value === '' ? (fallback || '') : String(value);\n}\n\nfunction escapeHtml(value) {\n  return String(value || '')\n    .replace(/&/g, '&amp;')\n    .replace(/</g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/\"/g, '&quot;')\n    .replace(/'/g, '&#39;');\n}\n\nvar baseUrl = 'https://n8n-pxlk.srv1480638.hstgr.cloud';\n\nvar approveUrl =\n  baseUrl +\n  '/webhook/approve-prospect-pack-v3?pack_id=' +\n  encodeURIComponent(pack.pack_id) +\n  '&decision=approved';\n\nvar rejectUrl =\n  baseUrl +\n  '/webhook/approve-prospect-pack-v3?pack_id=' +\n  encodeURIComponent(pack.pack_id) +\n  '&decision=rejected';\n\nvar subjectPreview =\n  \"Proposition d'audit gratuit, d'accompagnement et de formation\";\n\nvar summary = [\n  'Organisation: ' + escapeHtml(safe(pack.organization_name, 'a confirmer')),\n  'Email cible: ' + escapeHtml(safe(pack.target_email, 'a confirmer')),\n  \"Cas d'usage: \" + escapeHtml(safe((pack.payload && (pack.payload.best_selling_use_case || pack.payload.recommended_use_case)) || '', 'a confirmer')),\n  'Tier: ' + escapeHtml(safe(pack.payload && pack.payload.commercial_priority_tier, 'n/a')),\n  'CTA: ' + escapeHtml(safe(pack.payload && pack.payload.single_primary_cta, 'a confirmer')),\n  'Pack ID: ' + escapeHtml(safe(pack.pack_id, 'n/a')),\n  'Sujet prevu: ' + escapeHtml(subjectPreview)\n].join('<br>');\n\nreturn [{\n  json: Object.assign({}, pack, {\n    approve_url: approveUrl,\n    reject_url: rejectUrl,\n    subject_preview: subjectPreview,\n    internal_review_html:\n      '<p>Un nouveau prospect pack est pret a valider.</p>' +\n      '<p>' + summary + '</p>' +\n      '<p><a href=\"' + approveUrl + '\" style=\"color:green;font-weight:bold\">Approuver et envoyer</a></p>' +\n      '<p><a href=\"' + rejectUrl + '\" style=\"color:red;font-weight:bold\">Rejeter</a></p>'\n  })\n}];"
       },
-      "id": "node-020",
+      "id": "1b85f7a0-08b3-4b02-ad04-f70a10ba74a0",
       "name": "Build Approval Email",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2760,
-        320
+        3280,
+        528
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
             },
             {
               "name": "Content-Type",
@@ -472,87 +746,112 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'prospection@transferai.africa', to: [$env.INTERNAL_REVIEW_EMAIL || 'review@example.com'], subject: `Validation requise - Prospect pack ${$json.organization_name}`, html: $json.internal_review_html })}}",
+        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'onboarding@resend.dev', to: [$env.INTERNAL_REVIEW_EMAIL || 'marius.ayoro70@gmail.com'], subject: 'Validation requise - Prospect pack ' + ($json.organization_name || 'Organisation a confirmer'), html: $json.internal_review_html || '<p>Aucun contenu de validation disponible.</p>' })}}",
         "options": {}
       },
-      "id": "node-021",
+      "id": "790ed1f0-4703-4fc6-92fb-909cccabd52e",
       "name": "Send Internal Approval Email",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3000,
-        320
+        3520,
+        528
       ]
     },
     {
       "parameters": {
-        "httpMethod": "GET",
         "path": "approve-prospect-pack-v3",
-        "responseMode": "lastNode",
-        "options": {}
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
       },
-      "id": "node-022",
+      "id": "83777881-0aea-4918-a1a6-859204778341",
       "name": "Approval Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        220,
-        780
-      ]
+        -1360,
+        1088
+      ],
+      "webhookId": "1c2af234-7498-4c9d-9ccb-1dfe5de6462b"
     },
     {
       "parameters": {
-        "jsCode": "const q = $json.query || {};\nreturn [{ json: { pack_id: (q.pack_id || '').toString(), decision: (q.decision || '').toString().toLowerCase() } }];"
+        "jsCode": "const raw = $input.first().json;\nconst q = (raw.query && raw.query.pack_id) ? raw.query : raw;\nconst isApproved = q.decision === 'approved' || q.approved === 'true' || q.approved === true;\nreturn [{ json: {\n  approved:          isApproved,\n  decision:          isApproved ? 'approved' : 'rejected',\n  prospect_id:       q.prospect_id        || '',\n  pack_id:           q.pack_id            || '',\n  organization_name: q.organization_name  || '',\n  target_email:      q.target_email       || ''\n} }];"
       },
-      "id": "node-023",
+      "id": "abd02544-4d73-42eb-9535-efb6de995c37",
       "name": "Parse Approval Query",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        480,
-        780
+        -1136,
+        1088
       ]
     },
     {
       "parameters": {
-        "method": "GET",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?select=*&pack_id=eq.' + encodeURIComponent($json.pack_id) + '&limit=1'}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/ai_prospecting_packs?pack_id=eq.' + $json.pack_id + '&order=created_at.desc&limit=1'}}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "BearereyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
             }
           ]
         },
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
       },
-      "id": "node-024",
+      "id": "5146d822-4d60-4b59-be61-1a57003d1718",
       "name": "Get Pack From Supabase",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        740,
-        780
+        -912,
+        1088
       ]
     },
     {
       "parameters": {
-        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst payload = row.payload || {};\nconst decision = $('Parse Approval Query').first().json.decision;\nconst executiveLetterHtml = String(payload.executive_letter || '').replace(/\\n/g, '<br>');\nreturn [{ json: { row_id: row.id || null, pack_id: row.pack_id || payload.pack_id, prospect_id: row.prospect_id || payload.prospect_id || null, decision, target_email: row.target_email || payload.target_email, organization_name: row.organization_name || payload.organization_name, website: row.website || payload.website || '', decision_maker_name: row.decision_maker_name || payload.decision_maker_name || '', source_backend: payload.source_backend || 'supabase', source_label: payload.source_label || '', raw_source_id: payload.raw_source_id || null, executive_letter: payload.executive_letter || '', executive_letter_html: executiveLetterHtml, payload } }];"
+        "jsCode": "const rows = Array.isArray($json)\n  ? $json\n  : Array.isArray($json.data)\n  ? $json.data\n  : Array.isArray($json.body)\n  ? $json.body\n  : [];\n\nconst row = rows[0] || {};\nconst payload = row.payload || {};\nconst decision = $('Parse Approval Query').first().json.decision;\nconst executiveLetterHtml = String(payload.executive_letter || '').replace(/\\n/g, '<br>');\n\nreturn [{\n  json: {\n    row_id: row.id || null,\n    pack_id: row.pack_id || payload.pack_id,\n    prospect_id: row.prospect_id || payload.prospect_id || null,\n    decision: decision,\n    target_email: row.target_email || payload.target_email || '',\n    organization_name: row.organization_name || payload.organization_name || '',\n    website: row.website || payload.website || '',\n    decision_maker_name: row.decision_maker_name || payload.decision_maker_name || '',\n    source_backend: payload.source_backend || 'supabase',\n    source_label: payload.source_label || '',\n    raw_source_id: payload.raw_source_id || null,\n    executive_letter: payload.executive_letter || '',\n    executive_letter_html: executiveLetterHtml,\n    tailored_catalogue: payload.tailored_catalogue || '',\n    tailored_audit_form: payload.tailored_audit_form || '',\n    deck_brief: payload.deck_brief || {},\n    payload: payload\n  }\n}];"
       },
-      "id": "node-025",
+      "id": "c38a0ce1-e6fd-4a89-80c5-b213039b1b25",
       "name": "Extract Pack Payload",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        980,
-        780
+        -688,
+        1088
       ]
     },
     {
@@ -561,32 +860,31 @@
           "string": [
             {
               "value1": "={{$json.decision}}",
-              "operation": "equal",
               "value2": "approved"
             }
           ]
         }
       },
-      "id": "node-026",
+      "id": "53bc9c20-f0b8-4e5f-82c0-96bed2d17d99",
       "name": "If Approved",
       "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
+      "typeVersion": 1,
       "position": [
-        1220,
-        780
+        -240,
+        1104
       ]
     },
     {
       "parameters": {
-        "jsCode": "const canSend = Boolean($json.target_email && $json.executive_letter && $json.executive_letter.trim().length > 0);\nconst reason = canSend ? null : 'Email cible ou contenu du courrier manquant.';\nreturn [{ json: { ...$json, can_send: canSend, send_failure_reason: reason } }];"
+        "jsCode": "var src = JSON.parse(JSON.stringify($('Extract Pack Payload').first().json));\n\nfunction safeFileStem(value) {\n  return String(value || 'Prospect')\n    .normalize('NFD')\n    .replace(/[̀-ͯ]/g, '')\n    .replace(/[^a-zA-Z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '');\n}\n\nfunction normalizeAttachment(att) {\n  if (!att || !att.filename) return null;\n\n  var normalized = {\n    filename: String(att.filename)\n  };\n\n  if (att.content) {\n    normalized.content = String(att.content);\n  }\n\n  if (att.path) {\n    normalized.path = String(att.path);\n  }\n\n  if (!normalized.content && !normalized.path) {\n    return null;\n  }\n\n  return normalized;\n}\n\nfunction dedupeAttachments(list) {\n  var seen = {};\n  var deduped = [];\n  for (var i = 0; i < list.length; i++) {\n    var att = list[i];\n    var key = [att.filename || '', att.path || '', att.content || ''].join('|');\n    if (seen[key]) continue;\n    seen[key] = true;\n    deduped.push(att);\n  }\n  return deduped;\n}\n\nfunction extractPackIdFromUrl(url) {\n  var value = String(url || '');\n  var match = value.match(/[?&]pack_id=([^&#]+)/i);\n  return match ? decodeURIComponent(match[1]) : '';\n}\n\nvar org = safeFileStem(src.organization_name || 'Prospect');\nvar attachments = [];\nvar payload = src.payload || {};\n\nvar providedAttachments = Array.isArray(payload.mail_attachments)\n  ? payload.mail_attachments.map(normalizeAttachment).filter(Boolean)\n  : [];\n\nif (providedAttachments.length > 0) {\n  attachments = providedAttachments;\n} else {\n  var rebuilt = [];\n\n  if (payload.catalogue_artifact && payload.catalogue_artifact.pdf_url) {\n    rebuilt.push({\n      filename: String(\n        payload.catalogue_artifact.filename_pdf ||\n        ('Mini_Catalogue_TransferAI_' + org + '.pdf')\n      ),\n      path: String(payload.catalogue_artifact.pdf_url)\n    });\n  }\n\n  if (payload.deck_artifact && payload.deck_artifact.pptx_url) {\n    rebuilt.push({\n      filename: String(\n        payload.deck_artifact.filename_pptx ||\n        ('Deck_TransferAI_' + org + '.pptx')\n      ),\n      path: String(payload.deck_artifact.pptx_url)\n    });\n  }\n\n  attachments = rebuilt.map(normalizeAttachment).filter(Boolean);\n}\n\nattachments = dedupeAttachments(attachments);\n\nvar hasPdf = attachments.some(function (att) {\n  return /\\.pdf$/i.test(String(att.filename || ''));\n});\n\nvar hasPptx = attachments.some(function (att) {\n  return /\\.pptx$/i.test(String(att.filename || ''));\n});\n\nvar packId =\n  src.pack_id ||\n  payload.pack_id ||\n  extractPackIdFromUrl(src.audit_form_url) ||\n  extractPackIdFromUrl(payload.audit_form_url) ||\n  '';\n\nvar auditFormUrl = packId\n  ? 'https://www.transferai.ci/questionnaire-audit?pack_id=' + encodeURIComponent(packId)\n  : '';\n\nvar canSend = Boolean(\n  src.target_email &&\n  src.executive_letter &&\n  src.executive_letter.trim().length > 0 &&\n  attachments.length >= 2 &&\n  hasPdf &&\n  hasPptx &&\n  packId\n);\n\nvar reason = canSend\n  ? null\n  : 'Email cible, courrier, pack_id ou artefacts requis manquants. Attendus: 1 catalogue PDF et 1 deck PPTX.';\n\nvar auditBlock = auditFormUrl\n  ? \"<br><br><p><strong>Formulaire d'audit pre-RDV :</strong> <a href=\\\"\" + auditFormUrl + \"\\\">\" + auditFormUrl + \"</a></p><p>Merci de le remplir avant le rendez-vous afin que nos experts preparent un audit sur mesure.</p>\"\n  : \"\";\n\nvar externalEmailHtml = String(\n  src.executive_letter_html || String(src.executive_letter || '').replace(/\\n/g, '<br>')\n) + auditBlock;\n\nreturn [{\n  json: {\n    ...src,\n    pack_id: packId,\n    audit_form_url: auditFormUrl,\n    attachments: attachments,\n    attachments_count: attachments.length,\n    can_send: canSend,\n    send_failure_reason: reason,\n    external_email_html: externalEmailHtml\n  }\n}];"
       },
-      "id": "node-027",
+      "id": "0ccc47fb-7b36-4190-abc7-7d4d6a4d3f7d",
       "name": "Build Send Context",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1460,
-        700
+        192,
+        1056
       ]
     },
     {
@@ -600,62 +898,70 @@
           ]
         }
       },
-      "id": "node-028",
+      "id": "b4494038-6535-442e-8e23-205dac1941ff",
       "name": "If Ready To Send",
       "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
+      "typeVersion": 1,
       "position": [
-        1700,
-        700
+        528,
+        1024
       ]
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
               "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
             }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{JSON.stringify({ status: 'approved', approved_at: new Date().toISOString() })}}",
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
       },
-      "id": "node-029",
+      "id": "a40b0c0b-17a1-421d-ac7d-953dc90b74dd",
       "name": "Mark Pack Approved",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1940,
-        620
+        1024,
+        832
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
             },
             {
               "name": "Content-Type",
@@ -665,46 +971,51 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'prospection@transferai.africa', to: [$json.target_email], subject: 'Proposition d\\'audit gratuit, d\\'accompagnement et de formation', html: $json.executive_letter_html })}}",
-        "options": {}
+        "jsonBody": "={{ (() => {\n  const ctx = $('Build Send Context').first().json || {};\n\n  const organizationName = ctx.organization_name || 'Votre organisation';\n  const targetEmail = ctx.target_email || '';\n  const auditFormUrl = ctx.audit_form_url || '';\n  const executiveLetterHtml =\n    ctx.executive_letter_html ||\n    String(ctx.executive_letter || '').replace(/\\n/g, '<br>');\n  const bookingLink =\n    ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';\n\n  return JSON.stringify({\n    from: 'TransferAI <contact@transferai.ci>',\n    to: [targetEmail],\n    subject: \"Proposition d'audit gratuit, d'accompagnement et de formation\",\n    html:\n      '<p>Objet : Optimisation du reporting financier et mont\\u00e9e en comp\\u00e9tences par IA pour ' + organizationName + '</p>' +\n      '<p>Madame, Monsieur,</p>' +\n      '<p>' + executiveLetterHtml + '</p>' +\n      '<p>Nous vous invitons \\u00e0 compl\\u00e9ter le formulaire d\\'audit pr\\u00e9alable ici : ' +\n      '<a href=\"' + auditFormUrl + '\">' + auditFormUrl + '</a></p>' +\n      '<p>Vous pouvez aussi r\\u00e9server votre rendez-vous ici : ' +\n      '<a href=\"' + bookingLink + '\">' + bookingLink + '</a></p>' +\n      '<p>Cordialement,<br>TransferAI</p>',\n    attachments: ctx.attachments || []\n  });\n})() }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
       },
-      "id": "node-030",
+      "id": "d5d6b80e-248d-4729-9259-d4cf4b0f52ac",
       "name": "Send External Prospect Email",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2180,
-        620
+        1264,
+        832
       ]
     },
     {
       "parameters": {
-        "jsCode": "const resend = $json || {};\nconst ctx = $('Build Send Context').first().json;\nreturn [{ json: { ...ctx, resend_response: resend, resend_id: resend.id || resend.data?.id || null, sent_at: new Date().toISOString() } }];"
+        "jsCode": "var resend = JSON.parse(JSON.stringify($input.first().json || {}));\nvar ctx = JSON.parse(JSON.stringify($('Build Send Context').first().json));\nvar resendId = resend.id || (resend.data && resend.data.id) || null;\nreturn [{ json: Object.assign({}, ctx, {\n  resend_response: resend,\n  resend_id: resendId,\n  sent_at: new Date().toISOString()\n}) }];"
       },
-      "id": "node-031",
+      "id": "9c684ba3-219c-4f42-aac7-f152666fa674",
       "name": "Parse Send Result",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2420,
-        620
+        1504,
+        832
       ]
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -714,65 +1025,79 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ status: 'sent', approved_at: new Date().toISOString(), sent_at: $json.sent_at, resend_message_id: $json.resend_id })}}",
-        "options": {}
+        "jsonBody": "={{JSON.stringify({\n  status: 'sent',\n  sent_at: $json.sent_at,\n  updated_at: new Date().toISOString(),\n  resend_message_id: $json.resend_id\n})}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
       },
-      "id": "node-032",
+      "id": "7b1ec735-e021-4e73-9d61-5532c557677a",
       "name": "Mark Pack Sent",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2660,
-        620
+        1744,
+        832
       ]
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/outreach_attempts'}}",
-        "authentication": "none",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
               "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
             }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ organization_id: null, person_id: null, prospect_id: $json.prospect_id || null, pack_id: $json.pack_id || null, target_email: $json.target_email || null, organization_name: $json.organization_name || null, channel: 'email', message_variant: 'executive_multi_prospect_model_v3_crm_ready', sent_at: $json.sent_at || new Date().toISOString(), delivery_status: 'submitted', response_status: 'pending', stop_reason: null, metadata: { source_backend: $json.source_backend || null, source_label: $json.source_label || null, raw_source_id: $json.raw_source_id || null, website: $json.website || null, decision_maker_name: $json.decision_maker_name || null, commercial_priority_tier: $json.payload?.commercial_priority_tier || null, best_selling_use_case: $json.payload?.best_selling_use_case || null } })}}",
-        "options": {}
+        "jsonBody": "={{JSON.stringify({\n  prospect_id: $json.prospect_id || null,\n  pack_id: $json.pack_id || null,\n  channel: 'email',\n  sent_at: $json.sent_at || new Date().toISOString(),\n  status: 'sent'\n})}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
       },
-      "id": "node-033",
+      "id": "3ad53d4f-96c4-47a1-895e-b1b9fba691b8",
       "name": "Log Outreach Attempt",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2900,
-        620
+        1984,
+        832
       ]
     },
     {
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
             },
             {
               "name": "Content-Type",
@@ -782,48 +1107,38 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'prospection@transferai.africa', to: [$env.INTERNAL_REVIEW_EMAIL || 'review@example.com'], subject: `Pack envoyé - ${$json.organization_name}`, html: `<p>Le pack ${$json.pack_id} a été approuvé puis envoyé à ${$json.target_email}.</p><p>Resend ID: ${$json.resend_id || 'n/a'}</p>` })}}",
-        "options": {}
+        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'onboarding@resend.dev', to: [$env.INTERNAL_REVIEW_EMAIL || 'marius.ayoro70@gmail.com'], subject: 'Pack envoye - ' + (($json.payload && $json.payload.organization_name) || $json.organization_name || 'Organisation a confirmer'), html: '<p>Le pack ' + ((($json.payload && $json.payload.pack_id) || $json.pack_id || 'n/a')) + ' a ete approuve puis envoye a ' + ((($json.payload && $json.payload.target_email) || $json.target_email || 'n/a')) + '.</p><p>Resend ID: ' + ($json.resend_id || 'n/a') + '</p>' })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
       },
-      "id": "node-034",
+      "id": "0c80c7a6-5df8-41fd-b629-78e0a416e9df",
       "name": "Send Internal Sent Confirmation",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3140,
-        620
-      ]
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "={{'Pack approuvé et e-mail envoyé à ' + $json.target_email}}",
-        "options": {}
-      },
-      "id": "node-035",
-      "name": "Approval Success Response",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        3380,
-        620
+        2224,
+        832
       ]
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -833,48 +1148,32 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ status: 'approval_error', approval_error_at: new Date().toISOString(), error_reason: $json.send_failure_reason })}}",
+        "jsonBody": "={{JSON.stringify({\n  status: 'approval_error',\n  error_reason: $json.send_failure_reason || 'Pièces jointes manquantes ou invalides.'\n})}}",
         "options": {}
       },
-      "id": "node-036",
+      "id": "769dd8af-502b-4bfd-be6a-96eb6122ed97",
       "name": "Mark Pack Approval Error",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1940,
-        820
-      ]
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "={{'Pack approuvé mais non envoyé : ' + ($json.send_failure_reason || 'contexte incomplet')}}",
-        "options": {}
-      },
-      "id": "node-037",
-      "name": "Approval Error Response",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        2180,
-        820
+        1040,
+        1072
       ]
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -885,47 +1184,38 @@
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{JSON.stringify({ status: 'rejected', rejected_at: new Date().toISOString() })}}",
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
       },
-      "id": "node-038",
+      "id": "959740bc-83b6-464c-bf67-4a3bf4eaa846",
       "name": "Mark Pack Rejected",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1460,
-        980
-      ]
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "={{'Pack rejeté pour ' + $json.organization_name}}",
-        "options": {}
-      },
-      "id": "node-039",
-      "name": "Rejection Response",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        1700,
-        980
+        416,
+        1472
       ]
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -938,66 +1228,77 @@
         "jsonBody": "={{JSON.stringify({ status: 'active', last_sequence_result: 'sent_v3', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', next_action_at: new Date(Date.now() + 5 * 86400000).toISOString() })}}",
         "options": {}
       },
-      "id": "node-042",
+      "id": "3434d195-2798-42db-aa45-d09e7e76c335",
       "name": "Update Prospect Target Sent",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        4040,
-        260
-      ]
+        3120,
+        480
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
               "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
             }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{JSON.stringify({ status: 'paused', paused: true, last_sequence_result: 'approval_error_v3', stop_reason: $json.send_failure_reason || 'approval_error', niche_status: 'internal_fix_required' })}}",
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
       },
-      "id": "node-043",
+      "id": "66e6214c-b4e6-46c2-b85d-a15dbbd359a8",
       "name": "Update Prospect Target Approval Error",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3540,
-        500
-      ]
+        2624,
+        720
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
-        "authentication": "none",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -1008,18 +1309,102 @@
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{JSON.stringify({ status: 'ready', last_sequence_result: 'rejected_internal_v3', stop_reason: 'internal_review_rejected', niche_status: 'needs_manual_revision' })}}",
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
       },
-      "id": "node-044",
+      "id": "53d3e86d-f632-40a9-9d24-3bc044117ed8",
       "name": "Update Prospect Target Rejected",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3300,
-        700
-      ]
+        2400,
+        1072
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "==Décision reçue : {{$json.decision}} — Pack {{$json.pack_id}}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -480,
+        1104
+      ],
+      "id": "fce63137-7025-45d8-8f89-cece85d7876f",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Pack rejeté.",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2672,
+        1072
+      ],
+      "id": "3e3ae8ec-8799-4057-a721-dc170084bc45",
+      "name": "Respond Rejected"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Erreur approbation — pack mis en pause.",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2880,
+        720
+      ],
+      "id": "5d8036d5-8759-4931-bebe-ef211c3aed6b",
+      "name": "Respond Approval Error"
     }
   ],
+  "pinData": {},
   "connections": {
     "Manual Trigger": {
       "main": [
@@ -1172,7 +1557,7 @@
       "main": [
         [
           {
-            "node": "Store Pack In Supabase",
+            "node": "Build Catalogue Render Payload",
             "type": "main",
             "index": 0
           }
@@ -1238,7 +1623,7 @@
       "main": [
         [
           {
-            "node": "If Approved",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
@@ -1349,13 +1734,7 @@
     },
     "Send Internal Sent Confirmation": {
       "main": [
-        [
-          {
-            "node": "Approval Success Response",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Mark Pack Approval Error": {
@@ -1427,7 +1806,7 @@
       "main": [
         [
           {
-            "node": "Approval Error Response",
+            "node": "Respond Approval Error",
             "type": "main",
             "index": 0
           }
@@ -1438,7 +1817,117 @@
       "main": [
         [
           {
-            "node": "Rejection Response",
+            "node": "Respond Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "If Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Tailored Catalogue": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Tailored Audit Form": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Deck Brief": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Catalogue Render Payload": {
+      "main": [
+        [
+          {
+            "node": "Render Catalogue Artifact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render Catalogue Artifact": {
+      "main": [
+        [
+          {
+            "node": "Merge Catalogue Artifact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Catalogue Artifact": {
+      "main": [
+        [
+          {
+            "node": "Build Deck Render Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Deck Render Payload": {
+      "main": [
+        [
+          {
+            "node": "Render Deck Artifact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render Deck Artifact": {
+      "main": [
+        [
+          {
+            "node": "Merge Deck Artifact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Deck Artifact": {
+      "main": [
+        [
+          {
+            "node": "Store Pack In Supabase",
             "type": "main",
             "index": 0
           }
@@ -1446,36 +1935,59 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
   },
-  "versionId": "transferai-prospecting-multi-prospect-v3-crm-ready-export",
+  "versionId": "f0e6ef5b-89ef-46c3-be63-312e04ff4799",
   "meta": {
-    "templateCredsSetupCompleted": false
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
   },
-  "pinData": {},
+  "id": "2hx9Zzy06rYHoScv",
   "tags": [
     {
-      "name": "transferai"
-    },
-    {
-      "name": "prospection"
-    },
-    {
+      "updatedAt": "2026-05-03T22:34:59.820Z",
+      "createdAt": "2026-05-03T22:34:59.820Z",
+      "id": "2r7eSS4qi7O5UnRC",
       "name": "n8n"
     },
     {
+      "updatedAt": "2026-05-22T23:19:01.025Z",
+      "createdAt": "2026-05-22T23:19:01.025Z",
+      "id": "315WaRTwXryKbT4t",
       "name": "multi-prospect"
     },
     {
+      "updatedAt": "2026-05-03T22:34:59.803Z",
+      "createdAt": "2026-05-03T22:34:59.803Z",
+      "id": "AxBM52Emi3tTDxlG",
+      "name": "transferai"
+    },
+    {
+      "updatedAt": "2026-05-22T20:26:33.896Z",
+      "createdAt": "2026-05-22T20:26:33.896Z",
+      "id": "LS1xqEW9cRhyCbRm",
+      "name": "prospection"
+    },
+    {
+      "updatedAt": "2026-05-04T11:49:02.875Z",
+      "createdAt": "2026-05-04T11:49:02.875Z",
+      "id": "VE0lP6ncXKC7vR2h",
       "name": "v3"
     },
     {
-      "name": "crm"
+      "updatedAt": "2026-05-27T08:24:53.839Z",
+      "createdAt": "2026-05-27T08:24:53.839Z",
+      "id": "XoXR3if3XLLRG0Qn",
+      "name": "ready"
     },
     {
-      "name": "ready"
+      "updatedAt": "2026-05-27T08:24:53.844Z",
+      "createdAt": "2026-05-27T08:24:53.844Z",
+      "id": "ZHfuOClpv1xJYnMd",
+      "name": "crm"
     }
   ]
 }

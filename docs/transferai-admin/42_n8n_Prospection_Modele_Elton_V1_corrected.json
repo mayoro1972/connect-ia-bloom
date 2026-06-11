@@ -98,7 +98,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Read directly from Proxy (JSON.stringify on Proxy returns {})\nvar p = $input.first().json;\nvar website = String(p.website || '');\nvar base = website.trim().replace(/\\/$/, '');\nvar customPagePaths = String(p.custom_page_paths_csv || '');\nvar prospectId = String(p.prospect_id || '');\nvar orgName = String(p.organization_name || '');\nvar orgType = String(p.organization_type || '');\nvar sectorGuess = String(p.sector_guess || '');\nvar country = String(p.country || '');\nvar decisionMaker = String(p.decision_maker_name || '');\nvar bookingLink = String(p.booking_link_45min || '');\nvar commercialPriority = String(p.commercial_priority_default || '');\nvar researchScope = String(p.research_scope || '');\n\nvar customPaths = customPagePaths.split(',').map(function(v) { return v.trim(); }).filter(Boolean);\nvar defaultPaths = ['/', '/a-propos/', '/about/', '/services/', '/solutions/',\n  '/expertise/', '/produits-et-services/', '/products/', '/contact/',\n  '/carrieres/', '/careers/', '/blog/'];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : '/' + path;\n}\nvar seen = {};\nvar selectedPaths = [];\ncustomPaths.concat(defaultPaths).forEach(function(path) {\n  var n = normalizePath(path);\n  if (!seen[n] && selectedPaths.length < 5) { seen[n] = true; selectedPaths.push(n); }\n});\nvar sourcePages = selectedPaths.map(function(path, index) {\n  var isAbsolute = /^https?:\\/\\//i.test(path);\n  var normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  var url = isAbsolute ? path : base + (normalizedPath === '/' ? '' : normalizedPath);\n  return { key: 'page_' + (index + 1), path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? 'public_source_' + (index + 1) : normalizedPath, url: url };\n});\n\nvar output = {\n  prospect_id: prospectId,\n  organization_name: orgName,\n  organization_type: orgType,\n  website: website,\n  sector_guess: sectorGuess,\n  country: country,\n  decision_maker_name: decisionMaker,\n  custom_page_paths_csv: customPagePaths,\n  booking_link_45min: bookingLink,\n  commercial_priority_default: commercialPriority,\n  research_scope: researchScope,\n  source_pages: sourcePages\n};\nsourcePages.forEach(function(page, index) {\n  output['page_' + (index + 1) + '_url'] = page.url;\n  output['page_' + (index + 1) + '_label'] = page.label;\n});\nreturn [{ json: output }];",
+        "jsCode": "// Read directly from Proxy (JSON.stringify on Proxy returns {})\nvar p = $input.first().json;\nvar website = String(p.website || '');\nvar base = website.trim().replace(/\\/$/, '');\nvar customPagePaths = String(p.custom_page_paths_csv || '');\nvar prospectId = String(p.prospect_id || '');\nvar orgName = String(p.organization_name || '');\nvar orgType = String(p.organization_type || '');\nvar sectorGuess = String(p.sector_guess || '');\nvar country = String(p.country || '');\nvar decisionMaker = String(p.decision_maker_name || '');\nvar bookingLink = String(p.booking_link_45min || '');\nvar commercialPriority = String(p.commercial_priority_default || '');\nvar researchScope = String(p.research_scope || '');\n\nvar customPaths = customPagePaths.split(',').map(function(v) { return v.trim(); }).filter(Boolean);\nvar defaultPaths = ['/', '/services/', '/solutions/', '/contact/', '/blog/',\n  '/products/', '/expertise/', '/produits-et-services/', '/carrieres/',\n  '/careers/', '/a-propos/', '/about/'];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : '/' + path;\n}\nvar seen = {};\nvar selectedPaths = [];\ncustomPaths.concat(defaultPaths).forEach(function(path) {\n  var n = normalizePath(path);\n  if (!seen[n] && selectedPaths.length < 5) { seen[n] = true; selectedPaths.push(n); }\n});\nvar sourcePages = selectedPaths.map(function(path, index) {\n  var isAbsolute = /^https?:\\/\\//i.test(path);\n  var normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  var url = isAbsolute ? path : base + (normalizedPath === '/' ? '' : normalizedPath);\n  return { key: 'page_' + (index + 1), path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? 'public_source_' + (index + 1) : normalizedPath, url: url };\n});\n\nvar output = {\n  prospect_id: prospectId,\n  organization_name: orgName,\n  organization_type: orgType,\n  website: website,\n  sector_guess: sectorGuess,\n  country: country,\n  decision_maker_name: decisionMaker,\n  custom_page_paths_csv: customPagePaths,\n  booking_link_45min: bookingLink,\n  commercial_priority_default: commercialPriority,\n  research_scope: researchScope,\n  source_pages: sourcePages\n};\nsourcePages.forEach(function(page, index) {\n  output['page_' + (index + 1) + '_url'] = page.url;\n  output['page_' + (index + 1) + '_label'] = page.label;\n});\nreturn [{ json: output }];",
         "mode": "runOnceForAllItems"
       },
       "id": "node-003",
@@ -131,7 +131,8 @@
       "position": [
         960,
         100
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -154,7 +155,8 @@
       "position": [
         960,
         220
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -177,7 +179,8 @@
       "position": [
         960,
         340
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -200,7 +203,8 @@
       "position": [
         960,
         460
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -223,11 +227,12 @@
       "position": [
         960,
         580
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "const target = JSON.parse(JSON.stringify($('Build Source URLs').first().json));\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/a-propos/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/services/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/solutions/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/contact/' }, raw: $('Fetch Public Page 5').first().json }\n];\nfunction toText(raw) {\n  const html = (raw && (raw.body || raw.data)) || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ').trim();\n}\nconst pageTexts = pages\n  .map(function(page) { return { key: page.meta.key, label: page.meta.label, text: toText(page.raw).slice(0, 12000) }; })\n  .filter(function(page) { return page.text; });\nconst combinedPublicText = pageTexts.map(function(page) {\n  return '[' + page.key.toUpperCase() + ' - ' + page.label + ']\\n' + page.text;\n}).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'reseaux sociaux'],\n  workflow_administratif: ['procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['sante', 'patient', 'clinique', 'hopital', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'operations']\n};\nconst roiClues = Object.keys(clueTaxonomy).filter(function(key) {\n  return clueTaxonomy[key].some(function(kw) { return normalizedText.indexOf(kw) !== -1; });\n});\nreturn [{\n  json: Object.assign({}, target, {\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : ['workflow_administratif', 'service_client_multicanal', 'assistant_direction_documentaire']\n  })\n}];",
+        "jsCode": "const target = JSON.parse(JSON.stringify($('Build Source URLs').first().json));\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/services/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/solutions/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/contact/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/blog/' }, raw: $('Fetch Public Page 5').first().json }\n];\nfunction toText(raw) {\n  const html = (raw && (raw.body || raw.data)) || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ').trim();\n}\nconst pageTexts = pages\n  .map(function(page) { return { key: page.meta.key, label: page.meta.label, text: toText(page.raw).slice(0, 12000) }; })\n  .filter(function(page) { return page.text; });\nconst combinedPublicText = pageTexts.map(function(page) {\n  return '[' + page.key.toUpperCase() + ' - ' + page.label + ']\\n' + page.text;\n}).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'reseaux sociaux'],\n  workflow_administratif: ['procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['sante', 'patient', 'clinique', 'hopital', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'operations']\n};\nconst roiClues = Object.keys(clueTaxonomy).filter(function(key) {\n  return clueTaxonomy[key].some(function(kw) { return normalizedText.indexOf(kw) !== -1; });\n});\nreturn [{\n  json: Object.assign({}, target, {\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : ['workflow_administratif', 'service_client_multicanal', 'assistant_direction_documentaire']\n  })\n}];",
         "mode": "runOnceForAllItems"
       },
       "id": "node-009",

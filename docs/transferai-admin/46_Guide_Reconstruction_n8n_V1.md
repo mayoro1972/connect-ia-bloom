@@ -109,7 +109,8 @@ Sorties à produire :
 Le nœud doit :
 
 - prendre les chemins personnalisés si `custom_page_paths_csv` est renseigné
-- sinon utiliser des chemins publics fréquents comme `/`, `/a-propos/`, `/services/`, `/solutions/`, `/contact/`, `/products/`, `/careers/`
+- sinon utiliser des chemins publics fréquents comme `/`, `/services/`, `/solutions/`, `/contact/`, `/blog/`, `/products/`, `/careers/`
+- garder les pages de présentation non standard via `custom_page_paths_csv` si le site utilise un slug spécifique comme `/la-smb/`
 - limiter la première passe à 5 pages pour garder un workflow stable et peu coûteux
 
 Connexion :
@@ -148,6 +149,7 @@ Créer 5 nœuds `HTTP Request`.
 Recommandations de configuration :
 
 - méthode `GET`
+- activer `On Error -> Continue (regular output)` sur les 5 nœuds HTTP pour qu'une boucle de redirection sur une page ne bloque pas tout le workflow
 - format de réponse texte ou HTML
 - tolérance raisonnable aux erreurs si une page renvoie un contenu partiel
 

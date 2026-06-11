@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appointmentBookings, buildAppointmentPath, directLinks } from "@/lib/site-links";
+import { appointmentBookings, buildAppointmentPath, buildPackAwareAuditAccessPath, directLinks } from "@/lib/site-links";
 
 describe("appointment booking routing", () => {
   it("maps each journey to the expected Calendly link", () => {
@@ -27,8 +27,15 @@ describe("appointment booking routing", () => {
     );
   });
 
-  it("routes the audit form through the integrated public path", () => {
+  it("routes the audit form through the dynamic questionnaire path", () => {
     expect(directLinks.auditForm).toBe("/demande-audit-gratuit");
-    expect(directLinks.auditQuestionnaire).toBe("/formulaire-audit-ia/index.html");
+    expect(directLinks.auditQuestionnaire).toBe("/questionnaire-audit");
+  });
+
+  it("builds a pack-aware secure access path when a pack_id is present", () => {
+    expect(buildPackAwareAuditAccessPath()).toBe("/acces-formulaire-audit");
+    expect(buildPackAwareAuditAccessPath("pack-transferai-001")).toBe(
+      "/acces-formulaire-audit?pack_id=pack-transferai-001",
+    );
   });
 });

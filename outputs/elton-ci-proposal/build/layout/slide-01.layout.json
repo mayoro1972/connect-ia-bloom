@@ -2,13 +2,13 @@
   "schema": "openai.presentation.layout/v4",
   "unit": "px",
   "slide": {
-    "aid": "sl/exnjvp",
-    "id": "exnjvp",
+    "aid": "sl/oc92gp",
+    "id": "oc92gp",
     "slide": 1,
-    "layoutId": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+    "layoutId": "e8395186-6167-493e-abd6-da64e1eda14a",
     "layoutName": "Title Slide",
     "layoutType": "title",
-    "masterLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+    "masterLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
     "masterLayoutName": "Master",
     "frame": {
       "left": 0,
@@ -45,15 +45,15 @@
   "inheritedLayers": [
     {
       "scope": "layout",
-      "id": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+      "id": "e8395186-6167-493e-abd6-da64e1eda14a",
       "name": "Title Slide",
       "type": "title",
-      "parentLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+      "parentLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "elements": []
     },
     {
       "scope": "master",
-      "id": "05412918-66fe-43e3-9b4f-318023edc354",
+      "id": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "name": "Master",
       "type": "master",
       "elements": []
@@ -64,7 +64,7 @@
       "order": 1,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/32lszqtc",
+      "aid": "sh/gr2p8nqx",
       "id": "1",
       "bbox": [
         0,
@@ -81,7 +81,7 @@
       "order": 2,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/sneloj2t",
+      "aid": "sh/r65wjudg",
       "id": "2",
       "bbox": [
         58,
@@ -98,7 +98,7 @@
       "order": 3,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/l87ed8ba",
+      "aid": "sh/ylc7u54z",
       "id": "3",
       "bbox": [
         774,
@@ -115,7 +115,7 @@
       "order": 4,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/at47y1kr",
+      "aid": "sh/5o7qpg3e",
       "id": "4",
       "bbox": [
         774,
@@ -132,7 +132,7 @@
       "order": 5,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/3ex0nuxc",
+      "aid": "sh/g3ex0nux",
       "id": "5",
       "bbox": [
         84,
@@ -183,7 +183,7 @@
       "order": 6,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/szqtcj6t",
+      "aid": "sh/nih4byhg",
       "id": "6",
       "bbox": [
         84,
@@ -270,7 +270,7 @@
       "order": 7,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/lkjm1cfa",
+      "aid": "sh/yxobm58z",
       "id": "7",
       "bbox": [
         84,
@@ -327,8 +327,76 @@
       "order": 8,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/ex0nuxc3",
+      "aid": "sh/9s36hcrm",
       "id": "8",
+      "bbox": [
+        84,
+        418,
+        410,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "9",
+      "bbox": [
+        100,
+        425,
+        380,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI est le hub AI de Nettelecom CI.",
+      "textPreview": "TransferAI est le hub AI de Nettelecom CI.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI est le hub AI de Nettelecom CI."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI est le hub AI de Nettelecom CI.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI est le hub AI de Nettelecom CI.",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "10",
       "bbox": [
         84,
         454,
@@ -375,11 +443,11 @@
       "lineWidth": 0
     },
     {
-      "order": 9,
+      "order": 11,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/3itgfmlk",
-      "id": "9",
+      "aid": "sh/rmhk3q5o",
+      "id": "11",
       "bbox": [
         84,
         476,
@@ -430,11 +498,11 @@
       "lineWidth": 0
     },
     {
-      "order": 10,
+      "order": 12,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bm58z25k",
-      "id": "10",
+      "aid": "sh/g7adsji5",
+      "id": "12",
       "bbox": [
         84,
         548,
@@ -447,11 +515,11 @@
       "lineWidth": 1
     },
     {
-      "order": 11,
+      "order": 13,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/m1cfa9w3",
-      "id": "11",
+      "aid": "sh/9s36hcrm",
+      "id": "13",
       "bbox": [
         100,
         566,
@@ -464,11 +532,11 @@
       "lineWidth": 0
     },
     {
-      "order": 12,
+      "order": 14,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tsvu9kni",
-      "id": "12",
+      "aid": "sh/yd0z6103",
+      "id": "14",
       "bbox": [
         114,
         562,
@@ -515,11 +583,11 @@
       "lineWidth": 0
     },
     {
-      "order": 13,
+      "order": 15,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/47y1kre1",
-      "id": "13",
+      "aid": "sh/rytsvu9k",
+      "id": "15",
       "bbox": [
         114,
         594,
@@ -566,11 +634,11 @@
       "lineWidth": 0
     },
     {
-      "order": 14,
+      "order": 16,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bat47y1k",
-      "id": "14",
+      "aid": "sh/gfmlkjm1",
+      "id": "16",
       "bbox": [
         114,
         612,
@@ -619,11 +687,11 @@
       "lineWidth": 0
     },
     {
-      "order": 15,
+      "order": 17,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/mp0bi9s3",
-      "id": "15",
+      "aid": "sh/90je9cvi",
+      "id": "17",
       "bbox": [
         236,
         548,
@@ -636,11 +704,11 @@
       "lineWidth": 1
     },
     {
-      "order": 16,
+      "order": 18,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tgfmlkjm",
-      "id": "16",
+      "aid": "sh/ylc7u54z",
+      "id": "18",
       "bbox": [
         252,
         566,
@@ -653,11 +721,11 @@
       "lineWidth": 0
     },
     {
-      "order": 17,
+      "order": 19,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/4vmtwra5",
-      "id": "17",
+      "aid": "sh/r65wjudg",
+      "id": "19",
       "bbox": [
         266,
         562,
@@ -665,8 +733,8 @@
         30
       ],
       "geometry": "rect",
-      "text": "4",
-      "textPreview": "4",
+      "text": "13",
+      "textPreview": "13",
       "resolvedFontSize": 22,
       "resolvedTextStyle": {
         "fontSize": 22,
@@ -679,18 +747,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "4"
+            "text": "13"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "4",
+          "text": "13",
           "runs": [
             {
               "index": 1,
-              "text": "4",
+              "text": "13",
               "fontSize": 22,
               "typeface": "Aptos Display",
               "color": "#1A3554",
@@ -704,11 +772,11 @@
       "lineWidth": 0
     },
     {
-      "order": 18,
+      "order": 20,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/b2hwfyxo",
-      "id": "18",
+      "aid": "sh/fa9w3m94",
+      "id": "20",
       "bbox": [
         266,
         594,
@@ -716,8 +784,8 @@
         18
       ],
       "geometry": "rect",
-      "text": "cas d'usage",
-      "textPreview": "cas d'usage",
+      "text": "experts IA",
+      "textPreview": "experts IA",
       "resolvedFontSize": 9.51,
       "resolvedTextStyle": {
         "fontSize": 9.51,
@@ -730,18 +798,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "cas d'usage"
+            "text": "experts IA"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "cas d'usage",
+          "text": "experts IA",
           "runs": [
             {
               "index": 1,
-              "text": "cas d'usage",
+              "text": "experts IA",
               "fontSize": 9.51,
               "typeface": "Aptos",
               "color": "#617086",
@@ -755,11 +823,11 @@
       "lineWidth": 0
     },
     {
-      "order": 19,
+      "order": 21,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/mhk3q5o7",
-      "id": "19",
+      "aid": "sh/qpg3ex0n",
+      "id": "21",
       "bbox": [
         266,
         612,
@@ -767,8 +835,8 @@
         26
       ],
       "geometry": "rect",
-      "text": "priorises pour ELTON CI",
-      "textPreview": "priorises pour ELTON CI",
+      "text": "mobilises via TransferAI",
+      "textPreview": "mobilises via TransferAI",
       "resolvedFontSize": 8.51,
       "resolvedTextStyle": {
         "fontSize": 8.51,
@@ -780,18 +848,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "priorises pour ELTON CI"
+            "text": "mobilises via TransferAI"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "priorises pour ELTON CI",
+          "text": "mobilises via TransferAI",
           "runs": [
             {
               "index": 1,
-              "text": "priorises pour ELTON CI",
+              "text": "mobilises via TransferAI",
               "fontSize": 8.51,
               "typeface": "Aptos",
               "color": "#617086"
@@ -804,11 +872,11 @@
       "lineWidth": 0
     },
     {
-      "order": 20,
+      "order": 22,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/udg7adsj",
-      "id": "20",
+      "aid": "sh/xczed8v6",
+      "id": "22",
       "bbox": [
         388,
         548,
@@ -821,11 +889,11 @@
       "lineWidth": 1
     },
     {
-      "order": 21,
+      "order": 23,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/nyd0z610",
-      "id": "21",
+      "aid": "sh/8v6psfil",
+      "id": "23",
       "bbox": [
         404,
         566,
@@ -838,11 +906,11 @@
       "lineWidth": 0
     },
     {
-      "order": 22,
+      "order": 24,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/cj6tovah",
-      "id": "22",
+      "aid": "sh/fyxobm58",
+      "id": "24",
       "bbox": [
         418,
         562,
@@ -889,11 +957,11 @@
       "lineWidth": 0
     },
     {
-      "order": 23,
+      "order": 25,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/54zidony",
-      "id": "23",
+      "aid": "sh/qd4vmtwr",
+      "id": "25",
       "bbox": [
         418,
         594,
@@ -944,11 +1012,11 @@
       "lineWidth": 0
     },
     {
-      "order": 24,
+      "order": 26,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/upwb2hwf",
-      "id": "24",
+      "aid": "sh/x4nap4r6",
+      "id": "26",
       "bbox": [
         418,
         612,
@@ -997,11 +1065,11 @@
       "lineWidth": 0
     },
     {
-      "order": 25,
+      "order": 27,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/nap4r65w",
-      "id": "25",
+      "aid": "sh/8jqh0fep",
+      "id": "27",
       "bbox": [
         540,
         548,
@@ -1014,11 +1082,11 @@
       "lineWidth": 1
     },
     {
-      "order": 26,
+      "order": 28,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/cvixczed",
-      "id": "26",
+      "aid": "sh/fmlkjm1c",
+      "id": "28",
       "bbox": [
         556,
         566,
@@ -1031,11 +1099,11 @@
       "lineWidth": 0
     },
     {
-      "order": 27,
+      "order": 29,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/5gbq1ory",
-      "id": "27",
+      "aid": "sh/q1orytsv",
+      "id": "29",
       "bbox": [
         570,
         562,
@@ -1082,11 +1150,11 @@
       "lineWidth": 0
     },
     {
-      "order": 28,
+      "order": 30,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/u18jqh0f",
-      "id": "28",
+      "aid": "sh/kjm1cfa9",
+      "id": "30",
       "bbox": [
         570,
         594,
@@ -1133,11 +1201,11 @@
       "lineWidth": 0
     },
     {
-      "order": 29,
+      "order": 31,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/jm1cfa9w",
-      "id": "29",
+      "aid": "sh/94fu18jq",
+      "id": "31",
       "bbox": [
         570,
         612,
@@ -1186,11 +1254,11 @@
       "lineWidth": 0
     },
     {
-      "order": 30,
+      "order": 32,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/9knih4by",
-      "id": "30",
+      "aid": "sh/2hwfyxob",
+      "id": "32",
       "bbox": [
         812,
         122,
@@ -1237,11 +1305,11 @@
       "lineWidth": 0
     },
     {
-      "order": 31,
+      "order": 33,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/kzupwb2h",
-      "id": "31",
+      "aid": "sh/r2p8nqxs",
+      "id": "33",
       "bbox": [
         812,
         154,
@@ -1306,11 +1374,11 @@
       "lineWidth": 0
     },
     {
-      "order": 32,
+      "order": 34,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/re1w7mp0",
-      "id": "32",
+      "aid": "sh/gvy90je9",
+      "id": "34",
       "bbox": [
         812,
         276,
@@ -1410,11 +1478,11 @@
       "lineWidth": 0
     },
     {
-      "order": 33,
+      "order": 35,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/2t83itgf",
-      "id": "33",
+      "aid": "sh/9gr2p8nq",
+      "id": "35",
       "bbox": [
         812,
         430,
@@ -1427,11 +1495,11 @@
       "lineWidth": 1
     },
     {
-      "order": 34,
+      "order": 36,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/9w3m94fu",
-      "id": "34",
+      "aid": "sh/2p8nqxs7",
+      "id": "36",
       "bbox": [
         834,
         448,
@@ -1478,11 +1546,11 @@
       "lineWidth": 0
     },
     {
-      "order": 35,
+      "order": 37,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/kb6xkf6d",
-      "id": "35",
+      "aid": "sh/ra5gbq1o",
+      "id": "37",
       "bbox": [
         834,
         470,
@@ -1537,11 +1605,11 @@
       "lineWidth": 0
     },
     {
-      "order": 36,
+      "order": 38,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/rqd4vmtw",
-      "id": "36",
+      "aid": "sh/kzupwb2h",
+      "id": "38",
       "bbox": [
         812,
         548,
@@ -1554,11 +1622,11 @@
       "lineWidth": 1
     },
     {
-      "order": 37,
+      "order": 39,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/25kb6xkf",
-      "id": "37",
+      "aid": "sh/9knih4by",
+      "id": "39",
       "bbox": [
         832,
         566,
@@ -1611,11 +1679,11 @@
       "lineWidth": 0
     },
     {
-      "order": 38,
+      "order": 40,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/94fu18jq",
-      "id": "38",
+      "aid": "sh/lc7u54zi",
+      "id": "40",
       "bbox": [
         68,
         682,
@@ -1628,11 +1696,11 @@
       "lineWidth": 0
     },
     {
-      "order": 39,
+      "order": 41,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/kjm1cfa9",
-      "id": "39",
+      "aid": "sh/wra5gbq1",
+      "id": "41",
       "bbox": [
         72,
         690,
@@ -1640,8 +1708,8 @@
         16
       ],
       "geometry": "rect",
-      "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
-      "textPreview": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
       "resolvedFontSize": 8.51,
       "resolvedTextStyle": {
         "fontSize": 8.51,
@@ -1653,18 +1721,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage"
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
           "runs": [
             {
               "index": 1,
-              "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
               "fontSize": 8.51,
               "typeface": "Aptos",
               "color": "#617086"
@@ -1677,11 +1745,11 @@
       "lineWidth": 0
     },
     {
-      "order": 40,
+      "order": 42,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/87ed8bat",
-      "id": "40",
+      "aid": "sh/36hcrmhk",
+      "id": "42",
       "bbox": [
         1160,
         688,

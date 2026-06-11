@@ -15,7 +15,7 @@ const theme = {
   darkSoft: "#C9D4E1",
 };
 
-const footerLabel = "TransferAI | Hub IA de Nettelecom CI | Modèle deck institutionnel V3";
+const footerLabel = "TransferAI | Hub IA de Nettelecom CI | Modèle deck institutionnel premium";
 
 function text(slide, ctx, value, x, y, w, h, opts = {}) {
   return ctx.addText(slide, {
@@ -127,7 +127,7 @@ async function useCaseCard(slide, ctx, opts) {
   text(slide, ctx, "AVANT", x + 22, y + 66, 80, 14, { size: 9, color: theme.orange, bold: true });
   body(slide, ctx, before, x + 22, y + 84, w - 44, 42, 11.5, theme.soft);
   text(slide, ctx, "APRÈS", x + 22, y + 130, 80, 14, { size: 9, color: theme.teal, bold: true });
-  body(slide, ctx, after, x + 22, y + 148, w - 44, h - 160, 11.5, theme.ink);
+  body(slide, ctx, after, x + 22, y + 148, w - 44, h - 164, 11.5, theme.ink);
 }
 
 function metricCard(slide, ctx, x, y, w, h, fill, value, label, note, valueColor = theme.white) {
@@ -145,8 +145,8 @@ function metricCard(slide, ctx, x, y, w, h, fill, value, label, note, valueColor
     align: "center",
     bold: true,
   });
-  text(slide, ctx, note, x + 18, y + 86, w - 36, 24, {
-    size: 8.5,
+  text(slide, ctx, note, x + 18, y + 82, w - 36, 18, {
+    size: 8.1,
     color: valueColor,
     align: "center",
   });
@@ -438,7 +438,7 @@ export async function slide02brand(presentation, ctx) {
   body(
     slide,
     ctx,
-    "La proposition gagne en crédibilité si nous expliquons clairement qui porte l'offre, avec quelle profondeur d'expertise et dans quel cadre d'exécution.",
+    "La crédibilité de l'offre dépend d'un point simple : qui porte l'exécution, avec quelle profondeur d'expertise et dans quel cadre de confiance.",
     72,
     176,
     970,
@@ -453,27 +453,27 @@ export async function slide02brand(presentation, ctx) {
     color: "#D7E5F3",
     bold: true,
   });
-  title(slide, ctx, "Le hub IA\nopérationnel de\nNettelecom CI", 98, 286, 270, 132, 30, theme.white);
+  title(slide, ctx, "La plateforme\nd'exécution IA de\nNettelecom CI", 98, 286, 290, 132, 28, theme.white);
   body(
     slide,
     ctx,
-    "Nous positionnons TransferAI comme la structure qui relie stratégie, automatisation, data, formation et gouvernance pour transformer l'IA en exécution métier.",
+    "TransferAI relie stratégie, formation, gouvernance et déploiement progressif pour transformer l'IA en résultats utiles.",
     98,
-    408,
+    426,
     286,
-    78,
+    60,
     13.5,
     "#D7E5F3",
   );
-  card(slide, ctx, 98, 512, 290, 42, { fill: "#244667", border: "#244667" });
+  card(slide, ctx, 98, 510, 290, 46, { fill: "#244667", border: "#244667" });
   body(
     slide,
     ctx,
-    "Pour le prospect : un interlocuteur IA structuré, pas un simple catalogue.",
+    "Un partenaire structuré pour cadrer, former et déployer.",
     114,
-    524,
+    522,
     258,
-    18,
+    24,
     11,
     theme.white,
     { bold: true },
@@ -481,11 +481,11 @@ export async function slide02brand(presentation, ctx) {
 
   card(slide, ctx, 534, 228, 300, 148, { fill: theme.panel });
   await iconBadge(slide, ctx, "Users", 556, 250, theme.orange);
-  title(slide, ctx, "13 experts en IA", 612, 250, 180, 28, 22);
+  title(slide, ctx, "13 experts mobilisables", 612, 250, 200, 28, 20);
   body(
     slide,
     ctx,
-    "Une équipe de 13 experts en IA, mobilisable sur des enjeux de diagnostic, d'automatisation, de pilotage, de formation et de gouvernance.",
+    "Une équipe mobilisable sur le diagnostic, la formation, la gouvernance et les premiers déploiements.",
     556,
     300,
     236,
@@ -496,11 +496,11 @@ export async function slide02brand(presentation, ctx) {
 
   card(slide, ctx, 856, 228, 352, 148, { fill: theme.panel });
   await iconBadge(slide, ctx, "Building2", 878, 250, theme.teal);
-  title(slide, ctx, "Différents secteurs couverts", 934, 250, 230, 28, 22);
+  title(slide, ctx, "Expertises multi-secteurs", 934, 250, 230, 28, 20);
   body(
     slide,
     ctx,
-    "TransferAI rassemble des expertises IA appliquées dans différents secteurs d'activité, ce qui permet de relier les usages technologiques aux contraintes métier.",
+    "Des expertises capables d'adapter les usages IA aux réalités opérationnelles de chaque organisation.",
     878,
     300,
     288,
@@ -515,7 +515,7 @@ export async function slide02brand(presentation, ctx) {
   body(
     slide,
     ctx,
-    "Notre rôle n'est pas seulement de présenter l'IA. Nous cadrons, priorisons, formons et transformons un besoin flou en pilote métier mesurable.",
+    "Nous ne présentons pas seulement l'IA : nous cadrons, priorisons, formons et transformons un besoin flou en trajectoire lisible.",
     556,
     470,
     236,
@@ -526,11 +526,11 @@ export async function slide02brand(presentation, ctx) {
 
   card(slide, ctx, 856, 398, 352, 148, { fill: theme.panel });
   await iconBadge(slide, ctx, "ShieldCheck", 878, 420, theme.gold);
-  title(slide, ctx, "Un cadre compatible entreprise", 934, 420, 240, 28, 22);
+  title(slide, ctx, "Cadre de confiance", 934, 420, 220, 28, 20);
   body(
     slide,
     ctx,
-    "Adossé à Nettelecom CI, TransferAI porte une approche sérieuse de la confidentialité, de la gouvernance des usages et de la supervision des pilotes.",
+    "Une approche sérieuse de la confidentialité, des accès, de la supervision et du passage du pilote à l'échelle.",
     878,
     470,
     288,
@@ -548,10 +548,10 @@ export async function slide02brand(presentation, ctx) {
   body(
     slide,
     ctx,
-    "Avant de parler ROI et cas d'usage, le prospect doit voir que TransferAI est une entité crédible, portée par Nettelecom CI et soutenue par 13 experts IA.",
-    310,
-    606,
-    860,
+    "Avant de parler ROI, le prospect doit voir une structure crédible, locale, encadrée et capable d'exécuter.",
+    332,
+    607,
+    838,
     18,
     11.5,
     theme.ink,
@@ -566,12 +566,12 @@ export async function slide02(presentation, ctx) {
   const slide = presentation.slides.add();
   bg(slide, ctx);
 
-  kicker(slide, ctx, "Contexte prospect");
-  title(slide, ctx, "Pourquoi cette proposition est adaptée à votre contexte", 72, 86, 900, 84, 34);
+  kicker(slide, ctx, "Enjeux transversaux");
+  title(slide, ctx, "Pourquoi cette proposition peut parler à toute organisation", 72, 86, 980, 84, 34);
   body(
     slide,
     ctx,
-    "L'objectif n'est pas d'ajouter un outil de plus. Il s'agit de mieux piloter, mieux coordonner et mieux diffuser l'information utile dans des flux qui coûtent du temps et de la discipline.",
+    "L'objectif n'est pas d'ajouter un outil de plus. Il s'agit de mieux piloter, mieux coordonner et mieux exploiter l'information utile là où l'exécution ralentit.",
     72,
     176,
     950,
@@ -583,30 +583,30 @@ export async function slide02(presentation, ctx) {
   await useCaseCard(slide, ctx, {
     x: 72, y: 248, w: 270, h: 180,
     icon: "Briefcase", accent: theme.orange,
-    titleText: "Comptes professionnels",
-    before: "Revues de portefeuille, relances et suivi d'encaissement souvent préparés à la main.",
-    after: "Portefeuille plus lisible, relances mieux priorisées et synthèses plus rapides pour la direction.",
+    titleText: "Coordination et suivi",
+    before: "L'information utile circule mal entre les équipes, les validations et les points de contact.",
+    after: "Décisions plus lisibles, suivi plus régulier et moins de perte entre acteurs.",
   });
   await useCaseCard(slide, ctx, {
     x: 362, y: 248, w: 270, h: 180,
     icon: "Fuel", accent: theme.teal,
-    titleText: "Flotte et carburant",
-    before: "Consommations, cartes et anomalies difficilement consolidées dans un même pilotage.",
-    after: "Suivi plus fiable des coûts, alertes sur écarts et comparaison par véhicule, site ou période.",
+    titleText: "Pilotage et reporting",
+    before: "Les données existent, mais restent longues à consolider, commenter et exploiter.",
+    after: "Synthèses plus rapides, alertes plus simples et meilleure lecture des priorités.",
   });
   await useCaseCard(slide, ctx, {
     x: 652, y: 248, w: 270, h: 180,
     icon: "Wrench", accent: theme.navy,
-    titleText: "Service client / auto",
-    before: "Rappels, demandes et réponses pas toujours homogènes ni suffisamment tracés.",
-    after: "Réponses plus rapides, scripts mieux cadrés et meilleure continuité dans le suivi client.",
+    titleText: "Qualité de service",
+    before: "Réponses variables, délais inégaux et continuité de service difficile à tenir.",
+    after: "Réponses plus homogènes, délais mieux suivis et expérience mieux maîtrisée.",
   });
   await useCaseCard(slide, ctx, {
     x: 942, y: 248, w: 266, h: 180,
     icon: "BookOpen", accent: theme.gold,
-    titleText: "Procédures internes",
-    before: "Les bonnes pratiques existent, mais restent dispersées dans les équipes et les documents.",
-    after: "Accès plus rapide aux procédures, onboarding plus court et exécution plus cohérente.",
+    titleText: "Procédures et connaissances",
+    before: "Les standards existent, mais restent dispersés dans les documents et les équipes.",
+    after: "Accès plus rapide aux bonnes pratiques, onboarding plus fluide et exécution plus cohérente.",
   });
 
   rect(slide, ctx, 72, 466, 1136, 136, theme.navy, { line: ctx.line(theme.navy, 0) });
@@ -615,11 +615,11 @@ export async function slide02(presentation, ctx) {
     color: "#CFE0F0",
     bold: true,
   });
-  title(slide, ctx, "Partir des flux métier qui freinent déjà l'exécution.", 98, 520, 560, 52, 28, theme.white);
+  title(slide, ctx, "Partir des points de friction qui ralentissent déjà l'exécution.", 98, 520, 580, 62, 26, theme.white);
   body(
     slide,
     ctx,
-    "La crédibilité ne viendra pas d'un catalogue de formations. Elle viendra d'une proposition qui relie diagnostic, cas d'usage, gouvernance, formation ciblée et premiers gains visibles.",
+    "TransferAI ne vend pas un catalogue. TransferAI part des flux où le temps, la coordination et la qualité de service se dégradent déjà.",
     680,
     512,
     500,
@@ -638,39 +638,39 @@ export async function slide03(presentation, ctx) {
 
   rect(slide, ctx, 0, 0, 1280, 118, theme.navy, { line: ctx.line(theme.navy, 0) });
   kicker(slide, ctx, "ROI de référence", 72, 52, theme.white);
-  title(slide, ctx, "Le ROI devient utile seulement s'il est traduit dans le contexte du prospect", 72, 76, 1036, 34, 28, theme.white);
+  title(slide, ctx, "Le ROI devient crédible quand il est instrumenté", 72, 76, 920, 34, 28, theme.white);
 
-  metricCard(slide, ctx, 72, 148, 264, 116, theme.teal, "+30 %", "productivité benchmark", "tâches répétitives, reporting, préparation de synthèses");
-  metricCard(slide, ctx, 356, 148, 264, 116, theme.navy, "-45 %", "effort de formation", "onboarding, diffusion de pratiques et transfert de savoir");
-  metricCard(slide, ctx, 640, 148, 264, 116, theme.orange, "J+15", "premier livrable", "audit, cadrage et priorisation ROI");
-  metricCard(slide, ctx, 924, 148, 284, 116, theme.gold, "3,2x", "potentiel de ROI", "référence : projets comparables TransferAI");
+  metricCard(slide, ctx, 72, 148, 264, 116, theme.teal, "+30 %", "productivité benchmark", "flux répétitifs et préparation");
+  metricCard(slide, ctx, 356, 148, 264, 116, theme.navy, "-45 %", "effort de formation", "onboarding et diffusion interne");
+  metricCard(slide, ctx, 640, 148, 264, 116, theme.orange, "J+15", "premier livrable", "audit, cadrage et priorisation");
+  metricCard(slide, ctx, 924, 148, 284, 116, theme.gold, "3,2x", "potentiel de ROI", "références TransferAI comparables");
 
   kpiRow(
     slide,
     ctx,
     310,
     theme.orange,
-    "Comptes professionnels",
-    "Automatiser la préparation des relances, standardiser les revues de portefeuille et mieux signaler les comptes à risque ou en retard.",
-    "délai moyen de relance, temps de préparation des revues clients, évolution des encours en retard",
+    "Productivité et délai",
+    "Réduire le temps passé sur la préparation, la consolidation et la circulation de l'information.",
+    "temps de traitement, temps de préparation, délai de réponse",
   );
   kpiRow(
     slide,
     ctx,
     392,
     theme.teal,
-    "Flotte et cartes carburant",
-    "Consolider les consommations, rapprocher les sources et produire des alertes simples sur les anomalies ou les dépassements inhabituels.",
-    "temps de production du reporting flotte, nombre d'anomalies détectées, variation des coûts carburant",
+    "Qualité de service",
+    "Rendre les réponses plus cohérentes, mieux tracées et plus faciles à superviser.",
+    "qualité perçue, taux de réouverture, délai de clôture",
   );
   kpiRow(
     slide,
     ctx,
     474,
     theme.navy,
-    "Service client et procédures",
-    "Rendre les réponses plus cohérentes, accélérer l'accès aux standards et réduire le temps de montée en main des équipes.",
-    "délai de réponse, temps d'onboarding, usage de la base procédures / FAQ interne",
+    "Capitalisation et adoption",
+    "Accélérer l'accès aux procédures, l'onboarding et l'appropriation des nouveaux usages.",
+    "temps d'onboarding, temps de recherche, taux d'usage",
   );
 
   card(slide, ctx, 72, 584, 1136, 54, { fill: theme.panelAlt, border: theme.line });
@@ -682,7 +682,7 @@ export async function slide03(presentation, ctx) {
   body(
     slide,
     ctx,
-    "Les chiffres affichés ci-dessus sont un référentiel ROI TransferAI sur des déploiements comparables. Les gains réels seront calibrés sur les volumes, les processus et les données du prospect pendant l'audit initial.",
+    "Les chiffres ci-dessus servent de repères. Les gains réels seront calibrés à partir des volumes, des processus et des données du prospect.",
     188,
     598,
     980,
@@ -700,11 +700,11 @@ export async function slide04(presentation, ctx) {
   bg(slide, ctx);
 
   kicker(slide, ctx, "Cas d'usage prioritaires");
-  title(slide, ctx, "Les 4 cas d'usage à mettre au centre de la proposition", 72, 86, 900, 84, 34);
+  title(slide, ctx, "Les 4 familles de cas d'usage à prioriser", 72, 86, 900, 84, 34);
   body(
     slide,
     ctx,
-    "Chaque cas d'usage doit être présenté comme un flux métier visible, avec un avant, un après et des KPI de validation.",
+    "Le deck doit montrer des familles d'usages adaptables, pas des scénarios déjà figés pour le prospect.",
     72,
     176,
     920,
@@ -716,30 +716,30 @@ export async function slide04(presentation, ctx) {
   await useCaseCard(slide, ctx, {
     x: 72, y: 228, w: 540, h: 172,
     icon: "CircleDollarSign", accent: theme.orange,
-    titleText: "1. Comptes professionnels et recouvrement",
-    before: "Relances, revues de portefeuille et synthèses commerciales dispersées entre plusieurs supports.",
-    after: "Assistant de préparation, synthèse portefeuille, priorisation des comptes à risque et routines de suivi mieux standardisées.",
+    titleText: "1. Relation usagers / clients",
+    before: "Demandes récurrentes, réponses hétérogènes et historique peu exploité.",
+    after: "Réponses assistées, suivi continu et meilleure qualité de service.",
   });
   await useCaseCard(slide, ctx, {
     x: 640, y: 228, w: 568, h: 172,
     icon: "Fuel", accent: theme.teal,
-    titleText: "2. Flotte, cartes carburant et consommation",
-    before: "Vision fragmentée des consommations, des écarts et des commentaires d'analyse.",
-    after: "Tableau de bord consolidé, alertes simples sur anomalies et meilleure lecture des coûts par véhicule, site ou période.",
+    titleText: "2. Back-office et reporting",
+    before: "Consolidations, contrôles et synthèses encore très manuels.",
+    after: "Préparation plus rapide, reporting mieux structuré et alertes utiles.",
   });
   await useCaseCard(slide, ctx, {
     x: 72, y: 424, w: 540, h: 172,
     icon: "MessageSquareText", accent: theme.navy,
-    titleText: "3. Service client / service auto",
-    before: "Demandes récurrentes, scripts variables et historique pas toujours exploitable pour mieux servir.",
-    after: "FAQ assistée, canevas de réponse, suivi plus continu et meilleur niveau de réactivité opérationnelle.",
+    titleText: "3. Procédures et knowledge base",
+    before: "Standards dispersés, transmission lente et onboarding fragile.",
+    after: "Référentiel plus accessible, exécution plus homogène et transfert plus fiable.",
   });
   await useCaseCard(slide, ctx, {
     x: 640, y: 424, w: 568, h: 172,
     icon: "BookOpen", accent: theme.gold,
-    titleText: "4. Procédures internes et base de connaissances",
-    before: "Procédures, standards et bonnes réponses éparpillés, donc difficilement réutilisables à grande échelle.",
-    after: "Base interne plus accessible, exécution plus homogène et réduction du temps de recherche pour les équipes.",
+    titleText: "4. Aide à la décision",
+    before: "Décisions prises avec une lecture partielle ou tardive des données utiles.",
+    after: "Synthèses plus lisibles, signaux utiles et arbitrages mieux préparés.",
   });
 
   footer(slide, ctx, 7);
@@ -750,13 +750,13 @@ export async function slide04sectionB(presentation, ctx) {
   const slide = presentation.slides.add();
   sectionDivider(slide, ctx, {
     kicker: "Ce que nous recommandons",
-    title: "Les slides qui transforment\nles enjeux en feuille de route\ngouvernée.",
-    copy: "Cette deuxième partie du deck convertit les cas d'usage en feuille de route, en gouvernance et en prochaine étape institutionnelle simple.",
+    title: "Transformer les enjeux\nen feuille de route\ngouvernée.",
+    copy: "À partir des priorités repérées, le deck doit montrer comment TransferAI cadre, forme, pilote et mesure sans brûler les étapes.",
     panelLabel: "Ce que le prospect doit retenir",
-    panelCopy: "TransferAI aide à choisir un premier terrain, à cadrer le pilote, à former les bonnes équipes et à mesurer si l'extension est justifiée dans un cadre maîtrisé.",
+    panelCopy: "TransferAI aide à choisir un point de départ, à cadrer le pilote, à former les bonnes équipes et à mesurer si l'extension est justifiée.",
     quoteLabel: "Fil conducteur",
     quoteTitle: "Recommander sans surpromettre.",
-    quoteCopy: "Un pilote utile, encadré et lisible vaut mieux qu'un grand plan flou ou trop large dès le départ.",
+    quoteCopy: "Un pilote utile, encadré et lisible vaut mieux qu'un grand plan trop large dès le départ.",
     accent: theme.teal,
   });
   footer(slide, ctx, 8);
@@ -768,11 +768,11 @@ export async function slide05(presentation, ctx) {
   bg(slide, ctx);
 
   kicker(slide, ctx, "Détail des cas d'usage");
-  title(slide, ctx, "Les deux premiers terrains à lancer rapidement", 72, 86, 840, 84, 34);
+  title(slide, ctx, "Deux portes d'entrée qui rendent la valeur vite visible", 72, 86, 980, 84, 34);
   body(
     slide,
     ctx,
-    "Nous recommandons de démarrer par deux flux où la valeur est plus facile à rendre visible pour la direction : comptes professionnels et flotte / cartes carburant.",
+    "Pour un premier pilote, mieux vaut démarrer par des usages simples à démontrer pour la direction et utiles aux équipes.",
     72,
     176,
     920,
@@ -782,30 +782,30 @@ export async function slide05(presentation, ctx) {
   );
 
   card(slide, ctx, 72, 228, 540, 326, { fill: theme.panel });
-  await iconBadge(slide, ctx, "CircleDollarSign", 94, 248, theme.orange);
-  title(slide, ctx, "Comptes professionnels et recouvrement", 150, 248, 410, 34, 22);
+  await iconBadge(slide, ctx, "Briefcase", 94, 248, theme.orange);
+  title(slide, ctx, "Productivité interne et reporting", 150, 248, 410, 34, 22);
   text(slide, ctx, "AVANT", 94, 300, 70, 16, { size: 10, color: theme.orange, bold: true });
-  body(slide, ctx, "• relances préparées à la main\n• revues de portefeuille longues à consolider\n• informations dispersées entre mails, fichiers et historique commercial", 94, 324, 470, 74, 12.5, theme.soft);
+  body(slide, ctx, "• préparations manuelles\n• synthèses longues à produire\n• informations dispersées entre supports", 94, 324, 470, 74, 12.5, theme.soft);
   text(slide, ctx, "APRÈS", 94, 418, 70, 16, { size: 10, color: theme.teal, bold: true });
-  body(slide, ctx, "• canevas de relance et brouillons assistés\n• synthèse de portefeuille pré-préparée pour les revues\n• signalement des comptes sensibles ou des échéances critiques", 94, 442, 470, 74, 12.5, theme.ink);
-  card(slide, ctx, 94, 522, 490, 40, { fill: theme.panelAlt, border: theme.line });
-  body(slide, ctx, "KPI : délai de relance | temps de préparation des revues | visibilité sur les encours en retard", 110, 534, 456, 16, 11.5, theme.ink, { bold: true });
+  body(slide, ctx, "• brouillons assistés\n• synthèses pré-structurées\n• lecture plus rapide des points critiques", 94, 442, 470, 74, 12.5, theme.ink);
+  card(slide, ctx, 94, 514, 490, 40, { fill: theme.panelAlt, border: theme.line });
+  body(slide, ctx, "KPI : temps de préparation | temps de consolidation | délai de production", 110, 526, 456, 16, 11.5, theme.ink, { bold: true });
 
   card(slide, ctx, 640, 228, 568, 326, { fill: theme.panel });
-  await iconBadge(slide, ctx, "Fuel", 662, 248, theme.teal);
-  title(slide, ctx, "Flotte, cartes carburant et consommation", 718, 248, 420, 34, 22);
+  await iconBadge(slide, ctx, "MessageSquareText", 662, 248, theme.teal);
+  title(slide, ctx, "Qualité de service et coordination", 718, 248, 420, 34, 22);
   text(slide, ctx, "AVANT", 662, 300, 70, 16, { size: 10, color: theme.orange, bold: true });
-  body(slide, ctx, "• reporting flotte et carburant peu harmonisé\n• écarts détectés tardivement\n• lecture difficile des coûts par site, véhicule ou période", 662, 324, 498, 74, 12.5, theme.soft);
+  body(slide, ctx, "• réponses inégales\n• suivi difficile à tracer\n• dépendance aux personnes clés", 662, 324, 498, 74, 12.5, theme.soft);
   text(slide, ctx, "APRÈS", 662, 418, 70, 16, { size: 10, color: theme.teal, bold: true });
-  body(slide, ctx, "• tableau de bord consolidé\n• alertes sur anomalies de consommation\n• comparatifs plus simples pour arbitrer et commenter les écarts", 662, 442, 498, 74, 12.5, theme.ink);
-  card(slide, ctx, 662, 522, 498, 40, { fill: theme.panelAlt, border: theme.line });
-  body(slide, ctx, "KPI : temps de production du reporting | anomalies détectées | variation du coût carburant", 678, 534, 466, 16, 11.5, theme.ink, { bold: true });
+  body(slide, ctx, "• canevas de réponse\n• suivi plus homogène\n• continuité de service renforcée", 662, 442, 498, 74, 12.5, theme.ink);
+  card(slide, ctx, 662, 514, 498, 40, { fill: theme.panelAlt, border: theme.line });
+  body(slide, ctx, "KPI : délai de réponse | qualité perçue | taux de réouverture", 678, 526, 466, 16, 11.5, theme.ink, { bold: true });
 
   rect(slide, ctx, 72, 590, 1136, 54, theme.navy, { line: ctx.line(theme.navy, 0) });
   body(
     slide,
     ctx,
-    "Ces deux flux ont un avantage : ils parlent à la fois à la direction, aux opérations et aux équipes métier. Ils permettent donc de montrer très vite une valeur concrète, sans promettre une transformation trop large dès le départ.",
+    "Ces deux portes d'entrée parlent à la direction comme aux équipes : elles permettent de démontrer vite une valeur utile sans enfermer le pilote dans un secteur précis.",
     96,
     606,
     1088,
@@ -823,11 +823,11 @@ export async function slide06(presentation, ctx) {
   bg(slide, ctx);
 
   kicker(slide, ctx, "Détail des cas d'usage");
-  title(slide, ctx, "Les cas d'usage qui renforcent la qualité de service et la standardisation", 72, 86, 980, 84, 34);
+  title(slide, ctx, "Deux familles d'usages qui sécurisent l'adoption", 72, 86, 980, 84, 34);
   body(
     slide,
     ctx,
-    "Ces deux usages rendent aussi la formation plus crédible : on apprend sur des situations réelles, pas sur des exemples génériques.",
+    "Ces usages rendent l'IA visible dans le quotidien tout en renforçant les standards internes.",
     72,
     176,
     960,
@@ -838,12 +838,12 @@ export async function slide06(presentation, ctx) {
 
   card(slide, ctx, 72, 228, 540, 308, { fill: theme.panel });
   await iconBadge(slide, ctx, "MessageSquareText", 94, 248, theme.navy);
-  title(slide, ctx, "Service client / service auto", 150, 248, 390, 34, 22);
+  title(slide, ctx, "Support et relation usagers / clients", 150, 248, 390, 34, 20);
   text(slide, ctx, "Usages proposés", 94, 300, 120, 16, { size: 10, color: theme.orange, bold: true });
   body(
     slide,
     ctx,
-    "• FAQ assistée pour les questions récurrentes\n• canevas de réponse ou de rappel\n• historique d'interactions mieux exploitable\n• synthèses rapides avant rappel ou traitement",
+    "• réponses assistées sur questions récurrentes\n• canevas de réponse ou de rappel\n• historique mieux exploitable\n• synthèses rapides avant traitement",
     94,
     324,
     456,
@@ -852,16 +852,16 @@ export async function slide06(presentation, ctx) {
     theme.ink,
   );
   card(slide, ctx, 94, 432, 490, 84, { fill: theme.panelAlt, border: theme.line });
-  body(slide, ctx, "KPI : délai de réponse | qualité perçue | taux de réouverture / relance | standardisation des scripts", 112, 458, 450, 36, 11.5, theme.ink, { bold: true });
+  body(slide, ctx, "KPI : délai de réponse | qualité perçue | taux de réouverture | homogénéité des scripts", 112, 458, 450, 36, 11.5, theme.ink, { bold: true });
 
   card(slide, ctx, 640, 228, 568, 308, { fill: theme.panel });
   await iconBadge(slide, ctx, "BookOpen", 662, 248, theme.gold);
-  title(slide, ctx, "Procédures internes et base de connaissances", 718, 248, 432, 34, 22);
+  title(slide, ctx, "Procédures, knowledge base et onboarding", 718, 248, 432, 34, 20);
   text(slide, ctx, "Usages proposés", 662, 300, 120, 16, { size: 10, color: theme.orange, bold: true });
   body(
     slide,
     ctx,
-    "• base de procédures consultable rapidement\n• réponses homogènes pour les équipes support et métier\n• onboarding accéléré sur les standards, scripts et points de contrôle\n• diffusion plus simple des mises à jour internes",
+    "• base de procédures consultable rapidement\n• réponses homogènes pour les équipes support et métier\n• onboarding accéléré sur les standards et points de contrôle\n• diffusion plus simple des mises à jour internes",
     662,
     324,
     490,
@@ -870,19 +870,19 @@ export async function slide06(presentation, ctx) {
     theme.ink,
   );
   card(slide, ctx, 662, 432, 498, 84, { fill: theme.panelAlt, border: theme.line });
-  body(slide, ctx, "KPI : temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne", 680, 458, 460, 36, 11.5, theme.ink, { bold: true });
+  body(slide, ctx, "KPI : temps de recherche | temps d'onboarding | taux d'usage de la base interne", 680, 458, 460, 36, 11.5, theme.ink, { bold: true });
 
-  rect(slide, ctx, 72, 566, 1136, 80, theme.teal, { line: ctx.line(theme.teal, 0) });
+  rect(slide, ctx, 72, 566, 1136, 88, theme.teal, { line: ctx.line(theme.teal, 0) });
   text(slide, ctx, "Pourquoi cette slide compte", 96, 586, 170, 16, {
     size: 10,
     color: "#DDF5EF",
     bold: true,
   });
-  title(slide, ctx, "La formation devient crédible quand elle prépare des usages visibles.", 96, 608, 560, 24, 22, theme.white);
+  title(slide, ctx, "L'adoption devient crédible quand elle prépare des usages visibles.", 96, 604, 560, 34, 18, theme.white);
   body(
     slide,
     ctx,
-    "Cela permet d'éviter un discours abstrait : les équipes voient tout de suite sur quels gestes métier l'IA doit les aider.",
+    "Les équipes comprennent tout de suite sur quels gestes concrets l'IA doit les aider.",
     700,
     602,
     470,
@@ -1003,7 +1003,7 @@ export async function slide09(presentation, ctx) {
   bg(slide, ctx);
 
   kicker(slide, ctx, "Confiance et prochaine étape");
-  title(slide, ctx, "Proposer un pilote utile, gouverné et mesurable", 72, 86, 900, 84, 34);
+  title(slide, ctx, "Ouvrir sur un pilote utile, gouverné et mesurable", 72, 86, 920, 84, 34);
 
   card(slide, ctx, 72, 180, 520, 390, { fill: theme.panel });
   await iconBadge(slide, ctx, "ShieldCheck", 94, 204, theme.teal);
@@ -1011,9 +1011,9 @@ export async function slide09(presentation, ctx) {
   body(
     slide,
     ctx,
-    "• aucune donnée sensible n'est exposée sans règles d'usage, rôles et validation\n• revue humaine avant toute automatisation critique\n• traçabilité des accès et des sorties\n• périmètre pilote strictement défini avant extension\n• formation intégrée aux exigences de confidentialité et de supervision",
+    "• règles d'usage, rôles et validation avant exposition de données sensibles\n• revue humaine avant toute automatisation critique\n• traçabilité des accès et des sorties\n• périmètre pilote défini avant extension\n• formation intégrée aux exigences de supervision",
     94,
-    262,
+    276,
     448,
     182,
     12.8,
@@ -1021,7 +1021,7 @@ export async function slide09(presentation, ctx) {
   );
   card(slide, ctx, 94, 456, 456, 88, { fill: theme.panelAlt, border: theme.line });
   text(slide, ctx, "Message fort", 114, 474, 100, 16, { size: 10, color: theme.orange, bold: true });
-  title(slide, ctx, "Une IA utile, maîtrisée et compatible avec vos exigences de confidentialité.", 114, 496, 392, 30, 18);
+  title(slide, ctx, "Une IA utile, maîtrisée et compatible avec vos exigences de confidentialité.", 114, 496, 392, 40, 17);
 
   rect(slide, ctx, 640, 180, 568, 390, theme.navy, { line: ctx.line(theme.navy, 0) });
   kicker(slide, ctx, "Prochaine étape", 668, 208, theme.white);
@@ -1029,11 +1029,11 @@ export async function slide09(presentation, ctx) {
   body(
     slide,
     ctx,
-    "1. Tenir un échange expert de 30 minutes\n2. Remplir ou envoyer le formulaire d'audit IA\n3. Recevoir une priorisation claire des cas d'usage\n4. Valider un premier pilote et ses KPI",
+    "1. Qualifier les priorités et les irritants\n2. Choisir le bon point d'entrée\n3. Cadrer l'audit, le pilote ou la formation",
     668,
-    286,
+    300,
     360,
-    128,
+    110,
     15,
     theme.white,
   );
@@ -1048,11 +1048,11 @@ export async function slide09(presentation, ctx) {
   body(
     slide,
     ctx,
-    "Formule courte à utiliser : TransferAI aide votre organisation à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite entre pilote, accompagnement et extension. Formulaire d'audit : www.transferai.ci/formulaire-audit-ia/index.html",
+    "TransferAI aide votre organisation à identifier les usages utiles, former les bonnes équipes et choisir la bonne suite. Point d'entrée : transferai.ci",
     690,
-    466,
+    470,
     456,
-    40,
+    34,
     11.5,
     "#D7E5F3",
   );

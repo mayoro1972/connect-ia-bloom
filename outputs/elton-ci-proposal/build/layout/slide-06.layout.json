@@ -2,13 +2,13 @@
   "schema": "openai.presentation.layout/v4",
   "unit": "px",
   "slide": {
-    "aid": "sl/tpni6s",
-    "id": "tpni6s",
+    "aid": "sl/ibgf3t",
+    "id": "ibgf3t",
     "slide": 6,
-    "layoutId": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+    "layoutId": "e8395186-6167-493e-abd6-da64e1eda14a",
     "layoutName": "Title Slide",
     "layoutType": "title",
-    "masterLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+    "masterLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
     "masterLayoutName": "Master",
     "frame": {
       "left": 0,
@@ -45,15 +45,15 @@
   "inheritedLayers": [
     {
       "scope": "layout",
-      "id": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+      "id": "e8395186-6167-493e-abd6-da64e1eda14a",
       "name": "Title Slide",
       "type": "title",
-      "parentLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+      "parentLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "elements": []
     },
     {
       "scope": "master",
-      "id": "05412918-66fe-43e3-9b4f-318023edc354",
+      "id": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "name": "Master",
       "type": "master",
       "elements": []
@@ -64,7 +64,7 @@
       "order": 1,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/4r65wjud",
+      "aid": "sh/lc7u54zi",
       "id": "1",
       "bbox": [
         0,
@@ -81,7 +81,7 @@
       "order": 2,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/f6dcbulw",
+      "aid": "sh/eloj2t83",
       "id": "2",
       "bbox": [
         72,
@@ -132,17 +132,17 @@
       "order": 3,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/mlkjm1cf",
+      "aid": "sh/36hcrmhk",
       "id": "3",
       "bbox": [
         72,
         86,
-        980,
+        840,
         84
       ],
       "geometry": "rect",
-      "text": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
-      "textPreview": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
+      "text": "Les deux premiers terrains a lancer rapidement",
+      "textPreview": "Les deux premiers terrains a lancer rapidement",
       "resolvedFontSize": 34,
       "resolvedTextStyle": {
         "fontSize": 34,
@@ -151,26 +151,22 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "Les cas d'usage qui renforcent la qualite de service et la"
-          },
-          {
-            "index": 2,
-            "text": "standardisation"
+            "text": "Les deux premiers terrains a lancer rapidement"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
+          "text": "Les deux premiers terrains a lancer rapidement",
           "runs": [
             {
               "index": 1,
-              "text": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
+              "text": "Les deux premiers terrains a lancer rapidement",
               "fontSize": 34,
               "typeface": "Aptos Display",
               "color": "#1A3554",
@@ -187,17 +183,17 @@
       "order": 4,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/xkf6dcbu",
+      "aid": "sh/wfyxobm5",
       "id": "4",
       "bbox": [
         72,
         176,
-        960,
+        920,
         28
       ],
       "geometry": "rect",
-      "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
-      "textPreview": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
+      "text": "Nous recommandons de demarrer par deux flux ou la valeur est plus facile a rendre visible pour la direction: comptes professionnels et flotte / cartes carburant.",
+      "textPreview": "Nous recommandons de demarrer par deux flux ou la valeur est plus facile a rendre visible pour la direction: comptes professionnels et fl...",
       "resolvedFontSize": 14,
       "resolvedTextStyle": {
         "fontSize": 14,
@@ -205,22 +201,26 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 1,
+        "lineCount": 2,
         "lines": [
           {
             "index": 1,
-            "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques."
+            "text": "Nous recommandons de demarrer par deux flux ou la valeur est plus facile a rendre visible pour la direction: comptes professionnels et flotte /"
+          },
+          {
+            "index": 2,
+            "text": "cartes carburant."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
+          "text": "Nous recommandons de demarrer par deux flux ou la valeur est plus facile a rendre visible pour la direction: comptes professionnels et flotte / cartes carburant.",
           "runs": [
             {
               "index": 1,
-              "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
+              "text": "Nous recommandons de demarrer par deux flux ou la valeur est plus facile a rendre visible pour la direction: comptes professionnels et flotte / cartes carburant.",
               "fontSize": 14,
               "typeface": "Aptos",
               "color": "#617086"
@@ -236,13 +236,13 @@
       "order": 5,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/4zidonyd",
+      "aid": "sh/l0rqd4vm",
       "id": "5",
       "bbox": [
         72,
         228,
         540,
-        308
+        326
       ],
       "geometry": "rect",
       "fillColor": "#FFFDFC",
@@ -253,7 +253,7 @@
       "order": 6,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/fepkzupw",
+      "aid": "sh/ed8bat47",
       "id": "6",
       "bbox": [
         94,
@@ -262,15 +262,15 @@
         44
       ],
       "geometry": "ellipse",
-      "fillColor": "#163556",
-      "lineColor": "#163556",
+      "fillColor": "#E76F1D",
+      "lineColor": "#E76F1D",
       "lineWidth": 0
     },
     {
       "order": 7,
       "kind": "image",
       "scope": "slide",
-      "aid": "im/7ed8bat4",
+      "aid": "im/uxc3ylc7",
       "id": "7",
       "bbox": [
         104,
@@ -278,29 +278,29 @@
         24,
         24
       ],
-      "alt": "MessageSquareText icon",
+      "alt": "CircleDollarSign icon",
       "contentType": "image/svg+xml",
       "asset": {
-        "assetId": "9450f577-0d25-402b-8141-20118a105923",
+        "assetId": "21241684-4c1a-4911-8d66-740625edfb06",
         "contentType": "image/svg+xml",
-        "byteLength": 366
+        "byteLength": 286
       }
     },
     {
       "order": 8,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/xobm58z2",
+      "aid": "sh/w7mp0bi9",
       "id": "8",
       "bbox": [
         150,
         248,
-        390,
+        410,
         34
       ],
       "geometry": "rect",
-      "text": "Service client / service auto",
-      "textPreview": "Service client / service auto",
+      "text": "Comptes professionnels & recouvrement",
+      "textPreview": "Comptes professionnels & recouvrement",
       "resolvedFontSize": 22,
       "resolvedTextStyle": {
         "fontSize": 22,
@@ -309,22 +309,26 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 1,
+        "lineCount": 2,
         "lines": [
           {
             "index": 1,
-            "text": "Service client / service auto"
+            "text": "Comptes professionnels &"
+          },
+          {
+            "index": 2,
+            "text": "recouvrement"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Service client / service auto",
+          "text": "Comptes professionnels & recouvrement",
           "runs": [
             {
               "index": 1,
-              "text": "Service client / service auto",
+              "text": "Comptes professionnels & recouvrement",
               "fontSize": 22,
               "typeface": "Aptos Display",
               "color": "#1A3554",
@@ -341,17 +345,17 @@
       "order": 9,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/83itgfml",
+      "aid": "sh/psfil0rq",
       "id": "9",
       "bbox": [
         94,
         300,
-        110,
+        70,
         16
       ],
       "geometry": "rect",
-      "text": "Usages proposes",
-      "textPreview": "Usages proposes",
+      "text": "AVANT",
+      "textPreview": "AVANT",
       "resolvedFontSize": 10,
       "resolvedTextStyle": {
         "fontSize": 10,
@@ -364,18 +368,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "Usages proposes"
+            "text": "AVANT"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Usages proposes",
+          "text": "AVANT",
           "runs": [
             {
               "index": 1,
-              "text": "Usages proposes",
+              "text": "AVANT",
               "fontSize": 10,
               "typeface": "Aptos",
               "color": "#E76F1D",
@@ -392,17 +396,17 @@
       "order": 10,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/y90je9cv",
+      "aid": "sh/tsvu9kni",
       "id": "10",
       "bbox": [
         94,
         324,
-        456,
-        90
+        470,
+        74
       ],
       "geometry": "rect",
-      "text": "• FAQ assistee pour questions recurrentes\n• canevas de reponse ou de rappel\n• historique d'interactions mieux exploitable\n• syntheses rapides avant rappel ou traitement",
-      "textPreview": "• FAQ assistee pour questions recurrentes | • canevas de reponse ou de rappel | • historique d'interactions mieux exploitable | • synthes...",
+      "text": "• relances preparees a la main\n• revues portefeuille longues a consolider\n• informations dispersees entre mails, fichiers et historique commercial",
+      "textPreview": "• relances preparees a la main | • revues portefeuille longues a consolider | • informations dispersees entre mails, fichiers et historiq...",
       "resolvedFontSize": 12.51,
       "resolvedTextStyle": {
         "fontSize": 12.51,
@@ -410,76 +414,59 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 4,
+        "lineCount": 3,
         "lines": [
           {
             "index": 1,
-            "text": "• FAQ assistee pour questions recurrentes"
+            "text": "• relances preparees a la main"
           },
           {
             "index": 2,
-            "text": "• canevas de reponse ou de rappel"
+            "text": "• revues portefeuille longues a consolider"
           },
           {
             "index": 3,
-            "text": "• historique d'interactions mieux exploitable"
-          },
-          {
-            "index": 4,
-            "text": "• syntheses rapides avant rappel ou traitement"
+            "text": "• informations dispersees entre mails, fichiers et historique commercial"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• FAQ assistee pour questions recurrentes",
+          "text": "• relances preparees a la main",
           "runs": [
             {
               "index": 1,
-              "text": "• FAQ assistee pour questions recurrentes",
+              "text": "• relances preparees a la main",
               "fontSize": 12.51,
               "typeface": "Aptos",
-              "color": "#1A3554"
+              "color": "#617086"
             }
           ]
         },
         {
           "index": 2,
-          "text": "• canevas de reponse ou de rappel",
+          "text": "• revues portefeuille longues a consolider",
           "runs": [
             {
               "index": 1,
-              "text": "• canevas de reponse ou de rappel",
+              "text": "• revues portefeuille longues a consolider",
               "fontSize": 12.51,
               "typeface": "Aptos",
-              "color": "#1A3554"
+              "color": "#617086"
             }
           ]
         },
         {
           "index": 3,
-          "text": "• historique d'interactions mieux exploitable",
+          "text": "• informations dispersees entre mails, fichiers et historique commercial",
           "runs": [
             {
               "index": 1,
-              "text": "• historique d'interactions mieux exploitable",
+              "text": "• informations dispersees entre mails, fichiers et historique commercial",
               "fontSize": 12.51,
               "typeface": "Aptos",
-              "color": "#1A3554"
-            }
-          ]
-        },
-        {
-          "index": 4,
-          "text": "• syntheses rapides avant rappel ou traitement",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• syntheses rapides avant rappel ou traitement",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#1A3554"
+              "color": "#617086"
             }
           ]
         }
@@ -492,13 +479,147 @@
       "order": 11,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/nuxc3ylc",
+      "aid": "sh/47y1kre1",
       "id": "11",
       "bbox": [
         94,
-        432,
+        418,
+        70,
+        16
+      ],
+      "geometry": "rect",
+      "text": "APRES",
+      "textPreview": "APRES",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "APRES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "APRES",
+          "runs": [
+            {
+              "index": 1,
+              "text": "APRES",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1C8A78",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bm58z25k",
+      "id": "12",
+      "bbox": [
+        94,
+        442,
+        470,
+        74
+      ],
+      "geometry": "rect",
+      "text": "• canevas de relance et brouillons assistes\n• synthese portefeuille pre-preparee pour les revues\n• signalement des comptes sensibles ou des echeances critiques",
+      "textPreview": "• canevas de relance et brouillons assistes | • synthese portefeuille pre-preparee pour les revues | • signalement des comptes sensibles ...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• canevas de relance et brouillons assistes"
+          },
+          {
+            "index": 2,
+            "text": "• synthese portefeuille pre-preparee pour les revues"
+          },
+          {
+            "index": 3,
+            "text": "• signalement des comptes sensibles ou des echeances critiques"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• canevas de relance et brouillons assistes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• canevas de relance et brouillons assistes",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• synthese portefeuille pre-preparee pour les revues",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• synthese portefeuille pre-preparee pour les revues",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• signalement des comptes sensibles ou des echeances critiques",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• signalement des comptes sensibles ou des echeances critiques",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m1cfa9w3",
+      "id": "13",
+      "bbox": [
+        94,
+        522,
         490,
-        84
+        40
       ],
       "geometry": "rect",
       "fillColor": "#FBF5EE",
@@ -506,20 +627,20 @@
       "lineWidth": 1
     },
     {
-      "order": 12,
+      "order": 14,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/gbq1oryt",
-      "id": "12",
+      "aid": "sh/tgfmlkjm",
+      "id": "14",
       "bbox": [
-        112,
-        458,
-        450,
-        36
+        110,
+        534,
+        456,
+        16
       ],
       "geometry": "rect",
-      "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
-      "textPreview": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+      "text": "KPI: delai de relance | temps preparation revue | visibilite encours en retard",
+      "textPreview": "KPI: delai de relance | temps preparation revue | visibilite encours en retard",
       "resolvedFontSize": 11.51,
       "resolvedTextStyle": {
         "fontSize": 11.51,
@@ -528,26 +649,22 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance |"
-          },
-          {
-            "index": 2,
-            "text": "standardisation des scripts"
+            "text": "KPI: delai de relance | temps preparation revue | visibilite encours en retard"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+          "text": "KPI: delai de relance | temps preparation revue | visibilite encours en retard",
           "runs": [
             {
               "index": 1,
-              "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+              "text": "KPI: delai de relance | temps preparation revue | visibilite encours en retard",
               "fontSize": 11.51,
               "typeface": "Aptos",
               "color": "#1A3554",
@@ -561,16 +678,16 @@
       "lineWidth": 0
     },
     {
-      "order": 13,
+      "order": 15,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/5wjudg7a",
-      "id": "13",
+      "aid": "sh/4vmtwra5",
+      "id": "15",
       "bbox": [
         640,
         228,
         568,
-        308
+        326
       ],
       "geometry": "rect",
       "fillColor": "#FFFDFC",
@@ -578,11 +695,11 @@
       "lineWidth": 1
     },
     {
-      "order": 14,
+      "order": 16,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/yhgn29gr",
-      "id": "14",
+      "aid": "sh/bat47y1k",
+      "id": "16",
       "bbox": [
         662,
         248,
@@ -590,45 +707,45 @@
         44
       ],
       "geometry": "ellipse",
-      "fillColor": "#C88C3A",
-      "lineColor": "#C88C3A",
+      "fillColor": "#1C8A78",
+      "lineColor": "#1C8A78",
       "lineWidth": 0
     },
     {
-      "order": 15,
+      "order": 17,
       "kind": "image",
       "scope": "slide",
-      "aid": "im/gvy90je9",
-      "id": "15",
+      "aid": "im/5sneloj2",
+      "id": "17",
       "bbox": [
         672,
         258,
         24,
         24
       ],
-      "alt": "BookOpen icon",
+      "alt": "Fuel icon",
       "contentType": "image/svg+xml",
       "asset": {
-        "assetId": "c8225a6b-44f8-45a3-989c-0cd4401b6fe2",
+        "assetId": "b908e642-03ed-4e2c-91c7-192160358fb1",
         "contentType": "image/svg+xml",
-        "byteLength": 344
+        "byteLength": 355
       }
     },
     {
-      "order": 16,
+      "order": 18,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/gn29gr2p",
-      "id": "16",
+      "aid": "sh/t83itgfm",
+      "id": "18",
       "bbox": [
         718,
         248,
-        432,
+        420,
         34
       ],
       "geometry": "rect",
-      "text": "Procedures internes & knowledge base",
-      "textPreview": "Procedures internes & knowledge base",
+      "text": "Flotte, cartes carburant & consommation",
+      "textPreview": "Flotte, cartes carburant & consommation",
       "resolvedFontSize": 22,
       "resolvedTextStyle": {
         "fontSize": 22,
@@ -637,22 +754,26 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 1,
+        "lineCount": 2,
         "lines": [
           {
             "index": 1,
-            "text": "Procedures internes & knowledge base"
+            "text": "Flotte, cartes carburant &"
+          },
+          {
+            "index": 2,
+            "text": "consommation"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Procedures internes & knowledge base",
+          "text": "Flotte, cartes carburant & consommation",
           "runs": [
             {
               "index": 1,
-              "text": "Procedures internes & knowledge base",
+              "text": "Flotte, cartes carburant & consommation",
               "fontSize": 22,
               "typeface": "Aptos Display",
               "color": "#1A3554",
@@ -666,20 +787,20 @@
       "lineWidth": 0
     },
     {
-      "order": 17,
+      "order": 19,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/58z25kb6",
-      "id": "17",
+      "aid": "sh/4nap4r65",
+      "id": "19",
       "bbox": [
         662,
         300,
-        110,
+        70,
         16
       ],
       "geometry": "rect",
-      "text": "Usages proposes",
-      "textPreview": "Usages proposes",
+      "text": "AVANT",
+      "textPreview": "AVANT",
       "resolvedFontSize": 10,
       "resolvedTextStyle": {
         "fontSize": 10,
@@ -692,18 +813,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "Usages proposes"
+            "text": "AVANT"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Usages proposes",
+          "text": "AVANT",
           "runs": [
             {
               "index": 1,
-              "text": "Usages proposes",
+              "text": "AVANT",
               "fontSize": 10,
               "typeface": "Aptos",
               "color": "#E76F1D",
@@ -717,20 +838,20 @@
       "lineWidth": 0
     },
     {
-      "order": 18,
+      "order": 20,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/ytsvu9kn",
-      "id": "18",
+      "aid": "sh/0rqd4vmt",
+      "id": "20",
       "bbox": [
         662,
         324,
-        490,
-        90
+        498,
+        74
       ],
       "geometry": "rect",
-      "text": "• base procedure consultable rapidement\n• reponses homognes pour les equipes support et metier\n• onboarding accelere sur standards, scripts et points de controle\n• diffusion plus simple des mises a jour internes",
-      "textPreview": "• base procedure consultable rapidement | • reponses homognes pour les equipes support et metier | • onboarding accelere sur standards, s...",
+      "text": "• reporting flotte et carburant peu harmonise\n• ecarts detectes tardivement\n• lecture difficile des couts par site, vehicule ou periode",
+      "textPreview": "• reporting flotte et carburant peu harmonise | • ecarts detectes tardivement | • lecture difficile des couts par site, vehicule ou periode",
       "resolvedFontSize": 12.51,
       "resolvedTextStyle": {
         "fontSize": 12.51,
@@ -738,34 +859,164 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 4,
+        "lineCount": 3,
         "lines": [
           {
             "index": 1,
-            "text": "• base procedure consultable rapidement"
+            "text": "• reporting flotte et carburant peu harmonise"
           },
           {
             "index": 2,
-            "text": "• reponses homognes pour les equipes support et metier"
+            "text": "• ecarts detectes tardivement"
           },
           {
             "index": 3,
-            "text": "• onboarding accelere sur standards, scripts et points de controle"
-          },
-          {
-            "index": 4,
-            "text": "• diffusion plus simple des mises a jour internes"
+            "text": "• lecture difficile des couts par site, vehicule ou periode"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• base procedure consultable rapidement",
+          "text": "• reporting flotte et carburant peu harmonise",
           "runs": [
             {
               "index": 1,
-              "text": "• base procedure consultable rapidement",
+              "text": "• reporting flotte et carburant peu harmonise",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• ecarts detectes tardivement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ecarts detectes tardivement",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• lecture difficile des couts par site, vehicule ou periode",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• lecture difficile des couts par site, vehicule ou periode",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcj6tova",
+      "id": "21",
+      "bbox": [
+        662,
+        418,
+        70,
+        16
+      ],
+      "geometry": "rect",
+      "text": "APRES",
+      "textPreview": "APRES",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "APRES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "APRES",
+          "runs": [
+            {
+              "index": 1,
+              "text": "APRES",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1C8A78",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "22",
+      "bbox": [
+        662,
+        442,
+        498,
+        74
+      ],
+      "geometry": "rect",
+      "text": "• tableau de bord consolide\n• alertes sur anomalies de consommation\n• comparatifs plus simples pour arbitrer et commenter les ecarts",
+      "textPreview": "• tableau de bord consolide | • alertes sur anomalies de consommation | • comparatifs plus simples pour arbitrer et commenter les ecarts",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• tableau de bord consolide"
+          },
+          {
+            "index": 2,
+            "text": "• alertes sur anomalies de consommation"
+          },
+          {
+            "index": 3,
+            "text": "• comparatifs plus simples pour arbitrer et commenter les ecarts"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• tableau de bord consolide",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• tableau de bord consolide",
               "fontSize": 12.51,
               "typeface": "Aptos",
               "color": "#1A3554"
@@ -774,11 +1025,11 @@
         },
         {
           "index": 2,
-          "text": "• reponses homognes pour les equipes support et metier",
+          "text": "• alertes sur anomalies de consommation",
           "runs": [
             {
               "index": 1,
-              "text": "• reponses homognes pour les equipes support et metier",
+              "text": "• alertes sur anomalies de consommation",
               "fontSize": 12.51,
               "typeface": "Aptos",
               "color": "#1A3554"
@@ -787,24 +1038,11 @@
         },
         {
           "index": 3,
-          "text": "• onboarding accelere sur standards, scripts et points de controle",
+          "text": "• comparatifs plus simples pour arbitrer et commenter les ecarts",
           "runs": [
             {
               "index": 1,
-              "text": "• onboarding accelere sur standards, scripts et points de controle",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#1A3554"
-            }
-          ]
-        },
-        {
-          "index": 4,
-          "text": "• diffusion plus simple des mises a jour internes",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• diffusion plus simple des mises a jour internes",
+              "text": "• comparatifs plus simples pour arbitrer et commenter les ecarts",
               "fontSize": 12.51,
               "typeface": "Aptos",
               "color": "#1A3554"
@@ -817,16 +1055,16 @@
       "lineWidth": 0
     },
     {
-      "order": 19,
+      "order": 23,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/neloj2t8",
-      "id": "19",
+      "aid": "sh/b6xkf6dc",
+      "id": "23",
       "bbox": [
         662,
-        432,
+        522,
         498,
-        84
+        40
       ],
       "geometry": "rect",
       "fillColor": "#FBF5EE",
@@ -834,20 +1072,20 @@
       "lineWidth": 1
     },
     {
-      "order": 20,
+      "order": 24,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/fepkzupw",
-      "id": "20",
+      "aid": "sh/0je9cvix",
+      "id": "24",
       "bbox": [
-        680,
-        458,
-        460,
-        36
+        678,
+        534,
+        466,
+        16
       ],
       "geometry": "rect",
-      "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
-      "textPreview": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+      "text": "KPI: temps de production reporting | anomalies detectees | variation cout carburant",
+      "textPreview": "KPI: temps de production reporting | anomalies detectees | variation cout carburant",
       "resolvedFontSize": 11.51,
       "resolvedTextStyle": {
         "fontSize": 11.51,
@@ -856,26 +1094,22 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la"
-          },
-          {
-            "index": 2,
-            "text": "base interne"
+            "text": "KPI: temps de production reporting | anomalies detectees | variation cout carburant"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+          "text": "KPI: temps de production reporting | anomalies detectees | variation cout carburant",
           "runs": [
             {
               "index": 1,
-              "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+              "text": "KPI: temps de production reporting | anomalies detectees | variation cout carburant",
               "fontSize": 11.51,
               "typeface": "Aptos",
               "color": "#1A3554",
@@ -889,143 +1123,37 @@
       "lineWidth": 0
     },
     {
-      "order": 21,
+      "order": 25,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/mtwra5gb",
-      "id": "21",
+      "aid": "sh/t47y1kre",
+      "id": "25",
       "bbox": [
         72,
-        566,
+        590,
         1136,
-        80
+        54
       ],
       "geometry": "rect",
-      "fillColor": "#1C8A78",
-      "lineColor": "#1C8A78",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
       "lineWidth": 0
     },
     {
-      "order": 22,
+      "order": 26,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/xkf6dcbu",
-      "id": "22",
+      "aid": "sh/idonyd0z",
+      "id": "26",
       "bbox": [
         96,
-        586,
-        170,
-        16
+        606,
+        1088,
+        20
       ],
       "geometry": "rect",
-      "text": "Pourquoi cette slide compte",
-      "textPreview": "Pourquoi cette slide compte",
-      "resolvedFontSize": 10,
-      "resolvedTextStyle": {
-        "fontSize": 10,
-        "typeface": "Aptos",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "Pourquoi cette slide compte"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "Pourquoi cette slide compte",
-          "runs": [
-            {
-              "index": 1,
-              "text": "Pourquoi cette slide compte",
-              "fontSize": 10,
-              "typeface": "Aptos",
-              "color": "#DDF5EF",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 23,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/4zidonyd",
-      "id": "23",
-      "bbox": [
-        96,
-        608,
-        560,
-        24
-      ],
-      "geometry": "rect",
-      "text": "La formation devient credible quand elle prepare des usages visibles.",
-      "textPreview": "La formation devient credible quand elle prepare des usages visibles.",
-      "resolvedFontSize": 22,
-      "resolvedTextStyle": {
-        "fontSize": 22,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 2,
-        "lines": [
-          {
-            "index": 1,
-            "text": "La formation devient credible quand elle prepare des"
-          },
-          {
-            "index": 2,
-            "text": "usages visibles."
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "La formation devient credible quand elle prepare des usages visibles.",
-          "runs": [
-            {
-              "index": 1,
-              "text": "La formation devient credible quand elle prepare des usages visibles.",
-              "fontSize": 22,
-              "typeface": "Aptos Display",
-              "color": "#FFFFFF",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 24,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/f6dcbulw",
-      "id": "24",
-      "bbox": [
-        700,
-        602,
-        470,
-        26
-      ],
-      "geometry": "rect",
-      "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
-      "textPreview": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
+      "text": "Ces deux flux ont un avantage: ils parlent a la fois a la direction, aux operations et aux equipes metier. Ils permettent donc de montrer tres vite une valeur concrete, sans promettre une transformation trop large des le depart.",
+      "textPreview": "Ces deux flux ont un avantage: ils parlent a la fois a la direction, aux operations et aux equipes metier. Ils permettent donc de montrer...",
       "resolvedFontSize": 12.51,
       "resolvedTextStyle": {
         "fontSize": 12.51,
@@ -1037,22 +1165,22 @@
         "lines": [
           {
             "index": 1,
-            "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de"
+            "text": "Ces deux flux ont un avantage: ils parlent a la fois a la direction, aux operations et aux equipes metier. Ils permettent donc de montrer tres vite une valeur concrete, sans promettre une"
           },
           {
             "index": 2,
-            "text": "suite sur quels gestes metier l'IA doit les aider."
+            "text": "transformation trop large des le depart."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
+          "text": "Ces deux flux ont un avantage: ils parlent a la fois a la direction, aux operations et aux equipes metier. Ils permettent donc de montrer tres vite une valeur concrete, sans promettre une transformation trop large des le depart.",
           "runs": [
             {
               "index": 1,
-              "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
+              "text": "Ces deux flux ont un avantage: ils parlent a la fois a la direction, aux operations et aux equipes metier. Ils permettent donc de montrer tres vite une valeur concrete, sans promettre une transformation trop large des le depart.",
               "fontSize": 12.51,
               "typeface": "Aptos",
               "color": "#FFFFFF"
@@ -1065,11 +1193,11 @@
       "lineWidth": 0
     },
     {
-      "order": 25,
+      "order": 27,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/mlkjm1cf",
-      "id": "25",
+      "aid": "sh/byhgn29g",
+      "id": "27",
       "bbox": [
         68,
         682,
@@ -1082,11 +1210,11 @@
       "lineWidth": 0
     },
     {
-      "order": 26,
+      "order": 28,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/xc3ylc7u",
-      "id": "26",
+      "aid": "sh/0fepkzup",
+      "id": "28",
       "bbox": [
         72,
         690,
@@ -1094,8 +1222,8 @@
         16
       ],
       "geometry": "rect",
-      "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
-      "textPreview": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
       "resolvedFontSize": 8.51,
       "resolvedTextStyle": {
         "fontSize": 8.51,
@@ -1107,18 +1235,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage"
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
           "runs": [
             {
               "index": 1,
-              "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
               "fontSize": 8.51,
               "typeface": "Aptos",
               "color": "#617086"
@@ -1131,11 +1259,11 @@
       "lineWidth": 0
     },
     {
-      "order": 27,
+      "order": 29,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/4r65wjud",
-      "id": "27",
+      "aid": "sh/p0bi9s36",
+      "id": "29",
       "bbox": [
         1160,
         688,

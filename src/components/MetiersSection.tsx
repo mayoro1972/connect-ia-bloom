@@ -17,7 +17,7 @@ const sectionCopy = {
     eyebrow: "Webinaires gratuits · Lancement Côte d'Ivoire",
     title: "Participez aux webinaires de lancement TransferAI",
     subtitle:
-      "En juin 2026, TransferAI lance ses activités en Côte d'Ivoire. Réservez votre place pour comprendre comment l'IA peut transformer les métiers, les entreprises et les opportunités professionnelles.",
+      "En juillet 2026, TransferAI lance ses activités en Côte d'Ivoire. Réservez votre place pour comprendre comment l'IA peut transformer les métiers, les entreprises et les opportunités professionnelles.",
     secondaryCta: "Voir tous les webinaires gratuits",
     formatLabel: "En ligne gratuit",
     durationLabel: "60 minutes",
@@ -50,7 +50,7 @@ const sectionCopy = {
     eyebrow: "Free webinars · Côte d'Ivoire launch",
     title: "Join TransferAI's launch webinars",
     subtitle:
-      "In June 2026, TransferAI launches its operations in Côte d'Ivoire. Reserve your seat to learn how AI can transform professions, organizations and career opportunities.",
+      "In July 2026, TransferAI launches its operations in Côte d'Ivoire. Reserve your seat to learn how AI can transform professions, organizations and career opportunities.",
     secondaryCta: "See all free webinars",
     formatLabel: "Free online session",
     durationLabel: "60 minutes",
@@ -112,7 +112,7 @@ const MetiersSection = () => {
                 <div className="mb-5 grid gap-2 text-xs text-muted-foreground">
                   <span className="inline-flex items-center gap-2">
                     <CalendarDays size={14} className="text-primary" />
-                    {lang === "fr" ? "Session de lancement · Juin 2026" : "Launch session · June 2026"}
+                    {lang === "fr" ? "Session de lancement · Juillet 2026" : "Launch session · July 2026"}
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <Clock size={14} className="text-primary" />

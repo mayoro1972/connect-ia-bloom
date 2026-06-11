@@ -78,6 +78,7 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const CONTENT_ADMIN_TOKEN = Deno.env.get("CONTENT_ADMIN_TOKEN") ?? "";
 const PUBLIC_SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
+const DEFAULT_AUDIT_ACCESS_URL = `${PUBLIC_SITE_URL}/acces-formulaire-audit`;
 const LOGO_PATH = new URL("../_shared/assets/transferai-africa-nettelecom-co-brand.png", import.meta.url);
 
 const BRAND = {
@@ -745,7 +746,7 @@ const buildDocx = async (payload: CatalogueRenderPayload, domainLabel: string, d
     }),
     new Paragraph({
       spacing: { after: 120 },
-      children: [new TextRun({ text: payload.audit_form_url || "https://audit.transferai.ci", size: 20, color: BRAND.teal.replace("#", "") })],
+      children: [new TextRun({ text: payload.audit_form_url || DEFAULT_AUDIT_ACCESS_URL, size: 20, color: BRAND.teal.replace("#", "") })],
     }),
     new Paragraph({
       spacing: { before: 160, after: 80 },
@@ -1005,7 +1006,7 @@ const buildPdf = async (payload: CatalogueRenderPayload, domainLabel: string, do
     trimText(payload.single_primary_cta) || localize(locale, "Planifier un audit stratégique gratuit et un rendez-vous expert de 30 minutes.", "Book a free strategic audit and a 30-minute expert session.", "Agendar una auditoría estratégica gratuita y una sesión experta de 30 minutos.")
   );
   writeParagraph(payload.calendly_url || "https://calendly.com/contact-transferai/30min", { size: 11, bold: true, color: BRAND.teal });
-  writeParagraph(payload.audit_form_url || "https://audit.transferai.ci", { size: 11, bold: true, color: BRAND.teal });
+  writeParagraph(payload.audit_form_url || DEFAULT_AUDIT_ACCESS_URL, { size: 11, bold: true, color: BRAND.teal });
 
   drawSectionTitle(localize(locale, "VOTRE ÉQUIPE TRANSFERAI", "YOUR TRANSFERAI TEAM", "SU EQUIPO TRANSFERAI"));
   TEAM_SIGNATURES.forEach((signer) => {

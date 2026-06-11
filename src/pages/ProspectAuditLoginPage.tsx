@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,9 +18,11 @@ const hashPassword = async (value: string) => {
 
 const ProspectAuditLoginPage = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [isBusy, setIsBusy] = useState(false);
+  const packId = searchParams.get("pack_id")?.trim() || "";
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -52,6 +55,7 @@ const ProspectAuditLoginPage = () => {
         body: JSON.stringify({
           identifier: identifier.trim().toLowerCase(),
           passwordHash,
+          packId,
         }),
       });
 
@@ -68,6 +72,8 @@ const ProspectAuditLoginPage = () => {
         description:
           error instanceof Error && error.message === "invalid_credentials"
             ? "Identifiant ou mot de passe incorrect."
+            : error instanceof Error && error.message === "invalid_pack"
+              ? "Ce lien d'accès n'est plus relié à un pack actif."
             : "Impossible d'ouvrir le formulaire d'audit pour le moment.",
         variant: "destructive",
       });
@@ -95,6 +101,11 @@ const ProspectAuditLoginPage = () => {
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
                 Utilisez l&apos;adresse email et le mot de passe définis lors de votre demande. Nous vous redirigerons ensuite vers votre formulaire d&apos;audit personnalisé.
               </p>
+              {packId ? (
+                <p className="mt-4 inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                  pack_id lie · {packId}
+                </p>
+              ) : null}
 
               <form onSubmit={submit} className="mt-8 space-y-5">
                 <input

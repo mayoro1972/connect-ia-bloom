@@ -25,17 +25,17 @@ const customPaths = String($json.custom_page_paths_csv || '')
 
 const defaultPaths = [
   '/',
-  '/a-propos/',
-  '/about/',
   '/services/',
   '/solutions/',
+  '/contact/',
+  '/blog/',
+  '/products/',
   '/expertise/',
   '/produits-et-services/',
-  '/products/',
-  '/contact/',
   '/carrieres/',
   '/careers/',
-  '/blog/'
+  '/a-propos/',
+  '/about/'
 ];
 
 function normalizePath(path) {
@@ -81,10 +81,10 @@ const target = $('Build Source URLs').first().json;
 const configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];
 const pages = [
   { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },
-  { meta: configuredPages[1] || { key: 'page_2', label: '/a-propos/' }, raw: $('Fetch Public Page 2').first().json },
-  { meta: configuredPages[2] || { key: 'page_3', label: '/services/' }, raw: $('Fetch Public Page 3').first().json },
-  { meta: configuredPages[3] || { key: 'page_4', label: '/solutions/' }, raw: $('Fetch Public Page 4').first().json },
-  { meta: configuredPages[4] || { key: 'page_5', label: '/contact/' }, raw: $('Fetch Public Page 5').first().json }
+  { meta: configuredPages[1] || { key: 'page_2', label: '/services/' }, raw: $('Fetch Public Page 2').first().json },
+  { meta: configuredPages[2] || { key: 'page_3', label: '/solutions/' }, raw: $('Fetch Public Page 3').first().json },
+  { meta: configuredPages[3] || { key: 'page_4', label: '/contact/' }, raw: $('Fetch Public Page 4').first().json },
+  { meta: configuredPages[4] || { key: 'page_5', label: '/blog/' }, raw: $('Fetch Public Page 5').first().json }
 ];
 
 function toText(raw) {

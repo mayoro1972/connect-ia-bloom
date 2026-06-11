@@ -45,6 +45,7 @@ Le noeud doit retourner un JSON avec :
 - Une slide = une conclusion claire.
 - Pas de catalogue generique.
 - Le deck vend une demarche, pas seulement des formations.
+- Le deck doit montrer clairement que la valeur TransferAI ne s'arrete pas a la formation, mais se prolonge par un accompagnement 90 jours.
 - Le CTA est unique et reste visible dans la narration.
 - Les chiffres sont formules comme hypotheses, benchmarks ou referentiels tant que l'audit n'est pas fait.
 - Le contenu doit relier audit, formation, gouvernance et premier terrain d'execution.
@@ -196,22 +197,35 @@ Logique dominante :
 
 - Titre : la sequence recommandee pour passer du cadrage au pilote
 - Preuve : `J+0 / J+15 / J+45 / J+90`
-- Message : vendre l'ordre des etapes, avec validation a chaque palier
+- Message : vendre l'ordre des etapes, avec validation a chaque palier et accompagnement post-formation visible
 - Source JSON : `delivery_timeline`, `single_primary_cta`
 
 ### Slide 9 - Offre recommandee
 
 - Titre : la proposition TransferAI pour `{{ORGANIZATION_NAME}}`
 - Preuve : 4 briques d'offre
-- Message : la valeur vient de l'enchainement entre diagnostic, formation, gouvernance et pilote
+- Message : la valeur vient de l'enchainement entre diagnostic, formation, accompagnement 90 jours, gouvernance et pilote
 - Source JSON : `training_focus`, `key_messages`
 
 ### Slide 10 - Confiance et prochaine etape
 
 - Titre : proposer un pilote utile, gouverne et mesurable
-- Preuve : cadre de confiance + CTA + sortie attendue du rendez-vous
+- Preuve : cadre de confiance + CTA + sortie attendue du rendez-vous + rappel de l'accompagnement 90 jours
 - Message : une IA utile, maitrisee et compatible avec les exigences de l'organisation
 - Source JSON : `single_primary_cta`, `slide_objective`, `roi_hypothesis`
+
+## Message cle a imposer sur l'accompagnement
+
+Le deck doit permettre de comprendre en une lecture une difference simple :
+
+- une structure de formation classique transmet un contenu ;
+- TransferAI forme, puis accompagne pendant 90 jours la mise en pratique, la gouvernance, la lecture des premiers KPI et la decision d'extension.
+
+Cette logique doit apparaitre au minimum :
+
+- dans le parcours 90 jours ;
+- dans la slide offre recommandee ;
+- dans la slide finale de prochaine etape.
 
 ## Micro-style a reproduire
 

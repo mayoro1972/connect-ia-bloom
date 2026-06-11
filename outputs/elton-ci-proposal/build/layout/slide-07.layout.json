@@ -2,13 +2,13 @@
   "schema": "openai.presentation.layout/v4",
   "unit": "px",
   "slide": {
-    "aid": "sl/361kqi",
-    "id": "361kqi",
+    "aid": "sl/z0h9e7",
+    "id": "z0h9e7",
     "slide": 7,
-    "layoutId": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+    "layoutId": "e8395186-6167-493e-abd6-da64e1eda14a",
     "layoutName": "Title Slide",
     "layoutType": "title",
-    "masterLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+    "masterLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
     "masterLayoutName": "Master",
     "frame": {
       "left": 0,
@@ -45,15 +45,15 @@
   "inheritedLayers": [
     {
       "scope": "layout",
-      "id": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+      "id": "e8395186-6167-493e-abd6-da64e1eda14a",
       "name": "Title Slide",
       "type": "title",
-      "parentLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+      "parentLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "elements": []
     },
     {
       "scope": "master",
-      "id": "05412918-66fe-43e3-9b4f-318023edc354",
+      "id": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "name": "Master",
       "type": "master",
       "elements": []
@@ -64,7 +64,7 @@
       "order": 1,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/je9cvixc",
+      "aid": "sh/tovahoza",
       "id": "1",
       "bbox": [
         0,
@@ -81,7 +81,7 @@
       "order": 2,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/8z25kb6x",
+      "aid": "sh/ixczed8v",
       "id": "2",
       "bbox": [
         72,
@@ -90,8 +90,8 @@
         18
       ],
       "geometry": "rect",
-      "text": "PARCOURS 90 JOURS",
-      "textPreview": "PARCOURS 90 JOURS",
+      "text": "DETAIL CAS D'USAGE",
+      "textPreview": "DETAIL CAS D'USAGE",
       "resolvedFontSize": 10.51,
       "resolvedTextStyle": {
         "fontSize": 10.51,
@@ -104,18 +104,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "PARCOURS 90 JOURS"
+            "text": "DETAIL CAS D'USAGE"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "PARCOURS 90 JOURS",
+          "text": "DETAIL CAS D'USAGE",
           "runs": [
             {
               "index": 1,
-              "text": "PARCOURS 90 JOURS",
+              "text": "DETAIL CAS D'USAGE",
               "fontSize": 10.51,
               "typeface": "Aptos",
               "color": "#E76F1D",
@@ -132,17 +132,17 @@
       "order": 3,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/1gvy90je",
+      "aid": "sh/bi9s36hc",
       "id": "3",
       "bbox": [
         72,
         86,
-        900,
+        980,
         84
       ],
       "geometry": "rect",
-      "text": "La sequence recommandee pour passer du cadrage au pilote",
-      "textPreview": "La sequence recommandee pour passer du cadrage au pilote",
+      "text": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
+      "textPreview": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
       "resolvedFontSize": 34,
       "resolvedTextStyle": {
         "fontSize": 34,
@@ -155,22 +155,22 @@
         "lines": [
           {
             "index": 1,
-            "text": "La sequence recommandee pour passer du cadrage au"
+            "text": "Les cas d'usage qui renforcent la qualite de service et la"
           },
           {
             "index": 2,
-            "text": "pilote"
+            "text": "standardisation"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "La sequence recommandee pour passer du cadrage au pilote",
+          "text": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
           "runs": [
             {
               "index": 1,
-              "text": "La sequence recommandee pour passer du cadrage au pilote",
+              "text": "Les cas d'usage qui renforcent la qualite de service et la standardisation",
               "fontSize": 34,
               "typeface": "Aptos Display",
               "color": "#1A3554",
@@ -187,17 +187,17 @@
       "order": 4,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/q1orytsv",
+      "aid": "sh/0fepkzup",
       "id": "4",
       "bbox": [
         72,
         176,
-        940,
+        960,
         28
       ],
       "geometry": "rect",
-      "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
-      "textPreview": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
+      "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
+      "textPreview": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
       "resolvedFontSize": 14,
       "resolvedTextStyle": {
         "fontSize": 14,
@@ -209,18 +209,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier."
+            "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
+          "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
           "runs": [
             {
               "index": 1,
-              "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
+              "text": "Ces deux usages rendent aussi la formation plus credible: on apprend sur des situations reelles, pas sur des exemples generiques.",
               "fontSize": 14,
               "typeface": "Aptos",
               "color": "#617086"
@@ -236,13 +236,13 @@
       "order": 5,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/fmlkjm1c",
+      "aid": "sh/p0bi9s36",
       "id": "5",
       "bbox": [
         72,
-        236,
-        256,
-        248
+        228,
+        540,
+        308
       ],
       "geometry": "rect",
       "fillColor": "#FFFDFC",
@@ -253,153 +253,82 @@
       "order": 6,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/87ed8bat",
+      "aid": "sh/i9s36hcr",
       "id": "6",
       "bbox": [
-        90,
-        252,
-        60,
-        28
+        94,
+        248,
+        44,
+        44
       ],
-      "geometry": "rect",
-      "text": "01",
-      "textPreview": "01",
-      "resolvedFontSize": 20,
-      "resolvedTextStyle": {
-        "fontSize": 20,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "01"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "01",
-          "runs": [
-            {
-              "index": 1,
-              "text": "01",
-              "fontSize": 20,
-              "typeface": "Aptos Display",
-              "color": "#E76F1D",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
+      "geometry": "ellipse",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
       "lineWidth": 0
     },
     {
       "order": 7,
-      "kind": "shape",
+      "kind": "image",
       "scope": "slide",
-      "aid": "sh/xs72x4na",
+      "aid": "im/mhk3q5o7",
       "id": "7",
       "bbox": [
-        90,
-        290,
-        220,
-        52
+        104,
+        258,
+        24,
+        24
       ],
-      "geometry": "rect",
-      "text": "J+0 | Audit & cadrage",
-      "textPreview": "J+0 | Audit & cadrage",
-      "resolvedFontSize": 18,
-      "resolvedTextStyle": {
-        "fontSize": 18,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "J+0 | Audit & cadrage"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "J+0 | Audit & cadrage",
-          "runs": [
-            {
-              "index": 1,
-              "text": "J+0 | Audit & cadrage",
-              "fontSize": 18,
-              "typeface": "Aptos Display",
-              "color": "#1A3554",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
+      "alt": "MessageSquareText icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "19bcc0f2-efc7-4546-8eb0-26387d4585c3",
+        "contentType": "image/svg+xml",
+        "byteLength": 366
+      }
     },
     {
       "order": 8,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/qd4vmtwr",
+      "aid": "sh/0je9cvix",
       "id": "8",
       "bbox": [
-        90,
-        350,
-        220,
-        116
+        150,
+        248,
+        390,
+        34
       ],
       "geometry": "rect",
-      "text": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
-      "textPreview": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
-      "resolvedFontSize": 12.51,
+      "text": "Service client / service auto",
+      "textPreview": "Service client / service auto",
+      "resolvedFontSize": 22,
       "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 3,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "Cartographier les irritants, choisir les"
-          },
-          {
-            "index": 2,
-            "text": "cas d'usage prioritaires et definir les"
-          },
-          {
-            "index": 3,
-            "text": "KPI de preuve."
+            "text": "Service client / service auto"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
+          "text": "Service client / service auto",
           "runs": [
             {
               "index": 1,
-              "text": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#617086"
+              "text": "Service client / service auto",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
             }
           ]
         }
@@ -412,562 +341,17 @@
       "order": 9,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/fyxobm58",
+      "aid": "sh/t47y1kre",
       "id": "9",
       "bbox": [
-        352,
-        236,
-        256,
-        248
-      ],
-      "geometry": "rect",
-      "fillColor": "#FFFDFC",
-      "lineColor": "#D7CEC3",
-      "lineWidth": 1
-    },
-    {
-      "order": 10,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/7mp0bi9s",
-      "id": "10",
-      "bbox": [
-        370,
-        252,
-        60,
-        28
-      ],
-      "geometry": "rect",
-      "text": "02",
-      "textPreview": "02",
-      "resolvedFontSize": 20,
-      "resolvedTextStyle": {
-        "fontSize": 20,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "02"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "02",
-          "runs": [
-            {
-              "index": 1,
-              "text": "02",
-              "fontSize": 20,
-              "typeface": "Aptos Display",
-              "color": "#1C8A78",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 11,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/e1w7mp0b",
-      "id": "11",
-      "bbox": [
-        370,
-        290,
-        220,
-        52
-      ],
-      "geometry": "rect",
-      "text": "J+15 | Prototype cible",
-      "textPreview": "J+15 | Prototype cible",
-      "resolvedFontSize": 18,
-      "resolvedTextStyle": {
-        "fontSize": 18,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "J+15 | Prototype cible"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "J+15 | Prototype cible",
-          "runs": [
-            {
-              "index": 1,
-              "text": "J+15 | Prototype cible",
-              "fontSize": 18,
-              "typeface": "Aptos Display",
-              "color": "#1A3554",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 12,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/psfil0rq",
-      "id": "12",
-      "bbox": [
-        370,
-        350,
-        220,
-        116
-      ],
-      "geometry": "rect",
-      "text": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
-      "textPreview": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
-      "resolvedFontSize": 12.51,
-      "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 3,
-        "lines": [
-          {
-            "index": 1,
-            "text": "Produire un premier livrable"
-          },
-          {
-            "index": 2,
-            "text": "exploitable: synthese, tableau de bord,"
-          },
-          {
-            "index": 3,
-            "text": "assistant ou routine de pilotage."
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
-          "runs": [
-            {
-              "index": 1,
-              "text": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#617086"
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 13,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/w7mp0bi9",
-      "id": "13",
-      "bbox": [
-        632,
-        236,
-        256,
-        248
-      ],
-      "geometry": "rect",
-      "fillColor": "#FFFDFC",
-      "lineColor": "#D7CEC3",
-      "lineWidth": 1
-    },
-    {
-      "order": 14,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/7adsji5s",
-      "id": "14",
-      "bbox": [
-        650,
-        252,
-        60,
-        28
-      ],
-      "geometry": "rect",
-      "text": "03",
-      "textPreview": "03",
-      "resolvedFontSize": 20,
-      "resolvedTextStyle": {
-        "fontSize": 20,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "03"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "03",
-          "runs": [
-            {
-              "index": 1,
-              "text": "03",
-              "fontSize": 20,
-              "typeface": "Aptos Display",
-              "color": "#163556",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 15,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/epkzupwb",
-      "id": "15",
-      "bbox": [
-        650,
-        290,
-        220,
-        52
-      ],
-      "geometry": "rect",
-      "text": "J+45 | Formation & pilote",
-      "textPreview": "J+45 | Formation & pilote",
-      "resolvedFontSize": 18,
-      "resolvedTextStyle": {
-        "fontSize": 18,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "J+45 | Formation & pilote"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "J+45 | Formation & pilote",
-          "runs": [
-            {
-              "index": 1,
-              "text": "J+45 | Formation & pilote",
-              "fontSize": 18,
-              "typeface": "Aptos Display",
-              "color": "#1A3554",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 16,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/pg3ex0nu",
-      "id": "16",
-      "bbox": [
-        650,
-        350,
-        220,
-        116
-      ],
-      "geometry": "rect",
-      "text": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
-      "textPreview": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
-      "resolvedFontSize": 12.51,
-      "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 3,
-        "lines": [
-          {
-            "index": 1,
-            "text": "Former la bonne population et lancer le"
-          },
-          {
-            "index": 2,
-            "text": "pilote sur un flux concret, avec"
-          },
-          {
-            "index": 3,
-            "text": "supervision et revue metier."
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
-          "runs": [
-            {
-              "index": 1,
-              "text": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#617086"
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 17,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/wval87ed",
-      "id": "17",
-      "bbox": [
-        912,
-        236,
-        296,
-        248
-      ],
-      "geometry": "rect",
-      "fillColor": "#FFFDFC",
-      "lineColor": "#D7CEC3",
-      "lineWidth": 1
-    },
-    {
-      "order": 18,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/36hcrmhk",
-      "id": "18",
-      "bbox": [
-        930,
-        252,
-        60,
-        28
-      ],
-      "geometry": "rect",
-      "text": "04",
-      "textPreview": "04",
-      "resolvedFontSize": 20,
-      "resolvedTextStyle": {
-        "fontSize": 20,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "04"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "04",
-          "runs": [
-            {
-              "index": 1,
-              "text": "04",
-              "fontSize": 20,
-              "typeface": "Aptos Display",
-              "color": "#C88C3A",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 19,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/eloj2t83",
-      "id": "19",
-      "bbox": [
-        930,
-        290,
-        260,
-        52
-      ],
-      "geometry": "rect",
-      "text": "J+90 | ROI & extension",
-      "textPreview": "J+90 | ROI & extension",
-      "resolvedFontSize": 18,
-      "resolvedTextStyle": {
-        "fontSize": 18,
-        "typeface": "Aptos Display",
-        "bold": true,
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 1,
-        "lines": [
-          {
-            "index": 1,
-            "text": "J+90 | ROI & extension"
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "J+90 | ROI & extension",
-          "runs": [
-            {
-              "index": 1,
-              "text": "J+90 | ROI & extension",
-              "fontSize": 18,
-              "typeface": "Aptos Display",
-              "color": "#1A3554",
-              "bold": true
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 20,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/mp0bi9s3",
-      "id": "20",
-      "bbox": [
-        930,
-        350,
-        260,
-        116
-      ],
-      "geometry": "rect",
-      "text": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
-      "textPreview": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
-      "resolvedFontSize": 12.51,
-      "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
-        "alignment": "left"
-      },
-      "textLayout": {
-        "lineCount": 3,
-        "lines": [
-          {
-            "index": 1,
-            "text": "Mesurer les premiers resultats, documenter"
-          },
-          {
-            "index": 2,
-            "text": "les apprentissages et decider ce qui merite"
-          },
-          {
-            "index": 3,
-            "text": "d'etre etendu."
-          }
-        ]
-      },
-      "paragraphs": [
-        {
-          "index": 1,
-          "text": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
-          "runs": [
-            {
-              "index": 1,
-              "text": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#617086"
-            }
-          ]
-        }
-      ],
-      "fillColor": "rgba(0, 0, 0, 0)",
-      "lineColor": "rgba(0, 0, 0, 0)",
-      "lineWidth": 0
-    },
-    {
-      "order": 21,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/bat47y1k",
-      "id": "21",
-      "bbox": [
-        72,
-        520,
-        1136,
-        112
-      ],
-      "geometry": "rect",
-      "fillColor": "#163556",
-      "lineColor": "#163556",
-      "lineWidth": 0
-    },
-    {
-      "order": 22,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/4vmtwra5",
-      "id": "22",
-      "bbox": [
-        96,
-        542,
-        250,
+        94,
+        300,
+        110,
         16
       ],
       "geometry": "rect",
-      "text": "Ce qu'ELTON CI obtient a chaque etape",
-      "textPreview": "Ce qu'ELTON CI obtient a chaque etape",
+      "text": "Usages proposes",
+      "textPreview": "Usages proposes",
       "resolvedFontSize": 10,
       "resolvedTextStyle": {
         "fontSize": 10,
@@ -980,21 +364,589 @@
         "lines": [
           {
             "index": 1,
-            "text": "Ce qu'ELTON CI obtient a chaque etape"
+            "text": "Usages proposes"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Ce qu'ELTON CI obtient a chaque etape",
+          "text": "Usages proposes",
           "runs": [
             {
               "index": 1,
-              "text": "Ce qu'ELTON CI obtient a chaque etape",
+              "text": "Usages proposes",
               "fontSize": 10,
               "typeface": "Aptos",
-              "color": "#CFE0F0",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "10",
+      "bbox": [
+        94,
+        324,
+        456,
+        90
+      ],
+      "geometry": "rect",
+      "text": "• FAQ assistee pour questions recurrentes\n• canevas de reponse ou de rappel\n• historique d'interactions mieux exploitable\n• syntheses rapides avant rappel ou traitement",
+      "textPreview": "• FAQ assistee pour questions recurrentes | • canevas de reponse ou de rappel | • historique d'interactions mieux exploitable | • synthes...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• FAQ assistee pour questions recurrentes"
+          },
+          {
+            "index": 2,
+            "text": "• canevas de reponse ou de rappel"
+          },
+          {
+            "index": 3,
+            "text": "• historique d'interactions mieux exploitable"
+          },
+          {
+            "index": 4,
+            "text": "• syntheses rapides avant rappel ou traitement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• FAQ assistee pour questions recurrentes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• FAQ assistee pour questions recurrentes",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• canevas de reponse ou de rappel",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• canevas de reponse ou de rappel",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• historique d'interactions mieux exploitable",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• historique d'interactions mieux exploitable",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• syntheses rapides avant rappel ou traitement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• syntheses rapides avant rappel ou traitement",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "11",
+      "bbox": [
+        94,
+        432,
+        490,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "12",
+      "bbox": [
+        112,
+        458,
+        450,
+        36
+      ],
+      "geometry": "rect",
+      "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+      "textPreview": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance |"
+          },
+          {
+            "index": 2,
+            "text": "standardisation des scripts"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+          "runs": [
+            {
+              "index": 1,
+              "text": "KPI: delai de reponse | qualite percue | taux de reouverture / relance | standardisation des scripts",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "13",
+      "bbox": [
+        640,
+        228,
+        568,
+        308
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "14",
+      "bbox": [
+        662,
+        248,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#C88C3A",
+      "lineColor": "#C88C3A",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/7y1kre1w",
+      "id": "15",
+      "bbox": [
+        672,
+        258,
+        24,
+        24
+      ],
+      "alt": "BookOpen icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "54bc8ddf-12ef-41ed-9ed8-566f3a0c262e",
+        "contentType": "image/svg+xml",
+        "byteLength": 344
+      }
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "16",
+      "bbox": [
+        718,
+        248,
+        432,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Procedures internes & knowledge base",
+      "textPreview": "Procedures internes & knowledge base",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Procedures internes & knowledge base"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Procedures internes & knowledge base",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Procedures internes & knowledge base",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "17",
+      "bbox": [
+        662,
+        300,
+        110,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Usages proposes",
+      "textPreview": "Usages proposes",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Usages proposes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Usages proposes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Usages proposes",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cvixcze",
+      "id": "18",
+      "bbox": [
+        662,
+        324,
+        490,
+        90
+      ],
+      "geometry": "rect",
+      "text": "• base procedure consultable rapidement\n• reponses homognes pour les equipes support et metier\n• onboarding accelere sur standards, scripts et points de controle\n• diffusion plus simple des mises a jour internes",
+      "textPreview": "• base procedure consultable rapidement | • reponses homognes pour les equipes support et metier | • onboarding accelere sur standards, s...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• base procedure consultable rapidement"
+          },
+          {
+            "index": 2,
+            "text": "• reponses homognes pour les equipes support et metier"
+          },
+          {
+            "index": 3,
+            "text": "• onboarding accelere sur standards, scripts et points de controle"
+          },
+          {
+            "index": 4,
+            "text": "• diffusion plus simple des mises a jour internes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• base procedure consultable rapidement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• base procedure consultable rapidement",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• reponses homognes pour les equipes support et metier",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• reponses homognes pour les equipes support et metier",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• onboarding accelere sur standards, scripts et points de controle",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• onboarding accelere sur standards, scripts et points de controle",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• diffusion plus simple des mises a jour internes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• diffusion plus simple des mises a jour internes",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gr2p8nqx",
+      "id": "19",
+      "bbox": [
+        662,
+        432,
+        498,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u54zid",
+      "id": "20",
+      "bbox": [
+        680,
+        458,
+        460,
+        36
+      ],
+      "geometry": "rect",
+      "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+      "textPreview": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la"
+          },
+          {
+            "index": 2,
+            "text": "base interne"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+          "runs": [
+            {
+              "index": 1,
+              "text": "KPI: temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "21",
+      "bbox": [
+        72,
+        566,
+        1136,
+        80
+      ],
+      "geometry": "rect",
+      "fillColor": "#1C8A78",
+      "lineColor": "#1C8A78",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "22",
+      "bbox": [
+        96,
+        586,
+        170,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi cette slide compte",
+      "textPreview": "Pourquoi cette slide compte",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi cette slide compte"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi cette slide compte",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi cette slide compte",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#DDF5EF",
               "bold": true
             }
           ]
@@ -1008,94 +960,49 @@
       "order": 23,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tgfmlkjm",
+      "aid": "sh/jm1cfa9w",
       "id": "23",
       "bbox": [
         96,
-        566,
-        260,
-        56
+        608,
+        560,
+        24
       ],
       "geometry": "rect",
-      "text": "• priorites mieux choisies\n• cas d'usage mieux qualifies\n• formation plus ciblee\n• decision plus simple sur le passage a l'echelle",
-      "textPreview": "• priorites mieux choisies | • cas d'usage mieux qualifies | • formation plus ciblee | • decision plus simple sur le passage a l'echelle",
-      "resolvedFontSize": 11.51,
+      "text": "La formation devient credible quand elle prepare des usages visibles.",
+      "textPreview": "La formation devient credible quand elle prepare des usages visibles.",
+      "resolvedFontSize": 22,
       "resolvedTextStyle": {
-        "fontSize": 11.51,
-        "typeface": "Aptos",
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 4,
+        "lineCount": 2,
         "lines": [
           {
             "index": 1,
-            "text": "• priorites mieux choisies"
+            "text": "La formation devient credible quand elle prepare des"
           },
           {
             "index": 2,
-            "text": "• cas d'usage mieux qualifies"
-          },
-          {
-            "index": 3,
-            "text": "• formation plus ciblee"
-          },
-          {
-            "index": 4,
-            "text": "• decision plus simple sur le passage a l'echelle"
+            "text": "usages visibles."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• priorites mieux choisies",
+          "text": "La formation devient credible quand elle prepare des usages visibles.",
           "runs": [
             {
               "index": 1,
-              "text": "• priorites mieux choisies",
-              "fontSize": 11.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 2,
-          "text": "• cas d'usage mieux qualifies",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• cas d'usage mieux qualifies",
-              "fontSize": 11.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 3,
-          "text": "• formation plus ciblee",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• formation plus ciblee",
-              "fontSize": 11.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 4,
-          "text": "• decision plus simple sur le passage a l'echelle",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• decision plus simple sur le passage a l'echelle",
-              "fontSize": 11.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
+              "text": "La formation devient credible quand elle prepare des usages visibles.",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
             }
           ]
         }
@@ -1108,22 +1015,21 @@
       "order": 24,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/m1cfa9w3",
+      "aid": "sh/cfa9w3m9",
       "id": "24",
       "bbox": [
-        414,
-        578,
-        736,
-        28
+        700,
+        602,
+        470,
+        26
       ],
       "geometry": "rect",
-      "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
-      "textPreview": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+      "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
+      "textPreview": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
       "resolvedFontSize": 12.51,
       "resolvedTextStyle": {
         "fontSize": 12.51,
         "typeface": "Aptos",
-        "bold": true,
         "alignment": "left"
       },
       "textLayout": {
@@ -1131,26 +1037,25 @@
         "lines": [
           {
             "index": 1,
-            "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages"
+            "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de"
           },
           {
             "index": 2,
-            "text": "autorises."
+            "text": "suite sur quels gestes metier l'IA doit les aider."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+          "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
           "runs": [
             {
               "index": 1,
-              "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+              "text": "Pour ELTON CI, cela permet d'eviter un discours abstrait: les equipes voient tout de suite sur quels gestes metier l'IA doit les aider.",
               "fontSize": 12.51,
               "typeface": "Aptos",
-              "color": "#D7E5F3",
-              "bold": true
+              "color": "#FFFFFF"
             }
           ]
         }
@@ -1163,7 +1068,7 @@
       "order": 25,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bm58z25k",
+      "aid": "sh/1032lszq",
       "id": "25",
       "bbox": [
         68,
@@ -1180,7 +1085,7 @@
       "order": 26,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/47y1kre1",
+      "aid": "sh/u9knih4b",
       "id": "26",
       "bbox": [
         72,
@@ -1189,8 +1094,8 @@
         16
       ],
       "geometry": "rect",
-      "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
-      "textPreview": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
       "resolvedFontSize": 8.51,
       "resolvedTextStyle": {
         "fontSize": 8.51,
@@ -1202,18 +1107,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage"
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
           "runs": [
             {
               "index": 1,
-              "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
               "fontSize": 8.51,
               "typeface": "Aptos",
               "color": "#617086"
@@ -1229,7 +1134,7 @@
       "order": 27,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tsvu9kni",
+      "aid": "sh/judg7ads",
       "id": "27",
       "bbox": [
         1160,

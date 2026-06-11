@@ -243,6 +243,8 @@ export type Database = {
       }
       form_invitations: {
         Row: {
+          access_context: Json
+          contact_request_id: string | null
           created_at: string
           draft_form_data: Json | null
           expires_at: string | null
@@ -250,10 +252,14 @@ export type Database = {
           invite_token: string
           invitee_email: string | null
           invitee_name: string | null
+          pack_id: string | null
           response_id: string | null
+          sector_context: string | null
           status: string
         }
         Insert: {
+          access_context?: Json
+          contact_request_id?: string | null
           created_at?: string
           draft_form_data?: Json | null
           expires_at?: string | null
@@ -261,10 +267,14 @@ export type Database = {
           invite_token: string
           invitee_email?: string | null
           invitee_name?: string | null
+          pack_id?: string | null
           response_id?: string | null
+          sector_context?: string | null
           status?: string
         }
         Update: {
+          access_context?: Json
+          contact_request_id?: string | null
           created_at?: string
           draft_form_data?: Json | null
           expires_at?: string | null
@@ -272,10 +282,26 @@ export type Database = {
           invite_token?: string
           invitee_email?: string | null
           invitee_name?: string | null
+          pack_id?: string | null
           response_id?: string | null
+          sector_context?: string | null
           status?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "form_invitations_contact_request_id_fkey"
+            columns: ["contact_request_id"]
+            isOneToOne: false
+            referencedRelation: "contact_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "form_invitations_pack_id_fkey"
+            columns: ["pack_id"]
+            isOneToOne: false
+            referencedRelation: "ai_prospecting_packs"
+            referencedColumns: ["pack_id"]
+          },
           {
             foreignKeyName: "form_invitations_response_id_fkey"
             columns: ["response_id"]
@@ -288,11 +314,15 @@ export type Database = {
       form_responses: {
         Row: {
           completion_percentage: number
+          contact_request_id: string | null
+          context_snapshot: Json
           created_at: string
           form_data: Json
           id: string
           invitation_token: string | null
           is_completed: boolean
+          pack_id: string | null
+          sector_context: string | null
           session_id: string | null
           submitted_at: string
           user_email: string | null
@@ -302,11 +332,15 @@ export type Database = {
         }
         Insert: {
           completion_percentage?: number
+          contact_request_id?: string | null
+          context_snapshot?: Json
           created_at?: string
           form_data?: Json
           id?: string
           invitation_token?: string | null
           is_completed?: boolean
+          pack_id?: string | null
+          sector_context?: string | null
           session_id?: string | null
           submitted_at?: string
           user_email?: string | null
@@ -316,11 +350,15 @@ export type Database = {
         }
         Update: {
           completion_percentage?: number
+          contact_request_id?: string | null
+          context_snapshot?: Json
           created_at?: string
           form_data?: Json
           id?: string
           invitation_token?: string | null
           is_completed?: boolean
+          pack_id?: string | null
+          sector_context?: string | null
           session_id?: string | null
           submitted_at?: string
           user_email?: string | null
@@ -328,7 +366,22 @@ export type Database = {
           user_name?: string | null
           user_position?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "form_responses_contact_request_id_fkey"
+            columns: ["contact_request_id"]
+            isOneToOne: false
+            referencedRelation: "contact_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "form_responses_pack_id_fkey"
+            columns: ["pack_id"]
+            isOneToOne: false
+            referencedRelation: "ai_prospecting_packs"
+            referencedColumns: ["pack_id"]
+          },
+        ]
       }
       job_opportunities: {
         Row: {

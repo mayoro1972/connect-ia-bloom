@@ -1,0 +1,596 @@
+{
+  "name": "TransferAI Prospecting CRM V5 Growth Loop",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-prospecting-crm-v5-growth-loop",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "crm"
+    },
+    {
+      "name": "n8n"
+    },
+    {
+      "name": "v5"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        120
+      ],
+      "parameters": {}
+    },
+    {
+      "name": "Daily CRM Growth Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * 1-5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Scraped Leads Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        480
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "crm-public-leads-ingest",
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "name": "Set CRM Growth Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        470,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "crm_backend",
+              "type": "string",
+              "stringValue": "={{$json.crm_backend || 'supabase'}}"
+            },
+            {
+              "name": "scraped_csv_url",
+              "type": "string",
+              "stringValue": "={{$json.scraped_csv_url || $env.SCRAPED_PUBLIC_LEADS_CSV_URL || ''}}"
+            },
+            {
+              "name": "dispatch_to_v4",
+              "type": "boolean",
+              "booleanValue": "={{$json.dispatch_to_v4 !== undefined ? $json.dispatch_to_v4 : true}}"
+            },
+            {
+              "name": "child_workflow_id_v4",
+              "type": "string",
+              "stringValue": "={{$json.child_workflow_id_v4 || $env.N8N_CHILD_WORKFLOW_ID_V4 || 'REPLACE_WITH_V4_WORKFLOW_ID'}}"
+            },
+            {
+              "name": "child_workflow_id_v3",
+              "type": "string",
+              "stringValue": "={{$json.child_workflow_id_v3 || $env.N8N_CHILD_WORKFLOW_ID_V3 || 'REPLACE_WITH_V3_WORKFLOW_ID'}}"
+            },
+            {
+              "name": "child_workflow_label_v3",
+              "type": "string",
+              "stringValue": "={{$json.child_workflow_label_v3 || 'TransferAI Prospecting V3 CRM Enhanced [FINAL]-11'}}"
+            },
+            {
+              "name": "batch_fetch_limit",
+              "type": "string",
+              "stringValue": "={{$json.batch_fetch_limit || '25'}}"
+            },
+            {
+              "name": "daily_send_limit",
+              "type": "string",
+              "stringValue": "={{$json.daily_send_limit || '5'}}"
+            },
+            {
+              "name": "max_attempts_per_prospect",
+              "type": "string",
+              "stringValue": "={{$json.max_attempts_per_prospect || '3'}}"
+            },
+            {
+              "name": "min_confidence_score",
+              "type": "string",
+              "stringValue": "={{$json.min_confidence_score || '0.45'}}"
+            },
+            {
+              "name": "batch_run_label",
+              "type": "string",
+              "stringValue": "={{$json.batch_run_label || 'v5-crm-dispatch-run'}}"
+            },
+            {
+              "name": "booking_link_45min",
+              "type": "string",
+              "stringValue": "={{$json.booking_link_45min || $env.BOOKING_LINK_45MIN || 'https://calendly.com/your-link'}}"
+            },
+            {
+              "name": "default_country",
+              "type": "string",
+              "stringValue": "={{$json.default_country || \"Côte d'Ivoire\"}}"
+            },
+            {
+              "name": "default_organization_type",
+              "type": "string",
+              "stringValue": "={{$json.default_organization_type || 'organisation à qualifier'}}"
+            },
+            {
+              "name": "default_sector_guess",
+              "type": "string",
+              "stringValue": "={{$json.default_sector_guess || 'secteur à confirmer'}}"
+            },
+            {
+              "name": "default_priority",
+              "type": "string",
+              "stringValue": "={{$json.default_priority || 'tier1'}}"
+            },
+            {
+              "name": "default_research_scope",
+              "type": "string",
+              "stringValue": "={{$json.default_research_scope || 'public_web_only'}}"
+            },
+            {
+              "name": "next_action_delay_days",
+              "type": "string",
+              "stringValue": "={{$json.next_action_delay_days || '1'}}"
+            },
+            {
+              "name": "ingest_label",
+              "type": "string",
+              "stringValue": "={{$json.ingest_label || 'daily-public-scrape-ingest'}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "If Direct Lead Payload",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{Boolean($json.leads || ($json.body && typeof $json.body === 'object') || $json.organization_name || $json.company_name)}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Fetch Scraped Leads CSV",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        970,
+        180
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$json.scraped_csv_url}}",
+        "authentication": "none",
+        "options": {}
+      }
+    },
+    {
+      "name": "Normalize Inbound Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const source = $json;\nfunction slugify(value) {\n  return String(value || '')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '-')\n    .replace(/^-+|-+$/g, '');\n}\nfunction domainFromWebsite(website) {\n  return String(website || '').replace(/^https?:\\/\\//i, '').replace(/^www\\./i, '').split('/')[0].trim();\n}\nfunction canonicalize(row, index) {\n  const website = row.website || row.domain || '';\n  const domain = domainFromWebsite(website);\n  return {\n    prospect_id: row.prospect_id || `crm-${slugify(domain || row.organization_name || row.company_name || 'lead')}-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website,\n    country: row.country || source.default_country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || source.default_organization_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || source.default_sector_guess || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: row.booking_link_45min || $env.BOOKING_LINK_45MIN || '',\n    commercial_priority_default: row.commercial_priority_default || source.default_priority || 'tier1',\n    research_scope: row.research_scope || source.default_research_scope || 'public_web_only',\n    lead_origin: row.lead_origin || source.ingest_label || 'public_scrape',\n    source_backend: source.crm_backend || 'supabase',\n    raw_source_id: row.raw_source_id || row.id || domain || null\n  };\n}\nif (Array.isArray(source.leads)) {\n  return source.leads.map((row, index) => ({ json: canonicalize(row || {}, index) }));\n}\nif (typeof source.body === 'string' || typeof source.data === 'string') {\n  const raw = String(source.body || source.data || '');\n  const lines = raw.split(/\\r?\\n/).filter(Boolean);\n  if (!lines.length) return [];\n  const headers = lines.shift().split(',').map((h) => h.trim());\n  return lines.map((line, index) => {\n    const values = line.split(',');\n    const row = {};\n    headers.forEach((header, idx) => row[header] = (values[idx] || '').trim());\n    return { json: canonicalize(row, index) };\n  });\n}\nif (source.body && typeof source.body === 'object' && Array.isArray(source.body.leads)) {\n  return source.body.leads.map((row, index) => ({ json: canonicalize(row || {}, index) }));\n}\nreturn [{ json: canonicalize(source, 0) }];"
+      }
+    },
+    {
+      "name": "Filter Valid Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return items\n  .map((item) => item.json)\n  .filter((lead) => lead.organization_name && lead.website)\n  .map((lead) => ({ json: lead }));"
+      }
+    },
+    {
+      "name": "Prepare CRM Upserts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1700,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const lead = $json;\nconst delayDays = Number($('Set CRM Growth Config').first().json.next_action_delay_days || 1);\nconst nextActionAt = new Date(Date.now() + delayDays * 86400000).toISOString();\nreturn [{\n  json: {\n    ...lead,\n    status: 'ready',\n    paused: false,\n    do_not_contact: false,\n    outreach_attempt_count: Number(lead.outreach_attempt_count || 0),\n    last_response_status: lead.last_response_status || '',\n    last_sequence_result: lead.last_sequence_result || '',\n    stop_reason: '',\n    niche_status: lead.niche_status || 'not_assessed',\n    next_action_at: lead.next_action_at || nextActionAt,\n    updated_at: new Date().toISOString()\n  }\n}];"
+      }
+    },
+    {
+      "name": "Upsert Prospects Into CRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1940,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?on_conflict=prospect_id'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates,return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json)}}",
+        "options": {}
+      }
+    },
+    {
+      "name": "Build CRM Import Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2190,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const imported = items.map((item) => item.json);\nconst config = $('Set CRM Growth Config').first().json;\nreturn [{\n  json: {\n    imported_count: imported.length,\n    imported_prospect_ids: imported.map((row) => row.prospect_id || row[0]?.prospect_id).filter(Boolean),\n    dispatch_to_v4: config.dispatch_to_v4,\n    child_workflow_id_v4: config.child_workflow_id_v4,\n    child_workflow_id_v3: config.child_workflow_id_v3,\n    child_workflow_label_v3: config.child_workflow_label_v3,\n    batch_fetch_limit: config.batch_fetch_limit,\n    daily_send_limit: config.daily_send_limit,\n    max_attempts_per_prospect: config.max_attempts_per_prospect,\n    min_confidence_score: config.min_confidence_score,\n    batch_run_label: config.batch_run_label,\n    booking_link_45min: config.booking_link_45min,\n    ingest_label: config.ingest_label\n  }\n}];"
+      }
+    },
+    {
+      "name": "If Dispatch To V4",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2430,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.dispatch_to_v4}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Execute V4 Batch Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2670,
+        220
+      ],
+      "parameters": {
+        "workflowId": "={{$json.child_workflow_id_v4 || $env.N8N_CHILD_WORKFLOW_ID_V4 || 'REPLACE_WITH_V4_WORKFLOW_ID'}}",
+        "mode": "each",
+        "options": {}
+      }
+    },
+    {
+      "name": "Fetch CRM Ready Snapshot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2670,
+        420
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?select=prospect_id&status=in.(ready,active)&paused=eq.false'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "name": "Fetch Today Outreach Snapshot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2910,
+        420
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/outreach_attempts?select=id&sent_at=gte.' + new Date().toISOString().slice(0,10)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "name": "Build End Of Run Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3150,
+        420
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const crmRows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : [];\nlet outreachRows = [];\ntry {\n  const snap = $('Fetch Today Outreach Snapshot').first().json;\n  outreachRows = Array.isArray(snap) ? snap : Array.isArray(snap.data) ? snap.data : [];\n} catch (e) {}\nconst importSummary = $('Build CRM Import Summary').first().json;\nreturn [{\n  json: {\n    crm_stage: 'v5_growth_loop_completed',\n    imported_count: importSummary.imported_count || 0,\n    crm_ready_count: crmRows.length,\n    outreach_today_count: outreachRows.length,\n    dispatch_to_v4: importSummary.dispatch_to_v4,\n    child_workflow_id_v4: importSummary.child_workflow_id_v4 || null,\n    child_workflow_id_v3: importSummary.child_workflow_id_v3 || null,\n    child_workflow_label_v3: importSummary.child_workflow_label_v3 || null,\n    batch_fetch_limit: importSummary.batch_fetch_limit || null,\n    daily_send_limit: importSummary.daily_send_limit || null,\n    next_step: importSummary.dispatch_to_v4 ? 'V4 batch can now process the CRM queue with the configured V3 enhanced workflow.' : 'CRM queue updated without dispatch.',\n    generated_at: new Date().toISOString()\n  }\n}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set CRM Growth Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily CRM Growth Schedule": {
+      "main": [
+        [
+          {
+            "node": "Set CRM Growth Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scraped Leads Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set CRM Growth Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set CRM Growth Config": {
+      "main": [
+        [
+          {
+            "node": "If Direct Lead Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Direct Lead Payload": {
+      "main": [
+        [
+          {
+            "node": "Normalize Inbound Leads",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Scraped Leads CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Scraped Leads CSV": {
+      "main": [
+        [
+          {
+            "node": "Normalize Inbound Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Inbound Leads": {
+      "main": [
+        [
+          {
+            "node": "Filter Valid Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Valid Leads": {
+      "main": [
+        [
+          {
+            "node": "Prepare CRM Upserts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare CRM Upserts": {
+      "main": [
+        [
+          {
+            "node": "Upsert Prospects Into CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert Prospects Into CRM": {
+      "main": [
+        [
+          {
+            "node": "Build CRM Import Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build CRM Import Summary": {
+      "main": [
+        [
+          {
+            "node": "If Dispatch To V4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Dispatch To V4": {
+      "main": [
+        [
+          {
+            "node": "Execute V4 Batch Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch CRM Ready Snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute V4 Batch Workflow": {
+      "main": [
+        [
+          {
+            "node": "Fetch CRM Ready Snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch CRM Ready Snapshot": {
+      "main": [
+        [
+          {
+            "node": "Fetch Today Outreach Snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Today Outreach Snapshot": {
+      "main": [
+        [
+          {
+            "node": "Build End Of Run Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

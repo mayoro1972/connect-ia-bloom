@@ -98,7 +98,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const base = String($json.website || '').trim().replace(/\\/$/, '');\nconst customPaths = String($json.custom_page_paths_csv || '')\n  .split(',')\n  .map((value) => value.trim())\n  .filter(Boolean);\n\nconst defaultPaths = [\n  '/',\n  '/a-propos/',\n  '/about/',\n  '/services/',\n  '/solutions/',\n  '/expertise/',\n  '/produits-et-services/',\n  '/products/',\n  '/contact/',\n  '/carrieres/',\n  '/careers/',\n  '/blog/'\n];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : `/${path}`;\n}\n\nconst selectedPaths = [...new Set([...customPaths, ...defaultPaths].map(normalizePath))].slice(0, 5);\nconst sourcePages = selectedPaths.map((path, index) => {\n  const isAbsolute = /^https?:\\/\\//i.test(path);\n  const normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  const url = isAbsolute ? path : `${base}${normalizedPath === '/' ? '' : normalizedPath}`;\n  return {\n    key: `page_${index + 1}`,\n    path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? `public_source_${index + 1}` : normalizedPath,\n    url,\n  };\n});\n\nconst output = { ...$json, source_pages: sourcePages };\nsourcePages.forEach((page, index) => {\n  output[`page_${index + 1}_url`] = page.url;\n  output[`page_${index + 1}_label`] = page.label;\n});\n\nreturn [{ json: output }];"
+        "jsCode": "const base = String($json.website || '').trim().replace(/\\/$/, '');\nconst customPaths = String($json.custom_page_paths_csv || '')\n  .split(',')\n  .map((value) => value.trim())\n  .filter(Boolean);\n\nconst defaultPaths = [\n  '/',\n  '/services/',\n  '/solutions/',\n  '/contact/',\n  '/blog/',\n  '/products/',\n  '/expertise/',\n  '/produits-et-services/',\n  '/carrieres/',\n  '/careers/',\n  '/a-propos/',\n  '/about/'\n];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : `/${path}`;\n}\n\nconst selectedPaths = [...new Set([...customPaths, ...defaultPaths].map(normalizePath))].slice(0, 5);\nconst sourcePages = selectedPaths.map((path, index) => {\n  const isAbsolute = /^https?:\\/\\//i.test(path);\n  const normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  const url = isAbsolute ? path : `${base}${normalizedPath === '/' ? '' : normalizedPath}`;\n  return {\n    key: `page_${index + 1}`,\n    path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? `public_source_${index + 1}` : normalizedPath,\n    url,\n  };\n});\n\nconst output = { ...$json, source_pages: sourcePages };\nsourcePages.forEach((page, index) => {\n  output[`page_${index + 1}_url`] = page.url;\n  output[`page_${index + 1}_label`] = page.label;\n});\n\nreturn [{ json: output }];"
       },
       "id": "node-003",
       "name": "Build Source URLs",
@@ -122,7 +122,8 @@
       "position": [
         960,
         100
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -137,7 +138,8 @@
       "position": [
         960,
         220
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -152,7 +154,8 @@
       "position": [
         960,
         340
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -167,7 +170,8 @@
       "position": [
         960,
         460
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -182,11 +186,12 @@
       "position": [
         960,
         580
-      ]
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "const target = $('Build Source URLs').first().json;\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/a-propos/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/services/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/solutions/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/contact/' }, raw: $('Fetch Public Page 5').first().json }\n];\n\nfunction toText(raw) {\n  const html = raw?.body || raw?.data || raw || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nconst pageTexts = pages\n  .map((page) => ({\n    key: page.meta.key,\n    label: page.meta.label,\n    text: toText(page.raw).slice(0, 12000)\n  }))\n  .filter((page) => page.text);\n\nconst combinedPublicText = pageTexts.map((page) => `[${page.key.toUpperCase()} - ${page.label}]\\n${page.text}`).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\n\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'réseaux sociaux', 'reseaux sociaux'],\n  workflow_administratif: ['procédure', 'procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilité', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carrière', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['santé', 'sante', 'patient', 'clinique', 'hôpital', 'hopital', 'télémédecine', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformité', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'opérations', 'operations']\n};\n\nconst roiClues = Object.entries(clueTaxonomy)\n  .filter(([, keywords]) => keywords.some((keyword) => normalizedText.includes(keyword.toLowerCase())))\n  .map(([key]) => key);\n\nreturn [{\n  json: {\n    ...target,\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : [\n      'workflow_administratif',\n      'service_client_multicanal',\n      'assistant_direction_documentaire'\n    ]\n  }\n}];"
+        "jsCode": "const target = $('Build Source URLs').first().json;\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/services/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/solutions/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/contact/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/blog/' }, raw: $('Fetch Public Page 5').first().json }\n];\n\nfunction toText(raw) {\n  const html = raw?.body || raw?.data || raw || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nconst pageTexts = pages\n  .map((page) => ({\n    key: page.meta.key,\n    label: page.meta.label,\n    text: toText(page.raw).slice(0, 12000)\n  }))\n  .filter((page) => page.text);\n\nconst combinedPublicText = pageTexts.map((page) => `[${page.key.toUpperCase()} - ${page.label}]\\n${page.text}`).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\n\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'réseaux sociaux', 'reseaux sociaux'],\n  workflow_administratif: ['procédure', 'procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilité', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carrière', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['santé', 'sante', 'patient', 'clinique', 'hôpital', 'hopital', 'télémédecine', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformité', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'opérations', 'operations']\n};\n\nconst roiClues = Object.entries(clueTaxonomy)\n  .filter(([, keywords]) => keywords.some((keyword) => normalizedText.includes(keyword.toLowerCase())))\n  .map(([key]) => key);\n\nreturn [{\n  json: {\n    ...target,\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : [\n      'workflow_administratif',\n      'service_client_multicanal',\n      'assistant_direction_documentaire'\n    ]\n  }\n}];"
       },
       "id": "node-009",
       "name": "Normalize Public Signals",

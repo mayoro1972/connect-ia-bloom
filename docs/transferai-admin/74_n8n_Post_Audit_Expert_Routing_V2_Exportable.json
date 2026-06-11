@@ -1,0 +1,1241 @@
+{
+  "name": "TransferAI Post-Audit Expert Routing V2",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-post-audit-expert-routing-v2",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "crm"
+    },
+    {
+      "name": "post-audit"
+    },
+    {
+      "name": "expert-routing"
+    },
+    {
+      "name": "n8n"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        120
+      ],
+      "parameters": {}
+    },
+    {
+      "name": "Audit Completed Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        320
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferai-post-audit-expert-routing-v2",
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "name": "Reconciliation Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        520
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "*/30 * * * *"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Set Post-Audit Manual Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        460,
+        120
+      ],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "pack_id",
+              "type": "string",
+              "stringValue": "={{$json.pack_id || 'REPLACE_WITH_PACK_ID'}}"
+            },
+            {
+              "name": "internal_email_to",
+              "type": "string",
+              "stringValue": "={{$json.internal_email_to || $env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci'}}"
+            },
+            {
+              "name": "next_action_delay_days",
+              "type": "string",
+              "stringValue": "={{$json.next_action_delay_days || '1'}}"
+            },
+            {
+              "name": "force_rerun",
+              "type": "string",
+              "stringValue": "={{$json.force_rerun || 'false'}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Parse Post-Audit Webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        320
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const src = $json || {};\nconst query = src.query || {};\nconst body = typeof src.body === 'object' && src.body ? src.body : (typeof src === 'object' ? src : {});\nfunction toBoolean(value) {\n  return value === true || value === 'true' || value === '1' || value === 1;\n}\nreturn [{\n  json: {\n    pack_id: body.pack_id || query.pack_id || src.pack_id || '',\n    response_id: body.response_id || query.response_id || src.response_id || '',\n    completion_percentage: body.completion_percentage || query.completion_percentage || src.completion_percentage || '',\n    is_completed: body.is_completed ?? query.is_completed ?? src.is_completed ?? '',\n    internal_email_to: body.internal_email_to || query.internal_email_to || $env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci',\n    next_action_delay_days: body.next_action_delay_days || query.next_action_delay_days || '1',\n    force_rerun: toBoolean(body.force_rerun ?? query.force_rerun ?? src.force_rerun ?? false),\n    trigger_source: 'webhook'\n  }\n}];"
+      }
+    },
+    {
+      "name": "Set Reconciliation Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        460,
+        520
+      ],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "pack_id",
+              "type": "string",
+              "stringValue": ""
+            },
+            {
+              "name": "internal_email_to",
+              "type": "string",
+              "stringValue": "={{$env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci'}}"
+            },
+            {
+              "name": "next_action_delay_days",
+              "type": "string",
+              "stringValue": "1"
+            },
+            {
+              "name": "force_rerun",
+              "type": "string",
+              "stringValue": "false"
+            },
+            {
+              "name": "max_candidates",
+              "type": "number",
+              "numberValue": 20
+            },
+            {
+              "name": "trigger_source",
+              "type": "string",
+              "stringValue": "reconciliation"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Normalize Post-Audit Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        320
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const src = $json || {};\nfunction toBoolean(value) {\n  return value === true || value === 'true' || value === '1' || value === 1;\n}\nreturn [{\n  json: {\n    pack_id: String(src.pack_id || '').trim(),\n    response_id: String(src.response_id || '').trim(),\n    completion_percentage: Number(src.completion_percentage || 0),\n    is_completed: toBoolean(src.is_completed),\n    internal_email_to: String(src.internal_email_to || $env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci').trim(),\n    next_action_delay_days: Number(src.next_action_delay_days || 1),\n    force_rerun: toBoolean(src.force_rerun),\n    max_candidates: Number(src.max_candidates || 20),\n    trigger_source: src.trigger_source || 'manual'\n  }\n}];"
+      }
+    },
+    {
+      "name": "If Pack Id Provided",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        980,
+        320
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.pack_id}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Pack Row",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1240,
+        220
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Fetch Recent Completed Responses",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1240,
+        520
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_responses?select=*&pack_id=not.is.null&is_completed=eq.true&order=submitted_at.desc.nullslast,updated_at.desc.nullslast&limit=' + encodeURIComponent(String($json.max_candidates || 20))}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Next Completed Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1500,
+        520
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $('Normalize Post-Audit Request').first().json || {};\nconst rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || null;\nif (!row) {\n  return [{\n    json: {\n      ...request,\n      no_candidate_found: true,\n      pack_id: '',\n      response_id: ''\n    }\n  }];\n}\nreturn [{\n  json: {\n    ...request,\n    no_candidate_found: false,\n    pack_id: row.pack_id || '',\n    response_id: row.id || '',\n    completion_percentage: Number(row.completion_percentage || 0),\n    is_completed: Boolean(row.is_completed || Number(row.completion_percentage || 0) >= 80),\n    trigger_source: request.trigger_source || 'reconciliation'\n  }\n}];"
+      }
+    },
+    {
+      "name": "If Candidate Response Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        520
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.pack_id}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Extract Pack Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1500,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $('Normalize Post-Audit Request').first().json || {};\nconst candidate = (() => { try { return $('Extract Next Completed Response').first().json || {}; } catch (e) { return {}; } })();\nconst rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst payload = row.payload || {};\nreturn [{\n  json: {\n    ...request,\n    row_id: row.id || null,\n    found: Boolean(row.pack_id || payload.pack_id),\n    pack_id: row.pack_id || payload.pack_id || candidate.pack_id || request.pack_id || null,\n    prospect_id: row.prospect_id || payload.prospect_id || null,\n    organization_name: row.organization_name || payload.organization_name || null,\n    target_email: row.target_email || payload.target_email || null,\n    status: row.status || null,\n    payload\n  }\n}];"
+      }
+    },
+    {
+      "name": "If Pack Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        220
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.found}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Latest Form Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2020,
+        220
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_responses?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*&order=submitted_at.desc.nullslast,updated_at.desc.nullslast&limit=1'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Latest Form Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst completionPercentage = Number(row.completion_percentage || 0);\nreturn [{\n  json: {\n    response_id: row.id || null,\n    pack_id: row.pack_id || $('Extract Pack Row').first().json.pack_id || null,\n    form_data: row.form_data || {},\n    context_snapshot: row.context_snapshot || {},\n    submitted_at: row.submitted_at || row.updated_at || null,\n    updated_at: row.updated_at || null,\n    is_completed: Boolean(row.is_completed || completionPercentage >= 80),\n    completion_percentage: completionPercentage,\n    audit_completed: Boolean(row.is_completed || completionPercentage >= 80),\n    raw_form_response: row\n  }\n}];"
+      }
+    },
+    {
+      "name": "If Audit Completed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2540,
+        220
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.audit_completed}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Invitation Row",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2800,
+        220
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_invitations?pack_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.pack_id || '') + '&select=*&order=created_at.desc&limit=1'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Invitation Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3060,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nreturn [{\n  json: {\n    invitation_id: row.id || null,\n    invite_token: row.invite_token || null,\n    invitee_email: row.invitee_email || null,\n    response_email: row.response_email || null,\n    response_cc: row.response_cc || null,\n    status: row.status || null,\n    access_context: row.access_context || {},\n    expires_at: row.expires_at || null,\n    raw_invitation: row\n  }\n}];"
+      }
+    },
+    {
+      "name": "Get Prospect Target Row",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        3320,
+        220
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.prospect_id || '') + '&select=*'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Prospect Target Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3580,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $('Normalize Post-Audit Request').first().json || {};\nconst rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst lastSequenceResult = row.last_sequence_result || '';\nconst alreadyProcessed = !Boolean(request.force_rerun) && ['post_audit_ready', 'post_audit_processed'].includes(lastSequenceResult);\nreturn [{\n  json: {\n    prospect_id: row.prospect_id || $('Extract Pack Row').first().json.prospect_id || null,\n    status: row.status || null,\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: lastSequenceResult,\n    stop_reason: row.stop_reason || '',\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null,\n    last_pack_id: row.last_pack_id || null,\n    already_processed: alreadyProcessed,\n    raw_prospect_target: row\n  }\n}];"
+      }
+    },
+    {
+      "name": "If Already Post-Audit Processed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3840,
+        220
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.already_processed}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Build Expert Routing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4100,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $('Normalize Post-Audit Request').first().json || {};\nconst pack = $('Extract Pack Row').first().json || {};\nconst invitation = $('Extract Invitation Row').first().json || {};\nconst form = $('Extract Latest Form Response').first().json || {};\nconst payload = pack.payload || {};\nconst formData = form.form_data || {};\nfunction parseJson(value, fallback) {\n  try {\n    return value ? JSON.parse(value) : fallback;\n  } catch (e) {\n    return fallback;\n  }\n}\nfunction toList(value) {\n  if (Array.isArray(value)) {\n    return value.flatMap(toList);\n  }\n  return String(value || '').split(',').map((v) => v.trim()).filter(Boolean);\n}\nfunction uniq(list) {\n  const seen = {};\n  return list.filter((value) => {\n    const key = String(value || '').toLowerCase();\n    if (!key || seen[key]) return false;\n    seen[key] = true;\n    return true;\n  });\n}\nconst routingMap = parseJson($env.POST_AUDIT_ROUTING_MAP_JSON || '{}', {});\nconst sectorKey = String(formData.audit_sector || payload.sector_guess || '').trim().toLowerCase();\nconst sectorConfig = routingMap[sectorKey] || routingMap.default || {};\nconst recipients = uniq([\n  ...toList(request.internal_email_to),\n  ...toList(payload.internal_email_to),\n  ...toList(payload.assigned_expert_email),\n  ...toList(sectorConfig.internal_email_to),\n  ...toList(invitation.response_email),\n  ...toList(invitation.response_cc),\n  ...toList($env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci')\n]);\nconst completion = Number(form.completion_percentage || 0);\nconst maturityLabel = String(formData.ai_maturity || formData.audit_ai_maturity || formData.maturity_level || '').toLowerCase();\nlet priority = sectorConfig.priority || 'normal';\nif (completion >= 95) priority = 'high';\nif (maturityLabel.includes('avance') || maturityLabel.includes('advanced')) priority = 'high';\nif (String(payload.commercial_priority_tier || '').toUpperCase() === 'A') priority = 'high';\nconst nextActionDelayDays = Number(request.next_action_delay_days || payload.next_action_delay_days || sectorConfig.next_action_delay_days || 1);\nreturn [{\n  json: {\n    routing_internal_email_to: recipients.join(', '),\n    routing_primary_expert_email: recipients[0] || ($env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci'),\n    routing_service_lane: sectorConfig.service_lane || payload.recommended_offer || 'audit',\n    routing_priority: priority,\n    sector_routing_key: sectorKey || 'default',\n    booking_link: payload.booking_link || $env.BOOKING_LINK_45MIN || null,\n    next_action_delay_days: nextActionDelayDays,\n    send_slack_alert: Boolean($env.POST_AUDIT_SLACK_WEBHOOK_URL)\n  }\n}];"
+      }
+    },
+    {
+      "name": "Build Post-Audit CRM Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4360,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $('Normalize Post-Audit Request').first().json || {};\nconst pack = $('Extract Pack Row').first().json || {};\nconst form = $('Extract Latest Form Response').first().json || {};\nconst invitation = $('Extract Invitation Row').first().json || {};\nconst prospect = $('Extract Prospect Target Row').first().json || {};\nconst routing = $('Build Expert Routing').first().json || {};\nconst payload = pack.payload || {};\nconst formData = form.form_data || {};\nconst contextSnapshot = form.context_snapshot || {};\nfunction pickFirst(...values) {\n  for (const value of values) {\n    if (value === undefined || value === null) continue;\n    if (Array.isArray(value) && value.length === 0) continue;\n    if (typeof value === 'string' && value.trim() === '') continue;\n    return value;\n  }\n  return null;\n}\nfunction normalizeList(value) {\n  if (Array.isArray(value)) {\n    return value.map((item) => String(item || '').trim()).filter(Boolean);\n  }\n  if (typeof value === 'string') {\n    return value.split(/\\n|,|;/).map((item) => item.trim()).filter(Boolean);\n  }\n  return [];\n}\nconst recommendation = formData.transferai_recommendation || contextSnapshot.transferai_recommendation || null;\nconst nextActionAt = new Date(Date.now() + Number(routing.next_action_delay_days || 1) * 86400000).toISOString();\nconst maturityLevel = pickFirst(formData.ai_maturity, formData.audit_ai_maturity, formData.maturity_level, formData.ai_maturity_level, payload.ai_maturity, payload.maturity_level);\nconst quickWinsDeclared = normalizeList(pickFirst(formData.quick_wins, formData.quickwins, formData.quick_wins_declared, payload.expected_quick_wins));\nconst constraintsDeclared = normalizeList(pickFirst(formData.constraints, formData.freins, formData.limitations, formData.contraintes));\nconst priorityUseCases = normalizeList(pickFirst(formData.use_cases, formData.priority_use_cases, formData.cas_usage_prioritaires, payload.recommended_use_case, payload.best_selling_use_case));\nreturn [{\n  json: {\n    pack_id: pack.pack_id || null,\n    prospect_id: pack.prospect_id || prospect.prospect_id || null,\n    response_id: form.response_id || request.response_id || null,\n    trigger_source: request.trigger_source || 'manual',\n    organization_name: pickFirst(formData.c_entite, payload.organization_name, pack.organization_name),\n    decision_maker_name: pickFirst(formData.c_nom, payload.decision_maker_name),\n    decision_maker_role: pickFirst(formData.c_poste, payload.decision_maker_role),\n    target_email: pickFirst(formData.c_email, payload.target_email, pack.target_email),\n    website: pickFirst(payload.website, contextSnapshot.website),\n    country: pickFirst(payload.country, contextSnapshot.country),\n    organization_type: pickFirst(formData.organization_type, payload.organization_type),\n    sector_guess: pickFirst(formData.audit_sector, payload.sector_guess, contextSnapshot.sector_context),\n    prospect_language: pickFirst(payload.prospect_language, contextSnapshot.prospect_language, 'fr'),\n    commercial_priority_tier: pickFirst(payload.commercial_priority_tier, contextSnapshot.commercial_priority_tier),\n    recommended_offer: pickFirst(payload.recommended_offer, recommendation?.primary?.title),\n    recommended_use_case: pickFirst(payload.recommended_use_case, payload.best_selling_use_case),\n    best_selling_use_case: pickFirst(payload.best_selling_use_case, payload.recommended_use_case),\n    transferai_recommendation: recommendation,\n    submitted_at: form.submitted_at || null,\n    completion_percentage: Number(form.completion_percentage || 0),\n    post_audit_ready: Boolean(form.audit_completed),\n    maturity_level: maturityLevel,\n    quick_wins_declared: quickWinsDeclared,\n    constraints_declared: constraintsDeclared,\n    priority_use_cases: priorityUseCases,\n    audit_form_url: pickFirst(payload.audit_form_url, contextSnapshot.audit_form_url),\n    booking_link: routing.booking_link || null,\n    internal_email_to: routing.routing_internal_email_to || request.internal_email_to,\n    assigned_expert_email: routing.routing_primary_expert_email || request.internal_email_to,\n    routing_service_lane: routing.routing_service_lane || 'audit',\n    routing_priority: routing.routing_priority || 'normal',\n    send_slack_alert: Boolean(routing.send_slack_alert),\n    crm_status_before: prospect.status || null,\n    crm_last_response_status_before: prospect.last_response_status || '',\n    crm_last_sequence_result_before: prospect.last_sequence_result || '',\n    crm_niche_status_before: prospect.niche_status || '',\n    crm_next_action_at_before: prospect.next_action_at || null,\n    crm_next_action_at_after: nextActionAt,\n    invitation_status: invitation.status || null,\n    invitation_access_context: invitation.access_context || {},\n    form_data: formData,\n    context_snapshot: contextSnapshot,\n    pack_payload: payload,\n    raw_form_response: form.raw_form_response || {},\n    raw_prospect_target: prospect.raw_prospect_target || {},\n    raw_invitation: invitation.raw_invitation || {}\n  }\n}];"
+      }
+    },
+    {
+      "name": "Generate Internal Pre-RDV Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        4620,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, messages: [ { role: 'system', content: \"Tu rediges une fiche pre-RDV interne TransferAI a partir du pack prospecting, des reponses du formulaire et de l orientation de service calculee. Objectif: aider l equipe commerciale et l equipe audit a preparer la reunion suivante. Regles: 1. Si prospect_language = fr, redige en francais professionnel. Si en, redige en anglais professionnel. Si es, redige en espagnol professionnel. 2. Fais apparaitre clairement: identification, synthese executive, maturite IA, cas d usage prioritaires, quick wins, contraintes, orientation TransferAI, points de vigilance, prochaine etape, preparation du RDV. 3. La section Orientation TransferAI doit inclure: service principal recommande, parcours complementaire, niveau de confiance, raisons de l orientation et prochaine etape. 4. N invente pas d informations absentes. 5. Reste sobre, utile et directement exploitable par une equipe commerciale et audit. 6. Format: markdown propre avec titres courts et bullets plats.\" }, { role: 'user', content: `Contexte post-audit:\\n${JSON.stringify($json, null, 2)}` } ] })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Update Prospect Target Post-Audit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        4880,
+        220
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id || '')}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'active', last_response_status: 'audit_completed', last_sequence_result: 'post_audit_ready', stop_reason: null, niche_status: 'qualified_after_audit', next_action_at: $json.crm_next_action_at_after || new Date(Date.now() + 86400000).toISOString(), last_pack_id: $json.pack_id || null, updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Patch Pack Post-Audit Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        5140,
+        220
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($('Build Post-Audit CRM Context').first().json.pack_id || '')}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'post_audit_processed' })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Upsert Follow-Up Tracking",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        5400,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/post_audit_follow_ups?on_conflict=pack_id'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ pack_id: $('Build Post-Audit CRM Context').first().json.pack_id || null, prospect_id: $('Build Post-Audit CRM Context').first().json.prospect_id || null, organization_name: $('Build Post-Audit CRM Context').first().json.organization_name || null, target_email: $('Build Post-Audit CRM Context').first().json.target_email || null, sector_guess: $('Build Post-Audit CRM Context').first().json.sector_guess || null, maturity_level: $('Build Post-Audit CRM Context').first().json.maturity_level || null, recommended_offer: $('Build Post-Audit CRM Context').first().json.recommended_offer || null, primary_service: $('Build Post-Audit CRM Context').first().json.transferai_recommendation?.primary?.title || $('Build Post-Audit CRM Context').first().json.recommended_offer || null, secondary_service: $('Build Post-Audit CRM Context').first().json.transferai_recommendation?.secondary?.title || null, priority_use_cases: $('Build Post-Audit CRM Context').first().json.priority_use_cases || [], quick_wins_declared: $('Build Post-Audit CRM Context').first().json.quick_wins_declared || [], constraints_declared: $('Build Post-Audit CRM Context').first().json.constraints_declared || [], assigned_expert_email: $('Build Post-Audit CRM Context').first().json.assigned_expert_email || null, internal_email_to: $('Build Post-Audit CRM Context').first().json.internal_email_to || null, workflow_status: 'ready_for_expert', response_submitted_at: $('Build Post-Audit CRM Context').first().json.submitted_at || null, next_action_at: $('Build Post-Audit CRM Context').first().json.crm_next_action_at_after || null, booking_link: $('Build Post-Audit CRM Context').first().json.booking_link || null })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Send Internal Brief Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        5660,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'onboarding@resend.dev', to: String($('Build Post-Audit CRM Context').first().json.internal_email_to || 'contact@transferai.ci').split(',').map((v) => v.trim()).filter(Boolean), subject: 'Fiche pre-RDV post-audit - ' + (($('Build Post-Audit CRM Context').first().json.organization_name || 'Prospect a confirmer')), html: String(((($('Generate Internal Pre-RDV Brief').first().json || {}).choices || [])[0] || {}).message?.content || 'Aucune fiche generee.').replace(/\\n/g, '<br>') })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "If Slack Alerts Enabled",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        5920,
+        220
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$('Build Post-Audit CRM Context').first().json.send_slack_alert}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Send Slack Expert Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        6180,
+        160
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.POST_AUDIT_SLACK_WEBHOOK_URL}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ text: 'Nouveau dossier post-audit TransferAI\\nOrganisation: ' + (($('Build Post-Audit CRM Context').first().json.organization_name) || 'A confirmer') + '\\nPack: ' + (($('Build Post-Audit CRM Context').first().json.pack_id) || 'n/a') + '\\nService principal: ' + (($('Build Post-Audit CRM Context').first().json.transferai_recommendation?.primary?.title) || ($('Build Post-Audit CRM Context').first().json.recommended_offer) || 'A confirmer') + '\\nExpert: ' + (($('Build Post-Audit CRM Context').first().json.assigned_expert_email) || 'A confirmer') + '\\nPriorite: ' + (($('Build Post-Audit CRM Context').first().json.routing_priority) || 'normal') + '\\nRDV: ' + (($('Build Post-Audit CRM Context').first().json.booking_link) || 'A definir') })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Build Post-Audit Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6440,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "function safeNode(name) {\n  try {\n    return $(name).first().json || {};\n  } catch (e) {\n    return {};\n  }\n}\nconst ctx = safeNode('Build Post-Audit CRM Context');\nconst briefResponse = safeNode('Generate Internal Pre-RDV Brief');\nconst emailResponse = safeNode('Send Internal Brief Email');\nconst slackResponse = safeNode('Send Slack Expert Alert');\nconst trackingResponse = safeNode('Upsert Follow-Up Tracking');\nconst brief = (((briefResponse.choices || [])[0] || {}).message || {}).content || '';\nconst resendId = emailResponse.id || (emailResponse.data && emailResponse.data.id) || null;\nconst slackAttempted = Boolean(ctx.send_slack_alert);\nconst slackDelivered = slackAttempted ? Object.keys(slackResponse || {}).length > 0 : false;\nreturn [{\n  json: {\n    status: 'post_audit_processed',\n    pack_id: ctx.pack_id || null,\n    prospect_id: ctx.prospect_id || null,\n    response_id: ctx.response_id || null,\n    organization_name: ctx.organization_name || null,\n    submitted_at: ctx.submitted_at || null,\n    completion_percentage: ctx.completion_percentage || null,\n    primary_service: ctx.transferai_recommendation?.primary?.title || ctx.recommended_offer || null,\n    secondary_service: ctx.transferai_recommendation?.secondary?.title || null,\n    confidence_label: ctx.transferai_recommendation?.confidenceLabel || null,\n    assigned_expert_email: ctx.assigned_expert_email || null,\n    internal_email_to: ctx.internal_email_to || null,\n    next_action_at: ctx.crm_next_action_at_after || null,\n    resend_id: resendId,\n    slack_attempted: slackAttempted,\n    slack_delivered: slackDelivered,\n    tracking_sync_attempted: Object.keys(trackingResponse || {}).length > 0,\n    brief_markdown: brief\n  }\n}];"
+      }
+    },
+    {
+      "name": "Build No-Op Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4620,
+        520
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "function safeNode(name) {\n  try {\n    return $(name).first().json || {};\n  } catch (e) {\n    return {};\n  }\n}\nconst request = safeNode('Normalize Post-Audit Request');\nconst candidate = safeNode('Extract Next Completed Response');\nconst pack = safeNode('Extract Pack Row');\nconst form = safeNode('Extract Latest Form Response');\nconst prospect = safeNode('Extract Prospect Target Row');\nlet reason = 'no_action_taken';\nif (candidate.no_candidate_found) reason = 'no_completed_responses_found';\nelse if ((request.pack_id || candidate.pack_id) && !pack.found) reason = 'pack_not_found';\nelse if (form.response_id && !form.audit_completed) reason = 'audit_not_completed';\nelse if (prospect.already_processed) reason = 'already_post_audit_processed';\nreturn [{\n  json: {\n    status: 'no_op',\n    reason,\n    pack_id: pack.pack_id || candidate.pack_id || request.pack_id || null,\n    prospect_id: pack.prospect_id || prospect.prospect_id || null,\n    response_id: form.response_id || candidate.response_id || request.response_id || null,\n    trigger_source: request.trigger_source || candidate.trigger_source || 'unknown'\n  }\n}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Post-Audit Manual Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audit Completed Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Post-Audit Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reconciliation Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Reconciliation Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Post-Audit Manual Input": {
+      "main": [
+        [
+          {
+            "node": "Normalize Post-Audit Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Post-Audit Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Post-Audit Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Reconciliation Input": {
+      "main": [
+        [
+          {
+            "node": "Normalize Post-Audit Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Post-Audit Request": {
+      "main": [
+        [
+          {
+            "node": "If Pack Id Provided",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Pack Id Provided": {
+      "main": [
+        [
+          {
+            "node": "Get Pack Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Recent Completed Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Recent Completed Responses": {
+      "main": [
+        [
+          {
+            "node": "Extract Next Completed Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Next Completed Response": {
+      "main": [
+        [
+          {
+            "node": "If Candidate Response Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Candidate Response Found": {
+      "main": [
+        [
+          {
+            "node": "Get Pack Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build No-Op Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pack Row": {
+      "main": [
+        [
+          {
+            "node": "Extract Pack Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Pack Row": {
+      "main": [
+        [
+          {
+            "node": "If Pack Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Pack Found": {
+      "main": [
+        [
+          {
+            "node": "Get Latest Form Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build No-Op Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Latest Form Response": {
+      "main": [
+        [
+          {
+            "node": "Extract Latest Form Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Latest Form Response": {
+      "main": [
+        [
+          {
+            "node": "If Audit Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Audit Completed": {
+      "main": [
+        [
+          {
+            "node": "Get Invitation Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build No-Op Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Invitation Row": {
+      "main": [
+        [
+          {
+            "node": "Extract Invitation Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Invitation Row": {
+      "main": [
+        [
+          {
+            "node": "Get Prospect Target Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Prospect Target Row": {
+      "main": [
+        [
+          {
+            "node": "Extract Prospect Target Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Prospect Target Row": {
+      "main": [
+        [
+          {
+            "node": "If Already Post-Audit Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Already Post-Audit Processed": {
+      "main": [
+        [
+          {
+            "node": "Build No-Op Result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Expert Routing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Expert Routing": {
+      "main": [
+        [
+          {
+            "node": "Build Post-Audit CRM Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Post-Audit CRM Context": {
+      "main": [
+        [
+          {
+            "node": "Generate Internal Pre-RDV Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Internal Pre-RDV Brief": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Post-Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Post-Audit": {
+      "main": [
+        [
+          {
+            "node": "Patch Pack Post-Audit Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Patch Pack Post-Audit Status": {
+      "main": [
+        [
+          {
+            "node": "Upsert Follow-Up Tracking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert Follow-Up Tracking": {
+      "main": [
+        [
+          {
+            "node": "Send Internal Brief Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Internal Brief Email": {
+      "main": [
+        [
+          {
+            "node": "If Slack Alerts Enabled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Slack Alerts Enabled": {
+      "main": [
+        [
+          {
+            "node": "Send Slack Expert Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Post-Audit Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Slack Expert Alert": {
+      "main": [
+        [
+          {
+            "node": "Build Post-Audit Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

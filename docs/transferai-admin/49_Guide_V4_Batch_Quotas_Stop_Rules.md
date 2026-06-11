@@ -30,6 +30,8 @@ Son rôle est de :
 - `BOOKING_LINK_45MIN`
 - `N8N_CHILD_WORKFLOW_ID_V3`
 
+Le `N8N_CHILD_WORKFLOW_ID_V3` doit maintenant idéalement pointer vers la version enrichie du workflow prospect, c’est-à-dire la variante qui génère aussi le mini-catalogue et le deck avant stockage / envoi.
+
 ## Paramètres batch recommandés
 
 Dans `Set Batch Config` :
@@ -40,6 +42,7 @@ Dans `Set Batch Config` :
 - `max_attempts_per_prospect`
 - `min_confidence_score`
 - `batch_run_label`
+- `child_workflow_label_v3`
 
 ### Valeurs de départ recommandées
 
@@ -48,6 +51,7 @@ Dans `Set Batch Config` :
 - `daily_send_limit = 5`
 - `max_attempts_per_prospect = 3`
 - `min_confidence_score = 0.45`
+- `child_workflow_label_v3 = TransferAI Prospecting V3 CRM Enhanced [FINAL]-11`
 
 ## Règles d'arrêt implémentées
 
@@ -105,6 +109,8 @@ Le V3 se charge ensuite de :
 - scrapper
 - protéger les données avant LLM
 - produire le pack prospect
+- générer le mini-catalogue rendu
+- générer le deck rendu
 - lancer la validation
 - envoyer après approbation
 
@@ -114,7 +120,13 @@ La V4 produit en fin de run :
 
 - `processed_count`
 - `skipped_count`
+- `rendered_catalogues_count`
+- `rendered_decks_count`
+- `rendered_attachments_total`
+- `render_error_count`
 - `skip_reasons`
+- `child_workflow_id_v3`
+- `child_workflow_label_v3`
 - `generated_at`
 
 Et, dans la version actuelle, elle peut aussi journaliser :

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Checklist de Suivi Opérationnel - Phase 1 Prospection V3</title>
+  <style>
+    body {
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      font-size: 11pt;
+      line-height: 1.35;
+      color: #1f2937;
+      margin: 0.9in;
+    }
+    h1, h2 { color: #0f4c81; margin-bottom: 6pt; }
+    h1 { font-size: 20pt; margin-top: 0; }
+    h2 { font-size: 14pt; margin-top: 18pt; border-bottom: 1px solid #d1d5db; padding-bottom: 4pt; }
+    p { margin: 0 0 8pt 0; }
+    ul { margin: 0 0 10pt 18pt; }
+    li { margin-bottom: 4pt; }
+    .meta {
+      background: #f3f6fb;
+      border: 1px solid #dbe6f3;
+      padding: 10pt 12pt;
+      margin: 10pt 0 18pt 0;
+    }
+    .callout {
+      background: #ecfdf5;
+      border-left: 4px solid #16a34a;
+      padding: 8pt 10pt;
+      margin: 10pt 0 14pt 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 12pt 0 18pt 0;
+    }
+    th, td {
+      border: 1px solid #cfd8e3;
+      padding: 6pt 8pt;
+      vertical-align: top;
+    }
+    th {
+      background: #eaf1f8;
+      text-align: left;
+    }
+    .status-done { background: #ecfdf5; }
+    .status-remaining { background: #fff7ed; }
+    .status-blocking { background: #fef2f2; }
+    .status-nice { background: #f5f3ff; }
+    .small { font-size: 9.5pt; color: #4b5563; }
+    code { font-family: "Menlo", monospace; font-size: 9.5pt; }
+  </style>
+</head>
+<body>
+  <h1>Checklist de suivi opérationnel</h1>
+  <p><strong>Programme :</strong> Prospection TransferAI V3 - Phase 1 deck premium, catalogue dynamique et envoi prospect</p>
+
+  <div class="meta">
+    <p><strong>Date :</strong> 2 juin 2026</p>
+    <p><strong>Objet :</strong> fournir un tableau de suivi opérationnel simple à partager pour piloter la clôture de la phase 1.</p>
+    <p><strong>Périmètre :</strong> workflow V3, renderers Supabase, qualité du deck premium, mini-catalogue, validation interne et envoi prospect.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Lecture rapide :</strong> la phase 1 est fonctionnelle de bout en bout sur le plan technique. Le reste porte principalement sur la validation multi-cas, le durcissement de production et la qualité finale du rendu premium.
+  </div>
+
+  <h2>1. Tableau de suivi opérationnel</h2>
+  <table>
+    <tr>
+      <th>Lot</th>
+      <th>Élément</th>
+      <th>Statut</th>
+      <th>Responsable</th>
+      <th>Priorité</th>
+      <th>Prochaine action</th>
+    </tr>
+    <tr class="status-done">
+      <td>Workflow V3</td>
+      <td>Génération du catalogue dynamique par pack</td>
+      <td>Done</td>
+      <td>Technique</td>
+      <td>Haute</td>
+      <td>Conserver le flux actuel et vérifier ponctuellement les rendus PDF/DOCX sur de nouveaux packs.</td>
+    </tr>
+    <tr class="status-done">
+      <td>Workflow V3</td>
+      <td>Génération du deck PPTX par pack</td>
+      <td>Done</td>
+      <td>Technique</td>
+      <td>Haute</td>
+      <td>Continuer les tests de génération sur des prospects variés pour confirmer la stabilité.</td>
+    </tr>
+    <tr class="status-done">
+      <td>Workflow V3</td>
+      <td>Fusion des pièces jointes finales</td>
+      <td>Done</td>
+      <td>Technique</td>
+      <td>Haute</td>
+      <td>Contrôler régulièrement <code>attachments_count = 2</code> dans les exécutions critiques.</td>
+    </tr>
+    <tr class="status-done">
+      <td>Workflow V3</td>
+      <td>Validation interne puis envoi prospect</td>
+      <td>Done</td>
+      <td>Technique</td>
+      <td>Haute</td>
+      <td>Maintenir le protocole d’approbation sur le dernier email reçu uniquement.</td>
+    </tr>
+    <tr class="status-done">
+      <td>Renderers</td>
+      <td>Déploiement de <code>catalogue-renderer</code> et <code>deck-renderer</code></td>
+      <td>Done</td>
+      <td>Technique</td>
+      <td>Haute</td>
+      <td>Conserver les versions déployées et documenter toute évolution avant redéploiement.</td>
+    </tr>
+    <tr class="status-done">
+      <td>Guides</td>
+      <td>Mise à jour des guides utilisateur et troubleshooting</td>
+      <td>Done</td>
+      <td>Documentation</td>
+      <td>Moyenne</td>
+      <td>Partager les nouvelles versions MD et Word avec l’équipe opérationnelle.</td>
+    </tr>
+    <tr class="status-remaining">
+      <td>QA Deck</td>
+      <td>Validation visuelle du deck premium sur plusieurs prospects réels</td>
+      <td>Remaining</td>
+      <td>Commercial + Technique</td>
+      <td>Haute</td>
+      <td>Régénérer au moins 3 à 5 decks multi-secteurs et faire une revue slide par slide.</td>
+    </tr>
+    <tr class="status-remaining">
+      <td>QA Catalogue</td>
+      <td>Validation visuelle du mini-catalogue sur plusieurs secteurs</td>
+      <td>Remaining</td>
+      <td>Commercial + Technique</td>
+      <td>Haute</td>
+      <td>Comparer les sorties Orange et hors Orange pour confirmer le niveau premium et la bonne personnalisation.</td>
+    </tr>
+    <tr class="status-remaining">
+      <td>Localisation</td>
+      <td>Tests complets FR / EN / ES</td>
+      <td>Remaining</td>
+      <td>Technique</td>
+      <td>Haute</td>
+      <td>Exécuter un cas francophone, un anglophone et un hispanophone avec contrôle des accents et de la cohérence métier.</td>
+    </tr>
+    <tr class="status-remaining">
+      <td>Fallbacks métier</td>
+      <td>Validation des cas incomplets ou faiblement documentés</td>
+      <td>Remaining</td>
+      <td>Technique + Ops</td>
+      <td>Moyenne</td>
+      <td>Tester des prospects sans décideur identifié, avec peu de signaux ou avec secteur incertain.</td>
+    </tr>
+    <tr class="status-remaining">
+      <td>Production Email</td>
+      <td>Passage du sender de test au domaine de production</td>
+      <td>Remaining</td>
+      <td>Ops + Technique</td>
+      <td>Haute</td>
+      <td>Valider Resend sur le domaine TransferAI puis remplacer <code>onboarding@resend.dev</code> par <code>noreply@transferai.ci</code>.</td>
+    </tr>
+    <tr class="status-remaining">
+      <td>Nettoyage</td>
+      <td>Retrait des cibles de test et des usages de validation temporaires</td>
+      <td>Remaining</td>
+      <td>Ops</td>
+      <td>Haute</td>
+      <td>Supprimer les adresses de démonstration et vérifier que l’envoi cible toujours le vrai prospect.</td>
+    </tr>
+    <tr class="status-blocking">
+      <td>Audit Web</td>
+      <td>Finalisation du formulaire d’audit dynamique par <code>pack_id</code></td>
+      <td>Blocking</td>
+      <td>Produit + Technique</td>
+      <td>Haute</td>
+      <td>Rendre le flux d’audit entièrement piloté par le pack, avec reprise native du contexte prospect.</td>
+    </tr>
+    <tr class="status-blocking">
+      <td>QA Documentaire</td>
+      <td>Prévisualisation automatisée DOCX</td>
+      <td>Blocking partiel</td>
+      <td>Technique</td>
+      <td>Basse</td>
+      <td>Installer ou rendre disponible <code>soffice</code> pour une QA visuelle automatisée des documents Word.</td>
+    </tr>
+    <tr class="status-nice">
+      <td>Industrialisation</td>
+      <td>Grille de QA standard deck + catalogue</td>
+      <td>Nice to have</td>
+      <td>Ops</td>
+      <td>Moyenne</td>
+      <td>Créer une fiche de contrôle avant envoi couvrant lisibilité, langue, pièces jointes et CTA.</td>
+    </tr>
+    <tr class="status-nice">
+      <td>Industrialisation</td>
+      <td>Snapshots de rendu par langue et par secteur</td>
+      <td>Nice to have</td>
+      <td>Technique</td>
+      <td>Basse</td>
+      <td>Archiver quelques rendus de référence FR / EN / ES pour accélérer les validations futures.</td>
+    </tr>
+    <tr class="status-nice">
+      <td>Industrialisation</td>
+      <td>Guide interne go live production</td>
+      <td>Nice to have</td>
+      <td>Ops + Technique</td>
+      <td>Moyenne</td>
+      <td>Formaliser un document court sur Resend, audit dynamique, contrôles V3 et règles d’exploitation.</td>
+    </tr>
+  </table>
+
+  <h2>2. Critère de sortie de phase 1</h2>
+  <ul>
+    <li>Au moins 3 à 5 packs réels passent correctement avec catalogue et deck premium.</li>
+    <li>Les deux pièces jointes finales sont systématiquement présentes : un PDF et un PPTX.</li>
+    <li>Le rendu du deck et du mini-catalogue est jugé lisible, cohérent et premium sur plusieurs cas.</li>
+    <li>Le formulaire d’audit dynamique par <code>pack_id</code> est validé fonctionnellement.</li>
+    <li>L’envoi email est prêt à basculer sur le domaine de production.</li>
+  </ul>
+
+  <h2>3. Recommandation opérationnelle</h2>
+  <p>La phase 1 n’est plus bloquée sur la chaîne technique principale. La priorité doit maintenant être mise sur la validation transverse, la qualité perçue des livrables et la sécurisation des usages de production.</p>
+
+  <p class="small">Document de pilotage opérationnel généré à partir de l’état réel du workflow V3, des renderers Supabase et des guides de référence mis à jour au 2 juin 2026.</p>
+</body>
+</html>

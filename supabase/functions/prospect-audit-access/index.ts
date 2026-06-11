@@ -1,9 +1,14 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { resolveAuditDomainAccess } from "../_shared/audit-domain-access.ts";
+import {
+  type ProspectAuditPackRow,
+  buildAuditAccessContext,
+  buildAuditDraftFormData,
+} from "../_shared/prospect-audit-context.ts";
 
 type AccessPayload = {
   identifier?: string | null;
   passwordHash?: string | null;
+  packId?: string | null;
 };
 
 const corsHeaders = {
@@ -15,8 +20,11 @@ const corsHeaders = {
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
-const AUDIT_FORM_URL =
-  (Deno.env.get("PUBLIC_AUDIT_FORM_URL") ?? `${SITE_URL}/formulaire-audit-ia/index.html`).trim();
+const rawAuditFormUrl =
+  (Deno.env.get("PUBLIC_AUDIT_FORM_URL") ?? `${SITE_URL}/questionnaire-audit`).trim();
+const AUDIT_FORM_URL = rawAuditFormUrl.includes("/formulaire-audit-ia/index.html")
+  ? `${SITE_URL}/questionnaire-audit`
+  : rawAuditFormUrl;
 
 const supabase =
   supabaseUrl && serviceRoleKey
@@ -29,6 +37,7 @@ const supabase =
     : null;
 
 const normalize = (value?: string | null) => (value ?? "").trim().toLowerCase();
+const normalizePackId = (value?: string | null) => (value ?? "").trim();
 
 const generateInviteToken = () => crypto.randomUUID().replaceAll("-", "");
 
@@ -57,6 +66,7 @@ Deno.serve(async (request) => {
   const body = (await request.json().catch(() => ({}))) as AccessPayload;
   const identifier = normalize(body.identifier);
   const passwordHash = normalize(body.passwordHash);
+  const requestedPackId = normalizePackId(body.packId);
 
   if (!identifier || !passwordHash) {
     return new Response(JSON.stringify({ error: "invalid_credentials" }), {
@@ -67,7 +77,7 @@ Deno.serve(async (request) => {
 
   const { data: rows, error } = await supabase
     .from("contact_requests")
-    .select("id, full_name, email, profession, company, country, sector, prospect_username, prospect_password_hash, prospect_portal_status, audit_invite_token, audit_invite_expires_at")
+    .select("id, full_name, email, profession, company, country, sector, message, ai_maturity, use_cases, engagement_format, scoping_horizon, budget_range, prospect_username, prospect_password_hash, prospect_portal_status, audit_invite_token, audit_invite_expires_at")
     .eq("request_intent", "demande-audit")
     .or(`email.eq.${identifier},prospect_username.eq.${identifier}`)
     .order("created_at", { ascending: false })
@@ -91,6 +101,60 @@ Deno.serve(async (request) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
+  let packRow: ProspectAuditPackRow | null = null;
+
+  if (requestedPackId) {
+    const { data: requestedPack, error: packError } = await supabase
+      .from("ai_prospecting_packs")
+      .select("pack_id, organization_name, organization_type, target_email, payload")
+      .eq("pack_id", requestedPackId)
+      .maybeSingle();
+
+    if (packError) {
+      return new Response(JSON.stringify({ error: packError.message }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!requestedPack) {
+      return new Response(JSON.stringify({ error: "invalid_pack" }), {
+        status: 404,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const packEmail = normalize(typeof requestedPack.target_email === "string" ? requestedPack.target_email : "");
+    if (packEmail && packEmail !== normalize(row.email)) {
+      return new Response(JSON.stringify({ error: "invalid_pack" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    packRow = requestedPack;
+  } else {
+    const { data: latestPack, error: latestPackError } = await supabase
+      .from("ai_prospecting_packs")
+      .select("pack_id, organization_name, organization_type, target_email, payload")
+      .eq("target_email", row.email)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (latestPackError) {
+      return new Response(JSON.stringify({ error: latestPackError.message }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    packRow = latestPack ?? null;
+  }
+
+  const accessContext = buildAuditAccessContext(row, packRow);
+  const draftFormData = buildAuditDraftFormData(row, accessContext);
 
   const existingTokenStillValid =
     row.audit_invite_token &&
@@ -124,21 +188,18 @@ Deno.serve(async (request) => {
   if (!existingInviteStillValid) {
     inviteToken = generateInviteToken();
     inviteExpiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toISOString();
-    const { domainKey } = resolveAuditDomainAccess(row.sector);
 
     const invitationPayload = {
+      contact_request_id: row.id,
+      pack_id: accessContext.packId,
       invitee_name: row.full_name,
       invitee_email: row.email,
       invite_token: inviteToken,
       expires_at: inviteExpiresAt,
       status: "pending",
-      draft_form_data: {
-        c_nom: row.full_name,
-        c_email: row.email,
-        c_entite: row.company,
-        c_poste: row.profession ?? "",
-        c_domaine: domainKey,
-      },
+      sector_context: accessContext.sectorLabel,
+      access_context: accessContext,
+      draft_form_data: draftFormData,
     };
 
     const { error: invitationError } = await supabase.from("form_invitations").insert(invitationPayload);
@@ -166,6 +227,19 @@ Deno.serve(async (request) => {
       });
     }
   } else {
+    await supabase
+      .from("form_invitations")
+      .update({
+        contact_request_id: row.id,
+        pack_id: accessContext.packId,
+        invitee_name: row.full_name,
+        invitee_email: row.email,
+        sector_context: accessContext.sectorLabel,
+        access_context: accessContext,
+        draft_form_data: draftFormData,
+      })
+      .eq("invite_token", inviteToken!);
+
     await supabase
       .from("contact_requests")
       .update({ last_portal_login_at: new Date().toISOString() })

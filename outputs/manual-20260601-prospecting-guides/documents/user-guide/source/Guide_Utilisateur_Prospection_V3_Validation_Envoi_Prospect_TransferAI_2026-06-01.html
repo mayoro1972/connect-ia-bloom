@@ -59,23 +59,24 @@
   <p><strong>Programme :</strong> écosystème de prospection, qualification, validation et envoi TransferAI</p>
   <div class="meta">
     <p><strong>Version consolidée :</strong> 2 juin 2026</p>
-    <p><strong>Portée :</strong> ce document fusionne les guides utilisateur, administrateur, batch CRM et exploitation n8n créés depuis le début du projet jusqu’à la stabilisation actuelle.</p>
-    <p><strong>Finalité :</strong> donner un document unique pour comprendre le dispositif, l’utiliser au quotidien, préparer un envoi prospect, maintenir les bons secrets et savoir quel workflow joue quel rôle.</p>
+    <p><strong>Workflow de référence pour cette mise à jour :</strong> <code>TransferAI Prospecting V3 CRM Enhanced [FINAL]-10.json</code> exporté depuis n8n, 53 nœuds.</p>
+    <p><strong>Portée :</strong> ce document fusionne les guides utilisateur, administrateur, batch CRM et exploitation n8n créés depuis le début du projet jusqu’à la stabilisation actuelle, puis les aligne sur l’export <code>FINAL-10</code>.</p>
+    <p><strong>Finalité :</strong> donner un document unique pour comprendre le dispositif, l’utiliser au quotidien, préparer un envoi prospect, maintenir les bons secrets et savoir quel workflow joue quel rôle, y compris quand un export n8n conserve encore des nœuds de compatibilité.</p>
   </div>
 
-  <h2>1. Objet et perimetre</h2>
-  <p>Le systeme TransferAI ne se limite pas a un simple workflow n8n. Il s agit d une chaine complete qui couvre :</p>
+  <h2>1. Objet et périmètre</h2>
+  <p>Le système TransferAI ne se limite pas à un simple workflow n8n. Il s’agit d’une chaîne complète qui couvre :</p>
   <ul>
     <li>la collecte de signaux publics sur les prospects,</li>
-    <li>la protection des donnees avant appel LLM,</li>
-    <li>la generation de livrables commerciaux,</li>
+    <li>la protection des données avant appel LLM,</li>
+    <li>la génération de livrables commerciaux,</li>
     <li>la validation interne par email,</li>
-    <li>l envoi prospect apres approbation,</li>
+    <li>l’envoi prospect après approbation,</li>
     <li>la croissance CRM,</li>
-    <li>le back-office de contenu et d operations,</li>
+    <li>le back-office de contenu et d’opérations,</li>
     <li>les integrations Supabase, Resend, Twilio, Chatwoot et Cloudflare.</li>
   </ul>
-  <p>Ce guide couvre les usages reels et les decisions structurelles valides a date. Il sert de reference utilisateur pour la V3, mais aussi de point d entree pour comprendre la logique V1, V2, V4 et V5.</p>
+  <p>Ce guide couvre les usages réels et les décisions structurelles validées à date. Il sert de référence utilisateur pour la V3, mais aussi de point d’entrée pour comprendre la logique V1, V2, V4 et V5. Cette version documente l’état concret de l’export <code>FINAL-10</code>, y compris les écarts restant à corriger avant un passage complet en production.</p>
 
   <h2>2. Evolution du dispositif de prospection</h2>
   <table>
@@ -126,6 +127,9 @@
   <div class="ok">
     <strong>État attendu en phase 1 deck PPTX :</strong> chaque pack validé doit stocker deux pièces jointes finales dans <code>mail_attachments</code> : un catalogue <code>.pdf</code> et un deck <code>.pptx</code>. Le fallback <code>Deck_Brief_[Prospect].json</code> ne fait plus partie du flux d’envoi cible.
   </div>
+  <div class="callout">
+    <strong>Point important pour le workflow <code>FINAL-10</code> :</strong> l’export conserve encore des nœuds de compatibilité hérités de l’ancienne logique catalogue statique, notamment <code>Resolve Domain Catalogue</code>, <code>Download Catalogue PDF</code> et <code>Assemble Mail Attachments</code>. Ils sont toujours présents dans le canvas, mais la chaîne cible pour les pièces jointes finales est désormais la chaîne dynamique <code>Build Catalogue Render Payload -&gt; render Catalogue Artifact -&gt; Merge Catalogue Artifact -&gt; Build Deck Render Payload -&gt; Render Deck Artifact -&gt; Merge Deck Artifact</code>.
+  </div>
 
   <h2>4. Composants, outils et responsabilites</h2>
   <h3>4.1 n8n</h3>
@@ -134,9 +138,9 @@
   <h3>4.2 Supabase</h3>
   <p>Supabase joue plusieurs roles :</p>
   <ul>
-    <li>base de donnees pour les packs et le CRM,</li>
+    <li>base de données pour les packs et le CRM,</li>
     <li>storage pour les catalogues PDF/DOCX,</li>
-    <li>edge functions pour les traitements backend comme <code>catalogue-renderer</code>.</li>
+    <li>edge functions pour les traitements backend comme <code>catalogue-renderer</code> et <code>deck-renderer</code>.</li>
   </ul>
 
   <h3>4.3 Resend</h3>
@@ -191,27 +195,42 @@
       <td>Remplacer le sender de test <code>onboarding@resend.dev</code> par <code>noreply@transferai.ci</code> une fois le domaine valide</td>
     </tr>
   </table>
+  <div class="callout">
+    <strong>Constat sur l’export <code>FINAL-10</code> :</strong> plusieurs secrets restent encore écrits en dur dans le fichier exporté, notamment des tokens Supabase, des valeurs <code>x-admin-token</code> et une clé Resend. Le guide utilisateur doit donc être lu avec une vigilance particulière : le workflow fonctionne en test, mais ces valeurs doivent être externalisées avant toute généralisation.
+  </div>
 
-  <h2>6. Cles, valeurs et comportements a remplacer pour la stabilite</h2>
+  <h2>6. Clés, valeurs et comportements à remplacer pour la stabilité</h2>
   <ul>
+    <li>Remplacer les valeurs <code>x-admin-token</code> écrites en dur dans <code>render Catalogue Artifact</code> et <code>Render Deck Artifact</code> par <code>{{$env.CONTENT_ADMIN_TOKEN}}</code> ou par une credential équivalente.</li>
+    <li>Externaliser les clés Supabase et Resend encore écrites en dur dans l’export <code>FINAL-10</code>.</li>
     <li>Supprimer l ancien schema d auth du renderer par <code>Authorization: Bearer ...</code> si le schema <code>x-admin-token</code> est adopte partout.</li>
     <li>Retirer toute cible Gmail de test avant production.</li>
-    <li>Ne plus utiliser les anciens PDF statiques du site <code>transferai.ci/catalogues-domaines-assets/...</code> comme source finale de piece jointe.</li>
+    <li>Ne plus utiliser les anciens PDF statiques du site <code>transferai.ci/catalogues-domaines-assets/...</code> comme source finale de pièce jointe, même si <code>Download Catalogue PDF</code> et <code>Assemble Mail Attachments</code> restent visibles dans l’export.</li>
     <li>Ne plus attacher le formulaire d audit en fichier ; conserver uniquement le lien web.</li>
-    <li>Ne plus dependre d un chemin disque local Mac pour les livrables ; toute generation doit passer par service backend + storage.</li>
+    <li>Ne plus dépendre d un chemin disque local Mac pour les livrables ; toute génération doit passer par service backend + storage.</li>
   </ul>
 
   <h2>7. Workflow V3 de référence</h2>
-  <h3>7.1 Nœuds clés</h3>
+  <h3>7.1 État réel du workflow <code>FINAL-10</code></h3>
+  <p>Le workflow exporté <code>TransferAI Prospecting V3 CRM Enhanced [FINAL]-10.json</code> contient <strong>53 nœuds</strong>. Il reflète un état de transition avancé :</p>
+  <ul>
+    <li>la chaîne dynamique catalogue + deck est bien en place et fonctionne,</li>
+    <li>la branche d’approbation / envoi impose bien <code>attachments_count = 2</code>,</li>
+    <li>mais quelques nœuds plus anciens restent dans le canvas à des fins de compatibilité ou d’historique opérationnel.</li>
+  </ul>
+
+  <h3>7.2 Nœuds clés</h3>
   <ul>
     <li><strong>Generate Executive Letter</strong> : courrier exécutif.</li>
     <li><strong>Generate Tailored Catalogue</strong> : source de personnalisation commerciale.</li>
     <li><strong>Generate Tailored Audit Form</strong> : source métier pour le formulaire d’audit.</li>
     <li><strong>Generate Deck Brief</strong> : structure et argumentaire du deck.</li>
     <li><strong>Assemble Prospect Pack</strong> : assemble les sorties LLM et le contexte prospect.</li>
-    <li><strong>Resolve Domain Catalogue</strong> : détecte le domaine de base du catalogue.</li>
+    <li><strong>Resolve Domain Catalogue</strong> : détecte le domaine de base du catalogue statique historique ; ce nœud reste présent dans <code>FINAL-10</code>.</li>
+    <li><strong>Download Catalogue PDF</strong> : télécharge le PDF catalogue côté site public ; présent dans l’export mais non retenu comme source finale cible des pièces jointes phase 1 deck.</li>
+    <li><strong>Assemble Mail Attachments</strong> : ancienne logique d’assemblage PDF + <code>Deck_Brief</code> ; visible dans l’export, mais ne correspond plus au flux d’envoi cible.</li>
     <li><strong>Build Catalogue Render Payload</strong> : fabrique le payload complet pour <code>catalogue-renderer</code>.</li>
-    <li><strong>Render Catalogue Artifact</strong> : génère le PDF et le DOCX par <code>pack_id</code>.</li>
+    <li><strong>render Catalogue Artifact</strong> : génère le PDF et le DOCX par <code>pack_id</code>. Dans <code>FINAL-10</code>, le nom du nœud commence bien par un <code>r</code> minuscule.</li>
     <li><strong>Merge Catalogue Artifact</strong> : injecte les URLs réelles du catalogue dans le pack.</li>
     <li><strong>Build Deck Render Payload</strong> : prépare le payload PPTX à partir du pack enrichi catalogue.</li>
     <li><strong>Render Deck Artifact</strong> : appelle <code>deck-renderer</code> pour produire le fichier <code>.pptx</code>.</li>
@@ -221,27 +240,28 @@
     <li><strong>Approval Webhook</strong>, <strong>Extract Pack Payload</strong>, <strong>Build Send Context</strong>, <strong>Send External Prospect Email</strong> : envoi prospect.</li>
   </ul>
 
-  <h3>7.2 Chaîne principale de référence</h3>
-  <p>La chaîne principale V3 validée pour la phase 1 deck PPTX est la suivante :</p>
-  <p><code>Assemble Prospect Pack -&gt; Resolve Domain Catalogue -&gt; Build Catalogue Render Payload -&gt; Render Catalogue Artifact -&gt; Merge Catalogue Artifact -&gt; Build Deck Render Payload -&gt; Render Deck Artifact -&gt; Merge Deck Artifact -&gt; Store Pack In Supabase -&gt; Build Approval Email -&gt; Send Internal Approval Email</code></p>
+  <h3>7.3 Chaîne principale de référence</h3>
+  <p>Dans l’export <code>FINAL-10</code>, la chaîne fonctionnelle à suivre pour la phase 1 deck PPTX est la suivante :</p>
+  <p><code>Assemble Prospect Pack -&gt; Resolve Domain Catalogue -&gt; Build Catalogue Render Payload -&gt; render Catalogue Artifact -&gt; Merge Catalogue Artifact -&gt; Build Deck Render Payload -&gt; Render Deck Artifact -&gt; Merge Deck Artifact -&gt; Store Pack In Supabase -&gt; Build Approval Email -&gt; Send Internal Approval Email</code></p>
+  <p class="small">Le nœud <code>Resolve Domain Catalogue</code> reste en amont dans le workflow exporté. En revanche, la source finale d’attachments utilisée pour l’envoi prospect doit bien venir de <code>Merge Deck Artifact</code>, et non de l’ancienne paire <code>Download Catalogue PDF</code> / <code>Assemble Mail Attachments</code>.</p>
 
-  <h3>7.3 Procédure normale d’utilisation</h3>
+  <h3>7.4 Procédure normale d’utilisation</h3>
   <ol>
     <li>Vérifier le prospect cible dans <strong>Set Target</strong> ou dans sa source CRM.</li>
     <li>Lancer le workflow de génération.</li>
-    <li>Vérifier que <strong>Render Catalogue Artifact</strong> retourne <code>success = true</code> et <code>used_tailored_markdown = true</code>.</li>
+    <li>Vérifier que <strong>render Catalogue Artifact</strong> retourne <code>success = true</code> et <code>used_tailored_markdown = true</code>.</li>
     <li>Vérifier que <strong>Render Deck Artifact</strong> retourne <code>success = true</code> avec un <code>deck_artifact</code> contenant <code>filename_pptx</code> et <code>pptx_url</code>.</li>
     <li>Vérifier dans les diagnostics du deck que la variante, la langue et le nombre de slides de cas d’usage sont cohérents avec le prospect. Le rendu cible doit rester dans une fourchette de 8 à 10 slides selon la densité du contenu.</li>
     <li>Vérifier dans <strong>Merge Deck Artifact</strong> que <code>mail_attachments</code> contient exactement deux fichiers : un <code>.pdf</code> et un <code>.pptx</code>.</li>
     <li>Vérifier que <strong>Store Pack In Supabase</strong> stocke bien <code>catalogue_artifact</code>, <code>deck_artifact</code>, <code>mail_attachments</code> et <code>attachments_count = 2</code>.</li>
-    <li>Recevoir et relire l’email interne de validation. La ligne <code>Pièces jointes préparées</code> doit afficher <code>2</code> et la ligne <code>Fichiers</code> doit mentionner le PDF puis le PPTX.</li>
+    <li>Recevoir et relire l’email interne de validation. Dans l’export actuel, la ligne visible peut encore s’afficher sous la forme <code>Pieces jointes preparees</code> sans accents. La valeur attendue reste néanmoins <code>2</code>.</li>
     <li>Approuver uniquement le dernier email reçu.</li>
     <li>Vérifier la nouvelle exécution webhook dans <strong>Executions</strong>.</li>
     <li>Vérifier que <strong>Build Send Context</strong> retourne <code>attachments_count = 2</code> et <code>can_send = true</code>.</li>
     <li>Vérifier la réponse de <strong>Send External Prospect Email</strong>.</li>
   </ol>
 
-  <h3>7.4 Règles de qualité du deck premium</h3>
+  <h3>7.5 Règles de qualité du deck premium</h3>
   <ul>
     <li>Le deck V3 doit être lisible à la première lecture, sans chevauchement de texte ni zones saturées.</li>
     <li>La structure cible est dynamique : couverture, agenda, crédibilité, enjeux, une ou deux slides de cas d’usage, ROI, trajectoire 90 jours, clôture. Le total attendu est de 8 à 10 slides selon la matière disponible.</li>
@@ -251,13 +271,13 @@
     <li>Quand le contenu est trop dense, le renderer doit raccourcir les blocs, limiter les listes et répartir les cas d’usage sur une slide supplémentaire au lieu de tasser le texte.</li>
   </ul>
 
-  <h2>8. Procedure de lecture des executions</h2>
-  <p>Les validations les plus fiables se font dans <strong>Executions</strong>, pas seulement dans l editeur de noeuds.</p>
+  <h2>8. Procédure de lecture des exécutions</h2>
+  <p>Les validations les plus fiables se font dans <strong>Executions</strong>, pas seulement dans l éditeur de nœuds.</p>
   <ol>
-    <li>Ouvrir la derniere execution du workflow principal apres generation.</li>
-    <li>Ouvrir la derniere execution webhook apres clic sur <em>Approuver et envoyer</em>.</li>
-    <li>Verifier la branche <code>true</code> dans <strong>If Approved</strong> et <strong>If Ready To Send</strong>.</li>
-    <li>Verifier le nombre de pieces jointes dans <strong>Build Send Context</strong>.</li>
+    <li>Ouvrir la dernière exécution du workflow principal après génération.</li>
+    <li>Ouvrir la dernière exécution webhook après clic sur <em>Approuver et envoyer</em>.</li>
+    <li>Vérifier la branche <code>true</code> dans <strong>If Approved</strong> et <strong>If Ready To Send</strong>.</li>
+    <li>Vérifier le nombre de pièces jointes dans <strong>Build Send Context</strong>.</li>
   </ol>
 
   <h2>9. État actuellement validé</h2>
@@ -269,9 +289,11 @@
       <li>Le deck est généré en <code>.pptx</code> par <code>deck-renderer</code>, stocké dans le même bucket et renvoyé comme seconde pièce jointe finale du pack.</li>
       <li>Le formulaire d’audit est en ligne et n’est plus joint.</li>
       <li>Le circuit approbation interne puis envoi prospect est stable en test avec deux pièces jointes finales.</li>
-      <li>Le résumé d’approbation interne reflète désormais <code>attachments_count</code>, le nom des fichiers joints et les meilleurs fallbacks commerciaux disponibles.</li>
+      <li>Dans <code>FINAL-10</code>, la branche d’envoi prospect se base bien sur <code>Build Send Context</code>, qui accepte des attachments avec <code>content</code> ou <code>path</code> et exige un PDF plus un PPTX.</li>
+      <li>Le résumé d’approbation interne reflète désormais <code>attachments_count</code> et le nombre attendu de pièces jointes, même si certains libellés visibles dans l’export restent encore écrits sans accents.</li>
       <li>Quand le décideur n’est pas encore connu, le courrier prospect évite autant que possible d’exposer brut le placeholder <code>Décideur à confirmer</code>.</li>
       <li>Le renderer deck premium gère désormais la localisation FR / EN / ES, les accents visibles, la réduction intelligente des CTA et la répartition dynamique des cas d’usage pour limiter les chevauchements.</li>
+      <li>Le workflow exporté conserve encore des nœuds historiques catalogue statique, mais ils ne définissent plus la cible fonctionnelle du flux V3 phase 1 deck PPTX.</li>
     </ul>
   </div>
 
@@ -282,12 +304,12 @@
   </ul>
   <p>Le formulaire d’audit ne doit plus apparaître en pièce jointe. Le flux d’envoi cible ne doit plus produire <code>Deck_Brief_[Prospect].json</code>.</p>
 
-  <h2>11. Regles commerciales et d exploitation</h2>
+  <h2>11. Règles commerciales et d’exploitation</h2>
   <ul>
-    <li>La V4 pilote les quotas quotidiens et les regles d arret.</li>
-    <li>La V5 grossit la base CRM sans envoyer elle-meme les courriers.</li>
-    <li>Le flux V3 doit rester reserve aux prospects valides et eligibles.</li>
-    <li>Ne pas augmenter les volumes tant que les boucles de reponse et les signaux de niche ne sont pas stabilises.</li>
+    <li>La V4 pilote les quotas quotidiens et les règles d’arrêt.</li>
+    <li>La V5 grossit la base CRM sans envoyer elle-même les courriers.</li>
+    <li>Le flux V3 doit rester réservé aux prospects validés et éligibles.</li>
+    <li>Ne pas augmenter les volumes tant que les boucles de réponse et les signaux de niche ne sont pas stabilisés.</li>
   </ul>
 
   <h2>12. Guide d exploitation du back-office</h2>
@@ -306,17 +328,18 @@
       <th>Tache</th>
       <th>Priorite</th>
     </tr>
+    <tr><td>Externaliser toutes les clés encore écrites en dur dans l’export <code>FINAL-10</code> : Supabase, Resend et <code>x-admin-token</code></td><td>Urgent</td></tr>
     <tr><td>Rendre le formulaire d audit reellement dynamique via <code>pack_id</code></td><td>Urgent</td></tr>
     <tr><td>Valider le rendu <code>.pptx</code> premium sur plusieurs profils de prospect et plusieurs langues, avec contrôle visuel slide par slide</td><td>Urgent</td></tr>
     <tr><td>Verifier le domaine Resend et migrer vers <code>noreply@transferai.ci</code></td><td>Important</td></tr>
     <tr><td>Retirer le Gmail de test et la cible de demonstration</td><td>Important</td></tr>
-    <tr><td>Tester francais, anglais et espagnol sur des cas reels distincts</td><td>Important</td></tr>
+    <tr><td>Tester français, anglais et espagnol sur des cas réels distincts</td><td>Important</td></tr>
     <tr><td>Vérifier régulièrement le fallback Orange et les autres fallbacks sectoriels premium après chaque évolution du renderer</td><td>Important</td></tr>
     <tr><td>Verifier le CRM growth loop V5 et les quotas V4 en conditions reelles</td><td>Normal</td></tr>
   </table>
 
   <h2>14. Resume de reference</h2>
-  <p>Le système TransferAI est maintenant composé d’une couche amont CRM, d’une couche de batch et d’une couche de prospection personnalisée avec validation humaine. La génération du catalogue par pack est validée. Le deck PPTX premium dynamique est désormais actif côté backend, avec stockage Supabase, localisation par langue, gestion des accents et mécanismes de réduction de densité pour tenir dans 8 à 10 slides lisibles. Le chantier structurant qui reste ouvert en priorité est la finalisation d’un audit web dynamique réellement exploité par <code>pack_id</code> ainsi que la validation continue du rendu premium sur plusieurs secteurs réels.</p>
+  <p>Le système TransferAI est maintenant composé d’une couche amont CRM, d’une couche de batch et d’une couche de prospection personnalisée avec validation humaine. Dans l’export <code>FINAL-10</code>, la génération du catalogue par pack et du deck PPTX premium dynamique est opérationnelle, avec stockage Supabase, localisation par langue, gestion des accents et mécanismes de réduction de densité pour tenir dans 8 à 10 slides lisibles. Les deux chantiers prioritaires qui restent ouverts sont l’externalisation des secrets encore écrits en dur et la finalisation d’un audit web dynamique réellement exploité par <code>pack_id</code>, tout en poursuivant la validation visuelle du rendu premium sur plusieurs secteurs réels.</p>
 
   <p class="small">Document consolide a partir des guides V1, V2, V4, V5, des guides admin/back-office et des guides de stabilisation V3.</p>
 </body>

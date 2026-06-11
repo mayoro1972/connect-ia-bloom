@@ -60,6 +60,10 @@ Le pack a 4 objectifs :
 47. [Workflow JSON n8n - prospection CRM V5 growth loop](./60_n8n_Prospection_CRM_V5_Growth_Loop.json)
 48. [Guide V5 - boucle de croissance CRM](./61_Guide_V5_CRM_Growth_Loop.md)
 49. [Workflow JSON n8n - prospection multi-prospects V3 CRM ready export](./62_n8n_Prospection_Multi_Prospect_V3_CRM_Ready_Export.json)
+50. [Guide Word - installation complete du workflow V4 dans n8n](./word/TransferAI_Africa_Installation_Complete_Workflow_V4_n8n_2026-06-02.docx)
+51. [Guide Word - installation complete du workflow V5 dans n8n](./word/TransferAI_Africa_Installation_Complete_Workflow_V5_n8n_2026-06-02.docx)
+52. [Guide Word - utilisateur CRM Prospecting V3](./word/TransferAI_Africa_Guide_Utilisateur_CRM_Prospecting_V3_2026-06-02.docx)
+53. [Guide Word - maitre Prospecting V3 fusionne](./word/TransferAI_Africa_Guide_Maitre_Prospecting_V3_Fusionne_2026-06-02.docx)
 
 ## Ordre de lecture recommandé
 

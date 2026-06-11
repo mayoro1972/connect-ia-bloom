@@ -2,13 +2,13 @@
   "schema": "openai.presentation.layout/v4",
   "unit": "px",
   "slide": {
-    "aid": "sl/pze5w7",
-    "id": "pze5w7",
+    "aid": "sl/nf4hds",
+    "id": "nf4hds",
     "slide": 8,
-    "layoutId": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+    "layoutId": "e8395186-6167-493e-abd6-da64e1eda14a",
     "layoutName": "Title Slide",
     "layoutType": "title",
-    "masterLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+    "masterLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
     "masterLayoutName": "Master",
     "frame": {
       "left": 0,
@@ -45,15 +45,15 @@
   "inheritedLayers": [
     {
       "scope": "layout",
-      "id": "473ac6e4-3edd-4283-ac7c-22ddf2481ef7",
+      "id": "e8395186-6167-493e-abd6-da64e1eda14a",
       "name": "Title Slide",
       "type": "title",
-      "parentLayoutId": "05412918-66fe-43e3-9b4f-318023edc354",
+      "parentLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "elements": []
     },
     {
       "scope": "master",
-      "id": "05412918-66fe-43e3-9b4f-318023edc354",
+      "id": "91d90ecb-cfd9-4add-aac6-cc708566751e",
       "name": "Master",
       "type": "master",
       "elements": []
@@ -64,7 +64,7 @@
       "order": 1,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/0fepkzup",
+      "aid": "sh/d8v6psfi",
       "id": "1",
       "bbox": [
         0,
@@ -81,7 +81,7 @@
       "order": 2,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bulwval8",
+      "aid": "sh/6hcrmhk3",
       "id": "2",
       "bbox": [
         72,
@@ -90,8 +90,8 @@
         18
       ],
       "geometry": "rect",
-      "text": "OFFRE RECOMMANDEE",
-      "textPreview": "OFFRE RECOMMANDEE",
+      "text": "PARCOURS 90 JOURS",
+      "textPreview": "PARCOURS 90 JOURS",
       "resolvedFontSize": 10.51,
       "resolvedTextStyle": {
         "fontSize": 10.51,
@@ -104,18 +104,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "OFFRE RECOMMANDEE"
+            "text": "PARCOURS 90 JOURS"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "OFFRE RECOMMANDEE",
+          "text": "PARCOURS 90 JOURS",
           "runs": [
             {
               "index": 1,
-              "text": "OFFRE RECOMMANDEE",
+              "text": "PARCOURS 90 JOURS",
               "fontSize": 10.51,
               "typeface": "Aptos",
               "color": "#E76F1D",
@@ -132,17 +132,17 @@
       "order": 3,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/i9s36hcr",
+      "aid": "sh/z25kb6xk",
       "id": "3",
       "bbox": [
         72,
         86,
-        840,
+        900,
         84
       ],
       "geometry": "rect",
-      "text": "La proposition TransferAI pour ELTON CI",
-      "textPreview": "La proposition TransferAI pour ELTON CI",
+      "text": "La sequence recommandee pour passer du cadrage au pilote",
+      "textPreview": "La sequence recommandee pour passer du cadrage au pilote",
       "resolvedFontSize": 34,
       "resolvedTextStyle": {
         "fontSize": 34,
@@ -151,22 +151,26 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 1,
+        "lineCount": 2,
         "lines": [
           {
             "index": 1,
-            "text": "La proposition TransferAI pour ELTON CI"
+            "text": "La sequence recommandee pour passer du cadrage au"
+          },
+          {
+            "index": 2,
+            "text": "pilote"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "La proposition TransferAI pour ELTON CI",
+          "text": "La sequence recommandee pour passer du cadrage au pilote",
           "runs": [
             {
               "index": 1,
-              "text": "La proposition TransferAI pour ELTON CI",
+              "text": "La sequence recommandee pour passer du cadrage au pilote",
               "fontSize": 34,
               "typeface": "Aptos Display",
               "color": "#1A3554",
@@ -183,17 +187,17 @@
       "order": 4,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tovahoza",
+      "aid": "sh/ovahoza1",
       "id": "4",
       "bbox": [
         72,
         176,
-        970,
+        940,
         28
       ],
       "geometry": "rect",
-      "text": "Notre valeur ne vient pas d'un outil unique, mais de l'enchainement entre diagnostic, formation utile, gouvernance et premier terrain d'execution.",
-      "textPreview": "Notre valeur ne vient pas d'un outil unique, mais de l'enchainement entre diagnostic, formation utile, gouvernance et premier terrain d'e...",
+      "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
+      "textPreview": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
       "resolvedFontSize": 14,
       "resolvedTextStyle": {
         "fontSize": 14,
@@ -205,18 +209,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "Notre valeur ne vient pas d'un outil unique, mais de l'enchainement entre diagnostic, formation utile, gouvernance et premier terrain d'execution."
+            "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Notre valeur ne vient pas d'un outil unique, mais de l'enchainement entre diagnostic, formation utile, gouvernance et premier terrain d'execution.",
+          "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
           "runs": [
             {
               "index": 1,
-              "text": "Notre valeur ne vient pas d'un outil unique, mais de l'enchainement entre diagnostic, formation utile, gouvernance et premier terrain d'execution.",
+              "text": "Le bon scenario n'est pas de tout vendre d'un bloc, mais d'enchainer les etapes utiles dans le bon ordre, avec validation a chaque palier.",
               "fontSize": 14,
               "typeface": "Aptos",
               "color": "#617086"
@@ -232,37 +236,37 @@
       "order": 5,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/032lszqt",
+      "aid": "sh/dg7adsji",
       "id": "5",
       "bbox": [
         72,
         236,
-        544,
-        140
+        256,
+        248
       ],
       "geometry": "rect",
-      "fillColor": "#163556",
-      "lineColor": "#163556",
-      "lineWidth": 0
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
     },
     {
       "order": 6,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bi9s36hc",
+      "aid": "sh/6tovahoz",
       "id": "6",
       "bbox": [
         90,
-        254,
-        508,
-        44
+        252,
+        60,
+        28
       ],
       "geometry": "rect",
-      "text": "1. Audit, cadrage et feuille de route",
-      "textPreview": "1. Audit, cadrage et feuille de route",
-      "resolvedFontSize": 18,
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 20,
       "resolvedTextStyle": {
-        "fontSize": 18,
+        "fontSize": 20,
         "typeface": "Aptos Display",
         "bold": true,
         "alignment": "left"
@@ -272,21 +276,21 @@
         "lines": [
           {
             "index": 1,
-            "text": "1. Audit, cadrage et feuille de route"
+            "text": "01"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "1. Audit, cadrage et feuille de route",
+          "text": "01",
           "runs": [
             {
               "index": 1,
-              "text": "1. Audit, cadrage et feuille de route",
-              "fontSize": 18,
+              "text": "01",
+              "fontSize": 20,
               "typeface": "Aptos Display",
-              "color": "#FFFFFF",
+              "color": "#E76F1D",
               "bold": true
             }
           ]
@@ -300,77 +304,45 @@
       "order": 7,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/ixczed8v",
+      "aid": "sh/vahoza1g",
       "id": "7",
       "bbox": [
         90,
-        308,
-        508,
-        50
+        290,
+        220,
+        52
       ],
       "geometry": "rect",
-      "text": "• priorites metier\n• cartographie des flux\n• KPI de preuve et conditions de pilotage",
-      "textPreview": "• priorites metier | • cartographie des flux | • KPI de preuve et conditions de pilotage",
-      "resolvedFontSize": 12.51,
+      "text": "J+0 | Audit & cadrage",
+      "textPreview": "J+0 | Audit & cadrage",
+      "resolvedFontSize": 18,
       "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 3,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "• priorites metier"
-          },
-          {
-            "index": 2,
-            "text": "• cartographie des flux"
-          },
-          {
-            "index": 3,
-            "text": "• KPI de preuve et conditions de pilotage"
+            "text": "J+0 | Audit & cadrage"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• priorites metier",
+          "text": "J+0 | Audit & cadrage",
           "runs": [
             {
               "index": 1,
-              "text": "• priorites metier",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 2,
-          "text": "• cartographie des flux",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• cartographie des flux",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 3,
-          "text": "• KPI de preuve et conditions de pilotage",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• KPI de preuve et conditions de pilotage",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
+              "text": "J+0 | Audit & cadrage",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
             }
           ]
         }
@@ -383,62 +355,51 @@
       "order": 8,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tcj6tova",
+      "aid": "sh/o7qpg3ex",
       "id": "8",
       "bbox": [
-        640,
-        236,
-        568,
-        140
+        90,
+        350,
+        220,
+        116
       ],
       "geometry": "rect",
-      "fillColor": "#E76F1D",
-      "lineColor": "#E76F1D",
-      "lineWidth": 0
-    },
-    {
-      "order": 9,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/0rqd4vmt",
-      "id": "9",
-      "bbox": [
-        658,
-        254,
-        532,
-        44
-      ],
-      "geometry": "rect",
-      "text": "2. Formation dirigeants et managers",
-      "textPreview": "2. Formation dirigeants et managers",
-      "resolvedFontSize": 18,
+      "text": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
+      "textPreview": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
+      "resolvedFontSize": 12.51,
       "resolvedTextStyle": {
-        "fontSize": 18,
-        "typeface": "Aptos Display",
-        "bold": true,
+        "fontSize": 12.51,
+        "typeface": "Aptos",
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 1,
+        "lineCount": 3,
         "lines": [
           {
             "index": 1,
-            "text": "2. Formation dirigeants et managers"
+            "text": "Cartographier les irritants, choisir les"
+          },
+          {
+            "index": 2,
+            "text": "cas d'usage prioritaires et definir les"
+          },
+          {
+            "index": 3,
+            "text": "KPI de preuve."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "2. Formation dirigeants et managers",
+          "text": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
           "runs": [
             {
               "index": 1,
-              "text": "2. Formation dirigeants et managers",
-              "fontSize": 18,
-              "typeface": "Aptos Display",
-              "color": "#FFFFFF",
-              "bold": true
+              "text": "Cartographier les irritants, choisir les cas d'usage prioritaires et definir les KPI de preuve.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#617086"
             }
           ]
         }
@@ -448,63 +409,65 @@
       "lineWidth": 0
     },
     {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "9",
+      "bbox": [
+        352,
+        236,
+        256,
+        248
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
       "order": 10,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/i9s36hcr",
+      "aid": "sh/pwb2hwfy",
       "id": "10",
       "bbox": [
-        658,
-        308,
-        532,
-        50
+        370,
+        252,
+        60,
+        28
       ],
       "geometry": "rect",
-      "text": "• lecture executive des usages IA\n• arbitrage, gouvernance et conduite du changement",
-      "textPreview": "• lecture executive des usages IA | • arbitrage, gouvernance et conduite du changement",
-      "resolvedFontSize": 12.51,
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 20,
       "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
+        "fontSize": 20,
+        "typeface": "Aptos Display",
+        "bold": true,
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "• lecture executive des usages IA"
-          },
-          {
-            "index": 2,
-            "text": "• arbitrage, gouvernance et conduite du changement"
+            "text": "02"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• lecture executive des usages IA",
+          "text": "02",
           "runs": [
             {
               "index": 1,
-              "text": "• lecture executive des usages IA",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 2,
-          "text": "• arbitrage, gouvernance et conduite du changement",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• arbitrage, gouvernance et conduite du changement",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
+              "text": "02",
+              "fontSize": 20,
+              "typeface": "Aptos Display",
+              "color": "#1C8A78",
+              "bold": true
             }
           ]
         }
@@ -517,34 +480,17 @@
       "order": 11,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bulwval8",
+      "aid": "sh/0bi9s36h",
       "id": "11",
       "bbox": [
-        72,
-        400,
-        544,
-        140
+        370,
+        290,
+        220,
+        52
       ],
       "geometry": "rect",
-      "fillColor": "#1C8A78",
-      "lineColor": "#1C8A78",
-      "lineWidth": 0
-    },
-    {
-      "order": 12,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/0fepkzup",
-      "id": "12",
-      "bbox": [
-        90,
-        418,
-        508,
-        44
-      ],
-      "geometry": "rect",
-      "text": "3. Formation equipes metier",
-      "textPreview": "3. Formation equipes metier",
+      "text": "J+15 | Prototype cible",
+      "textPreview": "J+15 | Prototype cible",
       "resolvedFontSize": 18,
       "resolvedTextStyle": {
         "fontSize": 18,
@@ -557,22 +503,79 @@
         "lines": [
           {
             "index": 1,
-            "text": "3. Formation equipes metier"
+            "text": "J+15 | Prototype cible"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "3. Formation equipes metier",
+          "text": "J+15 | Prototype cible",
           "runs": [
             {
               "index": 1,
-              "text": "3. Formation equipes metier",
+              "text": "J+15 | Prototype cible",
               "fontSize": 18,
               "typeface": "Aptos Display",
-              "color": "#FFFFFF",
+              "color": "#1A3554",
               "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7qpg3ex0",
+      "id": "12",
+      "bbox": [
+        370,
+        350,
+        220,
+        116
+      ],
+      "geometry": "rect",
+      "text": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
+      "textPreview": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Produire un premier livrable"
+          },
+          {
+            "index": 2,
+            "text": "exploitable: synthese, tableau de bord,"
+          },
+          {
+            "index": 3,
+            "text": "assistant ou routine de pilotage."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Produire un premier livrable exploitable: synthese, tableau de bord, assistant ou routine de pilotage.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#617086"
             }
           ]
         }
@@ -585,60 +588,62 @@
       "order": 13,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/p0bi9s36",
+      "aid": "sh/i5sneloj",
       "id": "13",
       "bbox": [
-        90,
-        472,
-        508,
-        50
+        632,
+        236,
+        256,
+        248
       ],
       "geometry": "rect",
-      "text": "• comptes, flotte, relation client, support\n• outils, scripts et routines lies aux vrais cas d'usage",
-      "textPreview": "• comptes, flotte, relation client, support | • outils, scripts et routines lies aux vrais cas d'usage",
-      "resolvedFontSize": 12.51,
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "14",
+      "bbox": [
+        650,
+        252,
+        60,
+        28
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 20,
       "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
+        "fontSize": 20,
+        "typeface": "Aptos Display",
+        "bold": true,
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "• comptes, flotte, relation client, support"
-          },
-          {
-            "index": 2,
-            "text": "• outils, scripts et routines lies aux vrais cas d'usage"
+            "text": "03"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• comptes, flotte, relation client, support",
+          "text": "03",
           "runs": [
             {
               "index": 1,
-              "text": "• comptes, flotte, relation client, support",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 2,
-          "text": "• outils, scripts et routines lies aux vrais cas d'usage",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• outils, scripts et routines lies aux vrais cas d'usage",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
+              "text": "03",
+              "fontSize": 20,
+              "typeface": "Aptos Display",
+              "color": "#163556",
+              "bold": true
             }
           ]
         }
@@ -648,37 +653,20 @@
       "lineWidth": 0
     },
     {
-      "order": 14,
-      "kind": "shape",
-      "scope": "slide",
-      "aid": "sh/ixczed8v",
-      "id": "14",
-      "bbox": [
-        640,
-        400,
-        568,
-        140
-      ],
-      "geometry": "rect",
-      "fillColor": "#C88C3A",
-      "lineColor": "#C88C3A",
-      "lineWidth": 0
-    },
-    {
       "order": 15,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/bi9s36hc",
+      "aid": "sh/wjudg7ad",
       "id": "15",
       "bbox": [
-        658,
-        418,
-        532,
-        44
+        650,
+        290,
+        220,
+        52
       ],
       "geometry": "rect",
-      "text": "4. Pilote metier encadre",
-      "textPreview": "4. Pilote metier encadre",
+      "text": "J+45 | Formation & pilote",
+      "textPreview": "J+45 | Formation & pilote",
       "resolvedFontSize": 18,
       "resolvedTextStyle": {
         "fontSize": 18,
@@ -691,21 +679,21 @@
         "lines": [
           {
             "index": 1,
-            "text": "4. Pilote metier encadre"
+            "text": "J+45 | Formation & pilote"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "4. Pilote metier encadre",
+          "text": "J+45 | Formation & pilote",
           "runs": [
             {
               "index": 1,
-              "text": "4. Pilote metier encadre",
+              "text": "J+45 | Formation & pilote",
               "fontSize": 18,
               "typeface": "Aptos Display",
-              "color": "#FFFFFF",
+              "color": "#1A3554",
               "bold": true
             }
           ]
@@ -719,17 +707,17 @@
       "order": 16,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/032lszqt",
+      "aid": "sh/7y1kre1w",
       "id": "16",
       "bbox": [
-        658,
-        472,
-        532,
-        50
+        650,
+        350,
+        220,
+        116
       ],
       "geometry": "rect",
-      "text": "• assistant cible, tableau de bord ou base interne\n• supervision, mesure et decision d'extension",
-      "textPreview": "• assistant cible, tableau de bord ou base interne | • supervision, mesure et decision d'extension",
+      "text": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
+      "textPreview": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
       "resolvedFontSize": 12.51,
       "resolvedTextStyle": {
         "fontSize": 12.51,
@@ -737,42 +725,33 @@
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 3,
         "lines": [
           {
             "index": 1,
-            "text": "• assistant cible, tableau de bord ou base interne"
+            "text": "Former la bonne population et lancer le"
           },
           {
             "index": 2,
-            "text": "• supervision, mesure et decision d'extension"
+            "text": "pilote sur un flux concret, avec"
+          },
+          {
+            "index": 3,
+            "text": "supervision et revue metier."
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "• assistant cible, tableau de bord ou base interne",
+          "text": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
           "runs": [
             {
               "index": 1,
-              "text": "• assistant cible, tableau de bord ou base interne",
+              "text": "Former la bonne population et lancer le pilote sur un flux concret, avec supervision et revue metier.",
               "fontSize": 12.51,
               "typeface": "Aptos",
-              "color": "#FFFFFF"
-            }
-          ]
-        },
-        {
-          "index": 2,
-          "text": "• supervision, mesure et decision d'extension",
-          "runs": [
-            {
-              "index": 1,
-              "text": "• supervision, mesure et decision d'extension",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
-              "color": "#FFFFFF"
+              "color": "#617086"
             }
           ]
         }
@@ -785,16 +764,16 @@
       "order": 17,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/tovahoza",
+      "aid": "sh/ed8v6psf",
       "id": "17",
       "bbox": [
-        72,
-        576,
-        1136,
-        66
+        912,
+        236,
+        296,
+        248
       ],
       "geometry": "rect",
-      "fillColor": "#FBF5EE",
+      "fillColor": "#FFFDFC",
       "lineColor": "#D7CEC3",
       "lineWidth": 1
     },
@@ -802,21 +781,21 @@
       "order": 18,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/il0rqd4v",
+      "aid": "sh/p8nqxs72",
       "id": "18",
       "bbox": [
-        96,
-        596,
-        180,
-        16
+        930,
+        252,
+        60,
+        28
       ],
       "geometry": "rect",
-      "text": "Recommandation de depart",
-      "textPreview": "Recommandation de depart",
-      "resolvedFontSize": 10,
+      "text": "04",
+      "textPreview": "04",
+      "resolvedFontSize": 20,
       "resolvedTextStyle": {
-        "fontSize": 10,
-        "typeface": "Aptos",
+        "fontSize": 20,
+        "typeface": "Aptos Display",
         "bold": true,
         "alignment": "left"
       },
@@ -825,21 +804,21 @@
         "lines": [
           {
             "index": 1,
-            "text": "Recommandation de depart"
+            "text": "04"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Recommandation de depart",
+          "text": "04",
           "runs": [
             {
               "index": 1,
-              "text": "Recommandation de depart",
-              "fontSize": 10,
-              "typeface": "Aptos",
-              "color": "#E76F1D",
+              "text": "04",
+              "fontSize": 20,
+              "typeface": "Aptos Display",
+              "color": "#C88C3A",
               "bold": true
             }
           ]
@@ -853,47 +832,43 @@
       "order": 19,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/b6xkf6dc",
+      "aid": "sh/0nuxc3yl",
       "id": "19",
       "bbox": [
-        296,
-        592,
-        866,
-        24
+        930,
+        290,
+        260,
+        52
       ],
       "geometry": "rect",
-      "text": "Commencer par deux flux a forte lisibilite de valeur: comptes professionnels + flotte / cartes carburant. Les autres cas d'usage restent dans la feuille de route, mais n'encombrent pas le pilote initial.",
-      "textPreview": "Commencer par deux flux a forte lisibilite de valeur: comptes professionnels + flotte / cartes carburant. Les autres cas d'usage restent ...",
-      "resolvedFontSize": 12.51,
+      "text": "J+90 | ROI & extension",
+      "textPreview": "J+90 | ROI & extension",
+      "resolvedFontSize": 18,
       "resolvedTextStyle": {
-        "fontSize": 12.51,
-        "typeface": "Aptos",
+        "fontSize": 18,
+        "typeface": "Aptos Display",
         "bold": true,
         "alignment": "left"
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "Commencer par deux flux a forte lisibilite de valeur: comptes professionnels + flotte / cartes carburant. Les autres cas d'usage restent dans la"
-          },
-          {
-            "index": 2,
-            "text": "feuille de route, mais n'encombrent pas le pilote initial."
+            "text": "J+90 | ROI & extension"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Commencer par deux flux a forte lisibilite de valeur: comptes professionnels + flotte / cartes carburant. Les autres cas d'usage restent dans la feuille de route, mais n'encombrent pas le pilote initial.",
+          "text": "J+90 | ROI & extension",
           "runs": [
             {
               "index": 1,
-              "text": "Commencer par deux flux a forte lisibilite de valeur: comptes professionnels + flotte / cartes carburant. Les autres cas d'usage restent dans la feuille de route, mais n'encombrent pas le pilote initial.",
-              "fontSize": 12.51,
-              "typeface": "Aptos",
+              "text": "J+90 | ROI & extension",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
               "color": "#1A3554",
               "bold": true
             }
@@ -908,8 +883,288 @@
       "order": 20,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/32lszqtc",
+      "aid": "sh/wval87ed",
       "id": "20",
+      "bbox": [
+        930,
+        350,
+        260,
+        116
+      ],
+      "geometry": "rect",
+      "text": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
+      "textPreview": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Mesurer les premiers resultats, documenter"
+          },
+          {
+            "index": 2,
+            "text": "les apprentissages et decider ce qui merite"
+          },
+          {
+            "index": 3,
+            "text": "d'etre etendu."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Mesurer les premiers resultats, documenter les apprentissages et decider ce qui merite d'etre etendu.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "21",
+      "bbox": [
+        72,
+        520,
+        1136,
+        112
+      ],
+      "geometry": "rect",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "22",
+      "bbox": [
+        96,
+        542,
+        250,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Ce qu'ELTON CI obtient a chaque etape",
+      "textPreview": "Ce qu'ELTON CI obtient a chaque etape",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce qu'ELTON CI obtient a chaque etape"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce qu'ELTON CI obtient a chaque etape",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce qu'ELTON CI obtient a chaque etape",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#CFE0F0",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "23",
+      "bbox": [
+        96,
+        566,
+        260,
+        56
+      ],
+      "geometry": "rect",
+      "text": "• priorites mieux choisies\n• cas d'usage mieux qualifies\n• formation plus ciblee\n• decision plus simple sur le passage a l'echelle",
+      "textPreview": "• priorites mieux choisies | • cas d'usage mieux qualifies | • formation plus ciblee | • decision plus simple sur le passage a l'echelle",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• priorites mieux choisies"
+          },
+          {
+            "index": 2,
+            "text": "• cas d'usage mieux qualifies"
+          },
+          {
+            "index": 3,
+            "text": "• formation plus ciblee"
+          },
+          {
+            "index": 4,
+            "text": "• decision plus simple sur le passage a l'echelle"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• priorites mieux choisies",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• priorites mieux choisies",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• cas d'usage mieux qualifies",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• cas d'usage mieux qualifies",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• formation plus ciblee",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• formation plus ciblee",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• decision plus simple sur le passage a l'echelle",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• decision plus simple sur le passage a l'echelle",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "24",
+      "bbox": [
+        414,
+        578,
+        736,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+      "textPreview": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages"
+          },
+          {
+            "index": 2,
+            "text": "autorises."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Principe de gouvernance: aucun passage a l'etape suivante sans validation des livrables, des acces et des usages autorises.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#D7E5F3",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psfil0rq",
+      "id": "25",
       "bbox": [
         68,
         682,
@@ -922,11 +1177,11 @@
       "lineWidth": 0
     },
     {
-      "order": 21,
+      "order": 26,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/ahoza1gv",
-      "id": "21",
+      "aid": "sh/e1w7mp0b",
+      "id": "26",
       "bbox": [
         72,
         690,
@@ -934,8 +1189,8 @@
         16
       ],
       "geometry": "rect",
-      "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
-      "textPreview": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
       "resolvedFontSize": 8.51,
       "resolvedTextStyle": {
         "fontSize": 8.51,
@@ -947,18 +1202,18 @@
         "lines": [
           {
             "index": 1,
-            "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage"
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
           "runs": [
             {
               "index": 1,
-              "text": "TransferAI Africa | Proposition ciblee ELTON CI | ROI et cas d'usage",
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
               "fontSize": 8.51,
               "typeface": "Aptos",
               "color": "#617086"
@@ -971,11 +1226,11 @@
       "lineWidth": 0
     },
     {
-      "order": 22,
+      "order": 27,
       "kind": "shape",
       "scope": "slide",
-      "aid": "sh/l87ed8ba",
-      "id": "22",
+      "aid": "sh/7mp0bi9s",
+      "id": "27",
       "bbox": [
         1160,
         688,
