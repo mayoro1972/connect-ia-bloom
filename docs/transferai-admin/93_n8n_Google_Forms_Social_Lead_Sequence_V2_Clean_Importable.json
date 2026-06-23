@@ -1,50 +1,18 @@
 {
   "name": "TransferAI Google Forms Social Lead Sequence V2 Clean Importable",
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "active": false,
-  "versionId": "transferai-google-forms-social-lead-sequence-v2-clean-importable",
-  "meta": {
-    "templateCredsSetupCompleted": false
-  },
-  "pinData": {},
-  "tags": [
-    {
-      "name": "transferai"
-    },
-    {
-      "name": "google-forms"
-    },
-    {
-      "name": "social-leads"
-    },
-    {
-      "name": "crm"
-    },
-    {
-      "name": "email-sequence"
-    }
-  ],
   "nodes": [
     {
+      "parameters": {},
       "name": "Manual Trigger",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        180,
-        140
+        -240,
+        64
       ],
-      "parameters": {}
+      "id": "5945de10-ae3a-4491-a0f5-5b7d514a1dc6"
     },
     {
-      "name": "Hourly Social Follow-Up Schedule",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1,
-      "position": [
-        180,
-        320
-      ],
       "parameters": {
         "rule": {
           "interval": [
@@ -54,117 +22,124 @@
             }
           ]
         }
-      }
+      },
+      "name": "Hourly Social Follow-Up Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        288
+      ],
+      "id": "117c6ac5-eb2b-4bf0-8231-c8acbbd929f2"
     },
     {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "google-forms-social-leads",
+        "options": {}
+      },
       "name": "Google Forms Social Lead Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        180,
-        500
+        -240,
+        512
       ],
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "google-forms-social-leads",
-        "responseMode": "onReceived",
-        "options": {}
-      }
+      "id": "19680b41-b46e-47a4-941e-98ffdb691980",
+      "webhookId": "f0965c96-98ce-4d0c-a31d-cc67eaf914dd"
     },
     {
-      "name": "Set Social Sequence Config",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3,
-      "position": [
-        430,
-        320
-      ],
       "parameters": {
-        "mode": "manual",
-        "duplicateItem": false,
-        "includeOtherFields": true,
         "fields": {
           "values": [
             {
               "name": "source_backend",
-              "type": "string",
-              "stringValue": "={{$json.source_backend && $json.source_backend !== 'undefined' ? $json.source_backend : 'manual'}}"
+              "stringValue": "manual"
             },
             {
               "name": "source_label_prefix",
-              "type": "string",
-              "stringValue": "={{$json.source_label_prefix && $json.source_label_prefix !== 'undefined' ? $json.source_label_prefix : 'google_forms_social'}}"
+              "stringValue": "google_forms_social"
             },
             {
               "name": "booking_link_45min",
-              "type": "string",
-              "stringValue": "={{$json.booking_link_45min && $json.booking_link_45min !== 'undefined' ? $json.booking_link_45min : 'https://calendly.com/contact-transferai/30min'}}"
+              "stringValue": "https://calendly.com/contact-transferai/30min"
             },
             {
               "name": "follow_up_delay_1_days",
-              "type": "string",
-              "stringValue": "={{$json.follow_up_delay_1_days && $json.follow_up_delay_1_days !== 'undefined' ? $json.follow_up_delay_1_days : '4'}}"
+              "stringValue": "4"
             },
             {
               "name": "follow_up_delay_2_days",
-              "type": "string",
-              "stringValue": "={{$json.follow_up_delay_2_days && $json.follow_up_delay_2_days !== 'undefined' ? $json.follow_up_delay_2_days : '7'}}"
+              "stringValue": "7"
             },
             {
               "name": "follow_up_fetch_limit",
-              "type": "string",
-              "stringValue": "={{$json.follow_up_fetch_limit && $json.follow_up_fetch_limit !== 'undefined' ? $json.follow_up_fetch_limit : '1'}}"
+              "stringValue": "1"
             },
             {
               "name": "default_country",
-              "type": "string",
-              "stringValue": "={{$json.default_country && $json.default_country !== 'undefined' ? $json.default_country : \"Côte d'Ivoire\"}}"
+              "stringValue": "Côte d'Ivoire"
             }
           ]
-        }
-      }
+        },
+        "options": {}
+      },
+      "name": "Set Social Sequence Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        112,
+        288
+      ],
+      "id": "2caea843-606b-462c-b37f-82d51edab1cd"
     },
     {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "7ee003cc-da2a-4162-8982-0a1e7340299b",
+              "leftValue": "={{Boolean($json.body || $json.form_title || $json['Nom et prénom'] || $json.email || $json['Adresse e-mail'])}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
       "name": "If New Lead Payload",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        690,
-        320
+        352,
+        288
       ],
-      "parameters": {
-        "conditions": {
-          "boolean": [
-            {
-              "value1": "={{Boolean($json.body || $json.form_title || $json['Nom et prénom'] || $json.email || $json['Adresse e-mail'])}}",
-              "operation": "true"
-            }
-          ]
-        }
-      }
+      "id": "55b0230d-16c0-4e6b-907c-1441af1c9d2f"
     },
     {
-      "name": "Fetch Social Prospect Snapshot",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "position": [
-        950,
-        180
-      ],
       "parameters": {
-        "method": "GET",
         "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=*&status=in.(ready,active)&paused=eq.false&do_not_contact=eq.false&stop_reason=is.null&last_response_status=eq.pending&order=next_action_at.asc.nullslast,updated_at.asc&limit=' + $json.follow_up_fetch_limit}}",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "__SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "Bearer __SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             }
           ]
         },
@@ -176,69 +151,71 @@
             }
           }
         }
-      }
+      },
+      "name": "Fetch Social Prospect Snapshot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        608,
+        144
+      ],
+      "id": "1532f119-5032-4ce7-b1bb-9c56f40b38eb"
     },
     {
+      "parameters": {
+        "jsCode": "const inputItems = $input.all();\n\nconst rows = inputItems.flatMap((item) => {\n  const j = item.json || {};\n  if (Array.isArray(j)) return j;\n  if (Array.isArray(j.data)) return j.data;\n  if (Array.isArray(j.body)) return j.body;\n  return [j];\n});\n\nconst now = Date.now();\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nconst config = $('Set Social Sequence Config').first().json || {};\nconst fetchLimit = Math.max(\n  1,\n  Number(cleanString(config.follow_up_fetch_limit) || '1')\n);\n\nconst dueItems = [];\n\nfor (const row of rows) {\n  const sourcePayload = row.source_payload || {};\n\n  if (sourcePayload.sequence_origin !== 'google_forms_social') continue;\n  if (row.paused || row.do_not_contact || row.stop_reason) continue;\n  if (!cleanString(row.target_email)) continue;\n\n  const nextAt = row.next_action_at ? Date.parse(row.next_action_at) : 0;\n  if (Number.isFinite(nextAt) && nextAt > now) continue;\n\n  let sequenceStep = 0;\n\n  if (!row.last_sequence_result) {\n    sequenceStep = 1;\n  } else if (row.last_sequence_result === 'social_email_1_sent') {\n    sequenceStep = 2;\n  } else if (\n    row.last_sequence_result === 'social_email_2_sent' &&\n    sourcePayload.allow_third_email\n  ) {\n    sequenceStep = 3;\n  } else {\n    continue;\n  }\n\n  dueItems.push({\n    json: {\n      ...row,\n      source_payload: sourcePayload,\n      form_type: cleanString(sourcePayload.form_type || ''),\n      lead_temperature: cleanString(sourcePayload.lead_temperature || 'warm'),\n      allow_third_email: Boolean(sourcePayload.allow_third_email),\n      sequence_step: sequenceStep,\n      booking_link_45min:\n        cleanString(row.booking_link_45min) ||\n        cleanString(sourcePayload.booking_link_45min) ||\n        cleanString(config.booking_link_45min) ||\n        'https://calendly.com/contact-transferai/30min',\n      follow_up_delay_1_days: Number(cleanString(config.follow_up_delay_1_days) || 4),\n      follow_up_delay_2_days: Number(cleanString(config.follow_up_delay_2_days) || 7),\n    },\n  });\n}\n\nreturn dueItems.slice(0, fetchLimit);"
+      },
       "name": "Build Due Social Follow-Ups",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1210,
-        180
+        848,
+        144
       ],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst now = Date.now();\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\nfunction hasTimestamp(value) {\n  return Boolean(cleanString(value));\n}\nconst config = $('Set Social Sequence Config').first().json || {};\nfor (const row of rows) {\n  const sourcePayload = row.source_payload || {};\n  if (sourcePayload.sequence_origin !== 'google_forms_social') continue;\n  if (row.paused || row.do_not_contact || row.stop_reason) continue;\n  if (!cleanString(row.target_email)) continue;\n  const nextAt = row.next_action_at ? Date.parse(row.next_action_at) : 0;\n  if (Number.isFinite(nextAt) && nextAt > now) continue;\n  const allowThirdEmail = Boolean(sourcePayload.allow_third_email);\n  const sentEmail1 = hasTimestamp(row.social_email_1_sent_at);\n  const sentEmail2 = hasTimestamp(row.social_email_2_sent_at);\n  const sentEmail3 = hasTimestamp(row.social_email_3_sent_at);\n  const lastResult = cleanString(row.last_sequence_result);\n  let sequenceStep = 0;\n  if (!sentEmail1 && !lastResult) sequenceStep = 1;\n  else if (!sentEmail2 && (sentEmail1 || lastResult === 'social_email_1_sent')) sequenceStep = 2;\n  else if (!sentEmail3 && allowThirdEmail && (sentEmail2 || lastResult === 'social_email_2_sent')) sequenceStep = 3;\n  else continue;\n  return [{ json: {\n    ...row,\n    source_payload: sourcePayload,\n    form_type: cleanString(sourcePayload.form_type || ''),\n    lead_temperature: cleanString(sourcePayload.lead_temperature || 'warm'),\n    allow_third_email: allowThirdEmail,\n    sequence_step: sequenceStep,\n    booking_link_45min: cleanString(row.booking_link_45min) || cleanString(sourcePayload.booking_link_45min) || cleanString(config.booking_link_45min) || 'https://calendly.com/contact-transferai/30min',\n    follow_up_delay_1_days: Number(cleanString(config.follow_up_delay_1_days) || 4),\n    follow_up_delay_2_days: Number(cleanString(config.follow_up_delay_2_days) || 7)\n  } }];\n}\nreturn [];"
-      }
+      "id": "b7f375d8-14bd-4245-9c7c-ebbfdf88308c"
     },
     {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function asObject(value) {\n  return value && typeof value === 'object' && !Array.isArray(value) ? value : null;\n}\n\nconst input = $json;\n\n// Cas 1: webhook n8n classique -> input.body\n// Cas 2: Apps Script -> input.body.body\nconst level1 = asObject(input.body) || input;\nconst root = asObject(level1.body) || level1;\nconst answers = asObject(root.answers) || {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (!s || s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nfunction slugify(value) {\n  return cleanString(value)\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '-')\n    .replace(/^-+|-+$/g, '');\n}\n\nfunction normalizeKey(value) {\n  return cleanString(value)\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/['’]/g, '')\n    .replace(/[^a-z0-9]+/g, ' ')\n    .trim();\n}\n\nfunction findValueByNormalizedKeys(source, aliases) {\n  if (!source || typeof source !== 'object') return '';\n  const normalizedAliases = aliases.map(normalizeKey);\n  for (const [key, value] of Object.entries(source)) {\n    const normalizedKey = normalizeKey(key);\n    if (!normalizedAliases.includes(normalizedKey)) continue;\n    if (Array.isArray(value)) {\n      const cleaned = value.map((v) => cleanString(v)).filter(Boolean);\n      if (cleaned.length) return cleaned;\n      continue;\n    }\n    const cleaned = cleanString(value);\n    if (cleaned) return cleaned;\n  }\n  return '';\n}\n\nfunction pickFrom(source, keys) {\n  if (!source || typeof source !== 'object') return '';\n  for (const key of keys) {\n    if (!(key in source)) continue;\n    const value = source[key];\n    if (Array.isArray(value)) {\n      const cleaned = value.map((v) => cleanString(v)).filter(Boolean);\n      if (cleaned.length) return cleaned;\n      continue;\n    }\n    const cleaned = cleanString(value);\n    if (cleaned) return cleaned;\n  }\n  return '';\n}\n\nfunction pick(keys, normalizedAliases = []) {\n  const fromAnswers = pickFrom(answers, keys);\n  if (Array.isArray(fromAnswers)) return fromAnswers;\n  if (fromAnswers) return fromAnswers;\n\n  const fromRoot = pickFrom(root, keys);\n  if (Array.isArray(fromRoot)) return fromRoot;\n  if (fromRoot) return fromRoot;\n\n  const normalizedFromAnswers = findValueByNormalizedKeys(answers, normalizedAliases);\n  if (Array.isArray(normalizedFromAnswers)) return normalizedFromAnswers;\n  if (normalizedFromAnswers) return normalizedFromAnswers;\n\n  const normalizedFromRoot = findValueByNormalizedKeys(root, normalizedAliases);\n  if (Array.isArray(normalizedFromRoot)) return normalizedFromRoot;\n  if (normalizedFromRoot) return normalizedFromRoot;\n\n  return '';\n}\n\nfunction pickList(keys, normalizedAliases = []) {\n  const value = pick(keys, normalizedAliases);\n  if (Array.isArray(value)) {\n    return value.map((v) => cleanString(v)).filter(Boolean);\n  }\n  return cleanString(value)\n    .split(/[,;\\n]/)\n    .map((v) => v.trim())\n    .filter(Boolean);\n}\n\nconst config = $('Set Social Sequence Config').first().json || {};\n\nconst formTitle = cleanString(\n  pick(\n    ['form_title', 'form_name', 'title', 'Nom du formulaire'],\n    ['form title', 'form name', 'title', 'nom du formulaire']\n  )\n);\n\nconst assistantSignal =\n  /secretaire|secrétaire|assistant de direction|assistanat/i.test(formTitle) ||\n  Boolean(\n    cleanString(\n      pick(\n        [\n          \"Souhaitez-vous être formé à l'intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\",\n          \"Souhaitez-vous être formé à l’intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\"\n        ],\n        ['souhaitez vous etre forme a lintelligence artificielle de facon simple pratique et adaptee a votre metier']\n      )\n    )\n  );\n\nconst enterpriseSignal =\n  /formulaire ia|cote d.?ivoire|côte d.?ivoire/i.test(formTitle) ||\n  Boolean(\n    cleanString(\n      pick(\n        [\n          \"Votre entreprise utilise-t-elle déjà l'intelligence artificielle, même de manière partielle ?\",\n          \"Votre entreprise utilise-t-elle déjà l’intelligence artificielle, même de manière partielle ?\"\n        ],\n        ['votre entreprise utilise t elle deja lintelligence artificielle meme de maniere partielle']\n      )\n    )\n  );\n\nconst formType = assistantSignal\n  ? 'assistant_training_interest'\n  : enterpriseSignal\n    ? 'enterprise_ai_interest'\n    : 'enterprise_ai_interest';\n\nconst fullName = cleanString(\n  pick(\n    ['Nom et prénom', 'Nom et prenom', 'nom_prenom', 'name', 'full_name'],\n    ['nom et prenom', 'nom prenom', 'full name', 'nom complet']\n  )\n);\n\nconst email = cleanString(\n  pick(\n    ['Adresse e-mail', 'Adresse email', 'adresse_email', 'email', 'Email'],\n    ['adresse e mail', 'adresse email', 'email']\n  )\n);\n\nconst phone = cleanString(\n  pick(\n    ['Téléphone', 'Telephone', 'telephone', 'phone'],\n    ['telephone', 'phone', 'numero de telephone']\n  )\n);\n\nconst functionLabel = cleanString(\n  pick(\n    ['Fonction', 'fonction', 'job_title'],\n    ['fonction', 'poste', 'job title']\n  )\n);\n\nconst enterpriseCompanyName = cleanString(\n  pick(\n    [\n      \"Nom de l’entreprise\",\n      \"Nom de l'entreprise\",\n      'Nom entreprise',\n      'nom_entreprise',\n      'company_name'\n    ],\n    ['nom de lentreprise', 'nom de entreprise', 'nom entreprise', 'company name']\n  )\n);\n\nconst assistantStructureName = cleanString(\n  pick(\n    ['Structure ou entreprise', 'structure_ou_entreprise'],\n    ['structure ou entreprise']\n  )\n);\n\nconst organizationName =\n  formType === 'assistant_training_interest'\n    ? assistantStructureName || fullName || 'Prospect formation IA'\n    : enterpriseCompanyName || fullName || 'Entreprise à confirmer';\n\nconst q3Needs =\n  formType === 'assistant_training_interest'\n    ? pickList(\n        [\n          'Question 3',\n          \"Pour quelles tâches l'intelligence artificielle pourrait-elle vous être la plus utile aujourd'hui ?\",\n          \"Pour quelles tâches l’intelligence artificielle pourrait-elle vous être la plus utile aujourd’hui ?\"\n        ],\n        ['pour quelles taches lintelligence artificielle pourrait elle vous etre la plus utile aujourdhui']\n      )\n    : pickList(\n        [\n          \"Dans quel domaine l'intelligence artificielle pourrait-elle être la plus utile à votre entreprise aujourd'hui ?\",\n          \"Dans quel domaine l’intelligence artificielle pourrait-elle être la plus utile à votre entreprise aujourd’hui ?\"\n        ],\n        ['dans quel domaine lintelligence artificielle pourrait elle etre la plus utile a votre entreprise aujourdhui']\n      );\n\nconst assistantQ4 = cleanString(\n  pick(\n    [\n      \"Souhaitez-vous être formé à l'intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\",\n      \"Souhaitez-vous être formé à l’intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\"\n    ],\n    ['souhaitez vous etre forme a lintelligence artificielle de facon simple pratique et adaptee a votre metier']\n  )\n);\n\nconst assistantQ5 = cleanString(\n  pick(\n    [\n      \"Quel est aujourd'hui votre plus grand besoin dans votre travail administratif ou de secrétariat ?\",\n      \"Quel est aujourd’hui votre plus grand besoin dans votre travail administratif ou de secrétariat ?\"\n    ],\n    ['quel est aujourdhui votre plus grand besoin dans votre travail administratif ou de secretariat']\n  )\n);\n\nconst assistantQ6 = cleanString(\n  pick(\n    [\n      \"Si une formation IA spécialement pensée pour les secrétaires et assistants est lancée bientôt, seriez-vous intéressé à y participer ?\",\n      \"Si une formation IA spécialement pensée pour les secrétaires et assistants est lancée bientôt, seriez-vous intéressé à y participer ?\"\n    ],\n    ['si une formation ia specialement pensee pour les secretaires et assistants est lancee bientot seriez vous interesse a y participer']\n  )\n);\n\nconst enterpriseQ2 = cleanString(\n  pick(\n    [\n      \"Votre entreprise utilise-t-elle déjà l'intelligence artificielle, même de manière partielle ?\",\n      \"Votre entreprise utilise-t-elle déjà l’intelligence artificielle, même de manière partielle ?\"\n    ],\n    ['votre entreprise utilise t elle deja lintelligence artificielle meme de maniere partielle']\n  )\n);\n\nconst enterpriseQ4 = cleanString(\n  pick(\n    [\n      \"Pensez-vous que votre entreprise est suffisamment en sécurité face à Internet et à l'intelligence artificielle ?\",\n      \"Pensez-vous que votre entreprise est suffisamment en sécurité face à Internet et à l’intelligence artificielle ?\"\n    ],\n    ['pensez vous que votre entreprise est suffisamment en securite face a internet et a lintelligence artificielle']\n  )\n);\n\nconst enterpriseQ5 = cleanString(\n  pick(\n    [\n      \"Avez-vous déjà essayé de voir ce que l'on trouve sur votre entreprise, ou même sur vous-même, sur Internet avec les outils d'intelligence artificielle ?\",\n      \"Avez-vous déjà essayé de voir ce que l’on trouve sur votre entreprise, ou même sur vous-même, sur Internet avec les outils d’intelligence artificielle ?\"\n    ],\n    ['avez vous deja essaye de voir ce que lon trouve sur votre entreprise ou meme sur vous meme sur internet avec les outils dintelligence artificielle']\n  )\n);\n\nconst enterpriseQ6 = cleanString(\n  pick(\n    [\n      \"Souhaitez-vous être recontacté pour découvrir des usages concrets de l'intelligence artificielle adaptés à votre entreprise ?\",\n      \"Souhaitez-vous être recontacté pour découvrir des usages concrets de l’intelligence artificielle adaptés à votre entreprise ?\"\n    ],\n    ['souhaitez vous etre recontacte pour decouvrir des usages concrets de lintelligence artificielle adaptes a votre entreprise']\n  )\n);\n\nlet leadTemperature = 'warm';\nlet allowThirdEmail = true;\n\nif (formType === 'assistant_training_interest') {\n  if (assistantQ6 === 'Oui, je suis prêt(e)' && assistantQ4 === 'Oui, tout à fait') {\n    leadTemperature = 'hot';\n  } else if (\n    assistantQ6 === 'Peut-être' ||\n    assistantQ4 === 'Oui, pourquoi pas' ||\n    assistantQ4 === 'Peut-être plus tard'\n  ) {\n    leadTemperature = 'warm';\n  } else {\n    leadTemperature = 'cool';\n  }\n\n  allowThirdEmail = assistantQ6 !== 'Non' && assistantQ4 !== 'Non, pas pour le moment';\n} else {\n  if (enterpriseQ6 === 'Oui') {\n    leadTemperature = 'hot';\n  } else if (enterpriseQ6 === 'Peut-être') {\n    leadTemperature = 'warm';\n  } else {\n    leadTemperature = 'cool';\n  }\n\n  allowThirdEmail = enterpriseQ6 !== 'Pas pour le moment';\n}\n\nconst canAutoSequence = Boolean(email) && allowThirdEmail;\nconst emailSlug = slugify(email || fullName || organizationName || 'lead');\nconst prospectId = 'gf-' + formType + '-' + emailSlug;\nconst configBooking = cleanString(config.booking_link_45min || '');\n\nreturn {\n  json: {\n    prospect_id: prospectId,\n    decision_maker_name: fullName || 'Prospect à confirmer',\n    organization_name: organizationName,\n    target_email: email || null,\n    phone,\n    function_label: functionLabel,\n    form_title:\n      formTitle ||\n      (formType === 'assistant_training_interest'\n        ? 'Formation IA secrétariat'\n        : \"Formulaire IA Côte d'Ivoire\"),\n    form_type: formType,\n    lead_temperature: leadTemperature,\n    allow_third_email: allowThirdEmail,\n    can_auto_sequence: canAutoSequence,\n    q3_needs: q3Needs,\n    assistant_q4_training_interest: assistantQ4,\n    assistant_q5_main_need: assistantQ5,\n    assistant_q6_launch_interest: assistantQ6,\n    enterprise_q2_usage: enterpriseQ2,\n    enterprise_q4_security: enterpriseQ4,\n    enterprise_q5_visibility: enterpriseQ5,\n    enterprise_q6_recontact_interest: enterpriseQ6,\n    raw_answers: answers,\n    booking_link_45min: cleanString(pick(['booking_link_45min'], ['booking link 45min'])) || configBooking\n  }\n};"
+      },
       "name": "Normalize Google Forms Lead",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        950,
-        500
+        544,
+        528
       ],
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const input = $json;\n\nconst root =\n  input.body && typeof input.body === 'object' && !Array.isArray(input.body)\n    ? input.body\n    : input;\n\nconst answers =\n  root.answers && typeof root.answers === 'object' && !Array.isArray(root.answers)\n    ? root.answers\n    : {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nfunction slugify(value) {\n  return cleanString(value)\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '-')\n    .replace(/^-+|-+$/g, '');\n}\n\nfunction pickFrom(source, keys) {\n  if (!source || typeof source !== 'object') return '';\n  for (const key of keys) {\n    if (!(key in source)) continue;\n    const value = source[key];\n    if (Array.isArray(value)) {\n      const cleaned = value.map((v) => cleanString(v)).filter(Boolean);\n      if (cleaned.length) return cleaned;\n      continue;\n    }\n    const cleaned = cleanString(value);\n    if (cleaned) return cleaned;\n  }\n  return '';\n}\n\nfunction pick(keys) {\n  const fromAnswers = pickFrom(answers, keys);\n  if (Array.isArray(fromAnswers)) return fromAnswers;\n  if (fromAnswers) return fromAnswers;\n  const fromRoot = pickFrom(root, keys);\n  if (Array.isArray(fromRoot)) return fromRoot;\n  if (fromRoot) return fromRoot;\n  return '';\n}\n\nfunction pickList(keys) {\n  const value = pick(keys);\n  if (Array.isArray(value)) {\n    return value.map((v) => cleanString(v)).filter(Boolean);\n  }\n  return cleanString(value)\n    .split(/[,;\\n]/)\n    .map((v) => v.trim())\n    .filter(Boolean);\n}\n\nconst formTitle = cleanString(\n  pick(['form_title', 'form_name', 'title', 'Nom du formulaire'])\n);\n\nconst assistantSignal =\n  /secretaire|secrétaire|assistant de direction|assistanat/i.test(formTitle) ||\n  Boolean(\n    cleanString(\n      pick([\n        \"Souhaitez-vous être formé à l'intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\",\n        \"Souhaitez-vous être formé à l’intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\"\n      ])\n    )\n  );\n\nconst enterpriseSignal =\n  /formulaire ia|cote d.?ivoire|côte d.?ivoire/i.test(formTitle) ||\n  Boolean(\n    cleanString(\n      pick([\n        \"Votre entreprise utilise-t-elle déjà l'intelligence artificielle, même de manière partielle ?\",\n        \"Votre entreprise utilise-t-elle déjà l’intelligence artificielle, même de manière partielle ?\"\n      ])\n    )\n  );\n\nconst formType = assistantSignal\n  ? 'assistant_training_interest'\n  : enterpriseSignal\n    ? 'enterprise_ai_interest'\n    : 'enterprise_ai_interest';\n\nconst fullName = cleanString(\n  pick(['Nom et prénom', 'Nom et prenom', 'nom_prenom', 'name', 'full_name'])\n);\n\nconst email = cleanString(\n  pick(['Adresse e-mail', 'Adresse email', 'adresse_email', 'email', 'Email'])\n);\n\nconst phone = cleanString(\n  pick(['Téléphone', 'Telephone', 'telephone', 'phone'])\n);\n\nconst functionLabel = cleanString(\n  pick(['Fonction', 'fonction', 'job_title'])\n);\n\nconst organizationName =\n  formType === 'assistant_training_interest'\n    ? cleanString(pick(['Structure ou entreprise', 'structure_ou_entreprise'])) || fullName || 'Prospect formation IA'\n    : cleanString(\n        pick([\n          \"Nom de l’entreprise\",\n          \"Nom de l'entreprise\",\n          'nom_entreprise',\n          'company_name'\n        ])\n      ) || fullName || 'Entreprise à confirmer';\n\nconst q3Needs =\n  formType === 'assistant_training_interest'\n    ? pickList([\n        'Question 3',\n        \"Pour quelles tâches l'intelligence artificielle pourrait-elle vous être la plus utile aujourd'hui ?\",\n        \"Pour quelles tâches l’intelligence artificielle pourrait-elle vous être la plus utile aujourd’hui ?\"\n      ])\n    : pickList([\n        \"Dans quel domaine l'intelligence artificielle pourrait-elle être la plus utile à votre entreprise aujourd'hui ?\",\n        \"Dans quel domaine l’intelligence artificielle pourrait-elle être la plus utile à votre entreprise aujourd’hui ?\"\n      ]);\n\nconst assistantQ4 = cleanString(\n  pick([\n    \"Souhaitez-vous être formé à l'intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\",\n    \"Souhaitez-vous être formé à l’intelligence artificielle de façon simple, pratique et adaptée à votre métier ?\"\n  ])\n);\n\nconst assistantQ5 = cleanString(\n  pick([\n    \"Quel est aujourd'hui votre plus grand besoin dans votre travail administratif ou de secrétariat ?\",\n    \"Quel est aujourd’hui votre plus grand besoin dans votre travail administratif ou de secrétariat ?\"\n  ])\n);\n\nconst assistantQ6 = cleanString(\n  pick([\n    \"Si une formation IA spécialement pensée pour les secrétaires et assistants est lancée bientôt, seriez-vous intéressé à y participer ?\",\n    \"Si une formation IA spécialement pensée pour les secrétaires et assistants est lancée bientôt, seriez-vous intéressé à y participer ?\"\n  ])\n);\n\nconst enterpriseQ2 = cleanString(\n  pick([\n    \"Votre entreprise utilise-t-elle déjà l'intelligence artificielle, même de manière partielle ?\",\n    \"Votre entreprise utilise-t-elle déjà l’intelligence artificielle, même de manière partielle ?\"\n  ])\n);\n\nconst enterpriseQ4 = cleanString(\n  pick([\n    \"Pensez-vous que votre entreprise est suffisamment en sécurité face à Internet et à l'intelligence artificielle ?\",\n    \"Pensez-vous que votre entreprise est suffisamment en sécurité face à Internet et à l’intelligence artificielle ?\"\n  ])\n);\n\nconst enterpriseQ5 = cleanString(\n  pick([\n    \"Avez-vous déjà essayé de voir ce que l'on trouve sur votre entreprise, ou même sur vous-même, sur Internet avec les outils d'intelligence artificielle ?\",\n    \"Avez-vous déjà essayé de voir ce que l’on trouve sur votre entreprise, ou même sur vous-même, sur Internet avec les outils d’intelligence artificielle ?\"\n  ])\n);\n\nconst enterpriseQ6 = cleanString(\n  pick([\n    \"Souhaitez-vous être recontacté pour découvrir des usages concrets de l'intelligence artificielle adaptés à votre entreprise ?\",\n    \"Souhaitez-vous être recontacté pour découvrir des usages concrets de l’intelligence artificielle adaptés à votre entreprise ?\"\n  ])\n);\n\nlet leadTemperature = 'warm';\nlet allowThirdEmail = true;\n\nif (formType === 'assistant_training_interest') {\n  if (assistantQ6 === 'Oui, je suis prêt(e)' && assistantQ4 === 'Oui, tout à fait') {\n    leadTemperature = 'hot';\n  } else if (\n    assistantQ6 === 'Peut-être' ||\n    assistantQ4 === 'Oui, pourquoi pas' ||\n    assistantQ4 === 'Peut-être plus tard'\n  ) {\n    leadTemperature = 'warm';\n  } else {\n    leadTemperature = 'cool';\n  }\n  allowThirdEmail = assistantQ6 !== 'Non' && assistantQ4 !== 'Non, pas pour le moment';\n} else {\n  if (enterpriseQ6 === 'Oui') {\n    leadTemperature = 'hot';\n  } else if (enterpriseQ6 === 'Peut-être') {\n    leadTemperature = 'warm';\n  } else {\n    leadTemperature = 'cool';\n  }\n  allowThirdEmail = enterpriseQ6 !== 'Pas pour le moment';\n}\n\nconst canAutoSequence = Boolean(email) && allowThirdEmail;\nconst emailSlug = slugify(email || fullName || organizationName || 'lead');\nconst prospectId = 'gf-' + formType + '-' + emailSlug;\nconst configBooking = cleanString(($('Set Social Sequence Config').first().json || {}).booking_link_45min || '');\n\nreturn {\n  json: {\n    prospect_id: prospectId,\n    decision_maker_name: fullName || 'Prospect à confirmer',\n    organization_name: organizationName,\n    target_email: email || null,\n    phone,\n    function_label: functionLabel,\n    form_title:\n      formTitle ||\n      (formType === 'assistant_training_interest'\n        ? 'Formation IA secrétariat'\n        : \"Formulaire IA Côte d'Ivoire\"),\n    form_type: formType,\n    lead_temperature: leadTemperature,\n    allow_third_email: allowThirdEmail,\n    can_auto_sequence: canAutoSequence,\n    q3_needs: q3Needs,\n    assistant_q4_training_interest: assistantQ4,\n    assistant_q5_main_need: assistantQ5,\n    assistant_q6_launch_interest: assistantQ6,\n    enterprise_q2_usage: enterpriseQ2,\n    enterprise_q4_security: enterpriseQ4,\n    enterprise_q5_visibility: enterpriseQ5,\n    enterprise_q6_recontact_interest: enterpriseQ6,\n    raw_answers: answers,\n    booking_link_45min: cleanString(pick(['booking_link_45min'])) || configBooking\n  }\n};"
-      }
+      "id": "0301a150-09e1-435b-ae99-5f6cc0a04836"
     },
     {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const lead = $json;\nconst config = $('Set Social Sequence Config').first().json || {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nconst formType = cleanString(lead.form_type || 'enterprise_ai_interest');\nconst leadTemperature = cleanString(lead.lead_temperature || 'warm');\nconst email = cleanString(lead.target_email || '');\nconst fullName = cleanString(lead.decision_maker_name || 'Prospect à confirmer');\nconst organizationName = cleanString(lead.organization_name || 'Prospect à confirmer');\nconst bookingLink = cleanString(\n  lead.booking_link_45min ||\n  config.booking_link_45min ||\n  'https://calendly.com/contact-transferai/30min'\n);\n\nconst priority =\n  leadTemperature === 'hot'\n    ? 'tier1'\n    : leadTemperature === 'warm'\n      ? 'tier2'\n      : 'tier3';\n\nconst sectorGuess =\n  formType === 'assistant_training_interest'\n    ? 'formation-assistanat-ia'\n    : 'ia-entreprise-cote-divoire';\n\nconst organizationType =\n  formType === 'assistant_training_interest'\n    ? 'professionnel ou structure'\n    : 'entreprise ou organisation';\n\nconst allowThirdEmail = Boolean(lead.allow_third_email);\nconst canAutoSequence = Boolean(lead.can_auto_sequence) && Boolean(email);\nconst nowIso = new Date().toISOString();\n\nconst sourcePayload = {\n  sequence_origin: 'google_forms_social',\n  form_type: formType,\n  form_title: cleanString(lead.form_title || ''),\n  lead_temperature: leadTemperature,\n  allow_third_email: allowThirdEmail,\n  booking_link_45min: bookingLink,\n  phone: cleanString(lead.phone || ''),\n  function_label: cleanString(lead.function_label || ''),\n  q3_needs: Array.isArray(lead.q3_needs) ? lead.q3_needs : [],\n  assistant_q4_training_interest: cleanString(lead.assistant_q4_training_interest || ''),\n  assistant_q5_main_need: cleanString(lead.assistant_q5_main_need || ''),\n  assistant_q6_launch_interest: cleanString(lead.assistant_q6_launch_interest || ''),\n  enterprise_q2_usage: cleanString(lead.enterprise_q2_usage || ''),\n  enterprise_q4_security: cleanString(lead.enterprise_q4_security || ''),\n  enterprise_q5_visibility: cleanString(lead.enterprise_q5_visibility || ''),\n  enterprise_q6_recontact_interest: cleanString(lead.enterprise_q6_recontact_interest || ''),\n  raw_answers:\n    lead.raw_answers && typeof lead.raw_answers === 'object' && !Array.isArray(lead.raw_answers)\n      ? lead.raw_answers\n      : {}\n};\n\nreturn {\n  json: {\n    prospect_id: cleanString(lead.prospect_id || ''),\n    organization_name: organizationName,\n    website: '',\n    country: cleanString(config.default_country || \"Côte d'Ivoire\"),\n    organization_type: organizationType,\n    sector_guess: sectorGuess,\n    decision_maker_name: fullName,\n    target_email: email || null,\n    custom_page_paths_csv: '',\n    booking_link_45min: bookingLink,\n    commercial_priority_default: priority,\n    research_scope: 'public_web_only',\n    source_backend: 'manual',\n    source_label: cleanString(config.source_label_prefix || 'google_forms_social') + ':' + formType,\n    raw_source_id: cleanString(lead.prospect_id || ''),\n    source_payload: sourcePayload,\n    status: canAutoSequence ? 'active' : 'paused',\n    paused: !canAutoSequence,\n    do_not_contact: false,\n    outreach_attempt_count: 0,\n    last_response_status: 'pending',\n    last_sequence_result: null,\n    stop_reason: canAutoSequence ? null : 'low_recontact_intent',\n    niche_status: canAutoSequence ? 'social_form_inbound' : 'social_form_review_only',\n    next_action_at: canAutoSequence ? nowIso : null,\n    last_pack_id: null,\n    notes_internal: 'Lead social Google Forms | ' + formType + ' | ' + leadTemperature\n  }\n};"
+      },
       "name": "Prepare Social Prospect Record",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1210,
-        500
+        768,
+        528
       ],
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const lead = $json;\nconst config = $('Set Social Sequence Config').first().json || {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nconst formType = cleanString(lead.form_type || 'enterprise_ai_interest');\nconst leadTemperature = cleanString(lead.lead_temperature || 'warm');\nconst email = cleanString(lead.target_email || '');\nconst fullName = cleanString(lead.decision_maker_name || 'Prospect à confirmer');\nconst organizationName = cleanString(lead.organization_name || 'Prospect à confirmer');\nconst bookingLink = cleanString(\n  lead.booking_link_45min ||\n  config.booking_link_45min ||\n  'https://calendly.com/contact-transferai/30min'\n);\n\nconst priority =\n  leadTemperature === 'hot'\n    ? 'tier1'\n    : leadTemperature === 'warm'\n      ? 'tier2'\n      : 'tier3';\n\nconst sectorGuess =\n  formType === 'assistant_training_interest'\n    ? 'formation-assistanat-ia'\n    : 'ia-entreprise-cote-divoire';\n\nconst organizationType =\n  formType === 'assistant_training_interest'\n    ? 'professionnel ou structure'\n    : 'entreprise ou organisation';\n\nconst allowThirdEmail = Boolean(lead.allow_third_email);\nconst canAutoSequence = Boolean(lead.can_auto_sequence) && Boolean(email);\nconst nowIso = new Date().toISOString();\n\nconst sourcePayload = {\n  sequence_origin: 'google_forms_social',\n  form_type: formType,\n  form_title: cleanString(lead.form_title || ''),\n  lead_temperature: leadTemperature,\n  allow_third_email: allowThirdEmail,\n  booking_link_45min: bookingLink,\n  phone: cleanString(lead.phone || ''),\n  function_label: cleanString(lead.function_label || ''),\n  q3_needs: Array.isArray(lead.q3_needs) ? lead.q3_needs : [],\n  assistant_q4_training_interest: cleanString(lead.assistant_q4_training_interest || ''),\n  assistant_q5_main_need: cleanString(lead.assistant_q5_main_need || ''),\n  assistant_q6_launch_interest: cleanString(lead.assistant_q6_launch_interest || ''),\n  enterprise_q2_usage: cleanString(lead.enterprise_q2_usage || ''),\n  enterprise_q4_security: cleanString(lead.enterprise_q4_security || ''),\n  enterprise_q5_visibility: cleanString(lead.enterprise_q5_visibility || ''),\n  enterprise_q6_recontact_interest: cleanString(lead.enterprise_q6_recontact_interest || ''),\n  raw_answers:\n    lead.raw_answers && typeof lead.raw_answers === 'object' && !Array.isArray(lead.raw_answers)\n      ? lead.raw_answers\n      : {}\n};\n\nreturn {\n  json: {\n    prospect_id: cleanString(lead.prospect_id || ''),\n    organization_name: organizationName,\n    website: '',\n    country: cleanString(config.default_country || \"Côte d'Ivoire\"),\n    organization_type: organizationType,\n    sector_guess: sectorGuess,\n    decision_maker_name: fullName,\n    target_email: email || null,\n    custom_page_paths_csv: '',\n    booking_link_45min: bookingLink,\n    commercial_priority_default: priority,\n    research_scope: 'public_web_only',\n    source_backend: 'manual',\n    source_label: cleanString(config.source_label_prefix || 'google_forms_social') + ':' + formType,\n    raw_source_id: cleanString(lead.prospect_id || ''),\n    source_payload: sourcePayload,\n    status: canAutoSequence ? 'active' : 'paused',\n    paused: !canAutoSequence,\n    do_not_contact: false,\n    outreach_attempt_count: 0,\n    last_response_status: 'pending',\n    last_sequence_result: null,\n    stop_reason: canAutoSequence ? null : 'low_recontact_intent',\n    niche_status: canAutoSequence ? 'social_form_inbound' : 'social_form_review_only',\n    next_action_at: canAutoSequence ? nowIso : null,\n    social_email_1_sent_at: null,\n    social_email_2_sent_at: null,\n    social_email_3_sent_at: null,\n    last_pack_id: null,\n    notes_internal: 'Lead social Google Forms | ' + formType + ' | ' + leadTemperature\n  }\n};"
-      }
+      "id": "3f557aaa-8ff8-4ca8-8b49-29af419ed03a"
     },
     {
-      "name": "Upsert Social Prospect Into CRM",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "position": [
-        1470,
-        500
-      ],
       "parameters": {
         "method": "POST",
         "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?on_conflict=prospect_id'}}",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "__SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "Bearer __SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -261,71 +238,87 @@
             }
           }
         }
-      }
+      },
+      "name": "Upsert Social Prospect Into CRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1008,
+        528
+      ],
+      "id": "71337ca0-423f-4b09-9ccf-e4483b226b9f"
     },
     {
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [$json];\nconst row = rows[0] || {};\nconst sourcePayload = row.source_payload || {};\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\nif (!cleanString(row.target_email) || row.paused || row.stop_reason === 'low_recontact_intent' || sourcePayload.sequence_origin !== 'google_forms_social') {\n  return [];\n}\nconst config = $('Set Social Sequence Config').first().json || {};\nreturn [{ json: {\n  ...row,\n  source_payload: sourcePayload,\n  form_type: cleanString(sourcePayload.form_type || row.form_type || ''),\n  lead_temperature: cleanString(sourcePayload.lead_temperature || 'warm'),\n  allow_third_email: Boolean(sourcePayload.allow_third_email),\n  sequence_step: row.last_sequence_result ? 2 : 1,\n  booking_link_45min: cleanString(row.booking_link_45min) || cleanString(sourcePayload.booking_link_45min) || cleanString(config.booking_link_45min) || 'https://calendly.com/contact-transferai/30min',\n  follow_up_delay_1_days: Number(cleanString(config.follow_up_delay_1_days) || 4),\n  follow_up_delay_2_days: Number(cleanString(config.follow_up_delay_2_days) || 7)\n} }];"
+      },
       "name": "Build Immediate Social Send Context",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1730,
-        500
+        1232,
+        320
       ],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [$json];\nconst row = rows[0] || {};\nconst sourcePayload = row.source_payload || {};\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\nfunction hasTimestamp(value) {\n  return Boolean(cleanString(value));\n}\nif (!cleanString(row.target_email) || row.paused || row.stop_reason === 'low_recontact_intent' || sourcePayload.sequence_origin !== 'google_forms_social') {\n  return [];\n}\nconst config = $('Set Social Sequence Config').first().json || {};\nconst allowThirdEmail = Boolean(sourcePayload.allow_third_email);\nconst sentEmail1 = hasTimestamp(row.social_email_1_sent_at);\nconst sentEmail2 = hasTimestamp(row.social_email_2_sent_at);\nconst sentEmail3 = hasTimestamp(row.social_email_3_sent_at);\nconst lastResult = cleanString(row.last_sequence_result);\nlet sequenceStep = 0;\nif (!sentEmail1 && !lastResult) sequenceStep = 1;\nelse if (!sentEmail2 && (sentEmail1 || lastResult === 'social_email_1_sent')) sequenceStep = 2;\nelse if (!sentEmail3 && allowThirdEmail && (sentEmail2 || lastResult === 'social_email_2_sent')) sequenceStep = 3;\nelse return [];\nreturn [{ json: {\n  ...row,\n  source_payload: sourcePayload,\n  form_type: cleanString(sourcePayload.form_type || row.form_type || ''),\n  lead_temperature: cleanString(sourcePayload.lead_temperature || 'warm'),\n  allow_third_email: allowThirdEmail,\n  sequence_step: sequenceStep,\n  booking_link_45min: cleanString(row.booking_link_45min) || cleanString(sourcePayload.booking_link_45min) || cleanString(config.booking_link_45min) || 'https://calendly.com/contact-transferai/30min',\n  follow_up_delay_1_days: Number(cleanString(config.follow_up_delay_1_days) || 4),\n  follow_up_delay_2_days: Number(cleanString(config.follow_up_delay_2_days) || 7)\n} }];"
-      }
+      "id": "69b3a45b-dbf8-458d-b2f4-febc2ed4c0d3"
     },
     {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "935ae0aa-7c2f-43d6-a5b0-08a30c383b50",
+              "leftValue": "={{Boolean($json.prospect_id && $json.target_email && $json.sequence_step)}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
       "name": "If Social Lead Ready To Send",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1990,
-        340
+        1120,
+        144
       ],
-      "parameters": {
-        "conditions": {
-          "boolean": [
-            {
-              "value1": "={{Boolean($json.prospect_id && $json.target_email && $json.sequence_step)}}",
-              "operation": "true"
-            }
-          ]
-        }
-      }
+      "id": "c291cf2c-d98e-44cf-b605-4b72fcafb34e"
     },
     {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const row = $json || {};\nconst sourcePayload = row.source_payload || {};\nconst formType = sourcePayload.form_type || row.form_type || 'enterprise_ai_interest';\nconst step = Math.max(Number(row.sequence_step || 1), 1);\nconst displayName = String(row.decision_maker_name || '').trim();\nconst org = String(row.organization_name || 'votre structure').trim();\nconst bookingLink = String(\n  row.booking_link_45min ||\n  sourcePayload.booking_link_45min ||\n  $('Set Social Sequence Config').first().json.booking_link_45min ||\n  'https://calendly.com/contact-transferai/30min'\n).trim();\nconst q3Needs = Array.isArray(sourcePayload.q3_needs) ? sourcePayload.q3_needs : [];\nconst assistantNeed = String(sourcePayload.assistant_q5_main_need || '').trim();\nconst assistantLaunch = String(sourcePayload.assistant_q6_launch_interest || '').trim();\nconst enterpriseSecurity = String(sourcePayload.enterprise_q4_security || '').trim();\nconst allowThirdEmail = Boolean(sourcePayload.allow_third_email);\nconst targetEmail = String(row.target_email || sourcePayload.target_email || '').trim();\n\nif (!row.prospect_id || !targetEmail) {\n  return { json: {} };\n}\n\nfunction intro(name) {\n  return `Bonjour${name ? ' ' + name : ''},`;\n}\n\nfunction joinList(items) {\n  if (!items || !items.length) return '';\n  if (items.length === 1) return items[0];\n  if (items.length === 2) return `${items[0]} et ${items[1]}`;\n  return `${items.slice(0, -1).join(', ')} et ${items[items.length - 1]}`;\n}\n\nfunction assistantUseCaseBlock() {\n  if (!q3Needs.length) return 'des usages concrets directement utiles dans le travail quotidien';\n  return `des usages concrets autour de ${joinList(q3Needs).toLowerCase()}`;\n}\n\nlet emailSubject = '';\nlet emailText = '';\nlet messageVariant = '';\n\nif (formType === 'assistant_training_interest') {\n  if (step === 1) {\n    emailSubject = 'Merci pour votre intérêt pour la formation IA dédiée au secrétariat';\n    emailText = `${intro(displayName)}\n\nMerci pour l’intérêt que vous avez manifesté pour notre future formation IA dédiée aux secrétaires et assistants de direction.\n\nNous préparons une formation simple, pratique et directement utile dans le travail quotidien, avec des usages concrets comme :\n- la rédaction plus rapide de courriers et d’e-mails\n- les comptes rendus et procès-verbaux\n- l’organisation de réunions et d’agendas\n- le gain de temps dans les tâches administratives\n\nNotre objectif est de vous aider à mieux utiliser les outils d’intelligence artificielle, même si vous débutez encore, avec une approche adaptée aux réalités du terrain.\n\nSi vous le souhaitez, nous pouvons échanger rapidement avec vous pour mieux comprendre vos besoins et vous présenter les premières orientations de la formation.\n\nVous pouvez réserver un créneau ici :\n${bookingLink}\n\nBien cordialement,\n\nMarius AYORO\nTransferAI\ncontact@transferai.ci`;\n    messageVariant = 'social_assistant_email_1';\n  } else if (step === 2) {\n    emailSubject = 'Suite à votre intérêt pour la formation IA dédiée au secrétariat';\n    emailText = `${intro(displayName)}\n\nJe reviens vers vous à la suite de votre intérêt pour notre future formation IA dédiée aux secrétaires et assistants de direction.\n\nL’objectif de cette formation est d’aller à l’essentiel, avec ${assistantUseCaseBlock()}.\n\nAu regard de votre besoin principal, notamment autour de \"${assistantNeed || 'gagner du temps et mieux structurer le travail administratif'}\", cette formation peut constituer une base très utile pour gagner en méthode, en rapidité et en efficacité.\n\nSi vous le souhaitez, je peux déjà vous envoyer un aperçu du programme envisagé ainsi que le format prévu pour les premières sessions.\n\nBien cordialement,\nTransferAI`;\n    messageVariant = 'social_assistant_email_2';\n  } else {\n    emailSubject = 'Dernier suivi concernant la formation IA pour secrétaires et assistants';\n    emailText = `${intro(displayName)}\n\nJe vous adresse ce dernier message concernant la formation IA pensée pour les secrétaires et assistants de direction.\n\nNous préparons actuellement une formule qui se veut très accessible, orientée résultats, et utile pour mieux organiser le travail, améliorer la qualité des documents et faire gagner du temps dans les tâches administratives.\n\nComme vous avez indiqué un intérêt \"${assistantLaunch || 'à confirmer'}\", je peux vous transmettre en priorité les prochaines informations sur le contenu de la formation, le format des sessions et les conditions de participation au lancement.\n\nSi ce n’est pas le bon moment, aucun souci, nous pourrons revenir vers vous plus tard.\n\nBien cordialement,\nTransferAI`;\n    messageVariant = 'social_assistant_email_3';\n  }\n} else {\n  if (step === 1) {\n    emailSubject = 'Merci pour votre intérêt pour nos solutions et services IA';\n    emailText = `${intro(displayName)}\n\nMerci pour l’intérêt que vous avez manifesté pour les services, solutions et usages concrets de l’intelligence artificielle chez TransferAI.\n\nNous accompagnons les entreprises et organisations qui souhaitent identifier des applications IA utiles, réalistes et adaptées à leurs besoins, que ce soit pour :\n- améliorer la productivité\n- structurer certains processus administratifs ou opérationnels\n- renforcer la qualité de service\n- explorer de nouvelles opportunités d’automatisation ou d’assistance\n\nNotre approche est simple : partir de vos besoins réels, de votre contexte et de votre niveau actuel de maturité, afin de vous proposer des pistes concrètes et directement exploitables.\n\nSi vous le souhaitez, nous pouvons échanger rapidement avec vous pour mieux comprendre vos priorités et vous présenter des cas d’usage adaptés à votre structure.\n\nVous pouvez réserver un créneau ici :\n${bookingLink}\n\nBien cordialement,\n\nMarius AYORO\nTransferAI\ncontact@transferai.ci`;\n    messageVariant = 'social_enterprise_email_1';\n  } else if (step === 2) {\n    emailSubject = 'Suite à votre intérêt pour des usages concrets de l’IA dans votre entreprise';\n    emailText = `${intro(displayName)}\n\nJe reviens vers vous à la suite du formulaire que vous avez renseigné au sujet de l’intelligence artificielle appliquée aux entreprises en Côte d’Ivoire.\n\nNotre démarche vise à aider les structures comme ${org} à identifier des usages concrets, utiles et réalistes de l’IA, en fonction de leurs priorités opérationnelles, commerciales ou administratives.\n\nNous constatons aussi que beaucoup d’entreprises s’interrogent sur leur niveau de maturité, leur exposition numérique et les premières actions pertinentes à engager, sans complexité inutile.\n\nSi vous le souhaitez, nous pouvons vous proposer un premier échange simple pour identifier les pistes les plus adaptées à votre contexte.\n\nVous pouvez réserver un créneau ici :\n${bookingLink}\n\nBien cordialement,\nTransferAI`;\n    messageVariant = 'social_enterprise_email_2';\n  } else {\n    emailSubject = 'Dernier suivi concernant votre intérêt pour l’IA en entreprise';\n    emailText = `${intro(displayName)}\n\nJe vous adresse ce dernier message à propos de votre intérêt pour les usages concrets de l’intelligence artificielle dans votre entreprise.\n\nL’idée n’est pas de proposer une approche théorique, mais d’aider ${org} à mieux comprendre où l’IA peut créer de la valeur rapidement, quels usages sont réellement pertinents et comment avancer de manière progressive.\n\nVotre retour sur la question de sécurité et d’exposition numérique \"${enterpriseSecurity || 'à confirmer'}\" montre aussi qu’un échange de cadrage peut être utile pour poser les bonnes priorités.\n\nSi le sujet reste d’actualité, je peux vous proposer un premier échange ici :\n${bookingLink}\n\nÀ défaut de retour, je clôturerai ce suivi pour le moment, tout en restant disponible si vous souhaitez reprendre la discussion plus tard.\n\nBien cordialement,\nTransferAI`;\n    messageVariant = 'social_enterprise_email_3';\n  }\n}\n\nconst delay1 = Math.max(Number(row.follow_up_delay_1_days || 4), 1);\nconst delay2 = Math.max(Number(row.follow_up_delay_2_days || 7), 1);\n\nlet nextActionAtAfter = null;\nlet isFinalStep = false;\n\nif (step === 1) {\n  nextActionAtAfter = new Date(Date.now() + delay1 * 86400000).toISOString();\n} else if (step === 2 && allowThirdEmail) {\n  nextActionAtAfter = new Date(Date.now() + delay2 * 86400000).toISOString();\n} else {\n  isFinalStep = true;\n}\n\nif (step === 2 && !allowThirdEmail) {\n  isFinalStep = true;\n  nextActionAtAfter = null;\n}\n\nif (step >= 3) {\n  isFinalStep = true;\n  nextActionAtAfter = null;\n}\n\nreturn {\n  json: {\n    ...row,\n    target_email: targetEmail,\n    form_type: formType,\n    sequence_step: step,\n    allow_third_email: allowThirdEmail,\n    message_variant: messageVariant,\n    next_action_at_after: nextActionAtAfter,\n    is_final_step: isFinalStep,\n    email_subject: emailSubject,\n    email_text: emailText,\n    email_html: emailText.replace(/\\n/g, '<br>')\n  }\n};"
+      },
       "name": "Build Social Sequence Email",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2250,
-        340
+        1376,
+        128
       ],
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const row = $json || {};\nconst sourcePayload = row.source_payload || {};\nconst formType = sourcePayload.form_type || row.form_type || 'enterprise_ai_interest';\nconst step = Math.max(Number(row.sequence_step || 1), 1);\nconst displayName = String(row.decision_maker_name || '').trim();\nconst org = String(row.organization_name || 'votre structure').trim();\nconst bookingLink = String(row.booking_link_45min || sourcePayload.booking_link_45min || $('Set Social Sequence Config').first().json.booking_link_45min || 'https://calendly.com/contact-transferai/30min').trim();\nconst q3Needs = Array.isArray(sourcePayload.q3_needs) ? sourcePayload.q3_needs : [];\nconst assistantNeed = String(sourcePayload.assistant_q5_main_need || '').trim();\nconst assistantLaunch = String(sourcePayload.assistant_q6_launch_interest || '').trim();\nconst enterpriseSecurity = String(sourcePayload.enterprise_q4_security || '').trim();\nconst allowThirdEmail = Boolean(sourcePayload.allow_third_email);\nif (!row.prospect_id || !row.target_email) {\n  return { json: {} };\n}\nfunction intro(name) {\n  return `Bonjour${name ? ' ' + name : ''},`;\n}\nfunction joinList(items) {\n  if (!items || !items.length) return '';\n  if (items.length === 1) return items[0];\n  if (items.length === 2) return `${items[0]} et ${items[1]}`;\n  return `${items.slice(0, -1).join(', ')} et ${items[items.length - 1]}`;\n}\nfunction assistantUseCaseBlock() {\n  if (!q3Needs.length) return 'des usages concrets directement utiles dans le travail quotidien';\n  return `des usages concrets autour de ${joinList(q3Needs).toLowerCase()}`;\n}\nlet emailSubject = '';\nlet emailText = '';\nlet messageVariant = '';\nif (formType === 'assistant_training_interest') {\n  if (step === 1) {\n    emailSubject = 'Merci pour votre intérêt pour la formation IA dédiée au secrétariat';\n    emailText = `${intro(displayName)}\\n\\nMerci pour l’intérêt que vous avez manifesté pour notre future formation IA dédiée aux secrétaires et assistants de direction.\\n\\nNous préparons une formule simple, pratique et adaptée aux réalités du terrain, avec ${assistantUseCaseBlock()}.\\n\\nNotre objectif est de proposer une formation utile, accessible et directement applicable dans le travail quotidien, même pour les personnes qui utilisent encore peu l’intelligence artificielle.\\n\\nSi vous le souhaitez, nous pouvons déjà vous transmettre les premières informations sur le contenu envisagé et le format des sessions.\\n\\nBien cordialement,\\nTransferAI`;\n    messageVariant = 'social_assistant_email_1';\n  } else if (step === 2) {\n    emailSubject = 'Suite à votre intérêt pour la formation IA dédiée au secrétariat';\n    emailText = `${intro(displayName)}\\n\\nJe reviens vers vous à la suite de votre intérêt pour notre future formation IA dédiée aux secrétaires et assistants de direction.\\n\\nL’objectif de cette formation est d’aller à l’essentiel, avec ${assistantUseCaseBlock()}.\\n\\nAu regard de votre besoin principal, notamment autour de \"${assistantNeed || 'gagner du temps et mieux structurer le travail administratif'}\", cette formation peut constituer une base très utile pour gagner en méthode, en rapidité et en efficacité.\\n\\nSi vous le souhaitez, je peux déjà vous envoyer un aperçu du programme envisagé ainsi que le format prévu pour les premières sessions.\\n\\nBien cordialement,\\nTransferAI`;\n    messageVariant = 'social_assistant_email_2';\n  } else {\n    emailSubject = 'Dernier suivi concernant la formation IA pour secrétaires et assistants';\n    emailText = `${intro(displayName)}\\n\\nJe vous adresse ce dernier message concernant la formation IA pensée pour les secrétaires et assistants de direction.\\n\\nNous préparons actuellement une formule qui se veut très accessible, orientée résultats, et utile pour mieux organiser le travail, améliorer la qualité des documents et faire gagner du temps dans les tâches administratives.\\n\\nComme vous avez indiqué un intérêt \"${assistantLaunch || 'à confirmer'}\", je peux vous transmettre en priorité les prochaines informations sur le contenu de la formation, le format des sessions et les conditions de participation au lancement.\\n\\nSi ce n’est pas le bon moment, aucun souci, nous pourrons revenir vers vous plus tard.\\n\\nBien cordialement,\\nTransferAI`;\n    messageVariant = 'social_assistant_email_3';\n  }\n} else {\n  if (step === 1) {\n    emailSubject = 'Merci pour votre intérêt pour les usages concrets de l’IA en entreprise';\n    emailText = `${intro(displayName)}\\n\\nMerci pour l’intérêt que vous avez manifesté concernant les usages concrets de l’intelligence artificielle dans les entreprises en Côte d’Ivoire.\\n\\nNotre démarche vise à aider des structures comme ${org} à mieux comprendre où l’IA peut créer de la valeur, comment démarrer de façon progressive et quelles priorités traiter en premier.\\n\\nSi vous le souhaitez, nous pouvons vous proposer un premier échange simple afin d’identifier les pistes les plus pertinentes pour votre contexte.\\n\\nVous pouvez réserver un créneau ici :\\n${bookingLink}\\n\\nBien cordialement,\\nTransferAI`;\n    messageVariant = 'social_enterprise_email_1';\n  } else if (step === 2) {\n    emailSubject = 'Suite à votre intérêt pour des usages concrets de l’IA dans votre entreprise';\n    emailText = `${intro(displayName)}\\n\\nJe reviens vers vous à la suite du formulaire que vous avez renseigné au sujet de l’intelligence artificielle appliquée aux entreprises en Côte d’Ivoire.\\n\\nNotre démarche vise à aider les structures comme ${org} à identifier des usages concrets, utiles et réalistes de l’IA, en fonction de leurs priorités opérationnelles, commerciales ou administratives.\\n\\nNous constatons aussi que beaucoup d’entreprises s’interrogent sur leur niveau de maturité, leur exposition numérique et les premières actions pertinentes à engager, sans complexité inutile.\\n\\nSi vous le souhaitez, nous pouvons vous proposer un premier échange simple pour identifier les pistes les plus adaptées à votre contexte.\\n\\nVous pouvez réserver un créneau ici :\\n${bookingLink}\\n\\nBien cordialement,\\nTransferAI`;\n    messageVariant = 'social_enterprise_email_2';\n  } else {\n    emailSubject = 'Dernier suivi concernant votre intérêt pour l’IA en entreprise';\n    emailText = `${intro(displayName)}\\n\\nJe vous adresse ce dernier message à propos de votre intérêt pour les usages concrets de l’intelligence artificielle dans votre entreprise.\\n\\nL’idée n’est pas de proposer une approche théorique, mais d’aider ${org} à mieux comprendre où l’IA peut créer de la valeur rapidement, quels usages sont réellement pertinents et comment avancer de manière progressive.\\n\\nVotre retour sur la question de sécurité et d’exposition numérique \"${enterpriseSecurity || 'à confirmer'}\" montre aussi qu’un échange de cadrage peut être utile pour poser les bonnes priorités.\\n\\nSi le sujet reste d’actualité, je peux vous proposer un premier échange ici :\\n${bookingLink}\\n\\nÀ défaut de retour, je clôturerai ce suivi pour le moment, tout en restant disponible si vous souhaitez reprendre la discussion plus tard.\\n\\nBien cordialement,\\nTransferAI`;\n    messageVariant = 'social_enterprise_email_3';\n  }\n}\nconst delay1 = Math.max(Number(row.follow_up_delay_1_days || 4), 1);\nconst delay2 = Math.max(Number(row.follow_up_delay_2_days || 7), 1);\nlet nextActionAtAfter = null;\nlet isFinalStep = false;\nif (step === 1) {\n  nextActionAtAfter = new Date(Date.now() + delay1 * 86400000).toISOString();\n} else if (step === 2 && allowThirdEmail) {\n  nextActionAtAfter = new Date(Date.now() + delay2 * 86400000).toISOString();\n} else {\n  isFinalStep = true;\n}\nif (step === 2 && !allowThirdEmail) {\n  isFinalStep = true;\n  nextActionAtAfter = null;\n}\nif (step >= 3) {\n  isFinalStep = true;\n  nextActionAtAfter = null;\n}\nreturn { json: {\n  ...row,\n  form_type: formType,\n  sequence_step: step,\n  allow_third_email: allowThirdEmail,\n  message_variant: messageVariant,\n  next_action_at_after: nextActionAtAfter,\n  is_final_step: isFinalStep,\n  email_subject: emailSubject,\n  email_text: emailText,\n  email_html: emailText.replace(/\\n/g, '<br>')\n} };"
-      }
+      "id": "0da7a45a-790d-43f8-a98b-6a52c21cb9e6"
     },
     {
-      "name": "Send Social Sequence Email",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "position": [
-        2510,
-        340
-      ],
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer __RESEND_API_KEY__"
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
             },
             {
               "name": "Content-Type",
@@ -335,7 +328,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{({ from: 'TransferAI <contact@transferai.ci>', to: $json.target_email, subject: $json.email_subject, html: $json.email_html })}}",
+        "jsonBody": "={{({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: $json.target_email,\n  subject: $json.email_subject,\n  html: $json.email_html\n})}}",
         "options": {
           "response": {
             "response": {
@@ -344,62 +337,79 @@
             }
           }
         }
-      }
+      },
+      "name": "Send Social Sequence Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2000,
+        112
+      ],
+      "id": "09534327-eea9-4a8b-8ec3-7917bffecc45",
+      "alwaysOutputData": false
     },
     {
+      "parameters": {
+        "jsCode": "const ctx = $('Build Social Sequence Email').first().json || {};\nconst response = $json || {};\nconst resendId = response.id || (response.data && response.data.id) || null;\n\nreturn [\n  {\n    json: {\n      ...ctx,\n      resend_id: resendId,\n      sent_at: new Date().toISOString(),\n      send_success: Boolean(resendId),\n      send_api_response: response\n    }\n  }\n];"
+      },
       "name": "Parse Social Send Result",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2770,
-        340
+        2192,
+        112
       ],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const ctx = $('Build Social Sequence Email').first().json || {};\nconst response = $json || {};\nconst resendId = response.id || (response.data && response.data.id) || null;\nconst sentAt = new Date().toISOString();\nconst step = Math.max(Number(ctx.sequence_step || 1), 1);\nconst expectedSequenceResult = `social_email_${step}_sent`;\nconst socialSentAt = {\n  social_email_1_sent_at: ctx.social_email_1_sent_at || null,\n  social_email_2_sent_at: ctx.social_email_2_sent_at || null,\n  social_email_3_sent_at: ctx.social_email_3_sent_at || null\n};\nif (step === 1) socialSentAt.social_email_1_sent_at = sentAt;\nelse if (step === 2) socialSentAt.social_email_2_sent_at = sentAt;\nelse socialSentAt.social_email_3_sent_at = sentAt;\nreturn [{ json: {\n  ...ctx,\n  ...socialSentAt,\n  resend_id: resendId,\n  sent_at: sentAt,\n  expected_sequence_result: expectedSequenceResult,\n  send_success: Boolean(resendId),\n  send_api_response: response\n} }];"
-      }
+      "id": "079176f7-ec97-4c54-afed-65ebe2cba412",
+      "alwaysOutputData": true
     },
     {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "89467028-8bcf-4484-b0e8-bf3835961874",
+              "leftValue": "={{$json.send_success}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
       "name": "If Social Email Sent",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        3030,
-        340
+        2624,
+        112
       ],
-      "parameters": {
-        "conditions": {
-          "boolean": [
-            {
-              "value1": "={{$json.send_success}}",
-              "operation": "true"
-            }
-          ]
-        }
-      }
+      "id": "5808c31d-e8ac-4ed5-89e3-e1b39d347255"
     },
     {
-      "name": "Log Social Outreach Attempt",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "position": [
-        3290,
-        260
-      ],
       "parameters": {
         "method": "POST",
         "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts'}}",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "__SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "Bearer __SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -422,30 +432,76 @@
             }
           }
         }
-      }
+      },
+      "name": "Log Social Outreach Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        3088,
+        -32
+      ],
+      "id": "2f6bfc93-af4f-4e49-b2e3-b2048ccf068d"
     },
     {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  status: $json.status,\n  paused: $json.paused,\n  last_sequence_result: $json.last_sequence_result,\n  last_response_status: $json.last_response_status,\n  stop_reason: $json.stop_reason,\n  niche_status: $json.niche_status,\n  next_action_at: $json.next_action_at,\n  social_email_1_sent_at: $json.social_email_1_sent_at,\n  social_email_2_sent_at: $json.social_email_2_sent_at,\n  social_email_3_sent_at: $json.social_email_3_sent_at,\n  meeting_booked_at: $json.meeting_booked_at,\n  closed_at: $json.closed_at,\n  close_reason: $json.close_reason,\n  updated_at: $json.updated_at\n})\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
       "name": "Update Prospect After Social Send",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        3550,
-        260
+        3072,
+        176
       ],
+      "id": "a3d45c81-6304-4161-b03e-9f9b792dce09"
+    },
+    {
       "parameters": {
         "method": "PATCH",
         "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "__SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Authorization",
-              "value": "Bearer __SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
               "name": "Content-Type",
@@ -459,7 +515,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{({ status: 'active', paused: false, last_sequence_result: $json.expected_sequence_result || ('social_email_' + String($json.sequence_step || 1) + '_sent'), last_response_status: 'pending', stop_reason: $json.is_final_step ? 'social_sequence_completed' : null, niche_status: $json.is_final_step ? 'social_sequence_completed' : 'social_sequence_active', next_action_at: $json.next_action_at_after || null, social_email_1_sent_at: $json.social_email_1_sent_at || null, social_email_2_sent_at: $json.social_email_2_sent_at || null, social_email_3_sent_at: $json.social_email_3_sent_at || null, last_outreach_at: $json.sent_at || new Date().toISOString(), updated_at: new Date().toISOString() })}}",
+        "jsonBody": "={{({\n  status: 'paused',\n  paused: true,\n  last_sequence_result: 'social_email_send_error',\n  stop_reason: 'social_send_failed',\n  niche_status: 'social_sequence_fix_required',\n  updated_at: new Date().toISOString()\n})}}",
         "options": {
           "response": {
             "response": {
@@ -468,33 +524,242 @@
             }
           }
         }
-      }
-    },
-    {
+      },
       "name": "Update Prospect Social Failure",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        3290,
-        460
+        3056,
+        368
       ],
+      "id": "8681c92f-a12e-4807-b7bf-e84e7e26a40b"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: 'contact@transferai.ci',\n  subject: $json.admin_email_subject,\n  html: $json.admin_email_html\n})\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2416,
+        464
+      ],
+      "id": "be5e73c7-3bbd-4f75-9347-73197d577241",
+      "name": "Send Admin Lead Alert"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "013a55d7-19e2-4d51-81d6-defd6390d144",
+              "leftValue": "={{ $json.should_notify_admin }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1504,
+        608
+      ],
+      "id": "f75bb668-deaa-43a1-86ed-ff41f29bfacf",
+      "name": "If Admin Alert Eligible"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const row = $json || {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nfunction joinList(items) {\n  if (!Array.isArray(items) || !items.length) return '';\n  return items.join(', ');\n}\n\nconst isAssistant = row.form_type === 'assistant_training_interest';\nconst priority =\n  row.lead_temperature === 'hot' ? 'HAUTE' :\n  row.lead_temperature === 'warm' ? 'MOYENNE' :\n  'NORMALE';\n\nconst emailSubject =\n  `[Nouveau prospect ${priority}] ${cleanString(row.decision_maker_name)} - ${cleanString(row.organization_name) || 'Organisation à confirmer'}`;\n\nconst lines = [\n  `Nouveau prospect détecté via Google Forms.`,\n  ``,\n  `Nom : ${cleanString(row.decision_maker_name)}`,\n  `Email : ${cleanString(row.target_email)}`,\n  `Téléphone : ${cleanString(row.phone) || 'Non renseigné'}`,\n  `Organisation : ${cleanString(row.organization_name) || 'Non renseignée'}`,\n  `Fonction : ${cleanString(row.function_label) || 'Non renseignée'}`,\n  `Type de formulaire : ${cleanString(row.form_type)}`,\n  `Niveau de priorité : ${priority}`,\n  ``,\n  isAssistant\n    ? `Besoin principal : ${cleanString(row.assistant_need) || 'Non précisé'}`\n    : `Intérêt de recontact : ${cleanString(row.enterprise_interest) || 'Non précisé'}`,\n  `Usages / besoins cités : ${joinList(row.q3_needs) || 'Non précisés'}`,\n  isAssistant\n    ? `Intérêt lancement : ${cleanString(row.assistant_launch_interest) || 'Non précisé'}`\n    : '',\n  ``,\n  `Lien de rendez-vous proposé au prospect : ${cleanString(row.booking_link_45min)}`,\n  `Prospect ID : ${cleanString(row.prospect_id)}`\n].filter(Boolean);\n\nconst emailText = lines.join('\\n');\n\nreturn {\n  json: {\n    ...row,\n    admin_email_subject: emailSubject,\n    admin_email_text: emailText,\n    admin_email_html: emailText.replace(/\\n/g, '<br>')\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1728,
+        480
+      ],
+      "id": "92237b6b-fb11-492a-b846-6a2ab56d53b9",
+      "name": "Build Admin Lead Alert Email"
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json)\n  ? $json\n  : Array.isArray($json.data)\n    ? $json.data\n    : [$json];\n\nconst row = rows[0] || {};\nconst sourcePayload = row.source_payload || {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nconst leadTemperature = cleanString(sourcePayload.lead_temperature || 'warm');\nconst formType = cleanString(sourcePayload.form_type || row.form_type || '');\nconst assistantNeed = cleanString(sourcePayload.assistant_q5_main_need || '');\nconst assistantLaunchInterest = cleanString(sourcePayload.assistant_q6_launch_interest || '');\nconst enterpriseInterest = cleanString(sourcePayload.enterprise_q6_recontact_interest || '');\nconst q3Needs = Array.isArray(sourcePayload.q3_needs) ? sourcePayload.q3_needs : [];\nconst adminAlertSentAt = row.admin_alert_sent_at || null;\n\nreturn [{\n  json: {\n    prospect_id: cleanString(row.prospect_id || ''),\n    decision_maker_name: cleanString(row.decision_maker_name || 'Prospect à confirmer'),\n    target_email: cleanString(row.target_email || ''),\n    organization_name: cleanString(row.organization_name || ''),\n    phone: cleanString(sourcePayload.phone || ''),\n    function_label: cleanString(sourcePayload.function_label || ''),\n    form_type: formType,\n    lead_temperature: leadTemperature,\n    assistant_need: assistantNeed,\n    assistant_launch_interest: assistantLaunchInterest,\n    enterprise_interest: enterpriseInterest,\n    q3_needs: q3Needs,\n    booking_link_45min: cleanString(\n      row.booking_link_45min ||\n      sourcePayload.booking_link_45min ||\n      'https://calendly.com/contact-transferai/30min'\n    ),\n    should_notify_admin: Boolean(\n      cleanString(row.prospect_id || '') &&\n      cleanString(row.target_email || '')\n    ),\n    admin_alert_sent_at: adminAlertSentAt\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        608
+      ],
+      "id": "06fa4d4f-71c8-4381-94c3-5fa478e96721",
+      "name": "Build Admin Lead Alert Context"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const row = $json || {};\nconst step = Math.max(Number(row.sequence_step || 1), 1);\n\nlet sentAtField = '';\nlet alreadySentAt = null;\nlet expectedSequenceResult = '';\n\nif (step === 1) {\n  sentAtField = 'social_email_1_sent_at';\n  alreadySentAt = row.social_email_1_sent_at || null;\n  expectedSequenceResult = 'social_email_1_sent';\n} else if (step === 2) {\n  sentAtField = 'social_email_2_sent_at';\n  alreadySentAt = row.social_email_2_sent_at || null;\n  expectedSequenceResult = 'social_email_2_sent';\n} else {\n  sentAtField = 'social_email_3_sent_at';\n  alreadySentAt = row.social_email_3_sent_at || null;\n  expectedSequenceResult = 'social_email_3_sent';\n}\n\nconst canSendNow = Boolean(\n  row.prospect_id &&\n  row.target_email &&\n  row.message_variant &&\n  !alreadySentAt\n);\n\nreturn {\n  json: {\n    ...row,\n    sent_at_field: sentAtField,\n    already_sent_at: alreadySentAt,\n    expected_sequence_result: expectedSequenceResult,\n    can_send_now: canSendNow,\n    duplicate_guard_reason: alreadySentAt\n      ? `Email deja envoye pour cette etape: ${sentAtField}`\n      : ''\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        128
+      ],
+      "id": "59d45005-d930-4f4f-9e9a-f3c6a988641c",
+      "name": "Build Social Sent Guard"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e6806c39-3a1f-4abf-b4b0-3cc5cb6441f7",
+              "leftValue": "={{$json.can_send_now}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1760,
+        128
+      ],
+      "id": "ee6493f9-28b2-4365-8acc-5d0898a09965",
+      "name": "If Social Send Allowed"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const row = $json || {};\nconst alreadySent = Boolean(row.admin_alert_sent_at);\n\nconst canSendAdminAlert = Boolean(\n  row.should_notify_admin &&\n  row.prospect_id &&\n  row.admin_email_subject &&\n  !alreadySent\n);\n\nreturn {\n  json: {\n    ...row,\n    admin_alert_already_sent: alreadySent,\n    can_send_admin_alert: canSendAdminAlert,\n    admin_alert_guard_reason: alreadySent\n      ? 'Alerte admin deja envoyee pour ce prospect'\n      : canSendAdminAlert\n        ? ''\n        : 'Alerte admin non autorisee ou incomplete'\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1936,
+        480
+      ],
+      "id": "3af9751c-2df9-47fb-a251-686a51c3e186",
+      "name": "Build Admin Alert Guard"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "75ab6430-bfb6-4c44-ae1d-c3a9ac4ad4ee",
+              "leftValue": "={{$json.can_send_admin_alert}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2160,
+        480
+      ],
+      "id": "44eda691-75a7-4c33-acf9-832f5661c23c",
+      "name": "If Admin Alert Allowed"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const sendResponse = $json || {};\nconst ctx = $items('Build Admin Alert Guard')[0]?.json || {};\n\nreturn {\n  json: {\n    ...ctx,\n    admin_alert_sent_at: new Date().toISOString(),\n    admin_alert_resend_id: sendResponse.id || null\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        464
+      ],
+      "id": "840087e2-f7e3-4269-abae-fbbd153e70f3",
+      "name": "Build Admin Alert Send Result"
+    },
+    {
       "parameters": {
         "method": "PATCH",
         "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
-        "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "apikey",
-              "value": "__SUPABASE_SERVICE_ROLE_KEY__"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
-              "name": "Authorization",
-              "value": "Bearer __SUPABASE_SERVICE_ROLE_KEY__"
+              "name": "Authorization ",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
             },
             {
-              "name": "Content-Type",
+              "name": "content-type",
               "value": "application/json"
             },
             {
@@ -505,18 +770,34 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{({ status: 'paused', paused: true, last_sequence_result: 'social_email_send_error', stop_reason: 'social_send_failed', niche_status: 'social_sequence_fix_required', updated_at: new Date().toISOString() })}}",
-        "options": {
-          "response": {
-            "response": {
-              "neverError": true,
-              "responseFormat": "json"
-            }
-          }
-        }
-      }
+        "jsonBody": "={{ {\"admin_alert_sent_at\": $json.admin_alert_sent_at} }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2800,
+        464
+      ],
+      "id": "8814eb03-542f-4a98-9a39-1f4fe2b6ba3c",
+      "name": "Update Prospect After Admin Alert"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const row = $json || {};\nconst now = new Date().toISOString();\n\nconst step = Math.max(Number(row.sequence_step || 1), 1);\n\nconst sentAtField =\n  row.sent_at_field ||\n  (step === 1\n    ? 'social_email_1_sent_at'\n    : step === 2\n      ? 'social_email_2_sent_at'\n      : 'social_email_3_sent_at');\n\nconst expectedSequenceResult =\n  row.expected_sequence_result ||\n  (step === 1\n    ? 'social_email_1_sent'\n    : step === 2\n      ? 'social_email_2_sent'\n      : 'social_email_3_sent');\n\nconst hasBookingLink = Boolean(String(row.booking_link_45min || '').trim());\nconst isFinalStep = Boolean(row.is_final_step);\n\nlet status = 'followup_pending';\n\nif (isFinalStep) {\n  status = 'closed_no_reply';\n} else if (step === 1 && hasBookingLink) {\n  status = 'meeting_invited';\n} else if (step === 1) {\n  status = 'email_1_sent';\n}\n\nreturn {\n  json: {\n    ...row,\n\n    status,\n    paused: isFinalStep ? true : false,\n    last_sequence_result: expectedSequenceResult,\n    last_response_status: row.last_response_status || 'pending',\n    stop_reason: isFinalStep ? 'no_reply' : null,\n    niche_status: isFinalStep ? 'social_sequence_completed' : 'social_sequence_active',\n    next_action_at: isFinalStep ? null : (row.next_action_at_after || row.next_action_at || null),\n\n    social_email_1_sent_at:\n      sentAtField === 'social_email_1_sent_at'\n        ? now\n        : (row.social_email_1_sent_at || null),\n\n    social_email_2_sent_at:\n      sentAtField === 'social_email_2_sent_at'\n        ? now\n        : (row.social_email_2_sent_at || null),\n\n    social_email_3_sent_at:\n      sentAtField === 'social_email_3_sent_at'\n        ? now\n        : (row.social_email_3_sent_at || null),\n\n    meeting_booked_at: row.meeting_booked_at || null,\n    closed_at: isFinalStep ? now : (row.closed_at || null),\n    close_reason: isFinalStep ? 'no_reply' : (row.close_reason || null),\n\n    updated_at: now\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2416,
+        112
+      ],
+      "id": "726c3dbb-5c41-492a-9afd-fff14882ea0c",
+      "name": "Build Social Send Result"
     }
   ],
+  "pinData": {},
   "connections": {
     "Manual Trigger": {
       "main": [
@@ -631,6 +912,11 @@
             "node": "Build Immediate Social Send Context",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Build Admin Lead Alert Context",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -654,15 +940,14 @@
             "type": "main",
             "index": 0
           }
-        ],
-        []
+        ]
       ]
     },
     "Build Social Sequence Email": {
       "main": [
         [
           {
-            "node": "Send Social Sequence Email",
+            "node": "Build Social Sent Guard",
             "type": "main",
             "index": 0
           }
@@ -684,7 +969,7 @@
       "main": [
         [
           {
-            "node": "If Social Email Sent",
+            "node": "Build Social Send Result",
             "type": "main",
             "index": 0
           }
@@ -714,10 +999,158 @@
         ]
       ]
     },
-    "Log Social Outreach Attempt": {
+    "If Admin Alert Eligible": {
       "main": [
-        []
+        [
+          {
+            "node": "Build Admin Lead Alert Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Admin Lead Alert Email": {
+      "main": [
+        [
+          {
+            "node": "Build Admin Alert Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Admin Lead Alert Context": {
+      "main": [
+        [
+          {
+            "node": "If Admin Alert Eligible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Social Sent Guard": {
+      "main": [
+        [
+          {
+            "node": "If Social Send Allowed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Social Send Allowed": {
+      "main": [
+        [
+          {
+            "node": "Send Social Sequence Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Admin Alert Guard": {
+      "main": [
+        [
+          {
+            "node": "If Admin Alert Allowed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Admin Alert Allowed": {
+      "main": [
+        [
+          {
+            "node": "Send Admin Lead Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Admin Lead Alert": {
+      "main": [
+        [
+          {
+            "node": "Build Admin Alert Send Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Admin Alert Send Result": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect After Admin Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Social Send Result": {
+      "main": [
+        [
+          {
+            "node": "If Social Email Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
-  }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c10d1d75-5df9-46c0-a52a-6342e8ba2c6d",
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "id": "pFFS4n1dTQvEgzK3",
+  "tags": [
+    {
+      "updatedAt": "2026-06-13T22:52:28.902Z",
+      "createdAt": "2026-06-13T22:52:28.902Z",
+      "id": "8mV29dP9tIUrAJ87",
+      "name": "google-forms"
+    },
+    {
+      "updatedAt": "2026-05-03T22:34:59.803Z",
+      "createdAt": "2026-05-03T22:34:59.803Z",
+      "id": "AxBM52Emi3tTDxlG",
+      "name": "transferai"
+    },
+    {
+      "updatedAt": "2026-06-13T22:52:28.900Z",
+      "createdAt": "2026-06-13T22:52:28.900Z",
+      "id": "NWmH2WYD0Ww4DlCm",
+      "name": "social-leads"
+    },
+    {
+      "updatedAt": "2026-06-13T22:52:28.898Z",
+      "createdAt": "2026-06-13T22:52:28.898Z",
+      "id": "Pfmg1MeHD1baeskx",
+      "name": "email-sequence"
+    },
+    {
+      "updatedAt": "2026-05-27T08:24:53.844Z",
+      "createdAt": "2026-05-27T08:24:53.844Z",
+      "id": "ZHfuOClpv1xJYnMd",
+      "name": "crm"
+    }
+  ]
 }
