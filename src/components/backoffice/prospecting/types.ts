@@ -137,6 +137,10 @@ export type ProspectTargetItem = {
   stop_reason: string | null;
   niche_status: string | null;
   next_action_at: string | null;
+  admin_alert_sent_at: string | null;
+  social_email_1_sent_at: string | null;
+  social_email_2_sent_at: string | null;
+  social_email_3_sent_at: string | null;
   last_outreach_at: string | null;
   last_researched_at: string | null;
   last_pack_id: string | null;
