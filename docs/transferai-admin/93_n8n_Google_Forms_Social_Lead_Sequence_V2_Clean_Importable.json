@@ -7,10 +7,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -240,
-        64
+        208,
+        832
       ],
-      "id": "5945de10-ae3a-4491-a0f5-5b7d514a1dc6"
+      "id": "8e5c212f-9c8d-46d6-b5ab-af4c705d7131"
     },
     {
       "parameters": {
@@ -27,10 +27,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        -240,
-        288
+        208,
+        1056
       ],
-      "id": "117c6ac5-eb2b-4bf0-8231-c8acbbd929f2"
+      "id": "5ca556e1-58be-466b-98b9-67b3afdc0f5d"
     },
     {
       "parameters": {
@@ -42,10 +42,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -240,
-        512
+        208,
+        1280
       ],
-      "id": "19680b41-b46e-47a4-941e-98ffdb691980",
+      "id": "eb183e60-d452-46c9-8aef-f313e8a83c2b",
       "webhookId": "f0965c96-98ce-4d0c-a31d-cc67eaf914dd"
     },
     {
@@ -88,10 +88,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3,
       "position": [
-        112,
-        288
+        560,
+        1056
       ],
-      "id": "2caea843-606b-462c-b37f-82d51edab1cd"
+      "id": "76af07f6-0591-437a-8127-be9b8ceedee9"
     },
     {
       "parameters": {
@@ -122,10 +122,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        352,
-        288
+        800,
+        1056
       ],
-      "id": "55b0230d-16c0-4e6b-907c-1441af1c9d2f"
+      "id": "92ad76bd-2701-4f0e-8aa7-49d3ea7acc69"
     },
     {
       "parameters": {
@@ -156,10 +156,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        608,
-        144
+        1056,
+        912
       ],
-      "id": "1532f119-5032-4ce7-b1bb-9c56f40b38eb"
+      "id": "7194357d-5ee3-44b9-bfde-1c9ff883b3a4"
     },
     {
       "parameters": {
@@ -169,10 +169,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        848,
-        144
+        1296,
+        912
       ],
-      "id": "b7f375d8-14bd-4245-9c7c-ebbfdf88308c"
+      "id": "633a107f-8737-4989-811d-668ad2a3a5e4"
     },
     {
       "parameters": {
@@ -183,10 +183,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        544,
-        528
+        992,
+        1296
       ],
-      "id": "0301a150-09e1-435b-ae99-5f6cc0a04836"
+      "id": "f3af6dbf-21df-4fa1-bafd-6ab71b99196d"
     },
     {
       "parameters": {
@@ -197,10 +197,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        768,
-        528
+        1216,
+        1296
       ],
-      "id": "3f557aaa-8ff8-4ca8-8b49-29af419ed03a"
+      "id": "050b06d3-f6a9-4741-8ad1-4f4222447a3f"
     },
     {
       "parameters": {
@@ -243,10 +243,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        1008,
-        528
+        1456,
+        1296
       ],
-      "id": "71337ca0-423f-4b09-9ccf-e4483b226b9f"
+      "id": "456946d7-6e7c-4eda-8197-6ee1f8e3911b"
     },
     {
       "parameters": {
@@ -256,10 +256,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1232,
-        320
+        1680,
+        1088
       ],
-      "id": "69b3a45b-dbf8-458d-b2f4-febc2ed4c0d3"
+      "id": "467a713e-27bf-468d-aeab-7fc9d6222186"
     },
     {
       "parameters": {
@@ -290,10 +290,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1120,
-        144
+        1568,
+        912
       ],
-      "id": "c291cf2c-d98e-44cf-b605-4b72fcafb34e"
+      "id": "6705efa4-1b36-4b03-8518-fe4931ad7fbb"
     },
     {
       "parameters": {
@@ -304,10 +304,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1376,
-        128
+        1824,
+        896
       ],
-      "id": "0da7a45a-790d-43f8-a98b-6a52c21cb9e6"
+      "id": "03d1a604-af51-4300-8c3f-e3ff9d128b00"
     },
     {
       "parameters": {
@@ -328,7 +328,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: $json.target_email,\n  subject: $json.email_subject,\n  html: $json.email_html\n})}}",
+        "jsonBody": "={{({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: $json.target_email,\n  reply_to: 'contact@transferai.ci',\n  subject: $json.email_subject,\n  html: $json.email_html,\n  tags: [\n    { name: 'prospect_id', value: $json.prospect_id },\n    { name: 'sequence_step', value: String($json.sequence_step) },\n    { name: 'form_type', value: $json.form_type }\n  ]\n})}}",
         "options": {
           "response": {
             "response": {
@@ -342,10 +342,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        2000,
-        112
+        2448,
+        880
       ],
-      "id": "09534327-eea9-4a8b-8ec3-7917bffecc45",
+      "id": "20d1308d-e854-404c-9e24-c18f0b83c23c",
       "alwaysOutputData": false
     },
     {
@@ -356,10 +356,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2192,
-        112
+        2640,
+        880
       ],
-      "id": "079176f7-ec97-4c54-afed-65ebe2cba412",
+      "id": "55b057aa-adba-48d9-a12b-68c2e2d3c1bf",
       "alwaysOutputData": true
     },
     {
@@ -391,10 +391,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2624,
-        112
+        3072,
+        880
       ],
-      "id": "5808c31d-e8ac-4ed5-89e3-e1b39d347255"
+      "id": "d5110896-8a01-4f37-b332-81065f22675c"
     },
     {
       "parameters": {
@@ -437,10 +437,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        3088,
-        -32
+        3536,
+        736
       ],
-      "id": "2f6bfc93-af4f-4e49-b2e3-b2048ccf068d"
+      "id": "beb047d7-f67e-4f65-99ea-a2fdf6ffb392"
     },
     {
       "parameters": {
@@ -483,10 +483,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        3072,
-        176
+        3520,
+        944
       ],
-      "id": "a3d45c81-6304-4161-b03e-9f9b792dce09"
+      "id": "efdd128e-a81a-4883-9fe6-150156936cc6"
     },
     {
       "parameters": {
@@ -529,10 +529,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        3056,
-        368
+        3504,
+        1136
       ],
-      "id": "8681c92f-a12e-4807-b7bf-e84e7e26a40b"
+      "id": "95d17e32-5a88-4e26-9038-9723a0fd3e23"
     },
     {
       "parameters": {
@@ -566,10 +566,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2416,
-        464
+        2864,
+        1232
       ],
-      "id": "be5e73c7-3bbd-4f75-9347-73197d577241",
+      "id": "0f0dadcb-0f9b-4393-9a20-f4c5f8276571",
       "name": "Send Admin Lead Alert"
     },
     {
@@ -600,10 +600,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1504,
-        608
+        1952,
+        1376
       ],
-      "id": "f75bb668-deaa-43a1-86ed-ff41f29bfacf",
+      "id": "d6d73618-7690-4ac9-85f0-f90682728407",
       "name": "If Admin Alert Eligible"
     },
     {
@@ -614,10 +614,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1728,
-        480
+        2176,
+        1248
       ],
-      "id": "92237b6b-fb11-492a-b846-6a2ab56d53b9",
+      "id": "6fa040dc-e02e-41b9-aec6-1216bf31b08f",
       "name": "Build Admin Lead Alert Email"
     },
     {
@@ -627,10 +627,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1232,
-        608
+        1680,
+        1376
       ],
-      "id": "06fa4d4f-71c8-4381-94c3-5fa478e96721",
+      "id": "1eb205a7-999c-4cb5-95a5-302dba54abd5",
       "name": "Build Admin Lead Alert Context"
     },
     {
@@ -641,10 +641,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1568,
-        128
+        2016,
+        896
       ],
-      "id": "59d45005-d930-4f4f-9e9a-f3c6a988641c",
+      "id": "9e931751-8f31-49d9-ad3e-246b167991a6",
       "name": "Build Social Sent Guard"
     },
     {
@@ -675,10 +675,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1760,
-        128
+        2208,
+        896
       ],
-      "id": "ee6493f9-28b2-4365-8acc-5d0898a09965",
+      "id": "41991232-2166-45d8-96a2-5a53178d3784",
       "name": "If Social Send Allowed"
     },
     {
@@ -689,10 +689,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1936,
-        480
+        2384,
+        1248
       ],
-      "id": "3af9751c-2df9-47fb-a251-686a51c3e186",
+      "id": "9c31e23f-928f-4c63-9acc-5bedc0b11310",
       "name": "Build Admin Alert Guard"
     },
     {
@@ -723,10 +723,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2160,
-        480
+        2608,
+        1248
       ],
-      "id": "44eda691-75a7-4c33-acf9-832f5661c23c",
+      "id": "22ec94b3-a738-4471-921c-df6b7e69957e",
       "name": "If Admin Alert Allowed"
     },
     {
@@ -737,10 +737,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2608,
-        464
+        3056,
+        1232
       ],
-      "id": "840087e2-f7e3-4269-abae-fbbd153e70f3",
+      "id": "91b85a39-5899-4f75-a750-5e42ed9cf1e2",
       "name": "Build Admin Alert Send Result"
     },
     {
@@ -776,10 +776,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2800,
-        464
+        3248,
+        1232
       ],
-      "id": "8814eb03-542f-4a98-9a39-1f4fe2b6ba3c",
+      "id": "65eff117-485d-43dc-bd75-87ef3306d669",
       "name": "Update Prospect After Admin Alert"
     },
     {
@@ -790,10 +790,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2416,
-        112
+        2864,
+        880
       ],
-      "id": "726c3dbb-5c41-492a-9afd-fff14882ea0c",
+      "id": "c0372d39-11ea-40cb-b9ef-3a8a87ebfb49",
       "name": "Build Social Send Result"
     }
   ],
@@ -1116,11 +1116,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "22b6cf0d-2fd1-4b0c-b196-605fb95be55c",
+  "versionId": "d9af970d-596e-468a-8143-bddcfcc149fb",
   "meta": {
     "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
   },
-  "id": "pFFS4n1dTQvEgzK3",
+  "id": "Kwfx6WcWrkcBNm0f",
   "tags": [
     {
       "updatedAt": "2026-06-13T22:52:28.902Z",
