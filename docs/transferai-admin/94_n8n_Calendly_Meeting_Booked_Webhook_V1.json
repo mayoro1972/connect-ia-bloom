@@ -1,0 +1,179 @@
+{
+  "name": "TransferAI Calendly Meeting Booked Webhook V1",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "calendly-meeting-booked",
+        "options": {}
+      },
+      "name": "Calendly Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [-240, 288],
+      "id": "a1b2c3d4-0001-0001-0001-000000000001",
+      "webhookId": "calendly-meeting-booked-transferai"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const body = $json.body || $json;\nconst payload = body.payload || {};\n\nfunction cleanString(value) {\n  if (value === undefined || value === null) return '';\n  const s = String(value).trim();\n  if (s === 'undefined' || s === 'null') return '';\n  return s;\n}\n\nconst eventType = cleanString(body.event || '');\nconst invitee = payload.invitee || {};\nconst scheduledEvent = payload.scheduled_event || {};\n\nconst inviteeEmail = cleanString(invitee.email || '');\nconst inviteeName = cleanString(invitee.name || '');\nconst startTime = cleanString(scheduledEvent.start_time || '');\nconst endTime = cleanString(scheduledEvent.end_time || '');\nconst eventName = cleanString(scheduledEvent.name || '');\nconst cancelUrl = cleanString(invitee.cancel_url || '');\nconst rescheduleUrl = cleanString(invitee.reschedule_url || '');\n\nif (eventType !== 'invitee.created') {\n  return [];\n}\n\nif (!inviteeEmail) {\n  return [];\n}\n\nreturn {\n  json: {\n    event_type: eventType,\n    invitee_email: inviteeEmail,\n    invitee_name: inviteeName,\n    start_time: startTime,\n    end_time: endTime,\n    event_name: eventName,\n    cancel_url: cancelUrl,\n    reschedule_url: rescheduleUrl,\n    booked_at: new Date().toISOString()\n  }\n};"
+      },
+      "name": "Parse Calendly Event",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [0, 288],
+      "id": "a1b2c3d4-0002-0002-0002-000000000002"
+    },
+    {
+      "parameters": {
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=prospect_id,target_email,status,paused&target_email=eq.' + encodeURIComponent($json.invitee_email) + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Find Prospect By Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [240, 288],
+      "id": "a1b2c3d4-0003-0003-0003-000000000003"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : [$json];\nconst prospect = rows[0] || {};\n\nconst ctx = $('Parse Calendly Event').first().json || {};\n\nif (!prospect.prospect_id) {\n  return [];\n}\n\nreturn {\n  json: {\n    prospect_id: prospect.prospect_id,\n    target_email: prospect.target_email,\n    current_status: prospect.status,\n    invitee_email: ctx.invitee_email,\n    invitee_name: ctx.invitee_name,\n    start_time: ctx.start_time,\n    end_time: ctx.end_time,\n    event_name: ctx.event_name,\n    cancel_url: ctx.cancel_url,\n    reschedule_url: ctx.reschedule_url,\n    booked_at: ctx.booked_at\n  }\n};"
+      },
+      "name": "Build Meeting Booked Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 288],
+      "id": "a1b2c3d4-0004-0004-0004-000000000004"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  status: 'meeting_booked',\n  paused: true,\n  meeting_booked_at: $json.booked_at,\n  stop_reason: null,\n  niche_status: 'meeting_booked',\n  last_response_status: 'meeting_booked',\n  updated_at: new Date().toISOString()\n})\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Update Prospect Meeting Booked",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [720, 288],
+      "id": "a1b2c3d4-0005-0005-0005-000000000005"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: 'contact@transferai.ci',\n  subject: '[RDV confirmé] ' + $('Build Meeting Booked Context').first().json.invitee_name + ' — ' + $('Build Meeting Booked Context').first().json.event_name,\n  html: 'Un RDV a été réservé.<br><br>Nom : ' + $('Build Meeting Booked Context').first().json.invitee_name + '<br>Email : ' + $('Build Meeting Booked Context').first().json.invitee_email + '<br>Date : ' + $('Build Meeting Booked Context').first().json.start_time + '<br>Événement : ' + $('Build Meeting Booked Context').first().json.event_name + '<br><br>Annuler : ' + $('Build Meeting Booked Context').first().json.cancel_url\n})\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Send Admin Meeting Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [960, 288],
+      "id": "a1b2c3d4-0006-0006-0006-000000000006"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Calendly Webhook": {
+      "main": [[{"node": "Parse Calendly Event", "type": "main", "index": 0}]]
+    },
+    "Parse Calendly Event": {
+      "main": [[{"node": "Find Prospect By Email", "type": "main", "index": 0}]]
+    },
+    "Find Prospect By Email": {
+      "main": [[{"node": "Build Meeting Booked Context", "type": "main", "index": 0}]]
+    },
+    "Build Meeting Booked Context": {
+      "main": [[{"node": "Update Prospect Meeting Booked", "type": "main", "index": 0}]]
+    },
+    "Update Prospect Meeting Booked": {
+      "main": [[{"node": "Send Admin Meeting Alert", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "tags": [
+    {"name": "transferai"},
+    {"name": "calendly"},
+    {"name": "crm"}
+  ]
+}
