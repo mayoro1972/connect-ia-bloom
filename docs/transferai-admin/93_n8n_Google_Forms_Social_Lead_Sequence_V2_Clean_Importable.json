@@ -129,7 +129,7 @@
     },
     {
       "parameters": {
-        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=*&status=in.(ready,active)&paused=eq.false&do_not_contact=eq.false&stop_reason=is.null&last_response_status=eq.pending&order=next_action_at.asc.nullslast,updated_at.asc&limit=' + $json.follow_up_fetch_limit}}",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=*&status=in.(ready,active)&status=not.in.(replied,human_handoff_required,meeting_booked)&paused=eq.false&do_not_contact=eq.false&stop_reason=is.null&last_response_status=eq.pending&order=next_action_at.asc.nullslast,updated_at.asc&limit=' + $json.follow_up_fetch_limit}}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -1116,7 +1116,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "d9af970d-596e-468a-8143-bddcfcc149fb",
+  "versionId": "90a7231e-21f8-4218-a02a-cd662d9b11b0",
   "meta": {
     "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
   },
