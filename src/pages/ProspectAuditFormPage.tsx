@@ -646,6 +646,19 @@ const ProspectAuditFormPage = () => {
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">{loadError}</p>
               </section>
+            ) : !isPreviewMode && invitation && !context.organizationName ? (
+              <section className="rounded-[30px] border border-amber-200 bg-amber-50 p-10 shadow-[0_28px_80px_-58px_rgba(16,33,61,0.28)]">
+                <h2 className="font-heading text-2xl font-bold text-amber-950">
+                  {activeLanguage === "en"
+                    ? `The personalised questionnaire for ${trimText(invitation.invitee_name) || "your organisation"} is not yet ready.`
+                    : `Le questionnaire personnalisé pour ${trimText(invitation.invitee_name) || "votre organisation"} n'est pas encore disponible.`}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-amber-800">
+                  {activeLanguage === "en"
+                    ? "The audit pack is still being prepared. Come back in a few moments or contact our team."
+                    : "Le pack d'audit est en cours de préparation. Revenez dans quelques instants ou contactez notre équipe."}
+                </p>
+              </section>
             ) : (
               <>
                 <section className="sticky top-24 z-20 rounded-[26px] border border-border bg-card/95 p-4 shadow-[0_24px_60px_-40px_rgba(16,33,61,0.35)] backdrop-blur md:p-5">
