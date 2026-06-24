@@ -1,0 +1,1501 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/7dm9bl",
+    "id": "7dm9bl",
+    "slide": 10,
+    "layoutId": "d2d6b884-9ea0-414c-963b-759f7233be1c",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "5cce2e47-9e45-4f40-8b0f-a02c5724a521",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d2d6b884-9ea0-414c-963b-759f7233be1c",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "5cce2e47-9e45-4f40-8b0f-a02c5724a521",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "5cce2e47-9e45-4f40-8b0f-a02c5724a521",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65wjudg",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F5EFE7",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gr2p8nqx",
+      "id": "2",
+      "bbox": [
+        72,
+        52,
+        260,
+        18
+      ],
+      "geometry": "rect",
+      "text": "DÉTAIL DES CAS D'USAGE",
+      "textPreview": "DÉTAIL DES CAS D'USAGE",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "color": "#E76F1D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "DÉTAIL DES CAS D'USAGE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "DÉTAIL DES CAS D'USAGE",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "typeface": "Aptos",
+            "color": "#E76F1D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "DÉTAIL DES CAS D'USAGE",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cvixcze",
+      "id": "3",
+      "bbox": [
+        72,
+        86,
+        980,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Les cas d'usage qui renforcent la qualité de service et la standardisation",
+      "textPreview": "Les cas d'usage qui renforcent la qualité de service et la standardisation",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 34,
+        "typeface": "Aptos Display",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les cas d'usage qui renforcent la qualité de service et la"
+          },
+          {
+            "index": 2,
+            "text": "standardisation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les cas d'usage qui renforcent la qualité de service et la standardisation",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "typeface": "Aptos Display",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les cas d'usage qui renforcent la qualité de service et la standardisation",
+              "fontSize": 34,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yxobm58z",
+      "id": "4",
+      "bbox": [
+        72,
+        176,
+        960,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Ces deux usages rendent aussi la formation plus crédible : on apprend sur des situations réelles, pas sur des exemples génériques.",
+      "textPreview": "Ces deux usages rendent aussi la formation plus crédible : on apprend sur des situations réelles, pas sur des exemples génériques.",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "color": "#617086",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ces deux usages rendent aussi la formation plus crédible : on apprend sur des situations réelles, pas sur des exemples génériques."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ces deux usages rendent aussi la formation plus crédible : on apprend sur des situations réelles, pas sur des exemples génériques.",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "typeface": "Aptos",
+            "color": "#617086",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ces deux usages rendent aussi la formation plus crédible : on apprend sur des situations réelles, pas sur des exemples génériques.",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nih4byhg",
+      "id": "5",
+      "bbox": [
+        72,
+        228,
+        540,
+        308
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g3ex0nux",
+      "id": "6",
+      "bbox": [
+        94,
+        248,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/87ed8bat",
+      "id": "7",
+      "bbox": [
+        104,
+        258,
+        24,
+        24
+      ],
+      "alt": "MessageSquareText icon",
+      "contentType": "image/svg+xml",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "731a7895-344c-4789-aa79-0be98f75a984",
+        "contentType": "image/svg+xml",
+        "byteLength": 366
+      }
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "8",
+      "bbox": [
+        150,
+        248,
+        390,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Service client / service auto",
+      "textPreview": "Service client / service auto",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Service client / service auto"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Service client / service auto",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "typeface": "Aptos Display",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Service client / service auto",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "9",
+      "bbox": [
+        94,
+        300,
+        120,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Usages proposés",
+      "textPreview": "Usages proposés",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "color": "#E76F1D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Usages proposés"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Usages proposés",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos",
+            "color": "#E76F1D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Usages proposés",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa9w3m94",
+      "id": "10",
+      "bbox": [
+        94,
+        324,
+        456,
+        90
+      ],
+      "geometry": "rect",
+      "text": "• FAQ assistée pour les questions récurrentes\n• canevas de réponse ou de rappel\n• historique d'interactions mieux exploitable\n• synthèses rapides avant rappel ou traitement",
+      "textPreview": "• FAQ assistée pour les questions récurrentes | • canevas de réponse ou de rappel | • historique d'interactions mieux exploitable | • syn...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• FAQ assistée pour les questions récurrentes"
+          },
+          {
+            "index": 2,
+            "text": "• canevas de réponse ou de rappel"
+          },
+          {
+            "index": 3,
+            "text": "• historique d'interactions mieux exploitable"
+          },
+          {
+            "index": 4,
+            "text": "• synthèses rapides avant rappel ou traitement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• FAQ assistée pour les questions récurrentes",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• FAQ assistée pour les questions récurrentes",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• canevas de réponse ou de rappel",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• canevas de réponse ou de rappel",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• historique d'interactions mieux exploitable",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• historique d'interactions mieux exploitable",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• synthèses rapides avant rappel ou traitement",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• synthèses rapides avant rappel ou traitement",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "11",
+      "bbox": [
+        94,
+        432,
+        490,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xczed8v6",
+      "id": "12",
+      "bbox": [
+        112,
+        458,
+        450,
+        36
+      ],
+      "geometry": "rect",
+      "text": "KPI : délai de réponse | qualité perçue | taux de réouverture / relance | standardisation des scripts",
+      "textPreview": "KPI : délai de réponse | qualité perçue | taux de réouverture / relance | standardisation des scripts",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "KPI : délai de réponse | qualité perçue | taux de réouverture / relance |"
+          },
+          {
+            "index": 2,
+            "text": "standardisation des scripts"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "KPI : délai de réponse | qualité perçue | taux de réouverture / relance | standardisation des scripts",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "KPI : délai de réponse | qualité perçue | taux de réouverture / relance | standardisation des scripts",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8v6psfil",
+      "id": "13",
+      "bbox": [
+        640,
+        228,
+        568,
+        308
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fyxobm58",
+      "id": "14",
+      "bbox": [
+        662,
+        248,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#C88C3A",
+      "lineColor": "#C88C3A",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/hcrmhk3q",
+      "id": "15",
+      "bbox": [
+        672,
+        258,
+        24,
+        24
+      ],
+      "alt": "BookOpen icon",
+      "contentType": "image/svg+xml",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "b000dfa4-0add-4459-9786-0d0a0902b3be",
+        "contentType": "image/svg+xml",
+        "byteLength": 344
+      }
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4nap4r6",
+      "id": "16",
+      "bbox": [
+        718,
+        248,
+        432,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Procédures internes et base de connaissances",
+      "textPreview": "Procédures internes et base de connaissances",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Procédures internes et base de"
+          },
+          {
+            "index": 2,
+            "text": "connaissances"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Procédures internes et base de connaissances",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "typeface": "Aptos Display",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Procédures internes et base de connaissances",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jqh0fep",
+      "id": "17",
+      "bbox": [
+        662,
+        300,
+        120,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Usages proposés",
+      "textPreview": "Usages proposés",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "color": "#E76F1D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Usages proposés"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Usages proposés",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos",
+            "color": "#E76F1D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Usages proposés",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fmlkjm1c",
+      "id": "18",
+      "bbox": [
+        662,
+        324,
+        490,
+        90
+      ],
+      "geometry": "rect",
+      "text": "• base de procédures consultable rapidement\n• réponses homogènes pour les équipes support et métier\n• onboarding accéléré sur les standards, scripts et points de contrôle\n• diffusion plus simple des mises à jour internes",
+      "textPreview": "• base de procédures consultable rapidement | • réponses homogènes pour les équipes support et métier | • onboarding accéléré sur les sta...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• base de procédures consultable rapidement"
+          },
+          {
+            "index": 2,
+            "text": "• réponses homogènes pour les équipes support et métier"
+          },
+          {
+            "index": 3,
+            "text": "• onboarding accéléré sur les standards, scripts et points de contrôle"
+          },
+          {
+            "index": 4,
+            "text": "• diffusion plus simple des mises à jour internes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• base de procédures consultable rapidement",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• base de procédures consultable rapidement",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• réponses homogènes pour les équipes support et métier",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• réponses homogènes pour les équipes support et métier",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• onboarding accéléré sur les standards, scripts et points de contrôle",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• onboarding accéléré sur les standards, scripts et points de contrôle",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• diffusion plus simple des mises à jour internes",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• diffusion plus simple des mises à jour internes",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1orytsv",
+      "id": "19",
+      "bbox": [
+        662,
+        432,
+        498,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "20",
+      "bbox": [
+        680,
+        458,
+        460,
+        36
+      ],
+      "geometry": "rect",
+      "text": "KPI : temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+      "textPreview": "KPI : temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "KPI : temps de recherche d'information | temps d'onboarding | taux d'usage de la"
+          },
+          {
+            "index": 2,
+            "text": "base interne"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "KPI : temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "KPI : temps de recherche d'information | temps d'onboarding | taux d'usage de la base interne",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "21",
+      "bbox": [
+        72,
+        566,
+        1136,
+        80
+      ],
+      "geometry": "rect",
+      "fillColor": "#1C8A78",
+      "lineColor": "#1C8A78",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "22",
+      "bbox": [
+        96,
+        586,
+        170,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi cette slide compte",
+      "textPreview": "Pourquoi cette slide compte",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "color": "#DDF5EF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi cette slide compte"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi cette slide compte",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos",
+            "color": "#DDF5EF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi cette slide compte",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#DDF5EF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "23",
+      "bbox": [
+        96,
+        608,
+        560,
+        24
+      ],
+      "geometry": "rect",
+      "text": "La formation devient crédible quand elle prépare des usages visibles.",
+      "textPreview": "La formation devient crédible quand elle prépare des usages visibles.",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La formation devient crédible quand elle prépare des"
+          },
+          {
+            "index": 2,
+            "text": "usages visibles."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La formation devient crédible quand elle prépare des usages visibles.",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "typeface": "Aptos Display",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "La formation devient crédible quand elle prépare des usages visibles.",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "24",
+      "bbox": [
+        700,
+        602,
+        470,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Cela permet d'éviter un discours abstrait : les équipes voient tout de suite sur quels gestes métier l'IA doit les aider.",
+      "textPreview": "Cela permet d'éviter un discours abstrait : les équipes voient tout de suite sur quels gestes métier l'IA doit les aider.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "color": "#FFFFFF",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Cela permet d'éviter un discours abstrait : les équipes voient tout de suite sur quels"
+          },
+          {
+            "index": 2,
+            "text": "gestes métier l'IA doit les aider."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Cela permet d'éviter un discours abstrait : les équipes voient tout de suite sur quels gestes métier l'IA doit les aider.",
+          "resolvedTextStyle": {
+            "fontSize": 12.51,
+            "typeface": "Aptos",
+            "color": "#FFFFFF",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Cela permet d'éviter un discours abstrait : les équipes voient tout de suite sur quels gestes métier l'IA doit les aider.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "25",
+      "bbox": [
+        68,
+        682,
+        1144,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D7CEC3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "26",
+      "bbox": [
+        72,
+        690,
+        900,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI | Hub IA de Nettelecom CI | Modèle deck commercial entreprise V3",
+      "textPreview": "TransferAI | Hub IA de Nettelecom CI | Modèle deck commercial entreprise V3",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "color": "#617086",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI | Hub IA de Nettelecom CI | Modèle deck commercial entreprise V3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI | Hub IA de Nettelecom CI | Modèle deck commercial entreprise V3",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "typeface": "Aptos",
+            "color": "#617086",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI | Hub IA de Nettelecom CI | Modèle deck commercial entreprise V3",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "27",
+      "bbox": [
+        1160,
+        688,
+        36,
+        18
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

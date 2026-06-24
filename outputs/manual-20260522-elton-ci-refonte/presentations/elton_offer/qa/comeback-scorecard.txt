@@ -1,0 +1,45 @@
+final score by rubric dimension
+- story: 5
+- specificity: 5
+- rhythm: 4
+- whitespace: 4
+- chart clarity: 4
+- typography: 4
+- restraint: 4
+- precision: 5
+- coherence: 5
+- reference delta: 4
+- total: 44 / 50
+
+primary deck-profile and profile gate
+- primary profile: strategy-leadership
+- secondary gate: product-platform
+- profile gate result: pass
+- gating note: the deck reads as a DG-facing decision offer, not as a catalogue, and keeps measurable logic without unsupported ROI claims
+
+reference-deck comparison
+- beats current ELTON-targeted deck on: decision orientation, sharper thesis, clearer audit deliverables, stronger sequencing, and explicit KPI logic
+- beats Africa deck on: credibility, ELTON fit, restraint, governance framing, and removal of unsupported case-study / ROI claims
+- Africa deck still wins on: visual aggression and immediate headline punch
+- source ELTON deck still wins on: use of photography and broader brand warmth on the opening slide
+- what changed after iteration: tightened slide 08 and slide 09 to remove text crowding and improve contact / formula readability
+
+tool and runtime caveats
+- artifact-tool export and render succeeded
+- contact sheet generation required the bundled Python runtime because system python lacked Pillow
+- no external logos, screenshots, or synthetic brand assets were introduced
+
+package checks
+- final PPTX exists and is non-empty
+- expected slide count confirmed: 9
+- no native charts required; proof slides use editable text / shape systems
+
+render checks
+- final slide PNGs reviewed visually
+- contact sheet reviewed at thumbnail size
+- no title / footer collisions observed
+- no clipped formula or contact block after second render pass
+
+accepted warnings or tradeoffs
+- the deck intentionally avoids quantified ROI promises because no verified ELTON baselines or client proof points were provided
+- the result is more sober than the Africa deck by design; credibility was prioritized over aggressive commercial claims

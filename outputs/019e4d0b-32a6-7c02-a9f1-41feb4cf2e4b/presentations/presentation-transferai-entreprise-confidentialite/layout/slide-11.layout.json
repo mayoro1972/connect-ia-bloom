@@ -1,0 +1,1374 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/5mzd5i",
+    "id": "5mzd5i",
+    "slide": 11,
+    "layoutId": "9c5b7c48-5774-41b5-8daa-f26e25836fc6",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "017b17e9-ae8f-408d-a89a-4de42886218e",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "9c5b7c48-5774-41b5-8daa-f26e25836fc6",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "017b17e9-ae8f-408d-a89a-4de42886218e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "017b17e9-ae8f-408d-a89a-4de42886218e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8nqxs72x",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#FFFDFC",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j2t83itg",
+      "id": "2",
+      "bbox": [
+        60,
+        40,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "GOUVERNANCE DES DONNÉES",
+      "textPreview": "GOUVERNANCE DES DONNÉES",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "GOUVERNANCE DES DONNÉES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "GOUVERNANCE DES DONNÉES",
+          "runs": [
+            {
+              "index": 1,
+              "text": "GOUVERNANCE DES DONNÉES",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qh0fepkz",
+      "id": "3",
+      "bbox": [
+        60,
+        78,
+        900,
+        72
+      ],
+      "geometry": "rect",
+      "text": "Les garde-fous que nous défendons avant tout usage d'un modèle d'IA",
+      "textPreview": "Les garde-fous que nous défendons avant tout usage d'un modèle d'IA",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les garde-fous que nous défendons avant tout usage d'un modèle"
+          },
+          {
+            "index": 2,
+            "text": "d'IA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les garde-fous que nous défendons avant tout usage d'un modèle d'IA",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les garde-fous que nous défendons avant tout usage d'un modèle d'IA",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1w7mp0bi",
+      "id": "4",
+      "bbox": [
+        60,
+        150,
+        920,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Nous cherchons d'abord à réduire le risque. Chaque usage est encadré par des règles claires sur les données, les accès et les contrôles de supervision.",
+      "textPreview": "Nous cherchons d'abord à réduire le risque. Chaque usage est encadré par des règles claires sur les données, les accès et les contrôles d...",
+      "resolvedFontSize": 14.51,
+      "resolvedTextStyle": {
+        "fontSize": 14.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nous cherchons d'abord à réduire le risque. Chaque usage est encadré par des règles claires sur les données, les accès et les contrôles de"
+          },
+          {
+            "index": 2,
+            "text": "supervision."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nous cherchons d'abord à réduire le risque. Chaque usage est encadré par des règles claires sur les données, les accès et les contrôles de supervision.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nous cherchons d'abord à réduire le risque. Chaque usage est encadré par des règles claires sur les données, les accès et les contrôles de supervision.",
+              "fontSize": 14.51,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8bat47y1",
+      "id": "5",
+      "bbox": [
+        60,
+        222,
+        332,
+        152
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jqh0fepk",
+      "id": "6",
+      "bbox": [
+        82,
+        244,
+        42,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(22, 50, 79, 0.09412)",
+      "lineColor": "rgba(22, 50, 79, 0.09412)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/7mp0bi9s",
+      "id": "7",
+      "bbox": [
+        91,
+        253,
+        24,
+        24
+      ],
+      "alt": "shield icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "15f43b03-20b0-4ff8-a1b9-e4a09f08e98b",
+        "contentType": "image/svg+xml",
+        "byteLength": 356
+      }
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kre1w7m",
+      "id": "8",
+      "bbox": [
+        142,
+        246,
+        210,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Protection par défaut",
+      "textPreview": "Protection par défaut",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Protection par défaut"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Protection par défaut",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Protection par défaut",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3ylc7u5",
+      "id": "9",
+      "bbox": [
+        84,
+        302,
+        280,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Aucune donnée sensible ne part vers un outil d'IA sans autorisation explicite.",
+      "textPreview": "Aucune donnée sensible ne part vers un outil d'IA sans autorisation explicite.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Aucune donnée sensible ne part vers un outil"
+          },
+          {
+            "index": 2,
+            "text": "d'IA sans autorisation explicite."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Aucune donnée sensible ne part vers un outil d'IA sans autorisation explicite.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Aucune donnée sensible ne part vers un outil d'IA sans autorisation explicite.",
+              "fontSize": 13.6,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1gvy90j",
+      "id": "10",
+      "bbox": [
+        438,
+        222,
+        332,
+        152
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zidonyd0",
+      "id": "11",
+      "bbox": [
+        460,
+        244,
+        42,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(214, 103, 36, 0.09412)",
+      "lineColor": "rgba(214, 103, 36, 0.09412)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/zed8v6ps",
+      "id": "12",
+      "bbox": [
+        469,
+        253,
+        24,
+        24
+      ],
+      "alt": "filter icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "bd5c6d13-a8e7-4484-bf0b-78425c684c51",
+        "contentType": "image/svg+xml",
+        "byteLength": 340
+      }
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hoza1gvy",
+      "id": "13",
+      "bbox": [
+        520,
+        246,
+        210,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Limitation des données",
+      "textPreview": "Limitation des données",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Limitation des données"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Limitation des données",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Limitation des données",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ap4r65wj",
+      "id": "14",
+      "bbox": [
+        462,
+        302,
+        280,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Seules les informations strictement utiles au besoin traité sont autorisées.",
+      "textPreview": "Seules les informations strictement utiles au besoin traité sont autorisées.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Seules les informations strictement utiles au"
+          },
+          {
+            "index": 2,
+            "text": "besoin traité sont autorisées."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Seules les informations strictement utiles au besoin traité sont autorisées.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Seules les informations strictement utiles au besoin traité sont autorisées.",
+              "fontSize": 13.6,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/za1gvy90",
+      "id": "15",
+      "bbox": [
+        816,
+        222,
+        332,
+        152
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/svu9knih",
+      "id": "16",
+      "bbox": [
+        838,
+        244,
+        42,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(47, 111, 106, 0.09412)",
+      "lineColor": "rgba(47, 111, 106, 0.09412)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/65wjudg7",
+      "id": "17",
+      "bbox": [
+        847,
+        253,
+        24,
+        24
+      ],
+      "alt": "eye-off icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "2b831770-93e9-4222-bd71-4e4e10f8e335",
+        "contentType": "image/svg+xml",
+        "byteLength": 462
+      }
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/adsji5sn",
+      "id": "18",
+      "bbox": [
+        898,
+        246,
+        210,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Masquage des identités",
+      "textPreview": "Masquage des identités",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Masquage des identités"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Masquage des identités",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Masquage des identités",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ylc7u54",
+      "id": "19",
+      "bbox": [
+        840,
+        302,
+        280,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Les informations qui permettent d'identifier une personne sont retirées avant traitement.",
+      "textPreview": "Les informations qui permettent d'identifier une personne sont retirées avant traitement.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les informations qui permettent d'identifier"
+          },
+          {
+            "index": 2,
+            "text": "une personne sont retirées avant traitement."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les informations qui permettent d'identifier une personne sont retirées avant traitement.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les informations qui permettent d'identifier une personne sont retirées avant traitement.",
+              "fontSize": 13.6,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "20",
+      "bbox": [
+        60,
+        408,
+        332,
+        152
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF7F3",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "21",
+      "bbox": [
+        82,
+        430,
+        42,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(110, 125, 140, 0.09412)",
+      "lineColor": "rgba(110, 125, 140, 0.09412)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/6hcrmhk3",
+      "id": "22",
+      "bbox": [
+        91,
+        439,
+        24,
+        24
+      ],
+      "alt": "lock icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "d945f08c-aed8-4572-b2b6-05ee9fd91c2b",
+        "contentType": "image/svg+xml",
+        "byteLength": 275
+      }
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kf6dcbul",
+      "id": "23",
+      "bbox": [
+        142,
+        432,
+        210,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Accès contrôlés",
+      "textPreview": "Accès contrôlés",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Accès contrôlés"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Accès contrôlés",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Accès contrôlés",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "24",
+      "bbox": [
+        84,
+        488,
+        280,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Les droits sont organisés selon les équipes, les rôles et le niveau de sensibilité.",
+      "textPreview": "Les droits sont organisés selon les équipes, les rôles et le niveau de sensibilité.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les droits sont organisés selon les équipes,"
+          },
+          {
+            "index": 2,
+            "text": "les rôles et le niveau de sensibilité."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les droits sont organisés selon les équipes, les rôles et le niveau de sensibilité.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les droits sont organisés selon les équipes, les rôles et le niveau de sensibilité.",
+              "fontSize": 13.6,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "25",
+      "bbox": [
+        438,
+        408,
+        332,
+        152
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF7F3",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "26",
+      "bbox": [
+        460,
+        430,
+        42,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(22, 50, 79, 0.09412)",
+      "lineColor": "rgba(22, 50, 79, 0.09412)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/vahoza1g",
+      "id": "27",
+      "bbox": [
+        469,
+        439,
+        24,
+        24
+      ],
+      "alt": "file-text icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "cbb325ae-6046-4bc6-b8f4-e425ad59c026",
+        "contentType": "image/svg+xml",
+        "byteLength": 398
+      }
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/val87ed8",
+      "id": "28",
+      "bbox": [
+        520,
+        432,
+        210,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Traçabilité",
+      "textPreview": "Traçabilité",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Traçabilité"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Traçabilité",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Traçabilité",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6psfil0r",
+      "id": "29",
+      "bbox": [
+        462,
+        488,
+        280,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Les données utilisées et les réponses produites doivent pouvoir être retracées.",
+      "textPreview": "Les données utilisées et les réponses produites doivent pouvoir être retracées.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les données utilisées et les réponses"
+          },
+          {
+            "index": 2,
+            "text": "produites doivent pouvoir être retracées."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les données utilisées et les réponses produites doivent pouvoir être retracées.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les données utilisées et les réponses produites doivent pouvoir être retracées.",
+              "fontSize": 13.6,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gn29gr2p",
+      "id": "30",
+      "bbox": [
+        816,
+        408,
+        332,
+        152
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF7F3",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58z25kb6",
+      "id": "31",
+      "bbox": [
+        838,
+        430,
+        42,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(214, 103, 36, 0.09412)",
+      "lineColor": "rgba(214, 103, 36, 0.09412)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/lwval87e",
+      "id": "32",
+      "bbox": [
+        847,
+        439,
+        24,
+        24
+      ],
+      "alt": "users icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "86a0723b-173e-4e6e-8329-d024c73ed09b",
+        "contentType": "image/svg+xml",
+        "byteLength": 341
+      }
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n29gr2p8",
+      "id": "33",
+      "bbox": [
+        898,
+        432,
+        210,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Revue humaine",
+      "textPreview": "Revue humaine",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Revue humaine"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Revue humaine",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Revue humaine",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gbq1oryt",
+      "id": "34",
+      "bbox": [
+        840,
+        488,
+        280,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Les cas les plus sensibles gardent une validation humaine et des contrôles renforcés.",
+      "textPreview": "Les cas les plus sensibles gardent une validation humaine et des contrôles renforcés.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les cas les plus sensibles gardent une"
+          },
+          {
+            "index": 2,
+            "text": "validation humaine et des contrôles renforcés."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les cas les plus sensibles gardent une validation humaine et des contrôles renforcés.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les cas les plus sensibles gardent une validation humaine et des contrôles renforcés.",
+              "fontSize": 13.6,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5wjudg7a",
+      "id": "35",
+      "bbox": [
+        60,
+        614,
+        1160,
+        40
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFF5EE",
+      "lineColor": "#FFF5EE",
+      "lineWidth": 1
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y90je9cv",
+      "id": "36",
+      "bbox": [
+        84,
+        626,
+        1100,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Notre promesse n'est pas seulement une IA performante, mais une IA gouvernée, maîtrisable et compatible avec la confidentialité.",
+      "textPreview": "Notre promesse n'est pas seulement une IA performante, mais une IA gouvernée, maîtrisable et compatible avec la confidentialité.",
+      "resolvedFontSize": 11.8,
+      "resolvedTextStyle": {
+        "fontSize": 11.8,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Notre promesse n'est pas seulement une IA performante, mais une IA gouvernée, maîtrisable et compatible avec la confidentialité."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Notre promesse n'est pas seulement une IA performante, mais une IA gouvernée, maîtrisable et compatible avec la confidentialité.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Notre promesse n'est pas seulement une IA performante, mais une IA gouvernée, maîtrisable et compatible avec la confidentialité.",
+              "fontSize": 11.8,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nuxc3ylc",
+      "id": "37",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cbulwval",
+      "id": "38",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Filtrage, masquage des identités, contrôle d'accès, traçabilité, revue humaine",
+      "textPreview": "TransferAI Africa | Filtrage, masquage des identités, contrôle d'accès, traçabilité, revue humaine",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Filtrage, masquage des identités, contrôle d'accès, traçabilité, revue humaine"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Filtrage, masquage des identités, contrôle d'accès, traçabilité, revue humaine",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Filtrage, masquage des identités, contrôle d'accès, traçabilité, revue humaine",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5sneloj2",
+      "id": "39",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "11",
+      "textPreview": "11",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "11"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "11",
+          "runs": [
+            {
+              "index": 1,
+              "text": "11",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -23,7 +23,7 @@ const servicesHubCopy = {
   fr: {
     title: "Des services clairs pour passer de l'idée à l'impact",
     subtitle:
-      "Trois points d'entrée simples pour cadrer, déployer et faire vivre une dynamique IA utile dans votre organisation.",
+      "Trois points d'entrée simples pour identifier les gains rapides, cadrer les priorités et faire vivre une dynamique IA utile dans votre organisation.",
     diagnosisTitle: "Choisissez votre point d'entrée",
     diagnosisDesc:
       "Commencez par le bon pilier selon votre besoin actuel, puis avancez avec un plan clair.",
@@ -89,14 +89,14 @@ const servicesHubCopy = {
     ],
     ctaTitle: "Commencer par le bon service",
     ctaDesc:
-      "Si votre besoin est déjà clair, allez directement au bon pilier. Sinon, commencez par un échange de cadrage.",
-    ctaPrimary: "Demander un cadrage",
+      "Si votre besoin est déjà clair, allez directement au bon pilier. Sinon, commencez par un audit ou un échange de cadrage.",
+    ctaPrimary: "Demander un audit IA gratuit",
     ctaSecondary: "Voir le catalogue formations",
   },
   en: {
     title: "Clear services to move from idea to impact",
     subtitle:
-      "Three simple entry points to frame, deploy and sustain useful AI adoption inside your organization.",
+      "Three simple entry points to identify quick wins, frame priorities, and sustain useful AI adoption inside your organization.",
     diagnosisTitle: "Choose your entry point",
     diagnosisDesc:
       "Start with the right pillar for your current need, then move forward with a clear plan.",
@@ -162,8 +162,8 @@ const servicesHubCopy = {
     ],
     ctaTitle: "Start with the right service",
     ctaDesc:
-      "If your need is already clear, go directly to the right pillar. If not, start with a framing conversation.",
-    ctaPrimary: "Request a framing call",
+      "If your need is already clear, go directly to the right pillar. If not, start with an audit or a framing conversation.",
+    ctaPrimary: "Request a free AI audit",
     ctaSecondary: "View the training catalogue",
   },
 } as const;
@@ -272,7 +272,7 @@ const EntreprisesPage = () => {
               <p className="mx-auto mb-4 max-w-4xl text-sm leading-6 text-white/85 md:whitespace-nowrap">{copy.ctaDesc}</p>
               <div className="flex justify-center">
                 <Link
-                  to="/parler-expert-ia"
+                  to={directLinks.auditForm}
                   className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   {copy.ctaPrimary} <ArrowRight size={16} />

@@ -28,9 +28,49 @@ const normalizeDomains = (value: unknown) =>
         .filter(Boolean)
     : [];
 
-const draftingSystemPrompt = `Tu rédiges la newsletter hebdomadaire IA premium de TransferAI Africa, en français, avec un angle Côte d'Ivoire et Afrique.
+const getDraftingSystemPrompt = (language: "fr" | "en") =>
+  language === "en"
+    ? `You write TransferAI Africa's premium weekly AI newsletter in English, with a Côte d'Ivoire and Africa-first business angle.
+
+Each edition MUST include:
+- 1 editorial section based on the week's global AI watch, with a clear reading of the impact for Africa and specifically Côte d'Ivoire
+- 3 useful AI tools (practical, accessible, business-ready)
+- 3 actionable prompts (ready to copy, adapted to African business use cases)
+- 1 African use case (company/sector on the continent using AI well)
+- 1 important AI update of the week (launch, model, feature)
+- 1 opportunity to watch (freelance mission, AI role, call for projects, funding)
+- If editorial instructions are provided in generation_notes, follow them first.
+- For founder rotations, keep the founder editorial block visible and sober without diluting the business message.
+
+Output format: strict JSON with ONLY these keys:
+- title (string): editorial title
+- subject (string): compelling email subject under 70 chars
+- preheader (string): preview text under 110 chars
+- intro (string): 2-3 sentence intro
+- highlightTitle (string): title of the African use case
+- highlightSummary (string): 3-5 sentence summary of the African use case
+- highlightUrl (string|null): source URL if available
+- tipTitle (string): title of the important AI update
+- tipBody (string): 3-5 sentence explanation of the update
+- toolName (string): names of the 3 tools separated by " · "
+- toolCategory (string): categories such as "Productivity · Analysis · Creation"
+- toolSummary (string): one markdown bullet line per tool with business use
+- promptTitle (string): title for the 3 prompts section
+- promptBody (string): the 3 prompts in full, numbered 1./ 2./ 3./
+- ctaLabel (string): CTA button label
+- ctaUrl (string): CTA URL (always https://www.transferai.ci/...)
+- bodyMarkdown (string): markdown that MUST start with a section titled "## Editorial" and then include the opportunity, sector watch and closing sections
+
+Rules:
+- Premium English, expert business tone, concrete and actionable
+- Always orient the edition toward business transformation, training, and AI adoption
+- Prioritize Côte d'Ivoire, West Africa, and African examples
+- Do not invent figures; cite sources when used
+- No markdown in short fields (title, subject, intro, etc.)`
+    : `Tu rédiges la newsletter hebdomadaire IA premium de TransferAI Africa, en français, avec un angle Côte d'Ivoire et Afrique.
 
 Chaque édition DOIT contenir :
+- 1 éditorial fondé sur la veille IA de la semaine dans le monde, avec une lecture claire de l'impact pour l'Afrique et spécifiquement la Côte d'Ivoire
 - 3 outils IA utiles (concrets, accessibles, métier)
 - 3 prompts actionnables (prêts à copier-coller, métier africain)
 - 1 cas d'usage africain (entreprise/secteur sur le continent qui a réussi avec l'IA)
@@ -56,7 +96,7 @@ Format de sortie : JSON strict avec UNIQUEMENT ces clés :
 - promptBody (string) : les 3 prompts en clair, numérotés 1./ 2./ 3./
 - ctaLabel (string) : libellé bouton CTA
 - ctaUrl (string) : URL CTA (toujours https://www.transferai.ci/...)
-- bodyMarkdown (string) : section "Opportunité à surveiller" en markdown (mission, job, financement, IA Afrique)
+- bodyMarkdown (string) : markdown qui DOIT commencer par une section "## Editorial" puis inclure l'opportunité, la veille sectorielle et les sections de clôture
 
 Règles :
 - Français premium, ton expert business, concret et activable
@@ -76,42 +116,79 @@ type DraftPost = {
   published_at: string;
 };
 
-const buildFallbackDraft = (issueDate: string, targetDomains: string[], posts: DraftPost[]) => {
+const buildFallbackDraft = (issueDate: string, language: "fr" | "en", targetDomains: string[], posts: DraftPost[]) => {
   const primaryPost = posts[0];
   const secondaryPost = posts[1];
-  const domainsLabel = targetDomains.length > 0 ? targetDomains.join(", ") : "vos métiers prioritaires";
-  const intro = `Chaque semaine, TransferAI Africa synthétise pour vous les signaux, usages et actions IA les plus utiles pour ${domainsLabel}, avec un angle Côte d'Ivoire et Afrique.`;
+  const domainsLabel = targetDomains.length > 0
+    ? targetDomains.join(", ")
+    : language === "en"
+      ? "your priority business functions"
+      : "vos métiers prioritaires";
+  const intro = language === "en"
+    ? `Each week, TransferAI Africa curates the AI signals, use cases and actions that matter most for ${domainsLabel}, with a Côte d'Ivoire and Africa-first lens.`
+    : `Chaque semaine, TransferAI Africa synthétise pour vous les signaux, usages et actions IA les plus utiles pour ${domainsLabel}, avec un angle Côte d'Ivoire et Afrique.`;
   const bodyMarkdown = [
-    "Dans cette édition :",
-    primaryPost ? `- Le signal à retenir : ${primaryPost.title_fr}` : "- Le signal à retenir : un cas d'usage IA à fort impact business",
-    secondaryPost ? `- Un deuxième angle utile : ${secondaryPost.title_fr}` : "- Un conseil pratique activable cette semaine",
-    "- Un outil à connaître pour mieux travailler",
-    "- Un prompt simple à adapter à votre métier",
+    "## Editorial",
+    language === "en"
+      ? "Global AI momentum is increasingly shifting from raw model performance to trust, governance and day-to-day integration. For Africa, and especially Côte d'Ivoire, the opportunity is no longer just to observe this transition, but to structure practical adoption around local skills, secure data practices and business-ready workflows."
+      : "La dynamique mondiale de l'IA se déplace de plus en plus de la performance brute des modèles vers la confiance, la gouvernance et l'intégration au travail quotidien. Pour l'Afrique, et plus particulièrement pour la Côte d'Ivoire, l'enjeu n'est plus seulement d'observer cette transition, mais de structurer une adoption concrète autour des talents locaux, de la sécurité des données et de workflows réellement utiles aux métiers.",
     "",
-    "Prochaine étape recommandée : choisissez un cas d'usage, testez-le sur un périmètre réduit, documentez le gain observé et préparez un plan d'adoption plus large.",
+    language === "en" ? "## In this edition" : "## Dans cette édition",
+    primaryPost
+      ? language === "en"
+        ? `- Key signal: ${primaryPost.title_fr}`
+        : `- Le signal à retenir : ${primaryPost.title_fr}`
+      : language === "en"
+        ? "- Key signal: a high-impact AI business use case"
+        : "- Le signal à retenir : un cas d'usage IA à fort impact business",
+    secondaryPost
+      ? language === "en"
+        ? `- A second angle to watch: ${secondaryPost.title_fr}`
+        : `- Un deuxième angle utile : ${secondaryPost.title_fr}`
+      : language === "en"
+        ? "- A practical move to launch this week"
+        : "- Un conseil pratique activable cette semaine",
+    language === "en" ? "- A tool worth knowing" : "- Un outil à connaître pour mieux travailler",
+    language === "en" ? "- A simple prompt to adapt to your work" : "- Un prompt simple à adapter à votre métier",
+    "",
+    language === "en"
+      ? "Recommended next step: pick one use case, test it on a limited scope, document the gain observed and prepare a wider adoption plan."
+      : "Prochaine étape recommandée : choisissez un cas d'usage, testez-le sur un périmètre réduit, documentez le gain observé et préparez un plan d'adoption plus large.",
   ].join("\n");
 
   return {
-    title: `Newsletter IA TransferAI Africa · ${issueDate}`,
-    subject: `Les signaux IA à suivre cette semaine pour ${targetDomains[0] ?? "vos métiers"}`,
-    preheader: "Une édition concise, utile et orientée usages concrets pour la Côte d'Ivoire et l'Afrique.",
+    title: language === "en" ? `TransferAI Africa AI Newsletter · ${issueDate}` : `Newsletter IA TransferAI Africa · ${issueDate}`,
+    subject: language === "en"
+      ? `The AI signals to watch this week for ${targetDomains[0] ?? "your teams"}`
+      : `Les signaux IA à suivre cette semaine pour ${targetDomains[0] ?? "vos métiers"}`,
+    preheader: language === "en"
+      ? "A concise, useful edition focused on practical AI uses for Côte d'Ivoire and Africa."
+      : "Une édition concise, utile et orientée usages concrets pour la Côte d'Ivoire et l'Afrique.",
     intro,
-    highlightTitle: primaryPost?.title_fr ?? "Le signal clé de la semaine",
+    highlightTitle: primaryPost?.title_fr ?? (language === "en" ? "This week's key signal" : "Le signal clé de la semaine"),
     highlightSummary:
       primaryPost?.excerpt_fr ??
-      "Un signal métier qui mérite l'attention des équipes qui veulent intégrer l'IA avec méthode et impact concret.",
+      (language === "en"
+        ? "A business signal worth watching for teams that want to integrate AI with method and measurable impact."
+        : "Un signal métier qui mérite l'attention des équipes qui veulent intégrer l'IA avec méthode et impact concret."),
     highlightUrl: primaryPost?.source_url ?? null,
-    tipTitle: "Le réflexe utile à appliquer",
+    tipTitle: language === "en" ? "The practical reflex to adopt" : "Le réflexe utile à appliquer",
     tipBody:
-      "Ne déployez pas l'IA partout en même temps. Choisissez un seul irritant métier, définissez un livrable cible, un temps gagné attendu et une validation humaine claire.",
-    toolName: "ChatGPT, Claude ou Gemini",
-    toolCategory: "Copilote métier",
+      language === "en"
+        ? "Do not deploy AI everywhere at once. Choose one business pain point, define the target deliverable, the expected time gain and a clear human validation step."
+        : "Ne déployez pas l'IA partout en même temps. Choisissez un seul irritant métier, définissez un livrable cible, un temps gagné attendu et une validation humaine claire.",
+    toolName: language === "en" ? "ChatGPT, Claude or Gemini" : "ChatGPT, Claude ou Gemini",
+    toolCategory: language === "en" ? "Business copilot" : "Copilote métier",
     toolSummary:
-      "Utilisez-les d'abord pour cadrer, synthétiser, préparer des livrables et accélérer vos analyses. Le bon usage ne consiste pas à tout déléguer, mais à structurer un meilleur travail humain.",
-    promptTitle: "Prompt prêt à adapter",
+      language === "en"
+        ? "Use them first to frame a task, synthesize information, prepare deliverables and accelerate analysis. The best use is not to delegate everything, but to structure better human work."
+        : "Utilisez-les d'abord pour cadrer, synthétiser, préparer des livrables et accélérer vos analyses. Le bon usage ne consiste pas à tout déléguer, mais à structurer un meilleur travail humain.",
+    promptTitle: language === "en" ? "Prompt ready to adapt" : "Prompt prêt à adapter",
     promptBody:
-      "Agis comme un responsable métier. Aide-moi à transformer ce sujet en note opérationnelle. Donne-moi : 1) les enjeux, 2) les risques, 3) les actions à lancer en 7 jours, 4) les indicateurs à suivre.",
-    ctaLabel: "Découvrir les ressources TransferAI",
+      language === "en"
+        ? "Act as a business lead. Help me turn this topic into an operational note. Give me: 1) the stakes, 2) the risks, 3) the actions to launch in the next 7 days, 4) the indicators to track."
+        : "Agis comme un responsable métier. Aide-moi à transformer ce sujet en note opérationnelle. Donne-moi : 1) les enjeux, 2) les risques, 3) les actions à lancer en 7 jours, 4) les indicateurs à suivre.",
+    ctaLabel: language === "en" ? "Explore TransferAI resources" : "Découvrir les ressources TransferAI",
     ctaUrl: "https://www.transferai.ci/blog",
     bodyMarkdown,
   };
@@ -206,7 +283,7 @@ Deno.serve(async (request) => {
     }
 
     const selectedPosts = (posts ?? []) as DraftPost[];
-    const fallbackDraft = buildFallbackDraft(issueDate, targetDomains, selectedPosts);
+    const fallbackDraft = buildFallbackDraft(issueDate, language, targetDomains, selectedPosts);
 
     let aiDraft:
       | {
@@ -238,17 +315,29 @@ Deno.serve(async (request) => {
       fallbackDraft,
       generationNotes,
       officialStructure: [
-        "Signal clé",
-        "Conseil pratique",
-        "Outil à connaître",
-        "Prompt de la semaine",
-        "Prochaine étape",
+        ...(language === "en"
+          ? [
+            "Editorial",
+            "Key signal",
+            "Practical tip",
+            "Tool to know",
+            "Prompt of the week",
+            "Next step",
+          ]
+          : [
+            "Editorial",
+            "Signal clé",
+            "Conseil pratique",
+            "Outil à connaître",
+            "Prompt de la semaine",
+            "Prochaine étape",
+          ]),
       ],
     };
 
     if (Deno.env.get("ANTHROPIC_API_KEY")) {
       const anthropicText = await callAnthropicText({
-        systemPrompt: draftingSystemPrompt,
+        systemPrompt: getDraftingSystemPrompt(language),
         userPrompt: JSON.stringify(promptPayload),
       }).catch(() => null);
 
@@ -260,12 +349,12 @@ Deno.serve(async (request) => {
       }
     } else if (Deno.env.get("OPENAI_API_KEY")) {
       aiDraft = await callOpenAIJson({
-        systemPrompt: draftingSystemPrompt,
+        systemPrompt: getDraftingSystemPrompt(language),
         userPrompt: JSON.stringify(promptPayload),
       }).catch(() => null);
     } else if (Deno.env.get("LOVABLE_API_KEY")) {
       aiDraft = await callLovableAIJson({
-        systemPrompt: draftingSystemPrompt,
+        systemPrompt: getDraftingSystemPrompt(language),
         userPrompt: JSON.stringify(promptPayload),
       }).catch((error) => {
         console.error("Lovable AI draft failed:", error);
@@ -304,9 +393,12 @@ Deno.serve(async (request) => {
       body_html: null,
       source_post_ids: selectedPosts.map((post) => post.id),
       generation_source: aiDraft ? "ai" : "hybrid",
-      generation_notes: targetDomains.length > 0
-        ? `Edition préparée à partir des domaines : ${targetDomains.join(", ")}`
-        : "Edition préparée à partir des contenus récents publiés.",
+      generation_notes: [
+        generationNotes,
+        targetDomains.length > 0
+          ? `Edition préparée à partir des domaines : ${targetDomains.join(", ")}`
+          : "Edition préparée à partir des contenus récents publiés.",
+      ].filter(Boolean).join(" | "),
     };
 
     const issueWithHtml = {

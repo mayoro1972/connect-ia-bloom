@@ -1,0 +1,586 @@
+{
+  "name": "TransferAI Post-Audit CRM-Aware Follow-Up",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-post-audit-crm-aware-follow-up",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "crm"
+    },
+    {
+      "name": "post-audit"
+    },
+    {
+      "name": "n8n"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        200
+      ],
+      "parameters": {}
+    },
+    {
+      "name": "Audit Completed Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        420
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferai-post-audit-follow-up",
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "name": "Set Post-Audit Manual Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        460,
+        200
+      ],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "pack_id",
+              "type": "string",
+              "stringValue": "={{$json.pack_id || 'REPLACE_WITH_PACK_ID'}}"
+            },
+            {
+              "name": "internal_email_to",
+              "type": "string",
+              "stringValue": "={{$json.internal_email_to || $env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci'}}"
+            },
+            {
+              "name": "next_action_delay_days",
+              "type": "string",
+              "stringValue": "={{$json.next_action_delay_days || '1'}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Parse Post-Audit Webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        420
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const src = $json || {};\nconst query = src.query || {};\nconst body = typeof src.body === 'object' && src.body ? src.body : {};\nreturn [{\n  json: {\n    pack_id: body.pack_id || query.pack_id || src.pack_id || '',\n    internal_email_to: body.internal_email_to || query.internal_email_to || $env.POST_AUDIT_INTERNAL_EMAIL || 'contact@transferai.ci',\n    next_action_delay_days: body.next_action_delay_days || query.next_action_delay_days || '1',\n    trigger_source: 'webhook'\n  }\n}];"
+      }
+    },
+    {
+      "name": "Normalize Post-Audit Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const src = $json || {};\nreturn [{\n  json: {\n    pack_id: String(src.pack_id || '').trim(),\n    internal_email_to: String(src.internal_email_to || 'contact@transferai.ci').trim(),\n    next_action_delay_days: Number(src.next_action_delay_days || 1),\n    trigger_source: src.trigger_source || 'manual'\n  }\n}];"
+      }
+    },
+    {
+      "name": "Get Pack Row",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        980,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Pack Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $('Normalize Post-Audit Request').first().json || {};\nconst rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst payload = row.payload || {};\nreturn [{\n  json: {\n    ...request,\n    row_id: row.id || null,\n    pack_id: row.pack_id || payload.pack_id || request.pack_id || null,\n    prospect_id: row.prospect_id || payload.prospect_id || null,\n    organization_name: row.organization_name || payload.organization_name || null,\n    target_email: row.target_email || payload.target_email || null,\n    status: row.status || null,\n    payload\n  }\n}];"
+      }
+    },
+    {
+      "name": "Get Latest Form Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1500,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/form_responses?pack_id=eq.' + encodeURIComponent($json.pack_id) + '&select=*&order=submitted_at.desc.nullslast,updated_at.desc.nullslast&limit=1'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Latest Form Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nreturn [{\n  json: {\n    response_id: row.id || null,\n    pack_id: row.pack_id || $('Extract Pack Row').first().json.pack_id || null,\n    form_data: row.form_data || {},\n    context_snapshot: row.context_snapshot || {},\n    submitted_at: row.submitted_at || row.updated_at || null,\n    updated_at: row.updated_at || null,\n    raw_form_response: row\n  }\n}];"
+      }
+    },
+    {
+      "name": "Get Prospect Target Row",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2020,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($('Extract Pack Row').first().json.prospect_id || '') + '&select=*'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Extract Prospect Target Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nreturn [{\n  json: {\n    prospect_id: row.prospect_id || $('Extract Pack Row').first().json.prospect_id || null,\n    status: row.status || null,\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null,\n    last_pack_id: row.last_pack_id || null,\n    raw_prospect_target: row\n  }\n}];"
+      }
+    },
+    {
+      "name": "Build Post-Audit CRM Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2540,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const pack = $('Extract Pack Row').first().json || {};\nconst form = $('Extract Latest Form Response').first().json || {};\nconst prospect = $('Extract Prospect Target Row').first().json || {};\nconst payload = pack.payload || {};\nconst formData = form.form_data || {};\nconst contextSnapshot = form.context_snapshot || {};\nconst recommendation = formData.transferai_recommendation || contextSnapshot.transferai_recommendation || null;\nconst delayDays = Number(pack.next_action_delay_days || 1);\nconst nextActionAt = new Date(Date.now() + delayDays * 86400000).toISOString();\nreturn [{\n  json: {\n    pack_id: pack.pack_id || null,\n    prospect_id: pack.prospect_id || prospect.prospect_id || null,\n    internal_email_to: pack.internal_email_to || 'contact@transferai.ci',\n    trigger_source: pack.trigger_source || 'manual',\n    organization_name: formData.c_entite || payload.organization_name || pack.organization_name || null,\n    decision_maker_name: formData.c_nom || payload.decision_maker_name || null,\n    target_email: formData.c_email || payload.target_email || pack.target_email || null,\n    website: payload.website || null,\n    country: payload.country || null,\n    organization_type: formData.organization_type || payload.organization_type || null,\n    sector_guess: formData.audit_sector || payload.sector_guess || null,\n    prospect_language: payload.prospect_language || 'fr',\n    commercial_priority_tier: payload.commercial_priority_tier || null,\n    recommended_offer: payload.recommended_offer || null,\n    recommended_use_case: payload.recommended_use_case || null,\n    best_selling_use_case: payload.best_selling_use_case || null,\n    audit_form_url: payload.audit_form_url || null,\n    submitted_at: form.submitted_at || null,\n    transferai_recommendation: recommendation,\n    crm_status_before: prospect.status || null,\n    crm_last_response_status_before: prospect.last_response_status || '',\n    crm_last_sequence_result_before: prospect.last_sequence_result || '',\n    crm_niche_status_before: prospect.niche_status || '',\n    crm_next_action_at_before: prospect.next_action_at || null,\n    crm_next_action_at_after: nextActionAt,\n    form_data: formData,\n    context_snapshot: contextSnapshot,\n    pack_payload: payload,\n    raw_form_response: form.raw_form_response || {},\n    raw_prospect_target: prospect.raw_prospect_target || {}\n  }\n}];"
+      }
+    },
+    {
+      "name": "Generate Internal Pre-RDV Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2800,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, messages: [ { role: 'system', content: \"Tu rediges une fiche pre-RDV interne TransferAI a partir du pack prospecting, des reponses du formulaire et de l orientation de service calculee. Objectif: aider l equipe commerciale et l equipe audit a preparer la reunion suivante. Regles: 1. Si prospect_language = fr, redige en francais professionnel. Si en, redige en anglais professionnel. Si es, redige en espagnol professionnel. 2. Fais apparaitre clairement: identification, synthese rapide, contexte actuel, priorites exprimees, orientation TransferAI, prochaine etape recommande, points a verifier en rendez-vous. 3. La section Orientation TransferAI doit inclure: service principal recommande, parcours complementaire, niveau de confiance, raisons de l orientation et prochaine etape. 4. N invente pas d informations absentes. 5. Reste sobre, utile et directement exploitable par une equipe commerciale et audit. 6. Format: markdown propre avec titres courts.\" }, { role: 'user', content: `Contexte post-audit:\\n${JSON.stringify($json, null, 2)}` } ] })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Update Prospect Target Post-Audit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        3060,
+        300
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id || '')}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'active', last_response_status: 'audit_completed', last_sequence_result: 'post_audit_ready', stop_reason: null, niche_status: 'qualified_after_audit', next_action_at: $json.crm_next_action_at_after || new Date(Date.now() + 86400000).toISOString(), last_pack_id: $json.pack_id || null, updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Send Internal Brief Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        3320,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: 'onboarding@resend.dev', to: String($('Build Post-Audit CRM Context').first().json.internal_email_to || 'contact@transferai.ci').split(',').map((v) => v.trim()).filter(Boolean), subject: 'Fiche pre-RDV post-audit - ' + (($('Build Post-Audit CRM Context').first().json.organization_name || 'Prospect a confirmer')), html: String(((($('Generate Internal Pre-RDV Brief').first().json || {}).choices || [])[0] || {}).message?.content || 'Aucune fiche generee.').replace(/\\n/g, '<br>') })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Build Post-Audit Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3580,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const ctx = $('Build Post-Audit CRM Context').first().json || {};\nconst briefResponse = $('Generate Internal Pre-RDV Brief').first().json || {};\nconst brief = (((briefResponse.choices || [])[0] || {}).message || {}).content || '';\nconst resend = $('Send Internal Brief Email').first().json || {};\nconst resendId = resend.id || (resend.data && resend.data.id) || null;\nreturn [{\n  json: {\n    status: 'post_audit_processed',\n    pack_id: ctx.pack_id || null,\n    prospect_id: ctx.prospect_id || null,\n    organization_name: ctx.organization_name || null,\n    submitted_at: ctx.submitted_at || null,\n    primary_service: ctx.transferai_recommendation?.primary?.title || ctx.recommended_offer || null,\n    secondary_service: ctx.transferai_recommendation?.secondary?.title || null,\n    confidence_label: ctx.transferai_recommendation?.confidenceLabel || null,\n    next_action_at: ctx.crm_next_action_at_after || null,\n    internal_email_to: ctx.internal_email_to || null,\n    resend_id: resendId,\n    brief_markdown: brief\n  }\n}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Post-Audit Manual Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audit Completed Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Post-Audit Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Post-Audit Manual Input": {
+      "main": [
+        [
+          {
+            "node": "Normalize Post-Audit Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Post-Audit Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Post-Audit Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Post-Audit Request": {
+      "main": [
+        [
+          {
+            "node": "Get Pack Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pack Row": {
+      "main": [
+        [
+          {
+            "node": "Extract Pack Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Pack Row": {
+      "main": [
+        [
+          {
+            "node": "Get Latest Form Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Latest Form Response": {
+      "main": [
+        [
+          {
+            "node": "Extract Latest Form Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Latest Form Response": {
+      "main": [
+        [
+          {
+            "node": "Get Prospect Target Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Prospect Target Row": {
+      "main": [
+        [
+          {
+            "node": "Extract Prospect Target Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Prospect Target Row": {
+      "main": [
+        [
+          {
+            "node": "Build Post-Audit CRM Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Post-Audit CRM Context": {
+      "main": [
+        [
+          {
+            "node": "Generate Internal Pre-RDV Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Internal Pre-RDV Brief": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Post-Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Post-Audit": {
+      "main": [
+        [
+          {
+            "node": "Send Internal Brief Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Internal Brief Email": {
+      "main": [
+        [
+          {
+            "node": "Build Post-Audit Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,1228 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/s72x4nap",
+    "id": "s72x4nap",
+    "slide": 4,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt",
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psfil0rq",
+      "id": "27",
+      "name": "Rectangle 26",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "2",
+      "name": "Rectangle 1",
+      "bbox": [
+        60,
+        40,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "OBJECTIFS",
+      "textPreview": "OBJECTIFS",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "OBJECTIFS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "OBJECTIFS",
+          "runs": [
+            {
+              "index": 1,
+              "text": "OBJECTIFS",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "3",
+      "name": "Rectangle 2",
+      "bbox": [
+        60,
+        78,
+        680,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Ce que cette approche cherche à améliorer",
+      "textPreview": "Ce que cette approche cherche à améliorer",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que cette approche cherche à améliorer"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que cette approche cherche à améliorer",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que cette approche cherche à améliorer",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "4",
+      "name": "Rectangle 3",
+      "bbox": [
+        60,
+        140,
+        700,
+        36
+      ],
+      "geometry": "rect",
+      "text": "Pour une entreprise comme Elton CI, l'enjeu n'est pas d'ajouter un outil de plus, mais de mieux organiser la décision, la formation et l'exécution.",
+      "textPreview": "Pour une entreprise comme Elton CI, l'enjeu n'est pas d'ajouter un outil de plus, mais de mieux organiser la décision, la formation et l'...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pour une entreprise comme Elton CI, l'enjeu n'est pas d'ajouter un outil de plus, mais de mieux organiser la"
+          },
+          {
+            "index": 2,
+            "text": "décision, la formation et l'exécution."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pour une entreprise comme Elton CI, l'enjeu n'est pas d'ajouter un outil de plus, mais de mieux organiser la décision, la formation et l'exécution.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pour une entreprise comme Elton CI, l'enjeu n'est pas d'ajouter un outil de plus, mais de mieux organiser la décision, la formation et l'exécution.",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "5",
+      "name": "Rectangle 4",
+      "bbox": [
+        60,
+        206,
+        560,
+        364
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "6",
+      "name": "Rectangle 5",
+      "bbox": [
+        88,
+        232,
+        220,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Objectifs prioritaires",
+      "textPreview": "Objectifs prioritaires",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Objectifs prioritaires"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Objectifs prioritaires",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Objectifs prioritaires",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "7",
+      "name": "Rectangle 6",
+      "bbox": [
+        88,
+        272,
+        16,
+        18
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "8",
+      "name": "Rectangle 7",
+      "bbox": [
+        108,
+        270,
+        480,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Identifier les priorités réellement utiles pour l'entreprise",
+      "textPreview": "Identifier les priorités réellement utiles pour l'entreprise",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Identifier les priorités réellement utiles pour l'entreprise"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Identifier les priorités réellement utiles pour l'entreprise",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Identifier les priorités réellement utiles pour l'entreprise",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#10213D"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "9",
+      "name": "Rectangle 8",
+      "bbox": [
+        88,
+        330,
+        16,
+        18
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "10",
+      "name": "Rectangle 9",
+      "bbox": [
+        108,
+        328,
+        480,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Fluidifier les processus qui consomment du temps et de la coordination",
+      "textPreview": "Fluidifier les processus qui consomment du temps et de la coordination",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Fluidifier les processus qui consomment du temps et de la coordination"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Fluidifier les processus qui consomment du temps et de la coordination",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Fluidifier les processus qui consomment du temps et de la coordination",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#10213D"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "11",
+      "name": "Rectangle 10",
+      "bbox": [
+        88,
+        388,
+        16,
+        18
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "12",
+      "name": "Rectangle 11",
+      "bbox": [
+        108,
+        386,
+        480,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Renforcer la qualité de service et le suivi client",
+      "textPreview": "Renforcer la qualité de service et le suivi client",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Renforcer la qualité de service et le suivi client"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Renforcer la qualité de service et le suivi client",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Renforcer la qualité de service et le suivi client",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#10213D"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "13",
+      "name": "Rectangle 12",
+      "bbox": [
+        88,
+        446,
+        16,
+        18
+      ],
+      "geometry": "rect",
+      "text": "•",
+      "textPreview": "•",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "•"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "•",
+          "runs": [
+            {
+              "index": 1,
+              "text": "•",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "14",
+      "name": "Rectangle 13",
+      "bbox": [
+        108,
+        444,
+        480,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Faire monter les équipes en compétences sur des usages concrets",
+      "textPreview": "Faire monter les équipes en compétences sur des usages concrets",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Faire monter les équipes en compétences sur des usages concrets"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Faire monter les équipes en compétences sur des usages concrets",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Faire monter les équipes en compétences sur des usages concrets",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#10213D"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61032lsz",
+      "id": "15",
+      "name": "Rectangle 14",
+      "bbox": [
+        680,
+        206,
+        500,
+        168
+      ],
+      "geometry": "rect",
+      "fillColor": "#16324F",
+      "lineColor": "#16324F",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "16",
+      "name": "Rectangle 15",
+      "bbox": [
+        710,
+        232,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Résultat attendu",
+      "textPreview": "Résultat attendu",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Résultat attendu"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Résultat attendu",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Résultat attendu",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#D7E2EE",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "17",
+      "name": "Rectangle 16",
+      "bbox": [
+        710,
+        262,
+        420,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Des équipes mieux préparées et des priorités mieux choisies.",
+      "textPreview": "Des équipes mieux préparées et des priorités mieux choisies.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Des équipes mieux préparées et des"
+          },
+          {
+            "index": 2,
+            "text": "priorités mieux choisies."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Des équipes mieux préparées et des priorités mieux choisies.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Des équipes mieux préparées et des priorités mieux choisies.",
+              "fontSize": 24,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "18",
+      "name": "Rectangle 17",
+      "bbox": [
+        710,
+        324,
+        420,
+        30
+      ],
+      "geometry": "rect",
+      "text": "L'offre formation n'est crédible que si elle est connectée à des besoins réels et à une suite opérationnelle.",
+      "textPreview": "L'offre formation n'est crédible que si elle est connectée à des besoins réels et à une suite opérationnelle.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L'offre formation n'est crédible que si elle est connectée à des besoins"
+          },
+          {
+            "index": 2,
+            "text": "réels et à une suite opérationnelle."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L'offre formation n'est crédible que si elle est connectée à des besoins réels et à une suite opérationnelle.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'offre formation n'est crédible que si elle est connectée à des besoins réels et à une suite opérationnelle.",
+              "fontSize": 12.6,
+              "typeface": "Aptos",
+              "color": "#EDF3FA"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6tovahoz",
+      "id": "19",
+      "name": "Rectangle 18",
+      "bbox": [
+        680,
+        402,
+        500,
+        168
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFF7F1",
+      "lineColor": "#FFF7F1",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "20",
+      "name": "Rectangle 19",
+      "bbox": [
+        710,
+        428,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Populations à adresser",
+      "textPreview": "Populations à adresser",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Populations à adresser"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Populations à adresser",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Populations à adresser",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "21",
+      "name": "Rectangle 20",
+      "bbox": [
+        710,
+        460,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Direction générale",
+      "textPreview": "Direction générale",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Direction générale"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Direction générale",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Direction générale",
+              "fontSize": 14,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "22",
+      "name": "Rectangle 21",
+      "bbox": [
+        710,
+        488,
+        240,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Managers et responsables de pôle",
+      "textPreview": "Managers et responsables de pôle",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Managers et responsables de pôle"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Managers et responsables de pôle",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Managers et responsables de pôle",
+              "fontSize": 14,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "23",
+      "name": "Rectangle 22",
+      "bbox": [
+        710,
+        516,
+        320,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Équipes finance, opérations, relation client",
+      "textPreview": "Équipes finance, opérations, relation client",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Équipes finance, opérations, relation client"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Équipes finance, opérations, relation client",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Équipes finance, opérations, relation client",
+              "fontSize": 14,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "24",
+      "name": "Rectangle 23",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "25",
+      "name": "Rectangle 24",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "La formation doit être présentée comme un levier d'exécution et de performance, pas comme un catalogue isolé.",
+      "textPreview": "La formation doit être présentée comme un levier d'exécution et de performance, pas comme un catalogue isolé.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La formation doit être présentée comme un levier d'exécution et de performance, pas comme un catalogue isolé."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La formation doit être présentée comme un levier d'exécution et de performance, pas comme un catalogue isolé.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La formation doit être présentée comme un levier d'exécution et de performance, pas comme un catalogue isolé.",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "26",
+      "name": "Rectangle 25",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03",
+          "runs": [
+            {
+              "index": 1,
+              "text": "03",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

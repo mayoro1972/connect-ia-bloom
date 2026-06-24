@@ -1,0 +1,1800 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/28xphp",
+    "id": "28xphp",
+    "slide": 1,
+    "layoutId": "95ec2e28-2100-46b7-ba47-339934c3d083",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "de0daf85-a6dd-419a-bd5e-75fa2101cbd5",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "95ec2e28-2100-46b7-ba47-339934c3d083",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "de0daf85-a6dd-419a-bd5e-75fa2101cbd5",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "de0daf85-a6dd-419a-bd5e-75fa2101cbd5",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0z61032l",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F5EFE7",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ed8bat4",
+      "id": "2",
+      "bbox": [
+        58,
+        82,
+        676,
+        504
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itgfmlkj",
+      "id": "3",
+      "bbox": [
+        774,
+        82,
+        448,
+        504
+      ],
+      "geometry": "rect",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8nqxs72",
+      "id": "4",
+      "bbox": [
+        774,
+        82,
+        10,
+        504
+      ],
+      "geometry": "rect",
+      "fillColor": "#1C8A78",
+      "lineColor": "#1C8A78",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nuxc3yl",
+      "id": "5",
+      "bbox": [
+        84,
+        110,
+        260,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROPOSITION CIBLÉE | ELTON CI",
+      "textPreview": "PROPOSITION CIBLÉE | ELTON CI",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROPOSITION CIBLÉE | ELTON CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROPOSITION CIBLÉE | ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROPOSITION CIBLÉE | ELTON CI",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/72x4nap4",
+      "id": "6",
+      "bbox": [
+        84,
+        148,
+        560,
+        154
+      ],
+      "geometry": "rect",
+      "text": "Transformer l'IA\nen gains visibles\npour ELTON CI",
+      "textPreview": "Transformer l'IA | en gains visibles | pour ELTON CI",
+      "resolvedFontSize": 42,
+      "resolvedTextStyle": {
+        "fontSize": 42,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Transformer l'IA"
+          },
+          {
+            "index": 2,
+            "text": "en gains visibles"
+          },
+          {
+            "index": 3,
+            "text": "pour ELTON CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Transformer l'IA",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Transformer l'IA",
+              "fontSize": 42,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "en gains visibles",
+          "runs": [
+            {
+              "index": 1,
+              "text": "en gains visibles",
+              "fontSize": 42,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "pour ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "pour ELTON CI",
+              "fontSize": 42,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ih4byhgn",
+      "id": "7",
+      "bbox": [
+        84,
+        324,
+        580,
+        118
+      ],
+      "geometry": "rect",
+      "text": "Une proposition construite à partir du ROI de référence TransferAI, mais traduite dans le contexte ELTON CI autour de quatre terrains d'impact : comptes professionnels, flotte et cartes carburant, service client, procédures internes.",
+      "textPreview": "Une proposition construite à partir du ROI de référence TransferAI, mais traduite dans le contexte ELTON CI autour de quatre terrains d'i...",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une proposition construite à partir du ROI de référence TransferAI, mais traduite"
+          },
+          {
+            "index": 2,
+            "text": "dans le contexte ELTON CI autour de quatre terrains d'impact : comptes"
+          },
+          {
+            "index": 3,
+            "text": "professionnels, flotte et cartes carburant, service client, procédures internes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une proposition construite à partir du ROI de référence TransferAI, mais traduite dans le contexte ELTON CI autour de quatre terrains d'impact : comptes professionnels, flotte et cartes carburant, service client, procédures internes.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une proposition construite à partir du ROI de référence TransferAI, mais traduite dans le contexte ELTON CI autour de quatre terrains d'impact : comptes professionnels, flotte et cartes carburant, service client, procédures internes.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "8",
+      "bbox": [
+        84,
+        418,
+        410,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wjudg7ad",
+      "id": "9",
+      "bbox": [
+        100,
+        425,
+        380,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI est le hub AI de Nettelecom CI.",
+      "textPreview": "TransferAI est le hub AI de Nettelecom CI.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI est le hub AI de Nettelecom CI."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI est le hub AI de Nettelecom CI.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI est le hub AI de Nettelecom CI.",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6tovahoz",
+      "id": "10",
+      "bbox": [
+        84,
+        454,
+        220,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Point d'entrée recommandé",
+      "textPreview": "Point d'entrée recommandé",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Point d'entrée recommandé"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Point d'entrée recommandé",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Point d'entrée recommandé",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "11",
+      "bbox": [
+        84,
+        476,
+        548,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Audit IA gratuit + atelier métier de 45 minutes pour qualifier les priorités, les KPI et la bonne séquence de déploiement.",
+      "textPreview": "Audit IA gratuit + atelier métier de 45 minutes pour qualifier les priorités, les KPI et la bonne séquence de déploiement.",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Audit IA gratuit + atelier métier de 45 minutes pour qualifier les priorités, les KPI"
+          },
+          {
+            "index": 2,
+            "text": "et la bonne séquence de déploiement."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Audit IA gratuit + atelier métier de 45 minutes pour qualifier les priorités, les KPI et la bonne séquence de déploiement.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Audit IA gratuit + atelier métier de 45 minutes pour qualifier les priorités, les KPI et la bonne séquence de déploiement.",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovahoza1",
+      "id": "12",
+      "bbox": [
+        84,
+        548,
+        138,
+        86
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg7adsji",
+      "id": "13",
+      "bbox": [
+        100,
+        566,
+        3,
+        50
+      ],
+      "geometry": "rect",
+      "fillColor": "#E76F1D",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "14",
+      "bbox": [
+        114,
+        562,
+        94,
+        30
+      ],
+      "geometry": "rect",
+      "text": "J+15",
+      "textPreview": "J+15",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "J+15"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "J+15",
+          "runs": [
+            {
+              "index": 1,
+              "text": "J+15",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "15",
+      "bbox": [
+        114,
+        594,
+        94,
+        18
+      ],
+      "geometry": "rect",
+      "text": "premier livrable",
+      "textPreview": "premier livrable",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "premier livrable"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "premier livrable",
+          "runs": [
+            {
+              "index": 1,
+              "text": "premier livrable",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#617086",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onyd0z61",
+      "id": "16",
+      "bbox": [
+        114,
+        612,
+        94,
+        26
+      ],
+      "geometry": "rect",
+      "text": "lecture claire des gains rapides",
+      "textPreview": "lecture claire des gains rapides",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "lecture claire des gains"
+          },
+          {
+            "index": 2,
+            "text": "rapides"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "lecture claire des gains rapides",
+          "runs": [
+            {
+              "index": 1,
+              "text": "lecture claire des gains rapides",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "17",
+      "bbox": [
+        236,
+        548,
+        138,
+        86
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "18",
+      "bbox": [
+        252,
+        566,
+        3,
+        50
+      ],
+      "geometry": "rect",
+      "fillColor": "#1C8A78",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "19",
+      "bbox": [
+        266,
+        562,
+        94,
+        30
+      ],
+      "geometry": "rect",
+      "text": "13",
+      "textPreview": "13",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "13"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "13",
+          "runs": [
+            {
+              "index": 1,
+              "text": "13",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "20",
+      "bbox": [
+        266,
+        594,
+        94,
+        18
+      ],
+      "geometry": "rect",
+      "text": "experts IA",
+      "textPreview": "experts IA",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "experts IA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "experts IA",
+          "runs": [
+            {
+              "index": 1,
+              "text": "experts IA",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#617086",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "21",
+      "bbox": [
+        266,
+        612,
+        94,
+        26
+      ],
+      "geometry": "rect",
+      "text": "mobilisés via TransferAI",
+      "textPreview": "mobilisés via TransferAI",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "mobilisés via TransferAI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "mobilisés via TransferAI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "mobilisés via TransferAI",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "22",
+      "bbox": [
+        388,
+        548,
+        138,
+        86
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "23",
+      "bbox": [
+        404,
+        566,
+        3,
+        50
+      ],
+      "geometry": "rect",
+      "fillColor": "#163556",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "24",
+      "bbox": [
+        418,
+        562,
+        94,
+        30
+      ],
+      "geometry": "rect",
+      "text": "+30 %",
+      "textPreview": "+30 %",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+30 %"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+30 %",
+          "runs": [
+            {
+              "index": 1,
+              "text": "+30 %",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "25",
+      "bbox": [
+        418,
+        594,
+        94,
+        18
+      ],
+      "geometry": "rect",
+      "text": "productivité benchmark",
+      "textPreview": "productivité benchmark",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "productivité"
+          },
+          {
+            "index": 2,
+            "text": "benchmark"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "productivité benchmark",
+          "runs": [
+            {
+              "index": 1,
+              "text": "productivité benchmark",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#617086",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "26",
+      "bbox": [
+        418,
+        612,
+        94,
+        26
+      ],
+      "geometry": "rect",
+      "text": "sur des flux répétitifs comparables",
+      "textPreview": "sur des flux répétitifs comparables",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "sur des flux répétitifs"
+          },
+          {
+            "index": 2,
+            "text": "comparables"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "sur des flux répétitifs comparables",
+          "runs": [
+            {
+              "index": 1,
+              "text": "sur des flux répétitifs comparables",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "27",
+      "bbox": [
+        540,
+        548,
+        138,
+        86
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65wjudg",
+      "id": "28",
+      "bbox": [
+        556,
+        566,
+        3,
+        50
+      ],
+      "geometry": "rect",
+      "fillColor": "#C88C3A",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ylc7u54z",
+      "id": "29",
+      "bbox": [
+        570,
+        562,
+        94,
+        30
+      ],
+      "geometry": "rect",
+      "text": "-45 %",
+      "textPreview": "-45 %",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "-45 %"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "-45 %",
+          "runs": [
+            {
+              "index": 1,
+              "text": "-45 %",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8v6psfil",
+      "id": "30",
+      "bbox": [
+        570,
+        594,
+        94,
+        18
+      ],
+      "geometry": "rect",
+      "text": "effort de formation",
+      "textPreview": "effort de formation",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "effort de formation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "effort de formation",
+          "runs": [
+            {
+              "index": 1,
+              "text": "effort de formation",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#617086",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xczed8v6",
+      "id": "31",
+      "bbox": [
+        570,
+        612,
+        94,
+        26
+      ],
+      "geometry": "rect",
+      "text": "benchmark onboarding / diffusion",
+      "textPreview": "benchmark onboarding / diffusion",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "benchmark onboarding /"
+          },
+          {
+            "index": 2,
+            "text": "diffusion"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "benchmark onboarding / diffusion",
+          "runs": [
+            {
+              "index": 1,
+              "text": "benchmark onboarding / diffusion",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "32",
+      "bbox": [
+        812,
+        122,
+        260,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CE QUE NOUS PROPOSONS",
+      "textPreview": "CE QUE NOUS PROPOSONS",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CE QUE NOUS PROPOSONS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CE QUE NOUS PROPOSONS",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CE QUE NOUS PROPOSONS",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa9w3m94",
+      "id": "33",
+      "bbox": [
+        812,
+        154,
+        340,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Une offre exécutive,\nmétier et mesurable.",
+      "textPreview": "Une offre exécutive, | métier et mesurable.",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une offre exécutive,"
+          },
+          {
+            "index": 2,
+            "text": "métier et mesurable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une offre exécutive,",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une offre exécutive,",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "métier et mesurable.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "métier et mesurable.",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jqh0fep",
+      "id": "34",
+      "bbox": [
+        812,
+        276,
+        338,
+        124
+      ],
+      "geometry": "rect",
+      "text": "• Partir des vrais irritants d'ELTON CI\n• Cadrer des cas d'usage utiles avant tout déploiement\n• Former les bonnes équipes au bon niveau\n• Lancer un pilote avec mesure du ROI",
+      "textPreview": "• Partir des vrais irritants d'ELTON CI | • Cadrer des cas d'usage utiles avant tout déploiement | • Former les bonnes équipes au bon niv...",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Partir des vrais irritants d'ELTON CI"
+          },
+          {
+            "index": 2,
+            "text": "• Cadrer des cas d'usage utiles avant tout"
+          },
+          {
+            "index": 3,
+            "text": "déploiement"
+          },
+          {
+            "index": 4,
+            "text": "• Former les bonnes équipes au bon niveau"
+          },
+          {
+            "index": 5,
+            "text": "• Lancer un pilote avec mesure du ROI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Partir des vrais irritants d'ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Partir des vrais irritants d'ELTON CI",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#C9D4E1"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Cadrer des cas d'usage utiles avant tout déploiement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Cadrer des cas d'usage utiles avant tout déploiement",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#C9D4E1"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Former les bonnes équipes au bon niveau",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Former les bonnes équipes au bon niveau",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#C9D4E1"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• Lancer un pilote avec mesure du ROI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Lancer un pilote avec mesure du ROI",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#C9D4E1"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4nap4r6",
+      "id": "35",
+      "bbox": [
+        812,
+        430,
+        330,
+        102
+      ],
+      "geometry": "rect",
+      "fillColor": "#244667",
+      "lineColor": "#244667",
+      "lineWidth": 1
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qd4vmtwr",
+      "id": "36",
+      "bbox": [
+        834,
+        448,
+        90,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Promesse",
+      "textPreview": "Promesse",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Promesse"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Promesse",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Promesse",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#D7E5F3",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fyxobm58",
+      "id": "37",
+      "bbox": [
+        834,
+        470,
+        286,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Faire de l'IA un levier de pilotage, de rigueur opérationnelle et de qualité de service pour ELTON CI.",
+      "textPreview": "Faire de l'IA un levier de pilotage, de rigueur opérationnelle et de qualité de service pour ELTON CI.",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Faire de l'IA un levier de pilotage, de"
+          },
+          {
+            "index": 2,
+            "text": "rigueur opérationnelle et de qualité de"
+          },
+          {
+            "index": 3,
+            "text": "service pour ELTON CI."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Faire de l'IA un levier de pilotage, de rigueur opérationnelle et de qualité de service pour ELTON CI.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Faire de l'IA un levier de pilotage, de rigueur opérationnelle et de qualité de service pour ELTON CI.",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "38",
+      "bbox": [
+        812,
+        548,
+        330,
+        86
+      ],
+      "geometry": "rect",
+      "fillColor": "#10263F",
+      "lineColor": "#2F587F",
+      "lineWidth": 1
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "39",
+      "bbox": [
+        832,
+        566,
+        292,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Important : les chiffres de ROI affichés dans ce deck sont des benchmarks de référence TransferAI, à confirmer sur les données d'ELTON CI pendant l'audit.",
+      "textPreview": "Important : les chiffres de ROI affichés dans ce deck sont des benchmarks de référence TransferAI, à confirmer sur les données d'ELTON CI...",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Important : les chiffres de ROI affichés dans ce deck"
+          },
+          {
+            "index": 2,
+            "text": "sont des benchmarks de référence TransferAI, à"
+          },
+          {
+            "index": 3,
+            "text": "confirmer sur les données d'ELTON CI pendant l'audit."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Important : les chiffres de ROI affichés dans ce deck sont des benchmarks de référence TransferAI, à confirmer sur les données d'ELTON CI pendant l'audit.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Important : les chiffres de ROI affichés dans ce deck sont des benchmarks de référence TransferAI, à confirmer sur les données d'ELTON CI pendant l'audit.",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#D7E5F3"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 40,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94fu18jq",
+      "id": "40",
+      "bbox": [
+        68,
+        682,
+        1144,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D7CEC3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 41,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjm1cfa9",
+      "id": "41",
+      "bbox": [
+        72,
+        690,
+        900,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 42,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "42",
+      "bbox": [
+        1160,
+        688,
+        36,
+        18
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

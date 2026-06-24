@@ -99,7 +99,7 @@ Deno.serve(async (request) => {
       recipient_count: number;
     };
 
-    const html = issueRecord.body_html?.trim() || renderNewsletterHtml(issueRecord);
+    const html = renderNewsletterHtml(issueRecord);
 
     if (testEmail) {
       if (!dryRun) {
@@ -141,7 +141,7 @@ Deno.serve(async (request) => {
 
     const { data: subscriptions, error: subscriptionsError } = await editorialClient
       .from("newsletter_subscriptions")
-      .select("email, language, subscribed_domains")
+      .select("email, subscribed_domains")
       .eq("status", "active");
 
     if (subscriptionsError) {
@@ -149,10 +149,6 @@ Deno.serve(async (request) => {
     }
 
     const recipients = (subscriptions ?? []).filter((subscription) => {
-      if (subscription.language !== issueRecord.language) {
-        return false;
-      }
-
       const subscriberDomains = normalizeDomains(subscription.subscribed_domains);
       if (issueRecord.target_domains.length === 0) {
         return true;

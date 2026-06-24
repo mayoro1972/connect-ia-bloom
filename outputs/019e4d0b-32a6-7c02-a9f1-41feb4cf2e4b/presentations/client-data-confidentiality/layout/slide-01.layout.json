@@ -1,0 +1,1224 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/4lzd6q",
+    "id": "4lzd6q",
+    "slide": 1,
+    "layoutId": "728d8b36-d6b4-450b-b668-45f4026448d7",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "d2e808e8-a89e-4b35-9f22-05d4115e9a57",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "728d8b36-d6b4-450b-b668-45f4026448d7",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "d2e808e8-a89e-4b35-9f22-05d4115e9a57",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "d2e808e8-a89e-4b35-9f22-05d4115e9a57",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F3EE",
+      "lineColor": "#F7F3EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "2",
+      "bbox": [
+        44,
+        52,
+        724,
+        616
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "3",
+      "bbox": [
+        802,
+        52,
+        434,
+        616
+      ],
+      "geometry": "rect",
+      "fillColor": "#16324F",
+      "lineColor": "#16324F",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/fyxobm58",
+      "id": "4",
+      "bbox": [
+        76,
+        82,
+        178,
+        62
+      ],
+      "alt": "TransferAI Africa logo",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "754ffa5f-40c5-4c9a-b59d-91059f80a999",
+        "contentType": "image/png",
+        "byteLength": 196122
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "5",
+      "bbox": [
+        76,
+        170,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "MESSAGE CLIENT",
+      "textPreview": "MESSAGE CLIENT",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "MESSAGE CLIENT"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "MESSAGE CLIENT",
+          "runs": [
+            {
+              "index": 1,
+              "text": "MESSAGE CLIENT",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#D66724",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "6",
+      "bbox": [
+        76,
+        204,
+        560,
+        88
+      ],
+      "geometry": "rect",
+      "text": "Confidentialite des informations clients",
+      "textPreview": "Confidentialite des informations clients",
+      "resolvedFontSize": 31,
+      "resolvedTextStyle": {
+        "fontSize": 31,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Confidentialite des informations"
+          },
+          {
+            "index": 2,
+            "text": "clients"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Confidentialite des informations clients",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Confidentialite des informations clients",
+              "fontSize": 31,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "7",
+      "bbox": [
+        76,
+        296,
+        560,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Protection des donnees sensibles et LLM sur mesure",
+      "textPreview": "Protection des donnees sensibles et LLM sur mesure",
+      "resolvedFontSize": 18.51,
+      "resolvedTextStyle": {
+        "fontSize": 18.51,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Protection des donnees sensibles et LLM sur mesure"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Protection des donnees sensibles et LLM sur mesure",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Protection des donnees sensibles et LLM sur mesure",
+              "fontSize": 18.51,
+              "typeface": "Aptos Display",
+              "color": "#516072",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u9knih4b",
+      "id": "8",
+      "bbox": [
+        76,
+        354,
+        574,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Vos donnees sensibles ne sont pas un carburant IA par defaut.",
+      "textPreview": "Vos donnees sensibles ne sont pas un carburant IA par defaut.",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vos donnees sensibles ne sont pas un carburant IA par"
+          },
+          {
+            "index": 2,
+            "text": "defaut."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vos donnees sensibles ne sont pas un carburant IA par defaut.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vos donnees sensibles ne sont pas un carburant IA par defaut.",
+              "fontSize": 20,
+              "typeface": "Aptos Display",
+              "color": "#16324F",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/judg7ads",
+      "id": "9",
+      "bbox": [
+        76,
+        428,
+        590,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Nous concevons des solutions IA qui s'adaptent aux contraintes de confidentialite, de conformite et de gouvernance de chaque organisation.",
+      "textPreview": "Nous concevons des solutions IA qui s'adaptent aux contraintes de confidentialite, de conformite et de gouvernance de chaque organisation.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nous concevons des solutions IA qui s'adaptent aux contraintes de"
+          },
+          {
+            "index": 2,
+            "text": "confidentialite, de conformite et de gouvernance de chaque organisation."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nous concevons des solutions IA qui s'adaptent aux contraintes de confidentialite, de conformite et de gouvernance de chaque organisation.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nous concevons des solutions IA qui s'adaptent aux contraintes de confidentialite, de conformite et de gouvernance de chaque organisation.",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "10",
+      "bbox": [
+        76,
+        546,
+        176,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "11",
+      "bbox": [
+        94,
+        564,
+        4,
+        48
+      ],
+      "geometry": "rect",
+      "fillColor": "#16324F",
+      "lineColor": "#16324F",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "12",
+      "bbox": [
+        114,
+        562,
+        124,
+        34
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "13",
+      "bbox": [
+        114,
+        600,
+        124,
+        28
+      ],
+      "geometry": "rect",
+      "text": "deny-by-default",
+      "textPreview": "deny-by-default",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "deny-by-default"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "deny-by-default",
+          "runs": [
+            {
+              "index": 1,
+              "text": "deny-by-default",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#516072",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "14",
+      "bbox": [
+        274,
+        546,
+        176,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "15",
+      "bbox": [
+        292,
+        564,
+        4,
+        48
+      ],
+      "geometry": "rect",
+      "fillColor": "#D66724",
+      "lineColor": "#D66724",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "16",
+      "bbox": [
+        312,
+        562,
+        124,
+        34
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "17",
+      "bbox": [
+        312,
+        600,
+        124,
+        28
+      ],
+      "geometry": "rect",
+      "text": "minimisation",
+      "textPreview": "minimisation",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "minimisation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "minimisation",
+          "runs": [
+            {
+              "index": 1,
+              "text": "minimisation",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#516072",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "18",
+      "bbox": [
+        472,
+        546,
+        176,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "19",
+      "bbox": [
+        490,
+        564,
+        4,
+        48
+      ],
+      "geometry": "rect",
+      "fillColor": "#2FB67E",
+      "lineColor": "#2FB67E",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "20",
+      "bbox": [
+        510,
+        562,
+        124,
+        34
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03",
+          "runs": [
+            {
+              "index": 1,
+              "text": "03",
+              "fontSize": 28,
+              "typeface": "Aptos Display",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "21",
+      "bbox": [
+        510,
+        600,
+        124,
+        28
+      ],
+      "geometry": "rect",
+      "text": "sur mesure",
+      "textPreview": "sur mesure",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "sur mesure"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "sur mesure",
+          "runs": [
+            {
+              "index": 1,
+              "text": "sur mesure",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#516072",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kb6xkf6d",
+      "id": "22",
+      "bbox": [
+        836,
+        94,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Ce que nous garantissons",
+      "textPreview": "Ce que nous garantissons",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que nous garantissons"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que nous garantissons",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que nous garantissons",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#C9D8E8",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3m94fu",
+      "id": "23",
+      "bbox": [
+        836,
+        126,
+        320,
+        108
+      ],
+      "geometry": "rect",
+      "text": "Une IA utile sans banaliser la confidentialite.",
+      "textPreview": "Une IA utile sans banaliser la confidentialite.",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une IA utile sans"
+          },
+          {
+            "index": 2,
+            "text": "banaliser la"
+          },
+          {
+            "index": 3,
+            "text": "confidentialite."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une IA utile sans banaliser la confidentialite.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une IA utile sans banaliser la confidentialite.",
+              "fontSize": 26,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2t83itgf",
+      "id": "24",
+      "bbox": [
+        836,
+        248,
+        330,
+        104
+      ],
+      "geometry": "rect",
+      "text": "Nous ne partons pas du principe que toutes les donnees peuvent etre donnees a un modele. Nous etablissons d'abord les regles de protection, puis seulement les usages autorises.",
+      "textPreview": "Nous ne partons pas du principe que toutes les donnees peuvent etre donnees a un modele. Nous etablissons d'abord les regles de protectio...",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nous ne partons pas du principe que toutes les"
+          },
+          {
+            "index": 2,
+            "text": "donnees peuvent etre donnees a un modele."
+          },
+          {
+            "index": 3,
+            "text": "Nous etablissons d'abord les regles de"
+          },
+          {
+            "index": 4,
+            "text": "protection, puis seulement les usages autorises."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nous ne partons pas du principe que toutes les donnees peuvent etre donnees a un modele. Nous etablissons d'abord les regles de protection, puis seulement les usages autorises.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nous ne partons pas du principe que toutes les donnees peuvent etre donnees a un modele. Nous etablissons d'abord les regles de protection, puis seulement les usages autorises.",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#E7EEF6"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re1w7mp0",
+      "id": "25",
+      "bbox": [
+        836,
+        392,
+        330,
+        150
+      ],
+      "geometry": "rect",
+      "fillColor": "#27496A",
+      "lineColor": "#27496A",
+      "lineWidth": 1
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzupwb2h",
+      "id": "26",
+      "bbox": [
+        864,
+        420,
+        120,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Positionnement",
+      "textPreview": "Positionnement",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Positionnement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Positionnement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Positionnement",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#BFD0E2",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9knih4by",
+      "id": "27",
+      "bbox": [
+        864,
+        452,
+        274,
+        64
+      ],
+      "geometry": "rect",
+      "text": "Le LLM s'adapte a votre gouvernance, a vos contraintes de conformite et a votre niveau d'acceptation du risque.",
+      "textPreview": "Le LLM s'adapte a votre gouvernance, a vos contraintes de conformite et a votre niveau d'acceptation du risque.",
+      "resolvedFontSize": 14.51,
+      "resolvedTextStyle": {
+        "fontSize": 14.51,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le LLM s'adapte a votre gouvernance,"
+          },
+          {
+            "index": 2,
+            "text": "a vos contraintes de conformite et a"
+          },
+          {
+            "index": 3,
+            "text": "votre niveau d'acceptation du risque."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le LLM s'adapte a votre gouvernance, a vos contraintes de conformite et a votre niveau d'acceptation du risque.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le LLM s'adapte a votre gouvernance, a vos contraintes de conformite et a votre niveau d'acceptation du risque.",
+              "fontSize": 14.51,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2p8nqxs7",
+      "id": "28",
+      "bbox": [
+        60,
+        680,
+        1160,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3CC",
+      "lineColor": "#D9D3CC",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ra5gbq1o",
+      "id": "29",
+      "bbox": [
+        60,
+        688,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Confidentialite des informations clients | Support commercial",
+      "textPreview": "TransferAI Africa | Confidentialite des informations clients | Support commercial",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Confidentialite des informations clients | Support commercial"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Confidentialite des informations clients | Support commercial",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Confidentialite des informations clients | Support commercial",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#516072"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "30",
+      "bbox": [
+        1140,
+        686,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#10213D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,17 @@
+export {
+  assets,
+  palette,
+  deck,
+  fullBleed,
+  panel,
+  rule,
+  kicker,
+  title,
+  body,
+  bulletList,
+  metricCard,
+  chip,
+  addLogo,
+  addPartnerStrip,
+  footer,
+} from "../transferai-company/shared.mjs";

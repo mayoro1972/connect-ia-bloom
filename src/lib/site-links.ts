@@ -20,9 +20,14 @@ const auditRequestUrl =
   import.meta.env.VITE_AUDIT_REQUEST_URL ||
   "/demande-audit-gratuit";
 
-const auditQuestionnaireUrl =
+const rawAuditQuestionnaireUrl =
   import.meta.env.VITE_AUDIT_FORM_URL ||
-  "/formulaire-audit-ia/index.html";
+  "/questionnaire-audit";
+
+const auditQuestionnaireUrl =
+  rawAuditQuestionnaireUrl.includes("/formulaire-audit-ia/index.html")
+    ? "/questionnaire-audit"
+    : rawAuditQuestionnaireUrl;
 
 export const publicSiteUrl =
   (import.meta.env.VITE_PUBLIC_SITE_URL || "https://www.transferai.ci").replace(/\/$/, "");
@@ -48,6 +53,17 @@ export const directLinks = {
   auditQuestionnaire: auditQuestionnaireUrl,
   calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
   map: "https://www.google.com/maps/search/?api=1&query=Nettelecomci%2C+Residence+de+la+Paix%2C+Riviera+3%2C+carrefour+Sainte+Famille%2C+Abidjan%2C+Cote+d%27Ivoire",
+};
+
+export const buildPackAwareAuditAccessPath = (packId?: string | null) => {
+  const normalizedPackId = packId?.trim();
+
+  if (!normalizedPackId) {
+    return "/acces-formulaire-audit";
+  }
+
+  const params = new URLSearchParams({ pack_id: normalizedPackId });
+  return `/acces-formulaire-audit?${params.toString()}`;
 };
 
 export const appointmentBookings: Record<AppointmentSource, string> = {

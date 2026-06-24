@@ -12,9 +12,9 @@ const sectionCopy = {
     titleHighlight: "TransferAI",
     title2: " Africa ?",
     reasons: {
-      local: { title: "Ancrage Côte d'Ivoire & Afrique", desc: "Une offre pensée pour les réalités locales, portée par la diaspora et orientée vers l'impact sur le continent." },
-      practical: { title: "Formation utile et appliquée", desc: "Des cas concrets, des outils directement mobilisables et une pédagogie tournée vers le résultat métier." },
-      flexible: { title: "Des parcours pour particuliers et entreprises", desc: "Catalogue, parcours, certification, formats live et formation d'équipes : chacun peut trouver le bon niveau d'entrée." },
+      local: { title: "Ancrage Côte d'Ivoire & Afrique", desc: "Une offre pensée pour les réalités locales, avec des cas d'usage adaptés aux entreprises et institutions du continent." },
+      practical: { title: "Audit, formation et exécution", desc: "TransferAI ne s'arrête pas à la sensibilisation : nous relions cadrage, montée en compétences et premiers usages concrets." },
+      flexible: { title: "Une approche orientée résultat", desc: "L'objectif n'est pas de vendre l'IA en général, mais d'identifier les gains rapides les plus utiles à vos équipes." },
     },
   },
   en: {
@@ -22,9 +22,9 @@ const sectionCopy = {
     titleHighlight: "TransferAI",
     title2: " Africa?",
     reasons: {
-      local: { title: "Côte d'Ivoire & Africa focus", desc: "An offer designed for local realities, powered by the diaspora and focused on tangible impact across the continent." },
-      practical: { title: "Useful, applied training", desc: "Concrete use cases, directly usable tools, and a pedagogy focused on professional outcomes." },
-      flexible: { title: "Paths for individuals and companies", desc: "Catalogue, guided paths, certification, live formats, and team training so everyone can find the right entry point." },
+      local: { title: "Côte d'Ivoire & Africa focus", desc: "An offer designed for local realities, with AI use cases adapted to companies and institutions across the continent." },
+      practical: { title: "Audit, training, and execution", desc: "TransferAI goes beyond awareness by connecting scoping, upskilling, and the first concrete business uses." },
+      flexible: { title: "A results-oriented approach", desc: "The goal is not to sell AI in the abstract, but to identify the quickest wins that matter to your teams." },
     },
   },
 } as const;

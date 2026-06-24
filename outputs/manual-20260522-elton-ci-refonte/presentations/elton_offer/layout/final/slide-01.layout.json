@@ -1,0 +1,1435 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/pvtjta",
+    "id": "pvtjta",
+    "slide": 1,
+    "layoutId": "c86286a2-50c4-412e-9eaa-44d808bab499",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "63687533-61ce-41b6-a861-5742f33e5edf",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Avenir Next",
+      "Georgia"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "c86286a2-50c4-412e-9eaa-44d808bab499",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "63687533-61ce-41b6-a861-5742f33e5edf",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "63687533-61ce-41b6-a861-5742f33e5edf",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F6F1EA",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u54zid",
+      "id": "2",
+      "bbox": [
+        58,
+        64,
+        6,
+        58
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "3",
+      "bbox": [
+        82,
+        66,
+        360,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROPOSITION CIBLÉE | DOCUMENT DE TRAVAIL",
+      "textPreview": "PROPOSITION CIBLÉE | DOCUMENT DE TRAVAIL",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROPOSITION CIBLÉE | DOCUMENT DE TRAVAIL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROPOSITION CIBLÉE | DOCUMENT DE TRAVAIL",
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROPOSITION CIBLÉE | DOCUMENT DE TRAVAIL",
+              "fontSize": 10,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u9knih4b",
+      "id": "4",
+      "bbox": [
+        82,
+        92,
+        340,
+        18
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa x ELTON Oil CI",
+      "textPreview": "TransferAI Africa x ELTON Oil CI",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa x ELTON Oil CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa x ELTON Oil CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa x ELTON Oil CI",
+              "fontSize": 10,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/judg7ads",
+      "id": "5",
+      "bbox": [
+        58,
+        156,
+        670,
+        170
+      ],
+      "geometry": "rect",
+      "text": "Faire de l'IA un levier opérationnel utile pour ELTON Oil CI, sans effet d'annonce ni déploiement prématuré.",
+      "textPreview": "Faire de l'IA un levier opérationnel utile pour ELTON Oil CI, sans effet d'annonce ni déploiement prématuré.",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Faire de l'IA un levier opérationnel utile pour"
+          },
+          {
+            "index": 2,
+            "text": "ELTON Oil CI, sans effet d'annonce ni"
+          },
+          {
+            "index": 3,
+            "text": "déploiement prématuré."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Faire de l'IA un levier opérationnel utile pour ELTON Oil CI, sans effet d'annonce ni déploiement prématuré.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Faire de l'IA un levier opérationnel utile pour ELTON Oil CI, sans effet d'annonce ni déploiement prématuré.",
+              "fontSize": 28,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cfa9w3m9",
+      "id": "6",
+      "bbox": [
+        58,
+        346,
+        610,
+        96
+      ],
+      "geometry": "rect",
+      "text": "Notre recommandation : commencer par un audit ciblé, former les bonnes populations, puis lancer un premier pilote sur des sujets directement liés aux comptes professionnels, à la flotte, à la relation client et au reporting.",
+      "textPreview": "Notre recommandation : commencer par un audit ciblé, former les bonnes populations, puis lancer un premier pilote sur des sujets directem...",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Notre recommandation : commencer par un audit ciblé, former les bonnes populations,"
+          },
+          {
+            "index": 2,
+            "text": "puis lancer un premier pilote sur des sujets directement liés aux comptes professionnels,"
+          },
+          {
+            "index": 3,
+            "text": "à la flotte, à la relation client et au reporting."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Notre recommandation : commencer par un audit ciblé, former les bonnes populations, puis lancer un premier pilote sur des sujets directement liés aux comptes professionnels, à la flotte, à la relation client et au reporting.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Notre recommandation : commencer par un audit ciblé, former les bonnes populations, puis lancer un premier pilote sur des sujets directement liés aux comptes professionnels, à la flotte, à la relation client et au reporting.",
+              "fontSize": 15,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1032lszq",
+      "id": "7",
+      "bbox": [
+        58,
+        452,
+        610,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Ce que la direction doit obtenir rapidement : des priorités claires, des cas d'usage crédibles, une trajectoire de déploiement maîtrisée et des critères simples pour décider de la suite.",
+      "textPreview": "Ce que la direction doit obtenir rapidement : des priorités claires, des cas d'usage crédibles, une trajectoire de déploiement maîtrisée ...",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que la direction doit obtenir rapidement : des priorités claires, des cas d'usage crédibles,"
+          },
+          {
+            "index": 2,
+            "text": "une trajectoire de déploiement maîtrisée et des critères simples pour décider de la suite."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que la direction doit obtenir rapidement : des priorités claires, des cas d'usage crédibles, une trajectoire de déploiement maîtrisée et des critères simples pour décider de la suite.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que la direction doit obtenir rapidement : des priorités claires, des cas d'usage crédibles, une trajectoire de déploiement maîtrisée et des critères simples pour décider de la suite.",
+              "fontSize": 13.51,
+              "typeface": "Avenir Next",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "8",
+      "bbox": [
+        764,
+        84,
+        430,
+        450
+      ],
+      "geometry": "rect",
+      "fillColor": "#102338",
+      "lineColor": "#102338",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "9",
+      "bbox": [
+        802,
+        120,
+        120,
+        18
+      ],
+      "geometry": "rect",
+      "text": "THÈSE",
+      "textPreview": "THÈSE",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "THÈSE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "THÈSE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "THÈSE",
+              "fontSize": 10,
+              "typeface": "Avenir Next",
+              "color": "#D7E1EE",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "10",
+      "bbox": [
+        802,
+        160,
+        340,
+        142
+      ],
+      "geometry": "rect",
+      "text": "L'offre la plus crédible pour ELTON n'est pas un catalogue de formations. C'est une démarche courte, cadrée et utile qui relie diagnostic, compétences, gouvernance et premier terrain d'exécution.",
+      "textPreview": "L'offre la plus crédible pour ELTON n'est pas un catalogue de formations. C'est une démarche courte, cadrée et utile qui relie diagnostic...",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L'offre la plus crédible pour"
+          },
+          {
+            "index": 2,
+            "text": "ELTON n'est pas un catalogue"
+          },
+          {
+            "index": 3,
+            "text": "de formations. C'est une"
+          },
+          {
+            "index": 4,
+            "text": "démarche courte, cadrée et"
+          },
+          {
+            "index": 5,
+            "text": "utile qui relie diagnostic,"
+          },
+          {
+            "index": 6,
+            "text": "compétences, gouvernance et"
+          },
+          {
+            "index": 7,
+            "text": "premier terrain d'exécution."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L'offre la plus crédible pour ELTON n'est pas un catalogue de formations. C'est une démarche courte, cadrée et utile qui relie diagnostic, compétences, gouvernance et premier terrain d'exécution.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'offre la plus crédible pour ELTON n'est pas un catalogue de formations. C'est une démarche courte, cadrée et utile qui relie diagnostic, compétences, gouvernance et premier terrain d'exécution.",
+              "fontSize": 21,
+              "typeface": "Georgia",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "11",
+      "bbox": [
+        802,
+        330,
+        340,
+        94
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi cette approche tient mieux face à un DG : elle évite les promesses vagues, part des priorités métier, et prépare une décision d'investissement sur des bases observables.",
+      "textPreview": "Pourquoi cette approche tient mieux face à un DG : elle évite les promesses vagues, part des priorités métier, et prépare une décision d'...",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi cette approche tient mieux face à un DG : elle"
+          },
+          {
+            "index": 2,
+            "text": "évite les promesses vagues, part des priorités métier, et"
+          },
+          {
+            "index": 3,
+            "text": "prépare une décision d'investissement sur des bases"
+          },
+          {
+            "index": 4,
+            "text": "observables."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi cette approche tient mieux face à un DG : elle évite les promesses vagues, part des priorités métier, et prépare une décision d'investissement sur des bases observables.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi cette approche tient mieux face à un DG : elle évite les promesses vagues, part des priorités métier, et prépare une décision d'investissement sur des bases observables.",
+              "fontSize": 13,
+              "typeface": "Avenir Next",
+              "color": "#D7E1EE"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "12",
+      "bbox": [
+        802,
+        442,
+        300,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#1D8A78",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knih4byh",
+      "id": "13",
+      "bbox": [
+        802,
+        458,
+        320,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Audit d'entrée, formation ciblée, cadre de confiance, puis pilote seulement si le terrain le justifie.",
+      "textPreview": "Audit d'entrée, formation ciblée, cadre de confiance, puis pilote seulement si le terrain le justifie.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Audit d'entrée, formation ciblée, cadre de confiance,"
+          },
+          {
+            "index": 2,
+            "text": "puis pilote seulement si le terrain le justifie."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Audit d'entrée, formation ciblée, cadre de confiance, puis pilote seulement si le terrain le justifie.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Audit d'entrée, formation ciblée, cadre de confiance, puis pilote seulement si le terrain le justifie.",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "14",
+      "bbox": [
+        58,
+        566,
+        1,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "15",
+      "bbox": [
+        74,
+        572,
+        170,
+        36
+      ],
+      "geometry": "rect",
+      "text": "0 FCFA",
+      "textPreview": "0 FCFA",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "0 FCFA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "0 FCFA",
+          "runs": [
+            {
+              "index": 1,
+              "text": "0 FCFA",
+              "fontSize": 27,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0z61032",
+      "id": "16",
+      "bbox": [
+        74,
+        612,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Audit d'entrée",
+      "textPreview": "Audit d'entrée",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Audit d'entrée"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Audit d'entrée",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Audit d'entrée",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kf6dcbul",
+      "id": "17",
+      "bbox": [
+        74,
+        630,
+        210,
+        24
+      ],
+      "geometry": "rect",
+      "text": "point de départ recommandé",
+      "textPreview": "point de départ recommandé",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "point de départ recommandé"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "point de départ recommandé",
+          "runs": [
+            {
+              "index": 1,
+              "text": "point de départ recommandé",
+              "fontSize": 8.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "18",
+      "bbox": [
+        340,
+        566,
+        1,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#1D8A78",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "19",
+      "bbox": [
+        356,
+        572,
+        170,
+        36
+      ],
+      "geometry": "rect",
+      "text": "45 min",
+      "textPreview": "45 min",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "45 min"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "45 min",
+          "runs": [
+            {
+              "index": 1,
+              "text": "45 min",
+              "fontSize": 27,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "20",
+      "bbox": [
+        356,
+        612,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Échange de cadrage",
+      "textPreview": "Échange de cadrage",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Échange de cadrage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Échange de cadrage",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Échange de cadrage",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "21",
+      "bbox": [
+        356,
+        630,
+        210,
+        24
+      ],
+      "geometry": "rect",
+      "text": "avec la direction ou son représentant",
+      "textPreview": "avec la direction ou son représentant",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "avec la direction ou son représentant"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "avec la direction ou son représentant",
+          "runs": [
+            {
+              "index": 1,
+              "text": "avec la direction ou son représentant",
+              "fontSize": 8.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "22",
+      "bbox": [
+        622,
+        566,
+        1,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "23",
+      "bbox": [
+        638,
+        572,
+        170,
+        36
+      ],
+      "geometry": "rect",
+      "text": "4",
+      "textPreview": "4",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4",
+          "runs": [
+            {
+              "index": 1,
+              "text": "4",
+              "fontSize": 27,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "24",
+      "bbox": [
+        638,
+        612,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Chantiers prioritaires",
+      "textPreview": "Chantiers prioritaires",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Chantiers prioritaires"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Chantiers prioritaires",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Chantiers prioritaires",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "25",
+      "bbox": [
+        638,
+        630,
+        210,
+        24
+      ],
+      "geometry": "rect",
+      "text": "comptes pro, flotte, service, reporting",
+      "textPreview": "comptes pro, flotte, service, reporting",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "comptes pro, flotte, service, reporting"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "comptes pro, flotte, service, reporting",
+          "runs": [
+            {
+              "index": 1,
+              "text": "comptes pro, flotte, service, reporting",
+              "fontSize": 8.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "26",
+      "bbox": [
+        904,
+        566,
+        1,
+        60
+      ],
+      "geometry": "rect",
+      "fillColor": "#1D8A78",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "27",
+      "bbox": [
+        920,
+        572,
+        170,
+        36
+      ],
+      "geometry": "rect",
+      "text": "1",
+      "textPreview": "1",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "1",
+              "fontSize": 27,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "28",
+      "bbox": [
+        920,
+        612,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Feuille de route",
+      "textPreview": "Feuille de route",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Feuille de route"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Feuille de route",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Feuille de route",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "29",
+      "bbox": [
+        920,
+        630,
+        210,
+        24
+      ],
+      "geometry": "rect",
+      "text": "orientée décision et exécution",
+      "textPreview": "orientée décision et exécution",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "orientée décision et exécution"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "orientée décision et exécution",
+          "runs": [
+            {
+              "index": 1,
+              "text": "orientée décision et exécution",
+              "fontSize": 8.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t47y1kre",
+      "id": "30",
+      "bbox": [
+        58,
+        682,
+        1164,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D1C6",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0je9cvix",
+      "id": "31",
+      "bbox": [
+        58,
+        689,
+        920,
+        14
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Couverture",
+      "textPreview": "TransferAI Africa | Offre ciblée ELTON Oil CI | Couverture",
+      "resolvedFontSize": 7.51,
+      "resolvedTextStyle": {
+        "fontSize": 7.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Couverture"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Couverture",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Couverture",
+              "fontSize": 7.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/byhgn29g",
+      "id": "32",
+      "bbox": [
+        1180,
+        685,
+        44,
+        18
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 11,
+              "typeface": "Georgia",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

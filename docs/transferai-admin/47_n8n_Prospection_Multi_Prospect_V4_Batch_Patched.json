@@ -1,0 +1,511 @@
+{
+  "name": "TransferAI Prospecting Multi-Prospect V4 Batch Orchestrator",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-prospecting-multi-prospect-v4-batch-orchestrator",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    { "name": "transferai" },
+    { "name": "prospection" },
+    { "name": "n8n" },
+    { "name": "multi-prospect" },
+    { "name": "batch" }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [200, 180],
+      "parameters": {}
+    },
+    {
+      "name": "Daily Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [200, 360],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Set Batch Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [460, 260],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": false,
+        "fields": {
+          "values": [
+            {
+              "name": "source_backend",
+              "type": "string",
+              "stringValue": "={{$json.source_backend || 'supabase'}}"
+            },
+            {
+              "name": "batch_fetch_limit",
+              "type": "string",
+              "stringValue": "={{$json.batch_fetch_limit || '25'}}"
+            },
+            {
+              "name": "daily_send_limit",
+              "type": "string",
+              "stringValue": "={{$json.daily_send_limit || '5'}}"
+            },
+            {
+              "name": "max_attempts_per_prospect",
+              "type": "string",
+              "stringValue": "={{$json.max_attempts_per_prospect || '3'}}"
+            },
+            {
+              "name": "min_confidence_score",
+              "type": "string",
+              "stringValue": "={{$json.min_confidence_score || '0.45'}}"
+            },
+            {
+              "name": "batch_run_label",
+              "type": "string",
+              "stringValue": "={{$json.batch_run_label || 'weekday-morning-run'}}"
+            },
+            {
+              "name": "child_workflow_id_v3",
+              "type": "string",
+              "stringValue": "={{$json.child_workflow_id_v3 || $env.N8N_CHILD_WORKFLOW_ID_V3 || 'REPLACE_WITH_V3_WORKFLOW_ID'}}"
+            },
+            {
+              "name": "child_workflow_label_v3",
+              "type": "string",
+              "stringValue": "={{$json.child_workflow_label_v3 || 'TransferAI Prospecting V3 CRM Enhanced [FINAL]-11'}}"
+            },
+            {
+              "name": "booking_link_45min",
+              "type": "string",
+              "stringValue": "={{$json.booking_link_45min || $env.BOOKING_LINK_45MIN || 'https://calendly.com/your-link'}}"
+            },
+            {
+              "name": "active_niche_list_csv",
+              "type": "string",
+              "stringValue": "={{$json.active_niche_list_csv || 'assistant_direction_documentaire'}}"
+            },
+            {
+              "name": "active_campaign_label",
+              "type": "string",
+              "stringValue": "={{$json.active_campaign_label || 'S1-Assistanat-Administratif'}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Fetch Today Outreach Count",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [720, 100],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/outreach_attempts?select=id&channel=eq.email&delivery_status=eq.submitted&sent_at=gte.' + new Date().toISOString().slice(0,10)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.SUPABASE_SERVICE_ROLE_KEY}}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "name": "Create Batch Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [720, 420],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospecting_batch_runs'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=representation" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ run_label: $json.batch_run_label, source_backend: $json.source_backend, source_snapshot: $json, batch_fetch_limit: Number($json.batch_fetch_limit || 25), daily_send_limit: Number($json.daily_send_limit || 5), max_attempts_per_prospect: Number($json.max_attempts_per_prospect || 3), min_confidence_score: Number($json.min_confidence_score || 0.45), active_niche_list_csv: $json.active_niche_list_csv || '', active_campaign_label: $json.active_campaign_label || '', status: 'started', started_at: new Date().toISOString() })}}",
+        "options": {}
+      }
+    },
+    {
+      "name": "If Supabase Source",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [720, 260],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.source_backend}}",
+              "operation": "equal",
+              "value2": "supabase"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Fetch Prospects From Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [980, 140],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?select=*&status=eq.ready&paused=eq.false&order=next_action_at.asc.nullslast,updated_at.asc&limit=' + $json.batch_fetch_limit}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.SUPABASE_SERVICE_ROLE_KEY}}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "name": "Normalize Supabase Prospects",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1240, 140],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = $json || [];\nconst items = Array.isArray(rows) ? rows : [];\nreturn items.map((row, index) => ({ json: {\n  prospect_id: row.prospect_id || row.id || `supabase-${index + 1}`,\n  organization_name: row.organization_name || row.company_name || row.name || '',\n  website: row.website || row.domain || '',\n  country: row.country || \"Côte d'Ivoire\",\n  organization_type: row.organization_type || row.account_type || 'organisation à qualifier',\n  sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n  decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n  target_email: row.target_email || row.email || '',\n  custom_page_paths_csv: row.custom_page_paths_csv || '',\n  booking_link_45min: row.booking_link_45min || $env.BOOKING_LINK_45MIN || '',\n  commercial_priority_default: row.commercial_priority_default || 'tier1',\n  research_scope: row.research_scope || 'public_web_only',\n  source_backend: 'supabase',\n  raw_source_id: row.id || null,\n  outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n  last_response_status: row.last_response_status || '',\n  last_sequence_result: row.last_sequence_result || '',\n  stop_reason: row.stop_reason || '',\n  paused: Boolean(row.paused),\n  do_not_contact: Boolean(row.do_not_contact),\n  niche_status: row.niche_status || '',\n  next_action_at: row.next_action_at || null\n} }));"
+      }
+    },
+    {
+      "name": "If Airtable Source",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [980, 380],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.source_backend}}",
+              "operation": "equal",
+              "value2": "airtable"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Fetch Prospects From Airtable",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1240, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "={{'https://api.airtable.com/v0/' + $env.AIRTABLE_BASE_ID + '/' + $env.AIRTABLE_TABLE_NAME + '?maxRecords=' + $json.batch_fetch_limit + '&view=' + encodeURIComponent($env.AIRTABLE_READY_VIEW || 'Ready For Outreach')}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.AIRTABLE_API_KEY}}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "name": "Normalize Airtable Prospects",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1500, 300],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const records = Array.isArray($json.records) ? $json.records : [];\nreturn records.map((record, index) => {\n  const row = record.fields || {};\n  return { json: {\n    prospect_id: row.prospect_id || record.id || `airtable-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website: row.website || row.domain || '',\n    country: row.country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: row.booking_link_45min || $env.BOOKING_LINK_45MIN || '',\n    commercial_priority_default: row.commercial_priority_default || 'tier1',\n    research_scope: row.research_scope || 'public_web_only',\n    source_backend: 'airtable',\n    raw_source_id: record.id,\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null\n  } };\n});"
+      }
+    },
+    {
+      "name": "Fetch Prospects From Google Sheets CSV",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1240, 500],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.GOOGLE_SHEETS_CSV_URL}}",
+        "authentication": "none",
+        "options": {}
+      }
+    },
+    {
+      "name": "Normalize Google Sheets Prospects",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1500, 500],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const raw = String($json.body || $json.data || $json || '');\nconst lines = raw.split(/\\r?\\n/).filter(Boolean);\nif (!lines.length) return [];\nconst headers = lines.shift().split(',').map((h) => h.trim());\nfunction parseLine(line) {\n  const values = line.split(',');\n  const obj = {};\n  headers.forEach((header, index) => { obj[header] = (values[index] || '').trim(); });\n  return obj;\n}\nreturn lines.map((line, index) => {\n  const row = parseLine(line);\n  return { json: {\n    prospect_id: row.prospect_id || `gsheet-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website: row.website || row.domain || '',\n    country: row.country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: row.booking_link_45min || $env.BOOKING_LINK_45MIN || '',\n    commercial_priority_default: row.commercial_priority_default || 'tier1',\n    research_scope: row.research_scope || 'public_web_only',\n    source_backend: 'google_sheets',\n    raw_source_id: row.prospect_id || `gsheet-${index + 1}`,\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    paused: ['true','1','yes'].includes(String(row.paused || '').toLowerCase()),\n    do_not_contact: ['true','1','yes'].includes(String(row.do_not_contact || '').toLowerCase()),\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null\n  } };\n});"
+      }
+    },
+    {
+      "name": "Build Eligible Prospect Queue",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1760, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const items = $input.all().map((item) => item.json);\nconst config = $('Set Batch Config').first().json;\nconst sentToday = Array.isArray($('Fetch Today Outreach Count').first().json) ? $('Fetch Today Outreach Count').first().json.length : 0;\nconst batchRunResponse = $('Create Batch Run').first().json;\nconst batchRunRow = Array.isArray(batchRunResponse) ? batchRunResponse[0] : batchRunResponse;\nconst batchRunId = batchRunRow?.id || null;\nconst dailyLimit = Number(config.daily_send_limit || 5);\nconst maxAttempts = Number(config.max_attempts_per_prospect || 3);\nconst remainingCapacity = Math.max(dailyLimit - sentToday, 0);\nconst activeNiches = String(config.active_niche_list_csv || '').split(',').map((n) => n.trim()).filter(Boolean);\nlet scheduled = 0;\nconst outputs = [];\nfor (const prospect of items) {\n  let processDecision = 'skip';\n  let stopReason = '';\n  const prospectNiche = String(prospect.niche_status || '').trim();\n  const nicheMatch = activeNiches.length === 0 || activeNiches.includes(prospectNiche);\n  if (!nicheMatch) {\n    stopReason = 'inactive_niche';\n  } else if (!prospect.organization_name || !prospect.website) {\n    stopReason = 'missing_minimum_profile';\n  } else if (prospect.do_not_contact) {\n    stopReason = 'do_not_contact';\n  } else if (prospect.paused) {\n    stopReason = 'prospect_paused';\n  } else if (prospect.stop_reason) {\n    stopReason = prospect.stop_reason;\n  } else if (Number(prospect.outreach_attempt_count || 0) >= maxAttempts) {\n    stopReason = 'max_attempts_reached';\n  } else if (['interested','meeting_booked','not_interested','unsubscribed'].includes(String(prospect.last_response_status || '').toLowerCase())) {\n    stopReason = 'sequence_already_closed';\n  } else if (String(prospect.last_sequence_result || '').toLowerCase() === 'no_niche') {\n    stopReason = 'niche_not_relevant';\n  } else if (scheduled >= remainingCapacity) {\n    stopReason = 'daily_quota_reached';\n  } else {\n    processDecision = 'process_now';\n    scheduled += 1;\n  }\n  outputs.push({\n    json: {\n      ...prospect,\n      batch_run_id: batchRunId,\n      batch_run_label: config.batch_run_label,\n      active_campaign_label: config.active_campaign_label || null,\n      active_niche_list_csv: config.active_niche_list_csv || '',\n      daily_send_limit: dailyLimit,\n      sent_today: sentToday,\n      remaining_capacity: remainingCapacity,\n      process_decision: processDecision,\n      batch_stop_reason: stopReason || null\n    }\n  });\n}\nreturn outputs;"
+      }
+    },
+    {
+      "name": "If Prospect Eligible",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2020, 300],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.process_decision}}",
+              "operation": "equal",
+              "value2": "process_now"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Execute Prospect Workflow V3",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [2280, 220],
+      "parameters": {
+        "workflowId": "={{$json.child_workflow_id_v3 || $env.N8N_CHILD_WORKFLOW_ID_V3 || \"REPLACE_WITH_V3_WORKFLOW_ID\"}}",
+        "mode": "each",
+        "options": {}
+      }
+    },
+    {
+      "name": "Mark Dispatched To V3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [2520, 220],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "batch_status",
+              "type": "string",
+              "stringValue": "dispatched_to_v3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Mark Skipped In Batch",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [2280, 420],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "batch_status",
+              "type": "string",
+              "stringValue": "skipped_in_batch"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Merge Batch Outcomes",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [2760, 320],
+      "parameters": {
+        "mode": "append"
+      }
+    },
+    {
+      "name": "Build Batch Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3000, 320],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const items = $input.all().map((item) => item.json);\nconst config = $('Set Batch Config').first().json;\nconst processed = items.filter((item) => item.batch_status === 'dispatched_to_v3').length;\nconst skipped = items.filter((item) => item.batch_status === 'skipped_in_batch').length;\nconst skipReasons = {};\nfor (const item of items.filter((entry) => entry.batch_stop_reason)) {\n  skipReasons[item.batch_stop_reason] = (skipReasons[item.batch_stop_reason] || 0) + 1;\n}\nconst renderedCataloguesCount = items.filter((item) => item.catalogue_artifact).length;\nconst renderedDecksCount = items.filter((item) => item.deck_artifact).length;\nconst renderErrorCount = items.filter((item) => item.render_errors && Object.keys(item.render_errors).length > 0).length;\nconst attachmentsTotalCount = items.reduce((sum, item) => sum + Number(item.attachments_count || 0), 0);\nconst batchRunResponse = $('Create Batch Run').first().json;\nconst batchRunRow = Array.isArray(batchRunResponse) ? batchRunResponse[0] : batchRunResponse;\nreturn [{ json: {\n  batch_run_id: batchRunRow?.id || null,\n  batch_run_label: items[0]?.batch_run_label || batchRunRow?.run_label || 'batch-run',\n  active_campaign_label: items[0]?.active_campaign_label || config.active_campaign_label || null,\n  active_niche_list_csv: items[0]?.active_niche_list_csv || config.active_niche_list_csv || '',\n  child_workflow_id_v3: items[0]?.child_workflow_id_v3 || config.child_workflow_id_v3 || null,\n  child_workflow_label_v3: items[0]?.child_workflow_label_v3 || config.child_workflow_label_v3 || null,\n  processed_count: processed,\n  skipped_count: skipped,\n  rendered_catalogues_count: renderedCataloguesCount,\n  rendered_decks_count: renderedDecksCount,\n  rendered_attachments_total: attachmentsTotalCount,\n  render_error_count: renderErrorCount,\n  skip_reasons: skipReasons,\n  generated_at: new Date().toISOString()\n} }];"
+      }
+    },
+    {
+      "name": "Log Processed Batch Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2760, 220],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospecting_batch_run_items'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ batch_run_id: $json.batch_run_id, prospect_id: $json.prospect_id || null, pack_id: $json.pack_id || null, organization_name: $json.organization_name || null, website: $json.website || null, process_decision: $json.process_decision || 'process_now', batch_status: $json.batch_status || 'dispatched_to_v3', batch_stop_reason: $json.batch_stop_reason || null, active_campaign_label: $json.active_campaign_label || null, niche_status: $json.niche_status || null })}}",
+        "options": {}
+      }
+    },
+    {
+      "name": "Log Skipped Batch Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2760, 420],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospecting_batch_run_items'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ batch_run_id: $json.batch_run_id, prospect_id: $json.prospect_id || null, pack_id: $json.pack_id || null, organization_name: $json.organization_name || null, website: $json.website || null, process_decision: $json.process_decision || 'skip', batch_status: $json.batch_status || 'skipped_in_batch', batch_stop_reason: $json.batch_stop_reason || null, active_campaign_label: $json.active_campaign_label || null, niche_status: $json.niche_status || null })}}",
+        "options": {}
+      }
+    },
+    {
+      "name": "Finalize Batch Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [3240, 320],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospecting_batch_runs?id=eq.' + encodeURIComponent($json.batch_run_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "={{\"Bearer \" + $env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ processed_count: $json.processed_count, skipped_count: $json.skipped_count, status: 'completed', completed_at: new Date().toISOString(), failure_reason: null })}}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Set Batch Config", "type": "main", "index": 0 }]]
+    },
+    "Daily Schedule Trigger": {
+      "main": [[{ "node": "Set Batch Config", "type": "main", "index": 0 }]]
+    },
+    "Set Batch Config": {
+      "main": [
+        [{ "node": "Fetch Today Outreach Count", "type": "main", "index": 0 }],
+        [{ "node": "If Supabase Source", "type": "main", "index": 0 }],
+        [{ "node": "Create Batch Run", "type": "main", "index": 0 }]
+      ]
+    },
+    "If Supabase Source": {
+      "main": [
+        [{ "node": "Fetch Prospects From Supabase", "type": "main", "index": 0 }],
+        [{ "node": "If Airtable Source", "type": "main", "index": 0 }]
+      ]
+    },
+    "Fetch Prospects From Supabase": {
+      "main": [[{ "node": "Normalize Supabase Prospects", "type": "main", "index": 0 }]]
+    },
+    "Normalize Supabase Prospects": {
+      "main": [[{ "node": "Build Eligible Prospect Queue", "type": "main", "index": 0 }]]
+    },
+    "If Airtable Source": {
+      "main": [
+        [{ "node": "Fetch Prospects From Airtable", "type": "main", "index": 0 }],
+        [{ "node": "Fetch Prospects From Google Sheets CSV", "type": "main", "index": 0 }]
+      ]
+    },
+    "Fetch Prospects From Airtable": {
+      "main": [[{ "node": "Normalize Airtable Prospects", "type": "main", "index": 0 }]]
+    },
+    "Normalize Airtable Prospects": {
+      "main": [[{ "node": "Build Eligible Prospect Queue", "type": "main", "index": 0 }]]
+    },
+    "Fetch Prospects From Google Sheets CSV": {
+      "main": [[{ "node": "Normalize Google Sheets Prospects", "type": "main", "index": 0 }]]
+    },
+    "Normalize Google Sheets Prospects": {
+      "main": [[{ "node": "Build Eligible Prospect Queue", "type": "main", "index": 0 }]]
+    },
+    "Build Eligible Prospect Queue": {
+      "main": [[{ "node": "If Prospect Eligible", "type": "main", "index": 0 }]]
+    },
+    "If Prospect Eligible": {
+      "main": [
+        [{ "node": "Execute Prospect Workflow V3", "type": "main", "index": 0 }],
+        [{ "node": "Mark Skipped In Batch", "type": "main", "index": 0 }]
+      ]
+    },
+    "Execute Prospect Workflow V3": {
+      "main": [[{ "node": "Mark Dispatched To V3", "type": "main", "index": 0 }]]
+    },
+    "Mark Dispatched To V3": {
+      "main": [[{ "node": "Log Processed Batch Item", "type": "main", "index": 0 }]]
+    },
+    "Mark Skipped In Batch": {
+      "main": [[{ "node": "Log Skipped Batch Item", "type": "main", "index": 0 }]]
+    },
+    "Merge Batch Outcomes": {
+      "main": [[{ "node": "Build Batch Summary", "type": "main", "index": 0 }]]
+    },
+    "Log Processed Batch Item": {
+      "main": [[{ "node": "Merge Batch Outcomes", "type": "main", "index": 0 }]]
+    },
+    "Log Skipped Batch Item": {
+      "main": [[{ "node": "Merge Batch Outcomes", "type": "main", "index": 1 }]]
+    },
+    "Build Batch Summary": {
+      "main": [[{ "node": "Finalize Batch Run", "type": "main", "index": 0 }]]
+    }
+  }
+}

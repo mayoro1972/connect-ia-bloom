@@ -1,0 +1,2114 @@
+{
+  "name": "TransferAI Admin Prospection Controller V1 - Zoho First",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-admin-prospection-controller-v1-zoho-first",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "n8n"
+    },
+    {
+      "name": "controller"
+    },
+    {
+      "name": "zoho-first"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        180,
+        140
+      ],
+      "parameters": {},
+      "id": "b8b22ebd-449e-497b-abf0-d3df2d4586fb"
+    },
+    {
+      "name": "Set Manual Request",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        420,
+        140
+      ],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": false,
+        "fields": {
+          "values": [
+            {
+              "name": "action",
+              "type": "string",
+              "stringValue": "={{$json.action || 'health_check'}}"
+            },
+            {
+              "name": "payload",
+              "type": "string",
+              "stringValue": "={{$json.payload || '{}'}}"
+            },
+            {
+              "name": "authorization",
+              "type": "string",
+              "stringValue": "={{$json.authorization || ('Bearer ' + ($env.ADMIN_BACKOFFICE_TOKEN || 'REPLACE_ME'))}}"
+            },
+            {
+              "name": "actor_email",
+              "type": "string",
+              "stringValue": "={{$json.actor_email || 'admin@transferai.ci'}}"
+            },
+            {
+              "name": "request_id",
+              "type": "string",
+              "stringValue": "={{$json.request_id || ('manual-' + Date.now())}}"
+            }
+          ]
+        }
+      },
+      "id": "32934d34-5624-4c24-bcb0-739be6ac39e7"
+    },
+    {
+      "name": "Admin Controller Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        180,
+        340
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "admin-prospect-pack-action-zoho",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "57a3cd32-2c30-4887-9e8c-bea4c2f834b8"
+    },
+    {
+      "name": "Normalize Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        240
+      ],
+      "parameters": {
+        "jsCode": "const input = $input.first()?.json ?? {};\nconst body = input.body ?? input;\nconst headers = input.headers ?? {};\nconst rawPayload = body.payload ?? input.payload ?? {};\nlet payload = rawPayload;\nif (typeof rawPayload === 'string') { try { payload = JSON.parse(rawPayload); } catch (e) { payload = {}; } }\nreturn [{ json: { action: String(body.action || input.action || '').trim(), payload, authorization: String(headers.authorization || headers.Authorization || input.authorization || '').trim(), request_id: String(headers['x-request-id'] || headers['X-Request-Id'] || input.request_id || ('req-' + Date.now())), actor_email: String(headers['x-actor-email'] || headers['X-Actor-Email'] || input.actor_email || ''), received_at: new Date().toISOString() } }];"
+      },
+      "id": "bdeb10d7-c5dc-4211-a406-c9414c1ddb7b"
+    },
+    {
+      "name": "Validate Auth Header",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        240
+      ],
+      "parameters": {
+        "jsCode": "const expected = String($env.ADMIN_BACKOFFICE_TOKEN || 'REPLACE_ME').trim();\nconst token = String($json.authorization || '').replace(/^Bearer\\s+/i, '').trim();\nreturn [{ json: { ...$json, auth_ok: Boolean(expected && token && token === expected) } }];"
+      },
+      "id": "371df6f3-5857-4516-aa59-4d485f5679ef"
+    },
+    {
+      "name": "If Auth Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        240
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.auth_ok}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "a21841a4-e369-41de-8a95-0903f550b659"
+    },
+    {
+      "name": "Build Unauthorized Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        400
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'unknown'), status: 'unauthorized', message: 'Token admin invalide.', error: { code: 'UNAUTHORIZED' }, meta: { request_id: $json.request_id || ('req-' + Date.now()), timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "1b566865-c021-44d8-9b84-500ec91e39e5"
+    },
+    {
+      "name": "Validate Action",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        180
+      ],
+      "parameters": {
+        "jsCode": "const supported = ['generate_pack','regenerate_pack','approve_pack','reject_pack','send_pack','test_provider','health_check'];\nreturn [{ json: { ...$json, action_valid: supported.includes(String($json.action || '')) } }];"
+      },
+      "id": "1d938701-189d-410a-b6e4-92686fb6ff03"
+    },
+    {
+      "name": "If Action Supported",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        180
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.action_valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "ebe9bac5-dcd2-4394-9e3d-2b2fa50af653"
+    },
+    {
+      "name": "Build Unsupported Action Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        320
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'unknown'), status: 'invalid_action', message: 'Action non supportee.', error: { code: 'UNSUPPORTED_ACTION' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "3cdf2df2-edb9-4fc8-9fbb-cb68bda933db"
+    },
+    {
+      "name": "If Generate Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        60
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "generate_pack"
+            }
+          ]
+        }
+      },
+      "id": "bbc9cf06-a808-4407-8c3e-432038436b56"
+    },
+    {
+      "name": "If Regenerate Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        180
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "regenerate_pack"
+            }
+          ]
+        }
+      },
+      "id": "f280e5f0-f0f8-4a8f-928d-e282b1fa415f"
+    },
+    {
+      "name": "If Approve Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "approve_pack"
+            }
+          ]
+        }
+      },
+      "id": "0e92c310-ecfa-42e9-87be-e5bc10fce2e5"
+    },
+    {
+      "name": "If Reject Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        420
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "reject_pack"
+            }
+          ]
+        }
+      },
+      "id": "60567f04-b5b8-4504-a94a-8dfad51b6985"
+    },
+    {
+      "name": "If Send Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        540
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "send_pack"
+            }
+          ]
+        }
+      },
+      "id": "5d039bad-239c-4982-a6e7-d8a79b97b649"
+    },
+    {
+      "name": "If Test Provider Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        660
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "test_provider"
+            }
+          ]
+        }
+      },
+      "id": "01c979ca-dcf8-476f-a8ea-74ca1780cc9d"
+    },
+    {
+      "name": "If Health Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        780
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "health_check"
+            }
+          ]
+        }
+      },
+      "id": "023b9e9a-2d78-4c1a-a8ba-ee4a59af2450"
+    },
+    {
+      "name": "Build No Route Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2120,
+        880
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'unknown'), status: 'invalid_action', message: 'Aucune branche correspondante.', error: { code: 'UNSUPPORTED_ACTION' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "fa404d07-1e0b-45a5-823c-d1b38e78fa96"
+    },
+    {
+      "name": "Validate Generate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        60
+      ],
+      "parameters": {
+        "jsCode": "const p=$json.payload||{}; const valid=Boolean(p.prospect_id&&p.triggered_by); return [{json:{...$json,valid,validation_error: valid?null:'prospect_id et triggered_by sont requis.'}}];"
+      },
+      "id": "011513d1-4e3f-4dd8-9108-0dc641680179"
+    },
+    {
+      "name": "If Generate Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        60
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "e2430a3e-22c9-4a88-b722-d8e3d0a205e2"
+    },
+    {
+      "name": "Build Generate Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        160
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'generate_pack', status: 'invalid_payload', message: $json.validation_error, error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "e3bff259-521c-4f4d-a1c9-8eac7fade0e7"
+    },
+    {
+      "name": "Call Workflow V3 Generate",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2840,
+        20
+      ],
+      "parameters": {
+        "workflowId": "={{$env.PROSPECTING_V3_WORKFLOW_ID || 'REPLACE_WITH_PROSPECTING_V3_WORKFLOW_ID'}}",
+        "mode": "each",
+        "options": {}
+      },
+      "id": "12115792-38f5-4d42-8dd3-0c837abea0b3"
+    },
+    {
+      "name": "Build Generate Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        20
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, action: 'generate_pack', status: 'accepted', message: 'Generation du pack lancee.', data: { prospect_id: $json.payload?.prospect_id || $('If Generate Payload Valid').first().json.payload.prospect_id, workflow_key: 'prospecting-v3-pack-engine', poll_after_ms: 2500 }, meta: { request_id: $('If Generate Payload Valid').first().json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "981741e2-0879-4cbc-b14b-e26b31ab0308"
+    },
+    {
+      "name": "Validate Regenerate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        180
+      ],
+      "parameters": {
+        "jsCode": "const p=$json.payload||{}; const valid=Boolean(p.pack_id&&p.triggered_by&&p.reason); return [{json:{...$json,valid,validation_error: valid?null:'pack_id, triggered_by et reason sont requis.'}}];"
+      },
+      "id": "f0db7b4b-9be7-4382-bfec-39b9bd39dfe3"
+    },
+    {
+      "name": "If Regenerate Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        180
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "6a6c4fac-3ac6-4f89-9502-72d319389474"
+    },
+    {
+      "name": "Build Regenerate Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        280
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'regenerate_pack', status: 'invalid_payload', message: $json.validation_error, error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "7c2d93df-a850-4615-b1a8-82b9270f5940"
+    },
+    {
+      "name": "Call Workflow V3 Regenerate",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2840,
+        140
+      ],
+      "parameters": {
+        "workflowId": "={{$env.PROSPECTING_V3_WORKFLOW_ID || 'REPLACE_WITH_PROSPECTING_V3_WORKFLOW_ID'}}",
+        "mode": "each",
+        "options": {}
+      },
+      "id": "a0d0f403-ac4c-4b1c-b8d0-4a646f94a9e2"
+    },
+    {
+      "name": "Build Regenerate Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        140
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, action: 'regenerate_pack', status: 'accepted', message: 'Regeneration du pack lancee.', data: { pack_id: $('If Regenerate Payload Valid').first().json.payload.pack_id, poll_after_ms: 2500 }, meta: { request_id: $('If Regenerate Payload Valid').first().json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "223e022a-999d-442e-a497-8863bdca6c05"
+    },
+    {
+      "name": "Validate Reject Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        420
+      ],
+      "parameters": {
+        "jsCode": "const p=$json.payload||{}; const valid=Boolean(p.pack_id&&p.reviewer_email&&p.reason); return [{json:{...$json,valid,validation_error: valid?null:'pack_id, reviewer_email et reason sont requis.'}}];"
+      },
+      "id": "833bde16-a1db-4ff3-a96c-c2754e0f5314"
+    },
+    {
+      "name": "If Reject Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        420
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "9a3e43f5-c5c6-43fa-9309-3e35f280499c"
+    },
+    {
+      "name": "Build Reject Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        520
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'reject_pack', status: 'invalid_payload', message: $json.validation_error, error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "b3f69ff6-6f11-44f6-9ae1-2a9774716034"
+    },
+    {
+      "name": "Call Legacy Reject Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        380
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{($env.N8N_BASE_URL || 'https://your-n8n.example.com') + '/webhook/approve-prospect-pack-v3?pack_id=' + encodeURIComponent($json.payload.pack_id) + '&decision=rejected'}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "df376896-0105-4bb3-981b-d60aca8293e2"
+    },
+    {
+      "name": "Build Reject Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        380
+      ],
+      "parameters": {
+        "jsCode": "const src=$('If Reject Payload Valid').first().json; return [{ json: { ok: true, action: 'reject_pack', status: 'rejected', message: 'Pack rejete.', data: { pack_id: src.payload.pack_id, prospect_status: 'ready' }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "69477454-69f8-45ba-b17a-c180279baf01"
+    },
+    {
+      "name": "Validate Approve Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const p=$json.payload||{}; const valid=Boolean(p.pack_id&&p.reviewer_email&&p.mode); return [{json:{...$json,valid,validation_error: valid?null:'pack_id, reviewer_email et mode sont requis.'}}];"
+      },
+      "id": "18ab5ecd-cae8-4cf9-afc6-3ea4b998daa6"
+    },
+    {
+      "name": "If Approve Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "f130ff07-13ac-4554-8f1d-a2764210c581"
+    },
+    {
+      "name": "Build Approve Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        340
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'approve_pack', status: 'invalid_payload', message: $json.validation_error, error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "5b203411-a5ba-4963-9f5f-739ff97d94db"
+    },
+    {
+      "name": "If Approve And Send Mode",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        260
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.payload.mode}}",
+              "value2": "approve_and_send"
+            }
+          ]
+        }
+      },
+      "id": "169feeae-fb1c-4552-b6ea-e5c67249ba23"
+    },
+    {
+      "name": "Mark Pack Approved Direct",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        300
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.payload.pack_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'approved', approved_at: new Date().toISOString(), reviewer_email: $json.payload.reviewer_email })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "771dda29-132a-4b7c-a018-cb16020513ac"
+    },
+    {
+      "name": "Build Approve Only Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const src=$('If Approve Payload Valid').first().json; return [{ json: { ok: true, action: 'approve_pack', status: 'approved', message: 'Pack approuve.', data: { pack_id: src.payload.pack_id, reviewer_email: src.payload.reviewer_email }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "df866aca-b23b-4985-b669-7e553dc10d25"
+    },
+    {
+      "name": "Validate Send Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        540
+      ],
+      "parameters": {
+        "jsCode": "const p=$json.payload||{}; const valid=Boolean(p.pack_id&&p.reviewer_email); return [{json:{...$json,valid,validation_error: valid?null:'pack_id et reviewer_email sont requis.'}}];"
+      },
+      "id": "1e74cf50-bd3a-4d5b-998c-816a6089e703"
+    },
+    {
+      "name": "If Send Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        540
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "f775f133-a56f-40a6-b56a-e4266e546c9f"
+    },
+    {
+      "name": "Build Send Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        640
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'send_pack', status: 'invalid_payload', message: $json.validation_error, error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "3bb42452-d4de-485b-83dd-dcf53f8167f4"
+    },
+    {
+      "name": "Get Pack For Zoho Send",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        500
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?select=*&pack_id=eq.' + encodeURIComponent($json.payload.pack_id) + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "eb8da96d-3af4-4335-9c12-de8344af99b5"
+    },
+    {
+      "name": "Extract Pack For Zoho Send",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        500
+      ],
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || null;\nconst root = $('Get Pack For Zoho Send').first().json;\nconst request = $('If Send Payload Valid').all().length ? $('If Send Payload Valid').first().json : $('If Approve And Send Mode').first().json;\nreturn [{ json: { ...request, pack_row: row, found: Boolean(row) } }];"
+      },
+      "id": "fa1de17d-7ab4-4318-9909-3d7cff0c9782"
+    },
+    {
+      "name": "If Pack For Zoho Send Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3560,
+        500
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.found}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "52d1d7a6-4c78-42eb-8424-b9dc7ea9dc09"
+    },
+    {
+      "name": "Build Pack Not Found For Send Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3800,
+        620
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'send_pack'), status: 'not_found', message: 'Pack introuvable.', error: { code: 'PACK_NOT_FOUND' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "d4280413-cf1f-4a93-be20-a493b315a1d2"
+    },
+    {
+      "name": "Build Zoho Send Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3800,
+        460
+      ],
+      "parameters": {
+        "jsCode": "function safeFileStem(value) { return String(value || 'Prospect').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '') || 'Prospect'; }\nconst row = $json.pack_row || {};\nconst payload = row.payload || {};\nconst rawAttachments = Array.isArray(payload.mail_attachments) ? payload.mail_attachments : [];\nlet catalogueUrl = payload.catalogue_artifact?.pdf_url || null;\nlet deckUrl = payload.deck_artifact?.pptx_url || null;\nfor (const att of rawAttachments) { const name = String(att.filename || ''); if (!catalogueUrl && /\\.pdf$/i.test(name) && att.path) catalogueUrl = att.path; if (!deckUrl && /\\.pptx$/i.test(name) && att.path) deckUrl = att.path; }\nconst org = safeFileStem(row.organization_name || payload.organization_name || 'Prospect');\nconst targetEmail = row.target_email || payload.target_email || null;\nconst executiveLetterHtml = payload.executive_letter_html || String(payload.executive_letter || '').replace(/\\n/g, '<br>');\nconst bookingLink = payload.booking_link_45min || $env.BOOKING_LINK_45MIN || 'https://calendly.com/contact-transferai/30min';\nconst auditFormUrl = payload.audit_form_url || '';\nconst attachments = []; if (catalogueUrl) attachments.push({ filename: payload.catalogue_artifact?.filename_pdf || ('Mini_Catalogue_TransferAI_' + org + '.pdf'), path: catalogueUrl, outputPropertyName: 'catalogue_pdf' }); if (deckUrl) attachments.push({ filename: payload.deck_artifact?.filename_pptx || ('Deck_TransferAI_' + org + '.pptx'), path: deckUrl, outputPropertyName: 'deck_pptx' });\nconst canSend = Boolean(targetEmail && executiveLetterHtml && attachments.length >= 2 && catalogueUrl && deckUrl);\nconst reason = canSend ? null : 'Pack incomplet pour envoi Zoho: email cible, courrier, PDF ou PPTX manquant.';\nreturn [{ json: { ...$json, pack_id: row.pack_id || payload.pack_id || null, prospect_id: row.prospect_id || payload.prospect_id || null, organization_name: row.organization_name || payload.organization_name || null, target_email: targetEmail, reviewer_email: $json.payload?.reviewer_email || null, provider_key: $json.payload?.provider_key || 'zoho-primary', attachments, attachments_count: attachments.length, can_send: canSend, send_failure_reason: reason, subject: \"Proposition d'audit gratuit, d'accompagnement et de formation\", html: '<p>Madame, Monsieur,</p><p>' + executiveLetterHtml + '</p>' + (auditFormUrl ? '<p>Formulaire d'audit préalable : <a href= + auditFormUrl + >' + auditFormUrl + '</a></p>' : '') + '<p>Réservation : <a href= + bookingLink + >' + bookingLink + '</a></p><p>Cordialement,<br>TransferAI</p>' } }];"
+      },
+      "id": "68f15bc1-00f1-49a6-b061-8eacac71ae41"
+    },
+    {
+      "name": "If Zoho Send Ready",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4040,
+        460
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.can_send}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "2194076d-0714-43cd-9d21-039110313d3e"
+    },
+    {
+      "name": "Download Zoho Catalogue PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4280,
+        380
+      ],
+      "parameters": {
+        "url": "={{$json.attachments[0].path}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "catalogue_pdf"
+            }
+          }
+        }
+      },
+      "id": "b5638d47-eddb-4fbe-bd74-1b9db2452d54"
+    },
+    {
+      "name": "Download Zoho Deck PPTX",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4280,
+        540
+      ],
+      "parameters": {
+        "url": "={{$json.attachments[1].path}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "deck_pptx"
+            }
+          }
+        }
+      },
+      "id": "91a16d16-e50a-44af-a0e5-6a4697c10b50"
+    },
+    {
+      "name": "Merge Zoho Files",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4520,
+        460
+      ],
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "9d14b463-e0f8-47e9-bad7-53aebd439ae8"
+    },
+    {
+      "name": "Assemble Zoho Email Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4760,
+        460
+      ],
+      "parameters": {
+        "jsCode": "const ctx = $('Build Zoho Send Context').first().json;\nconst merged = $input.first()?.binary ? JSON.parse(JSON.stringify($input.first())) : { binary: {} };\nconst catalogue = $('Download Zoho Catalogue PDF').first();\nconst deck = $('Download Zoho Deck PPTX').first();\nconst binary = Object.assign({}, (catalogue && catalogue.binary) || {}, (deck && deck.binary) || {}, merged.binary || {});\nreturn [{ json: { ...ctx }, binary }];"
+      },
+      "id": "2052a6db-b4bc-4bc5-9144-31201775223e"
+    },
+    {
+      "name": "Send Zoho SMTP Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        5000,
+        460
+      ],
+      "parameters": {
+        "fromEmail": "={{$env.OUTREACH_FROM_EMAIL || \"contact@transferai.ci\"}}",
+        "toEmail": "={{$json.target_email}}",
+        "subject": "={{$json.subject}}",
+        "emailFormat": "html",
+        "message": "={{$json.html}}",
+        "options": {}
+      },
+      "id": "333eb7e9-0943-4c6b-b126-6b835f0d8252",
+      "credentials": {
+        "smtp": {
+          "id": "zoho-smtp-transferai",
+          "name": "TransferAI Zoho SMTP"
+        }
+      },
+      "notes": "Configurer la credential SMTP Zoho avec smtppro.zoho.com et le compte TransferAI. Le noeud reçoit les binaires catalogue_pdf et deck_pptx pour les pièces jointes."
+    },
+    {
+      "name": "Build Zoho Send Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5240,
+        460
+      ],
+      "parameters": {
+        "jsCode": "const ctx = $('Build Zoho Send Context').first().json;\nreturn [{ json: { ...ctx, sent_at: new Date().toISOString(), provider_message_id: null, provider_name: 'zoho-smtp' } }];"
+      },
+      "id": "324a899e-cb55-46ce-ab84-3b295c3f936e"
+    },
+    {
+      "name": "Mark Pack Approved For Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5480,
+        380
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'approved', approved_at: new Date().toISOString(), reviewer_email: $json.reviewer_email })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "9134c770-0992-422c-bd87-51b3de5011cc"
+    },
+    {
+      "name": "Mark Pack Sent Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5720,
+        460
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'sent', sent_at: $json.sent_at, resend_message_id: $json.provider_message_id, reviewer_email: $json.reviewer_email, updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "5fc4cd42-2634-4c5b-9532-0363da68160d"
+    },
+    {
+      "name": "Log Outreach Attempt Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5960,
+        460
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + \"/rest/v1/outreach_attempts\"}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ prospect_id: $json.prospect_id || null, pack_id: $json.pack_id || null, target_email: $json.target_email || null, organization_name: $json.organization_name || null, channel: 'email', message_variant: 'executive_multi_prospect_model_v3_zoho', sent_at: $json.sent_at || new Date().toISOString(), delivery_status: 'submitted', response_status: 'pending', stop_reason: null, metadata: { provider: 'zoho-smtp' } })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "3e065dd6-f611-41d7-b48c-9d754a24829c"
+    },
+    {
+      "name": "Update Prospect Target Sent Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6200,
+        460
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'active', last_sequence_result: 'sent_v3_zoho', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', next_action_at: new Date(Date.now() + 5 * 86400000).toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "c25cd59b-4965-4c7d-a8d9-971314b4706e"
+    },
+    {
+      "name": "Build Zoho Final Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6440,
+        460
+      ],
+      "parameters": {
+        "jsCode": "const root = $('Build Zoho Send Context').first().json;\nconst action = String(root.action || '') === 'approve_pack' ? 'approve_and_send_pack' : 'send_pack';\nreturn [{ json: { ok: true, action, status: 'sent', message: 'Pack envoye via Zoho SMTP.', data: { pack_id: root.pack_id, provider_key: root.provider_key || 'zoho-primary', provider_name: 'zoho-smtp', provider_message_id: null, sent_at: new Date().toISOString() }, meta: { request_id: root.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "0d2e3825-4a09-4fd6-bd4c-278f63191df2"
+    },
+    {
+      "name": "Mark Pack Approval Error Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4280,
+        700
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'approval_error', error_reason: $json.send_failure_reason || 'approval_error', updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "55fbe972-0681-48fe-b4f0-d8dbad77c1e6"
+    },
+    {
+      "name": "Update Prospect Target Approval Error Zoho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4520,
+        700
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'paused', paused: true, last_sequence_result: 'approval_error_v3_zoho', stop_reason: $json.send_failure_reason || 'approval_error', niche_status: 'internal_fix_required' })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "e8ef6ebb-1cab-4b4e-9a39-e86ddd2d01b4"
+    },
+    {
+      "name": "Build Zoho Send Error Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4760,
+        700
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'send_pack') === 'approve_pack' ? 'approve_and_send_pack' : 'send_pack', status: 'approval_error', message: $json.send_failure_reason || 'Le pack n'est pas envoyable via Zoho.', error: { code: 'PACK_NOT_SENDABLE', details: { attachments_count: $json.attachments_count || 0, can_send: $json.can_send || false } }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "90cc6337-b1aa-4cd9-a99b-8fb616578648"
+    },
+    {
+      "name": "Validate Test Provider Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        660
+      ],
+      "parameters": {
+        "jsCode": "const p=$json.payload||{}; const valid=Boolean(p.test_to_email&&p.triggered_by); return [{json:{...$json,valid,validation_error: valid?null:'test_to_email et triggered_by sont requis.'}}];"
+      },
+      "id": "9ad0beda-e3b0-4d3e-8fa4-95b4fada4afe"
+    },
+    {
+      "name": "If Test Provider Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        660
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "bbbb4b16-bf4f-41a7-b2c6-678eafd9be8a"
+    },
+    {
+      "name": "Build Test Provider Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        760
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'test_provider', status: 'invalid_payload', message: $json.validation_error, error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "198946ab-df12-42b8-807c-2d8d7c3d6ffe"
+    },
+    {
+      "name": "Prepare Zoho Test Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        620
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ...$json, test_to_email: $json.payload.test_to_email, subject: 'Test connecteur Zoho TransferAI', html: '<p>Test du connecteur Zoho SMTP TransferAI.</p>' } }];"
+      },
+      "id": "7853bfa3-6769-4eb0-b5e9-d621536594a6"
+    },
+    {
+      "name": "Send Zoho Test Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        3080,
+        620
+      ],
+      "parameters": {
+        "fromEmail": "={{$env.OUTREACH_FROM_EMAIL || \"contact@transferai.ci\"}}",
+        "toEmail": "={{$json.test_to_email}}",
+        "subject": "={{$json.subject}}",
+        "emailFormat": "html",
+        "message": "={{$json.html}}",
+        "options": {}
+      },
+      "id": "acbbad03-b3ec-433a-94f0-b583ff1ce5d5",
+      "credentials": {
+        "smtp": {
+          "id": "zoho-smtp-transferai",
+          "name": "TransferAI Zoho SMTP"
+        }
+      },
+      "notes": "Credential SMTP Zoho a lier manuellement apres import. Parametres recommandes: smtppro.zoho.com, port 465 SSL ou 587 TLS."
+    },
+    {
+      "name": "Build Test Provider Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        620
+      ],
+      "parameters": {
+        "jsCode": "const src=$('Prepare Zoho Test Email').first().json; return [{ json: { ok: true, action: 'test_provider', status: 'success', message: 'Email de test envoye via Zoho SMTP.', data: { provider_key: 'zoho-primary', provider_name: 'zoho-smtp', test_to_email: src.test_to_email, provider_message_id: null }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "e0387061-cec6-4502-857e-26d9b150751f"
+    },
+    {
+      "name": "Check Supabase Health",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2360,
+        780
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + \"/rest/v1/prospect_targets?select=prospect_id&limit=1\"}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "956129a3-67d9-4362-8e16-7deccef0e566"
+    },
+    {
+      "name": "Build Health Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        780
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, action: 'health_check', status: 'healthy', message: 'Controller Zoho-first operationnel.', data: { supabase: 'ok', n8n: 'ok', providers_active: 1, primary_provider: 'zoho-smtp' }, meta: { request_id: $('If Health Action').first().json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "6c308c91-414b-4f0e-acbe-83be34dca251"
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Manual Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Manual Request": {
+      "main": [
+        [
+          {
+            "node": "Normalize Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Admin Controller Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Request": {
+      "main": [
+        [
+          {
+            "node": "Validate Auth Header",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Auth Header": {
+      "main": [
+        [
+          {
+            "node": "If Auth Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Auth Valid": {
+      "main": [
+        [
+          {
+            "node": "Validate Action",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Unauthorized Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Action": {
+      "main": [
+        [
+          {
+            "node": "If Action Supported",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Action Supported": {
+      "main": [
+        [
+          {
+            "node": "If Generate Action",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Unsupported Action Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Generate Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Generate Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Regenerate Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Regenerate Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Regenerate Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Approve Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Approve Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Reject Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Reject Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Reject Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Send Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Send Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Send Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Test Provider Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Test Provider Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Test Provider Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Health Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Health Action": {
+      "main": [
+        [
+          {
+            "node": "Check Supabase Health",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build No Route Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Generate Payload": {
+      "main": [
+        [
+          {
+            "node": "If Generate Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Generate Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Call Workflow V3 Generate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Generate Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Workflow V3 Generate": {
+      "main": [
+        [
+          {
+            "node": "Build Generate Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Regenerate Payload": {
+      "main": [
+        [
+          {
+            "node": "If Regenerate Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Regenerate Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Call Workflow V3 Regenerate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Regenerate Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Workflow V3 Regenerate": {
+      "main": [
+        [
+          {
+            "node": "Build Regenerate Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Approve Payload": {
+      "main": [
+        [
+          {
+            "node": "If Approve Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "If Approve And Send Mode",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Approve Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve And Send Mode": {
+      "main": [
+        [
+          {
+            "node": "Get Pack For Zoho Send",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Pack Approved Direct",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approved Direct": {
+      "main": [
+        [
+          {
+            "node": "Build Approve Only Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Reject Payload": {
+      "main": [
+        [
+          {
+            "node": "If Reject Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Reject Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Call Legacy Reject Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Reject Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Legacy Reject Webhook": {
+      "main": [
+        [
+          {
+            "node": "Build Reject Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Send Payload": {
+      "main": [
+        [
+          {
+            "node": "If Send Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Send Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Get Pack For Zoho Send",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Send Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pack For Zoho Send": {
+      "main": [
+        [
+          {
+            "node": "Extract Pack For Zoho Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Pack For Zoho Send": {
+      "main": [
+        [
+          {
+            "node": "If Pack For Zoho Send Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Pack For Zoho Send Found": {
+      "main": [
+        [
+          {
+            "node": "Build Zoho Send Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Pack Not Found For Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Zoho Send Context": {
+      "main": [
+        [
+          {
+            "node": "If Zoho Send Ready",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Download Zoho Deck PPTX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Zoho Send Ready": {
+      "main": [
+        [
+          {
+            "node": "Download Zoho Catalogue PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Pack Approval Error Zoho",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Zoho Catalogue PDF": {
+      "main": [
+        [
+          {
+            "node": "Merge Zoho Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Zoho Deck PPTX": {
+      "main": [
+        [
+          {
+            "node": "Merge Zoho Files",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Zoho Files": {
+      "main": [
+        [
+          {
+            "node": "Assemble Zoho Email Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Zoho Email Payload": {
+      "main": [
+        [
+          {
+            "node": "Send Zoho SMTP Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Zoho SMTP Email": {
+      "main": [
+        [
+          {
+            "node": "Build Zoho Send Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Zoho Send Result": {
+      "main": [
+        [
+          {
+            "node": "Mark Pack Approved For Zoho",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approved For Zoho": {
+      "main": [
+        [
+          {
+            "node": "Mark Pack Sent Zoho",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Sent Zoho": {
+      "main": [
+        [
+          {
+            "node": "Log Outreach Attempt Zoho",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Outreach Attempt Zoho": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Sent Zoho",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Sent Zoho": {
+      "main": [
+        [
+          {
+            "node": "Build Zoho Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approval Error Zoho": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Approval Error Zoho",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Approval Error Zoho": {
+      "main": [
+        [
+          {
+            "node": "Build Zoho Send Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Test Provider Payload": {
+      "main": [
+        [
+          {
+            "node": "If Test Provider Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Test Provider Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Prepare Zoho Test Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Test Provider Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Zoho Test Email": {
+      "main": [
+        [
+          {
+            "node": "Send Zoho Test Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Zoho Test Email": {
+      "main": [
+        [
+          {
+            "node": "Build Test Provider Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Supabase Health": {
+      "main": [
+        [
+          {
+            "node": "Build Health Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

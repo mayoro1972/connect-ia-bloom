@@ -54,18 +54,19 @@ describe("blog page", () => {
       </LanguageProvider>,
     );
 
-    expect(screen.getByRole("heading", { name: /blog & ressources/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /ressources & veille ia/i })).toBeInTheDocument();
 
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
-          name: /veille it & transformation digitale : 6 signaux ia/i,
+          name: /openai : les nouveautés à suivre cette semaine/i,
         }),
       ).toBeInTheDocument();
     });
 
-    expect(screen.getByText(/veille dynamique/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /claude : les nouveautés à suivre cette semaine/i })).toBeInTheDocument();
     expect(screen.getByText(/transferai africa · veille editoriale multi-sources/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /recevoir la veille ia afrique/i })).toBeInTheDocument();
+    expect(screen.getByText(/veille dynamique/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /la veille ia utile pour votre métier/i })).toBeInTheDocument();
   });
 });

@@ -1,0 +1,1091 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/pg3ex0nu",
+    "id": "pg3ex0nu",
+    "slide": 3,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "DEFAULT",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office",
+    "colors": {
+      "accent1": "#4472C4",
+      "accent2": "#ED7D31",
+      "accent3": "#A5A5A5",
+      "accent4": "#FFC000",
+      "accent5": "#5B9BD5",
+      "accent6": "#70AD47",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#44546A",
+      "lt2": "#E7E6E6",
+      "hlink": "#0563C1",
+      "folHlink": "#954F72"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "DEFAULT",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5o7qpg3e",
+      "id": "2",
+      "name": "Shape 0",
+      "bbox": [
+        0,
+        0,
+        960,
+        81.6
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g3ex0nux",
+      "id": "3",
+      "name": "Text 1",
+      "bbox": [
+        38.4,
+        0,
+        883.2,
+        81.6
+      ],
+      "geometry": "rect",
+      "text": "Reconnaissez-vous ces défis dans vos opérations ?",
+      "textPreview": "Reconnaissez-vous ces défis dans vos opérations ?",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Reconnaissez-vous ces défis dans vos opérations ?"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Reconnaissez-vous ces défis dans vos opérations ?",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Reconnaissez-vous ces défis dans vos opérations ?",
+              "fontSize": 23.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65wjudg",
+      "id": "4",
+      "name": "Shape 2",
+      "bbox": [
+        21.12,
+        96,
+        288,
+        182.4
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFF7ED",
+      "lineColor": "#E8EDF0",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ylc7u54z",
+      "id": "5",
+      "name": "Shape 3",
+      "bbox": [
+        35.52,
+        110.4,
+        42.24,
+        42.24
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#B85C00",
+      "lineColor": "#B85C00",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/rmhk3q5o",
+      "id": "32",
+      "name": "Image 0",
+      "bbox": [
+        39.36,
+        114.24,
+        34.56,
+        34.56
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-2-1.png",
+        "contentType": "image/png",
+        "byteLength": 4755
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-2-1.png",
+        "contentType": "image/png",
+        "byteLength": 4755
+      }
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gr2p8nqx",
+      "id": "7",
+      "name": "Text 4",
+      "bbox": [
+        90.24,
+        110.4,
+        211.2,
+        43.2
+      ],
+      "geometry": "rect",
+      "text": "60 % du temps perdu",
+      "textPreview": "60 % du temps perdu",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "60 % du temps perdu"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "60 % du temps perdu",
+          "runs": [
+            {
+              "index": 1,
+              "text": "60 % du temps perdu",
+              "fontSize": 14.67,
+              "color": "#1A1A2E",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "8",
+      "name": "Text 5",
+      "bbox": [
+        34.56,
+        161.28,
+        264.96,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "Saisie manuelle, rapports répétitifs, e-mails standardisés. Vos talents sont mobilisés sur des tâches sans valeur stratégique.",
+      "textPreview": "Saisie manuelle, rapports répétitifs, e-mails standardisés. Vos talents sont mobilisés sur des tâches sans valeur stratégique.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Saisie manuelle, rapports répétitifs, e-mails"
+          },
+          {
+            "index": 2,
+            "text": "standardisés. Vos talents sont mobilisés sur"
+          },
+          {
+            "index": 3,
+            "text": "des tâches sans valeur stratégique."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Saisie manuelle, rapports répétitifs, e-mails standardisés. Vos talents sont mobilisés sur des tâches sans valeur stratégique.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Saisie manuelle, rapports répétitifs, e-mails standardisés. Vos talents sont mobilisés sur des tâches sans valeur stratégique.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "9",
+      "name": "Shape 6",
+      "bbox": [
+        334.08,
+        96,
+        288,
+        182.4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D4EDE5",
+      "lineColor": "#E8EDF0",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "10",
+      "name": "Shape 7",
+      "bbox": [
+        348.48,
+        110.4,
+        42.24,
+        42.24
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 10,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/y1kre1w7",
+      "id": "33",
+      "name": "Image 1",
+      "bbox": [
+        352.32,
+        114.24,
+        34.56,
+        34.56
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-2-2.png",
+        "contentType": "image/png",
+        "byteLength": 2544
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-2-2.png",
+        "contentType": "image/png",
+        "byteLength": 2544
+      }
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "12",
+      "name": "Text 8",
+      "bbox": [
+        403.2,
+        110.4,
+        211.2,
+        43.2
+      ],
+      "geometry": "rect",
+      "text": "Données inexploitées",
+      "textPreview": "Données inexploitées",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Données inexploitées"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Données inexploitées",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Données inexploitées",
+              "fontSize": 14.67,
+              "color": "#1A1A2E",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "13",
+      "name": "Text 9",
+      "bbox": [
+        347.52,
+        161.28,
+        264.96,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "Vous collectez des données mais n'avez pas les outils pour en extraire des décisions business en temps réel.",
+      "textPreview": "Vous collectez des données mais n'avez pas les outils pour en extraire des décisions business en temps réel.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vous collectez des données mais n'avez pas"
+          },
+          {
+            "index": 2,
+            "text": "les outils pour en extraire des décisions"
+          },
+          {
+            "index": 3,
+            "text": "business en temps réel."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vous collectez des données mais n'avez pas les outils pour en extraire des décisions business en temps réel.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vous collectez des données mais n'avez pas les outils pour en extraire des décisions business en temps réel.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "14",
+      "name": "Shape 10",
+      "bbox": [
+        647.04,
+        96,
+        288,
+        182.4
+      ],
+      "geometry": "rect",
+      "fillColor": "#0A7C5C",
+      "lineColor": "#E8EDF0",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 14,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/90je9cvi",
+      "id": "34",
+      "name": "Image 2",
+      "bbox": [
+        664.32,
+        113.28,
+        36.48,
+        36.48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-2-3.png",
+        "contentType": "image/png",
+        "byteLength": 4868
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-2-3.png",
+        "contentType": "image/png",
+        "byteLength": 4868
+      }
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "16",
+      "name": "Text 11",
+      "bbox": [
+        716.16,
+        110.4,
+        211.2,
+        43.2
+      ],
+      "geometry": "rect",
+      "text": "Croissance bloquée par les RH",
+      "textPreview": "Croissance bloquée par les RH",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Croissance bloquée par les"
+          },
+          {
+            "index": 2,
+            "text": "RH"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Croissance bloquée par les RH",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Croissance bloquée par les RH",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "17",
+      "name": "Text 12",
+      "bbox": [
+        660.48,
+        161.28,
+        264.96,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "La scalabilité est limitée par les capacités humaines. L'IA brise ce plafond sans coût de recrutement additionnel.",
+      "textPreview": "La scalabilité est limitée par les capacités humaines. L'IA brise ce plafond sans coût de recrutement additionnel.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La scalabilité est limitée par les capacités"
+          },
+          {
+            "index": 2,
+            "text": "humaines. L'IA brise ce plafond sans coût de"
+          },
+          {
+            "index": 3,
+            "text": "recrutement additionnel."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La scalabilité est limitée par les capacités humaines. L'IA brise ce plafond sans coût de recrutement additionnel.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La scalabilité est limitée par les capacités humaines. L'IA brise ce plafond sans coût de recrutement additionnel.",
+              "fontSize": 12.67,
+              "color": "#C8E8DC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "18",
+      "name": "Shape 13",
+      "bbox": [
+        21.12,
+        297.6,
+        288,
+        182.4
+      ],
+      "geometry": "rect",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#E8EDF0",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 18,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/gfmlkjm1",
+      "id": "35",
+      "name": "Image 3",
+      "bbox": [
+        38.4,
+        314.88,
+        36.48,
+        36.48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-2-4.png",
+        "contentType": "image/png",
+        "byteLength": 4066
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-2-4.png",
+        "contentType": "image/png",
+        "byteLength": 4066
+      }
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "20",
+      "name": "Text 14",
+      "bbox": [
+        90.24,
+        312,
+        211.2,
+        43.2
+      ],
+      "geometry": "rect",
+      "text": "Formation lente & coûteuse",
+      "textPreview": "Formation lente & coûteuse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formation lente & coûteuse"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formation lente & coûteuse",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formation lente & coûteuse",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "21",
+      "name": "Text 15",
+      "bbox": [
+        34.56,
+        362.88,
+        264.96,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "Onboarding long, montée en compétences difficile. L'IA réduit ce coût de 45 % en automatisant le transfert de savoir.",
+      "textPreview": "Onboarding long, montée en compétences difficile. L'IA réduit ce coût de 45 % en automatisant le transfert de savoir.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Onboarding long, montée en compétences"
+          },
+          {
+            "index": 2,
+            "text": "difficile. L'IA réduit ce coût de 45 % en"
+          },
+          {
+            "index": 3,
+            "text": "automatisant le transfert de savoir."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Onboarding long, montée en compétences difficile. L'IA réduit ce coût de 45 % en automatisant le transfert de savoir.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Onboarding long, montée en compétences difficile. L'IA réduit ce coût de 45 % en automatisant le transfert de savoir.",
+              "fontSize": 12.67,
+              "color": "#C8E8DC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "22",
+      "name": "Shape 16",
+      "bbox": [
+        334.08,
+        297.6,
+        288,
+        182.4
+      ],
+      "geometry": "rect",
+      "fillColor": "#0E9E76",
+      "lineColor": "#E8EDF0",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 22,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/rytsvu9k",
+      "id": "36",
+      "name": "Image 4",
+      "bbox": [
+        351.36,
+        314.88,
+        36.48,
+        36.48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-2-5.png",
+        "contentType": "image/png",
+        "byteLength": 6297
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-2-5.png",
+        "contentType": "image/png",
+        "byteLength": 6297
+      }
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "24",
+      "name": "Text 17",
+      "bbox": [
+        403.2,
+        312,
+        211.2,
+        43.2
+      ],
+      "geometry": "rect",
+      "text": "Processus non standardisés",
+      "textPreview": "Processus non standardisés",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Processus non standardisés"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Processus non standardisés",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Processus non standardisés",
+              "fontSize": 14.67,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "25",
+      "name": "Text 18",
+      "bbox": [
+        347.52,
+        362.88,
+        264.96,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "Chaque département a ses pratiques. L'IA normalise, harmonise et crée un référentiel opérationnel commun.",
+      "textPreview": "Chaque département a ses pratiques. L'IA normalise, harmonise et crée un référentiel opérationnel commun.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Chaque département a ses pratiques. L'IA"
+          },
+          {
+            "index": 2,
+            "text": "normalise, harmonise et crée un référentiel"
+          },
+          {
+            "index": 3,
+            "text": "opérationnel commun."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Chaque département a ses pratiques. L'IA normalise, harmonise et crée un référentiel opérationnel commun.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Chaque département a ses pratiques. L'IA normalise, harmonise et crée un référentiel opérationnel commun.",
+              "fontSize": 12.67,
+              "color": "#C8E8DC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "26",
+      "name": "Shape 19",
+      "bbox": [
+        647.04,
+        297.6,
+        288,
+        182.4
+      ],
+      "geometry": "rect",
+      "fillColor": "#F0F4FF",
+      "lineColor": "#E8EDF0",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "27",
+      "name": "Shape 20",
+      "bbox": [
+        661.44,
+        312,
+        42.24,
+        42.24
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0D1B2A",
+      "lineColor": "#0D1B2A",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 27,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/yd0z6103",
+      "id": "37",
+      "name": "Image 5",
+      "bbox": [
+        665.28,
+        315.84,
+        34.56,
+        34.56
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image-2-6.png",
+        "contentType": "image/png",
+        "byteLength": 6300
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image-2-6.png",
+        "contentType": "image/png",
+        "byteLength": 6300
+      }
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "29",
+      "name": "Text 21",
+      "bbox": [
+        716.16,
+        312,
+        211.2,
+        43.2
+      ],
+      "geometry": "rect",
+      "text": "Retard concurrentiel",
+      "textPreview": "Retard concurrentiel",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Retard concurrentiel"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Retard concurrentiel",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Retard concurrentiel",
+              "fontSize": 14.67,
+              "color": "#1A1A2E",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65wjudg7",
+      "id": "30",
+      "name": "Text 22",
+      "bbox": [
+        660.48,
+        362.88,
+        264.96,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "Vos concurrents intègrent déjà l'IA. Chaque mois sans action creuse l'écart de compétitivité.",
+      "textPreview": "Vos concurrents intègrent déjà l'IA. Chaque mois sans action creuse l'écart de compétitivité.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vos concurrents intègrent déjà l'IA. Chaque"
+          },
+          {
+            "index": 2,
+            "text": "mois sans action creuse l'écart de"
+          },
+          {
+            "index": 3,
+            "text": "compétitivité."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vos concurrents intègrent déjà l'IA. Chaque mois sans action creuse l'écart de compétitivité.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vos concurrents intègrent déjà l'IA. Chaque mois sans action creuse l'écart de compétitivité.",
+              "fontSize": 12.67,
+              "color": "#64748B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zqtcj6to",
+      "id": "31",
+      "name": "Text 23",
+      "bbox": [
+        28.8,
+        506.88,
+        902.4,
+        23.04
+      ],
+      "geometry": "rect",
+      "text": "Si vous répondez OUI à au moins 2 de ces points — cette présentation vous est destinée.",
+      "textPreview": "Si vous répondez OUI à au moins 2 de ces points — cette présentation vous est destinée.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Si vous répondez OUI à au moins 2 de ces points — cette présentation vous est destinée."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Si vous répondez OUI à au moins 2 de ces points — cette présentation vous est destinée.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Si vous répondez OUI à au moins 2 de ces points — cette présentation vous est destinée.",
+              "fontSize": 12,
+              "color": "#0A7C5C",
+              "italic": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

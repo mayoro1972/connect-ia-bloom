@@ -1,0 +1,758 @@
+{
+  "name": "TransferAI Prospecting Multi-Prospect V1",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "node-001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        340
+      ]
+    },
+    {
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        380
+      ],
+      "parameters": {}
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": false,
+        "fields": {
+          "values": [
+            {
+              "name": "prospect_id",
+              "type": "string",
+              "stringValue": "test-prospect-001"
+            },
+            {
+              "name": "organization_name",
+              "type": "string",
+              "stringValue": "Orange Côte d'Ivoire"
+            },
+            {
+              "name": "website",
+              "type": "string",
+              "stringValue": "https://www.orange.ci"
+            },
+            {
+              "name": "country",
+              "type": "string",
+              "stringValue": "Côte d'Ivoire"
+            },
+            {
+              "name": "organization_type",
+              "type": "string",
+              "stringValue": "Entreprise de télécommunications"
+            },
+            {
+              "name": "sector_guess",
+              "type": "string",
+              "stringValue": "Télécommunications"
+            },
+            {
+              "name": "decision_maker_name",
+              "type": "string",
+              "stringValue": "Directeur Général"
+            },
+            {
+              "name": "custom_page_paths_csv",
+              "type": "string",
+              "stringValue": ""
+            },
+            {
+              "name": "booking_link_45min",
+              "type": "string",
+              "stringValue": "https://calendly.com/transferai/45min"
+            },
+            {
+              "name": "commercial_priority_default",
+              "type": "string",
+              "stringValue": "tier1"
+            },
+            {
+              "name": "research_scope",
+              "type": "string",
+              "stringValue": "public_web_only"
+            }
+          ]
+        }
+      },
+      "id": "node-002",
+      "name": "Set Target",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Read directly from Proxy (JSON.stringify on Proxy returns {})\nvar p = $input.first().json;\nvar website = String(p.website || '');\nvar base = website.trim().replace(/\\/$/, '');\nvar customPagePaths = String(p.custom_page_paths_csv || '');\nvar prospectId = String(p.prospect_id || '');\nvar orgName = String(p.organization_name || '');\nvar orgType = String(p.organization_type || '');\nvar sectorGuess = String(p.sector_guess || '');\nvar country = String(p.country || '');\nvar decisionMaker = String(p.decision_maker_name || '');\nvar bookingLink = String(p.booking_link_45min || '');\nvar commercialPriority = String(p.commercial_priority_default || '');\nvar researchScope = String(p.research_scope || '');\n\nvar customPaths = customPagePaths.split(',').map(function(v) { return v.trim(); }).filter(Boolean);\nvar defaultPaths = ['/', '/services/', '/solutions/', '/contact/', '/blog/',\n  '/products/', '/expertise/', '/produits-et-services/', '/carrieres/',\n  '/careers/', '/a-propos/', '/about/'];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : '/' + path;\n}\nvar seen = {};\nvar selectedPaths = [];\ncustomPaths.concat(defaultPaths).forEach(function(path) {\n  var n = normalizePath(path);\n  if (!seen[n] && selectedPaths.length < 5) { seen[n] = true; selectedPaths.push(n); }\n});\nvar sourcePages = selectedPaths.map(function(path, index) {\n  var isAbsolute = /^https?:\\/\\//i.test(path);\n  var normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  var url = isAbsolute ? path : base + (normalizedPath === '/' ? '' : normalizedPath);\n  return { key: 'page_' + (index + 1), path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? 'public_source_' + (index + 1) : normalizedPath, url: url };\n});\n\nvar output = {\n  prospect_id: prospectId,\n  organization_name: orgName,\n  organization_type: orgType,\n  website: website,\n  sector_guess: sectorGuess,\n  country: country,\n  decision_maker_name: decisionMaker,\n  custom_page_paths_csv: customPagePaths,\n  booking_link_45min: bookingLink,\n  commercial_priority_default: commercialPriority,\n  research_scope: researchScope,\n  source_pages: sourcePages\n};\nsourcePages.forEach(function(page, index) {\n  output['page_' + (index + 1) + '_url'] = page.url;\n  output['page_' + (index + 1) + '_label'] = page.label;\n});\nreturn [{ json: output }];",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "node-003",
+      "name": "Build Source URLs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_1_url}}",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "node-004",
+      "name": "Fetch Public Page 1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        100
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_2_url}}",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "node-005",
+      "name": "Fetch Public Page 2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        220
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_3_url}}",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "node-006",
+      "name": "Fetch Public Page 3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        340
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_4_url}}",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "node-007",
+      "name": "Fetch Public Page 4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        460
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_5_url}}",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "node-008",
+      "name": "Fetch Public Page 5",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        580
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const target = JSON.parse(JSON.stringify($('Build Source URLs').first().json));\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/services/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/solutions/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/contact/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/blog/' }, raw: $('Fetch Public Page 5').first().json }\n];\nfunction toText(raw) {\n  const html = (raw && (raw.body || raw.data)) || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ').trim();\n}\nconst pageTexts = pages\n  .map(function(page) { return { key: page.meta.key, label: page.meta.label, text: toText(page.raw).slice(0, 12000) }; })\n  .filter(function(page) { return page.text; });\nconst combinedPublicText = pageTexts.map(function(page) {\n  return '[' + page.key.toUpperCase() + ' - ' + page.label + ']\\n' + page.text;\n}).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'reseaux sociaux'],\n  workflow_administratif: ['procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['sante', 'patient', 'clinique', 'hopital', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'operations']\n};\nconst roiClues = Object.keys(clueTaxonomy).filter(function(key) {\n  return clueTaxonomy[key].some(function(kw) { return normalizedText.indexOf(kw) !== -1; });\n});\nreturn [{\n  json: Object.assign({}, target, {\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : ['workflow_administratif', 'service_client_multicanal', 'assistant_direction_documentaire']\n  })\n}];",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "node-009",
+      "name": "Normalize Public Signals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const source = JSON.parse(JSON.stringify($input.first().json));\nconst orgName = (source.organization_name || '').trim();\nconst decisionMaker = (source.decision_maker_name || '').trim();\nconst website = (source.website || '').trim();\nconst domain = website.replace(/^https?:\\/\\//i, '').replace(/^www\\./i, '').split('/')[0];\nfunction escapeRegex(v) { return v.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'); }\nlet sanitizedText = String(source.public_text || '');\nconst genericPatterns = [\n  [/https?:\\/\\/\\S+/gi, '[URL_REDACTED]'],\n  [/\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b/gi, '[EMAIL_REDACTED]'],\n  [/\\+?\\d[\\d\\s().-]{7,}\\d/g, '[PHONE_REDACTED]']\n];\nfor (let i = 0; i < genericPatterns.length; i++) {\n  sanitizedText = sanitizedText.replace(genericPatterns[i][0], genericPatterns[i][1]);\n}\nconst sensitiveTokens = [\n  { value: orgName, replacement: 'ORG_TARGET' },\n  { value: decisionMaker, replacement: 'DECISION_MAKER_TARGET' },\n  { value: domain, replacement: '[URL_REDACTED]' }\n].filter(function(item) { return item.value && item.value.length > 2; });\nfor (let i = 0; i < sensitiveTokens.length; i++) {\n  const pattern = new RegExp(escapeRegex(sensitiveTokens[i].value), 'gi');\n  sanitizedText = sanitizedText.replace(pattern, sensitiveTokens[i].replacement);\n}\nconst normalized = sanitizedText.toLowerCase();\nconst signalTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact center', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'marque', 'reseaux sociaux'],\n  workflow_administratif: ['procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'pilotage', 'rapport', 'documentation', 'compte rendu'],\n  reporting_financier_assiste: ['facturation', 'finance', 'comptabilite', 'paiement', 'recouvrement'],\n  recrutement_onboarding_augmente: ['recrutement', 'carriere', 'rh', 'talent', 'onboarding'],\n  commentaire_donnees_reporting: ['donnees', 'dashboard', 'analytics', 'indicateurs', 'tableau de bord'],\n  telemedecine_triage_orientation: ['sante', 'patient', 'clinique', 'hopital', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'compliance', 'conformite', 'risque'],\n  operations_terrain_coordination: ['flotte', 'terrain', 'logistique', 'livraison', 'intervention', 'operations'],\n  energie_industrie_services: ['energie', 'oil', 'gas', 'station', 'industrie', 'industriel'],\n  formation_montee_en_competence: ['formation', 'certification', 'academy', 'apprentissage', 'competence']\n};\nconst signalTags = Object.keys(signalTaxonomy).filter(function(key) {\n  return signalTaxonomy[key].some(function(kw) { return normalized.indexOf(kw) !== -1; });\n});\nconst allowedFields = ['organization_type','sector_guess','country','signal_tags','roi_clues','page_keys','public_text_sanitized_excerpt'];\nconst blockedFields = ['organization_name','website','decision_maker_name','target_email','page_texts','public_text'];\nconst sanitizedExcerpt = sanitizedText.slice(0, 12000);\nconst llmAllowedPayload = {\n  llm_policy: 'deny-by-default',\n  organization_ref: 'ORG_TARGET',\n  decision_maker_ref: decisionMaker ? 'DECISION_MAKER_TARGET' : null,\n  organization_type: source.organization_type || null,\n  sector_guess: source.sector_guess || null,\n  country: source.country || null,\n  signal_tags: signalTags,\n  roi_clues: Array.isArray(source.roi_clues) ? source.roi_clues : [],\n  page_keys: Array.isArray(source.page_texts) ? source.page_texts.map(function(p) { return p.key; }) : [],\n  public_text_sanitized_excerpt: sanitizedExcerpt,\n  allowed_fields: allowedFields,\n  blocked_fields: blockedFields\n};\nconst llmGenerationPayload = Object.assign({}, llmAllowedPayload, {\n  organization_display: '{{ORGANIZATION_NAME}}',\n  decision_maker_display: '{{DECISION_MAKER_NAME}}',\n  website_display: '{{WEBSITE}}'\n});\nreturn [{\n  json: Object.assign({}, source, {\n    public_text_sanitized: sanitizedExcerpt,\n    llm_allowed_payload: llmAllowedPayload,\n    llm_generation_payload: llmGenerationPayload,\n    llm_redaction_summary: {\n      policy: 'deny-by-default',\n      blocked_fields: blockedFields,\n      allowed_fields: allowedFields,\n      pseudonymized_identifiers: ['organization_name', 'decision_maker_name', 'website'],\n      text_sent_to_llm: 'sanitized_public_text_excerpt_only'\n    }\n  })\n}];",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "node-009a",
+      "name": "Sanitize Prospect Data For LLM",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1490,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es l'assistant IA de prospection de TransferAI. Analyse uniquement des signaux pseudonymisés et retourne uniquement un JSON valide avec: organization_summary, probable_strengths, probable_weaknesses, probable_needs, entry_point_niche, confidence_score. N'utilise jamais de noms réels; raisonne sur ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-010",
+      "name": "Call OpenAI Pre-Audit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1500,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste commercial TransferAI. Retourne uniquement un JSON valide avec: probable_problems, probable_quick_wins, recommended_offer, offer_sequence, recommended_training_bundle, recommended_use_case, best_selling_use_case, commercial_priority_tier, recommended_meeting_angle. Les problèmes doivent être formulés comme hypothèses. Privilégie les cas les plus vendables à court terme: support IT intelligent, service client multicanal, machine à contenu marketing, workflow administratif, assistant documentaire de direction. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-011",
+      "name": "Call OpenAI Problems Solutions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste de valeur TransferAI. Retourne uniquement un JSON valide avec: roi_hypothesis, expected_time_savings, expected_service_improvements, expected_quick_wins, delivery_timeline. Présente les chiffres comme hypothèses ou benchmarks à valider. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-012",
+      "name": "Call OpenAI ROI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1500,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const base = JSON.parse(JSON.stringify($('Sanitize Prospect Data For LLM').first().json));\nfunction parseOpenAI(nodeName) {\n  try {\n    const n = $(nodeName).first().json;\n    const raw = (n && n.choices && n.choices[0] && n.choices[0].message && n.choices[0].message.content) || '{}';\n    try { return JSON.parse(raw); } catch(e) { return { parse_error: nodeName + ': ' + e.message }; }\n  } catch(e) { return { parse_error: nodeName + ': not executed' }; }\n}\nfunction slugify(value) {\n  return String(value || '').normalize('NFD').replace(/[̀-ͯ]/g, '')\n    .toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');\n}\nconst preAudit = parseOpenAI('Call OpenAI Pre-Audit');\nconst problems = parseOpenAI('Call OpenAI Problems Solutions');\nconst roi = parseOpenAI('Call OpenAI ROI');\nconst sectorVariant = problems.sector_variant || slugify(base.sector_guess) || 'multi_sector_operations';\nreturn [{\n  json: Object.assign({}, base, preAudit, problems, roi, {\n    single_primary_cta: \"Planifier un audit strategique gratuit suivi d'un echange de 45 minutes\",\n    sector_variant: sectorVariant\n  })\n}];",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "node-013",
+      "name": "Assemble Prospect Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.4, messages: [ { role: 'system', content: \"Rédige un courrier professionnel en français standard avec accents. Commence par le résultat attendu pour le client. Mets en avant: audit gratuit, rendez-vous gratuit de 45 minutes, service derrière l'IA, accompagnement dans les secteurs opérés par TransferAI. N'affirme jamais un problème comme certain. Utilise les tokens \\x7b\\x7bORGANIZATION_NAME\\x7d\\x7d, \\x7b\\x7bDECISION_MAKER_NAME\\x7d\\x7d et \\x7b\\x7bWEBSITE\\x7d\\x7d au lieu des identifiants réels.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-014",
+      "name": "Generate Executive Letter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.4, messages: [ { role: 'system', content: \"Rédige un mini-catalogue ciblé avec les sections: Message central, Objectifs, Pourquoi cette approche peut intéresser la structure, Notre porte d'entrée, Offres prioritaires, Formations prioritaires, Hypothèse de gains attendus, Proposition immédiate. Utilise les tokens \\x7b\\x7bORGANIZATION_NAME\\x7d\\x7d et \\x7b\\x7bWEBSITE\\x7d\\x7d au lieu des identifiants réels.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-015",
+      "name": "Generate Tailored Catalogue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.3, messages: [ { role: 'system', content: \"Crée une forme d'audit courte à envoyer avant un appel de 45 minutes. Elle doit être adaptée au secteur et couvrir: priorités métier, irritants, outils actuels, données, attentes de formation, confidentialité, objectifs à 3 mois, volumes traités, délais actuels et objectifs de performance. Utilise les tokens \\x7b\\x7bORGANIZATION_NAME\\x7d\\x7d et \\x7b\\x7bWEBSITE\\x7d\\x7d au lieu des identifiants réels.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-016",
+      "name": "Generate Tailored Audit Form",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Retourne uniquement un JSON valide avec: slide_objective, key_messages, sector_pain_points, recommended_case_study, training_focus, roi_hypothesis, delivery_timeline, sector_variant, single_primary_cta. Le deck doit être taillé sur mesure et n'avoir qu'un seul appel à l'action principal. Utilise les tokens \\x7b\\x7bORGANIZATION_NAME\\x7d\\x7d, \\x7b\\x7bDECISION_MAKER_NAME\\x7d\\x7d et \\x7b\\x7bWEBSITE\\x7d\\x7d au lieu des identifiants réels.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-017",
+      "name": "Generate Deck Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function textFrom(nodeName) {\n  try {\n    const n = $(nodeName).first().json;\n    return (n && n.choices && n.choices[0] && n.choices[0].message && n.choices[0].message.content) || '';\n  } catch(e) { return ''; }\n}\nfunction jsonFrom(nodeName) {\n  const raw = textFrom(nodeName) || '{}';\n  try { return JSON.parse(raw); } catch(e) { return { parse_error: nodeName + ': ' + e.message, raw: raw }; }\n}\nfunction hydrateString(value, ctx) {\n  return String(value)\n    .replace(/\\{\\{ORGANIZATION_NAME\\}\\}/g, ctx.organization_name || '')\n    .replace(/\\{\\{DECISION_MAKER_NAME\\}\\}/g, ctx.decision_maker_name || '')\n    .replace(/\\{\\{WEBSITE\\}\\}/g, ctx.website || '');\n}\nfunction hydrateValue(value, ctx) {\n  if (typeof value === 'string') return hydrateString(value, ctx);\n  if (Array.isArray(value)) return value.map(function(item) { return hydrateValue(item, ctx); });\n  if (value && typeof value === 'object') {\n    const out = {};\n    const keys = Object.keys(value);\n    for (let i = 0; i < keys.length; i++) out[keys[i]] = hydrateValue(value[keys[i]], ctx);\n    return out;\n  }\n  return value;\n}\nconst ctx = JSON.parse(JSON.stringify($('Assemble Prospect Context').first().json));\nconst executiveLetter = hydrateString(textFrom('Generate Executive Letter'), ctx);\nconst tailoredCatalogue = hydrateString(textFrom('Generate Tailored Catalogue'), ctx);\nconst tailoredAuditForm = hydrateString(textFrom('Generate Tailored Audit Form'), ctx);\nconst deckBrief = hydrateValue(jsonFrom('Generate Deck Brief'), ctx);\nconst requiresEmail = Object.prototype.hasOwnProperty.call(ctx, 'target_email');\nconst approvedForSend = Boolean(ctx.organization_name && ctx.entry_point_niche && ctx.recommended_offer && (!requiresEmail || ctx.target_email));\nconst packId = ctx.pack_id || 'pack-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);\nreturn [{\n  json: Object.assign({}, ctx, {\n    pack_id: packId,\n    executive_letter: executiveLetter,\n    tailored_catalogue: tailoredCatalogue,\n    tailored_audit_form: tailoredAuditForm,\n    deck_brief: deckBrief,\n    approved_for_send: approvedForSend,\n    llm_redaction_summary: ctx.llm_redaction_summary,\n    llm_allowed_payload: ctx.llm_allowed_payload,\n    llm_generation_payload: ctx.llm_generation_payload\n  })\n}];",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "node-018",
+      "name": "Assemble Prospect Pack",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "workflow_status",
+              "type": "string",
+              "stringValue": "ready_for_manual_review"
+            },
+            {
+              "name": "workflow_scope",
+              "type": "string",
+              "stringValue": "multi_prospect"
+            }
+          ]
+        }
+      },
+      "id": "node-019",
+      "name": "Mark For Review",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2540,
+        340
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Target": {
+      "main": [
+        [
+          {
+            "node": "Build Source URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Source URLs": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 1": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 2": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 3": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 4": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 5": {
+      "main": [
+        [
+          {
+            "node": "Normalize Public Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Public Signals": {
+      "main": [
+        [
+          {
+            "node": "Sanitize Prospect Data For LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call OpenAI Pre-Audit": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Prospect Context": {
+      "main": [
+        [
+          {
+            "node": "Generate Executive Letter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Tailored Catalogue",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Tailored Audit Form",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Deck Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Executive Letter": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Prospect Pack": {
+      "main": [
+        [
+          {
+            "node": "Mark For Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanitize Prospect Data For LLM": {
+      "main": [
+        [
+          {
+            "node": "Call OpenAI Pre-Audit",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call OpenAI Problems Solutions",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call OpenAI ROI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "transferai-prospecting-multi-prospect-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "n8n"
+    },
+    {
+      "name": "multi-prospect"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-05-22",
+  "policyMode": "deny-by-default",
+  "rules": [
+    {
+      "dataFamily": "direct_identifiers",
+      "examples": ["name", "email", "phone", "whatsapp_number", "profile_name", "company"],
+      "llmStatus": "blocked",
+      "rule": "Never send to external LLM APIs"
+    },
+    {
+      "dataFamily": "credentials_and_tokens",
+      "examples": ["password", "hash", "invite_token", "session_id", "response_id", "provider_message_id"],
+      "llmStatus": "blocked",
+      "rule": "Never send to any LLM"
+    },
+    {
+      "dataFamily": "free_text_customer_content",
+      "examples": ["message", "motivation", "request_message", "audit_form_data", "whatsapp_body", "internal_notes"],
+      "llmStatus": "blocked",
+      "rule": "Require local redaction and human approval before any transformation"
+    },
+    {
+      "dataFamily": "marketing_preferences",
+      "examples": ["subscribed_domains", "language", "source_page"],
+      "llmStatus": "pseudonymize_required",
+      "rule": "Allowed only without direct identifiers"
+    },
+    {
+      "dataFamily": "commercial_qualification",
+      "examples": ["sector", "requested_domain", "budget_range", "scoping_horizon", "participants"],
+      "llmStatus": "pseudonymize_required",
+      "rule": "Allowed only in minimized prospect-neutral form"
+    },
+    {
+      "dataFamily": "aggregated_operational_metrics",
+      "examples": ["counts_by_status", "volumes_by_domain", "send_rate", "failure_rate"],
+      "llmStatus": "allowed_under_control",
+      "rule": "Must remain non-reidentifying"
+    }
+  ],
+  "tables": [
+    {
+      "table": "contact_requests",
+      "blockedFields": ["full_name", "email", "phone", "company", "city", "country", "profession", "message"],
+      "pseudonymizeFields": ["sector", "request_intent", "requested_domain", "ai_maturity", "use_cases", "scoping_horizon", "engagement_format", "budget_range"],
+      "allowedAggregates": ["count_by_request_intent", "count_by_sector", "count_by_domain"]
+    },
+    {
+      "table": "registration_requests",
+      "blockedFields": ["first_name", "last_name", "email", "phone", "company", "position", "message"],
+      "pseudonymizeFields": ["formation_title", "participants"],
+      "allowedAggregates": ["count_by_formation", "sum_participants_by_formation"]
+    },
+    {
+      "table": "webinar_registrations",
+      "blockedFields": ["full_name", "email", "phone", "organization", "city", "country", "motivation", "admin_notes"],
+      "pseudonymizeFields": ["sector", "domain_key", "formation_title", "participants", "status"],
+      "allowedAggregates": ["count_by_domain", "count_by_sector", "count_by_status"]
+    },
+    {
+      "table": "newsletter_subscriptions",
+      "blockedFields": ["email"],
+      "pseudonymizeFields": ["subscribed_domains", "language", "source_page"],
+      "allowedAggregates": ["count_by_domain", "count_by_language", "count_by_source_page"]
+    },
+    {
+      "table": "partner_listing_reviews",
+      "blockedFields": ["prospect_name", "prospect_email", "company", "website", "role", "city", "request_message", "admin_notes", "response_email_body_fr", "response_email_body_en"],
+      "pseudonymizeFields": ["sector_activity", "requested_visibility_type", "requested_timeline", "ai_score", "ai_recommendation"],
+      "allowedAggregates": ["count_by_review_status", "count_by_sector_activity"]
+    },
+    {
+      "table": "form_responses",
+      "blockedFields": ["user_name", "user_email", "user_position", "user_entity", "form_data", "session_id", "invitation_token"],
+      "pseudonymizeFields": [],
+      "allowedAggregates": ["completion_rate", "count_completed"]
+    },
+    {
+      "table": "form_invitations",
+      "blockedFields": ["invitee_name", "invitee_email", "invite_token", "draft_form_data", "response_id"],
+      "pseudonymizeFields": [],
+      "allowedAggregates": ["count_by_status"]
+    },
+    {
+      "table": "prospect_email_delivery_logs",
+      "blockedFields": ["recipient_email", "subject", "error_message", "meta", "provider_message_id"],
+      "pseudonymizeFields": ["intent", "language", "status", "recipient_type"],
+      "allowedAggregates": ["delivery_rate_by_intent", "failure_rate_by_language"]
+    },
+    {
+      "table": "newsletter_delivery_logs",
+      "blockedFields": ["recipient_email", "payload", "error_message", "provider_message_id"],
+      "pseudonymizeFields": ["subscribed_domains", "language", "status", "delivery_type"],
+      "allowedAggregates": ["delivery_rate_by_domain", "delivery_rate_by_language"]
+    },
+    {
+      "table": "catalogue_delivery_logs",
+      "blockedFields": ["recipient_email", "delivery_context", "error_message"],
+      "pseudonymizeFields": ["domain_key", "status", "delivery_channel"],
+      "allowedAggregates": ["count_by_domain", "count_by_channel", "count_by_status"]
+    },
+    {
+      "table": "whatsapp_inbound_messages",
+      "blockedFields": ["from_number", "to_number", "profile_name", "body", "wa_id", "raw_payload", "internal_notes", "message_sid", "account_sid"],
+      "pseudonymizeFields": ["category", "status", "num_media"],
+      "allowedAggregates": ["count_by_category", "count_by_status"]
+    },
+    {
+      "table": "whatsapp_email_notification_logs",
+      "blockedFields": ["recipient_email", "message_sid", "subject", "error_message", "meta", "provider_message_id"],
+      "pseudonymizeFields": ["notification_type", "status"],
+      "allowedAggregates": ["count_by_status", "count_by_notification_type"]
+    }
+  ]
+}

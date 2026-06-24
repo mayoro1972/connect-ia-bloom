@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BookOpen, Users, Award, Globe, Eye } from "lucide-react";
 import { MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -12,18 +13,20 @@ import {
   SUPABASE_URL,
   supabase,
 } from "@/integrations/supabase/client";
-import { directLinks } from "@/lib/site-links";
+import { trackCtaClick } from "@/lib/analytics";
+import { buildContactPath, directLinks } from "@/lib/site-links";
 
 const sectionCopy = {
   fr: {
-    badge: "Formation · Certification · Services IA",
+    badge: "Audit IA gratuit · Formations · Solutions IA",
     title1: "L'",
     titleHighlight: "IA",
-    title2: " utile pour les talents, les entreprises et les institutions d'Afrique",
+    title2: " utile pour les entreprises, les talents et les institutions d'Afrique",
     subtitle:
-      "TransferAI Africa forme en Côte d'Ivoire et en Afrique celles et ceux qui veulent apprendre l'IA et l'appliquer concrètement à leur métier.",
-    whatsappCta: "Écrire sur WhatsApp",
-    whatsappHelper: "Réponse rapide pour parler IA, formation et accompagnement.",
+      "TransferAI Africa aide les entreprises à repérer les usages IA à gain visible, former les équipes sur des cas concrets et déployer une première trajectoire utile en Côte d'Ivoire et en Afrique.",
+    whatsappCta: "Parler à un expert IA",
+    auditCta: "Réserver un audit IA gratuit",
+    whatsappHelper: "Deux entrées simples : un échange rapide avec un expert ou un audit IA gratuit pour cadrer votre besoin d'équipe.",
     stats: {
       formations: "Formations",
       metiers: "Domaines d'expertise",
@@ -33,14 +36,15 @@ const sectionCopy = {
     },
   },
   en: {
-    badge: "Training · Certification · AI Services",
+    badge: "Free AI audit · Training · AI Solutions",
     title1: "",
     titleHighlight: "AI",
-    title2: " that serves African talent, companies, and institutions",
+    title2: " that serves companies, talent, and institutions across Africa",
     subtitle:
-      "TransferAI Africa trains people and teams in Côte d'Ivoire and across Africa who want to learn AI and apply it concretely to their work.",
-    whatsappCta: "Chat on WhatsApp",
-    whatsappHelper: "Quick contact for AI, training, and advisory support.",
+      "TransferAI Africa helps companies identify AI use cases with visible impact, train teams on concrete workflows, and deploy a first practical adoption path across Côte d'Ivoire and Africa.",
+    whatsappCta: "Speak with an AI expert",
+    auditCta: "Book a free AI audit",
+    whatsappHelper: "Two simple entry points: a quick expert conversation or a free AI audit to scope your team's need.",
     stats: {
       formations: "Courses",
       metiers: "Areas of expertise",
@@ -165,16 +169,42 @@ const HeroSection = () => {
           </p>
 
           <div className="mb-12 flex flex-col items-center gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-coral-gradient px-8 text-white shadow-[0_18px_34px_-18px_rgba(251,146,60,0.9)] hover:opacity-95"
-            >
-              <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer">
-                <MessageCircle size={18} />
-                {copy.whatsappCta}
-              </a>
-            </Button>
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-coral-gradient px-8 text-white shadow-[0_18px_34px_-18px_rgba(251,146,60,0.9)] hover:opacity-95"
+              >
+                <a
+                  href={directLinks.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackCtaClick({
+                      ctaName: copy.whatsappCta,
+                      ctaLocation: "hero_section",
+                      destination: directLinks.whatsapp,
+                    })
+                  }
+                >
+                  <MessageCircle size={18} />
+                  {copy.whatsappCta}
+                </a>
+              </Button>
+              <Link
+                to={buildContactPath("demande-renseignement", activeLanguage === "fr" ? "Audit IA gratuit" : "Free AI audit")}
+                onClick={() =>
+                  trackCtaClick({
+                    ctaName: copy.auditCta,
+                    ctaLocation: "hero_section",
+                    destination: buildContactPath("demande-renseignement", activeLanguage === "fr" ? "Audit IA gratuit" : "Free AI audit"),
+                  })
+                }
+                className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:border-white/28 hover:bg-white/14"
+              >
+                {copy.auditCta}
+              </Link>
+            </div>
             <p className="max-w-xl text-sm text-slate-200/75 md:text-base">
               {copy.whatsappHelper}
             </p>

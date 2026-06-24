@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness } from "lucide-react";
 import ctaBg from "@/assets/cta-bg.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { resolveActiveLanguage } from "@/i18n/resolveLanguage";
@@ -11,18 +11,18 @@ const sectionCopy = {
   fr: {
     title1: "Prêt à faire de l'",
     titleHighlight: "IA",
-    title2: " ?",
-    subtitle: "Choisissez le bon prochain pas : former vos équipes, découvrir les parcours ou parler à un expert IA.",
-    button: "Parler à un expert IA",
-    catalogue: "Demander un catalogue",
+    title2: " un vrai levier entreprise ?",
+    subtitle: "Commencez par un audit IA gratuit, clarifiez les gains rapides et avancez vers la bonne suite : cadrage, formation ou déploiement.",
+    button: "Réserver un audit IA gratuit",
+    catalogue: "Voir les services entreprises",
   },
   en: {
     title1: "Ready to turn ",
     titleHighlight: "AI",
-    title2: "?",
-    subtitle: "Choose the right next step: train your teams, explore the paths, or speak with an AI expert.",
-    button: "Speak with an AI expert",
-    catalogue: "Request a catalogue",
+    title2: " into a real business lever?",
+    subtitle: "Start with a free AI audit, clarify your quickest wins, and move toward the right next step: scoping, training, or deployment.",
+    button: "Book a free AI audit",
+    catalogue: "View enterprise services",
   },
 } as const;
 
@@ -58,12 +58,12 @@ const CTASection = () => {
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              to={buildContactPath("demande-renseignement")}
+              to={buildContactPath("demande-renseignement", language === "en" ? "Free AI audit" : "Audit IA gratuit")}
               onClick={() =>
                 trackCtaClick({
                   ctaName: copy.button,
                   ctaLocation: "home_final_cta",
-                  destination: buildContactPath("demande-renseignement"),
+                  destination: buildContactPath("demande-renseignement", language === "en" ? "Free AI audit" : "Audit IA gratuit"),
                 })
               }
               className="inline-flex items-center gap-2 rounded-full bg-orange-gradient px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition-all hover:scale-105 hover:opacity-95"
@@ -71,17 +71,17 @@ const CTASection = () => {
               {copy.button} <ArrowRight size={18} />
             </Link>
             <Link
-              to="/demande-catalogue"
+              to="/entreprises"
               onClick={() =>
                 trackCtaClick({
                   ctaName: copy.catalogue,
                   ctaLocation: "home_final_cta",
-                  destination: "/demande-catalogue",
+                  destination: "/entreprises",
                 })
               }
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white/95 transition-all hover:scale-105 hover:bg-white/[0.08]"
             >
-              <Download size={18} /> {copy.catalogue}
+              <BriefcaseBusiness size={18} /> {copy.catalogue}
             </Link>
           </div>
         </ScrollReveal>

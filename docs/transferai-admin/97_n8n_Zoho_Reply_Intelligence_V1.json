@@ -1,0 +1,301 @@
+{
+  "name": "TransferAI Zoho Reply Intelligence V1",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "minutes", "minutesInterval": 15 }]
+        }
+      },
+      "name": "Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-600, 300],
+      "id": "zri-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "mailbox": "INBOX",
+        "options": {
+          "unseen": true,
+          "since": "={{ new Date(Date.now() - 16 * 60 * 1000).toISOString() }}"
+        }
+      },
+      "name": "Read Unread Zoho Emails",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [-360, 300],
+      "id": "zri-0002-0002-0002-000000000002",
+      "credentials": {
+        "imap": {
+          "name": "IMAP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $json;\n\nconst fromEmail = String(item.from || '').toLowerCase().trim();\nconst subject = String(item.subject || '').trim();\nconst bodyText = String(item.text || item.html || '').trim();\nconst receivedAt = item.date || new Date().toISOString();\n\n// Ignorer les emails internes et no-reply\nconst skipPatterns = ['no-reply', 'noreply', 'donotreply', 'contact@transferai.ci', 'support-ia@transferai.ci', 'mailer-daemon'];\nconst shouldSkip = skipPatterns.some(p => fromEmail.includes(p));\n\nif (shouldSkip || !fromEmail || !bodyText) {\n  return [];\n}\n\n// Extraire l'email pur depuis \"Nom <email>\"\nconst emailMatch = fromEmail.match(/<([^>]+)>/);\nconst cleanEmail = emailMatch ? emailMatch[1].trim() : fromEmail;\n\nreturn [{\n  json: {\n    from_email: cleanEmail,\n    subject: subject,\n    body_text: bodyText.substring(0, 2000),\n    received_at: receivedAt\n  }\n}];"
+      },
+      "name": "Parse Incoming Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-120, 300],
+      "id": "zri-0003-0003-0003-000000000003"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=prospect_id,status,sequence_step,organization_name,decision_maker_name,form_type,paused&email=eq.' + encodeURIComponent($json.from_email) + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Authorization", "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" }
+          ]
+        },
+        "options": {
+          "response": { "response": { "neverError": true, "responseFormat": "json" } }
+        }
+      },
+      "name": "Find Prospect By Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [120, 300],
+      "id": "zri-0004-0004-0004-000000000004"
+    },
+    {
+      "parameters": {
+        "jsCode": "const reply = $('Parse Incoming Reply').first().json;\nconst prospects = $input.all()[0].json;\n\nconst list = Array.isArray(prospects) ? prospects : [];\nif (!list.length) return [];\n\nconst prospect = list[0];\n\nreturn [{\n  json: {\n    prospect_id: prospect.prospect_id,\n    status: prospect.status,\n    sequence_step: prospect.sequence_step,\n    organization_name: prospect.organization_name || '',\n    decision_maker_name: prospect.decision_maker_name || '',\n    form_type: prospect.form_type || '',\n    from_email: reply.from_email,\n    subject: reply.subject,\n    body_text: reply.body_text,\n    received_at: reply.received_at\n  }\n}];"
+      },
+      "name": "Load Prospect Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [360, 300],
+      "id": "zri-0005-0005-0005-000000000005"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": { "temperature": 0.2 },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Tu es un assistant commercial pour TransferAI, une entreprise de solutions IA en Côte d'Ivoire. Tu analyses les réponses email de prospects et tu retournes UNIQUEMENT un JSON valide sans markdown.\n\nLes intents possibles :\n- interested : le prospect est intéressé et veut en savoir plus ou prendre RDV\n- not_interested : le prospect décline poliment\n- question : le prospect pose une question précise\n- already_client : il est déjà client\n- out_of_office : message d'absence automatique\n- other : autre cas\n\nFormat de réponse OBLIGATOIRE (JSON pur) :\n{\"intent\": \"<intent>\", \"needs_human\": <true|false>, \"summary\": \"<résumé en 1 phrase>\", \"suggested_reply\": \"<réponse courte en français si needs_human=false, sinon vide>\"}\n\nRègles :\n- needs_human=true si : question complexe, négociation, plainte, out_of_office=false avec ambiguïté\n- needs_human=false si : not_interested clair, out_of_office, already_client, question simple"
+            },
+            {
+              "role": "user",
+              "content": "=Prospect : {{ $json.decision_maker_name }} ({{ $json.organization_name }})\nEmail reçu :\nObjet : {{ $json.subject }}\nCorps : {{ $json.body_text }}"
+            }
+          ]
+        }
+      },
+      "name": "OpenAI Classify Reply",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [600, 300],
+      "id": "zri-0006-0006-0006-000000000006",
+      "credentials": {
+        "openAiApi": {
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $('Load Prospect Context').first().json;\nconst aiRaw = $input.all()[0].json;\n\nlet classification = {};\ntry {\n  const text = aiRaw.message?.content || aiRaw.choices?.[0]?.message?.content || '';\n  classification = JSON.parse(text);\n} catch(e) {\n  classification = { intent: 'other', needs_human: true, summary: 'Erreur de parsing IA', suggested_reply: '' };\n}\n\nreturn [{\n  json: {\n    ...ctx,\n    intent: classification.intent || 'other',\n    needs_human: classification.needs_human !== false,\n    summary: classification.summary || '',\n    suggested_reply: classification.suggested_reply || ''\n  }\n}];"
+      },
+      "name": "Parse AI Classification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 300],
+      "id": "zri-0007-0007-0007-000000000007"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.needs_human }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "name": "IF Needs Human Handoff",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1080, 300],
+      "id": "zri-0008-0008-0008-000000000008"
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact@transferai.ci",
+        "toEmail": "contact@transferai.ci",
+        "subject": "=🙋 Handoff requis — {{ $json.decision_maker_name }} ({{ $json.organization_name }})",
+        "emailType": "html",
+        "message": "=<h2>Un prospect a répondu et nécessite une intervention humaine</h2>\n<table style='border-collapse:collapse;width:100%'>\n<tr><td style='padding:8px;border:1px solid #ddd'><strong>Prospect</strong></td><td style='padding:8px;border:1px solid #ddd'>{{ $json.decision_maker_name }}</td></tr>\n<tr><td style='padding:8px;border:1px solid #ddd'><strong>Organisation</strong></td><td style='padding:8px;border:1px solid #ddd'>{{ $json.organization_name }}</td></tr>\n<tr><td style='padding:8px;border:1px solid #ddd'><strong>Email</strong></td><td style='padding:8px;border:1px solid #ddd'>{{ $json.from_email }}</td></tr>\n<tr><td style='padding:8px;border:1px solid #ddd'><strong>Intent IA</strong></td><td style='padding:8px;border:1px solid #ddd'>{{ $json.intent }}</td></tr>\n<tr><td style='padding:8px;border:1px solid #ddd'><strong>Résumé IA</strong></td><td style='padding:8px;border:1px solid #ddd'>{{ $json.summary }}</td></tr>\n<tr><td style='padding:8px;border:1px solid #ddd'><strong>Email reçu</strong></td><td style='padding:8px;border:1px solid #ddd'><pre>{{ $json.body_text }}</pre></td></tr>\n</table>\n<p>Le prospect a été mis en pause dans le CRM. Répondez directement depuis votre boîte mail.</p>",
+        "options": {}
+      },
+      "name": "Notify Admin Human Handoff",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1320, 160],
+      "id": "zri-0009-0009-0009-000000000009",
+      "credentials": {
+        "smtp": {
+          "name": "SMTP TransferAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Authorization", "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=representation" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  status: 'human_handoff_required',\n  paused: true,\n  last_reply_intent: $json.intent,\n  last_reply_at: $json.received_at,\n  updated_at: new Date().toISOString()\n})\n}}",
+        "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } } }
+      },
+      "name": "Update Prospect Human Handoff",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1560, 160],
+      "id": "zri-0010-0010-0010-000000000010"
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact@transferai.ci",
+        "toEmail": "={{ $json.from_email }}",
+        "subject": "=Re: {{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.suggested_reply }}",
+        "options": {
+          "replyTo": "contact@transferai.ci"
+        }
+      },
+      "name": "Send Auto Reply",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1320, 440],
+      "id": "zri-0011-0011-0011-000000000011",
+      "credentials": {
+        "smtp": {
+          "name": "SMTP TransferAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Authorization", "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=representation" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  status: 'replied',\n  paused: true,\n  last_reply_intent: $json.intent,\n  last_reply_at: $json.received_at,\n  updated_at: new Date().toISOString()\n})\n}}",
+        "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } } }
+      },
+      "name": "Update Prospect Replied Auto",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1560, 440],
+      "id": "zri-0012-0012-0012-000000000012"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Authorization", "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=representation" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  prospect_id: $json.prospect_id,\n  type: 'reply_received',\n  direction: 'inbound',\n  channel: 'email',\n  content: $json.body_text,\n  ai_classification: $json.intent,\n  ai_summary: $json.summary,\n  needs_human: $json.needs_human,\n  attempted_at: $json.received_at\n})\n}}",
+        "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } } }
+      },
+      "name": "Log Outreach Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1800, 300],
+      "id": "zri-0013-0013-0013-000000000013"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every 15 Minutes": {
+      "main": [[{ "node": "Read Unread Zoho Emails", "type": "main", "index": 0 }]]
+    },
+    "Read Unread Zoho Emails": {
+      "main": [[{ "node": "Parse Incoming Reply", "type": "main", "index": 0 }]]
+    },
+    "Parse Incoming Reply": {
+      "main": [[{ "node": "Find Prospect By Email", "type": "main", "index": 0 }]]
+    },
+    "Find Prospect By Email": {
+      "main": [[{ "node": "Load Prospect Context", "type": "main", "index": 0 }]]
+    },
+    "Load Prospect Context": {
+      "main": [[{ "node": "OpenAI Classify Reply", "type": "main", "index": 0 }]]
+    },
+    "OpenAI Classify Reply": {
+      "main": [[{ "node": "Parse AI Classification", "type": "main", "index": 0 }]]
+    },
+    "Parse AI Classification": {
+      "main": [[{ "node": "IF Needs Human Handoff", "type": "main", "index": 0 }]]
+    },
+    "IF Needs Human Handoff": {
+      "main": [
+        [{ "node": "Notify Admin Human Handoff", "type": "main", "index": 0 }],
+        [{ "node": "Send Auto Reply", "type": "main", "index": 0 }]
+      ]
+    },
+    "Notify Admin Human Handoff": {
+      "main": [[{ "node": "Update Prospect Human Handoff", "type": "main", "index": 0 }]]
+    },
+    "Update Prospect Human Handoff": {
+      "main": [[{ "node": "Log Outreach Attempt", "type": "main", "index": 0 }]]
+    },
+    "Send Auto Reply": {
+      "main": [[{ "node": "Update Prospect Replied Auto", "type": "main", "index": 0 }]]
+    },
+    "Update Prospect Replied Auto": {
+      "main": [[{ "node": "Log Outreach Attempt", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "tags": [
+    { "name": "transferai" },
+    { "name": "zoho" },
+    { "name": "crm" },
+    { "name": "ai" }
+  ]
+}

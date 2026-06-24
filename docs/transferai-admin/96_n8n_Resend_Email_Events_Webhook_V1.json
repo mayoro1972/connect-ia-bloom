@@ -1,0 +1,92 @@
+{
+  "name": "TransferAI Resend Email Events Webhook V1",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "resend-email-events",
+        "options": {}
+      },
+      "name": "Resend Events Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [-240, 288],
+      "id": "r1-0001-0001-0001-000000000001",
+      "webhookId": "resend-email-events-transferai"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.all()[0].json;\nconst body = (item.body && typeof item.body === 'object') ? item.body : item;\n\nconst eventType = String(body.type || '');\nconst data = body.data || {};\nconst tags = data.tags || {};\n\nconst prospectId = tags.prospect_id || '';\nconst toEmail = (Array.isArray(data.to) && data.to[0]) ? data.to[0] : '';\n\nconst actionableEvents = ['email.bounced', 'email.complained'];\n\nif (!actionableEvents.includes(eventType) || !prospectId) {\n  return [];\n}\n\nconst stopReason = eventType === 'email.bounced' ? 'email_bounced' : 'email_complained';\n\nreturn [{\n  json: {\n    event_type: eventType,\n    prospect_id: prospectId,\n    to_email: toEmail,\n    stop_reason: stopReason,\n    detected_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Parse Resend Event",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [0, 288],
+      "id": "r1-0002-0002-0002-000000000002"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  status: 'closed_no_reply',\n  paused: true,\n  stop_reason: $json.stop_reason,\n  niche_status: 'social_sequence_completed',\n  closed_at: $json.detected_at,\n  close_reason: $json.stop_reason,\n  updated_at: $json.detected_at\n})\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Stop Prospect On Bounce",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [240, 288],
+      "id": "r1-0003-0003-0003-000000000003"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Resend Events Webhook": {
+      "main": [[{"node": "Parse Resend Event", "type": "main", "index": 0}]]
+    },
+    "Parse Resend Event": {
+      "main": [[{"node": "Stop Prospect On Bounce", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "tags": [
+    {"name": "transferai"},
+    {"name": "resend"},
+    {"name": "crm"}
+  ]
+}

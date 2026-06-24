@@ -1,0 +1,231 @@
+{
+  "name": "TransferAI Daily Monitoring Report V1",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * 1-6"
+            }
+          ]
+        }
+      },
+      "name": "Daily 7am Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [-240, 288],
+      "id": "m1-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=prospect_id,target_email,status,paused,social_email_1_sent_at,social_email_2_sent_at,social_email_3_sent_at,next_action_at,created_at&created_at=gte.{{ new Date(Date.now() - 86400000).toISOString() }}&order=created_at.desc",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Fetch New Leads 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [0, 288],
+      "id": "m1-0002-0002-0002-000000000002"
+    },
+    {
+      "parameters": {
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts?select=prospect_id,channel,status,sent_at,sequence_step&sent_at=gte.{{ new Date(Date.now() - 86400000).toISOString() }}&order=sent_at.desc",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Fetch Emails Sent 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [0, 480],
+      "id": "m1-0003-0003-0003-000000000003"
+    },
+    {
+      "parameters": {
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=prospect_id,target_email,status,next_action_at&status=eq.meeting_booked&meeting_booked_at=gte.{{ new Date(Date.now() - 86400000).toISOString() }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Fetch Meetings Booked 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [0, 672],
+      "id": "m1-0004-0004-0004-000000000004"
+    },
+    {
+      "parameters": {
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=prospect_id,target_email,status,next_action_at&status=eq.active&paused=eq.false&next_action_at=lt.{{ new Date().toISOString() }}&social_email_1_sent_at=is.null",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Fetch Stuck Leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [0, 864],
+      "id": "m1-0005-0005-0005-000000000005"
+    },
+    {
+      "parameters": {
+        "jsCode": "const newLeads = Array.isArray($('Fetch New Leads 24h').first().json) ? $('Fetch New Leads 24h').first().json : [];\nconst emailsSent = Array.isArray($('Fetch Emails Sent 24h').first().json) ? $('Fetch Emails Sent 24h').first().json : [];\nconst meetings = Array.isArray($('Fetch Meetings Booked 24h').first().json) ? $('Fetch Meetings Booked 24h').first().json : [];\nconst stuck = Array.isArray($('Fetch Stuck Leads').first().json) ? $('Fetch Stuck Leads').first().json : [];\n\nconst today = new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Africa/Abidjan' });\n\nconst email1 = emailsSent.filter(e => e.sequence_step === 1).length;\nconst email2 = emailsSent.filter(e => e.sequence_step === 2).length;\nconst email3 = emailsSent.filter(e => e.sequence_step === 3).length;\n\nconst newLeadsList = newLeads.slice(0, 5).map(l => `• ${l.target_email} (${l.status})`).join('<br>') || 'Aucun';\nconst meetingsList = meetings.slice(0, 5).map(m => `• ${m.target_email}`).join('<br>') || 'Aucun';\nconst stuckList = stuck.slice(0, 5).map(s => `• ${s.target_email} (next: ${s.next_action_at ? new Date(s.next_action_at).toLocaleDateString('fr-FR') : 'null'})`).join('<br>') || 'Aucun';\n\nconst hasAlert = stuck.length > 0 || newLeads.length === 0;\nconst alertBanner = hasAlert ? '<p style=\"background:#fff3cd;padding:10px;border-left:4px solid #ffc107;\"><strong>⚠ Points à vérifier</strong></p>' : '<p style=\"background:#d4edda;padding:10px;border-left:4px solid #28a745;\"><strong>✅ Tout est nominal</strong></p>';\n\nconst html = `\n<h2>Rapport quotidien TransferAI — ${today}</h2>\n${alertBanner}\n<h3>📥 Nouveaux leads (24h)</h3>\n<p><strong>${newLeads.length}</strong> nouveau(x) prospect(s)</p>\n${newLeads.length > 0 ? '<p>' + newLeadsList + '</p>' : ''}\n\n<h3>📧 Emails envoyés (24h)</h3>\n<table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse\">\n<tr><th>Mail 1</th><th>Mail 2</th><th>Mail 3</th><th>Total</th></tr>\n<tr><td>${email1}</td><td>${email2}</td><td>${email3}</td><td>${emailsSent.length}</td></tr>\n</table>\n\n<h3>📅 RDV réservés (24h)</h3>\n<p><strong>${meetings.length}</strong> rendez-vous</p>\n${meetings.length > 0 ? '<p>' + meetingsList + '</p>' : ''}\n\n<h3>⚠ Leads bloqués (mail 1 non envoyé)</h3>\n<p><strong>${stuck.length}</strong> prospect(s) en attente</p>\n${stuck.length > 0 ? '<p>' + stuckList + '</p>' : ''}\n`;\n\nreturn [{\n  json: {\n    report_html: html,\n    new_leads_count: newLeads.length,\n    emails_sent_count: emailsSent.length,\n    meetings_count: meetings.length,\n    stuck_count: stuck.length,\n    has_alert: hasAlert,\n    date: today\n  }\n}];"
+      },
+      "name": "Build Daily Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 576],
+      "id": "m1-0006-0006-0006-000000000006"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: 'contact@transferai.ci',\n  subject: ($json.has_alert ? '⚠ ' : '✅ ') + 'Rapport quotidien TransferAI — ' + $json.date + ' | ' + $json.new_leads_count + ' leads · ' + $json.emails_sent_count + ' emails · ' + $json.meetings_count + ' RDV',\n  html: $json.report_html\n})\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Send Daily Report Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [720, 576],
+      "id": "m1-0007-0007-0007-000000000007"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily 7am Trigger": {
+      "main": [
+        [
+          {"node": "Fetch New Leads 24h", "type": "main", "index": 0},
+          {"node": "Fetch Emails Sent 24h", "type": "main", "index": 0},
+          {"node": "Fetch Meetings Booked 24h", "type": "main", "index": 0},
+          {"node": "Fetch Stuck Leads", "type": "main", "index": 0}
+        ]
+      ]
+    },
+    "Fetch New Leads 24h": {
+      "main": [[{"node": "Build Daily Report", "type": "main", "index": 0}]]
+    },
+    "Fetch Emails Sent 24h": {
+      "main": [[{"node": "Build Daily Report", "type": "main", "index": 0}]]
+    },
+    "Fetch Meetings Booked 24h": {
+      "main": [[{"node": "Build Daily Report", "type": "main", "index": 0}]]
+    },
+    "Fetch Stuck Leads": {
+      "main": [[{"node": "Build Daily Report", "type": "main", "index": 0}]]
+    },
+    "Build Daily Report": {
+      "main": [[{"node": "Send Daily Report Email", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "tags": [
+    {"name": "transferai"},
+    {"name": "monitoring"},
+    {"name": "crm"}
+  ]
+}

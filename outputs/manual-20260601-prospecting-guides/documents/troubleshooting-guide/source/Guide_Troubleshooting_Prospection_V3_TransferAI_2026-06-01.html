@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Guide Troubleshooting Prospection V3</title>
+  <style>
+    body {
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      font-size: 11pt;
+      line-height: 1.35;
+      color: #1f2937;
+      margin: 0.9in;
+    }
+    h1, h2, h3 { color: #7c2d12; margin-bottom: 6pt; }
+    h1 { font-size: 21pt; margin-top: 0; }
+    h2 { font-size: 14pt; margin-top: 18pt; border-bottom: 1px solid #d1d5db; padding-bottom: 4pt; }
+    h3 { font-size: 12pt; margin-top: 14pt; }
+    p { margin: 0 0 8pt 0; }
+    ul, ol { margin: 0 0 10pt 18pt; }
+    li { margin-bottom: 4pt; }
+    .meta, .box {
+      border: 1px solid #e5e7eb;
+      padding: 10pt 12pt;
+      margin: 10pt 0 16pt 0;
+    }
+    .meta { background: #f9fafb; }
+    .warn { background: #fff7ed; border-left: 4px solid #ea580c; padding: 8pt 10pt; margin: 10pt 0; }
+    code { font-family: "Menlo", monospace; font-size: 9.5pt; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 10pt 0 14pt 0;
+    }
+    th, td {
+      border: 1px solid #cfd8e3;
+      padding: 6pt 8pt;
+      vertical-align: top;
+    }
+    th { background: #fef2f2; text-align: left; }
+    .small { font-size: 9.5pt; color: #4b5563; }
+  </style>
+</head>
+<body>
+  <h1>Guide de troubleshooting de référence</h1>
+  <div class="meta">
+    <p><strong>Workflow :</strong> TransferAI Prospecting V3 CRM Enhanced [FINAL]</p>
+    <p><strong>Date de mise à jour :</strong> 2 juin 2026</p>
+    <p><strong>Objet :</strong> référentiel consolidé de diagnostic et de correction après les incidents réels rencontrés jusqu’à la stabilisation de la V3 avec catalogue généré par pack, deck PPTX généré par service backend, validation interne et envoi prospect.</p>
+  </div>
+
+  <h2>1. Principe general de diagnostic</h2>
+  <p>Le point le plus important est de debugger la branche d approbation via <strong>Executions</strong> dans n8n. Quand un utilisateur clique sur <strong>Approuver et envoyer</strong>, cela declenche une nouvelle execution via webhook. Les noeuds ouverts dans l editeur peuvent afficher <em>No input data</em> alors que le webhook a bel et bien tourne.</p>
+
+  <div class="warn">
+    <strong>Regle d or :</strong> ne pas conclure a une erreur uniquement depuis l editeur du noeud. Ouvrir d abord la derniere execution du webhook dans l onglet Executions.
+  </div>
+
+  <h2>2. Check-list de controle dans l ordre</h2>
+  <ol>
+    <li><strong>Parse Approval Query</strong> : verifier que <code>decision = approved</code>.</li>
+    <li><strong>Get Pack From Supabase</strong> : verifier que le pack est bien retrouve.</li>
+    <li><strong>Extract Pack Payload</strong> : vérifier la présence de la lettre, du catalogue rendu, du deck rendu et des pièces jointes finales.</li>
+    <li><strong>If Approved</strong> : verifier que la branche <code>true</code> est prise.</li>
+    <li><strong>Build Send Context</strong> : vérifier <code>attachments_count = 2</code>, la présence d’un <code>.pdf</code> et d’un <code>.pptx</code>, puis <code>can_send = true</code>.</li>
+    <li><strong>If Ready To Send</strong> : verifier que la branche <code>true</code> est prise.</li>
+    <li><strong>Send External Prospect Email</strong> : verifier la reponse Resend.</li>
+  </ol>
+
+  <h2>3. Incidents rencontres et correctifs appliques</h2>
+  <ul>
+    <li><strong>Deux courriers differents selon les tests</strong> : cause = d anciens packs etaient encore stockes dans Supabase ; correctif = regenerer un nouveau pack et n approuver que le dernier email interne.</li>
+    <li><strong>Ancien lien Calendly dans le courrier</strong> : cause = ancienne version du prompt dans Generate Executive Letter ; correctif = remplacement par <code>https://calendly.com/contact-transferai/30min</code>.</li>
+    <li><strong>Send External Prospect Email renvoie 422 Missing html or text field</strong> : cause = le noeud lisait la mauvaise source ; correctif = forcer le jsonBody a relire explicitement la sortie de Build Send Context.</li>
+    <li><strong>If Ready To Send ne laissait pas passer l envoi</strong> : cause = noeud non configure ; correctif = condition booleenne sur <code>{{$json.can_send}}</code> egale a <code>true</code>.</li>
+    <li><strong>Store Pack In Supabase casse avec des erreurs de colonnes manquantes</strong> : cause = schema Supabase plus minimal ; correctif = reduire le jsonBody aux colonnes minimales et laisser le reste dans <code>payload</code>.</li>
+    <li><strong>Build Approval Email casse avec acces aux variables d environnement</strong> : cause = le Code node n avait pas acces a <code>$env</code> ; correctif = utiliser une URL en dur puis revenir a une version stable sans override Gmail dans le flux normal.</li>
+    <li><strong>Le mail prospect n arrivait pas sur la bonne boite</strong> : cause = le pack stockait encore <code>contact@transferai.ci</code> ; correctif = affichage de la cible reelle, suppression progressive du Gmail de test et verification de <code>target_email</code> dans Build Send Context.</li>
+    <li><strong>Pieces jointes locales impossibles a lire</strong> : cause = tentative de lecture de fichiers Mac ou de <code>fs</code> dans un n8n distant ; correctif = abandon du montage disque local et bascule vers service backend + storage public.</li>
+    <li><strong>Le formulaire d audit restait en piece jointe</strong> : cause = ancien fallback dans Build Send Context ; correctif = suppression du bloc <code>tailored_audit_form</code> en attachment et maintien du formulaire uniquement en ligne via lien web.</li>
+    <li><strong>Le catalogue restait statique et issu du site</strong> : cause = ancien flux <code>Resolve Domain Catalogue -> Download Catalogue PDF</code> ; correctif = ajout de <code>Build Catalogue Render Payload</code>, <code>catalogue-renderer</code>, <code>Merge Catalogue Artifact</code> et stockage des artefacts PDF/DOCX par <code>pack_id</code>.</li>
+    <li><strong>Render Catalogue Artifact renvoie 404 NOT_FOUND</strong> : cause = fonction Supabase non deployee ; correctif = deploy de <code>catalogue-renderer</code> sur le projet <code>wlhznciwuofueffyoflo</code>.</li>
+    <li><strong>Render Catalogue Artifact renvoie 401 unauthorized</strong> : cause = mismatch d auth entre la nouvelle fonction et les autres fonctions admin ; correctif = aligner <code>catalogue-renderer</code> sur le schema <code>x-admin-token</code> / <code>CONTENT_ADMIN_TOKEN</code> deja utilise par le back-office.</li>
+    <li><strong>Le deck etait genere mais jamais envoye</strong> : cause = <code>Build Send Context</code> n acceptait que les pieces jointes avec <code>filename + content</code>, alors que <code>deck-renderer</code> renvoie <code>filename + path</code> ; correctif = normaliser les attachments avec <code>content</code> ou <code>path</code>.</li>
+    <li><strong>Le flux stockait encore un fallback JSON de deck</strong> : cause = ancien fonctionnement transitoire autour de <code>Deck_Brief_[Prospect].json</code> ; correctif = insertion de <code>Build Deck Render Payload</code>, <code>Render Deck Artifact</code> et <code>Merge Deck Artifact</code>, puis suppression du fallback dans <code>Build Send Context</code>.</li>
+    <li><strong>Le pack etait stocke sans le deck final</strong> : cause = <code>Store Pack In Supabase</code> recevait encore la sortie de <code>Merge Catalogue Artifact</code> ; correctif = rebrancher le stockage sur la sortie de <code>Merge Deck Artifact</code>.</li>
+    <li><strong>Render Deck Artifact renvoyait <code>deck_render_failed</code> avec <code>Cannot read properties of undefined (reading 'rect')</code></strong> : cause = bug du backend <code>deck-renderer</code> dans la construction des formes PPTX ; correctif = corriger la fonction Supabase puis la redéployer avant de relancer le noeud.</li>
+    <li><strong>L email interne affichait encore <code>Pièces jointes préparées : 1</code> apres correction du deck</strong> : cause = ancien pack stocke ou relance incomplete ; correctif = réexécuter dans l ordre <code>Merge Deck Artifact -> Store Pack In Supabase -> Build Approval Email -> Send Internal Approval Email</code>, puis n approuver que le dernier email interne.</li>
+    <li><strong>Le deck etait généré mais restait visuellement peu premium</strong> : cause = blocs trop longs, CTA trop verboses et densité excessive sur certaines zones droites ; correctif = compacter les textes dans le renderer, réduire les blocs de fermeture et répartir les cas d’usage sur une slide supplémentaire si nécessaire.</li>
+    <li><strong>Les accents français n apparaissaient pas partout dans le deck</strong> : cause = prompts et libellés statiques encore partiellement non accentués ; correctif = corriger les prompts LLM, nettoyer les placeholders et redéployer le renderer avec des libellés FR accentués.</li>
+    <li><strong>Le deck Orange n héritait pas du bon niveau de personnalisation premium</strong> : cause = fallback sectoriel trop générique ; correctif = enrichir le fallback Orange dans le renderer pour reprendre un message, des cas d’usage et une trajectoire plus fidèles au contexte Orange.</li>
+    <li><strong>Les slides 4 et 8 devenaient illisibles</strong> : cause = saturation de la colonne droite et encombrement de la slide de clôture ; correctif = raccourcir les blocs, limiter le nombre de lignes et réduire la taille des CTA et signatures dans le renderer.</li>
+    <li><strong>Le résumé interne montrait <code>Cas d usage : a confirmer</code> ou <code>Tier : n/a</code> alors que le pack etait exploitable</strong> : cause = fallbacks insuffisants dans <code>Build Approval Email</code> ; correctif = relire d abord <code>best_selling_use_case</code>, puis <code>recommended_use_case</code>, puis <code>entry_point_niche</code>, et utiliser <code>commercial_priority_default</code> si le tier n est pas encore fourni par l analyse.</li>
+    <li><strong>Bucket rendu public mais aucune URL visible</strong> : cause = confusion normale Supabase ; correctif = comprendre que l URL publique apparait seulement pour les objets uploades, et qu elle est retournee directement par la fonction renderer.</li>
+    <li><strong>Store Pack In Supabase renvoyait une erreur de doublon pack_id</strong> : cause = insertion simple sur une ligne deja existante ; correctif = passer le noeud en upsert avec <code>?on_conflict=pack_id</code> et le header <code>Prefer: resolution=merge-duplicates,return=representation</code>.</li>
+    <li><strong>Le renderer generait un PDF sans personnalisation</strong> : cause = ancien run ou payload stale, avec <code>tailored_catalogue_markdown</code> vide ; correctif = verifier la propagation <code>Generate Tailored Catalogue -> Assemble Prospect Pack -> Build Catalogue Render Payload</code> puis reexecuter le renderer. Etat final valide : <code>used_tailored_markdown = true</code>.</li>
+    <li><strong>Send Internal Sent Confirmation casse avec JSON invalide</strong> : cause = jsonBody mal forme ; correctif = reconstruire un JSON strict et simple avec <code>from</code>, <code>to</code>, <code>subject</code> et <code>html</code>.</li>
+  </ul>
+
+  <h2>4. Valeurs de reference aujourd hui</h2>
+  <div class="box">
+    <p><strong>Lien de RDV valide :</strong> <code>https://calendly.com/contact-transferai/30min</code></p>
+    <p><strong>Sender de test encore utilise :</strong> <code>onboarding@resend.dev</code></p>
+    <p><strong>Destinataire de test courant :</strong> <code>marius.ayoro70@gmail.com</code></p>
+    <p><strong>Pièces jointes attendues aujourd’hui :</strong> 2 fichiers par pack, soit 1 catalogue PDF généré et 1 deck PPTX généré</p>
+    <p><strong>Fonction catalogue :</strong> <code>https://wlhznciwuofueffyoflo.supabase.co/functions/v1/catalogue-renderer</code></p>
+    <p><strong>Fonction deck :</strong> <code>https://wlhznciwuofueffyoflo.supabase.co/functions/v1/deck-renderer</code></p>
+    <p><strong>Bucket public :</strong> <code>prospecting-artifacts</code></p>
+    <p><strong>Header renderer valide :</strong> <code>x-admin-token: CONTENT_ADMIN_TOKEN</code></p>
+  </div>
+
+  <h2>5. Diagnostic rapide par symptome</h2>
+
+  <h3>5.1 L email interne de validation arrive, mais pas l email prospect</h3>
+  <ol>
+    <li>Verifier la derniere execution du webhook dans Executions.</li>
+    <li>Verifier que <code>If Ready To Send</code> est vrai.</li>
+    <li>Verifier la reponse de <code>Send External Prospect Email</code>.</li>
+    <li>Verifier que la cible effective est bien celle attendue.</li>
+  </ol>
+
+  <h3>5.2 Le noeud affiche No input data</h3>
+  <p>C est normal si tu regardes le noeud hors execution. Ouvrir la derniere execution du webhook au lieu de l editeur seul.</p>
+
+  <h3>5.3 Le prospect recoit le mauvais courrier</h3>
+  <ol>
+    <li>Verifier que le bon noeud <strong>Generate Executive Letter</strong> a ete mis a jour.</li>
+    <li>Verifier que le dernier pack seulement a ete approuve.</li>
+    <li>Verifier qu un ancien lien d approbation n a pas ete reutilise.</li>
+  </ol>
+
+  <h3>5.4 Les pieces jointes ne partent pas</h3>
+  <ol>
+    <li>Vérifier dans <strong>Build Send Context</strong> que <code>attachments_count = 2</code>.</li>
+    <li>Vérifier que les deux fichiers sont bien un <code>.pdf</code> et un <code>.pptx</code>.</li>
+    <li>Vérifier que chaque fichier a un <code>filename</code> et soit un <code>content</code>, soit un <code>path</code>.</li>
+    <li>Verifier le jsonBody de <strong>Send External Prospect Email</strong>.</li>
+  </ol>
+
+  <h3>5.5 Le deck est genere, mais l email interne reste a 1 piece jointe</h3>
+  <ol>
+    <li>Verifier que <strong>Render Deck Artifact</strong> retourne bien <code>success = true</code>.</li>
+    <li>Verifier que <strong>Merge Deck Artifact</strong> retourne <code>attachments_count = 2</code>.</li>
+    <li>Relancer ensuite <strong>Store Pack In Supabase</strong>.</li>
+    <li>Relancer <strong>Build Approval Email</strong> puis <strong>Send Internal Approval Email</strong>.</li>
+    <li>Confirmer que le dernier email interne affiche <code>Pièces jointes préparées : 2</code> avant de cliquer sur l approbation.</li>
+  </ol>
+
+  <h3>5.6 Le deck est généré, mais il reste peu lisible ou trop dense</h3>
+  <ol>
+    <li>Vérifier le dernier fichier <code>.pptx</code> réellement régénéré, et non une ancienne version exportée.</li>
+    <li>Contrôler en priorité la couverture, la slide des enjeux, la slide ROI et la slide de clôture, car ce sont les zones les plus sensibles au chevauchement.</li>
+    <li>Vérifier dans le renderer que les CTA, les signatures et les listes sont bien compactés.</li>
+    <li>Si le prospect contient trop de cas d’usage, vérifier que le deck répartit automatiquement ces cas sur deux slides au lieu de les comprimer sur une seule.</li>
+    <li>Après correction de la source, redéployer <code>deck-renderer</code> puis relancer <code>Render Deck Artifact</code>.</li>
+  </ol>
+
+  <h3>5.7 Les accents français ne s affichent pas dans le deck ou le mini-catalogue</h3>
+  <ol>
+    <li>Vérifier que les prompts des nœuds <strong>Generate Executive Letter</strong>, <strong>Generate Tailored Catalogue</strong>, <strong>Generate Tailored Audit Form</strong> et <strong>Generate Deck Brief</strong> demandent explicitement un français professionnel avec accents.</li>
+    <li>Vérifier que le renderer deck et le renderer catalogue ont bien été redéployés après correction.</li>
+    <li>Vérifier que le prospect est bien détecté comme francophone via <code>prospect_language</code> ou via la logique de fallback.</li>
+    <li>Régénérer les artefacts au lieu d’utiliser une ancienne sortie déjà téléchargée.</li>
+  </ol>
+
+  <h3>5.8 Render Deck Artifact renvoie 404</h3>
+  <ol>
+    <li>Vérifier que la fonction <code>deck-renderer</code> est bien déployée.</li>
+    <li>Vérifier l’URL exacte de la fonction.</li>
+    <li>Vérifier que le projet Supabase cible est bien <code>wlhznciwuofueffyoflo</code>.</li>
+  </ol>
+
+  <h3>5.9 Render Deck Artifact renvoie 401 unauthorized</h3>
+  <ol>
+    <li>Vérifier que le nœud utilise <code>Authentication = None</code>.</li>
+    <li>Vérifier que le header actif est bien <code>x-admin-token</code>.</li>
+    <li>Vérifier que la valeur utilisée correspond bien au secret <code>CONTENT_ADMIN_TOKEN</code>.</li>
+    <li>Vérifier qu’aucun ancien header <code>Authorization: Bearer ...</code> n’est encore présent sur le nœud.</li>
+  </ol>
+
+  <h3>5.10 Render Catalogue Artifact renvoie 404</h3>
+  <ol>
+    <li>Verifier que la fonction <code>catalogue-renderer</code> est bien deployee.</li>
+    <li>Verifier l URL exacte de la fonction.</li>
+    <li>Verifier que le projet Supabase cible est bien <code>wlhznciwuofueffyoflo</code>.</li>
+  </ol>
+
+  <h3>5.11 Render Catalogue Artifact renvoie 401 unauthorized</h3>
+  <ol>
+    <li>Verifier que le noeud utilise <code>Authentication = None</code>.</li>
+    <li>Verifier que le header actif est bien <code>x-admin-token</code> et qu aucun vieux header <code>Authorization: Bearer ...</code> ne parasite le noeud.</li>
+    <li>Verifier que la valeur utilisee est bien le secret <code>CONTENT_ADMIN_TOKEN</code> du projet.</li>
+    <li>Verifier que le secret a ete redeploye / pris en compte cote fonction Supabase.</li>
+  </ol>
+
+  <h3>5.12 Le bucket est public mais l URL ne se voit pas dans Supabase</h3>
+  <p>C est normal. Le bucket public ne fournit pas une page publique par lui-meme. L URL utile est celle de chaque objet uploade, par exemple :</p>
+  <p><code>https://wlhznciwuofueffyoflo.supabase.co/storage/v1/object/public/prospecting-artifacts/prospecting-packs/&lt;pack_id&gt;/Mini_Catalogue_TransferAI_....pdf</code></p>
+  <p>Cette URL est renvoyee directement par <code>catalogue-renderer</code>.</p>
+
+  <h3>5.13 Render Catalogue Artifact reussit mais diagnostics.used_tailored_markdown vaut false</h3>
+  <ol>
+    <li>Verifier dans <strong>Generate Tailored Catalogue</strong> que <code>choices[0].message.content</code> contient bien du texte.</li>
+    <li>Verifier dans <strong>Assemble Prospect Pack</strong> que <code>tailored_catalogue</code> est bien rempli.</li>
+    <li>Verifier dans <strong>Build Catalogue Render Payload</strong> que <code>catalogue_render_payload.tailored_catalogue_markdown</code> contient ce texte.</li>
+    <li>Relancer <strong>Render Catalogue Artifact</strong> avec <strong>Execute previous nodes</strong> pour eviter un ancien run stale.</li>
+    <li>Etat final attendu : <code>used_tailored_markdown = true</code>.</li>
+  </ol>
+
+  <h3>5.14 Build Send Context retourne can_send = false</h3>
+  <ol>
+    <li>Vérifier que <code>payload.catalogue_artifact.pdf_url</code> est présent.</li>
+    <li>Vérifier que <code>payload.deck_artifact.pptx_url</code> est présent.</li>
+    <li>Vérifier que <code>payload.mail_attachments</code> contient exactement deux entrées finales.</li>
+    <li>Vérifier que le code du nœud accepte les attachments avec <code>content</code> ou <code>path</code>.</li>
+    <li>Vérifier qu’aucun fallback <code>Deck_Brief_[Prospect].json</code> n’a été réintroduit.</li>
+  </ol>
+
+  <h3>5.15 Store Pack In Supabase renvoie duplicate key value violates unique constraint ai_prospecting_packs_pack_id_key</h3>
+  <ol>
+    <li>Verifier que l URL contient bien <code>?on_conflict=pack_id</code>.</li>
+    <li>Verifier qu un seul header <code>Prefer</code> est present.</li>
+    <li>Verifier que sa valeur est exactement <code>resolution=merge-duplicates,return=representation</code>.</li>
+    <li>Relancer le noeud et verifier que la ligne est mise a jour au lieu d etre re-inseree.</li>
+  </ol>
+
+  <h2>6. Cles, secrets et headers de reference</h2>
+  <table>
+    <tr>
+      <th>Element</th>
+      <th>Usage</th>
+      <th>Statut recommande</th>
+    </tr>
+    <tr>
+      <td><code>CONTENT_ADMIN_TOKEN</code></td>
+      <td>Header <code>x-admin-token</code> pour <code>catalogue-renderer</code>, <code>deck-renderer</code> et fonctions back-office</td>
+      <td>À conserver ; token prioritaire pour n8n</td>
+    </tr>
+    <tr>
+      <td><code>SUPABASE_SERVICE_ROLE_KEY</code></td>
+      <td>Execution server-side / secours backend</td>
+      <td>A conserver cote backend uniquement ; ne pas privilegier dans n8n si <code>x-admin-token</code> est disponible</td>
+    </tr>
+    <tr>
+      <td><code>SUPABASE_URL</code></td>
+      <td>URL du projet Supabase</td>
+      <td>A conserver</td>
+    </tr>
+    <tr>
+      <td><code>RESEND_API_KEY</code></td>
+      <td>Envoi email via Resend</td>
+      <td>A conserver</td>
+    </tr>
+    <tr>
+      <td><code>MAIL_FROM</code> / sender</td>
+      <td>Adresse d envoi</td>
+      <td>Remplacer <code>onboarding@resend.dev</code> par <code>noreply@transferai.ci</code> apres verification domaine</td>
+    </tr>
+    <tr>
+      <td>Header <code>Authorization: Bearer ...</code> dans <code>Render Catalogue Artifact</code></td>
+      <td>Ancien montage renderer</td>
+      <td>A supprimer ou laisser vide ; le schema stable valide est maintenant <code>x-admin-token</code></td>
+    </tr>
+    <tr>
+      <td>Gmail de test force</td>
+      <td>Validation temporaire</td>
+      <td>A retirer avant production</td>
+    </tr>
+    <tr>
+      <td>Ancienne logique audit attache</td>
+      <td>Legacy V3</td>
+      <td>A laisser supprimee ; audit uniquement en ligne</td>
+    </tr>
+    <tr>
+      <td>Ancien PDF catalogue statique <code>transferai.ci/catalogues-domaines-assets/...</code></td>
+      <td>Fallback de transition</td>
+      <td>Deja remplace dans la chaine cible ; ne pas le remettre en production</td>
+    </tr>
+  </table>
+
+  <h2>7. Noeuds sensibles a verifier en priorite</h2>
+  <ul>
+    <li><strong>Generate Executive Letter</strong></li>
+    <li><strong>Generate Tailored Catalogue</strong></li>
+    <li><strong>Generate Tailored Audit Form</strong></li>
+    <li><strong>Generate Deck Brief</strong></li>
+    <li><strong>Assemble Prospect Pack</strong></li>
+    <li><strong>Resolve Domain Catalogue</strong></li>
+    <li><strong>Build Catalogue Render Payload</strong></li>
+    <li><strong>Render Catalogue Artifact</strong></li>
+    <li><strong>Build Deck Render Payload</strong></li>
+    <li><strong>Render Deck Artifact</strong></li>
+    <li><strong>Merge Deck Artifact</strong></li>
+    <li><strong>Store Pack In Supabase</strong></li>
+    <li><strong>Extract Pack Payload</strong></li>
+    <li><strong>Build Send Context</strong></li>
+    <li><strong>If Ready To Send</strong></li>
+    <li><strong>Send External Prospect Email</strong></li>
+    <li><strong>Send Internal Sent Confirmation</strong></li>
+  </ul>
+
+  <h2>8. Prochaines corrections a finaliser</h2>
+  <table>
+    <tr>
+      <th>Tache</th>
+      <th>Priorite</th>
+    </tr>
+    <tr><td>Rendre le formulaire d audit réellement dynamique via <code>pack_id</code></td><td>Urgent</td></tr>
+    <tr><td>Valider le rendu <code>.pptx</code> premium sur plusieurs profils, secteurs et langues, avec revue visuelle systématique des zones denses</td><td>Urgent</td></tr>
+    <tr><td>Verifier le domaine <code>transferai.ci</code> dans Resend</td><td>Important</td></tr>
+    <tr><td>Changer le sender vers <code>noreply@transferai.ci</code></td><td>Important</td></tr>
+    <tr><td>Retirer la cible Gmail de test et revenir au prospect reel</td><td>Important</td></tr>
+    <tr><td>Tester francais, anglais et espagnol sur des prospects differents</td><td>Normal</td></tr>
+  </table>
+
+  <h2>9. Conclusion</h2>
+  <p>Le circuit d envoi prospect apres approbation est maintenant valide en mode test avec catalogue genere par pack, rendu DOCX/PDF via fonction Supabase, deck PPTX premium via <code>deck-renderer</code> et stockage public dans <code>prospecting-artifacts</code>. Les erreurs majeures ont ete identifiees, reproduites et corrigees. La suite consiste a fiabiliser l environnement de production, finaliser l audit web dynamique par <code>pack_id</code>, maintenir la qualité visuelle premium du deck sur plusieurs secteurs et verrouiller l envoi depuis le domaine TransferAI.</p>
+
+  <p class="small">Guide de troubleshooting de reference mis a jour apres resolution du rendu catalogue dynamique, du deck PPTX premium, de l auth renderer via <code>x-admin-token</code>, de l upsert Supabase et de la stabilisation de la V3.</p>
+</body>
+</html>

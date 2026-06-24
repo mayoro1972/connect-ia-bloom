@@ -29,10 +29,86 @@
     />
     <meta name="twitter:image" content="https://www.transferai.ci/placeholder.svg" />
     <link rel="canonical" href="https://www.transferai.ci/" />
+    <style>
+      a[href*="lovable.dev"],
+      a[href*="lovable.app"],
+      img[src*="lovable"],
+      iframe[src*="lovable"],
+      [data-lovable],
+      [data-lovable-badge],
+      [id*="lovable-badge"],
+      [class*="lovable-badge"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
   </head>
 
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        const LOVABLE_SELECTORS = [
+          'a[href*="lovable.dev"]',
+          'a[href*="lovable.app"]',
+          'img[src*="lovable"]',
+          'iframe[src*="lovable"]',
+          '[data-lovable]',
+          '[data-lovable-badge]',
+          '[id*="lovable-badge"]',
+          '[class*="lovable-badge"]',
+        ];
+
+        const LOVABLE_TEXT_PATTERNS = [/made with lovable/i, /built with lovable/i, /edit with lovable/i];
+
+        const shouldRemove = (node) => {
+          if (!(node instanceof HTMLElement)) return false;
+          if (LOVABLE_SELECTORS.some((selector) => node.matches(selector))) return true;
+
+          const text = node.textContent?.trim() ?? "";
+          return text.length > 0 && LOVABLE_TEXT_PATTERNS.some((pattern) => pattern.test(text));
+        };
+
+        const removeLovableBranding = (root) => {
+          if (!(root instanceof HTMLElement || root instanceof Document)) return;
+
+          LOVABLE_SELECTORS.forEach((selector) => {
+            root.querySelectorAll(selector).forEach((element) => element.remove());
+          });
+
+          if (root instanceof HTMLElement && shouldRemove(root)) {
+            root.remove();
+          }
+        };
+
+        const startObserver = () => {
+          removeLovableBranding(document);
+
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              mutation.addedNodes.forEach((node) => {
+                if (!(node instanceof HTMLElement)) return;
+                removeLovableBranding(node);
+
+                if (shouldRemove(node)) {
+                  node.remove();
+                }
+              });
+            });
+          });
+
+          observer.observe(document.documentElement, { childList: true, subtree: true });
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", startObserver, { once: true });
+        } else {
+          startObserver();
+        }
+      })();
+    </script>
     <script>
       window.chatwootSettings = {
         position: "right",

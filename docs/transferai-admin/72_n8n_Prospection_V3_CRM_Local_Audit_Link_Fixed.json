@@ -1,0 +1,1586 @@
+{
+  "name": "TransferAI Prospecting Multi-Prospect V3 CRM Ready Export",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "node-001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        320
+      ]
+    },
+    {
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        380
+      ],
+      "parameters": {}
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": true,
+        "fields": {
+          "values": [
+            {
+              "name": "prospect_id",
+              "type": "string",
+              "stringValue": "={{$json.prospect_id || 'manual-prospect-001'}}"
+            },
+            {
+              "name": "organization_name",
+              "type": "string",
+              "stringValue": "={{$json.organization_name || 'Organisation cible à qualifier'}}"
+            },
+            {
+              "name": "website",
+              "type": "string",
+              "stringValue": "={{$json.website || 'https://www.example.org'}}"
+            },
+            {
+              "name": "country",
+              "type": "string",
+              "stringValue": "={{$json.country || \"Côte d'Ivoire\"}}"
+            },
+            {
+              "name": "organization_type",
+              "type": "string",
+              "stringValue": "={{$json.organization_type || 'organisation à qualifier'}}"
+            },
+            {
+              "name": "sector_guess",
+              "type": "string",
+              "stringValue": "={{$json.sector_guess || 'secteur à confirmer'}}"
+            },
+            {
+              "name": "decision_maker_name",
+              "type": "string",
+              "stringValue": "={{$json.decision_maker_name || 'Décideur à confirmer'}}"
+            },
+            {
+              "name": "target_email",
+              "type": "string",
+              "stringValue": "={{$json.target_email || 'contact@example.org'}}"
+            },
+            {
+              "name": "custom_page_paths_csv",
+              "type": "string",
+              "stringValue": "={{$json.custom_page_paths_csv || ''}}"
+            },
+            {
+              "name": "booking_link_45min",
+              "type": "string",
+              "stringValue": "={{$json.booking_link_45min || $env.BOOKING_LINK_45MIN || 'https://calendly.com/your-link'}}"
+            },
+            {
+              "name": "commercial_priority_default",
+              "type": "string",
+              "stringValue": "={{$json.commercial_priority_default || 'tier1'}}"
+            },
+            {
+              "name": "research_scope",
+              "type": "string",
+              "stringValue": "={{$json.research_scope || 'public_web_only'}}"
+            },
+            {
+              "name": "source_backend",
+              "type": "string",
+              "stringValue": "={{$json.source_backend || 'manual'}}"
+            },
+            {
+              "name": "source_label",
+              "type": "string",
+              "stringValue": "={{$json.source_label || ''}}"
+            },
+            {
+              "name": "raw_source_id",
+              "type": "string",
+              "stringValue": "={{$json.raw_source_id || ''}}"
+            },
+            {
+              "name": "niche_status",
+              "type": "string",
+              "stringValue": "={{$json.niche_status || ''}}"
+            },
+            {
+              "name": "last_response_status",
+              "type": "string",
+              "stringValue": "={{$json.last_response_status || ''}}"
+            },
+            {
+              "name": "last_sequence_result",
+              "type": "string",
+              "stringValue": "={{$json.last_sequence_result || ''}}"
+            },
+            {
+              "name": "audit_form_base_url",
+              "type": "string",
+              "stringValue": "={{$json.audit_form_base_url || $env.AUDIT_FORM_BASE_URL || 'https://www.transferai.ci/questionnaire-audit'}}"
+            },
+            {
+              "name": "audit_form_query_suffix",
+              "type": "string",
+              "stringValue": "={{$json.audit_form_query_suffix || $env.AUDIT_FORM_QUERY_SUFFIX || ''}}"
+            }
+          ]
+        }
+      },
+      "id": "node-002",
+      "name": "Set Target",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const base = String($json.website || '').trim().replace(/\\/$/, '');\nconst customPaths = String($json.custom_page_paths_csv || '')\n  .split(',')\n  .map((value) => value.trim())\n  .filter(Boolean);\n\nconst defaultPaths = [\n  '/',\n  '/a-propos/',\n  '/about/',\n  '/services/',\n  '/solutions/',\n  '/expertise/',\n  '/produits-et-services/',\n  '/products/',\n  '/contact/',\n  '/carrieres/',\n  '/careers/',\n  '/blog/'\n];\n\nfunction normalizePath(path) {\n  if (!path) return '/';\n  if (/^https?:\\/\\//i.test(path)) return path;\n  return path.startsWith('/') ? path : `/${path}`;\n}\n\nconst selectedPaths = [...new Set([...customPaths, ...defaultPaths].map(normalizePath))].slice(0, 5);\nconst sourcePages = selectedPaths.map((path, index) => {\n  const isAbsolute = /^https?:\\/\\//i.test(path);\n  const normalizedPath = isAbsolute ? path : path.replace(/^\\/+/, '/');\n  const url = isAbsolute ? path : `${base}${normalizedPath === '/' ? '' : normalizedPath}`;\n  return {\n    key: `page_${index + 1}`,\n    path: isAbsolute ? null : normalizedPath,\n    label: isAbsolute ? `public_source_${index + 1}` : normalizedPath,\n    url,\n  };\n});\n\nconst output = { ...$json, source_pages: sourcePages };\nsourcePages.forEach((page, index) => {\n  output[`page_${index + 1}_url`] = page.url;\n  output[`page_${index + 1}_label`] = page.label;\n});\n\nreturn [{ json: output }];"
+      },
+      "id": "node-003",
+      "name": "Build Source URLs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_1_url}}",
+        "options": {}
+      },
+      "id": "node-004",
+      "name": "Fetch Public Page 1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_2_url}}",
+        "options": {}
+      },
+      "id": "node-005",
+      "name": "Fetch Public Page 2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_3_url}}",
+        "options": {}
+      },
+      "id": "node-006",
+      "name": "Fetch Public Page 3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_4_url}}",
+        "options": {}
+      },
+      "id": "node-007",
+      "name": "Fetch Public Page 4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$('Build Source URLs').first().json.page_5_url}}",
+        "options": {}
+      },
+      "id": "node-008",
+      "name": "Fetch Public Page 5",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const target = $('Build Source URLs').first().json;\nconst configuredPages = Array.isArray(target.source_pages) ? target.source_pages : [];\nconst pages = [\n  { meta: configuredPages[0] || { key: 'page_1', label: '/' }, raw: $('Fetch Public Page 1').first().json },\n  { meta: configuredPages[1] || { key: 'page_2', label: '/a-propos/' }, raw: $('Fetch Public Page 2').first().json },\n  { meta: configuredPages[2] || { key: 'page_3', label: '/services/' }, raw: $('Fetch Public Page 3').first().json },\n  { meta: configuredPages[3] || { key: 'page_4', label: '/solutions/' }, raw: $('Fetch Public Page 4').first().json },\n  { meta: configuredPages[4] || { key: 'page_5', label: '/contact/' }, raw: $('Fetch Public Page 5').first().json }\n];\n\nfunction toText(raw) {\n  const html = raw?.body || raw?.data || raw || '';\n  return String(html)\n    .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n    .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nconst pageTexts = pages\n  .map((page) => ({\n    key: page.meta.key,\n    label: page.meta.label,\n    text: toText(page.raw).slice(0, 12000)\n  }))\n  .filter((page) => page.text);\n\nconst combinedPublicText = pageTexts.map((page) => `[${page.key.toUpperCase()} - ${page.label}]\\n${page.text}`).join('\\n\\n');\nconst normalizedText = combinedPublicText.toLowerCase();\n\nconst clueTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'réseaux sociaux', 'reseaux sociaux'],\n  workflow_administratif: ['procédure', 'procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'rapport', 'compte rendu', 'documentation', 'pilotage'],\n  reporting_financier_assiste: ['finance', 'facturation', 'comptabilité', 'comptabilite', 'recouvrement', 'paiement'],\n  recrutement_onboarding_augmente: ['recrutement', 'talent', 'carrière', 'carriere', 'onboarding', 'rh'],\n  telemedecine_triage_orientation: ['santé', 'sante', 'patient', 'clinique', 'hôpital', 'hopital', 'télémédecine', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'conformité', 'conformite', 'compliance', 'risque'],\n  operations_terrain_coordination: ['terrain', 'flotte', 'logistique', 'livraison', 'intervention', 'opérations', 'operations']\n};\n\nconst roiClues = Object.entries(clueTaxonomy)\n  .filter(([, keywords]) => keywords.some((keyword) => normalizedText.includes(keyword.toLowerCase())))\n  .map(([key]) => key);\n\nreturn [{\n  json: {\n    ...target,\n    page_texts: pageTexts,\n    public_text: combinedPublicText.slice(0, 45000),\n    roi_clues: roiClues.length ? roiClues : [\n      'workflow_administratif',\n      'service_client_multicanal',\n      'assistant_direction_documentaire'\n    ]\n  }\n}];"
+      },
+      "id": "node-009",
+      "name": "Normalize Public Signals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const source = $json;\nconst orgName = (source.organization_name || '').trim();\nconst decisionMaker = (source.decision_maker_name || '').trim();\nconst website = (source.website || '').trim();\nconst domain = website.replace(/^https?:\\/\\//i, '').replace(/^www\\./i, '').split('/')[0];\n\nfunction escapeRegex(value) {\n  return value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n}\n\nlet sanitizedText = String(source.public_text || '');\n\nconst genericPatterns = [\n  [/https?:\\/\\/\\S+/gi, '[URL_REDACTED]'],\n  [/\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b/gi, '[EMAIL_REDACTED]'],\n  [/\\+?\\d[\\d\\s().-]{7,}\\d/g, '[PHONE_REDACTED]']\n];\n\nfor (const [pattern, replacement] of genericPatterns) {\n  sanitizedText = sanitizedText.replace(pattern, replacement);\n}\n\nconst sensitiveTokens = [\n  { value: orgName, replacement: 'ORG_TARGET' },\n  { value: decisionMaker, replacement: 'DECISION_MAKER_TARGET' },\n  { value: domain, replacement: '[URL_REDACTED]' }\n].filter((item) => item.value && item.value.length > 2);\n\nfor (const token of sensitiveTokens) {\n  const pattern = new RegExp(escapeRegex(token.value), 'gi');\n  sanitizedText = sanitizedText.replace(pattern, token.replacement);\n}\n\nconst normalized = sanitizedText.toLowerCase();\nconst signalTaxonomy = {\n  support_it_intelligent: ['support', 'helpdesk', 'incident', 'ticket', 'sla', 'maintenance'],\n  service_client_multicanal: ['service client', 'relation client', 'support client', 'contact center', 'crm'],\n  machine_contenu_marketing: ['marketing', 'communication', 'campagne', 'contenu', 'marque', 'réseaux sociaux', 'reseaux sociaux'],\n  workflow_administratif: ['procédure', 'procedure', 'validation', 'reporting', 'back-office', 'administratif'],\n  assistant_direction_documentaire: ['direction', 'pilotage', 'rapport', 'documentation', 'compte rendu'],\n  reporting_financier_assiste: ['facturation', 'finance', 'comptabilité', 'comptabilite', 'paiement', 'recouvrement'],\n  recrutement_onboarding_augmente: ['recrutement', 'carrière', 'carriere', 'rh', 'talent', 'onboarding'],\n  commentaire_donnees_reporting: ['données', 'donnees', 'dashboard', 'analytics', 'indicateurs', 'tableau de bord'],\n  telemedecine_triage_orientation: ['santé', 'sante', 'patient', 'clinique', 'hôpital', 'hopital', 'telemedecine'],\n  banque_kyc_reporting: ['banque', 'kyc', 'compliance', 'conformité', 'conformite', 'risque'],\n  operations_terrain_coordination: ['flotte', 'terrain', 'logistique', 'livraison', 'intervention', 'opérations', 'operations'],\n  energie_industrie_services: ['énergie', 'energie', 'oil', 'gas', 'station', 'industrie', 'industriel'],\n  formation_montee_en_competence: ['formation', 'certification', 'academy', 'apprentissage', 'compétence', 'competence']\n};\n\nconst signalTags = Object.entries(signalTaxonomy)\n  .filter(([, keywords]) => keywords.some((keyword) => normalized.includes(keyword.toLowerCase())))\n  .map(([key]) => key);\n\nconst allowedFields = [\n  'organization_type',\n  'sector_guess',\n  'country',\n  'signal_tags',\n  'roi_clues',\n  'page_keys',\n  'public_text_sanitized_excerpt'\n];\n\nconst blockedFields = [\n  'organization_name',\n  'website',\n  'decision_maker_name',\n  'target_email',\n  'page_texts',\n  'public_text'\n];\n\nconst sanitizedExcerpt = sanitizedText.slice(0, 12000);\n\nconst llmAllowedPayload = {\n  llm_policy: 'deny-by-default',\n  organization_ref: 'ORG_TARGET',\n  decision_maker_ref: decisionMaker ? 'DECISION_MAKER_TARGET' : null,\n  organization_type: source.organization_type || null,\n  sector_guess: source.sector_guess || null,\n  country: source.country || null,\n  signal_tags: signalTags,\n  roi_clues: Array.isArray(source.roi_clues) ? source.roi_clues : [],\n  page_keys: Array.isArray(source.page_texts) ? source.page_texts.map((p) => p.key) : [],\n  public_text_sanitized_excerpt: sanitizedExcerpt,\n  allowed_fields: allowedFields,\n  blocked_fields: blockedFields\n};\n\nconst llmGenerationPayload = {\n  ...llmAllowedPayload,\n  organization_display: '{{ORGANIZATION_NAME}}',\n  decision_maker_display: '{{DECISION_MAKER_NAME}}',\n  website_display: '{{WEBSITE}}'\n};\n\nreturn [{\n  json: {\n    ...source,\n    public_text_sanitized: sanitizedExcerpt,\n    llm_allowed_payload: llmAllowedPayload,\n    llm_generation_payload: llmGenerationPayload,\n    llm_redaction_summary: {\n      policy: 'deny-by-default',\n      blocked_fields: blockedFields,\n      allowed_fields: allowedFields,\n      pseudonymized_identifiers: ['organization_name', 'decision_maker_name', 'website'],\n      text_sent_to_llm: 'sanitized_public_text_excerpt_only'\n    }\n  }\n}];"
+      },
+      "id": "node-009a",
+      "name": "Sanitize Prospect Data For LLM",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1490,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es l'assistant IA de prospection de TransferAI. Analyse uniquement des signaux pseudonymisés et retourne uniquement un JSON valide avec: organization_summary, probable_strengths, probable_weaknesses, probable_needs, entry_point_niche, confidence_score. N'utilise jamais de noms réels; raisonne sur ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-010",
+      "name": "Call OpenAI Pre-Audit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1500,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste commercial TransferAI. Retourne uniquement un JSON valide avec: probable_problems, probable_quick_wins, recommended_offer, offer_sequence, recommended_training_bundle, recommended_use_case, best_selling_use_case, commercial_priority_tier, recommended_meeting_angle. Les problèmes doivent être formulés comme hypothèses. Privilégie les cas les plus vendables à court terme: support IT intelligent, service client multicanal, machine à contenu marketing, workflow administratif, assistant documentaire de direction. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-011",
+      "name": "Call OpenAI Problems Solutions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1500,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \"Tu es un analyste de valeur TransferAI. Retourne uniquement un JSON valide avec: roi_hypothesis, expected_time_savings, expected_service_improvements, expected_quick_wins, delivery_timeline. Présente les chiffres comme hypothèses ou benchmarks à valider. Ne fais référence qu'à ORG_TARGET.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_allowed_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-012",
+      "name": "Call OpenAI ROI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1500,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const base = $('Normalize Public Signals').first().json;\n\nfunction parseOpenAI(nodeName) {\n  const raw = $(nodeName).first().json?.choices?.[0]?.message?.content || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return { parse_error: `${nodeName}: ${e.message}` };\n  }\n}\n\nfunction slugify(value) {\n  return String(value || '')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '');\n}\n\nconst preAudit = parseOpenAI('Call OpenAI Pre-Audit');\nconst problems = parseOpenAI('Call OpenAI Problems Solutions');\nconst roi = parseOpenAI('Call OpenAI ROI');\nconst sectorVariant = problems.sector_variant || slugify(base.sector_guess) || 'multi_sector_operations';\n\nreturn [{\n  json: {\n    ...base,\n    ...preAudit,\n    ...problems,\n    ...roi,\n    single_primary_cta: 'Planifier un audit stratégique gratuit suivi d\\'un échange de 45 minutes',\n    sector_variant: sectorVariant\n  }\n}];"
+      },
+      "id": "node-013",
+      "name": "Assemble Prospect Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "options": {}
+      },
+      "id": "node-014",
+      "name": "Generate Executive Letter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.3, messages: [ { role: 'system', content: \\\"Tu rediges pour TransferAI un document commercial cible, a mi-chemin entre mini-catalogue, note d'orientation et support de lecture du deck executive. Le document doit s'appuyer sur le contexte prospect assemble apres analyse et jamais sur un catalogue generique. OBJECTIF: produire un catalogue cible, propre et professionnel qui relie priorites metier, audit, formation ciblee, accompagnement, cas d'usage, gouvernance et premiere feuille de route. POSITIONNEMENT: ce document doit completer le courrier executif, le formulaire d'audit et le deck de presentation; il doit donc reprendre la meme logique de ciblage et de prudence commerciale. FORMAT OBLIGATOIRE: Markdown propre avec les sections visibles suivantes seulement: 1. Titre, 2. Synthese executive, 3. Lecture du contexte du prospect, 4. Priorites metier et irritants visibles, 5. Cas d'usage et quick wins recommandes, 6. Porte d'entree recommandee, 7. Parcours recommande, 8. Formations prioritaires, 9. Livrables attendus, 10. Gouvernance, confidentialite et conduite du changement, 11. Accompagnement post-formation, 12. Accompagnement 90 jours, 13. Proposition immediate. N'ajoute aucune section visible supplementaire apres la proposition immediate. REGLES DE FOND: 1. Maximum 6 formations prioritaires. 2. Regroupe si utile les formations en 3 ou 4 familles metier. 3. Choisis seulement les formations coherentes avec les besoins identifies, les quick wins probables, le ou les cas d'usage recommandes et les populations a former. 4. Pour chaque formation, fournis obligatoirement: intitule, public concerne, objectifs, prerequis, livrables, format/duree si cela peut etre deduit du contexte ou sinon la mention a confirmer, et pourquoi cette formation est utile pour ce prospect. 5. Le document doit clairement montrer comment il s'articule avec le deck de presentation: les cas d'usage, hypothese de ROI, KPI, feuille de route 90 jours et prochaine etape doivent rester coherents. 6. N'ecris jamais comme si TransferAI vendait un catalogue de masse; la logique doit rester ciblee, executive, sectorielle et terrain. 7. Le bloc livrables attendus doit couvrir les livrables globaux du dispositif et pas seulement ceux d'une session. 8. Le bloc gouvernance, confidentialite et conduite du changement est obligatoire si le contexte le justifie; il doit rappeler supervision humaine, cadre de confidentialite, progression par pilote et validation avant extension. 9. Le bloc accompagnement post-formation est obligatoire et doit expliquer clairement le differentiel TransferAI: acces gratuit a la communaute TransferAI pour les personnes et societes formees, afin de partager leurs cas d'entreprise, les problemes rencontres, et recevoir de l'assistance ainsi que des conseils pratiques dans la realisation de leurs taches. 10. Le bloc accompagnement 90 jours est obligatoire et doit expliquer clairement la difference entre une structure de formation classique et TransferAI: une structure de formation transmet un contenu, tandis que TransferAI forme puis accompagne la mise en pratique, la revue des premiers KPI, l'ajustement des usages et la decision d'extension sur 90 jours. 11. Les gains doivent etre presentes comme hypotheses, reperes ou benchmarks a confirmer pendant l'audit. 12. N'invente ni prix, ni details internes, ni cas client non verifies. 13. Utilise les tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d, \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d et \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d au lieu des identifiants reels. 14. Adapte naturellement la posture si l'organisation ressemble a une entreprise privee, une institution publique, une institution financiere ou une organisation internationale. 15. Regles de langue: si le contexte indique le francais, redige exclusivement en francais standard avec accents; si le contexte indique l'anglais, redige exclusivement en anglais professionnel standard; si le contexte indique l'espagnol, redige exclusivement en espagnol professionnel standard avec accents; ne melange jamais les langues. 16. Tout document lie a la formation, au mini-catalogue ou a l'accompagnement doit comporter en cloture un simple bloc de signatures non numerote, sans titre de section, avec exactement: Soulemane Konate — Directeur IA & Innovation, puis Medard Sery — Consultant expert · Data engineering, cloud & plateformes IA. 17. Le document doit etre pense pour un habillage standard utilisant le logo co-brande TransferAi Africa × Nettelecom et le pied de page suivant, sans en faire une section visible: TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | www.transferai.ci | +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan. 18. Le bloc de signatures et le cadre documentaire sont des exigences de production, pas des chapitres du document. TON: sobre, professionnel, credible, oriente decision et execution.\\\" }, { role: 'user', content: `Contexte prospect assemble et sanitise:\\\\n${JSON.stringify({ llm_policy: $json.llm_allowed_payload?.llm_policy || 'deny-by-default', organization_display: $json.llm_generation_payload?.organization_display || '{{ORGANIZATION_NAME}}', decision_maker_display: $json.llm_generation_payload?.decision_maker_display || '{{DECISION_MAKER_NAME}}', website_display: $json.llm_generation_payload?.website_display || '{{WEBSITE}}', organization_type: $json.organization_type || null, sector_guess: $json.sector_guess || null, country: $json.country || null, signal_tags: $json.llm_allowed_payload?.signal_tags || [], roi_clues: $json.roi_clues || [], organization_summary: $json.organization_summary || '', probable_strengths: $json.probable_strengths || [], probable_weaknesses: $json.probable_weaknesses || [], probable_needs: $json.probable_needs || [], entry_point_niche: $json.entry_point_niche || '', confidence_score: $json.confidence_score || null, probable_problems: $json.probable_problems || [], probable_quick_wins: $json.probable_quick_wins || [], recommended_offer: $json.recommended_offer || '', offer_sequence: $json.offer_sequence || [], recommended_training_bundle: $json.recommended_training_bundle || [], recommended_use_case: $json.recommended_use_case || '', best_selling_use_case: $json.best_selling_use_case || '', commercial_priority_tier: $json.commercial_priority_tier || '', recommended_meeting_angle: $json.recommended_meeting_angle || '', roi_hypothesis: $json.roi_hypothesis || [], expected_time_savings: $json.expected_time_savings || [], expected_service_improvements: $json.expected_service_improvements || [], expected_quick_wins: $json.expected_quick_wins || [], delivery_timeline: $json.delivery_timeline || [], public_text_sanitized_excerpt: $json.llm_allowed_payload?.public_text_sanitized_excerpt || '', audit_form_url: $json.audit_form_url || (($json.audit_form_base_url || $env.AUDIT_FORM_BASE_URL || 'https://www.transferai.ci/questionnaire-audit') + '?pack_id=' + encodeURIComponent($json.pack_id || '') + (($json.audit_form_query_suffix || $env.AUDIT_FORM_QUERY_SUFFIX || '') ? '&' + String($json.audit_form_query_suffix || $env.AUDIT_FORM_QUERY_SUFFIX || '').replace(/^[?&]+/, '') : '')) }, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-015",
+      "name": "Generate Tailored Catalogue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.3, messages: [ { role: 'system', content: \"Crée une forme d'audit courte à envoyer avant un appel de 45 minutes. Elle doit être adaptée au secteur et couvrir: priorités métier, irritants, outils actuels, données, attentes de formation, confidentialité, objectifs à 3 mois, volumes traités, délais actuels et objectifs de performance. Utilise les tokens {{ORGANIZATION_NAME}} et {{WEBSITE}} au lieu des identifiants réels.\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-016",
+      "name": "Generate Tailored Audit Form",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4.1-mini', temperature: 0.2, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: \\\"Retourne uniquement un JSON valide avec les clés suivantes: deck_profile, slide_objective, key_messages, sector_pain_points, recommended_case_study, training_focus, roi_hypothesis, delivery_timeline, sector_variant, single_primary_cta. Tu produis le brief d'un deck PowerPoint executive TransferAI taillé sur mesure pour un prospect. IDENTITE TRANSFERAI: TransferAI est la branche IA de NettelecomCI en Côte d'Ivoire. Le hub s'appuie sur 13 experts ivoiriens basés en Côte d'Ivoire, au Royaume-Uni, aux États-Unis et en Inde. OBJECTIF: préparer un deck de 10 slides, propre, décisionnel et orienté DG, sponsor projet, secrétaire général ou décideur institutionnel. REGLE DE ROUTAGE: choisis d'abord deck_profile. Utilise commercial_enterprise pour les entreprises privées et les contextes où le langage dominant doit être business, performance, ROI, gains rapides et pilotage opérationnel. Utilise institutional pour les institutions publiques, structures parapubliques, banques, assurances, institutions financières, ONG, bailleurs, fondations et organisations internationales, avec un langage dominant de mission, qualité de service, gouvernance, conformité, supervision et renforcement des capacités. Le type d'organisation, le secteur, les signaux métier visibles et la nature des irritants doivent guider ce choix. NARRATION OBLIGATOIRE: si deck_profile = commercial_enterprise, suis cette logique: 1. couverture orientée résultat, 2. identité et crédibilité TransferAI, 3. contexte et irritants métier, 4. ROI de référence et KPI à instrumenter, 5. cas d'usage prioritaires, 6. détail des deux premiers cas d'usage, 7. usages de standardisation et qualité de service, 8. parcours 90 jours, 9. offre recommandée en 4 briques, 10. confiance et prochaine étape. Si deck_profile = institutional, suis cette logique: 1. couverture orientée impact et mission, 2. identité et crédibilité TransferAI, 3. contexte institutionnel et enjeux de service, 4. résultats attendus et indicateurs de preuve, 5. cas d'usage prioritaires, 6. gouvernance, confidentialité et supervision, 7. renforcement des capacités et conduite du changement, 8. feuille de route 90 jours, 9. dispositif d'accompagnement recommandé, 10. confiance et prochaine étape. REGLES: chaque slide porte une conclusion claire; aucun catalogue générique; les gains sont formulés comme hypothèses ou benchmarks à confirmer pendant l'audit; les cas d'usage doivent être crédibles, visibles et reliés à des flux métier réels; l'accompagnement post-formation sur 90 jours doit apparaitre clairement dans la narration, au minimum dans le parcours, l'offre recommandee et la prochaine etape; le deck doit faire comprendre la difference entre une structure de formation classique et TransferAI, qui forme puis accompagne la mise en pratique, la gouvernance et la lecture des premiers KPI; un seul CTA principal; utilise les tokens \\\\x7b\\\\x7bORGANIZATION_NAME\\\\x7d\\\\x7d, \\\\x7b\\\\x7bDECISION_MAKER_NAME\\\\x7d\\\\x7d et \\\\x7b\\\\x7bWEBSITE\\\\x7d\\\\x7d au lieu des identifiants réels. REGLES DE LANGUE: si le contexte indique le français, rédige exclusivement en français standard avec accents; si le contexte indique l'anglais, rédige exclusivement en anglais professionnel standard; si le contexte indique l'espagnol, rédige exclusivement en espagnol professionnel standard avec accents; ne mélange jamais les langues; adapte naturellement les titres, CTA, formulations ROI et transitions à la langue du prospect. FORMAT: deck_profile = commercial_enterprise ou institutional; slide_objective = phrase de couverture; key_messages = 4 à 6 messages; sector_pain_points = 3 à 5 irritants; recommended_case_study = 3 à 4 cas d'usage avec logique avant/après; training_focus = 4 à 8 axes de formation réellement utiles pour ce prospect; roi_hypothesis = 3 à 5 hypothèses de gains ou KPI; delivery_timeline = 4 étapes max audit -> premier livrable -> formation/pilote -> mesure/extension; sector_variant = variante métier courte et claire; single_primary_cta = un seul appel à l'action. N'ajoute aucun commentaire hors JSON.\\\" }, { role: 'user', content: `Contexte prospect pseudonymisé:\\\\n${JSON.stringify($json.llm_generation_payload, null, 2)}` } ] })}}",
+        "options": {}
+      },
+      "id": "node-017",
+      "name": "Generate Deck Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function textFrom(nodeName) {\n  return $(nodeName).first().json?.choices?.[0]?.message?.content || '';\n}\n\nfunction jsonFrom(nodeName) {\n  const raw = textFrom(nodeName) || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return { parse_error: `${nodeName}: ${e.message}`, raw };\n  }\n}\n\nfunction hydrateString(value, ctx) {\n  return String(value)\n    .replace(/\\{\\{ORGANIZATION_NAME\\}\\}/g, ctx.organization_name || '')\n    .replace(/\\{\\{DECISION_MAKER_NAME\\}\\}/g, ctx.decision_maker_name || '')\n    .replace(/\\{\\{WEBSITE\\}\\}/g, ctx.website || '');\n}\n\nfunction hydrateValue(value, ctx) {\n  if (typeof value === 'string') return hydrateString(value, ctx);\n  if (Array.isArray(value)) return value.map((item) => hydrateValue(item, ctx));\n  if (value && typeof value === 'object') {\n    const out = {};\n    for (const [key, inner] of Object.entries(value)) out[key] = hydrateValue(inner, ctx);\n    return out;\n  }\n  return value;\n}\n\nconst ctx = $('Assemble Prospect Context').first().json;\nconst executiveLetter = hydrateString(textFrom('Generate Executive Letter'), ctx);\nconst tailoredCatalogue = hydrateString(textFrom('Generate Tailored Catalogue'), ctx);\nconst tailoredAuditForm = hydrateString(textFrom('Generate Tailored Audit Form'), ctx);\nconst deckBrief = hydrateValue(jsonFrom('Generate Deck Brief'), ctx);\nconst requiresEmail = Object.prototype.hasOwnProperty.call(ctx, 'target_email');\nconst approvedForSend = Boolean(ctx.organization_name && ctx.entry_point_niche && ctx.recommended_offer && (!requiresEmail || ctx.target_email));\nconst packId = ctx.pack_id || `pack-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;\nconst auditBaseUrl = (ctx.audit_form_base_url || $env.AUDIT_FORM_BASE_URL || 'https://www.transferai.ci/questionnaire-audit').trim();\nconst rawAuditSuffix = String(ctx.audit_form_query_suffix || $env.AUDIT_FORM_QUERY_SUFFIX || '').trim();\nconst cleanAuditSuffix = rawAuditSuffix.replace(/^[?&]+/, '');\nlet auditFormUrl = String(ctx.audit_form_url || '').trim();\nif (!auditFormUrl) {\n  auditFormUrl = `${auditBaseUrl}${auditBaseUrl.includes('?') ? '&' : '?'}pack_id=${encodeURIComponent(packId)}`;\n  if (cleanAuditSuffix) auditFormUrl += `&${cleanAuditSuffix}`;\n}\nconst executiveLetterHtml = executiveLetter.replace(/\\n/g, '<br>');\n\nreturn [{\n  json: {\n    ...ctx,\n    pack_id: packId,\n    audit_form_base_url: auditBaseUrl,\n    audit_form_query_suffix: rawAuditSuffix,\n    audit_form_url: auditFormUrl,\n    executive_letter: executiveLetter,\n    executive_letter_html: executiveLetterHtml,\n    tailored_catalogue: tailoredCatalogue,\n    tailored_audit_form: tailoredAuditForm,\n    deck_brief: deckBrief,\n    approved_for_send: approvedForSend,\n    llm_redaction_summary: ctx.llm_redaction_summary,\n    llm_allowed_payload: ctx.llm_allowed_payload,\n    llm_generation_payload: ctx.llm_generation_payload\n  }\n}];"
+      },
+      "id": "node-018",
+      "name": "Assemble Prospect Pack",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ pack_id: $json.pack_id, prospect_id: $json.prospect_id || null, organization_name: $json.organization_name, decision_maker_name: $json.decision_maker_name, target_email: $json.target_email, website: $json.website, status: 'pending_approval', payload: $json, llm_redaction_summary: $json.llm_redaction_summary || null, reviewer_email: null, error_reason: null, created_at: new Date().toISOString() })}}",
+        "options": {}
+      },
+      "id": "node-019",
+      "name": "Store Pack In Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2520,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const pack = $('Assemble Prospect Pack').first().json;\nconst baseUrl = $env.N8N_BASE_URL || 'https://your-n8n.example.com';\nconst approveUrl = `${baseUrl}/webhook/approve-prospect-pack-v3?pack_id=${encodeURIComponent(pack.pack_id)}&decision=approved`;\nconst rejectUrl = `${baseUrl}/webhook/approve-prospect-pack-v3?pack_id=${encodeURIComponent(pack.pack_id)}&decision=rejected`;\nconst auditFormUrl = pack.audit_form_url || pack.payload?.audit_form_url || 'a confirmer';\nconst summary = [\n  `Organisation: ${pack.organization_name}`,\n  `Cas d'usage: ${pack.best_selling_use_case || pack.recommended_use_case || 'à confirmer'}`,\n  `Tier: ${pack.commercial_priority_tier || 'n/a'}`,\n  `Lien formulaire: ${auditFormUrl}`,\n  `CTA: ${pack.single_primary_cta}`\n].join('<br>');\nreturn [{ json: { ...pack, approve_url: approveUrl, reject_url: rejectUrl, internal_review_html: `<p>Un nouveau prospect pack est prêt à valider.</p><p>${summary}</p><p><a href=\"${approveUrl}\">Approuver et envoyer</a></p><p><a href=\"${rejectUrl}\">Rejeter</a></p>` } }];"
+      },
+      "id": "node-020",
+      "name": "Build Approval Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2760,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'prospection@transferai.africa', to: [$env.INTERNAL_REVIEW_EMAIL || 'review@example.com'], subject: `Validation requise - Prospect pack ${$json.organization_name}`, html: $json.internal_review_html })}}",
+        "options": {}
+      },
+      "id": "node-021",
+      "name": "Send Internal Approval Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3000,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "approve-prospect-pack-v3",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "node-022",
+      "name": "Approval Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const q = $json.query || {};\nreturn [{ json: { pack_id: (q.pack_id || '').toString(), decision: (q.decision || '').toString().toLowerCase() } }];"
+      },
+      "id": "node-023",
+      "name": "Parse Approval Query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?select=*&pack_id=eq.' + encodeURIComponent($json.pack_id) + '&limit=1'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-024",
+      "name": "Get Pack From Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        740,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst payload = row.payload || {};\nconst decision = $('Parse Approval Query').first().json.decision;\nconst executiveLetterHtml = String(payload.executive_letter_html || payload.executive_letter || '').replace(/\\n/g, '<br>');\nreturn [{ json: { row_id: row.id || null, pack_id: row.pack_id || payload.pack_id, prospect_id: row.prospect_id || payload.prospect_id || null, decision, target_email: row.target_email || payload.target_email, organization_name: row.organization_name || payload.organization_name, website: row.website || payload.website || '', decision_maker_name: row.decision_maker_name || payload.decision_maker_name || '', source_backend: payload.source_backend || 'supabase', source_label: payload.source_label || '', raw_source_id: payload.raw_source_id || null, audit_form_url: row.audit_form_url || payload.audit_form_url || '', executive_letter: payload.executive_letter || '', executive_letter_html: executiveLetterHtml, payload } }];"
+      },
+      "id": "node-025",
+      "name": "Extract Pack Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        980,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.decision}}",
+              "operation": "equal",
+              "value2": "approved"
+            }
+          ]
+        }
+      },
+      "id": "node-026",
+      "name": "If Approved",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var src = JSON.parse(JSON.stringify($('Extract Pack Payload').first().json));\n\nfunction safeFileStem(value) {\n  return String(value || 'Prospect')\n    .normalize('NFD')\n    .replace(/[̀-ͯ]/g, '')\n    .replace(/[^a-zA-Z0-9]+/g, '_')\n    .replace(/^_+|_+$/g, '');\n}\n\nfunction normalizeAttachment(att) {\n  if (!att || !att.filename) return null;\n\n  var normalized = {\n    filename: String(att.filename)\n  };\n\n  if (att.content) {\n    normalized.content = String(att.content);\n  }\n\n  if (att.path) {\n    normalized.path = String(att.path);\n  }\n\n  if (!normalized.content && !normalized.path) {\n    return null;\n  }\n\n  return normalized;\n}\n\nfunction dedupeAttachments(list) {\n  var seen = {};\n  var deduped = [];\n  for (var i = 0; i < list.length; i++) {\n    var att = list[i];\n    var key = [att.filename || '', att.path || '', att.content || ''].join('|');\n    if (seen[key]) continue;\n    seen[key] = true;\n    deduped.push(att);\n  }\n  return deduped;\n}\n\nfunction extractPackIdFromUrl(url) {\n  var value = String(url || '');\n  var match = value.match(/[?&]pack_id=([^&#]+)/i);\n  return match ? decodeURIComponent(match[1]) : '';\n}\n\nvar org = safeFileStem(src.organization_name || 'Prospect');\nvar attachments = [];\nvar payload = src.payload || {};\n\nvar providedAttachments = Array.isArray(payload.mail_attachments)\n  ? payload.mail_attachments.map(normalizeAttachment).filter(Boolean)\n  : [];\n\nif (providedAttachments.length > 0) {\n  attachments = providedAttachments;\n} else {\n  var rebuilt = [];\n\n  if (payload.catalogue_artifact && payload.catalogue_artifact.pdf_url) {\n    rebuilt.push({\n      filename: String(\n        payload.catalogue_artifact.filename_pdf ||\n        ('Mini_Catalogue_TransferAI_' + org + '.pdf')\n      ),\n      path: String(payload.catalogue_artifact.pdf_url)\n    });\n  }\n\n  if (payload.deck_artifact && payload.deck_artifact.pptx_url) {\n    rebuilt.push({\n      filename: String(\n        payload.deck_artifact.filename_pptx ||\n        ('Deck_TransferAI_' + org + '.pptx')\n      ),\n      path: String(payload.deck_artifact.pptx_url)\n    });\n  }\n\n  attachments = rebuilt.map(normalizeAttachment).filter(Boolean);\n}\n\nattachments = dedupeAttachments(attachments);\n\nvar hasPdf = attachments.some(function (att) {\n  return /\\.pdf$/i.test(String(att.filename || ''));\n});\n\nvar hasPptx = attachments.some(function (att) {\n  return /\\.pptx$/i.test(String(att.filename || ''));\n});\n\nvar packId =\n  src.pack_id ||\n  payload.pack_id ||\n  extractPackIdFromUrl(src.audit_form_url) ||\n  extractPackIdFromUrl(payload.audit_form_url) ||\n  '';\n\nvar auditFormUrl = packId\n  ? 'https://www.transferai.ci/questionnaire-audit?pack_id=' + encodeURIComponent(packId)\n  : '';\n\nvar canSend = Boolean(\n  src.target_email &&\n  src.executive_letter &&\n  src.executive_letter.trim().length > 0 &&\n  attachments.length >= 2 &&\n  hasPdf &&\n  hasPptx &&\n  packId\n);\n\nvar reason = canSend\n  ? null\n  : 'Email cible, courrier, pack_id ou artefacts requis manquants. Attendus: 1 catalogue PDF et 1 deck PPTX.';\n\nvar auditBlock = auditFormUrl\n  ? \"<br><br><p><strong>Formulaire d'audit pre-RDV :</strong> <a href=\\\"\" + auditFormUrl + \"\\\">\" + auditFormUrl + \"</a></p><p>Merci de le remplir avant le rendez-vous afin que nos experts preparent un audit sur mesure.</p>\"\n  : \"\";\n\nvar externalEmailHtml = String(\n  src.executive_letter_html || String(src.executive_letter || '').replace(/\\n/g, '<br>')\n) + auditBlock;\n\nreturn [{\n  json: {\n    ...src,\n    pack_id: packId,\n    audit_form_url: auditFormUrl,\n    attachments: attachments,\n    attachments_count: attachments.length,\n    can_send: canSend,\n    send_failure_reason: reason,\n    external_email_html: externalEmailHtml\n  }\n}];"
+      },
+      "id": "node-027",
+      "name": "Build Send Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.can_send}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "node-028",
+      "name": "If Ready To Send",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1700,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'approved', approved_at: new Date().toISOString() })}}",
+        "options": {}
+      },
+      "id": "node-029",
+      "name": "Mark Pack Approved",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1940,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ (() => {\n  const ctx = $('Build Send Context').first().json || {};\n\n  const organizationName = ctx.organization_name || 'Votre organisation';\n  const targetEmail = ctx.target_email || '';\n  const auditFormUrl = ctx.audit_form_url || '';\n  const executiveLetterHtml =\n    ctx.executive_letter_html ||\n    String(ctx.executive_letter || '').replace(/\\n/g, '<br>');\n  const bookingLink =\n    ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';\n\n  return JSON.stringify({\n    from: 'TransferAI <contact@transferai.ci>',\n    to: [targetEmail],\n    subject: \"Proposition d'audit gratuit, d'accompagnement et de formation\",\n    html:\n      '<p>Objet : Optimisation du reporting financier et mont\\u00e9e en comp\\u00e9tences par IA pour ' + organizationName + '</p>' +\n      '<p>Madame, Monsieur,</p>' +\n      '<p>' + executiveLetterHtml + '</p>' +\n      '<p>Nous vous invitons \\u00e0 compl\\u00e9ter le formulaire d\\'audit pr\\u00e9alable ici : ' +\n      '<a href=\"' + auditFormUrl + '\">' + auditFormUrl + '</a></p>' +\n      '<p>Vous pouvez aussi r\\u00e9server votre rendez-vous ici : ' +\n      '<a href=\"' + bookingLink + '\">' + bookingLink + '</a></p>' +\n      '<p>Cordialement,<br>TransferAI</p>',\n    attachments: ctx.attachments || []\n  });\n})() }}",
+        "options": {}
+      },
+      "id": "node-030",
+      "name": "Send External Prospect Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2180,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const resend = $json || {};\nconst ctx = $('Build Send Context').first().json;\nreturn [{ json: { ...ctx, resend_response: resend, resend_id: resend.id || resend.data?.id || null, sent_at: new Date().toISOString() } }];"
+      },
+      "id": "node-031",
+      "name": "Parse Send Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'sent', approved_at: new Date().toISOString(), sent_at: $json.sent_at, resend_message_id: $json.resend_id })}}",
+        "options": {}
+      },
+      "id": "node-032",
+      "name": "Mark Pack Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2660,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/outreach_attempts'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ organization_id: null, person_id: null, prospect_id: $json.prospect_id || null, pack_id: $json.pack_id || null, target_email: $json.target_email || null, organization_name: $json.organization_name || null, channel: 'email', message_variant: 'executive_multi_prospect_model_v3_crm_ready', sent_at: $json.sent_at || new Date().toISOString(), delivery_status: 'submitted', response_status: 'pending', stop_reason: null, metadata: { source_backend: $json.source_backend || null, source_label: $json.source_label || null, raw_source_id: $json.raw_source_id || null, website: $json.website || null, decision_maker_name: $json.decision_maker_name || null, commercial_priority_tier: $json.payload?.commercial_priority_tier || null, best_selling_use_case: $json.payload?.best_selling_use_case || null } })}}",
+        "options": {}
+      },
+      "id": "node-033",
+      "name": "Log Outreach Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2900,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.RESEND_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: 'onboarding@resend.dev', to: ['marius.ayoro70@gmail.com'], subject: 'Pack envoye - ' + ($json.organization_name || 'Organisation a confirmer'), html: '<p>Le pack ' + ($json.pack_id || 'n/a') + ' a ete approuve puis envoye a ' + ($json.target_email || 'n/a') + '.</p><p>Resend ID: ' + ($json.resend_id || 'n/a') + '</p>' })}}",
+        "options": {}
+      },
+      "id": "node-034",
+      "name": "Send Internal Sent Confirmation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3140,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{'Pack approuvé et e-mail envoyé à ' + $json.target_email}}",
+        "options": {}
+      },
+      "id": "node-035",
+      "name": "Approval Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        3380,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'approval_error', approval_error_at: new Date().toISOString(), error_reason: $json.send_failure_reason })}}",
+        "options": {}
+      },
+      "id": "node-036",
+      "name": "Mark Pack Approval Error",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1940,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{'Pack approuvé mais non envoyé : ' + ($json.send_failure_reason || 'contexte incomplet')}}",
+        "options": {}
+      },
+      "id": "node-037",
+      "name": "Approval Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2180,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.pack_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'rejected', rejected_at: new Date().toISOString() })}}",
+        "options": {}
+      },
+      "id": "node-038",
+      "name": "Mark Pack Rejected",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1460,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{'Pack rejeté pour ' + $json.organization_name}}",
+        "options": {}
+      },
+      "id": "node-039",
+      "name": "Rejection Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1700,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'active', last_sequence_result: 'sent_v3', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', next_action_at: new Date(Date.now() + 5 * 86400000).toISOString() })}}",
+        "options": {}
+      },
+      "id": "node-042",
+      "name": "Update Prospect Target Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4040,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'paused', paused: true, last_sequence_result: 'approval_error_v3', stop_reason: $json.send_failure_reason || 'approval_error', niche_status: 'internal_fix_required' })}}",
+        "options": {}
+      },
+      "id": "node-043",
+      "name": "Update Prospect Target Approval Error",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3540,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'ready', last_sequence_result: 'rejected_internal_v3', stop_reason: 'internal_review_rejected', niche_status: 'needs_manual_revision' })}}",
+        "options": {}
+      },
+      "id": "node-044",
+      "name": "Update Prospect Target Rejected",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3300,
+        700
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Target": {
+      "main": [
+        [
+          {
+            "node": "Build Source URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Source URLs": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 1": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 2": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 3": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 4": {
+      "main": [
+        [
+          {
+            "node": "Fetch Public Page 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Public Page 5": {
+      "main": [
+        [
+          {
+            "node": "Normalize Public Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Public Signals": {
+      "main": [
+        [
+          {
+            "node": "Sanitize Prospect Data For LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call OpenAI Pre-Audit": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Prospect Context": {
+      "main": [
+        [
+          {
+            "node": "Generate Executive Letter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Tailored Catalogue",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Tailored Audit Form",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Deck Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Executive Letter": {
+      "main": [
+        [
+          {
+            "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Prospect Pack": {
+      "main": [
+        [
+          {
+            "node": "Store Pack In Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Pack In Supabase": {
+      "main": [
+        [
+          {
+            "node": "Build Approval Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Approval Email": {
+      "main": [
+        [
+          {
+            "node": "Send Internal Approval Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approval Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Approval Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Approval Query": {
+      "main": [
+        [
+          {
+            "node": "Get Pack From Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pack From Supabase": {
+      "main": [
+        [
+          {
+            "node": "Extract Pack Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Pack Payload": {
+      "main": [
+        [
+          {
+            "node": "If Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approved": {
+      "main": [
+        [
+          {
+            "node": "Build Send Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Pack Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Send Context": {
+      "main": [
+        [
+          {
+            "node": "If Ready To Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Ready To Send": {
+      "main": [
+        [
+          {
+            "node": "Mark Pack Approved",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Pack Approval Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approved": {
+      "main": [
+        [
+          {
+            "node": "Send External Prospect Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send External Prospect Email": {
+      "main": [
+        [
+          {
+            "node": "Parse Send Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Send Result": {
+      "main": [
+        [
+          {
+            "node": "Mark Pack Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Sent": {
+      "main": [
+        [
+          {
+            "node": "Log Outreach Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Outreach Attempt": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Internal Sent Confirmation": {
+      "main": [
+        [
+          {
+            "node": "Approval Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approval Error": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Approval Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Rejected": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect Target Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanitize Prospect Data For LLM": {
+      "main": [
+        [
+          {
+            "node": "Call OpenAI Pre-Audit",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call OpenAI Problems Solutions",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call OpenAI ROI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Sent": {
+      "main": [
+        [
+          {
+            "node": "Send Internal Sent Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Approval Error": {
+      "main": [
+        [
+          {
+            "node": "Approval Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Prospect Target Rejected": {
+      "main": [
+        [
+          {
+            "node": "Rejection Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "transferai-prospecting-multi-prospect-v3-crm-ready-export",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "n8n"
+    },
+    {
+      "name": "multi-prospect"
+    },
+    {
+      "name": "v3"
+    },
+    {
+      "name": "crm"
+    },
+    {
+      "name": "ready"
+    }
+  ]
+}

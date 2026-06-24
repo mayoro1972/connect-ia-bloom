@@ -1,0 +1,1183 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/psyble",
+    "id": "psyble",
+    "slide": 2,
+    "layoutId": "c86286a2-50c4-412e-9eaa-44d808bab499",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "63687533-61ce-41b6-a861-5742f33e5edf",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Avenir Next",
+      "Georgia"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "c86286a2-50c4-412e-9eaa-44d808bab499",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "63687533-61ce-41b6-a861-5742f33e5edf",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "63687533-61ce-41b6-a861-5742f33e5edf",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F6F1EA",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "2",
+      "bbox": [
+        58,
+        51,
+        10,
+        10
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "3",
+      "bbox": [
+        80,
+        48,
+        460,
+        18
+      ],
+      "geometry": "rect",
+      "text": "E N J E U X   P R I O R I T A I R E S",
+      "textPreview": "E N J E U X   P R I O R I T A I R E S",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "E N J E U X   P R I O R I T A I R E S"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "E N J E U X   P R I O R I T A I R E S",
+          "runs": [
+            {
+              "index": 1,
+              "text": "E N J E U X   P R I O R I T A I R E S",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "4",
+      "bbox": [
+        58,
+        84,
+        900,
+        90
+      ],
+      "geometry": "rect",
+      "text": "Les enjeux à traiter chez ELTON sont d'abord opérationnels, pas technologiques.",
+      "textPreview": "Les enjeux à traiter chez ELTON sont d'abord opérationnels, pas technologiques.",
+      "resolvedFontSize": 33,
+      "resolvedTextStyle": {
+        "fontSize": 33,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Les enjeux à traiter chez ELTON sont d'abord"
+          },
+          {
+            "index": 2,
+            "text": "opérationnels, pas technologiques."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Les enjeux à traiter chez ELTON sont d'abord opérationnels, pas technologiques.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Les enjeux à traiter chez ELTON sont d'abord opérationnels, pas technologiques.",
+              "fontSize": 33,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "5",
+      "bbox": [
+        58,
+        176,
+        840,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Le bon discours commercial n'est donc pas “voici notre IA”, mais “voici où nous pouvons vous aider à mieux décider, mieux exécuter et mieux former vos équipes”.",
+      "textPreview": "Le bon discours commercial n'est donc pas “voici notre IA”, mais “voici où nous pouvons vous aider à mieux décider, mieux exécuter et mie...",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le bon discours commercial n'est donc pas “voici notre IA”, mais “voici où nous pouvons vous aider à mieux décider, mieux exécuter"
+          },
+          {
+            "index": 2,
+            "text": "et mieux former vos équipes”."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le bon discours commercial n'est donc pas “voici notre IA”, mais “voici où nous pouvons vous aider à mieux décider, mieux exécuter et mieux former vos équipes”.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le bon discours commercial n'est donc pas “voici notre IA”, mais “voici où nous pouvons vous aider à mieux décider, mieux exécuter et mieux former vos équipes”.",
+              "fontSize": 14,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "6",
+      "bbox": [
+        58,
+        260,
+        536,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "7",
+      "bbox": [
+        58,
+        260,
+        8,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g3ex0nux",
+      "id": "8",
+      "bbox": [
+        86,
+        282,
+        330,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Comptes professionnels",
+      "textPreview": "Comptes professionnels",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Comptes professionnels"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Comptes professionnels",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Comptes professionnels",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5o7qpg3e",
+      "id": "9",
+      "bbox": [
+        86,
+        326,
+        452,
+        62
+      ],
+      "geometry": "rect",
+      "text": "• mieux suivre les échéances, relances et revues de portefeuille\n• fiabiliser la circulation de l'information commerciale et administrative",
+      "textPreview": "• mieux suivre les échéances, relances et revues de portefeuille | • fiabiliser la circulation de l'information commerciale et administra...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• mieux suivre les échéances, relances et revues de portefeuille"
+          },
+          {
+            "index": 2,
+            "text": "• fiabiliser la circulation de l'information commerciale et administrative"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• mieux suivre les échéances, relances et revues de portefeuille",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• mieux suivre les échéances, relances et revues de portefeuille",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• fiabiliser la circulation de l'information commerciale et administrative",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• fiabiliser la circulation de l'information commerciale et administrative",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "10",
+      "bbox": [
+        86,
+        392,
+        400,
+        18
+      ],
+      "geometry": "rect",
+      "text": "enjeu DG : visibilité et qualité de pilotage",
+      "textPreview": "enjeu DG : visibilité et qualité de pilotage",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "enjeu DG : visibilité et qualité de pilotage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "enjeu DG : visibilité et qualité de pilotage",
+          "runs": [
+            {
+              "index": 1,
+              "text": "enjeu DG : visibilité et qualité de pilotage",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#DE6A1F",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "11",
+      "bbox": [
+        646,
+        260,
+        536,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "12",
+      "bbox": [
+        646,
+        260,
+        8,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#1D8A78",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "13",
+      "bbox": [
+        674,
+        282,
+        330,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Flotte et cartes carburant",
+      "textPreview": "Flotte et cartes carburant",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Flotte et cartes carburant"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Flotte et cartes carburant",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Flotte et cartes carburant",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "14",
+      "bbox": [
+        674,
+        326,
+        452,
+        62
+      ],
+      "geometry": "rect",
+      "text": "• mieux exploiter les données de consommation, d'usage et d'écarts\n• préparer des alertes et tableaux de bord réellement lisibles",
+      "textPreview": "• mieux exploiter les données de consommation, d'usage et d'écarts | • préparer des alertes et tableaux de bord réellement lisibles",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• mieux exploiter les données de consommation, d'usage et d'écarts"
+          },
+          {
+            "index": 2,
+            "text": "• préparer des alertes et tableaux de bord réellement lisibles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• mieux exploiter les données de consommation, d'usage et d'écarts",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• mieux exploiter les données de consommation, d'usage et d'écarts",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• préparer des alertes et tableaux de bord réellement lisibles",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• préparer des alertes et tableaux de bord réellement lisibles",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "15",
+      "bbox": [
+        674,
+        392,
+        400,
+        18
+      ],
+      "geometry": "rect",
+      "text": "enjeu DG : contrôle et lecture des anomalies",
+      "textPreview": "enjeu DG : contrôle et lecture des anomalies",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "enjeu DG : contrôle et lecture des anomalies"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "enjeu DG : contrôle et lecture des anomalies",
+          "runs": [
+            {
+              "index": 1,
+              "text": "enjeu DG : contrôle et lecture des anomalies",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#1D8A78",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "16",
+      "bbox": [
+        58,
+        472,
+        536,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "17",
+      "bbox": [
+        58,
+        472,
+        8,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#17263E",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1032lszq",
+      "id": "18",
+      "bbox": [
+        86,
+        494,
+        330,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Service client et service auto",
+      "textPreview": "Service client et service auto",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Service client et service auto"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Service client et service auto",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Service client et service auto",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cfa9w3m9",
+      "id": "19",
+      "bbox": [
+        86,
+        538,
+        452,
+        62
+      ],
+      "geometry": "rect",
+      "text": "• réduire le temps de réponse et améliorer le suivi des demandes\n• mieux structurer les rappels, comptes rendus et historiques",
+      "textPreview": "• réduire le temps de réponse et améliorer le suivi des demandes | • mieux structurer les rappels, comptes rendus et historiques",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• réduire le temps de réponse et améliorer le suivi des demandes"
+          },
+          {
+            "index": 2,
+            "text": "• mieux structurer les rappels, comptes rendus et historiques"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• réduire le temps de réponse et améliorer le suivi des demandes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• réduire le temps de réponse et améliorer le suivi des demandes",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• mieux structurer les rappels, comptes rendus et historiques",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• mieux structurer les rappels, comptes rendus et historiques",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obm58z25",
+      "id": "20",
+      "bbox": [
+        86,
+        604,
+        400,
+        18
+      ],
+      "geometry": "rect",
+      "text": "enjeu DG : qualité de service et cohérence de traitement",
+      "textPreview": "enjeu DG : qualité de service et cohérence de traitement",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "enjeu DG : qualité de service et cohérence de traitement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "enjeu DG : qualité de service et cohérence de traitement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "enjeu DG : qualité de service et cohérence de traitement",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hwfyxobm",
+      "id": "21",
+      "bbox": [
+        646,
+        472,
+        536,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D1C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65wjudg7",
+      "id": "22",
+      "bbox": [
+        646,
+        472,
+        8,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#DE6A1F",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zqtcj6to",
+      "id": "23",
+      "bbox": [
+        674,
+        494,
+        330,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Procédures et reporting",
+      "textPreview": "Procédures et reporting",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Procédures et reporting"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Procédures et reporting",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Procédures et reporting",
+              "fontSize": 22,
+              "typeface": "Georgia",
+              "color": "#17263E",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oza1gvy9",
+      "id": "24",
+      "bbox": [
+        674,
+        538,
+        452,
+        62
+      ],
+      "geometry": "rect",
+      "text": "• diffuser plus vite les bonnes pratiques et informations utiles\n• réduire la dépendance à la mémoire individuelle pour exécuter et reporter",
+      "textPreview": "• diffuser plus vite les bonnes pratiques et informations utiles | • réduire la dépendance à la mémoire individuelle pour exécuter et rep...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• diffuser plus vite les bonnes pratiques et informations utiles"
+          },
+          {
+            "index": 2,
+            "text": "• réduire la dépendance à la mémoire individuelle pour exécuter et reporter"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• diffuser plus vite les bonnes pratiques et informations utiles",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• diffuser plus vite les bonnes pratiques et informations utiles",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• réduire la dépendance à la mémoire individuelle pour exécuter et reporter",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• réduire la dépendance à la mémoire individuelle pour exécuter et reporter",
+              "fontSize": 12.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hk3q5o7q",
+      "id": "25",
+      "bbox": [
+        674,
+        604,
+        400,
+        18
+      ],
+      "geometry": "rect",
+      "text": "enjeu DG : standardisation et montée en compétence",
+      "textPreview": "enjeu DG : standardisation et montée en compétence",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Avenir Next",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "enjeu DG : standardisation et montée en compétence"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "enjeu DG : standardisation et montée en compétence",
+          "runs": [
+            {
+              "index": 1,
+              "text": "enjeu DG : standardisation et montée en compétence",
+              "fontSize": 9.51,
+              "typeface": "Avenir Next",
+              "color": "#DE6A1F",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6xkf6dcb",
+      "id": "26",
+      "bbox": [
+        58,
+        682,
+        1164,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D1C6",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zed8v6ps",
+      "id": "27",
+      "bbox": [
+        58,
+        689,
+        920,
+        14
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Enjeux",
+      "textPreview": "TransferAI Africa | Offre ciblée ELTON Oil CI | Enjeux",
+      "resolvedFontSize": 7.51,
+      "resolvedTextStyle": {
+        "fontSize": 7.51,
+        "typeface": "Avenir Next",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Enjeux"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Enjeux",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Offre ciblée ELTON Oil CI | Enjeux",
+              "fontSize": 7.51,
+              "typeface": "Avenir Next",
+              "color": "#5C6777"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orytsvu9",
+      "id": "28",
+      "bbox": [
+        1180,
+        685,
+        44,
+        18
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Georgia",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 11,
+              "typeface": "Georgia",
+              "color": "#5C6777",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,1185 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/cou7rb",
+    "id": "cou7rb",
+    "slide": 10,
+    "layoutId": "95ec2e28-2100-46b7-ba47-339934c3d083",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "de0daf85-a6dd-419a-bd5e-75fa2101cbd5",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "95ec2e28-2100-46b7-ba47-339934c3d083",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "de0daf85-a6dd-419a-bd5e-75fa2101cbd5",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "de0daf85-a6dd-419a-bd5e-75fa2101cbd5",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F5EFE7",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "2",
+      "bbox": [
+        72,
+        52,
+        260,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CONFIANCE ET PROCHAINE ÉTAPE",
+      "textPreview": "CONFIANCE ET PROCHAINE ÉTAPE",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONFIANCE ET PROCHAINE ÉTAPE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONFIANCE ET PROCHAINE ÉTAPE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONFIANCE ET PROCHAINE ÉTAPE",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "3",
+      "bbox": [
+        72,
+        86,
+        900,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Proposer un pilote utile, gouverné et mesurable",
+      "textPreview": "Proposer un pilote utile, gouverné et mesurable",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Proposer un pilote utile, gouverné et mesurable"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Proposer un pilote utile, gouverné et mesurable",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Proposer un pilote utile, gouverné et mesurable",
+              "fontSize": 34,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "4",
+      "bbox": [
+        72,
+        180,
+        520,
+        390
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "5",
+      "bbox": [
+        94,
+        204,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1C8A78",
+      "lineColor": "#1C8A78",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/2t83itgf",
+      "id": "6",
+      "bbox": [
+        104,
+        214,
+        24,
+        24
+      ],
+      "alt": "ShieldCheck icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "a522266c-62e3-41f6-bc10-32a71eed7897",
+        "contentType": "image/svg+xml",
+        "byteLength": 381
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "7",
+      "bbox": [
+        150,
+        204,
+        380,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Le cadre de confiance à présenter à ELTON CI",
+      "textPreview": "Le cadre de confiance à présenter à ELTON CI",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le cadre de confiance à présenter à"
+          },
+          {
+            "index": 2,
+            "text": "ELTON CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le cadre de confiance à présenter à ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le cadre de confiance à présenter à ELTON CI",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psfil0rq",
+      "id": "8",
+      "bbox": [
+        94,
+        262,
+        448,
+        182
+      ],
+      "geometry": "rect",
+      "text": "• aucune donnée sensible n'est exposée sans règles d'usage, rôles et validation\n• revue humaine avant toute automatisation critique\n• traçabilité des accès et des sorties\n• périmètre pilote strictement défini avant extension\n• formation intégrée aux exigences de confidentialité et de supervision",
+      "textPreview": "• aucune donnée sensible n'est exposée sans règles d'usage, rôles et validation | • revue humaine avant toute automatisation critique | •...",
+      "resolvedFontSize": 12.8,
+      "resolvedTextStyle": {
+        "fontSize": 12.8,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 6,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• aucune donnée sensible n'est exposée sans règles d'usage, rôles et"
+          },
+          {
+            "index": 2,
+            "text": "validation"
+          },
+          {
+            "index": 3,
+            "text": "• revue humaine avant toute automatisation critique"
+          },
+          {
+            "index": 4,
+            "text": "• traçabilité des accès et des sorties"
+          },
+          {
+            "index": 5,
+            "text": "• périmètre pilote strictement défini avant extension"
+          },
+          {
+            "index": 6,
+            "text": "• formation intégrée aux exigences de confidentialité et de supervision"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• aucune donnée sensible n'est exposée sans règles d'usage, rôles et validation",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• aucune donnée sensible n'est exposée sans règles d'usage, rôles et validation",
+              "fontSize": 12.8,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• revue humaine avant toute automatisation critique",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• revue humaine avant toute automatisation critique",
+              "fontSize": 12.8,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• traçabilité des accès et des sorties",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• traçabilité des accès et des sorties",
+              "fontSize": 12.8,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• périmètre pilote strictement défini avant extension",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• périmètre pilote strictement défini avant extension",
+              "fontSize": 12.8,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "• formation intégrée aux exigences de confidentialité et de supervision",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• formation intégrée aux exigences de confidentialité et de supervision",
+              "fontSize": 12.8,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "9",
+      "bbox": [
+        94,
+        456,
+        456,
+        88
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "10",
+      "bbox": [
+        114,
+        474,
+        100,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Message fort",
+      "textPreview": "Message fort",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Message fort"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Message fort",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Message fort",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "11",
+      "bbox": [
+        114,
+        496,
+        392,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Une IA utile, maîtrisée et compatible avec vos exigences de confidentialité.",
+      "textPreview": "Une IA utile, maîtrisée et compatible avec vos exigences de confidentialité.",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une IA utile, maîtrisée et compatible avec vos"
+          },
+          {
+            "index": 2,
+            "text": "exigences de confidentialité."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une IA utile, maîtrisée et compatible avec vos exigences de confidentialité.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une IA utile, maîtrisée et compatible avec vos exigences de confidentialité.",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "12",
+      "bbox": [
+        640,
+        180,
+        568,
+        390
+      ],
+      "geometry": "rect",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "13",
+      "bbox": [
+        668,
+        208,
+        260,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROCHAINE ÉTAPE",
+      "textPreview": "PROCHAINE ÉTAPE",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROCHAINE ÉTAPE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROCHAINE ÉTAPE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROCHAINE ÉTAPE",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "14",
+      "bbox": [
+        668,
+        236,
+        360,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Sortie attendue du rendez-vous",
+      "textPreview": "Sortie attendue du rendez-vous",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sortie attendue du"
+          },
+          {
+            "index": 2,
+            "text": "rendez-vous"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sortie attendue du rendez-vous",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sortie attendue du rendez-vous",
+              "fontSize": 24,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "15",
+      "bbox": [
+        668,
+        286,
+        360,
+        128
+      ],
+      "geometry": "rect",
+      "text": "1. Tenir un atelier expert de 45 minutes\n2. Lancer l'audit IA gratuit\n3. Recevoir une priorisation claire des cas d'usage\n4. Valider un premier pilote et ses KPI",
+      "textPreview": "1. Tenir un atelier expert de 45 minutes | 2. Lancer l'audit IA gratuit | 3. Recevoir une priorisation claire des cas d'usage | 4. Valide...",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. Tenir un atelier expert de 45 minutes"
+          },
+          {
+            "index": 2,
+            "text": "2. Lancer l'audit IA gratuit"
+          },
+          {
+            "index": 3,
+            "text": "3. Recevoir une priorisation claire des cas d'usage"
+          },
+          {
+            "index": 4,
+            "text": "4. Valider un premier pilote et ses KPI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1. Tenir un atelier expert de 45 minutes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. Tenir un atelier expert de 45 minutes",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "2. Lancer l'audit IA gratuit",
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. Lancer l'audit IA gratuit",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "3. Recevoir une priorisation claire des cas d'usage",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. Recevoir une priorisation claire des cas d'usage",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "4. Valider un premier pilote et ses KPI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "4. Valider un premier pilote et ses KPI",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "16",
+      "bbox": [
+        1040,
+        252,
+        128,
+        102
+      ],
+      "geometry": "rect",
+      "fillColor": "#244667",
+      "lineColor": "#244667",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "17",
+      "bbox": [
+        1058,
+        276,
+        92,
+        28
+      ],
+      "geometry": "rect",
+      "text": "45 min",
+      "textPreview": "45 min",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "45 min"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "45 min",
+          "runs": [
+            {
+              "index": 1,
+              "text": "45 min",
+              "fontSize": 24,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "18",
+      "bbox": [
+        1058,
+        308,
+        92,
+        24
+      ],
+      "geometry": "rect",
+      "text": "atelier de cadrage",
+      "textPreview": "atelier de cadrage",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "atelier de cadrage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "atelier de cadrage",
+          "runs": [
+            {
+              "index": 1,
+              "text": "atelier de cadrage",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "19",
+      "bbox": [
+        1040,
+        370,
+        128,
+        102
+      ],
+      "geometry": "rect",
+      "fillColor": "#244667",
+      "lineColor": "#244667",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zed8v6ps",
+      "id": "20",
+      "bbox": [
+        1058,
+        394,
+        92,
+        28
+      ],
+      "geometry": "rect",
+      "text": "J+15",
+      "textPreview": "J+15",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "J+15"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "J+15",
+          "runs": [
+            {
+              "index": 1,
+              "text": "J+15",
+              "fontSize": 24,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6xkf6dcb",
+      "id": "21",
+      "bbox": [
+        1058,
+        426,
+        92,
+        24
+      ],
+      "geometry": "rect",
+      "text": "premier livrable",
+      "textPreview": "premier livrable",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "premier livrable"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "premier livrable",
+          "runs": [
+            {
+              "index": 1,
+              "text": "premier livrable",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hk3q5o7q",
+      "id": "22",
+      "bbox": [
+        668,
+        444,
+        500,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#244667",
+      "lineColor": "#244667",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oza1gvy9",
+      "id": "23",
+      "bbox": [
+        690,
+        466,
+        456,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Formule courte à utiliser : TransferAI aide ELTON CI à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite entre pilote, accompagnement et extension.",
+      "textPreview": "Formule courte à utiliser : TransferAI aide ELTON CI à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la...",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formule courte à utiliser : TransferAI aide ELTON CI à identifier les usages les plus utiles,"
+          },
+          {
+            "index": 2,
+            "text": "à former les bonnes équipes et à choisir la bonne suite entre pilote, accompagnement et"
+          },
+          {
+            "index": 3,
+            "text": "extension."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formule courte à utiliser : TransferAI aide ELTON CI à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite entre pilote, accompagnement et extension.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formule courte à utiliser : TransferAI aide ELTON CI à identifier les usages les plus utiles, à former les bonnes équipes et à choisir la bonne suite entre pilote, accompagnement et extension.",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#D7E5F3"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zqtcj6to",
+      "id": "24",
+      "bbox": [
+        68,
+        682,
+        1144,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D7CEC3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65wjudg7",
+      "id": "25",
+      "bbox": [
+        72,
+        690,
+        900,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblée ELTON CI",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hwfyxobm",
+      "id": "26",
+      "bbox": [
+        1160,
+        688,
+        36,
+        18
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

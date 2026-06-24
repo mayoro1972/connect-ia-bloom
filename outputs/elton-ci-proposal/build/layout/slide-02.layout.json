@@ -1,0 +1,1433 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/uajhqq",
+    "id": "uajhqq",
+    "slide": 2,
+    "layoutId": "e8395186-6167-493e-abd6-da64e1eda14a",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "e8395186-6167-493e-abd6-da64e1eda14a",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "91d90ecb-cfd9-4add-aac6-cc708566751e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "91d90ecb-cfd9-4add-aac6-cc708566751e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kf6dcbul",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F5EFE7",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "2",
+      "bbox": [
+        72,
+        52,
+        260,
+        18
+      ],
+      "geometry": "rect",
+      "text": "QUI SOMMES-NOUS",
+      "textPreview": "QUI SOMMES-NOUS",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "QUI SOMMES-NOUS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "QUI SOMMES-NOUS",
+          "runs": [
+            {
+              "index": 1,
+              "text": "QUI SOMMES-NOUS",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "3",
+      "bbox": [
+        72,
+        86,
+        860,
+        84
+      ],
+      "geometry": "rect",
+      "text": "TransferAI, le hub AI de Nettelecom CI",
+      "textPreview": "TransferAI, le hub AI de Nettelecom CI",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI, le hub AI de Nettelecom CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI, le hub AI de Nettelecom CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI, le hub AI de Nettelecom CI",
+              "fontSize": 34,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "4",
+      "bbox": [
+        72,
+        176,
+        970,
+        28
+      ],
+      "geometry": "rect",
+      "text": "La proposition gagne en credibilite si nous expliquons clairement qui porte l'offre, avec quelle profondeur d'expertise et dans quel cadre d'execution.",
+      "textPreview": "La proposition gagne en credibilite si nous expliquons clairement qui porte l'offre, avec quelle profondeur d'expertise et dans quel cadr...",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La proposition gagne en credibilite si nous expliquons clairement qui porte l'offre, avec quelle profondeur d'expertise et dans quel cadre d'execution."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La proposition gagne en credibilite si nous expliquons clairement qui porte l'offre, avec quelle profondeur d'expertise et dans quel cadre d'execution.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "La proposition gagne en credibilite si nous expliquons clairement qui porte l'offre, avec quelle profondeur d'expertise et dans quel cadre d'execution.",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knih4byh",
+      "id": "5",
+      "bbox": [
+        72,
+        228,
+        432,
+        340
+      ],
+      "geometry": "rect",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "6",
+      "bbox": [
+        98,
+        252,
+        160,
+        22
+      ],
+      "geometry": "rect",
+      "text": "TransferAI",
+      "textPreview": "TransferAI",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#D7E5F3",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "7",
+      "bbox": [
+        98,
+        286,
+        270,
+        132
+      ],
+      "geometry": "rect",
+      "text": "Le hub AI\noperationnel de\nNettelecom CI",
+      "textPreview": "Le hub AI | operationnel de | Nettelecom CI",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le hub AI"
+          },
+          {
+            "index": 2,
+            "text": "operationnel de"
+          },
+          {
+            "index": 3,
+            "text": "Nettelecom CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le hub AI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le hub AI",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "operationnel de",
+          "runs": [
+            {
+              "index": 1,
+              "text": "operationnel de",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "Nettelecom CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nettelecom CI",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbulwva",
+      "id": "8",
+      "bbox": [
+        98,
+        408,
+        286,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Nous positionnons TransferAI comme la structure qui relie strategie, automatisation, data, formation et gouvernance pour transformer l'IA en execution metier.",
+      "textPreview": "Nous positionnons TransferAI comme la structure qui relie strategie, automatisation, data, formation et gouvernance pour transformer l'IA...",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nous positionnons TransferAI comme la"
+          },
+          {
+            "index": 2,
+            "text": "structure qui relie strategie, automatisation,"
+          },
+          {
+            "index": 3,
+            "text": "data, formation et gouvernance pour"
+          },
+          {
+            "index": 4,
+            "text": "transformer l'IA en execution metier."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nous positionnons TransferAI comme la structure qui relie strategie, automatisation, data, formation et gouvernance pour transformer l'IA en execution metier.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nous positionnons TransferAI comme la structure qui relie strategie, automatisation, data, formation et gouvernance pour transformer l'IA en execution metier.",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#D7E5F3"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "9",
+      "bbox": [
+        98,
+        512,
+        290,
+        42
+      ],
+      "geometry": "rect",
+      "fillColor": "#244667",
+      "lineColor": "#244667",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6psfil0r",
+      "id": "10",
+      "bbox": [
+        114,
+        524,
+        258,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Pour ELTON CI: un interlocuteur IA structure, pas un simple catalogue.",
+      "textPreview": "Pour ELTON CI: un interlocuteur IA structure, pas un simple catalogue.",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pour ELTON CI: un interlocuteur IA structure, pas"
+          },
+          {
+            "index": 2,
+            "text": "un simple catalogue."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pour ELTON CI: un interlocuteur IA structure, pas un simple catalogue.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pour ELTON CI: un interlocuteur IA structure, pas un simple catalogue.",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/val87ed8",
+      "id": "11",
+      "bbox": [
+        534,
+        228,
+        300,
+        148
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "12",
+      "bbox": [
+        556,
+        250,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E76F1D",
+      "lineColor": "#E76F1D",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/i9s36hcr",
+      "id": "13",
+      "bbox": [
+        566,
+        260,
+        24,
+        24
+      ],
+      "alt": "Users icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "bec01382-9ad8-48d5-af72-d5ffa1dd6278",
+        "contentType": "image/svg+xml",
+        "byteLength": 341
+      }
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "14",
+      "bbox": [
+        612,
+        250,
+        180,
+        28
+      ],
+      "geometry": "rect",
+      "text": "13 experts en IA",
+      "textPreview": "13 experts en IA",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "13 experts en IA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "13 experts en IA",
+          "runs": [
+            {
+              "index": 1,
+              "text": "13 experts en IA",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "15",
+      "bbox": [
+        556,
+        300,
+        236,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Une equipe de 13 experts en IA mobilisable sur des enjeux de diagnostic, d'automatisation, de pilotage, de formation et de gouvernance.",
+      "textPreview": "Une equipe de 13 experts en IA mobilisable sur des enjeux de diagnostic, d'automatisation, de pilotage, de formation et de gouvernance.",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une equipe de 13 experts en IA"
+          },
+          {
+            "index": 2,
+            "text": "mobilisable sur des enjeux de diagnostic,"
+          },
+          {
+            "index": 3,
+            "text": "d'automatisation, de pilotage, de"
+          },
+          {
+            "index": 4,
+            "text": "formation et de gouvernance."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une equipe de 13 experts en IA mobilisable sur des enjeux de diagnostic, d'automatisation, de pilotage, de formation et de gouvernance.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une equipe de 13 experts en IA mobilisable sur des enjeux de diagnostic, d'automatisation, de pilotage, de formation et de gouvernance.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3q5o7qp",
+      "id": "16",
+      "bbox": [
+        856,
+        228,
+        352,
+        148
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/donyd0z6",
+      "id": "17",
+      "bbox": [
+        878,
+        250,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1C8A78",
+      "lineColor": "#1C8A78",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/tcj6tova",
+      "id": "18",
+      "bbox": [
+        888,
+        260,
+        24,
+        24
+      ],
+      "alt": "Building2 icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "a1c75179-037d-4567-8b6f-0a96bc091662",
+        "contentType": "image/svg+xml",
+        "byteLength": 395
+      }
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "19",
+      "bbox": [
+        934,
+        250,
+        230,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Differents secteurs couverts",
+      "textPreview": "Differents secteurs couverts",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Differents secteurs"
+          },
+          {
+            "index": 2,
+            "text": "couverts"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Differents secteurs couverts",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Differents secteurs couverts",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/judg7ads",
+      "id": "20",
+      "bbox": [
+        878,
+        300,
+        288,
+        54
+      ],
+      "geometry": "rect",
+      "text": "TransferAI rassemble des expertises IA appliquees dans differents secteurs d'activite, ce qui permet de relier les usages technologiques aux contraintes metier.",
+      "textPreview": "TransferAI rassemble des expertises IA appliquees dans differents secteurs d'activite, ce qui permet de relier les usages technologiques ...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI rassemble des expertises IA appliquees"
+          },
+          {
+            "index": 2,
+            "text": "dans differents secteurs d'activite, ce qui permet"
+          },
+          {
+            "index": 3,
+            "text": "de relier les usages technologiques aux contraintes"
+          },
+          {
+            "index": 4,
+            "text": "metier."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI rassemble des expertises IA appliquees dans differents secteurs d'activite, ce qui permet de relier les usages technologiques aux contraintes metier.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI rassemble des expertises IA appliquees dans differents secteurs d'activite, ce qui permet de relier les usages technologiques aux contraintes metier.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u9knih4b",
+      "id": "21",
+      "bbox": [
+        534,
+        398,
+        300,
+        148
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1032lszq",
+      "id": "22",
+      "bbox": [
+        556,
+        420,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/rytsvu9k",
+      "id": "23",
+      "bbox": [
+        566,
+        430,
+        24,
+        24
+      ],
+      "alt": "BrainCircuit icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "8ba1a659-040c-4040-a50c-2aff2ec18863",
+        "contentType": "image/svg+xml",
+        "byteLength": 674
+      }
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "24",
+      "bbox": [
+        612,
+        420,
+        190,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Une logique d'execution",
+      "textPreview": "Une logique d'execution",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une logique"
+          },
+          {
+            "index": 2,
+            "text": "d'execution"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une logique d'execution",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une logique d'execution",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "25",
+      "bbox": [
+        556,
+        470,
+        236,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Notre role n'est pas seulement de presenter l'IA. Nous cadrons, priorisons, formons et transformons un besoin flou en pilote metier mesurable.",
+      "textPreview": "Notre role n'est pas seulement de presenter l'IA. Nous cadrons, priorisons, formons et transformons un besoin flou en pilote metier mesur...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Notre role n'est pas seulement de"
+          },
+          {
+            "index": 2,
+            "text": "presenter l'IA. Nous cadrons, priorisons,"
+          },
+          {
+            "index": 3,
+            "text": "formons et transformons un besoin flou"
+          },
+          {
+            "index": 4,
+            "text": "en pilote metier mesurable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Notre role n'est pas seulement de presenter l'IA. Nous cadrons, priorisons, formons et transformons un besoin flou en pilote metier mesurable.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Notre role n'est pas seulement de presenter l'IA. Nous cadrons, priorisons, formons et transformons un besoin flou en pilote metier mesurable.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "26",
+      "bbox": [
+        856,
+        398,
+        352,
+        148
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u54zid",
+      "id": "27",
+      "bbox": [
+        878,
+        420,
+        44,
+        44
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#C88C3A",
+      "lineColor": "#C88C3A",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/g3ex0nux",
+      "id": "28",
+      "bbox": [
+        888,
+        430,
+        24,
+        24
+      ],
+      "alt": "ShieldCheck icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "0d1354a2-e3c5-4d65-817a-385604b3bced",
+        "contentType": "image/svg+xml",
+        "byteLength": 381
+      }
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "29",
+      "bbox": [
+        934,
+        420,
+        240,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Un cadre compatible entreprise",
+      "textPreview": "Un cadre compatible entreprise",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Un cadre compatible"
+          },
+          {
+            "index": 2,
+            "text": "entreprise"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Un cadre compatible entreprise",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Un cadre compatible entreprise",
+              "fontSize": 22,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4r65wjud",
+      "id": "30",
+      "bbox": [
+        878,
+        470,
+        288,
+        56
+      ],
+      "geometry": "rect",
+      "text": "Adosse a Nettelecom CI, TransferAI porte une approche serieuse sur la confidentialite, la gouvernance des usages et la supervision des pilotes.",
+      "textPreview": "Adosse a Nettelecom CI, TransferAI porte une approche serieuse sur la confidentialite, la gouvernance des usages et la supervision des pi...",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Adosse a Nettelecom CI, TransferAI porte une"
+          },
+          {
+            "index": 2,
+            "text": "approche serieuse sur la confidentialite, la"
+          },
+          {
+            "index": 3,
+            "text": "gouvernance des usages et la supervision des"
+          },
+          {
+            "index": 4,
+            "text": "pilotes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Adosse a Nettelecom CI, TransferAI porte une approche serieuse sur la confidentialite, la gouvernance des usages et la supervision des pilotes.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Adosse a Nettelecom CI, TransferAI porte une approche serieuse sur la confidentialite, la gouvernance des usages et la supervision des pilotes.",
+              "fontSize": 12.51,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xc3ylc7u",
+      "id": "31",
+      "bbox": [
+        72,
+        592,
+        1136,
+        50
+      ],
+      "geometry": "rect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mlkjm1cf",
+      "id": "32",
+      "bbox": [
+        94,
+        610,
+        200,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi l'ajouter tot dans le deck",
+      "textPreview": "Pourquoi l'ajouter tot dans le deck",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi l'ajouter tot dans le deck"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi l'ajouter tot dans le deck",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi l'ajouter tot dans le deck",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#E76F1D",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/f6dcbulw",
+      "id": "33",
+      "bbox": [
+        310,
+        606,
+        860,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Avant de parler ROI et cas d'usage, ELTON CI doit voir que TransferAI est une entite credible, portee par Nettelecom CI et soutenue par 13 experts IA.",
+      "textPreview": "Avant de parler ROI et cas d'usage, ELTON CI doit voir que TransferAI est une entite credible, portee par Nettelecom CI et soutenue par 1...",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Avant de parler ROI et cas d'usage, ELTON CI doit voir que TransferAI est une entite credible, portee par Nettelecom CI et soutenue par 13 experts IA."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Avant de parler ROI et cas d'usage, ELTON CI doit voir que TransferAI est une entite credible, portee par Nettelecom CI et soutenue par 13 experts IA.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Avant de parler ROI et cas d'usage, ELTON CI doit voir que TransferAI est une entite credible, portee par Nettelecom CI et soutenue par 13 experts IA.",
+              "fontSize": 11.51,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4zidonyd",
+      "id": "34",
+      "bbox": [
+        68,
+        682,
+        1144,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D7CEC3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xkf6dcbu",
+      "id": "35",
+      "bbox": [
+        72,
+        690,
+        900,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+      "textPreview": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI | Hub AI de Nettelecom CI | Proposition ciblee ELTON CI",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mtwra5gb",
+      "id": "36",
+      "bbox": [
+        1160,
+        688,
+        36,
+        18
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

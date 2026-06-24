@@ -1,0 +1,2180 @@
+{
+  "name": "TransferAI Admin Prospection Controller V1",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-admin-prospection-controller-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "n8n"
+    },
+    {
+      "name": "controller"
+    },
+    {
+      "name": "backoffice"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        180,
+        160
+      ],
+      "parameters": {},
+      "id": "b693ff43-c7cf-4ef0-8e9d-4d3433384401"
+    },
+    {
+      "name": "Set Manual Request",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        420,
+        160
+      ],
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "includeOtherFields": false,
+        "fields": {
+          "values": [
+            {
+              "name": "action",
+              "type": "string",
+              "stringValue": "={{$json.action || 'health_check'}}"
+            },
+            {
+              "name": "payload",
+              "type": "string",
+              "stringValue": "={{$json.payload || '{}'}}"
+            },
+            {
+              "name": "authorization",
+              "type": "string",
+              "stringValue": "={{$json.authorization || ('Bearer ' + ($env.ADMIN_BACKOFFICE_TOKEN || 'REPLACE_ME'))}}"
+            },
+            {
+              "name": "actor_email",
+              "type": "string",
+              "stringValue": "={{$json.actor_email || 'admin@transferai.ci'}}"
+            },
+            {
+              "name": "request_id",
+              "type": "string",
+              "stringValue": "={{$json.request_id || ('manual-' + Date.now())}}"
+            }
+          ]
+        }
+      },
+      "id": "77bb7539-0711-424c-ace6-7e6b7035d468"
+    },
+    {
+      "name": "Admin Controller Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        180,
+        360
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "admin-prospect-pack-action",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "26a6b181-1549-48f7-b3ca-6b4eeb5c16c0"
+    },
+    {
+      "name": "Normalize Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        260
+      ],
+      "parameters": {
+        "jsCode": "const input = $input.first()?.json ?? {};\nconst body = input.body ?? input;\nconst headers = input.headers ?? {};\nconst rawPayload = body.payload ?? input.payload ?? {};\nlet payload = rawPayload;\nif (typeof rawPayload === 'string') { try { payload = JSON.parse(rawPayload); } catch (e) { payload = {}; } }\nconst authorization = (headers.authorization || headers.Authorization || input.authorization || '').toString().trim();\nconst requestId = (headers['x-request-id'] || headers['X-Request-Id'] || input.request_id || ('req-' + Date.now())).toString();\nconst actorEmail = (headers['x-actor-email'] || headers['X-Actor-Email'] || input.actor_email || '').toString();\nconst idempotencyKey = (headers['idempotency-key'] || headers['Idempotency-Key'] || input.idempotency_key || '').toString();\nreturn [{ json: { action: String(body.action || input.action || '').trim(), payload, authorization, request_id: requestId, actor_email: actorEmail, idempotency_key: idempotencyKey, received_at: new Date().toISOString() } }];"
+      },
+      "id": "fba9eaef-eb98-4cca-a404-ae0a09b832b9"
+    },
+    {
+      "name": "Validate Auth Header",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        260
+      ],
+      "parameters": {
+        "jsCode": "const expected = String($env.ADMIN_BACKOFFICE_TOKEN || 'REPLACE_ME').trim();\nconst authorization = String($json.authorization || '').trim();\nconst token = authorization.replace(/^Bearer\\s+/i, '').trim();\nreturn [{ json: { ...$json, auth_ok: Boolean(expected && token && token === expected) } }];"
+      },
+      "id": "99c6b708-bcb8-46a9-bdc7-6297f6734fd7"
+    },
+    {
+      "name": "If Auth Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        260
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.auth_ok}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "02b1020a-b57f-40c5-bee0-f069fbc35a49"
+    },
+    {
+      "name": "Build Unauthorized Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        420
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'unknown'), status: 'unauthorized', message: 'Token admin invalide.', error: { code: 'UNAUTHORIZED' }, meta: { request_id: $json.request_id || ('req-' + Date.now()), timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "0f3d1dd7-c266-48fc-975b-e5c4f4f5e4d6"
+    },
+    {
+      "name": "Validate Action",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        200
+      ],
+      "parameters": {
+        "jsCode": "const supported = ['generate_pack','regenerate_pack','approve_pack','reject_pack','send_pack','test_provider','list_providers','health_check'];\nreturn [{ json: { ...$json, action_valid: supported.includes(String($json.action || '')) } }];"
+      },
+      "id": "7583ae4e-efb9-45fe-8dff-2911ed6a0476"
+    },
+    {
+      "name": "If Action Supported",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.action_valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "2207dbd8-46f5-4714-8b23-9ebe159b7f3e"
+    },
+    {
+      "name": "Build Unsupported Action Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        340
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'unknown'), status: 'invalid_action', message: 'Action non supportee.', error: { code: 'UNSUPPORTED_ACTION' }, meta: { request_id: $json.request_id || ('req-' + Date.now()), timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "cb12a782-338a-4864-a214-181f54340210"
+    },
+    {
+      "name": "If Generate Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        80
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "generate_pack"
+            }
+          ]
+        }
+      },
+      "id": "8f0ea3b9-374b-46b7-bf1b-a6113ff8ef27"
+    },
+    {
+      "name": "If Regenerate Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "regenerate_pack"
+            }
+          ]
+        }
+      },
+      "id": "92311731-e670-41f4-bc71-abdc2965218b"
+    },
+    {
+      "name": "If Approve Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        320
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "approve_pack"
+            }
+          ]
+        }
+      },
+      "id": "33d5610a-d4ce-4e7d-aa53-efe9329ec8e4"
+    },
+    {
+      "name": "If Reject Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        440
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "reject_pack"
+            }
+          ]
+        }
+      },
+      "id": "ca576c30-8da2-4759-8926-64adc3f2554b"
+    },
+    {
+      "name": "If Send Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        560
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "send_pack"
+            }
+          ]
+        }
+      },
+      "id": "c4177a30-da19-4229-a811-4ee4ab6ef96c"
+    },
+    {
+      "name": "If Test Provider Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        680
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "test_provider"
+            }
+          ]
+        }
+      },
+      "id": "dacfcef7-cec7-422a-86b6-698a7728a406"
+    },
+    {
+      "name": "If List Providers Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        800
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "list_providers"
+            }
+          ]
+        }
+      },
+      "id": "ba31555f-3dc5-413f-9820-0877c938fa59"
+    },
+    {
+      "name": "If Health Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        920
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "health_check"
+            }
+          ]
+        }
+      },
+      "id": "fe1a0b8e-52f3-4104-afb2-c77ed0b0dad2"
+    },
+    {
+      "name": "Build No Route Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2120,
+        920
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: String($json.action || 'unknown'), status: 'invalid_action', message: 'Aucune branche de workflow ne correspond a cette action.', error: { code: 'UNSUPPORTED_ACTION' }, meta: { request_id: $json.request_id || ('req-' + Date.now()), timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "70a6766d-02e9-4efe-bc61-c23569558a4e"
+    },
+    {
+      "name": "Validate Generate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        80
+      ],
+      "parameters": {
+        "jsCode": "const p = $json.payload || {};\nconst valid = Boolean(p.prospect_id && p.triggered_by);\nreturn [{ json: { ...$json, valid, validation_error: valid ? null : 'prospect_id et triggered_by sont requis.' } }];"
+      },
+      "id": "bfa19862-af1b-4eaa-82a6-54233fe3e0fc"
+    },
+    {
+      "name": "If Generate Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        80
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "7f203e85-5dba-498c-87bb-6cdfddb16597"
+    },
+    {
+      "name": "Build Generate Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        180
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'generate_pack', status: 'invalid_payload', message: $json.validation_error || 'Payload invalide.', error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "ef7f9c33-9fc9-4fd9-9409-26c6cce266c7"
+    },
+    {
+      "name": "Get Prospect Target",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        20
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?select=*&prospect_id=eq.' + encodeURIComponent($json.payload.prospect_id) + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "251c1087-fa48-4515-8056-c05bacc6fda4"
+    },
+    {
+      "name": "Extract Prospect Target",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        20
+      ],
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || null;\nconst root = $('If Generate Payload Valid').first().json;\nreturn [{ json: { ...root, prospect_row: row, found: Boolean(row) } }];"
+      },
+      "id": "da67e03f-1db3-4d42-87fe-02e9e55bfee2"
+    },
+    {
+      "name": "If Prospect Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        20
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.found}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "f86784cc-69f0-44c9-b1cc-5f289139f4cc"
+    },
+    {
+      "name": "Build Prospect Not Found Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3560,
+        100
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'generate_pack', status: 'not_found', message: 'Prospect introuvable.', error: { code: 'PROSPECT_NOT_FOUND' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "3ca3da04-2d3c-4f79-8c1e-8face9bcb9e7"
+    },
+    {
+      "name": "Call Workflow V3 Generate",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3560,
+        -40
+      ],
+      "parameters": {
+        "workflowId": "={{$env.PROSPECTING_V3_WORKFLOW_ID || 'REPLACE_WITH_PROSPECTING_V3_WORKFLOW_ID'}}",
+        "mode": "each",
+        "options": {}
+      },
+      "id": "bdd8eda5-7a3f-4039-9164-9c022b51d6f1"
+    },
+    {
+      "name": "Build Generate Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3800,
+        -40
+      ],
+      "parameters": {
+        "jsCode": "const src = $('Extract Prospect Target').first().json;\nreturn [{ json: { ok: true, action: 'generate_pack', status: 'accepted', message: 'Generation du pack lancee.', data: { prospect_id: src.payload?.prospect_id || src.prospect_row?.prospect_id || null, workflow_key: 'prospecting-v3-pack-engine', poll_after_ms: 2500 }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "b760c7b8-cf2b-4ff5-940e-c57d2b5bd125"
+    },
+    {
+      "name": "Validate Regenerate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        200
+      ],
+      "parameters": {
+        "jsCode": "const p = $json.payload || {};\nconst valid = Boolean(p.pack_id && p.triggered_by && p.reason);\nreturn [{ json: { ...$json, valid, validation_error: valid ? null : 'pack_id, triggered_by et reason sont requis.' } }];"
+      },
+      "id": "819e6985-ce3a-4fa9-b1dc-e13f0f710007"
+    },
+    {
+      "name": "If Regenerate Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "2c1dd5fa-ca75-40b4-9885-3df42c2a9152"
+    },
+    {
+      "name": "Build Regenerate Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        300
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'regenerate_pack', status: 'invalid_payload', message: $json.validation_error || 'Payload invalide.', error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "9f97ad9f-a52b-419b-a398-a36fd9c78d40"
+    },
+    {
+      "name": "Get Existing Pack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        140
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?select=*&pack_id=eq.' + encodeURIComponent($json.payload.pack_id) + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "000cdb87-b976-465c-9451-a032e660478a"
+    },
+    {
+      "name": "Extract Existing Pack",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        140
+      ],
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || null;\nconst root = $('If Regenerate Payload Valid').first().json;\nreturn [{ json: { ...root, pack_row: row, found: Boolean(row) } }];"
+      },
+      "id": "0671566a-26f1-4cb8-a40f-9f0dfe16ceb2"
+    },
+    {
+      "name": "If Existing Pack Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        140
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.found}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "44b3aa24-c0b8-47b3-9c16-4f419a1e38f2"
+    },
+    {
+      "name": "Build Existing Pack Not Found Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3560,
+        220
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'regenerate_pack', status: 'not_found', message: 'Pack introuvable.', error: { code: 'PACK_NOT_FOUND' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "e7741689-3bab-428f-81ec-999523ba837e"
+    },
+    {
+      "name": "Get Prospect Target For Regenerate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3560,
+        80
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?select=*&prospect_id=eq.' + encodeURIComponent($json.pack_row?.prospect_id || $json.payload.prospect_id || '') + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "82d7d5d7-43f0-4552-a23b-d347b61e1eee"
+    },
+    {
+      "name": "Extract Prospect For Regenerate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3800,
+        80
+      ],
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || null;\nconst root = $('Extract Existing Pack').first().json;\nreturn [{ json: { ...root, prospect_row: row, prospect_found: Boolean(row) } }];"
+      },
+      "id": "4e2d2429-8e17-404e-b9bd-6cf3155cce70"
+    },
+    {
+      "name": "If Regenerate Prospect Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4040,
+        80
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.prospect_found}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "4353ae1b-fe3d-4787-9a21-d692b6e99862"
+    },
+    {
+      "name": "Build Regenerate Prospect Not Found Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4280,
+        160
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'regenerate_pack', status: 'not_found', message: 'Prospect source introuvable pour regeneration.', error: { code: 'PROSPECT_NOT_FOUND' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "78aabdb3-6acc-4059-9844-16587da5bc09"
+    },
+    {
+      "name": "Call Workflow V3 Regenerate",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        4280,
+        20
+      ],
+      "parameters": {
+        "workflowId": "={{$env.PROSPECTING_V3_WORKFLOW_ID || 'REPLACE_WITH_PROSPECTING_V3_WORKFLOW_ID'}}",
+        "mode": "each",
+        "options": {}
+      },
+      "id": "566d12a0-f09c-49e5-921d-5d646fc17d70"
+    },
+    {
+      "name": "Build Regenerate Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4520,
+        20
+      ],
+      "parameters": {
+        "jsCode": "const src = $('Extract Prospect For Regenerate').first().json;\nreturn [{ json: { ok: true, action: 'regenerate_pack', status: 'accepted', message: 'Regeneration du pack lancee.', data: { pack_id: src.payload?.pack_id || src.pack_row?.pack_id || null, prospect_id: src.prospect_row?.prospect_id || null, poll_after_ms: 2500 }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "335e951c-9f7a-4a74-aa4f-ef25ee893da4"
+    },
+    {
+      "name": "Validate Approve Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const p = $json.payload || {};\nconst valid = Boolean(p.pack_id && p.reviewer_email && p.mode);\nreturn [{ json: { ...$json, valid, validation_error: valid ? null : 'pack_id, reviewer_email et mode sont requis.' } }];"
+      },
+      "id": "4d1a6ded-8d65-4ece-95de-563926c85da1"
+    },
+    {
+      "name": "If Approve Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        320
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "905a875a-48c4-4087-8677-34522a9f89de"
+    },
+    {
+      "name": "Build Approve Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        420
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'approve_pack', status: 'invalid_payload', message: $json.validation_error || 'Payload invalide.', error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "d400cdb2-b6b2-4f11-8936-e4a3583b0564"
+    },
+    {
+      "name": "If Approve And Send Mode",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        280
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.payload.mode}}",
+              "value2": "approve_and_send"
+            }
+          ]
+        }
+      },
+      "id": "819334af-b9e0-4e80-b280-48eb6f2a9e3f"
+    },
+    {
+      "name": "Call Legacy Approve Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        220
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{($env.N8N_BASE_URL || 'https://your-n8n.example.com') + '/webhook/approve-prospect-pack-v3?pack_id=' + encodeURIComponent($json.payload.pack_id) + '&decision=approved'}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "4fef4528-e61e-46f1-8e1d-bef05438546c"
+    },
+    {
+      "name": "Build Approve Send Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        220
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, action: 'approve_and_send_pack', status: 'sent', message: 'Pack approuve puis envoi declenche via le workflow V3.', data: { pack_id: $json.payload?.pack_id || $('If Approve And Send Mode').first().json.payload.pack_id, provider_key: $('If Approve And Send Mode').first().json.payload.provider_key || null, provider_message_id: null }, meta: { request_id: $('If Approve And Send Mode').first().json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "9e1a578f-50d8-4db7-a090-4e10787e91ec"
+    },
+    {
+      "name": "Mark Pack Approved Direct",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        340
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?pack_id=eq.' + encodeURIComponent($json.payload.pack_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'approved', approved_at: new Date().toISOString(), reviewer_email: $json.payload.reviewer_email })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "d68935c9-c7d1-430d-884d-b5dac8379dcb"
+    },
+    {
+      "name": "Build Approve Only Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        340
+      ],
+      "parameters": {
+        "jsCode": "const src = $('If Approve And Send Mode').first().json;\nreturn [{ json: { ok: true, action: 'approve_pack', status: 'approved', message: 'Pack approuve.', data: { pack_id: src.payload.pack_id, reviewer_email: src.payload.reviewer_email }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "39c36406-c68a-4c08-9dc2-c33d757e0698"
+    },
+    {
+      "name": "Validate Reject Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        440
+      ],
+      "parameters": {
+        "jsCode": "const p = $json.payload || {};\nconst valid = Boolean(p.pack_id && p.reviewer_email && p.reason);\nreturn [{ json: { ...$json, valid, validation_error: valid ? null : 'pack_id, reviewer_email et reason sont requis.' } }];"
+      },
+      "id": "7e3e18a2-fe50-4cb9-b1b4-167f6915af3a"
+    },
+    {
+      "name": "If Reject Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        440
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "848646ac-a4e1-4774-85b9-d71c11e07348"
+    },
+    {
+      "name": "Build Reject Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        540
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'reject_pack', status: 'invalid_payload', message: $json.validation_error || 'Payload invalide.', error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "0ea6906f-f909-4ea0-9e24-875ba2cce13d"
+    },
+    {
+      "name": "Call Legacy Reject Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        400
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{($env.N8N_BASE_URL || 'https://your-n8n.example.com') + '/webhook/approve-prospect-pack-v3?pack_id=' + encodeURIComponent($json.payload.pack_id) + '&decision=rejected'}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "e77090a2-a452-4fc6-9377-79ed130fb937"
+    },
+    {
+      "name": "Build Reject Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        400
+      ],
+      "parameters": {
+        "jsCode": "const src = $('If Reject Payload Valid').first().json;\nreturn [{ json: { ok: true, action: 'reject_pack', status: 'rejected', message: 'Pack rejete.', data: { pack_id: src.payload.pack_id, prospect_status: 'ready' }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "0f159e81-bbc2-4389-a71c-752922c326e5"
+    },
+    {
+      "name": "Validate Send Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        560
+      ],
+      "parameters": {
+        "jsCode": "const p = $json.payload || {};\nconst valid = Boolean(p.pack_id && p.reviewer_email);\nreturn [{ json: { ...$json, valid, validation_error: valid ? null : 'pack_id et reviewer_email sont requis.' } }];"
+      },
+      "id": "521922bf-e1b8-45b8-a511-883513cab1b0"
+    },
+    {
+      "name": "If Send Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        560
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "46e53f50-38cd-4645-a863-07647bc1fe08"
+    },
+    {
+      "name": "Build Send Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        660
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'send_pack', status: 'invalid_payload', message: $json.validation_error || 'Payload invalide.', error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "40f0f241-8583-4801-9aa9-4dec547b4e12"
+    },
+    {
+      "name": "Call Legacy Send Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        520
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{($env.N8N_BASE_URL || 'https://your-n8n.example.com') + '/webhook/approve-prospect-pack-v3?pack_id=' + encodeURIComponent($json.payload.pack_id) + '&decision=approved'}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "49110050-5628-4f2f-8773-940567b6d220"
+    },
+    {
+      "name": "Build Send Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        520
+      ],
+      "parameters": {
+        "jsCode": "const src = $('If Send Payload Valid').first().json;\nreturn [{ json: { ok: true, action: 'send_pack', status: 'sent', message: 'Envoi declenche via le workflow V3.', data: { pack_id: src.payload.pack_id, provider_key: src.payload.provider_key || null, provider_message_id: null }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "0a7776e6-d120-4d61-9562-f8c04b749ff8"
+    },
+    {
+      "name": "Validate Test Provider Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        680
+      ],
+      "parameters": {
+        "jsCode": "const p = $json.payload || {};\nconst valid = Boolean(p.provider_key && p.test_to_email && p.triggered_by);\nreturn [{ json: { ...$json, valid, validation_error: valid ? null : 'provider_key, test_to_email et triggered_by sont requis.' } }];"
+      },
+      "id": "e3a3bce8-b354-4f2c-b41d-47f3f89abb6e"
+    },
+    {
+      "name": "If Test Provider Payload Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        680
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.valid}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "2f965e93-ee7c-4da0-bbe4-6f9e2c698781"
+    },
+    {
+      "name": "Build Test Provider Payload Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        780
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'test_provider', status: 'invalid_payload', message: $json.validation_error || 'Payload invalide.', error: { code: 'INVALID_PAYLOAD' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "ea5b7431-49a2-41c2-b2cf-2a5047cea5ee"
+    },
+    {
+      "name": "Get Provider Config For Test",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        640
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/email_provider_configs?select=*&provider_key=eq.' + encodeURIComponent($json.payload.provider_key) + '&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "fc6c0174-0b59-46bb-8dbd-def05ac56dea"
+    },
+    {
+      "name": "Extract Provider Config For Test",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3080,
+        640
+      ],
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || null;\nconst root = $('If Test Provider Payload Valid').first().json;\nreturn [{ json: { ...root, provider_row: row, found: Boolean(row) } }];"
+      },
+      "id": "932e2b02-d5bf-492b-8356-7f21ed35eaaf"
+    },
+    {
+      "name": "If Provider Config For Test Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        640
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.found}}",
+              "operation": "true"
+            }
+          ]
+        }
+      },
+      "id": "fe875d7c-c2c8-4edb-8ba7-47e7888d9cdf"
+    },
+    {
+      "name": "Build Provider Not Found Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3560,
+        740
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: false, action: 'test_provider', status: 'not_found', message: 'Connecteur email introuvable.', error: { code: 'PROVIDER_NOT_CONFIGURED' }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "8436ad1a-d0dd-45e0-9e2f-a698c8546750"
+    },
+    {
+      "name": "Build Provider Test Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3560,
+        600
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ...$json, provider_send_url: $json.provider_row?.test_send_url || $json.provider_row?.send_url || $env.PROVIDER_TEST_URL || 'https://example.invalid/provider-test', provider_payload: { provider_key: $json.payload.provider_key, from: { email: $json.provider_row?.from_email || 'contact@transferai.ci', name: $json.provider_row?.sender_name || 'TransferAI' }, to: [$json.payload.test_to_email], subject: 'Test connecteur email TransferAI', html: '<p>Test du connecteur email TransferAI.</p>', attachments: [] } } }];"
+      },
+      "id": "bc74ed4c-0e29-4659-9507-9917cc18a045"
+    },
+    {
+      "name": "Send Provider Test Placeholder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3800,
+        600
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json.provider_send_url}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json.provider_payload)}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "5176b8dc-e5ef-48ab-bdf4-500807366f46"
+    },
+    {
+      "name": "Build Provider Test Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4040,
+        600
+      ],
+      "parameters": {
+        "jsCode": "const src = $('Build Provider Test Message').first().json;\nconst raw = $json || {};\nreturn [{ json: { ok: true, action: 'test_provider', status: 'success', message: 'Connecteur email teste.', data: { provider_key: src.payload.provider_key, provider_message_id: raw.id || raw.messageId || raw.data?.id || null, raw_response: raw }, meta: { request_id: src.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "8246e4ba-148a-4778-9454-351da8c68972"
+    },
+    {
+      "name": "List Provider Configs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2360,
+        800
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/email_provider_configs?select=provider_key,provider_type,transport_mode,from_email,sender_name,reply_to_email,is_active,supports_attachments,daily_send_limit,per_minute_limit&order=provider_key.asc'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "bdec80c3-eac5-4c10-b70a-51122eea91b3"
+    },
+    {
+      "name": "Normalize Provider List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        800
+      ],
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst root = $('If List Providers Action').first().json;\nreturn [{ json: { ...root, providers: rows } }];"
+      },
+      "id": "a2740b93-ad93-4d4a-b201-49175a6e3257"
+    },
+    {
+      "name": "Build List Providers Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        800
+      ],
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, action: 'list_providers', status: 'success', message: 'Fournisseurs charges.', data: { providers: $json.providers || [] }, meta: { request_id: $json.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "8f966f7b-a6fc-4006-9236-bc0a92d266dc"
+    },
+    {
+      "name": "Check Supabase Health",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2360,
+        920
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?select=prospect_id&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "9cc1d6a1-54d7-4818-b3ff-840be34c3816"
+    },
+    {
+      "name": "Count Active Providers",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2600,
+        920
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/email_provider_configs?select=provider_key&is_active=eq.true'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a06eaa1a-6dde-481b-9705-ce4cb1da78bc"
+    },
+    {
+      "name": "Build Health Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        920
+      ],
+      "parameters": {
+        "jsCode": "const providerRows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst root = $('If Health Action').first().json;\nreturn [{ json: { ok: true, action: 'health_check', status: 'healthy', message: 'Backend prospection operationnel.', data: { supabase: 'ok', n8n: 'ok', providers_active: providerRows.length }, meta: { request_id: root.request_id, timestamp: new Date().toISOString() } } }];"
+      },
+      "id": "a96f0882-0c49-4cbd-bc5f-15d428310ed4"
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Manual Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Manual Request": {
+      "main": [
+        [
+          {
+            "node": "Normalize Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Admin Controller Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Request": {
+      "main": [
+        [
+          {
+            "node": "Validate Auth Header",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Auth Header": {
+      "main": [
+        [
+          {
+            "node": "If Auth Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Auth Valid": {
+      "main": [
+        [
+          {
+            "node": "Validate Action",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Unauthorized Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Action": {
+      "main": [
+        [
+          {
+            "node": "If Action Supported",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Action Supported": {
+      "main": [
+        [
+          {
+            "node": "If Generate Action",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Unsupported Action Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Generate Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Generate Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Regenerate Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Regenerate Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Regenerate Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Approve Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Approve Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Reject Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Reject Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Reject Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Send Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Send Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Send Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Test Provider Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Test Provider Action": {
+      "main": [
+        [
+          {
+            "node": "Validate Test Provider Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If List Providers Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If List Providers Action": {
+      "main": [
+        [
+          {
+            "node": "List Provider Configs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Health Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Health Action": {
+      "main": [
+        [
+          {
+            "node": "Check Supabase Health",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build No Route Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Generate Payload": {
+      "main": [
+        [
+          {
+            "node": "If Generate Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Generate Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Get Prospect Target",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Generate Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Prospect Target": {
+      "main": [
+        [
+          {
+            "node": "Extract Prospect Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Prospect Target": {
+      "main": [
+        [
+          {
+            "node": "If Prospect Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Prospect Found": {
+      "main": [
+        [
+          {
+            "node": "Call Workflow V3 Generate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Prospect Not Found Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Workflow V3 Generate": {
+      "main": [
+        [
+          {
+            "node": "Build Generate Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Regenerate Payload": {
+      "main": [
+        [
+          {
+            "node": "If Regenerate Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Regenerate Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Get Existing Pack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Regenerate Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Existing Pack": {
+      "main": [
+        [
+          {
+            "node": "Extract Existing Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Existing Pack": {
+      "main": [
+        [
+          {
+            "node": "If Existing Pack Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Existing Pack Found": {
+      "main": [
+        [
+          {
+            "node": "Get Prospect Target For Regenerate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Existing Pack Not Found Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Prospect Target For Regenerate": {
+      "main": [
+        [
+          {
+            "node": "Extract Prospect For Regenerate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Prospect For Regenerate": {
+      "main": [
+        [
+          {
+            "node": "If Regenerate Prospect Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Regenerate Prospect Found": {
+      "main": [
+        [
+          {
+            "node": "Call Workflow V3 Regenerate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Regenerate Prospect Not Found Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Workflow V3 Regenerate": {
+      "main": [
+        [
+          {
+            "node": "Build Regenerate Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Approve Payload": {
+      "main": [
+        [
+          {
+            "node": "If Approve Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "If Approve And Send Mode",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Approve Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve And Send Mode": {
+      "main": [
+        [
+          {
+            "node": "Call Legacy Approve Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Pack Approved Direct",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Legacy Approve Webhook": {
+      "main": [
+        [
+          {
+            "node": "Build Approve Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Pack Approved Direct": {
+      "main": [
+        [
+          {
+            "node": "Build Approve Only Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Reject Payload": {
+      "main": [
+        [
+          {
+            "node": "If Reject Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Reject Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Call Legacy Reject Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Reject Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Legacy Reject Webhook": {
+      "main": [
+        [
+          {
+            "node": "Build Reject Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Send Payload": {
+      "main": [
+        [
+          {
+            "node": "If Send Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Send Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Call Legacy Send Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Send Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Legacy Send Webhook": {
+      "main": [
+        [
+          {
+            "node": "Build Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Test Provider Payload": {
+      "main": [
+        [
+          {
+            "node": "If Test Provider Payload Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Test Provider Payload Valid": {
+      "main": [
+        [
+          {
+            "node": "Get Provider Config For Test",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Test Provider Payload Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Provider Config For Test": {
+      "main": [
+        [
+          {
+            "node": "Extract Provider Config For Test",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Provider Config For Test": {
+      "main": [
+        [
+          {
+            "node": "If Provider Config For Test Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Provider Config For Test Found": {
+      "main": [
+        [
+          {
+            "node": "Build Provider Test Message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Provider Not Found Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Provider Test Message": {
+      "main": [
+        [
+          {
+            "node": "Send Provider Test Placeholder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Provider Test Placeholder": {
+      "main": [
+        [
+          {
+            "node": "Build Provider Test Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Provider Configs": {
+      "main": [
+        [
+          {
+            "node": "Normalize Provider List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Provider List": {
+      "main": [
+        [
+          {
+            "node": "Build List Providers Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Supabase Health": {
+      "main": [
+        [
+          {
+            "node": "Count Active Providers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count Active Providers": {
+      "main": [
+        [
+          {
+            "node": "Build Health Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

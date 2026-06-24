@@ -23,8 +23,6 @@ const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <contact@transferai.ci>";
 const MAIL_TO = Deno.env.get("MAIL_TO") ?? "contact@transferai.ci";
 const SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
-const AUDIT_FORM_URL =
-  (Deno.env.get("PUBLIC_AUDIT_FORM_URL") ?? `${SITE_URL}/formulaire-audit-ia/index.html`).trim();
 const AUDIT_LOGIN_URL =
   (Deno.env.get("PUBLIC_AUDIT_LOGIN_URL") ?? `${SITE_URL}/acces-formulaire-audit`).trim();
 const AUDIT_BOOKING_URL =
@@ -216,7 +214,6 @@ Deno.serve(async (request) => {
           subject: message.subject,
           sent_at: new Date().toISOString(),
           metadata: {
-            audit_form_url: AUDIT_FORM_URL,
             audit_login_url: AUDIT_LOGIN_URL,
           },
         });
