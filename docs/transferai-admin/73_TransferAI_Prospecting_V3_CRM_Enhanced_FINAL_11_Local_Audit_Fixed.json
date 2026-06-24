@@ -72,7 +72,7 @@
             {
               "id": "c3c91c48-6724-4616-b592-abbd6228f482",
               "name": "=target_email",
-              "value": "={{$json.target_email || 'marius.ayoro70@gmail.com'}}",
+              "value": "={{$json.target_email || ''}}",
               "type": "string"
             },
             {
@@ -620,7 +620,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
+              "value": "={{'Bearer ' + ($env.RESEND_API_KEY || 're_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh')}}"
             },
             {
               "name": "Content-Type",
@@ -630,7 +630,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({\n  from: 'onboarding@resend.dev',\n  to: ['marius.ayoro70@gmail.com'],\n  subject: 'Validation requise - Prospect pack ' + ($json.organization_name || 'Organisation a confirmer'),\n  html: $json.internal_review_html || '<p>Aucun contenu de validation disponible.</p>'\n})}}",
+        "jsonBody": "={{JSON.stringify({\n  from: $env.INTERNAL_REVIEW_FROM_EMAIL || 'onboarding@resend.dev',\n  to: String($env.INTERNAL_REVIEW_EMAIL_TO || 'marius.ayoro70@gmail.com').split(',').map((value) => value.trim()).filter(Boolean),\n  subject: 'Validation requise - Prospect pack ' + ($json.organization_name || 'Organisation a confirmer'),\n  html: $json.internal_review_html || '<p>Aucun contenu de validation disponible.</p>'\n})}}",
         "options": {}
       },
       "id": "790ed1f0-4703-4fc6-92fb-909cccabd52e",
@@ -846,7 +846,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
+              "value": "={{'Bearer ' + ($env.RESEND_API_KEY || 're_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh')}}"
             },
             {
               "name": "Content-Type",
@@ -856,7 +856,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ (() => {\n  const ctx = $('Build Send Context').first().json || {};\n\n  const organizationName = ctx.organization_name || 'Votre organisation';\n  const targetEmail = ctx.target_email || '';\n  const auditFormUrl = ctx.audit_form_url || '';\n  const executiveLetterHtml =\n    ctx.executive_letter_html ||\n    String(ctx.executive_letter || '').replace(/\\n/g, '<br>');\n  const bookingLink =\n    ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';\n\n  return JSON.stringify({\n    from: 'TransferAI <contact@transferai.ci>',\n    to: [targetEmail],\n    subject: \"Proposition d'audit gratuit, d'accompagnement et de formation\",\n    html:\n      '<p>Objet : Optimisation du reporting financier et mont\\u00e9e en comp\\u00e9tences par IA pour ' + organizationName + '</p>' +\n      '<p>Madame, Monsieur,</p>' +\n      '<p>' + executiveLetterHtml + '</p>' +\n      '<p>Nous vous invitons \\u00e0 compl\\u00e9ter le formulaire d\\'audit pr\\u00e9alable ici : ' +\n      '<a href=\"' + auditFormUrl + '\">' + auditFormUrl + '</a></p>' +\n      '<p>Vous pouvez aussi r\\u00e9server votre rendez-vous ici : ' +\n      '<a href=\"' + bookingLink + '\">' + bookingLink + '</a></p>' +\n      '<p>Cordialement,<br>TransferAI</p>',\n    attachments: ctx.attachments || []\n  });\n})() }}",
+        "jsonBody": "={{ (() => {\n  const ctx = $('Build Send Context').first().json || {};\n\n  const organizationName = ctx.organization_name || 'Votre organisation';\n  const targetEmail = ctx.target_email || '';\n  const auditFormUrl = ctx.audit_form_url || '';\n  const executiveLetterHtml =\n    ctx.executive_letter_html ||\n    String(ctx.executive_letter || '').replace(/\\n/g, '<br>');\n  const bookingLink =\n    ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';\n\n  return JSON.stringify({\n    from: $env.OUTREACH_FROM_EMAIL || 'TransferAI <contact@transferai.ci>',\n    to: [targetEmail],\n    subject: \"Proposition d'audit gratuit, d'accompagnement et de formation\",\n    html:\n      '<p>Objet : Optimisation du reporting financier et mont\\u00e9e en comp\\u00e9tences par IA pour ' + organizationName + '</p>' +\n      '<p>Madame, Monsieur,</p>' +\n      '<p>' + executiveLetterHtml + '</p>' +\n      '<p>Nous vous invitons \\u00e0 compl\\u00e9ter le formulaire d\\'audit pr\\u00e9alable ici : ' +\n      '<a href=\"' + auditFormUrl + '\">' + auditFormUrl + '</a></p>' +\n      '<p>Vous pouvez aussi r\\u00e9server votre rendez-vous ici : ' +\n      '<a href=\"' + bookingLink + '\">' + bookingLink + '</a></p>' +\n      '<p>Cordialement,<br>TransferAI</p>',\n    attachments: ctx.attachments || []\n  });\n})() }}",
         "options": {
           "response": {
             "response": {
@@ -955,7 +955,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({\n  prospect_id: $json.prospect_id || null,\n  pack_id: $json.pack_id || null,\n  channel: 'email',\n  sent_at: $json.sent_at || new Date().toISOString(),\n  status: 'sent'\n})}}",
+        "jsonBody": "={{JSON.stringify({\n  prospect_id: $('Build Send Context').first().json.prospect_id || null,\n  pack_id: $('Build Send Context').first().json.pack_id || null,\n  organization_name: $('Build Send Context').first().json.organization_name || null,\n  target_email: $('Build Send Context').first().json.target_email || null,\n  channel: 'email',\n  message_variant: 'executive_multi_prospect_model_v3',\n  sent_at: new Date().toISOString(),\n  delivery_status: 'submitted',\n  response_status: 'pending',\n  follow_up_due_at: new Date(Date.now() + 5 * 86400000).toISOString(),\n  stop_reason: null,\n  resend_message_id: $('Send External Prospect Email').first().json.id || null\n})}}",
         "options": {
           "response": {
             "response": {
@@ -982,7 +982,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer re_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh"
+              "value": "={{'Bearer ' + ($env.RESEND_API_KEY || 're_9CWoT2CU_5eUxwpm17nr97w4QTxgKnYfh')}}"
             },
             {
               "name": "Content-Type",
@@ -992,7 +992,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ \n  from: 'onboarding@resend.dev', \n  to: ['marius.ayoro70@gmail.com'], \n  subject: `Pack envoyé - ${$json.payload.organization_name || $json.organization_name}`, \n  html: `<p>Le pack ${$json.payload.pack_id || $json.pack_id} a été approuvé puis envoyé à ${$json.payload.target_email || $json.target_email}.</p><p>Resend ID: ${$json.resend_id || 'n/a'}</p>` \n})}}",
+        "jsonBody": "={{JSON.stringify({ \n  from: $env.INTERNAL_REVIEW_FROM_EMAIL || 'onboarding@resend.dev', \n  to: String($env.INTERNAL_REVIEW_EMAIL_TO || 'marius.ayoro70@gmail.com').split(',').map((value) => value.trim()).filter(Boolean), \n  subject: `Pack envoyé - ${$json.payload.organization_name || $json.organization_name}`, \n  html: `<p>Le pack ${$json.payload.pack_id || $json.pack_id} a été approuvé puis envoyé à ${$json.payload.target_email || $json.target_email}.</p><p>Resend ID: ${$json.resend_id || 'n/a'}</p>` \n})}}",
         "options": {
           "response": {
             "response": {
@@ -1110,7 +1110,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ status: 'active', last_sequence_result: 'sent_v3', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', next_action_at: new Date(Date.now() + 5 * 86400000).toISOString() })}}",
+        "jsonBody": "={{JSON.stringify({ status: 'active', paused: false, last_sequence_result: 'sent_v3', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', next_action_at: new Date(Date.now() + 5 * 86400000).toISOString(), last_pack_id: $json.pack_id || null, updated_at: new Date().toISOString() })}}",
         "options": {}
       },
       "id": "3434d195-2798-42db-aa45-d09e7e76c335",
@@ -1150,7 +1150,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ status: 'paused', paused: true, last_sequence_result: 'approval_error_v3', stop_reason: $json.send_failure_reason || 'approval_error', niche_status: 'internal_fix_required' })}}",
+        "jsonBody": "={{JSON.stringify({ status: 'paused', paused: true, last_sequence_result: 'approval_error_v3', stop_reason: $json.send_failure_reason || 'approval_error', niche_status: 'internal_fix_required', updated_at: new Date().toISOString() })}}",
         "options": {
           "response": {
             "response": {
@@ -1193,7 +1193,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ status: 'ready', last_sequence_result: 'rejected_internal_v3', stop_reason: 'internal_review_rejected', niche_status: 'needs_manual_revision' })}}",
+        "jsonBody": "={{JSON.stringify({ status: 'ready', paused: false, last_sequence_result: 'rejected_internal_v3', stop_reason: 'internal_review_rejected', niche_status: 'needs_manual_revision', updated_at: new Date().toISOString() })}}",
         "options": {
           "response": {
             "response": {
