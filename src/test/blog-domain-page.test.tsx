@@ -61,9 +61,9 @@ describe("blog domain page", () => {
       </LanguageProvider>,
     );
 
-    expect(screen.getByRole("heading", { name: /^veille ia pour finance & fintech$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^ressources ia pour finance & fintech$/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /explorer le catalogue/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /veille finance & fintech : 5 signaux ia/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^finance & fintech : 5 signaux ia$/i })).toBeInTheDocument();
     expect(screen.queryByText(/veille rh & talents/i)).not.toBeInTheDocument();
   });
 });

@@ -76,9 +76,13 @@ describe("blog article page", () => {
       </LanguageProvider>,
     );
 
-    expect(screen.getByRole("heading", { name: /veille it & transformation digitale/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /it & transformation digitale : 6 signaux ia a suivre en afrique/i,
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByText(/le contenu complet s'affiche correctement/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /sources & références/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /découvrir les formations liées/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^sources$/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /explorer le catalogue/i })).toBeInTheDocument();
   });
 });
