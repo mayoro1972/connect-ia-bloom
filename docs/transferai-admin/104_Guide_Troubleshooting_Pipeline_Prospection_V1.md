@@ -1,6 +1,6 @@
 # Guide de dépannage — Pipeline de prospection automatisé TransferAI V1
 
-**Version :** 1.0  
+**Version :** 2.0  
 **Date :** 24 juin 2026  
 **Auteur :** TransferAI  
 
@@ -17,14 +17,15 @@ Ce guide vous aide à diagnostiquer et résoudre les problèmes du pipeline de p
 - Le rapport quotidien ne s'envoie pas → section 4
 - Un email bounce ne stoppe pas la séquence → section 5
 - Un prospect est dans un mauvais statut → section 6
-- Problèmes généraux n8n → section 7
+- Les réponses des prospects ne sont pas détectées (workflow 97) → section 7
+- Problèmes généraux n8n → section 8
 
 ---
 
 ## 1. Aucun email n'est envoyé après soumission du formulaire
 
 ### Symptôme
-Le prospect remplit le formulaire mais ne reçoit aucun email. Vous ne recevez pas non plus d'alerte admin.
+Le prospect remplit le formulaire mais ne reçoit aucun email. Vous ne recevez pas non plus d'alerte administrateur.
 
 ### Causes possibles et solutions
 
@@ -55,31 +56,51 @@ Si le workflow est inactif, cliquez sur le bouton pour l'activer.
 Vérification :
 1. Dans n8n, ouvrez le workflow 93
 2. Cliquez sur **Executions** (menu de gauche)
-3. Cherchez la dernière exécution et regardez si elle est en erreur (rouge)
+3. Cherchez la dernière exécution et regardez si elle est en erreur (fond rouge)
 4. Cliquez dessus pour voir quel nœud a échoué
 
 Erreurs fréquentes :
 
 | Nœud en erreur | Cause probable | Solution |
 |---------------|----------------|----------|
-| `Send Social Sequence Email` | Quota ou API Resend down | Vérifier le tableau de bord Resend |
-| `Upsert Prospect` | Supabase down ou clé API expirée | Vérifier Supabase |
-| `Send Admin Alert` | Même cause que Resend ci-dessus | Idem |
+| `Send Social Sequence Email` | Quota Resend atteint ou API Resend indisponible | Vérifier le tableau de bord Resend |
+| `Upsert Prospect` | Supabase indisponible ou clé API expirée | Vérifier le statut Supabase |
+| `Send Admin Alert` | Même cause que Resend | Idem |
 
 **1.4 Le prospect existe déjà avec `paused = true`**
 
 Vérification dans Supabase :
 ```sql
-SELECT email, status, paused, stop_reason
+SELECT target_email, status, paused, stop_reason
 FROM prospect_targets
-WHERE email = 'email_du_prospect@exemple.com';
+WHERE target_email = 'email_du_prospect@exemple.com';
 ```
 
-Si `paused = true`, le système a volontairement bloqué la séquence. Pour reprendre :
+Si `paused = true`, le système a volontairement bloqué la séquence. Pour la reprendre :
 ```sql
 UPDATE prospect_targets
 SET paused = false, next_action_at = NOW()
-WHERE email = 'email_du_prospect@exemple.com';
+WHERE target_email = 'email_du_prospect@exemple.com';
+```
+
+**1.5 Le prospect a déjà répondu ou est en statut handoff**
+
+Si le prospect avait déjà répondu lors d'un envoi précédent, son statut est `replied` ou `human_handoff_required`, et la séquence ne redémarre pas automatiquement.
+
+Vérification :
+```sql
+SELECT target_email, status, paused
+FROM prospect_targets
+WHERE target_email = 'email_du_prospect@exemple.com';
+```
+
+Si le statut est `replied` ou `human_handoff_required` et que vous souhaitez relancer :
+```sql
+UPDATE prospect_targets
+SET status = 'active',
+    paused = false,
+    next_action_at = NOW() + INTERVAL '1 hour'
+WHERE target_email = 'email_du_prospect@exemple.com';
 ```
 
 ---
@@ -95,13 +116,14 @@ Le mail 1 a été envoyé, mais les relances à J+4 et J+7 ne se déclenchent pa
 
 Vérification dans Supabase :
 ```sql
-SELECT email, sequence_step, next_action_at, social_email_1_sent_at
+SELECT target_email, next_action_at, social_email_1_sent_at,
+       source_payload->>'form_type' AS form_type
 FROM prospect_targets
 WHERE status = 'meeting_invited'
 LIMIT 20;
 ```
 
-Si `next_action_at` est `null` alors que le mail 1 a été envoyé, c'est que le nœud `Build Social Send Result` a un problème. Vérifiez les exécutions du workflow 93 et cherchez une erreur dans ce nœud.
+Si `next_action_at` est `null` alors que le mail 1 a été envoyé, c'est que le nœud `Build Social Send Result` a rencontré un problème. Vérifiez les exécutions du workflow 93 et cherchez une erreur dans ce nœud.
 
 **2.2 `next_action_at` est dans le futur**
 
@@ -111,18 +133,39 @@ Ce n'est pas un bug — c'est le fonctionnement normal. Le mail 2 est envoyé ex
 
 Le cron du workflow 93 se déclenche toutes les heures pour vérifier s'il y a des relances à envoyer. Si le workflow était inactif pendant une période, des relances peuvent avoir été manquées.
 
-Solution : Réactivez le workflow 93. Les relances dont `next_action_at` est dépassé seront envoyées lors de la prochaine exécution du cron.
+Solution : Réactivez le workflow 93. Les relances dont `next_action_at` est dépassé seront traitées lors de la prochaine exécution du cron.
 
 **2.4 `allow_third_email = false`**
 
 Le mail 3 n'est envoyé que si le prospect a autorisé un troisième contact. Vérifiez dans Supabase :
 ```sql
-SELECT email, allow_third_email, sequence_step
+SELECT target_email, allow_third_email,
+       source_payload->>'form_type' AS form_type
 FROM prospect_targets
-WHERE email = 'email@exemple.com';
+WHERE target_email = 'email@exemple.com';
 ```
 
 Si `allow_third_email = false`, c'est un comportement normal : la séquence s'arrête après le mail 2.
+
+**2.5 Le prospect est dans un statut exclu des relances**
+
+Depuis la mise à jour du workflow 93 (étape 11), les prospects dont le statut est `replied`, `human_handoff_required` ou `meeting_booked` sont automatiquement exclus de la file de relance.
+
+Vérification :
+```sql
+SELECT target_email, status, paused
+FROM prospect_targets
+WHERE target_email = 'email@exemple.com';
+```
+
+Si le statut est l'un des trois ci-dessus, c'est un comportement voulu. Pour forcer une relance tout de même (cas exceptionnel) :
+```sql
+UPDATE prospect_targets
+SET status = 'active',
+    paused = false,
+    next_action_at = NOW() + INTERVAL '1 hour'
+WHERE target_email = 'email@exemple.com';
+```
 
 ---
 
@@ -149,7 +192,7 @@ curl -H "Authorization: Bearer VOTRE_TOKEN" \
   https://api.calendly.com/webhook_subscriptions
 ```
 
-Si la liste est vide, il faut réenregistrer le webhook :
+Si la liste est vide, réenregistrez le webhook :
 ```bash
 curl -X POST https://api.calendly.com/webhook_subscriptions \
   -H "Authorization: Bearer VOTRE_TOKEN" \
@@ -162,14 +205,14 @@ curl -X POST https://api.calendly.com/webhook_subscriptions \
   }'
 ```
 
-**3.3 L'email du prospect Calendly ne correspond pas à Supabase**
+**3.3 L'adresse email du prospect Calendly ne correspond pas à Supabase**
 
-Le workflow 94 recherche le prospect par son email Calendly. Si le prospect a utilisé une adresse différente (adresse pro vs personnelle), la correspondance échoue.
+Le workflow 94 recherche le prospect par son adresse email Calendly. Si le prospect a utilisé une adresse différente (adresse professionnelle vs personnelle), la correspondance échoue.
 
 Vérification dans n8n (exécutions du workflow 94) :
 1. Ouvrez la dernière exécution
 2. Cliquez sur le nœud `Find Prospect By Email`
-3. Vérifiez si l'email retourné est bien dans Supabase
+3. Vérifiez si l'adresse retournée est bien enregistrée dans Supabase
 
 Solution manuelle dans Supabase :
 ```sql
@@ -177,7 +220,7 @@ UPDATE prospect_targets
 SET status = 'meeting_booked',
     paused = true,
     meeting_booked_at = NOW()
-WHERE email = 'email_connu_du_prospect@exemple.com';
+WHERE target_email = 'email_connu_du_prospect@exemple.com';
 ```
 
 ---
@@ -197,7 +240,7 @@ Vérification :
 
 **4.2 Problème de fuseau horaire**
 
-Le cron est configuré pour `0 7 * * 1-6`. Si le serveur n8n est en UTC et que vous êtes en Afrique de l'Ouest (GMT+0), le rapport devrait arriver à 7h00 GMT. Vérifiez le fuseau horaire dans **Settings → n8n** dans n8n.
+Le cron est configuré pour `0 7 * * 1-6`. Si le serveur n8n est en UTC et que vous êtes en Afrique de l'Ouest (GMT+0), le rapport doit arriver à 7h00 GMT. Vérifiez le fuseau horaire dans **Settings → n8n**.
 
 **4.3 Erreur dans le nœud d'envoi Resend**
 
@@ -247,6 +290,8 @@ Solution : Vérifiez que le nœud `Send Social Sequence Email` du workflow 93 co
 ### Symptôme
 Le statut d'un prospect dans Supabase ne reflète pas la réalité.
 
+**Important :** La colonne email dans Supabase s'appelle `target_email` (et non `email`). Toutes les requêtes de correction doivent utiliser cette colonne.
+
 ### Corrections manuelles via Supabase
 
 **Forcer le statut `meeting_booked` :**
@@ -255,7 +300,15 @@ UPDATE prospect_targets
 SET status = 'meeting_booked',
     paused = true,
     meeting_booked_at = NOW()
-WHERE email = 'email@exemple.com';
+WHERE target_email = 'email@exemple.com';
+```
+
+**Forcer la clôture après un handoff humain traité :**
+```sql
+UPDATE prospect_targets
+SET status = 'closed_won',
+    paused = true
+WHERE target_email = 'email@exemple.com';
 ```
 
 **Reprendre la séquence d'un prospect bloqué par erreur :**
@@ -264,21 +317,21 @@ UPDATE prospect_targets
 SET paused = false,
     stop_reason = null,
     next_action_at = NOW() + INTERVAL '1 hour'
-WHERE email = 'email@exemple.com';
+WHERE target_email = 'email@exemple.com';
 ```
 
-**Réinitialiser complètement un prospect (recommencer la séquence) :**
+**Réinitialiser complètement un prospect (recommencer la séquence depuis le début) :**
 ```sql
 UPDATE prospect_targets
-SET status = 'active',
-    paused = false,
-    sequence_step = 0,
-    last_sequence_result = null,
-    social_email_1_sent_at = null,
-    social_email_2_sent_at = null,
-    social_email_3_sent_at = null,
+SET status         = 'active',
+    paused         = false,
+    sequence_step  = 0,
+    last_sequence_result    = null,
+    social_email_1_sent_at  = null,
+    social_email_2_sent_at  = null,
+    social_email_3_sent_at  = null,
     next_action_at = NOW()
-WHERE email = 'email@exemple.com';
+WHERE target_email = 'email@exemple.com';
 ```
 
 **Fermer définitivement un prospect :**
@@ -286,29 +339,121 @@ WHERE email = 'email@exemple.com';
 UPDATE prospect_targets
 SET status = 'closed_lost',
     paused = true,
-    stop_reason = 'manual_close',
-    closed_at = NOW()
-WHERE email = 'email@exemple.com';
+    stop_reason = 'manual_close'
+WHERE target_email = 'email@exemple.com';
+```
+
+**Retrouver un prospect dont vous ne connaissez pas l'adresse email exacte :**
+```sql
+SELECT target_email, status, paused, organization_name, decision_maker_name
+FROM prospect_targets
+WHERE organization_name ILIKE '%nom_organisation%'
+   OR decision_maker_name ILIKE '%nom_contact%'
+LIMIT 10;
 ```
 
 ---
 
-## 7. Problèmes généraux n8n
+## 7. Les réponses des prospects ne sont pas détectées (workflow 97)
 
-### 7.1 Accès à n8n
+### Symptôme
+Un prospect a répondu à votre email, mais vous n'avez reçu aucune notification de handoff et le statut du prospect n'a pas changé dans Supabase.
+
+### Causes possibles et solutions
+
+**7.1 Workflow 97 inactif**
+
+Vérification :
+1. Ouvrez le workflow **97 — Zoho Reply Intelligence V1** dans n8n
+2. Vérifiez que le bouton **Active** est vert
+
+Si le workflow est inactif, activez-le. Il se déclenchera à la prochaine minute pour traiter les emails non lus.
+
+**7.2 La connexion IMAP Zoho est interrompue**
+
+Le workflow 97 utilise une connexion IMAP vers `imap.zoho.eu` (port 993, SSL) avec un mot de passe d'application Zoho.
+
+Vérification dans n8n :
+1. Ouvrez le workflow 97
+2. Cliquez sur le nœud **IMAP Email Trigger**
+3. Cliquez sur l'icône de credential (crayon)
+4. Vérifiez que les paramètres sont :
+   - Hôte : `imap.zoho.eu`
+   - Port : `993`
+   - SSL : activé
+   - Utilisateur : `contact@transferai.ci`
+   - Mot de passe : le mot de passe d'application Zoho (App Password)
+
+Si la connexion échoue avec une erreur d'authentification, le mot de passe d'application Zoho a peut-être été révoqué. Créez-en un nouveau dans l'interface Zoho Mail : **Mon compte → Sécurité → Mots de passe d'application**.
+
+**7.3 L'adresse email de l'expéditeur n'est pas dans Supabase**
+
+Le workflow 97 identifie le prospect par son adresse email dans la colonne `target_email` de Supabase. Si la personne qui répond n'est pas enregistrée sous cette adresse, le traitement s'arrête silencieusement.
+
+Vérification :
+```sql
+SELECT target_email, status, organization_name, decision_maker_name
+FROM prospect_targets
+WHERE target_email = 'adresse_email_du_repondeur@exemple.com';
+```
+
+Si la requête ne renvoie aucun résultat, c'est que le prospect n'est pas identifié. Il peut s'agir d'une adresse secondaire ou d'un collègue qui répond à sa place. Dans ce cas, vous pouvez mettre à jour l'adresse dans Supabase ou traiter la réponse manuellement.
+
+**7.4 L'email est filtré comme automatique**
+
+Le workflow 97 ignore automatiquement les emails dont l'expéditeur contient : `no-reply`, `noreply`, `donotreply`, `contact@transferai.ci`, `support-ia@transferai.ci`, `mailer-daemon`.
+
+Si un email légitime provient d'une adresse contenant l'un de ces mots-clés, il sera ignoré. Dans ce cas, traitez-le manuellement.
+
+**7.5 La réponse automatique n'a pas été envoyée**
+
+Si la classification IA a bien eu lieu mais que la réponse automatique n'est pas partie, vérifiez les exécutions du workflow 97 :
+1. Cliquez sur le nœud **Send Auto Reply**
+2. Vérifiez s'il y a une erreur de connexion SMTP
+
+La connexion SMTP Zoho utilise le serveur `smtp.zoho.eu`, port 465, SSL. Si la connexion échoue, vérifiez la credential SMTP Zoho dans n8n.
+
+**7.6 La notification de handoff n'a pas été reçue**
+
+Si l'IA a décidé un handoff humain mais que vous n'avez pas reçu l'email de notification :
+1. Vérifiez les exécutions du workflow 97
+2. Cliquez sur le nœud **Notify Admin Human Handoff**
+3. Vérifiez s'il y a une erreur d'envoi
+
+Si le nœud est en erreur, vérifiez la credential d'envoi (Resend ou SMTP Zoho selon la configuration) et assurez-vous que l'adresse destinataire `contact@transferai.ci` est correctement renseignée.
+
+**7.7 Déboguer une exécution du workflow 97**
+
+Pour analyser une exécution spécifique :
+1. Ouvrez le workflow 97 dans n8n
+2. Cliquez sur **Executions** (menu de gauche)
+3. Cliquez sur une exécution
+4. Vérifiez nœud par nœud :
+   - **IMAP Email Trigger** : email reçu ? (données entrantes visibles)
+   - **Parse Incoming Reply** : `from_email`, `subject`, `body_text` bien extraits ?
+   - **Find Prospect By Email** : un prospect trouvé ? (liste non vide ?)
+   - **Load Prospect Context** : données du prospect correctement chargées ?
+   - **Classify Reply with OpenAI** : intention et `needs_human` retournés ?
+   - **Route by Needs Human** : branche correcte empruntée ?
+
+---
+
+## 8. Problèmes généraux n8n
+
+### 8.1 Accès à n8n
 
 - **URL :** `https://n8n-pxlk.srv1480638.hstgr.cloud`
 - En cas de problème de connexion, vérifiez que le serveur est en ligne
 
-### 7.2 Voir les logs d'une exécution
+### 8.2 Voir les logs d'une exécution
 
 1. Ouvrez le workflow concerné
 2. Cliquez sur **Executions** dans le menu de gauche
 3. Cliquez sur une exécution pour voir le détail nœud par nœud
 4. Les nœuds verts ont réussi, les rouges ont échoué
-5. Cliquez sur un nœud rouge pour voir le message d'erreur
+5. Cliquez sur un nœud rouge pour voir le message d'erreur complet
 
-### 7.3 Tester manuellement un workflow
+### 8.3 Tester manuellement un workflow
 
 Pour tester le workflow 93 sans attendre un formulaire :
 1. Ouvrez le workflow 93
@@ -316,32 +461,38 @@ Pour tester le workflow 93 sans attendre un formulaire :
 3. Cliquez sur **Listen for test event**
 4. Simulez un envoi de formulaire depuis Google Forms (mode **Aperçu**)
 
-### 7.4 Réimporter un workflow depuis un fichier JSON
+Pour tester le workflow 97 sans attendre un email :
+1. Envoyez un email test à `contact@transferai.ci` depuis une adresse enregistrée dans Supabase
+2. Attendez 1 à 2 minutes
+3. Ouvrez les exécutions du workflow 97 pour vérifier le traitement
+
+### 8.4 Réimporter un workflow depuis un fichier JSON
 
 Si vous devez restaurer un workflow :
 1. Dans n8n, cliquez sur **+ New workflow** → **Import from file**
 2. Choisissez le fichier JSON correspondant dans `docs/transferai-admin/`
-3. Vérifiez que le workflow est bien configuré (credentials, etc.)
-4. Activez-le avec le bouton **Active**
+3. Vérifiez que toutes les credentials sont correctement associées à chaque nœud
+4. Activez le workflow avec le bouton **Active**
 
-### 7.5 Fichiers JSON des workflows
+### 8.5 Fichiers JSON des workflows
 
 | Fichier | Workflow |
 |---------|----------|
-| `93_n8n_Google_Forms_Social_Lead_Sequence_V2_Clean_Importable.json` | Séquence principale |
-| `94_n8n_Calendly_Meeting_Booked_Webhook_V1.json` | Détection rendez-vous |
+| `93_n8n_Google_Forms_Social_Lead_Sequence_V2_Clean_Importable.json` | Séquence principale (formulaire + relances) |
+| `94_n8n_Calendly_Meeting_Booked_Webhook_V1.json` | Détection des rendez-vous Calendly |
 | `95_n8n_Daily_Monitoring_Report_V1.json` | Rapport quotidien |
-| `96_n8n_Resend_Email_Events_Webhook_V1.json` | Gestion bounces |
-| `97_n8n_Zoho_Reply_Intelligence_V1.json` | Détection et classification des réponses |
+| `96_n8n_Resend_Email_Events_Webhook_V1.json` | Gestion des bounces et spams |
+| `97_n8n_Zoho_Reply_Intelligence_V1.json` | Détection et classification des réponses entrantes |
 
 ---
 
 ## Récapitulatif rapide des vérifications à faire en priorité
 
-En cas de doute, voici les cinq vérifications à faire dans l'ordre :
+En cas de doute, voici les vérifications à effectuer dans l'ordre :
 
 1. **Les cinq workflows 93, 94, 95, 96, 97 sont-ils actifs dans n8n ?**
 2. **Le Google Apps Script du formulaire est-il actif ?**
 3. **Y a-t-il des erreurs dans les exécutions récentes de n8n ?**
 4. **Le webhook Calendly est-il enregistré et actif ?**
 5. **Le webhook Resend est-il configuré avec les bons événements ?**
+6. **La connexion IMAP Zoho du workflow 97 est-elle opérationnelle ?**
