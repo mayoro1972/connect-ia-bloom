@@ -1,0 +1,308 @@
+{
+  "name": "TransferAI Chatwoot Auto Reply V5.5.3 CRM Ready",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatwoot-inbound-v5-5",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "node-001",
+      "name": "Chatwoot Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first()?.json?.body ?? $input.first()?.json ?? {};\n\nconst event = body.event;\n\n// Version V5.5.3 : on ne traite que message_created pour eviter les doublons.\nif (event !== 'message_created') {\n  return [];\n}\n\nconst conversationId = (body.conversation?.id ?? '').toString();\nconst incomingText = (body.content ?? '').toString().trim();\nconst messageType = String(body.message_type ?? '').toLowerCase();\n\nif (messageType !== '0' && messageType !== 'incoming') {\n  return [];\n}\n\nif (!incomingText || !conversationId) {\n  return [];\n}\n\nconst senderName =\n  body.sender?.name ??\n  body.meta?.sender?.name ??\n  body.conversation?.meta?.sender?.name ??\n  'prospect';\n\nconst senderEmail =\n  body.sender?.email ??\n  body.meta?.sender?.email ??\n  body.conversation?.meta?.sender?.email ??\n  '';\n\nconst senderPhone =\n  body.sender?.phone_number ??\n  body.meta?.sender?.phone_number ??\n  body.conversation?.meta?.sender?.phone_number ??\n  '';\n\nconst fallbackReply =\n  \"Je n'ai pas pu generer une reponse pour le moment. Un membre de notre equipe vous contactera rapidement.\";\n\nreturn [{\n  json: {\n    conversation_id: conversationId,\n    incoming_text: incomingText,\n    sender_name: senderName,\n    sender_email: senderEmail,\n    sender_phone: senderPhone,\n    fallback_reply: fallbackReply,\n    source_event: event\n  }\n}];"
+      },
+      "id": "node-002",
+      "name": "Filter Chatwoot event",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{'https://app.chatwoot.com/api/v1/accounts/' + ($env.CHATWOOT_ACCOUNT_ID || '163278') + '/conversations/' + $json.conversation_id + '/messages'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{$env.CHATWOOT_API_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-003",
+      "name": "Get conversation history",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const historyResponse = $input.first()?.json ?? {};\nconst current = $('Filter Chatwoot event').first()?.json ?? {};\n\nconst MAX_HISTORY = 20;\nconst CALENDLY_LINK = 'https://calendly.com/contact-transferai/30min';\nconst PUBLIC_DOMAIN = 'https://www.transferai.ci';\n\nfunction asArray(response) {\n  if (Array.isArray(response)) return response;\n  if (Array.isArray(response.payload)) return response.payload;\n  if (Array.isArray(response.data)) return response.data;\n  if (Array.isArray(response.messages)) return response.messages;\n  return [];\n}\n\nconst messages = asArray(historyResponse)\n  .map((m) => {\n    const content = (m.content ?? '').toString().trim();\n    if (!content) return null;\n    const isIn = m.message_type === 0 || m.message_type === 'incoming' || m.message_type === 3;\n    const isOut = m.message_type === 1 || m.message_type === 'outgoing';\n    if (!isIn && !isOut) return null;\n    return { role: isIn ? 'user' : 'assistant', content, ts: m.created_at || 0 };\n  })\n  .filter(Boolean)\n  .sort((a, b) => a.ts - b.ts)\n  .slice(-MAX_HISTORY)\n  .map(({ role, content }) => ({ role, content }));\n\nconst lastUserInHistory = [...messages].reverse().find((m) => m.role === 'user')?.content ?? '';\nconst alreadyIncluded = lastUserInHistory === current.incoming_text;\n\nconst knownEmail = (current.sender_email || '').toString().trim();\nconst contactInfoStatus = knownEmail\n  ? `L'email du prospect est deja connu : ${knownEmail}. Ne le redemande surtout pas.`\n  : \"L'email du prospect n'est pas encore connu.\";\n\nconst systemPrompt = [\n  \"Tu es l'assistant commercial et d'orientation de TransferAI Africa.\",\n  \"Tu reponds en francais ou en anglais selon la langue du DERNIER message du prospect.\",\n  \"Ne mentionne jamais que tu changes de langue.\",\n  \"Tu representes une organisation centree sur la formation IA, l'accompagnement entreprise, l'audit IA, la veille strategique, l'automatisation, les catalogues sectoriels, les certifications, les webinaires et certains partenariats.\",\n  \"Tu dois t'appuyer uniquement sur ces verites metier. N'invente jamais d'offre, de prix, de calendrier, de reference client ou de promesse non confirmee.\",\n  \"Tu disposes de l'historique recent. Utilise-le pour eviter de reposer les memes questions.\",\n  \"Quand le besoin est simple, reponds d'abord utilement puis pose UNE seule question de qualification pertinente.\",\n  \"Quand le besoin est plus large, pose au maximum DEUX questions de qualification par reponse.\",\n  \"Questions de qualification prioritaires : organisation ou entreprise, secteur, objectif principal, email, site web.\",\n  \"Regle contact importante : \" + contactInfoStatus,\n  \"Regle rendez-vous : si le prospect demande explicitement un rendez-vous, un creneau, un appel, une demo, un echange avec l'equipe, une discussion cette semaine ou un accompagnement, donne IMMEDIATEMENT ce lien de reservation : \" + CALENDLY_LINK,\n  \"Tu peux demander l'email dans la meme reponse pour le suivi, mais jamais comme condition prealable au partage du lien.\",\n  \"Si le prospect demande les tarifs, explique brievement que l'orientation depend du besoin et propose un echange ou la collecte du contexte. N'invente aucun prix.\",\n  \"Si la demande concerne emploi ou candidature, oriente vers la voie emploi et mise en relation plutot que vers une vente classique.\",\n  \"Si la demande concerne support ou acces technique, propose une reprise humaine.\",\n  \"Si tu cites le site, utilise seulement des liens publics coherents avec TransferAI, par exemple \" + PUBLIC_DOMAIN + \", /entreprises, /catalogue, /contact.\",\n  \"Ton style : chaleureux, professionnel, clair, concret, sans jargon excessif.\",\n  \"Ta reponse doit tenir en maximum 6 lignes courtes, avec une seule action principale a la fin.\"\n].join(' ');\n\nconst openaiMessages = [{ role: 'system', content: systemPrompt }, ...messages];\n\nif (!alreadyIncluded) {\n  openaiMessages.push({ role: 'user', content: current.incoming_text });\n}\n\nreturn [\n  {\n    json: {\n      conversation_id: current.conversation_id,\n      incoming_text: current.incoming_text,\n      sender_name: current.sender_name,\n      sender_email: current.sender_email,\n      sender_phone: current.sender_phone,\n      fallback_reply: current.fallback_reply,\n      history_count: messages.length,\n      raw_history_messages: messages,\n      openai_payload: {\n        model: 'gpt-4.1-mini',\n        temperature: 0.25,\n        max_tokens: 420,\n        messages: openaiMessages\n      }\n    }\n  }\n];"
+      },
+      "id": "node-004",
+      "name": "Build OpenAI reply payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json.openai_payload)}}",
+        "options": {}
+      },
+      "id": "node-005",
+      "name": "Call OpenAI reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1180, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const openai = $input.first()?.json ?? {};\nconst context = $('Build OpenAI reply payload').first()?.json ?? {};\n\nconst replyText =\n  openai.choices?.[0]?.message?.content?.toString().trim() ||\n  context.fallback_reply ||\n  \"Je n'ai pas pu g\\u00e9n\\u00e9rer une r\\u00e9ponse. Un agent humain va vous contacter.\";\n\nreturn [{\n  json: {\n    ...context,\n    reply_text: replyText\n  }\n}];"
+      },
+      "id": "node-006",
+      "name": "Format AI reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1420, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{'https://app.chatwoot.com/api/v1/accounts/' + ($env.CHATWOOT_ACCOUNT_ID || '163278') + '/conversations/' + $json.conversation_id + '/messages'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{$env.CHATWOOT_API_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ content: $json.reply_text, message_type: 'outgoing', private: false }) }}",
+        "options": {}
+      },
+      "id": "node-007",
+      "name": "Send reply to Chatwoot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1660, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const format = $('Format AI reply').first()?.json ?? {};\nconst history = format.raw_history_messages ?? [];\n\nconst conversationText = history\n  .map((m) => `${m.role === 'user' ? 'PROSPECT' : 'ASSISTANT'}: ${m.content}`)\n  .join('\\n');\n\nconst lastUserText = [...history].reverse().find((m) => m.role === 'user')?.content ?? '';\nconst conversationFull = lastUserText === format.incoming_text\n  ? conversationText\n  : `${conversationText}\\nPROSPECT: ${format.incoming_text}`;\n\nconst systemPrompt = [\n  \"Tu es un agent de qualification commerciale pour TransferAI Africa.\",\n  \"Analyse la conversation ci-dessous et extrais STRICTEMENT un objet JSON valide.\",\n  \"Ne renvoie QUE du JSON. Aucun texte autour, aucun markdown, aucun commentaire.\",\n  \"\",\n  \"Intentions possibles : formation, audit_ia, veille, automatisation, catalogue, certification, webinar, partenariat, emploi, support, autre.\",\n  \"Need types possibles : formation, accompagnement, audit, veille, automatisation, catalogue, certification, webinar, partenariat, emploi, support, autre.\",\n  \"Niveaux de seriosite : faible, moyen, eleve.\",\n  \"crm_readiness_level possibles : none, contact_request_ready, prospect_target_ready.\",\n  \"recommended_workflow possibles : null, V1, V2, V3, V4, V5, V6, handoff_humain.\",\n  \"\",\n  \"Regles :\",\n  \"- utilise null si une information n'a JAMAIS ete donnee dans la conversation.\",\n  \"- ne devine pas, n'invente pas.\",\n  \"- 'is_b2b' = true si le prospect parle au nom d'une organisation, false si c'est un particulier, null sinon.\",\n  \"- 'wants_demo' = true si le prospect a explicitement demande un rendez-vous, un appel, une demo, un creneau ou un echange avec l'equipe.\",\n  \"- 'needs_human_handoff' = true si la demande est strategique, sensible, tarifaire complexe, support, ou si le prospect demande un humain.\",\n  \"- 'crm_readiness_level' = contact_request_ready si au moins le besoin est clair et un email de suivi est disponible.\",\n  \"- 'crm_readiness_level' = prospect_target_ready si company_name et website sont connus, avec un besoin B2B exploitable.\",\n  \"- 'missing_fields' liste les champs parmi [company_name, sector, need_type, email, website] qui sont encore manquants pour avancer.\",\n  \"- 'email' = email valide mentionne par le prospect dans la conversation, ou null si aucun email valide n'apparait.\",\n  \"- 'phone' = telephone mentionne par le prospect dans la conversation, ou null si aucun telephone n'apparait.\",\n  \"- 'website' = site web explicitement mentionne par le prospect, ou null.\",\n  \"- 'summary' = resume tres court et utile pour un humain.\",\n  \"- 'next_best_action' = prochaine action concrete recommandee.\",\n  \"\",\n  \"JSON attendu (TOUTES ces cles obligatoires) :\",\n  \"{\\\"company_name\\\": null, \\\"sector\\\": null, \\\"need_type\\\": null, \\\"intent\\\": null, \\\"lead_seriousness\\\": null, \\\"is_b2b\\\": null, \\\"wants_demo\\\": null, \\\"needs_human_handoff\\\": null, \\\"contact_name\\\": null, \\\"email\\\": null, \\\"phone\\\": null, \\\"website\\\": null, \\\"country\\\": null, \\\"summary\\\": null, \\\"next_best_action\\\": null, \\\"crm_readiness_level\\\": null, \\\"recommended_workflow\\\": null, \\\"missing_fields\\\": []}\"\n].join('\\n');\n\nconst userMessage = `Conversation a analyser :\\n\\n${conversationFull || 'PROSPECT: ' + format.incoming_text}\\n\\nProduis le JSON.`;\n\nreturn [\n  {\n    json: {\n      conversation_id: format.conversation_id,\n      incoming_text: format.incoming_text,\n      sender_name: format.sender_name,\n      sender_email: format.sender_email,\n      sender_phone: format.sender_phone,\n      reply_text: format.reply_text,\n      qualification_payload: {\n        model: 'gpt-4.1-mini',\n        temperature: 0.1,\n        max_tokens: 650,\n        response_format: { type: 'json_object' },\n        messages: [\n          { role: 'system', content: systemPrompt },\n          { role: 'user', content: userMessage }\n        ]\n      }\n    }\n  }\n];"
+      },
+      "id": "node-008",
+      "name": "Build qualification payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1660, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json.qualification_payload)}}",
+        "options": {}
+      },
+      "id": "node-009",
+      "name": "Call OpenAI qualification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1900, 520]
+    },
+    {
+      "parameters": {
+        "jsCode": "const openai = $input.first()?.json ?? {};\nconst context = $('Build qualification payload').first()?.json ?? {};\n\nconst DEFAULT_QUALIFICATION = {\n  company_name: null,\n  sector: null,\n  need_type: null,\n  intent: null,\n  lead_seriousness: null,\n  is_b2b: null,\n  wants_demo: null,\n  needs_human_handoff: null,\n  contact_name: null,\n  email: null,\n  phone: null,\n  website: null,\n  country: null,\n  summary: null,\n  next_best_action: null,\n  crm_readiness_level: 'none',\n  recommended_workflow: null,\n  missing_fields: ['company_name', 'sector', 'need_type', 'email', 'website']\n};\n\nlet qualification = { ...DEFAULT_QUALIFICATION };\nlet parseError = null;\n\ntry {\n  const raw = openai.choices?.[0]?.message?.content?.toString().trim() || '{}';\n  const parsed = JSON.parse(raw);\n  qualification = { ...DEFAULT_QUALIFICATION, ...parsed };\n} catch (err) {\n  parseError = err.message;\n}\n\nif (!qualification.contact_name && context.sender_name && context.sender_name !== 'prospect') {\n  qualification.contact_name = context.sender_name;\n}\nif (!qualification.email && context.sender_email) {\n  qualification.email = context.sender_email;\n}\nif (!qualification.phone && context.sender_phone) {\n  qualification.phone = context.sender_phone;\n}\n\nconst labels = [];\nconst intent = (qualification.intent || '').toString().toLowerCase();\nif (intent === 'formation') labels.push('formation');\nif (intent === 'audit_ia') labels.push('audit-ia');\nif (intent === 'automatisation') labels.push('automatisation');\nif (intent === 'partenariat') labels.push('partenariat');\nif (intent === 'emploi') labels.push('emploi');\nif (intent === 'catalogue') labels.push('catalogue');\nif (intent === 'certification') labels.push('certification');\nif (intent === 'webinar') labels.push('webinar');\nif (intent === 'support') labels.push('support');\nif (intent === 'veille') labels.push('veille');\n\nconst seriousness = (qualification.lead_seriousness || '').toString().toLowerCase();\nif (seriousness === 'eleve' || seriousness === 'élevé' || seriousness === 'high') {\n  labels.push('lead-chaud');\n}\nif (Array.isArray(qualification.missing_fields) && qualification.missing_fields.length > 0) {\n  labels.push('infos-manquantes');\n}\nif (qualification.needs_human_handoff === true) {\n  labels.push('handoff-humain');\n}\nif (qualification.wants_demo === true) {\n  labels.push('demo-proposee');\n}\nif (qualification.crm_readiness_level === 'contact_request_ready') {\n  labels.push('crm-contact-ready');\n}\nif (qualification.crm_readiness_level === 'prospect_target_ready') {\n  labels.push('crm-prospect-ready');\n}\n\nconst customAttributes = {};\nif (qualification.contact_name) customAttributes.contact_name = qualification.contact_name;\nif (qualification.company_name) customAttributes.company_name = qualification.company_name;\nif (qualification.sector) customAttributes.sector = qualification.sector;\nif (qualification.need_type) customAttributes.need_type = qualification.need_type;\nif (qualification.intent) customAttributes.intent = qualification.intent;\nif (qualification.lead_seriousness) customAttributes.lead_seriousness = qualification.lead_seriousness;\nif (qualification.summary) customAttributes.internal_summary = qualification.summary;\nif (qualification.next_best_action) customAttributes.next_best_action = qualification.next_best_action;\nif (qualification.country) customAttributes.country = qualification.country;\nif (qualification.website) customAttributes.lead_website = qualification.website;\nif (qualification.crm_readiness_level) customAttributes.crm_readiness_level = qualification.crm_readiness_level;\nif (qualification.recommended_workflow) customAttributes.recommended_workflow = qualification.recommended_workflow;\nif (typeof qualification.is_b2b === 'boolean') customAttributes.is_b2b = qualification.is_b2b;\nif (typeof qualification.wants_demo === 'boolean') customAttributes.demo_proposed = qualification.wants_demo;\nif (typeof qualification.needs_human_handoff === 'boolean') customAttributes.human_handoff = qualification.needs_human_handoff;\nif (qualification.email) customAttributes.lead_email = qualification.email;\nif (qualification.phone) customAttributes.lead_phone = qualification.phone;\n\nreturn [\n  {\n    json: {\n      conversation_id: context.conversation_id,\n      qualification,\n      labels,\n      labels_count: labels.length,\n      custom_attributes_payload: { custom_attributes: customAttributes },\n      labels_payload: { labels },\n      parse_error: parseError,\n      qualification_used_fallback: parseError !== null\n    }\n  }\n];"
+      },
+      "id": "node-010",
+      "name": "Parse qualification + Compute labels",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2140, 520]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://app.chatwoot.com/api/v1/accounts/' + ($env.CHATWOOT_ACCOUNT_ID || '163278') + '/conversations/' + $json.conversation_id}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{$env.CHATWOOT_API_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($json.custom_attributes_payload)}}",
+        "options": {}
+      },
+      "id": "node-011",
+      "name": "Update custom attributes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2380, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{'https://app.chatwoot.com/api/v1/accounts/' + ($env.CHATWOOT_ACCOUNT_ID || '163278') + '/conversations/' + $('Parse qualification + Compute labels').first().json.conversation_id + '/labels'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{$env.CHATWOOT_API_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify($('Parse qualification + Compute labels').first().json.labels_payload)}}",
+        "options": {}
+      },
+      "id": "node-012",
+      "name": "Apply labels",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2620, 520]
+    }
+  ],
+  "connections": {
+    "Chatwoot Webhook": {
+      "main": [
+        [{ "node": "Filter Chatwoot event", "type": "main", "index": 0 }]
+      ]
+    },
+    "Filter Chatwoot event": {
+      "main": [
+        [{ "node": "Get conversation history", "type": "main", "index": 0 }]
+      ]
+    },
+    "Get conversation history": {
+      "main": [
+        [{ "node": "Build OpenAI reply payload", "type": "main", "index": 0 }]
+      ]
+    },
+    "Build OpenAI reply payload": {
+      "main": [
+        [{ "node": "Call OpenAI reply", "type": "main", "index": 0 }]
+      ]
+    },
+    "Call OpenAI reply": {
+      "main": [
+        [{ "node": "Format AI reply", "type": "main", "index": 0 }]
+      ]
+    },
+    "Format AI reply": {
+      "main": [
+        [
+          { "node": "Send reply to Chatwoot", "type": "main", "index": 0 },
+          { "node": "Build qualification payload", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Send reply to Chatwoot": {
+      "main": [[]]
+    },
+    "Build qualification payload": {
+      "main": [
+        [{ "node": "Call OpenAI qualification", "type": "main", "index": 0 }]
+      ]
+    },
+    "Call OpenAI qualification": {
+      "main": [
+        [{ "node": "Parse qualification + Compute labels", "type": "main", "index": 0 }]
+      ]
+    },
+    "Parse qualification + Compute labels": {
+      "main": [
+        [{ "node": "Update custom attributes", "type": "main", "index": 0 }]
+      ]
+    },
+    "Update custom attributes": {
+      "main": [
+        []
+      ]
+    },
+    "Apply labels": {
+      "main": [[]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-05-08T00:00:00.000Z",
+  "versionId": "v5.5.3-crm-ready"
+}

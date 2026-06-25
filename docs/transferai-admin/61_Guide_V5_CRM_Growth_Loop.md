@@ -13,6 +13,7 @@ Elle permet de :
 - recevoir des leads publics scrappés
 - les normaliser
 - les injecter dans `prospect_targets`
+- les pré-scorrer par priorité commerciale
 - préparer le terrain pour la V4
 
 ## Ce que fait la V5
@@ -96,7 +97,8 @@ Ne laisse passer que les leads qui ont au minimum :
 
 Ajoute les champs CRM de pilotage :
 
-- `status = ready`
+- `status = ready` si `target_email` est disponible
+- `status = draft` si `target_email` manque
 - `paused = false`
 - `do_not_contact = false`
 - `outreach_attempt_count`
@@ -104,6 +106,12 @@ Ajoute les champs CRM de pilotage :
 - `last_sequence_result`
 - `niche_status`
 - `next_action_at`
+
+La V5 calcule désormais aussi une priorité simple :
+
+- `tier1` : lead inbound ou très complet
+- `tier2` : lead exploitable mais moins qualifié
+- `tier3` : lead incomplet
 
 ### 7. `Upsert Prospects Into CRM`
 
@@ -177,6 +185,8 @@ Le CRM apparaît à trois endroits clés :
 
 Donc la V5 ne traite pas seulement des leads.
 Elle construit un CRM exploitable.
+
+Elle évite aussi qu’un lead sans `target_email` parte dans la file d’envoi.
 
 ## Logique d’échelle 100 sociétés
 

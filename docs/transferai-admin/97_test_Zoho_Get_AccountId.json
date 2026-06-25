@@ -1,0 +1,70 @@
+{
+  "name": "TransferAI Test Zoho Get AccountId",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-240, 300],
+      "id": "zt-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://mail.zoho.eu/api/accounts",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "zohoOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Get Zoho Accounts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [0, 300],
+      "id": "zt-0002-0002-0002-000000000002",
+      "credentials": {
+        "zohoOAuth2Api": {
+          "name": "Zoho account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.all()[0].json;\nconst accounts = data.data || [];\n\nif (!accounts.length) {\n  return [{ json: { error: 'No accounts found', raw: data } }];\n}\n\nreturn accounts.map(acc => ({\n  json: {\n    accountId: acc.accountId,\n    emailAddress: acc.emailAddress,\n    displayName: acc.displayName,\n    incomingUserName: acc.incomingUserName\n  }\n}));"
+      },
+      "name": "Extract Account Info",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "id": "zt-0003-0003-0003-000000000003"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Get Zoho Accounts", "type": "main", "index": 0 }]]
+    },
+    "Get Zoho Accounts": {
+      "main": [[{ "node": "Extract Account Info", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "tags": [
+    { "name": "transferai" },
+    { "name": "test" },
+    { "name": "zoho" }
+  ]
+}

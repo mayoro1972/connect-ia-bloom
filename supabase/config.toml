@@ -12,6 +12,9 @@ verify_jwt = false
 [functions.twilio-whatsapp-webhook]
 verify_jwt = false
 
+[functions.whatsapp-followup-scheduler]
+verify_jwt = false
+
 [functions.catalogue-renderer]
 verify_jwt = false
 

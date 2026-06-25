@@ -15,7 +15,7 @@ Son rôle est de :
 - charger une liste de prospects
 - décider qui peut être traité aujourd’hui
 - bloquer ce qui ne doit pas partir
-- envoyer les prospects éligibles vers le workflow V3
+- router les prospects éligibles vers le bon sous-workflow
 - produire un résumé de batch
 
 ## Variables d’environnement recommandées
@@ -29,6 +29,7 @@ Son rôle est de :
 - `GOOGLE_SHEETS_CSV_URL`
 - `BOOKING_LINK_45MIN`
 - `N8N_CHILD_WORKFLOW_ID_V3`
+- `N8N_CHILD_WORKFLOW_ID_FOLLOW_UP`
 
 Le `N8N_CHILD_WORKFLOW_ID_V3` doit maintenant idéalement pointer vers la version enrichie du workflow prospect, c’est-à-dire la variante qui génère aussi le mini-catalogue et le deck avant stockage / envoi.
 
@@ -59,12 +60,15 @@ La V4 doit arrêter un prospect avant exécution si :
 
 - `organization_name` est absent
 - `website` est absent
+- `target_email` est absent
 - `do_not_contact = true`
 - `paused = true`
 - `stop_reason` est déjà renseigné
 - `outreach_attempt_count >= max_attempts_per_prospect`
 - `last_response_status` indique une séquence déjà close
 - `last_sequence_result = no_niche`
+- `next_action_at` est dans le futur
+- `confidence_score < min_confidence_score` quand ce score existe sur le prospect
 - le quota quotidien est déjà atteint
 
 ## Statuts de réponse considérés comme séquence close
@@ -98,11 +102,16 @@ Pour une campagne B2B ciblée, je recommande :
 - arrêt de la séquence si la niche est jugée faible
 - arrêt après 3 tentatives sans signal positif
 
-## Articulation avec le workflow V3
+## Articulation avec les sous-workflows
 
-La V4 envoie au V3 uniquement les prospects marqués :
+La V4 ne pousse que les prospects marqués :
 
 - `process_decision = process_now`
+
+Puis elle choisit automatiquement :
+
+- `initial_pack_v3` pour un premier contact
+- `follow_up_v1` pour une relance sur prospect déjà contacté
 
 Le V3 se charge ensuite de :
 
@@ -113,6 +122,14 @@ Le V3 se charge ensuite de :
 - générer le deck rendu
 - lancer la validation
 - envoyer après approbation
+
+Le workflow de follow-up se charge de :
+
+- récupérer le dernier pack
+- générer un email de relance personnalisé
+- envoyer la relance
+- journaliser `outreach_attempts`
+- mettre à jour `prospect_targets`
 
 ## Sorties de la V4
 

@@ -1,47 +1,173 @@
 {
-  "version": "2026-05-02-chatwoot-n8n",
+  "version": "2026-06-19-site-chatwoot-whatsapp-prospecting-crm-ready",
+  "purpose": "Base de connaissance de reference pour les assistants IA TransferAI afin de reduire les hallucinations sur le site, les parcours de contact, WhatsApp, Chatwoot et les workflows de prospection.",
+  "source_of_truth": {
+    "site_and_admin_docs": [
+      "docs/transferai-admin/02_Base_Connaissance_Site.md",
+      "docs/transferai-admin/03_FAQ_Site_Assistant_IA.md",
+      "docs/transferai-admin/05_Roadmap_Historique_Projet.md",
+      "docs/transferai-admin/95_Guide_Activation_WhatsApp_Auto_Reply_And_Followup.md"
+    ],
+    "chatwoot_docs": [
+      "docs/transferai-admin/11_Prompt_Pack_n8n_Chatwoot.md",
+      "docs/transferai-admin/17_Checklist_Chatwoot_Preparation.md",
+      "docs/transferai-admin/18_Mapping_Chatwoot_Vers_n8n.md",
+      "docs/transferai-admin/19_Prompts_Operationnels_Chatwoot_n8n_V1.md",
+      "docs/transferai-admin/20_n8n_Chatwoot_Auto_Reply_V1.json",
+      "docs/transferai-admin/30_n8n_Chatwoot_Auto_Reply_V5.5_Calendly.json",
+      "docs/transferai-admin/31_n8n_Chatwoot_Auto_Reply_V5.5.2_Calendly.json",
+      "docs/transferai-admin/32_n8n_Chatwoot_Auto_Reply_V5.5.3_CRM_Ready.json",
+      "docs/transferai-admin/96_Guide_Utilisateur_WhatsApp_Live_Chatwoot_IA_2026-06-18.md"
+    ],
+    "prospecting_docs": [
+      "docs/transferai-admin/57_Presentation_Pipeline_Prospection_V1_V2_V3_V4.md",
+      "docs/transferai-admin/61_Guide_V5_CRM_Growth_Loop.md",
+      "docs/transferai-admin/68_Guide_Utilisateur_Prospection_V3_CRM_Audit_Dynamique.md",
+      "docs/transferai-admin/71_Guide_Utilisateur_Workflow_Post_Audit_CRM_Aware.md",
+      "docs/transferai-admin/75_Guide_Import_V6_Google_Sheets_Dashboard.md",
+      "docs/transferai-admin/78_Schema_Architecture_Fonctionnelle_V1_V6_2026-06-08.md",
+      "docs/transferai-admin/86_Blueprint_n8n_Controller_Workflow_Prospection_Packs_2026-06-11.md",
+      "docs/transferai-admin/90_Audit_Upgrade_Prospection_CRM_2026-06-13.md",
+      "docs/transferai-admin/92_Guide_Activation_Google_Forms_Social_Lead_Sequence_V1.md"
+    ]
+  },
   "site": {
     "name": "TransferAI Africa",
+    "public_domains": [
+      "https://www.transferai.ci",
+      "https://transferai.ci",
+      "https://audit.transferai.ci"
+    ],
     "positioning": "Plateforme de formation, contenus, conseil et solutions IA orientée Côte d'Ivoire et Afrique.",
     "promise": "Aider les professionnels, entreprises et institutions à intégrer l'IA avec méthode, impact concret et logique métier.",
     "primary_language": "fr",
-    "secondary_language_policy": "en seulement pour contenus stratégiques",
-    "geographic_priority": ["Cote d'Ivoire", "Afrique de l'Ouest", "Afrique"],
+    "secondary_language_policy": "en seulement quand le contexte l'exige ou pour certains contenus strategiques",
+    "geographic_priority": [
+      "Côte d'Ivoire",
+      "Afrique de l'Ouest",
+      "Afrique"
+    ],
     "target_audiences": [
       "professionnels",
       "entreprises",
       "institutions",
       "dirigeants",
       "responsables formation",
-      "equipes metiers",
-      "apprenants"
+      "équipes métiers",
+      "apprenants",
+      "partenaires",
+      "candidats et profils en mise en relation"
+    ],
+    "key_offers": [
+      "formation IA",
+      "audit IA gratuit",
+      "accompagnement entreprise",
+      "automatisation et solutions IA",
+      "veille et contenus IA",
+      "catalogues sectoriels",
+      "certification",
+      "webinaires",
+      "partenariats",
+      "emploi et mise en relation"
+    ],
+    "critical_ctas": [
+      "Parler à un expert IA",
+      "Audit IA gratuit",
+      "WhatsApp",
+      "Demande de catalogue",
+      "Partenariat stratégique",
+      "Parler emploi et mise en relation"
     ]
   },
   "navigation": {
     "primary_routes": [
-      { "path": "/", "purpose": "accueil", "when_to_send_user": "quand le visiteur veut une vue globale de TransferAI Africa" },
-      { "path": "/education", "purpose": "hub education", "when_to_send_user": "quand le visiteur cherche une entrée formation" },
-      { "path": "/catalogue", "purpose": "catalogue formations", "when_to_send_user": "quand le visiteur veut comparer les formations" },
-      { "path": "/parcours", "purpose": "parcours guides", "when_to_send_user": "quand le visiteur ne sait pas encore quelle trajectoire choisir" },
-      { "path": "/certification", "purpose": "certification sectorielle", "when_to_send_user": "quand le visiteur veut une offre plus structurée et professionnalisante" },
-      { "path": "/outils-ia", "purpose": "matrice outils IA", "when_to_send_user": "quand le visiteur cherche les outils recommandés par domaine" },
-      { "path": "/entreprises", "purpose": "offre entreprise", "when_to_send_user": "quand l'intention est B2B, accompagnement, audit, conseil ou solution" },
-      { "path": "/services", "purpose": "alias de /entreprises", "when_to_send_user": "quand un ancien lien pointe vers services" },
-      { "path": "/demande-audit-gratuit", "purpose": "audit IA gratuit", "when_to_send_user": "quand le visiteur veut cadrer un besoin entreprise" },
-      { "path": "/blog", "purpose": "hub ressources", "when_to_send_user": "quand le visiteur veut lire des contenus ou commencer par la veille" },
-      { "path": "/contact", "purpose": "formulaires et demandes", "when_to_send_user": "quand le visiteur veut parler à un expert IA ou soumettre une demande structurée" },
-      { "path": "/parler-expert-ia", "purpose": "orientation rapide", "when_to_send_user": "quand le visiteur doit être orienté rapidement vers un expert IA" },
-      { "path": "/parler-emploi-ia", "purpose": "emploi et mise en relation", "when_to_send_user": "quand le visiteur parle emploi, mission ou mise en relation" },
-      { "path": "/createur-contenu-ia", "purpose": "capsules vidéo et positionnement contenu", "when_to_send_user": "quand le visiteur cherche l'offre créateur de contenu IA" },
-      { "path": "/partenaires", "purpose": "partenaires et référencement", "when_to_send_user": "quand le visiteur cherche les partenaires existants ou veut une présence sur le site" },
-      { "path": "/back-office", "purpose": "administration", "when_to_send_user": "jamais pour le public, seulement pour l'administration interne" }
+      {
+        "path": "/",
+        "purpose": "accueil",
+        "when_to_send_user": "quand le visiteur veut une vue globale de TransferAI"
+      },
+      {
+        "path": "/education",
+        "purpose": "hub education",
+        "when_to_send_user": "quand le visiteur cherche une entrée formation"
+      },
+      {
+        "path": "/catalogue",
+        "purpose": "catalogue formations",
+        "when_to_send_user": "quand le visiteur veut comparer les formations"
+      },
+      {
+        "path": "/parcours",
+        "purpose": "parcours guidés",
+        "when_to_send_user": "quand le visiteur ne sait pas encore quelle trajectoire choisir"
+      },
+      {
+        "path": "/certification",
+        "purpose": "certification sectorielle",
+        "when_to_send_user": "quand le visiteur veut une offre plus structurée et professionnalisante"
+      },
+      {
+        "path": "/outils-ia",
+        "purpose": "matrice outils IA",
+        "when_to_send_user": "quand le visiteur cherche des outils recommandés par domaine"
+      },
+      {
+        "path": "/entreprises",
+        "purpose": "offre entreprise",
+        "when_to_send_user": "quand l'intention est B2B, accompagnement, audit, conseil ou solution"
+      },
+      {
+        "path": "/services",
+        "purpose": "alias de /entreprises",
+        "when_to_send_user": "quand un ancien lien ou une formulation ancienne pointe vers services"
+      },
+      {
+        "path": "/demande-audit-gratuit",
+        "purpose": "audit IA gratuit",
+        "when_to_send_user": "quand le visiteur veut cadrer un besoin entreprise"
+      },
+      {
+        "path": "/blog",
+        "purpose": "hub ressources",
+        "when_to_send_user": "quand le visiteur veut commencer par les contenus et la veille"
+      },
+      {
+        "path": "/contact",
+        "purpose": "formulaires et demandes",
+        "when_to_send_user": "quand le visiteur veut parler à un expert IA ou soumettre une demande structurée"
+      },
+      {
+        "path": "/parler-expert-ia",
+        "purpose": "orientation rapide",
+        "when_to_send_user": "quand le visiteur doit être orienté rapidement vers un expert IA"
+      },
+      {
+        "path": "/parler-emploi-ia",
+        "purpose": "emploi et mise en relation",
+        "when_to_send_user": "quand le visiteur parle emploi, mission, stage ou mise en relation"
+      },
+      {
+        "path": "/createur-contenu-ia",
+        "purpose": "capsules vidéo et offre créateur de contenu IA",
+        "when_to_send_user": "quand le visiteur cherche l'offre contenu ou capsules"
+      },
+      {
+        "path": "/partenaires",
+        "purpose": "partenaires et référencement",
+        "when_to_send_user": "quand l'organisation cherche à être référencée ou visible sur TransferAI"
+      },
+      {
+        "path": "/back-office",
+        "purpose": "administration interne",
+        "when_to_send_user": "jamais pour le public"
+      }
     ]
   },
   "contact_flows": [
     {
-      "entry_label": "Parler a un expert IA",
+      "entry_label": "Parler à un expert IA",
       "purpose": "porte d'entrée principale pour une demande de formation, d'accompagnement ou d'orientation",
-      "expected_next_step": "formulaire structuré puis réponse email adaptée"
+      "expected_next_step": "formulaire structuré puis réponse email ou échange humain"
     },
     {
       "entry_label": "Demande de catalogue",
@@ -50,7 +176,7 @@
     },
     {
       "entry_label": "Demande de référencement",
-      "purpose": "présentation d'une organisation voulant une présence sur TransferAI Africa",
+      "purpose": "présentation d'une organisation voulant une présence sur TransferAI",
       "expected_next_step": "revue partenaire puis recommandation ou réponse email"
     },
     {
@@ -65,11 +191,22 @@
     }
   ],
   "whatsapp": {
-    "number": "+2250716573990",
-    "prefilled_message": "Bonjour TransferAI, je souhaite échanger avec votre équipe au sujet de vos services, formations ou solutions IA.",
-    "helper_copy_fr": "Réponse rapide pour parler IA, formation et accompagnement.",
-    "pipeline": [
-      "clic site",
+    "public_number": "+2250716573990",
+    "public_prefilled_message": "Bonjour TransferAI, je souhaite échanger avec votre équipe au sujet de vos services, formations ou solutions IA.",
+    "public_helper_copy_fr": "Réponse rapide pour parler IA, formation et accompagnement.",
+    "public_entry_link_is_site_cta": true,
+    "twilio_runtime_mode": "sandbox validé le 2026-06-18 pour auto-réponse et relance",
+    "twilio_sandbox_number": "+14155238886",
+    "twilio_sandbox_join_code": "difference-detail",
+    "validated_booking_link_runtime": "https://calendly.com/contact-transferai/30min",
+    "current_auto_reply_behavior": {
+      "message_1": "accusé de réception immédiat avec lien de réservation et possibilité de répondre avec le besoin principal",
+      "message_2": "relance automatique différée si le prospect ne répond pas",
+      "opt_out_supported": true
+    },
+    "backoffice_status": "module WhatsApp visible et exploitable dans le BackOffice",
+    "pipeline_site_to_ops": [
+      "clic site vers WhatsApp",
       "message WhatsApp",
       "réception Twilio",
       "webhook Supabase",
@@ -79,23 +216,86 @@
     ],
     "tables": [
       "whatsapp_inbound_messages",
-      "whatsapp_email_notification_logs"
+      "whatsapp_email_notification_logs",
+      "whatsapp_followup_sequences"
+    ],
+    "functions": [
+      "twilio-whatsapp-webhook",
+      "whatsapp-followup-scheduler"
     ]
   },
   "chatwoot": {
     "website_inbox": "TransferAI",
-    "widget_status": "visible en local et prêt à être validé en production",
     "website_domain": "transferai.ci",
+    "widget_status": "script intégré au front, widget visible en local, prêt pour validation publique",
     "website_token_present": true,
-    "webhook_status": "webhook Chatwoot vers n8n reçu avec succès sur chatwoot-inbound",
-    "labels_ready": true,
+    "webhook_status": "webhook Chatwoot vers n8n reçu avec succès sur chatwoot-inbound-v5-5",
+    "labels_ready": false,
     "custom_attributes_ready": true,
+    "labels_status_note": "application automatique des labels temporairement débranchée côté n8n pour éviter une erreur 404 Chatwoot, sans bloquer les réponses ni les attributs",
     "canned_responses_ready": true,
     "macros_ready": [
       "Handoff humain",
       "Lead chaud",
       "Démo proposée"
-    ]
+    ],
+    "workflows_prepared": [
+      {
+        "name": "TransferAI Chatwoot Auto Reply V1",
+        "file": "docs/transferai-admin/20_n8n_Chatwoot_Auto_Reply_V1.json",
+        "status": "prototype simple, réponse fixe, non actif dans le fichier"
+      },
+      {
+        "name": "TransferAI Chatwoot Auto Reply V5.5 Calendly",
+        "file": "docs/transferai-admin/30_n8n_Chatwoot_Auto_Reply_V5.5_Calendly.json",
+        "status": "workflow avancé préparé avec historique, OpenAI, qualification et labels, à importer et activer proprement"
+      },
+      {
+        "name": "TransferAI Chatwoot Auto Reply V5.5.2 Calendly",
+        "file": "docs/transferai-admin/31_n8n_Chatwoot_Auto_Reply_V5.5.2_Calendly.json",
+        "status": "version corrigée recommandée, compatible conversation_created et message_created, avec le bon lien Calendly"
+      },
+      {
+        "name": "TransferAI Chatwoot Auto Reply V5.5.3 CRM Ready",
+        "file": "docs/transferai-admin/32_n8n_Chatwoot_Auto_Reply_V5.5.3_CRM_Ready.json",
+        "status": "version recommandée actuelle, anti-doublon, prompt renforcé, qualification CRM-ready, labels déconnectés provisoirement"
+      }
+    ],
+    "target_architecture": "Chatwoot pour l'expérience conversationnelle visible, n8n pour l'orchestration, OpenAI pour la réponse et la qualification, handoff humain via Chatwoot",
+    "conversation_policies": {
+      "language_rule": "répondre dans la langue du dernier message du prospect, FR par défaut",
+      "hallucination_rule": "ne jamais inventer de prix, calendrier, promesse, cas client, partenaire ou modalité non confirmés",
+      "question_limit_rule": "poser au maximum 2 questions de qualification par réponse",
+      "qualification_priority_fields": [
+        "company_name",
+        "sector",
+        "need_type",
+        "email",
+        "website"
+      ],
+      "meeting_booking_rule": "si le prospect demande explicitement un rendez-vous, un appel, une démo, un créneau, un échange avec l'équipe ou un accompagnement, envoyer immédiatement le lien de réservation validé",
+      "pricing_rule": "si le prospect demande les tarifs, ne pas inventer de prix; proposer un échange ou demander le contexte pour orienter l'offre",
+      "employment_rule": "si la demande concerne emploi, stage, mission ou candidature, orienter vers le parcours emploi et mise en relation au lieu d'un discours commercial classique",
+      "support_rule": "si la demande concerne support technique, back-office ou accès, préparer un handoff humain"
+    },
+    "crm_readiness_rules": {
+      "contact_request_ready": {
+        "minimum_signals": [
+          "besoin clair",
+          "email de suivi disponible"
+        ],
+        "intended_target": "contact_requests"
+      },
+      "prospect_target_ready": {
+        "minimum_signals": [
+          "company_name",
+          "website",
+          "besoin B2B exploitable"
+        ],
+        "intended_target": "prospect_targets"
+      },
+      "not_ready_policy": "si les informations minimales ne sont pas réunies, rester en conversation Chatwoot et continuer la qualification sans pousser au CRM"
+    }
   },
   "newsletter": {
     "subscription_mode": "par domaine",
@@ -104,20 +304,20 @@
       "objet",
       "preheader",
       "introduction",
-      "signal cle",
+      "signal clé",
       "conseil pratique",
-      "outil a connaitre",
+      "outil à connaître",
       "prompt de la semaine",
-      "bloc editorial",
+      "bloc éditorial",
       "cta"
     ],
     "automation": {
       "draft_weekly": "milieu de semaine",
-      "send_weekly": "fin de semaine si edition approuvee",
+      "send_weekly": "fin de semaine si édition approuvée",
       "guardrail": "envoi seulement si edition approved ou scheduled",
       "recommended_mode": "semi-automatique avec validation humaine"
     },
-    "email_greeting_rule": "Bonjour avant 12:00 heure de Cote d'Ivoire, Bonsoir a partir de 12:00"
+    "email_greeting_rule": "Bonjour avant 12:00 heure de Côte d'Ivoire, Bonsoir à partir de 12:00"
   },
   "backoffice": {
     "tabs": [
@@ -127,7 +327,7 @@
       "Brouillons IA",
       "Partenaires IA",
       "Newsletter IA",
-      "Capsules video",
+      "Capsules vidéo",
       "WhatsApp",
       "Emplois IA",
       "Webinaires",
@@ -138,24 +338,44 @@
     "admin_secret_name": "CONTENT_ADMIN_TOKEN",
     "main_actions": [
       "publier une ressource",
-      "gerer des brouillons IA",
-      "creer ou relire une newsletter",
+      "gérer des brouillons IA",
+      "créer ou relire une newsletter",
       "revoir des demandes partenaires",
-      "gerer le feed video",
-      "gerer les messages WhatsApp",
+      "gérer le feed vidéo",
+      "gérer les messages WhatsApp",
       "suivre les analytics"
     ]
   },
   "tech_stack": {
-    "frontend": ["React", "TypeScript", "Vite", "React Router", "TanStack Query"],
-    "backend": ["Supabase database", "Supabase Edge Functions", "Supabase scheduled jobs"],
-    "email": ["Resend"],
-    "messaging": ["Twilio WhatsApp", "Chatwoot Website"],
-    "automation": ["n8n"],
-    "deployment": ["GitHub", "Cloudflare"]
+    "frontend": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "React Router",
+      "TanStack Query"
+    ],
+    "backend": [
+      "Supabase database",
+      "Supabase Edge Functions",
+      "Supabase scheduled jobs"
+    ],
+    "email": [
+      "Resend"
+    ],
+    "messaging": [
+      "Twilio WhatsApp",
+      "Chatwoot Website"
+    ],
+    "automation": [
+      "n8n"
+    ],
+    "deployment": [
+      "GitHub",
+      "Cloudflare"
+    ]
   },
   "supabase": {
-    "tables": [
+    "site_and_content_tables": [
       "contact_requests",
       "registration_requests",
       "form_responses",
@@ -173,9 +393,22 @@
       "partner_listing_reviews",
       "partner_followup_jobs",
       "social_video_posts",
+      "webinar_registrations"
+    ],
+    "messaging_tables": [
       "whatsapp_inbound_messages",
       "whatsapp_email_notification_logs",
-      "webinar_registrations"
+      "whatsapp_followup_sequences"
+    ],
+    "prospecting_tables": [
+      "prospect_targets",
+      "ai_prospecting_packs",
+      "outreach_attempts",
+      "do_not_contact",
+      "prospecting_batch_runs",
+      "prospecting_batch_run_items",
+      "form_invitations",
+      "post_audit_follow_ups"
     ],
     "functions": [
       "content-admin",
@@ -189,7 +422,210 @@
       "send-prospect-emails",
       "partner-review-drafter",
       "partner-followup-send",
-      "twilio-whatsapp-webhook"
+      "twilio-whatsapp-webhook",
+      "whatsapp-followup-scheduler"
+    ]
+  },
+  "prospecting_system": {
+    "versioning_note": "Les documents d'architecture canoniques structurent clairement V1 à V6. Le dépôt contient ensuite des modules complémentaires plus récents (controller admin, follow-up CRM, social lead sequence). Si un utilisateur parle de V7, ne pas inventer une version canonique unique : expliquer que le repo montre surtout une couche post-V6 d'orchestration et d'extensions.",
+    "current_chain_reference": [
+      "V5 Growth Loop CRM",
+      "prospect_targets",
+      "V4 Batch Orchestrator",
+      "V3 Approval + Auto-Send",
+      "questionnaire audit",
+      "workflow post-audit CRM-aware",
+      "V6 dashboard Google Sheets"
+    ],
+    "canonical_versions": [
+      {
+        "version": "V1",
+        "label": "prototype manuel prospect unique",
+        "role": "générer un pack prospect unitaire et prouver le concept",
+        "status": "historique, utile pour comprendre l'origine et certains tests unitaires",
+        "key_outputs": [
+          "executive_letter",
+          "tailored_catalogue",
+          "tailored_audit_form",
+          "deck_brief"
+        ],
+        "main_files": [
+          "docs/transferai-admin/42_n8n_Prospection_Modele_Elton_V1.json",
+          "docs/transferai-admin/42_n8n_Prospection_Modele_Elton_V1_corrected.json",
+          "docs/transferai-admin/57_Presentation_Pipeline_Prospection_V1_V2_V3_V4.md"
+        ]
+      },
+      {
+        "version": "V2",
+        "label": "single prospect avec stockage Supabase et approbation interne",
+        "role": "structurer la persistance et le circuit de validation avant envoi",
+        "status": "historique, base de compréhension, largement dépassée par V3",
+        "key_outputs": [
+          "stockage du pack en base",
+          "email d'approbation interne",
+          "décision approve/reject"
+        ],
+        "main_files": [
+          "docs/transferai-admin/43_n8n_Prospection_Modele_Elton_V2_Supabase_Approval_Email.json",
+          "docs/transferai-admin/58_Guide_Step_By_Step_V2_Supabase_Approval_Email.md"
+        ]
+      },
+      {
+        "version": "V3",
+        "label": "CRM enhanced approval + auto-send",
+        "role": "moteur de production single-prospect qui génère, fait approuver puis envoie le pack au prospect",
+        "status": "référence de production avant audit",
+        "key_outputs": [
+          "pack_id",
+          "audit_form_url dynamique",
+          "stockage dans ai_prospecting_packs",
+          "journalisation dans outreach_attempts"
+        ],
+        "main_files": [
+          "docs/transferai-admin/73_TransferAI_Prospecting_V3_CRM_Enhanced_FINAL_11_Local_Audit_Fixed.json",
+          "docs/transferai-admin/68_Guide_Utilisateur_Prospection_V3_CRM_Audit_Dynamique.md",
+          "docs/transferai-admin/69_Guide_Troubleshooting_Prospection_V3_CRM_Audit_Dynamique.md"
+        ]
+      },
+      {
+        "version": "V4",
+        "label": "batch orchestrator multi-prospects",
+        "role": "sélectionner les prospects prioritaires, appliquer quotas et règles d'arrêt, puis déléguer à V3 ou au follow-up",
+        "status": "stabilisée sur le chemin Supabase uniquement, sensible si on rebranche des sources sans merge propre",
+        "key_outputs": [
+          "prospecting_batch_runs",
+          "prospecting_batch_run_items",
+          "dispatch dynamique vers V3 ou follow-up"
+        ],
+        "main_files": [
+          "docs/transferai-admin/66_n8n_Prospection_CRM_V4_Exportable.json",
+          "docs/transferai-admin/76_Guide_Utilisateur_V4_Batch_Node_Par_Node_2026-06-08.md",
+          "docs/transferai-admin/77_Guide_Troubleshooting_V4_V3_Audit_Links_2026-06-08.md"
+        ]
+      },
+      {
+        "version": "V5",
+        "label": "CRM growth loop",
+        "role": "alimenter et enrichir en continu le CRM de prospection avant le batch",
+        "status": "référence pour ingestion CRM et pré-priorisation",
+        "key_outputs": [
+          "prospect_targets enrichi",
+          "status ready ou draft",
+          "pré-scoring commercial"
+        ],
+        "main_files": [
+          "docs/transferai-admin/67_n8n_Prospection_CRM_V5_Exportable.json",
+          "docs/transferai-admin/61_Guide_V5_CRM_Growth_Loop.md"
+        ]
+      },
+      {
+        "version": "V6",
+        "label": "post-audit dashboard Google Sheets",
+        "role": "synchroniser les données post-audit vers un dashboard métier et notifier l'expert assigné",
+        "status": "couche de lecture métier, ne crée pas de prospects",
+        "key_outputs": [
+          "Build V6 Dashboard Row",
+          "Build V6 Summary",
+          "sync Google Sheets",
+          "notification expert"
+        ],
+        "main_files": [
+          "docs/transferai-admin/75_n8n_Post_Audit_V6_Google_Sheets_Dashboard_Exportable.json",
+          "docs/transferai-admin/75_Guide_Import_V6_Google_Sheets_Dashboard.md"
+        ]
+      }
+    ],
+    "post_v6_extensions": [
+      {
+        "module": "Workflow Post-Audit CRM-Aware",
+        "role": "reprendre la main après soumission du formulaire, fusionner pack, CRM et réponses audit, produire la fiche pré-RDV et mettre à jour le CRM",
+        "main_files": [
+          "docs/transferai-admin/74_n8n_Post_Audit_Expert_Routing_V2_Exportable.json",
+          "docs/transferai-admin/71_Guide_Utilisateur_Workflow_Post_Audit_CRM_Aware.md"
+        ]
+      },
+      {
+        "module": "CRM Follow-Up V1",
+        "role": "gérer la relance email dédiée, avec 1 envoi initial et jusqu'à 2 relances maximum",
+        "main_files": [
+          "docs/transferai-admin/89_n8n_Prospection_CRM_Follow_Up_V1_Exportable.json",
+          "docs/transferai-admin/90_Audit_Upgrade_Prospection_CRM_2026-06-13.md"
+        ]
+      },
+      {
+        "module": "Admin Prospection Controller V1",
+        "role": "orchestration back-office pour générer, régénérer, approuver, rejeter et envoyer les packs sans dupliquer V3",
+        "main_files": [
+          "docs/transferai-admin/86_Blueprint_n8n_Controller_Workflow_Prospection_Packs_2026-06-11.md",
+          "docs/transferai-admin/87_n8n_Admin_Prospection_Controller_V1_Exportable.json",
+          "docs/transferai-admin/88_n8n_Admin_Prospection_Controller_V1_Zoho_First_Exportable.json"
+        ]
+      },
+      {
+        "module": "Google Forms Social Lead Sequence",
+        "role": "traiter des leads entrants formulaires, envoyer email 1 immédiatement, puis email 2 et éventuellement email 3",
+        "main_files": [
+          "docs/transferai-admin/91_n8n_Google_Forms_Social_Lead_Sequence_V1_Exportable.json",
+          "docs/transferai-admin/92_Guide_Activation_Google_Forms_Social_Lead_Sequence_V1.md",
+          "docs/transferai-admin/93_n8n_Google_Forms_Social_Lead_Sequence_V2_Clean_Importable.json"
+        ]
+      }
+    ],
+    "data_objects": [
+      {
+        "name": "prospect_targets",
+        "role": "CRM maître des prospects"
+      },
+      {
+        "name": "ai_prospecting_packs",
+        "role": "historique des packs générés"
+      },
+      {
+        "name": "outreach_attempts",
+        "role": "journal des envois et relances"
+      },
+      {
+        "name": "prospecting_batch_runs",
+        "role": "historique des runs batch V4"
+      },
+      {
+        "name": "prospecting_batch_run_items",
+        "role": "détail prospect par prospect d'un batch"
+      },
+      {
+        "name": "form_responses",
+        "role": "réponses au questionnaire audit"
+      },
+      {
+        "name": "post_audit_follow_ups",
+        "role": "suivi interne après audit"
+      }
+    ]
+  },
+  "assistant_grounding_policy": {
+    "must_do": [
+      "répondre clairement",
+      "orienter vers la bonne page ou le bon workflow",
+      "respecter la logique FR d'abord",
+      "rester utile, concret et professionnel",
+      "reconnaître quand une information n'est pas confirmée dans le dépôt ou dans les documents de référence",
+      "privilégier les fichiers de référence récents quand plusieurs exports similaires coexistent"
+    ],
+    "must_not_do": [
+      "inventer des prix",
+      "inventer des dates de session",
+      "inventer des partenaires",
+      "inventer des promesses produit",
+      "inventer une version canonique V7 unique si elle n'est pas explicitement documentée",
+      "confondre le WhatsApp public du site avec le sandbox Twilio de test"
+    ],
+    "reference_priority_rules": [
+      "Pour Chatwoot, privilégier 32_n8n_Chatwoot_Auto_Reply_V5.5.3_CRM_Ready.json comme workflow avancé recommandé actuel, 31_n8n_Chatwoot_Auto_Reply_V5.5.2_Calendly.json comme version stable précédente et 20_n8n_Chatwoot_Auto_Reply_V1.json comme historique simple.",
+      "Pour la prospection sortante single prospect, privilégier 73_TransferAI_Prospecting_V3_CRM_Enhanced_FINAL_11_Local_Audit_Fixed.json.",
+      "Pour l'orchestration multi-prospects, privilégier 66_n8n_Prospection_CRM_V4_Exportable.json et 67_n8n_Prospection_CRM_V5_Exportable.json.",
+      "Pour le post-audit, privilégier 74_n8n_Post_Audit_Expert_Routing_V2_Exportable.json puis 75_n8n_Post_Audit_V6_Google_Sheets_Dashboard_Exportable.json.",
+      "Pour la relance CRM, privilégier 89_n8n_Prospection_CRM_Follow_Up_V1_Exportable.json.",
+      "Quand un lien de réservation est cité, privilégier le lien actuel validé au runtime : https://calendly.com/contact-transferai/30min."
     ]
   },
   "faq": [
@@ -199,48 +635,44 @@
     },
     {
       "question": "Comment trouver la bonne formation ?",
-      "answer": "Le visiteur doit être orienté vers le catalogue, les parcours ou la certification selon son objectif et son métier."
+      "answer": "Le visiteur doit être orienté vers le catalogue, les parcours ou la certification selon son objectif, son métier et sa maturité."
     },
     {
-      "question": "Comment fonctionne la newsletter ?",
-      "answer": "Les visiteurs s'abonnent par domaine. Une édition peut être préparée automatiquement, relue puis envoyée si elle est approuvée."
+      "question": "Quel est le parcours entreprise recommandé ?",
+      "answer": "Le parcours entreprise commence généralement par la page Entreprises ou la demande d'audit IA gratuit, puis un cadrage et un échange avec l'équipe."
     },
     {
-      "question": "Où gère-t-on les contenus ?",
-      "answer": "Dans le BackOffice, onglets Ressources, Brouillons IA, Newsletter IA et Capsules vidéo."
-    },
-    {
-      "question": "Où gère-t-on les messages WhatsApp ?",
-      "answer": "Dans le BackOffice, onglet WhatsApp, avec liste, filtres, fiche détail, statuts, catégories et notes."
-    },
-    {
-      "question": "Comment fonctionne le flux WhatsApp ?",
-      "answer": "Le site ouvre WhatsApp, Twilio reçoit le message, Supabase l'enregistre, le BackOffice l'affiche et une notification email interne est envoyée."
+      "question": "Comment fonctionne le flux WhatsApp aujourd'hui ?",
+      "answer": "Le site peut ouvrir WhatsApp, Twilio reçoit le message, Supabase l'enregistre, le BackOffice l'affiche et une notification email interne est envoyée. Une auto-réponse Twilio sandbox a été validée avec lien de réservation."
     },
     {
       "question": "Le site dispose-t-il d'un chat web ?",
-      "answer": "Oui. Le widget Chatwoot website est intégré et sa réception webhook vers n8n a été validée en local."
+      "answer": "Oui. Le widget Chatwoot website est intégré et sa réception webhook vers n8n a déjà été validée."
     },
     {
       "question": "À quoi sert n8n dans le projet TransferAI ?",
-      "answer": "n8n sert à orchestrer les événements Chatwoot, la qualification IA, le scoring, l'écriture en base, les réponses automatiques et le handoff humain."
+      "answer": "n8n orchestre Chatwoot, la prospection CRM, la qualification IA, les relances, le post-audit et certains workflows de notification ou de dashboard."
+    },
+    {
+      "question": "Quelle est la version de prospection de référence avant audit ?",
+      "answer": "La V3 CRM Enhanced est la référence pour générer, faire approuver et envoyer le pack prospect avant l'audit."
+    },
+    {
+      "question": "Quelle version nourrit le CRM ?",
+      "answer": "La V5 Growth Loop nourrit et enrichit prospect_targets avant sélection par V4."
+    },
+    {
+      "question": "La V6 crée-t-elle des prospects ?",
+      "answer": "Non. V6 sert au dashboard et à la synchronisation post-audit, pas à la création de prospects."
     }
   ],
-  "assistant_policy": {
-    "must_do": [
-      "repondre clairement",
-      "orienter vers la bonne page",
-      "respecter la logique FR d'abord",
-      "rester utile et concret",
-      "reconnaitre quand une information n'est pas confirmee"
-    ],
-    "must_not_do": [
-      "inventer des prix",
-      "inventer des dates de session",
-      "inventer des partenaires",
-      "inventer des promesses produit",
-      "inventer des actions techniques non verifiees"
-    ]
+  "current_project_state": {
+    "site_public_status": "site actif avec navigation, ressources, formulaires de contact, CTA WhatsApp et CTA audit",
+    "whatsapp_backoffice_status": "BackOffice WhatsApp V1 en place",
+    "whatsapp_auto_reply_status": "auto-réponse sandbox Twilio validée le 2026-06-18 avec le lien https://calendly.com/contact-transferai/30min",
+    "chatwoot_status": "socle prêt, inbox live Twilio connecté, webhook validé et workflow avancé V5.5.3 CRM-ready préparé pour import ou alignement",
+    "prospecting_status": "chaîne V3/V4/V5/V6 documentée et modules post-V6 disponibles dans le dépôt",
+    "recommended_next_step_after_kb_update": "aligner n8n sur le workflow avancé Chatwoot V5.5.3 CRM-ready, tester 3 conversations live, puis brancher le IF qualification CRM"
   },
   "recent_updates": [
     "simplification de plusieurs pages denses pour mieux guider les visiteurs",
@@ -248,13 +680,16 @@
     "ajout d'un flux partenaires avec formulaire public, revue admin et email de suivi",
     "professionnalisation des emails automatiques avec salutation selon l'heure",
     "distribution catalogue plus directe avec email enrichi et accès web ou PDF",
-    "page média nettoyée avec suppression de blocs trop conceptuels",
     "création du flux /parler-emploi-ia",
-    "correction du CTA emploi pour sortir de la logique prise de rendez-vous",
     "capsules vidéo TikTok pilotées par backend",
-    "pipeline WhatsApp complet validé en production",
     "BackOffice WhatsApp V1 publié",
     "notifications email internes sur nouveau message WhatsApp activées et loguées",
-    "documentation administrateur et exports Word réalignés au 1er mai 2026"
+    "webhook Chatwoot vers n8n validé sur chatwoot-inbound",
+    "workflow Chatwoot avancé V5.5 préparé avec OpenAI, historique et labels",
+    "préparation d'une version Chatwoot V5.5.3 CRM-ready avec prompt renforcé, anti-doublon, logique rendez-vous plus directe et qualification CRM-ready",
+    "chaîne prospection V3/V4/V5/V6 auditée et enrichie avec follow-up CRM",
+    "controller admin de prospection préparé pour le futur back-office",
+    "séquence Google Forms social lead ajoutée comme module entrant complémentaire",
+    "validation sandbox Twilio WhatsApp le 2026-06-18 avec auto-réponse et lien de réservation corrigé"
   ]
 }

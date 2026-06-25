@@ -64,6 +64,10 @@ Le pack a 4 objectifs :
 51. [Guide Word - installation complete du workflow V5 dans n8n](./word/TransferAI_Africa_Installation_Complete_Workflow_V5_n8n_2026-06-02.docx)
 52. [Guide Word - utilisateur CRM Prospecting V3](./word/TransferAI_Africa_Guide_Utilisateur_CRM_Prospecting_V3_2026-06-02.docx)
 53. [Guide Word - maitre Prospecting V3 fusionne](./word/TransferAI_Africa_Guide_Maitre_Prospecting_V3_Fusionne_2026-06-02.docx)
+54. [Workflow JSON n8n - relance CRM follow-up V1](./89_n8n_Prospection_CRM_Follow_Up_V1_Exportable.json)
+55. [Audit et upgrade expert - prospection CRM 2026-06-13](./90_Audit_Upgrade_Prospection_CRM_2026-06-13.md)
+56. [Workflow JSON n8n - Google Forms social lead sequence V1](./91_n8n_Google_Forms_Social_Lead_Sequence_V1_Exportable.json)
+57. [Guide d'activation - Google Forms social lead sequence V1](./92_Guide_Activation_Google_Forms_Social_Lead_Sequence_V1.md)
 
 ## Ordre de lecture recommandé
 

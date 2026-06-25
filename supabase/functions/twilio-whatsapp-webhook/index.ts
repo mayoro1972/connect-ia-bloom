@@ -1,5 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
+import {
+  ACTIVE_WHATSAPP_SEQUENCE_STATUSES,
+  buildFirstAutoReply,
+  getWhatsappBookingLink,
+  getWhatsappFollowupDelayHours,
+  isOptOutMessage,
+} from "../_shared/whatsapp-followups.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,6 +30,13 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
     autoRefreshToken: false,
   },
 });
+
+type WhatsappFollowupSequenceRow = {
+  id: string;
+  status: string;
+  trigger_message_sid: string;
+  latest_inbound_message_sid: string;
+};
 
 const xml = (body: string, status = 200) =>
   new Response(body, {
@@ -255,6 +269,107 @@ ${backofficeUrl}
   }
 };
 
+const upsertWhatsappFollowupSequence = async (payload: {
+  whatsappMessageId?: string | null;
+  messageSid: string;
+  fromNumber: string;
+  profileName?: string | null;
+  body?: string | null;
+}) => {
+  const { data: latestSequence, error: latestSequenceError } = await supabase
+    .from("whatsapp_followup_sequences")
+    .select("id, status, trigger_message_sid, latest_inbound_message_sid")
+    .eq("from_number", payload.fromNumber)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (latestSequenceError) {
+    throw latestSequenceError;
+  }
+
+  const nowIso = new Date().toISOString();
+  const optOut = isOptOutMessage(payload.body);
+  const latestSequenceRow = (latestSequence ?? null) as WhatsappFollowupSequenceRow | null;
+  const isActiveSequence = latestSequenceRow
+    ? ACTIVE_WHATSAPP_SEQUENCE_STATUSES.includes(
+      latestSequenceRow.status as (typeof ACTIVE_WHATSAPP_SEQUENCE_STATUSES)[number],
+    )
+    : false;
+
+  if (isActiveSequence && latestSequenceRow) {
+    const nextStatus =
+      optOut
+        ? "opted_out"
+        : latestSequenceRow.trigger_message_sid !== payload.messageSid
+        ? "prospect_replied"
+        : latestSequenceRow.status;
+
+    const updatePayload: Record<string, unknown> = {
+      profile_name: payload.profileName?.trim() || null,
+      latest_inbound_message_sid: payload.messageSid,
+      latest_inbound_at: nowIso,
+      status: nextStatus,
+      opt_out: optOut,
+      last_error: null,
+      updated_at: nowIso,
+    };
+
+    if (nextStatus === "opted_out" || nextStatus === "prospect_replied") {
+      updatePayload.closed_at = nowIso;
+    }
+
+    const { error } = await supabase
+      .from("whatsapp_followup_sequences")
+      .update(updatePayload)
+      .eq("id", latestSequenceRow.id);
+
+    if (error) {
+      throw error;
+    }
+
+    return {
+      shouldSendFirstReply: false,
+      firstReplyText: "",
+      sequenceStatus: nextStatus,
+    };
+  }
+
+  const followupDelayHours = getWhatsappFollowupDelayHours();
+  const firstReplyText = autoReply || buildFirstAutoReply(payload.profileName);
+  const secondFollowupDueAt = new Date(Date.now() + followupDelayHours * 60 * 60 * 1000).toISOString();
+
+  const { error } = await supabase.from("whatsapp_followup_sequences").insert({
+    from_number: payload.fromNumber,
+    profile_name: payload.profileName?.trim() || null,
+    trigger_message_id: payload.whatsappMessageId ?? null,
+    trigger_message_sid: payload.messageSid,
+    latest_inbound_message_sid: payload.messageSid,
+    latest_inbound_at: nowIso,
+    first_auto_reply_sent_at: nowIso,
+    second_followup_due_at: secondFollowupDueAt,
+    booking_link: getWhatsappBookingLink(),
+    status: optOut ? "opted_out" : "pending_second_followup",
+    opt_out: optOut,
+    closed_at: optOut ? nowIso : null,
+    meta: {
+      first_reply_preview: firstReplyText,
+      booking_link: getWhatsappBookingLink(),
+      followup_delay_hours: followupDelayHours,
+    },
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return {
+    shouldSendFirstReply: !optOut && Boolean(firstReplyText),
+    firstReplyText,
+    sequenceStatus: optOut ? "opted_out" : "pending_second_followup",
+  };
+};
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -318,6 +433,8 @@ Deno.serve(async (req: Request) => {
       return xml('<?xml version="1.0" encoding="UTF-8"?><Response></Response>', 500);
     }
 
+    let replyText = "";
+
     if (!existingMessage) {
       await sendInternalNotificationEmail({
         whatsappMessageId: savedMessage?.id ?? null,
@@ -335,8 +452,20 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const replyBody = autoReply
-      ? `<?xml version="1.0" encoding="UTF-8"?><Response><Message>${escapeXml(autoReply)}</Message></Response>`
+    const followupResult = await upsertWhatsappFollowupSequence({
+      whatsappMessageId: savedMessage?.id ?? null,
+      messageSid,
+      fromNumber,
+      profileName,
+      body,
+    });
+
+    if (followupResult.shouldSendFirstReply) {
+      replyText = followupResult.firstReplyText;
+    }
+
+    const replyBody = replyText
+      ? `<?xml version="1.0" encoding="UTF-8"?><Response><Message>${escapeXml(replyText)}</Message></Response>`
       : '<?xml version="1.0" encoding="UTF-8"?><Response></Response>';
 
     return xml(replyBody);

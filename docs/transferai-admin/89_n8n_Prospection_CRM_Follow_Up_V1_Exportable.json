@@ -1,0 +1,614 @@
+{
+  "name": "TransferAI Prospecting CRM Follow-Up V1",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "transferai-prospecting-crm-follow-up-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "transferai"
+    },
+    {
+      "name": "prospection"
+    },
+    {
+      "name": "crm"
+    },
+    {
+      "name": "follow-up"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        180
+      ],
+      "parameters": {}
+    },
+    {
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        360
+      ],
+      "parameters": {}
+    },
+    {
+      "name": "Set Follow-Up Target",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        500,
+        260
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "prospect_id",
+              "value": "={{$json.prospect_id || 'manual-follow-up-001'}}",
+              "type": "string"
+            },
+            {
+              "name": "organization_name",
+              "value": "={{$json.organization_name || 'Organisation a confirmer'}}",
+              "type": "string"
+            },
+            {
+              "name": "decision_maker_name",
+              "value": "={{$json.decision_maker_name || 'Decideur a confirmer'}}",
+              "type": "string"
+            },
+            {
+              "name": "target_email",
+              "value": "={{$json.target_email || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "website",
+              "value": "={{$json.website || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "country",
+              "value": "={{$json.country || \"Côte d'Ivoire\"}}",
+              "type": "string"
+            },
+            {
+              "name": "organization_type",
+              "value": "={{$json.organization_type || 'organisation à qualifier'}}",
+              "type": "string"
+            },
+            {
+              "name": "sector_guess",
+              "value": "={{$json.sector_guess || 'secteur à confirmer'}}",
+              "type": "string"
+            },
+            {
+              "name": "booking_link_45min",
+              "value": "={{$json.booking_link_45min || $env.BOOKING_LINK_45MIN || 'https://calendly.com/contact-transferai/30min'}}",
+              "type": "string"
+            },
+            {
+              "name": "source_backend",
+              "value": "={{$json.source_backend || 'supabase'}}",
+              "type": "string"
+            },
+            {
+              "name": "source_label",
+              "value": "={{$json.source_label || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "raw_source_id",
+              "value": "={{$json.raw_source_id || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "outreach_attempt_count",
+              "value": "={{$json.outreach_attempt_count || 1}}",
+              "type": "number"
+            },
+            {
+              "name": "last_response_status",
+              "value": "={{$json.last_response_status || 'pending'}}",
+              "type": "string"
+            },
+            {
+              "name": "last_sequence_result",
+              "value": "={{$json.last_sequence_result || 'sent_v3'}}",
+              "type": "string"
+            },
+            {
+              "name": "next_action_at",
+              "value": "={{$json.next_action_at || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "last_pack_id",
+              "value": "={{$json.last_pack_id || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "max_attempts_per_prospect",
+              "value": "={{$json.max_attempts_per_prospect || 3}}",
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      }
+    },
+    {
+      "name": "Fetch Latest Pack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        780,
+        260
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/ai_prospecting_packs?select=*&prospect_id=eq.' + encodeURIComponent($json.prospect_id) + '&order=created_at.desc&limit=1'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Build Follow-Up Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        260
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const inbound = $('Set Follow-Up Target').first().json || {};\nconst rows = Array.isArray($json) ? $json : Array.isArray($json.data) ? $json.data : Array.isArray($json.body) ? $json.body : [];\nconst row = rows[0] || {};\nconst payload = row.payload || {};\nconst lastSequence = String(inbound.last_sequence_result || '').toLowerCase();\nconst maxAttempts = Math.max(Number(inbound.max_attempts_per_prospect || 3), 1);\nconst maxFollowUpSteps = Math.max(maxAttempts - 1, 1);\nlet followUpStep = 1;\nconst match = lastSequence.match(/follow_up_sent_(\\d+)/i);\nif (match) {\n  followUpStep = Math.min(Number(match[1] || 0) + 1, maxFollowUpSteps);\n} else if (lastSequence === 'sent_v3') {\n  followUpStep = 1;\n}\nconst isFinalFollowUp = followUpStep >= maxFollowUpSteps;\nconst delayDays = followUpStep === 1 ? 4 : 7;\nconst nextActionAtAfter = isFinalFollowUp ? null : new Date(Date.now() + delayDays * 86400000).toISOString();\nconst auditFormUrl = payload.audit_form_url || inbound.audit_form_url || '';\nconst canSend = Boolean(inbound.prospect_id && inbound.target_email && row.pack_id);\nlet failureReason = '';\nif (!inbound.prospect_id) failureReason = 'missing_prospect_id';\nelse if (!inbound.target_email) failureReason = 'missing_target_email';\nelse if (!row.pack_id) failureReason = 'missing_reference_pack';\nreturn [{ json: {\n  ...inbound,\n  pack_id: row.pack_id || inbound.last_pack_id || null,\n  executive_letter: payload.executive_letter || '',\n  executive_letter_html: payload.executive_letter_html || '',\n  audit_form_url: auditFormUrl,\n  recommended_offer: payload.recommended_offer || '',\n  recommended_use_case: payload.recommended_use_case || payload.best_selling_use_case || '',\n  probable_quick_wins: payload.probable_quick_wins || [],\n  organization_summary: payload.organization_summary || '',\n  follow_up_step: followUpStep,\n  max_follow_up_steps: maxFollowUpSteps,\n  is_final_follow_up: isFinalFollowUp,\n  next_action_at_after: nextActionAtAfter,\n  can_send: canSend,\n  send_failure_reason: failureReason,\n  pack_payload: payload\n} }];"
+      }
+    },
+    {
+      "name": "If Ready To Generate",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        260
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.can_send}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Generate Follow-Up Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        180
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: $env.OPENAI_MODEL || 'gpt-4.1-mini', temperature: 0.4, messages: [ { role: 'system', content: \"Tu rediges un email de relance B2B tres court, credible et professionnel pour TransferAI. OBJECTIF: relancer un prospect qui a deja recu un premier pack de prospection et n a pas encore repondu. REGLES: 1. 120 a 180 mots maximum. 2. Ton sobre, executif, utile, jamais insistant. 3. Rappelle brievement la valeur de l audit, du rendez-vous et du cas d usage le plus pertinent. 4. Mentionne le lien de reservation et, si disponible, le formulaire d audit pre-RDV. 5. Si follow_up_step = 2, formule cela comme un dernier suivi poli avant cloture du dossier. 6. Un seul appel a l action. 7. Pas d invention de chiffres. 8. Reponds uniquement avec le corps texte de l email, sans JSON et sans signature HTML.\" }, { role: 'user', content: `Contexte follow-up:\\n${JSON.stringify({ organization_name: $json.organization_name, decision_maker_name: $json.decision_maker_name, sector_guess: $json.sector_guess, organization_type: $json.organization_type, country: $json.country, recommended_offer: $json.recommended_offer, recommended_use_case: $json.recommended_use_case, probable_quick_wins: $json.probable_quick_wins, organization_summary: $json.organization_summary, audit_form_url: $json.audit_form_url, booking_link_45min: $json.booking_link_45min, follow_up_step: $json.follow_up_step, is_final_follow_up: $json.is_final_follow_up }, null, 2)}` } ]})}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Build Follow-Up Email Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1820,
+        180
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const ctx = $('Build Follow-Up Context').first().json || {};\nlet aiBody = '';\ntry {\n  const response = $input.first().json || {};\n  aiBody = (((response.choices || [])[0] || {}).message || {}).content || '';\n} catch (e) {}\nconst fallback = ctx.follow_up_step >= 2\n  ? `Bonjour,\\n\\nJe me permets un dernier suivi concernant la proposition d'audit IA que nous vous avions adressée pour ${ctx.organization_name || 'votre organisation'}. Si le sujet reste pertinent, nous pouvons convenir d'un court échange ici : ${ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min'}. ${ctx.audit_form_url ? `Le formulaire préparatoire reste également disponible ici : ${ctx.audit_form_url}. ` : ''}\\n\\nBien cordialement,\\nTransferAI`\n  : `Bonjour,\\n\\nJe reviens vers vous à propos de notre proposition d'audit IA pour ${ctx.organization_name || 'votre organisation'}. Nous pensons que ${ctx.recommended_use_case || 'le cas d’usage identifié'} pourrait constituer une première piste utile à explorer. Vous pouvez réserver un échange ici : ${ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min'}. ${ctx.audit_form_url ? `Le formulaire préparatoire est accessible ici : ${ctx.audit_form_url}. ` : ''}\\n\\nBien cordialement,\\nTransferAI`;\nconst bodyText = String(aiBody || fallback).trim();\nconst subject = ctx.follow_up_step >= 2\n  ? `Dernier suivi - proposition d'audit IA pour ${ctx.organization_name || 'votre organisation'}`\n  : `Suite à notre proposition d'audit IA pour ${ctx.organization_name || 'votre organisation'}`;\nreturn [{ json: {\n  ...ctx,\n  email_subject: subject,\n  email_text: bodyText,\n  email_html: bodyText.replace(/\\n/g, '<br>')\n} }];"
+      }
+    },
+    {
+      "name": "Send Follow-Up Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2080,
+        180
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + ($env.RESEND_API_KEY || '')}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: $env.OUTREACH_FROM_EMAIL || 'TransferAI <contact@transferai.ci>', to: [$json.target_email], subject: $json.email_subject, html: $json.email_html })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Parse Follow-Up Send Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2340,
+        180
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const ctx = $('Build Follow-Up Email Payload').first().json || {};\nconst resend = $input.first().json || {};\nconst resendId = resend.id || (resend.data && resend.data.id) || null;\nconst errorMessage = resend.message || (resend.error && resend.error.message) || '';\nreturn [{ json: {\n  ...ctx,\n  resend_response: resend,\n  resend_id: resendId,\n  send_ok: Boolean(resendId),\n  send_failure_reason: resendId ? null : (errorMessage || ctx.send_failure_reason || 'follow_up_send_failed'),\n  sent_at: new Date().toISOString()\n} }];"
+      }
+    },
+    {
+      "name": "If Follow-Up Sent",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        180
+      ],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.send_ok}}",
+              "operation": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Log Follow-Up Outreach Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2860,
+        100
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/outreach_attempts'}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ prospect_id: $json.prospect_id || null, pack_id: $json.pack_id || null, organization_name: $json.organization_name || null, target_email: $json.target_email || null, channel: 'email', message_variant: 'follow_up_v1_step_' + String($json.follow_up_step || 1), sent_at: $json.sent_at || new Date().toISOString(), delivery_status: 'submitted', response_status: 'pending', follow_up_due_at: $json.next_action_at_after || null, stop_reason: $json.is_final_follow_up ? 'max_follow_ups_scheduled' : null, resend_message_id: $json.resend_id || null })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Update Prospect After Follow-Up",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        3120,
+        100
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'active', paused: false, last_sequence_result: 'follow_up_sent_' + String($json.follow_up_step || 1), last_response_status: 'pending', stop_reason: $json.is_final_follow_up ? 'max_follow_ups_scheduled' : null, niche_status: $json.is_final_follow_up ? 'follow_up_sequence_completed' : 'follow_up_active', next_action_at: $json.next_action_at_after || null, last_pack_id: $json.pack_id || null, updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Update Prospect Follow-Up Failure",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2860,
+        360
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL + '/rest/v1/prospect_targets?prospect_id=eq.' + encodeURIComponent($json.prospect_id)}}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.SUPABASE_SERVICE_ROLE_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ status: 'paused', paused: true, last_sequence_result: 'follow_up_error_v1', stop_reason: $json.send_failure_reason || 'follow_up_send_failed', niche_status: 'follow_up_fix_required', updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Follow-Up Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Follow-Up Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Follow-Up Target": {
+      "main": [
+        [
+          {
+            "node": "Fetch Latest Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Latest Pack": {
+      "main": [
+        [
+          {
+            "node": "Build Follow-Up Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Follow-Up Context": {
+      "main": [
+        [
+          {
+            "node": "If Ready To Generate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Ready To Generate": {
+      "main": [
+        [
+          {
+            "node": "Generate Follow-Up Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Prospect Follow-Up Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Follow-Up Email": {
+      "main": [
+        [
+          {
+            "node": "Build Follow-Up Email Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Follow-Up Email Payload": {
+      "main": [
+        [
+          {
+            "node": "Send Follow-Up Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Follow-Up Email": {
+      "main": [
+        [
+          {
+            "node": "Parse Follow-Up Send Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Follow-Up Send Result": {
+      "main": [
+        [
+          {
+            "node": "If Follow-Up Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Follow-Up Sent": {
+      "main": [
+        [
+          {
+            "node": "Log Follow-Up Outreach Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Prospect Follow-Up Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Follow-Up Outreach Attempt": {
+      "main": [
+        [
+          {
+            "node": "Update Prospect After Follow-Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
