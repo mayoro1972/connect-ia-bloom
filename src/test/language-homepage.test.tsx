@@ -29,7 +29,11 @@ describe("homepage language switch", () => {
     );
 
     expect(screen.getByText("ACCUEIL")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /l' ia utile pour les talents/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /l' ia utile pour les entreprises, les talents et les institutions d'afrique/i,
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByText("Formations")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "EN" }));
@@ -38,7 +42,11 @@ describe("homepage language switch", () => {
       expect(screen.getByText("HOME")).toBeInTheDocument();
     });
 
-    expect(screen.getByRole("heading", { name: /ai that serves african talent/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /ai that serves companies, talent, and institutions across africa/i,
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByText("Courses")).toBeInTheDocument();
   });
 });

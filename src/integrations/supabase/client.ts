@@ -2,10 +2,15 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim();
+const FALLBACK_SUPABASE_URL = "https://wlhznciwuofueffyoflo.supabase.co";
+const FALLBACK_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_RxVxXCVvH9NmaVgOOLzmPw_6zDeP6IH";
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim() || FALLBACK_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY =
   import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ||
-  import.meta.env.VITE_SUPABASE_ANON_KEY?.trim();
+  import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ||
+  FALLBACK_SUPABASE_PUBLISHABLE_KEY;
+export { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL };
 export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 export const supabaseUnavailableMessage =
   "Supabase n'est pas configure dans cet environnement. Ajoutez VITE_SUPABASE_URL et VITE_SUPABASE_PUBLISHABLE_KEY (ou VITE_SUPABASE_ANON_KEY) dans la configuration du build.";
