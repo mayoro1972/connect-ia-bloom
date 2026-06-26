@@ -1,0 +1,181 @@
+{
+  "slug": "master-prospect-sectoriel",
+  "commercialStem": "Master_Prospect_Sectoriel",
+  "title": "{{SECTOR_NAME}}",
+  "titleSentence": "{{SECTOR_NAME}}",
+  "subtitle": "Transformer l'IA en gains visibles pour {{ORGANIZATION_NAME}} dans un contexte {{ORGANIZATION_TYPE}}.",
+  "tagline": "Pour {{DECISION_MAKER_ROLE}}, les équipes {{FUNCTION_SCOPE}} et les sponsors projet qui veulent relier l'IA à des cas d'usage utiles, mesurables et gouvernés.",
+  "accentColor": "#E76F1D",
+  "crmSectors": [
+    "{{SECTOR_CONTEXT_1}}",
+    "{{SECTOR_CONTEXT_2}}",
+    "{{SECTOR_CONTEXT_3}}",
+    "{{SECTOR_CONTEXT_4}}"
+  ],
+  "coverMetrics": [
+    {
+      "value": "{{N_FORMATIONS}}",
+      "label": "formations activables"
+    },
+    {
+      "value": "{{N_USAGES}}",
+      "label": "usages prioritaires"
+    },
+    {
+      "value": "{{JALON_CIBLE}}",
+      "label": "pilotage d'extension"
+    },
+    {
+      "value": "{{COUT_ENTREE}}",
+      "label": "audit d'entrée"
+    }
+  ],
+  "contextNarrative": "Le ROI se lit ici dans {{VALUE_LEVER_1}}, {{VALUE_LEVER_2}}, {{VALUE_LEVER_3}} et {{VALUE_LEVER_4}}, avec des hypothèses à confirmer pendant l'audit.",
+  "priorities": [
+    {
+      "title": "{{PRIORITY_1_TITLE}}",
+      "before": "{{PRIORITY_1_BEFORE}}",
+      "after": "{{PRIORITY_1_AFTER}}"
+    },
+    {
+      "title": "{{PRIORITY_2_TITLE}}",
+      "before": "{{PRIORITY_2_BEFORE}}",
+      "after": "{{PRIORITY_2_AFTER}}"
+    },
+    {
+      "title": "{{PRIORITY_3_TITLE}}",
+      "before": "{{PRIORITY_3_BEFORE}}",
+      "after": "{{PRIORITY_3_AFTER}}"
+    },
+    {
+      "title": "{{PRIORITY_4_TITLE}}",
+      "before": "{{PRIORITY_4_BEFORE}}",
+      "after": "{{PRIORITY_4_AFTER}}"
+    }
+  ],
+  "roiMetrics": [
+    {
+      "value": "{{ROI_METRIC_1_VALUE}}",
+      "label": "{{ROI_METRIC_1_LABEL}}",
+      "note": "{{ROI_METRIC_1_NOTE}}"
+    },
+    {
+      "value": "{{ROI_METRIC_2_VALUE}}",
+      "label": "{{ROI_METRIC_2_LABEL}}",
+      "note": "{{ROI_METRIC_2_NOTE}}"
+    },
+    {
+      "value": "{{ROI_METRIC_3_VALUE}}",
+      "label": "{{ROI_METRIC_3_LABEL}}",
+      "note": "{{ROI_METRIC_3_NOTE}}"
+    },
+    {
+      "value": "{{ROI_METRIC_4_VALUE}}",
+      "label": "{{ROI_METRIC_4_LABEL}}",
+      "note": "{{ROI_METRIC_4_NOTE}}"
+    }
+  ],
+  "useCases": [
+    {
+      "title": "{{USE_CASE_1_TITLE}}",
+      "before": "{{USE_CASE_1_BEFORE}}",
+      "after": "{{USE_CASE_1_AFTER}}",
+      "kpi": "{{USE_CASE_1_KPI}}"
+    },
+    {
+      "title": "{{USE_CASE_2_TITLE}}",
+      "before": "{{USE_CASE_2_BEFORE}}",
+      "after": "{{USE_CASE_2_AFTER}}",
+      "kpi": "{{USE_CASE_2_KPI}}"
+    },
+    {
+      "title": "{{USE_CASE_3_TITLE}}",
+      "before": "{{USE_CASE_3_BEFORE}}",
+      "after": "{{USE_CASE_3_AFTER}}",
+      "kpi": "{{USE_CASE_3_KPI}}"
+    },
+    {
+      "title": "{{USE_CASE_4_TITLE}}",
+      "before": "{{USE_CASE_4_BEFORE}}",
+      "after": "{{USE_CASE_4_AFTER}}",
+      "kpi": "{{USE_CASE_4_KPI}}"
+    }
+  ],
+  "trainingFocus": [
+    "{{TRAINING_PRIORITY_1}}",
+    "{{TRAINING_PRIORITY_2}}",
+    "{{TRAINING_PRIORITY_3}}",
+    "{{TRAINING_PRIORITY_4}}",
+    "{{TRAINING_PRIORITY_5}}",
+    "{{TRAINING_PRIORITY_6}}"
+  ],
+  "standardization": [
+    "{{STANDARDIZATION_GOAL_1}}",
+    "{{STANDARDIZATION_GOAL_2}}",
+    "{{STANDARDIZATION_GOAL_3}}",
+    "{{STANDARDIZATION_GOAL_4}}"
+  ],
+  "timeline": [
+    {
+      "step": "J+0",
+      "title": "{{TIMELINE_1_TITLE}}",
+      "desc": "{{TIMELINE_1_DESC}}"
+    },
+    {
+      "step": "J+15",
+      "title": "{{TIMELINE_2_TITLE}}",
+      "desc": "{{TIMELINE_2_DESC}}"
+    },
+    {
+      "step": "J+45",
+      "title": "{{TIMELINE_3_TITLE}}",
+      "desc": "{{TIMELINE_3_DESC}}"
+    },
+    {
+      "step": "J+90",
+      "title": "{{TIMELINE_4_TITLE}}",
+      "desc": "{{TIMELINE_4_DESC}}"
+    }
+  ],
+  "offerBlocks": [
+    {
+      "title": "Audit métier ciblé",
+      "promise": "Qualifier les flux, documents et points de friction les plus critiques pour {{ORGANIZATION_NAME}} dans {{SECTOR_NAME}}.",
+      "items": [
+        "{{OFFER_BLOCK_1_ITEM_1}}",
+        "{{OFFER_BLOCK_1_ITEM_2}}"
+      ]
+    },
+    {
+      "title": "Formation des décideurs",
+      "promise": "Aligner {{DECISION_MAKER_ROLE}} et les sponsors sur les usages utiles, les limites, la gouvernance et les arbitrages.",
+      "items": [
+        "{{OFFER_BLOCK_2_ITEM_1}}",
+        "{{OFFER_BLOCK_2_ITEM_2}}"
+      ]
+    },
+    {
+      "title": "Formation des équipes opérationnelles",
+      "promise": "Mettre les bons assistants, routines et standards dans les mains des équipes qui exécutent au quotidien.",
+      "items": [
+        "{{OFFER_BLOCK_3_ITEM_1}}",
+        "{{OFFER_BLOCK_3_ITEM_2}}"
+      ]
+    },
+    {
+      "title": "Pilote, accompagnement et extension",
+      "promise": "Passer d'une intention IA à un premier terrain visible, mesurable et gouverné sur 90 jours.",
+      "items": [
+        "{{OFFER_BLOCK_4_ITEM_1}}",
+        "{{OFFER_BLOCK_4_ITEM_2}}"
+      ]
+    }
+  ],
+  "trust": [
+    "{{TRUST_POINT_1}}",
+    "{{TRUST_POINT_2}}",
+    "{{TRUST_POINT_3}}",
+    "{{TRUST_POINT_4}}"
+  ],
+  "cta": "{{PRIMARY_CTA}}"
+}

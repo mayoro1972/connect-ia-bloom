@@ -1,0 +1,1467 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/aekf9o",
+    "id": "aekf9o",
+    "slide": 10,
+    "layoutId": "80b887b9-0140-4114-9167-6d9d536c4027",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "be54e4ba-8f30-46fd-8513-16b06ce0a911",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "80b887b9-0140-4114-9167-6d9d536c4027",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "be54e4ba-8f30-46fd-8513-16b06ce0a911",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "be54e4ba-8f30-46fd-8513-16b06ce0a911",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F6F0E8",
+      "lineColor": "#F6F0E8",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#163556",
+      "lineColor": "#163556",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/0bi9s36h",
+      "id": "3",
+      "bbox": [
+        78,
+        76,
+        184,
+        52
+      ],
+      "alt": "TransferAI x NettelecomCI",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "29936f25-d057-47ae-878b-6d5c30ab2bf4",
+        "contentType": "image/png",
+        "byteLength": 196122
+      }
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "4",
+      "bbox": [
+        78,
+        156,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CONFIANCE ET PROCHAINE ÉTAPE",
+      "textPreview": "CONFIANCE ET PROCHAINE ÉTAPE",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10.51,
+        "typeface": "Aptos",
+        "color": "#D8E6F4",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONFIANCE ET PROCHAINE ÉTAPE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONFIANCE ET PROCHAINE ÉTAPE",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "typeface": "Aptos",
+            "color": "#D8E6F4",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONFIANCE ET PROCHAINE ÉTAPE",
+              "fontSize": 10.51,
+              "typeface": "Aptos",
+              "color": "#D8E6F4",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "5",
+      "bbox": [
+        78,
+        184,
+        620,
+        68
+      ],
+      "geometry": "rect",
+      "text": "Proposer un pilote utile, gouverné et mesurable.",
+      "textPreview": "Proposer un pilote utile, gouverné et mesurable.",
+      "resolvedFontSize": 26.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 26.51,
+        "typeface": "Aptos Display",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Proposer un pilote utile, gouverné et mesurable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Proposer un pilote utile, gouverné et mesurable.",
+          "resolvedTextStyle": {
+            "fontSize": 26.51,
+            "typeface": "Aptos Display",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Proposer un pilote utile, gouverné et mesurable.",
+              "fontSize": 26.51,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "6",
+      "bbox": [
+        78,
+        258,
+        610,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Le rendez-vous ne sert pas à vendre un outil abstrait. Il sert à confirmer les deux premiers terrains, les équipes à former, les données à protéger et la sortie attendue à 90 jours.",
+      "textPreview": "Le rendez-vous ne sert pas à vendre un outil abstrait. Il sert à confirmer les deux premiers terrains, les équipes à former, les données ...",
+      "resolvedFontSize": 12.6,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12.6,
+        "typeface": "Aptos",
+        "color": "#D7E5F3",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le rendez-vous ne sert pas à vendre un outil abstrait. Il sert à confirmer les deux premiers terrains, les"
+          },
+          {
+            "index": 2,
+            "text": "équipes à former, les données à protéger et la sortie attendue à 90 jours."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le rendez-vous ne sert pas à vendre un outil abstrait. Il sert à confirmer les deux premiers terrains, les équipes à former, les données à protéger et la sortie attendue à 90 jours.",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "typeface": "Aptos",
+            "color": "#D7E5F3",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le rendez-vous ne sert pas à vendre un outil abstrait. Il sert à confirmer les deux premiers terrains, les équipes à former, les données à protéger et la sortie attendue à 90 jours.",
+              "fontSize": 12.6,
+              "typeface": "Aptos",
+              "color": "#D7E5F3"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "7",
+      "bbox": [
+        78,
+        336,
+        560,
+        246
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#20405F",
+      "lineColor": "#2B587F",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "8",
+      "bbox": [
+        104,
+        362,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Le cadre de confiance à présenter",
+      "textPreview": "Le cadre de confiance à présenter",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le cadre de confiance à présenter"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le cadre de confiance à présenter",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Aptos Display",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le cadre de confiance à présenter",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "9",
+      "bbox": [
+        104,
+        402,
+        486,
+        132
+      ],
+      "geometry": "rect",
+      "text": "• Les usages proposés restent gouvernés, progressifs et validés par des responsables métier identifiés.\n• Les données sensibles, documents internes et arbitrages critiques restent sous supervision humaine.\n• TransferAI ne s’arrête pas à la formation : nous accompagnons aussi la mise en pratique, les premiers KPI et la décision d’extension.\n• Les usages sensibles restent encadrés par validation humaine, règles de conformité et supervision des accès.",
+      "textPreview": "• Les usages proposés restent gouvernés, progressifs et validés par des responsables métier identifiés. | • Les données sensibles, docume...",
+      "resolvedFontSize": 11.4,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11.4,
+        "typeface": "Aptos",
+        "color": "#E8F1F8",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 8,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Les usages proposés restent gouvernés, progressifs et validés par des responsables métier"
+          },
+          {
+            "index": 2,
+            "text": "identifiés."
+          },
+          {
+            "index": 3,
+            "text": "• Les données sensibles, documents internes et arbitrages critiques restent sous supervision"
+          },
+          {
+            "index": 4,
+            "text": "humaine."
+          },
+          {
+            "index": 5,
+            "text": "• TransferAI ne s’arrête pas à la formation : nous accompagnons aussi la mise en pratique, les"
+          },
+          {
+            "index": 6,
+            "text": "premiers KPI et la décision d’extension."
+          },
+          {
+            "index": 7,
+            "text": "• Les usages sensibles restent encadrés par validation humaine, règles de conformité et"
+          },
+          {
+            "index": 8,
+            "text": "supervision des accès."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Les usages proposés restent gouvernés, progressifs et validés par des responsables métier identifiés.",
+          "resolvedTextStyle": {
+            "fontSize": 11.4,
+            "typeface": "Aptos",
+            "color": "#E8F1F8",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Les usages proposés restent gouvernés, progressifs et validés par des responsables métier identifiés.",
+              "fontSize": 11.4,
+              "typeface": "Aptos",
+              "color": "#E8F1F8"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Les données sensibles, documents internes et arbitrages critiques restent sous supervision humaine.",
+          "resolvedTextStyle": {
+            "fontSize": 11.4,
+            "typeface": "Aptos",
+            "color": "#E8F1F8",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Les données sensibles, documents internes et arbitrages critiques restent sous supervision humaine.",
+              "fontSize": 11.4,
+              "typeface": "Aptos",
+              "color": "#E8F1F8"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• TransferAI ne s’arrête pas à la formation : nous accompagnons aussi la mise en pratique, les premiers KPI et la décision d’extension.",
+          "resolvedTextStyle": {
+            "fontSize": 11.4,
+            "typeface": "Aptos",
+            "color": "#E8F1F8",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• TransferAI ne s’arrête pas à la formation : nous accompagnons aussi la mise en pratique, les premiers KPI et la décision d’extension.",
+              "fontSize": 11.4,
+              "typeface": "Aptos",
+              "color": "#E8F1F8"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Les usages sensibles restent encadrés par validation humaine, règles de conformité et supervision des accès.",
+          "resolvedTextStyle": {
+            "fontSize": 11.4,
+            "typeface": "Aptos",
+            "color": "#E8F1F8",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Les usages sensibles restent encadrés par validation humaine, règles de conformité et supervision des accès.",
+              "fontSize": 11.4,
+              "typeface": "Aptos",
+              "color": "#E8F1F8"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "10",
+      "bbox": [
+        684,
+        116,
+        520,
+        466
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#FFFDFC",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "11",
+      "bbox": [
+        714,
+        148,
+        300,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Sortie attendue du rendez-vous",
+      "textPreview": "Sortie attendue du rendez-vous",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18,
+        "typeface": "Aptos Display",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sortie attendue du rendez-vous"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sortie attendue du rendez-vous",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Aptos Display",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sortie attendue du rendez-vous",
+              "fontSize": 18,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "12",
+      "bbox": [
+        714,
+        188,
+        430,
+        128
+      ],
+      "geometry": "rect",
+      "text": "• Confirmer les 2 premiers cas d’usage à plus forte valeur visible.\n• Valider les populations à former et le niveau d’accompagnement requis.\n• Identifier les KPI prioritaires et la forme du premier pilote.\n• Décider du bon ordre entre audit détaillé, formation ciblée, pilote et gouvernance.",
+      "textPreview": "• Confirmer les 2 premiers cas d’usage à plus forte valeur visible. | • Valider les populations à former et le niveau d’accompagnement re...",
+      "resolvedFontSize": 11.6,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11.6,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Confirmer les 2 premiers cas d’usage à plus forte valeur visible."
+          },
+          {
+            "index": 2,
+            "text": "• Valider les populations à former et le niveau d’accompagnement requis."
+          },
+          {
+            "index": 3,
+            "text": "• Identifier les KPI prioritaires et la forme du premier pilote."
+          },
+          {
+            "index": 4,
+            "text": "• Décider du bon ordre entre audit détaillé, formation ciblée, pilote et gouvernance."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Confirmer les 2 premiers cas d’usage à plus forte valeur visible.",
+          "resolvedTextStyle": {
+            "fontSize": 11.6,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Confirmer les 2 premiers cas d’usage à plus forte valeur visible.",
+              "fontSize": 11.6,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Valider les populations à former et le niveau d’accompagnement requis.",
+          "resolvedTextStyle": {
+            "fontSize": 11.6,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Valider les populations à former et le niveau d’accompagnement requis.",
+              "fontSize": 11.6,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Identifier les KPI prioritaires et la forme du premier pilote.",
+          "resolvedTextStyle": {
+            "fontSize": 11.6,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Identifier les KPI prioritaires et la forme du premier pilote.",
+              "fontSize": 11.6,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Décider du bon ordre entre audit détaillé, formation ciblée, pilote et gouvernance.",
+          "resolvedTextStyle": {
+            "fontSize": 11.6,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Décider du bon ordre entre audit détaillé, formation ciblée, pilote et gouvernance.",
+              "fontSize": 11.6,
+              "typeface": "Aptos",
+              "color": "#1A3554"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "13",
+      "bbox": [
+        714,
+        344,
+        120,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CTA principal",
+      "textPreview": "CTA principal",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 14,
+        "typeface": "Aptos Display",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CTA principal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CTA principal",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "typeface": "Aptos Display",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CTA principal",
+              "fontSize": 14,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "14",
+      "bbox": [
+        714,
+        370,
+        430,
+        38
+      ],
+      "geometry": "rect",
+      "text": "Planifier un audit IA gratuit suivi d’un échange expert de 45 minutes",
+      "textPreview": "Planifier un audit IA gratuit suivi d’un échange expert de 45 minutes",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "color": "#163556",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Planifier un audit IA gratuit suivi d’un échange expert de 45"
+          },
+          {
+            "index": 2,
+            "text": "minutes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Planifier un audit IA gratuit suivi d’un échange expert de 45 minutes",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "typeface": "Aptos",
+            "color": "#163556",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Planifier un audit IA gratuit suivi d’un échange expert de 45 minutes",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#163556",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61032lsz",
+      "id": "15",
+      "bbox": [
+        714,
+        430,
+        430,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Pièces jointes recommandées : ce deck sectoriel + mini-catalogue ciblé + formulaire d’audit pré-rendez-vous.",
+      "textPreview": "Pièces jointes recommandées : ce deck sectoriel + mini-catalogue ciblé + formulaire d’audit pré-rendez-vous.",
+      "resolvedFontSize": 10.8,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10.8,
+        "typeface": "Aptos",
+        "color": "#617086",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pièces jointes recommandées : ce deck sectoriel + mini-catalogue ciblé + formulaire"
+          },
+          {
+            "index": 2,
+            "text": "d’audit pré-rendez-vous."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pièces jointes recommandées : ce deck sectoriel + mini-catalogue ciblé + formulaire d’audit pré-rendez-vous.",
+          "resolvedTextStyle": {
+            "fontSize": 10.8,
+            "typeface": "Aptos",
+            "color": "#617086",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pièces jointes recommandées : ce deck sectoriel + mini-catalogue ciblé + formulaire d’audit pré-rendez-vous.",
+              "fontSize": 10.8,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "16",
+      "bbox": [
+        714,
+        486,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Contextes proches",
+      "textPreview": "Contextes proches",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13.51,
+        "typeface": "Aptos Display",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Contextes proches"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Contextes proches",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "Aptos Display",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Contextes proches",
+              "fontSize": 13.51,
+              "typeface": "Aptos Display",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "17",
+      "bbox": [
+        714,
+        510,
+        380,
+        24
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "18",
+      "bbox": [
+        724,
+        516,
+        360,
+        12
+      ],
+      "geometry": "rect",
+      "text": "Banque / Finance",
+      "textPreview": "Banque / Finance",
+      "resolvedFontSize": 9.4,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9.4,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Banque / Finance"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Banque / Finance",
+          "resolvedTextStyle": {
+            "fontSize": 9.4,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Banque / Finance",
+              "fontSize": 9.4,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6tovahoz",
+      "id": "19",
+      "bbox": [
+        714,
+        544,
+        380,
+        24
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "20",
+      "bbox": [
+        724,
+        550,
+        360,
+        12
+      ],
+      "geometry": "rect",
+      "text": "Banque / Habitat",
+      "textPreview": "Banque / Habitat",
+      "resolvedFontSize": 9.4,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9.4,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Banque / Habitat"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Banque / Habitat",
+          "resolvedTextStyle": {
+            "fontSize": 9.4,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Banque / Habitat",
+              "fontSize": 9.4,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "21",
+      "bbox": [
+        714,
+        578,
+        380,
+        24
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FBF5EE",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 1
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "22",
+      "bbox": [
+        724,
+        584,
+        360,
+        12
+      ],
+      "geometry": "rect",
+      "text": "Finance / Bourse",
+      "textPreview": "Finance / Bourse",
+      "resolvedFontSize": 9.4,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9.4,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Finance / Bourse"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Finance / Bourse",
+          "resolvedTextStyle": {
+            "fontSize": 9.4,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Finance / Bourse",
+              "fontSize": 9.4,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "23",
+      "bbox": [
+        68,
+        682,
+        1144,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D7CEC3",
+      "lineColor": "#D7CEC3",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "24",
+      "bbox": [
+        72,
+        690,
+        950,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI | Banque & Services Financiers | Confiance et prochaine étape",
+      "textPreview": "TransferAI | Banque & Services Financiers | Confiance et prochaine étape",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 8.51,
+        "typeface": "Aptos",
+        "color": "#617086",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI | Banque & Services Financiers | Confiance et prochaine étape"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI | Banque & Services Financiers | Confiance et prochaine étape",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "typeface": "Aptos",
+            "color": "#617086",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI | Banque & Services Financiers | Confiance et prochaine étape",
+              "fontSize": 8.51,
+              "typeface": "Aptos",
+              "color": "#617086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "25",
+      "bbox": [
+        1160,
+        688,
+        36,
+        18
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "color": "#1A3554",
+        "bold": true,
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "typeface": "Aptos",
+            "color": "#1A3554",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#1A3554",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

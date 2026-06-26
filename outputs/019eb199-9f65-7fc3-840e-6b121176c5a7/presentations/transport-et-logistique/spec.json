@@ -1,0 +1,193 @@
+{
+  "slug": "transport-et-logistique",
+  "title": "Transport & Logistique",
+  "subtitle": "Mieux piloter les opérations terrain, les flux, les retards et la qualité de service en environnement distribué.",
+  "tagline": "Pour les acteurs du transport, de la mobilité, du fret, du portuaire et de l’express qui veulent faire gagner du temps aux opérations et rendre les KPI plus actionnables.",
+  "accent": "teal",
+  "accentColor": "#1C8A78",
+  "catalogueKey": null,
+  "preferredCourses": [],
+  "manualCourses": [
+    "Gestion de Flotte et Logistique IA",
+    "Planification et Suivi des Indicateurs avec l'IA",
+    "Gestion des Achats et Approvisionnement IA",
+    "Relation Client Augmentée par l'IA",
+    "Optimisation des Processus Métier avec l'IA",
+    "Support Prédictif et Maintenance Anticipée"
+  ],
+  "crmSectors": [
+    "Logistique / Express",
+    "Logistique portuaire",
+    "Transport en commun",
+    "Transport ferroviaire",
+    "Transport / Mobilité"
+  ],
+  "contextNarrative": "Le ROI se joue ici sur la coordination terrain, la réduction des retards, la lecture des anomalies, la fluidité de service et la capacité à mieux commenter les opérations.",
+  "priorities": [
+    {
+      "title": "Informations terrain dispersées",
+      "before": "Les opérations, incidents, tournées et retards remontent par plusieurs canaux et sont difficiles à consolider.",
+      "after": "Les équipes gagnent des synthèses plus rapides et une meilleure visibilité sur les priorités d’action."
+    },
+    {
+      "title": "Pilotage des flux peu commenté",
+      "before": "Les KPI existent mais restent peu reliés à des analyses exploitables pour les responsables opérationnels.",
+      "after": "Les indicateurs gagnent en contexte, en commentaire et en capacité d’alerte."
+    },
+    {
+      "title": "Service client et opérations trop séparés",
+      "before": "Le client vit les effets des retards ou incidents avant que les équipes ne disposent d’une réponse homogène.",
+      "after": "Les opérations et la relation client se coordonnent mieux autour d’une information plus fraîche."
+    },
+    {
+      "title": "Maintenance et anomalies traitées tard",
+      "before": "Les signaux utiles existent mais sont peu capitalisés avant que le coût terrain n’augmente.",
+      "after": "Les écarts et incidents deviennent plus visibles pour permettre une réaction plus rapide."
+    }
+  ],
+  "roiMetrics": [
+    {
+      "value": "Moins de retards subis",
+      "label": "dans les opérations",
+      "note": "meilleure lecture des points de friction"
+    },
+    {
+      "value": "Coordination plus rapide",
+      "label": "terrain ↔ managers",
+      "note": "synthèses, alertes, relances"
+    },
+    {
+      "value": "Service plus homogène",
+      "label": "côté client",
+      "note": "information plus claire en cas d’incident"
+    },
+    {
+      "value": "KPI plus actionnables",
+      "label": "pour l’exploitation",
+      "note": "commentaires et priorités visibles"
+    }
+  ],
+  "useCases": [
+    {
+      "title": "Cockpit synthétique des opérations terrain",
+      "before": "Les responsables reçoivent beaucoup d’informations mais peinent à voir rapidement quoi arbitrer.",
+      "after": "Les flux et incidents sont résumés de façon plus lisible pour l’exploitation et le management.",
+      "kpi": "Temps de lecture des incidents ; réactivité de coordination"
+    },
+    {
+      "title": "Gestion de flotte et suivi d’anomalies",
+      "before": "Les données de flotte, trajets ou mouvements sont difficiles à transformer en décisions rapides.",
+      "after": "Les anomalies, exceptions et priorités ressortent plus tôt pour les équipes concernées.",
+      "kpi": "Temps de détection ; nombre d’anomalies qualifiées"
+    },
+    {
+      "title": "Interface opérations / service client",
+      "before": "Les équipes relation client manquent souvent d’un message cohérent et actualisé en cas de perturbation.",
+      "after": "Les réponses client s’appuient sur une information plus consolidée, plus rapide et mieux formulée.",
+      "kpi": "Temps de réponse client ; taux de résolution premier contact"
+    },
+    {
+      "title": "Maintenance et support prédictif",
+      "before": "Les signaux précurseurs sont traités trop tard ou mal commentés.",
+      "after": "L’IA aide à structurer les alertes, historiques et points d’attention avant action humaine.",
+      "kpi": "Délai d’escalade ; temps d’immobilisation évité"
+    }
+  ],
+  "standardization": [
+    "Aider l’exploitation à voir plus vite les exceptions, retards et points de friction.",
+    "Mieux relier les équipes terrain, managers et service client autour d’une même lecture opérationnelle.",
+    "Structurer des routines de suivi plus homogènes sur plusieurs sites ou réseaux.",
+    "Mettre en place des KPI commentés qui servent réellement aux arbitrages quotidiens."
+  ],
+  "timeline": [
+    {
+      "step": "J+0",
+      "title": "Audit, cadrage et priorisation",
+      "desc": "Identifier les flux à plus forte valeur, les risques à encadrer et les équipes à mobiliser."
+    },
+    {
+      "step": "J+15",
+      "title": "Premier livrable utile",
+      "desc": "Produire un kit de travail, un assistant pilote ou une première base documentaire prête à l’usage."
+    },
+    {
+      "step": "J+45",
+      "title": "Formation ciblée et pilote",
+      "desc": "Former les bonnes populations, lancer le premier terrain d’exécution et sécuriser les pratiques."
+    },
+    {
+      "step": "J+90",
+      "title": "Mesure, gouvernance et extension",
+      "desc": "Relire les premiers KPI, ajuster les usages et décider l’extension, le recentrage ou la montée en charge."
+    }
+  ],
+  "trust": [
+    "Les usages proposés restent gouvernés, progressifs et validés par des responsables métier identifiés.",
+    "Les données sensibles, documents internes et arbitrages critiques restent sous supervision humaine.",
+    "TransferAI ne s’arrête pas à la formation : nous accompagnons aussi la mise en pratique, les premiers KPI et la décision d’extension.",
+    "Les recommandations restent validées par les responsables d’exploitation, avec des règles explicites sur incidents, sécurité et supervision humaine."
+  ],
+  "trainingFocus": [
+    "Gestion de Flotte et Logistique IA",
+    "Planification et Suivi des Indicateurs avec l'IA",
+    "Gestion des Achats et Approvisionnement IA",
+    "Relation Client Augmentée par l'IA",
+    "Optimisation des Processus Métier avec l'IA",
+    "Support Prédictif et Maintenance Anticipée"
+  ],
+  "courseCount": 6,
+  "coverMetrics": [
+    {
+      "value": "6",
+      "label": "formations activables"
+    },
+    {
+      "value": "4",
+      "label": "usages prioritaires"
+    },
+    {
+      "value": "J+90",
+      "label": "pilotage d’extension"
+    },
+    {
+      "value": "0 FCFA",
+      "label": "audit d’entrée"
+    }
+  ],
+  "offerBlocks": [
+    {
+      "title": "Audit métier ciblé",
+      "promise": "Qualifier les flux, documents et points de friction les plus critiques pour Transport & Logistique.",
+      "items": [
+        "Cartographie des irritants",
+        "Hypothèses de gains rapides"
+      ]
+    },
+    {
+      "title": "Formation des décideurs",
+      "promise": "Aligner la direction, les managers et les sponsors sur les usages, limites et conditions de réussite.",
+      "items": [
+        "Vision, gouvernance et arbitrages",
+        "Lecture des premiers KPI"
+      ]
+    },
+    {
+      "title": "Formation des équipes opérationnelles",
+      "promise": "Mettre les bonnes méthodes et les bons assistants dans les mains des équipes qui exécutent.",
+      "items": [
+        "Gestes métier augmentés",
+        "Standardisation utile"
+      ]
+    },
+    {
+      "title": "Pilote, accompagnement et extension",
+      "promise": "Passer d’une intention IA à un premier terrain visible, mesurable et gouverné.",
+      "items": [
+        "Pilotage sur 90 jours",
+        "Décision d’extension ou de recentrage"
+      ]
+    }
+  ],
+  "cta": "Planifier un audit IA gratuit suivi d’un échange expert de 45 minutes",
+  "fileName": "TransferAI_Deck_Sectoriel_transport-logistique_2026-06-12.pptx"
+}
