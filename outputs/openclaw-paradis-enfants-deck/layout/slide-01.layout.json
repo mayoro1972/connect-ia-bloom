@@ -1,0 +1,769 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/50razk",
+    "id": "50razk",
+    "slide": 1,
+    "layoutId": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFF9F3",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "1",
+      "bbox": [
+        -40,
+        -20,
+        360,
+        360
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFE8F6",
+      "lineColor": "#FFE8F6",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "2",
+      "bbox": [
+        850,
+        40,
+        380,
+        380
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E6EAFF",
+      "lineColor": "#E6EAFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "3",
+      "bbox": [
+        70,
+        470,
+        1140,
+        160
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#324CFF",
+      "lineColor": "#324CFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "4",
+      "bbox": [
+        82,
+        72,
+        620,
+        30
+      ],
+      "geometry": "rect",
+      "text": "TRANSFERAI • NETTELECOM CI • PARADIS D'ENFANTS",
+      "textPreview": "TRANSFERAI • NETTELECOM CI • PARADIS D'ENFANTS",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TRANSFERAI • NETTELECOM CI • PARADIS D'ENFANTS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TRANSFERAI • NETTELECOM CI • PARADIS D'ENFANTS",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TRANSFERAI • NETTELECOM CI • PARADIS D'ENFANTS",
+              "fontSize": 16,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "5",
+      "bbox": [
+        80,
+        120,
+        760,
+        170
+      ],
+      "geometry": "rect",
+      "text": "Comment TikTok, Facebook et WhatsApp deviennent\nune boutique pilotée par l'IA",
+      "textPreview": "Comment TikTok, Facebook et WhatsApp deviennent | une boutique pilotée par l'IA",
+      "resolvedFontSize": 40,
+      "resolvedTextStyle": {
+        "fontSize": 40,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Comment TikTok, Facebook et"
+          },
+          {
+            "index": 2,
+            "text": "WhatsApp deviennent"
+          },
+          {
+            "index": 3,
+            "text": "une boutique pilotée par l'IA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Comment TikTok, Facebook et WhatsApp deviennent",
+          "resolvedTextStyle": {
+            "fontSize": 40,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Comment TikTok, Facebook et WhatsApp deviennent",
+              "fontSize": 40,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "une boutique pilotée par l'IA",
+          "resolvedTextStyle": {
+            "fontSize": 40,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "une boutique pilotée par l'IA",
+              "fontSize": 40,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "6",
+      "bbox": [
+        82,
+        314,
+        650,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Une démonstration concrète du tunnel social commerce : attirer, convertir, enregistrer dans le CRM, relancer, vendre, encaisser et suivre.",
+      "textPreview": "Une démonstration concrète du tunnel social commerce : attirer, convertir, enregistrer dans le CRM, relancer, vendre, encaisser et suivre.",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#475569",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Une démonstration concrète du tunnel social commerce : attirer,"
+          },
+          {
+            "index": 2,
+            "text": "convertir, enregistrer dans le CRM, relancer, vendre, encaisser et"
+          },
+          {
+            "index": 3,
+            "text": "suivre."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Une démonstration concrète du tunnel social commerce : attirer, convertir, enregistrer dans le CRM, relancer, vendre, encaisser et suivre.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Une démonstration concrète du tunnel social commerce : attirer, convertir, enregistrer dans le CRM, relancer, vendre, encaisser et suivre.",
+              "fontSize": 21,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "7",
+      "bbox": [
+        82,
+        410,
+        170,
+        34
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F7D6EB",
+      "lineColor": "#F7D6EB",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "8",
+      "bbox": [
+        94,
+        417,
+        146,
+        20
+      ],
+      "geometry": "rect",
+      "text": "TikTok attire",
+      "textPreview": "TikTok attire",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TikTok attire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TikTok attire",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TikTok attire",
+              "fontSize": 14,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "9",
+      "bbox": [
+        266,
+        410,
+        190,
+        34
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#EDEBFF",
+      "lineColor": "#EDEBFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "10",
+      "bbox": [
+        278,
+        417,
+        166,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Facebook rassure",
+      "textPreview": "Facebook rassure",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Facebook rassure"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Facebook rassure",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Facebook rassure",
+              "fontSize": 14,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "11",
+      "bbox": [
+        470,
+        410,
+        198,
+        34
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E5F5EF",
+      "lineColor": "#E5F5EF",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "12",
+      "bbox": [
+        482,
+        417,
+        174,
+        20
+      ],
+      "geometry": "rect",
+      "text": "WhatsApp convertit",
+      "textPreview": "WhatsApp convertit",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#1F9D72",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "WhatsApp convertit"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "WhatsApp convertit",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#1F9D72",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "WhatsApp convertit",
+              "fontSize": 14,
+              "color": "#1F9D72",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "13",
+      "bbox": [
+        102,
+        500,
+        570,
+        110
+      ],
+      "geometry": "rect",
+      "text": "1. Les contenus sociaux créent la demande\n2. OpenClaw structure la conversation\n3. Le CRM garde la mémoire client\n4. La boutique relance, encaisse et suit mieux",
+      "textPreview": "1. Les contenus sociaux créent la demande | 2. OpenClaw structure la conversation | 3. Le CRM garde la mémoire client | 4. La boutique re...",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. Les contenus sociaux créent la demande"
+          },
+          {
+            "index": 2,
+            "text": "2. OpenClaw structure la conversation"
+          },
+          {
+            "index": 3,
+            "text": "3. Le CRM garde la mémoire client"
+          },
+          {
+            "index": 4,
+            "text": "4. La boutique relance, encaisse et suit mieux"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1. Les contenus sociaux créent la demande",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. Les contenus sociaux créent la demande",
+              "fontSize": 21,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "2. OpenClaw structure la conversation",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. OpenClaw structure la conversation",
+              "fontSize": 21,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "3. Le CRM garde la mémoire client",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. Le CRM garde la mémoire client",
+              "fontSize": 21,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "4. La boutique relance, encaisse et suit mieux",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4. La boutique relance, encaisse et suit mieux",
+              "fontSize": 21,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "14",
+      "bbox": [
+        760,
+        520,
+        390,
+        74
+      ],
+      "geometry": "rect",
+      "text": "Support de démonstration commerciale\nProjet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI.",
+      "textPreview": "Support de démonstration commerciale | Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI.",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Support de démonstration commerciale"
+          },
+          {
+            "index": 2,
+            "text": "Projet piloté par TransferAI, notre hub IA, en"
+          },
+          {
+            "index": 3,
+            "text": "collaboration avec Nettelecom CI."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Support de démonstration commerciale",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Support de démonstration commerciale",
+              "fontSize": 18,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI.",
+              "fontSize": 18,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

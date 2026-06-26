@@ -1,0 +1,1058 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/jbrlfi",
+    "id": "jbrlfi",
+    "slide": 7,
+    "layoutId": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFF9F3",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7qpg3ex0",
+      "id": "1",
+      "bbox": [
+        -80,
+        -50,
+        300,
+        300
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFE8F6",
+      "lineColor": "#FFE8F6",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bi9s36h",
+      "id": "2",
+      "bbox": [
+        1030,
+        520,
+        260,
+        260
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E8ECFF",
+      "lineColor": "#E8ECFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pwb2hwfy",
+      "id": "3",
+      "bbox": [
+        74,
+        42,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "textPreview": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+              "fontSize": 13,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8v6psf",
+      "id": "4",
+      "bbox": [
+        72,
+        76,
+        1136,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Nouveaux arrivages, promotions, commandes : l'IA automatise les bons gestes commerciaux",
+      "textPreview": "Nouveaux arrivages, promotions, commandes : l'IA automatise les bons gestes commerciaux",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nouveaux arrivages, promotions, commandes : l'IA automatise les bons"
+          },
+          {
+            "index": 2,
+            "text": "gestes commerciaux"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nouveaux arrivages, promotions, commandes : l'IA automatise les bons gestes commerciaux",
+          "resolvedTextStyle": {
+            "fontSize": 32,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nouveaux arrivages, promotions, commandes : l'IA automatise les bons gestes commerciaux",
+              "fontSize": 32,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7y1kre1w",
+      "id": "5",
+      "bbox": [
+        72,
+        664,
+        1090,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "textPreview": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#475569",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+              "fontSize": 13,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wjudg7ad",
+      "id": "6",
+      "bbox": [
+        72,
+        220,
+        232,
+        290
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFF5E7",
+      "lineColor": "#FFF5E7",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "7",
+      "bbox": [
+        90,
+        246,
+        196,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Nouveaux arrivages",
+      "textPreview": "Nouveaux arrivages",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#D89C32",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nouveaux"
+          },
+          {
+            "index": 2,
+            "text": "arrivages"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nouveaux arrivages",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#D89C32",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nouveaux arrivages",
+              "fontSize": 24,
+              "color": "#D89C32",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ih4byhgn",
+      "id": "8",
+      "bbox": [
+        90,
+        302,
+        196,
+        144
+      ],
+      "geometry": "rect",
+      "text": "Le CRM sait quelles clientes attendaient une taille, un coffret naissance ou une nouvelle collection. OpenClaw prépare la relance ciblée.",
+      "textPreview": "Le CRM sait quelles clientes attendaient une taille, un coffret naissance ou une nouvelle collection. OpenClaw prépare la relance ciblée.",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le CRM sait quelles"
+          },
+          {
+            "index": 2,
+            "text": "clientes attendaient"
+          },
+          {
+            "index": 3,
+            "text": "une taille, un coffret"
+          },
+          {
+            "index": 4,
+            "text": "naissance ou une"
+          },
+          {
+            "index": 5,
+            "text": "nouvelle collection."
+          },
+          {
+            "index": 6,
+            "text": "OpenClaw prépare la"
+          },
+          {
+            "index": 7,
+            "text": "relance ciblée."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le CRM sait quelles clientes attendaient une taille, un coffret naissance ou une nouvelle collection. OpenClaw prépare la relance ciblée.",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le CRM sait quelles clientes attendaient une taille, un coffret naissance ou une nouvelle collection. OpenClaw prépare la relance ciblée.",
+              "fontSize": 17,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/72x4nap4",
+      "id": "9",
+      "bbox": [
+        372,
+        220,
+        232,
+        290
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FBE1F4",
+      "lineColor": "#FBE1F4",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zqtcj6to",
+      "id": "10",
+      "bbox": [
+        390,
+        246,
+        196,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Promotions",
+      "textPreview": "Promotions",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Promotions"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Promotions",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Promotions",
+              "fontSize": 24,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65wjudg7",
+      "id": "11",
+      "bbox": [
+        390,
+        302,
+        196,
+        144
+      ],
+      "geometry": "rect",
+      "text": "Au lieu d'un message unique pour tout le monde, la boutique envoie des offres mieux ciblées : liquidation, week-end, lots, retour école.",
+      "textPreview": "Au lieu d'un message unique pour tout le monde, la boutique envoie des offres mieux ciblées : liquidation, week-end, lots, retour école.",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Au lieu d'un message"
+          },
+          {
+            "index": 2,
+            "text": "unique pour tout le"
+          },
+          {
+            "index": 3,
+            "text": "monde, la boutique"
+          },
+          {
+            "index": 4,
+            "text": "envoie des offres"
+          },
+          {
+            "index": 5,
+            "text": "mieux ciblées :"
+          },
+          {
+            "index": 6,
+            "text": "liquidation, week-end,"
+          },
+          {
+            "index": 7,
+            "text": "lots, retour école."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Au lieu d'un message unique pour tout le monde, la boutique envoie des offres mieux ciblées : liquidation, week-end, lots, retour école.",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Au lieu d'un message unique pour tout le monde, la boutique envoie des offres mieux ciblées : liquidation, week-end, lots, retour école.",
+              "fontSize": 17,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hwfyxobm",
+      "id": "12",
+      "bbox": [
+        672,
+        220,
+        232,
+        290
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7F4EE",
+      "lineColor": "#E7F4EE",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obm58z25",
+      "id": "13",
+      "bbox": [
+        690,
+        246,
+        196,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Commandes & livraison",
+      "textPreview": "Commandes & livraison",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#1F9D72",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Commandes &"
+          },
+          {
+            "index": 2,
+            "text": "livraison"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Commandes & livraison",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#1F9D72",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Commandes & livraison",
+              "fontSize": 24,
+              "color": "#1F9D72",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zed8v6ps",
+      "id": "14",
+      "bbox": [
+        690,
+        302,
+        196,
+        144
+      ],
+      "geometry": "rect",
+      "text": "OpenClaw aide à suivre confirmation, préparation, expédition, livraison et recontact post-achat sans laisser de conversation dormir.",
+      "textPreview": "OpenClaw aide à suivre confirmation, préparation, expédition, livraison et recontact post-achat sans laisser de conversation dormir.",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "OpenClaw aide à"
+          },
+          {
+            "index": 2,
+            "text": "suivre confirmation,"
+          },
+          {
+            "index": 3,
+            "text": "préparation,"
+          },
+          {
+            "index": 4,
+            "text": "expédition, livraison et"
+          },
+          {
+            "index": 5,
+            "text": "recontact post-achat"
+          },
+          {
+            "index": 6,
+            "text": "sans laisser de"
+          },
+          {
+            "index": 7,
+            "text": "conversation dormir."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "OpenClaw aide à suivre confirmation, préparation, expédition, livraison et recontact post-achat sans laisser de conversation dormir.",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "OpenClaw aide à suivre confirmation, préparation, expédition, livraison et recontact post-achat sans laisser de conversation dormir.",
+              "fontSize": 17,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6xkf6dcb",
+      "id": "15",
+      "bbox": [
+        972,
+        220,
+        232,
+        290
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#EDEBFF",
+      "lineColor": "#EDEBFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hk3q5o7q",
+      "id": "16",
+      "bbox": [
+        990,
+        246,
+        196,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Pilotage",
+      "textPreview": "Pilotage",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#324CFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pilotage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pilotage",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#324CFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pilotage",
+              "fontSize": 24,
+              "color": "#324CFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oza1gvy9",
+      "id": "17",
+      "bbox": [
+        990,
+        302,
+        196,
+        144
+      ],
+      "geometry": "rect",
+      "text": "La gérante reçoit les chiffres et alertes utiles : demandes du jour, clientes à relancer, produits critiques et commandes en attente.",
+      "textPreview": "La gérante reçoit les chiffres et alertes utiles : demandes du jour, clientes à relancer, produits critiques et commandes en attente.",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La gérante reçoit les"
+          },
+          {
+            "index": 2,
+            "text": "chiffres et alertes utiles"
+          },
+          {
+            "index": 3,
+            "text": ": demandes du jour,"
+          },
+          {
+            "index": 4,
+            "text": "clientes à relancer,"
+          },
+          {
+            "index": 5,
+            "text": "produits critiques et"
+          },
+          {
+            "index": 6,
+            "text": "commandes en"
+          },
+          {
+            "index": 7,
+            "text": "attente."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La gérante reçoit les chiffres et alertes utiles : demandes du jour, clientes à relancer, produits critiques et commandes en attente.",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "La gérante reçoit les chiffres et alertes utiles : demandes du jour, clientes à relancer, produits critiques et commandes en attente.",
+              "fontSize": 17,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z61032ls",
+      "id": "18",
+      "bbox": [
+        72,
+        550,
+        360,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Démonstration commerciale à faire en réunion",
+      "textPreview": "Démonstration commerciale à faire en réunion",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Démonstration commerciale à faire en"
+          },
+          {
+            "index": 2,
+            "text": "réunion"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Démonstration commerciale à faire en réunion",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Démonstration commerciale à faire en réunion",
+              "fontSize": 20,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/al87ed8b",
+      "id": "19",
+      "bbox": [
+        72,
+        578,
+        1030,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Montrer un scénario simple : une cliente demande un ensemble sur WhatsApp, la boutique n'a pas le stock aujourd'hui, la fiche CRM garde l'attente, puis OpenClaw la relance automatiquement au prochain arrivage.",
+      "textPreview": "Montrer un scénario simple : une cliente demande un ensemble sur WhatsApp, la boutique n'a pas le stock aujourd'hui, la fiche CRM garde l...",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Montrer un scénario simple : une cliente demande un ensemble sur WhatsApp, la boutique n'a pas le stock aujourd'hui, la"
+          },
+          {
+            "index": 2,
+            "text": "fiche CRM garde l'attente, puis OpenClaw la relance automatiquement au prochain arrivage."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Montrer un scénario simple : une cliente demande un ensemble sur WhatsApp, la boutique n'a pas le stock aujourd'hui, la fiche CRM garde l'attente, puis OpenClaw la relance automatiquement au prochain arrivage.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Montrer un scénario simple : une cliente demande un ensemble sur WhatsApp, la boutique n'a pas le stock aujourd'hui, la fiche CRM garde l'attente, puis OpenClaw la relance automatiquement au prochain arrivage.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

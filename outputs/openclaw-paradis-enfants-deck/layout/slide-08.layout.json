@@ -1,0 +1,1040 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/q0knh9",
+    "id": "q0knh9",
+    "slide": 8,
+    "layoutId": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFF9F3",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7y1kre1w",
+      "id": "1",
+      "bbox": [
+        -80,
+        -50,
+        300,
+        300
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFE8F6",
+      "lineColor": "#FFE8F6",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wjudg7ad",
+      "id": "2",
+      "bbox": [
+        1030,
+        520,
+        260,
+        260
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E8ECFF",
+      "lineColor": "#E8ECFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "3",
+      "bbox": [
+        74,
+        42,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "textPreview": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+              "fontSize": 13,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i5sneloj",
+      "id": "4",
+      "bbox": [
+        72,
+        76,
+        1136,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Le tableau de bord Telegram : la gérante voit sa boutique sans relire toutes les conversations",
+      "textPreview": "Le tableau de bord Telegram : la gérante voit sa boutique sans relire toutes les conversations",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le tableau de bord Telegram : la gérante voit sa boutique sans relire toutes les"
+          },
+          {
+            "index": 2,
+            "text": "conversations"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le tableau de bord Telegram : la gérante voit sa boutique sans relire toutes les conversations",
+          "resolvedTextStyle": {
+            "fontSize": 32,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le tableau de bord Telegram : la gérante voit sa boutique sans relire toutes les conversations",
+              "fontSize": 32,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7qpg3ex0",
+      "id": "5",
+      "bbox": [
+        72,
+        664,
+        1090,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "textPreview": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#475569",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+              "fontSize": 13,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bi9s36h",
+      "id": "6",
+      "bbox": [
+        106,
+        174,
+        420,
+        380
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#1F2A7A",
+      "lineColor": "#1F2A7A",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pwb2hwfy",
+      "id": "7",
+      "bbox": [
+        138,
+        202,
+        240,
+        22
+      ],
+      "geometry": "rect",
+      "text": "@openclaw_paradis_bot",
+      "textPreview": "@openclaw_paradis_bot",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#C7D2FE",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "@openclaw_paradis_bot"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "@openclaw_paradis_bot",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#C7D2FE",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "@openclaw_paradis_bot",
+              "fontSize": 18,
+              "color": "#C7D2FE",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itgfmlkj",
+      "id": "8",
+      "bbox": [
+        138,
+        234,
+        220,
+        30
+      ],
+      "geometry": "rect",
+      "text": "BILAN DU SOIR",
+      "textPreview": "BILAN DU SOIR",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "BILAN DU SOIR"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "BILAN DU SOIR",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "BILAN DU SOIR",
+              "fontSize": 24,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ed8bat4",
+      "id": "9",
+      "bbox": [
+        138,
+        286,
+        330,
+        186
+      ],
+      "geometry": "rect",
+      "text": "Demandes entrantes : 26\nCommandes confirmées : 9\nPaiements Mobile Money reçus : 6\nPaiements à vérifier : 2\nTop demandes : ensembles 6 mois, coffrets naissance\nStock critique : pyjamas 6 mois, body naissance\nClientes à relancer : 7\nLivraisons à suivre demain : 3",
+      "textPreview": "Demandes entrantes : 26 | Commandes confirmées : 9 | Paiements Mobile Money reçus : 6 | Paiements à vérifier : 2 | Top demandes : ensembl...",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 10,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Demandes entrantes : 26"
+          },
+          {
+            "index": 2,
+            "text": "Commandes confirmées : 9"
+          },
+          {
+            "index": 3,
+            "text": "Paiements Mobile Money reçus : 6"
+          },
+          {
+            "index": 4,
+            "text": "Paiements à vérifier : 2"
+          },
+          {
+            "index": 5,
+            "text": "Top demandes : ensembles 6 mois,"
+          },
+          {
+            "index": 6,
+            "text": "coffrets naissance"
+          },
+          {
+            "index": 7,
+            "text": "Stock critique : pyjamas 6 mois, body"
+          },
+          {
+            "index": 8,
+            "text": "naissance"
+          },
+          {
+            "index": 9,
+            "text": "Clientes à relancer : 7"
+          },
+          {
+            "index": 10,
+            "text": "Livraisons à suivre demain : 3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Demandes entrantes : 26",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Demandes entrantes : 26",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Commandes confirmées : 9",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Commandes confirmées : 9",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "Paiements Mobile Money reçus : 6",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Paiements Mobile Money reçus : 6",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "Paiements à vérifier : 2",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Paiements à vérifier : 2",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "Top demandes : ensembles 6 mois, coffrets naissance",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Top demandes : ensembles 6 mois, coffrets naissance",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "Stock critique : pyjamas 6 mois, body naissance",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Stock critique : pyjamas 6 mois, body naissance",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "Clientes à relancer : 7",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Clientes à relancer : 7",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "Livraisons à suivre demain : 3",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Livraisons à suivre demain : 3",
+              "fontSize": 17,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "10",
+      "bbox": [
+        138,
+        500,
+        280,
+        20
+      ],
+      "geometry": "rect",
+      "text": "20:00 • Africa/Abidjan • généré automatiquement",
+      "textPreview": "20:00 • Africa/Abidjan • généré automatiquement",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#D6DCF7",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "20:00 • Africa/Abidjan • généré"
+          },
+          {
+            "index": 2,
+            "text": "automatiquement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "20:00 • Africa/Abidjan • généré automatiquement",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#D6DCF7"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "20:00 • Africa/Abidjan • généré automatiquement",
+              "fontSize": 12,
+              "color": "#D6DCF7"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hwfyxob",
+      "id": "11",
+      "bbox": [
+        586,
+        188,
+        560,
+        160
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7DCE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94fu18jq",
+      "id": "12",
+      "bbox": [
+        612,
+        214,
+        430,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi cette slide compte en démonstration",
+      "textPreview": "Pourquoi cette slide compte en démonstration",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#324CFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi cette slide compte en démonstration"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi cette slide compte en démonstration",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#324CFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi cette slide compte en démonstration",
+              "fontSize": 18,
+              "color": "#324CFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjm1cfa9",
+      "id": "13",
+      "bbox": [
+        612,
+        248,
+        500,
+        70
+      ],
+      "geometry": "rect",
+      "text": "Le client comprend d'un coup qu'il n'achète pas seulement un bot de réponse. Il achète une boutique mieux lisible, mieux suivie et mieux pilotée.",
+      "textPreview": "Le client comprend d'un coup qu'il n'achète pas seulement un bot de réponse. Il achète une boutique mieux lisible, mieux suivie et mieux ...",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le client comprend d'un coup qu'il n'achète pas seulement un bot"
+          },
+          {
+            "index": 2,
+            "text": "de réponse. Il achète une boutique mieux lisible, mieux suivie et"
+          },
+          {
+            "index": 3,
+            "text": "mieux pilotée."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le client comprend d'un coup qu'il n'achète pas seulement un bot de réponse. Il achète une boutique mieux lisible, mieux suivie et mieux pilotée.",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le client comprend d'un coup qu'il n'achète pas seulement un bot de réponse. Il achète une boutique mieux lisible, mieux suivie et mieux pilotée.",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ra5gbq1o",
+      "id": "14",
+      "bbox": [
+        586,
+        376,
+        560,
+        176
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFF5E7",
+      "lineColor": "#F6E2B7",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2p8nqxs7",
+      "id": "15",
+      "bbox": [
+        612,
+        402,
+        300,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Éléments à lire à voix haute",
+      "textPreview": "Éléments à lire à voix haute",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#D89C32",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Éléments à lire à voix haute"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Éléments à lire à voix haute",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#D89C32",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Éléments à lire à voix haute",
+              "fontSize": 18,
+              "color": "#D89C32",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gr2p8nq",
+      "id": "16",
+      "bbox": [
+        612,
+        438,
+        500,
+        104
+      ],
+      "geometry": "rect",
+      "text": "• Qui a écrit aujourd'hui ?\n• Qui a acheté ?\n• Qui faut-il relancer demain ?\n• Quels produits deviennent critiques ?",
+      "textPreview": "• Qui a écrit aujourd'hui ? | • Qui a acheté ? | • Qui faut-il relancer demain ? | • Quels produits deviennent critiques ?",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Qui a écrit aujourd'hui ?"
+          },
+          {
+            "index": 2,
+            "text": "• Qui a acheté ?"
+          },
+          {
+            "index": 3,
+            "text": "• Qui faut-il relancer demain ?"
+          },
+          {
+            "index": 4,
+            "text": "• Quels produits deviennent critiques ?"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Qui a écrit aujourd'hui ?",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Qui a écrit aujourd'hui ?",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Qui a acheté ?",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Qui a acheté ?",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Qui faut-il relancer demain ?",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Qui faut-il relancer demain ?",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Quels produits deviennent critiques ?",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Quels produits deviennent critiques ?",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

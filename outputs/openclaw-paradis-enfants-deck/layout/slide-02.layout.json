@@ -1,0 +1,1085 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/4xaetx",
+    "id": "4xaetx",
+    "slide": 2,
+    "layoutId": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFF9F3",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s36hcrmh",
+      "id": "1",
+      "bbox": [
+        -80,
+        -50,
+        300,
+        300
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFE8F6",
+      "lineColor": "#FFE8F6",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zidonyd0",
+      "id": "2",
+      "bbox": [
+        1030,
+        520,
+        260,
+        260
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E8ECFF",
+      "lineColor": "#E8ECFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1gvy90j",
+      "id": "3",
+      "bbox": [
+        74,
+        42,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "textPreview": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+              "fontSize": 13,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hgn29gr2",
+      "id": "4",
+      "bbox": [
+        72,
+        76,
+        1136,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Le vrai problème : les réseaux génèrent l'intérêt, mais la boutique perd encore des ventes",
+      "textPreview": "Le vrai problème : les réseaux génèrent l'intérêt, mais la boutique perd encore des ventes",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le vrai problème : les réseaux génèrent l'intérêt, mais la boutique perd encore"
+          },
+          {
+            "index": 2,
+            "text": "des ventes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le vrai problème : les réseaux génèrent l'intérêt, mais la boutique perd encore des ventes",
+          "resolvedTextStyle": {
+            "fontSize": 32,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le vrai problème : les réseaux génèrent l'intérêt, mais la boutique perd encore des ventes",
+              "fontSize": 32,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/svu9knih",
+      "id": "5",
+      "bbox": [
+        72,
+        664,
+        1090,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "textPreview": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#475569",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+              "fontSize": 13,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/za1gvy90",
+      "id": "6",
+      "bbox": [
+        72,
+        150,
+        540,
+        420
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7DCE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ap4r65wj",
+      "id": "7",
+      "bbox": [
+        648,
+        150,
+        560,
+        420
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#EDF1FF",
+      "lineColor": "#D8DFFD",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h4byhgn2",
+      "id": "8",
+      "bbox": [
+        98,
+        176,
+        200,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Sans OpenClaw",
+      "textPreview": "Sans OpenClaw",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sans OpenClaw"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sans OpenClaw",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sans OpenClaw",
+              "fontSize": 24,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sji5snel",
+      "id": "9",
+      "bbox": [
+        98,
+        228,
+        470,
+        270
+      ],
+      "geometry": "rect",
+      "text": "• TikTok et Facebook attirent des clientes, mais les demandes se perdent en DM et sur WhatsApp.\n• La vendeuse doit se souvenir de qui cherchait quelle taille ou quel article.\n• Les nouveaux arrivages ne sont pas relancés vers les bonnes clientes.\n• Les promotions sont diffusées à tout le monde sans priorité.\n• Le soir, il n'y a pas de vision claire : qui a écrit, qui a acheté, qui doit être relancée.",
+      "textPreview": "• TikTok et Facebook attirent des clientes, mais les demandes se perdent en DM et sur WhatsApp. | • La vendeuse doit se souvenir de qui c...",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 10,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• TikTok et Facebook attirent des clientes, mais les"
+          },
+          {
+            "index": 2,
+            "text": "demandes se perdent en DM et sur WhatsApp."
+          },
+          {
+            "index": 3,
+            "text": "• La vendeuse doit se souvenir de qui cherchait quelle"
+          },
+          {
+            "index": 4,
+            "text": "taille ou quel article."
+          },
+          {
+            "index": 5,
+            "text": "• Les nouveaux arrivages ne sont pas relancés vers les"
+          },
+          {
+            "index": 6,
+            "text": "bonnes clientes."
+          },
+          {
+            "index": 7,
+            "text": "• Les promotions sont diffusées à tout le monde sans"
+          },
+          {
+            "index": 8,
+            "text": "priorité."
+          },
+          {
+            "index": 9,
+            "text": "• Le soir, il n'y a pas de vision claire : qui a écrit, qui a"
+          },
+          {
+            "index": 10,
+            "text": "acheté, qui doit être relancée."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• TikTok et Facebook attirent des clientes, mais les demandes se perdent en DM et sur WhatsApp.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• TikTok et Facebook attirent des clientes, mais les demandes se perdent en DM et sur WhatsApp.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• La vendeuse doit se souvenir de qui cherchait quelle taille ou quel article.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• La vendeuse doit se souvenir de qui cherchait quelle taille ou quel article.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Les nouveaux arrivages ne sont pas relancés vers les bonnes clientes.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Les nouveaux arrivages ne sont pas relancés vers les bonnes clientes.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Les promotions sont diffusées à tout le monde sans priorité.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Les promotions sont diffusées à tout le monde sans priorité.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• Le soir, il n'y a pas de vision claire : qui a écrit, qui a acheté, qui doit être relancée.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Le soir, il n'y a pas de vision claire : qui a écrit, qui a acheté, qui doit être relancée.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qh0fepkz",
+      "id": "10",
+      "bbox": [
+        96,
+        514,
+        166,
+        34
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFE6E6",
+      "lineColor": "#FFE6E6",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j2t83itg",
+      "id": "11",
+      "bbox": [
+        108,
+        521,
+        142,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Fuite d'attention",
+      "textPreview": "Fuite d'attention",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#9A2E2E",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Fuite d'attention"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Fuite d'attention",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#9A2E2E",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Fuite d'attention",
+              "fontSize": 14,
+              "color": "#9A2E2E",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8nqxs72x",
+      "id": "12",
+      "bbox": [
+        274,
+        514,
+        150,
+        34
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFF0D8",
+      "lineColor": "#FFF0D8",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/18jqh0fe",
+      "id": "13",
+      "bbox": [
+        286,
+        521,
+        126,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Fuite de suivi",
+      "textPreview": "Fuite de suivi",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#8A5612",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Fuite de suivi"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Fuite de suivi",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#8A5612",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Fuite de suivi",
+              "fontSize": 14,
+              "color": "#8A5612",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5o7qpg3",
+      "id": "14",
+      "bbox": [
+        436,
+        514,
+        164,
+        34
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FBE1F4",
+      "lineColor": "#FBE1F4",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jqh0fepk",
+      "id": "15",
+      "bbox": [
+        448,
+        521,
+        140,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Fuite de relance",
+      "textPreview": "Fuite de relance",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Fuite de relance"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Fuite de relance",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Fuite de relance",
+              "fontSize": 14,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8bat47y1",
+      "id": "16",
+      "bbox": [
+        674,
+        176,
+        240,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Ce que l'IA corrige",
+      "textPreview": "Ce que l'IA corrige",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#324CFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que l'IA corrige"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que l'IA corrige",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#324CFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que l'IA corrige",
+              "fontSize": 24,
+              "color": "#324CFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1w7mp0bi",
+      "id": "17",
+      "bbox": [
+        674,
+        228,
+        486,
+        270
+      ],
+      "geometry": "rect",
+      "text": "• Chaque demande entrante est classée par canal, produit, taille, urgence et statut.\n• OpenClaw transforme WhatsApp en point de conversion organisé.\n• Le CRM garde la mémoire des clientes et des besoins en attente.\n• La boutique sait qui relancer pour un nouvel arrivage, une promotion ou une livraison.\n• Le pilotage quotidien devient lisible depuis Telegram ou un tableau simple.",
+      "textPreview": "• Chaque demande entrante est classée par canal, produit, taille, urgence et statut. | • OpenClaw transforme WhatsApp en point de convers...",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 10,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Chaque demande entrante est classée par canal,"
+          },
+          {
+            "index": 2,
+            "text": "produit, taille, urgence et statut."
+          },
+          {
+            "index": 3,
+            "text": "• OpenClaw transforme WhatsApp en point de conversion"
+          },
+          {
+            "index": 4,
+            "text": "organisé."
+          },
+          {
+            "index": 5,
+            "text": "• Le CRM garde la mémoire des clientes et des besoins"
+          },
+          {
+            "index": 6,
+            "text": "en attente."
+          },
+          {
+            "index": 7,
+            "text": "• La boutique sait qui relancer pour un nouvel arrivage,"
+          },
+          {
+            "index": 8,
+            "text": "une promotion ou une livraison."
+          },
+          {
+            "index": 9,
+            "text": "• Le pilotage quotidien devient lisible depuis Telegram ou"
+          },
+          {
+            "index": 10,
+            "text": "un tableau simple."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Chaque demande entrante est classée par canal, produit, taille, urgence et statut.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Chaque demande entrante est classée par canal, produit, taille, urgence et statut.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• OpenClaw transforme WhatsApp en point de conversion organisé.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• OpenClaw transforme WhatsApp en point de conversion organisé.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Le CRM garde la mémoire des clientes et des besoins en attente.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Le CRM garde la mémoire des clientes et des besoins en attente.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• La boutique sait qui relancer pour un nouvel arrivage, une promotion ou une livraison.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• La boutique sait qui relancer pour un nouvel arrivage, une promotion ou une livraison.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• Le pilotage quotidien devient lisible depuis Telegram ou un tableau simple.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Le pilotage quotidien devient lisible depuis Telegram ou un tableau simple.",
+              "fontSize": 18,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxc3ylc7",
+      "id": "18",
+      "bbox": [
+        674,
+        510,
+        470,
+        66
+      ],
+      "geometry": "rect",
+      "text": "L'enjeu n'est pas seulement le stock.\nL'enjeu est de transformer le trafic social en conversations tracées, puis en ventes suivies.",
+      "textPreview": "L'enjeu n'est pas seulement le stock. | L'enjeu est de transformer le trafic social en conversations tracées, puis en ventes suivies.",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L'enjeu n'est pas seulement le stock."
+          },
+          {
+            "index": 2,
+            "text": "L'enjeu est de transformer le trafic social en"
+          },
+          {
+            "index": 3,
+            "text": "conversations tracées, puis en ventes suivies."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L'enjeu n'est pas seulement le stock.",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'enjeu n'est pas seulement le stock.",
+              "fontSize": 20,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "L'enjeu est de transformer le trafic social en conversations tracées, puis en ventes suivies.",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'enjeu est de transformer le trafic social en conversations tracées, puis en ventes suivies.",
+              "fontSize": 20,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

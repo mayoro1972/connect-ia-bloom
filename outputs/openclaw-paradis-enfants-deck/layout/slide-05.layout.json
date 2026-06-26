@@ -1,0 +1,1613 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/w37u8g",
+    "id": "w37u8g",
+    "slide": 5,
+    "layoutId": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFF9F3",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2c628ca3-c890-4dfc-b3b7-1c4e57cff9fa",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a906113e-7cc5-430b-9589-864d9700c0f6",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "1",
+      "bbox": [
+        -80,
+        -50,
+        300,
+        300
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFE8F6",
+      "lineColor": "#FFE8F6",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "2",
+      "bbox": [
+        1030,
+        520,
+        260,
+        260
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E8ECFF",
+      "lineColor": "#E8ECFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "3",
+      "bbox": [
+        74,
+        42,
+        320,
+        24
+      ],
+      "geometry": "rect",
+      "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "textPreview": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LIVE TIKTOK • TRANSFERAI x NETTELECOM CI",
+              "fontSize": 13,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "4",
+      "bbox": [
+        72,
+        76,
+        1136,
+        84
+      ],
+      "geometry": "rect",
+      "text": "Démonstration CRM : comment OpenClaw transforme une conversation en fiche cliente actionnable",
+      "textPreview": "Démonstration CRM : comment OpenClaw transforme une conversation en fiche cliente actionnable",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "+mn-lt",
+        "color": "#1F2A7A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Démonstration CRM : comment OpenClaw transforme une conversation en"
+          },
+          {
+            "index": 2,
+            "text": "fiche cliente actionnable"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Démonstration CRM : comment OpenClaw transforme une conversation en fiche cliente actionnable",
+          "resolvedTextStyle": {
+            "fontSize": 32,
+            "color": "#1F2A7A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Démonstration CRM : comment OpenClaw transforme une conversation en fiche cliente actionnable",
+              "fontSize": 32,
+              "color": "#1F2A7A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "5",
+      "bbox": [
+        72,
+        664,
+        1090,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "textPreview": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#475569",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Projet piloté par TransferAI, notre hub IA, en collaboration avec Nettelecom CI",
+              "fontSize": 13,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "6",
+      "bbox": [
+        72,
+        156,
+        960,
+        50
+      ],
+      "geometry": "rect",
+      "text": "Le CRM ne sert pas seulement à stocker des noms.\nIl sert à ne plus oublier qui attend quoi, sur quel canal, et quelle relance doit partir.",
+      "textPreview": "Le CRM ne sert pas seulement à stocker des noms. | Il sert à ne plus oublier qui attend quoi, sur quel canal, et quelle relance doit partir.",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#475569",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le CRM ne sert pas seulement à stocker des noms."
+          },
+          {
+            "index": 2,
+            "text": "Il sert à ne plus oublier qui attend quoi, sur quel canal, et quelle relance doit partir."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le CRM ne sert pas seulement à stocker des noms.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le CRM ne sert pas seulement à stocker des noms.",
+              "fontSize": 18,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Il sert à ne plus oublier qui attend quoi, sur quel canal, et quelle relance doit partir.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#475569"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Il sert à ne plus oublier qui attend quoi, sur quel canal, et quelle relance doit partir.",
+              "fontSize": 18,
+              "color": "#475569"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/4zidonyd",
+      "id": "7",
+      "bbox": [
+        72,
+        246,
+        1132,
+        264
+      ],
+      "text": "Source | Cliente | Besoin | Âge/Taille | Statut CRM | Prochaine action\nTikTok -> WhatsApp | Aminata | Ensemble bébé | 6 mois | Lead chaud | Envoyer 3 options aujourd'hui\nFacebook -> WhatsApp | Awa | Coffret naissance | 0-3 mois | En attente de stock | Relancer au prochain arrivage\nWhatsApp direct | Mariam | Pyjama enfant | 4 ans | Commande à confirmer | Valider le stock puis la livraison\nTikTok DM | Fatou | Robe fille | 12 mois | À réactiver | Promotion week-end à envoyer",
+      "textPreview": "Source | Cliente | Besoin | Âge/Taille | Statut CRM | Prochaine action | TikTok -> WhatsApp | Aminata | Ensemble bébé | 6 mois | Lead cha...",
+      "rows": 5,
+      "cols": 6,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            72,
+            246,
+            160,
+            52.8
+          ],
+          "text": "Source",
+          "textPreview": "Source",
+          "fillColor": "#324CFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Source",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#FFFFFF",
+                "bold": true
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Source",
+                  "fontSize": 15,
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            232,
+            246,
+            120,
+            52.8
+          ],
+          "text": "Cliente",
+          "textPreview": "Cliente",
+          "fillColor": "#324CFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Cliente",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#FFFFFF",
+                "bold": true
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Cliente",
+                  "fontSize": 15,
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            352,
+            246,
+            170,
+            52.8
+          ],
+          "text": "Besoin",
+          "textPreview": "Besoin",
+          "fillColor": "#324CFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Besoin",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#FFFFFF",
+                "bold": true
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Besoin",
+                  "fontSize": 15,
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 1,
+          "column": 4,
+          "bbox": [
+            522,
+            246,
+            100,
+            52.8
+          ],
+          "text": "Âge/Taille",
+          "textPreview": "Âge/Taille",
+          "fillColor": "#324CFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Âge/Taille",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#FFFFFF",
+                "bold": true
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Âge/Taille",
+                  "fontSize": 15,
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 1,
+          "column": 5,
+          "bbox": [
+            622,
+            246,
+            170,
+            52.8
+          ],
+          "text": "Statut CRM",
+          "textPreview": "Statut CRM",
+          "fillColor": "#324CFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Statut CRM",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#FFFFFF",
+                "bold": true
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Statut CRM",
+                  "fontSize": 15,
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 1,
+          "column": 6,
+          "bbox": [
+            792,
+            246,
+            412,
+            52.8
+          ],
+          "text": "Prochaine action",
+          "textPreview": "Prochaine action",
+          "fillColor": "#324CFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Prochaine action",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#FFFFFF",
+                "bold": true
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Prochaine action",
+                  "fontSize": 15,
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            72,
+            298.8,
+            160,
+            52.8
+          ],
+          "text": "TikTok -> WhatsApp",
+          "textPreview": "TikTok -> WhatsApp",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "TikTok -> WhatsApp",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "TikTok -> WhatsApp",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            232,
+            298.8,
+            120,
+            52.8
+          ],
+          "text": "Aminata",
+          "textPreview": "Aminata",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Aminata",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Aminata",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            352,
+            298.8,
+            170,
+            52.8
+          ],
+          "text": "Ensemble bébé",
+          "textPreview": "Ensemble bébé",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ensemble bébé",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ensemble bébé",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 2,
+          "column": 4,
+          "bbox": [
+            522,
+            298.8,
+            100,
+            52.8
+          ],
+          "text": "6 mois",
+          "textPreview": "6 mois",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "6 mois",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "6 mois",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 2,
+          "column": 5,
+          "bbox": [
+            622,
+            298.8,
+            170,
+            52.8
+          ],
+          "text": "Lead chaud",
+          "textPreview": "Lead chaud",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Lead chaud",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Lead chaud",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 2,
+          "column": 6,
+          "bbox": [
+            792,
+            298.8,
+            412,
+            52.8
+          ],
+          "text": "Envoyer 3 options aujourd'hui",
+          "textPreview": "Envoyer 3 options aujourd'hui",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Envoyer 3 options aujourd'hui",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Envoyer 3 options aujourd'hui",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            72,
+            351.6,
+            160,
+            52.8
+          ],
+          "text": "Facebook -> WhatsApp",
+          "textPreview": "Facebook -> WhatsApp",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Facebook -> WhatsApp",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Facebook -> WhatsApp",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            232,
+            351.6,
+            120,
+            52.8
+          ],
+          "text": "Awa",
+          "textPreview": "Awa",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Awa",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Awa",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 15,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            352,
+            351.6,
+            170,
+            52.8
+          ],
+          "text": "Coffret naissance",
+          "textPreview": "Coffret naissance",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Coffret naissance",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Coffret naissance",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "row": 3,
+          "column": 4,
+          "bbox": [
+            522,
+            351.6,
+            100,
+            52.8
+          ],
+          "text": "0-3 mois",
+          "textPreview": "0-3 mois",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "0-3 mois",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "0-3 mois",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 17,
+          "row": 3,
+          "column": 5,
+          "bbox": [
+            622,
+            351.6,
+            170,
+            52.8
+          ],
+          "text": "En attente de stock",
+          "textPreview": "En attente de stock",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "En attente de stock",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "En attente de stock",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 18,
+          "row": 3,
+          "column": 6,
+          "bbox": [
+            792,
+            351.6,
+            412,
+            52.8
+          ],
+          "text": "Relancer au prochain arrivage",
+          "textPreview": "Relancer au prochain arrivage",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Relancer au prochain arrivage",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Relancer au prochain arrivage",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 19,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            72,
+            404.4,
+            160,
+            52.8
+          ],
+          "text": "WhatsApp direct",
+          "textPreview": "WhatsApp direct",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "WhatsApp direct",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "WhatsApp direct",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 20,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            232,
+            404.4,
+            120,
+            52.8
+          ],
+          "text": "Mariam",
+          "textPreview": "Mariam",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Mariam",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Mariam",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 21,
+          "row": 4,
+          "column": 3,
+          "bbox": [
+            352,
+            404.4,
+            170,
+            52.8
+          ],
+          "text": "Pyjama enfant",
+          "textPreview": "Pyjama enfant",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Pyjama enfant",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Pyjama enfant",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 22,
+          "row": 4,
+          "column": 4,
+          "bbox": [
+            522,
+            404.4,
+            100,
+            52.8
+          ],
+          "text": "4 ans",
+          "textPreview": "4 ans",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "4 ans",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "4 ans",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 23,
+          "row": 4,
+          "column": 5,
+          "bbox": [
+            622,
+            404.4,
+            170,
+            52.8
+          ],
+          "text": "Commande à confirmer",
+          "textPreview": "Commande à confirmer",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Commande à confirmer",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Commande à confirmer",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 24,
+          "row": 4,
+          "column": 6,
+          "bbox": [
+            792,
+            404.4,
+            412,
+            52.8
+          ],
+          "text": "Valider le stock puis la livraison",
+          "textPreview": "Valider le stock puis la livraison",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Valider le stock puis la livraison",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Valider le stock puis la livraison",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 25,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            72,
+            457.2,
+            160,
+            52.8
+          ],
+          "text": "TikTok DM",
+          "textPreview": "TikTok DM",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "TikTok DM",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "TikTok DM",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 26,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            232,
+            457.2,
+            120,
+            52.8
+          ],
+          "text": "Fatou",
+          "textPreview": "Fatou",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Fatou",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Fatou",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 27,
+          "row": 5,
+          "column": 3,
+          "bbox": [
+            352,
+            457.2,
+            170,
+            52.8
+          ],
+          "text": "Robe fille",
+          "textPreview": "Robe fille",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Robe fille",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Robe fille",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 28,
+          "row": 5,
+          "column": 4,
+          "bbox": [
+            522,
+            457.2,
+            100,
+            52.8
+          ],
+          "text": "12 mois",
+          "textPreview": "12 mois",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "12 mois",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "12 mois",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 29,
+          "row": 5,
+          "column": 5,
+          "bbox": [
+            622,
+            457.2,
+            170,
+            52.8
+          ],
+          "text": "À réactiver",
+          "textPreview": "À réactiver",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "À réactiver",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "À réactiver",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 30,
+          "row": 5,
+          "column": 6,
+          "bbox": [
+            792,
+            457.2,
+            412,
+            52.8
+          ],
+          "text": "Promotion week-end à envoyer",
+          "textPreview": "Promotion week-end à envoyer",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Promotion week-end à envoyer",
+              "resolvedTextStyle": {
+                "fontSize": 15,
+                "color": "#172033"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Promotion week-end à envoyer",
+                  "fontSize": 15,
+                  "color": "#172033"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "8",
+      "bbox": [
+        72,
+        526,
+        540,
+        84
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7F4EE",
+      "lineColor": "#CFEBDD",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "9",
+      "bbox": [
+        96,
+        544,
+        420,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Ce que la démonstration doit faire comprendre",
+      "textPreview": "Ce que la démonstration doit faire comprendre",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#1F9D72",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que la démonstration doit faire comprendre"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que la démonstration doit faire comprendre",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#1F9D72",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que la démonstration doit faire comprendre",
+              "fontSize": 18,
+              "color": "#1F9D72",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6xkf6dc",
+      "id": "10",
+      "bbox": [
+        96,
+        568,
+        490,
+        34
+      ],
+      "geometry": "rect",
+      "text": "OpenClaw classe, résume, étiquette et prépare l'action commerciale. Le CRM devient la mémoire vivante de la boutique.",
+      "textPreview": "OpenClaw classe, résume, étiquette et prépare l'action commerciale. Le CRM devient la mémoire vivante de la boutique.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "OpenClaw classe, résume, étiquette et prépare l'action"
+          },
+          {
+            "index": 2,
+            "text": "commerciale. Le CRM devient la mémoire vivante de la boutique."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "OpenClaw classe, résume, étiquette et prépare l'action commerciale. Le CRM devient la mémoire vivante de la boutique.",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "OpenClaw classe, résume, étiquette et prépare l'action commerciale. Le CRM devient la mémoire vivante de la boutique.",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "11",
+      "bbox": [
+        650,
+        526,
+        554,
+        84
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7DCE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcj6tova",
+      "id": "12",
+      "bbox": [
+        674,
+        544,
+        300,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Champs CRM à montrer en démo",
+      "textPreview": "Champs CRM à montrer en démo",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#FF5ABF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Champs CRM à montrer en démo"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Champs CRM à montrer en démo",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#FF5ABF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Champs CRM à montrer en démo",
+              "fontSize": 18,
+              "color": "#FF5ABF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rqd4vmt",
+      "id": "13",
+      "bbox": [
+        674,
+        568,
+        500,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Prénom, nom, numéro WhatsApp, e-mail si disponible, canal d'origine, besoin, taille/âge, statut, relance, paiement, livraison ou retrait.",
+      "textPreview": "Prénom, nom, numéro WhatsApp, e-mail si disponible, canal d'origine, besoin, taille/âge, statut, relance, paiement, livraison ou retrait.",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#172033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Prénom, nom, numéro WhatsApp, e-mail si disponible, canal"
+          },
+          {
+            "index": 2,
+            "text": "d'origine, besoin, taille/âge, statut, relance, paiement, livraison ou"
+          },
+          {
+            "index": 3,
+            "text": "retrait."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Prénom, nom, numéro WhatsApp, e-mail si disponible, canal d'origine, besoin, taille/âge, statut, relance, paiement, livraison ou retrait.",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#172033"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Prénom, nom, numéro WhatsApp, e-mail si disponible, canal d'origine, besoin, taille/âge, statut, relance, paiement, livraison ou retrait.",
+              "fontSize": 16,
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
