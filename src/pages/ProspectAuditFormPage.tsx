@@ -238,17 +238,33 @@ const ProspectAuditFormPage = () => {
 
       try {
         const functionBaseUrl = getFunctionBaseUrl();
-        const response = await fetch(`${functionBaseUrl}/resolve-invitation`, {
-          method: "POST",
-          headers: buildFunctionHeaders(),
-          body: JSON.stringify(
-            inviteTokenFromUrl
-              ? { inviteToken: inviteTokenFromUrl }
-              : { packId: packIdFromUrl },
-          ),
-        });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 12000);
+        let response: Response;
+        try {
+          response = await fetch(`${functionBaseUrl}/resolve-invitation`, {
+            method: "POST",
+            headers: buildFunctionHeaders(),
+            body: JSON.stringify(
+              inviteTokenFromUrl
+                ? { inviteToken: inviteTokenFromUrl }
+                : { packId: packIdFromUrl },
+            ),
+            signal: controller.signal,
+          });
+        } finally {
+          clearTimeout(timeoutId);
+        }
 
         const result = (await response.json().catch(() => ({}))) as ResolveInvitationResult;
+
+        if (response.status === 404 || response.status === 410) {
+          throw new Error(
+            activeLanguage === "en"
+              ? "This invitation has expired or is no longer available."
+              : "Cette invitation a expiré ou n'est plus disponible.",
+          );
+        }
 
         if (!response.ok || !result?.invitation) {
           throw new Error(typeof result?.error === "string" ? result.error : "Invitation introuvable.");
@@ -367,6 +383,11 @@ const ProspectAuditFormPage = () => {
     }
 
     if (!activeInviteToken || !isSupabaseConfigured) {
+      setSaveMessage(
+        activeLanguage === "en"
+          ? "Saving unavailable: no active invitation token."
+          : "Enregistrement indisponible : token d'invitation manquant.",
+      );
       return;
     }
 
@@ -1042,7 +1063,7 @@ const ProspectAuditFormPage = () => {
                     </div>
 
                     <textarea
-                      value={trimText(formData.prospect_context)}
+                      value={typeof formData.prospect_context === "string" ? formData.prospect_context : ""}
                       onChange={(event) => updateField("prospect_context", event.target.value)}
                       placeholder={
                         activeLanguage === "en"
