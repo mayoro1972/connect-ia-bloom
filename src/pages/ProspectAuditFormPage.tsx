@@ -546,7 +546,7 @@ const ProspectAuditFormPage = () => {
       <h3 className="mt-3 font-heading text-xl font-bold text-card-foreground">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-muted-foreground">{prompt}</p>
       <textarea
-        value={trimText(formData[key])}
+        value={typeof formData[key] === "string" ? (formData[key] as string) : ""}
         onChange={(event) => updateField(key, event.target.value)}
         placeholder={placeholder}
         className="mt-5 min-h-[160px] w-full rounded-3xl border border-border bg-background px-4 py-4 text-sm leading-7 text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary/25"
