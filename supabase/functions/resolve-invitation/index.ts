@@ -145,7 +145,7 @@ const getOrCreateInvitationForPack = async (
 ) => {
   const packQuery = await supabase
     .from("ai_prospecting_packs")
-    .select("pack_id, organization_name, organization_type, target_email, payload")
+    .select("pack_id, organization_name, target_email, payload")
     .eq("pack_id", packId)
     .maybeSingle();
   const pack = packQuery.data as ProspectAuditPackRow | null;

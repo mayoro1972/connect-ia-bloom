@@ -232,11 +232,14 @@ const buildAuditAccessContextInternal = (
     ...normalizeList(request?.use_cases),
   ]).slice(0, 6);
   const suggestedConstraints = buildSuggestedConstraints(payload, validationScenario);
-  const prospectContext =
+  const realOrgName = trimText(pack?.organization_name) || trimText(request?.company) || trimText(request?.full_name) || "ce prospect";
+  const deAnonymize = (text: string) => text.replace(/ORG_TARGET/g, realOrgName).replace(/DECISION_MAKER_TARGET/g, trimText(request?.full_name) || realOrgName);
+  const rawProspectContext =
     trimText(payload.organization_summary) ||
     trimText(payload.public_text_sanitized_excerpt) ||
     trimText(request?.message) ||
-    `Audit préparé pour ${trimText(pack?.organization_name) || trimText(request?.company) || trimText(request?.full_name) || "ce prospect"}.`;
+    `Audit préparé pour ${realOrgName}.`;
+  const prospectContext = deAnonymize(rawProspectContext);
 
   return {
     version: 2,
