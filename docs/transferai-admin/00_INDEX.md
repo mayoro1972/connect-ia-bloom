@@ -68,6 +68,28 @@ Le pack a 4 objectifs :
 55. [Audit et upgrade expert - prospection CRM 2026-06-13](./90_Audit_Upgrade_Prospection_CRM_2026-06-13.md)
 56. [Workflow JSON n8n - Google Forms social lead sequence V1](./91_n8n_Google_Forms_Social_Lead_Sequence_V1_Exportable.json)
 57. [Guide d'activation - Google Forms social lead sequence V1](./92_Guide_Activation_Google_Forms_Social_Lead_Sequence_V1.md)
+58. [Guide utilisateur - Workflow Google Forms Prospects chronologie 2026-06-23](./100_Guide_Utilisateur_Workflow_Google_Forms_Prospects_Chronologie_2026-06-23.md)
+59. [Guide troubleshooting - Workflow Google Forms Prospects chronologie 2026-06-23](./101_Guide_Troubleshooting_Workflow_Google_Forms_Prospects_Chronologie_2026-06-23.md)
+60. [Tableau complet - Workflow Google Forms Prospects version opérationnelle 2026-06-23](./102_Tableau_Complet_Workflow_Google_Forms_Prospects_Version_Operationnelle_2026-06-23.md)
+61. [Guide utilisateur - Pipeline Prospection Automatisé V1](./103_Guide_Utilisateur_Pipeline_Prospection_Automatise_V1.md)
+62. [Checklist mise en production CRM 2026-06-24](./104_Checklist_Mise_En_Production_CRM_2026-06-24.md)
+63. [Guide troubleshooting - Pipeline Prospection V1](./104_Guide_Troubleshooting_Pipeline_Prospection_V1.md)
+64. [Guide Word - utilisateur session 2026-06-28 Audit V6](./105_Guide_Utilisateur_Session_2026-06-28_Audit_V6.docx)
+65. [Guide Word - troubleshooting session 2026-06-28 Audit V6](./106_Guide_Troubleshooting_Session_2026-06-28_Audit_V6.docx)
+66. [Guide Word - Maître des 12 workflows TransferAI V1](./107_Guide_Maitre_Workflows_TransferAI_V1.docx)
+67. [Guide utilisateur V4 Batch nœud par nœud 2026-06-08](./76_Guide_Utilisateur_V4_Batch_Node_Par_Node_2026-06-08.md)
+68. [Guide troubleshooting V4 V3 liens audit 2026-06-08](./77_Guide_Troubleshooting_V4_V3_Audit_Links_2026-06-08.md)
+69. [Schéma architecture fonctionnelle V1→V6 2026-06-08](./78_Schema_Architecture_Fonctionnelle_V1_V6_2026-06-08.md)
+70. [Plan dashboard BackOffice Prospection 2026-06-08](./79_Plan_Concret_Dashboard_Web_BackOffice_Prospection_2026-06-08.md)
+71. [Guide utilisateur Prospection V3 CRM Audit Dynamique](./68_Guide_Utilisateur_Prospection_V3_CRM_Audit_Dynamique.md)
+72. [Guide troubleshooting Prospection V3 CRM Audit Dynamique](./69_Guide_Troubleshooting_Prospection_V3_CRM_Audit_Dynamique.md)
+73. [Audit et upgrade expert CRM 2026-06-13](./90_Audit_Upgrade_Prospection_CRM_2026-06-13.md)
+74. [Guide activation WhatsApp Auto Reply et Follow-Up](./95_Guide_Activation_WhatsApp_Auto_Reply_And_Followup.md)
+75. [Guide utilisateur WhatsApp Live Chatwoot IA 2026-06-18](./96_Guide_Utilisateur_WhatsApp_Live_Chatwoot_IA_2026-06-18.md)
+76. [Plan intégration Zoho Inbound BackOffice 2026-06-19](./97_Plan_Integration_Zoho_Inbound_BackOffice_2026-06-19.md)
+77. [Guide utilisateur Google Forms Prospects Amélioré 2026-06-20](./98_Guide_Utilisateur_Workflow_Google_Forms_Prospects_Ameliore_2026-06-20.md)
+78. [Guide troubleshooting Google Forms Prospects Amélioré 2026-06-20](./99_Guide_Troubleshooting_Workflow_Google_Forms_Prospects_Ameliore_2026-06-20.md)
+79. [**BASE DE CONNAISSANCE COMPLÈTE 2026-06-28**](./KB_TransferAI_Base_Connaissance_Complete_2026-06-28.md) — document maître reconstituant tout le projet depuis les origines
 
 ## Ordre de lecture recommandé
 
@@ -85,9 +107,10 @@ Pour les administrateurs relais :
 
 Pour les futurs assistants IA :
 
-- charger d’abord la base de connaissance du site
-- compléter avec la FAQ
-- utiliser ensuite le JSON structuré
+- charger d’abord `KB_TransferAI_Base_Connaissance_Complete_2026-06-28.md`
+- compléter avec la base de connaissance du site (02) et la FAQ (03)
+- utiliser le JSON structuré (06) pour les réponses au chat
+- référencer le guide maître workflows (107 DOCX) pour toute question sur l’automatisation
 
 ## Périmètre actuel du site
 
