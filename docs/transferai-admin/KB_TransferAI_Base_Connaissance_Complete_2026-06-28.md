@@ -396,6 +396,9 @@ Côte d'Ivoire (priorité) → Afrique de l'Ouest → Afrique
 - `103/104` — Pipeline prospection V1
 - `105/106` — Session 28/06 Audit V6 (utilisateur + troubleshooting)
 - `107` — Guide Maître 12 workflows (DOCX)
+- `109` — Guide intégration Deck V3 n8n (Execute Command → Supabase Storage)
+- `110` — **Guide utilisateur Pack Prospect complet : Deck + Mini-Catalogue PDF (28/06/2026)**
+- `111` — **Guide troubleshooting Pack Prospect : 9 erreurs documentées et corrigées**
 
 ---
 
@@ -411,12 +414,87 @@ Côte d'Ivoire (priorité) → Afrique de l'Ouest → Afrique
 - ✅ Zoho Reply V1 classe les réponses email toutes les 15 min
 - ✅ Calendly Webhook met à jour le CRM à chaque RDV pris
 
+### Validé en session du 28 juin 2026 (matin)
+- ✅ `generate_mini_catalogue_pdf.py` — PDF natif ReportLab, couverture pleine page, footer sur chaque page, 0 en-tête répété
+- ✅ `mini_catalogue_cli.py` — dry-run `ok: true` — génère + upload Supabase Storage bucket `prospect-decks`
+- ✅ `deck_generator_cli.py` — dry-run `ok: true` — génère PPTX + PDF (LibreOffice VPS) + upload Supabase
+- ✅ `deck_template_transferai.py` — template de référence 6 slides, 5 membres équipe (dont Soulemane Konaté + Médard Séry)
+- ✅ Bucket Supabase `prospect-decks` — migration SQL prête (`20260628120000_prospect_decks_storage.sql`)
+- ✅ Guide intégration n8n V3 (doc 109) — nœuds Build Payload + Execute Command + Merge Artifacts documentés
+- ✅ Pack prospect = 3 pièces jointes : lettre executive (HTML) + mini-catalogue PDF + deck PDF
+- ✅ `publish-main` resynchronisé sur `main` (force push après divergence)
+- ✅ Toutes les branches locales codex/claude poussées sur remote
+
 ### En attente / À faire
 - ⬜ Désactiver Post-Audit V2 (conflit avec V6)
 - ⬜ Désactiver Chatwoot V5.5 (conflit avec V5.5.2)
 - ⬜ Lancer V4 sur les 53 prospects tier1 en attente
-- ⬜ Tester V3 avec un nouveau prospect réel (valider Executive Letter + Deck + Catalogue)
 - ⬜ Fix lien Calendly doublé dans email `Send Internal Brief Email` (nœud n8n V6)
-- ⬜ BackOffice dashboard web prospection (plan docs 79-82, prompt Lovable docs 80-81)
+- ⬜ **Déployer scripts sur VPS** : `pip3 install python-pptx reportlab`, copier dans `/opt/transferai/scripts/`
+- ⬜ **Appliquer migration Supabase** : `20260628120000_prospect_decks_storage.sql`
+- ⬜ **Câbler nœuds n8n V3** : Build Catalogue Payload + Generate Catalogue + Build Deck Payload + Generate Deck (guide 109)
+- ⬜ Test end-to-end V3 prospect réel — valider 3 pièces jointes reçues dans email Resend
+- ⬜ BackOffice dashboard web prospection (plan docs 79-82)
 - ⬜ Webinaire juillet 2026 (branche `codex/webinar-july-2026`)
 - ⬜ Newsletter bilingue (branche `codex/newsletter-bilingual-editorial`)
+
+---
+
+## 12. PACK PROSPECT — ARCHITECTURE TECHNIQUE (28/06/2026)
+
+### Scripts Python (dossier `scripts/`)
+
+| Script | Rôle | Dépendance |
+|---|---|---|
+| `generate_mini_catalogue_pdf.py` | Moteur PDF ReportLab — layout, styles, données | `reportlab` |
+| `mini_catalogue_cli.py` | CLI n8n → JSON → PDF → Supabase Storage | importe le moteur ci-dessus |
+| `deck_generator_cli.py` | CLI n8n → JSON → PPTX + PDF → Supabase Storage | `python-pptx`, `libreoffice` (VPS) |
+| `deck_template_transferai.py` | Template deck référence, 6 slides, édition manuelle | `python-pptx` |
+| `polish_deck_orange_ci.py` | Deck polished Orange CI — référence visuelle | `python-pptx` |
+
+### Mini-catalogue PDF — pages générées
+
+1. **Couverture** — fond `#10263F`, bande droite `#163556`, barre orange gauche, 3 enjeux pré-audit
+2. **Section 00** — introduction personnalisée par prospect et secteur
+3. **Section 01** — enjeux détectés (cartes : numéro + titre + constat + signaux)
+4. **Section 02** — 3 formations prioritaires (avant/après + objectifs + livrables + gain)
+5. **Section 03** — livrables globaux du dispositif
+6. **Section 04** — parcours 90 jours (J+0 / J+15 / J+45 / J+90)
+7. **Section 05** — prochaine étape (Calendly + formulaire audit)
+- Footer sur chaque page : ligne orange + contact + numéro de page
+
+### Deck PPTX — slides
+
+1. Couverture + accroche
+2. Enjeux secteur (3 points)
+3. Pourquoi TransferAI (3 piliers)
+4. Cas d'usage phares (3 cartes)
+5. Gains attendus (3 KPI)
+6. Plan 90 jours
+7. Équipe (5 membres : Casimir Kassi Beda, Franck Diomandé, Yves Kouamé, Soulemane Konaté, Médard Séry)
+8. CTA + coordonnées
+
+### Supabase Storage
+
+- **Bucket** : `prospect-decks` (public read, service_role write, 20 MB max)
+- **URL pattern** : `https://wlhznciwuofueffyoflo.supabase.co/storage/v1/object/public/prospect-decks/<filename>`
+- **Fichiers générés** :
+  - `MiniCatalogue_TransferAI_<Org>_<pack_id>.pdf`
+  - `Deck_TransferAI_<Org>_<pack_id>.pptx`
+  - `Deck_TransferAI_<Org>_<pack_id>.pdf`
+
+### Pipeline n8n V3 — flux complet
+
+```
+Webhook / Schedule
+    ↓ Assemble Pack (GPT → lettre executive)
+    ↓ Build Catalogue Payload  (Code node)
+    ↓ Generate Catalogue       (Execute Command → mini_catalogue_cli.py)
+    ↓ Build Deck Payload       (Code node)
+    ↓ Generate Deck            (Execute Command → deck_generator_cli.py)
+    ↓ Merge Artifacts          (fusionne urls pièces jointes)
+    ↓ Build Send Context
+    ↓ Send Email (Resend)      → 3 PJ : lettre HTML + catalogue PDF + deck PDF
+```
+
+**Gate avant envoi :** `hasPdf && hasPptx && hasCatalogue === true`
