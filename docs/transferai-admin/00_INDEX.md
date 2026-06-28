@@ -90,6 +90,9 @@ Le pack a 4 objectifs :
 77. [Guide utilisateur Google Forms Prospects Amélioré 2026-06-20](./98_Guide_Utilisateur_Workflow_Google_Forms_Prospects_Ameliore_2026-06-20.md)
 78. [Guide troubleshooting Google Forms Prospects Amélioré 2026-06-20](./99_Guide_Troubleshooting_Workflow_Google_Forms_Prospects_Ameliore_2026-06-20.md)
 79. [**BASE DE CONNAISSANCE COMPLÈTE 2026-06-28**](./KB_TransferAI_Base_Connaissance_Complete_2026-06-28.md) — document maître reconstituant tout le projet depuis les origines
+80. [Guide intégration Deck V3 n8n](./109_Guide_Integration_Deck_V3_n8n.md) — câblage n8n Execute Command pour deck PPTX+PDF → Supabase
+81. [**Guide utilisateur — Pack Prospect complet : Deck + Mini-Catalogue PDF (28/06/2026)**](./110_Guide_Utilisateur_Pack_Prospect_Deck_MiniCatalogue_2026-06-28.md) — génération automatique lettre + catalogue PDF + deck PPTX/PDF
+82. [**Guide troubleshooting — Pack Prospect : Deck + Mini-Catalogue PDF (28/06/2026)**](./111_Guide_Troubleshooting_Pack_Prospect_Deck_MiniCatalogue_2026-06-28.md) — 9 erreurs documentées et corrigées (ReportLab, Supabase, layout PDF, git)
 
 ## Ordre de lecture recommandé
 
