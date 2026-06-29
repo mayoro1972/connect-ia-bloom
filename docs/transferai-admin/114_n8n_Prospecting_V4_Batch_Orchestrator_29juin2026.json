@@ -1,0 +1,2096 @@
+{
+  "updatedAt": "2026-06-29T14:52:08.139Z",
+  "createdAt": "2026-06-07T18:47:35.934Z",
+  "id": "artMSEypvgBIDR58",
+  "name": "TransferAI Prospecting Multi-Prospect V4 Batch Orchestrator",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        6928,
+        1808
+      ],
+      "id": "15ace4b4-ffe0-4ffd-9631-b72953c02c81"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      },
+      "name": "Daily Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        6944,
+        2016
+      ],
+      "id": "32986180-08bf-45d1-b78b-37ac0df33137"
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "source_backend",
+              "stringValue": "={{ $json.source_backend || 'supabase' }}"
+            },
+            {
+              "name": "batch_fetch_limit",
+              "stringValue": "={{ $json.batch_fetch_limit || '25' }}"
+            },
+            {
+              "name": "daily_send_limit",
+              "stringValue": "={{ $json.daily_send_limit || '20' }}"
+            },
+            {
+              "name": "max_attempts_per_prospect",
+              "stringValue": "={{ $json.max_attempts_per_prospect || '3' }}"
+            },
+            {
+              "name": "min_confidence_score",
+              "stringValue": "={{ $json.min_confidence_score || '0.45' }}"
+            },
+            {
+              "name": "batch_run_label",
+              "stringValue": "={{ $json.batch_run_label || 'weekday-morning-run' }}"
+            },
+            {
+              "name": "child_workflow_id_v3",
+              "stringValue": "={{ $json.child_workflow_id_v3 || 'McmOFeZKrK3rJ0D9' }}"
+            },
+            {
+              "name": "child_workflow_label_v3",
+              "stringValue": "={{ $json.child_workflow_label_v3 || 'TransferAI Prospecting V3 CRM Enhanced [FINAL]-11' }}"
+            },
+            {
+              "name": "booking_link_45min",
+              "stringValue": "={{ $json.booking_link_45min || 'https://calendly.com/contact-transferai/30min' }}"
+            },
+            {
+              "name": "active_niche_list_csv",
+              "stringValue": "={{ $json.active_niche_list_csv || 'workflow_administratif,operations_terrain_coordination,assistant_direction_documentaire,banque_kyc_reporting,support_it_intelligent,machine_contenu_marketing,service_client_multicanal,reporting_financier_assiste,social_sequence_active,telemedecine_triage_orientation,formation_montee_en_competence,recrutement_onboarding_augmente,social_form_inbound,social_sequence_fix_required,meeting_booked' }}"
+            },
+            {
+              "name": "active_campaign_label",
+              "stringValue": "={{ $json.active_campaign_label || 'S1-Assistanat-Administratif' }}"
+            },
+            {
+              "name": "child_workflow_id_follow_up",
+              "stringValue": "3Rbwmx5Gkhqf2gO1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set Batch Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        7216,
+        1920
+      ],
+      "id": "69bfc582-e6f1-4be2-a487-769d3b345af0"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts?select=id&channel=eq.email&delivery_status=eq.submitted&sent_at=gte.' + new Date().toISOString().slice(0,10) + 'T00:00:00.000Z' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fetch Today Outreach Count",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        7808,
+        1552
+      ],
+      "id": "2139014f-acc8-4642-b228-bf05160f4e5e",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_runs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  run_label: $json.batch_run_label || 'weekday-morning-run',\n  source_backend: $json.source_backend || 'supabase',\n  source_snapshot: $json,\n  batch_fetch_limit: Number($json.batch_fetch_limit || 25),\n  daily_send_limit: Number($json.daily_send_limit || 5),\n  max_attempts_per_prospect: Number($json.max_attempts_per_prospect || 3),\n  min_confidence_score: Number($json.min_confidence_score || 0.45),\n  active_niche_list_csv: $json.active_niche_list_csv || '',\n  active_campaign_label: $json.active_campaign_label || '',\n  status: 'started',\n  started_at: new Date().toISOString()\n}) }}",
+        "options": {}
+      },
+      "name": "Create Batch Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        8448,
+        2544
+      ],
+      "id": "4a53e349-7ab5-4485-aeb8-145ed71b2109"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "139a0924-55a2-4178-ba2c-a259c987dd7f",
+              "leftValue": "={{$json.source_backend}}",
+              "rightValue": "supabase",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "If Supabase Source",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        7728,
+        1888
+      ],
+      "id": "75aa7157-12d2-4896-9e91-df793966d445"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=*&status=eq.ready&paused=eq.false&order=next_action_at.asc.nullslast,updated_at.asc&limit=' + $json.batch_fetch_limit }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fetch Prospects From Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        8288,
+        1696
+      ],
+      "id": "27aaf7c1-fb0a-4105-8819-d07ae84baa1a",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all().map((item) => item.json);\n\nreturn items.map((row, index) => ({\n  json: {\n    prospect_id: row.prospect_id || row.id || `supabase-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website: row.website || row.domain || '',\n    country: row.country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || row.account_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: 'https://calendly.com/contact-transferai/30min',\n    commercial_priority_default: row.commercial_priority_default || 'tier1',\n    research_scope: row.research_scope || 'public_web_only',\n    source_backend: 'supabase',\n    raw_source_id: row.id || null,\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null\n  }\n}));"
+      },
+      "name": "Normalize Supabase Prospects",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8560,
+        1696
+      ],
+      "id": "85c94194-fd92-4980-91a1-2d166a680019"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "7f8cf06b-4f48-4d78-be61-82a52c938676",
+              "leftValue": "={{ $json.source_backend }}",
+              "rightValue": "airtable",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "If Airtable Source",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        8016,
+        1920
+      ],
+      "id": "286087c7-1a60-4a9d-a4f3-d02573718d9b"
+    },
+    {
+      "parameters": {
+        "url": "={{'https://api.airtable.com/v0/' + $env.AIRTABLE_BASE_ID + '/' + $env.AIRTABLE_TABLE_NAME + '?maxRecords=' + $json.batch_fetch_limit + '&view=' + encodeURIComponent($env.AIRTABLE_READY_VIEW || 'Ready For Outreach')}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{\"Bearer \" + $env.AIRTABLE_API_KEY}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fetch Prospects From Airtable",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        8304,
+        1904
+      ],
+      "id": "76ed4f55-2004-46f4-9ba7-8f174dd88f64",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const records = Array.isArray($json.records) ? $json.records : [];\nreturn records.map((record, index) => {\n  const row = record.fields || {};\n  return { json: {\n    prospect_id: row.prospect_id || record.id || `airtable-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website: row.website || row.domain || '',\n    country: row.country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: row.booking_link_45min || $env.BOOKING_LINK_45MIN || '',\n    commercial_priority_default: row.commercial_priority_default || 'tier1',\n    research_scope: row.research_scope || 'public_web_only',\n    source_backend: 'airtable',\n    raw_source_id: record.id,\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null\n  } };\n});"
+      },
+      "name": "Normalize Airtable Prospects",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8576,
+        1888
+      ],
+      "id": "8d2ec948-be22-45ea-9673-07226eb3af29"
+    },
+    {
+      "parameters": {
+        "url": "=https://docs.google.com/spreadsheets/d/1qqIujbjHEnN3CeV-xMI6hIgsH4hdoIGyp271ozazMwg/export?format=csv&gid=0",
+        "options": {}
+      },
+      "name": "Fetch Prospects From Google Sheets CSV",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        8288,
+        2096
+      ],
+      "id": "1ff8ae94-a26c-40f0-857d-c162b6fa4456",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const raw = String($json.body || $json.data || $json || '');\nconst lines = raw.split(/\\r?\\n/).filter(Boolean);\n\nif (!lines.length) return [];\n\nconst headers = lines.shift().split(',').map((h) => h.trim());\n\nfunction parseLine(line) {\n  const values = line.split(',');\n  const obj = {};\n  headers.forEach((header, index) => {\n    obj[header] = (values[index] || '').trim();\n  });\n  return obj;\n}\n\nreturn lines.map((line, index) => {\n  const row = parseLine(line);\n\n  return {\n    json: {\n      prospect_id: row.prospect_id || `gsheet-${index + 1}`,\n      organization_name: row.organization_name || row.company_name || row.name || '',\n      website: row.website || row.domain || '',\n      country: row.country || \"Côte d'Ivoire\",\n      organization_type: row.organization_type || 'organisation à qualifier',\n      sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n      decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n      target_email: row.target_email || row.email || '',\n      custom_page_paths_csv: row.custom_page_paths_csv || '',\n      booking_link_45min: row.booking_link_45min || 'https://calendly.com/contact-transferai/30min',\n      commercial_priority_default: row.commercial_priority_default || 'tier1',\n      research_scope: row.research_scope || 'public_web_only',\n      source_backend: 'google_sheets_csv',\n      raw_source_id: row.prospect_id || `gsheet-${index + 1}`,\n      outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n      last_response_status: row.last_response_status || '',\n      last_sequence_result: row.last_sequence_result || '',\n      stop_reason: row.stop_reason || '',\n      paused: ['true', '1', 'yes'].includes(String(row.paused || '').toLowerCase()),\n      do_not_contact: ['true', '1', 'yes'].includes(String(row.do_not_contact || '').toLowerCase()),\n      niche_status: row.niche_status || '',\n      next_action_at: row.next_action_at || null\n    }\n  };\n});"
+      },
+      "name": "Normalize Google Sheets Prospects",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8528,
+        2096
+      ],
+      "id": "249adc06-fba2-4900-a14a-2dc588f21b8d"
+    },
+    {
+      "parameters": {
+        "jsCode": "function safeNode(name) {\n  try { return $(name).first().json || {}; } catch (e) { return {}; }\n}\n\nconst items = $input.all().map((item) => item.json);\nconst config = safeNode('Set Batch Config');\n\nlet sentToday = 0;\ntry { sentToday = $('Fetch Today Outreach Count').all().length; } catch (e) {}\n\nconst batchRunResponse = safeNode('Create Batch Run');\nconst batchRunRow = Array.isArray(batchRunResponse) ? batchRunResponse[0] : batchRunResponse;\nconst batchRunId = batchRunRow?.id || null;\n\nconst dailyLimit = Number(config.daily_send_limit || 5);\nconst maxAttempts = Number(config.max_attempts_per_prospect || 3);\nconst remainingCapacity = Math.max(dailyLimit - sentToday, 0);\nconst activeNiches = String(config.active_niche_list_csv || '')\n  .split(',').map((n) => n.trim()).filter(Boolean);\n\nlet scheduled = 0;\nconst outputs = [];\n\nfor (const prospect of items) {\n  let processDecision = 'skip';\n  let stopReason = '';\n\n  const prospectNiche = String(prospect.niche_status || '').trim();\n  const nicheMatch = activeNiches.length === 0 || activeNiches.includes(prospectNiche);\n\n  if (!nicheMatch) {\n    stopReason = 'inactive_niche';\n  } else if (!prospect.organization_name || !prospect.website || prospect.website.trim() === '') {\n    stopReason = 'missing_minimum_profile';\n  } else if (prospect.do_not_contact) {\n    stopReason = 'do_not_contact';\n  } else if (prospect.paused) {\n    stopReason = 'prospect_paused';\n  } else if (String(prospect.stop_reason || '').trim()) {\n    stopReason = prospect.stop_reason;\n  } else if (Number(prospect.outreach_attempt_count || 0) >= maxAttempts) {\n    stopReason = 'max_attempts_reached';\n  } else if (\n    ['interested', 'meeting_booked', 'not_interested', 'unsubscribed']\n      .includes(String(prospect.last_response_status || '').toLowerCase())\n  ) {\n    stopReason = 'sequence_already_closed';\n  } else if (String(prospect.last_sequence_result || '').toLowerCase() === 'no_niche') {\n    stopReason = 'niche_not_relevant';\n  } else if (scheduled >= remainingCapacity) {\n    stopReason = 'daily_quota_reached';\n  } else {\n    processDecision = 'process_now';\n    scheduled += 1;\n  }\n\n  outputs.push({\n    json: {\n      ...prospect,\n      batch_run_id: batchRunId,\n      batch_run_label: config.batch_run_label || 'weekday-morning-run',\n      active_campaign_label: config.active_campaign_label || null,\n      active_niche_list_csv: config.active_niche_list_csv || '',\n      daily_send_limit: dailyLimit,\n      sent_today: sentToday,\n      remaining_capacity: remainingCapacity,\n      process_decision: processDecision,\n      batch_stop_reason: stopReason || null\n    }\n  });\n}\n\nreturn outputs;"
+      },
+      "name": "Build Eligible Prospect Queue",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8960,
+        2176
+      ],
+      "id": "fdebcadf-deb5-40cc-96ef-9304fce03b24",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "2625d483-9e78-4e24-bd52-1d567dc9dde2",
+              "leftValue": "={{ $json.process_decision }}",
+              "rightValue": "process_now",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "If Prospect Eligible",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        9264,
+        2176
+      ],
+      "id": "0804a633-60cd-4410-97ea-a61f3845b233"
+    },
+    {
+      "parameters": {
+        "workflowId": "={{ $json.child_workflow_id_v3 || 'rQyOh7As2gQoCgvK' }}",
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "name": "Execute Prospect Workflow V3",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        9440,
+        1856
+      ],
+      "id": "2e63d3b6-b6b6-48dc-a581-5678c3d9cc10"
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "batch_status",
+              "stringValue": "dispatched_to_v3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Mark Dispatched To V3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        9904,
+        1792
+      ],
+      "id": "460f0834-d64e-4979-9dec-486ed2bee7d2"
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "batch_status",
+              "stringValue": "skipped_in_batch"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Mark Skipped In Batch",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        9728,
+        2192
+      ],
+      "id": "a74fffac-162f-46c7-b74b-d0c0975ac49f"
+    },
+    {
+      "parameters": {},
+      "name": "Merge Batch Outcomes",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        10256,
+        1888
+      ],
+      "id": "15b9a6a3-5dca-4404-a552-432f022a5ecf"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all().map((item) => item.json);\nconst config = $('Set Batch Config').first().json;\nconst processed = items.filter((item) => item.batch_status === 'dispatched_to_v3').length;\nconst skipped = items.filter((item) => item.batch_status === 'skipped_in_batch').length;\nconst skipReasons = {};\nfor (const item of items.filter((entry) => entry.batch_stop_reason)) {\n  skipReasons[item.batch_stop_reason] = (skipReasons[item.batch_stop_reason] || 0) + 1;\n}\nconst renderedCataloguesCount = items.filter((item) => item.catalogue_artifact).length;\nconst renderedDecksCount = items.filter((item) => item.deck_artifact).length;\nconst renderErrorCount = items.filter((item) => item.render_errors && Object.keys(item.render_errors).length > 0).length;\nconst attachmentsTotalCount = items.reduce((sum, item) => sum + Number(item.attachments_count || 0), 0);\nconst batchRunResponse = $('Create Batch Run').first().json;\nconst batchRunRow = Array.isArray(batchRunResponse) ? batchRunResponse[0] : batchRunResponse;\nreturn [{ json: {\n  batch_run_id: batchRunRow?.id || null,\n  batch_run_label: items[0]?.batch_run_label || batchRunRow?.run_label || 'batch-run',\n  active_campaign_label: items[0]?.active_campaign_label || config.active_campaign_label || null,\n  active_niche_list_csv: items[0]?.active_niche_list_csv || config.active_niche_list_csv || '',\n  child_workflow_id_v3: items[0]?.child_workflow_id_v3 || config.child_workflow_id_v3 || null,\n  child_workflow_label_v3: items[0]?.child_workflow_label_v3 || config.child_workflow_label_v3 || null,\n  processed_count: processed,\n  skipped_count: skipped,\n  rendered_catalogues_count: renderedCataloguesCount,\n  rendered_decks_count: renderedDecksCount,\n  rendered_attachments_total: attachmentsTotalCount,\n  render_error_count: renderErrorCount,\n  skip_reasons: skipReasons,\n  generated_at: new Date().toISOString()\n} }];"
+      },
+      "name": "Build Batch Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        10512,
+        1888
+      ],
+      "id": "61881da8-5763-4369-8156-901975bacecd"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_run_items",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  batch_run_id: $json.batch_run_id || $('Create Batch Run').first().json.id || null,\n  prospect_id: $json.prospect_id || null,\n  pack_id: $json.pack_id || null,\n  organization_name: $json.organization_name || null,\n  website: $json.website || null,\n  process_decision: $json.process_decision || 'process_now',\n  batch_status: $json.batch_status || 'dispatched_to_v3',\n  batch_stop_reason: $json.batch_stop_reason || null,\n  active_campaign_label: $json.active_campaign_label || null,\n  niche_status: $json.niche_status || null\n}) }}",
+        "options": {}
+      },
+      "name": "Log Processed Batch Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        10096,
+        1440
+      ],
+      "id": "07e5ac01-849e-42c7-8cb8-d6b8cb712946"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_run_items",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  batch_run_id: $json.batch_run_id || $('Create Batch Run').first().json.id || null,\n  prospect_id: $json.prospect_id || null,\n  pack_id: $json.pack_id || null,\n  organization_name: $json.organization_name || null,\n  website: $json.website || null,\n  process_decision: $json.process_decision || 'skip',\n  batch_status: $json.batch_status || 'skipped_in_batch',\n  batch_stop_reason: $json.batch_stop_reason || null,\n  active_campaign_label: $json.active_campaign_label || null,\n  niche_status: $json.niche_status || null\n}) }}",
+        "options": {}
+      },
+      "name": "Log Skipped Batch Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        10288,
+        2208
+      ],
+      "id": "653e9900-2758-43fb-95ab-dc375c99f273"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_runs?id=eq.' + encodeURIComponent($json.batch_run_id) }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ processed_count: $json.processed_count, skipped_count: $json.skipped_count, status: 'completed', completed_at: new Date().toISOString(), failure_reason: null })}}",
+        "options": {}
+      },
+      "name": "Finalize Batch Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        10768,
+        1888
+      ],
+      "id": "64596b09-2362-4449-a700-f167c9665a66",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        8784,
+        2176
+      ],
+      "id": "e2bf29cf-1d39-4dcf-8f42-8d689dc4be56",
+      "name": "Merge Prospects With Batch Run"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a302dd67-86d6-42c3-803d-b3642a3266e9",
+              "name": "batch_run_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "38a3bd7f-1e3a-47e7-a853-972e7a046543",
+              "name": "batch_run_label",
+              "value": "={{ $json.run_label }}",
+              "type": "string"
+            },
+            {
+              "id": "717e18da-e242-4ef2-b333-8b775a89c8d4",
+              "name": "active_campaign_label",
+              "value": "={{ $json.active_campaign_label \n\n '' }}",
+              "type": "string"
+            },
+            {
+              "id": "1e862f50-887f-41b1-9ee7-cfbd805f6cfc",
+              "name": "active_niche_list_csv",
+              "value": "={{ $json.active_niche_list_csv \n\n '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        7856,
+        2512
+      ],
+      "id": "53ddc65a-fe2f-4cf0-abf0-34264f79a8b4",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "=rQyOh7As2gQoCgvK",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/=rQyOh7As2gQoCgvK"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        9456,
+        1648
+      ],
+      "id": "d51b2006-d352-43dc-a265-4d9d1e7c4d7a",
+      "name": "Execute Prospect Workflow V89"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d7566a10-1b0d-4995-a3cc-6f0e990b2790",
+              "leftValue": "={{ $json.last_sequence_result }}",
+              "rightValue": "^(sent_v3\nfollow_up_sent_\\d+)$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        9152,
+        1776
+      ],
+      "id": "8d221f7e-d1d0-40a7-81b8-cc72b4d055e5",
+      "name": "If Prospect Eligible1"
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Batch Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Batch Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Batch Config": {
+      "main": [
+        [
+          {
+            "node": "If Supabase Source",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Today Outreach Count",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Batch Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Supabase Source": {
+      "main": [
+        [
+          {
+            "node": "Fetch Prospects From Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Airtable Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Prospects From Supabase": {
+      "main": [
+        [
+          {
+            "node": "Normalize Supabase Prospects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Supabase Prospects": {
+      "main": [
+        [
+          {
+            "node": "Merge Prospects With Batch Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Airtable Source": {
+      "main": [
+        [
+          {
+            "node": "Fetch Prospects From Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Prospects From Google Sheets CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Prospects From Airtable": {
+      "main": [
+        [
+          {
+            "node": "Normalize Airtable Prospects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Airtable Prospects": {
+      "main": [
+        []
+      ]
+    },
+    "Fetch Prospects From Google Sheets CSV": {
+      "main": [
+        [
+          {
+            "node": "Normalize Google Sheets Prospects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Google Sheets Prospects": {
+      "main": [
+        []
+      ]
+    },
+    "Build Eligible Prospect Queue": {
+      "main": [
+        [
+          {
+            "node": "If Prospect Eligible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Prospect Eligible": {
+      "main": [
+        [
+          {
+            "node": "If Prospect Eligible1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Skipped In Batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Prospect Workflow V3": {
+      "main": [
+        [
+          {
+            "node": "Mark Dispatched To V3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Dispatched To V3": {
+      "main": [
+        [
+          {
+            "node": "Log Processed Batch Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Skipped In Batch": {
+      "main": [
+        [
+          {
+            "node": "Log Skipped Batch Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Batch Outcomes": {
+      "main": [
+        [
+          {
+            "node": "Build Batch Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Processed Batch Item": {
+      "main": [
+        [
+          {
+            "node": "Merge Batch Outcomes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Skipped Batch Item": {
+      "main": [
+        [
+          {
+            "node": "Merge Batch Outcomes",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Build Batch Summary": {
+      "main": [
+        [
+          {
+            "node": "Finalize Batch Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Batch Run": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Prospects With Batch Run": {
+      "main": [
+        [
+          {
+            "node": "Build Eligible Prospect Queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge Prospects With Batch Run",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Execute Prospect Workflow V89": {
+      "main": [
+        [
+          {
+            "node": "Mark Dispatched To V3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Prospect Eligible1": {
+      "main": [
+        [
+          {
+            "node": "Execute Prospect Workflow V89",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Prospect Workflow V3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": {
+    "node:Daily Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "meta": null,
+  "pinData": {},
+  "versionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
+  "activeVersionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
+  "versionCounter": 595,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-06-07T18:47:35.936Z",
+      "createdAt": "2026-06-07T18:47:35.936Z",
+      "role": "workflow:owner",
+      "workflowId": "artMSEypvgBIDR58",
+      "projectId": "br4WNyB51LUb9pkP",
+      "project": {
+        "updatedAt": "2026-03-12T23:52:20.806Z",
+        "createdAt": "2026-03-11T00:39:45.487Z",
+        "id": "br4WNyB51LUb9pkP",
+        "name": "marius ayoro <marius.ayoro70@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "bd1cd523-0846-4f4f-807c-02e596e874ca"
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-05-03T22:34:59.820Z",
+      "createdAt": "2026-05-03T22:34:59.820Z",
+      "id": "2r7eSS4qi7O5UnRC",
+      "name": "n8n"
+    },
+    {
+      "updatedAt": "2026-05-22T23:19:01.025Z",
+      "createdAt": "2026-05-22T23:19:01.025Z",
+      "id": "315WaRTwXryKbT4t",
+      "name": "multi-prospect"
+    },
+    {
+      "updatedAt": "2026-06-03T05:47:32.074Z",
+      "createdAt": "2026-06-03T05:47:32.074Z",
+      "id": "7ioGdJcyX3tP4urX",
+      "name": "batch"
+    },
+    {
+      "updatedAt": "2026-05-03T22:34:59.803Z",
+      "createdAt": "2026-05-03T22:34:59.803Z",
+      "id": "AxBM52Emi3tTDxlG",
+      "name": "transferai"
+    },
+    {
+      "updatedAt": "2026-05-22T20:26:33.896Z",
+      "createdAt": "2026-05-22T20:26:33.896Z",
+      "id": "LS1xqEW9cRhyCbRm",
+      "name": "prospection"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-06-29T14:52:23.000Z",
+    "createdAt": "2026-06-29T14:52:08.140Z",
+    "versionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
+    "workflowId": "artMSEypvgBIDR58",
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          6928,
+          1808
+        ],
+        "id": "15ace4b4-ffe0-4ffd-9631-b72953c02c81"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "cronExpression",
+                "expression": "0 8 * * 1-5"
+              }
+            ]
+          }
+        },
+        "name": "Daily Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1,
+        "position": [
+          6944,
+          2016
+        ],
+        "id": "32986180-08bf-45d1-b78b-37ac0df33137"
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "source_backend",
+                "stringValue": "={{ $json.source_backend || 'supabase' }}"
+              },
+              {
+                "name": "batch_fetch_limit",
+                "stringValue": "={{ $json.batch_fetch_limit || '25' }}"
+              },
+              {
+                "name": "daily_send_limit",
+                "stringValue": "={{ $json.daily_send_limit || '20' }}"
+              },
+              {
+                "name": "max_attempts_per_prospect",
+                "stringValue": "={{ $json.max_attempts_per_prospect || '3' }}"
+              },
+              {
+                "name": "min_confidence_score",
+                "stringValue": "={{ $json.min_confidence_score || '0.45' }}"
+              },
+              {
+                "name": "batch_run_label",
+                "stringValue": "={{ $json.batch_run_label || 'weekday-morning-run' }}"
+              },
+              {
+                "name": "child_workflow_id_v3",
+                "stringValue": "={{ $json.child_workflow_id_v3 || 'McmOFeZKrK3rJ0D9' }}"
+              },
+              {
+                "name": "child_workflow_label_v3",
+                "stringValue": "={{ $json.child_workflow_label_v3 || 'TransferAI Prospecting V3 CRM Enhanced [FINAL]-11' }}"
+              },
+              {
+                "name": "booking_link_45min",
+                "stringValue": "={{ $json.booking_link_45min || 'https://calendly.com/contact-transferai/30min' }}"
+              },
+              {
+                "name": "active_niche_list_csv",
+                "stringValue": "={{ $json.active_niche_list_csv || 'workflow_administratif,operations_terrain_coordination,assistant_direction_documentaire,banque_kyc_reporting,support_it_intelligent,machine_contenu_marketing,service_client_multicanal,reporting_financier_assiste,social_sequence_active,telemedecine_triage_orientation,formation_montee_en_competence,recrutement_onboarding_augmente,social_form_inbound,social_sequence_fix_required,meeting_booked' }}"
+              },
+              {
+                "name": "active_campaign_label",
+                "stringValue": "={{ $json.active_campaign_label || 'S1-Assistanat-Administratif' }}"
+              },
+              {
+                "name": "child_workflow_id_follow_up",
+                "stringValue": "3Rbwmx5Gkhqf2gO1"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Set Batch Config",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3,
+        "position": [
+          7216,
+          1920
+        ],
+        "id": "69bfc582-e6f1-4be2-a487-769d3b345af0"
+      },
+      {
+        "parameters": {
+          "url": "={{ 'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts?select=id&channel=eq.email&delivery_status=eq.submitted&sent_at=gte.' + new Date().toISOString().slice(0,10) + 'T00:00:00.000Z' }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Authorization",
+                "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Fetch Today Outreach Count",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          7808,
+          1552
+        ],
+        "id": "2139014f-acc8-4642-b228-bf05160f4e5e",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_runs",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Prefer",
+                "value": "return=representation"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({\n  run_label: $json.batch_run_label || 'weekday-morning-run',\n  source_backend: $json.source_backend || 'supabase',\n  source_snapshot: $json,\n  batch_fetch_limit: Number($json.batch_fetch_limit || 25),\n  daily_send_limit: Number($json.daily_send_limit || 5),\n  max_attempts_per_prospect: Number($json.max_attempts_per_prospect || 3),\n  min_confidence_score: Number($json.min_confidence_score || 0.45),\n  active_niche_list_csv: $json.active_niche_list_csv || '',\n  active_campaign_label: $json.active_campaign_label || '',\n  status: 'started',\n  started_at: new Date().toISOString()\n}) }}",
+          "options": {}
+        },
+        "name": "Create Batch Run",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          8448,
+          2544
+        ],
+        "id": "4a53e349-7ab5-4485-aeb8-145ed71b2109"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            },
+            "conditions": [
+              {
+                "id": "139a0924-55a2-4178-ba2c-a259c987dd7f",
+                "leftValue": "={{$json.source_backend}}",
+                "rightValue": "supabase",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "name": "If Supabase Source",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          7728,
+          1888
+        ],
+        "id": "75aa7157-12d2-4896-9e91-df793966d445"
+      },
+      {
+        "parameters": {
+          "url": "={{ 'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?select=*&status=eq.ready&paused=eq.false&order=next_action_at.asc.nullslast,updated_at.asc&limit=' + $json.batch_fetch_limit }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Authorization",
+                "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Fetch Prospects From Supabase",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          8288,
+          1696
+        ],
+        "id": "27aaf7c1-fb0a-4105-8819-d07ae84baa1a",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "jsCode": "const items = $input.all().map((item) => item.json);\n\nreturn items.map((row, index) => ({\n  json: {\n    prospect_id: row.prospect_id || row.id || `supabase-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website: row.website || row.domain || '',\n    country: row.country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || row.account_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: 'https://calendly.com/contact-transferai/30min',\n    commercial_priority_default: row.commercial_priority_default || 'tier1',\n    research_scope: row.research_scope || 'public_web_only',\n    source_backend: 'supabase',\n    raw_source_id: row.id || null,\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null\n  }\n}));"
+        },
+        "name": "Normalize Supabase Prospects",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          8560,
+          1696
+        ],
+        "id": "85c94194-fd92-4980-91a1-2d166a680019"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            },
+            "conditions": [
+              {
+                "id": "7f8cf06b-4f48-4d78-be61-82a52c938676",
+                "leftValue": "={{ $json.source_backend }}",
+                "rightValue": "airtable",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "name": "If Airtable Source",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          8016,
+          1920
+        ],
+        "id": "286087c7-1a60-4a9d-a4f3-d02573718d9b"
+      },
+      {
+        "parameters": {
+          "url": "={{'https://api.airtable.com/v0/' + $env.AIRTABLE_BASE_ID + '/' + $env.AIRTABLE_TABLE_NAME + '?maxRecords=' + $json.batch_fetch_limit + '&view=' + encodeURIComponent($env.AIRTABLE_READY_VIEW || 'Ready For Outreach')}}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "={{\"Bearer \" + $env.AIRTABLE_API_KEY}}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Fetch Prospects From Airtable",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          8304,
+          1904
+        ],
+        "id": "76ed4f55-2004-46f4-9ba7-8f174dd88f64",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "const records = Array.isArray($json.records) ? $json.records : [];\nreturn records.map((record, index) => {\n  const row = record.fields || {};\n  return { json: {\n    prospect_id: row.prospect_id || record.id || `airtable-${index + 1}`,\n    organization_name: row.organization_name || row.company_name || row.name || '',\n    website: row.website || row.domain || '',\n    country: row.country || \"Côte d'Ivoire\",\n    organization_type: row.organization_type || 'organisation à qualifier',\n    sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n    decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n    target_email: row.target_email || row.email || '',\n    custom_page_paths_csv: row.custom_page_paths_csv || '',\n    booking_link_45min: row.booking_link_45min || $env.BOOKING_LINK_45MIN || '',\n    commercial_priority_default: row.commercial_priority_default || 'tier1',\n    research_scope: row.research_scope || 'public_web_only',\n    source_backend: 'airtable',\n    raw_source_id: record.id,\n    outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n    last_response_status: row.last_response_status || '',\n    last_sequence_result: row.last_sequence_result || '',\n    stop_reason: row.stop_reason || '',\n    paused: Boolean(row.paused),\n    do_not_contact: Boolean(row.do_not_contact),\n    niche_status: row.niche_status || '',\n    next_action_at: row.next_action_at || null\n  } };\n});"
+        },
+        "name": "Normalize Airtable Prospects",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          8576,
+          1888
+        ],
+        "id": "8d2ec948-be22-45ea-9673-07226eb3af29"
+      },
+      {
+        "parameters": {
+          "url": "=https://docs.google.com/spreadsheets/d/1qqIujbjHEnN3CeV-xMI6hIgsH4hdoIGyp271ozazMwg/export?format=csv&gid=0",
+          "options": {}
+        },
+        "name": "Fetch Prospects From Google Sheets CSV",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          8288,
+          2096
+        ],
+        "id": "1ff8ae94-a26c-40f0-857d-c162b6fa4456",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "const raw = String($json.body || $json.data || $json || '');\nconst lines = raw.split(/\\r?\\n/).filter(Boolean);\n\nif (!lines.length) return [];\n\nconst headers = lines.shift().split(',').map((h) => h.trim());\n\nfunction parseLine(line) {\n  const values = line.split(',');\n  const obj = {};\n  headers.forEach((header, index) => {\n    obj[header] = (values[index] || '').trim();\n  });\n  return obj;\n}\n\nreturn lines.map((line, index) => {\n  const row = parseLine(line);\n\n  return {\n    json: {\n      prospect_id: row.prospect_id || `gsheet-${index + 1}`,\n      organization_name: row.organization_name || row.company_name || row.name || '',\n      website: row.website || row.domain || '',\n      country: row.country || \"Côte d'Ivoire\",\n      organization_type: row.organization_type || 'organisation à qualifier',\n      sector_guess: row.sector_guess || row.industry || 'secteur à confirmer',\n      decision_maker_name: row.decision_maker_name || row.contact_name || 'Décideur à confirmer',\n      target_email: row.target_email || row.email || '',\n      custom_page_paths_csv: row.custom_page_paths_csv || '',\n      booking_link_45min: row.booking_link_45min || 'https://calendly.com/contact-transferai/30min',\n      commercial_priority_default: row.commercial_priority_default || 'tier1',\n      research_scope: row.research_scope || 'public_web_only',\n      source_backend: 'google_sheets_csv',\n      raw_source_id: row.prospect_id || `gsheet-${index + 1}`,\n      outreach_attempt_count: Number(row.outreach_attempt_count || 0),\n      last_response_status: row.last_response_status || '',\n      last_sequence_result: row.last_sequence_result || '',\n      stop_reason: row.stop_reason || '',\n      paused: ['true', '1', 'yes'].includes(String(row.paused || '').toLowerCase()),\n      do_not_contact: ['true', '1', 'yes'].includes(String(row.do_not_contact || '').toLowerCase()),\n      niche_status: row.niche_status || '',\n      next_action_at: row.next_action_at || null\n    }\n  };\n});"
+        },
+        "name": "Normalize Google Sheets Prospects",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          8528,
+          2096
+        ],
+        "id": "249adc06-fba2-4900-a14a-2dc588f21b8d"
+      },
+      {
+        "parameters": {
+          "jsCode": "function safeNode(name) {\n  try { return $(name).first().json || {}; } catch (e) { return {}; }\n}\n\nconst items = $input.all().map((item) => item.json);\nconst config = safeNode('Set Batch Config');\n\nlet sentToday = 0;\ntry { sentToday = $('Fetch Today Outreach Count').all().length; } catch (e) {}\n\nconst batchRunResponse = safeNode('Create Batch Run');\nconst batchRunRow = Array.isArray(batchRunResponse) ? batchRunResponse[0] : batchRunResponse;\nconst batchRunId = batchRunRow?.id || null;\n\nconst dailyLimit = Number(config.daily_send_limit || 5);\nconst maxAttempts = Number(config.max_attempts_per_prospect || 3);\nconst remainingCapacity = Math.max(dailyLimit - sentToday, 0);\nconst activeNiches = String(config.active_niche_list_csv || '')\n  .split(',').map((n) => n.trim()).filter(Boolean);\n\nlet scheduled = 0;\nconst outputs = [];\n\nfor (const prospect of items) {\n  let processDecision = 'skip';\n  let stopReason = '';\n\n  const prospectNiche = String(prospect.niche_status || '').trim();\n  const nicheMatch = activeNiches.length === 0 || activeNiches.includes(prospectNiche);\n\n  if (!nicheMatch) {\n    stopReason = 'inactive_niche';\n  } else if (!prospect.organization_name || !prospect.website || prospect.website.trim() === '') {\n    stopReason = 'missing_minimum_profile';\n  } else if (prospect.do_not_contact) {\n    stopReason = 'do_not_contact';\n  } else if (prospect.paused) {\n    stopReason = 'prospect_paused';\n  } else if (String(prospect.stop_reason || '').trim()) {\n    stopReason = prospect.stop_reason;\n  } else if (Number(prospect.outreach_attempt_count || 0) >= maxAttempts) {\n    stopReason = 'max_attempts_reached';\n  } else if (\n    ['interested', 'meeting_booked', 'not_interested', 'unsubscribed']\n      .includes(String(prospect.last_response_status || '').toLowerCase())\n  ) {\n    stopReason = 'sequence_already_closed';\n  } else if (String(prospect.last_sequence_result || '').toLowerCase() === 'no_niche') {\n    stopReason = 'niche_not_relevant';\n  } else if (scheduled >= remainingCapacity) {\n    stopReason = 'daily_quota_reached';\n  } else {\n    processDecision = 'process_now';\n    scheduled += 1;\n  }\n\n  outputs.push({\n    json: {\n      ...prospect,\n      batch_run_id: batchRunId,\n      batch_run_label: config.batch_run_label || 'weekday-morning-run',\n      active_campaign_label: config.active_campaign_label || null,\n      active_niche_list_csv: config.active_niche_list_csv || '',\n      daily_send_limit: dailyLimit,\n      sent_today: sentToday,\n      remaining_capacity: remainingCapacity,\n      process_decision: processDecision,\n      batch_stop_reason: stopReason || null\n    }\n  });\n}\n\nreturn outputs;"
+        },
+        "name": "Build Eligible Prospect Queue",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          8960,
+          2176
+        ],
+        "id": "fdebcadf-deb5-40cc-96ef-9304fce03b24",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            },
+            "conditions": [
+              {
+                "id": "2625d483-9e78-4e24-bd52-1d567dc9dde2",
+                "leftValue": "={{ $json.process_decision }}",
+                "rightValue": "process_now",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "name": "If Prospect Eligible",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          9264,
+          2176
+        ],
+        "id": "0804a633-60cd-4410-97ea-a61f3845b233"
+      },
+      {
+        "parameters": {
+          "workflowId": "={{ $json.child_workflow_id_v3 || 'rQyOh7As2gQoCgvK' }}",
+          "mode": "each",
+          "options": {
+            "waitForSubWorkflow": false
+          }
+        },
+        "name": "Execute Prospect Workflow V3",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1,
+        "position": [
+          9440,
+          1856
+        ],
+        "id": "2e63d3b6-b6b6-48dc-a581-5678c3d9cc10"
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "batch_status",
+                "stringValue": "dispatched_to_v3"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Mark Dispatched To V3",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3,
+        "position": [
+          9904,
+          1792
+        ],
+        "id": "460f0834-d64e-4979-9dec-486ed2bee7d2"
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "batch_status",
+                "stringValue": "skipped_in_batch"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Mark Skipped In Batch",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3,
+        "position": [
+          9728,
+          2192
+        ],
+        "id": "a74fffac-162f-46c7-b74b-d0c0975ac49f"
+      },
+      {
+        "parameters": {},
+        "name": "Merge Batch Outcomes",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          10256,
+          1888
+        ],
+        "id": "15b9a6a3-5dca-4404-a552-432f022a5ecf"
+      },
+      {
+        "parameters": {
+          "jsCode": "const items = $input.all().map((item) => item.json);\nconst config = $('Set Batch Config').first().json;\nconst processed = items.filter((item) => item.batch_status === 'dispatched_to_v3').length;\nconst skipped = items.filter((item) => item.batch_status === 'skipped_in_batch').length;\nconst skipReasons = {};\nfor (const item of items.filter((entry) => entry.batch_stop_reason)) {\n  skipReasons[item.batch_stop_reason] = (skipReasons[item.batch_stop_reason] || 0) + 1;\n}\nconst renderedCataloguesCount = items.filter((item) => item.catalogue_artifact).length;\nconst renderedDecksCount = items.filter((item) => item.deck_artifact).length;\nconst renderErrorCount = items.filter((item) => item.render_errors && Object.keys(item.render_errors).length > 0).length;\nconst attachmentsTotalCount = items.reduce((sum, item) => sum + Number(item.attachments_count || 0), 0);\nconst batchRunResponse = $('Create Batch Run').first().json;\nconst batchRunRow = Array.isArray(batchRunResponse) ? batchRunResponse[0] : batchRunResponse;\nreturn [{ json: {\n  batch_run_id: batchRunRow?.id || null,\n  batch_run_label: items[0]?.batch_run_label || batchRunRow?.run_label || 'batch-run',\n  active_campaign_label: items[0]?.active_campaign_label || config.active_campaign_label || null,\n  active_niche_list_csv: items[0]?.active_niche_list_csv || config.active_niche_list_csv || '',\n  child_workflow_id_v3: items[0]?.child_workflow_id_v3 || config.child_workflow_id_v3 || null,\n  child_workflow_label_v3: items[0]?.child_workflow_label_v3 || config.child_workflow_label_v3 || null,\n  processed_count: processed,\n  skipped_count: skipped,\n  rendered_catalogues_count: renderedCataloguesCount,\n  rendered_decks_count: renderedDecksCount,\n  rendered_attachments_total: attachmentsTotalCount,\n  render_error_count: renderErrorCount,\n  skip_reasons: skipReasons,\n  generated_at: new Date().toISOString()\n} }];"
+        },
+        "name": "Build Batch Summary",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          10512,
+          1888
+        ],
+        "id": "61881da8-5763-4369-8156-901975bacecd"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_run_items",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Authorization",
+                "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({\n  batch_run_id: $json.batch_run_id || $('Create Batch Run').first().json.id || null,\n  prospect_id: $json.prospect_id || null,\n  pack_id: $json.pack_id || null,\n  organization_name: $json.organization_name || null,\n  website: $json.website || null,\n  process_decision: $json.process_decision || 'process_now',\n  batch_status: $json.batch_status || 'dispatched_to_v3',\n  batch_stop_reason: $json.batch_stop_reason || null,\n  active_campaign_label: $json.active_campaign_label || null,\n  niche_status: $json.niche_status || null\n}) }}",
+          "options": {}
+        },
+        "name": "Log Processed Batch Item",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          10096,
+          1440
+        ],
+        "id": "07e5ac01-849e-42c7-8cb8-d6b8cb712946"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_run_items",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Authorization",
+                "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({\n  batch_run_id: $json.batch_run_id || $('Create Batch Run').first().json.id || null,\n  prospect_id: $json.prospect_id || null,\n  pack_id: $json.pack_id || null,\n  organization_name: $json.organization_name || null,\n  website: $json.website || null,\n  process_decision: $json.process_decision || 'skip',\n  batch_status: $json.batch_status || 'skipped_in_batch',\n  batch_stop_reason: $json.batch_stop_reason || null,\n  active_campaign_label: $json.active_campaign_label || null,\n  niche_status: $json.niche_status || null\n}) }}",
+          "options": {}
+        },
+        "name": "Log Skipped Batch Item",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          10288,
+          2208
+        ],
+        "id": "653e9900-2758-43fb-95ab-dc375c99f273"
+      },
+      {
+        "parameters": {
+          "method": "PATCH",
+          "url": "={{ 'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospecting_batch_runs?id=eq.' + encodeURIComponent($json.batch_run_id) }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Authorization",
+                "value": "=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{JSON.stringify({ processed_count: $json.processed_count, skipped_count: $json.skipped_count, status: 'completed', completed_at: new Date().toISOString(), failure_reason: null })}}",
+          "options": {}
+        },
+        "name": "Finalize Batch Run",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4,
+        "position": [
+          10768,
+          1888
+        ],
+        "id": "64596b09-2362-4449-a700-f167c9665a66",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineAll",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          8784,
+          2176
+        ],
+        "id": "e2bf29cf-1d39-4dcf-8f42-8d689dc4be56",
+        "name": "Merge Prospects With Batch Run"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a302dd67-86d6-42c3-803d-b3642a3266e9",
+                "name": "batch_run_id",
+                "value": "={{ $json.id }}",
+                "type": "string"
+              },
+              {
+                "id": "38a3bd7f-1e3a-47e7-a853-972e7a046543",
+                "name": "batch_run_label",
+                "value": "={{ $json.run_label }}",
+                "type": "string"
+              },
+              {
+                "id": "717e18da-e242-4ef2-b333-8b775a89c8d4",
+                "name": "active_campaign_label",
+                "value": "={{ $json.active_campaign_label \n\n '' }}",
+                "type": "string"
+              },
+              {
+                "id": "1e862f50-887f-41b1-9ee7-cfbd805f6cfc",
+                "name": "active_niche_list_csv",
+                "value": "={{ $json.active_niche_list_csv \n\n '' }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          7856,
+          2512
+        ],
+        "id": "53ddc65a-fe2f-4cf0-abf0-34264f79a8b4",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "=rQyOh7As2gQoCgvK",
+            "mode": "id",
+            "cachedResultUrl": "/workflow/=rQyOh7As2gQoCgvK"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "mode": "each",
+          "options": {
+            "waitForSubWorkflow": false
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          9456,
+          1648
+        ],
+        "id": "d51b2006-d352-43dc-a265-4d9d1e7c4d7a",
+        "name": "Execute Prospect Workflow V89"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "d7566a10-1b0d-4995-a3cc-6f0e990b2790",
+                "leftValue": "={{ $json.last_sequence_result }}",
+                "rightValue": "^(sent_v3\nfollow_up_sent_\\d+)$",
+                "operator": {
+                  "type": "string",
+                  "operation": "regex"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          9152,
+          1776
+        ],
+        "id": "8d221f7e-d1d0-40a7-81b8-cc72b4d055e5",
+        "name": "If Prospect Eligible1"
+      }
+    ],
+    "connections": {
+      "Manual Trigger": {
+        "main": [
+          [
+            {
+              "node": "Set Batch Config",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Daily Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Set Batch Config",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Batch Config": {
+        "main": [
+          [
+            {
+              "node": "If Supabase Source",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Fetch Today Outreach Count",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Create Batch Run",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If Supabase Source": {
+        "main": [
+          [
+            {
+              "node": "Fetch Prospects From Supabase",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "If Airtable Source",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Prospects From Supabase": {
+        "main": [
+          [
+            {
+              "node": "Normalize Supabase Prospects",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Normalize Supabase Prospects": {
+        "main": [
+          [
+            {
+              "node": "Merge Prospects With Batch Run",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If Airtable Source": {
+        "main": [
+          [
+            {
+              "node": "Fetch Prospects From Airtable",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Prospects From Google Sheets CSV",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Prospects From Airtable": {
+        "main": [
+          [
+            {
+              "node": "Normalize Airtable Prospects",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Normalize Airtable Prospects": {
+        "main": [
+          []
+        ]
+      },
+      "Fetch Prospects From Google Sheets CSV": {
+        "main": [
+          [
+            {
+              "node": "Normalize Google Sheets Prospects",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Normalize Google Sheets Prospects": {
+        "main": [
+          []
+        ]
+      },
+      "Build Eligible Prospect Queue": {
+        "main": [
+          [
+            {
+              "node": "If Prospect Eligible",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If Prospect Eligible": {
+        "main": [
+          [
+            {
+              "node": "If Prospect Eligible1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Mark Skipped In Batch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Execute Prospect Workflow V3": {
+        "main": [
+          [
+            {
+              "node": "Mark Dispatched To V3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mark Dispatched To V3": {
+        "main": [
+          [
+            {
+              "node": "Log Processed Batch Item",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mark Skipped In Batch": {
+        "main": [
+          [
+            {
+              "node": "Log Skipped Batch Item",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge Batch Outcomes": {
+        "main": [
+          [
+            {
+              "node": "Build Batch Summary",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Processed Batch Item": {
+        "main": [
+          [
+            {
+              "node": "Merge Batch Outcomes",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Skipped Batch Item": {
+        "main": [
+          [
+            {
+              "node": "Merge Batch Outcomes",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Build Batch Summary": {
+        "main": [
+          [
+            {
+              "node": "Finalize Batch Run",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Create Batch Run": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge Prospects With Batch Run": {
+        "main": [
+          [
+            {
+              "node": "Build Eligible Prospect Queue",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Merge Prospects With Batch Run",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Execute Prospect Workflow V89": {
+        "main": [
+          [
+            {
+              "node": "Mark Dispatched To V3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If Prospect Eligible1": {
+        "main": [
+          [
+            {
+              "node": "Execute Prospect Workflow V89",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Execute Prospect Workflow V3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "marius ayoro",
+    "name": "Version 7fbf4fcf",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-06-29T14:52:23.243Z",
+        "id": 643,
+        "workflowId": "artMSEypvgBIDR58",
+        "versionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
+        "event": "activated",
+        "userId": "bd1cd523-0846-4f4f-807c-02e596e874ca"
+      }
+    ]
+  }
+}
