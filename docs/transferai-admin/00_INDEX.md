@@ -93,6 +93,7 @@ Le pack a 4 objectifs :
 80. [Guide intégration Deck V3 n8n](./109_Guide_Integration_Deck_V3_n8n.md) — câblage n8n Execute Command pour deck PPTX+PDF → Supabase
 81. [**Guide utilisateur — Pack Prospect complet : Deck + Mini-Catalogue PDF (28/06/2026)**](./110_Guide_Utilisateur_Pack_Prospect_Deck_MiniCatalogue_2026-06-28.md) — génération automatique lettre + catalogue PDF + deck PPTX/PDF
 82. [**Guide troubleshooting — Pack Prospect : Deck + Mini-Catalogue PDF (28/06/2026)**](./111_Guide_Troubleshooting_Pack_Prospect_Deck_MiniCatalogue_2026-06-28.md) — 9 erreurs documentées et corrigées (ReportLab, Supabase, layout PDF, git)
+83. [**Guide utilisateur — Pipeline automatique V4 → V3 → V6 · 300 sociétés · 5/jour**](./112_Guide_Utilisateur_Pipeline_Automatique_V4_V3_V6_300_Prospects.md) — 4 corrections bloquantes, import prospects, checklist complète go-live
 
 ## Ordre de lecture recommandé
 
