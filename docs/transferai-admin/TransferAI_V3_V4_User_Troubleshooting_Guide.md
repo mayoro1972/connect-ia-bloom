@@ -1,178 +1,448 @@
-# TransferAI Prospecting — Guide Utilisateur & Troubleshooting
-
-**Configuration V4 · Rectification V3 · Résolution des problèmes**  
-Version 1.0 — Juin 2026  
-Préparé par : TransferAI NettelecomCI
+# TransferAI Prospecting — Guide Troubleshooting
+## Pipeline V3 · V4 · V6 — Résolution des problèmes
+**Version 2.0 — Mis à jour le 29 juin 2026**
+*Sessions du 8 juin, 28 juin et 29 juin 2026*
 
 ---
 
 ## Table des matières
 
-1. [Architecture générale du système](#1-architecture-générale)
-2. [Configuration V4 — Workflow Batch](#2-configuration-v4)
-3. [Configuration V3 — Workflow Prospect Individuel](#3-configuration-v3)
-4. [Troubleshooting Guide Détaillé](#4-troubleshooting)
-5. [Checklist de vérification](#5-checklist)
-6. [Référence rapide — Codes des nœuds corrigés](#6-référence-rapide)
-7. [Historique des corrections — Session du 8 juin 2026](#7-historique)
+1. [Architecture du pipeline](#1-architecture-du-pipeline)
+2. [Problèmes V3 — Génération du pack](#2-problèmes-v3)
+3. [Problèmes V4 — Batch orchestrateur](#3-problèmes-v4)
+4. [Problèmes V6 — Post-audit routing](#4-problèmes-v6)
+5. [Problèmes Supabase](#5-problèmes-supabase)
+6. [Checklist de vérification](#6-checklist)
+7. [Requêtes SQL utiles](#7-requêtes-sql)
+8. [Historique des corrections](#8-historique)
 
 ---
 
-## 1. Architecture générale
-
-### 1.1 Vue d'ensemble
-
-Le système de prospection TransferAI est composé de deux workflows n8n imbriqués :
-
-| Workflow | Rôle |
-|----------|------|
-| **V4 (Batch)** | Orchestre l'envoi en masse. Récupère les prospects depuis Supabase et appelle V3 pour chaque prospect. |
-| **V3 (Prospect individuel)** | Génère la lettre commerciale, le catalogue PDF, le deck PPTX, stocke le pack dans Supabase, envoie l'email d'approbation, attend l'approbation, puis envoie l'email prospect. |
-
-### 1.2 Flux de données complet
+## 1. Architecture du pipeline
 
 ```
-1. V4 Batch       → récupère les prospects depuis prospect_targets (status=ready)
-2. V4             → appelle V3 via Execute Prospect Workflow V3
-3. V3 OpenAI      → génère lettre, catalogue, audit form, deck
-4. V3 Assemble    → construit pack_id et audit_form_url
-5. V3 Store       → stocke dans ai_prospecting_packs (status=pending_approval)
-6. V3 Email       → envoie email interne d'approbation (onboarding@resend.dev)
-7. Approbateur    → clique "Approuver et envoyer"
-8. V3 Webhook     → Approval Webhook → Parse Approval Query
-9. V3             → Get Pack From Supabase → Extract Pack Payload
-10. V3            → Build Send Context → Send External Prospect Email
+V4 (Batch, 8h lun-ven)
+  └→ V3 × 5 prospects/jour
+        └→ GPT + PDF + PPTX + Email validation (4 boutons)
+              └→ Approbation admin
+                    └→ Email prospect
+
+V6 (toutes les 30 min)
+  └→ form_responses WHERE processed=false AND completion>=80%
+        └→ ai_prospecting_packs (via pack_id)
+              └→ Fiche pré-RDV + Email [PRIORITÉ HAUTE]
 ```
 
-### 1.3 Tables Supabase utilisées
+### Tables clés
 
 | Table | Rôle |
-|-------|------|
-| `prospect_targets` | Liste des prospects à contacter |
-| `ai_prospecting_packs` | Packs générés et stockés |
-| `prospect_targets_ready_for_batch` | Vue filtrée des prospects prêts (status=ready, paused=false) |
-| `prospecting_batch_runs` | Suivi des exécutions batch |
-| `prospecting_batch_run_items` | Détail par prospect par run |
-| `form_invitations` | Invitations au questionnaire d'audit |
+|---|---|
+| `prospect_targets` | Prospects à contacter — source V4 |
+| `ai_prospecting_packs` | Packs générés — source V6 |
+| `form_responses` | Formulaires soumis — déclencheur V6 |
+| `outreach_attempts` | Log des envois — quota V4 |
+| `form_invitations` | Invitations formulaire |
 
 ---
 
-## 2. Configuration V4
+## 2. Problèmes V3
 
-### 2.1 Prérequis
+---
 
-Avant de configurer V4, vérifier que :
-- Le workflow V3 est actif dans n8n (pas en pause)
-- Les prospects sont insérés dans `prospect_targets` avec `status='ready'`
-- Les clés API sont configurées : OpenAI, Resend, Supabase Service Role Key
-- Les fonctions Edge Supabase sont déployées : `catalogue-renderer`, `deck-renderer`
+### 2.1 Tous les emails générés pour la même organisation
 
-### 2.2 Nœuds clés de V4
+#### Symptôme
+10 emails de validation reçus pour Orange Côte d'Ivoire, aucun pour les autres prospects.
 
-#### SET BATCH CONFIG
-- Définit le nombre de prospects par batch
-- Paramètre principal : `max_per_day` (défaut : 5)
+#### Cause
+Le nœud `Set Target` avait des valeurs **hardcodées** (nom, email, site web d'Orange) au lieu de lire depuis `$json`.
 
-#### FETCH PROSPECTS FROM SUPABASE
-- URL : `https://<project>.supabase.co/rest/v1/prospect_targets_ready_for_batch`
-- Méthode : GET
-- Headers requis : `apikey` + `Authorization: Bearer <service_role_key>`
-
-#### EXECUTE PROSPECT WORKFLOW V3
-- Appelle le workflow V3 pour chaque prospect
-- Passe les données du prospect en paramètre input
-
-#### MARK DISPATCHED TO V3
-- Met à jour le statut du prospect à `dispatched`
-- Évite les doublons lors du prochain batch
-
-### 2.3 Configuration des headers Supabase
-
-À appliquer sur **tous les nœuds HTTP Request qui appellent Supabase** :
+#### Solution
+Dans le nœud `Set Target`, changer **chaque champ** de valeur fixe vers expression :
 
 ```
-apikey          : <SUPABASE_ANON_KEY ou SERVICE_ROLE_KEY>
-Authorization   : Bearer <SUPABASE_SERVICE_ROLE_KEY>
-Content-Type    : application/json
-Prefer          : return=representation  (uniquement pour INSERT/UPDATE)
+organization_name : {{ $json.organization_name || 'Orange Côte d\'Ivoire' }}
+website           : {{ $json.website || 'https://www.orange.ci' }}
+target_email      : {{ $json.target_email || 'marius.ayoro70@gmail.com' }}
+niche_status      : {{ $json.niche_status || 'telecom_africa' }}
+source_backend    : {{ $json.source_backend || 'manual' }}
+```
+*(la valeur après `||` est le fallback uniquement — ne jamais laisser les champs en valeur fixe)*
+
+#### Vérification
+Dans l'output du nœud `Set Target`, `organization_name` doit correspondre au prospect traité, pas toujours au même.
+
+---
+
+### 2.2 `pack_id` vide dans la lettre executive
+
+#### Symptôme
+L'email de validation contient :
+```
+https://www.transferai.ci/questionnaire-audit?pack_id=
+```
+Le lien Calendly dans la lettre contient aussi `pack_id=` vide.
+
+#### Cause
+GPT génère la lettre executive **avant** que `pack_id` existe. La lettre intègre un `pack_id` vide qui est ensuite stocké tel quel.
+
+#### Solution
+Dans le nœud `Assemble Prospect Pack`, après la ligne `var executiveLetterHtml = executiveLetter.replace(/\n/g, '<br>');`, ajouter :
+
+```javascript
+// Injecte le pack_id réel dans tous les liens de la lettre
+executiveLetterHtml = executiveLetterHtml
+  .replace(/pack_id=/g, 'pack_id=' + encodeURIComponent(packId))
+  .replace(/pack_id%3D/g, 'pack_id%3D' + encodeURIComponent(packId));
+executiveLetter = executiveLetter
+  .replace(/pack_id=/g, 'pack_id=' + encodeURIComponent(packId));
 ```
 
-### 2.4 Colonnes requises dans `prospect_targets`
+#### Vérification
+Dans l'email de validation, le lien `questionnaire-audit` doit contenir `?pack_id=pack-XXXXXXXXXX-XXXXXXXX`.
 
-| Colonne | Type | Valeurs |
-|---------|------|---------|
-| `prospect_id` | text PRIMARY KEY | ex: `ci-orange-001` |
-| `organization_name` | text | Nom de l'organisation |
-| `target_email` | text | Email du décideur |
-| `decision_maker_name` | text | Nom du décideur |
-| `website` | text | Site web |
-| `country` | text | Pays |
-| `status` | text | `ready` \| `active` \| `dispatched` \| `paused` |
-| `paused` | boolean | `true` pour exclure du batch |
-| `do_not_contact` | boolean | `true` pour exclure définitivement |
+---
 
-### 2.5 Gestion des prospects de test
+### 2.3 PDF/PPTX affichent "Non disponible" dans l'email de validation
 
-#### Créer un prospect de test
+#### Symptôme
+L'email de validation (4 boutons) affiche :
+```
+Mini-catalogue PDF : Non disponible
+Deck PPTX : Non disponible
+Deck PDF : Non disponible
+```
+
+#### Cause
+Le nœud `Build Approval Email` cherchait les URLs dans `payload.catalogue_pdf_url` et `payload.deck_pdf_url` (champs plats) alors que la structure réelle est `payload.catalogue_artifact.pdf_url` et `payload.deck_artifact.pdf_url` (objets imbriqués).
+
+#### Solution
+Dans le nœud `Build Approval Email`, corriger les déclarations de variables :
+
+```javascript
+var pack = JSON.parse(JSON.stringify($('Store Pack In Supabase').first().json));
+var payload = pack.payload || {};
+
+var pdfUrl = (payload.catalogue_artifact && payload.catalogue_artifact.pdf_url)
+  || (pack.catalogue_artifact && pack.catalogue_artifact.pdf_url)
+  || payload.catalogue_pdf_url
+  || pack.catalogue_pdf_url
+  || '';
+
+var deckPdfUrl = (payload.deck_artifact && payload.deck_artifact.pdf_url)
+  || (pack.deck_artifact && pack.deck_artifact.pdf_url)
+  || payload.deck_pdf_url
+  || pack.deck_pdf_url
+  || '';
+
+var deckPptxUrl = (payload.deck_artifact && payload.deck_artifact.pptx_url)
+  || (pack.deck_artifact && pack.deck_artifact.pptx_url)
+  || payload.deck_pptx_url
+  || pack.deck_pptx_url
+  || '';
+```
+
+#### Vérification
+L'email de validation doit afficher 3 liens cliquables (PDF catalogue, PPTX deck, PDF deck).
+
+---
+
+### 2.4 10 emails envoyés au lieu de 5
+
+#### Symptôme
+Le quota est de 5 emails/jour mais 10 ont été envoyés.
+
+#### Causes possibles
+1. **Clic double sur "Execute"** — V4 lancé deux fois manuellement
+2. **`outreach_attempts` vide** — le quota check retourne 0 envois alors que des emails ont déjà été envoyés
+
+#### Solutions
+1. Ne cliquer Execute qu'une seule fois et attendre la fin de l'exécution
+2. Après chaque approbation, V3 doit écrire dans `outreach_attempts` :
+
+```javascript
+// À ajouter dans le flow d'approbation V3 après envoi
+{
+  prospect_id: packData.prospect_id,
+  pack_id: packData.pack_id,
+  organization_name: packData.organization_name,
+  sent_at: new Date().toISOString(),
+  delivery_status: 'sent',
+  workflow_version: 'v3'
+}
+```
+
+#### Vérification
+```sql
+SELECT COUNT(*) FROM outreach_attempts WHERE sent_at >= CURRENT_DATE;
+```
+Ce chiffre doit correspondre au nombre d'approbations du jour.
+
+---
+
+### 2.5 Lien questionnaire cassé `?pack_id=` vide dans l'email prospect
+
+#### Symptôme
+L'email envoyé au prospect contient :
+```
+https://www.transferai.ci/questionnaire-audit?pack_id=
+```
+
+#### Cause
+Voir 2.2 — le `pack_id` n'était pas injecté dans la lettre après génération GPT.
+
+#### Solution triple
+- **Fix 1 (Assemble Prospect Pack)** : injecter `pack_id` dès la génération (voir 2.2)
+- **Fix 2 (Build Send Context)** : réparer par regex avant envoi
+- **Fix 3 (Send External Prospect Email)** : utiliser `ctx.external_email_html` directement
+
+---
+
+### 2.6 Erreur syntaxe dans Send External Prospect Email
+
+#### Symptôme
+n8n affiche `[invalid syntax]` dans le panneau JSON Body.
+
+#### Cause
+Utilisation de `\\'` au lieu de `\'` pour échapper une apostrophe.
+
+#### Solution
+Remplacer `d\\'audit` par `d\'audit` dans le JSON Body.
+
+---
+
+### 2.7 Webhook de révision ne répond pas
+
+#### Symptôme
+Clic sur "Réviser" → page blanche ou erreur 404.
+
+#### Cause
+Le webhook `revision-prospect-pack-v3` n'est pas configuré avec "Respond: Using Respond to Webhook Node".
+
+#### Solution
+Dans le nœud Webhook `revision-prospect-pack-v3` :
+- Method : GET
+- Response Mode : **Using Respond to Webhook Node**
+- Connecter à → `Fetch Pack For Revision` → `Build Revision Form` → `Return Revision Form`
+
+Dans le nœud `Return Revision Form` (Respond to Webhook) :
+- Response Body : `{{ $json.html_form }}`
+- Response Headers : `Content-Type: text/html`
+
+---
+
+## 3. Problèmes V4
+
+---
+
+### 3.1 V4 ne traite qu'un seul niche/secteur
+
+#### Symptôme
+V4 ne lance V3 que pour les prospects du secteur `assistant_direction_documentaire`.
+
+#### Cause
+La variable `active_niche_list_csv` dans V4 est réglée sur une seule valeur.
+
+#### Solution
+Dans V4 → nœud `Set Batch Config`, modifier `active_niche_list_csv` :
+
+```javascript
+// Remplacer
+active_niche_list_csv: 'assistant_direction_documentaire'
+
+// Par (tous les niches)
+active_niche_list_csv: 'service_client_multicanal,reporting_data_analytics,formation_montee_competences,automatisation_processus_rh,logistique_supply_chain,telecommunications,it_transformation_digitale,finance_comptabilite'
+```
+
+Ou pour accepter tous les prospects sans filtre par niche :
+```javascript
+active_niche_list_csv: ''  // vide = pas de filtre
+```
+
+---
+
+### 3.2 V4 ne trouve pas V3 (workflowId incorrect)
+
+#### Symptôme
+V4 échoue avec : `Workflow not found` ou `Cannot execute workflow`.
+
+#### Solution
+1. Ouvrir V3 dans n8n → copier l'ID depuis l'URL : `https://n8n-pxlk.srv1480638.hstgr.cloud/workflow/`**rQyOh7As2gQoCgvK**
+2. Dans V4 → nœud `Execute Prospect Workflow V3` → `workflowId` → saisir l'ID exact
+
+---
+
+### 3.3 Quota atteint immédiatement (0 prospects traités)
+
+#### Symptôme
+V4 s'arrête dès le début avec "Quota journalier atteint" alors qu'aucun email n'a été envoyé.
+
+#### Cause
+`outreach_attempts` contient des lignes avec `sent_at` datées d'aujourd'hui depuis un test ou une exécution précédente.
+
+#### Solution
+```sql
+-- Vérifier les envois du jour
+SELECT * FROM outreach_attempts WHERE sent_at >= CURRENT_DATE;
+
+-- Si ce sont des tests à supprimer :
+DELETE FROM outreach_attempts WHERE sent_at >= CURRENT_DATE AND prospect_id LIKE 'test-%';
+```
+
+---
+
+## 4. Problèmes V6
+
+---
+
+### 4.1 V6 toujours sur le chemin "Build No-Op Result" (ne traite rien)
+
+#### Symptôme
+Toutes les exécutions V6 terminent en "Succeeded in < 2s" via `Build No-Op Result`. Aucune fiche pré-RDV générée.
+
+#### Cause 1 — Conditions `If Candidate Response Found` vides (bug session 29 juin)
+
+Le nœud `If Candidate Response Found` avait des conditions complètement vides (`value1` et `value2` blancs) → toujours `false` → toujours `No-Op`.
+
+**Fix :**
+- value1 : `{{ $json.no_candidate_found }}`
+- Opération : `is equal to`
+- value2 : `false`
+
+#### Cause 2 — `form_responses.pack_id` NULL
+
+V6 ne peut pas relier le formulaire au pack si `pack_id` est NULL.
+
+**Fix temporaire (SQL) :**
+```sql
+UPDATE form_responses
+SET pack_id = 'pack-XXXXXXXXXX-XXXXXXXXX'
+WHERE user_email = 'email@prospect.ci'
+  AND pack_id IS NULL
+ORDER BY submitted_at DESC
+LIMIT 1;
+```
+
+**Fix permanent :** corriger le frontend React (transferai.ci) pour sauvegarder `pack_id` lors de la soumission.
+
+#### Cause 3 — `form_responses.processed = true`
+
+La ligne a déjà été traitée par une exécution précédente de V6.
+
+```sql
+SELECT id, user_email, pack_id, processed, submitted_at
+FROM form_responses
+ORDER BY submitted_at DESC LIMIT 5;
+```
+Si `processed = true` → remettre à `false` pour re-tester :
+```sql
+UPDATE form_responses SET processed = false WHERE id = 'xxx';
+```
+
+#### Cause 4 — `completion_percentage < 80`
+
+V6 ignore les formulaires complétés à moins de 80%.
+
+```sql
+SELECT user_email, completion_percentage, is_completed FROM form_responses ORDER BY submitted_at DESC LIMIT 5;
+```
+
+---
+
+### 4.2 V6 échoue sur `Get Prospect Target Row`
+
+#### Symptôme
+V6 passe `If Candidate Response Found` mais échoue plus loin avec "No rows returned" sur la requête `prospect_targets`.
+
+#### Cause
+Le prospect n'existe pas dans `prospect_targets`. V6 essaie de joindre `prospect_targets` via `target_email` ou `pack_id`.
+
+#### Solution
+Insérer le prospect manuellement dans `prospect_targets` :
+
 ```sql
 INSERT INTO prospect_targets (
-  prospect_id, organization_name, target_email,
-  decision_maker_name, website, country,
-  status, paused, do_not_contact
+  prospect_id, organization_name, target_email, website,
+  country, status, delivery_status, last_pack_id,
+  outreach_attempt_count, do_not_contact, paused
 ) VALUES (
-  'test-prospect-001',
-  'Entreprise Test TransferAI',
-  'votre-email@gmail.com',
-  'Décideur Test',
-  'https://www.test-entreprise.ci',
-  'Cote d''Ivoire',
-  'ready', false, false
-);
+  'manual-prospect-001',
+  'Nom Organisation',
+  'email@organisation.ci',
+  'https://www.organisation.ci',
+  'Côte d''Ivoire',
+  'active', 'sent', 'pack-XXXXXXXXXX-XXXXXXXXX',
+  1, false, false
+)
+ON CONFLICT (prospect_id) DO UPDATE SET
+  delivery_status = 'sent',
+  last_pack_id = 'pack-XXXXXXXXXX-XXXXXXXXX';
 ```
 
-#### Mettre en pause après test (recommandé — évite les doublons)
-```sql
-UPDATE prospect_targets
-SET status = 'paused', paused = true
-WHERE prospect_id = 'test-prospect-001';
-```
+**Note :** `Extract Prospect Target Row` a un fallback sur `Extract Pack Row` — si le prospect n'est pas dans `prospect_targets`, V6 utilise les données du pack. Mais certains nœuds en aval peuvent nécessiter des champs de `prospect_targets`.
 
-#### Relancer pour un nouveau test
+---
+
+### 4.3 V6 génère une fiche pré-RDV avec mauvais secteur
+
+#### Symptôme
+La fiche indique "Secteur à confirmer" ou un secteur incorrect.
+
+#### Cause
+Les données de `form_responses.form_data` n'ont pas été correctement extraites, ou le champ `sector_context` est vide.
+
+#### Vérification
 ```sql
-UPDATE prospect_targets
-SET status = 'ready', paused = false
-WHERE prospect_id = 'test-prospect-001';
+SELECT form_data, sector_context FROM form_responses
+WHERE user_email = 'email@prospect.ci'
+ORDER BY submitted_at DESC LIMIT 1;
 ```
 
 ---
 
-## 3. Configuration V3
+## 5. Problèmes Supabase
 
-### 3.1 Nœuds critiques et leur rôle
+---
 
-#### ASSEMBLE PROSPECT PACK
-**Rôle :** Génère le `pack_id`, construit `audit_form_url`, corrige les liens cassés dans la lettre.
+### 5.1 Erreur "column does not exist"
 
-> **IMPORTANT :** Ce nœud s'exécute APRÈS `Generate Executive Letter`. La lettre peut contenir un lien audit cassé (`?pack_id=` vide) car elle est générée avant que `pack_id` existe. Le fix corrige ce lien dans le même nœud via regex.
+#### Symptôme
+```
+Failed to run sql query: ERROR: 42703: column "prospect_email" does not exist
+```
 
-Points clés du code :
-- `pack_id` généré : `ctx.pack_id || ('pack-' + Date.now() + '-' + Math.random().toString(36).slice(2,10))`
-- `audit_form_url` construite : `auditBaseUrl + '?pack_id=' + encodeURIComponent(packId)`
-- Correction du lien dans la lettre (après génération de `auditFormUrl`) :
-```javascript
-var brokenAuditPattern = /https?:\/\/[^\s"'<>]*questionnaire-audit[^\s"'<>]*/g;
-executiveLetterHtml = executiveLetterHtml.replace(brokenAuditPattern, auditFormUrl);
-executiveLetter = executiveLetter.replace(brokenAuditPattern, auditFormUrl);
+#### Cause
+La colonne s'appelle différemment dans la table réelle. La table `form_responses` utilise `user_email`, pas `prospect_email`.
+
+#### Solution
+Toujours vérifier les noms réels des colonnes :
+```sql
+SELECT column_name FROM information_schema.columns
+WHERE table_name = 'form_responses'
+ORDER BY ordinal_position;
+```
+
+#### Colonnes réelles de `form_responses`
+```
+id, user_name, user_email, user_position, user_entity,
+submitted_at, last_updated_at, is_completed, completion_percentage,
+form_data, notes, session_id, invitation_token, email_sent_at,
+contact_request_id, pack_id, sector_context, context_snapshot, processed
 ```
 
 ---
 
-#### STORE PACK IN SUPABASE
-**Rôle :** Stocke le pack dans `ai_prospecting_packs`.
+### 5.2 Erreur Store Pack In Supabase — colonne inexistante
 
-- **URL :** `POST https://<project>.supabase.co/rest/v1/ai_prospecting_packs?on_conflict=pack_id`
-- **Body JSON correct :**
+#### Symptôme
+```
+Could not find the 'organization_type' column of 'ai_prospecting_packs'
+```
 
+#### Solution
+Retirer `organization_type` et `sector_guess` du JSON Body. Ces colonnes n'existent pas dans `ai_prospecting_packs` — stocker ces données dans `payload` (JSONB).
+
+**JSON Body correct :**
 ```javascript
 {{JSON.stringify({
   pack_id: $json.pack_id,
@@ -185,591 +455,59 @@ executiveLetter = executiveLetter.replace(brokenAuditPattern, auditFormUrl);
 })}}
 ```
 
-> **ATTENTION :** Ne jamais ajouter `organization_type` ni `sector_guess` — ces colonnes **n'existent pas** dans la table `ai_prospecting_packs`. Toutes les données enrichies sont accessibles via la colonne `payload` (JSONB).
-
 ---
 
-#### BUILD SEND CONTEXT
-**Rôle :** Prépare le contexte d'envoi, répare les liens audit cassés, valide les pièces jointes.
-
-Points clés :
-- Extraction `pack_id` depuis plusieurs sources (fallback chain)
-- Reconstruction `audit_form_url` canonique depuis `pack_id`
-- Réparation de `rawLetterHtml` par regex avant utilisation
-- **Override de `executive_letter_html`** dans le return — crucial pour que `Send External Prospect Email` lise la version réparée
-
-Return du nœud (fin du code) :
-```javascript
-return [{
-  json: {
-    ...src,
-    pack_id: packId,
-    audit_form_url: auditFormUrl,
-    attachments: attachments,
-    attachments_count: attachments.length,
-    can_send: canSend,
-    send_failure_reason: reason,
-    external_email_html: externalEmailHtml,
-    executive_letter_html: rawLetterHtml  // CRUCIAL : écrase la version cassée de Supabase
-  }
-}];
-```
-
-Conditions de `canSend = true` :
-- `target_email` non vide
-- `executive_letter` non vide
-- Au minimum 2 pièces jointes (1 PDF + 1 PPTX)
-- `pack_id` non vide
-
----
-
-#### SEND EXTERNAL PROSPECT EMAIL
-**Rôle :** Envoie l'email au prospect via Resend API.
-
-- **URL :** `POST https://api.resend.com/emails`
-- **Body JSON correct :**
-
-```javascript
-={{ (() => {
-  const ctx = $('Build Send Context').first().json || {};
-  const targetEmail = ctx.target_email || '';
-  const bookingLink = ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';
-  return JSON.stringify({
-    from: 'TransferAI <contact@transferai.ci>',
-    to: [targetEmail],
-    subject: "Proposition d'audit gratuit, d'accompagnement et de formation",
-    html: ctx.external_email_html || '',
-    attachments: ctx.attachments || []
-  });
-})() }}
-```
-
-> Utiliser `ctx.external_email_html` directement — ce champ est déjà assemblé et réparé par `Build Send Context`. Ne pas reconstruire le HTML depuis `ctx.executive_letter_html`.
-
----
-
-#### PARSE APPROVAL QUERY
-**Rôle :** Extrait `pack_id` et `decision` depuis l'URL du webhook d'approbation.
-
-```javascript
-const raw = $input.first().json;
-const q = (raw.query && raw.query.pack_id) ? raw.query : raw;
-const isApproved = q.decision === 'approved' || q.approved === 'true' || q.approved === true;
-return [{ json: {
-  approved:          isApproved,
-  decision:          isApproved ? 'approved' : 'rejected',
-  prospect_id:       q.prospect_id        || '',
-  pack_id:           q.pack_id            || '',
-  organization_name: q.organization_name  || '',
-  target_email:      q.target_email       || ''
-} }];
-```
-
----
-
-## 4. Troubleshooting
-
----
-
-### 4.1 Lien questionnaire cassé (`?pack_id=` vide) dans l'email prospect
+### 5.3 Colonne `processed` manquante dans `form_responses`
 
 #### Symptôme
-L'email prospect contient :
-```
-https://www.transferai.ci/questionnaire-audit?pack_id=
-```
-La page questionnaire affiche : **"Aucun identifiant de pack fourni dans l'URL (paramètre pack_id manquant)"**
-
-#### Cause racine
-
-`Generate Executive Letter` s'exécute **AVANT** qu'`Assemble Prospect Pack` génère le `pack_id`. Le prompt OpenAI reçoit `audit_form_url` avec `pack_id` vide (`$json.pack_id = ''`). L'IA intègre ce lien cassé dans la lettre. Ce texte est ensuite stocké dans Supabase (`payload.executive_letter_html`). Lors de l'approbation, le lien cassé ressort dans l'email prospect.
-
-#### Solution (3 nœuds à corriger)
-
-**Fix 1 — Assemble Prospect Pack**
-
-Après la ligne `var executiveLetterHtml = executiveLetter.replace(/\n/g, '<br>');`, ajouter :
-
-```javascript
-// Remplace le lien audit cassé (pack_id vide) par l'URL correcte
-var brokenAuditPattern = /https?:\/\/[^\s"'<>]*questionnaire-audit[^\s"'<>]*/g;
-executiveLetterHtml = executiveLetterHtml.replace(brokenAuditPattern, auditFormUrl);
-executiveLetter = executiveLetter.replace(brokenAuditPattern, auditFormUrl);
-```
-
-**Fix 2 — Build Send Context**
-
-Remplacer la construction de `externalEmailHtml` :
-
-```javascript
-var rawLetterHtml = String(
-  src.executive_letter_html || String(src.executive_letter || '').replace(/\n/g, '<br>')
-);
-
-// Répare le lien audit cassé dans la lettre
-if (auditFormUrl) {
-  var brokenAuditPattern = /https?:\/\/[^\s"'<>]*questionnaire-audit[^\s"'<>]*/g;
-  rawLetterHtml = rawLetterHtml.replace(brokenAuditPattern, auditFormUrl);
-}
-
-var externalEmailHtml = rawLetterHtml + auditBlock;
-```
-
-Et dans le `return`, ajouter la ligne :
-```javascript
-executive_letter_html: rawLetterHtml
-```
-
-**Fix 3 — Send External Prospect Email**
-
-Remplacer le JSON Body par la version simplifiée utilisant `ctx.external_email_html` directement (voir Section 3.1).
-
-#### Pourquoi les 3 fixes sont nécessaires
-
-| Fix | Protège |
-|-----|---------|
-| Fix 1 (Assemble Prospect Pack) | Les nouveaux packs — corrige le lien dès la génération avant stockage Supabase |
-| Fix 2 (Build Send Context) | Les anciens packs déjà stockés avec lien cassé — répare à l'envoi |
-| Fix 3 (Send External Prospect Email) | Évite toute reconstruction intermédiaire qui pourrait réintroduire le lien cassé |
-
-#### Vérification
-Dans l'email reçu, le lien doit contenir : `?pack_id=pack-XXXXXXXXXX-XXXXXXXX`  
-La page questionnaire doit s'ouvrir sans erreur.
-
----
-
-### 4.2 Erreur de syntaxe dans Send External Prospect Email
-
-#### Symptôme
-n8n affiche `[invalid syntax]` dans le panneau de droite du nœud JSON Body.
-
-#### Cause
-Utilisation de `\\'` au lieu de `\'` pour échapper une apostrophe dans une chaîne JavaScript.
+V6 échoue avec "column processed does not exist".
 
 #### Solution
-Remplacer `d\\'audit` par `d\'audit` dans le JSON Body.
-
-#### Règle
-Dans une chaîne JavaScript entre apostrophes simples `'...'` :
-- Correct : `\'` (un seul backslash)
-- Incorrect : `\\'` (interprété comme backslash + fin de chaîne)
-
----
-
-### 4.3 Deux pack_ids différents entre email approbation et email prospect
-
-#### Symptôme
-- Email d'approbation montre `pack_id=pack-AAAA`
-- Email prospect montre `pack_id=pack-BBBB` (différent)
-
-#### Cause
-Le workflow traite le même prospect **deux fois** car il apparaît en doublon dans `prospect_targets`. Deux packs sont générés en parallèle avec des IDs différents.
-
-#### Solution
-
-**Étape 1 — Identifier les doublons :**
 ```sql
-SELECT prospect_id, organization_name, target_email, status, created_at
-FROM prospect_targets
-WHERE organization_name ILIKE '%NomOrganisation%'
-ORDER BY created_at DESC;
+ALTER TABLE form_responses
+  ADD COLUMN IF NOT EXISTS processed BOOLEAN DEFAULT false;
 ```
 
-**Étape 2 — Supprimer le doublon (garde le plus récent) :**
+---
+
+### 5.4 Colonne `delivery_status` manquante dans `prospect_targets`
+
+#### Symptôme
+INSERT dans `prospect_targets` échoue avec "column delivery_status does not exist".
+
+#### Solution
+```sql
+ALTER TABLE prospect_targets
+  ADD COLUMN IF NOT EXISTS delivery_status TEXT DEFAULT 'pending',
+  ADD COLUMN IF NOT EXISTS last_pack_id TEXT;
+```
+
+---
+
+### 5.5 Doublons dans `prospect_targets`
+
+#### Symptôme
+2 emails de validation reçus pour la même organisation, avec des `pack_id` différents.
+
+#### Détection
+```sql
+SELECT organization_name, COUNT(*) as nb
+FROM prospect_targets
+WHERE status = 'ready' AND paused = false
+GROUP BY organization_name
+HAVING COUNT(*) > 1;
+```
+
+#### Suppression (garde le plus récent)
 ```sql
 DELETE FROM prospect_targets
 WHERE prospect_id IN (
-  SELECT prospect_id
-  FROM (
+  SELECT prospect_id FROM (
     SELECT prospect_id,
            ROW_NUMBER() OVER (
              PARTITION BY organization_name
              ORDER BY created_at DESC
            ) AS rn
-    FROM prospect_targets
-    WHERE organization_name ILIKE '%NomOrganisation%'
-  ) ranked
-  WHERE rn > 1
-);
-```
-
-#### Prévention
-Utiliser un `prospect_id` unique basé sur le nom de l'organisation. Pour les tests, utiliser `status='paused'` plutôt que créer un nouveau prospect à chaque fois.
-
----
-
-### 4.4 Erreur Store Pack In Supabase — colonne inexistante
-
-#### Symptôme
-```
-Bad request - please check your parameters
-Could not find the 'organization_type' column of 'ai_prospecting_packs' in the schema cache
-```
-ou
-```
-Could not find the 'sector_guess' column of 'ai_prospecting_packs' in the schema cache
-```
-
-#### Cause
-Le JSON Body de `Store Pack In Supabase` référence des colonnes qui **n'existent pas** dans la table `ai_prospecting_packs`.
-
-#### Colonnes valides dans `ai_prospecting_packs`
-```
-pack_id, prospect_id, organization_name, target_email,
-status, payload, llm_redaction_summary
-```
-
-#### Solution — JSON Body correct
-```javascript
-{{JSON.stringify({
-  pack_id: $json.pack_id,
-  prospect_id: $json.prospect_id || null,
-  organization_name: $json.organization_name || null,
-  target_email: $json.target_email || null,
-  status: 'pending_approval',
-  payload: $json,
-  llm_redaction_summary: $json.llm_redaction_summary || null
-})}}
-```
-
-> Toutes les données enrichies (`sector_guess`, `organization_type`, etc.) sont stockées dans la colonne `payload` de type JSONB et restent accessibles.
-
----
-
-### 4.5 Page questionnaire affiche "questionnaire non disponible"
-
-#### Symptôme
-La page `https://www.transferai.ci/questionnaire-audit?pack_id=pack-XXX` charge mais affiche :
-> *"Le questionnaire personnalisé pour [Organisation] n'est pas encore disponible. Revenez dans quelques instants ou contactez notre équipe."*
-
-Badges affichés : **SECTEUR A CONFIRMER**, **ORGANISATION A QUALIFIER**
-
-#### Cause
-Les champs `sector_guess` et `organization_type` ont les valeurs par défaut SQL (`'secteur à confirmer'`, `'organisation à qualifier'`) car le nœud `Store Pack In Supabase` essayait d'écrire dans des colonnes inexistantes — l'erreur 400 bloquait le stockage du pack.
-
-#### Solution
-Appliquer le fix 4.4 (retirer `organization_type` et `sector_guess` du JSON Body). Une fois le pack correctement stocké avec les données dans `payload`, la fonction Edge `resolve-invitation` lit `payload.sector_guess` et `payload.organization_type` via `buildAuditAccessContextFromPack`.
-
-Pour les packs déjà stockés avec ce problème : relancer le workflow complet pour générer un nouveau pack.
-
----
-
-### 4.6 Plusieurs emails d'approbation pour le même prospect
-
-#### Symptôme
-2 emails `onboarding@resend.dev` reçus au même moment pour la même organisation, avec des `pack_id` différents.
-
-#### Cause
-Le prospect apparaît plusieurs fois dans `prospect_targets` (doublon par `organization_name` mais `prospect_id` différent). Le batch V4 génère un pack pour chaque ligne.
-
-#### Solution
-Voir section 4.3.
-
-#### Requête de détection préventive
-Exécuter avant chaque run :
-```sql
-SELECT organization_name, COUNT(*) as nb
-FROM prospect_targets
-WHERE status = 'ready' AND paused = false
-GROUP BY organization_name
-HAVING COUNT(*) > 1;
-```
-Si cette requête retourne des lignes → doublons à traiter avant de lancer le batch.
-
----
-
-### 4.7 `canSend = false` — email non envoyé
-
-#### Symptôme
-Le workflow s'exécute sans erreur visible mais l'email prospect n'est pas envoyé.  
-Dans l'output de `Build Send Context` :
-```
-can_send: false
-send_failure_reason: "Email cible, courrier, pack_id ou artefacts requis manquants. Attendus: 1 catalogue PDF et 1 deck PPTX."
-```
-
-#### Cause
-Une ou plusieurs conditions manquantes :
-
-| Condition | Vérification |
-|-----------|-------------|
-| `target_email` | Doit être un email valide non vide |
-| `executive_letter` | Doit contenir du texte |
-| Pièces jointes | Au minimum 2 : 1 fichier `.pdf` + 1 fichier `.pptx` |
-| `pack_id` | Doit être non vide |
-
-#### Solution
-1. Vérifier l'output de `Build Send Context` — identifier quelle condition échoue
-2. Si pièces jointes manquantes : vérifier que `render Catalogue Artifact` a retourné `pdf_url` et que `Render Deck Artifact` a retourné `pptx_url`
-3. Si `pack_id` vide : vérifier `Assemble Prospect Pack` — `ctx.pack_id` ou génération automatique
-
----
-
-### 4.8 `Parse Approval Query` retourne `pack_id` vide
-
-#### Symptôme
-Output de `Parse Approval Query` :
-```json
-{ "pack_id": "", "decision": "approved" }
-```
-`Get Pack From Supabase` retourne un pack différent de celui approuvé.
-
-#### Cause
-Le lien "Approuver et envoyer" dans l'email d'approbation ne contient pas `pack_id` dans les query parameters de l'URL webhook.
-
-#### Vérification
-Clic droit sur le lien "Approuver et envoyer" → "Copier l'adresse du lien".  
-L'URL doit contenir : `?pack_id=pack-XXXX&decision=approved`
-
-#### Solution
-Vérifier le nœud `Build Approval Email` : le lien d'approbation doit être construit avec `pack_id` dans les paramètres de l'URL webhook.
-
----
-
-## 5. Checklist de vérification
-
-### 5.1 Avant chaque run V4
-
-- [ ] Aucun doublon dans `prospect_targets` (requête section 4.6)
-- [ ] Les prospects cibles ont `status='ready'` et `paused=false`
-- [ ] Clé API OpenAI valide
-- [ ] Clé API Resend valide
-- [ ] Clé Service Role Supabase configurée dans les nœuds HTTP
-- [ ] Workflow V3 actif dans n8n (pas en pause)
-- [ ] Fonctions Edge Supabase déployées (`catalogue-renderer`, `deck-renderer`)
-
-### 5.2 Après chaque run — vérification bout en bout
-
-- [ ] Email d'approbation reçu avec lien formulaire complet (`pack_id` présent)
-- [ ] Cliquer "Approuver et envoyer" sur le bon email
-- [ ] Email prospect reçu avec lien questionnaire complet
-- [ ] Cliquer le lien questionnaire → page s'ouvre sans erreur
-- [ ] Page affiche le bon `PACK_ID` et le nom de l'organisation
-- [ ] Vérifier pièces jointes : 1 PDF catalogue + 1 PPTX deck présents
-
-### 5.3 Après un test — nettoyage
-
-```sql
--- Remettre le prospect test en pause
-UPDATE prospect_targets
-SET status = 'paused', paused = true
-WHERE prospect_id = 'test-prospect-001';
-
--- Vérifier qu'aucun pack pending_approval ne reste ouvert
-SELECT pack_id, organization_name, status, created_at
-FROM ai_prospecting_packs
-WHERE status = 'pending_approval'
-ORDER BY created_at DESC;
-```
-
----
-
-## 6. Référence rapide — Codes des nœuds corrigés
-
-### 6.1 Store Pack In Supabase — JSON Body
-
-```javascript
-={{JSON.stringify({
-  pack_id: $json.pack_id,
-  prospect_id: $json.prospect_id || null,
-  organization_name: $json.organization_name || null,
-  target_email: $json.target_email || null,
-  status: 'pending_approval',
-  payload: $json,
-  llm_redaction_summary: $json.llm_redaction_summary || null
-})}}
-```
-
----
-
-### 6.2 Send External Prospect Email — JSON Body
-
-```javascript
-={{ (() => {
-  const ctx = $('Build Send Context').first().json || {};
-  const targetEmail = ctx.target_email || '';
-  const bookingLink = ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';
-  return JSON.stringify({
-    from: 'TransferAI <contact@transferai.ci>',
-    to: [targetEmail],
-    subject: "Proposition d'audit gratuit, d'accompagnement et de formation",
-    html: ctx.external_email_html || '',
-    attachments: ctx.attachments || []
-  });
-})() }}
-```
-
----
-
-### 6.3 Build Send Context — JavaScript Code (complet)
-
-```javascript
-var src = JSON.parse(JSON.stringify($('Extract Pack Payload').first().json));
-
-function safeFileStem(value) {
-  return String(value || 'Prospect')
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-}
-
-function normalizeAttachment(att) {
-  if (!att || !att.filename) return null;
-  var normalized = { filename: String(att.filename) };
-  if (att.content) normalized.content = String(att.content);
-  if (att.path) normalized.path = String(att.path);
-  if (!normalized.content && !normalized.path) return null;
-  return normalized;
-}
-
-function dedupeAttachments(list) {
-  var seen = {};
-  var deduped = [];
-  for (var i = 0; i < list.length; i++) {
-    var att = list[i];
-    var key = [att.filename || '', att.path || '', att.content || ''].join('|');
-    if (seen[key]) continue;
-    seen[key] = true;
-    deduped.push(att);
-  }
-  return deduped;
-}
-
-function extractPackIdFromUrl(url) {
-  var value = String(url || '');
-  var match = value.match(/[?&]pack_id=([^&#]+)/i);
-  return match ? decodeURIComponent(match[1]) : '';
-}
-
-var org = safeFileStem(src.organization_name || 'Prospect');
-var attachments = [];
-var payload = src.payload || {};
-
-var providedAttachments = Array.isArray(payload.mail_attachments)
-  ? payload.mail_attachments.map(normalizeAttachment).filter(Boolean)
-  : [];
-
-if (providedAttachments.length > 0) {
-  attachments = providedAttachments;
-} else {
-  var rebuilt = [];
-  if (payload.catalogue_artifact && payload.catalogue_artifact.pdf_url) {
-    rebuilt.push({
-      filename: String(payload.catalogue_artifact.filename_pdf || ('Mini_Catalogue_TransferAI_' + org + '.pdf')),
-      path: String(payload.catalogue_artifact.pdf_url)
-    });
-  }
-  if (payload.deck_artifact && payload.deck_artifact.pptx_url) {
-    rebuilt.push({
-      filename: String(payload.deck_artifact.filename_pptx || ('Deck_TransferAI_' + org + '.pptx')),
-      path: String(payload.deck_artifact.pptx_url)
-    });
-  }
-  attachments = rebuilt.map(normalizeAttachment).filter(Boolean);
-}
-
-attachments = dedupeAttachments(attachments);
-
-var hasPdf  = attachments.some(function(att) { return /\.pdf$/i.test(String(att.filename || '')); });
-var hasPptx = attachments.some(function(att) { return /\.pptx$/i.test(String(att.filename || '')); });
-
-var packId =
-  src.pack_id ||
-  payload.pack_id ||
-  extractPackIdFromUrl(src.audit_form_url) ||
-  extractPackIdFromUrl(payload.audit_form_url) ||
-  '';
-
-var auditFormUrl = packId
-  ? 'https://www.transferai.ci/questionnaire-audit?pack_id=' + encodeURIComponent(packId)
-  : '';
-
-var canSend = Boolean(
-  src.target_email &&
-  src.executive_letter &&
-  src.executive_letter.trim().length > 0 &&
-  attachments.length >= 2 &&
-  hasPdf &&
-  hasPptx &&
-  packId
-);
-
-var reason = canSend
-  ? null
-  : 'Email cible, courrier, pack_id ou artefacts requis manquants. Attendus: 1 catalogue PDF et 1 deck PPTX.';
-
-var auditBlock = auditFormUrl
-  ? "<br><br><p><strong>Formulaire d'audit pre-RDV :</strong> <a href=\"" + auditFormUrl + "\">" + auditFormUrl + "</a></p><p>Merci de le remplir avant le rendez-vous afin que nos experts preparent un audit sur mesure.</p>"
-  : "";
-
-var rawLetterHtml = String(
-  src.executive_letter_html || String(src.executive_letter || '').replace(/\n/g, '<br>')
-);
-
-// Répare le lien audit cassé dans la lettre si auditFormUrl est disponible
-if (auditFormUrl) {
-  var brokenAuditPattern = /https?:\/\/[^\s"'<>]*questionnaire-audit[^\s"'<>]*/g;
-  rawLetterHtml = rawLetterHtml.replace(brokenAuditPattern, auditFormUrl);
-}
-
-var externalEmailHtml = rawLetterHtml + auditBlock;
-
-return [{
-  json: {
-    ...src,
-    pack_id: packId,
-    audit_form_url: auditFormUrl,
-    attachments: attachments,
-    attachments_count: attachments.length,
-    can_send: canSend,
-    send_failure_reason: reason,
-    external_email_html: externalEmailHtml,
-    executive_letter_html: rawLetterHtml   // CRUCIAL : écrase la version cassée de Supabase
-  }
-}];
-```
-
----
-
-### 6.4 Requêtes SQL utiles
-
-```sql
--- Voir tous les prospects actifs
-SELECT prospect_id, organization_name, target_email, status, paused
-FROM prospect_targets
-WHERE paused = false
-ORDER BY created_at DESC;
-
--- Détecter les doublons avant un run
-SELECT organization_name, COUNT(*) as nb
-FROM prospect_targets
-WHERE status = 'ready' AND paused = false
-GROUP BY organization_name
-HAVING COUNT(*) > 1;
-
--- Voir les derniers packs générés
-SELECT pack_id, organization_name, status, created_at
-FROM ai_prospecting_packs
-ORDER BY created_at DESC
-LIMIT 20;
-
--- Remettre un prospect en ready
-UPDATE prospect_targets
-SET status = 'ready', paused = false
-WHERE prospect_id = 'test-prospect-001';
-
--- Mettre en pause un prospect
-UPDATE prospect_targets
-SET status = 'paused', paused = true
-WHERE prospect_id = 'test-prospect-001';
-
--- Supprimer un doublon (garder le plus récent)
-DELETE FROM prospect_targets
-WHERE prospect_id IN (
-  SELECT prospect_id FROM (
-    SELECT prospect_id,
-           ROW_NUMBER() OVER (PARTITION BY organization_name ORDER BY created_at DESC) AS rn
     FROM prospect_targets
     WHERE organization_name ILIKE '%NomOrganisation%'
   ) ranked WHERE rn > 1
@@ -778,23 +516,119 @@ WHERE prospect_id IN (
 
 ---
 
-## 7. Historique des corrections — Session du 8 juin 2026
+## 6. Checklist de vérification
 
-**Problème initial :** lien questionnaire cassé `?pack_id=` vide dans l'email prospect.
+### Avant chaque run V4
 
-| # | Nœud modifié | Changement |
-|---|--------------|-----------|
-| 1 | `Send External Prospect Email` | JSON Body remplacé par version IIFE utilisant `ctx.executive_letter_html` |
-| 2 | `Build Send Context` | Ajout reconstruction `pack_id` depuis plusieurs sources + `audit_form_url` canonique + validation pièces jointes |
-| 3 | `Build Send Context` | Ajout regex de réparation des liens cassés dans `rawLetterHtml` |
-| 4 | `Build Send Context` | Ajout `executive_letter_html: rawLetterHtml` dans le return pour écraser la version cassée de Supabase |
-| 5 | `Send External Prospect Email` | Simplification pour utiliser `ctx.external_email_html` directement |
-| 6 | `Assemble Prospect Pack` | Ajout réparation du lien dans la lettre dès la génération (fix préventif) |
-| 7 | `Store Pack In Supabase` | Suppression des colonnes inexistantes `organization_type` et `sector_guess` |
-| 8 | `prospect_targets` (Supabase) | Suppression du doublon `manual-prospect-001` |
+- [ ] Aucun doublon dans `prospect_targets` (requête 5.5)
+- [ ] Prospects cibles : `status='ready'`, `paused=false`, `delivery_status='pending'`
+- [ ] Clé API OpenAI valide dans les nœuds n8n
+- [ ] Clé API Resend valide
+- [ ] `active_niche_list_csv` dans V4 couvre les bons niches
+- [ ] Vérifier quota : `SELECT COUNT(*) FROM outreach_attempts WHERE sent_at >= CURRENT_DATE;`
 
-**Résultat final :** email prospect avec lien correct + page questionnaire accessible + workflow sans erreur Supabase.
+### Après réception email de validation V3
+
+- [ ] 4 boutons présents : Approuver, Réviser, Régénérer, Rejeter
+- [ ] Liens PDF mini-catalogue, PPTX deck, PDF deck visibles et accessibles
+- [ ] Lien Calendly fonctionnel dans la lettre
+- [ ] Lien formulaire d'audit avec `pack_id` complet (pas vide)
+
+### Après approbation et envoi prospect
+
+- [ ] Email prospect reçu avec 2 pièces jointes (PDF + PPTX)
+- [ ] Lien formulaire dans l'email avec `pack_id` complet
+- [ ] `delivery_status = 'sent'` dans Supabase pour ce prospect
+
+### Après soumission formulaire (test V6)
+
+- [ ] `form_responses.pack_id` renseigné (manuellement si frontend pas encore corrigé)
+- [ ] `form_responses.processed = false`
+- [ ] Attendre < 30 min → Email [PRIORITÉ HAUTE] reçu
+- [ ] Fiche pré-RDV reçue avec organisation, secteur, maturité IA
 
 ---
 
-*Document généré le 8 juin 2026 — TransferAI NettelecomCI*
+## 7. Requêtes SQL utiles
+
+```sql
+-- Prospects envoyés
+SELECT organization_name, delivery_status, last_pack_id, updated_at
+FROM prospect_targets WHERE delivery_status = 'sent'
+ORDER BY updated_at DESC;
+
+-- Formulaires récents
+SELECT user_email, pack_id, completion_percentage, processed, submitted_at
+FROM form_responses ORDER BY submitted_at DESC LIMIT 10;
+
+-- Formulaires à traiter par V6 (non encore traités)
+SELECT user_email, pack_id, completion_percentage, submitted_at
+FROM form_responses
+WHERE completion_percentage >= 80 AND processed = false
+ORDER BY submitted_at ASC;
+
+-- Packs générés récemment
+SELECT pack_id, organization_name, status, created_at
+FROM ai_prospecting_packs ORDER BY created_at DESC LIMIT 10;
+
+-- Quota envois du jour
+SELECT COUNT(*) as envois FROM outreach_attempts WHERE sent_at >= CURRENT_DATE;
+
+-- Colonnes d'une table (diagnostic)
+SELECT column_name, data_type FROM information_schema.columns
+WHERE table_name = 'form_responses' ORDER BY ordinal_position;
+
+-- Remettre un formulaire à traiter (re-test V6)
+UPDATE form_responses SET processed = false WHERE id = 'xxx';
+
+-- Vérifier prospect_targets pour un prospect
+SELECT prospect_id, organization_name, delivery_status, last_pack_id, status
+FROM prospect_targets WHERE organization_name ILIKE '%Orange%';
+```
+
+---
+
+## 8. Historique des corrections
+
+### Session du 8 juin 2026
+
+| # | Nœud | Changement |
+|---|---|---|
+| 1 | `Send External Prospect Email` | JSON Body — IIFE utilisant `ctx.executive_letter_html` |
+| 2 | `Build Send Context` | Reconstruction `pack_id` multi-source + `audit_form_url` canonique |
+| 3 | `Build Send Context` | Regex réparation liens cassés dans `rawLetterHtml` |
+| 4 | `Build Send Context` | Ajout `executive_letter_html: rawLetterHtml` dans le return |
+| 5 | `Assemble Prospect Pack` | Regex réparation lien audit dès la génération |
+| 6 | `Store Pack In Supabase` | Suppression colonnes inexistantes `organization_type`, `sector_guess` |
+| 7 | `prospect_targets` | Suppression doublons |
+
+### Session du 28 juin 2026
+
+| # | Composant | Changement |
+|---|---|---|
+| 1 | VPS | Installation LibreOffice 24.2.7.2 pour conversion PPTX → PDF |
+| 2 | Supabase | `ALTER TABLE form_responses ADD COLUMN processed BOOLEAN DEFAULT false` |
+| 3 | Supabase | `ALTER TABLE prospect_targets ADD COLUMN delivery_status, last_pack_id` |
+| 4 | V3 — `Build Approval Email` | Ajout boutons Réviser et Régénérer (4 boutons total) |
+| 5 | V3 — `Build Approval Email` | Correction chemins `catalogue_artifact.pdf_url` / `deck_artifact.pdf_url` |
+| 6 | V3 | Nouveau webhook GET `revision-prospect-pack-v3` + formulaire HTML révision |
+| 7 | V3 | Nouveau webhook POST `submit-revision-pack-v3` |
+| 8 | V3 | Nouveau webhook GET `regenerate-prospect-pack-v3` |
+| 9 | V3 — `Assemble Prospect Pack` | Injection `pack_id` dans lettre executive par regex |
+
+### Session du 29 juin 2026
+
+| # | Composant | Changement |
+|---|---|---|
+| 1 | V3 — `Set Target` | Tous les champs convertis de valeurs fixes vers expressions `$json` |
+| 2 | V4 | Activé (toggle ON) — schedule lundi-vendredi 8h00 |
+| 3 | V6 | Activé (toggle ON) — schedule toutes les 30 min |
+| 4 | Post-Audit V2 | Désactivé (évite conflit V6) |
+| 5 | V6 — `If Candidate Response Found` | Conditions vides corrigées → `no_candidate_found` is equal to `false` |
+| 6 | `prospect_targets` | Insertion manuelle Orange CI pour test V6 |
+| 7 | `form_responses` | Mise à jour manuelle `pack_id` pour la ligne de test |
+| 8 | Pipeline complet | **Validation end-to-end réussie** — V3 → V6 → emails reçus le 29/06 à 22:45 |
+
+---
+
+*Document mis à jour le 29 juin 2026 — TransferAI NettelecomCI*
