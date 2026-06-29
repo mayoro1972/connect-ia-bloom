@@ -1,7 +1,7 @@
 # TransferAI Prospecting — Guide Troubleshooting
 ## Pipeline V3 · V4 · V6 — Résolution des problèmes
-**Version 2.0 — Mis à jour le 29 juin 2026**
-*Sessions du 8 juin, 28 juin et 29 juin 2026*
+**Version 2.1 — Mis à jour le 30 juin 2026**
+*Sessions du 8 juin, 28 juin, 29 juin et 30 juin 2026*
 
 ---
 
@@ -211,7 +211,71 @@ Remplacer `d\\'audit` par `d\'audit` dans le JSON Body.
 
 ---
 
-### 2.7 Webhook de révision ne répond pas
+### 2.7 Formulaire révision — PDF/PPTX affichent "non disponible"
+
+#### Symptôme
+Le formulaire de révision affiche :
+```
+📄 Mini-catalogue PDF : ✗ non disponible
+📊 Deck PDF : ✗ non disponible
+```
+Pourtant les liens fonctionnent dans l'email de validation.
+
+#### Cause
+Le nœud `Code in JavaScript1` (builder du formulaire HTML) cherchait les URLs dans des champs plats (`payload.catalogue_pdf_url`) alors que la structure réelle du pack est imbriquée (`payload.catalogue_artifact.pdf_url`).
+
+#### Solution — appliquée le 30 juin 2026 ✅
+Le nœud lit maintenant les deux structures en cascade :
+```javascript
+const pdfUrl = (payload.catalogue_artifact && payload.catalogue_artifact.pdf_url)
+  || (pack.catalogue_artifact && pack.catalogue_artifact.pdf_url)
+  || payload.catalogue_pdf_url   // fallback ancien format
+  || pack.catalogue_pdf_url
+  || '';
+
+const deckPdfUrl = (payload.deck_artifact && payload.deck_artifact.pdf_url)
+  || (pack.deck_artifact && pack.deck_artifact.pdf_url)
+  || payload.deck_pdf_url
+  || pack.deck_pdf_url
+  || '';
+```
+
+#### Vérification
+Ouvrir le lien "Réviser" → les badges **✓ disponible** (fond vert) doivent apparaître à côté des liens PDF.
+
+---
+
+### 2.8 Formulaire révision — lettre affiche du HTML brut au lieu du texte rendu
+
+#### Symptôme
+La section "Modifier la lettre executive" affiche le contenu HTML brut avec des balises visibles :
+```
+Cher Directeur,<br><br>Dans un secteur aussi dynamique...
+```
+Au lieu de la lettre mise en forme.
+
+#### Cause
+La textarea échappait les `<` et `>` pour afficher le HTML source — comportement correct pour l'édition, mais l'utilisateur voulait voir le rendu.
+
+#### Solution — appliquée le 30 juin 2026 ✅
+Le formulaire de révision dispose maintenant de **deux onglets** :
+
+| Onglet | Usage |
+|---|---|
+| **👁 Prévisualisation** (défaut) | Lettre rendue comme dans l'email, avec mise en forme complète |
+| **✏️ Modifier le HTML** | Textarea avec le code HTML brut pour édition technique |
+
+La prévisualisation se met à jour **en temps réel** pendant la saisie dans le textarea.
+
+#### Comportement attendu
+1. Ouverture du formulaire → onglet Prévisualisation actif → lettre rendue visible
+2. Clic sur "Modifier le HTML" → textarea avec le HTML brut
+3. Modification du texte → clic sur "Prévisualisation" → aperçu mis à jour instantanément
+4. Clic "Soumettre" → nouvel email de validation envoyé avec le HTML modifié
+
+---
+
+### 2.10 Webhook de révision ne répond pas
 
 #### Symptôme
 Clic sur "Réviser" → page blanche ou erreur 404.
@@ -628,7 +692,18 @@ FROM prospect_targets WHERE organization_name ILIKE '%Orange%';
 | 6 | `prospect_targets` | Insertion manuelle Orange CI pour test V6 |
 | 7 | `form_responses` | Mise à jour manuelle `pack_id` pour la ligne de test |
 | 8 | Pipeline complet | **Validation end-to-end réussie** — V3 → V6 → emails reçus le 29/06 à 22:45 |
+| 9 | Workflows n8n | Export V3 (67 nœuds), V4 (27), V6 (37) vers GitHub via API n8n |
+
+### Session du 30 juin 2026
+
+| # | Composant | Changement |
+|---|---|---|
+| 1 | V3 — `Code in JavaScript1` | **Fix URLs PDF/PPTX** : lecture depuis `catalogue_artifact.pdf_url` et `deck_artifact.pdf_url` (structure imbriquée) avec fallback sur anciens champs plats |
+| 2 | V3 — `Code in JavaScript1` | **Lettre executive** : ajout onglet Prévisualisation (rendu HTML) + onglet Modifier le HTML (textarea) avec mise à jour en temps réel |
+| 3 | V3 — `Code in JavaScript1` | Badges ✓ vert / ✗ rouge sur les liens documents dans le formulaire de révision |
+| 4 | V3 — `Code in JavaScript1` | Avertissement orange si PDF manquant au moment de l'upload |
+| 5 | GitHub | Export mis à jour : `113_n8n_Prospecting_V3_...json` re-poussé avec corrections |
 
 ---
 
-*Document mis à jour le 29 juin 2026 — TransferAI NettelecomCI*
+*Document mis à jour le 30 juin 2026 — TransferAI NettelecomCI*

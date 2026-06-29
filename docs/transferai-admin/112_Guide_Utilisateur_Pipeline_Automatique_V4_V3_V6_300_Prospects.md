@@ -1,8 +1,8 @@
 # Guide Utilisateur — Pipeline Automatique V4 → V3 → V6
 ## 300 sociétés · 5 envois/jour · Zéro intervention humaine
-**TransferAI Africa — Mis à jour le 29 juin 2026**
+**TransferAI Africa — Mis à jour le 30 juin 2026**
 
-> **Statut au 29 juin 2026 :** Pipeline V4 → V3 → V6 entièrement opérationnel et validé de bout en bout. V4 et V6 activés. V3 testé avec succès — emails de validation, fiches pré-RDV et briefs internes reçus.
+> **Statut au 30 juin 2026 :** Pipeline V4 → V3 → V6 entièrement opérationnel et validé de bout en bout. V4 et V6 activés. Formulaire de révision amélioré : aperçu rendu de la lettre + liens PDF/PPTX corrigés.
 
 ---
 
@@ -57,7 +57,7 @@ Toutes les 30 min — V6
 
 ## 2. État des corrections et activations au 29 juin 2026
 
-### 2.1 Corrections appliquées ✅ (session 28-29 juin)
+### 2.1 Corrections appliquées ✅ (sessions 28-30 juin)
 
 | Correction | Description | Statut |
 |---|---|---|
@@ -75,6 +75,8 @@ Toutes les 30 min — V6
 | V4 activé | Toggle ON dans n8n | ✅ Fait |
 | V6 activé (schedule 30 min) | Toggle ON dans n8n | ✅ Fait |
 | Post-Audit V2 désactivé | Évite conflit avec V6 | ✅ Fait |
+| **Formulaire révision : URLs PDF/PPTX** | Lecture depuis `catalogue_artifact.pdf_url` / `deck_artifact.pdf_url` (structure imbriquée) | ✅ Fait (30 juin) |
+| **Formulaire révision : lettre rendue** | Onglet Prévisualisation affiche la lettre rendue HTML + onglet Modifier le HTML pour édition | ✅ Fait (30 juin) |
 
 ### 2.2 Validations end-to-end ✅
 
@@ -110,8 +112,12 @@ Après génération du pack par V3, l'administrateur reçoit un email de validat
 
 ### Bouton 2 — Réviser ✏️
 - URL : `webhook/revision-prospect-pack-v3?pack_id=XXX`
-- Action : affiche un formulaire HTML dans le navigateur avec les champs éditables du pack
-- L'administrateur corrige les textes, clique "Enregistrer et renvoyer pour validation"
+- Action : affiche un formulaire HTML dans le navigateur avec :
+  - **Section Documents actuels** : liens PDF mini-catalogue, PDF deck, PPTX deck avec badge ✓ vert (disponible) ou ✗ rouge (absent)
+  - **Onglet Prévisualisation** (par défaut) : lettre executive **rendue** comme dans l'email, avec mise en forme
+  - **Onglet Modifier le HTML** : textarea pour éditer le code HTML brut (mise à jour de la prévisualisation en temps réel)
+  - **Upload PDF** : possibilité de remplacer le mini-catalogue ou le deck
+- L'administrateur corrige les textes, clique "Soumettre les corrections → Nouvel email de validation"
 - Résultat : pack mis à jour dans Supabase, nouvel email de validation envoyé
 
 ### Bouton 3 — Régénérer 🔄
