@@ -955,7 +955,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({\n  prospect_id: $('Build Send Context').first().json.prospect_id || null,\n  pack_id: $('Build Send Context').first().json.pack_id || null,\n  organization_name: $('Build Send Context').first().json.organization_name || null,\n  target_email: $('Build Send Context').first().json.target_email || null,\n  channel: 'email',\n  message_variant: 'executive_multi_prospect_model_v3',\n  sent_at: new Date().toISOString(),\n  delivery_status: 'submitted',\n  response_status: 'pending',\n  follow_up_due_at: new Date(Date.now() + 5 * 86400000).toISOString(),\n  stop_reason: null,\n  resend_message_id: $('Send External Prospect Email').first().json.id || null\n})}}",
+        "jsonBody": "={{JSON.stringify({\n  prospect_id: $('Build Send Context').first().json.prospect_id || null,\n  pack_id: $('Build Send Context').first().json.pack_id || null,\n  organization_name: $('Build Send Context').first().json.organization_name || null,\n  target_email: $('Build Send Context').first().json.target_email || null,\n  channel: 'email',\n  message_variant: 'executive_multi_prospect_model_v3',\n  sent_at: new Date().toISOString(),\n  delivery_status: 'sent',\n  response_status: 'pending',\n  follow_up_due_at: new Date(Date.now() + 5 * 86400000).toISOString(),\n  stop_reason: null,\n  resend_message_id: $('Send External Prospect Email').first().json.id || null\n})}}",
         "options": {
           "response": {
             "response": {
@@ -1110,7 +1110,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({ status: 'active', paused: false, last_sequence_result: 'sent_v3', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', next_action_at: new Date(Date.now() + 5 * 86400000).toISOString(), last_pack_id: $json.pack_id || null, updated_at: new Date().toISOString() })}}",
+        "jsonBody": "={{JSON.stringify({ status: 'sent', delivery_status: 'sent', sent_at: new Date().toISOString(), paused: false, last_sequence_result: 'sent_v3', last_response_status: 'pending', stop_reason: null, niche_status: 'outreach_started', outreach_attempt_count: ($('Build Send Context').first().json.outreach_attempt_count || 0) + 1, next_action_at: new Date(Date.now() + 7 * 86400000).toISOString(), last_pack_id: $json.pack_id || null, updated_at: new Date().toISOString() })}}",
         "options": {}
       },
       "id": "3434d195-2798-42db-aa45-d09e7e76c335",
@@ -1428,6 +1428,52 @@
       ],
       "id": "f105cb92-f606-4082-9da8-9bc4d7537a03",
       "name": "Merge Deck Artifact"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ prospect_id: $json.prospect_id, organization_name: $json.organization_name || '', target_email: $json.target_email || '', website: $json.website || '', country: $json.country || \"Côte d'Ivoire\", sector_guess: $json.sector_guess || '', niche_status: $json.niche_status || '', decision_maker_name: $json.decision_maker_name || '', organization_type: $json.organization_type || 'Entreprise', commercial_priority_tier: $json.commercial_priority_default || 'tier2', prospect_language: $json.prospect_language || 'fr', source_backend: $json.source_backend || 'manual', status: 'ready', delivery_status: 'pending', outreach_attempt_count: $json.outreach_attempt_count || 0, do_not_contact: false, updated_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Upsert Prospect In CRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -490,
+        528
+      ],
+      "onError": "continueRegularOutput"
     }
   ],
   "pinData": {},
@@ -1447,7 +1493,7 @@
       "main": [
         [
           {
-            "node": "Build Source URLs",
+            "node": "Upsert Prospect In CRM",
             "type": "main",
             "index": 0
           }
@@ -1965,6 +2011,17 @@
         [
           {
             "node": "Store Pack In Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert Prospect In CRM": {
+      "main": [
+        [
+          {
+            "node": "Build Source URLs",
             "type": "main",
             "index": 0
           }
