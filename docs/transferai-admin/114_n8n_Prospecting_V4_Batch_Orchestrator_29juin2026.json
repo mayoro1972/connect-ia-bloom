@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T14:52:08.139Z",
+  "updatedAt": "2026-06-29T22:50:12.659Z",
   "createdAt": "2026-06-07T18:47:35.934Z",
   "id": "artMSEypvgBIDR58",
   "name": "TransferAI Prospecting Multi-Prospect V4 Batch Orchestrator",
@@ -68,7 +68,7 @@
             },
             {
               "name": "child_workflow_id_v3",
-              "stringValue": "={{ $json.child_workflow_id_v3 || 'McmOFeZKrK3rJ0D9' }}"
+              "stringValue": "={{ $json.child_workflow_id_v3 || 'rQyOh7As2gQoCgvK' }}"
             },
             {
               "name": "child_workflow_label_v3",
@@ -1009,7 +1009,8 @@
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": {
     "node:Daily Schedule Trigger": {
@@ -1018,9 +1019,9 @@
   },
   "meta": null,
   "pinData": {},
-  "versionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
-  "activeVersionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
-  "versionCounter": 595,
+  "versionId": "4f8805ee-dba9-4b39-b8dd-5c67e98b33d6",
+  "activeVersionId": "4f8805ee-dba9-4b39-b8dd-5c67e98b33d6",
+  "versionCounter": 598,
   "triggerCount": 1,
   "shared": [
     {
@@ -1074,9 +1075,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-06-29T14:52:23.000Z",
-    "createdAt": "2026-06-29T14:52:08.140Z",
-    "versionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
+    "updatedAt": "2026-06-29T22:50:12.660Z",
+    "createdAt": "2026-06-29T22:50:12.660Z",
+    "versionId": "4f8805ee-dba9-4b39-b8dd-5c67e98b33d6",
     "workflowId": "artMSEypvgBIDR58",
     "nodes": [
       {
@@ -1140,7 +1141,7 @@
               },
               {
                 "name": "child_workflow_id_v3",
-                "stringValue": "={{ $json.child_workflow_id_v3 || 'McmOFeZKrK3rJ0D9' }}"
+                "stringValue": "={{ $json.child_workflow_id_v3 || 'rQyOh7As2gQoCgvK' }}"
               },
               {
                 "name": "child_workflow_label_v3",
@@ -2079,16 +2080,24 @@
       }
     },
     "authors": "marius ayoro",
-    "name": "Version 7fbf4fcf",
-    "description": "",
-    "autosaved": true,
+    "name": null,
+    "description": null,
+    "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-06-29T14:52:23.243Z",
-        "id": 643,
+        "createdAt": "2026-06-29T22:50:12.710Z",
+        "id": 661,
         "workflowId": "artMSEypvgBIDR58",
-        "versionId": "7fbf4fcf-d417-49c9-9732-8aadadc79afe",
+        "versionId": "4f8805ee-dba9-4b39-b8dd-5c67e98b33d6",
         "event": "activated",
+        "userId": "bd1cd523-0846-4f4f-807c-02e596e874ca"
+      },
+      {
+        "createdAt": "2026-06-29T22:50:12.695Z",
+        "id": 660,
+        "workflowId": "artMSEypvgBIDR58",
+        "versionId": "4f8805ee-dba9-4b39-b8dd-5c67e98b33d6",
+        "event": "deactivated",
         "userId": "bd1cd523-0846-4f4f-807c-02e596e874ca"
       }
     ]
