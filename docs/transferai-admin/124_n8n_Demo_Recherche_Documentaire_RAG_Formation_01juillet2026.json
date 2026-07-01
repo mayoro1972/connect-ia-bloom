@@ -1,0 +1,309 @@
+{
+  "name": "Recherche_Documentaire_RAG",
+  "nodes": [
+    {
+      "id": "rag-001",
+      "name": "Trigger — Question utilisateur",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "recherche-documentaire",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "recherche-documentaire"
+    },
+    {
+      "id": "rag-002",
+      "name": "Extraire question",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nreturn [{ json: {\n  question:    body.question || body.query || body.message || '',\n  utilisateur: body.utilisateur || body.user || 'Participant',\n  session_id:  body.session_id || 'sess-' + Date.now(),\n  timestamp:   new Date().toISOString()\n}}];"
+      }
+    },
+    {
+      "id": "rag-003",
+      "name": "Créer embedding question",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={ \"model\": \"text-embedding-3-small\", \"input\": \"{{ $json.question }}\" }",
+        "options": {}
+      }
+    },
+    {
+      "id": "rag-004",
+      "name": "Recherche Supabase Vector",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/rpc/match_documents",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "SUPABASE_SERVICE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer SUPABASE_SERVICE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"query_embedding\": {{ JSON.stringify($json.data[0].embedding) }},\n  \"match_threshold\": 0.75,\n  \"match_count\": 5\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "rag-005",
+      "name": "Construire contexte RAG",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const docs = Array.isArray($input.first().json) ? $input.first().json : [];\nconst question = $('Extraire question').first().json.question;\n\nconst contexte = docs.map((d, i) =>\n  `[Document ${i+1}] ${d.titre || 'Sans titre'} (similarité: ${Math.round((d.similarity||0)*100)}%)\\n${d.contenu||d.content||''}`\n).join('\\n\\n---\\n\\n');\n\nconst sources = docs.map(d => ({\n  titre: d.titre || 'Document',\n  url: d.url || null,\n  similarite: Math.round((d.similarity||0)*100)\n}));\n\nreturn [{ json: {\n  question,\n  contexte_rag: contexte || 'Aucun document trouvé dans la base documentaire.',\n  sources,\n  nb_sources: docs.length\n}}];"
+      }
+    },
+    {
+      "id": "rag-006",
+      "name": "Réponse IA avec sources",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"model\": \"gpt-4o\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Tu es un assistant documentaire interne. Tu réponds UNIQUEMENT à partir des documents fournis. Si la réponse n'est pas dans les documents, dis-le clairement. Cite toujours tes sources. Réponds en français, de façon concise et professionnelle.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Question : {{ $json.question }}\\n\\nDocuments disponibles :\\n{{ $json.contexte_rag }}\"\n    }\n  ],\n  \"temperature\": 0.2\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "rag-007",
+      "name": "Formater & retourner réponse",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const gpt = $input.first().json;\nconst reponse = gpt.choices[0].message.content;\nconst meta = $('Construire contexte RAG').first().json;\n\nreturn [{ json: {\n  reponse: reponse,\n  question: meta.question,\n  sources: meta.sources,\n  nb_sources: meta.nb_sources,\n  timestamp: new Date().toISOString()\n}}];"
+      }
+    },
+    {
+      "id": "rag-008",
+      "name": "Journaliser dans Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1880,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/rag_logs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "SUPABASE_SERVICE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer SUPABASE_SERVICE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"question\": \"{{ $json.question }}\",\n  \"reponse\": \"{{ $json.reponse }}\",\n  \"nb_sources\": {{ $json.nb_sources }},\n  \"sources\": {{ JSON.stringify($json.sources) }},\n  \"utilisateur\": \"{{ $('Extraire question').first().json.utilisateur }}\",\n  \"session_id\": \"{{ $('Extraire question').first().json.session_id }}\",\n  \"created_at\": \"{{ $json.timestamp }}\"\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "rag-009",
+      "name": "Retourner réponse finale",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1880,
+        380
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, reponse: $('Formater & retourner réponse').first().json.reponse, sources: $('Formater & retourner réponse').first().json.sources, nb_sources: $('Formater & retourner réponse').first().json.nb_sources }) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger — Question utilisateur": {
+      "main": [
+        [
+          {
+            "node": "Extraire question",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraire question": {
+      "main": [
+        [
+          {
+            "node": "Créer embedding question",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Créer embedding question": {
+      "main": [
+        [
+          {
+            "node": "Recherche Supabase Vector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recherche Supabase Vector": {
+      "main": [
+        [
+          {
+            "node": "Construire contexte RAG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire contexte RAG": {
+      "main": [
+        [
+          {
+            "node": "Réponse IA avec sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Réponse IA avec sources": {
+      "main": [
+        [
+          {
+            "node": "Formater & retourner réponse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formater & retourner réponse": {
+      "main": [
+        [
+          {
+            "node": "Journaliser dans Supabase",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Retourner réponse finale",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "DÉMO FORMATION — Recherche documentaire intelligente (RAG) avec sources et journalisation"
+  }
+}

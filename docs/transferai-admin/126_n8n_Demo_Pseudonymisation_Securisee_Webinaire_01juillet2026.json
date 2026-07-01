@@ -1,0 +1,205 @@
+{
+  "name": "Pseudonymisation_Securisee",
+  "nodes": [
+    {
+      "id": "ps-001",
+      "name": "Trigger — Formulaire webinaire",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pseudonymisation-demo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "pseudonymisation-demo"
+    },
+    {
+      "id": "ps-002",
+      "name": "Étape 1 — Détecter PII",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n// DÉMO WEBINAIRE — Étape 1 : Détection des PII\n// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nconst body = $input.first().json.body || $input.first().json;\n\n// Données saisies par le volontaire (fictives)\nconst nom_complet  = body.nom_complet  || body.nom    || '';\nconst prenom       = body.prenom       || '';\nconst email        = body.email        || '';\nconst telephone    = body.telephone    || body.tel    || '';\nconst adresse      = body.adresse      || '';\nconst ref_dossier  = body.ref_dossier  || '';\nconst demande      = body.demande      || body.texte  || body.sujet || '';\n\n// ── Détection des champs PII présents ──\nconst pii_detectes = [];\nif (nom_complet || prenom) pii_detectes.push({ type: 'NOM', valeur: [prenom, nom_complet].filter(Boolean).join(' ').trim() });\nif (email)      pii_detectes.push({ type: 'EMAIL',     valeur: email });\nif (telephone)  pii_detectes.push({ type: 'TELEPHONE', valeur: telephone });\nif (adresse)    pii_detectes.push({ type: 'ADRESSE',   valeur: adresse });\nif (ref_dossier)pii_detectes.push({ type: 'REF',       valeur: ref_dossier });\n\n// ── Construire le texte brut (ce qui partirait à l'IA SANS protection) ──\nconst texte_brut = `\nObjet de la demande : ${demande}\nDemandeur : ${[prenom, nom_complet].filter(Boolean).join(' ')}\nContact : ${email} — ${telephone}\nAdresse : ${adresse}\nRéférence dossier : ${ref_dossier}\n`.trim();\n\nreturn [{ json: {\n  // Données originales\n  nom_complet, prenom, email, telephone, adresse, ref_dossier, demande,\n  texte_brut,\n  // Analyse PII\n  pii_detectes,\n  nb_pii: pii_detectes.length,\n  demo_id: 'DEMO-' + Date.now()\n}}];"
+      }
+    },
+    {
+      "id": "ps-003",
+      "name": "Étape 2 — Pseudonymiser",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n// DÉMO WEBINAIRE — Étape 2 : Pseudonymisation\n// Table de correspondance locale (éphémère)\n// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nconst src = $input.first().json;\n\n// ── Table de correspondance : jeton → valeur réelle ──\nconst table_reidentification = {};\n\nfunction pseudonymise(valeur, prefixe, compteur) {\n  const jeton = `${prefixe}_${String(compteur).padStart(3,'0')}`;\n  table_reidentification[jeton] = valeur;\n  return jeton;\n}\n\nlet cpt = { PERSON: 1, EMAIL: 1, PHONE: 1, ADDR: 1, REF: 1 };\n\n// Appliquer la pseudonymisation\nconst nom_token   = (src.prenom || src.nom_complet) ? pseudonymise([src.prenom, src.nom_complet].filter(Boolean).join(' '), 'PERSON', cpt.PERSON++) : '';\nconst email_token  = src.email      ? pseudonymise(src.email,     'EMAIL',  cpt.EMAIL++)  : '';\nconst phone_token  = src.telephone  ? pseudonymise(src.telephone, 'PHONE',  cpt.PHONE++)  : '';\nconst addr_token   = src.adresse    ? pseudonymise(src.adresse,   'ADDR',   cpt.ADDR++)   : '';\nconst ref_token    = src.ref_dossier? pseudonymise(src.ref_dossier,'REF',   cpt.REF++)    : '';\n\n// ── Texte pseudonymisé (seul ce texte part vers l'IA) ──\nconst texte_pseudonymise = `\nObjet de la demande : ${src.demande}\nDemandeur : ${nom_token || '[non renseigné]'}\nContact : ${email_token || '[non renseigné]'} — ${phone_token || '[non renseigné]'}\nAdresse : ${addr_token || '[non renseigné]'}\nRéférence dossier : ${ref_token || '[non renseigné]'}\n`.trim();\n\nreturn [{ json: {\n  // Textes pour comparaison pédagogique\n  texte_brut:          src.texte_brut,\n  texte_pseudonymise,\n  // Mapping pour ré-identification\n  table_reidentification,\n  // Jetons\n  nom_token, email_token, phone_token, addr_token, ref_token,\n  // Données originales conservées localement\n  nom_original:    [src.prenom, src.nom_complet].filter(Boolean).join(' '),\n  email_original:  src.email,\n  phone_original:  src.telephone,\n  addr_original:   src.adresse,\n  ref_original:    src.ref_dossier,\n  demande:         src.demande,\n  demo_id:         src.demo_id,\n  nb_pii_proteges: src.nb_pii\n}}];"
+      }
+    },
+    {
+      "id": "ps-004",
+      "name": "Étape 3 — Envoyer à l'IA (texte pseudonymisé)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"model\": \"gpt-4o\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Tu es un assistant administratif. Traite la demande reçue et rédige une réponse officielle professionnelle. Important : les données personnelles ont été remplacées par des jetons (PERSON_001, EMAIL_001, etc.) — conserve ces jetons tels quels dans ta réponse.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $json.texte_pseudonymise }}\"\n    }\n  ],\n  \"temperature\": 0.3\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "ps-005",
+      "name": "Étape 4 — Ré-identifier (local)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n// DÉMO WEBINAIRE — Étape 4 : Ré-identification locale\n// Le fournisseur d'IA n'a JAMAIS vu les vraies données\n// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nconst gpt = $input.first().json;\nconst reponse_pseudonymisee = gpt.choices[0].message.content;\nconst meta = $('Étape 2 — Pseudonymiser').first().json;\n\n// ── Ré-identification : remplacer les jetons par les vraies valeurs ──\nlet reponse_finale = reponse_pseudonymisee;\nconst table = meta.table_reidentification || {};\nfor (const [jeton, valeur] of Object.entries(table)) {\n  reponse_finale = reponse_finale.replaceAll(jeton, valeur);\n}\n\n// ── Construction du comparatif pédagogique ──\nconst html_comparatif = `\n<div style=\"font-family:Arial,sans-serif;max-width:1000px;margin:auto;padding:30px\">\n\n  <div style=\"background:#10263F;color:white;padding:20px;border-radius:6px;margin-bottom:20px\">\n    <h2 style=\"margin:0\">🔐 Démonstration — Pseudonymisation TransferAI</h2>\n    <p style=\"margin:4px 0;opacity:0.8\">Réf. ${meta.demo_id} — ${new Date().toLocaleString('fr-FR')}</p>\n    <p style=\"margin:4px 0;opacity:0.8\"><strong>${meta.nb_pii_proteges} données personnelles protégées</strong></p>\n  </div>\n\n  <table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n    <tr style=\"background:#E74C3C;color:white\">\n      <th style=\"padding:12px;width:50%;text-align:left\">❌ SANS PROTECTION — Envoyé en clair à l'IA</th>\n      <th style=\"padding:12px;width:50%;text-align:left\">✅ AVEC PROTECTION — Ce que l'IA a reçu</th>\n    </tr>\n    <tr>\n      <td style=\"padding:16px;vertical-align:top;background:#FFF5F5;border:1px solid #E74C3C;font-family:monospace;font-size:13px;white-space:pre-wrap\">${meta.texte_brut}</td>\n      <td style=\"padding:16px;vertical-align:top;background:#F0FFF4;border:1px solid #27AE60;font-family:monospace;font-size:13px;white-space:pre-wrap\">${meta.texte_pseudonymise}</td>\n    </tr>\n  </table>\n\n  <div style=\"background:#F8F9FA;border:1px solid #ddd;padding:20px;border-radius:6px;margin-bottom:20px\">\n    <h3 style=\"color:#10263F;margin-top:0\">📄 Réponse finale (après ré-identification locale)</h3>\n    <div style=\"line-height:1.8;white-space:pre-wrap\">${reponse_finale}</div>\n  </div>\n\n  <div style=\"background:#EBF5FB;border-left:4px solid #2E86AB;padding:16px;border-radius:0 6px 6px 0\">\n    <strong>🎯 Message pédagogique :</strong> Le fournisseur d'IA (OpenAI, Claude...) n'a jamais vu le vrai nom, le vrai email ni le vrai numéro de téléphone. Résultat identique — données protégées.\n  </div>\n</div>`;\n\nreturn [{ json: {\n  reponse_finale,\n  reponse_pseudonymisee,\n  html_comparatif,\n  texte_brut: meta.texte_brut,\n  texte_pseudonymise: meta.texte_pseudonymise,\n  table_reidentification: meta.table_reidentification,\n  demo_id: meta.demo_id,\n  nb_pii_proteges: meta.nb_pii_proteges\n}}];"
+      }
+    },
+    {
+      "id": "ps-006",
+      "name": "Étape 5 — Purger table correspondance",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        220
+      ],
+      "parameters": {
+        "jsCode": "// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n// DÉMO WEBINAIRE — Étape 5 : PURGE (sécurité)\n// La table de correspondance est détruite ici\n// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nconst src = $input.first().json;\n\n// Écraser la table — elle ne sera pas transmise plus loin\nconst table_purgee = null;\nconst demo_id = src.demo_id;\n\nreturn [{ json: {\n  reponse_finale:       src.reponse_finale,\n  html_comparatif:      src.html_comparatif,\n  texte_brut:           src.texte_brut,\n  texte_pseudonymise:   src.texte_pseudonymise,\n  nb_pii_proteges:      src.nb_pii_proteges,\n  demo_id,\n  table_reidentification: table_purgee,   // ← PURGÉE\n  purge_effectuee:      true,\n  purge_timestamp:      new Date().toISOString()\n}}];"
+      }
+    },
+    {
+      "id": "ps-007",
+      "name": "Afficher comparatif démonstration",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1400,
+        380
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Étape 5 — Purger table correspondance').first().json.html_comparatif }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Trigger — Formulaire webinaire": {
+      "main": [
+        [
+          {
+            "node": "Étape 1 — Détecter PII",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Étape 1 — Détecter PII": {
+      "main": [
+        [
+          {
+            "node": "Étape 2 — Pseudonymiser",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Étape 2 — Pseudonymiser": {
+      "main": [
+        [
+          {
+            "node": "Étape 3 — Envoyer à l'IA (texte pseudonymisé)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Étape 3 — Envoyer à l'IA (texte pseudonymisé)": {
+      "main": [
+        [
+          {
+            "node": "Étape 4 — Ré-identifier (local)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Étape 4 — Ré-identifier (local)": {
+      "main": [
+        [
+          {
+            "node": "Étape 5 — Purger table correspondance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Étape 5 — Purger table correspondance": {
+      "main": [
+        [
+          {
+            "node": "Afficher comparatif démonstration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "DÉMO WEBINAIRE — Pseudonymisation live : détection PII → jetons → IA → ré-identification locale → purge"
+  }
+}

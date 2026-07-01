@@ -1,0 +1,356 @@
+{
+  "name": "Courrier_Automatique",
+  "nodes": [
+    {
+      "id": "co-001",
+      "name": "Trigger — Demande courrier",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "courrier-automatique",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "courrier-automatique"
+    },
+    {
+      "id": "co-002",
+      "name": "Extraire demande",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nreturn [{ json: {\n  type_courrier:    body.type_courrier || 'Courrier officiel',\n  destinataire:     body.destinataire || '',\n  objet:            body.objet || body.sujet || '',\n  instructions:     body.instructions || body.message || '',\n  expediteur:       body.expediteur || 'Direction Générale',\n  organisation:     body.organisation || 'Mon Organisation',\n  email_validation: body.email_validation || 'contact@transferai.ci',\n  langue:           body.langue || 'fr',\n  timestamp:        new Date().toISOString(),\n  courrier_id:      'CRR-' + Date.now()\n}}];"
+      }
+    },
+    {
+      "id": "co-003",
+      "name": "Générer courrier GPT-4o",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"model\": \"gpt-4o\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Tu es expert en rédaction de courriers officiels et administratifs en Afrique francophone. Tu produis des courriers professionnels, formels et adaptés au contexte institutionnel. Utilise les formules de politesse appropriées. Produis uniquement le texte du courrier, en HTML propre.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Type de courrier : {{ $json.type_courrier }}\\nExpéditeur : {{ $json.expediteur }} — {{ $json.organisation }}\\nDestinataire : {{ $json.destinataire }}\\nObjet : {{ $json.objet }}\\nInstructions complémentaires : {{ $json.instructions }}\\n\\nRédige le courrier complet en HTML (sans balises html/body/head, juste le contenu formaté).\"\n    }\n  ],\n  \"temperature\": 0.4\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "co-004",
+      "name": "Préparer courrier HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const gpt = $input.first().json;\nconst contenu = gpt.choices[0].message.content;\nconst meta = $('Extraire demande').first().json;\n\nconst html = `\n<div style=\"font-family:Georgia,serif;max-width:700px;margin:auto;padding:40px;border:1px solid #ddd\">\n  <div style=\"text-align:right;margin-bottom:30px\">\n    <strong>${meta.organisation}</strong><br/>\n    ${new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})}\n  </div>\n  <div style=\"margin-bottom:20px\"><strong>À l'attention de :</strong><br/>${meta.destinataire}</div>\n  <div style=\"margin-bottom:10px\"><strong>Objet :</strong> ${meta.objet}</div>\n  <hr style=\"border:1px solid #ccc;margin:20px 0\"/>\n  <div style=\"line-height:1.8\">${contenu}</div>\n  <hr style=\"border:1px solid #ccc;margin:30px 0\"/>\n  <div style=\"font-size:11px;color:#888\">\n    Réf. ${meta.courrier_id} — Généré par TransferAI Nettelecom CI<br/>\n    Ce courrier doit être validé par un responsable avant envoi.\n  </div>\n</div>`;\n\nconst lien_approbation = `https://[VPS_DOMAIN]/webhook/courrier-approve?id=${meta.courrier_id}&decision=approved`;\nconst lien_refus = `https://[VPS_DOMAIN]/webhook/courrier-approve?id=${meta.courrier_id}&decision=rejected`;\n\nreturn [{ json: {\n  courrier_html: html,\n  courrier_brut: contenu,\n  courrier_id: meta.courrier_id,\n  objet: meta.objet,\n  destinataire: meta.destinataire,\n  email_validation: meta.email_validation,\n  lien_approbation,\n  lien_refus\n}}];"
+      }
+    },
+    {
+      "id": "co-005",
+      "name": "Email validation manager",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1160,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"from\": \"TransferAI Formation <contact@transferai.ci>\",\n  \"to\": [\"{{ $json.email_validation }}\"],\n  \"subject\": \"[VALIDATION] Courrier — {{ $json.objet }}\",\n  \"html\": \"<h2>Courrier généré — validation requise</h2><p>Objet : <strong>{{ $json.objet }}</strong></p><p>Destinataire : {{ $json.destinataire }}</p><hr/><div style='border:1px solid #ddd;padding:20px;background:#f9f9f9'>{{ $json.courrier_html }}</div><hr/><p><a href='{{ $json.lien_approbation }}' style='background:#27AE60;color:white;padding:12px 24px;text-decoration:none;border-radius:4px;font-weight:bold;margin-right:16px'>✅ APPROUVER & ENVOYER</a> <a href='{{ $json.lien_refus }}' style='background:#E74C3C;color:white;padding:12px 24px;text-decoration:none;border-radius:4px;font-weight:bold'>❌ REJETER</a></p>\"\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "co-006",
+      "name": "Confirmer — en attente validation",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1400,
+        300
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"ok\": true, \"courrier_id\": \"{{ $('Préparer courrier HTML').first().json.courrier_id }}\", \"status\": \"en_attente_validation\", \"message\": \"Email de validation envoyé au manager\" }"
+      }
+    },
+    {
+      "id": "co-007",
+      "name": "Webhook — Décision manager",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        560
+      ],
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "courrier-approve",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "courrier-approve"
+    },
+    {
+      "id": "co-008",
+      "name": "Vérifier décision",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        440,
+        560
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.query.decision }}",
+              "rightValue": "approved",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "co-009",
+      "name": "Envoyer courrier final",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        480
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"from\": \"TransferAI Formation <contact@transferai.ci>\",\n  \"to\": [\"{{ $json.query.destinataire_email || 'contact@transferai.ci' }}\"],\n  \"subject\": \"{{ $json.query.objet || 'Courrier officiel' }}\",\n  \"html\": \"Courrier approuvé et envoyé.\"\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "co-010",
+      "name": "Confirmer approbation",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        920,
+        480
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<html><body style='font-family:Arial;text-align:center;padding:60px'><h2 style='color:#27AE60'>✅ Courrier approuvé et envoyé</h2><p>Le destinataire a été notifié.</p></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "co-011",
+      "name": "Confirmer rejet",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        680,
+        640
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<html><body style='font-family:Arial;text-align:center;padding:60px'><h2 style='color:#E74C3C'>❌ Courrier rejeté</h2><p>Aucun email n'a été envoyé.</p></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Trigger — Demande courrier": {
+      "main": [
+        [
+          {
+            "node": "Extraire demande",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraire demande": {
+      "main": [
+        [
+          {
+            "node": "Générer courrier GPT-4o",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Générer courrier GPT-4o": {
+      "main": [
+        [
+          {
+            "node": "Préparer courrier HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer courrier HTML": {
+      "main": [
+        [
+          {
+            "node": "Email validation manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email validation manager": {
+      "main": [
+        [
+          {
+            "node": "Confirmer — en attente validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook — Décision manager": {
+      "main": [
+        [
+          {
+            "node": "Vérifier décision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vérifier décision": {
+      "main": [
+        [
+          {
+            "node": "Envoyer courrier final",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirmer rejet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer courrier final": {
+      "main": [
+        [
+          {
+            "node": "Confirmer approbation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "DÉMO FORMATION — Génération courrier administratif + validation manager + envoi final"
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "name": "CR_Reunion_Automatique",
+  "nodes": [
+    {
+      "id": "cr-001",
+      "name": "Trigger — Nouveau fichier audio",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cr-reunion-audio",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "cr-reunion-audio"
+    },
+    {
+      "id": "cr-002",
+      "name": "Extraire infos réunion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// Extraction des métadonnées de la réunion depuis le webhook\nconst body = $input.first().json.body || $input.first().json;\nconst audioUrl  = body.audio_url || body.file_url || '';\nconst reunionDate = body.date || new Date().toLocaleDateString('fr-FR');\nconst participants = body.participants || 'Non précisé';\nconst sujet = body.sujet || body.title || 'Réunion';\nconst langue = body.langue || 'fr';\n\nreturn [{ json: {\n  audio_url: audioUrl,\n  reunion_date: reunionDate,\n  participants: participants,\n  sujet: sujet,\n  langue: langue,\n  timestamp: new Date().toISOString()\n}}];"
+      }
+    },
+    {
+      "id": "cr-003",
+      "name": "Transcription Whisper (OpenAI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "whisper-1"
+            },
+            {
+              "name": "language",
+              "value": "={{ $json.langue }}"
+            },
+            {
+              "name": "response_format",
+              "value": "text"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "cr-004",
+      "name": "Résumé structuré GPT-4o",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"model\": \"gpt-4o\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Tu es un assistant spécialisé dans la rédaction de comptes rendus de réunion professionnels en français. Tu produis des comptes rendus structurés, concis et exploitables. Format de sortie : JSON strict.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Réunion du {{ $('Extraire infos réunion').first().json.reunion_date }} — Sujet : {{ $('Extraire infos réunion').first().json.sujet }}\\nParticipants : {{ $('Extraire infos réunion').first().json.participants }}\\n\\nTranscription :\\n{{ $json.data || $json }}\\n\\nProduis un JSON avec ces clés : { resume_executif, points_discutes (array), decisions_prises (array), actions (array de { responsable, action, echeance }), prochaine_reunion }\"\n    }\n  ],\n  \"response_format\": { \"type\": \"json_object\" },\n  \"temperature\": 0.3\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "cr-005",
+      "name": "Parser résultat GPT",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const gpt = $input.first().json;\nconst content = gpt.choices[0].message.content;\nlet cr;\ntry { cr = JSON.parse(content); } catch(e) { cr = { resume_executif: content }; }\n\nconst meta = $('Extraire infos réunion').first().json;\nconst date = meta.reunion_date;\nconst sujet = meta.sujet;\nconst participants = meta.participants;\n\n// Construire le HTML du compte rendu\nconst actionsHtml = (cr.actions || []).map(a =>\n  `<tr><td>${a.responsable||''}</td><td>${a.action||''}</td><td>${a.echeance||''}</td></tr>`\n).join('');\n\nconst html = `\n<h1>Compte Rendu de Réunion</h1>\n<p><strong>Date :</strong> ${date} | <strong>Sujet :</strong> ${sujet}</p>\n<p><strong>Participants :</strong> ${participants}</p>\n<hr/>\n<h2>Résumé exécutif</h2>\n<p>${cr.resume_executif||''}</p>\n<h2>Points discutés</h2>\n<ul>${(cr.points_discutes||[]).map(p=>`<li>${p}</li>`).join('')}</ul>\n<h2>Décisions prises</h2>\n<ul>${(cr.decisions_prises||[]).map(d=>`<li>${d}</li>`).join('')}</ul>\n<h2>Plan d'action</h2>\n<table border=\"1\" cellpadding=\"8\" style=\"border-collapse:collapse;width:100%\">\n<tr><th>Responsable</th><th>Action</th><th>Échéance</th></tr>\n${actionsHtml}\n</table>\n<h2>Prochaine réunion</h2>\n<p>${cr.prochaine_reunion||'À définir'}</p>\n<hr/><p style=\"font-size:11px;color:#888\">Généré automatiquement par TransferAI — ${new Date().toLocaleString('fr-FR')}</p>\n`;\n\nreturn [{ json: {\n  compte_rendu_json: cr,\n  compte_rendu_html: html,\n  sujet: sujet,\n  date: date,\n  participants: participants,\n  nb_actions: (cr.actions||[]).length\n}}];"
+      }
+    },
+    {
+      "id": "cr-006",
+      "name": "Envoyer CR par email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"from\": \"TransferAI Formation <contact@transferai.ci>\",\n  \"to\": [\"{{ $('Extraire infos réunion').first().json.email_manager || 'contact@transferai.ci' }}\"],\n  \"subject\": \"[CR] {{ $json.sujet }} — {{ $json.date }}\",\n  \"html\": \"{{ $json.compte_rendu_html }}\"\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "cr-007",
+      "name": "Confirmer envoi",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1400,
+        380
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"ok\": true, \"message\": \"Compte rendu généré et envoyé\", \"nb_actions\": {{ $('Parser résultat GPT').first().json.nb_actions }} }"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger — Nouveau fichier audio": {
+      "main": [
+        [
+          {
+            "node": "Extraire infos réunion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraire infos réunion": {
+      "main": [
+        [
+          {
+            "node": "Transcription Whisper (OpenAI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcription Whisper (OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "Résumé structuré GPT-4o",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Résumé structuré GPT-4o": {
+      "main": [
+        [
+          {
+            "node": "Parser résultat GPT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser résultat GPT": {
+      "main": [
+        [
+          {
+            "node": "Envoyer CR par email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Confirmer envoi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "DÉMO FORMATION — Transcription audio → compte rendu structuré + plan d'action en < 15 min"
+  }
+}
