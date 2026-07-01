@@ -1,0 +1,1004 @@
+{
+  "name": "TransferAI Formation — Email 2 & 3 Séquence avec Validation Humaine",
+  "nodes": [
+    {
+      "id": "18369f97-6983-4a70-b291-bfd12c59974f",
+      "name": "Schedule 9h Email2",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1800,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "63ba50f2-be2f-420e-bfb6-7d43d7c03421",
+      "name": "Fetch Leads J+1 Email2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1560,
+        300
+      ],
+      "parameters": {
+        "url": "={'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?source_label=eq.google_form_formation_juillet_2026&niche_status=eq.assistant_direction_documentaire&status=eq.formation_interest&select=prospect_id,decision_maker_name,target_email,organization_name,sector_guess,notes_internal&limit=30'}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "3ebfb00a-fbf8-4390-8cd9-3b5a47c8c1ec",
+      "name": "Split Email2 Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1320,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const d=$input.first().json; const arr=Array.isArray(d)?d:[]; return arr.map(p=>({json:p}));"
+      }
+    },
+    {
+      "id": "eb2a6304-ad1f-4780-aeba-1b85154f0e94",
+      "name": "Build Email2 Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1080,
+        300
+      ],
+      "parameters": {
+        "jsCode": "\nconst p = $json;\nconst prenom = (p.decision_maker_name||'').split(' ')[0] || 'Madame/Monsieur';\nconst email2_body = `<div style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#222\">\n<p>Bonjour {{prenom}},</p>\n<p>Suite à votre inscription, nous avons le plaisir de vous faire parvenir le <strong>programme détaillé</strong> de notre formation <strong>L'IA appliquée à votre métier</strong>.</p>\n<p>Vous trouverez en pièce jointe le programme complet (PDF). Voici les points essentiels :</p>\n<h3 style=\"color:#1a56db;font-size:15px;margin:20px 0 8px\">📋 Ce que vous allez maîtriser en 2 jours</h3>\n<ul>\n<li><strong>Jour 1 :</strong> Panorama IA &amp; confidentialité · Courriers &amp; emails · Réunions &amp; briefings · Comptes rendus</li>\n<li><strong>Jour 2 :</strong> Classement &amp; GED · Notes de synthèse · Bibliothèque de prompts · Charte interne IA</li>\n</ul>\n<h3 style=\"color:#1a56db;font-size:15px;margin:20px 0 8px\">🎓 Vous repartez avec</h3>\n<ul>\n<li>✅ Attestation de formation <strong>TransferAI &amp; Nettelecom CI</strong></li>\n<li>✅ Kit de prompts / Templates IA adaptés à votre métier</li>\n<li>✅ Support PDF complet + Bibliothèque de prompts métier</li>\n<li>✅ Check-list protection données sensibles + Mini-charte interne</li>\n</ul>\n<h3 style=\"color:#1a56db;font-size:15px;margin:20px 0 8px\">📅 Sessions disponibles</h3>\n<ul>\n<li>Session 1 — <strong>30-31 juillet 2026</strong></li>\n<li>Session 2 — <strong>10-11 août 2026</strong></li>\n</ul>\n<p><strong>Lieu :</strong> Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire<br>\n<strong>Tarif :</strong> À partir de 250 000 F CFA / personne · Réductions groupe disponibles</p>\n<p>Pour confirmer votre place ou poser une question :</p>\n<p style=\"text-align:center;margin:28px 0\">\n<a href=\"{{google_form_url}}\" style=\"background:#1a56db;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;margin-right:10px\">Je confirme mon inscription</a>\n<a href=\"{{calendly_url}}\" style=\"background:#ffffff;color:#1a56db;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;border:1px solid #1a56db\">Réserver un appel</a>\n</p>\n<p style=\"font-size:13px;color:#666\">WhatsApp &amp; Agent IA : <strong>+225 07 16 57 39 90</strong></p>\n<p>Bien cordialement,<br><strong>L'équipe TransferAI Nettelecom CI</strong><br>\nWhatsApp &amp; Agent IA : +225 07 16 57 39 90<br>\nEmail : contact@transferai.ci<br>\nRiviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire</p>\n</div>`\n  .replace('{{prenom}}', prenom)\n  .replace('{{google_form_url}}', 'https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform')\n  .replace('{{calendly_url}}', 'https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique');\n\nconst notes = p.notes_internal || '';\nconst nb = (notes.match(/Nb: ([^|]+)/)||['','1'])[1].trim();\nconst date_pref = (notes.match(/Date: ([^|]+)/)||['',''])[1].trim();\n\nconst admin_html = `<div style=\"font-family:Arial,sans-serif;max-width:640px;margin:0 auto\">\n<h2 style=\"color:#1a56db\">Validation requise — Email 2 : Programme formation</h2>\n<table style=\"width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px\">\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold;width:130px\">Prospect</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{nom}} — {{structure}}</td></tr>\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold\">Email</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{email}}</td></tr>\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold\">Secteur</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{secteur}}</td></tr>\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold\">Nb personnes</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{nb_personnes}}</td></tr>\n</table>\n<h3 style=\"font-size:14px;color:#374151\">Aperçu de l'email 2 :</h3>\n<div style=\"border:1px solid #e5e7eb;border-radius:6px;padding:16px;background:#f9fafb;margin-bottom:20px\">\n{{preview_html}}\n</div>\n<p style=\"text-align:center;margin:24px 0\">\n<a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/formation-email2-approve?decision=approve&prospect_id={{prospect_id}}&email=2\" style=\"background:#059669;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin:4px\">✅ Approuver &amp; Envoyer</a>\n<a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/formation-email2-approve?decision=amend&prospect_id={{prospect_id}}&email=2\" style=\"background:#f59e0b;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin:4px\">✏️ Amender</a>\n<a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/formation-email2-approve?decision=refuse&prospect_id={{prospect_id}}&email=2\" style=\"background:#dc2626;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin:4px\">❌ Refuser</a>\n</p>\n</div> `\n  .replace('{{nom}}', p.decision_maker_name||'Inconnu')\n  .replace('{{structure}}', p.organization_name||'-')\n  .replace('{{email}}', p.target_email||'-')\n  .replace('{{secteur}}', p.sector_guess||'-')\n  .replace('{{nb_personnes}}', nb||'1')\n  .replace('{{prospect_id}}', p.prospect_id)\n  .replace('{{prospect_id}}', p.prospect_id)\n  .replace('{{prospect_id}}', p.prospect_id)\n  .replace('{{preview_html}}', email2_body.substring(0,800)+'...');\n\nreturn [{json: {\n  prospect_id: p.prospect_id,\n  nom: p.decision_maker_name,\n  email: p.target_email,\n  structure: p.organization_name,\n  secteur: p.sector_guess,\n  prenom,\n  email2_body,\n  admin_html,\n  pdf_url: 'https://wlhznciwuofueffyoflo.supabase.co/storage/v1/object/public/prospecting-artifacts/formation/programme_formation_ia_2026.pdf'\n}}];\n"
+      }
+    },
+    {
+      "id": "4ecc5350-ec53-45e1-a355-acd728b5452c",
+      "name": "Send Email2 Approval To Admin",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -840,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{JSON.stringify({from:'TransferAI CRM <contact@transferai.ci>',to:['marius.ayoro70@gmail.com'],subject:'[VALIDATION] Email 2 formation — '+$json.nom+' ('+$json.structure+')',html:$json.admin_html})}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "d127288b-af6e-4763-b962-658c8b441d6c",
+      "name": "Mark Email2 Pending",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -600,
+        300
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.'+encodeURIComponent($('Build Email2 Content').first().json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{JSON.stringify({status:'email2_pending_approval',updated_at:new Date().toISOString()})}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "d427a290-0281-4450-a2c9-2d977f503fab",
+      "name": "Webhook Email2 Approval",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1800,
+        600
+      ],
+      "webhookId": "e462e91f-4bf8-46b3-9a07-b9aaa51b7ab5",
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "formation-email2-approve",
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "da090abe-de4f-434c-aec6-59b201a0ecfd",
+      "name": "Parse Email2 Decision",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1560,
+        600
+      ],
+      "parameters": {
+        "jsCode": "\nconst q = $json.query || {};\nreturn [{json:{decision:q.decision||'refuse', prospect_id:q.prospect_id||''}}];\n"
+      }
+    },
+    {
+      "id": "f273eceb-4c4c-4bf7-9712-04d78d95b371",
+      "name": "IF Email2 Approved",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1320,
+        600
+      ],
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{$json.decision}}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "eecd23cb-340b-4519-921d-0214e94f53f5",
+      "name": "Fetch Lead For Email2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1080,
+        500
+      ],
+      "parameters": {
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.'+encodeURIComponent($json.prospect_id)+'&select=prospect_id,decision_maker_name,target_email,organization_name,sector_guess,notes_internal&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ce174770-9168-45aa-bc78-3a4e2b7971d9",
+      "name": "Rebuild Email2 Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -840,
+        500
+      ],
+      "parameters": {
+        "jsCode": "\nconst raw=$input.first().json; const arr=Array.isArray(raw)?raw:[raw];\nconst p=arr[0]||{};\nconst prenom=(p.decision_maker_name||'').split(' ')[0]||'Madame/Monsieur';\nconst body=`<div style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#222\">\n<p>Bonjour {{prenom}},</p>\n<p>Suite à votre inscription, nous avons le plaisir de vous faire parvenir le <strong>programme détaillé</strong> de notre formation <strong>L'IA appliquée à votre métier</strong>.</p>\n<p>Vous trouverez en pièce jointe le programme complet (PDF). Voici les points essentiels :</p>\n<h3 style=\"color:#1a56db;font-size:15px;margin:20px 0 8px\">📋 Ce que vous allez maîtriser en 2 jours</h3>\n<ul>\n<li><strong>Jour 1 :</strong> Panorama IA &amp; confidentialité · Courriers &amp; emails · Réunions &amp; briefings · Comptes rendus</li>\n<li><strong>Jour 2 :</strong> Classement &amp; GED · Notes de synthèse · Bibliothèque de prompts · Charte interne IA</li>\n</ul>\n<h3 style=\"color:#1a56db;font-size:15px;margin:20px 0 8px\">🎓 Vous repartez avec</h3>\n<ul>\n<li>✅ Attestation de formation <strong>TransferAI &amp; Nettelecom CI</strong></li>\n<li>✅ Kit de prompts / Templates IA adaptés à votre métier</li>\n<li>✅ Support PDF complet + Bibliothèque de prompts métier</li>\n<li>✅ Check-list protection données sensibles + Mini-charte interne</li>\n</ul>\n<h3 style=\"color:#1a56db;font-size:15px;margin:20px 0 8px\">📅 Sessions disponibles</h3>\n<ul>\n<li>Session 1 — <strong>30-31 juillet 2026</strong></li>\n<li>Session 2 — <strong>10-11 août 2026</strong></li>\n</ul>\n<p><strong>Lieu :</strong> Riviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire<br>\n<strong>Tarif :</strong> À partir de 250 000 F CFA / personne · Réductions groupe disponibles</p>\n<p>Pour confirmer votre place ou poser une question :</p>\n<p style=\"text-align:center;margin:28px 0\">\n<a href=\"{{google_form_url}}\" style=\"background:#1a56db;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;margin-right:10px\">Je confirme mon inscription</a>\n<a href=\"{{calendly_url}}\" style=\"background:#ffffff;color:#1a56db;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;border:1px solid #1a56db\">Réserver un appel</a>\n</p>\n<p style=\"font-size:13px;color:#666\">WhatsApp &amp; Agent IA : <strong>+225 07 16 57 39 90</strong></p>\n<p>Bien cordialement,<br><strong>L'équipe TransferAI Nettelecom CI</strong><br>\nWhatsApp &amp; Agent IA : +225 07 16 57 39 90<br>\nEmail : contact@transferai.ci<br>\nRiviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire</p>\n</div>`.replace('{{prenom}}',prenom).replace('{{google_form_url}}','https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform').replace('{{calendly_url}}','https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique');\nreturn [{json:{...p,prenom,email2_body:body}}];\n"
+      }
+    },
+    {
+      "id": "7d88fda4-09bb-448c-a81d-51f22ffc2fd7",
+      "name": "Send Email2 To Prospect",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -600,
+        500
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={JSON.stringify({from:'TransferAI Formation <contact@transferai.ci>',to:[$json.target_email],bcc:['marius.ayoro70@gmail.com'],subject:$json.prenom+', votre programme de formation IA — TransferAI',html:$json.email2_body,attachments:[{filename:'Programme_Formation_IA_TransferAI_2026.pdf',path:'https://wlhznciwuofueffyoflo.supabase.co/storage/v1/object/public/prospecting-artifacts/formation/programme_formation_ia_2026.pdf'}]})}",
+        "options": {}
+      }
+    },
+    {
+      "id": "e0e94205-8f8f-4a46-a869-486920694b10",
+      "name": "Update Email2 Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -360,
+        500
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.'+encodeURIComponent($('Rebuild Email2 Body').first().json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{JSON.stringify({status:'email2_sent',social_email_1_sent_at:new Date().toISOString(),updated_at:new Date().toISOString()})}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "f99797c4-ef9d-429d-ab69-e1e3c2b67df6",
+      "name": "Respond Email2 Approved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        500
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Email 2 approuvé et envoyé.",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "5647e940-aef6-44e8-a1bb-ecb719bfc8e5",
+      "name": "Respond Email2 Refused",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -1080,
+        720
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Email 2 refusé / à amender. Aucun envoi effectué.",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "0ad58a9c-b722-45eb-b09a-e0f84c705168",
+      "name": "Schedule 9h Email3",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "4c8d0e40-10c4-4494-a36c-6743623f1008",
+      "name": "Fetch Leads J+4 Email3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "url": "={'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?source_label=eq.google_form_formation_juillet_2026&status=eq.email2_sent&select=prospect_id,decision_maker_name,target_email,organization_name,sector_guess,social_email_1_sent_at&social_email_1_sent_at=lte.'+new Date(Date.now()-4*86400000).toISOString()+'&limit=30'}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "79ee30c0-9ecb-4880-b171-ddfe51735704",
+      "name": "Split Email3 Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const d=$input.first().json; const arr=Array.isArray(d)?d:[]; return arr.map(p=>({json:p}));"
+      }
+    },
+    {
+      "id": "ed3c7510-198c-41b4-9083-bef143d38ceb",
+      "name": "Build Email3 Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        300
+      ],
+      "parameters": {
+        "jsCode": "\nconst p=$json;\nconst prenom=(p.decision_maker_name||'').split(' ')[0]||'Madame/Monsieur';\nconst email3_body=`<div style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#222\">\n<p style=\"background:#fff3cd;border-left:4px solid #f59e0b;padding:12px;border-radius:4px;font-weight:bold\">\n⚠️ Places limitées — Il reste peu de temps pour confirmer votre inscription\n</p>\n<p>Bonjour {{prenom}},</p>\n<p>Nous revenons vers vous concernant votre intérêt pour notre formation <strong>L'IA appliquée à votre métier</strong>.</p>\n<p><strong>Les places sont limitées à 20 participants par session</strong> et les inscriptions avancent rapidement. Nous souhaitons nous assurer que vous ne manquez pas cette opportunité.</p>\n<ul>\n<li>Session 1 — <strong>30-31 juillet 2026</strong> · Quelques places restantes</li>\n<li>Session 2 — <strong>10-11 août 2026</strong> · Ouvert aux inscriptions</li>\n</ul>\n<p>En 2 jours, vous repartirez avec des outils IA prêts à l'emploi, une attestation officielle, et un accompagnement post-formation pour mettre en pratique dès le lundi suivant.</p>\n<p style=\"text-align:center;margin:28px 0\">\n<a href=\"{{google_form_url}}\" style=\"background:#dc2626;color:#fff;padding:14px 28px;border-radius:6px;text-decoration:none;font-weight:bold\">Réserver ma place maintenant</a>\n</p>\n<p style=\"font-size:13px;color:#666\">Une question ? Écrivez-nous directement ou contactez-nous sur WhatsApp : <strong>+225 07 16 57 39 90</strong></p>\n<p>Bien cordialement,<br><strong>L'équipe TransferAI Nettelecom CI</strong><br>\nWhatsApp &amp; Agent IA : +225 07 16 57 39 90<br>\nEmail : contact@transferai.ci<br>\nRiviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire</p>\n</div>`.replace('{{prenom}}',prenom).replace('{{google_form_url}}','https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform');\nconst admin_html=`<div style=\"font-family:Arial,sans-serif;max-width:640px;margin:0 auto\">\n<h2 style=\"color:#1a56db\">Validation requise — Email 3 : Relance urgente — places limitées</h2>\n<table style=\"width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px\">\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold;width:130px\">Prospect</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{nom}} — {{structure}}</td></tr>\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold\">Email</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{email}}</td></tr>\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold\">Secteur</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{secteur}}</td></tr>\n<tr><td style=\"padding:6px;border:1px solid #e5e7eb;font-weight:bold\">Nb personnes</td><td style=\"padding:6px;border:1px solid #e5e7eb\">{{nb_personnes}}</td></tr>\n</table>\n<h3 style=\"font-size:14px;color:#374151\">Aperçu de l'email 3 :</h3>\n<div style=\"border:1px solid #e5e7eb;border-radius:6px;padding:16px;background:#f9fafb;margin-bottom:20px\">\n{{preview_html}}\n</div>\n<p style=\"text-align:center;margin:24px 0\">\n<a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/formation-email3-approve?decision=approve&prospect_id={{prospect_id}}&email=3\" style=\"background:#059669;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin:4px\">✅ Approuver &amp; Envoyer</a>\n<a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/formation-email3-approve?decision=amend&prospect_id={{prospect_id}}&email=3\" style=\"background:#f59e0b;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin:4px\">✏️ Amender</a>\n<a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/formation-email3-approve?decision=refuse&prospect_id={{prospect_id}}&email=3\" style=\"background:#dc2626;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin:4px\">❌ Refuser</a>\n</p>\n</div>`\n  .replace(/{{nom}}/g,p.decision_maker_name||'')\n  .replace(/{{structure}}/g,p.organization_name||'')\n  .replace(/{{email}}/g,p.target_email||'')\n  .replace(/{{secteur}}/g,p.sector_guess||'')\n  .replace(/{{nb_personnes}}/g,'')\n  .replace(/{{prospect_id}}/g,p.prospect_id)\n  .replace('{{preview_html}}',email3_body.substring(0,600)+'...');\nreturn [{json:{...p,prenom,email3_body,admin_html}}];\n"
+      }
+    },
+    {
+      "id": "55c24963-48ad-4d6d-bb6b-ac86118cbdbb",
+      "name": "Send Email3 Approval To Admin",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1160,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{JSON.stringify({from:'TransferAI CRM <contact@transferai.ci>',to:['marius.ayoro70@gmail.com'],subject:'[VALIDATION] Email 3 relance — '+$json.nom+' ('+$json.structure+')',html:$json.admin_html})}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "3b6f0260-6492-4654-9f8a-7640b337be61",
+      "name": "Mark Email3 Pending",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        300
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.'+encodeURIComponent($('Build Email3 Content').first().json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{JSON.stringify({status:'email3_pending_approval',updated_at:new Date().toISOString()})}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "87f8855d-f33e-4653-bff5-484b9b27ed97",
+      "name": "Webhook Email3 Approval",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        600
+      ],
+      "webhookId": "aa5641eb-f387-413c-8628-3ca87829a451",
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "formation-email3-approve",
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "b7de7100-061f-4d50-87cc-98d50411ce90",
+      "name": "Parse Email3 Decision",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        600
+      ],
+      "parameters": {
+        "jsCode": "const q=$json.query||{}; return [{json:{decision:q.decision||'refuse',prospect_id:q.prospect_id||''}}];"
+      }
+    },
+    {
+      "id": "422a3e33-ba44-449d-8335-041afb4cb947",
+      "name": "IF Email3 Approved",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        680,
+        600
+      ],
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{$json.decision}}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a6ad37ae-4d41-4907-9140-27fc42156111",
+      "name": "Fetch Lead For Email3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        500
+      ],
+      "parameters": {
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.'+encodeURIComponent($json.prospect_id)+'&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "84eb650e-e46f-4ad8-8717-369d5e5cb2a1",
+      "name": "Rebuild Email3 Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        500
+      ],
+      "parameters": {
+        "jsCode": "\nconst raw=$input.first().json; const arr=Array.isArray(raw)?raw:[raw]; const p=arr[0]||{};\nconst prenom=(p.decision_maker_name||'').split(' ')[0]||'Madame/Monsieur';\nconst body=`<div style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#222\">\n<p style=\"background:#fff3cd;border-left:4px solid #f59e0b;padding:12px;border-radius:4px;font-weight:bold\">\n⚠️ Places limitées — Il reste peu de temps pour confirmer votre inscription\n</p>\n<p>Bonjour {{prenom}},</p>\n<p>Nous revenons vers vous concernant votre intérêt pour notre formation <strong>L'IA appliquée à votre métier</strong>.</p>\n<p><strong>Les places sont limitées à 20 participants par session</strong> et les inscriptions avancent rapidement. Nous souhaitons nous assurer que vous ne manquez pas cette opportunité.</p>\n<ul>\n<li>Session 1 — <strong>30-31 juillet 2026</strong> · Quelques places restantes</li>\n<li>Session 2 — <strong>10-11 août 2026</strong> · Ouvert aux inscriptions</li>\n</ul>\n<p>En 2 jours, vous repartirez avec des outils IA prêts à l'emploi, une attestation officielle, et un accompagnement post-formation pour mettre en pratique dès le lundi suivant.</p>\n<p style=\"text-align:center;margin:28px 0\">\n<a href=\"{{google_form_url}}\" style=\"background:#dc2626;color:#fff;padding:14px 28px;border-radius:6px;text-decoration:none;font-weight:bold\">Réserver ma place maintenant</a>\n</p>\n<p style=\"font-size:13px;color:#666\">Une question ? Écrivez-nous directement ou contactez-nous sur WhatsApp : <strong>+225 07 16 57 39 90</strong></p>\n<p>Bien cordialement,<br><strong>L'équipe TransferAI Nettelecom CI</strong><br>\nWhatsApp &amp; Agent IA : +225 07 16 57 39 90<br>\nEmail : contact@transferai.ci<br>\nRiviera 3, carrefour Sainte Famille, Abidjan, Côte d'Ivoire</p>\n</div>`.replace('{{prenom}}',prenom).replace('{{google_form_url}}','https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform');\nreturn [{json:{...p,prenom,email3_body:body}}];\n"
+      }
+    },
+    {
+      "id": "4c872a07-b14c-4048-aa07-db86fd6efc8c",
+      "name": "Send Email3 To Prospect",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        500
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={JSON.stringify({from:'TransferAI Formation <contact@transferai.ci>',to:[$json.target_email],bcc:['marius.ayoro70@gmail.com'],subject:'⚠️ Places limitées — '+$json.prenom+', confirmez votre inscription avant le '+new Date(Date.now()+7*86400000).toLocaleDateString('fr-FR'),html:$json.email3_body})}",
+        "options": {}
+      }
+    },
+    {
+      "id": "76f3eaf2-615f-4ce8-8d87-4d7441c6aaf4",
+      "name": "Update Email3 Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1640,
+        500
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?prospect_id=eq.'+encodeURIComponent($('Rebuild Email3 Body').first().json.prospect_id)}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{JSON.stringify({status:'email3_sent',social_email_2_sent_at:new Date().toISOString(),updated_at:new Date().toISOString()})}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "9fa06cf0-4fdf-49fb-8a7f-55d87bd1329b",
+      "name": "Respond Email3 Approved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        500
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Email 3 relance approuvé et envoyé.",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "dc19f4df-b18a-4880-946e-23e602521711",
+      "name": "Respond Email3 Refused",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        920,
+        720
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Email 3 refusé / à amender.",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule 9h Email2": {
+      "main": [
+        [
+          {
+            "node": "Fetch Leads J+1 Email2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Leads J+1 Email2": {
+      "main": [
+        [
+          {
+            "node": "Split Email2 Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Email2 Leads": {
+      "main": [
+        [
+          {
+            "node": "Build Email2 Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Email2 Content": {
+      "main": [
+        [
+          {
+            "node": "Send Email2 Approval To Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email2 Approval To Admin": {
+      "main": [
+        [
+          {
+            "node": "Mark Email2 Pending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Email2 Approval": {
+      "main": [
+        [
+          {
+            "node": "Parse Email2 Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Email2 Decision": {
+      "main": [
+        [
+          {
+            "node": "IF Email2 Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Email2 Approved": {
+      "main": [
+        [
+          {
+            "node": "Fetch Lead For Email2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Email2 Refused",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Lead For Email2": {
+      "main": [
+        [
+          {
+            "node": "Rebuild Email2 Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rebuild Email2 Body": {
+      "main": [
+        [
+          {
+            "node": "Send Email2 To Prospect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email2 To Prospect": {
+      "main": [
+        [
+          {
+            "node": "Update Email2 Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Email2 Sent": {
+      "main": [
+        [
+          {
+            "node": "Respond Email2 Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule 9h Email3": {
+      "main": [
+        [
+          {
+            "node": "Fetch Leads J+4 Email3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Leads J+4 Email3": {
+      "main": [
+        [
+          {
+            "node": "Split Email3 Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Email3 Leads": {
+      "main": [
+        [
+          {
+            "node": "Build Email3 Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Email3 Content": {
+      "main": [
+        [
+          {
+            "node": "Send Email3 Approval To Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email3 Approval To Admin": {
+      "main": [
+        [
+          {
+            "node": "Mark Email3 Pending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Email3 Approval": {
+      "main": [
+        [
+          {
+            "node": "Parse Email3 Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Email3 Decision": {
+      "main": [
+        [
+          {
+            "node": "IF Email3 Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Email3 Approved": {
+      "main": [
+        [
+          {
+            "node": "Fetch Lead For Email3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Email3 Refused",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Lead For Email3": {
+      "main": [
+        [
+          {
+            "node": "Rebuild Email3 Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rebuild Email3 Body": {
+      "main": [
+        [
+          {
+            "node": "Send Email3 To Prospect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email3 To Prospect": {
+      "main": [
+        [
+          {
+            "node": "Update Email3 Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Email3 Sent": {
+      "main": [
+        [
+          {
+            "node": "Respond Email3 Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true
+  },
+  "staticData": null
+}

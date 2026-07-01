@@ -1,0 +1,808 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/fhaz7h",
+    "id": "fhaz7h",
+    "slide": 5,
+    "layoutId": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F1EA",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#142C46",
+      "lineColor": "#142C46",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/qpg3ex0n",
+      "id": "2",
+      "bbox": [
+        710,
+        84,
+        500,
+        270
+      ],
+      "geometry": "roundRect",
+      "alt": "Outils IA",
+      "contentType": "image/jpeg",
+      "imageFit": "cover",
+      "imageMask": {
+        "geometry": "roundRect",
+        "adjustmentList": [
+          {
+            "name": "adj",
+            "formula": "val 5926"
+          }
+        ]
+      },
+      "asset": {
+        "assetId": "ddf223ad-5b48-47d9-8121-478f660f2957",
+        "contentType": "image/jpeg",
+        "byteLength": 106418
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "3",
+      "bbox": [
+        74,
+        58,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROTECTION DES DONNÉES",
+      "textPreview": "PROTECTION DES DONNÉES",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#F8E0D0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROTECTION DES DONNÉES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROTECTION DES DONNÉES",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#F8E0D0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROTECTION DES DONNÉES",
+              "fontSize": 10.51,
+              "color": "#F8E0D0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "4",
+      "bbox": [
+        74,
+        92,
+        560,
+        110
+      ],
+      "geometry": "rect",
+      "text": "Ce qu'il faut absolument cadrer avant tout usage de l'IA",
+      "textPreview": "Ce qu'il faut absolument cadrer avant tout usage de l'IA",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce qu'il faut absolument cadrer"
+          },
+          {
+            "index": 2,
+            "text": "avant tout usage de l'IA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce qu'il faut absolument cadrer avant tout usage de l'IA",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce qu'il faut absolument cadrer avant tout usage de l'IA",
+              "fontSize": 34,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "5",
+      "bbox": [
+        74,
+        220,
+        560,
+        72
+      ],
+      "geometry": "rect",
+      "text": "Cette séquence fait la différence sur des profils exposés à des informations sensibles : ministère, diplomatie, direction générale, RH, marchés, dossiers administratifs.",
+      "textPreview": "Cette séquence fait la différence sur des profils exposés à des informations sensibles : ministère, diplomatie, direction générale, RH, m...",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#DCE7F2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Cette séquence fait la différence sur des profils exposés à des informations"
+          },
+          {
+            "index": 2,
+            "text": "sensibles : ministère, diplomatie, direction générale, RH, marchés, dossiers"
+          },
+          {
+            "index": 3,
+            "text": "administratifs."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Cette séquence fait la différence sur des profils exposés à des informations sensibles : ministère, diplomatie, direction générale, RH, marchés, dossiers administratifs.",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#DCE7F2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Cette séquence fait la différence sur des profils exposés à des informations sensibles : ministère, diplomatie, direction générale, RH, marchés, dossiers administratifs.",
+              "fontSize": 16,
+              "color": "#DCE7F2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "6",
+      "bbox": [
+        74,
+        332,
+        560,
+        280
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#21415F",
+      "lineColor": "#21415F",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "7",
+      "bbox": [
+        98,
+        356,
+        512,
+        230
+      ],
+      "geometry": "rect",
+      "text": "• Ne jamais copier dans une IA ouverte : pièces d'identité, données RH, dossiers disciplinaires, marchés non publics, notes confidentielles, agendas sensibles, données de santé, informations diplomatiques ou de cabinet.\n• Toujours anonymiser les noms, numéros, montants critiques, références de dossiers et tout élément permettant d'identifier une personne ou une affaire.\n• Utiliser des prompts cadrés : contexte, objectif, format, ton, interdictions, niveau de prudence et validation humaine attendue.\n• Relire systématiquement avant envoi ou diffusion : l'IA assiste, mais ne décide ni ne valide seule.",
+      "textPreview": "• Ne jamais copier dans une IA ouverte : pièces d'identité, données RH, dossiers disciplinaires, marchés non publics, notes confidentiell...",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 9,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Ne jamais copier dans une IA ouverte : pièces d'identité, données RH, dossiers"
+          },
+          {
+            "index": 2,
+            "text": "disciplinaires, marchés non publics, notes confidentielles, agendas sensibles,"
+          },
+          {
+            "index": 3,
+            "text": "données de santé, informations diplomatiques ou de cabinet."
+          },
+          {
+            "index": 4,
+            "text": "• Toujours anonymiser les noms, numéros, montants critiques, références de"
+          },
+          {
+            "index": 5,
+            "text": "dossiers et tout élément permettant d'identifier une personne ou une affaire."
+          },
+          {
+            "index": 6,
+            "text": "• Utiliser des prompts cadrés : contexte, objectif, format, ton, interdictions,"
+          },
+          {
+            "index": 7,
+            "text": "niveau de prudence et validation humaine attendue."
+          },
+          {
+            "index": 8,
+            "text": "• Relire systématiquement avant envoi ou diffusion : l'IA assiste, mais ne décide"
+          },
+          {
+            "index": 9,
+            "text": "ni ne valide seule."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Ne jamais copier dans une IA ouverte : pièces d'identité, données RH, dossiers disciplinaires, marchés non publics, notes confidentielles, agendas sensibles, données de santé, informations diplomatiques ou de cabinet.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Ne jamais copier dans une IA ouverte : pièces d'identité, données RH, dossiers disciplinaires, marchés non publics, notes confidentielles, agendas sensibles, données de santé, informations diplomatiques ou de cabinet.",
+              "fontSize": 13.6,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Toujours anonymiser les noms, numéros, montants critiques, références de dossiers et tout élément permettant d'identifier une personne ou une affaire.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Toujours anonymiser les noms, numéros, montants critiques, références de dossiers et tout élément permettant d'identifier une personne ou une affaire.",
+              "fontSize": 13.6,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Utiliser des prompts cadrés : contexte, objectif, format, ton, interdictions, niveau de prudence et validation humaine attendue.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Utiliser des prompts cadrés : contexte, objectif, format, ton, interdictions, niveau de prudence et validation humaine attendue.",
+              "fontSize": 13.6,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Relire systématiquement avant envoi ou diffusion : l'IA assiste, mais ne décide ni ne valide seule.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#FFFFFF"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Relire systématiquement avant envoi ou diffusion : l'IA assiste, mais ne décide ni ne valide seule.",
+              "fontSize": 13.6,
+              "color": "#FFFFFF"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "8",
+      "bbox": [
+        710,
+        384,
+        500,
+        228
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "9",
+      "bbox": [
+        736,
+        410,
+        220,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Message pédagogique à marteler",
+      "textPreview": "Message pédagogique à marteler",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Message pédagogique à marteler"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Message pédagogique à marteler",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Message pédagogique à marteler",
+              "fontSize": 10.51,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "10",
+      "bbox": [
+        736,
+        438,
+        430,
+        74
+      ],
+      "geometry": "rect",
+      "text": "L'IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine.",
+      "textPreview": "L'IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine.",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L'IA assiste, mais ne remplace ni le"
+          },
+          {
+            "index": 2,
+            "text": "secret professionnel, ni la validation"
+          },
+          {
+            "index": 3,
+            "text": "humaine."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L'IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine.",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "L'IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine.",
+              "fontSize": 22,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "11",
+      "bbox": [
+        736,
+        522,
+        430,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Chaque démonstration doit montrer une version risquée, puis une version sécurisée et anonymisée du même prompt.",
+      "textPreview": "Chaque démonstration doit montrer une version risquée, puis une version sécurisée et anonymisée du même prompt.",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Chaque démonstration doit montrer une version risquée, puis une"
+          },
+          {
+            "index": 2,
+            "text": "version sécurisée et anonymisée du même prompt."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Chaque démonstration doit montrer une version risquée, puis une version sécurisée et anonymisée du même prompt.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Chaque démonstration doit montrer une version risquée, puis une version sécurisée et anonymisée du même prompt.",
+              "fontSize": 13.6,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "12",
+      "bbox": [
+        62,
+        681,
+        1158,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D0C6",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "13",
+      "bbox": [
+        72,
+        689,
+        930,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Séquence essentielle : usages utiles, mais cadre de confidentialité non négociable.",
+      "textPreview": "Séquence essentielle : usages utiles, mais cadre de confidentialité non négociable.",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Séquence essentielle : usages utiles, mais cadre de confidentialité non négociable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Séquence essentielle : usages utiles, mais cadre de confidentialité non négociable.",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Séquence essentielle : usages utiles, mais cadre de confidentialité non négociable.",
+              "fontSize": 8.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "14",
+      "bbox": [
+        1146,
+        687,
+        46,
+        18
+      ],
+      "geometry": "rect",
+      "text": "05",
+      "textPreview": "05",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "05",
+              "fontSize": 10,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

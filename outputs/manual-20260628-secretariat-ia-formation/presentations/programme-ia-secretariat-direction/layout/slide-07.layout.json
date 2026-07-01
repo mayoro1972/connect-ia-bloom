@@ -1,0 +1,1216 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/v0a2g0",
+    "id": "v0a2g0",
+    "slide": 7,
+    "layoutId": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F1EA",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "1",
+      "bbox": [
+        72,
+        50,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "JOUR 1",
+      "textPreview": "JOUR 1",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "JOUR 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "JOUR 1",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "JOUR 1",
+              "fontSize": 10.51,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "2",
+      "bbox": [
+        72,
+        78,
+        620,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Programme détaillé | matinée",
+      "textPreview": "Programme détaillé | matinée",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Programme détaillé | matinée"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Programme détaillé | matinée",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Programme détaillé | matinée",
+              "fontSize": 29,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "3",
+      "bbox": [
+        72,
+        164,
+        1136,
+        452
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "4",
+      "bbox": [
+        72,
+        164,
+        1136,
+        10
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#D96B27",
+      "lineColor": "#D96B27",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "5",
+      "bbox": [
+        90,
+        188,
+        1100,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Jour 1 - Matin",
+      "textPreview": "Jour 1 - Matin",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Jour 1 - Matin"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Jour 1 - Matin",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Jour 1 - Matin",
+              "fontSize": 18,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "6",
+      "bbox": [
+        90,
+        232,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "08h30 - 09h00",
+      "textPreview": "08h30 - 09h00",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "08h30 - 09h00"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "08h30 - 09h00",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "08h30 - 09h00",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "7",
+      "bbox": [
+        190,
+        231,
+        1000,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Accueil, cadrage et attentes",
+      "textPreview": "Accueil, cadrage et attentes",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Accueil, cadrage et attentes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Accueil, cadrage et attentes",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Accueil, cadrage et attentes",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "8",
+      "bbox": [
+        190,
+        250,
+        1000,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Positionnement de la session, recueil des besoins, diagnostic rapide des usages actuels.",
+      "textPreview": "Positionnement de la session, recueil des besoins, diagnostic rapide des usages actuels.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Positionnement de la session, recueil des besoins, diagnostic rapide des usages actuels."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Positionnement de la session, recueil des besoins, diagnostic rapide des usages actuels.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Positionnement de la session, recueil des besoins, diagnostic rapide des usages actuels.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "9",
+      "bbox": [
+        90,
+        296,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "09h00 - 10h00",
+      "textPreview": "09h00 - 10h00",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "09h00 - 10h00"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "09h00 - 10h00",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "09h00 - 10h00",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "10",
+      "bbox": [
+        190,
+        295,
+        1000,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Panorama des outils IA utiles à l'assistanat de direction",
+      "textPreview": "Panorama des outils IA utiles à l'assistanat de direction",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Panorama des outils IA utiles à l'assistanat de direction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Panorama des outils IA utiles à l'assistanat de direction",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Panorama des outils IA utiles à l'assistanat de direction",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "11",
+      "bbox": [
+        190,
+        314,
+        1000,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Ce que l'IA sait faire aujourd'hui, limites, erreurs fréquentes, points de vigilance.",
+      "textPreview": "Ce que l'IA sait faire aujourd'hui, limites, erreurs fréquentes, points de vigilance.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que l'IA sait faire aujourd'hui, limites, erreurs fréquentes, points de vigilance."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que l'IA sait faire aujourd'hui, limites, erreurs fréquentes, points de vigilance.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que l'IA sait faire aujourd'hui, limites, erreurs fréquentes, points de vigilance.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knih4byh",
+      "id": "12",
+      "bbox": [
+        90,
+        360,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "10h15 - 11h15",
+      "textPreview": "10h15 - 11h15",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10h15 - 11h15"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10h15 - 11h15",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10h15 - 11h15",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "13",
+      "bbox": [
+        190,
+        359,
+        1000,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Principes de confidentialité et données sensibles",
+      "textPreview": "Principes de confidentialité et données sensibles",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Principes de confidentialité et données sensibles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Principes de confidentialité et données sensibles",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Principes de confidentialité et données sensibles",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "14",
+      "bbox": [
+        190,
+        378,
+        1000,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Typologie des données à risque, anonymisation, validation humaine, réflexes à adopter.",
+      "textPreview": "Typologie des données à risque, anonymisation, validation humaine, réflexes à adopter.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Typologie des données à risque, anonymisation, validation humaine, réflexes à adopter."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Typologie des données à risque, anonymisation, validation humaine, réflexes à adopter.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Typologie des données à risque, anonymisation, validation humaine, réflexes à adopter.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "15",
+      "bbox": [
+        90,
+        424,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "11h15 - 12h30",
+      "textPreview": "11h15 - 12h30",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "11h15 - 12h30"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "11h15 - 12h30",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "11h15 - 12h30",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kf6dcbul",
+      "id": "16",
+      "bbox": [
+        190,
+        423,
+        1000,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Atelier 1 : courriers, e-mails, reformulation et traduction",
+      "textPreview": "Atelier 1 : courriers, e-mails, reformulation et traduction",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Atelier 1 : courriers, e-mails, reformulation et traduction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Atelier 1 : courriers, e-mails, reformulation et traduction",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Atelier 1 : courriers, e-mails, reformulation et traduction",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0z61032",
+      "id": "17",
+      "bbox": [
+        190,
+        442,
+        1000,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Démonstrations guidées, prompts sûrs, ton institutionnel et cas sensibles.",
+      "textPreview": "Démonstrations guidées, prompts sûrs, ton institutionnel et cas sensibles.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Démonstrations guidées, prompts sûrs, ton institutionnel et cas sensibles."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Démonstrations guidées, prompts sûrs, ton institutionnel et cas sensibles.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Démonstrations guidées, prompts sûrs, ton institutionnel et cas sensibles.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "18",
+      "bbox": [
+        236,
+        634,
+        808,
+        30
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F8E0D0",
+      "lineColor": "#F8E0D0",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "19",
+      "bbox": [
+        246,
+        641,
+        788,
+        16
+      ],
+      "geometry": "rect",
+      "text": "Objectif pédagogique : sécuriser les fondamentaux dès le premier demi-jour.",
+      "textPreview": "Objectif pédagogique : sécuriser les fondamentaux dès le premier demi-jour.",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Objectif pédagogique : sécuriser les fondamentaux dès le premier demi-jour."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Objectif pédagogique : sécuriser les fondamentaux dès le premier demi-jour.",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Objectif pédagogique : sécuriser les fondamentaux dès le premier demi-jour.",
+              "fontSize": 10.51,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "20",
+      "bbox": [
+        62,
+        681,
+        1158,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D0C6",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "21",
+      "bbox": [
+        72,
+        689,
+        930,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+      "textPreview": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+              "fontSize": 8.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5kb6xkf6",
+      "id": "22",
+      "bbox": [
+        1146,
+        687,
+        46,
+        18
+      ],
+      "geometry": "rect",
+      "text": "07",
+      "textPreview": "07",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "07"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "07",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "07",
+              "fontSize": 10,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

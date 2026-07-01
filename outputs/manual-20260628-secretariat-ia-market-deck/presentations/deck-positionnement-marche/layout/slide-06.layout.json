@@ -1,0 +1,735 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/gdx0rq",
+    "id": "gdx0rq",
+    "slide": 6,
+    "layoutId": "309c7501-11f1-47bb-83bd-498523b32f8a",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFDFC",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "309c7501-11f1-47bb-83bd-498523b32f8a",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/032lszqt",
+      "id": "1",
+      "bbox": [
+        72,
+        50,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CAS CONCRETS",
+      "textPreview": "CAS CONCRETS",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D86A24",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CAS CONCRETS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CAS CONCRETS",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D86A24",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CAS CONCRETS",
+              "fontSize": 10.51,
+              "color": "#D86A24",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bi9s36hc",
+      "id": "2",
+      "bbox": [
+        72,
+        78,
+        760,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Ce que le prospect va immédiatement visualiser",
+      "textPreview": "Ce que le prospect va immédiatement visualiser",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce que le prospect va immédiatement visualiser"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce que le prospect va immédiatement visualiser",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce que le prospect va immédiatement visualiser",
+              "fontSize": 30,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/zqtcj6to",
+      "id": "3",
+      "bbox": [
+        742,
+        150,
+        466,
+        190
+      ],
+      "geometry": "roundRect",
+      "alt": "Outils IA",
+      "contentType": "image/jpeg",
+      "imageFit": "cover",
+      "imageMask": {
+        "geometry": "roundRect",
+        "adjustmentList": [
+          {
+            "name": "adj",
+            "formula": "val 8421"
+          }
+        ]
+      },
+      "asset": {
+        "assetId": "f6baca2d-65d5-486c-8013-f0af4a8d5b1f",
+        "contentType": "image/jpeg",
+        "byteLength": 106418
+      }
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p0bi9s36",
+      "id": "4",
+      "bbox": [
+        72,
+        164,
+        620,
+        430
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0fepkzup",
+      "id": "5",
+      "bbox": [
+        98,
+        192,
+        360,
+        24
+      ],
+      "geometry": "rect",
+      "text": "4 cas d'usage qui parlent tout de suite au client",
+      "textPreview": "4 cas d'usage qui parlent tout de suite au client",
+      "resolvedFontSize": 18.51,
+      "resolvedTextStyle": {
+        "fontSize": 18.51,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4 cas d'usage qui parlent tout de suite"
+          },
+          {
+            "index": 2,
+            "text": "au client"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4 cas d'usage qui parlent tout de suite au client",
+          "resolvedTextStyle": {
+            "fontSize": 18.51,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4 cas d'usage qui parlent tout de suite au client",
+              "fontSize": 18.51,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bulwval8",
+      "id": "6",
+      "bbox": [
+        98,
+        236,
+        560,
+        288
+      ],
+      "geometry": "rect",
+      "text": "• Rédiger un courrier officiel délicat avec le bon ton institutionnel\n• Transformer des notes brutes en procès-verbal exploitable\n• Préparer l'agenda et le briefing d'une audience sensible\n• Synthétiser un dossier volumineux en note d'aide à la décision",
+      "textPreview": "• Rédiger un courrier officiel délicat avec le bon ton institutionnel | • Transformer des notes brutes en procès-verbal exploitable | • P...",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Rédiger un courrier officiel délicat avec le bon ton institutionnel"
+          },
+          {
+            "index": 2,
+            "text": "• Transformer des notes brutes en procès-verbal exploitable"
+          },
+          {
+            "index": 3,
+            "text": "• Préparer l'agenda et le briefing d'une audience sensible"
+          },
+          {
+            "index": 4,
+            "text": "• Synthétiser un dossier volumineux en note d'aide à la décision"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Rédiger un courrier officiel délicat avec le bon ton institutionnel",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Rédiger un courrier officiel délicat avec le bon ton institutionnel",
+              "fontSize": 16,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Transformer des notes brutes en procès-verbal exploitable",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Transformer des notes brutes en procès-verbal exploitable",
+              "fontSize": 16,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Préparer l'agenda et le briefing d'une audience sensible",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Préparer l'agenda et le briefing d'une audience sensible",
+              "fontSize": 16,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Synthétiser un dossier volumineux en note d'aide à la décision",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Synthétiser un dossier volumineux en note d'aide à la décision",
+              "fontSize": 16,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i9s36hcr",
+      "id": "7",
+      "bbox": [
+        742,
+        372,
+        466,
+        222
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#DFF2EA",
+      "lineColor": "#DFF2EA",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t47y1kre",
+      "id": "8",
+      "bbox": [
+        770,
+        398,
+        220,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Pourquoi cela vend bien",
+      "textPreview": "Pourquoi cela vend bien",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#238C6A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Pourquoi cela vend bien"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Pourquoi cela vend bien",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#238C6A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Pourquoi cela vend bien",
+              "fontSize": 10.51,
+              "color": "#238C6A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0je9cvix",
+      "id": "9",
+      "bbox": [
+        770,
+        430,
+        400,
+        120
+      ],
+      "geometry": "rect",
+      "text": "• Le client reconnaît immédiatement ses tâches réelles.\n• La valeur est visible sans explication technique.\n• Le lien avec la confidentialité est naturel et crédible.",
+      "textPreview": "• Le client reconnaît immédiatement ses tâches réelles. | • La valeur est visible sans explication technique. | • Le lien avec la confide...",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Le client reconnaît immédiatement ses tâches réelles."
+          },
+          {
+            "index": 2,
+            "text": "• La valeur est visible sans explication technique."
+          },
+          {
+            "index": 3,
+            "text": "• Le lien avec la confidentialité est naturel et crédible."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Le client reconnaît immédiatement ses tâches réelles.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Le client reconnaît immédiatement ses tâches réelles.",
+              "fontSize": 13.6,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• La valeur est visible sans explication technique.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• La valeur est visible sans explication technique.",
+              "fontSize": 13.6,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Le lien avec la confidentialité est naturel et crédible.",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Le lien avec la confidentialité est naturel et crédible.",
+              "fontSize": 13.6,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a5gbq1or",
+      "id": "10",
+      "bbox": [
+        64,
+        682,
+        1150,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DDD2C6",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3m94fu18",
+      "id": "11",
+      "bbox": [
+        72,
+        689,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "textPreview": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+              "fontSize": 8.51,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s72x4nap",
+      "id": "12",
+      "bbox": [
+        1140,
+        687,
+        48,
+        18
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 10,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

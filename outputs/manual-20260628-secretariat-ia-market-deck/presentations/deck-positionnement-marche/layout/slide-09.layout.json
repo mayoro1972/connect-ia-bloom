@@ -1,0 +1,998 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/p19ffr",
+    "id": "p19ffr",
+    "slide": 9,
+    "layoutId": "309c7501-11f1-47bb-83bd-498523b32f8a",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F1EA",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "309c7501-11f1-47bb-83bd-498523b32f8a",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "1",
+      "bbox": [
+        72,
+        50,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CONVERSION",
+      "textPreview": "CONVERSION",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D86A24",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONVERSION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONVERSION",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D86A24",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONVERSION",
+              "fontSize": 10.51,
+              "color": "#D86A24",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "2",
+      "bbox": [
+        72,
+        78,
+        740,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Le webinaire gratuit qui prépare la vente",
+      "textPreview": "Le webinaire gratuit qui prépare la vente",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le webinaire gratuit qui prépare la vente"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le webinaire gratuit qui prépare la vente",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le webinaire gratuit qui prépare la vente",
+              "fontSize": 30,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "3",
+      "bbox": [
+        72,
+        164,
+        610,
+        420
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "4",
+      "bbox": [
+        98,
+        190,
+        220,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Format et objectif",
+      "textPreview": "Format et objectif",
+      "resolvedFontSize": 18.51,
+      "resolvedTextStyle": {
+        "fontSize": 18.51,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Format et objectif"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Format et objectif",
+          "resolvedTextStyle": {
+            "fontSize": 18.51,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Format et objectif",
+              "fontSize": 18.51,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "5",
+      "bbox": [
+        98,
+        232,
+        550,
+        236
+      ],
+      "geometry": "rect",
+      "text": "• Webinaire gratuit de 45 à 60 minutes\n• Objectif : rassurer, sensibiliser, faire sentir le risque, convertir\n• Contenu : usages, limites, données sensibles, 2 démonstrations métier\n• Sortie : appel découverte ou inscription à la session de 2 jours",
+      "textPreview": "• Webinaire gratuit de 45 à 60 minutes | • Objectif : rassurer, sensibiliser, faire sentir le risque, convertir | • Contenu : usages, lim...",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Webinaire gratuit de 45 à 60 minutes"
+          },
+          {
+            "index": 2,
+            "text": "• Objectif : rassurer, sensibiliser, faire sentir le risque, convertir"
+          },
+          {
+            "index": 3,
+            "text": "• Contenu : usages, limites, données sensibles, 2 démonstrations métier"
+          },
+          {
+            "index": 4,
+            "text": "• Sortie : appel découverte ou inscription à la session de 2 jours"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Webinaire gratuit de 45 à 60 minutes",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Webinaire gratuit de 45 à 60 minutes",
+              "fontSize": 15,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Objectif : rassurer, sensibiliser, faire sentir le risque, convertir",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Objectif : rassurer, sensibiliser, faire sentir le risque, convertir",
+              "fontSize": 15,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Contenu : usages, limites, données sensibles, 2 démonstrations métier",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Contenu : usages, limites, données sensibles, 2 démonstrations métier",
+              "fontSize": 15,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Sortie : appel découverte ou inscription à la session de 2 jours",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#14273D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Sortie : appel découverte ou inscription à la session de 2 jours",
+              "fontSize": 15,
+              "color": "#14273D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "6",
+      "bbox": [
+        98,
+        486,
+        558,
+        72
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#DFF2EA",
+      "lineColor": "#DFF2EA",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "7",
+      "bbox": [
+        122,
+        512,
+        510,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Rôle du webinaire : rassurer, montrer le risque, démontrer l'utilité, puis ouvrir la porte à la formation payante.",
+      "textPreview": "Rôle du webinaire : rassurer, montrer le risque, démontrer l'utilité, puis ouvrir la porte à la formation payante.",
+      "resolvedFontSize": 12.2,
+      "resolvedTextStyle": {
+        "fontSize": 12.2,
+        "typeface": "+mn-lt",
+        "color": "#238C6A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Rôle du webinaire : rassurer, montrer le risque, démontrer l'utilité, puis ouvrir la porte à la"
+          },
+          {
+            "index": 2,
+            "text": "formation payante."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Rôle du webinaire : rassurer, montrer le risque, démontrer l'utilité, puis ouvrir la porte à la formation payante.",
+          "resolvedTextStyle": {
+            "fontSize": 12.2,
+            "color": "#238C6A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Rôle du webinaire : rassurer, montrer le risque, démontrer l'utilité, puis ouvrir la porte à la formation payante.",
+              "fontSize": 12.2,
+              "color": "#238C6A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65wjudg",
+      "id": "8",
+      "bbox": [
+        722,
+        164,
+        486,
+        420
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ylc7u54z",
+      "id": "9",
+      "bbox": [
+        748,
+        190,
+        220,
+        20
+      ],
+      "geometry": "rect",
+      "text": "Conclusion commerciale",
+      "textPreview": "Conclusion commerciale",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D86A24",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Conclusion commerciale"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Conclusion commerciale",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D86A24",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Conclusion commerciale",
+              "fontSize": 10.51,
+              "color": "#D86A24",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "10",
+      "bbox": [
+        748,
+        226,
+        420,
+        118
+      ],
+      "geometry": "rect",
+      "text": "Vous êtes mieux placés si vous parlez moins d'outil et plus de tâches, de confidentialité et de résultats métier.",
+      "textPreview": "Vous êtes mieux placés si vous parlez moins d'outil et plus de tâches, de confidentialité et de résultats métier.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Vous êtes mieux placés si vous"
+          },
+          {
+            "index": 2,
+            "text": "parlez moins d'outil et plus de"
+          },
+          {
+            "index": 3,
+            "text": "tâches, de confidentialité et de"
+          },
+          {
+            "index": 4,
+            "text": "résultats métier."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Vous êtes mieux placés si vous parlez moins d'outil et plus de tâches, de confidentialité et de résultats métier.",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Vous êtes mieux placés si vous parlez moins d'outil et plus de tâches, de confidentialité et de résultats métier.",
+              "fontSize": 24,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "11",
+      "bbox": [
+        748,
+        370,
+        410,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Sources visibles au 28 juin 2026 : CAMPC, UVCI Certifications, ARTCI.",
+      "textPreview": "Sources visibles au 28 juin 2026 : CAMPC, UVCI Certifications, ARTCI.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Sources visibles au 28 juin 2026 : CAMPC, UVCI Certifications, ARTCI."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Sources visibles au 28 juin 2026 : CAMPC, UVCI Certifications, ARTCI.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Sources visibles au 28 juin 2026 : CAMPC, UVCI Certifications, ARTCI.",
+              "fontSize": 11.51,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "12",
+      "bbox": [
+        748,
+        444,
+        390,
+        102
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#17324E",
+      "lineColor": "#17324E",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "13",
+      "bbox": [
+        772,
+        464,
+        210,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Prochaine étape recommandée",
+      "textPreview": "Prochaine étape recommandée",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#F6DDCC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Prochaine étape recommandée"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Prochaine étape recommandée",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#F6DDCC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Prochaine étape recommandée",
+              "fontSize": 10.51,
+              "color": "#F6DDCC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "14",
+      "bbox": [
+        772,
+        492,
+        320,
+        40
+      ],
+      "geometry": "rect",
+      "text": "1. Webinaire gratuit\n2. Session pilote intra\n3. Déploiement premium",
+      "textPreview": "1. Webinaire gratuit | 2. Session pilote intra | 3. Déploiement premium",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. Webinaire gratuit"
+          },
+          {
+            "index": 2,
+            "text": "2. Session pilote intra"
+          },
+          {
+            "index": 3,
+            "text": "3. Déploiement premium"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1. Webinaire gratuit",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. Webinaire gratuit",
+              "fontSize": 14,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "2. Session pilote intra",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. Session pilote intra",
+              "fontSize": 14,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "3. Déploiement premium",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. Déploiement premium",
+              "fontSize": 14,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "15",
+      "bbox": [
+        64,
+        682,
+        1150,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DDD2C6",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "16",
+      "bbox": [
+        72,
+        689,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "textPreview": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+              "fontSize": 8.51,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "17",
+      "bbox": [
+        1140,
+        687,
+        48,
+        18
+      ],
+      "geometry": "rect",
+      "text": "09",
+      "textPreview": "09",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "09",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "09",
+              "fontSize": 10,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,649 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/am79w0",
+    "id": "am79w0",
+    "slide": 1,
+    "layoutId": "309c7501-11f1-47bb-83bd-498523b32f8a",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F1EA",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "309c7501-11f1-47bb-83bd-498523b32f8a",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cvixcze",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        760,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F6F1EA",
+      "lineColor": "#F6F1EA",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ylc7u54z",
+      "id": "2",
+      "bbox": [
+        760,
+        0,
+        520,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F1E5D8",
+      "lineColor": "#F1E5D8",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65wjudg",
+      "id": "3",
+      "bbox": [
+        60,
+        88,
+        610,
+        522
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/t47y1kre",
+      "id": "4",
+      "bbox": [
+        84,
+        112,
+        190,
+        62
+      ],
+      "geometry": "roundRect",
+      "alt": "Logo TransferAI",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "imageMask": {
+        "geometry": "roundRect",
+        "adjustmentList": [
+          {
+            "name": "adj",
+            "formula": "val 25806"
+          }
+        ]
+      },
+      "asset": {
+        "assetId": "906c669a-9667-4eff-9414-a98fee265e38",
+        "contentType": "image/png",
+        "byteLength": 196122
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5o7qpg3e",
+      "id": "5",
+      "bbox": [
+        84,
+        194,
+        220,
+        18
+      ],
+      "geometry": "rect",
+      "text": "DECK DE PRÉSENTATION",
+      "textPreview": "DECK DE PRÉSENTATION",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D86A24",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "DECK DE PRÉSENTATION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "DECK DE PRÉSENTATION",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D86A24",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "DECK DE PRÉSENTATION",
+              "fontSize": 10.51,
+              "color": "#D86A24",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yxobm58z",
+      "id": "6",
+      "bbox": [
+        84,
+        226,
+        450,
+        46
+      ],
+      "geometry": "rect",
+      "text": "Positionnement marché",
+      "textPreview": "Positionnement marché",
+      "resolvedFontSize": 33,
+      "resolvedTextStyle": {
+        "fontSize": 33,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Positionnement marché"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Positionnement marché",
+          "resolvedTextStyle": {
+            "fontSize": 33,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Positionnement marché",
+              "fontSize": 33,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nih4byhg",
+      "id": "7",
+      "bbox": [
+        84,
+        280,
+        500,
+        110
+      ],
+      "geometry": "rect",
+      "text": "Formation IA pour secrétariats de direction, cabinets, diplomatie et administration en Côte d'Ivoire",
+      "textPreview": "Formation IA pour secrétariats de direction, cabinets, diplomatie et administration en Côte d'Ivoire",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Formation IA pour secrétariats de"
+          },
+          {
+            "index": 2,
+            "text": "direction, cabinets, diplomatie et"
+          },
+          {
+            "index": 3,
+            "text": "administration en Côte d'Ivoire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Formation IA pour secrétariats de direction, cabinets, diplomatie et administration en Côte d'Ivoire",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Formation IA pour secrétariats de direction, cabinets, diplomatie et administration en Côte d'Ivoire",
+              "fontSize": 26,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "8",
+      "bbox": [
+        84,
+        404,
+        500,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Un deck de vente pour montrer ce qui se vend déjà, où se situe le vide du marché et pourquoi votre offre est plus premium.",
+      "textPreview": "Un deck de vente pour montrer ce qui se vend déjà, où se situe le vide du marché et pourquoi votre offre est plus premium.",
+      "resolvedFontSize": 15.51,
+      "resolvedTextStyle": {
+        "fontSize": 15.51,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Un deck de vente pour montrer ce qui se vend déjà, où se situe le"
+          },
+          {
+            "index": 2,
+            "text": "vide du marché et pourquoi votre offre est plus premium."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Un deck de vente pour montrer ce qui se vend déjà, où se situe le vide du marché et pourquoi votre offre est plus premium.",
+          "resolvedTextStyle": {
+            "fontSize": 15.51,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Un deck de vente pour montrer ce qui se vend déjà, où se situe le vide du marché et pourquoi votre offre est plus premium.",
+              "fontSize": 15.51,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "9",
+      "bbox": [
+        84,
+        510,
+        500,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#17324E",
+      "lineColor": "#17324E",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "10",
+      "bbox": [
+        108,
+        530,
+        452,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Objectif : aider le prospect à voir le vide du marché et pourquoi votre offre est plus premium.",
+      "textPreview": "Objectif : aider le prospect à voir le vide du marché et pourquoi votre offre est plus premium.",
+      "resolvedFontSize": 12.4,
+      "resolvedTextStyle": {
+        "fontSize": 12.4,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Objectif : aider le prospect à voir le vide du marché et pourquoi votre offre est"
+          },
+          {
+            "index": 2,
+            "text": "plus premium."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Objectif : aider le prospect à voir le vide du marché et pourquoi votre offre est plus premium.",
+          "resolvedTextStyle": {
+            "fontSize": 12.4,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Objectif : aider le prospect à voir le vide du marché et pourquoi votre offre est plus premium.",
+              "fontSize": 12.4,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/7ed8bat4",
+      "id": "11",
+      "bbox": [
+        794,
+        112,
+        428,
+        500
+      ],
+      "geometry": "roundRect",
+      "alt": "Réunion et IA",
+      "contentType": "image/jpeg",
+      "imageFit": "cover",
+      "imageMask": {
+        "geometry": "roundRect",
+        "adjustmentList": [
+          {
+            "name": "adj",
+            "formula": "val 3738"
+          }
+        ]
+      },
+      "asset": {
+        "assetId": "81ec88e1-358e-4226-9056-141020b35134",
+        "contentType": "image/jpeg",
+        "byteLength": 211964
+      }
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "12",
+      "bbox": [
+        64,
+        682,
+        1150,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DDD2C6",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "13",
+      "bbox": [
+        72,
+        689,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "textPreview": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+              "fontSize": 8.51,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg7adsji",
+      "id": "14",
+      "bbox": [
+        1140,
+        687,
+        48,
+        18
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 10,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

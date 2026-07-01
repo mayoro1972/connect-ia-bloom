@@ -1,0 +1,1398 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/bh7rk5",
+    "id": "bh7rk5",
+    "slide": 10,
+    "layoutId": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFDFC",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ji5snelo",
+      "id": "1",
+      "bbox": [
+        72,
+        50,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "JOUR 2",
+      "textPreview": "JOUR 2",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "JOUR 2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "JOUR 2",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "JOUR 2",
+              "fontSize": 10.51,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3ylc7u5",
+      "id": "2",
+      "bbox": [
+        72,
+        78,
+        750,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Programme détaillé | après-midi et clôture",
+      "textPreview": "Programme détaillé | après-midi et clôture",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Programme détaillé | après-midi et clôture"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Programme détaillé | après-midi et clôture",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Programme détaillé | après-midi et clôture",
+              "fontSize": 29,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kre1w7m",
+      "id": "3",
+      "bbox": [
+        72,
+        164,
+        724,
+        452
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F3E8DB",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulwval87",
+      "id": "4",
+      "bbox": [
+        72,
+        164,
+        724,
+        10
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#D96B27",
+      "lineColor": "#D96B27",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6tovaho",
+      "id": "5",
+      "bbox": [
+        90,
+        188,
+        688,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Jour 2 - Après-midi",
+      "textPreview": "Jour 2 - Après-midi",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Jour 2 - Après-midi"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Jour 2 - Après-midi",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Jour 2 - Après-midi",
+              "fontSize": 18,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/crmhk3q5",
+      "id": "6",
+      "bbox": [
+        90,
+        232,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "13h30 - 14h30",
+      "textPreview": "13h30 - 14h30",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "13h30 - 14h30"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "13h30 - 14h30",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "13h30 - 14h30",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfa9w3m",
+      "id": "7",
+      "bbox": [
+        190,
+        231,
+        588,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Bibliothèque de prompts métier",
+      "textPreview": "Bibliothèque de prompts métier",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Bibliothèque de prompts métier"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Bibliothèque de prompts métier",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Bibliothèque de prompts métier",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qh0fepkz",
+      "id": "8",
+      "bbox": [
+        190,
+        250,
+        588,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Construire les prompts types par situation : courrier, PV, note, briefing, synthèse.",
+      "textPreview": "Construire les prompts types par situation : courrier, PV, note, briefing, synthèse.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Construire les prompts types par situation : courrier, PV, note, briefing, synthèse."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Construire les prompts types par situation : courrier, PV, note, briefing, synthèse.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Construire les prompts types par situation : courrier, PV, note, briefing, synthèse.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j2t83itg",
+      "id": "9",
+      "bbox": [
+        90,
+        296,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "14h30 - 15h45",
+      "textPreview": "14h30 - 15h45",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "14h30 - 15h45"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "14h30 - 15h45",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "14h30 - 15h45",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/byhgn29g",
+      "id": "10",
+      "bbox": [
+        190,
+        295,
+        588,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Charte interne et protocole de validation",
+      "textPreview": "Charte interne et protocole de validation",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Charte interne et protocole de validation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Charte interne et protocole de validation",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Charte interne et protocole de validation",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/idonyd0z",
+      "id": "11",
+      "bbox": [
+        190,
+        314,
+        588,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Règles minimales d'usage, rôles, niveaux de sensibilité, étapes de contrôle.",
+      "textPreview": "Règles minimales d'usage, rôles, niveaux de sensibilité, étapes de contrôle.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Règles minimales d'usage, rôles, niveaux de sensibilité, étapes de contrôle."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Règles minimales d'usage, rôles, niveaux de sensibilité, étapes de contrôle.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Règles minimales d'usage, rôles, niveaux de sensibilité, étapes de contrôle.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t47y1kre",
+      "id": "12",
+      "bbox": [
+        90,
+        360,
+        90,
+        18
+      ],
+      "geometry": "rect",
+      "text": "16h00 - 17h00",
+      "textPreview": "16h00 - 17h00",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "16h00 - 17h00"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "16h00 - 17h00",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "16h00 - 17h00",
+              "fontSize": 10,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0je9cvix",
+      "id": "13",
+      "bbox": [
+        190,
+        359,
+        588,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Évaluation finale et restitution",
+      "textPreview": "Évaluation finale et restitution",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Évaluation finale et restitution"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Évaluation finale et restitution",
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Évaluation finale et restitution",
+              "fontSize": 13.51,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6xkf6dc",
+      "id": "14",
+      "bbox": [
+        190,
+        378,
+        588,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Cas pratique final, corrections, engagements d'application dans le poste.",
+      "textPreview": "Cas pratique final, corrections, engagements d'application dans le poste.",
+      "resolvedFontSize": 11.51,
+      "resolvedTextStyle": {
+        "fontSize": 11.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Cas pratique final, corrections, engagements d'application dans le poste."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Cas pratique final, corrections, engagements d'application dans le poste.",
+          "resolvedTextStyle": {
+            "fontSize": 11.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Cas pratique final, corrections, engagements d'application dans le poste.",
+              "fontSize": 11.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "15",
+      "bbox": [
+        830,
+        164,
+        378,
+        218
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#FFFDFC",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcj6tova",
+      "id": "16",
+      "bbox": [
+        848,
+        184,
+        342,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Livrables remis",
+      "textPreview": "Livrables remis",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Livrables remis"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Livrables remis",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Livrables remis",
+              "fontSize": 19,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rqd4vmt",
+      "id": "17",
+      "bbox": [
+        848,
+        226,
+        342,
+        138
+      ],
+      "geometry": "rect",
+      "text": "• Support PowerPoint et version PDF\n• Bibliothèque de prompts métier prête à l'emploi\n• Check-list de protection des données sensibles\n• Mini-charte interne d'usage de l'IA\n• Études de cas corrigées et attestation de participation",
+      "textPreview": "• Support PowerPoint et version PDF | • Bibliothèque de prompts métier prête à l'emploi | • Check-list de protection des données sensible...",
+      "resolvedFontSize": 12.6,
+      "resolvedTextStyle": {
+        "fontSize": 12.6,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Support PowerPoint et version PDF"
+          },
+          {
+            "index": 2,
+            "text": "• Bibliothèque de prompts métier prête à l'emploi"
+          },
+          {
+            "index": 3,
+            "text": "• Check-list de protection des données sensibles"
+          },
+          {
+            "index": 4,
+            "text": "• Mini-charte interne d'usage de l'IA"
+          },
+          {
+            "index": 5,
+            "text": "• Études de cas corrigées et attestation de participation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Support PowerPoint et version PDF",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Support PowerPoint et version PDF",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Bibliothèque de prompts métier prête à l'emploi",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Bibliothèque de prompts métier prête à l'emploi",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Check-list de protection des données sensibles",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Check-list de protection des données sensibles",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Mini-charte interne d'usage de l'IA",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Mini-charte interne d'usage de l'IA",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• Études de cas corrigées et attestation de participation",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Études de cas corrigées et attestation de participation",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bi9s36hc",
+      "id": "18",
+      "bbox": [
+        848,
+        184,
+        6,
+        28
+      ],
+      "geometry": "rect",
+      "fillColor": "#2E9B76",
+      "lineColor": "#2E9B76",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixczed8v",
+      "id": "19",
+      "bbox": [
+        830,
+        398,
+        378,
+        218
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E6F5EF",
+      "lineColor": "#E6F5EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/al87ed8b",
+      "id": "20",
+      "bbox": [
+        848,
+        418,
+        342,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Résultat attendu",
+      "textPreview": "Résultat attendu",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Résultat attendu"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Résultat attendu",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Résultat attendu",
+              "fontSize": 19,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z61032ls",
+      "id": "21",
+      "bbox": [
+        848,
+        460,
+        342,
+        138
+      ],
+      "geometry": "rect",
+      "text": "• Des participants capables d'utiliser l'IA sans mettre l'organisation en risque.\n• Des gains de temps visibles dès les premiers usages.\n• Une base commune de prompts et de réflexes de confidentialité.",
+      "textPreview": "• Des participants capables d'utiliser l'IA sans mettre l'organisation en risque. | • Des gains de temps visibles dès les premiers usages...",
+      "resolvedFontSize": 12.6,
+      "resolvedTextStyle": {
+        "fontSize": 12.6,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Des participants capables d'utiliser l'IA sans mettre"
+          },
+          {
+            "index": 2,
+            "text": "l'organisation en risque."
+          },
+          {
+            "index": 3,
+            "text": "• Des gains de temps visibles dès les premiers usages."
+          },
+          {
+            "index": 4,
+            "text": "• Une base commune de prompts et de réflexes de"
+          },
+          {
+            "index": 5,
+            "text": "confidentialité."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Des participants capables d'utiliser l'IA sans mettre l'organisation en risque.",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Des participants capables d'utiliser l'IA sans mettre l'organisation en risque.",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Des gains de temps visibles dès les premiers usages.",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Des gains de temps visibles dès les premiers usages.",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Une base commune de prompts et de réflexes de confidentialité.",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Une base commune de prompts et de réflexes de confidentialité.",
+              "fontSize": 12.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orytsvu9",
+      "id": "22",
+      "bbox": [
+        848,
+        418,
+        6,
+        28
+      ],
+      "geometry": "rect",
+      "fillColor": "#D96B27",
+      "lineColor": "#D96B27",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcrmhk3q",
+      "id": "23",
+      "bbox": [
+        62,
+        681,
+        1158,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D0C6",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9w3m94f",
+      "id": "24",
+      "bbox": [
+        72,
+        689,
+        930,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+      "textPreview": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+              "fontSize": 8.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zupwb2hw",
+      "id": "25",
+      "bbox": [
+        1146,
+        687,
+        46,
+        18
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 10,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

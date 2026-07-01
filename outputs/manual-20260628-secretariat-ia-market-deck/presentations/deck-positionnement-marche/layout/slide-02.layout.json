@@ -1,0 +1,1195 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/kdow25",
+    "id": "kdow25",
+    "slide": 2,
+    "layoutId": "309c7501-11f1-47bb-83bd-498523b32f8a",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFDFC",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "309c7501-11f1-47bb-83bd-498523b32f8a",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "8cddc97a-796b-48ce-b89a-bc59fdba4f49",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "1",
+      "bbox": [
+        72,
+        50,
+        280,
+        18
+      ],
+      "geometry": "rect",
+      "text": "LECTURE DU MARCHÉ",
+      "textPreview": "LECTURE DU MARCHÉ",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D86A24",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LECTURE DU MARCHÉ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LECTURE DU MARCHÉ",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D86A24",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LECTURE DU MARCHÉ",
+              "fontSize": 10.51,
+              "color": "#D86A24",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "2",
+      "bbox": [
+        72,
+        78,
+        820,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Ce qui est déjà visible aujourd'hui en Côte d'Ivoire",
+      "textPreview": "Ce qui est déjà visible aujourd'hui en Côte d'Ivoire",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ce qui est déjà visible aujourd'hui en Côte d'Ivoire"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ce qui est déjà visible aujourd'hui en Côte d'Ivoire",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ce qui est déjà visible aujourd'hui en Côte d'Ivoire",
+              "fontSize": 30,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "3",
+      "bbox": [
+        72,
+        164,
+        548,
+        186
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "4",
+      "bbox": [
+        90,
+        184,
+        6,
+        24
+      ],
+      "geometry": "rect",
+      "fillColor": "#D86A24",
+      "lineColor": "#D86A24",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "5",
+      "bbox": [
+        108,
+        182,
+        494,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Secrétariat, assistanat, protocole, diplomatie",
+      "textPreview": "Secrétariat, assistanat, protocole, diplomatie",
+      "resolvedFontSize": 16.51,
+      "resolvedTextStyle": {
+        "fontSize": 16.51,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Secrétariat, assistanat, protocole, diplomatie"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Secrétariat, assistanat, protocole, diplomatie",
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Secrétariat, assistanat, protocole, diplomatie",
+              "fontSize": 16.51,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lkjm1cfa",
+      "id": "6",
+      "bbox": [
+        108,
+        226,
+        494,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Visible chez : CAMPC",
+      "textPreview": "Visible chez : CAMPC",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D86A24",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Visible chez : CAMPC"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Visible chez : CAMPC",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D86A24",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Visible chez : CAMPC",
+              "fontSize": 10,
+              "color": "#D86A24",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "7",
+      "bbox": [
+        90,
+        256,
+        512,
+        74
+      ],
+      "geometry": "rect",
+      "text": "Le marché vend déjà des séminaires classiques en secrétariat-assistance de direction, protocole, diplomatie, archivage et GED.",
+      "textPreview": "Le marché vend déjà des séminaires classiques en secrétariat-assistance de direction, protocole, diplomatie, archivage et GED.",
+      "resolvedFontSize": 12.8,
+      "resolvedTextStyle": {
+        "fontSize": 12.8,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Le marché vend déjà des séminaires classiques en secrétariat-assistance de"
+          },
+          {
+            "index": 2,
+            "text": "direction, protocole, diplomatie, archivage et GED."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Le marché vend déjà des séminaires classiques en secrétariat-assistance de direction, protocole, diplomatie, archivage et GED.",
+          "resolvedTextStyle": {
+            "fontSize": 12.8,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Le marché vend déjà des séminaires classiques en secrétariat-assistance de direction, protocole, diplomatie, archivage et GED.",
+              "fontSize": 12.8,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "8",
+      "bbox": [
+        660,
+        164,
+        548,
+        186
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "9",
+      "bbox": [
+        678,
+        184,
+        6,
+        24
+      ],
+      "geometry": "rect",
+      "fillColor": "#238C6A",
+      "lineColor": "#238C6A",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "10",
+      "bbox": [
+        696,
+        182,
+        494,
+        44
+      ],
+      "geometry": "rect",
+      "text": "IA d'initiation et acculturation générale",
+      "textPreview": "IA d'initiation et acculturation générale",
+      "resolvedFontSize": 16.51,
+      "resolvedTextStyle": {
+        "fontSize": 16.51,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IA d'initiation et acculturation générale"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IA d'initiation et acculturation générale",
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "IA d'initiation et acculturation générale",
+              "fontSize": 16.51,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "11",
+      "bbox": [
+        696,
+        226,
+        494,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Visible chez : UVCI",
+      "textPreview": "Visible chez : UVCI",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#238C6A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Visible chez : UVCI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Visible chez : UVCI",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#238C6A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Visible chez : UVCI",
+              "fontSize": 10,
+              "color": "#238C6A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "12",
+      "bbox": [
+        678,
+        256,
+        512,
+        74
+      ],
+      "geometry": "rect",
+      "text": "Des modules comme “L'Intelligence Artificielle pour tous - Niveau 1” montrent que le besoin d'entrée en matière existe déjà.",
+      "textPreview": "Des modules comme “L'Intelligence Artificielle pour tous - Niveau 1” montrent que le besoin d'entrée en matière existe déjà.",
+      "resolvedFontSize": 12.8,
+      "resolvedTextStyle": {
+        "fontSize": 12.8,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Des modules comme “L'Intelligence Artificielle pour tous - Niveau 1” montrent que le"
+          },
+          {
+            "index": 2,
+            "text": "besoin d'entrée en matière existe déjà."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Des modules comme “L'Intelligence Artificielle pour tous - Niveau 1” montrent que le besoin d'entrée en matière existe déjà.",
+          "resolvedTextStyle": {
+            "fontSize": 12.8,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Des modules comme “L'Intelligence Artificielle pour tous - Niveau 1” montrent que le besoin d'entrée en matière existe déjà.",
+              "fontSize": 12.8,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "13",
+      "bbox": [
+        72,
+        386,
+        548,
+        186
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "14",
+      "bbox": [
+        90,
+        406,
+        6,
+        24
+      ],
+      "geometry": "rect",
+      "fillColor": "#2F5E8F",
+      "lineColor": "#2F5E8F",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "15",
+      "bbox": [
+        108,
+        404,
+        494,
+        44
+      ],
+      "geometry": "rect",
+      "text": "IA pour communication et marketing digital",
+      "textPreview": "IA pour communication et marketing digital",
+      "resolvedFontSize": 16.51,
+      "resolvedTextStyle": {
+        "fontSize": 16.51,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IA pour communication et marketing digital"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IA pour communication et marketing digital",
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "IA pour communication et marketing digital",
+              "fontSize": 16.51,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "16",
+      "bbox": [
+        108,
+        448,
+        494,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Visible chez : UVCI",
+      "textPreview": "Visible chez : UVCI",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#2F5E8F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Visible chez : UVCI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Visible chez : UVCI",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#2F5E8F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Visible chez : UVCI",
+              "fontSize": 10,
+              "color": "#2F5E8F",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "17",
+      "bbox": [
+        90,
+        478,
+        512,
+        74
+      ],
+      "geometry": "rect",
+      "text": "Des offres publiques visibles traitent déjà le community management optimisé avec l'IA et les usages digitaux généraux.",
+      "textPreview": "Des offres publiques visibles traitent déjà le community management optimisé avec l'IA et les usages digitaux généraux.",
+      "resolvedFontSize": 12.8,
+      "resolvedTextStyle": {
+        "fontSize": 12.8,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Des offres publiques visibles traitent déjà le community management optimisé avec"
+          },
+          {
+            "index": 2,
+            "text": "l'IA et les usages digitaux généraux."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Des offres publiques visibles traitent déjà le community management optimisé avec l'IA et les usages digitaux généraux.",
+          "resolvedTextStyle": {
+            "fontSize": 12.8,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Des offres publiques visibles traitent déjà le community management optimisé avec l'IA et les usages digitaux généraux.",
+              "fontSize": 12.8,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "18",
+      "bbox": [
+        660,
+        386,
+        548,
+        186
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "19",
+      "bbox": [
+        678,
+        406,
+        6,
+        24
+      ],
+      "geometry": "rect",
+      "fillColor": "#6D5F92",
+      "lineColor": "#6D5F92",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9knih4by",
+      "id": "20",
+      "bbox": [
+        696,
+        404,
+        494,
+        44
+      ],
+      "geometry": "rect",
+      "text": "IA/data/numérique plus techniques",
+      "textPreview": "IA/data/numérique plus techniques",
+      "resolvedFontSize": 16.51,
+      "resolvedTextStyle": {
+        "fontSize": 16.51,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "IA/data/numérique plus techniques"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "IA/data/numérique plus techniques",
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "IA/data/numérique plus techniques",
+              "fontSize": 16.51,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzupwb2h",
+      "id": "21",
+      "bbox": [
+        696,
+        448,
+        494,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Visible chez : UVCI / CAMPC",
+      "textPreview": "Visible chez : UVCI / CAMPC",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#6D5F92",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Visible chez : UVCI / CAMPC"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Visible chez : UVCI / CAMPC",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#6D5F92",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Visible chez : UVCI / CAMPC",
+              "fontSize": 10,
+              "color": "#6D5F92",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re1w7mp0",
+      "id": "22",
+      "bbox": [
+        678,
+        478,
+        512,
+        74
+      ],
+      "geometry": "rect",
+      "text": "GeoIA, traitement et analyse des données, réseaux et certifications techniques occupent déjà une partie du terrain.",
+      "textPreview": "GeoIA, traitement et analyse des données, réseaux et certifications techniques occupent déjà une partie du terrain.",
+      "resolvedFontSize": 12.8,
+      "resolvedTextStyle": {
+        "fontSize": 12.8,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "GeoIA, traitement et analyse des données, réseaux et certifications techniques"
+          },
+          {
+            "index": 2,
+            "text": "occupent déjà une partie du terrain."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "GeoIA, traitement et analyse des données, réseaux et certifications techniques occupent déjà une partie du terrain.",
+          "resolvedTextStyle": {
+            "fontSize": 12.8,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "GeoIA, traitement et analyse des données, réseaux et certifications techniques occupent déjà une partie du terrain.",
+              "fontSize": 12.8,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2t83itgf",
+      "id": "23",
+      "bbox": [
+        64,
+        682,
+        1150,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#DDD2C6",
+      "lineColor": "#DDD2C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3m94fu",
+      "id": "24",
+      "bbox": [
+        72,
+        689,
+        980,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "textPreview": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#6A7A8B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#6A7A8B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Deck de présentation marché | Formation IA pour secrétariat de direction",
+              "fontSize": 8.51,
+              "color": "#6A7A8B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kb6xkf6d",
+      "id": "25",
+      "bbox": [
+        1140,
+        687,
+        48,
+        18
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#14273D",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#14273D",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 10,
+              "color": "#14273D",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

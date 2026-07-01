@@ -1,0 +1,857 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/fkjiu3",
+    "id": "fkjiu3",
+    "slide": 6,
+    "layoutId": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFDFC",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "d31645af-605e-40df-9d0e-889ffb78fb0b",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "c803fc6c-7c14-455d-a3ac-7e7d3242b94d",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czed8v6p",
+      "id": "1",
+      "bbox": [
+        72,
+        50,
+        300,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PROMPTS PROFESSIONNELS",
+      "textPreview": "PROMPTS PROFESSIONNELS",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "+mn-lt",
+        "color": "#D96B27",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PROMPTS PROFESSIONNELS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PROMPTS PROFESSIONNELS",
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "color": "#D96B27",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PROMPTS PROFESSIONNELS",
+              "fontSize": 10.51,
+              "color": "#D96B27",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "2",
+      "bbox": [
+        72,
+        78,
+        760,
+        54
+      ],
+      "geometry": "rect",
+      "text": "La méthode de prompt à enseigner aux participants",
+      "textPreview": "La méthode de prompt à enseigner aux participants",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "La méthode de prompt à enseigner aux participants"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "La méthode de prompt à enseigner aux participants",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "La méthode de prompt à enseigner aux participants",
+              "fontSize": 29,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "3",
+      "bbox": [
+        72,
+        164,
+        516,
+        430
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5sneloj2",
+      "id": "4",
+      "bbox": [
+        98,
+        190,
+        250,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Structure simple à mémoriser",
+      "textPreview": "Structure simple à mémoriser",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Structure simple à"
+          },
+          {
+            "index": 2,
+            "text": "mémoriser"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Structure simple à mémoriser",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Structure simple à mémoriser",
+              "fontSize": 18,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cbulwval",
+      "id": "5",
+      "bbox": [
+        98,
+        232,
+        462,
+        324
+      ],
+      "geometry": "rect",
+      "text": "• 1. Rôle : “Agis comme un assistant de direction en environnement institutionnel.”\n• 2. Contexte : “Voici une situation anonymisée et le niveau de sensibilité.”\n• 3. Tâche : “Rédige / résume / structure / reformule sans inventer.”\n• 4. Contraintes : ton, longueur, niveau hiérarchique, éléments interdits.\n• 5. Format : courrier, note, tableau d'actions, briefing, mail, PV.\n• 6. Sécurité : signaler les données à masquer et les informations manquantes.",
+      "textPreview": "• 1. Rôle : “Agis comme un assistant de direction en environnement institutionnel.” | • 2. Contexte : “Voici une situation anonymisée et ...",
+      "resolvedFontSize": 14.2,
+      "resolvedTextStyle": {
+        "fontSize": 14.2,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 10,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• 1. Rôle : “Agis comme un assistant de direction en environnement"
+          },
+          {
+            "index": 2,
+            "text": "institutionnel.”"
+          },
+          {
+            "index": 3,
+            "text": "• 2. Contexte : “Voici une situation anonymisée et le niveau de"
+          },
+          {
+            "index": 4,
+            "text": "sensibilité.”"
+          },
+          {
+            "index": 5,
+            "text": "• 3. Tâche : “Rédige / résume / structure / reformule sans inventer.”"
+          },
+          {
+            "index": 6,
+            "text": "• 4. Contraintes : ton, longueur, niveau hiérarchique, éléments"
+          },
+          {
+            "index": 7,
+            "text": "interdits."
+          },
+          {
+            "index": 8,
+            "text": "• 5. Format : courrier, note, tableau d'actions, briefing, mail, PV."
+          },
+          {
+            "index": 9,
+            "text": "• 6. Sécurité : signaler les données à masquer et les informations"
+          },
+          {
+            "index": 10,
+            "text": "manquantes."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• 1. Rôle : “Agis comme un assistant de direction en environnement institutionnel.”",
+          "resolvedTextStyle": {
+            "fontSize": 14.2,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 1. Rôle : “Agis comme un assistant de direction en environnement institutionnel.”",
+              "fontSize": 14.2,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• 2. Contexte : “Voici une situation anonymisée et le niveau de sensibilité.”",
+          "resolvedTextStyle": {
+            "fontSize": 14.2,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 2. Contexte : “Voici une situation anonymisée et le niveau de sensibilité.”",
+              "fontSize": 14.2,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• 3. Tâche : “Rédige / résume / structure / reformule sans inventer.”",
+          "resolvedTextStyle": {
+            "fontSize": 14.2,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 3. Tâche : “Rédige / résume / structure / reformule sans inventer.”",
+              "fontSize": 14.2,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• 4. Contraintes : ton, longueur, niveau hiérarchique, éléments interdits.",
+          "resolvedTextStyle": {
+            "fontSize": 14.2,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 4. Contraintes : ton, longueur, niveau hiérarchique, éléments interdits.",
+              "fontSize": 14.2,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• 5. Format : courrier, note, tableau d'actions, briefing, mail, PV.",
+          "resolvedTextStyle": {
+            "fontSize": 14.2,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 5. Format : courrier, note, tableau d'actions, briefing, mail, PV.",
+              "fontSize": 14.2,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "• 6. Sécurité : signaler les données à masquer et les informations manquantes.",
+          "resolvedTextStyle": {
+            "fontSize": 14.2,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 6. Sécurité : signaler les données à masquer et les informations manquantes.",
+              "fontSize": 14.2,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqxs72x4",
+      "id": "6",
+      "bbox": [
+        622,
+        164,
+        586,
+        430
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E8F0F8",
+      "lineColor": "#E8F0F8",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u54zidon",
+      "id": "7",
+      "bbox": [
+        648,
+        190,
+        300,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Exemples de prompts à remettre dans le support",
+      "textPreview": "Exemples de prompts à remettre dans le support",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Exemples de prompts à remettre"
+          },
+          {
+            "index": 2,
+            "text": "dans le support"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Exemples de prompts à remettre dans le support",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Exemples de prompts à remettre dans le support",
+              "fontSize": 18,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5wjudg7a",
+      "id": "8",
+      "bbox": [
+        648,
+        232,
+        520,
+        300
+      ],
+      "geometry": "rect",
+      "text": "• Courrier : “Rédige un courrier officiel à partir de ces éléments. Ton sobre, institutionnel, sans invention. Signale les informations manquantes.”\n• PV : “À partir de ces notes anonymisées, produis un compte rendu avec décisions, actions, responsables, délais et points sensibles.”\n• Synthèse : “Analyse ces documents anonymisés et produis une note d'une page : contexte, enjeux, risques, points à arbitrer, recommandation.”",
+      "textPreview": "• Courrier : “Rédige un courrier officiel à partir de ces éléments. Ton sobre, institutionnel, sans invention. Signale les informations m...",
+      "resolvedFontSize": 13.6,
+      "resolvedTextStyle": {
+        "fontSize": 13.6,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 6,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Courrier : “Rédige un courrier officiel à partir de ces éléments. Ton sobre,"
+          },
+          {
+            "index": 2,
+            "text": "institutionnel, sans invention. Signale les informations manquantes.”"
+          },
+          {
+            "index": 3,
+            "text": "• PV : “À partir de ces notes anonymisées, produis un compte rendu avec"
+          },
+          {
+            "index": 4,
+            "text": "décisions, actions, responsables, délais et points sensibles.”"
+          },
+          {
+            "index": 5,
+            "text": "• Synthèse : “Analyse ces documents anonymisés et produis une note d'une page"
+          },
+          {
+            "index": 6,
+            "text": ": contexte, enjeux, risques, points à arbitrer, recommandation.”"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Courrier : “Rédige un courrier officiel à partir de ces éléments. Ton sobre, institutionnel, sans invention. Signale les informations manquantes.”",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Courrier : “Rédige un courrier officiel à partir de ces éléments. Ton sobre, institutionnel, sans invention. Signale les informations manquantes.”",
+              "fontSize": 13.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• PV : “À partir de ces notes anonymisées, produis un compte rendu avec décisions, actions, responsables, délais et points sensibles.”",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• PV : “À partir de ces notes anonymisées, produis un compte rendu avec décisions, actions, responsables, délais et points sensibles.”",
+              "fontSize": 13.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Synthèse : “Analyse ces documents anonymisés et produis une note d'une page : contexte, enjeux, risques, points à arbitrer, recommandation.”",
+          "resolvedTextStyle": {
+            "fontSize": 13.6,
+            "color": "#13263C"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Synthèse : “Analyse ces documents anonymisés et produis une note d'une page : contexte, enjeux, risques, points à arbitrer, recommandation.”",
+              "fontSize": 13.6,
+              "color": "#13263C"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gbq1oryt",
+      "id": "9",
+      "bbox": [
+        648,
+        500,
+        520,
+        70
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFDFC",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qxs72x4n",
+      "id": "10",
+      "bbox": [
+        672,
+        518,
+        472,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Réflexe à transmettre : demander à l'IA d'indiquer ce qui manque, ce qui est ambigu et ce qui doit être validé avant envoi.",
+      "textPreview": "Réflexe à transmettre : demander à l'IA d'indiquer ce qui manque, ce qui est ambigu et ce qui doit être validé avant envoi.",
+      "resolvedFontSize": 12.6,
+      "resolvedTextStyle": {
+        "fontSize": 12.6,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Réflexe à transmettre : demander à l'IA d'indiquer ce qui manque, ce qui est"
+          },
+          {
+            "index": 2,
+            "text": "ambigu et ce qui doit être validé avant envoi."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Réflexe à transmettre : demander à l'IA d'indiquer ce qui manque, ce qui est ambigu et ce qui doit être validé avant envoi.",
+          "resolvedTextStyle": {
+            "fontSize": 12.6,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Réflexe à transmettre : demander à l'IA d'indiquer ce qui manque, ce qui est ambigu et ce qui doit être validé avant envoi.",
+              "fontSize": 12.6,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fil0rqd4",
+      "id": "11",
+      "bbox": [
+        62,
+        681,
+        1158,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D0C6",
+      "lineColor": "#D9D0C6",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/83itgfml",
+      "id": "12",
+      "bbox": [
+        72,
+        689,
+        930,
+        16
+      ],
+      "geometry": "rect",
+      "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+      "textPreview": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+      "resolvedFontSize": 8.51,
+      "resolvedTextStyle": {
+        "fontSize": 8.51,
+        "typeface": "+mn-lt",
+        "color": "#68798B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+          "resolvedTextStyle": {
+            "fontSize": 8.51,
+            "color": "#68798B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TransferAI Africa | Formation IA pour secrétariats de direction et fonctions institutionnelles",
+              "fontSize": 8.51,
+              "color": "#68798B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xobm58z2",
+      "id": "13",
+      "bbox": [
+        1146,
+        687,
+        46,
+        18
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#13263C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#13263C",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 10,
+              "color": "#13263C",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

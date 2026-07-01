@@ -1,0 +1,432 @@
+{
+  "name": "TransferAI V10.1 — Agent IA Support Base Connaissance Complète",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferai-agent-formation-suivi",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook Formation Agent",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        400
+      ],
+      "id": "v10-node-0001",
+      "webhookId": "v10-wh-0001"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body || $json;\nreturn [{\n  json: {\n    from_email: String(body.from_email || '').trim(),\n    subject: String(body.subject || '').trim(),\n    body_text: String(body.body_text || '').substring(0, 2000),\n    prospect_id: String(body.prospect_id || '').trim(),\n    organization_name: String(body.organization_name || '').trim(),\n    decision_maker_name: String(body.decision_maker_name || '').trim(),\n    nb_personnes: String(body.nb_personnes || '1').trim(),\n    secteur: String(body.secteur || '').trim()\n  }\n}];"
+      },
+      "name": "Normaliser Entrée Agent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        400
+      ],
+      "id": "v10-node-0002"
+    },
+    {
+      "parameters": {
+        "url": "={{'https://wlhznciwuofueffyoflo.supabase.co/rest/v1/prospect_targets?target_email=eq.' + encodeURIComponent($json.from_email) + '&select=organization_name,sector_guess,campaign_type,niche_status&limit=1'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Charger Contexte Prospect",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -320,
+        400
+      ],
+      "id": "v10-node-0003"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $('Normaliser Entrée Agent').first().json;\nconst raw = $input.all()[0].json;\nconst rows = Array.isArray(raw) ? raw : [];\nconst prospect = rows[0] || {};\nreturn [{\n  json: {\n    ...input,\n    organization_name: input.organization_name || prospect.organization_name || '',\n    secteur: input.secteur || prospect.sector_guess || '',\n    campaign_type: prospect.campaign_type || 'formation_juillet',\n    niche_status: prospect.niche_status || ''\n  }\n}];"
+      },
+      "name": "Enrichir Contexte",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        400
+      ],
+      "id": "v10-node-0004"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer OPENAI_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ model: 'gpt-4o-mini', temperature: 0.2, messages: [ { role: 'system', content: \"Tu es l'agent IA de support et suivi de TransferAI Nettelecom CI.\\nTu r\\u00e9ponds aux questions des prospects et clients sur TOUS les services TransferAI : formation, audit, accompagnement, solutions IA sur mesure.\\n\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nA. QUI EST TRANSFERAI NETTELECOM CI\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nPlateforme de formation, conseil, contenus et solutions IA pour les professionnels, entreprises et institutions. Ancrage C\\u00f4te d'Ivoire / Afrique de l'Ouest.\\nSite : www.transferai.ci | Email : contact@transferai.ci | WhatsApp & Agent IA : +225 07 16 57 39 90\\nAdresse : Riviera 3, carrefour Sainte Famille, Abidjan, Cocody, C\\u00f4te d'Ivoire\\n\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nB. FORMATION IA PRATIQUE \\u2014 JUILLET-AO\\u00dbT 2026\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nTitre : \\\"L'IA appliqu\\u00e9e \\u00e0 votre m\\u00e9tier\\\" \\u2014 2 jours intensifs en pr\\u00e9sentiel (9h\\u201317h)\\nLieu : Riviera 3, carrefour Sainte Famille, Abidjan, Cocody\\nSessions : Session 1 = 30-31 juillet 2026 / Session 2 = 10-11 ao\\u00fbt 2026\\nPlaces : MAX 20 participants par session \\u2014 places limit\\u00e9es\\nPr\\u00e9requis : Aucun \\u2014 aucune comp\\u00e9tence technique requise\\n\\nM\\u00c9TIERS CIBLES : RH, Finance & Comptabilit\\u00e9, Banque & Microfinance, Secr\\u00e9tariat de Direction, Administration G\\u00e9n\\u00e9rale, Archivage & GED, Diplomatie & Affaires Internationales, March\\u00e9s Publics, Directions G\\u00e9n\\u00e9rales, Minist\\u00e8res & Institutions, Marketing & Communication, T\\u00e9l\\u00e9communications\\n\\nPROGRAMME (2 jours) :\\nJour 1 : Panorama IA & confidentialit\\u00e9 \\u00b7 R\\u00e9diger courriers/emails avec l'IA \\u00b7 Comptes rendus & r\\u00e9unions \\u00b7 Gestion agenda et priorit\\u00e9s\\nJour 2 : Classement & GED assist\\u00e9s par IA \\u00b7 Notes de synth\\u00e8se & rapports \\u00b7 Biblioth\\u00e8que de prompts m\\u00e9tier \\u00b7 Mini-charte interne IA\\n\\n\\u00c9QUIPE FORMATEURS (5 experts) :\\n- Expert IA, Automatisation & Syst\\u00e8mes d'Entreprise\\n- Consultante experte en Automatisation, Agents IA & Workflows\\n- Consultant expert en Diplomatie, IA appliqu\\u00e9e & Formation\\n- Expert Auditeur & Formateur-Coach Multipotentiel\\n- Consultant expert en Data Engineering, Cloud & Plateformes IA\\n\\nLIVRABLES : Attestation TransferAI & Nettelecom CI + Kit de prompts personnalis\\u00e9s + Support PDF complet + Biblioth\\u00e8que de prompts m\\u00e9tier + Check-list protection donn\\u00e9es sensibles + Mini-charte interne IA\\n\\nTARIFS (F CFA par personne \\u2014 d\\u00e9gressif) :\\n1 pers : 250 000 | 2 pers : 225 000/pers | 3 pers : 215 000/pers | 4 pers : 205 000/pers\\n5 pers : 195 000/pers | 6 pers : 185 000/pers | 7 pers : 180 000/pers | 8 pers : 175 000/pers\\n9 pers : 170 000/pers | 10 pers : 165 000/pers | 10+ pers : sur devis (session intra-entreprise possible)\\nGroupes/entreprises : r\\u00e9ductions disponibles, facturation structure accept\\u00e9e\\n\\nINSCRIPTION : https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform\\nAPPEL DE D\\u00c9COUVERTE : https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique\\n\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nC. AUTRES SERVICES TRANSFERAI\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\n1. AUDIT IA (gratuit) \\u2014 45 min RDV post-audit\\n   \\u2192 Formulaire : www.transferai.ci/questionnaire-audit\\n   \\u2192 Analyse de la maturit\\u00e9 IA de l'organisation\\n   \\u2192 Fiche de recommandations personnalis\\u00e9es\\n   \\u2192 RDV expert offert\\n\\n2. ACCOMPAGNEMENT ENTREPRISE\\n   \\u2192 Adoption IA par les \\u00e9quipes m\\u00e9tier\\n   \\u2192 Automatisation des processus (n8n, workflows)\\n   \\u2192 Conseil strat\\u00e9gique int\\u00e9gration IA\\n   \\u2192 Tarif : sur devis selon p\\u00e9rim\\u00e8tre\\n\\n3. SOLUTIONS SUR MESURE\\n   \\u2192 LLM priv\\u00e9 (donn\\u00e9es sensibles, secret professionnel)\\n   \\u2192 Workflows automatis\\u00e9s sur mesure\\n   \\u2192 CRM IA, agents IA int\\u00e9gr\\u00e9s\\n   \\u2192 Tarif : sur devis\\n\\n4. CATALOGUE FORMATIONS SECTORIELLES\\n   \\u2192 RH, Finance, Juridique, Marketing, Service Client, Data, IT, Sant\\u00e9, Diplomatie...\\n   \\u2192 Catalogue disponible sur demande\\n\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nD. CE QUI SE PASSE APR\\u00c8S L'INSCRIPTION FORMATION\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\n1. Formulaire soumis \\u2192 email d'accus\\u00e9 de r\\u00e9ception automatique\\n2. J+1 : Email avec programme d\\u00e9taill\\u00e9 PDF en pi\\u00e8ce jointe\\n3. J+4 : Email de confirmation / rappel places limit\\u00e9es\\n4. Avant la formation : convocation + instructions pratiques\\n\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nE. FAQ FR\\u00c9QUENTES\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nQ: La formation est-elle certifiante ? \\u2192 Oui, attestation officielle TransferAI & Nettelecom CI remise \\u00e0 chaque participant.\\nQ: Peut-on payer en plusieurs fois ? \\u2192 Demander \\u00e0 l'\\u00e9quipe : contact@transferai.ci ou WhatsApp +225 07 16 57 39 90\\nQ: Y a-t-il un suivi apr\\u00e8s la formation ? \\u2192 Oui, accompagnement post-formation inclus + ressources num\\u00e9riques\\nQ: Peut-on organiser une session en entreprise ? \\u2192 Oui, session intra-entreprise possible sur devis (10+ personnes)\\nQ: Comment confirmer une inscription groupe ? \\u2192 Envoyer la liste des participants \\u00e0 contact@transferai.ci\\nQ: Le mat\\u00e9riel est-il fourni ? \\u2192 Oui, laptops fournis, support PDF inclus, kit prompts offert\\nQ: La formation couvre-t-elle les donn\\u00e9es confidentielles ? \\u2192 Oui, module d\\u00e9di\\u00e9 secret professionnel + donn\\u00e9es sensibles + LLM priv\\u00e9\\n\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\nF. R\\u00c8GLES DE R\\u00c9PONSE\\n\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\n1. R\\u00e9ponds en fran\\u00e7ais professionnel, ton chaleureux et direct\\n2. R\\u00e9ponds aux questions sur TOUS les services TransferAI (formation, audit, accompagnement, solutions)\\n3. Si la question concerne : n\\u00e9gociation prix >10%, contrat/partenariat commercial, remboursement, r\\u00e9clamation \\u2192 marque needs_escalation: true\\n4. Si question totalement hors p\\u00e9rim\\u00e8tre TransferAI \\u2192 marque needs_escalation: true\\n5. Longueur : 80 \\u00e0 180 mots maximum\\n6. Termine toujours par : \\\"L'\\u00e9quipe TransferAI Nettelecom CI\\\"\\n7. Inclus TOUJOURS un appel \\u00e0 l'action adapt\\u00e9 (Calendly, formulaire inscription, ou email contact)\\n8. MESSAGE CLEF : \\\"L'IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine\\\"\\n\\nFORMAT DE R\\u00c9PONSE (JSON pur, sans markdown) :\\n{\\\"reply\\\": \\\"...\\\", \\\"needs_escalation\\\": false, \\\"escalation_reason\\\": \\\"\\\"}\" }, { role: 'user', content: `Prospect: ${$json.decision_maker_name || $json.from_email} (${$json.organization_name})\\nSecteur: ${$json.secteur}\\nNombre de personnes: ${$json.nb_personnes}\\n\\nEmail reçu:\\nObjet: ${$json.subject}\\nCorps: ${$json.body_text}` } ] })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "GPT Agent TransferAI KB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        160,
+        400
+      ],
+      "id": "v10-node-0005"
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $('Enrichir Contexte').first().json;\nconst raw = $input.first().json;\nlet parsed = {};\ntry {\n  const text = (((raw.choices || [])[0] || {}).message || {}).content || '';\n  parsed = JSON.parse(text);\n} catch(e) {\n  parsed = { reply: '', needs_escalation: true, escalation_reason: 'parse_error' };\n}\nreturn [{\n  json: {\n    ...ctx,\n    agent_reply: parsed.reply || '',\n    needs_escalation: Boolean(parsed.needs_escalation),\n    escalation_reason: parsed.escalation_reason || ''\n  }\n}];"
+      },
+      "name": "Parser Réponse Agent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        400
+      ],
+      "id": "v10-node-0006"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "v10-cond-0001",
+              "leftValue": "={{$json.needs_escalation}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "IF Escalade Requise",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        640,
+        400
+      ],
+      "id": "v10-node-0007"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: 'TransferAI Formation <contact@transferai.ci>', to: ['marius.ayoro@transferai.ci'], subject: '🚨 Escalade agent formation — ' + ($json.decision_maker_name || $json.from_email) + ' (' + ($json.organization_name || '') + ')', html: '<h3>Question hors portée agent IA</h3><p><strong>De :</strong> ' + $json.from_email + '</p><p><strong>Prospect :</strong> ' + ($json.decision_maker_name || '') + ' — ' + ($json.organization_name || '') + '</p><p><strong>Raison escalade :</strong> ' + ($json.escalation_reason || 'non précisée') + '</p><p><strong>Question reçue :</strong></p><pre>' + $json.body_text + '</pre><p>Répondre directement depuis votre boîte Zoho.</p>' })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Alerter Marius Escalade",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        880,
+        288
+      ],
+      "id": "v10-node-0008"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer RESEND_API_KEY_REDACTED"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ from: 'TransferAI Formation <contact@transferai.ci>', to: [$json.from_email], bcc: ['marius.ayoro@transferai.ci'], subject: 'Re: ' + $json.subject, html: $json.agent_reply.replace(/\\n/g, '<br>') })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Envoyer Réponse Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        880,
+        512
+      ],
+      "id": "v10-node-0009"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/outreach_attempts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({ prospect_id: $('Enrichir Contexte').first().json.prospect_id || null, channel: 'email', message_variant: $('Enrichir Contexte').first().json.needs_escalation ? 'formation_agent_escalated' : 'formation_agent_auto_reply', direction: 'outbound', delivery_status: 'submitted', response_status: 'pending', sent_at: new Date().toISOString() })}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Log Outreach Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        400
+      ],
+      "id": "v10-node-0010"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'ok', escalated: $('Enrichir Contexte').first().json.needs_escalation }) }}",
+        "options": {}
+      },
+      "name": "Répondre Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        400
+      ],
+      "id": "v10-node-0011"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Formation Agent": {
+      "main": [
+        [
+          {
+            "node": "Normaliser Entrée Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normaliser Entrée Agent": {
+      "main": [
+        [
+          {
+            "node": "Charger Contexte Prospect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Charger Contexte Prospect": {
+      "main": [
+        [
+          {
+            "node": "Enrichir Contexte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrichir Contexte": {
+      "main": [
+        [
+          {
+            "node": "GPT Agent TransferAI KB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser Réponse Agent": {
+      "main": [
+        [
+          {
+            "node": "IF Escalade Requise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Escalade Requise": {
+      "main": [
+        [
+          {
+            "node": "Alerter Marius Escalade",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Envoyer Réponse Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alerter Marius Escalade": {
+      "main": [
+        [
+          {
+            "node": "Log Outreach Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer Réponse Agent": {
+      "main": [
+        [
+          {
+            "node": "Log Outreach Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Outreach Attempt": {
+      "main": [
+        [
+          {
+            "node": "Répondre Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT Agent TransferAI KB": {
+      "main": [
+        [
+          {
+            "node": "Parser Réponse Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "d093371a-fae5-4520-a8ce-c607309e64c2",
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "id": "WBhLUarZPXocFU2j",
+  "tags": []
+}
