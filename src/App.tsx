@@ -41,6 +41,7 @@ const VeilleReglementaireIA = lazy(() => import("./pages/VeilleReglementaireIA")
 const WebinarRegistration = lazy(() => import("./pages/WebinarRegistration"));
 const WebinarSeatRequest = lazy(() => import("./pages/WebinarSeatRequest"));
 const CreateurContenuIA = lazy(() => import("./pages/CreateurContenuIA"));
+const NewsletterBackOffice = lazy(() => import("./pages/NewsletterBackOffice"));
 const ConsultingIA = lazy(() => import("./pages/ConsultingIA"));
 const DeveloppementSolutionsIA = lazy(() => import("./pages/DeveloppementSolutionsIA"));
 const PreviewHub = lazy(() => import("./pages/PreviewHub"));
@@ -255,6 +256,7 @@ const AnimatedRoutes = () => {
           <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
           <Route path="/questionnaire-audit" element={<QuestionnaireAuditPage />} />
           <Route path="/back-office" element={<BackOffice />} />
+          <Route path="/back-office/newsletters" element={<NewsletterBackOffice />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
