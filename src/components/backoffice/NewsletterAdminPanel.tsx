@@ -73,6 +73,21 @@ type NewsletterAdminPanelProps = {
 const fieldClass =
   "w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
 
+const formatIssueDate = (value: string) => {
+  const date = new Date(`${value}T00:00:00Z`);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    timeZone: "UTC",
+  }).format(date);
+};
+
 const domainOptions = [
   "IT & Transformation Digitale",
   "Finance & Fintech",
@@ -627,7 +642,7 @@ const NewsletterAdminPanel = ({
                   <div>
                     <p className="font-medium text-card-foreground">{issue.title}</p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {issue.issue_date} · {issue.language.toUpperCase()} · {issue.target_domains.join(", ") || "Tous domaines"}
+                      {formatIssueDate(issue.issue_date)} · {issue.language.toUpperCase()} · {issue.target_domains.join(", ") || "Tous domaines"}
                     </p>
                     <p className="mt-1 text-xs text-muted-foreground">
                       {issue.recipient_count} destinataires · {issue.send_count} envoi(x)
