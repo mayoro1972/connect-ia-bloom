@@ -162,8 +162,8 @@ const WebinarSeatRequest = () => {
 
   const plannedDate = useMemo(() => {
     return lang === "fr"
-      ? "entre le 14 juillet 2026 et le 16 juillet 2026"
-      : "between July 14, 2026 and July 16, 2026";
+      ? "entre le 17 juillet 2026 et le 19 juillet 2026"
+      : "between July 17, 2026 and July 19, 2026";
   }, [lang]);
 
   const formationsForDomain = useMemo(() => {
