@@ -38,6 +38,49 @@ type WhatsappFollowupSequenceRow = {
   latest_inbound_message_sid: string;
 };
 
+const normalizePhoneDigits = (value: string) => value.replace(/^whatsapp:/i, "").replace(/[^\d]/g, "");
+
+const WEBINAR_CONFIRM_PATTERNS: RegExp[] = [
+  /\boui\b/, /\byes\b/, /je confirme/, /confirm[ée]/, /je (serai|serais)/,
+  /pr[ée]sent[e]?/, /compte sur moi/, /d'accord/, /j'y serai/, /je viens/,
+];
+
+// Ferme la boucle "invitation webinaire non-sollicitée" côté WhatsApp : si l'expéditeur correspond
+// à un inscrit "invited" (jamais demandé lui-même) et que le message ressemble à une confirmation,
+// on bascule son statut sans attendre une action manuelle. Best-effort : ne doit jamais faire échouer le webhook Twilio.
+const matchAndConfirmWebinarRegistration = async (fromNumber: string, body: string) => {
+  try {
+    const bodyLower = (body || "").toLowerCase();
+    if (!WEBINAR_CONFIRM_PATTERNS.some((re) => re.test(bodyLower))) return;
+
+    const fromDigits = normalizePhoneDigits(fromNumber);
+    if (fromDigits.length < 8) return;
+    const fromSuffix = fromDigits.slice(-8);
+
+    const { data: invited, error } = await supabase
+      .from("webinar_registrations")
+      .select("id, phone, full_name, email")
+      .eq("status", "invited");
+
+    if (error || !invited?.length) return;
+
+    const match = invited.find((row) => {
+      const rowDigits = normalizePhoneDigits(row.phone || "");
+      return rowDigits.length >= 8 && rowDigits.slice(-8) === fromSuffix;
+    });
+    if (!match) return;
+
+    await supabase
+      .from("webinar_registrations")
+      .update({ status: "confirmed", date_confirmed_at: new Date().toISOString() })
+      .eq("id", match.id);
+
+    console.log(`[twilio-whatsapp-webhook] webinar registration confirmed via WhatsApp: ${match.email}`);
+  } catch (err) {
+    console.error("[twilio-whatsapp-webhook] webinar confirmation matching failed", err);
+  }
+};
+
 const xml = (body: string, status = 200) =>
   new Response(body, {
     status,
@@ -451,6 +494,8 @@ Deno.serve(async (req: Request) => {
         numMedia,
       });
     }
+
+    await matchAndConfirmWebinarRegistration(fromNumber, body);
 
     const followupResult = await upsertWhatsappFollowupSequence({
       whatsappMessageId: savedMessage?.id ?? null,
