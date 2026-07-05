@@ -39,6 +39,21 @@ const formatInlineMarkdown = (value: string) =>
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" style="color:#f97316;font-weight:700;text-decoration:none;">$1</a>');
 
+const formatIssueDate = (value: string) => {
+  const date = new Date(`${value}T00:00:00Z`);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    timeZone: "UTC",
+  }).format(date);
+};
+
 const paragraphize = (value: string) =>
   value
     .split(/\n{2,}/)
@@ -245,7 +260,7 @@ export const renderNewsletterHtml = (issue: NewsletterIssueRecord) => {
             </p>
             <h1 style="margin:0 0 12px;font-size:34px;line-height:1.15;color:#0f172a;">${escapeHtml(issue.title)}</h1>
             <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#64748b;">
-              ${escapeHtml(issue.issue_date)} · ${escapeHtml(domains)}
+              ${escapeHtml(formatIssueDate(issue.issue_date))} · ${escapeHtml(domains)}
             </p>
             ${bodyBlock}
             ${introBlock}

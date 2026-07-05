@@ -437,16 +437,17 @@ const CreateurContenuIA = () => {
     newsletterIssues.find((issue) => issue.id === selectedNewsletterId) ?? featuredNewsletter ?? null;
 
   const formatDate = (value: string) => {
-    const date = new Date(value);
+    const date = new Date(`${value}T00:00:00Z`);
 
     if (Number.isNaN(date.getTime())) {
       return value;
     }
 
     return new Intl.DateTimeFormat(normalizedLanguage === "en" ? "en-GB" : "fr-FR", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      timeZone: "UTC",
     }).format(date);
   };
 

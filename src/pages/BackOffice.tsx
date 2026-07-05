@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,7 +12,6 @@ import PageTransition from "@/components/PageTransition";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import { invokeAdminEdgeFunction, invokeContentAdmin } from "@/lib/content-admin";
 import { isSupabaseConfigured } from "@/integrations/supabase/client";
-import NewsletterAdminPanel from "@/components/backoffice/NewsletterAdminPanel";
 import PartnerAdminPanel from "@/components/backoffice/PartnerAdminPanel";
 import AuditProspectAdminPanel, { type AuditProspectSnapshot } from "@/components/backoffice/AuditProspectAdminPanel";
 import WebinarAdminPanel from "@/components/backoffice/WebinarAdminPanel";
@@ -270,6 +269,7 @@ const formatDateLabel = (value: string) =>
 
 const BackOfficePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [tokenInput, setTokenInput] = useState("");
   const [adminToken, setAdminToken] = useState("");
   const requestedTab = searchParams.get("tab") ?? "resources";
@@ -297,6 +297,12 @@ const BackOfficePage = () => {
   useEffect(() => {
     setActiveTab(requestedTab);
   }, [requestedTab]);
+
+  useEffect(() => {
+    if (requestedTab === "newsletters") {
+      navigate("/back-office/newsletters", { replace: true });
+    }
+  }, [navigate, requestedTab]);
 
   const isReady = useMemo(() => adminToken.trim().length > 0 && isSupabaseConfigured, [adminToken]);
 
@@ -668,6 +674,40 @@ const BackOfficePage = () => {
             {statusMessage ? <p className="mb-4 text-sm text-primary">{statusMessage}</p> : null}
             {errorMessage ? <p className="mb-4 text-sm text-destructive">{errorMessage}</p> : null}
 
+            <div className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <Link
+                to="/back-office/newsletters"
+                className="rounded-2xl border border-primary/20 bg-primary/5 p-5 transition hover:border-primary/40 hover:bg-primary/10"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Accès direct</p>
+                <h2 className="mt-2 font-heading text-lg font-bold text-card-foreground">Newsletter IA</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Ouvrir la page dédiée pour rédiger, tester et envoyer la newsletter sans passer par les tabs.
+                </p>
+              </Link>
+              <div className="rounded-2xl border border-border bg-card p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Contenus</p>
+                <h2 className="mt-2 font-heading text-lg font-bold text-card-foreground">Ressources & veille</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Publier les ressources et suivre les signaux éditoriaux depuis le back-office principal.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Prospects</p>
+                <h2 className="mt-2 font-heading text-lg font-bold text-card-foreground">Suivi des demandes</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Garder les demandes et conversions à portée de main dans le même espace admin.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Opérations</p>
+                <h2 className="mt-2 font-heading text-lg font-bold text-card-foreground">Pilotage global</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Centraliser les autres actions admin sans mélanger la gestion newsletter.
+                </p>
+              </div>
+            </div>
+
             <Tabs
               value={activeTab}
               onValueChange={(nextValue) => {
@@ -684,7 +724,6 @@ const BackOfficePage = () => {
                 <TabsTrigger value="resources">Ressources</TabsTrigger>
                 <TabsTrigger value="editorial">Brouillons IA</TabsTrigger>
                 <TabsTrigger value="partners">Partenaires IA</TabsTrigger>
-                <TabsTrigger value="newsletters">Newsletter IA</TabsTrigger>
                 <TabsTrigger value="videos">Capsules vidéo</TabsTrigger>
                 <TabsTrigger value="whatsapp">WhatsApp</TabsTrigger>
                 <TabsTrigger value="jobs">Emplois IA</TabsTrigger>
@@ -1237,16 +1276,6 @@ const BackOfficePage = () => {
                     </div>
                   </div>
                 </div>
-              </TabsContent>
-
-              <TabsContent value="newsletters">
-                <NewsletterAdminPanel
-                  token={adminToken}
-                  isReady={isReady}
-                  isBusyGlobal={isBusy}
-                  onStatus={setStatusMessage}
-                  onError={setErrorMessage}
-                />
               </TabsContent>
 
               <TabsContent value="videos">
