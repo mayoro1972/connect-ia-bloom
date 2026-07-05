@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-19-site-chatwoot-whatsapp-prospecting-crm-ready",
+  "version": "2026-07-03-formation-livrables-positionnement-added",
   "purpose": "Base de connaissance de reference pour les assistants IA TransferAI afin de reduire les hallucinations sur le site, les parcours de contact, WhatsApp, Chatwoot et les workflows de prospection.",
   "source_of_truth": {
     "site_and_admin_docs": [
@@ -29,6 +29,10 @@
       "docs/transferai-admin/86_Blueprint_n8n_Controller_Workflow_Prospection_Packs_2026-06-11.md",
       "docs/transferai-admin/90_Audit_Upgrade_Prospection_CRM_2026-06-13.md",
       "docs/transferai-admin/92_Guide_Activation_Google_Forms_Social_Lead_Sequence_V1.md"
+    ],
+    "formation_positioning_docs": [
+      "docs/transferai-admin/Livrables_Promesses_Formation_IA_TransferAI.docx",
+      "docs/transferai-admin/Positionnement_Differenciation_TransferAI_Premium.docx"
     ]
   },
   "site": {
@@ -664,6 +668,14 @@
     {
       "question": "La V6 crée-t-elle des prospects ?",
       "answer": "Non. V6 sert au dashboard et à la synchronisation post-audit, pas à la création de prospects."
+    },
+    {
+      "question": "Quels livrables concrets reçoit chaque participant à la formation IA ?",
+      "answer": "Six livrables (voir Livrables_Promesses_Formation_IA_TransferAI.docx) : (L1) note de cadrage IA personnalisée fin Jour 1, (L2) plan d'action à 90 jours avec KPI et responsables fin Jour 2, (L3) un premier flux IA opérationnel construit sur un cas d'usage réel pendant les ateliers, (L4) une charte d'usage IA interne (confidentialité, anonymisation, validation humaine), (L5) une certification TransferAI/NettelecomCI avec 90 jours de suivi expert, (L6) une migration cloud & données sur mesure disponible sur demande."
+    },
+    {
+      "question": "Qu'est-ce qui différencie TransferAI Africa des autres organismes de formation IA ?",
+      "answer": "Voir Positionnement_Differenciation_TransferAI_Premium.docx, sur six axes : diagnostic sur mesure plutôt qu'un contenu générique, trajectoire à 90 jours avec KPI plutôt qu'une simple sensibilisation, cas d'usage réel automatisé plutôt qu'une démonstration, gouvernance IA intégrée (charte, anonymisation, validation humaine) plutôt qu'une zone grise laissée au client, certification + 90 jours de suivi plutôt qu'un certificat générique, et migration cloud & données sur mesure disponible sur demande quand elle reste hors périmètre chez les autres."
     }
   ],
   "current_project_state": {
@@ -690,6 +702,7 @@
     "chaîne prospection V3/V4/V5/V6 auditée et enrichie avec follow-up CRM",
     "controller admin de prospection préparé pour le futur back-office",
     "séquence Google Forms social lead ajoutée comme module entrant complémentaire",
-    "validation sandbox Twilio WhatsApp le 2026-06-18 avec auto-réponse et lien de réservation corrigé"
+    "validation sandbox Twilio WhatsApp le 2026-06-18 avec auto-réponse et lien de réservation corrigé",
+    "ajout des documents Livrables_Promesses_Formation_IA_TransferAI.docx et Positionnement_Differenciation_TransferAI_Premium.docx (livrables L1-L6 et différenciation concurrentielle), et mise à jour du prompt système de l'agent support formation (workflow n8n TransferAI V10.1) en conséquence"
   ]
 }
