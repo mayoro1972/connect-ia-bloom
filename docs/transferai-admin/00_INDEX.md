@@ -94,6 +94,19 @@ Le pack a 4 objectifs :
 81. [**Guide utilisateur — Pack Prospect complet : Deck + Mini-Catalogue PDF (28/06/2026)**](./110_Guide_Utilisateur_Pack_Prospect_Deck_MiniCatalogue_2026-06-28.md) — génération automatique lettre + catalogue PDF + deck PPTX/PDF
 82. [**Guide troubleshooting — Pack Prospect : Deck + Mini-Catalogue PDF (28/06/2026)**](./111_Guide_Troubleshooting_Pack_Prospect_Deck_MiniCatalogue_2026-06-28.md) — 9 erreurs documentées et corrigées (ReportLab, Supabase, layout PDF, git)
 83. [**Guide utilisateur — Pipeline automatique V4 → V3 → V6 · 300 sociétés · 5/jour**](./112_Guide_Utilisateur_Pipeline_Automatique_V4_V3_V6_300_Prospects.md) — 4 corrections bloquantes, import prospects, checklist complète go-live
+84. [Workflow JSON n8n — Formation Email2/Email3 séquence validation humaine (01/07/2026)](./117_n8n_Formation_Email2_Email3_Sequence_Validation_Humaine_01juillet2026.json)
+85. [Workflow JSON n8n — V10.1 Agent IA Support KB complet (01/07/2026)](./118_n8n_V10_1_Agent_IA_Support_KB_Complet_01juillet2026.json)
+86. [Session 01/07/2026 — Pipeline Formation complet & Agent IA V10.1](./119_Session_01juillet2026_Formation_Pipeline_Complet.md)
+87. [Guide Word — utilisateur Workflows TransferAI V3 (01/07/2026)](./120_Guide_Utilisateur_Workflows_TransferAI_V3_01juillet2026.docx)
+88. [Guide Word — troubleshooting Workflows TransferAI V3 (01/07/2026)](./121_Guide_Troubleshooting_Workflows_TransferAI_V3_01juillet2026.docx)
+89. [Workflows JSON n8n — 4 démos formation (CR réunion, courrier, RAG documentaire, traduction, pseudonymisation)](./122_n8n_Demo_CR_Reunion_Automatique_Formation_01juillet2026.json) (voir aussi 123 à 126)
+90. [6 cas d'usage IA secteur par secteur (03/07/2026)](./127_6_Cas_Usage_IA_Secteur_Par_Secteur_2026-07-03.docx)
+91. [Catalogue cas d'usage IA prospects (03/07/2026)](./128_Catalogue_Cas_Usage_IA_Prospects_2026-07-03.docx)
+92. [Note interne — 6 cas d'usage commerciaux (03/07/2026)](./129_Note_Interne_6_Cas_Usage_Commerciaux_2026-07-03.docx)
+93. [**Programme de formation "L'IA au Bureau" — revamp complet (03/07/2026, docx)**](./130_Programme_Formation_IA_au_Bureau_REVAMP_2026-07-03.docx) — 6 cas d'usage, 6 différenciateurs, livrables individuels + organisationnels, 2 sessions
+94. [Programme de formation "L'IA au Bureau" — revamp complet (03/07/2026, PDF)](./131_Programme_Formation_IA_au_Bureau_REVAMP_2026-07-03.pdf) — version identique à celle publiée en production dans le bucket Supabase Storage
+95. [Session 03/07/2026 — Revamp Programme, remplacement PDF prod, re-test V9 + Email2/3](./132_Session_03juillet2026_Revamp_Programme_Test_V9_Email23.md)
+96. [**Guide troubleshooting — Campagne Formation IA : Programme, PDF joint, RAG (03/07/2026)**](./133_Guide_Troubleshooting_Campagne_Formation_Programme_RAG_03juillet2026.md) — sync des 4 sources de contenu, upload Storage RLS, LibreOffice, pagination docx-js, méthode de test V9/Email2-3, bug de filtre RAG (4/6 différenciateurs seulement retrouvables), clés API exposées
 
 ## Ordre de lecture recommandé
 

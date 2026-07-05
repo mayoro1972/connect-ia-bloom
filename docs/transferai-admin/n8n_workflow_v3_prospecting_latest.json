@@ -9,8 +9,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -976,
-        1536
+        -1040,
+        1488
       ]
     },
     {
@@ -19,8 +19,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -976,
-        1760
+        -1024,
+        1936
       ],
       "id": "da731611-cf36-40e9-b93c-2a49366613b6"
     },
@@ -31,133 +31,133 @@
             {
               "id": "72257cf7-3650-4255-881f-8613262aed84",
               "name": "prospect_id",
-              "value": "={{$json.prospect_id || 'manual-orange-ci-001'}}",
+              "value": "={{$json.body?.prospect_id ?? $json.prospect_id}}",
               "type": "string"
             },
             {
               "id": "5b3cde03-6214-4d76-85b2-103560c495dc",
               "name": "organization_name",
-              "value": "={{$json.organization_name || 'Orange Côte d\\'Ivoire'}}",
+              "value": "={{$json.body?.organization_name ?? $json.organization_name}}",
               "type": "string"
             },
             {
               "id": "e2cd6ff7-3a33-4457-be95-9d74368e6a03",
               "name": "website",
-              "value": "={{$json.website || 'https://www.orange.ci'}}",
+              "value": "={{$json.body?.website ?? $json.website ?? 'https://www.orange.ci'}}",
               "type": "string"
             },
             {
               "id": "127bce9c-db71-4ae0-8787-05beff005fc2",
               "name": "country",
-              "value": "={{$json.country || 'Cote d\\'Ivoire'}}",
+              "value": "={{$json.body?.country ?? $json.country ?? 'Cote d\\'Ivoire'}}",
               "type": "string"
             },
             {
               "id": "1759d87c-c698-47a9-b7dc-1e85a1302512",
               "name": "organization_type",
-              "value": "={{$json.organization_type || 'Entreprise de télécommunications'}}",
+              "value": "={{$json.body?.organization_type ?? $json.organization_type ?? 'Entreprise de télécommunications'}}",
               "type": "string"
             },
             {
               "id": "f3d41c1a-8af0-4e39-83ba-37710f33014f",
               "name": "sector_guess",
-              "value": "={{$json.sector_guess || 'IT & Transformation Digitale'}}",
+              "value": "={{$json.body?.sector_guess ?? $json.sector_guess ?? 'IT & Transformation Digitale'}}",
               "type": "string"
             },
             {
               "id": "bffd6a53-2974-44e0-a4c9-24958d8bbacb",
-              "name": "=decision_maker_name",
-              "value": "={{$json.decision_maker_name || 'Directeur Digital'}}",
+              "name": "decision_maker_name",
+              "value": "={{$json.body?.decision_maker_name ?? $json.decision_maker_name ?? ''}}",
               "type": "string"
             },
             {
               "id": "c3c91c48-6724-4616-b592-abbd6228f482",
-              "name": "=target_email",
-              "value": "={{$json.target_email || 'marius.ayoro70@gmail.com'}}",
+              "name": "target_email",
+              "value": "={{$json.body?.target_email ?? $json.target_email}}",
               "type": "string"
             },
             {
               "id": "0f4f6d6e-9971-42ad-b009-ced7a569a586",
               "name": "custom_page_paths_csv",
-              "value": "={{$json.custom_page_paths_csv || '/entreprises,/offres,/contact'}}",
+              "value": "={{$json.body?.custom_page_paths_csv ?? $json.custom_page_paths_csv ?? '/entreprises,/offres,/contact'}}",
               "type": "string"
             },
             {
               "id": "6c04401f-1d5a-40fd-b10e-e774316558ce",
               "name": "booking_link_45min",
-              "value": "={{$json.booking_link_45min || 'https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique'}}",
+              "value": "={{$json.body?.booking_link_45min ?? $json.booking_link_45min ?? 'https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique'}}",
               "type": "string"
             },
             {
               "id": "ab023150-e45d-4a33-afe4-d8d54a1e6cce",
               "name": "=commercial_priority_default",
-              "value": "={{$json.commercial_priority_default || 'tier1'}}",
+              "value": "={{$json.body?.commercial_priority_default ?? $json.commercial_priority_default ?? 'tier1'}}",
               "type": "string"
             },
             {
               "id": "a928a2c7-6409-465a-b8ac-2c3988c74dd7",
               "name": "research_scope",
-              "value": "={{$json.research_scope || 'public_web_only'}}",
+              "value": "={{$json.body?.research_scope ?? $json.research_scope ?? 'public_web_only'}}",
               "type": "string"
             },
             {
               "id": "1b671d53-2c39-49c8-ba84-4ad195624c48",
               "name": "source_backend",
-              "value": "={{$json.source_backend || 'manual'}}",
+              "value": "={{$json.body?.source_backend ?? $json.source_backend ?? 'manual'}}",
               "type": "string"
             },
             {
               "id": "895ff269-d0f1-4604-85f3-7259dac2aa01",
               "name": "source_label",
-              "value": "={{$json.source_label || 'saisie manuelle'}}",
+              "value": "={{$json.body?.source_label ?? $json.source_label ?? 'saisie manuelle'}}",
               "type": "string"
             },
             {
               "id": "d6a07002-d8df-42a6-8a64-479870b81bc5",
               "name": "=raw_source_id",
-              "value": "={{$json.raw_source_id || ''}}",
+              "value": "={{$json.body?.raw_source_id ?? $json.raw_source_id ?? ''}}",
               "type": "string"
             },
             {
               "id": "98699013-ce0d-4f49-a1c2-c7d8c9cf498e",
               "name": "niche_status",
-              "value": "={{$json.niche_status || 'telecom_africa'}}",
+              "value": "={{$json.body?.niche_status ?? $json.niche_status ?? 'telecom_africa'}}",
               "type": "string"
             },
             {
               "id": "69df16f3-f8a5-4c28-b532-e146fc54d44e",
               "name": "=last_response_status",
-              "value": "={{$json.last_response_status || ''}}",
+              "value": "={{$json.body?.last_response_status ?? $json.last_response_status ?? ''}}",
               "type": "string"
             },
             {
               "id": "bdcc7617-e6f9-4561-a457-9837b9934713",
               "name": "last_sequence_result",
-              "value": "={{$json.last_sequence_result || ''}}",
+              "value": "={{$json.body?.last_sequence_result ?? $json.last_sequence_result ?? ''}}",
               "type": "string"
             },
             {
               "id": "dfd1e19b-4fa8-4319-83ee-ee6f36d1da4f",
               "name": "prospect_language",
-              "value": "={{$json.prospect_language || 'auto'}}",
+              "value": "={{$json.body?.prospect_language ?? $json.prospect_language ?? 'auto'}}",
               "type": "string"
             },
             {
               "id": "50c33095-eae1-43a9-a9d9-a5212ac7a0cb",
               "name": "audit_form_base_url",
-              "value": "={{ $json.audit_form_base_url || 'https://www.transferai.ci/questionnaire-audit' }}",
+              "value": "={{ $json.body?.audit_form_base_url ?? $json.audit_form_base_url ?? 'https://www.transferai.ci/questionnaire-audit' }}",
               "type": "string"
             },
             {
               "id": "6162f0f6-14b7-48cc-888d-96e64ab2bd3a",
               "name": "audit_form_query_suffix",
-              "value": "={{ $json.audit_form_query_suffix || '' }}",
+              "value": "={{ $json.body?.audit_form_query_suffix ?? $json.audit_form_query_suffix ?? '' }}",
               "type": "string"
             },
             {
               "id": "camp-type-set-target-001",
               "name": "campaign_type",
-              "value": "={{$json.campaign_type || 'formation_juillet'}}",
+              "value": "={{$json.body?.campaign_type ?? $json.campaign_type ?? ''}}",
               "type": "string"
             }
           ]
@@ -332,7 +332,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -363,7 +363,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -394,7 +394,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -438,7 +438,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -457,7 +457,7 @@
       "typeVersion": 4.2,
       "position": [
         2016,
-        1392
+        1344
       ]
     },
     {
@@ -469,7 +469,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -500,7 +500,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -531,7 +531,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer OPENAI_API_KEY_REDACTED"
+              "value": "=Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -555,7 +555,7 @@
     },
     {
       "parameters": {
-        "jsCode": "var ctx = JSON.parse(JSON.stringify($('Assemble Prospect Context').first().json));\n\nfunction textFrom(nodeName) {\n  try {\n    var node = $(nodeName).first().json;\n    return (node && node.choices && node.choices[0] && node.choices[0].message && node.choices[0].message.content) || '';\n  } catch (e) {\n    return '';\n  }\n}\n\nfunction jsonFrom(nodeName) {\n  var raw = textFrom(nodeName) || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return {\n      parse_error: nodeName + ': ' + e.message,\n      raw: raw\n    };\n  }\n}\n\nfunction hydrateString(value, ctx) {\n  return String(value)\n    .split('{{ORGANIZATION_NAME}}').join(ctx.organization_name || '')\n    .split('{{DECISION_MAKER_NAME}}').join(ctx.decision_maker_name || '')\n    .split('{{WEBSITE}}').join(ctx.website || '');\n}\n\nfunction hydrateValue(value, ctx) {\n  if (typeof value === 'string') return hydrateString(value, ctx);\n  if (Array.isArray(value)) {\n    return value.map(function(item) {\n      return hydrateValue(item, ctx);\n    });\n  }\n  if (value && typeof value === 'object') {\n    var out = {};\n    var keys = Object.keys(value);\n    for (var i = 0; i < keys.length; i++) {\n      out[keys[i]] = hydrateValue(value[keys[i]], ctx);\n    }\n    return out;\n  }\n  return value;\n}\n\nvar formationLetterText = textFrom('Generate Formation Letter');\nvar standardLetterText = textFrom('Generate Executive Letter');\nvar executiveLetter = hydrateString(formationLetterText || standardLetterText, ctx);\nvar tailoredCatalogue = hydrateString(textFrom('Generate Tailored Catalogue'), ctx);\nvar tailoredAuditForm = hydrateString(textFrom('Generate Tailored Audit Form'), ctx);\nvar deckBrief = hydrateValue(jsonFrom('Generate Deck Brief'), ctx);\n\nvar requiresEmail = Object.prototype.hasOwnProperty.call(ctx, 'target_email');\nvar approvedForSend = Boolean(\n  ctx.organization_name &&\n  ctx.entry_point_niche &&\n  ctx.recommended_offer &&\n  (!requiresEmail || ctx.target_email)\n);\n\nvar packId = ctx.pack_id || ('pack-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10));\nvar auditBaseUrl = String(ctx.audit_form_base_url || 'https://www.transferai.ci/questionnaire-audit').trim();\nvar rawAuditSuffix = String(ctx.audit_form_query_suffix || '').trim();\nvar cleanAuditSuffix = rawAuditSuffix.replace(/^[?&]+/, '');\nvar auditFormUrl = String(ctx.audit_form_url || '').trim();\n\nif (!auditFormUrl) {\n  auditFormUrl = auditBaseUrl + (auditBaseUrl.indexOf('?') >= 0 ? '&' : '?') + 'pack_id=' + encodeURIComponent(packId);\n  if (cleanAuditSuffix) {\n    auditFormUrl += '&' + cleanAuditSuffix;\n  }\n}\n\nvar executiveLetterHtml = executiveLetter\n  .replace(/\\n/g, '<br>')\n  .replace(/pack_id=/g, 'pack_id=' + encodeURIComponent(packId))\n  .replace(/pack_id%3D/g, 'pack_id%3D' + encodeURIComponent(packId));\nreturn [\n  {\n    json: {\n      prospect_id: ctx.prospect_id || null,\n      organization_name: ctx.organization_name || '',\n      decision_maker_name: ctx.decision_maker_name || '',\n      website: ctx.website || '',\n      country: ctx.country || '',\n      target_email: ctx.target_email || '',\n      organization_type: ctx.organization_type || '',\n      sector_guess: ctx.sector_guess || '',\n      pack_id: packId,\n      audit_form_base_url: auditBaseUrl,\n      audit_form_query_suffix: rawAuditSuffix,\n      audit_form_url: auditFormUrl,\n      executive_letter: executiveLetter,\n      executive_letter_html: executiveLetterHtml,\n      tailored_catalogue: tailoredCatalogue,\n      tailored_audit_form: tailoredAuditForm,\n      deck_brief: deckBrief,\n      approved_for_send: approvedForSend,\n      source_backend: ctx.source_backend || 'manual',\n      source_label: ctx.source_label || '',\n      raw_source_id: ctx.raw_source_id || '',\n      llm_redaction_summary: ctx.llm_redaction_summary,\n      llm_allowed_payload: ctx.llm_allowed_payload,\n      llm_generation_payload: ctx.llm_generation_payload,\n      probable_needs: ctx.probable_needs || [],\n      probable_problems: ctx.probable_problems || [],\n      probable_quick_wins: ctx.probable_quick_wins || [],\n      recommended_offer: ctx.recommended_offer || '',\n      recommended_use_case: ctx.recommended_use_case || '',\n      best_selling_use_case: ctx.best_selling_use_case || '',\n      commercial_priority_tier: ctx.commercial_priority_tier || ctx.commercial_priority_default || '',\n      roi_hypothesis: ctx.roi_hypothesis || [],\n      expected_time_savings: ctx.expected_time_savings || [],\n      expected_service_improvements: ctx.expected_service_improvements || [],\n      expected_quick_wins: ctx.expected_quick_wins || [],\n      delivery_timeline: ctx.delivery_timeline || [],\n      recommended_training_bundle: ctx.recommended_training_bundle || [],\n      sector_pitches: ctx.sector_pitches || [],\n      signal_tags: (ctx.llm_allowed_payload && ctx.llm_allowed_payload.signal_tags) || []\n    }\n  }\n];"
+        "jsCode": "var ctx = JSON.parse(JSON.stringify($('Assemble Prospect Context').first().json));\n\nfunction textFrom(nodeName) {\n  try {\n    var node = $(nodeName).first().json;\n    return (node && node.choices && node.choices[0] && node.choices[0].message && node.choices[0].message.content) || '';\n  } catch (e) {\n    return '';\n  }\n}\n\nfunction jsonFrom(nodeName) {\n  var raw = textFrom(nodeName) || '{}';\n  try {\n    return JSON.parse(raw);\n  } catch (e) {\n    return {\n      parse_error: nodeName + ': ' + e.message,\n      raw: raw\n    };\n  }\n}\n\nfunction hydrateString(value, ctx) {\n  return String(value)\n    .split('{{ORGANIZATION_NAME}}').join(ctx.organization_name || '')\n    .split('{{DECISION_MAKER_NAME}}').join(ctx.decision_maker_name || '')\n    .split('{{WEBSITE}}').join(ctx.website || '');\n}\n\nfunction hydrateValue(value, ctx) {\n  if (typeof value === 'string') return hydrateString(value, ctx);\n  if (Array.isArray(value)) {\n    return value.map(function(item) {\n      return hydrateValue(item, ctx);\n    });\n  }\n  if (value && typeof value === 'object') {\n    var out = {};\n    var keys = Object.keys(value);\n    for (var i = 0; i < keys.length; i++) {\n      out[keys[i]] = hydrateValue(value[keys[i]], ctx);\n    }\n    return out;\n  }\n  return value;\n}\n\nvar formationLetterText = textFrom('Generate Formation Letter');\nvar standardLetterText = textFrom('Generate Executive Letter');\nvar executiveLetter = hydrateString(formationLetterText || standardLetterText, ctx);\nvar tailoredCatalogue = hydrateString(textFrom('Generate Tailored Catalogue'), ctx);\nvar tailoredAuditForm = hydrateString(textFrom('Generate Tailored Audit Form'), ctx);\nvar deckBrief = hydrateValue(jsonFrom('Generate Deck Brief'), ctx);\n\nvar requiresEmail = Object.prototype.hasOwnProperty.call(ctx, 'target_email');\nvar approvedForSend = Boolean(\n  ctx.organization_name &&\n  ctx.entry_point_niche &&\n  ctx.recommended_offer &&\n  (!requiresEmail || ctx.target_email)\n);\n\nvar packId = ctx.pack_id || ('pack-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10));\nvar auditBaseUrl = String(ctx.audit_form_base_url || 'https://www.transferai.ci/questionnaire-audit').trim();\nvar rawAuditSuffix = String(ctx.audit_form_query_suffix || '').trim();\nvar cleanAuditSuffix = rawAuditSuffix.replace(/^[?&]+/, '');\nvar auditFormUrl = String(ctx.audit_form_url || '').trim();\n\nif (!auditFormUrl) {\n  auditFormUrl = auditBaseUrl + (auditBaseUrl.indexOf('?') >= 0 ? '&' : '?') + 'pack_id=' + encodeURIComponent(packId);\n  if (cleanAuditSuffix) {\n    auditFormUrl += '&' + cleanAuditSuffix;\n  }\n}\n\nvar executiveLetterHtml = executiveLetter\n  .replace(/\\n/g, '<br>')\n  .replace(/pack_id=/g, 'pack_id=' + encodeURIComponent(packId))\n  .replace(/pack_id%3D/g, 'pack_id%3D' + encodeURIComponent(packId));\nreturn [\n  {\n    json: {\n      prospect_id: ctx.prospect_id || null,\n      organization_name: ctx.organization_name || '',\n      decision_maker_name: ctx.decision_maker_name || '',\n      website: ctx.website || '',\n      country: ctx.country || '',\n      target_email: ctx.target_email || '',\n      organization_type: ctx.organization_type || '',\n      sector_guess: ctx.sector_guess || '',\n      pack_id: packId,\n      audit_form_base_url: auditBaseUrl,\n      audit_form_query_suffix: rawAuditSuffix,\n      audit_form_url: auditFormUrl,\n      executive_letter: executiveLetter,\n      executive_letter_html: executiveLetterHtml,\n      tailored_catalogue: tailoredCatalogue,\n      tailored_audit_form: tailoredAuditForm,\n      deck_brief: deckBrief,\n      approved_for_send: approvedForSend,\n      campaign_type: ctx.campaign_type || '',\n      source_backend: ctx.source_backend || 'manual',\n      source_label: ctx.source_label || '',\n      raw_source_id: ctx.raw_source_id || '',\n      llm_redaction_summary: ctx.llm_redaction_summary,\n      llm_allowed_payload: ctx.llm_allowed_payload,\n      llm_generation_payload: ctx.llm_generation_payload,\n      probable_needs: ctx.probable_needs || [],\n      probable_problems: ctx.probable_problems || [],\n      probable_quick_wins: ctx.probable_quick_wins || [],\n      recommended_offer: ctx.recommended_offer || '',\n      recommended_use_case: ctx.recommended_use_case || '',\n      best_selling_use_case: ctx.best_selling_use_case || '',\n      commercial_priority_tier: ctx.commercial_priority_tier || ctx.commercial_priority_default || '',\n      roi_hypothesis: ctx.roi_hypothesis || [],\n      expected_time_savings: ctx.expected_time_savings || [],\n      expected_service_improvements: ctx.expected_service_improvements || [],\n      expected_quick_wins: ctx.expected_quick_wins || [],\n      delivery_timeline: ctx.delivery_timeline || [],\n      recommended_training_bundle: ctx.recommended_training_bundle || [],\n      sector_pitches: ctx.sector_pitches || [],\n      signal_tags: (ctx.llm_allowed_payload && ctx.llm_allowed_payload.signal_tags) || []\n    }\n  }\n];"
       },
       "id": "7f1e7f0b-7602-4d41-acda-1c047bc6457a",
       "name": "Assemble Prospect Pack",
@@ -575,11 +575,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -701,11 +701,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -808,11 +808,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -863,7 +863,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ (() => {\n  const ctx = $('Build Send Context').first().json || {};\n\n  const targetEmail = ctx.target_email || '';\n  const bookingLink = ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';\n\n  return JSON.stringify({\n    from: 'TransferAI <contact@transferai.ci>',\n    to: [targetEmail],\n    subject: ctx.is_formation ? \"Invitation : Formation IA Pratique — 30-31 Juillet & 10-11 Août 2026 — Abidjan Cocody\" : \"Proposition d'audit gratuit, d'accompagnement et de formation\",\n    html: ctx.external_email_html || '',\n    attachments: ctx.attachments || []\n  });\n})() }}",
+        "jsonBody": "={{ (() => {\n  const ctx = $('Build Send Context').first().json || {};\n\n  const targetEmail = ctx.target_email || '';\n  const bookingLink = ctx.booking_link_45min || 'https://calendly.com/contact-transferai/30min';\n\n  return JSON.stringify({\n    from: 'TransferAI <contact@transferai.ci>',\n    to: [targetEmail],\n    subject: ctx.is_formation ? \"Invitation : L'IA au Bureau — Formation Pratique IA — 30-31 Juillet & 10-11 Août 2026 — Abidjan\" : \"Proposition d'audit gratuit, d'accompagnement et de formation\",\n    html: ctx.external_email_html || '',\n    attachments: ctx.attachments || []\n  });\n})() }}",
         "options": {
           "response": {
             "response": {
@@ -903,11 +903,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -944,11 +944,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1026,11 +1026,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1061,11 +1061,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1103,11 +1103,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1139,11 +1139,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1186,11 +1186,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1310,7 +1310,7 @@
     },
     {
       "parameters": {
-        "jsCode": "var src = $input.first().json.catalogue_render_payload || $input.first().json;\n\n// enjeux_audit depuis probable_needs/problems\nvar enjeux_audit = [];\nvar needs = Array.isArray(src.probable_needs) ? src.probable_needs : [];\nvar problems = Array.isArray(src.probable_problems) ? src.probable_problems : [];\nvar source = needs.length > 0 ? needs : problems;\nfor (var i = 0; i < Math.min(source.length, 3); i++) {\n  enjeux_audit.push({\n    num: \"0\" + (i + 1),\n    titre: String(source[i]).slice(0, 60),\n    constat: String(source[i]),\n    signal: (src.signal_tags && src.signal_tags[i]) || \"Signal identifie\"\n  });\n}\nif (enjeux_audit.length === 0) {\n  enjeux_audit = [\n    { num: \"01\", titre: \"Optimisation des processus\", constat: \"Processus manuels chronophages\", signal: \"Gains de productivite identifies\" },\n    { num: \"02\", titre: \"Pilotage et reporting\", constat: \"Donnees eparses, decisions lentes\", signal: \"Besoin de consolidation\" },\n  ];\n}\n\n// formations depuis recommended_training_bundle ou defaults\nvar bundle = Array.isArray(src.recommended_training_bundle) ? src.recommended_training_bundle : [];\nvar formations = [];\nif (bundle.length > 0) {\n  for (var j = 0; j < Math.min(bundle.length, 3); j++) {\n    formations.push({\n      num: \"F\" + (j + 1),\n      intitule: String(bundle[j]).slice(0, 80),\n      public: \"Equipes metier\",\n      duree: \"2 jours\",\n      niveau: \"Debutant a intermediaire\",\n      probleme: \"Manque de maitrise des outils IA\",\n      apres: \"Autonomie operationnelle\",\n      objectifs: [\"Comprendre les cas usage IA\", \"Appliquer sur les processus metier\"],\n      livrables: [\"Guide pratique\", \"Tableau de bord\"],\n      gain: \"- 30% temps traitement\"\n    });\n  }\n} else {\n  formations = [\n    { num: \"F1\", intitule: \"IA pour le service client\", public: \"Agents et managers\", duree: \"2 jours\", niveau: \"Debutant\", probleme: \"Reponses lentes et heterogenes\", apres: \"Reponses rapides et homogenes\", objectifs: [\"Utiliser un copilote IA\", \"Reduire le temps de traitement\"], livrables: [\"Guide de prompts\", \"Scripts types\"], gain: \"- 40% temps de reponse\" },\n    { num: \"F2\", intitule: \"IA pour le reporting\", public: \"Analystes et managers\", duree: \"1 jour\", niveau: \"Intermediaire\", probleme: \"Reporting manuel et lent\", apres: \"Rapports auto en quelques minutes\", objectifs: [\"Automatiser les syntheses\", \"Creer des dashboards IA\"], livrables: [\"Template reporting\", \"Checklist\"], gain: \"- 60% temps reporting\" },\n  ];\n}\n\n// livrables_globaux\nvar livrables_globaux = Array.isArray(src.expected_quick_wins) && src.expected_quick_wins.length > 0\n  ? src.expected_quick_wins.slice(0, 4)\n  : [\"Audit IA personnalise\", \"Roadmap de transformation\", \"Formation equipes\", \"Support de mise en oeuvre\"];\n\n// plan_90j\nvar timeline = Array.isArray(src.delivery_timeline) && src.delivery_timeline.length > 0\n  ? src.delivery_timeline\n  : null;\nvar plan_90j = timeline\n  ? timeline.slice(0, 4).map(function(t, i) { return [\"J+\" + (i * 30), String(t).slice(0, 40), String(t)]; })\n  : [\n      [\"J+0\",  \"Audit et cadrage\",       \"Analyse besoins, definition perimetre\"],\n      [\"J+30\", \"Deploiement pilote\",      \"Mise en place solution sur equipe test\"],\n      [\"J+60\", \"Formation et adoption\",   \"Formation equipes, ajustements\"],\n      [\"J+90\", \"Generalisation\",          \"Deploiement complet, bilan ROI\"],\n    ];\n\nvar catalogue_input = {\n  prospect:          src.organization_name || \"Votre organisation\",\n  secteur:           src.sector_guess || src.sector_variant || \"Entreprise\",\n  pays:              src.country || \"Cote d Ivoire\",\n  pack_id:           src.pack_id || \"\",\n  enjeux_audit:      enjeux_audit,\n  formations:        formations,\n  livrables_globaux: livrables_globaux,\n  plan_90j:          plan_90j,\n  supabase_url:      \"https://wlhznciwuofueffyoflo.supabase.co\",\n  supabase_service_key: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4\",\n};\n\nvar catalogue_input_b64 = Buffer.from(JSON.stringify(catalogue_input)).toString('base64');\n\nreturn [{ json: Object.assign({}, $input.first().json, {\n  catalogue_input: catalogue_input,\n  catalogue_input_b64: catalogue_input_b64\n}) }];"
+        "jsCode": "var src = $input.first().json.catalogue_render_payload || $input.first().json;\n\n// enjeux_audit depuis probable_needs/problems\nvar enjeux_audit = [];\nvar needs = Array.isArray(src.probable_needs) ? src.probable_needs : [];\nvar problems = Array.isArray(src.probable_problems) ? src.probable_problems : [];\nvar source = needs.length > 0 ? needs : problems;\nfor (var i = 0; i < Math.min(source.length, 3); i++) {\n  enjeux_audit.push({\n    num: \"0\" + (i + 1),\n    titre: String(source[i]).slice(0, 60),\n    constat: String(source[i]),\n    signal: (src.signal_tags && src.signal_tags[i]) || \"Signal identifie\"\n  });\n}\nif (enjeux_audit.length === 0) {\n  enjeux_audit = [\n    { num: \"01\", titre: \"Optimisation des processus\", constat: \"Processus manuels chronophages\", signal: \"Gains de productivite identifies\" },\n    { num: \"02\", titre: \"Pilotage et reporting\", constat: \"Donnees eparses, decisions lentes\", signal: \"Besoin de consolidation\" },\n  ];\n}\n\n// formations depuis recommended_training_bundle ou defaults\nvar bundle = Array.isArray(src.recommended_training_bundle) ? src.recommended_training_bundle : [];\nvar formations = [];\nif (bundle.length > 0) {\n  for (var j = 0; j < Math.min(bundle.length, 3); j++) {\n    formations.push({\n      num: \"F\" + (j + 1),\n      intitule: String(bundle[j]).slice(0, 80),\n      public: \"Equipes metier\",\n      duree: \"2 jours\",\n      niveau: \"Debutant a intermediaire\",\n      probleme: \"Manque de maitrise des outils IA\",\n      apres: \"Autonomie operationnelle\",\n      objectifs: [\"Comprendre les cas usage IA\", \"Appliquer sur les processus metier\"],\n      livrables: [\"Guide pratique\", \"Tableau de bord\"],\n      gain: \"- 30% temps traitement\"\n    });\n  }\n} else {\n  formations = [\n    { num: \"F1\", intitule: \"IA pour le service client\", public: \"Agents et managers\", duree: \"2 jours\", niveau: \"Debutant\", probleme: \"Reponses lentes et heterogenes\", apres: \"Reponses rapides et homogenes\", objectifs: [\"Utiliser un copilote IA\", \"Reduire le temps de traitement\"], livrables: [\"Guide de prompts\", \"Scripts types\"], gain: \"- 40% temps de reponse\" },\n    { num: \"F2\", intitule: \"IA pour le reporting\", public: \"Analystes et managers\", duree: \"1 jour\", niveau: \"Intermediaire\", probleme: \"Reporting manuel et lent\", apres: \"Rapports auto en quelques minutes\", objectifs: [\"Automatiser les syntheses\", \"Creer des dashboards IA\"], livrables: [\"Template reporting\", \"Checklist\"], gain: \"- 60% temps reporting\" },\n  ];\n}\n\n// livrables_globaux\nvar livrables_globaux = Array.isArray(src.expected_quick_wins) && src.expected_quick_wins.length > 0\n  ? src.expected_quick_wins.slice(0, 4)\n  : [\"Audit IA personnalise\", \"Roadmap de transformation\", \"Formation equipes\", \"Support de mise en oeuvre\"];\n\n// plan_90j\nvar timeline = Array.isArray(src.delivery_timeline) && src.delivery_timeline.length > 0\n  ? src.delivery_timeline\n  : null;\nvar plan_90j = timeline\n  ? timeline.slice(0, 4).map(function(t, i) { return [\"J+\" + (i * 30), String(t).slice(0, 40), String(t)]; })\n  : [\n      [\"J+0\",  \"Audit et cadrage\",       \"Analyse besoins, definition perimetre\"],\n      [\"J+30\", \"Deploiement pilote\",      \"Mise en place solution sur equipe test\"],\n      [\"J+60\", \"Formation et adoption\",   \"Formation equipes, ajustements\"],\n      [\"J+90\", \"Generalisation\",          \"Deploiement complet, bilan ROI\"],\n    ];\n\nvar catalogue_input = {\n  prospect:          src.organization_name || \"Votre organisation\",\n  secteur:           src.sector_guess || src.sector_variant || \"Entreprise\",\n  pays:              src.country || \"Cote d Ivoire\",\n  pack_id:           src.pack_id || \"\",\n  enjeux_audit:      enjeux_audit,\n  formations:        formations,\n  livrables_globaux: livrables_globaux,\n  plan_90j:          plan_90j,\n  supabase_url:      \"https://wlhznciwuofueffyoflo.supabase.co\",\n  supabase_service_key: \"REDACTED_SUPABASE_JWT\",\n};\n\nvar catalogue_input_b64 = Buffer.from(JSON.stringify(catalogue_input)).toString('base64');\n\nreturn [{ json: Object.assign({}, $input.first().json, {\n  catalogue_input: catalogue_input,\n  catalogue_input_b64: catalogue_input_b64\n}) }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1375,7 +1375,7 @@
     },
     {
       "parameters": {
-        "jsCode": "var src = $input.first().json.deck_render_payload;\n\nvar nicheMap = {\n  \"service_client_multicanal\":    [[\">>\",\"Copilote service client\",\"Reponses homogenes, delai reduit de 40 %\"],[\"--\",\"Synthese des tickets\",\"Reporting automatise, alertes lisibles\"],[\">>\",\"Base de procedures terrain\",\"Scripts unifies, onboarding accelere\"]],\n  \"telecommunications\":           [[\">>\",\"Qualification des appels entrants\",\"Reduction du temps de traitement N1 de 40 %\"],[\"--\",\"Detection proactive du churn\",\"Relance ciblee, fidelisation amelioree\"],[\">>\",\"Base de connaissances agents\",\"Scripts unifies, homogeneite des reponses\"]],\n  \"it_transformation_digitale\":   [[\">>\",\"Automatisation du reporting IT\",\"Tableaux de bord generes automatiquement\"],[\"--\",\"Generation de documentation technique\",\"Specifications et guides produits acceleres\"],[\">>\",\"Copilote de support technique\",\"Resolution N1 plus rapide, escalades reduites\"]],\n  \"reporting_data_analytics\":     [[\">>\",\"Commentaire IA des KPI\",\"Syntheses managers, meilleur arbitrage\"],[\"--\",\"Consolidation du reporting\",\"Rapport automatise, gain de temps\"],[\">>\",\"Analyse des ecarts\",\"Detection rapide des anomalies\"]],\n  \"formation_montee_competences\": [[\">>\",\"Parcours IA sur mesure\",\"Formation ciblee et operationnelle\"],[\"--\",\"Base de connaissances\",\"Scripts unifies, onboarding accelere\"],[\">>\",\"Evaluation et certification\",\"Validation des acquis terrain\"]],\n  \"automatisation_processus_rh\":  [[\">>\",\"Copilote RH\",\"Gestion acceleree, reponses homogenes\"],[\"--\",\"Synthese des entretiens\",\"Reporting automatise, gain de temps\"],[\">>\",\"Procedures RH\",\"Onboarding structure, scripts clairs\"]],\n  \"logistique_supply_chain\":      [[\">>\",\"Planification assistee IA\",\"Optimisation des flux, moins d erreurs\"],[\"--\",\"Pilotage operationnel\",\"KPI lisibles, alertes automatiques\"],[\">>\",\"Procedures terrain\",\"Scripts unifies, onboarding accelere\"]],\n  \"finance_comptabilite\":         [[\">>\",\"Automatisation du reporting financier\",\"Clotures accelerees, erreurs reduites\"],[\"--\",\"Commentaire IA des tableaux de bord\",\"Syntheses decisionnelles en quelques secondes\"],[\">>\",\"Controle de conformite documentaire\",\"Revue automatisee, tracabilite assuree\"]],\n  \"ressources_humaines\":          [[\">>\",\"Preselection assistee de candidatures\",\"Processus de recrutement accelere\"],[\"--\",\"Onboarding personnalise\",\"Integration structuree, reduction du delai\"],[\">>\",\"Analyse des besoins de formation\",\"Plan de montee en competence cible\"]],\n  \"service_client\":               [[\">>\",\"Copilote service client\",\"Reponses homogenes, delai reduit de 40 %\"],[\"--\",\"Synthese des tickets\",\"Reporting automatise, alertes lisibles\"],[\">>\",\"Base de procedures terrain\",\"Scripts unifies, onboarding accelere\"]],\n  \"marketing_communication\":      [[\">>\",\"Generation de contenus cibles\",\"Productivite editoriale multipliee\"],[\"--\",\"Analyse des performances campagnes\",\"ROI mesurable, ciblage ameliore\"],[\">>\",\"Personnalisation a grande echelle\",\"Messages adaptes, engagement accru\"]],\n};\n\nvar sectorVariant = src.sector_variant || src.entry_point_niche || \"default\";\n\nvar defaultCasUsage = [\n  [\">>\", src.best_selling_use_case || \"Automatisation des processus prioritaires\", \"Gain de temps mesurable des le pilote\"],\n  [\"--\", \"Synthese et pilotage\", \"Reporting accelere, vision plus claire\"],\n  [\">>\", \"Base de connaissances\", \"Procedures unifiees, onboarding reduit\"],\n];\n\nvar casUsage = nicheMap[sectorVariant] || defaultCasUsage;\n\nvar enjeux = (src.probable_needs && src.probable_needs.length > 0)\n  ? src.probable_needs.slice(0, 3)\n  : [\"Ameliorer les processus internes\", \"Accelerer le reporting\", \"Structurer les procedures\"];\n\nvar deck_input = {\n  prospect:             src.organization_name || \"Votre organisation\",\n  secteur:              src.sector_guess || src.sector_variant || \"Entreprise\",\n  pays:                 src.country || \"Cote d Ivoire\",\n  pack_id:              src.pack_id || \"\",\n  accroche:             src.single_primary_cta || \"Transformer vos processus avec l IA\",\n  enjeux:               enjeux,\n  cas_usage:            casUsage,\n  gains: [\n    [\"Delai de reponse\",   \"- 30 a 50 %\", \"teal\"],\n    [\"Temps de reporting\", \"- 60 %\",       \"orange\"],\n    [\"Qualite reponses\",   \"+ homogeneite\",\"blue\"],\n  ],\n  supabase_url:         \"https://wlhznciwuofueffyoflo.supabase.co\",\n  supabase_service_key: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4\",\n};\n\nvar deck_input_b64 = Buffer.from(JSON.stringify(deck_input)).toString('base64');\n\nreturn [{ json: Object.assign({}, $input.first().json, {\n  deck_input: deck_input,\n  deck_input_b64: deck_input_b64\n}) }];"
+        "jsCode": "var src = $input.first().json.deck_render_payload;\n\nvar nicheMap = {\n  \"service_client_multicanal\":    [[\">>\",\"Copilote service client\",\"Reponses homogenes, delai reduit de 40 %\"],[\"--\",\"Synthese des tickets\",\"Reporting automatise, alertes lisibles\"],[\">>\",\"Base de procedures terrain\",\"Scripts unifies, onboarding accelere\"]],\n  \"telecommunications\":           [[\">>\",\"Qualification des appels entrants\",\"Reduction du temps de traitement N1 de 40 %\"],[\"--\",\"Detection proactive du churn\",\"Relance ciblee, fidelisation amelioree\"],[\">>\",\"Base de connaissances agents\",\"Scripts unifies, homogeneite des reponses\"]],\n  \"it_transformation_digitale\":   [[\">>\",\"Automatisation du reporting IT\",\"Tableaux de bord generes automatiquement\"],[\"--\",\"Generation de documentation technique\",\"Specifications et guides produits acceleres\"],[\">>\",\"Copilote de support technique\",\"Resolution N1 plus rapide, escalades reduites\"]],\n  \"reporting_data_analytics\":     [[\">>\",\"Commentaire IA des KPI\",\"Syntheses managers, meilleur arbitrage\"],[\"--\",\"Consolidation du reporting\",\"Rapport automatise, gain de temps\"],[\">>\",\"Analyse des ecarts\",\"Detection rapide des anomalies\"]],\n  \"formation_montee_competences\": [[\">>\",\"Parcours IA sur mesure\",\"Formation ciblee et operationnelle\"],[\"--\",\"Base de connaissances\",\"Scripts unifies, onboarding accelere\"],[\">>\",\"Evaluation et certification\",\"Validation des acquis terrain\"]],\n  \"automatisation_processus_rh\":  [[\">>\",\"Copilote RH\",\"Gestion acceleree, reponses homogenes\"],[\"--\",\"Synthese des entretiens\",\"Reporting automatise, gain de temps\"],[\">>\",\"Procedures RH\",\"Onboarding structure, scripts clairs\"]],\n  \"logistique_supply_chain\":      [[\">>\",\"Planification assistee IA\",\"Optimisation des flux, moins d erreurs\"],[\"--\",\"Pilotage operationnel\",\"KPI lisibles, alertes automatiques\"],[\">>\",\"Procedures terrain\",\"Scripts unifies, onboarding accelere\"]],\n  \"finance_comptabilite\":         [[\">>\",\"Automatisation du reporting financier\",\"Clotures accelerees, erreurs reduites\"],[\"--\",\"Commentaire IA des tableaux de bord\",\"Syntheses decisionnelles en quelques secondes\"],[\">>\",\"Controle de conformite documentaire\",\"Revue automatisee, tracabilite assuree\"]],\n  \"ressources_humaines\":          [[\">>\",\"Preselection assistee de candidatures\",\"Processus de recrutement accelere\"],[\"--\",\"Onboarding personnalise\",\"Integration structuree, reduction du delai\"],[\">>\",\"Analyse des besoins de formation\",\"Plan de montee en competence cible\"]],\n  \"service_client\":               [[\">>\",\"Copilote service client\",\"Reponses homogenes, delai reduit de 40 %\"],[\"--\",\"Synthese des tickets\",\"Reporting automatise, alertes lisibles\"],[\">>\",\"Base de procedures terrain\",\"Scripts unifies, onboarding accelere\"]],\n  \"marketing_communication\":      [[\">>\",\"Generation de contenus cibles\",\"Productivite editoriale multipliee\"],[\"--\",\"Analyse des performances campagnes\",\"ROI mesurable, ciblage ameliore\"],[\">>\",\"Personnalisation a grande echelle\",\"Messages adaptes, engagement accru\"]],\n};\n\nvar sectorVariant = src.sector_variant || src.entry_point_niche || \"default\";\n\nvar defaultCasUsage = [\n  [\">>\", src.best_selling_use_case || \"Automatisation des processus prioritaires\", \"Gain de temps mesurable des le pilote\"],\n  [\"--\", \"Synthese et pilotage\", \"Reporting accelere, vision plus claire\"],\n  [\">>\", \"Base de connaissances\", \"Procedures unifiees, onboarding reduit\"],\n];\n\nvar casUsage = nicheMap[sectorVariant] || defaultCasUsage;\n\nvar enjeux = (src.probable_needs && src.probable_needs.length > 0)\n  ? src.probable_needs.slice(0, 3)\n  : [\"Ameliorer les processus internes\", \"Accelerer le reporting\", \"Structurer les procedures\"];\n\nvar deck_input = {\n  prospect:             src.organization_name || \"Votre organisation\",\n  secteur:              src.sector_guess || src.sector_variant || \"Entreprise\",\n  pays:                 src.country || \"Cote d Ivoire\",\n  pack_id:              src.pack_id || \"\",\n  accroche:             src.single_primary_cta || \"Transformer vos processus avec l IA\",\n  enjeux:               enjeux,\n  cas_usage:            casUsage,\n  gains: [\n    [\"Delai de reponse\",   \"- 30 a 50 %\", \"teal\"],\n    [\"Temps de reporting\", \"- 60 %\",       \"orange\"],\n    [\"Qualite reponses\",   \"+ homogeneite\",\"blue\"],\n  ],\n  supabase_url:         \"https://wlhznciwuofueffyoflo.supabase.co\",\n  supabase_service_key: \"REDACTED_SUPABASE_JWT\",\n};\n\nvar deck_input_b64 = Buffer.from(JSON.stringify(deck_input)).toString('base64');\n\nreturn [{ json: Object.assign({}, $input.first().json, {\n  deck_input: deck_input,\n  deck_input_b64: deck_input_b64\n}) }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1429,7 +1429,7 @@
     },
     {
       "parameters": {
-        "jsCode": "var raw = $input.first().json;\nvar src = raw.catalogue_render_payload || raw;\n\nvar enjeux_audit = [];\nvar needs = Array.isArray(src.probable_needs) ? src.probable_needs : [];\nvar problems = Array.isArray(src.probable_problems) ? src.probable_problems : [];\nvar source = needs.length > 0 ? needs : problems;\nfor (var i = 0; i < Math.min(source.length, 3); i++) {\n  enjeux_audit.push({\n    num: \"0\" + (i + 1),\n    titre: String(source[i]).slice(0, 80),\n    constat: String(source[i]),\n    signal: \"\"\n  });\n}\nif (enjeux_audit.length === 0) {\n  enjeux_audit = [\n    { num: \"01\", titre: \"Optimisation des processus internes\", constat: \"Processus manuels chronophages, gains de productivité identifiés\", signal: \"\" },\n    { num: \"02\", titre: \"Pilotage et reporting\", constat: \"Données éparses, décisions ralenties par le manque de consolidation\", signal: \"\" }\n  ];\n}\n\nvar bundle = Array.isArray(src.recommended_training_bundle) ? src.recommended_training_bundle : [];\nvar formations = [];\nif (bundle.length > 0) {\n  for (var j = 0; j < Math.min(bundle.length, 3); j++) {\n    formations.push({\n      num: \"F\" + (j + 1),\n      intitule: String(bundle[j]).slice(0, 80),\n      public: \"Équipes métier\",\n      duree: \"2 jours\",\n      niveau: \"Débutant à intermédiaire\",\n      probleme: \"Processus manuels et chronophages\",\n      apres: \"Autonomie opérationnelle avec l'IA\",\n      objectifs: [\"Comprendre et appliquer les cas d'usage IA\", \"Gagner en efficacité sur les processus métier\"],\n      livrables: [\"Guide pratique personnalisé\", \"Tableau de bord de suivi\"],\n      gain: \"− 30 % du temps de traitement\"\n    });\n  }\n} else {\n  formations = [\n    {\n      num: \"F1\",\n      intitule: \"IA pour le service client\",\n      public: \"Agents et managers\",\n      duree: \"2 jours\",\n      niveau: \"Débutant\",\n      probleme: \"Réponses lentes et hétérogènes selon les agents\",\n      apres: \"Réponses rapides, homogènes et de meilleure qualité\",\n      objectifs: [\"Utiliser un copilote IA pour la relation client\", \"Réduire le temps de traitement des demandes\"],\n      livrables: [\"Guide de prompts métier\", \"Scripts types validés\"],\n      gain: \"− 40 % du temps de réponse\"\n    },\n    {\n      num: \"F2\",\n      intitule: \"IA pour le reporting\",\n      public: \"Analystes et managers\",\n      duree: \"1 jour\",\n      niveau: \"Intermédiaire\",\n      probleme: \"Reporting manuel, lent et source d'erreurs\",\n      apres: \"Rapports générés automatiquement en quelques minutes\",\n      objectifs: [\"Automatiser les synthèses et commentaires\", \"Créer des tableaux de bord assistés par IA\"],\n      livrables: [\"Modèle de reporting automatisé\", \"Checklist de contrôle qualité\"],\n      gain: \"− 60 % du temps de reporting\"\n    }\n  ];\n}\n\nvar livrables_globaux = (Array.isArray(src.expected_quick_wins) && src.expected_quick_wins.length > 0)\n  ? src.expected_quick_wins.slice(0, 4)\n  : [\"Audit IA personnalisé\", \"Feuille de route de transformation\", \"Formation des équipes\", \"Support de mise en œuvre\"];\n\nvar timeline = (Array.isArray(src.delivery_timeline) && src.delivery_timeline.length > 0) ? src.delivery_timeline : null;\nvar plan_90j = timeline\n  ? timeline.slice(0, 4).map(function(t, idx) { return [\"J+\" + (idx * 30), String(t).slice(0, 60), String(t)]; })\n  : [\n      [\"J+0\",  \"Audit et cadrage\",        \"Analyse des besoins, définition du périmètre d'intervention\"],\n      [\"J+30\", \"Déploiement pilote\",       \"Mise en place de la solution sur l'équipe test\"],\n      [\"J+60\", \"Formation et adoption\",    \"Formation des équipes, ajustements et retours terrain\"],\n      [\"J+90\", \"Généralisation\",           \"Déploiement complet, bilan ROI et décision d'extension\"]\n    ];\n\nvar catalogue_input = {\n  prospect:          src.organization_name || \"Votre organisation\",\n  secteur:           src.sector_guess || src.sector_variant || \"Entreprise\",\n  pays:              src.country || \"Côte d'Ivoire\",\n  pack_id:           src.pack_id || \"\",\n  enjeux_audit:      enjeux_audit,\n  formations:        formations,\n  livrables_globaux: livrables_globaux,\n  plan_90j:          plan_90j,\n  supabase_url:      \"https://wlhznciwuofueffyoflo.supabase.co\",\n  supabase_service_key: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4\"\n};\n\nvar catalogue_input_b64 = Buffer.from(JSON.stringify(catalogue_input)).toString('base64');\n\nreturn [{ json: Object.assign({}, raw, {\n  catalogue_input: catalogue_input,\n  catalogue_input_b64: catalogue_input_b64\n}) }];"
+        "jsCode": "var raw = $input.first().json;\nvar src = raw.catalogue_render_payload || raw;\n\nvar enjeux_audit = [];\nvar needs = Array.isArray(src.probable_needs) ? src.probable_needs : [];\nvar problems = Array.isArray(src.probable_problems) ? src.probable_problems : [];\nvar source = needs.length > 0 ? needs : problems;\nfor (var i = 0; i < Math.min(source.length, 3); i++) {\n  enjeux_audit.push({\n    num: \"0\" + (i + 1),\n    titre: String(source[i]).slice(0, 80),\n    constat: String(source[i]),\n    signal: \"\"\n  });\n}\nif (enjeux_audit.length === 0) {\n  enjeux_audit = [\n    { num: \"01\", titre: \"Optimisation des processus internes\", constat: \"Processus manuels chronophages, gains de productivité identifiés\", signal: \"\" },\n    { num: \"02\", titre: \"Pilotage et reporting\", constat: \"Données éparses, décisions ralenties par le manque de consolidation\", signal: \"\" }\n  ];\n}\n\nvar bundle = Array.isArray(src.recommended_training_bundle) ? src.recommended_training_bundle : [];\nvar formations = [];\nif (bundle.length > 0) {\n  for (var j = 0; j < Math.min(bundle.length, 3); j++) {\n    formations.push({\n      num: \"F\" + (j + 1),\n      intitule: String(bundle[j]).slice(0, 80),\n      public: \"Équipes métier\",\n      duree: \"2 jours\",\n      niveau: \"Débutant à intermédiaire\",\n      probleme: \"Processus manuels et chronophages\",\n      apres: \"Autonomie opérationnelle avec l'IA\",\n      objectifs: [\"Comprendre et appliquer les cas d'usage IA\", \"Gagner en efficacité sur les processus métier\"],\n      livrables: [\"Guide pratique personnalisé\", \"Tableau de bord de suivi\"],\n      gain: \"− 30 % du temps de traitement\"\n    });\n  }\n} else {\n  formations = [\n    {\n      num: \"F1\",\n      intitule: \"IA pour le service client\",\n      public: \"Agents et managers\",\n      duree: \"2 jours\",\n      niveau: \"Débutant\",\n      probleme: \"Réponses lentes et hétérogènes selon les agents\",\n      apres: \"Réponses rapides, homogènes et de meilleure qualité\",\n      objectifs: [\"Utiliser un copilote IA pour la relation client\", \"Réduire le temps de traitement des demandes\"],\n      livrables: [\"Guide de prompts métier\", \"Scripts types validés\"],\n      gain: \"− 40 % du temps de réponse\"\n    },\n    {\n      num: \"F2\",\n      intitule: \"IA pour le reporting\",\n      public: \"Analystes et managers\",\n      duree: \"1 jour\",\n      niveau: \"Intermédiaire\",\n      probleme: \"Reporting manuel, lent et source d'erreurs\",\n      apres: \"Rapports générés automatiquement en quelques minutes\",\n      objectifs: [\"Automatiser les synthèses et commentaires\", \"Créer des tableaux de bord assistés par IA\"],\n      livrables: [\"Modèle de reporting automatisé\", \"Checklist de contrôle qualité\"],\n      gain: \"− 60 % du temps de reporting\"\n    }\n  ];\n}\n\nvar livrables_globaux = (Array.isArray(src.expected_quick_wins) && src.expected_quick_wins.length > 0)\n  ? src.expected_quick_wins.slice(0, 4)\n  : [\"Audit IA personnalisé\", \"Feuille de route de transformation\", \"Formation des équipes\", \"Support de mise en œuvre\"];\n\nvar timeline = (Array.isArray(src.delivery_timeline) && src.delivery_timeline.length > 0) ? src.delivery_timeline : null;\nvar plan_90j = timeline\n  ? timeline.slice(0, 4).map(function(t, idx) { return [\"J+\" + (idx * 30), String(t).slice(0, 60), String(t)]; })\n  : [\n      [\"J+0\",  \"Audit et cadrage\",        \"Analyse des besoins, définition du périmètre d'intervention\"],\n      [\"J+30\", \"Déploiement pilote\",       \"Mise en place de la solution sur l'équipe test\"],\n      [\"J+60\", \"Formation et adoption\",    \"Formation des équipes, ajustements et retours terrain\"],\n      [\"J+90\", \"Généralisation\",           \"Déploiement complet, bilan ROI et décision d'extension\"]\n    ];\n\nvar catalogue_input = {\n  prospect:          src.organization_name || \"Votre organisation\",\n  secteur:           src.sector_guess || src.sector_variant || \"Entreprise\",\n  pays:              src.country || \"Côte d'Ivoire\",\n  pack_id:           src.pack_id || \"\",\n  enjeux_audit:      enjeux_audit,\n  formations:        formations,\n  livrables_globaux: livrables_globaux,\n  plan_90j:          plan_90j,\n  supabase_url:      \"https://wlhznciwuofueffyoflo.supabase.co\",\n  supabase_service_key: \"REDACTED_SUPABASE_JWT\"\n};\n\nvar catalogue_input_b64 = Buffer.from(JSON.stringify(catalogue_input)).toString('base64');\n\nreturn [{ json: Object.assign({}, raw, {\n  catalogue_input: catalogue_input,\n  catalogue_input_b64: catalogue_input_b64\n}) }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1449,11 +1449,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1507,11 +1507,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             }
           ]
         },
@@ -1528,7 +1528,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const response = $input.first().json;\nconst pack = Array.isArray(response) ? response[0] : response;\n\nif (!pack || !pack.pack_id) {\n  throw new Error('Pack introuvable pour cet ID');\n}\n\nconst payload = pack.payload || {};\n\nreturn [{\n  json: {\n    pack_id: pack.pack_id,\n    prospect_id: pack.prospect_id || '',\n    organization_name: pack.organization_name || '',\n    target_email: pack.target_email || '',\n    website: payload.website || pack.website || '',\n    country: payload.country || pack.country || '',\n    sector_guess: payload.sector_guess || '',\n    decision_maker_name: payload.decision_maker_name || '',\n    niche_status: payload.niche_status || '',\n    commercial_priority_tier: payload.commercial_priority_tier || 'tier1',\n    booking_link_45min: payload.booking_link_45min || 'https://calendly.com/contact-transferai/30min',\n    prospect_language: payload.prospect_language || 'fr',\n    source_backend: 'regenerate',\n    action: 'regenerate'\n  }\n}];"
+        "jsCode": "const response = $input.first().json;\nconst pack = Array.isArray(response) ? response[0] : response;\n\nif (!pack || !pack.pack_id) {\n  throw new Error('Pack introuvable pour cet ID');\n}\n\nconst payload = pack.payload || {};\n\nreturn [{\n  json: {\n    pack_id: pack.pack_id,\n    prospect_id: pack.prospect_id || '',\n    organization_name: pack.organization_name || '',\n    target_email: pack.target_email || '',\n    website: payload.website || pack.website || '',\n    country: payload.country || pack.country || '',\n    sector_guess: payload.sector_guess || '',\n    decision_maker_name: payload.decision_maker_name || '',\n    niche_status: payload.niche_status || '',\n    commercial_priority_tier: payload.commercial_priority_tier || 'tier1',\n    booking_link_45min: payload.booking_link_45min || 'https://calendly.com/contact-transferai/30min',\n    prospect_language: payload.prospect_language || 'fr',\n    campaign_type: payload.campaign_type || pack.campaign_type || '',\n    source_backend: 'regenerate',\n    action: 'regenerate'\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1592,11 +1592,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             }
           ]
         },
@@ -1687,11 +1687,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4"
+              "value": "Bearer REDACTED_SUPABASE_JWT"
             },
             {
               "name": "Content-Type",
@@ -1738,8 +1738,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1904,
-        1392
+        1824,
+        1248
       ],
       "id": "rc-fetch-dm-node-transferai-v3-002"
     },
@@ -1775,8 +1775,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        2112,
-        1392
+        2176,
+        1232
       ],
       "id": "rc-gpt-resolve-node-transferai-v3-003"
     },
@@ -1822,7 +1822,7 @@
       "typeVersion": 2,
       "position": [
         2560,
-        1392
+        1200
       ],
       "id": "camp-type-node-0001"
     },
@@ -1835,7 +1835,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer OPENAI_API_KEY_REDACTED"
+              "value": "Bearer REDACTED_OPENAI_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -1845,7 +1845,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({\"model\":\"gpt-4o-mini\",\"temperature\":0.4,\"messages\":[{\"role\":\"system\",\"content\":\"Tu rediges une lettre invitation B2B premium pour TransferAI Nettelecom CI — formation IA pratique 2 jours, Abidjan Cocody.\\n\\nEXPERTS (a mentionner): 4 experts IA appliquee aux metiers :\\n- Expert en IA, Automatisation & Systemes d Entreprise\\n- Consultante experte en Automatisation, Agents IA & Workflows\\n- Consultant expert en Diplomatie, IA appliquee & Formation\\n- Expert Auditeur & Formateur-Coach Multipotentiel\\n\\nDIFFERENCIATEURS CLE a mettre en valeur (ce qui distingue TransferAI des autres) :\\n1. Ordinateurs portables fournis — travaux pratiques reels, pas de slides theory\\n2. Accompagnement post-formation — suivi de mise en oeuvre apres les 2 jours\\n3. Focus donnees sensibles — seule formation qui montre version risquee PUIS version securisee de chaque prompt (ministere, diplomatie, DG, RH, marches publics)\\n4. Bibliotheque de prompts metier remise — prete a l emploi des le lundi suivant\\n5. Mini-charte interne d usage de l IA incluse — applicable immediatement en organisation\\n6. Pas une initiation ChatGPT : une montee en competences IA adaptee aux environnements sensibles et institutionnels\\n\\nPROGRAMME (a resumer) :\\n- Jour 1 : Panorama IA, confidentialite & donnees sensibles, courriers/emails institutionnels, reunions/agendas/briefings, comptes rendus/PV\\n- Jour 2 : Classement documentaire, notes de synthese, presentations, bibliotheque de prompts, charte usage IA, evaluation finale\\n\\nMESSAGE PEDAGOGIQUE A INCLURE :\\nL IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine.\\n\\nLIVRABLES REMIS (a mentionner) :\\nSupport PDF + Bibliotheque de prompts metier + Check-list protection donnees + Mini-charte usage IA + Attestation TransferAI Nettelecom CI\\n\\nREGLES REDACTION :\\n1. Commence EXACTEMENT par la valeur de Salutation fournie dans le message utilisateur (ex: Madame, ou Monsieur Dupont,)\\n2. Longueur : 280 a 350 mots (lettre premium, pas un flyer)\\n3. Ton : premium, professionnel, direct — montre l urgence et la valeur unique\\n4. Adapte l accroche au secteur du prospect (telecoms, banque, diplomatie, etc.)\\n5. CTA double en fin : Google Form inscription + Calendly appel decouverte\\n6. Signe : L equipe TransferAI Nettelecom CI / contact@transferai.ci\\n7. Ne mentionne PAS les services audit ou consulting TransferAI\"},{\"role\":\"user\",\"content\":\"Secteur: \" + ($json.sector_guess || \"institutionnel\") + \", Organisation: \" + ($json.organization_name || \"\") + \", Type: \" + ($json.organization_type || \"\") + \", Pays: \" + ($json.country || \"Cote d Ivoire\") + \", Decideur: \" + ($json.decision_maker_name || \"\") + \", Salutation: \" + ($json.resolved_greeting || \"Madame, Monsieur,\") + \", google_form_url: https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform, calendly_url: https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique\"}]})}}",
+        "jsonBody": "={{JSON.stringify({\"model\":\"gpt-4o-mini\",\"temperature\":0.4,\"messages\":[{\"role\":\"system\",\"content\":\"Tu rediges une lettre invitation B2B premium pour TransferAI Nettelecom CI.\\n\\nFORMATION : L IA au Bureau — la formation IA pratique qui parle a tous les metiers — 2 jours intensifs.\\n\\nMETIERS CIBLES (adapter l accroche au secteur du prospect) :\\nRessources Humaines, Finance & Comptabilite, Secretariat de Direction, Administration Generale, Archivage & Gestion Electronique des Documents (GED), Diplomatie, Marches Publics, Directions Generales, Ministeres, Marketing & Communication, Banque & Microfinance, Telecommunications & Operateurs.\\n\\nEQUIPE : 5 experts IA appliquee aux metiers :\\n- Expert en IA, Automatisation & Systemes d Entreprise\\n- Consultante experte en Automatisation, Agents IA & Workflows\\n- Consultant expert en Diplomatie, IA appliquee & Formation\\n- Expert Auditeur & Formateur-Coach Multipotentiel\\n- Consultant expert en Data Engineering, Cloud & Plateformes IA\\n\\nSESSIONS (a mentionner obligatoirement) :\\n- Session 1 : 29-30 juillet 2026\\n- Session 2 : 10-11 aout 2026\\nLieu : Riviera 3, carrefour Sainte Famille, Abidjan, Cote d Ivoire\\n\\nTARIF (a mentionner) :\\nA partir de 250 000 F CFA par personne, avec des reductions pour les groupes.\\n\\nBENEFICES CONCRETS A LISTER (mentionner ces 3 points minimum) :\\n- Amelioration de l efficacite operationnelle grace a l automatisation des taches repetitives\\n- Prise de decision eclairee grace a l analyse predictive des donnees\\n- Renforcement des competences de vos equipes pour faire face aux enjeux de la transformation digitale\\n\\nDIFFERENCIATEURS CLE (ce qui distingue TransferAI des autres) :\\n1. Ordinateurs portables fournis — travaux pratiques reels, pas de slides theory\\n2. Accompagnement post-formation — suivi de mise en oeuvre apres les 2 jours\\n3. Focus donnees sensibles : chaque demo montre version risquee PUIS version securisee du meme prompt\\n4. Adapte aux environnements sensibles : ministere, diplomatie, DG, RH, marches publics, dossiers confidentiels\\n\\nLIVRABLES REMIS A CHAQUE PARTICIPANT (mentionner tous) :\\n- Attestation de formation TransferAI & Nettelecom CI\\n- Kit de prompts / Templates IA adaptes a son metier (pret a l emploi)\\n- Support PDF pour approfondir les connaissances acquises\\n- Bibliotheque de prompts metier\\n- Check-list protection des donnees sensibles\\n- Mini-charte interne d usage de l IA\\n\\nMESSAGE PEDAGOGIQUE CLE A INCLURE :\\nL IA assiste, mais ne remplace ni le secret professionnel, ni la validation humaine.\\n\\nSIGNATURE (reproduire exactement a la fin de chaque lettre) :\\nL equipe TransferAI Nettelecom CI\\nWhatsApp & Agent IA : +225 07 16 57 39 90\\nEmail : contact@transferai.ci\\nRiviera 3, carrefour Sainte Famille, Abidjan, Cote d Ivoire\\n\\nREGLES REDACTION :\\n1. Commence EXACTEMENT par la valeur de Salutation fournie dans le message utilisateur (ex: Madame, ou Monsieur Dupont,)\\n2. Longueur : 300 a 380 mots — lettre riche et complete, pas un flyer\\n3. Structure : accroche sectorielle → benefices concrets (liste) → differenciateurs → livrables → sessions + tarif → double CTA → signature\\n4. Adapte l accroche au secteur du prospect (RH, finance, marketing, banque, telecoms, diplomatie, etc.)\\n5. Double CTA obligatoire : lien Google Form inscription + lien Calendly appel decouverte\\n6. Termine TOUJOURS par la signature complete telle que definie ci-dessus\\n7. Tu PEUX et DOIS mentionner l audit IA gratuit comme point d entree recommande, c est un differenciateur cle de l offre\"},{\"role\":\"user\",\"content\":\"Secteur: \" + ($json.sector_guess || \"institutionnel\") + \", Organisation: \" + ($json.organization_name || \"\") + \", Type: \" + ($json.organization_type || \"\") + \", Pays: \" + ($json.country || \"Cote d Ivoire\") + \", Decideur: \" + ($json.decision_maker_name || \"\") + \", Salutation: \" + ($json.resolved_greeting || \"Madame, Monsieur,\") + \", google_form_url: https://docs.google.com/forms/d/e/1FAIpQLSf8qtoXBTusqppHwdIoVfyXX9n12UbKBg34_bmAyxNzFPC_xA/viewform, calendly_url: https://calendly.com/contact-transferai/appel-decouverte-formation-ia-pratique\" + \", Contexte documentaire officiel a utiliser en priorite pour les faits, differenciateurs, livrables et audit gratuit: \" + ($json.contexte_rag || \"aucun\")}]})}}",
         "options": {
           "response": {
             "response": {
@@ -1876,6 +1876,102 @@
         1280
       ],
       "id": "camp-type-node-0003"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "formation-batch-trigger-v3",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "c98fb6b0-913c-46d1-9491-37b47dcf1281",
+      "name": "Webhook Batch Formation",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1008,
+        1712
+      ],
+      "webhookId": "e1502b42-8236-48bb-a424-e3b1e60fb0f3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer REDACTED_OPENAI_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'text-embedding-3-small', input: 'Differenciateurs, livrables et argumentaire premium de la formation IA TransferAI pour un prospect du secteur ' + ($json.sector_guess || 'institutionnel') }) }}",
+        "options": {}
+      },
+      "id": "rag-v3-001",
+      "name": "RAG - Créer embedding requête",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2560,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/rpc/match_documents",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "REDACTED_SUPABASE_JWT"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer REDACTED_SUPABASE_JWT"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query_embedding: $json.data[0].embedding, match_threshold: 0.2, match_count: 6 }) }}",
+        "options": {}
+      },
+      "id": "rag-v3-002",
+      "name": "RAG - Recherche Supabase Vector",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2544,
+        1776
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const docs = Array.isArray($input.first().json) ? $input.first().json : [];\nconst orig = $('IF Campaign Type Formation').first().json;\nconst contexte_rag = docs.map(d => `- ${d.titre} : ${d.contenu}`).join('\\n');\nreturn [{ json: { ...orig, contexte_rag, rag_sources: docs.map(d => d.titre), rag_nb_sources: docs.length } }];"
+      },
+      "id": "rag-v3-003",
+      "name": "RAG - Construire contexte formation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2528,
+        2016
+      ]
     }
   ],
   "connections": {
@@ -2626,7 +2722,7 @@
       "main": [
         [
           {
-            "node": "Generate Formation Letter",
+            "node": "RAG - Créer embedding requête",
             "type": "main",
             "index": 0
           }
@@ -2656,6 +2752,50 @@
         [
           {
             "node": "Assemble Prospect Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Batch Formation": {
+      "main": [
+        [
+          {
+            "node": "Set Target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG - Créer embedding requête": {
+      "main": [
+        [
+          {
+            "node": "RAG - Recherche Supabase Vector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG - Recherche Supabase Vector": {
+      "main": [
+        [
+          {
+            "node": "RAG - Construire contexte formation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG - Construire contexte formation": {
+      "main": [
+        [
+          {
+            "node": "Generate Formation Letter",
             "type": "main",
             "index": 0
           }

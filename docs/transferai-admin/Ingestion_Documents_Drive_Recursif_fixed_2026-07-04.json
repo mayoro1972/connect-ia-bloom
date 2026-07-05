@@ -1,0 +1,337 @@
+{
+  "name": "Ingestion_Documents_Drive_Recursif",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "ing-001",
+      "name": "Déclencheur — toutes les 6h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Liste tous les dossiers connus (principal + 7 sous-dossiers)\nconst folders = [{\"id\": \"1wAEiJ-X8Wi-b3rPe290gjeY3GqcbZTOH\", \"name\": \"Racine\"}, {\"id\": \"1G5544_ue1tORwCPgW4EwzoCO1LCZCGEw\", \"name\": \"01_Procedures_Internes\"}, {\"id\": \"1-zKhsbbznaMhBd83pGZJDNEmAaumOc8Y\", \"name\": \"02_Reglementation\"}, {\"id\": \"1hFxuObwGeHFZEze-RYzU9_RWPRb-faGl\", \"name\": \"03_Guides_Formations\"}, {\"id\": \"1U_U_LTfo0btz4XBNu5plIsAv3EvIoPkE\", \"name\": \"04_Workflows_Automatisation\"}, {\"id\": \"1doGiY1xg2bR9KmLZ3JOXjC4sEQZCGm2Q\", \"name\": \"05_Prospection_CRM\"}, {\"id\": \"1L6OhqVJjw_xbJkLx8z603wJwRREJYpl5\", \"name\": \"06_Decks_Sectoriels\"}, {\"id\": \"1JZta3HnCkg2WOt_YlL2NHhA3SH_BZLGe\", \"name\": \"07_Knowledge_Base\"}];\nconsole.log(`Scanning ${folders.length} dossiers...`);\nreturn folders.map(f => ({ json: f }));"
+      },
+      "id": "ing-001b",
+      "name": "Liste des dossiers à scanner",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files?q=%27{{ $json.id }}%27+in+parents+and+trashed%3Dfalse+and+mimeType+%21%3D+%27application%2Fvnd.google-apps.folder%27&fields=files(id%2Cname%2CmimeType%2CmodifiedTime%2CwebViewLink)&pageSize=1000",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "id": "ing-002",
+      "name": "Lister fichiers du dossier",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        688,
+        400
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "L899zqnTLMteTE0O",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aplatit les listes files[] de tous les dossiers\nconst allFiles = [];\nfor (const item of $input.all()) {\n  const files = item.json.files || [];\n  allFiles.push(...files);\n}\nreturn allFiles.map(f => ({ json: f }));"
+      },
+      "id": "ing-002b",
+      "name": "Aplatir liste fichiers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        928,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.id }}"
+        },
+        "options": {
+          "googleFileConversion": {}
+        }
+      },
+      "id": "ing-003",
+      "name": "Télécharger contenu fichier",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1168,
+        400
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "L899zqnTLMteTE0O",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const CHUNK_SIZE = 800;\nconst OVERLAP = 100;\nconst BINARY_EXTENSIONS = new Set(['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'png', 'jpg', 'jpeg', 'gif', 'webp']);\nconst BINARY_MIME_PREFIXES = ['image/', 'audio/', 'video/'];\nconst BINARY_MIME_EXACT = new Set([\n  'application/pdf',\n  'application/zip',\n  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',\n  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',\n  'application/vnd.openxmlformats-officedocument.presentationml.presentation',\n  'application/msword',\n  'application/vnd.ms-excel',\n  'application/vnd.ms-powerpoint'\n]);\nconst allChunks = [];\n\nfor (const item of $input.all()) {\n  const file = item.json ?? {};\n  const bin = item.binary?.data;\n\n  if (!bin?.data) continue;\n\n  const ext = String(bin.fileExtension || file.fileExtension || '').toLowerCase();\n  const mime = String(bin.mimeType || file.mimeType || '').toLowerCase();\n  const isClearlyBinary = BINARY_EXTENSIONS.has(ext)\n    || BINARY_MIME_PREFIXES.some((prefix) => mime.startsWith(prefix))\n    || BINARY_MIME_EXACT.has(mime);\n\n  if (isClearlyBinary) continue;\n\n  let texte = Buffer.from(bin.data, 'base64')\n    .toString('utf8')\n    .replace(/[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F\\x7F]/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n\n  if (texte.length < 50) continue;\n\n  let pos = 0;\n  let ci = 0;\n\n  while (pos < texte.length) {\n    const chunk = texte\n      .slice(pos, Math.min(pos + CHUNK_SIZE, texte.length))\n      .trim();\n\n    if (chunk.length > 50) {\n      allChunks.push({\n        json: {\n          chunk_text: chunk,\n          chunk_index: ci++,\n          source_file: file.name || bin.fileName || 'Inconnu',\n          source_id: file.id || null,\n          source_url: file.webViewLink || null,\n          modified_at: file.modifiedTime || new Date().toISOString(),\n          source_ext: ext || null,\n          source_mime: mime || null,\n        },\n      });\n    }\n\n    pos += CHUNK_SIZE - OVERLAP;\n  }\n}\n\nreturn allChunks;",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "ing-004",
+      "name": "Découper en chunks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"text-embedding-3-small\",\n  \"input\": \"{{ $json.chunk_text }}\"\n}",
+        "options": {}
+      },
+      "id": "ing-005",
+      "name": "Créer embedding chunk",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1648,
+        400
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "8o8AR120Bi7MOdnG",
+          "name": "OpenAI — Ingestion Documents Drive (migré 03/07/2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const embed = $json.data?.[0]?.embedding;\nconst meta = $('Découper en chunks').item.json ?? {};\n\nif (!Array.isArray(embed) || embed.length === 0) {\n  return [];\n}\n\nreturn [{\n  json: {\n    titre: meta.source_file || 'Inconnu',\n    contenu: meta.chunk_text || '',\n    url: meta.source_url || null,\n    source_id: meta.source_id || null,\n    chunk_index: meta.chunk_index ?? 0,\n    modified_at: meta.modified_at || new Date().toISOString(),\n    source_ext: meta.source_ext || null,\n    source_mime: meta.source_mime || null,\n    embedding: embed,\n  },\n}];",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "ing-006",
+      "name": "Préparer payload Supabase",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1888,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wlhznciwuofueffyoflo.supabase.co/rest/v1/documents?on_conflict=source_id,chunk_index",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates,return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "string",
+        "body": "={{ JSON.stringify({ titre: $json.titre, contenu: $json.contenu, url: $json.url, source_id: $json.source_id, chunk_index: $json.chunk_index, modified_at: $json.modified_at, embedding: $json.embedding }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "ing-007",
+      "name": "Insérer dans Supabase (upsert)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2128,
+        400
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "8nUcML4eth7S9gJ9",
+          "name": "Supabase TransferAI — service_role / ingestion (migré 03/07/2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all();\nconst total = results.length;\nconst okItems = results.filter((item) => {\n  const status = Number(item.json?.statusCode ?? 0);\n  return status >= 200 && status < 300;\n});\nconst failedItems = results.filter((item) => {\n  const status = Number(item.json?.statusCode ?? 0);\n  return !(status >= 200 && status < 300);\n});\n\nconst ok = okItems.length;\nconst failed = failedItems.length;\nconst errors = failedItems.slice(0, 5).map((item) => ({\n  statusCode: item.json?.statusCode ?? null,\n  body: item.json?.body ?? item.json ?? null,\n}));\n\nconsole.log('Ingestion terminee : ' + ok + '/' + total + ' chunks indexes, ' + failed + ' erreurs.');\n\nreturn [{\n  json: {\n    ok,\n    total,\n    failed,\n    timestamp: new Date().toISOString(),\n    message: failed === 0\n      ? ok + '/' + total + ' chunks indexes dans Supabase.'\n      : ok + '/' + total + ' chunks indexes dans Supabase, ' + failed + ' erreurs.',\n    errors,\n  },\n}];",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "ing-008",
+      "name": "Rapport d'ingestion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2368,
+        400
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Déclencheur — toutes les 6h": {
+      "main": [
+        [
+          {
+            "node": "Liste des dossiers à scanner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Liste des dossiers à scanner": {
+      "main": [
+        [
+          {
+            "node": "Lister fichiers du dossier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lister fichiers du dossier": {
+      "main": [
+        [
+          {
+            "node": "Aplatir liste fichiers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aplatir liste fichiers": {
+      "main": [
+        [
+          {
+            "node": "Télécharger contenu fichier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Télécharger contenu fichier": {
+      "main": [
+        [
+          {
+            "node": "Découper en chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Découper en chunks": {
+      "main": [
+        [
+          {
+            "node": "Créer embedding chunk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Créer embedding chunk": {
+      "main": [
+        [
+          {
+            "node": "Préparer payload Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer payload Supabase": {
+      "main": [
+        [
+          {
+            "node": "Insérer dans Supabase (upsert)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insérer dans Supabase (upsert)": {
+      "main": [
+        [
+          {
+            "node": "Rapport d'ingestion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "f86e9f55-ed4b-4f37-8178-0274ac6fc219",
+  "meta": {
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a"
+  },
+  "id": "q6oRJPxlE8ApiNa1",
+  "tags": []
+}
