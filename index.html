@@ -34,9 +34,12 @@
       a[href*="lovable.app"],
       img[src*="lovable"],
       iframe[src*="lovable"],
+      script[src*="lovable"],
       [data-lovable],
       [data-lovable-badge],
+      [id*="lovable"],
       [id*="lovable-badge"],
+      [class*="lovable"],
       [class*="lovable-badge"] {
         display: none !important;
         visibility: hidden !important;
@@ -55,13 +58,43 @@
           'a[href*="lovable.app"]',
           'img[src*="lovable"]',
           'iframe[src*="lovable"]',
+          'script[src*="lovable"]',
           '[data-lovable]',
           '[data-lovable-badge]',
+          '[id*="lovable"]',
           '[id*="lovable-badge"]',
+          '[class*="lovable"]',
           '[class*="lovable-badge"]',
         ];
 
         const LOVABLE_TEXT_PATTERNS = [/made with lovable/i, /built with lovable/i, /edit with lovable/i];
+
+        const hideElement = (element) => {
+          if (!(element instanceof HTMLElement)) return;
+          element.style.setProperty("display", "none", "important");
+          element.style.setProperty("visibility", "hidden", "important");
+          element.style.setProperty("opacity", "0", "important");
+          element.style.setProperty("pointer-events", "none", "important");
+        };
+
+        const findLovableContainer = (node) => {
+          if (!(node instanceof HTMLElement)) return null;
+
+          let current = node;
+          while (current && current !== document.body) {
+            if (LOVABLE_SELECTORS.some((selector) => current.matches(selector))) return current;
+
+            const computedStyle = window.getComputedStyle(current);
+            const text = current.textContent?.trim() ?? "";
+            const isBrandingText = text.length > 0 && LOVABLE_TEXT_PATTERNS.some((pattern) => pattern.test(text));
+            const isFloatingBadge = ["fixed", "sticky"].includes(computedStyle.position);
+
+            if (isBrandingText && isFloatingBadge) return current;
+            current = current.parentElement;
+          }
+
+          return LOVABLE_SELECTORS.some((selector) => node.matches(selector)) ? node : null;
+        };
 
         const shouldRemove = (node) => {
           if (!(node instanceof HTMLElement)) return false;
@@ -75,11 +108,17 @@
           if (!(root instanceof HTMLElement || root instanceof Document)) return;
 
           LOVABLE_SELECTORS.forEach((selector) => {
-            root.querySelectorAll(selector).forEach((element) => element.remove());
+            root.querySelectorAll(selector).forEach((element) => {
+              const container = findLovableContainer(element) ?? element;
+              hideElement(container);
+              container.remove();
+            });
           });
 
           if (root instanceof HTMLElement && shouldRemove(root)) {
-            root.remove();
+            const container = findLovableContainer(root) ?? root;
+            hideElement(container);
+            container.remove();
           }
         };
 
@@ -93,13 +132,20 @@
                 removeLovableBranding(node);
 
                 if (shouldRemove(node)) {
-                  node.remove();
+                  const container = findLovableContainer(node) ?? node;
+                  hideElement(container);
+                  container.remove();
                 }
               });
             });
           });
 
-          observer.observe(document.documentElement, { childList: true, subtree: true });
+          observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ["class", "id", "style", "href", "src", "data-lovable", "data-lovable-badge"],
+          });
         };
 
         if (document.readyState === "loading") {
