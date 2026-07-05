@@ -3,7 +3,7 @@ import { appointmentBookings, buildAppointmentPath, buildPackAwareAuditAccessPat
 
 describe("appointment booking routing", () => {
   it("maps each journey to the expected Calendly link", () => {
-    const sharedBookingLink = "https://calendly.com/marius-ayoro70/devis-quote-preparation-call";
+    const sharedBookingLink = "https://calendly.com/contact-transferai/30min";
 
     expect(appointmentBookings["demande-catalogue"]).toBe(
       sharedBookingLink,

@@ -1,4 +1,4 @@
-const DEFAULT_BOOKING_LINK = "https://calendly.com/marius-ayoro70/devis-quote-preparation-call";
+const DEFAULT_BOOKING_LINK = "https://calendly.com/contact-transferai/30min";
 const DEFAULT_FOLLOWUP_DELAY_HOURS = 20;
 
 export const ACTIVE_WHATSAPP_SEQUENCE_STATUSES = [

@@ -28,7 +28,7 @@ const AUDIT_LOGIN_URL =
 const AUDIT_BOOKING_URL =
   (
     Deno.env.get("PUBLIC_AUDIT_BOOKING_URL") ??
-    "https://calendly.com/marius-ayoro70/devis-quote-preparation-call"
+    "https://calendly.com/contact-transferai/30min"
   ).trim();
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";

@@ -51,7 +51,7 @@ export const directLinks = {
   appointment: "/prise-rdv",
   auditForm: auditRequestUrl,
   auditQuestionnaire: auditQuestionnaireUrl,
-  calendlyBooking: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+  calendlyBooking: "https://calendly.com/contact-transferai/30min",
   map: "https://www.google.com/maps/search/?api=1&query=Nettelecomci%2C+Residence+de+la+Paix%2C+Riviera+3%2C+carrefour+Sainte+Famille%2C+Abidjan%2C+Cote+d%27Ivoire",
 };
 
@@ -67,12 +67,12 @@ export const buildPackAwareAuditAccessPath = (packId?: string | null) => {
 };
 
 export const appointmentBookings: Record<AppointmentSource, string> = {
-  "contact-devis": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
-  "demande-catalogue": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
-  "demande-renseignement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
-  "demande-referencement": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
-  "demande-audit": "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
-  brochure: "https://calendly.com/marius-ayoro70/devis-quote-preparation-call",
+  "contact-devis": "https://calendly.com/contact-transferai/30min",
+  "demande-catalogue": "https://calendly.com/contact-transferai/30min",
+  "demande-renseignement": "https://calendly.com/contact-transferai/30min",
+  "demande-referencement": "https://calendly.com/contact-transferai/30min",
+  "demande-audit": "https://calendly.com/contact-transferai/30min",
+  brochure: "https://calendly.com/contact-transferai/30min",
 };
 
 export const contactDetails = {
