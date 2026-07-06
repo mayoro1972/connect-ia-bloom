@@ -1,0 +1,441 @@
+{
+  "name": "Traduction_Officielle_Internationale_PII_Revamp",
+  "nodes": [
+    {
+      "id": "tr-sec-001",
+      "name": "Webhook - Traduction securisee",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        180,
+        320
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "traduction-officielle-securisee",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "webhookId": "traduction-officielle-securisee"
+    },
+    {
+      "id": "tr-sec-002",
+      "name": "Extraire demande et politique",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst sourceCode = String(body.langue_source || body.source_language || 'fr').trim().slice(0, 2).toUpperCase();\nconst targetCode = String(body.langue_cible || body.target_language || 'en').trim().slice(0, 2).toUpperCase();\nconst langMap = { FR: 'francais', EN: 'anglais', ES: 'espagnol', AR: 'arabe', PT: 'portugais' };\nconst typeDocument = String(body.type_document || body.document_type || 'Document officiel').trim();\nconst sensitivityTriggers = ['visa', 'passeport', 'passport', 'titre de sejour', 'acte', 'naissance', 'diplomatique', 'note verbale', 'accord', 'contrat', 'identite', 'identity'];\nconst typeLower = typeDocument.toLowerCase();\nconst sensitivity = sensitivityTriggers.some((item) => typeLower.includes(item)) ? 'elevee' : 'standard';\n\nreturn [{\n  json: {\n    texte_original: String(body.texte || body.content || body.document_text || '').trim(),\n    langue_source: sourceCode,\n    langue_cible: targetCode,\n    nom_source: langMap[sourceCode] || sourceCode,\n    nom_cible: langMap[targetCode] || targetCode,\n    type_document: typeDocument,\n    demandeur: String(body.demandeur || body.requester_name || '').trim(),\n    organisation: String(body.organisation || body.organization || '').trim(),\n    reference_dossier: String(body.reference_dossier || body.case_reference || '').trim(),\n    email_retour: String(body.email_retour || body.return_email || '').trim(),\n    email_validateur: String(body.email_validateur || body.validator_email || ($env.INTERNAL_REVIEW_EMAIL || '')).trim(),\n    contexte_mission: String(body.contexte_mission || body.mission_context || 'Traduction internationale').trim(),\n    traduction_id: 'TRD-SEC-' + Date.now(),\n    sensibilite: sensitivity,\n    gouvernance: {\n      llm_policy: 'deny-by-default',\n      mode_protection: 'pseudonymisation_locale',\n      validation_humaine_recommandee: sensitivity === 'elevee',\n      conservation_mapping: 'memoire_execution_uniquement'\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "tr-sec-003",
+      "name": "Detecter PII",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst texte = src.texte_original || '';\nconst pii = [];\n\nfunction add(type, value) {\n  const clean = String(value || '').trim();\n  if (!clean) return;\n  if (pii.some((item) => item.type === type && item.valeur.toLowerCase() === clean.toLowerCase())) return;\n  pii.push({ type, valeur: clean });\n}\n\nadd('PERSON', src.demandeur);\nadd('ORG', src.organisation);\nadd('REF', src.reference_dossier);\nadd('EMAIL', src.email_retour);\n\nconst regexMap = [\n  ['EMAIL', /\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b/gi],\n  ['PHONE', /\\+?\\d[\\d\\s().-]{7,}\\d/g],\n  ['PASSPORT', /\\b[A-Z]{1,3}\\d{5,9}\\b/g],\n  ['DATE', /\\b\\d{1,2}[\\/.-]\\d{1,2}[\\/.-]\\d{2,4}\\b/g],\n  ['REF', /\\b(?:REF|DOSSIER|CASE|VISA|FILE)[-_ :]*[A-Z0-9-]{3,}\\b/gi],\n  ['URL', /https?:\\/\\/[^\\s]+/gi]\n];\n\nfor (const [type, regex] of regexMap) {\n  const matches = texte.match(regex) || [];\n  for (const match of matches) add(type, match);\n}\n\nreturn [{\n  json: {\n    ...src,\n    pii_detectes: pii,\n    nb_pii_detectes: pii.length\n  }\n}];"
+      }
+    },
+    {
+      "id": "tr-sec-004",
+      "name": "Pseudonymiser localement",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        940,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst counters = { PERSON: 1, ORG: 1, EMAIL: 1, PHONE: 1, PASSPORT: 1, DATE: 1, REF: 1, URL: 1 };\nconst table = {};\n\nfunction escapeRegex(value) {\n  return String(value).replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n}\n\nfunction tokenFor(type, raw) {\n  const clean = String(raw || '').trim();\n  if (!clean) return null;\n  const existing = Object.entries(table).find(([, value]) => value.toLowerCase() === clean.toLowerCase());\n  if (existing) return existing[0];\n  const key = `${type}_${String(counters[type]++).padStart(3, '0')}`;\n  table[key] = clean;\n  return key;\n}\n\nlet text = String(src.texte_original || '');\n\nfor (const item of src.pii_detectes || []) {\n  const token = tokenFor(item.type, item.valeur);\n  if (!token) continue;\n  text = text.replace(new RegExp(escapeRegex(item.valeur), 'gi'), token);\n}\n\nconst llmAllowedPayload = {\n  llm_policy: 'deny-by-default',\n  traduction_id: src.traduction_id,\n  type_document: src.type_document,\n  contexte_mission: src.contexte_mission,\n  sensibilite: src.sensibilite,\n  langue_source: src.nom_source,\n  langue_cible: src.nom_cible,\n  texte_pseudonymise: text,\n  pii_stats: {\n    count: Object.keys(table).length,\n    categories: Array.from(new Set(Object.keys(table).map((key) => key.split('_')[0])))\n  },\n  blocked_fields: ['demandeur', 'organisation', 'email_retour', 'reference_dossier', 'texte_original']\n};\n\nreturn [{\n  json: {\n    ...src,\n    texte_pseudonymise: text,\n    table_reidentification: table,\n    llm_allowed_payload: llmAllowedPayload\n  }\n}];"
+      }
+    },
+    {
+      "id": "tr-sec-005",
+      "name": "OpenAI - Traduction pseudonymisee",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1220,
+        320
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/responses",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n  model: 'gpt-4.1',\n  store: false,\n  input: [\n    {\n      role: 'system',\n      content: [\n        {\n          type: 'input_text',\n          text: 'Tu es un traducteur expert en documents officiels, administratifs, diplomatiques et migratoires. Tu ne recois qu un texte pseudonymise. Traduis avec precision, sans inventer, sans resumer, sans omettre et sans reformuler les jetons PERSON_001, ORG_001, EMAIL_001, REF_001, PASSPORT_001, DATE_001. Rends uniquement la traduction.'\n        }\n      ]\n    },\n    {\n      role: 'user',\n      content: [\n        {\n          type: 'input_text',\n          text: `Type document: ${$json.type_document}\\nContexte: ${$json.contexte_mission}\\nLangue source: ${$json.nom_source}\\nLangue cible: ${$json.nom_cible}\\n\\nTexte pseudonymise:\\n${$json.texte_pseudonymise}`\n        }\n      ]\n    }\n  ]\n}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-sec-006",
+      "name": "Parser traduction",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nlet text = '';\nfor (const item of response.output || []) {\n  if (item.type !== 'message') continue;\n  for (const content of item.content || []) {\n    if (content.type === 'output_text' && content.text) {\n      text = content.text;\n      break;\n    }\n  }\n  if (text) break;\n}\nif (!text && response.output_text) text = response.output_text;\n\nreturn [{\n  json: {\n    ...$('Pseudonymiser localement').first().json,\n    traduction_pseudonymisee: String(text || '').trim()\n  }\n}];"
+      }
+    },
+    {
+      "id": "tr-sec-007",
+      "name": "OpenAI - Relecture qualite pseudonymisee",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        320
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/responses",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n  model: 'gpt-4.1',\n  store: false,\n  input: [\n    {\n      role: 'system',\n      content: [\n        {\n          type: 'input_text',\n          text: 'Tu es un relecteur expert en traduction officielle. Evalue la qualite de la traduction pseudonymisee. Retourne uniquement un JSON strict avec les cles: score_qualite, validation, note_globale, risques, corrections_suggerees.'\n        }\n      ]\n    },\n    {\n      role: 'user',\n      content: [\n        {\n          type: 'input_text',\n          text: `Type document: ${$json.type_document}\\nOriginal pseudonymise:\\n${$json.texte_pseudonymise}\\n\\nTraduction pseudonymisee:\\n${$json.traduction_pseudonymisee}`\n        }\n      ]\n    }\n  ],\n  text: {\n    format: {\n      type: 'json_schema',\n      name: 'translation_quality_review',\n      strict: true,\n      schema: {\n        type: 'object',\n        additionalProperties: false,\n        required: ['score_qualite', 'validation', 'note_globale', 'risques', 'corrections_suggerees'],\n        properties: {\n          score_qualite: { type: 'number' },\n          validation: { type: 'boolean' },\n          note_globale: { type: 'string' },\n          risques: { type: 'array', items: { type: 'string' } },\n          corrections_suggerees: {\n            type: 'array',\n            items: {\n              type: 'object',\n              additionalProperties: false,\n              required: ['segment', 'correction', 'raison'],\n              properties: {\n                segment: { type: 'string' },\n                correction: { type: 'string' },\n                raison: { type: 'string' }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-sec-008",
+      "name": "Parser relecture",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nlet raw = '';\nfor (const item of response.output || []) {\n  if (item.type !== 'message') continue;\n  for (const content of item.content || []) {\n    if (content.type === 'output_text' && content.text) {\n      raw = content.text;\n      break;\n    }\n  }\n  if (raw) break;\n}\nif (!raw && response.output_text) raw = response.output_text;\n\nlet parsed = {};\ntry {\n  parsed = JSON.parse(raw || '{}');\n} catch (error) {\n  parsed = {\n    score_qualite: 0,\n    validation: false,\n    note_globale: 'Impossible de parser la relecture',\n    risques: ['Parser JSON echec'],\n    corrections_suggerees: []\n  };\n}\n\nreturn [{\n  json: {\n    ...$('Parser traduction').first().json,\n    revue_qualite: parsed\n  }\n}];"
+      }
+    },
+    {
+      "id": "tr-sec-009",
+      "name": "Reidentifier et assembler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst review = src.revue_qualite || {};\nlet traduction = String(src.traduction_pseudonymisee || '');\nconst table = src.table_reidentification || {};\n\nfor (const [token, value] of Object.entries(table)) {\n  traduction = traduction.replaceAll(token, value);\n}\n\nconst date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });\nconst reviewRequired = Boolean(src.sensibilite === 'elevee' || !review.validation || Number(review.score_qualite || 0) < 96);\nconst status = reviewRequired ? 'pending_validation' : 'ready_to_send';\n\nconst correctionsHtml = (Array.isArray(review.corrections_suggerees) ? review.corrections_suggerees : [])\n  .slice(0, 8)\n  .map((item) => `<li><strong>${item.segment || 'Segment'}</strong> : ${item.correction || ''} <em>(${item.raison || ''})</em></li>`)\n  .join('') || '<li>Aucune correction majeure suggeree.</li>';\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:960px;margin:0 auto;padding:32px;color:#1f2937\">\n  <div style=\"background:#10263F;color:white;padding:20px 24px;border-radius:8px 8px 0 0\">\n    <h2 style=\"margin:0 0 8px 0\">Traduction internationale securisee - ${src.type_document}</h2>\n    <p style=\"margin:4px 0;opacity:0.88\">Reference ${src.traduction_id} - ${date}</p>\n    <p style=\"margin:4px 0;opacity:0.88\">PII proteges localement : ${Object.keys(table).length} - Score qualite : ${review.score_qualite || 'N/A'}/100</p>\n  </div>\n  <div style=\"border:1px solid #d7dee7;border-top:none;padding:18px 24px;background:#f8fafc\">\n    <strong>Gouvernance :</strong> Les donnees personnelles ont ete pseudonymisees avant appel au modele. La reidentification a ete effectuee localement dans le workflow n8n.\n  </div>\n  <table style=\"width:100%;border-collapse:collapse\">\n    <tr>\n      <td style=\"width:50%;vertical-align:top;padding:22px;border:1px solid #d7dee7;background:#f8fafc\">\n        <h3 style=\"margin-top:0;color:#10263F\">${src.nom_source.toUpperCase()}</h3>\n        <div style=\"line-height:1.75;white-space:pre-wrap\">${src.texte_original}</div>\n      </td>\n      <td style=\"width:50%;vertical-align:top;padding:22px;border:1px solid #d7dee7\">\n        <h3 style=\"margin-top:0;color:#10263F\">${src.nom_cible.toUpperCase()}</h3>\n        <div style=\"line-height:1.75;white-space:pre-wrap\">${traduction}</div>\n      </td>\n    </tr>\n  </table>\n  <div style=\"margin-top:18px;padding:18px;border:1px solid #d7dee7;border-radius:8px;background:#ffffff\">\n    <h3 style=\"margin-top:0;color:#10263F\">Note de relecture</h3>\n    <p style=\"margin:0 0 8px 0\">${review.note_globale || 'Aucune note disponible.'}</p>\n    <ul>${correctionsHtml}</ul>\n    <p style=\"font-size:12px;color:#6b7280;margin-bottom:0\">Validation humaine ${reviewRequired ? 'requise avant diffusion externe' : 'recommandee selon votre politique interne'}.</p>\n  </div>\n</div>`;\n\nreturn [{\n  json: {\n    ...src,\n    texte_traduit: traduction,\n    document_html: html,\n    review_required: reviewRequired,\n    delivery_status: status,\n    pii_protected_count: Object.keys(table).length\n  }\n}];"
+      }
+    },
+    {
+      "id": "tr-sec-010",
+      "name": "Validation requise ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2540,
+        320
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.review_required }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "tr-sec-011",
+      "name": "Envoyer au validateur",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2800,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{\n  {\n    \"from\": $env.OUTREACH_FROM_EMAIL || \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_validateur || $env.INTERNAL_REVIEW_EMAIL || \"ops@transferai.ci\" ],\n    \"subject\": \"[VALIDATION REQUISE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": $json.document_html\n  }\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-sec-012",
+      "name": "Envoyer au client",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2800,
+        420
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{\n  {\n    \"from\": $env.OUTREACH_FROM_EMAIL || \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION SECURISEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": $json.document_html\n  }\n}}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-sec-013",
+      "name": "Purger mapping sensible",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3060,
+        320
+      ],
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nreturn [{\n  json: {\n    traduction_id: src.traduction_id,\n    delivery_status: src.delivery_status,\n    review_required: src.review_required,\n    purge_effectuee: true,\n    purge_timestamp: new Date().toISOString(),\n    pii_protected_count: src.pii_protected_count,\n    score_qualite: src.revue_qualite?.score_qualite || null\n  }\n}];"
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook - Traduction securisee": {
+      "main": [
+        [
+          {
+            "node": "Extraire demande et politique",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraire demande et politique": {
+      "main": [
+        [
+          {
+            "node": "Detecter PII",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detecter PII": {
+      "main": [
+        [
+          {
+            "node": "Pseudonymiser localement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pseudonymiser localement": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Traduction pseudonymisee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Traduction pseudonymisee": {
+      "main": [
+        [
+          {
+            "node": "Parser traduction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser traduction": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Relecture qualite pseudonymisee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Relecture qualite pseudonymisee": {
+      "main": [
+        [
+          {
+            "node": "Parser relecture",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser relecture": {
+      "main": [
+        [
+          {
+            "node": "Reidentifier et assembler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reidentifier et assembler": {
+      "main": [
+        [
+          {
+            "node": "Validation requise ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validation requise ?": {
+      "main": [
+        [
+          {
+            "node": "Envoyer au validateur",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Envoyer au client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer au validateur": {
+      "main": [
+        [
+          {
+            "node": "Purger mapping sensible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer au client": {
+      "main": [
+        [
+          {
+            "node": "Purger mapping sensible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "Workflow exportable n8n - traduction officielle internationale avec detection PII, pseudonymisation locale, traduction pseudonymisee, reidentification locale et validation humaine pour documents sensibles."
+  },
+  "tags": []
+}
