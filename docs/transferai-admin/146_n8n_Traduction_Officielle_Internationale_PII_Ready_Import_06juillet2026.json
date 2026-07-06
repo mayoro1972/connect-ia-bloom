@@ -58,6 +58,47 @@
       "notes": "Si un email contient plusieurs pieces jointes, seule la 1ere (piece_jointe_binary_key) est traitee ici. Dupliquer le noeud OCR + Drive pour traiter les autres si besoin."
     },
     {
+      "id": "tr-sec-027",
+      "name": "Piece jointe presente ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        550,
+        700
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.nb_pieces_jointes }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "notes": "Garde-fou : la boite mail du cabinet recoit aussi des emails sans rapport avec la traduction (notifications CRM, etc.). Sans ce filtre, tout email sans piece jointe fait planter le noeud OCR en aval. Ici, on ignore proprement ces emails au lieu de generer une erreur d'execution."
+    },
+    {
+      "id": "tr-sec-028",
+      "name": "Ignorer - Email sans piece jointe",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        550,
+        860
+      ],
+      "parameters": {},
+      "notes": "Fin de chaine normale pour les emails sans piece jointe exploitable (pas une erreur)."
+    },
+    {
       "id": "tr-sec-022",
       "name": "Deposer sur Google Drive - Dossier entrant",
       "type": "n8n-nodes-base.googleDrive",
@@ -116,13 +157,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/responses",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -139,6 +178,12 @@
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "OpenAI API Key (Header Auth)"
         }
       }
     },
@@ -179,7 +224,7 @@
         320
       ],
       "parameters": {
-        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst sourceCode = String(body.langue_source || body.source_language || 'fr').trim().slice(0, 2).toUpperCase();\nconst targetCode = String(body.langue_cible || body.target_language || 'en').trim().slice(0, 2).toUpperCase();\nconst langMap = { FR: 'francais', EN: 'anglais', ES: 'espagnol', AR: 'arabe', PT: 'portugais' };\nconst typeDocument = String(body.type_document || body.document_type || 'Document officiel').trim();\nconst sensitivityTriggers = ['visa', 'passeport', 'passport', 'titre de sejour', 'acte', 'naissance', 'diplomatique', 'note verbale', 'accord', 'contrat', 'identite', 'identity'];\nconst typeLower = typeDocument.toLowerCase();\nconst sensitivity = sensitivityTriggers.some((item) => typeLower.includes(item)) ? 'elevee' : 'standard';\n\nreturn [{\n  json: {\n    texte_original: String(body.texte || body.content || body.document_text || '').trim(),\n    langue_source: sourceCode,\n    langue_cible: targetCode,\n    nom_source: langMap[sourceCode] || sourceCode,\n    nom_cible: langMap[targetCode] || targetCode,\n    type_document: typeDocument,\n    demandeur: String(body.demandeur || body.requester_name || '').trim(),\n    organisation: String(body.organisation || body.organization || '').trim(),\n    reference_dossier: String(body.reference_dossier || body.case_reference || '').trim(),\n    email_retour: String(body.email_retour || body.return_email || '').trim(),\n    email_validateur: String(body.email_validateur || body.validator_email || ($env.INTERNAL_REVIEW_EMAIL || '')).trim(),\n    nom_expert: String(body.nom_expert || body.expert_name || 'Expert traducteur TransferAI').trim(),\n    email_secretariat: String(body.email_secretariat || ($env.SECRETARIAT_EMAIL || 'secretariat@transferai.ci')).trim(),\n    contexte_mission: String(body.contexte_mission || body.mission_context || 'Traduction internationale').trim(),\n    traduction_id: 'TRD-SEC-' + Date.now(),\n    sensibilite: sensitivity,\n    gouvernance: {\n      llm_policy: 'deny-by-default',\n      mode_protection: 'pseudonymisation_locale',\n      validation_humaine_recommandee: sensitivity === 'elevee',\n      conservation_mapping: 'memoire_execution_uniquement'\n    }\n  }\n}];"
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst sourceCode = String(body.langue_source || body.source_language || 'fr').trim().slice(0, 2).toUpperCase();\nconst targetCode = String(body.langue_cible || body.target_language || 'en').trim().slice(0, 2).toUpperCase();\nconst langMap = { FR: 'francais', EN: 'anglais', ES: 'espagnol', AR: 'arabe', PT: 'portugais' };\nconst typeDocument = String(body.type_document || body.document_type || 'Document officiel').trim();\nconst sensitivityTriggers = ['visa', 'passeport', 'passport', 'titre de sejour', 'acte', 'naissance', 'diplomatique', 'note verbale', 'accord', 'contrat', 'identite', 'identity'];\nconst typeLower = typeDocument.toLowerCase();\nconst sensitivity = sensitivityTriggers.some((item) => typeLower.includes(item)) ? 'elevee' : 'standard';\n\nreturn [{\n  json: {\n    texte_original: String(body.texte || body.content || body.document_text || '').trim(),\n    langue_source: sourceCode,\n    langue_cible: targetCode,\n    nom_source: langMap[sourceCode] || sourceCode,\n    nom_cible: langMap[targetCode] || targetCode,\n    type_document: typeDocument,\n    demandeur: String(body.demandeur || body.requester_name || '').trim(),\n    organisation: String(body.organisation || body.organization || '').trim(),\n    reference_dossier: String(body.reference_dossier || body.case_reference || '').trim(),\n    email_retour: String(body.email_retour || body.return_email || '').trim(),\n    email_validateur: String(body.email_validateur || body.validator_email || 'ops@transferai.ci').trim(),\n    nom_expert: String(body.nom_expert || body.expert_name || 'Expert traducteur TransferAI').trim(),\n    email_secretariat: String(body.email_secretariat || 'secretariat@transferai.ci').trim(),\n    contexte_mission: String(body.contexte_mission || body.mission_context || 'Traduction internationale').trim(),\n    traduction_id: 'TRD-SEC-' + Date.now(),\n    sensibilite: sensitivity,\n    gouvernance: {\n      llm_policy: 'deny-by-default',\n      mode_protection: 'pseudonymisation_locale',\n      validation_humaine_recommandee: sensitivity === 'elevee',\n      conservation_mapping: 'memoire_execution_uniquement'\n    }\n  }\n}];"
       }
     },
     {
@@ -220,13 +265,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/responses",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -243,6 +286,12 @@
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "OpenAI API Key (Header Auth)"
         }
       }
     },
@@ -271,13 +320,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/responses",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -294,6 +341,12 @@
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "OpenAI API Key (Header Auth)"
         }
       }
     },
@@ -361,8 +414,9 @@
         180
       ],
       "parameters": {
-        "jsCode": "const src = $input.first().json;\nconst baseResume = $execution.resumeUrl || (($env.N8N_BASE_URL || 'https://n8n.transferai.ci') + '/webhook-waiting/' + $execution.id);\n\nreturn [{\n  json: {\n    ...src,\n    lien_approbation: baseResume + '?decision=approuve',\n    lien_rejet: baseResume + '?decision=rejete'\n  }\n}];"
-      }
+        "jsCode": "const src = $input.first().json;\nconst baseResume = $execution.resumeUrl || ('https://A-REMPLACER-PAR-VOTRE-DOMAINE-N8N.exemple/webhook-waiting/' + $execution.id);\n\nreturn [{\n  json: {\n    ...src,\n    lien_approbation: baseResume + '?decision=approuve',\n    lien_rejet: baseResume + '?decision=rejete'\n  }\n}];"
+      },
+      "notes": "Si `$execution.resumeUrl` n'est pas disponible sur votre version de n8n, remplacez 'https://A-REMPLACER-PAR-VOTRE-DOMAINE-N8N.exemple' ci-dessus par le vrai domaine de votre instance n8n."
     },
     {
       "id": "tr-sec-011",
@@ -376,13 +430,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -391,13 +443,19 @@
         },
         "sendBody": true,
         "contentType": "json",
-        "body": "={{\n  {\n    \"from\": $env.OUTREACH_FROM_EMAIL || \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_validateur || $env.INTERNAL_REVIEW_EMAIL || \"ops@transferai.ci\" ],\n    \"subject\": \"[VALIDATION EXPERT REQUISE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<div style='font-family:Arial,sans-serif;max-width:640px;margin:0 auto'>\" + \"<p>A l'attention de <strong>\" + $json.nom_expert + \"</strong>,</p>\" + \"<p>Une traduction necessite votre validation avant certification et envoi par le secretariat.</p>\" + $json.document_html + \"<div style='margin-top:20px;text-align:center'>\" + \"<a href='\" + $json.lien_approbation + \"' style='background:#10263F;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;margin-right:12px;display:inline-block'>Valider et certifier</a>\" + \"<a href='\" + $json.lien_rejet + \"' style='background:#b91c1c;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;display:inline-block'>Rejeter - revision necessaire</a>\" + \"</div>\" + \"</div>\"\n  }\n}}",
+        "body": "={{\n  {\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_validateur || \"ops@transferai.ci\" ],\n    \"subject\": \"[VALIDATION EXPERT REQUISE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<div style='font-family:Arial,sans-serif;max-width:640px;margin:0 auto'>\" + \"<p>A l'attention de <strong>\" + $json.nom_expert + \"</strong>,</p>\" + \"<p>Une traduction necessite votre validation avant certification et envoi par le secretariat.</p>\" + $json.document_html + \"<div style='margin-top:20px;text-align:center'>\" + \"<a href='\" + $json.lien_approbation + \"' style='background:#10263F;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;margin-right:12px;display:inline-block'>Valider et certifier</a>\" + \"<a href='\" + $json.lien_rejet + \"' style='background:#b91c1c;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;display:inline-block'>Rejeter - revision necessaire</a>\" + \"</div>\" + \"</div>\"\n  }\n}}",
         "options": {
           "response": {
             "response": {
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "Resend API Key (Header Auth)"
         }
       }
     },
@@ -469,13 +527,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -484,13 +540,19 @@
         },
         "sendBody": true,
         "contentType": "json",
-        "body": "={{\n  {\n    \"from\": $env.SECRETARIAT_FROM_EMAIL || \"Secretariat TransferAI International <secretariat@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION CERTIFIEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<p>Traduction validee et certifiee par <strong>\" + $json.nom_expert + \"</strong>, envoyee par le secretariat TransferAI International.</p>\" + $json.document_html\n  }\n}}",
+        "body": "={{\n  {\n    \"from\": \"Secretariat TransferAI International <secretariat@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION CERTIFIEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<p>Traduction validee et certifiee par <strong>\" + $json.nom_expert + \"</strong>, envoyee par le secretariat TransferAI International.</p>\" + $json.document_html\n  }\n}}",
         "options": {
           "response": {
             "response": {
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "Resend API Key (Header Auth)"
         }
       }
     },
@@ -506,13 +568,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -521,13 +581,19 @@
         },
         "sendBody": true,
         "contentType": "json",
-        "body": "={{\n  {\n    \"from\": $env.OUTREACH_FROM_EMAIL || \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_secretariat || $json.email_validateur || $env.INTERNAL_REVIEW_EMAIL || \"ops@transferai.ci\" ],\n    \"subject\": \"[REJETE] Revision necessaire - \" + $json.type_document + \" - \" + $json.traduction_id,\n    \"html\": \"<p>La traduction \" + $json.traduction_id + \" a ete rejetee par l'expert <strong>\" + $json.nom_expert + \"</strong> et necessite une revision avant tout envoi au client. Le document n'a pas ete transmis au destinataire final.</p>\"\n  }\n}}",
+        "body": "={{\n  {\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_secretariat || $json.email_validateur || \"ops@transferai.ci\" ],\n    \"subject\": \"[REJETE] Revision necessaire - \" + $json.type_document + \" - \" + $json.traduction_id,\n    \"html\": \"<p>La traduction \" + $json.traduction_id + \" a ete rejetee par l'expert <strong>\" + $json.nom_expert + \"</strong> et necessite une revision avant tout envoi au client. Le document n'a pas ete transmis au destinataire final.</p>\"\n  }\n}}",
         "options": {
           "response": {
             "response": {
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "Resend API Key (Header Auth)"
         }
       }
     },
@@ -543,13 +609,11 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -558,13 +622,19 @@
         },
         "sendBody": true,
         "contentType": "json",
-        "body": "={{\n  {\n    \"from\": $env.OUTREACH_FROM_EMAIL || \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION SECURISEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": $json.document_html\n  }\n}}",
+        "body": "={{\n  {\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION SECURISEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": $json.document_html\n  }\n}}",
         "options": {
           "response": {
             "response": {
               "neverError": true
             }
           }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_APRES_IMPORT",
+          "name": "Resend API Key (Header Auth)"
         }
       }
     },
@@ -610,12 +680,30 @@
       "main": [
         [
           {
+            "node": "Piece jointe presente ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Piece jointe presente ?": {
+      "main": [
+        [
+          {
             "node": "Deposer sur Google Drive - Dossier entrant",
             "type": "main",
             "index": 0
           },
           {
             "node": "Preparer OCR - Encoder document",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ignorer - Email sans piece jointe",
             "type": "main",
             "index": 0
           }
