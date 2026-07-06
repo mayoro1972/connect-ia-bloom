@@ -13,7 +13,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "traduction-officielle-securisee",
-        "responseMode": "onReceived",
+        "responseMode": "lastNode",
         "options": {}
       },
       "webhookId": "traduction-officielle-securisee"
@@ -442,8 +442,9 @@
           ]
         },
         "sendBody": true,
-        "contentType": "json",
-        "body": "={{\n  {\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_validateur || \"ops@transferai.ci\" ],\n    \"subject\": \"[VALIDATION EXPERT REQUISE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<div style='font-family:Arial,sans-serif;max-width:640px;margin:0 auto'>\" + \"<p>A l'attention de <strong>\" + $json.nom_expert + \"</strong>,</p>\" + \"<p>Une traduction necessite votre validation avant certification et envoi par le secretariat.</p>\" + $json.document_html + \"<div style='margin-top:20px;text-align:center'>\" + \"<a href='\" + $json.lien_approbation + \"' style='background:#10263F;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;margin-right:12px;display:inline-block'>Valider et certifier</a>\" + \"<a href='\" + $json.lien_rejet + \"' style='background:#b91c1c;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;display:inline-block'>Rejeter - revision necessaire</a>\" + \"</div>\" + \"</div>\"\n  }\n}}",
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_validateur || \"ops@transferai.ci\" ],\n    \"subject\": \"[VALIDATION EXPERT REQUISE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<div style='font-family:Arial,sans-serif;max-width:640px;margin:0 auto'>\" + \"<p>A l'attention de <strong>\" + $json.nom_expert + \"</strong>,</p>\" + \"<p>Une traduction necessite votre validation avant certification et envoi par le secretariat.</p>\" + $json.document_html + \"<div style='margin-top:20px;text-align:center'>\" + \"<a href='\" + $json.lien_approbation + \"' style='background:#10263F;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;margin-right:12px;display:inline-block'>Valider et certifier</a>\" + \"<a href='\" + $json.lien_rejet + \"' style='background:#b91c1c;color:#fff;padding:12px 22px;border-radius:6px;text-decoration:none;display:inline-block'>Rejeter - revision necessaire</a>\" + \"</div>\" + \"</div>\"\n  }) }}",
         "options": {
           "response": {
             "response": {
@@ -539,8 +540,9 @@
           ]
         },
         "sendBody": true,
-        "contentType": "json",
-        "body": "={{\n  {\n    \"from\": \"Secretariat TransferAI International <secretariat@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION CERTIFIEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<p>Traduction validee et certifiee par <strong>\" + $json.nom_expert + \"</strong>, envoyee par le secretariat TransferAI International.</p>\" + $json.document_html\n  }\n}}",
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n    \"from\": \"Secretariat TransferAI International <secretariat@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION CERTIFIEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": \"<p>Traduction validee et certifiee par <strong>\" + $json.nom_expert + \"</strong>, envoyee par le secretariat TransferAI International.</p>\" + $json.document_html\n  }) }}",
         "options": {
           "response": {
             "response": {
@@ -580,8 +582,9 @@
           ]
         },
         "sendBody": true,
-        "contentType": "json",
-        "body": "={{\n  {\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_secretariat || $json.email_validateur || \"ops@transferai.ci\" ],\n    \"subject\": \"[REJETE] Revision necessaire - \" + $json.type_document + \" - \" + $json.traduction_id,\n    \"html\": \"<p>La traduction \" + $json.traduction_id + \" a ete rejetee par l'expert <strong>\" + $json.nom_expert + \"</strong> et necessite une revision avant tout envoi au client. Le document n'a pas ete transmis au destinataire final.</p>\"\n  }\n}}",
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_secretariat || $json.email_validateur || \"ops@transferai.ci\" ],\n    \"subject\": \"[REJETE] Revision necessaire - \" + $json.type_document + \" - \" + $json.traduction_id,\n    \"html\": \"<p>La traduction \" + $json.traduction_id + \" a ete rejetee par l'expert <strong>\" + $json.nom_expert + \"</strong> et necessite une revision avant tout envoi au client. Le document n'a pas ete transmis au destinataire final.</p>\"\n  }) }}",
         "options": {
           "response": {
             "response": {
@@ -621,8 +624,9 @@
           ]
         },
         "sendBody": true,
-        "contentType": "json",
-        "body": "={{\n  {\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION SECURISEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": $json.document_html\n  }\n}}",
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n    \"from\": \"TransferAI <contact@transferai.ci>\",\n    \"to\": [ $json.email_retour ],\n    \"subject\": \"[TRADUCTION SECURISEE] \" + $json.type_document + \" - \" + $json.nom_source + \" vers \" + $json.nom_cible + \" - \" + $json.traduction_id,\n    \"html\": $json.document_html\n  }) }}",
         "options": {
           "response": {
             "response": {
