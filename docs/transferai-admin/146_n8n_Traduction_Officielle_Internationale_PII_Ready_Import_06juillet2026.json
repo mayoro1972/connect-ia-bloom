@@ -78,7 +78,7 @@
         "folderId": {
           "__rl": true,
           "mode": "id",
-          "value": "={{ $env.GDRIVE_DOSSIER_ENTRANT_ID || 'A_REMPLACER_PAR_ID_DOSSIER_DRIVE' }}"
+          "value": "1Psjhy2-2RYJxukFJiWey1osukR2ygk9A"
         },
         "inputDataFieldName": "={{ $json.piece_jointe_binary_key }}",
         "options": {}
@@ -89,7 +89,7 @@
           "name": "Google Drive TransferAI"
         }
       },
-      "notes": "A CONFIGURER : credentials Google Drive + ID du dossier Drive de depot (GDRIVE_DOSSIER_ENTRANT_ID). Archive le document scanne tel que recu, avant toute traduction."
+      "notes": "A CONFIGURER : credentials Google Drive. ID du dossier de depot code en dur (1Psjhy2-2RYJxukFJiWey1osukR2ygk9A = Documents_Clients_Entrants_CONFIDENTIEL, dossier dedie cree specifiquement pour ce workflow, hors de l'arborescence 'Base documentaire RAG' 1wAEiJ-X8Wi-b3rPe290gjeY3GqcbZTOH et de ses 8 sous-dossiers surveilles par le pipeline d'ingestion RAG). NE JAMAIS pointer ce champ vers l'un des dossiers RAG : les documents deposes ici contiennent des donnees personnelles reelles (passeports, actes, diplomes) qui ne doivent pas etre ingerees dans la base RAG customer-facing. Archive le document scanne tel que recu, avant toute traduction."
     },
     {
       "id": "tr-sec-023",
