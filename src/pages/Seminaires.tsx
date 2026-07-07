@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, CheckCircle2, Clock, Globe, Loader2, MapPin, Play, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle2, Clock, Download, Globe, Loader2, MapPin, Play, Sparkles, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import AnimatedLogoWatermarks from "@/components/AnimatedLogoWatermarks";
 import Footer from "@/components/Footer";
@@ -34,6 +34,10 @@ const liveFormatsCopy = {
     replayBannerDesc:
       "Retrouvez tous nos replays et masterclasses dans notre médiathèque éditoriale.",
     replayBannerCta: "Voir tous les replays",
+    charterBannerTitle: "Charte IA remise en formation",
+    charterBannerDesc:
+      "Téléchargez la Charte d'utilisation responsable de l'intelligence artificielle, livrée aux décideurs et dirigeants lors de nos sessions.",
+    charterBannerCta: "Télécharger la charte (.docx)",
     register: "Demander ma place",
     loadingMsg: "Chargement du programme du cycle…",
     emptyMsg: "Le prochain cycle de séminaires sera publié sous peu. Revenez très vite.",
@@ -66,6 +70,10 @@ const liveFormatsCopy = {
     replayBannerDesc:
       "Find all our replays and masterclasses in the editorial media hub.",
     replayBannerCta: "Browse all replays",
+    charterBannerTitle: "AI charter handed out in training",
+    charterBannerDesc:
+      "Download the Responsible AI Usage Charter, given to executives and decision-makers during our sessions.",
+    charterBannerCta: "Download the charter (.docx)",
     register: "Request my seat",
     loadingMsg: "Loading the current cycle…",
     emptyMsg: "The next cycle will be published shortly. Check back soon.",
@@ -287,6 +295,27 @@ const Seminaires = () => {
                 >
                   {copy.replayBannerCta} <ArrowRight size={14} />
                 </Link>
+              </div>
+            </div>
+
+            <div className="mb-16 rounded-3xl border border-primary/20 bg-primary/5 p-6 md:p-8">
+              <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Download size={22} />
+                  </div>
+                  <div>
+                    <h2 className="font-heading text-xl font-bold text-foreground">{copy.charterBannerTitle}</h2>
+                    <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{copy.charterBannerDesc}</p>
+                  </div>
+                </div>
+                <a
+                  href="/downloads/Charte_IA_Utilisation_Responsable_TransferAI.docx"
+                  download
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  {copy.charterBannerCta} <Download size={14} />
+                </a>
               </div>
             </div>
 
