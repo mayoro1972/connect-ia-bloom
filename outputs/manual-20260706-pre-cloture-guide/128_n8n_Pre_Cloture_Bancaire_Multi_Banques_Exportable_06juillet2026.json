@@ -1,0 +1,490 @@
+{
+  "name": "Pre_Cloture_Bancaire_Multi_Banques_Validation_Humaine",
+  "nodes": [
+    {
+      "id": "pcb-001",
+      "name": "Trigger manuel",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        180
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "pcb-002",
+      "name": "Webhook - Donnees pre-cloture",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        160,
+        380
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pre-cloture-bancaire-upload",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "webhookId": "pre-cloture-bancaire-upload"
+    },
+    {
+      "id": "pcb-003",
+      "name": "Jeu de donnees demo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        180
+      ],
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    source: 'demo',\n    entity: 'Banque participante - Direction financiere',\n    report_period: 'Juin 2026',\n    currency: 'FCFA',\n    manager_email: 'controle.financier@banque.com',\n    recipients: [\n      'controle.financier@banque.com',\n      'comptabilite@banque.com',\n      'audit.interne@banque.com'\n    ],\n    rules: {\n      absolute_variation_threshold: 10000000,\n      relative_variation_threshold: 0.15\n    },\n    rows: [\n      {\n        account_code: '512000',\n        account_label: 'Banque principale',\n        current_amount: 325000000,\n        previous_amount: 282000000,\n        support_required: true,\n        support_received: true,\n        owner: 'Tresorerie'\n      },\n      {\n        account_code: '471200',\n        account_label: 'Compte d attente operations cartes',\n        current_amount: 18900000,\n        previous_amount: 4200000,\n        support_required: true,\n        support_received: false,\n        owner: 'Operations bancaires'\n      },\n      {\n        account_code: '616300',\n        account_label: 'Frais reseau et teletransmission',\n        current_amount: 28400000,\n        previous_amount: 29100000,\n        support_required: false,\n        support_received: false,\n        owner: 'Back office'\n      },\n      {\n        account_code: '445700',\n        account_label: 'TVA a regulariser',\n        current_amount: 21700000,\n        previous_amount: 7600000,\n        support_required: true,\n        support_received: false,\n        owner: 'Comptabilite fiscale'\n      },\n      {\n        account_code: '628100',\n        account_label: 'Charges diverses a justifier',\n        current_amount: 9600000,\n        previous_amount: 1180000,\n        support_required: true,\n        support_received: false,\n        owner: 'Comptabilite generale'\n      }\n    ]\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-004",
+      "name": "Normaliser entree webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        380
+      ],
+      "parameters": {
+        "jsCode": "const input = $input.first().json.body || $input.first().json;\nconst rows = Array.isArray(input.rows) ? input.rows : [];\n\nfunction parseBool(value, fallback) {\n  if (value === undefined || value === null || value === '') return fallback;\n  if (typeof value === 'boolean') return value;\n  const normalized = String(value).toLowerCase().trim();\n  if (['true', '1', 'oui', 'yes'].includes(normalized)) return true;\n  if (['false', '0', 'non', 'no'].includes(normalized)) return false;\n  return fallback;\n}\n\nreturn [{\n  json: {\n    source: 'webhook',\n    entity: input.entity || 'Banque participante - Direction financiere',\n    report_period: input.report_period || new Date().toLocaleDateString('fr-FR'),\n    currency: input.currency || 'FCFA',\n    manager_email: input.manager_email || ($env.INTERNAL_REVIEW_EMAIL || 'controle.financier@banque.com'),\n    recipients: Array.isArray(input.recipients) && input.recipients.length ? input.recipients : ['controle.financier@banque.com'],\n    rules: {\n      absolute_variation_threshold: Number(input.absolute_variation_threshold || 10000000),\n      relative_variation_threshold: Number(input.relative_variation_threshold || 0.15)\n    },\n    rows: rows.map((row) => ({\n      account_code: row.account_code || row.compte || '',\n      account_label: row.account_label || row.libelle || '',\n      current_amount: Number(row.current_amount || row.solde_actuel || 0),\n      previous_amount: Number(row.previous_amount || row.solde_precedent || 0),\n      support_required: parseBool(row.support_required ?? row.justificatif_requis, true),\n      support_received: parseBool(row.support_received ?? row.justificatif_recu, false),\n      owner: row.owner || row.responsable || 'Equipe finance'\n    }))\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-005",
+      "name": "Detecter ecarts et priorites",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        280
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst rows = Array.isArray(data.rows) ? data.rows : [];\nconst absThreshold = Number(data.rules?.absolute_variation_threshold || 10000000);\nconst relThreshold = Number(data.rules?.relative_variation_threshold || 0.15);\n\nfunction pct(current, previous) {\n  if (!previous) return current === 0 ? 0 : 1;\n  return (current - previous) / Math.abs(previous);\n}\n\nfunction formatMoney(value) {\n  return new Intl.NumberFormat('fr-FR').format(Number(value || 0));\n}\n\nconst anomalies = rows.map((row) => {\n  const current = Number(row.current_amount || 0);\n  const previous = Number(row.previous_amount || 0);\n  const absoluteVariation = current - previous;\n  const relativeVariation = pct(current, previous);\n  const missingSupport = Boolean(row.support_required) && !Boolean(row.support_received);\n  const thresholdBreach = Math.abs(absoluteVariation) >= absThreshold || Math.abs(relativeVariation) >= relThreshold;\n\n  let severity = 'faible';\n  if ((missingSupport && thresholdBreach) || Math.abs(relativeVariation) >= 0.4) {\n    severity = 'elevee';\n  } else if (missingSupport || thresholdBreach) {\n    severity = 'moyenne';\n  }\n\n  return {\n    ...row,\n    absolute_variation: absoluteVariation,\n    relative_variation: relativeVariation,\n    missing_support: missingSupport,\n    threshold_breach: thresholdBreach,\n    severity,\n    observation: [\n      thresholdBreach ? `Variation de ${formatMoney(absoluteVariation)} ${data.currency || 'FCFA'} (${(relativeVariation * 100).toFixed(1)} %).` : null,\n      missingSupport ? 'Justificatif manquant.' : null\n    ].filter(Boolean).join(' ')\n  };\n}).filter((item) => item.threshold_breach || item.missing_support);\n\nconst priorityRank = { elevee: 3, moyenne: 2, faible: 1 };\nanomalies.sort((a, b) => (priorityRank[b.severity] || 0) - (priorityRank[a.severity] || 0) || Math.abs(b.absolute_variation) - Math.abs(a.absolute_variation));\n\nconst grouped = {\n  now: anomalies.filter((item) => item.severity === 'elevee'),\n  review: anomalies.filter((item) => item.severity === 'moyenne'),\n  wait: anomalies.filter((item) => item.severity === 'faible')\n};\n\nreturn [{\n  json: {\n    ...data,\n    anomalies,\n    anomaly_count: anomalies.length,\n    high_priority_count: grouped.now.length,\n    review_count: grouped.review.length,\n    wait_count: grouped.wait.length,\n    grouped,\n    kpi: {\n      rows_analyzed: rows.length,\n      anomalies_detected: anomalies.length,\n      high_priority_count: grouped.now.length,\n      missing_support_count: anomalies.filter((item) => item.missing_support).length\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-005b",
+      "name": "Masquer donnees sensibles pour IA",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        840,
+        280
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst anomalies = Array.isArray(data.anomalies) ? data.anomalies : [];\n\nfunction sanitizeText(value) {\n  return String(value || '')\n    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/gi, '[email masque]')\n    .replace(/\\+?\\d[\\d\\s().-]{7,}\\d/g, '[telephone masque]')\n    .replace(/\\b\\d{8,}\\b/g, '[identifiant masque]')\n    .trim();\n}\n\nconst anomaliesForAi = anomalies.map((item, index) => ({\n  anomaly_ref: `ANOM-${String(index + 1).padStart(3, '0')}`,\n  account_family: item.account_code ? `${String(item.account_code).slice(0, 3)}***` : 'N/A',\n  account_label_sanitized: sanitizeText(item.account_label),\n  current_amount: Number(item.current_amount || 0),\n  previous_amount: Number(item.previous_amount || 0),\n  absolute_variation: Number(item.absolute_variation || 0),\n  relative_variation: Number(item.relative_variation || 0),\n  missing_support: Boolean(item.missing_support),\n  threshold_breach: Boolean(item.threshold_breach),\n  severity: item.severity || 'moyenne',\n  owner_team: sanitizeText(item.owner),\n  observation: sanitizeText(item.observation)\n}));\n\nreturn [{\n  json: {\n    ...data,\n    entity_for_ai: 'Banque operant en Cote d Ivoire - direction financiere',\n    anomalies_for_ai: anomaliesForAi,\n    pii_protection: {\n      mode: 'pseudonymisation',\n      masked_fields: ['entity', 'account_code', 'account_label', 'owner', 'emails', 'telephones', 'identifiants longs'],\n      note: 'Seules les donnees strictement necessaires a l analyse des ecarts sont transmises au modele IA.'\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-006",
+      "name": "Generer synthese IA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        980,
+        280
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  model: 'gpt-4o-mini',\n  temperature: 0.2,\n  response_format: { type: 'json_object' },\n  messages: [\n    {\n      role: 'system',\n      content: 'Tu es un assistant de direction financiere. Tu rediges en francais professionnel, sobre et actionnable. Tu reponds uniquement en JSON valide avec les cles: executive_summary, what_moved, review_now, can_wait, escalate_to_manager, managerial_comment.'\n    },\n    {\n      role: 'user',\n      content: 'Contexte: pre-cloture bancaire pour ' + $json.entity_for_ai + ' sur la periode ' + $json.report_period + '. Les donnees sensibles ont deja ete pseudonymisees avant traitement IA.\\n\\nKPI: ' + JSON.stringify($json.kpi) + '\\n\\nAnomalies pseudonymisees: ' + JSON.stringify($json.anomalies_for_ai) + '\\n\\nConsignes: 1) prioriser les ecarts vraiment utiles au management ; 2) rester prudent ; 3) mentionner explicitement qu une validation humaine reste obligatoire ; 4) produire des puces courtes et exploitables ; 5) ne pas reconstituer ni supposer des donnees personnelles.'\n    }\n  ]\n}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "pcb-007",
+      "name": "Parser synthese et HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        280
+      ],
+      "parameters": {
+        "jsCode": "const source = $('Detecter ecarts et priorites').first().json;\nconst raw = $input.first().json?.choices?.[0]?.message?.content || '{}';\n\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (error) {\n  parsed = {\n    executive_summary: 'Une revue humaine est requise avant diffusion.',\n    what_moved: [],\n    review_now: [],\n    can_wait: [],\n    escalate_to_manager: [],\n    managerial_comment: raw\n  };\n}\n\nfunction list(items) {\n  return (Array.isArray(items) ? items : []).map((item) => `<li>${String(item)}</li>`).join('') || '<li>Aucun point a signaler.</li>';\n}\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h1 style=\"color:#163556\">Synthese de pre-cloture bancaire</h1>\n  <p><strong>Entite :</strong> ${source.entity}<br><strong>Periode :</strong> ${source.report_period}<br><strong>Anomalies detectees :</strong> ${source.anomaly_count}</p>\n  <div style=\"background:#f8fafc;border:1px solid #dbe4ee;border-radius:8px;padding:16px;margin:16px 0\">\n    <strong>Resume executif</strong>\n    <p>${parsed.executive_summary || ''}</p>\n  </div>\n  <h2 style=\"color:#163556\">Ce qui a bouge</h2>\n  <ul>${list(parsed.what_moved)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit etre revu maintenant</h2>\n  <ul>${list(parsed.review_now)}</ul>\n  <h2 style=\"color:#163556\">Ce qui peut attendre</h2>\n  <ul>${list(parsed.can_wait)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit remonter au manager</h2>\n  <ul>${list(parsed.escalate_to_manager)}</ul>\n  <h2 style=\"color:#163556\">Commentaire manager</h2>\n  <p>${parsed.managerial_comment || ''}</p>\n  <hr style=\"margin:24px 0;border:none;border-top:1px solid #e5e7eb\" />\n  <p style=\"font-size:12px;color:#6b7280\">Synthese preparee automatiquement a partir de donnees pseudonymisees. Validation humaine obligatoire avant tout usage officiel.</p>\n</div>`;\n\nreturn [{\n  json: {\n    ...source,\n    ai_summary: parsed,\n    summary_html: html,\n    final_subject: `[Pre-cloture] Synthese ecarts - ${source.entity} - ${source.report_period}`\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-008",
+      "name": "Construire email validation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        280
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst baseUrl = $env.N8N_BASE_URL || 'https://your-n8n.example.com';\nconst payload = {\n  entity: data.entity,\n  report_period: data.report_period,\n  recipients: data.recipients,\n  final_subject: data.final_subject,\n  ai_summary: data.ai_summary,\n  anomaly_count: data.anomaly_count,\n  high_priority_count: data.high_priority_count,\n  review_count: data.review_count,\n  wait_count: data.wait_count\n};\n\nconst encoded = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');\nconst approveUrl = `${baseUrl}/webhook/pre-cloture-bancaire-approve?decision=approved&payload=${encoded}`;\nconst rejectUrl = `${baseUrl}/webhook/pre-cloture-bancaire-approve?decision=rejected&payload=${encoded}`;\n\nconst reviewHtml = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h2 style=\"color:#163556\">Validation requise - Synthese de pre-cloture bancaire</h2>\n  <p><strong>Entite :</strong> ${data.entity}<br><strong>Periode :</strong> ${data.report_period}<br><strong>Anomalies :</strong> ${data.anomaly_count}</p>\n  <p>Merci de valider la synthese avant diffusion officielle.</p>\n  <p style=\"margin:24px 0\">\n    <a href=\"${approveUrl}\" style=\"background:#059669;color:#ffffff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:bold;margin-right:12px\">Approuver et diffuser</a>\n    <a href=\"${rejectUrl}\" style=\"background:#dc2626;color:#ffffff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:bold\">Rejeter</a>\n  </p>\n  <div style=\"border:1px solid #dbe4ee;border-radius:8px;padding:16px;background:#f8fafc\">\n    ${data.summary_html}\n  </div>\n</div>`;\n\nreturn [{\n  json: {\n    ...data,\n    approval_payload: encoded,\n    approve_url: approveUrl,\n    reject_url: rejectUrl,\n    review_html: reviewHtml\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-009",
+      "name": "Envoyer email validation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        280
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  from: $env.OUTREACH_FROM_EMAIL || 'TransferAI <contact@transferai.ci>',\n  to: [$('Construire email validation').first().json.manager_email || $env.INTERNAL_REVIEW_EMAIL || 'controle.financier@banque.com'],\n  subject: 'Validation requise - ' + $('Construire email validation').first().json.final_subject,\n  html: $('Construire email validation').first().json.review_html\n}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "pcb-010",
+      "name": "Webhook - Approbation finale",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        160,
+        620
+      ],
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "pre-cloture-bancaire-approve",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "pre-cloture-bancaire-approve"
+    },
+    {
+      "id": "pcb-011",
+      "name": "Parser decision approbation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        620
+      ],
+      "parameters": {
+        "jsCode": "const query = $input.first().json.query || $input.first().json;\nconst decision = String(query.decision || '').toLowerCase();\nconst encoded = String(query.payload || '');\n\nlet payload = {};\ntry {\n  payload = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8'));\n} catch (error) {\n  payload = { decode_error: error.message };\n}\n\nreturn [{\n  json: {\n    decision,\n    approved: decision === 'approved',\n    ...payload\n  }\n}];"
+      }
+    },
+    {
+      "id": "pcb-012",
+      "name": "IF approuve",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        700,
+        620
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.approved }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "pcb-013",
+      "name": "Recomposer HTML final",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        980,
+        500
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst ai = data.ai_summary || {};\n\nfunction list(items) {\n  return (Array.isArray(items) ? items : []).map((item) => `<li>${String(item)}</li>`).join('') || '<li>Aucun point a signaler.</li>';\n}\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h1 style=\"color:#163556\">Synthese de pre-cloture bancaire</h1>\n  <p><strong>Entite :</strong> ${data.entity}<br><strong>Periode :</strong> ${data.report_period}<br><strong>Anomalies detectees :</strong> ${data.anomaly_count}</p>\n  <div style=\"background:#f8fafc;border:1px solid #dbe4ee;border-radius:8px;padding:16px;margin:16px 0\">\n    <strong>Resume executif</strong>\n    <p>${ai.executive_summary || ''}</p>\n  </div>\n  <h2 style=\"color:#163556\">Ce qui a bouge</h2>\n  <ul>${list(ai.what_moved)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit etre revu maintenant</h2>\n  <ul>${list(ai.review_now)}</ul>\n  <h2 style=\"color:#163556\">Ce qui peut attendre</h2>\n  <ul>${list(ai.can_wait)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit remonter au manager</h2>\n  <ul>${list(ai.escalate_to_manager)}</ul>\n  <h2 style=\"color:#163556\">Commentaire manager</h2>\n  <p>${ai.managerial_comment || ''}</p>\n  <hr style=\"margin:24px 0;border:none;border-top:1px solid #e5e7eb\" />\n  <p style=\"font-size:12px;color:#6b7280\">Synthese preparee automatiquement a partir de donnees pseudonymisees. Validation humaine obligatoire avant tout usage officiel.</p>\n</div>`;\n\nreturn [{ json: { ...data, summary_html: html } }];"
+      }
+    },
+    {
+      "id": "pcb-014",
+      "name": "Envoyer synthese finale",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1260,
+        500
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  from: $env.OUTREACH_FROM_EMAIL || 'TransferAI <contact@transferai.ci>',\n  to: Array.isArray($json.recipients) ? $json.recipients : ['controle.financier@banque.com'],\n  subject: $json.final_subject,\n  html: $json.summary_html\n}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "pcb-015",
+      "name": "Repondre approbation OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1540,
+        500
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=Validation enregistree. La synthese de pre-cloture a ete diffusee aux destinataires prevus."
+      }
+    },
+    {
+      "id": "pcb-016",
+      "name": "Repondre approbation refusee",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        980,
+        700
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=Validation refusee. Aucune diffusion officielle n a ete effectuee."
+      }
+    }
+  ],
+  "connections": {
+    "Trigger manuel": {
+      "main": [
+        [
+          {
+            "node": "Jeu de donnees demo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Donnees pre-cloture": {
+      "main": [
+        [
+          {
+            "node": "Normaliser entree webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jeu de donnees demo": {
+      "main": [
+        [
+          {
+            "node": "Detecter ecarts et priorites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normaliser entree webhook": {
+      "main": [
+        [
+          {
+            "node": "Detecter ecarts et priorites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detecter ecarts et priorites": {
+      "main": [
+        [
+          {
+            "node": "Masquer donnees sensibles pour IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generer synthese IA": {
+      "main": [
+        [
+          {
+            "node": "Parser synthese et HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser synthese et HTML": {
+      "main": [
+        [
+          {
+            "node": "Construire email validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire email validation": {
+      "main": [
+        [
+          {
+            "node": "Envoyer email validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Approbation finale": {
+      "main": [
+        [
+          {
+            "node": "Parser decision approbation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser decision approbation": {
+      "main": [
+        [
+          {
+            "node": "IF approuve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF approuve": {
+      "main": [
+        [
+          {
+            "node": "Recomposer HTML final",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Repondre approbation refusee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recomposer HTML final": {
+      "main": [
+        [
+          {
+            "node": "Envoyer synthese finale",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer synthese finale": {
+      "main": [
+        [
+          {
+            "node": "Repondre approbation OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Masquer donnees sensibles pour IA": {
+      "main": [
+        [
+          {
+            "node": "Generer synthese IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "Workflow exportable n8n - pre-cloture bancaire multi-banques avec detection d ecarts, pseudonymisation des donnees sensibles, synthese IA et validation humaine avant diffusion."
+  }
+}

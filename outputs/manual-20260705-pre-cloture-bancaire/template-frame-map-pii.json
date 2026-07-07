@@ -1,0 +1,87 @@
+{
+  "outputSlides": [
+    {
+      "outputSlide": 1,
+      "sourceSlide": 1,
+      "narrativeRole": "brand cover",
+      "reuseMode": "duplicate-slide",
+      "editTargets": []
+    },
+    {
+      "outputSlide": 2,
+      "sourceSlide": 2,
+      "narrativeRole": "use case overview",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/3q5o7qpg",
+          "action": "rewrite",
+          "reason": "Keep slide numbering explicit in the copied deck."
+        }
+      ]
+    },
+    {
+      "outputSlide": 3,
+      "sourceSlide": 2,
+      "narrativeRole": "compliance guardrail",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeIds": [
+            "sh/yxobm58z",
+            "sh/g3ex0nux",
+            "sh/r65wjudg",
+            "sh/9cvixcze",
+            "sh/gr2p8nqx",
+            "sh/yd0z6103",
+            "sh/wb2hwfyx",
+            "sh/e9cvixcz",
+            "sh/3q5o7qpg"
+          ],
+          "action": "rewrite",
+          "reason": "Repurpose the duplicated use-case slide into a dedicated compliance and PII slide."
+        }
+      ]
+    },
+    {
+      "outputSlide": 4,
+      "sourceSlide": 3,
+      "narrativeRole": "workflow proof",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/vahoza1g",
+          "action": "rewrite",
+          "reason": "Update footer numbering after inserting the new compliance slide."
+        }
+      ]
+    },
+    {
+      "outputSlide": 5,
+      "sourceSlide": 4,
+      "narrativeRole": "before after benefits",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/jqh0fepk",
+          "action": "rewrite",
+          "reason": "Update footer numbering after inserting the new compliance slide."
+        }
+      ]
+    },
+    {
+      "outputSlide": 6,
+      "sourceSlide": 5,
+      "narrativeRole": "kpi closing proof",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {
+          "shapeId": "sh/6psfil0r",
+          "action": "rewrite",
+          "reason": "Update footer numbering after inserting the new compliance slide."
+        }
+      ]
+    }
+  ],
+  "omittedSourceSlides": []
+}

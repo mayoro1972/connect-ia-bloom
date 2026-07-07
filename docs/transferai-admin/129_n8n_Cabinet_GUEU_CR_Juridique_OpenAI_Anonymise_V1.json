@@ -1,0 +1,702 @@
+{
+  "name": "Cabinet_GUEU_CR_Juridique_OpenAI_Anonymise_V1",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "REMPLACER_PAR_ID_DOSSIER_GOOGLE_DRIVE",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "gueu-drive-trigger",
+      "name": "Google Drive - Nouveau fichier audio",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        208
+      ],
+      "notes": "Surveille le dossier partage par le secretariat."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.mimeType }}",
+              "rightValue": "audio",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "gueu-filter-audio",
+      "name": "Filtre - Audio uniquement",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        224,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "gueu-download",
+      "name": "Telecharger fichier",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        448,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const driveFile = $('Google Drive - Nouveau fichier audio').first().json;\nconst nomFichier = driveFile.name || 'enregistrement';\nconst dossierClient = nomFichier\n  .replace(/\\.(m4a|mp3|wav|aac|ogg|opus|mp4|webm)$/i, '')\n  .replace(/[_-]+/g, ' ')\n  .trim();\n\nreturn [{\n  binary: $input.first().binary,\n  json: {\n    nom_fichier: nomFichier,\n    dossier_client: dossierClient,\n    fichier_drive_id: driveFile.id,\n    date_enregistrement: new Date().toISOString().slice(0, 10),\n    langue_code: 'fr',\n    langue_sortie: 'Francais',\n    niveau_masquage: 'Strict',\n    email_secretariat: 'cabpgueu@gmail.com',\n    email_destinataires_finaux: 'REMPLACER_PAR_EMAILS_PARTIES',\n    session_id: `gueu_cr_${Date.now()}`,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "gueu-prepare-meta",
+      "name": "Preparer metadonnees dossier",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        208
+      ],
+      "notes": "Adapter ici les emails de validation et de diffusion finale."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n-pxlk-audio-splitter-1:8000/split",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "segment_time",
+              "value": "1200"
+            },
+            {
+              "name": "bitrate",
+              "value": "32k"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gueu-split",
+      "name": "Decouper audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        896,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const resp = $input.first().json;\nconst segments = resp.segments || [];\nreturn Promise.all(segments.map(async (seg, idx) => ({\n  json: { index: idx + 1, filename: seg.filename || `segment_${idx + 1}.mp3` },\n  binary: { data: await this.helpers.prepareBinaryData(Buffer.from(seg.data_base64, 'base64'), seg.filename || `segment_${idx + 1}.mp3`, 'audio/mpeg') }\n})));"
+      },
+      "id": "gueu-extract-segments",
+      "name": "Extraire segments",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.OPENAI_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "model",
+              "value": "gpt-4o-transcribe"
+            },
+            {
+              "name": "language",
+              "value": "={{ $('Preparer metadonnees dossier').first().json.langue_code || 'fr' }}"
+            },
+            {
+              "name": "response_format",
+              "value": "verbose_json"
+            },
+            {
+              "name": "timestamp_granularities[]",
+              "value": "segment"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gueu-openai-transcribe",
+      "name": "OpenAI - Transcription juridique",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1344,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst meta = $('Preparer metadonnees dossier').first().json;\nconst parts = [];\nfor (let i = 0; i < items.length; i++) {\n  const row = items[i].json || {};\n  const text = (row.text || '').trim();\n  if (text) parts.push(`Segment ${i + 1}\\n${text}`);\n}\nreturn [{ json: { ...meta, transcription_brute: parts.join('\\n\\n'), nb_segments: parts.length } }];"
+      },
+      "id": "gueu-merge-transcript",
+      "name": "Fusionner transcription",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst table = {};\nconst counters = { PARTY: 1, EMAIL: 1, PHONE: 1, URL: 1, ID: 1 };\nconst nextToken = (prefix) => `${prefix}_${String(counters[prefix]++).padStart(3, '0')}`;\nconst esc = (value) => value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\nconst addMapping = (prefix, raw) => {\n  const clean = (raw || '').trim();\n  if (!clean) return null;\n  const existing = Object.entries(table).find(([, value]) => value.toLowerCase() === clean.toLowerCase());\n  if (existing) return existing[0];\n  const token = nextToken(prefix);\n  table[token] = clean;\n  return token;\n};\n\nlet transcript = src.transcription_brute || '';\nlet dossier = src.dossier_client || '';\n\nconst candidateEntities = [dossier, 'Cabinet GUEU', 'Maitre GUEU'].filter(Boolean).sort((a, b) => b.length - a.length);\nfor (const entity of candidateEntities) {\n  const token = addMapping('PARTY', entity);\n  if (!token) continue;\n  transcript = transcript.replace(new RegExp(`\\\\b${esc(entity)}\\\\b`, 'gi'), token);\n  dossier = dossier.replace(new RegExp(`\\\\b${esc(entity)}\\\\b`, 'gi'), token);\n}\n\ntranscript = transcript.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/gi, (match) => addMapping('EMAIL', match));\ntranscript = transcript.replace(/\\+?\\d[\\d\\s().-]{7,}\\d/g, (match) => addMapping('PHONE', match));\ntranscript = transcript.replace(/https?:\\/\\/[^\\s]+/gi, (match) => addMapping('URL', match));\ntranscript = transcript.replace(/\\b[A-Z0-9_-]{8,}\\b/g, (match) => addMapping('ID', match));\n\nreturn [{ json: {\n  ...src,\n  sensitive_table: table,\n  pii_count: Object.keys(table).length,\n  dossier_pseudonymise: dossier,\n  transcription_pseudonymisee: transcript\n} }];"
+      },
+      "id": "gueu-pseudonymize",
+      "name": "Pseudonymiser localement",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/responses",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.OPENAI_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n  model: 'gpt-5',\n  store: false,\n  input: [\n    {\n      role: 'system',\n      content: [\n        {\n          type: 'input_text',\n          text: 'Tu es un redacteur juridique senior. Tu ne recois qu une transcription pseudonymisee. Tu dois produire une note interne pseudonymisee pour le secretariat, un compte rendu client sanitise et un email de transmission sanitise. N invente aucun fait. En cas d incertitude, ecris [a clarifier]. Garde les alias PARTY_001, EMAIL_001, ID_001 sans tenter de les remplacer.'\n        }\n      ]\n    },\n    {\n      role: 'user',\n      content: [\n        {\n          type: 'input_text',\n          text: `Date de l'enregistrement: ${$json.date_enregistrement}\\nDossier pseudonymise: ${$json.dossier_pseudonymise}\\nNiveau de masquage: ${$json.niveau_masquage}\\n\\nTranscription pseudonymisee:\\n${$json.transcription_pseudonymisee}`\n        }\n      ]\n    }\n  ],\n  text: {\n    format: {\n      type: 'json_schema',\n      name: 'legal_meeting_pack',\n      strict: true,\n      schema: {\n        type: 'object',\n        additionalProperties: false,\n        required: [\n          'titre_sanitise',\n          'resume_executif',\n          'points_discutes',\n          'decisions_prises',\n          'actions',\n          'points_a_clarifier',\n          'note_interne_markdown',\n          'rapport_client_markdown',\n          'email_client_sujet',\n          'email_client_corps'\n        ],\n        properties: {\n          titre_sanitise: { type: 'string' },\n          resume_executif: { type: 'string' },\n          points_discutes: { type: 'array', items: { type: 'string' } },\n          decisions_prises: { type: 'array', items: { type: 'string' } },\n          actions: {\n            type: 'array',\n            items: {\n              type: 'object',\n              additionalProperties: false,\n              required: ['responsable_alias', 'action', 'echeance'],\n              properties: {\n                responsable_alias: { type: 'string' },\n                action: { type: 'string' },\n                echeance: { type: 'string' }\n              }\n            }\n          },\n          points_a_clarifier: { type: 'array', items: { type: 'string' } },\n          note_interne_markdown: { type: 'string' },\n          rapport_client_markdown: { type: 'string' },\n          email_client_sujet: { type: 'string' },\n          email_client_corps: { type: 'string' }\n        }\n      }\n    }\n  }\n}) }}",
+        "options": {}
+      },
+      "id": "gueu-openai-report",
+      "name": "OpenAI - Pack juridique anonymise",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2016,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst prev = $('Pseudonymiser localement').first().json;\nlet raw = '';\nfor (const item of response.output || []) {\n  if (item.type !== 'message') continue;\n  for (const content of item.content || []) {\n    if (content.type === 'output_text' && content.text) {\n      raw = content.text;\n      break;\n    }\n  }\n  if (raw) break;\n}\nif (!raw && response.output_text) raw = response.output_text;\nconst parsed = JSON.parse(raw || '{}');\nreturn [{ json: { ...prev, llm_raw: raw, llm_parsed: parsed } }];"
+      },
+      "id": "gueu-parse",
+      "name": "Parser sortie OpenAI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst map = src.sensitive_table || {};\nlet noteInterneClaire = src.llm_parsed.note_interne_markdown || '';\nfor (const [token, value] of Object.entries(map).sort((a, b) => b[0].length - a[0].length)) {\n  noteInterneClaire = noteInterneClaire.replaceAll(token, value);\n}\nreturn [{ json: { ...src, note_interne_claire: noteInterneClaire } }];"
+      },
+      "id": "gueu-reidentify",
+      "name": "Reidentifier note interne",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2464,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst store = $getWorkflowStaticData('global');\nconst sid = src.session_id;\nconst llm = src.llm_parsed || {};\nconst esc = (value) => String(value || '')\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;');\nconst block = (title, content) => `<div style=\"margin:18px 0\"><h3 style=\"margin-bottom:8px;color:#0a3161\">${esc(title)}</h3><pre style=\"white-space:pre-wrap;background:#f8f9ff;border:1px solid #dde;padding:16px;border-radius:8px;font-family:Menlo,monospace;font-size:12px;line-height:1.65\">${esc(content)}</pre></div>`;\nconst previewHtml = `<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Validation juridique</title></head><body style=\"font-family:Georgia,serif;max-width:920px;margin:auto;padding:28px;color:#1a1a2e\">\n  <div style=\"border-top:4px solid #0a3161;padding-top:16px\">\n    <h1 style=\"margin:0\">CABINET GUEU - Validation d'un compte rendu sensible</h1>\n    <p style=\"color:#5c677d\">Session ${esc(sid)} | Dossier ${esc(src.dossier_client)} | ${esc(src.date_enregistrement)}</p>\n  </div>\n  <div style=\"background:#fff8e6;border:1px solid #f4b400;padding:16px;border-radius:10px;margin-top:18px\">\n    <strong>Confidentialite :</strong> ${esc(src.pii_count)} donnees sensibles masquees avant traitement OpenAI. La diffusion finale reste sanitisee.\n  </div>\n  ${block('Email client sanitise', llm.email_client_corps || '')}\n  ${block('Compte rendu client sanitise', llm.rapport_client_markdown || '')}\n  ${block('Note interne reidentifiee - usage interne uniquement', src.note_interne_claire || '')}\n  <div style=\"margin-top:24px;padding:18px;border-top:1px solid #dde\">\n    <a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/gueu-cr-approve?sid=${encodeURIComponent(sid)}\" style=\"display:inline-block;padding:12px 18px;background:#1f8f4e;color:white;text-decoration:none;border-radius:8px;margin-right:8px\">Valider et envoyer</a>\n    <a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/gueu-cr-reject?sid=${encodeURIComponent(sid)}\" style=\"display:inline-block;padding:12px 18px;background:#c0392b;color:white;text-decoration:none;border-radius:8px\">Rejeter</a>\n  </div>\n</body></html>`;\n\nconst finalHtml = `<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>${esc(llm.titre_sanitise || sid)}</title></head><body style=\"font-family:Georgia,serif;max-width:860px;margin:auto;padding:28px;color:#1a1a2e\">${block('Email client sanitise', llm.email_client_corps || '')}${block('Compte rendu client sanitise', llm.rapport_client_markdown || '')}</body></html>`;\nconst archiveHtml = `<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>${esc(llm.titre_sanitise || sid)}</title></head><body style=\"font-family:Georgia,serif;max-width:860px;margin:auto;padding:28px;color:#1a1a2e\">${block('Compte rendu client sanitise', llm.rapport_client_markdown || '')}</body></html>`;\n\nstore[sid] = {\n  preview_html: previewHtml,\n  final_html: finalHtml,\n  archive_html: archiveHtml,\n  final_subject: llm.email_client_sujet || `Compte rendu de reunion - ${sid}`,\n  email_destinataires_finaux: src.email_destinataires_finaux,\n  email_secretariat: src.email_secretariat,\n  dossier_client: src.dossier_client\n};\n\nreturn [{ json: {\n  session_id: sid,\n  preview_html: previewHtml,\n  final_html: finalHtml,\n  archive_html: archiveHtml,\n  final_subject: llm.email_client_sujet || `Compte rendu de reunion - ${sid}`,\n  email_secretariat: src.email_secretariat,\n  email_destinataires_finaux: src.email_destinataires_finaux,\n  dossier_client: src.dossier_client\n} }];"
+      },
+      "id": "gueu-build-pack",
+      "name": "Construire pack validation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.RESEND_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ from: 'Cabinet GUEU via TransferAI <contact@transferai.ci>', to: [$json.email_secretariat], subject: '[Validation requise] ' + ($json.dossier_client || 'Compte rendu juridique'), html: $json.preview_html }) }}",
+        "options": {}
+      },
+      "id": "gueu-send-secretariat",
+      "name": "Envoyer au secretariat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2912,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "path": "gueu-cr-approve",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "gueu-approve",
+      "name": "Webhook - Approuver",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        496
+      ],
+      "webhookId": "gueu-cr-approve"
+    },
+    {
+      "parameters": {
+        "path": "gueu-cr-reject",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "gueu-reject",
+      "name": "Webhook - Rejeter",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        688
+      ],
+      "webhookId": "gueu-cr-reject"
+    },
+    {
+      "parameters": {
+        "jsCode": "const sid = $json.query?.sid || $json.sid || '';\nif (!sid) throw new Error('Session ID manquant');\nconst store = $getWorkflowStaticData('global');\nconst data = store[sid];\nif (!data) throw new Error(`Aucune session trouvee pour ${sid}`);\nreturn [{ json: { sid, ...data } }];"
+      },
+      "id": "gueu-load-session",
+      "name": "Charger session",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2912,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.RESEND_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ from: 'Cabinet GUEU via TransferAI <contact@transferai.ci>', to: String($json.email_destinataires_finaux || '').split(',').map(v => v.trim()).filter(Boolean), subject: $json.final_subject, html: $json.final_html }) }}",
+        "options": {}
+      },
+      "id": "gueu-send-final",
+      "name": "Envoyer version client sanitisee",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3136,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Compte rendu envoye</title></head><body style=\"font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f3fbf5\"><div style=\"background:white;padding:40px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);text-align:center;max-width:500px\"><div style=\"font-size:56px\">✅</div><h1 style=\"color:#1f8f4e\">Version client sanitisee envoyee</h1><p>La version externe a ete diffusee apres validation humaine.</p></div></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "gueu-response-approve",
+      "name": "Reponse - Approuve",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        3584,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Compte rendu rejete</title></head><body style=\"font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fff5f5\"><div style=\"background:white;padding:40px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);text-align:center;max-width:500px\"><div style=\"font-size:56px\">❌</div><h1 style=\"color:#c0392b\">Validation rejetee</h1><p>Aucune diffusion externe n'a ete effectuee.</p></div></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "gueu-response-reject",
+      "name": "Reponse - Rejete",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2912,
+        688
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst fileName = `gueu_sanitized_report_${data.sid}.html`;\nconst binary = await this.helpers.prepareBinaryData(Buffer.from(data.archive_html || data.final_html || '<p>Archive vide</p>', 'utf8'), fileName, 'text/html');\nreturn [{ json: { ...data, archive_file_name: fileName }, binary: { data: binary } }];"
+      },
+      "id": "gueu-prepare-archive",
+      "name": "Preparer archive",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        592
+      ]
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.archive_file_name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "REMPLACER_PAR_ID_DOSSIER_ARCHIVE"
+        },
+        "options": {}
+      },
+      "id": "gueu-archive-drive",
+      "name": "Archiver version sanitisee",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3584,
+        592
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Drive - Nouveau fichier audio": {
+      "main": [
+        [
+          {
+            "node": "Filtre - Audio uniquement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtre - Audio uniquement": {
+      "main": [
+        [
+          {
+            "node": "Telecharger fichier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telecharger fichier": {
+      "main": [
+        [
+          {
+            "node": "Preparer metadonnees dossier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparer metadonnees dossier": {
+      "main": [
+        [
+          {
+            "node": "Decouper audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decouper audio": {
+      "main": [
+        [
+          {
+            "node": "Extraire segments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraire segments": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Transcription juridique",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Transcription juridique": {
+      "main": [
+        [
+          {
+            "node": "Fusionner transcription",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fusionner transcription": {
+      "main": [
+        [
+          {
+            "node": "Pseudonymiser localement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pseudonymiser localement": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Pack juridique anonymise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Pack juridique anonymise": {
+      "main": [
+        [
+          {
+            "node": "Parser sortie OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser sortie OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Reidentifier note interne",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reidentifier note interne": {
+      "main": [
+        [
+          {
+            "node": "Construire pack validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire pack validation": {
+      "main": [
+        [
+          {
+            "node": "Envoyer au secretariat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Approuver": {
+      "main": [
+        [
+          {
+            "node": "Charger session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Rejeter": {
+      "main": [
+        [
+          {
+            "node": "Reponse - Rejete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Charger session": {
+      "main": [
+        [
+          {
+            "node": "Envoyer version client sanitisee",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparer archive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer version client sanitisee": {
+      "main": [
+        [
+          {
+            "node": "Reponse - Approuve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparer archive": {
+      "main": [
+        [
+          {
+            "node": "Archiver version sanitisee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "12900000-0000-4000-8000-000000000001",
+  "id": "129_n8n_Cabinet_GUEU_CR_Juridique_OpenAI_Anonymise_V1",
+  "tags": []
+}

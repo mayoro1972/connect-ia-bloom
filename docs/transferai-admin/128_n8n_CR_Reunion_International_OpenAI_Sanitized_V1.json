@@ -1,0 +1,969 @@
+{
+  "name": "CR_Reunion_International_OpenAI_Sanitized_V1",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Compte rendu de reunion sensible",
+        "formDescription": "Deposez un audio, un lien Drive, ou alimentez ce workflow depuis Zoom, Webex, Teams ou un dictaphone via un webhook d'ingestion. Le workflow pseudonymise localement, utilise OpenAI sur la version protegee, puis prepare un livrable final sanitise pour validation en francais, anglais ou espagnol.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Sujet de la reunion",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Participants (separes par virgule)"
+            },
+            {
+              "fieldLabel": "Date de la reunion",
+              "fieldType": "date"
+            },
+            {
+              "fieldLabel": "Source de l'enregistrement",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Smartphone"
+                  },
+                  {
+                    "option": "Dictaphone"
+                  },
+                  {
+                    "option": "Zoom"
+                  },
+                  {
+                    "option": "Webex"
+                  },
+                  {
+                    "option": "Google Drive"
+                  },
+                  {
+                    "option": "Teams"
+                  },
+                  {
+                    "option": "OneDrive / SharePoint"
+                  },
+                  {
+                    "option": "Salle de reunion"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mode d'ingestion",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Upload manuel"
+                  },
+                  {
+                    "option": "Lien Google Drive"
+                  },
+                  {
+                    "option": "Webhook plateforme"
+                  },
+                  {
+                    "option": "Dossier surveille"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Fichier audio",
+              "fieldType": "file",
+              "acceptFileTypes": ".mp3,.m4a,.wav,.ogg,.mp4,.webm,.opus"
+            },
+            {
+              "fieldLabel": "Ou lien Google Drive",
+              "fieldType": "url"
+            },
+            {
+              "fieldLabel": "URL directe du recording (optionnel)",
+              "fieldType": "url"
+            },
+            {
+              "fieldLabel": "Reference meeting / join URL"
+            },
+            {
+              "fieldLabel": "Objet source / dossier source"
+            },
+            {
+              "fieldLabel": "Email destinataire final",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email validateur",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Langue audio",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Francais (fr)"
+                  },
+                  {
+                    "option": "Anglais (en)"
+                  },
+                  {
+                    "option": "Arabe (ar)"
+                  },
+                  {
+                    "option": "Espagnol (es)"
+                  },
+                  {
+                    "option": "Portugais (pt)"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Langue de sortie",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Francais"
+                  },
+                  {
+                    "option": "Anglais"
+                  },
+                  {
+                    "option": "Espagnol"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Livrable demande",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Les deux"
+                  },
+                  {
+                    "option": "Email client"
+                  },
+                  {
+                    "option": "Compte rendu"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Entites sensibles a masquer"
+            },
+            {
+              "fieldLabel": "Niveau de masquage",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Strict"
+                  },
+                  {
+                    "option": "Standard"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "intl-form",
+      "name": "Formulaire - Audio sensible",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        160
+      ],
+      "webhookId": "cr-intl-sensible-form"
+    },
+    {
+      "parameters": {
+        "path": "cr-intl-source-ingest",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "intl-source-webhook",
+      "name": "Webhook - Ingestion plateforme meeting",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        576
+      ],
+      "webhookId": "cr-intl-source-ingest",
+      "notes": "Entree recommandee pour Zoom, Webex et Teams. Le workflow amont doit appeler ce webhook APRES la fin de la reunion et APRES recuperation du recording. Idealement, il envoie le binaire audio/video deja telecharge, ou depose le fichier dans le dossier Google Drive surveille puis appelle ce flux avec les metadonnees."
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1s2lO9ZCSDSL_67Busx6SwG-ZTSDlBBz-",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "intl-drive-trigger",
+      "name": "Google Drive - Nouveau fichier audio",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        368
+      ],
+      "notes": "Option autonome. Remplacer l'ID du dossier surveille."
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst input = item.json;\nconst binary = item.binary || {};\nconst binaryKeys = Object.keys(binary);\nconst firstBinaryField = binaryKeys[0] || 'data';\nconst isForm = input['Sujet de la reunion'] !== undefined;\nconst isPlatformWebhook = input.source_system !== undefined || input.recording_delivery !== undefined || input.recording_url !== undefined || input.meeting_reference !== undefined;\n\nconst normalizeAudioLanguageCode = (value) => {\n  const raw = String(value || 'fr').trim().toLowerCase();\n  const match = raw.match(/\\(([a-z]{2})\\)/);\n  if (match) return match[1];\n  const map = {\n    francais: 'fr', français: 'fr', french: 'fr', fr: 'fr',\n    anglais: 'en', english: 'en', en: 'en',\n    espagnol: 'es', español: 'es', spanish: 'es', es: 'es',\n    arabe: 'ar', arabic: 'ar', ar: 'ar',\n    portugais: 'pt', portuguais: 'pt', portuguese: 'pt', pt: 'pt'\n  };\n  return map[raw] || raw.slice(0, 2) || 'fr';\n};\n\nconst normalizeOutputLanguage = (value) => {\n  const raw = String(value || 'Francais').trim().toLowerCase();\n  if (['anglais', 'english', 'en'].includes(raw)) {\n    return { label: 'Anglais', code: 'en', htmlLang: 'en' };\n  }\n  if (['espagnol', 'español', 'spanish', 'es'].includes(raw)) {\n    return { label: 'Espagnol', code: 'es', htmlLang: 'es' };\n  }\n  return { label: 'Francais', code: 'fr', htmlLang: 'fr' };\n};\n\nconst normalizeDeliverable = (value) => {\n  const raw = String(value || 'Les deux').trim().toLowerCase();\n  if (['email client', 'client email', 'correo cliente', 'email', 'mail client'].includes(raw)) return 'Email client';\n  if (['compte rendu', 'meeting report', 'report', 'informe', 'reporte'].includes(raw)) return 'Compte rendu';\n  return 'Les deux';\n};\n\nconst normalizeMaskingLevel = (value) => {\n  const raw = String(value || 'Strict').trim().toLowerCase();\n  if (['standard', 'std'].includes(raw)) return 'Standard';\n  return 'Strict';\n};\n\nconst slugSource = (value) => String(value || 'meeting-platform')\n  .trim()\n  .toLowerCase()\n  .replace(/[^a-z0-9]+/g, '_')\n  .replace(/^_+|_+$/g, '') || 'meeting_platform';\n\nif (isForm) {\n  const sujet = input['Sujet de la reunion'] || 'Reunion';\n  const participants = input['Participants (separes par virgule)'] || 'Non precise';\n  const reunion_date = input['Date de la reunion'] || new Date().toISOString().slice(0, 10);\n  const email_destinataire = input['Email destinataire final'] || 'contact@transferai.ci';\n  const email_validateur = input['Email validateur'] || email_destinataire;\n  const audio_url = input['Ou lien Google Drive'] || '';\n  const recording_url = input['URL directe du recording (optionnel)'] || '';\n  const mode_ingestion = input['Mode d\\'ingestion'] || 'Upload manuel';\n  const meeting_reference = input['Reference meeting / join URL'] || '';\n  const source_object = input['Objet source / dossier source'] || '';\n  const langue_code = normalizeAudioLanguageCode(input['Langue audio'] || 'Francais (fr)');\n  const outputLanguage = normalizeOutputLanguage(input['Langue de sortie'] || 'Francais');\n  const livrable = normalizeDeliverable(input['Livrable demande'] || 'Les deux');\n  const entites_sensibles = input['Entites sensibles a masquer'] || '';\n  const niveau_masquage = normalizeMaskingLevel(input['Niveau de masquage'] || 'Strict');\n  const source_label = input[\"Source de l'enregistrement\"] || 'Formulaire';\n  const source_type = audio_url ? 'drive_url' : 'upload';\n  return [{\n    binary,\n    json: {\n      sujet,\n      participants,\n      reunion_date,\n      email_destinataire,\n      email_validateur,\n      audio_url,\n      recording_url,\n      mode_ingestion,\n      meeting_reference,\n      source_object,\n      langue_code,\n      langue_sortie: outputLanguage.label,\n      langue_sortie_code: outputLanguage.code,\n      langue_sortie_html: outputLanguage.htmlLang,\n      livrable,\n      entites_sensibles,\n      niveau_masquage,\n      source_label,\n      source_system: slugSource(source_label),\n      source_type,\n      audio_binary_field: 'Fichier audio',\n      session_id: `intl_cr_${Date.now()}`,\n      timestamp: new Date().toISOString()\n    }\n  }];\n}\n\nif (isPlatformWebhook) {\n  const sujet = input.sujet || input.meeting_title || input.topic || 'Reunion';\n  const participants = input.participants || 'Non precise';\n  const reunion_date = input.reunion_date || input.meeting_date || new Date().toISOString().slice(0, 10);\n  const email_destinataire = input.email_destinataire || 'contact@transferai.ci';\n  const email_validateur = input.email_validateur || email_destinataire;\n  const langue_code = normalizeAudioLanguageCode(input.langue_audio || input.langue_code || 'fr');\n  const outputLanguage = normalizeOutputLanguage(input.langue_sortie || input.output_language || input.langue_sortie_code || 'Francais');\n  const source_system = slugSource(input.source_system || input.source_label || 'meeting-platform');\n  return [{\n    binary,\n    json: {\n      sujet,\n      participants,\n      reunion_date,\n      email_destinataire,\n      email_validateur,\n      audio_url: input.audio_url || input.drive_url || '',\n      recording_url: input.recording_url || '',\n      mode_ingestion: input.recording_delivery || 'Webhook plateforme',\n      meeting_reference: input.meeting_reference || input.join_web_url || input.meeting_id || '',\n      source_object: input.source_object || input.drive_file_id || input.recording_id || '',\n      langue_code,\n      langue_sortie: outputLanguage.label,\n      langue_sortie_code: outputLanguage.code,\n      langue_sortie_html: outputLanguage.htmlLang,\n      livrable: normalizeDeliverable(input.livrable || input.deliverable || 'Les deux'),\n      entites_sensibles: input.entites_sensibles || '',\n      niveau_masquage: normalizeMaskingLevel(input.niveau_masquage || input.masking_level || 'Strict'),\n      source_label: input.source_label || input.source_system || 'Webhook plateforme',\n      source_system,\n      source_type: binaryKeys.length ? 'upload' : (input.audio_url ? 'drive_url' : 'upload'),\n      audio_binary_field: firstBinaryField,\n      session_id: input.session_id || `intl_cr_${Date.now()}`,\n      timestamp: new Date().toISOString()\n    }\n  }];\n}\n\nconst outputLanguage = normalizeOutputLanguage(input.langue_sortie || 'Francais');\nconst sujet = (input.name || 'Reunion').replace(/\\.(mp3|m4a|wav|ogg|mp4|webm|opus)$/i, '');\nreturn [{\n  json: {\n    sujet,\n    participants: 'Non precise',\n    reunion_date: new Date().toISOString().slice(0, 10),\n    email_destinataire: 'contact@transferai.ci',\n    email_validateur: 'contact@transferai.ci',\n    audio_url: input.id ? `https://drive.google.com/uc?id=${input.id}&export=download` : '',\n    recording_url: '',\n    mode_ingestion: 'Dossier surveille',\n    meeting_reference: '',\n    source_object: input.id || '',\n    langue_code: 'fr',\n    langue_sortie: outputLanguage.label,\n    langue_sortie_code: outputLanguage.code,\n    langue_sortie_html: outputLanguage.htmlLang,\n    livrable: 'Les deux',\n    entites_sensibles: '',\n    niveau_masquage: 'Strict',\n    source_label: 'Google Drive',\n    source_system: 'google_drive',\n    source_type: 'drive_url',\n    drive_file_id: input.id,\n    audio_binary_field: null,\n    session_id: `intl_cr_${Date.now()}`,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "intl-normalize",
+      "name": "Normaliser les donnees",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ $json.source_type === 'upload' ? 0 : 1 }}"
+      },
+      "id": "intl-switch-source",
+      "name": "Upload ou Drive ?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        544,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Normaliser les donnees').first().json.drive_file_id || $('Normaliser les donnees').first().json.audio_url.match(/id=([^&]+)/)?.[1] }}"
+        },
+        "options": {
+          "fileName": "={{ $('Normaliser les donnees').first().json.session_id + '.m4a' }}"
+        }
+      },
+      "id": "intl-drive-download",
+      "name": "Telecharger audio Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        816,
+        384
+      ],
+      "notes": "Fonctionne pour les liens Drive. Pour Zoom ou Meet, preferer l'upload direct ou remplacer ce noeud."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n-pxlk-audio-splitter-1:8000/split",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "segment_time",
+              "value": "1200"
+            },
+            {
+              "name": "bitrate",
+              "value": "32k"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "={{ $('Normaliser les donnees').first().json.audio_binary_field || 'data' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "intl-split-upload",
+      "name": "Decouper audio upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        816,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n-pxlk-audio-splitter-1:8000/split",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "segment_time",
+              "value": "1200"
+            },
+            {
+              "name": "bitrate",
+              "value": "32k"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "intl-split-drive",
+      "name": "Decouper audio Drive",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1088,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const resp = $input.first().json;\nconst segments = resp.segments || [];\nreturn Promise.all(segments.map(async (seg, idx) => ({\n  json: { index: idx + 1, filename: seg.filename || `segment_${idx + 1}.mp3` },\n  binary: { data: await this.helpers.prepareBinaryData(Buffer.from(seg.data_base64, 'base64'), seg.filename || `segment_${idx + 1}.mp3`, 'audio/mpeg') }\n})));"
+      },
+      "id": "intl-extract-segments",
+      "name": "Extraire segments audio",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.OPENAI_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "model",
+              "value": "gpt-4o-transcribe"
+            },
+            {
+              "name": "language",
+              "value": "={{ $('Normaliser les donnees').first().json.langue_code || 'fr' }}"
+            },
+            {
+              "name": "response_format",
+              "value": "verbose_json"
+            },
+            {
+              "name": "timestamp_granularities[]",
+              "value": "segment"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "intl-openai-transcribe",
+      "name": "OpenAI - Transcrire segment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1632,
+        256
+      ],
+      "notes": "Modele recommande pour la transcription. Si votre compte n'autorise pas ce modele, remplacer par un modele de transcription OpenAI disponible."
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst meta = $('Normaliser les donnees').first().json;\nconst parts = [];\nfor (let i = 0; i < items.length; i++) {\n  const row = items[i].json || {};\n  const text = (row.text || '').trim();\n  if (!text) continue;\n  parts.push(`Segment ${i + 1}\\n${text}`);\n}\nreturn [{ json: { ...meta, full_transcript: parts.join('\\n\\n'), transcript_segment_count: parts.length } }];"
+      },
+      "id": "intl-merge-transcript",
+      "name": "Fusionner transcription",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1904,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst table = {};\nconst counters = { PARTY: 1, EMAIL: 1, PHONE: 1, URL: 1, ID: 1 };\n\nconst nextToken = (prefix) => `${prefix}_${String(counters[prefix]++).padStart(3, '0')}`;\nconst esc = (value) => value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\nconst addMapping = (prefix, raw) => {\n  const clean = (raw || '').trim();\n  if (!clean) return null;\n  const existing = Object.entries(table).find(([, value]) => value.toLowerCase() === clean.toLowerCase());\n  if (existing) return existing[0];\n  const token = nextToken(prefix);\n  table[token] = clean;\n  return token;\n};\n\nlet transcript = src.full_transcript || '';\nlet subject = src.sujet || '';\nlet participants = src.participants || '';\n\nconst replaceAllTargets = (matcher, replacer) => {\n  transcript = transcript.replace(matcher, replacer);\n  subject = subject.replace(matcher, replacer);\n  participants = participants.replace(matcher, replacer);\n};\n\nconst exactEntities = [\n  ...String(src.participants || '').split(',').map(v => v.trim()),\n  ...String(src.entites_sensibles || '').split(/[;,\\n]/).map(v => v.trim())\n].filter(v => v && v.length > 2).sort((a, b) => b.length - a.length);\n\nfor (const entity of exactEntities) {\n  const token = addMapping('PARTY', entity);\n  if (!token) continue;\n  replaceAllTargets(new RegExp(`\\\\b${esc(entity)}\\\\b`, 'gi'), token);\n}\n\nreplaceAllTargets(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/gi, (match) => addMapping('EMAIL', match));\nreplaceAllTargets(/\\+?\\d[\\d\\s().-]{7,}\\d/g, (match) => addMapping('PHONE', match));\nreplaceAllTargets(/https?:\\/\\/[^\\s]+/gi, (match) => addMapping('URL', match));\nreplaceAllTargets(/\\b[A-Z0-9_-]{8,}\\b/g, (match) => addMapping('ID', match));\n\nconst pii_entries = Object.entries(table).map(([token, value]) => ({ token, value }));\n\nreturn [{ json: {\n  ...src,\n  sensitive_table: table,\n  pii_entries,\n  pseudonymized_subject: subject,\n  pseudonymized_participants: participants,\n  pseudonymized_transcript: transcript,\n  pii_count: pii_entries.length\n} }];"
+      },
+      "id": "intl-pseudonymize",
+      "name": "Pseudonymiser localement",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/responses",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.OPENAI_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n  model: 'gpt-5',\n  store: false,\n  input: [\n    {\n      role: 'system',\n      content: [\n        {\n          type: 'input_text',\n          text: 'You are an international meeting-report specialist serving corporations, international organizations, embassies, chancelleries, and public-sector stakeholders. You only receive pseudonymized content. Never invent facts. If a detail is uncertain, write [to clarify]. Supported output languages are Francais, Anglais, and Espagnol. All user-facing fields, section headings, reports, and email text must be written strictly in the requested output language. Produce two outputs: one internal pseudonymized report for the validator, and one external sanitized report plus a sanitized follow-up email for the client. Keep aliases such as PARTY_001 exactly as they are. Avoid exposing raw identifiers or guessing identities.'\n        }\n      ]\n    },\n    {\n      role: 'user',\n      content: [\n        {\n          type: 'input_text',\n          text: `Output language: ${$json.langue_sortie} (${String($json.langue_sortie_code || '').toLowerCase() || 'fr'})\\nDeliverable requested: ${$json.livrable}\\nMasking level: ${$json.niveau_masquage}\\nPseudonymized subject: ${$json.pseudonymized_subject}\\nPseudonymized participants: ${$json.pseudonymized_participants}\\nMeeting date: ${$json.reunion_date}\\n\\nPseudonymized transcript:\\n${$json.pseudonymized_transcript}`\n        }\n      ]\n    }\n  ],\n  text: {\n    format: {\n      type: 'json_schema',\n      name: 'meeting_pack',\n      strict: true,\n      schema: {\n        type: 'object',\n        additionalProperties: false,\n        required: [\n          'title_sanitized',\n          'executive_summary',\n          'discussion_points',\n          'decisions',\n          'actions',\n          'risks',\n          'next_steps',\n          'internal_report_markdown',\n          'external_report_markdown',\n          'sanitized_email_subject',\n          'sanitized_email_body'\n        ],\n        properties: {\n          title_sanitized: { type: 'string' },\n          executive_summary: { type: 'string' },\n          discussion_points: { type: 'array', items: { type: 'string' } },\n          decisions: { type: 'array', items: { type: 'string' } },\n          actions: {\n            type: 'array',\n            items: {\n              type: 'object',\n              additionalProperties: false,\n              required: ['owner_alias', 'action', 'due_date'],\n              properties: {\n                owner_alias: { type: 'string' },\n                action: { type: 'string' },\n                due_date: { type: 'string' }\n              }\n            }\n          },\n          risks: { type: 'array', items: { type: 'string' } },\n          next_steps: { type: 'array', items: { type: 'string' } },\n          internal_report_markdown: { type: 'string' },\n          external_report_markdown: { type: 'string' },\n          sanitized_email_subject: { type: 'string' },\n          sanitized_email_body: { type: 'string' }\n        }\n      }\n    }\n  }\n}) }}",
+        "options": {}
+      },
+      "id": "intl-openai-report",
+      "name": "OpenAI - Rapport structure sanitise",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2448,
+        256
+      ],
+      "notes": "Le noeud utilise le modele gpt-5 avec Structured Outputs et store=false. La generation du livrable final est pilotee par la langue de sortie demandee : francais, anglais ou espagnol. Si gpt-5 n'est pas disponible sur votre compte, remplacez-le par gpt-4.1 ou gpt-4o."
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst prev = $('Pseudonymiser localement').first().json;\nlet raw = '';\nfor (const item of response.output || []) {\n  if (item.type !== 'message') continue;\n  for (const content of item.content || []) {\n    if (content.type === 'output_text' && content.text) {\n      raw = content.text;\n      break;\n    }\n  }\n  if (raw) break;\n}\nif (!raw && response.output_text) raw = response.output_text;\nconst parsed = JSON.parse(raw || '{}');\nreturn [{ json: { ...prev, llm_raw: raw, llm_parsed: parsed } }];"
+      },
+      "id": "intl-parse-report",
+      "name": "Parser sortie OpenAI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2720,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst map = src.sensitive_table || {};\nlet internalClear = src.llm_parsed.internal_report_markdown || '';\nfor (const [token, value] of Object.entries(map).sort((a, b) => b[0].length - a[0].length)) {\n  internalClear = internalClear.replaceAll(token, value);\n}\nreturn [{ json: { ...src, internal_report_clear: internalClear } }];"
+      },
+      "id": "intl-reidentify",
+      "name": "Reidentifier version interne",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2992,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = $input.first().json;\nconst store = $getWorkflowStaticData('global');\nconst sid = src.session_id;\nconst llm = src.llm_parsed || {};\nconst esc = (value) => String(value || '')\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;');\n\nconst outputCode = String(src.langue_sortie_code || '').toLowerCase() || (\n  String(src.langue_sortie || '').toLowerCase().startsWith('ang') ? 'en' :\n  String(src.langue_sortie || '').toLowerCase().startsWith('esp') ? 'es' :\n  'fr'\n);\n\nconst i18n = {\n  fr: {\n    htmlLang: 'fr',\n    emailBlock: 'Email client sanitise',\n    reportBlock: 'Compte rendu client sanitise',\n    internalBlock: 'Version interne reidentifiee - validation uniquement',\n    previewTitle: 'Validation livrable sensible',\n    previewHeading: 'Validation requise - livrable sensible',\n    protectionLabel: 'Protection active :',\n    protectionText: 'donnees sensibles tokenisees avant l\\'appel OpenAI. La version finale client reste sanitisee.',\n    approve: 'Approuver et envoyer',\n    reject: 'Rejeter',\n    validatorPrefix: '[Validation requise]',\n    validatorFallback: 'Compte rendu sensible',\n    finalFallback: 'Compte rendu',\n    archivePrefix: 'sanitized_meeting_report'\n  },\n  en: {\n    htmlLang: 'en',\n    emailBlock: 'Sanitized client email',\n    reportBlock: 'Sanitized client meeting report',\n    internalBlock: 'Re-identified internal version - validation only',\n    previewTitle: 'Sensitive deliverable validation',\n    previewHeading: 'Validation required - sensitive deliverable',\n    protectionLabel: 'Active protection:',\n    protectionText: 'sensitive data elements tokenized before the OpenAI call. The final client version remains sanitized.',\n    approve: 'Approve and send',\n    reject: 'Reject',\n    validatorPrefix: '[Validation required]',\n    validatorFallback: 'Sensitive meeting report',\n    finalFallback: 'Meeting report',\n    archivePrefix: 'sanitized_meeting_report'\n  },\n  es: {\n    htmlLang: 'es',\n    emailBlock: 'Correo al cliente sanitizado',\n    reportBlock: 'Informe de reunion sanitizado para el cliente',\n    internalBlock: 'Version interna reidentificada - solo para validacion',\n    previewTitle: 'Validacion de entregable sensible',\n    previewHeading: 'Validacion requerida - entregable sensible',\n    protectionLabel: 'Proteccion activa:',\n    protectionText: 'datos sensibles tokenizados antes de la llamada a OpenAI. La version final para el cliente permanece sanitizada.',\n    approve: 'Aprobar y enviar',\n    reject: 'Rechazar',\n    validatorPrefix: '[Validacion requerida]',\n    validatorFallback: 'Informe de reunion sensible',\n    finalFallback: 'Informe de reunion',\n    archivePrefix: 'sanitized_meeting_report'\n  }\n};\n\nconst t = i18n[outputCode] || i18n.fr;\nconst toHtmlBlock = (title, content) => `<div style=\"margin:18px 0\"><h3 style=\"margin-bottom:8px;color:#10263F\">${esc(title)}</h3><pre style=\"white-space:pre-wrap;background:#f7f9fc;border:1px solid #d9e2ec;padding:16px;border-radius:8px;font-family:Menlo,monospace;font-size:12px;line-height:1.6\">${esc(content)}</pre></div>`;\nconst externalEmail = llm.sanitized_email_body || '';\nconst externalReport = llm.external_report_markdown || '';\nconst internalClear = src.internal_report_clear || '';\n\nlet finalBody = '';\nif (src.livrable === 'Email client') {\n  finalBody = toHtmlBlock(t.emailBlock, externalEmail);\n} else if (src.livrable === 'Compte rendu') {\n  finalBody = toHtmlBlock(t.reportBlock, externalReport);\n} else {\n  finalBody = toHtmlBlock(t.emailBlock, externalEmail) + toHtmlBlock(t.reportBlock, externalReport);\n}\n\nconst previewHtml = `<!DOCTYPE html><html lang=\"${t.htmlLang}\"><head><meta charset=\"UTF-8\"><title>${esc(t.previewTitle)}</title></head><body style=\"font-family:Arial,sans-serif;max-width:920px;margin:auto;padding:28px;color:#17212b\">\n  <div style=\"background:#10263F;color:white;padding:20px 24px;border-radius:10px\">\n    <h1 style=\"margin:0;font-size:22px\">${esc(t.previewHeading)}</h1>\n    <p style=\"margin:8px 0 0 0;opacity:.85\">Session ${esc(sid)} | ${esc(src.sujet)} | ${esc(src.reunion_date)}</p>\n  </div>\n  <div style=\"background:#FFF8E6;border:1px solid #F4B400;padding:16px;border-radius:10px;margin-top:18px\">\n    <strong>${esc(t.protectionLabel)}</strong> ${esc(src.pii_count)} ${esc(t.protectionText)}\n  </div>\n  ${finalBody}\n  ${toHtmlBlock(t.internalBlock, internalClear)}\n  <div style=\"margin-top:24px;padding:18px;border-top:1px solid #d9e2ec\">\n    <a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/cr-intl-approve?sid=${encodeURIComponent(sid)}\" style=\"display:inline-block;padding:12px 18px;background:#1f8f4e;color:white;text-decoration:none;border-radius:8px;margin-right:8px\">${esc(t.approve)}</a>\n    <a href=\"https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/cr-intl-reject?sid=${encodeURIComponent(sid)}\" style=\"display:inline-block;padding:12px 18px;background:#c0392b;color:white;text-decoration:none;border-radius:8px\">${esc(t.reject)}</a>\n  </div>\n</body></html>`;\n\nconst finalHtml = `<!DOCTYPE html><html lang=\"${t.htmlLang}\"><head><meta charset=\"UTF-8\"><title>${esc(llm.title_sanitized || t.finalFallback)}</title></head><body style=\"font-family:Arial,sans-serif;max-width:860px;margin:auto;padding:28px;color:#17212b\">${finalBody}</body></html>`;\nconst archiveHtml = `<!DOCTYPE html><html lang=\"${t.htmlLang}\"><head><meta charset=\"UTF-8\"><title>${esc(llm.title_sanitized || sid)}</title></head><body style=\"font-family:Arial,sans-serif;max-width:860px;margin:auto;padding:28px;color:#17212b\">${toHtmlBlock(t.reportBlock, externalReport)}</body></html>`;\nconst finalSubject = llm.sanitized_email_subject || `${t.finalFallback} - ${sid}`;\nconst validatorSubject = `${t.validatorPrefix} ${src.sujet_original || src.sujet || t.validatorFallback}`;\n\nstore[sid] = {\n  final_subject: finalSubject,\n  final_html: finalHtml,\n  archive_html: archiveHtml,\n  preview_html: previewHtml,\n  email_destinataire: src.email_destinataire,\n  sujet_original: src.sujet,\n  validator_subject: validatorSubject,\n  archive_lang: t.htmlLang,\n  archive_prefix: t.archivePrefix\n};\n\nreturn [{ json: {\n  session_id: sid,\n  preview_html: previewHtml,\n  final_html: finalHtml,\n  archive_html: archiveHtml,\n  final_subject: finalSubject,\n  validator_subject: validatorSubject,\n  email_destinataire: src.email_destinataire,\n  email_validateur: src.email_validateur,\n  sujet_original: src.sujet,\n  pii_count: src.pii_count,\n  archive_lang: t.htmlLang,\n  archive_prefix: t.archivePrefix\n} }];"
+      },
+      "id": "intl-build-preview",
+      "name": "Construire pack validation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.RESEND_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ from: 'TransferAI Secure Meetings <contact@transferai.ci>', to: [$json.email_validateur], subject: $json.validator_subject, html: $json.preview_html }) }}",
+        "options": {}
+      },
+      "id": "intl-send-validator",
+      "name": "Envoyer au validateur",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3536,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "path": "cr-intl-approve",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "intl-webhook-approve",
+      "name": "Webhook - Approuver",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        528
+      ],
+      "webhookId": "cr-intl-approve"
+    },
+    {
+      "parameters": {
+        "path": "cr-intl-reject",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "intl-webhook-reject",
+      "name": "Webhook - Rejeter",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        720
+      ],
+      "webhookId": "cr-intl-reject"
+    },
+    {
+      "parameters": {
+        "jsCode": "const sid = $json.query?.sid || $json.sid || '';\nif (!sid) throw new Error('Session ID manquant');\nconst store = $getWorkflowStaticData('global');\nconst data = store[sid];\nif (!data) throw new Error(`Aucune session trouvee pour ${sid}`);\nreturn [{ json: { sid, ...data } }];"
+      },
+      "id": "intl-load-session",
+      "name": "Charger session validee",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2960,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.RESEND_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ from: 'TransferAI Secure Meetings <contact@transferai.ci>', to: [$json.email_destinataire], subject: $json.final_subject, html: $json.final_html }) }}",
+        "options": {}
+      },
+      "id": "intl-send-final",
+      "name": "Envoyer livrable final sanitise",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3232,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Livrable envoye</title></head><body style=\"font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f3fbf5\"><div style=\"background:white;padding:40px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);text-align:center;max-width:500px\"><div style=\"font-size:56px\">✅</div><h1 style=\"color:#1f8f4e\">Livrable sanitise envoye</h1><p>La version client sanitisee a ete envoyee et peut etre archivee.</p></div></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "intl-response-approve",
+      "name": "Reponse - Approuve",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        3776,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Validation rejetee</title></head><body style=\"font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fff5f5\"><div style=\"background:white;padding:40px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);text-align:center;max-width:500px\"><div style=\"font-size:56px\">❌</div><h1 style=\"color:#c0392b\">Livrable rejete</h1><p>Aucun envoi externe n'a ete realise.</p></div></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "intl-response-reject",
+      "name": "Reponse - Rejete",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2960,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst langSuffix = data.archive_lang || 'fr';\nconst prefix = data.archive_prefix || 'sanitized_meeting_report';\nconst fileName = `${prefix}_${data.sid}_${langSuffix}.html`;\nconst binary = await this.helpers.prepareBinaryData(Buffer.from(data.archive_html || data.final_html || '<p>Archive empty</p>', 'utf8'), fileName, 'text/html');\nreturn [{ json: { ...data, archive_file_name: fileName }, binary: { data: binary } }];"
+      },
+      "id": "intl-prepare-archive",
+      "name": "Preparer archive HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3504,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.archive_file_name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1LjJgDyNhyZ5dAEhirJZBM0EDxfSZJnxo"
+        },
+        "options": {}
+      },
+      "id": "intl-archive-drive",
+      "name": "Archiver version sanitisee",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3776,
+        624
+      ],
+      "notes": "Archive uniquement la version sanitisee. La version interne reidentifiee ne doit pas etre diffusee."
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Formulaire - Audio sensible": {
+      "main": [
+        [
+          {
+            "node": "Normaliser les donnees",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Ingestion plateforme meeting": {
+      "main": [
+        [
+          {
+            "node": "Normaliser les donnees",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive - Nouveau fichier audio": {
+      "main": [
+        [
+          {
+            "node": "Normaliser les donnees",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normaliser les donnees": {
+      "main": [
+        [
+          {
+            "node": "Upload ou Drive ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload ou Drive ?": {
+      "main": [
+        [
+          {
+            "node": "Decouper audio upload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telecharger audio Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telecharger audio Drive": {
+      "main": [
+        [
+          {
+            "node": "Decouper audio Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decouper audio upload": {
+      "main": [
+        [
+          {
+            "node": "Extraire segments audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decouper audio Drive": {
+      "main": [
+        [
+          {
+            "node": "Extraire segments audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraire segments audio": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Transcrire segment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Transcrire segment": {
+      "main": [
+        [
+          {
+            "node": "Fusionner transcription",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fusionner transcription": {
+      "main": [
+        [
+          {
+            "node": "Pseudonymiser localement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pseudonymiser localement": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Rapport structure sanitise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Rapport structure sanitise": {
+      "main": [
+        [
+          {
+            "node": "Parser sortie OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser sortie OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Reidentifier version interne",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reidentifier version interne": {
+      "main": [
+        [
+          {
+            "node": "Construire pack validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire pack validation": {
+      "main": [
+        [
+          {
+            "node": "Envoyer au validateur",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Approuver": {
+      "main": [
+        [
+          {
+            "node": "Charger session validee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Rejeter": {
+      "main": [
+        [
+          {
+            "node": "Reponse - Rejete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Charger session validee": {
+      "main": [
+        [
+          {
+            "node": "Envoyer livrable final sanitise",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparer archive HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer livrable final sanitise": {
+      "main": [
+        [
+          {
+            "node": "Reponse - Approuve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparer archive HTML": {
+      "main": [
+        [
+          {
+            "node": "Archiver version sanitisee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "12800000-0000-4000-8000-000000000001",
+  "id": "128_n8n_CR_Reunion_International_OpenAI_Sanitized_V1",
+  "tags": []
+}
