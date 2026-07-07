@@ -30,8 +30,9 @@
       "parameters": {
         "mailbox": "INBOX",
         "postProcessAction": "read",
+        "downloadAttachments": true,
+        "format": "simple",
         "options": {
-          "downloadAttachments": true,
           "attachmentPrefix": "piece_jointe_"
         }
       },
@@ -53,7 +54,7 @@
         700
       ],
       "parameters": {
-        "jsCode": "const item = $input.first();\nconst json = item.json || {};\nconst binary = item.binary || {};\nconst binaryKeys = Object.keys(binary);\nconst firstAttachmentKey = binaryKeys[0] || null;\n\nconst subject = String(json.subject || '').trim();\nconst fromEmail = String(json.from || (json.from && json.from.text) || (json.headers && json.headers.from) || '').trim();\nconst fromName = String((json.from && json.from.name) || fromEmail.split('@')[0] || 'Client').trim();\n\nconst typeTriggers = [\n  ['diplome', 'Diplôme'],\n  ['acte de naissance', 'Acte de naissance'],\n  ['acte', 'Acte officiel'],\n  ['passeport', 'Passeport'],\n  ['passport', 'Passeport'],\n  ['visa', 'Demande de visa officiel'],\n  ['titre de sejour', 'Titre de séjour'],\n  ['contrat', 'Contrat']\n];\nconst subjectLower = subject.toLowerCase();\nconst matched = typeTriggers.find(([kw]) => subjectLower.includes(kw));\nconst typeDocument = matched ? matched[1] : 'Document scanné reçu par e-mail';\n\nreturn [{\n  json: {\n    piece_jointe_binary_key: firstAttachmentKey,\n    nb_pieces_jointes: binaryKeys.length,\n    email_expediteur: fromEmail,\n    nom_expediteur: fromName,\n    sujet_email: subject,\n    type_document_detecte: typeDocument,\n    email_message_id: json.messageId || json.uid || ('EMAIL-' + Date.now())\n  },\n  binary\n}];"
+        "jsCode": "const item = $input.first();\nconst json = item.json || {};\nconst binary = item.binary || {};\nconst binaryKeys = Object.keys(binary);\nconst firstAttachmentKey = binaryKeys[0] || null;\n\nconst subject = String(json.subject || '').trim();\nconst fromEmail = String(json.from || (json.from && json.from.text) || (json.headers && json.headers.from) || '').trim();\nconst fromName = String((json.from && json.from.name) || fromEmail.split('@')[0] || 'Client').trim();\n\nconst typeTriggers = [\n  ['diplome', 'Diplôme'],\n  ['acte de naissance', 'Acte de naissance'],\n  ['acte', 'Acte officiel'],\n  ['passeport', 'Passeport'],\n  ['passport', 'Passeport'],\n  ['visa', 'Demande de visa officiel'],\n  ['titre de sejour', 'Titre de séjour'],\n  ['contrat', 'Contrat']\n];\nconst subjectLower = subject.toLowerCase();\nconst matched = typeTriggers.find(([kw]) => subjectLower.includes(kw));\nconst typeDocument = matched ? matched[1] : 'Document scanné reçu par e-mail';\n\nconst mailboxAddresses = ['contact@transferai.ci'];\nconst isSelfNotification = mailboxAddresses.includes(fromEmail.toLowerCase());\nconst effectiveBinaryKeys = isSelfNotification ? [] : binaryKeys;\nconst effectiveFirstAttachmentKey = isSelfNotification ? null : firstAttachmentKey;\n\nreturn [{\n  json: {\n    piece_jointe_binary_key: effectiveFirstAttachmentKey,\n    nb_pieces_jointes: effectiveBinaryKeys.length,\n    email_expediteur: fromEmail,\n    nom_expediteur: fromName,\n    sujet_email: subject,\n    type_document_detecte: typeDocument,\n    email_message_id: json.messageId || json.uid || ('EMAIL-' + Date.now()),\n    ignore_reason: isSelfNotification ? 'notification_interne_boite_elle_meme' : null\n  },\n  binary: isSelfNotification ? {} : binary\n}];"
       },
       "notes": "Si un e-mail contient plusieurs pièces jointes, seule la 1ère (piece_jointe_binary_key) est traitée ici. Dupliquer le nœud OCR + Drive pour traiter les autres si besoin."
     },
@@ -73,18 +74,18 @@
           },
           "conditions": [
             {
-              "leftValue": "={{ $json.nb_pieces_jointes }}",
-              "rightValue": 0,
+              "leftValue": "={{ !!$json.piece_jointe_binary_key && Number($json.nb_pieces_jointes) > 0 }}",
+              "rightValue": true,
               "operator": {
-                "type": "number",
-                "operation": "gt"
+                "type": "boolean",
+                "operation": "equals"
               }
             }
           ]
         },
         "options": {}
       },
-      "notes": "Garde-fou : la boîte mail du cabinet reçoit aussi des e-mails sans rapport avec la traduction (notifications CRM, etc.). Sans ce filtre, tout e-mail sans pièce jointe fait planter le nœud OCR en aval. Ici, on ignore proprement ces e-mails au lieu de générer une erreur d'exécution."
+      "notes": "Garde-fou : la boîte mail du cabinet reçoit aussi des e-mails sans rapport avec la traduction (notifications CRM, etc.). Sans ce filtre, tout e-mail sans pièce jointe fait planter le nœud OCR en aval. Ici, on ignore proprement ces e-mails au lieu de générer une erreur d'exécution. Condition évaluée en JS pur (booléen strict) plutôt qu'une comparaison numérique native du nœud IF, jugée peu fiable sur cette instance."
     },
     {
       "id": "tr-sec-028",
