@@ -1,0 +1,74 @@
+# Guide de dépannage n8n — Patterns et pièges rencontrés
+
+Document de retour d'expérience technique, issu de la mise en production et du débogage du Workflow 143 (Traduction Officielle Internationale sécurisée) les 6 et 7 juillet 2026, sur une instance n8n auto-hébergée version 2.11.2 (Hostinger VPS).
+
+Ces observations sont valables spécifiquement pour cette version de n8n auto-hébergée ; certains comportements peuvent différer sur n8n Cloud ou d'autres versions.
+
+## 1. Authentification API via "Generic Credential Type" / "Header Auth"
+
+Pour appeler une API externe (OpenAI, Resend, etc.) depuis un nœud HTTP Request, la méthode fiable est :
+- Authentication : `Generic Credential Type`
+- Generic Auth Type : `Header Auth`
+- Créer une credential dédiée avec :
+  - Name (du header) : `Authorization`
+  - Value : `Bearer VOTRE_CLE_API` — le mot `Bearer` avec un espace doit être tapé explicitement, il n'est jamais ajouté automatiquement par n8n.
+- Ne jamais construire l'en-tête Authorization manuellement via une expression (`{{ 'Bearer ' + $env.MA_CLE }}`) si les variables d'environnement ne sont pas configurables sur l'instance (fréquent sur certains hébergements) — ça donne une erreur silencieuse ou "Missing bearer or basic authentication in header".
+- Piège rencontré : après avoir sélectionné la bonne credential dans le nœud, l'erreur "Missing bearer..." peut persister si le champ Value de la credential elle-même est vide ou mal rempli. Toujours vérifier le contenu réel de la credential (Settings → Credentials), pas seulement sa sélection dans le nœud.
+- Une clé API elle-même invalide/expirée renvoie une erreur différente et plus claire : `"Incorrect API key provided: sk-proj****...XXXX"` — ça confirme que le format d'authentification est correct, seule la valeur de la clé est en cause.
+
+## 2. Format du corps de requête HTTP (JSON)
+
+Piège majeur rencontré : avec `"contentType": "json"` défini directement dans le JSON exporté du workflow (sans que le champ `"specifyBody"` soit explicitement fixé), n8n peut retomber sur le mode **"Using Fields Below" (keypair)** au lieu d'envoyer l'objet JSON attendu — résultat : un corps de requête vide ou incomplet, sans erreur visible côté n8n (l'erreur apparaît côté API distante, ex. Resend renvoyant `422 missing_required_field: Missing "to" field`, alors que le champ existe bien dans les données amont).
+
+**Solution fiable et reproductible** : utiliser explicitement
+```
+"contentType": "raw",
+"rawContentType": "application/json",
+"body": "={{ JSON.stringify({ ...objet... }) }}"
+```
+plutôt que `"contentType": "json"` avec un objet JS brut dans le champ `body`. Cette méthode a été validée sur les 7 appels HTTP du workflow (3 OpenAI + 4 Resend).
+
+Alternative validée manuellement dans l'éditeur (sans passer par le JSON) : `Body Content Type: JSON` + `Specify Body: Using JSON`, en collant l'expression `{{ JSON.stringify({...}) }}` dans le champ JSON dédié — fonctionne aussi, mais le mode "raw" ci-dessus est plus robuste car il ne dépend pas d'un sous-paramètre facile à mal configurer.
+
+## 3. Nœud IF — comparaisons numériques peu fiables
+
+Une condition simple `{{ $json.mon_nombre }}` "is greater than" `0` s'est avérée **ne pas router correctement** sur cette instance : avec `mon_nombre = 0`, l'exécution a néanmoins pris la branche "true". Cause exacte non déterminée (coercition de type possible), mais le contournement suivant est fiable :
+
+Remplacer la comparaison native du nœud IF par une expression booléenne explicite calculée en JavaScript, avec un opérateur "Boolean equals" :
+```
+leftValue: {{ !!$json.champ_cle && Number($json.mon_nombre) > 0 }}
+rightValue: true
+operator: { type: "boolean", operation: "equals" }
+```
+Cette approche a corrigé un routage erroné en production (des e-mails sans pièce jointe passaient quand même vers le traitement OCR, provoquant une erreur).
+
+**Recommandation générale** : pour toute logique de routage critique dans un IF node sur cette instance, préférer une expression booléenne unique plutôt qu'une comparaison typée (nombre, date) native du nœud.
+
+## 4. Nœud Email Trigger (IMAP) — pièges spécifiques
+
+- **`downloadAttachments`** est un paramètre de **premier niveau** dans les `parameters` du nœud sur cette version, pas imbriqué sous `options`. Un JSON exporté avec `options: { downloadAttachments: true }` fait que le nœud affiche "Download Attachments" désactivé par défaut dans l'éditeur (aucune erreur, juste silencieusement ignoré) — il faut l'activer manuellement ou corriger la structure du JSON.
+- **Comportement de test** : contrairement à un Webhook, le nœud Email Trigger doit être mis en écoute (bouton "Execute workflow") **avant** l'arrivée du nouvel e-mail, pas après. Un e-mail déjà présent (non lu) au moment du clic peut ne pas être détecté selon le mode de fonctionnement (IDLE ou polling ponctuel).
+- **Boîte mail partagée avec un autre système automatisé** : si la boîte surveillée (ex. `contact@domaine.com`) est aussi utilisée par un autre workflow (CRM, support, chatbot), ce dernier peut générer ses propres notifications internes **dans la même boîte**, parfois envoyées par la boîte elle-même vers elle-même. Un test qui contient du texte "instructionnel" ou ambigu dans le corps du message peut déclencher une classification automatique côté autre système ("intervention humaine requise"), générant une nouvelle notification à chaque nouvel envoi de test — créant une boucle de bruit qui masque le véritable message à traiter.
+  - **Contournement** : dans le code qui extrait les métadonnées de l'e-mail entrant, exclure explicitement les e-mails dont l'expéditeur correspond à l'adresse de la boîte elle-même (`fromEmail === adresse_surveillee`), en forçant le nombre de pièces jointes à 0 pour ces cas — ils sont alors routés proprement vers une branche "ignorer" au lieu de faire planter le traitement en aval.
+  - **Bonne pratique pour les tests futurs** : utiliser une boîte mail dédiée aux tests (distincte de l'adresse de contact commerciale en production), et rédiger un corps de message simple et neutre plutôt que de coller des instructions techniques.
+
+## 5. Mise à jour de workflow via l'API n8n (`PUT /api/v1/workflows/{id}`)
+
+- Il est possible de lire un workflow existant (`GET`), fusionner ses associations de credentials réelles (par nom de nœud) avec une version corrigée du JSON, et repousser le tout (`PUT`) — utile pour appliquer des corrections de texte/logique sans perdre les credentials déjà configurées manuellement.
+- **Limite observée** : la persistance de l'association `credentials` via l'API n'est pas toujours garantie pour tous les types de nœuds ; après une mise à jour via API, il reste recommandé de **revérifier manuellement dans l'éditeur** que chaque credential est bien sélectionnée et fonctionnelle (tester un appel réel), plutôt que de faire confiance uniquement à la réponse HTTP 200 de l'API.
+- Mettre à jour un workflow via l'API pendant qu'un autre onglet du navigateur a le même workflow ouvert peut déclencher un conflit de version ("someone else just updated this workflow") lors d'une tentative de sauvegarde/publication depuis cet onglet resté ouvert — sans gravité, il suffit de recharger la page.
+
+## 6. "Publish" vs "Active" (toggle d'activation)
+
+Sur cette version de n8n, le bouton **"Publish"** (avec nom de version, changelog) est une fonctionnalité distincte du toggle classique **"Active"** qui active réellement les déclencheurs en arrière-plan (webhook production, polling IMAP). Pour tester un workflow via `webhook-test` ou "Execute workflow", **aucune publication n'est nécessaire** — ne pas se laisser bloquer par des erreurs de "Publish" lors de simples tests.
+
+## 7. Résumé des symptômes rencontrés → causes réelles
+
+| Symptôme observé | Cause réelle |
+|---|---|
+| Exécution "Succeeded" en quelques ms, aucun nœud après le trigger ne s'exécute | Le webhook était en `responseMode: onReceived` alors qu'aucun nœud suivant n'avait encore été testé ; dans d'autres cas, `Execute workflow` cliqué trop tôt/tard par rapport à l'événement réel |
+| Erreur Resend "Missing `to` field" malgré un champ `to` présent dans les données | `contentType: json` sans body JSON correctement spécifié → corps vide envoyé |
+| Erreur OpenAI "Missing bearer or basic authentication" | En-tête Authorization jamais réellement envoyé malgré credential apparemment sélectionnée |
+| Erreur OpenAI "Incorrect API key provided" | Authentification correctement formée, mais clé elle-même invalide/expirée |
+| E-mail sans pièce jointe route quand même vers le traitement OCR | Comparaison numérique native du nœud IF peu fiable |
+| Le même e-mail de notification interne réapparaît à chaque test | Boucle de contamination avec un autre système partageant la même boîte mail |
