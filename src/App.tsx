@@ -53,6 +53,7 @@ const Sitemap = lazy(() => import("./pages/Sitemap"));
 const BackOffice = lazy(() => import("./pages/BackOffice"));
 const QuestionnaireAuditPage = lazy(() => import("./pages/QuestionnaireAuditPage"));
 const SupportITDemoPage = lazy(() => import("./pages/SupportITDemoPage"));
+const DocumentRagDemoPage = lazy(() => import("./pages/DocumentRagDemoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -257,6 +258,7 @@ const AnimatedRoutes = () => {
           <Route path="/preview/prise-rdv" element={<AppointmentPreview />} />
           <Route path="/questionnaire-audit" element={<QuestionnaireAuditPage />} />
           <Route path="/demo/support-it-intelligent" element={<SupportITDemoPage />} />
+          <Route path="/demo/recherche-documentaire" element={<DocumentRagDemoPage />} />
           <Route path="/back-office" element={<BackOffice />} />
           <Route path="/back-office/newsletters" element={<NewsletterBackOffice />} />
           <Route path="*" element={<NotFound />} />
