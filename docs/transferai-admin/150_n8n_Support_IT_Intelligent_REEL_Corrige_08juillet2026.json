@@ -1,0 +1,395 @@
+{
+  "name": "TransferAI — Support IT Intelligent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ticket-it",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "2040caf4-704c-495b-be7f-a43c8a22e99a",
+      "name": "📥 Réception Ticket",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1104,
+        160
+      ],
+      "webhookId": "transferai-ticket-it-001",
+      "notes": "Point d'entrée : email, formulaire web, WhatsApp, Teams"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalisation et enrichissement du ticket entrant\nconst body = $input.first().json.body || $input.first().json;\n\nconst ticket = {\n  id: `TKT-${Date.now()}`,\n  timestamp: new Date().toISOString(),\n  source: body.source || 'web',\n  utilisateur: {\n    nom: body.nom || body.name || 'Inconnu',\n    email: body.email || '',\n    departement: body.departement || body.department || 'Non précisé'\n  },\n  sujet: body.sujet || body.subject || body.titre || '',\n  description: body.description || body.message || body.contenu || '',\n  urgence_declaree: body.urgence || body.priority || 'normal',\n  tags: body.tags || []\n};\n\n// Validation minimale\nif (!ticket.sujet && !ticket.description) {\n  throw new Error('Ticket invalide : sujet ou description requis');\n}\n\nreturn [{ json: ticket }];"
+      },
+      "id": "a0c15c0b-454b-4d0b-8b21-1cdc8d0f7500",
+      "name": "🔧 Normalisation Ticket",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -880,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const ticket = $('🔧 Normalisation Ticket').first().json;\nconst aiRaw = $input.first().json.output?.[0]?.content?.[0]?.text || $input.first().json.text || $input.first().json.message?.content || $input.first().json.choices?.[0]?.message?.content || '';\n\nlet diagnostic;\ntry {\n  // Nettoyer les backticks si présents\n  const cleaned = aiRaw.replace(/```json|```/g, '').trim();\n  diagnostic = JSON.parse(cleaned);\n} catch(e) {\n  // Fallback si parsing échoue\n  diagnostic = {\n    categorie: 'autre',\n    criticite: 'P3',\n    score_confiance: 0.5,\n    resolution_automatique_possible: false,\n    reponse_utilisateur: 'Votre ticket a été reçu et est en cours d\\'analyse par notre équipe.',\n    instructions_technicien: 'Analyser manuellement. Parsing IA échoué.',\n    mots_cles: [],\n    temps_resolution_estime: '4h',\n    equipe_recommandee: 'Management',\n    justification: 'Fallback — réponse IA non parsable'\n  };\n}\n\n// SLA calculé une seule fois ici (source unique de vérité, réutilisée par les nœuds suivants)\nconst slaOffsetsHeures = { P1: 1, P2: 4, P3: 8, P4: 24 };\nconst heuresSla = slaOffsetsHeures[diagnostic.criticite] || 8;\nconst slaDeadline = new Date();\nslaDeadline.setHours(slaDeadline.getHours() + heuresSla);\n\n// Enrichissement final\nconst result = {\n  ...ticket,\n  diagnostic: {\n    ...diagnostic,\n    traite_le: new Date().toISOString(),\n    sla_deadline: slaDeadline.toISOString(),\n    sla_target_minutes: heuresSla * 60\n  },\n  routing: {\n    auto_resolvable: diagnostic.score_confiance >= 0.85 && diagnostic.resolution_automatique_possible,\n    escalade_requise: diagnostic.score_confiance < 0.85 || !diagnostic.resolution_automatique_possible\n  }\n};\n\nreturn [{ json: result }];"
+      },
+      "id": "090e7849-e7fb-4825-9d2e-d751da1fe541",
+      "name": "⚙️ Parse & Enrich Diagnostic",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond-auto",
+              "leftValue": "={{ $json.routing.auto_resolvable }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f6e0e62b-0afd-4e7b-bf2c-9aaa179b28ca",
+      "name": "🔀 Routage Intelligent",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        144,
+        160
+      ],
+      "notes": "true → Résolution automatique | false → Escalade humaine"
+    },
+    {
+      "parameters": {
+        "fromEmail": "marius.ayoro70@gmail.com",
+        "toEmail": "={{ $json.utilisateur.email }}",
+        "subject": "=[✅ Résolu automatiquement] {{ $json.sujet }} — {{ $json.id }}",
+        "html": "=<!DOCTYPE html><html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;background:#f5f5f5\"><div style=\"background:white;border-radius:8px;padding:30px;border-left:4px solid #00D4FF\"><div style=\"display:flex;align-items:center;gap:10px;margin-bottom:20px\"><span style=\"font-size:24px\">🤖</span><h2 style=\"margin:0;color:#070C14\">Support IT Intelligent</h2></div><p style=\"color:#333\">Bonjour <strong>{{ $json.utilisateur.nom }}</strong>,</p><p style=\"color:#333;line-height:1.6\">{{ $json.diagnostic.reponse_utilisateur }}</p><div style=\"background:#f0f9ff;border-radius:6px;padding:16px;margin:20px 0\"><p style=\"margin:0;font-size:13px;color:#666\"><strong>📋 Référence :</strong> {{ $json.id }}<br><strong>⏱ Traité en :</strong> &lt; 30 secondes<br><strong>🏷 Catégorie :</strong> {{ $json.diagnostic.categorie }}<br><strong>📊 Priorité :</strong> {{ $json.diagnostic.criticite }}</p></div><p style=\"color:#333\">Si le problème persiste, répondez directement à cet email.</p><hr style=\"border:none;border-top:1px solid #eee;margin:20px 0\"><p style=\"font-size:12px;color:#999\">TransferAI Africa — Support IT Intelligent | marius.ayoro70@gmail.com</p></div></body></html>",
+        "options": {}
+      },
+      "id": "f410e608-7fb4-4d36-8db9-d53946bd412f",
+      "name": "📧 Email Résolution Auto",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        0
+      ],
+      "webhookId": "40e0702a-b9a1-4d02-a9c5-27886ab88a92",
+      "credentials": {
+        "smtp": {
+          "id": "2rceMN3R83rMjaaA",
+          "name": "SMTP TransferAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "marius.ayoro70@gmail.com",
+        "toEmail": "={{ $json.utilisateur.email }}",
+        "subject": "=[Ticket {{ $json.diagnostic.criticite }}] {{ $json.sujet }} — {{ $json.id }}",
+        "html": "=<!DOCTYPE html><html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;background:#f5f5f5\"><div style=\"background:white;border-radius:8px;padding:30px;border-left:4px solid #FF6B35\"><div style=\"display:flex;align-items:center;gap:10px;margin-bottom:20px\"><span style=\"font-size:24px\">🎫</span><h2 style=\"margin:0;color:#070C14\">Ticket IT Enregistré</h2></div><p style=\"color:#333\">Bonjour <strong>{{ $json.utilisateur.nom }}</strong>,</p><p style=\"color:#333;line-height:1.6\">{{ $json.diagnostic.reponse_utilisateur }}</p><div style=\"background:#fff4f0;border-radius:6px;padding:16px;margin:20px 0\"><p style=\"margin:0;font-size:13px;color:#666\"><strong>📋 Référence :</strong> {{ $json.id }}<br><strong>🚨 Priorité :</strong> {{ $json.diagnostic.criticite }}<br><strong>⏰ Délai de résolution :</strong> {{ $json.diagnostic.temps_resolution_estime }}<br><strong>👥 Équipe assignée :</strong> {{ $json.diagnostic.equipe_recommandee }}</p></div><p style=\"color:#333\">Nous vous tiendrons informé de l'avancement.</p><hr style=\"border:none;border-top:1px solid #eee;margin:20px 0\"><p style=\"font-size:12px;color:#999\">TransferAI Africa — Support IT Intelligent | marius.ayoro70@gmail.com</p></div></body></html>",
+        "options": {}
+      },
+      "id": "af35c35d-e34e-4b03-9ff7-a2767d401450",
+      "name": "📧 Email Accusé + Escalade",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        208
+      ],
+      "webhookId": "2f26b896-b6cd-43d1-a2a1-911fe2ec60b7",
+      "credentials": {
+        "smtp": {
+          "id": "2rceMN3R83rMjaaA",
+          "name": "SMTP TransferAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "marius.ayoro70@gmail.com",
+        "toEmail": "=support-ia@transferai.ci",
+        "subject": "=[🔴 ESCALADE {{ $json.diagnostic.criticite }}] {{ $json.sujet }} — {{ $json.id }}",
+        "html": "=<!DOCTYPE html><html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;background:#f5f5f5\"><div style=\"background:white;border-radius:8px;padding:30px;border-left:4px solid #FF4D6D\"><div style=\"display:flex;align-items:center;gap:10px;margin-bottom:20px\"><span style=\"font-size:24px\">🚨</span><h2 style=\"margin:0;color:#070C14\">Escalade Technicien — IA</h2></div><div style=\"background:#fff0f3;border-radius:6px;padding:16px;margin-bottom:20px\"><p style=\"margin:0;font-size:13px\"><strong>ID :</strong> {{ $json.id }}<br><strong>Utilisateur :</strong> {{ $json.utilisateur.nom }} ({{ $json.utilisateur.departement }})<br><strong>Email :</strong> {{ $json.utilisateur.email }}<br><strong>Priorité :</strong> <span style=\"color:#FF4D6D;font-weight:bold\">{{ $json.diagnostic.criticite }}</span><br><strong>Deadline SLA :</strong> {{ $json.diagnostic.sla_deadline }}<br><strong>Équipe recommandée :</strong> {{ $json.diagnostic.equipe_recommandee }}</p></div><div style=\"background:#f9f9f9;border-radius:6px;padding:16px;margin-bottom:20px\"><p style=\"margin:0 0 8px;font-weight:bold;color:#333\">📋 Sujet :</p><p style=\"margin:0;color:#333\">{{ $json.sujet }}</p></div><div style=\"background:#fffbea;border-radius:6px;padding:16px;margin-bottom:20px;border:1px solid #FFD166\"><p style=\"margin:0 0 8px;font-weight:bold;color:#333\">⚡ Instructions technicien :</p><p style=\"margin:0;color:#555;font-size:13px\">{{ $json.diagnostic.instructions_technicien }}</p></div><hr style=\"border:none;border-top:1px solid #eee;margin:20px 0\"><p style=\"font-size:12px;color:#999\">TransferAI Africa — Généré automatiquement</p></div></body></html>",
+        "options": {}
+      },
+      "id": "2e316092-dc09-4f42-8d23-b8e44d407750",
+      "name": "📧 Brief Technicien (IA)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        400
+      ],
+      "webhookId": "3bacde1a-d2f6-4584-b994-65af61396807",
+      "credentials": {
+        "smtp": {
+          "id": "2rceMN3R83rMjaaA",
+          "name": "SMTP TransferAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Calcul SLA et log pour le dashboard (trace d'exécution — la persistance réelle\n// est faite côté Supabase par l'Edge Function it-support-demo-ticket qui appelle ce webhook)\nconst data = $('⚙️ Parse & Enrich Diagnostic').first().json;\nconst isAuto = data.routing.auto_resolvable;\n\nconst heures = Math.round(data.diagnostic.sla_target_minutes / 60) || 8;\n\n// Temps de triage réel mesuré (réception webhook -> diagnostic IA parsé), plus fiable\n// qu'une valeur aléatoire pour un pitch qui promet un ROI mesurable.\nconst triageMs = new Date(data.diagnostic.traite_le).getTime() - new Date(data.timestamp).getTime();\nconst triageSecondes = Math.max(0, Math.round(triageMs / 1000));\n\nconst log = {\n  ticket_id: data.id,\n  timestamp: new Date().toISOString(),\n  utilisateur: data.utilisateur,\n  sujet: data.sujet,\n  source: data.source,\n  diagnostic: {\n    categorie: data.diagnostic.categorie,\n    criticite: data.diagnostic.criticite,\n    score_confiance: data.diagnostic.score_confiance,\n    equipe: data.diagnostic.equipe_recommandee,\n    temps_estime: data.diagnostic.temps_resolution_estime\n  },\n  traitement: {\n    mode: isAuto ? 'AUTOMATIQUE' : 'ESCALADE_HUMAINE',\n    sla_heures: heures,\n    sla_deadline: data.diagnostic.sla_deadline,\n    sla_status: 'EN_COURS'\n  },\n  kpis: {\n    temps_triage_secondes: triageSecondes,\n    resolution_auto: isAuto\n  }\n};\n\nconsole.log('TICKET_LOG:', JSON.stringify(log));\nreturn [{ json: log }];"
+      },
+      "id": "3d418987-3012-4958-82bf-08fe0bfe479e",
+      "name": "📊 Log SLA & Dashboard",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "X-TransferAI-Version",
+                "value": "1.0"
+              }
+            ]
+          }
+        }
+      },
+      "id": "527bba0e-6e46-404f-9bcd-1a17d8dd9861",
+      "name": "✅ Réponse API",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        928,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Tu es un agent IA spécialisé en support IT pour entreprises. Analyse chaque ticket et retourne UNIQUEMENT un objet JSON valide (sans markdown, sans commentaires) avec cette structure exacte :\n{\"categorie\": \"<reseau|securite|hardware|software|acces_droits|email|impression|telephonie|autre>\",\"criticite\": \"<P1|P2|P3|P4>\",\"score_confiance\": <0.0 à 1.0>,\"resolution_automatique_possible\": <true|false>,\"reponse_utilisateur\": \"<message clair en français, max 3 phrases>\",\"instructions_technicien\": \"<instructions détaillées si escalade>\",\"mots_cles\": [\"<mot1>\",\"<mot2>\"],\"temps_resolution_estime\": \"<ex: 15min, 2h, 1j>\",\"equipe_recommandee\": \"<Infra|Sécurité|Poste de travail|Applications|Réseau|Management>\",\"justification\": \"<explication courte>\"}\nP1=système critique en panne, P2=dysfonctionnement majeur, P3=problème individuel bloquant, P4=demande non urgente. Si score_confiance >= 0.85, resolution_automatique_possible peut être true."
+            },
+            {
+              "content": "=Ticket IT à analyser :\nID: {{ $json.id }}\nUtilisateur: {{ $json.utilisateur.nom }} ({{ $json.utilisateur.departement }})\nSujet: {{ $json.sujet }}\nDescription: {{ $json.description }}\nUrgence déclarée: {{ $json.urgence_declaree }}\nSource: {{ $json.source }}"
+            }
+          ]
+        },
+        "simplify": false,
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -672,
+        160
+      ],
+      "id": "70cf28e4-b9d0-42e1-aacf-f2898242f711",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "bKdbUjN9yQyWpjjd",
+          "name": "OpenAi API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const diag = $('⚙️ Parse & Enrich Diagnostic').first().json;\nconst isAuto = diag.routing.auto_resolvable;\n\nreturn [{\n  json: {\n    status: 'ok',\n    ticket_id: diag.id,\n    mode_traitement: isAuto ? 'AUTOMATIQUE' : 'ESCALADE_HUMAINE',\n    decision: isAuto ? 'auto_resolved' : 'escalated',\n    criticite: diag.diagnostic.criticite,\n    categorie: diag.diagnostic.categorie,\n    category: diag.diagnostic.categorie,\n    confidence: diag.diagnostic.score_confiance,\n    response_text: diag.diagnostic.reponse_utilisateur,\n    escalated_to: isAuto ? '' : diag.diagnostic.equipe_recommandee,\n    equipe: diag.diagnostic.equipe_recommandee,\n    sla_deadline: diag.diagnostic.sla_deadline,\n    sla_target_minutes: diag.diagnostic.sla_target_minutes,\n    message: 'Ticket enregistré et traité avec succès'\n  }\n}];"
+      },
+      "id": "b6e1a8b1-6b0a-4c1a-9a1a-1f2a3b4c5d6e",
+      "name": "🧾 Construire réponse API",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        160
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "📥 Réception Ticket": {
+      "main": [
+        [
+          {
+            "node": "🔧 Normalisation Ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔧 Normalisation Ticket": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "⚙️ Parse & Enrich Diagnostic": {
+      "main": [
+        [
+          {
+            "node": "🔀 Routage Intelligent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 Routage Intelligent": {
+      "main": [
+        [
+          {
+            "node": "📧 Email Résolution Auto",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "📧 Email Accusé + Escalade",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "📧 Brief Technicien (IA)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📧 Email Résolution Auto": {
+      "main": [
+        [
+          {
+            "node": "📊 Log SLA & Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📧 Brief Technicien (IA)": {
+      "main": [
+        [
+          {
+            "node": "📊 Log SLA & Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📊 Log SLA & Dashboard": {
+      "main": [
+        [
+          {
+            "node": "🧾 Construire réponse API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "⚙️ Parse & Enrich Diagnostic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🧾 Construire réponse API": {
+      "main": [
+        [
+          {
+            "node": "✅ Réponse API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c1e72d50-cbe9-4d54-9246-448f3ad65d91",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aced0764dbb20af018110b342a4f8545752b0bb9edbf513976ac9392526f1e6a",
+    "description": "Version corrigée le 2026-07-08 : sla_target_minutes calculé une seule fois, temps de triage réel (plus de valeur aléatoire), réponse API construite via JSON.stringify (évite les JSON invalides si le texte généré par l'IA contient des guillemets/retours à la ligne), et ajout des champs response_text/category/confidence/decision/escalated_to consommés par la page /demo/support-it-intelligent de connect-ia-bloom via l'Edge Function it-support-demo-ticket."
+  },
+  "id": "BlPGTikTdJdyzDOq",
+  "tags": [
+    {
+      "updatedAt": "2026-05-17T12:48:12.698Z",
+      "createdAt": "2026-05-17T12:48:12.698Z",
+      "id": "MxuQNlw7AqV9MORe",
+      "name": "Demo Live"
+    },
+    {
+      "updatedAt": "2026-05-17T12:48:12.694Z",
+      "createdAt": "2026-05-17T12:48:12.694Z",
+      "id": "Tlt4SNPEJbbS9N40",
+      "name": "Support IT"
+    },
+    {
+      "updatedAt": "2026-05-17T12:48:12.658Z",
+      "createdAt": "2026-05-17T12:48:12.658Z",
+      "id": "r82pHujAIa2DukfO",
+      "name": "TransferAI"
+    }
+  ]
+}
