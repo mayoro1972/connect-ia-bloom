@@ -169,6 +169,45 @@ Deno.serve(async (req) => {
         </table>`
       : `<p style="color:#666"><em>Aucun nouveau prospect formation dans les dernières 24h.</em></p>`;
 
+    // --- Décideurs ---
+    const { data: decideursRows, error: decideursError } = await supabase
+      .from("decideurs_formation_registrations")
+      .select("created_at, full_name, organization, function_title, sector, email, session_date, session_label, main_priority, status")
+      .order("created_at", { ascending: false });
+    if (decideursError) throw decideursError;
+
+    const allDecideurs = decideursRows ?? [];
+    const newDecideurs = allDecideurs.filter((r) => r.created_at >= since);
+    const decideursSessionCounts = { "2026-07-29": 0, "2026-08-10": 0, other: 0 };
+    allDecideurs.forEach((r) => {
+      if (r.session_date === "2026-07-29") decideursSessionCounts["2026-07-29"] += 1;
+      else if (r.session_date === "2026-08-10") decideursSessionCounts["2026-08-10"] += 1;
+      else decideursSessionCounts.other += 1;
+    });
+
+    const decideursNewHtml = newDecideurs.length
+      ? `<table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:12px">
+          <thead><tr style="background:#f3f4f6">
+            <th align="left" style="padding:6px;border:1px solid #e5e7eb">Nom</th>
+            <th align="left" style="padding:6px;border:1px solid #e5e7eb">Entreprise</th>
+            <th align="left" style="padding:6px;border:1px solid #e5e7eb">Fonction</th>
+            <th align="left" style="padding:6px;border:1px solid #e5e7eb">Secteur</th>
+            <th align="left" style="padding:6px;border:1px solid #e5e7eb">Session</th>
+            <th align="left" style="padding:6px;border:1px solid #e5e7eb">Enjeu principal</th>
+          </tr></thead>
+          <tbody>
+            ${newDecideurs.map((r) => `<tr>
+              <td style="padding:6px;border:1px solid #e5e7eb">${esc(r.full_name)}</td>
+              <td style="padding:6px;border:1px solid #e5e7eb">${esc(r.organization)}</td>
+              <td style="padding:6px;border:1px solid #e5e7eb">${esc(r.function_title)}</td>
+              <td style="padding:6px;border:1px solid #e5e7eb">${esc(r.sector)}</td>
+              <td style="padding:6px;border:1px solid #e5e7eb">${esc(r.session_label)}</td>
+              <td style="padding:6px;border:1px solid #e5e7eb;font-size:12px;color:#555">${esc((r.main_priority || "").slice(0, 140))}</td>
+            </tr>`).join("")}
+          </tbody>
+        </table>`
+      : `<p style="color:#666"><em>Aucun nouveau décideur inscrit dans les dernières 24h.</em></p>`;
+
     const today = new Date().toLocaleDateString("fr-FR", { timeZone: "Africa/Abidjan", day: "2-digit", month: "long", year: "numeric" });
 
     const html = `
@@ -199,6 +238,17 @@ Deno.serve(async (req) => {
         <p><strong>${newFormation.length}</strong> nouveau(x) prospect(s) formation dans les dernières 24h :</p>
         ${formationNewHtml}
 
+        <h3 style="color:#12233f;border-bottom:2px solid #0d9488;padding-bottom:6px;margin-top:32px">IA pour Décideurs</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+          <tr style="background:#f3f4f6">
+            <td style="padding:8px;border:1px solid #e5e7eb;text-align:center"><strong>${decideursSessionCounts["2026-07-29"]}</strong><br/><span style="color:#666">Session 29 juillet</span></td>
+            <td style="padding:8px;border:1px solid #e5e7eb;text-align:center"><strong>${decideursSessionCounts["2026-08-10"]}</strong><br/><span style="color:#666">Session 10 août</span></td>
+            <td style="padding:8px;border:1px solid #e5e7eb;text-align:center"><strong>${allDecideurs.length}</strong><br/><span style="color:#666">Total à date</span></td>
+          </tr>
+        </table>
+        <p><strong>${newDecideurs.length}</strong> nouvelle(s) inscription(s) décideur dans les dernières 24h :</p>
+        ${decideursNewHtml}
+
         <p style="margin-top:32px">
           <a href="https://www.transferai.ci/back-office?tab=webinars" style="background:#0d9488;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none">
             Ouvrir le BackOffice
@@ -206,9 +256,9 @@ Deno.serve(async (req) => {
         </p>
       </div>`;
 
-    const subject = `[TransferAI] Point quotidien — ${newWebinar.length} webinaire(s) / ${newFormation.length} formation(s) — ${today}`;
+    const subject = `[TransferAI] Point quotidien — ${newWebinar.length} webinaire(s) / ${newFormation.length} formation(s) / ${newDecideurs.length} décideur(s) — ${today}`;
     const result = await sendEmail(getRecipients(), subject, html);
-    return new Response(JSON.stringify({ ok: true, newWebinar: newWebinar.length, newFormation: newFormation.length, sent: result }), {
+    return new Response(JSON.stringify({ ok: true, newWebinar: newWebinar.length, newFormation: newFormation.length, newDecideurs: newDecideurs.length, sent: result }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
