@@ -6,6 +6,7 @@ import {
   FileSearch,
   Files,
   Loader2,
+  Lock,
   MessageSquareQuote,
   Search,
   Sparkles,
@@ -51,12 +52,38 @@ const emptyForm = {
   question: "",
 };
 
+const ACCESS_CODE_STORAGE_KEY = "rag_access_code";
+
 const DocumentRagDemoPage = () => {
   const [form, setForm] = useState(emptyForm);
   const [activeStep, setActiveStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [result, setResult] = useState<RagResponse | null>(null);
+  const [accessCode, setAccessCode] = useState(
+    () => sessionStorage.getItem(ACCESS_CODE_STORAGE_KEY) ?? "",
+  );
+  const [unlocked, setUnlocked] = useState(() => Boolean(sessionStorage.getItem(ACCESS_CODE_STORAGE_KEY)));
+  const [codeInput, setCodeInput] = useState("");
+
+  const handleUnlock = (event: React.FormEvent) => {
+    event.preventDefault();
+    const trimmed = codeInput.trim();
+    if (!trimmed) {
+      return;
+    }
+    sessionStorage.setItem(ACCESS_CODE_STORAGE_KEY, trimmed);
+    setAccessCode(trimmed);
+    setUnlocked(true);
+    setErrorMessage(null);
+  };
+
+  const handleLock = () => {
+    sessionStorage.removeItem(ACCESS_CODE_STORAGE_KEY);
+    setAccessCode("");
+    setCodeInput("");
+    setUnlocked(false);
+  };
 
   const canSubmit = useMemo(
     () => form.question.trim().length >= 3 && !submitting,
@@ -88,6 +115,9 @@ const DocumentRagDemoPage = () => {
       setActiveStep(2);
 
       const { data, error } = await supabase.functions.invoke("document-rag-query", {
+        headers: {
+          "x-rag-access-token": accessCode,
+        },
         body: {
           question: form.question.trim(),
           utilisateur: form.userName.trim() || "Visiteur demo",
@@ -95,10 +125,19 @@ const DocumentRagDemoPage = () => {
       });
 
       if (error || !data || data.error) {
-        const message =
-          (data && (data.detail || data.error)) ||
-          error?.message ||
-          "Le service documentaire n'a pas pu repondre.";
+        let errorBody: { error?: string; detail?: string } | null = data ?? null;
+        const context = (error as { context?: Response })?.context;
+
+        if (!errorBody && context && typeof context.json === "function") {
+          errorBody = await context.json().catch(() => null);
+        }
+
+        if (errorBody?.error === "unauthorized") {
+          handleLock();
+          throw new Error("Code d'acces incorrect. Merci de le ressaisir.");
+        }
+
+        const message = errorBody?.detail || errorBody?.error || error?.message || "Le service documentaire n'a pas pu repondre.";
         throw new Error(String(message));
       }
 
@@ -130,6 +169,46 @@ const DocumentRagDemoPage = () => {
     setActiveStep(0);
   };
 
+  if (!unlocked) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,#17324d_0%,#0b1420_40%,#060a11_100%)] px-6 text-slate-100">
+        <Card className="w-full max-w-md border-white/10 bg-[#0d1724]/90 text-slate-100 shadow-[0_30px_100px_-40px_rgba(34,211,238,0.45)]">
+          <CardHeader>
+            <div className="mb-2 inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-cyan-200">
+              <Lock className="h-3.5 w-3.5" />
+              Accès réservé
+            </div>
+            <CardTitle className="text-2xl">RAG documentaire &mdash; usage interne</CardTitle>
+            <CardDescription className="text-slate-400">
+              Cette page est réservée aux collègues TransferAI. Saisis le code d&apos;accès communiqué en interne pour
+              continuer.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form className="space-y-4" onSubmit={handleUnlock}>
+              <Input
+                type="password"
+                value={codeInput}
+                onChange={(event) => setCodeInput(event.target.value)}
+                placeholder="Code d'accès"
+                autoFocus
+                className="border-white/10 bg-slate-950/40 text-slate-100 placeholder:text-slate-500"
+              />
+              {errorMessage ? (
+                <div className="rounded-2xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-100">
+                  {errorMessage}
+                </div>
+              ) : null}
+              <Button type="submit" disabled={!codeInput.trim()} className="w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200">
+                Déverrouiller
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,#17324d_0%,#0b1420_40%,#060a11_100%)] text-slate-100">
       <div className="mx-auto max-w-6xl px-6 py-14">
@@ -152,6 +231,14 @@ const DocumentRagDemoPage = () => {
             >
               Voir aussi la demo Support IT
             </Link>
+            <button
+              type="button"
+              onClick={handleLock}
+              className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-slate-100"
+            >
+              <Lock className="h-3 w-3" />
+              Verrouiller
+            </button>
           </div>
         </div>
 

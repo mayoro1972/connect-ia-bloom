@@ -4,13 +4,14 @@ import { buildRagContext, normalizeRetrievedDocuments } from "../_shared/documen
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-rag-access-token",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const openAiApiKey = Deno.env.get("OPENAI_API_KEY") ?? "";
+const accessToken = Deno.env.get("DOCUMENT_RAG_ACCESS_TOKEN") ?? "";
 const answerModel = Deno.env.get("OPENAI_DOCUMENT_RAG_MODEL")?.trim() || "gpt-4o";
 const embeddingModel = Deno.env.get("OPENAI_DOCUMENT_RAG_EMBEDDING_MODEL")?.trim() || "text-embedding-3-small";
 const matchThreshold = Number(Deno.env.get("DOCUMENT_RAG_MATCH_THRESHOLD") ?? "0.72");
@@ -88,6 +89,16 @@ Deno.serve(async (req) => {
       error: "missing_server_configuration",
       detail: "SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY et OPENAI_API_KEY sont requis.",
     }, 500);
+  }
+
+  if (accessToken) {
+    const providedToken = req.headers.get("x-rag-access-token") ?? "";
+    if (providedToken !== accessToken) {
+      return jsonResponse({
+        error: "unauthorized",
+        detail: "Code d'acces manquant ou invalide.",
+      }, 401);
+    }
   }
 
   let payload: RagRequestPayload;
