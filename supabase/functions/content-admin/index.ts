@@ -558,8 +558,7 @@ const listNewsletters = async () => {
       .from("newsletter_issues")
       .select("*")
       .order("issue_date", { ascending: false })
-      .order("created_at", { ascending: false })
-      .limit(24),
+      .order("created_at", { ascending: false }),
     supabase
       .from("newsletter_subscriptions")
       .select("id", { count: "exact", head: true })

@@ -22,6 +22,11 @@ const requireScheduler = (request: Request) => {
   return false;
 };
 
+const requireAdmin = (request: Request) => {
+  const token = request.headers.get("x-admin-token") ?? "";
+  return CONTENT_ADMIN_TOKEN.length > 0 && token === CONTENT_ADMIN_TOKEN;
+};
+
 const todayIsoDate = () => new Date().toISOString().slice(0, 10);
 
 const formatIssueDateFr = (issueDate: string | null | undefined) => {
@@ -59,7 +64,7 @@ const invokeEdgeFunction = async (functionName: string, payload: Record<string, 
   return data;
 };
 
-const sendReminderEmail = async (subject: string, html: string) => {
+const sendReminderEmail = async (subject: string, html: string, recipients = REVIEW_REMINDER_RECIPIENTS) => {
   if (!RESEND_API_KEY) {
     throw new Error("Missing RESEND_API_KEY");
   }
@@ -72,7 +77,7 @@ const sendReminderEmail = async (subject: string, html: string) => {
     },
     body: JSON.stringify({
       from: MAIL_FROM,
-      to: REVIEW_REMINDER_RECIPIENTS,
+      to: recipients,
       subject,
       html,
     }),
@@ -177,15 +182,22 @@ const runWeeklyAuto = async () => {
   };
 };
 
-const runReviewReminder = async () => {
-  const { data: pendingIssues, error } = await editorialClient
+const runReviewReminder = async (options: { issueId?: string; testEmail?: string } = {}) => {
+  let pendingIssuesQuery = editorialClient
     .from("newsletter_issues")
     .select("id, title, status, issue_date, created_at, updated_at")
     .in("language", [...supportedLanguages])
-    .in("status", ["draft", "review"])
     .is("sent_at", null)
     .order("created_at", { ascending: false })
     .limit(3);
+
+  if (options.issueId) {
+    pendingIssuesQuery = pendingIssuesQuery.eq("id", options.issueId);
+  } else {
+    pendingIssuesQuery = pendingIssuesQuery.in("status", ["draft", "review"]);
+  }
+
+  const { data: pendingIssues, error } = await pendingIssuesQuery;
 
   if (error) {
     throw error;
@@ -202,8 +214,9 @@ const runReviewReminder = async () => {
   }
 
   const issueDateLabel = formatIssueDateFr(pendingIssue.issue_date);
-  const reviewUrl = "https://www.transferai.ci/back-office";
-  const subject = `[Newsletter] Validation requise avant vendredi — ${pendingIssue.title}`;
+  const reviewUrl = `https://www.transferai.ci/back-office/newsletters?issue=${pendingIssue.id}&mode=email`;
+  const subjectPrefix = options.testEmail ? "[TEST] " : "";
+  const subject = `${subjectPrefix}[Newsletter] Validation requise avant vendredi — ${pendingIssue.title}`;
   const html = `
     <div style="font-family:Arial,sans-serif;background:#f7f8fa;padding:24px;">
       <div style="max-width:680px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4e7ec;">
@@ -215,23 +228,24 @@ const runReviewReminder = async () => {
           <p style="margin:0 0 10px;color:#101828;"><strong>Date d'édition :</strong> ${issueDateLabel}</p>
           <p style="margin:0;color:#101828;"><strong>Statut actuel :</strong> ${pendingIssue.status}</p>
         </div>
-        <p style="margin:0 0 14px;color:#475467;">Action attendue aujourd'hui : relire le brouillon, envoyer un test si nécessaire, puis passer l'édition en <strong>approved</strong> ou <strong>scheduled</strong> pour autoriser l'envoi automatique du vendredi.</p>
+        ${options.testEmail ? `<p style="margin:0 0 14px;color:#475467;"><strong>Mode test :</strong> ce rappel vous a été renvoyé manuellement pour vérification du parcours de review.</p>` : ""}
+        <p style="margin:0 0 14px;color:#475467;">Action attendue aujourd'hui : ouvrir cette newsletter, la modifier si besoin, ajouter de nouveaux éléments, enregistrer vos changements, envoyer un test si nécessaire, puis utiliser les actions <strong>Approuver</strong>, <strong>Régénérer</strong> ou <strong>Rejeter</strong> selon votre décision avant l'envoi automatique du vendredi.</p>
         <p style="margin:24px 0 0;">
           <a href="${reviewUrl}" style="display:inline-block;background:#f28c28;color:#ffffff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;">
-            Ouvrir le back-office
+            Ouvrir et éditer la newsletter
           </a>
         </p>
       </div>
     </div>
   `;
 
-  await sendReminderEmail(subject, html);
+  await sendReminderEmail(subject, html, options.testEmail ? [options.testEmail] : REVIEW_REMINDER_RECIPIENTS);
 
   return {
     action: "review-reminder",
     skipped: false,
     issue: pendingIssue,
-    recipients: REVIEW_REMINDER_RECIPIENTS,
+    recipients: options.testEmail ? [options.testEmail] : REVIEW_REMINDER_RECIPIENTS,
   };
 };
 
@@ -302,11 +316,11 @@ Deno.serve(async (request) => {
     return json(500, { error: "Missing scheduler configuration." });
   }
 
-  if (!requireScheduler(request)) {
+  if (!requireScheduler(request) && !requireAdmin(request)) {
     return json(401, { error: "Unauthorized." });
   }
 
-  let body: { action?: string } = {};
+  let body: { action?: string; issue_id?: string; test_email?: string } = {};
 
   try {
     body = await request.json();
@@ -330,7 +344,12 @@ Deno.serve(async (request) => {
     }
 
     if (action === "review-reminder") {
-      return json(200, { data: await runReviewReminder() });
+      return json(200, {
+        data: await runReviewReminder({
+          issueId: body.issue_id,
+          testEmail: body.test_email,
+        }),
+      });
     }
 
     return json(400, { error: "Unsupported action." });

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
@@ -14,11 +14,14 @@ import { invokeContentAdmin } from "@/lib/content-admin";
 const ADMIN_TOKEN_STORAGE_KEY = "transferai-admin-token";
 
 const NewsletterBackOfficePage = () => {
+  const [searchParams] = useSearchParams();
   const [tokenInput, setTokenInput] = useState("");
   const [adminToken, setAdminToken] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isBusy, setIsBusy] = useState(false);
+  const initialIssueId = searchParams.get("issue");
+  const initialPreviewMode = searchParams.get("mode") === "editorial" ? "editorial" : "email";
 
   useEffect(() => {
     const storedToken = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY) ?? "";
@@ -153,6 +156,8 @@ const NewsletterBackOfficePage = () => {
                   token={adminToken}
                   isReady={isReady}
                   isBusyGlobal={isBusy}
+                  initialIssueId={initialIssueId}
+                  initialPreviewMode={initialPreviewMode}
                   onStatus={setStatusMessage}
                   onError={setErrorMessage}
                 />

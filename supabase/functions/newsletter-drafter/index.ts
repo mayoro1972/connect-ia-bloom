@@ -204,6 +204,7 @@ Deno.serve(async (request) => {
   }
 
   let body: {
+    issue_id?: string;
     issue_date?: string;
     language?: "fr" | "en";
     target_domains?: string[];
@@ -220,6 +221,7 @@ Deno.serve(async (request) => {
   }
 
   const issueDate = asString(body.issue_date, new Date().toISOString().slice(0, 10));
+  const issueId = asString(body.issue_id);
   const language = body.language === "en" ? "en" : "fr";
   const targetDomains = normalizeDomains(body.target_domains);
   const sourcePostIds = normalizeDomains(body.source_post_ids);
@@ -445,11 +447,20 @@ Deno.serve(async (request) => {
       return json(200, { data: { issue: issueWithHtml, created: false } });
     }
 
-    const { data: createdIssue, error: issueError } = await editorialClient
-      .from("newsletter_issues")
-      .insert(issueWithHtml)
-      .select("*")
-      .single();
+    const persistedIssueQuery = issueId
+      ? editorialClient
+        .from("newsletter_issues")
+        .update(issueWithHtml)
+        .eq("id", issueId)
+        .select("*")
+        .single()
+      : editorialClient
+        .from("newsletter_issues")
+        .insert(issueWithHtml)
+        .select("*")
+        .single();
+
+    const { data: createdIssue, error: issueError } = await persistedIssueQuery;
 
     if (issueError) {
       throw issueError;
@@ -466,7 +477,7 @@ Deno.serve(async (request) => {
         .eq("id", job.id);
     }
 
-    return json(200, { data: { issue: createdIssue, created: true } });
+    return json(200, { data: { issue: createdIssue, created: !issueId } });
   } catch (error) {
     if (job?.id) {
       await editorialClient

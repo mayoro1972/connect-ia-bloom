@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { invokeAdminEdgeFunction, invokeContentAdmin } from "@/lib/content-admin";
+import { renderNewsletterHtml, type NewsletterIssueRecord } from "../../../supabase/functions/_shared/newsletter";
 
 type NewsletterIssue = {
   id: string;
@@ -37,6 +38,7 @@ type NewsletterIssue = {
   last_test_sent_at: string | null;
   recipient_count: number;
   send_count: number;
+  meta: Record<string, unknown> | null;
 };
 
 type NewsletterDelivery = {
@@ -66,6 +68,8 @@ type NewsletterAdminPanelProps = {
   token: string;
   isReady: boolean;
   isBusyGlobal?: boolean;
+  initialIssueId?: string | null;
+  initialPreviewMode?: "editorial" | "email";
   onStatus: (message: string | null) => void;
   onError: (message: string | null) => void;
 };
@@ -127,10 +131,20 @@ const emptyNewsletterForm = {
   cta_label: "Découvrir les ressources TransferAI",
   cta_url: "https://www.transferai.ci/blog",
   body_markdown: "",
+  body_html: "",
+  source_post_ids: [] as string[],
   generation_source: "manual",
   generation_notes: "",
   scheduled_for: "",
+  approved_at: null as string | null,
+  sent_at: null as string | null,
+  last_test_sent_at: null as string | null,
+  recipient_count: 0,
+  send_count: 0,
+  meta: null as Record<string, unknown> | null,
 };
+
+type NewsletterFormState = typeof emptyNewsletterForm;
 
 const asLocalDateTime = (value: string | null) =>
   value ? new Date(value).toISOString().slice(0, 16) : "";
@@ -143,7 +157,33 @@ const toIsoOrNull = (value: string) => {
   return new Date(value).toISOString();
 };
 
-const NewsletterPreview = ({ form }: { form: typeof emptyNewsletterForm }) => (
+const buildPreviewIssue = (form: NewsletterFormState): NewsletterIssueRecord => ({
+  id: form.id || "preview",
+  issue_date: form.issue_date,
+  language: form.language === "en" ? "en" : "fr",
+  status: form.status,
+  title: form.title || "Titre de l’édition newsletter",
+  subject: form.subject || "Objet de l’email",
+  preheader: form.preheader || null,
+  intro: form.intro || null,
+  target_domains: form.target_domains,
+  highlight_title: form.highlight_title || null,
+  highlight_summary: form.highlight_summary || null,
+  highlight_url: form.highlight_url || null,
+  tip_title: form.tip_title || null,
+  tip_body: form.tip_body || null,
+  tool_name: form.tool_name || null,
+  tool_category: form.tool_category || null,
+  tool_summary: form.tool_summary || null,
+  prompt_title: form.prompt_title || null,
+  prompt_body: form.prompt_body || null,
+  cta_label: form.cta_label || null,
+  cta_url: form.cta_url || null,
+  body_markdown: form.body_markdown || null,
+  body_html: form.body_html || null,
+});
+
+const NewsletterPreview = ({ form }: { form: NewsletterFormState }) => (
   <div className="rounded-[1.75rem] border border-border bg-background p-6">
     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Aperçu local</p>
     <h3 className="mt-4 font-heading text-2xl font-bold text-card-foreground">
@@ -210,16 +250,35 @@ const NewsletterPreview = ({ form }: { form: typeof emptyNewsletterForm }) => (
   </div>
 );
 
+const NewsletterEmailPreview = ({ html }: { html: string }) => (
+  <div className="rounded-[1.75rem] border border-border bg-background p-6">
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Aperçu email final</p>
+    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+      Ce rendu reprend le HTML réellement utilisé pour les tests et les envois aux abonnés.
+    </p>
+    <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+      <iframe title="Aperçu email newsletter" srcDoc={html} className="h-[920px] w-full bg-white" />
+    </div>
+  </div>
+);
+
 const NewsletterAdminPanel = ({
   token,
   isReady,
   isBusyGlobal = false,
+  initialIssueId = null,
+  initialPreviewMode = "email",
   onStatus,
   onError,
 }: NewsletterAdminPanelProps) => {
   const [snapshot, setSnapshot] = useState<NewsletterSnapshot | null>(null);
   const [form, setForm] = useState(emptyNewsletterForm);
   const [testEmail, setTestEmail] = useState("");
+  const [reviewReminderEmail, setReviewReminderEmail] = useState("");
+  const [previewMode, setPreviewMode] = useState<"editorial" | "email">(initialPreviewMode);
+  const [issueSearch, setIssueSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [hasLoadedInitialIssue, setHasLoadedInitialIssue] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
 
   const loadSnapshot = async () => {
@@ -240,6 +299,10 @@ const NewsletterAdminPanel = ({
       onError(error instanceof Error ? error.message : "Chargement newsletter impossible.");
     });
   }, [isReady, token]);
+
+  useEffect(() => {
+    setPreviewMode(initialPreviewMode);
+  }, [initialPreviewMode]);
 
   const applyIssueToForm = (issue: NewsletterIssue) => {
     setForm({
@@ -265,9 +328,17 @@ const NewsletterAdminPanel = ({
       cta_label: issue.cta_label ?? "",
       cta_url: issue.cta_url ?? "",
       body_markdown: issue.body_markdown ?? "",
+      body_html: issue.body_html ?? "",
+      source_post_ids: issue.source_post_ids ?? [],
       generation_source: issue.generation_source ?? "manual",
       generation_notes: issue.generation_notes ?? "",
       scheduled_for: asLocalDateTime(issue.scheduled_for),
+      approved_at: issue.approved_at,
+      sent_at: issue.sent_at,
+      last_test_sent_at: issue.last_test_sent_at,
+      recipient_count: issue.recipient_count ?? 0,
+      send_count: issue.send_count ?? 0,
+      meta: issue.meta ?? null,
     });
   };
 
@@ -362,6 +433,43 @@ const NewsletterAdminPanel = ({
     }
   };
 
+  const regenerateIssue = async () => {
+    if (!form.id) {
+      onError("Chargez d'abord une newsletter existante pour la régénérer.");
+      return;
+    }
+
+    setIsBusy(true);
+    onStatus(null);
+    onError(null);
+
+    try {
+      const result = await invokeAdminEdgeFunction<{ data: { issue: NewsletterIssue; created: boolean } }>(
+        token,
+        "newsletter-drafter",
+        {
+          issue_id: form.id,
+          issue_date: form.issue_date,
+          language: form.language,
+          target_domains: form.target_domains,
+          generation_notes: form.generation_notes || null,
+          source_post_ids: form.source_post_ids,
+        },
+      );
+
+      if (result.data?.issue) {
+        applyIssueToForm(result.data.issue);
+      }
+
+      await loadSnapshot();
+      onStatus("Newsletter régénérée. Vous pouvez maintenant l'ajuster puis l'enregistrer.");
+    } catch (error) {
+      onError(error instanceof Error ? error.message : "Régénération newsletter impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
   const sendTest = async () => {
     if (!form.id || !testEmail.trim()) {
       onError("Chargez une édition puis renseignez un email de test.");
@@ -404,6 +512,30 @@ const NewsletterAdminPanel = ({
     }
   };
 
+  const sendReviewReminderTest = async () => {
+    if (!form.id || !reviewReminderEmail.trim()) {
+      onError("Chargez une édition puis renseignez l'email qui doit recevoir le rappel de review.");
+      return;
+    }
+
+    setIsBusy(true);
+    onStatus(null);
+    onError(null);
+
+    try {
+      await invokeAdminEdgeFunction(token, "newsletter-scheduler", {
+        action: "review-reminder",
+        issue_id: form.id,
+        test_email: reviewReminderEmail.trim(),
+      });
+      onStatus("Email de rappel review envoyé en test avec succès.");
+    } catch (error) {
+      onError(error instanceof Error ? error.message : "Envoi du rappel review impossible.");
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
   const setIssueStatus = async (issueId: string, status: string, scheduledFor?: string) => {
     setIsBusy(true);
     onStatus(null);
@@ -432,11 +564,61 @@ const NewsletterAdminPanel = ({
   const recentIssues = snapshot?.issues ?? [];
   const recentDeliveries = snapshot?.deliveries ?? [];
   const busy = isBusy || isBusyGlobal;
+  const previewIssue = useMemo(() => buildPreviewIssue(form), [form]);
+  const previewHtml = useMemo(() => renderNewsletterHtml(previewIssue), [previewIssue]);
 
   const selectedDomainsLabel = useMemo(
     () => (form.target_domains.length > 0 ? form.target_domains.join(", ") : "Tous les domaines"),
     [form.target_domains],
   );
+
+  const filteredIssues = useMemo(() => {
+    const normalizedSearch = issueSearch.trim().toLowerCase();
+
+    return recentIssues.filter((issue) => {
+      const matchesStatus = statusFilter === "all" || issue.status === statusFilter;
+
+      if (!matchesStatus) {
+        return false;
+      }
+
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      const haystack = [
+        issue.title,
+        issue.subject,
+        issue.issue_date,
+        issue.language,
+        issue.status,
+        issue.target_domains.join(" "),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(normalizedSearch);
+    });
+  }, [issueSearch, recentIssues, statusFilter]);
+
+  useEffect(() => {
+    if (!initialIssueId || hasLoadedInitialIssue || recentIssues.length === 0) {
+      return;
+    }
+
+    const matchedIssue = recentIssues.find((issue) => issue.id === initialIssueId);
+
+    if (!matchedIssue) {
+      setHasLoadedInitialIssue(true);
+      onError("La newsletter demandée depuis le rappel n'a pas été retrouvée dans la liste.");
+      return;
+    }
+
+    applyIssueToForm(matchedIssue);
+    setPreviewMode(initialPreviewMode);
+    setHasLoadedInitialIssue(true);
+    onStatus("Newsletter de rappel chargée. Vous pouvez la modifier puis enregistrer avant l'envoi.");
+  }, [hasLoadedInitialIssue, initialIssueId, initialPreviewMode, recentIssues]);
 
   return (
     <div className="space-y-8">
@@ -574,11 +756,11 @@ const NewsletterAdminPanel = ({
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={generateDraft}
+              onClick={form.id ? regenerateIssue : generateDraft}
               disabled={!isReady || busy}
               className="rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
             >
-              Générer un brouillon IA
+              {form.id ? "Régénérer" : "Générer un brouillon IA"}
             </button>
             <button
               type="button"
@@ -596,7 +778,7 @@ const NewsletterAdminPanel = ({
                   disabled={!isReady || busy}
                   className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-card-foreground hover:border-primary/40 disabled:opacity-50"
                 >
-                  Marquer approuvée
+                  Approuver
                 </button>
                 <button
                   type="button"
@@ -605,6 +787,14 @@ const NewsletterAdminPanel = ({
                   className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-card-foreground hover:border-primary/40 disabled:opacity-50"
                 >
                   Planifier
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIssueStatus(form.id, "archived")}
+                  disabled={!isReady || busy}
+                  className="rounded-lg border border-destructive/30 px-5 py-2.5 text-sm font-semibold text-destructive hover:bg-destructive/5 disabled:opacity-50"
+                >
+                  Rejeter
                 </button>
               </>
             ) : null}
@@ -624,19 +814,87 @@ const NewsletterAdminPanel = ({
               </button>
             </div>
           </div>
+
+          <div className="rounded-2xl border border-border bg-background p-4">
+            <p className="text-sm font-semibold text-card-foreground">Tester le mail de rappel review</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Vous recevrez le même email de notification, avec le lien direct vers cette newsletter pour la relire et l'éditer.
+            </p>
+            <div className="mt-3 grid gap-3 md:grid-cols-[1fr_auto]">
+              <Input
+                value={reviewReminderEmail}
+                onChange={(e) => setReviewReminderEmail(e.target.value)}
+                placeholder="votre-email@test.com"
+              />
+              <button
+                type="button"
+                onClick={sendReviewReminderTest}
+                disabled={!form.id || busy}
+                className="rounded-lg bg-orange-gradient px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+              >
+                Recevoir le rappel
+              </button>
+            </div>
+          </div>
         </div>
 
-        <NewsletterPreview form={form} />
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => setPreviewMode("email")}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                previewMode === "email"
+                  ? "bg-primary text-primary-foreground"
+                  : "border border-border bg-background text-card-foreground hover:border-primary/40"
+              }`}
+            >
+              Rendu email final
+            </button>
+            <button
+              type="button"
+              onClick={() => setPreviewMode("editorial")}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                previewMode === "editorial"
+                  ? "bg-primary text-primary-foreground"
+                  : "border border-border bg-background text-card-foreground hover:border-primary/40"
+              }`}
+            >
+              Aperçu éditeur
+            </button>
+          </div>
+
+          {previewMode === "email" ? <NewsletterEmailPreview html={previewHtml} /> : <NewsletterPreview form={form} />}
+        </div>
       </div>
 
       <div className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
         <div className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-heading text-xl font-bold text-card-foreground">Éditions récentes</h2>
+          <h2 className="font-heading text-xl font-bold text-card-foreground">Toutes les éditions</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Chargez une édition, ajustez-la, approuvez-la puis lancez un test ou la campagne finale.
+            Retrouvez les newsletters déjà créées, filtrez-les et ouvrez leur rendu avant diffusion.
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-[1fr_180px]">
+            <Input
+              value={issueSearch}
+              onChange={(e) => setIssueSearch(e.target.value)}
+              placeholder="Rechercher par titre, objet, date ou domaine"
+            />
+            <select className={fieldClass} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+              <option value="all">Tous les statuts</option>
+              <option value="draft">Draft</option>
+              <option value="review">Review</option>
+              <option value="approved">Approved</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="sent">Sent</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            {filteredIssues.length} édition(s) affichée(s) sur {recentIssues.length}.
           </p>
           <div className="mt-4 space-y-3">
-            {recentIssues.map((issue) => (
+            {filteredIssues.map((issue) => (
               <div key={issue.id} className="rounded-xl border border-border p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -651,8 +909,18 @@ const NewsletterAdminPanel = ({
                   <Badge variant="secondary">{issue.status}</Badge>
                 </div>
                 <div className="mt-3 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      applyIssueToForm(issue);
+                      setPreviewMode("email");
+                    }}
+                    className="text-xs font-semibold text-primary"
+                  >
+                    Prévisualiser
+                  </button>
                   <button type="button" onClick={() => applyIssueToForm(issue)} className="text-xs font-semibold text-primary">
-                    Charger
+                    Modifier
                   </button>
                   <button type="button" onClick={() => setIssueStatus(issue.id, "review")} className="text-xs font-semibold text-muted-foreground">
                     Revue
@@ -669,6 +937,11 @@ const NewsletterAdminPanel = ({
                 </div>
               </div>
             ))}
+            {filteredIssues.length === 0 ? (
+              <div className="rounded-xl border border-dashed border-border p-5 text-sm text-muted-foreground">
+                Aucune newsletter ne correspond à ce filtre pour le moment.
+              </div>
+            ) : null}
           </div>
         </div>
 
