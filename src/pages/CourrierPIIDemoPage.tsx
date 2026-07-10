@@ -29,7 +29,7 @@ type Step = {
 };
 
 const Token = ({ children }: { children: string }) => (
-  <span className="rounded bg-cyan-400/15 px-1.5 py-0.5 font-mono text-[13px] text-cyan-200">{children}</span>
+  <span className="rounded bg-violet-400/15 px-1.5 py-0.5 font-mono text-[13px] text-violet-200">{children}</span>
 );
 
 const Restored = ({ children }: { children: string }) => (
@@ -48,21 +48,20 @@ const steps: Step[] = [
       <div className="space-y-3 text-[15px] leading-7 text-slate-300">
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Destinataire</p>
-          <p>Mme Adjoua Kouassi</p>
+          <p>Ambassade du Royaume du Maroc à Abidjan</p>
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Objet</p>
-          <p>Confirmation de réception de virement</p>
+          <p>Confirmation de rendez-vous et accréditation</p>
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Instructions</p>
           <p>
-            Merci d&apos;informer <Sensitive>Mme Adjoua Kouassi</Sensitive> que le virement de{" "}
-            <Sensitive>2 500 000 FCFA</Sensitive> vers son IBAN{" "}
-            <Sensitive>CI93CI0080123456789012345</Sensitive> a bien été reçu. Son{" "}
-            <Sensitive>passeport n° 12AB34567</Sensitive> reste en cours de vérification. Adresse :{" "}
-            <Sensitive>Cocody 2 Plateaux</Sensitive>, Abidjan. La joindre au{" "}
-            <Sensitive>07 12 34 56 78</Sensitive>.
+            Merci de rédiger un courrier confirmant à <Sensitive>M. Abdellah Benkirane</Sensitive> que sa demande a
+            été validée, <Sensitive>référence diplomatique : DIP-2026-04471</Sensitive>. Il est{" "}
+            <Sensitive>domicilié à la Résidence de l&apos;Ambassade</Sensitive>, Riviera Golf, Abidjan. Le joindre
+            au <Sensitive>+225 07 45 12 33 89</Sensitive> ou par email{" "}
+            <Sensitive>a.benkirane@diplomatie-test.example</Sensitive>.
           </p>
         </div>
         <p className="text-xs text-slate-500">
@@ -77,13 +76,13 @@ const steps: Step[] = [
     render: () => (
       <div className="space-y-3">
         <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-slate-500">
-          <ShieldCheck className="h-3.5 w-3.5 text-cyan-300" />
+          <ShieldCheck className="h-3.5 w-3.5 text-violet-300" />
           Sous-workflow PII_Guard_Anonymisation — mode anonymize
         </div>
         <p className="text-[15px] leading-8 text-slate-300">
-          Merci d&apos;informer <Token>[PERSONNE_1]</Token> que le virement de <Token>[MONTANT_1]</Token> vers son
-          IBAN <Token>[IBAN_1]</Token> a bien été reçu. Son <Token>[PASSEPORT_1]</Token> reste en cours de
-          vérification. <Token>[ADRESSE_1]</Token>, Abidjan. La joindre au <Token>[TELEPHONE_1]</Token>.
+          Merci de rédiger un courrier confirmant à <Token>[PERSONNE_1]</Token> que sa demande a été validée,{" "}
+          <Token>[REF_DIPLOMATIQUE_1]</Token>. Il est <Token>[ADRESSE_1]</Token>, Riviera Golf, Abidjan. Le joindre
+          au <Token>[TELEPHONE_1]</Token> ou par email <Token>[EMAIL_1]</Token>.
         </p>
         <p className="text-xs text-slate-500">
           C&apos;est ce texte — et uniquement celui-ci — qui part vers l&apos;API OpenAI. Aucune donnée réelle ne
@@ -98,19 +97,21 @@ const steps: Step[] = [
     render: () => (
       <div className="space-y-3">
         <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-slate-500">
-          <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
+          <Sparkles className="h-3.5 w-3.5 text-violet-300" />
           Réponse réelle de l&apos;API OpenAI (gpt-4o)
         </div>
         <p className="whitespace-pre-line text-[15px] leading-8 text-slate-300">
-          {"Madame,\n\nJe vous écris pour vous informer que le virement d'un montant de "}
-          <Token>[MONTANT_1]</Token>
-          {" vers votre IBAN "}
-          <Token>[IBAN_1]</Token>
-          {" a bien été reçu.\n\nPar ailleurs, nous tenons à vous assurer que votre "}
-          <Token>[PASSEPORT_1]</Token>
-          {" est actuellement en cours de vérification.\n\nPour toute question, n'hésitez pas à nous contacter au "}
+          {"Objet : Confirmation de rendez-vous et accréditation\n\nMadame, Monsieur,\n\nNous avons le plaisir de vous informer que la demande d'accréditation de "}
+          <Token>[PERSONNE_1]</Token>
+          {" a été validée sous la référence "}
+          <Token>[REF_DIPLOMATIQUE_1]</Token>
+          {". Nous vous remercions de bien vouloir confirmer votre disponibilité pour un rendez-vous à l'Ambassade afin de finaliser les formalités nécessaires.\n\nPour toute question ou information complémentaire, vous pouvez joindre "}
+          <Token>[PERSONNE_1]</Token>
+          {" au numéro de téléphone suivant : "}
           <Token>[TELEPHONE_1]</Token>
-          {".\n\nNous vous prions d'agréer, Madame, l'expression de nos salutations distinguées."}
+          {" ou par email à l'adresse "}
+          <Token>[EMAIL_1]</Token>
+          {".\n\nNous vous prions d'agréer, Madame, Monsieur, l'expression de notre considération distinguée."}
         </p>
         <p className="text-xs text-slate-500">
           Le modèle recopie les jetons tels quels — il ne les invente jamais, il ne les « devine » jamais.
@@ -128,16 +129,16 @@ const steps: Step[] = [
             <p>De : courrier@transferai.ci</p>
             <p className="mt-0.5">À : marius.ayoro70@gmail.com</p>
             <p className="mt-1.5 text-sm text-slate-200">
-              Validation requise — Confirmation de réception de virement
+              Validation requise — Confirmation de rendez-vous et accréditation
             </p>
           </div>
           <div className="px-4 py-4">
             <p className="text-[15px] leading-7 text-slate-300">
-              Madame <Restored>Adjoua Kouassi</Restored>, <Restored>Cocody 2 Plateaux, Abidjan</Restored> — le
-              virement de <Restored>2 500 000 FCFA</Restored> vers l&apos;IBAN{" "}
-              <Restored>CI93CI0080123456789012345</Restored> a bien été reçu. Son passeport n°{" "}
-              <Restored>12AB34567</Restored> reste en cours de vérification. Contact :{" "}
-              <Restored>07 12 34 56 78</Restored>.
+              Demande d&apos;accréditation de <Restored>M. Abdellah Benkirane</Restored> validée sous la{" "}
+              <Restored>référence diplomatique : DIP-2026-04471</Restored>. Il est{" "}
+              <Restored>domicilié à la Résidence de l&apos;Ambassade</Restored>, Riviera Golf, Abidjan. Contact :{" "}
+              <Restored>+225 07 45 12 33 89</Restored> /{" "}
+              <Restored>a.benkirane@diplomatie-test.example</Restored>.
             </p>
             <div className="mt-4 flex gap-2">
               <span className="rounded border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-200">
@@ -157,21 +158,20 @@ const steps: Step[] = [
   },
   {
     label: "5. Client",
-    title: "Le client reçoit le courrier final",
+    title: "L'ambassade reçoit le courrier final",
     render: () => (
       <div className="space-y-3">
         <div className="rounded-lg border border-white/10 bg-white/5">
           <div className="border-b border-white/10 px-4 py-3 text-xs text-slate-400">
             <p>De : courrier@transferai.ci</p>
-            <p className="mt-0.5">À : a.kouassi@client-banque-test.example</p>
-            <p className="mt-1.5 text-sm text-slate-200">Confirmation de réception de virement</p>
+            <p className="mt-0.5">À : protocole@ambassade-maroc-ci.example</p>
+            <p className="mt-1.5 text-sm text-slate-200">Confirmation de rendez-vous et accréditation</p>
           </div>
           <div className="px-4 py-4">
             <p className="text-[15px] leading-7 text-slate-300">
-              Madame <Restored>Adjoua Kouassi</Restored>, nous vous informons que le virement de{" "}
-              <Restored>2 500 000 FCFA</Restored> vers votre IBAN{" "}
-              <Restored>CI93CI0080123456789012345</Restored> a bien été reçu et que votre passeport n°{" "}
-              <Restored>12AB34567</Restored> est en cours de vérification.
+              La demande d&apos;accréditation de <Restored>M. Abdellah Benkirane</Restored> a été validée sous la{" "}
+              <Restored>référence diplomatique : DIP-2026-04471</Restored>. Merci de confirmer sa disponibilité pour
+              un rendez-vous à l&apos;Ambassade.
             </p>
           </div>
           <div className="flex items-center gap-2 rounded-b-lg bg-emerald-400/10 px-4 py-2.5">
@@ -238,12 +238,12 @@ const CourrierPIIDemoPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#17324d_0%,#0b1420_40%,#060a11_100%)] text-slate-100">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#2d1f47_0%,#170f28_40%,#0a0714_100%)] text-slate-100">
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-violet-300"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Retour au site
@@ -255,13 +255,18 @@ const CourrierPIIDemoPage = () => {
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-200">
-              <ShieldCheck className="h-3.5 w-3.5" />
-              Courrier confidentiel généré par IA
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-200">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Courrier confidentiel généré par IA
+              </div>
+              <div className="rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-300">
+                Scénario 1 — Diplomatie
+              </div>
             </div>
 
             <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-[-0.04em] text-white md:text-5xl">
-              Une IA qui rédige vos courriers <span className="text-cyan-300">sans jamais voir vos données sensibles</span>
+              Une IA qui rédige vos courriers <span className="text-violet-300">sans jamais voir vos données sensibles</span>
             </h1>
             <p className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-300">
               Cette page rejoue, étape par étape, un vrai cycle déjà exécuté en production&nbsp;: PII Guard masque
@@ -275,7 +280,7 @@ const CourrierPIIDemoPage = () => {
               <Card className="border-white/10 bg-white/5 text-slate-100 shadow-none">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <ShieldCheck className="h-4 w-4 text-cyan-300" />
+                    <ShieldCheck className="h-4 w-4 text-violet-300" />
                     Anonymisation locale
                   </CardTitle>
                 </CardHeader>
@@ -287,7 +292,7 @@ const CourrierPIIDemoPage = () => {
               <Card className="border-white/10 bg-white/5 text-slate-100 shadow-none">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <Sparkles className="h-4 w-4 text-cyan-300" />
+                    <Sparkles className="h-4 w-4 text-violet-300" />
                     IA sans PII
                   </CardTitle>
                 </CardHeader>
@@ -299,7 +304,7 @@ const CourrierPIIDemoPage = () => {
               <Card className="border-white/10 bg-white/5 text-slate-100 shadow-none">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <UserCheck className="h-4 w-4 text-cyan-300" />
+                    <UserCheck className="h-4 w-4 text-violet-300" />
                     Validation humaine
                   </CardTitle>
                 </CardHeader>
@@ -327,7 +332,7 @@ const CourrierPIIDemoPage = () => {
               type="button"
               onClick={handleLiveDemo}
               disabled={submitting || onCooldown}
-              className="mt-3 w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200"
+              className="mt-3 w-full bg-violet-300 text-slate-950 hover:bg-violet-200"
             >
               {submitting ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -373,7 +378,7 @@ const CourrierPIIDemoPage = () => {
                 onClick={() => setActive(i)}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
                   active === i
-                    ? "bg-cyan-400/20 text-cyan-200"
+                    ? "bg-violet-400/20 text-violet-200"
                     : "border border-white/10 text-slate-400 hover:text-slate-200"
                 }`}
               >
