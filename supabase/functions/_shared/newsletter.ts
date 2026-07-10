@@ -139,6 +139,15 @@ const renderMarkdownBlock = (value: string) => {
       continue;
     }
 
+    const subheadingMatch = line.match(/^###\s+(.+)$/);
+    if (subheadingMatch) {
+      flushAll();
+      blocks.push(
+        `<h3 style="margin:20px 0 10px;font-size:18px;line-height:1.4;color:#0f172a;">${formatInlineMarkdown(subheadingMatch[1])}</h3>`,
+      );
+      continue;
+    }
+
     const unorderedListMatch = line.match(/^-\s+(.+)$/);
     if (unorderedListMatch) {
       flushParagraph();
