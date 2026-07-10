@@ -157,6 +157,20 @@ const toIsoOrNull = (value: string) => {
   return new Date(value).toISOString();
 };
 
+const withPreviewLinkTarget = (html: string) => {
+  const baseTag = '<base target="_blank" />';
+
+  if (/<base\b/i.test(html)) {
+    return html;
+  }
+
+  if (/<head\b[^>]*>/i.test(html)) {
+    return html.replace(/<head\b([^>]*)>/i, `<head$1>${baseTag}`);
+  }
+
+  return `${baseTag}${html}`;
+};
+
 const buildPreviewIssue = (form: NewsletterFormState): NewsletterIssueRecord => ({
   id: form.id || "preview",
   issue_date: form.issue_date,
@@ -250,17 +264,22 @@ const NewsletterPreview = ({ form }: { form: NewsletterFormState }) => (
   </div>
 );
 
-const NewsletterEmailPreview = ({ html }: { html: string }) => (
-  <div className="rounded-[1.75rem] border border-border bg-background p-6">
-    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Aperçu email final</p>
-    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-      Ce rendu reprend le HTML réellement utilisé pour les tests et les envois aux abonnés.
-    </p>
-    <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-      <iframe title="Aperçu email newsletter" srcDoc={html} className="h-[920px] w-full bg-white" />
+const NewsletterEmailPreview = ({ html }: { html: string }) => {
+  const previewHtml = useMemo(() => withPreviewLinkTarget(html), [html]);
+
+  return (
+    <div className="rounded-[1.75rem] border border-border bg-background p-6">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Aperçu email final</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        Ce rendu reprend le HTML réellement utilisé pour les tests et les envois aux abonnés.
+        Les liens s'ouvrent dans un nouvel onglet pour éviter de casser l'aperçu intégré.
+      </p>
+      <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+        <iframe title="Aperçu email newsletter" srcDoc={previewHtml} className="h-[920px] w-full bg-white" />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const NewsletterAdminPanel = ({
   token,
