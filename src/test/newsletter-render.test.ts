@@ -38,6 +38,7 @@ describe("renderNewsletterHtml", () => {
     const html = renderNewsletterHtml(sampleIssue);
 
     expect(html).toContain("Éditorial du fondateur");
+    expect(html).toContain("22 05 2026");
     expect(html).toContain("Cette édition met en avant les signaux IA");
     expect(html).toContain("La provenance devient un avantage business");
     expect(html).toContain("ChatGPT · Claude · Gemini");

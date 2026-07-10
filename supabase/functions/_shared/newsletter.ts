@@ -39,19 +39,25 @@ const formatInlineMarkdown = (value: string) =>
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" style="color:#f97316;font-weight:700;text-decoration:none;">$1</a>');
 
-const formatIssueDate = (value: string) => {
+export const formatIssueDate = (value: string) => {
   const date = new Date(`${value}T00:00:00Z`);
 
   if (Number.isNaN(date.getTime())) {
     return value;
   }
 
-  return new Intl.DateTimeFormat("fr-FR", {
+  const parts = new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
     month: "2-digit",
-    year: "2-digit",
+    year: "numeric",
     timeZone: "UTC",
-  }).format(date);
+  }).formatToParts(date);
+
+  const day = parts.find((part) => part.type === "day")?.value ?? "";
+  const month = parts.find((part) => part.type === "month")?.value ?? "";
+  const year = parts.find((part) => part.type === "year")?.value ?? "";
+
+  return [day, month, year].filter(Boolean).join(" ");
 };
 
 const paragraphize = (value: string) =>

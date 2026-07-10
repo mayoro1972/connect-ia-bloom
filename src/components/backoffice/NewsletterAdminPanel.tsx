@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { invokeAdminEdgeFunction, invokeContentAdmin } from "@/lib/content-admin";
-import { renderNewsletterHtml, type NewsletterIssueRecord } from "../../../supabase/functions/_shared/newsletter";
+import { formatIssueDate, renderNewsletterHtml, type NewsletterIssueRecord } from "../../../supabase/functions/_shared/newsletter";
 
 type NewsletterIssue = {
   id: string;
@@ -76,21 +76,6 @@ type NewsletterAdminPanelProps = {
 
 const fieldClass =
   "w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
-
-const formatIssueDate = (value: string) => {
-  const date = new Date(`${value}T00:00:00Z`);
-
-  if (Number.isNaN(date.getTime())) {
-    return value;
-  }
-
-  return new Intl.DateTimeFormat("fr-FR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    timeZone: "UTC",
-  }).format(date);
-};
 
 const domainOptions = [
   "IT & Transformation Digitale",

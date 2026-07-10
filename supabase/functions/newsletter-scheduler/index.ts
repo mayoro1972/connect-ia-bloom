@@ -1,4 +1,5 @@
 import { corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
+import { formatIssueDate } from "../_shared/newsletter.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
@@ -31,16 +32,7 @@ const todayIsoDate = () => new Date().toISOString().slice(0, 10);
 
 const formatIssueDateFr = (issueDate: string | null | undefined) => {
   if (!issueDate) return "date non définie";
-  const date = new Date(`${issueDate}T00:00:00Z`);
-  return Number.isNaN(date.getTime())
-    ? issueDate
-    : date.toLocaleDateString("fr-FR", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      timeZone: "UTC",
-    });
+  return formatIssueDate(issueDate);
 };
 
 const invokeEdgeFunction = async (functionName: string, payload: Record<string, unknown>) => {
