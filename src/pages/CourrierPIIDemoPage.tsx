@@ -4,13 +4,23 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  CheckCircle2,
+  Loader2,
   MailCheck,
+  Send,
   ShieldCheck,
   Sparkles,
   UserCheck,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { isSupabaseConfigured, supabase, supabaseUnavailableMessage } from "@/integrations/supabase/client";
+import { trackAnalyticsEvent } from "@/lib/analytics";
+
+const COOLDOWN_MS = 60_000;
+const COOLDOWN_STORAGE_KEY = "courrier_pii_demo_last_run";
 
 type Step = {
   label: string;
@@ -180,6 +190,52 @@ const steps: Step[] = [
 
 const CourrierPIIDemoPage = () => {
   const [active, setActive] = useState(0);
+  const [visitorName, setVisitorName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState<{ courrier_id: string | null } | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [cooldownUntil, setCooldownUntil] = useState<number>(() => {
+    const stored = Number(localStorage.getItem(COOLDOWN_STORAGE_KEY) ?? "0");
+    return stored + COOLDOWN_MS > Date.now() ? stored + COOLDOWN_MS : 0;
+  });
+
+  const onCooldown = cooldownUntil > Date.now();
+
+  const handleLiveDemo = async () => {
+    if (submitting || onCooldown) return;
+
+    setSubmitting(true);
+    setResult(null);
+    setErrorMessage(null);
+
+    if (!isSupabaseConfigured) {
+      setErrorMessage(supabaseUnavailableMessage);
+      setSubmitting(false);
+      return;
+    }
+
+    trackAnalyticsEvent("courrier_pii_demo_live_submit", { has_visitor_name: Boolean(visitorName.trim()) });
+
+    const { data, error } = await supabase.functions.invoke("courrier-automatique-pii-demo", {
+      body: { visitor_name: visitorName.trim() },
+    });
+
+    if (error || !data || data.error) {
+      const message =
+        (data && (data.detail || data.error)) ||
+        error?.message ||
+        "Le workflow n8n n'a pas répondu. Réessaie dans quelques instants.";
+      setErrorMessage(String(message));
+      setSubmitting(false);
+      return;
+    }
+
+    const now = Date.now();
+    localStorage.setItem(COOLDOWN_STORAGE_KEY, String(now));
+    setCooldownUntil(now + COOLDOWN_MS);
+    setResult({ courrier_id: data.courrier_id ?? null });
+    setSubmitting(false);
+  };
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,#17324d_0%,#0b1420_40%,#060a11_100%)] text-slate-100">
@@ -192,8 +248,8 @@ const CourrierPIIDemoPage = () => {
             <ArrowLeft className="h-3.5 w-3.5" />
             Retour au site
           </Link>
-          <Badge className="border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-cyan-200">
-            Démo illustrative — non fonctionnelle
+          <Badge className="border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-emerald-200">
+            Démo live — déclenche le vrai workflow n8n
           </Badge>
         </div>
 
@@ -210,8 +266,9 @@ const CourrierPIIDemoPage = () => {
             <p className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-300">
               Cette page rejoue, étape par étape, un vrai cycle déjà exécuté en production&nbsp;: PII Guard masque
               les données sensibles avant tout appel à l&apos;IA générative, puis les restaure uniquement pour la
-              validation humaine et l&apos;envoi final. Les textes affichés ci-dessous sont ceux d&apos;une exécution
-              réelle — cette page ne déclenche cependant aucun nouvel envoi.
+              validation humaine et l&apos;envoi final. Le parcours ci-dessous montre les textes d&apos;une exécution
+              réelle — et le bouton &laquo;&nbsp;Essaie-le en direct&nbsp;&raquo; en déclenche une nouvelle, pour de
+              vrai.
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -255,15 +312,55 @@ const CourrierPIIDemoPage = () => {
           </div>
 
           <div className="rounded-lg border border-white/10 bg-white/5 p-5">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Cas d&apos;usage</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Essaie-le en direct</p>
             <p className="mt-2 text-sm leading-6 text-slate-300">
-              Secrétariat diplomatique, bancaire, RH — tout contexte où un courrier professionnel généré par IA
-              contient des données sensibles.
+              Déclenche le vrai scénario Diplomatie ci-contre : anonymisation réelle, vrai appel GPT-4o, et un vrai
+              email de validation envoyé au manager de la démo.
             </p>
-            <div className="mt-4 flex items-center gap-2 text-xs text-emerald-300">
-              <MailCheck className="h-3.5 w-3.5" />
-              Cycle validé en conditions réelles
-            </div>
+            <Input
+              value={visitorName}
+              onChange={(e) => setVisitorName(e.target.value)}
+              placeholder="Ton prénom (optionnel)"
+              className="mt-4 border-white/10 bg-white/5 text-slate-100 placeholder:text-slate-500"
+            />
+            <Button
+              type="button"
+              onClick={handleLiveDemo}
+              disabled={submitting || onCooldown}
+              className="mt-3 w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200"
+            >
+              {submitting ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="mr-2 h-4 w-4" />
+              )}
+              {submitting
+                ? "Envoi en cours…"
+                : onCooldown
+                  ? "Patiente un instant avant de relancer"
+                  : "Lancer la démonstration réelle"}
+            </Button>
+
+            {errorMessage ? (
+              <p className="mt-3 rounded border border-rose-400/30 bg-rose-400/5 p-2.5 text-xs text-rose-200">
+                {errorMessage}
+              </p>
+            ) : null}
+
+            {result ? (
+              <div className="mt-3 flex items-start gap-2 rounded border border-emerald-400/30 bg-emerald-400/5 p-2.5 text-xs text-emerald-200">
+                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                <div>
+                  Workflow déclenché{result.courrier_id ? ` (réf. ${result.courrier_id})` : ""}. L&apos;email de
+                  validation manager part à l&apos;instant.
+                </div>
+              </div>
+            ) : (
+              <div className="mt-4 flex items-center gap-2 text-xs text-emerald-300">
+                <MailCheck className="h-3.5 w-3.5" />
+                Cycle validé en conditions réelles
+              </div>
+            )}
           </div>
         </div>
 
