@@ -54,6 +54,7 @@ const BackOffice = lazy(() => import("./pages/BackOffice"));
 const QuestionnaireAuditPage = lazy(() => import("./pages/QuestionnaireAuditPage"));
 const SupportITDemoPage = lazy(() => import("./pages/SupportITDemoPage"));
 const DocumentRagDemoPage = lazy(() => import("./pages/DocumentRagDemoPage"));
+const CourrierPIIDemoPage = lazy(() => import("./pages/CourrierPIIDemoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -259,6 +260,7 @@ const AnimatedRoutes = () => {
           <Route path="/questionnaire-audit" element={<QuestionnaireAuditPage />} />
           <Route path="/demo/support-it-intelligent" element={<SupportITDemoPage />} />
           <Route path="/demo/recherche-documentaire" element={<DocumentRagDemoPage />} />
+          <Route path="/demo/courrier-automatique-pii" element={<CourrierPIIDemoPage />} />
           <Route path="/back-office" element={<BackOffice />} />
           <Route path="/back-office/newsletters" element={<NewsletterBackOffice />} />
           <Route path="*" element={<NotFound />} />
