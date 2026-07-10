@@ -12,6 +12,16 @@ import { isSupabaseConfigured } from "@/integrations/supabase/client";
 import { invokeContentAdmin } from "@/lib/content-admin";
 
 const ADMIN_TOKEN_STORAGE_KEY = "transferai-admin-token";
+const LOCAL_NEWSLETTER_PREVIEWS = [
+  {
+    id: "transferai-newsletter-premium-2026-07-10",
+    title: "Newsletter premium TransferAI",
+    description:
+      "Brouillon éditorial premium en français professionnel avec le webinar du 18 juillet 2025, les formations à venir, le partenariat Pigier et la veille IA.",
+    href: "/previews/transferai-newsletter-premium-2026-07-10.html",
+    badge: "Nouveau brouillon",
+  },
+];
 
 const NewsletterBackOfficePage = () => {
   const [searchParams] = useSearchParams();
@@ -101,6 +111,48 @@ const NewsletterBackOfficePage = () => {
                   Retour au back-office
                 </Link>
                 <Badge variant="secondary">Newsletter IA</Badge>
+              </div>
+            </div>
+
+            <div className="mb-8 rounded-2xl border border-orange-200/70 bg-orange-50/80 p-6 shadow-sm backdrop-blur">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="max-w-3xl">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-orange-700">Prévisualisation locale</p>
+                  <h2 className="mt-2 font-heading text-2xl font-bold text-slate-900">Le nouveau newsletter est prêt à être relu</h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-700">
+                    Le brouillon premium que j'ai préparé est disponible ici, même si vous n'êtes pas encore connecté à l'espace admin.
+                    Vous pouvez l'ouvrir, le relire et revenir ensuite dans le back-office pour validation ou édition.
+                  </p>
+                </div>
+                <Badge className="bg-white text-orange-700 hover:bg-white">Aperçu disponible</Badge>
+              </div>
+
+              <div className="mt-6 grid gap-4">
+                {LOCAL_NEWSLETTER_PREVIEWS.map((preview) => (
+                  <div
+                    key={preview.id}
+                    className="rounded-2xl border border-white/80 bg-white/90 p-5 shadow-sm ring-1 ring-orange-100"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div className="max-w-2xl">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="font-heading text-lg font-bold text-slate-900">{preview.title}</h3>
+                          <Badge variant="secondary">{preview.badge}</Badge>
+                        </div>
+                        <p className="mt-2 text-sm leading-6 text-slate-600">{preview.description}</p>
+                      </div>
+                      <a
+                        href={preview.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                      >
+                        Voir le brouillon
+                      </a>
+                    </div>
+                    <p className="mt-3 text-xs text-slate-500">{preview.href}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
