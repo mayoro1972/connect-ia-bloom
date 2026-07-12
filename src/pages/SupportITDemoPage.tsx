@@ -128,16 +128,16 @@ const SupportITDemoPage = () => {
       <div className="mx-auto max-w-5xl px-6 py-14">
         <Link
           to="/"
-          className="mb-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#6B7A99] hover:text-[#00D4FF] transition-colors"
+          className="mb-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#6B7A99] hover:text-[#FF6B4A] transition-colors"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Retour au site
         </Link>
 
-        <div className="mb-4 inline-flex items-center gap-2 rounded-sm border border-[#00D4FF]/20 bg-[#00D4FF]/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#00D4FF]">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-sm border border-[#FF6B4A]/20 bg-[#FF6B4A]/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF6B4A]">
           <Sparkles className="h-3 w-3" /> Démo live — Support IT Intelligent
         </div>
         <h1 className="mb-3 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
-          Soumets un ticket, regarde <span className="text-[#00D4FF]">l'IA</span> le traiter en direct
+          Soumets un ticket, regarde <span className="text-[#FF6B4A]">l'IA</span> le traiter en direct
         </h1>
         <p className="mb-3 max-w-xl text-[15px] font-light leading-relaxed text-[#6B7A99]">
           Ce formulaire déclenche le vrai workflow n8n de production : classification GPT-4o, décision de résolution
@@ -256,7 +256,7 @@ const SupportITDemoPage = () => {
               </div>
             </div>
 
-            <Button type="submit" disabled={submitting} className="w-full bg-[#00D4FF] text-black hover:opacity-85">
+            <Button type="submit" disabled={submitting} className="w-full bg-[#FF6B4A] text-black hover:opacity-85">
               {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               {submitting ? "Traitement en cours…" : "Soumettre le ticket"}
             </Button>
@@ -271,7 +271,7 @@ const SupportITDemoPage = () => {
               <button
                 type="button"
                 onClick={reset}
-                className="mt-4 text-xs uppercase tracking-wider text-[#6B7A99] hover:text-[#00D4FF]"
+                className="mt-4 text-xs uppercase tracking-wider text-[#6B7A99] hover:text-[#FF6B4A]"
               >
                 Soumettre un nouveau ticket
               </button>
@@ -292,7 +292,7 @@ const SupportITDemoPage = () => {
                     key={step.key}
                     className={`flex items-start gap-3 rounded border p-3 transition-colors ${
                       isActive
-                        ? "border-[#00D4FF]/40 bg-[#00D4FF]/5"
+                        ? "border-[#FF6B4A]/40 bg-[#FF6B4A]/5"
                         : isDone
                           ? "border-[#7CFF6B]/20 bg-[#7CFF6B]/5"
                           : "border-white/[0.05] bg-white/[0.01]"
@@ -302,7 +302,7 @@ const SupportITDemoPage = () => {
                       {isDone ? (
                         <CheckCircle2 className="h-4 w-4 text-[#7CFF6B]" />
                       ) : isActive ? (
-                        <Loader2 className="h-4 w-4 animate-spin text-[#00D4FF]" />
+                        <Loader2 className="h-4 w-4 animate-spin text-[#FF6B4A]" />
                       ) : (
                         <div className="h-4 w-4 rounded-full border border-[#6B7A99]/40" />
                       )}
