@@ -47,6 +47,20 @@ const toOptionalText = (value: unknown): string | null => {
   return text ? text : null;
 };
 
+const toAbsoluteUrl = (value: unknown): string | null => {
+  const text = toText(value);
+  if (!text) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(text);
+    return parsed.protocol === "http:" || parsed.protocol === "https:" ? text : null;
+  } catch {
+    return null;
+  }
+};
+
 const toNumber = (value: unknown): number => {
   if (typeof value === "number" && Number.isFinite(value)) {
     return value;
@@ -106,7 +120,7 @@ export const normalizeRetrievedDocuments = (payload: unknown): RetrievedDocument
         id: (record.id as number | string | null | undefined) ?? null,
         titre: toText(record.titre ?? record.title ?? record.source_file ?? "Document") || "Document",
         contenu,
-        url: toOptionalText(record.url ?? record.source_url ?? record.webViewLink),
+        url: toAbsoluteUrl(record.url ?? record.source_url ?? record.webViewLink),
         similarity: toNumber(record.similarity ?? record.score),
         source_id: toOptionalText(record.source_id),
         chunk_index:

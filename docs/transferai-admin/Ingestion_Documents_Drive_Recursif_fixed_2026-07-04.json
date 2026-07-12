@@ -126,8 +126,9 @@
           ]
         },
         "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"text-embedding-3-small\",\n  \"input\": \"{{ $json.chunk_text }}\"\n}",
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: 'text-embedding-3-small', input: $json.chunk_text }) }}",
         "options": {}
       },
       "id": "ing-005",
@@ -179,6 +180,8 @@
           ]
         },
         "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
         "specifyBody": "string",
         "body": "={{ JSON.stringify({ titre: $json.titre, contenu: $json.contenu, url: $json.url, source_id: $json.source_id, chunk_index: $json.chunk_index, modified_at: $json.modified_at, embedding: $json.embedding }) }}",
         "options": {
@@ -207,7 +210,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const results = $input.all();\nconst total = results.length;\nconst okItems = results.filter((item) => {\n  const status = Number(item.json?.statusCode ?? 0);\n  return status >= 200 && status < 300;\n});\nconst failedItems = results.filter((item) => {\n  const status = Number(item.json?.statusCode ?? 0);\n  return !(status >= 200 && status < 300);\n});\n\nconst ok = okItems.length;\nconst failed = failedItems.length;\nconst errors = failedItems.slice(0, 5).map((item) => ({\n  statusCode: item.json?.statusCode ?? null,\n  body: item.json?.body ?? item.json ?? null,\n}));\n\nconsole.log('Ingestion terminee : ' + ok + '/' + total + ' chunks indexes, ' + failed + ' erreurs.');\n\nreturn [{\n  json: {\n    ok,\n    total,\n    failed,\n    timestamp: new Date().toISOString(),\n    message: failed === 0\n      ? ok + '/' + total + ' chunks indexes dans Supabase.'\n      : ok + '/' + total + ' chunks indexes dans Supabase, ' + failed + ' erreurs.',\n    errors,\n  },\n}];",
+        "jsCode": "const results = $input.all();\nconst total = results.length;\nconst okItems = results.filter((item) => {\n  const status = Number(item.json?.statusCode ?? 0);\n  return status >= 200 && status < 300;\n});\nconst failedItems = results.filter((item) => {\n  const status = Number(item.json?.statusCode ?? 0);\n  return !(status >= 200 && status < 300);\n});\n\nconst ok = okItems.length;\nconst failed = failedItems.length;\nconst errors = failedItems.slice(0, 5).map((item) => ({\n  statusCode: item.json?.statusCode ?? null,\n  body: item.json?.body ?? item.json ?? null,\n}));\n\nconsole.log('Ingestion terminee : ' + ok + '/' + total + ' chunks indexes, ' + failed + ' erreurs.');\n\nreturn [{\n  json: {\n    ok,\n    total,\n    failed,\n    timestamp: new Date().toISOString(),\n    message: failed === 0\n      ? ok + '/' + total + ' chunks indexes avec succes dans Supabase.'\n      : ok + '/' + total + ' chunks indexes dans Supabase, ' + failed + ' erreurs.',\n    errors,\n  },\n}];",
         "mode": "runOnceForAllItems"
       },
       "id": "ing-008",
