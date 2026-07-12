@@ -54,6 +54,7 @@ const BackOffice = lazy(() => import("./pages/BackOffice"));
 const QuestionnaireAuditPage = lazy(() => import("./pages/QuestionnaireAuditPage"));
 const SupportITDemoPage = lazy(() => import("./pages/SupportITDemoPage"));
 const DocumentRagDemoPage = lazy(() => import("./pages/DocumentRagDemoPage"));
+const PreClotureBancaireDemoPage = lazy(() => import("./pages/PreClotureBancaireDemoPage"));
 const CourrierPIIDemoPage = lazy(() => import("./pages/CourrierPIIDemoPage"));
 const ChatwootWhatsAppDemoPage = lazy(() => import("./pages/ChatwootWhatsAppDemoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -261,6 +262,7 @@ const AnimatedRoutes = () => {
           <Route path="/questionnaire-audit" element={<QuestionnaireAuditPage />} />
           <Route path="/demo/support-it-intelligent" element={<SupportITDemoPage />} />
           <Route path="/demo/recherche-documentaire" element={<DocumentRagDemoPage />} />
+          <Route path="/demo/pre-cloture-bancaire" element={<PreClotureBancaireDemoPage />} />
           <Route path="/demo/courrier-automatique-pii" element={<CourrierPIIDemoPage />} />
           <Route path="/demo/agent-ia-whatsapp-chatwoot" element={<ChatwootWhatsAppDemoPage />} />
           <Route path="/back-office" element={<BackOffice />} />

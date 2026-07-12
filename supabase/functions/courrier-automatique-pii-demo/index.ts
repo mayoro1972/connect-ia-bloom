@@ -18,26 +18,70 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
+type ScenarioId = "diplomatie" | "rh" | "finance" | "marketing";
+
 interface DemoRequest {
   visitor_name?: string;
+  scenario?: string;
 }
 
-// Scénario fixe (Diplomatie) — 100% fictif, vérifié en conditions réelles le 09-10/07/2026.
-// Volontairement non paramétrable par le visiteur : évite toute injection de contenu
+// 4 scénarios fixes, un par secteur — 100% fictifs, chacun vérifié en conditions réelles
+// (Diplomatie le 09-10/07/2026, RH/Finance/Marketing le 12/07/2026).
+// Volontairement non paramétrables par le visiteur : évite toute injection de contenu
 // arbitraire dans un formulaire public qui appelle un vrai LLM et envoie un vrai email.
-const DEMO_PAYLOAD = {
-  type_courrier: "Note de confirmation",
-  destinataire: "Ambassade du Royaume du Maroc à Abidjan",
-  destinataire_email: "protocole@ambassade-maroc-ci.example",
-  objet: "Confirmation de rendez-vous et accréditation",
-  instructions:
-    "Merci de rédiger un courrier confirmant à M. Abdellah Benkirane que sa demande a été validée, référence diplomatique : DIP-2026-04471. Il est domicilié à la Résidence de l'Ambassade, Riviera Golf, Abidjan. Le joindre au +225 07 45 12 33 89 ou par email a.benkirane@diplomatie-test.example.",
-  expediteur: "Cabinet du Secrétaire Général",
-  organisation: "Ministère des Affaires Étrangères de Côte d'Ivoire",
-  email_validation: "marius.ayoro70@gmail.com",
-  email_secretaire: "contact@transferai.ci",
-  langue: "fr",
+// Le champ manager de validation reste toujours interne (Marius clique en direct devant
+// l'audience) — jamais une adresse fournie par le visiteur.
+const SCENARIOS: Record<ScenarioId, Record<string, string>> = {
+  diplomatie: {
+    type_courrier: "Note de confirmation",
+    destinataire: "Ambassade du Royaume du Maroc à Abidjan",
+    destinataire_email: "protocole@ambassade-maroc-ci.example",
+    objet: "Confirmation de rendez-vous et accréditation",
+    instructions:
+      "Merci de rédiger un courrier confirmant à M. Abdellah Benkirane que sa demande a été validée, référence diplomatique : DIP-2026-04471. Il est domicilié à la Résidence de l'Ambassade, Riviera Golf, Abidjan. Le joindre au +225 07 45 12 33 89 ou par email a.benkirane@diplomatie-test.example.",
+    expediteur: "Cabinet du Secrétaire Général",
+    organisation: "Ministère des Affaires Étrangères de Côte d'Ivoire",
+  },
+  rh: {
+    type_courrier: "Convocation à un entretien",
+    destinataire: "M. Serge Yao",
+    destinataire_email: "serge.yao@exemple-rh.test",
+    objet: "Convocation à un entretien",
+    instructions:
+      "Merci de convoquer M. Serge Yao pour un entretien disciplinaire. CNI n° CI0045781239. Il est domicilié à Yopougon Selmer, Abidjan. Le joindre au 05 89 23 47 11 ou par email serge.yao@exemple-rh.test.",
+    expediteur: "Direction des Ressources Humaines",
+    organisation: "Entreprise Test SARL",
+  },
+  finance: {
+    type_courrier: "Confirmation de réception de virement",
+    destinataire: "Mme Adjoua Kouassi",
+    destinataire_email: "a.kouassi@client-banque-test.example",
+    objet: "Confirmation de réception de virement",
+    instructions:
+      "Merci d'informer Mme Adjoua Kouassi que le virement de 2 500 000 FCFA vers son IBAN CI93CI0080123456789012345 a bien été reçu. Son passeport n° 12AB34567 reste en cours de vérification. Adresse : Cocody 2 Plateaux, Abidjan. La joindre au 07 12 34 56 78.",
+    expediteur: "Service Relation Client",
+    organisation: "Banque Test CI",
+  },
+  marketing: {
+    type_courrier: "Confirmation de partenariat publicitaire",
+    destinataire: "Agence Kaydan Digital",
+    destinataire_email: "contact@kaydan-digital-test.example",
+    objet: "Confirmation de collaboration campagne Q3 2026",
+    instructions:
+      "Merci de confirmer à Mme Fatou Diarra que le budget de campagne de 8 500 000 FCFA a été validé, référence contrat : MKT-2026-0092. Elle est joignable au 07 33 22 11 44 ou par email f.diarra@kaydan-digital-test.example.",
+    expediteur: "Direction Marketing",
+    organisation: "TransferAI Africa",
+  },
 };
+
+function buildPayload(scenario: ScenarioId) {
+  return {
+    ...SCENARIOS[scenario],
+    email_validation: "marius.ayoro70@gmail.com",
+    email_secretaire: "contact@transferai.ci",
+    langue: "fr",
+  };
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -58,10 +102,16 @@ Deno.serve(async (req) => {
   }
 
   const visitorName = (payload.visitor_name ?? "").trim().slice(0, 120);
+  const requestedScenario = (payload.scenario ?? "").trim().toLowerCase();
+  const scenario: ScenarioId = (Object.keys(SCENARIOS) as ScenarioId[]).includes(
+    requestedScenario as ScenarioId,
+  )
+    ? (requestedScenario as ScenarioId)
+    : "diplomatie";
 
   const { data: inserted, error: insertError } = await supabase
     .from("courrier_pii_demo_submissions")
-    .insert({ visitor_name: visitorName || null, status: "processing" })
+    .insert({ visitor_name: visitorName || null, status: "processing", scenario })
     .select("id")
     .single();
 
@@ -92,7 +142,7 @@ Deno.serve(async (req) => {
     const n8nRes = await fetch(n8nWebhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(DEMO_PAYLOAD),
+      body: JSON.stringify(buildPayload(scenario)),
       signal: controller.signal,
     });
     clearTimeout(timeout);
