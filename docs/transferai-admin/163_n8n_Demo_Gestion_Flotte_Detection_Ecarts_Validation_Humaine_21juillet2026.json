@@ -6,7 +6,10 @@
       "name": "Trigger manuel",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
-      "position": [160, 180],
+      "position": [
+        160,
+        180
+      ],
       "parameters": {}
     },
     {
@@ -14,7 +17,10 @@
       "name": "Webhook - Donnees flotte",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [160, 380],
+      "position": [
+        160,
+        380
+      ],
       "parameters": {
         "httpMethod": "POST",
         "path": "flotte-carburant-upload",
@@ -28,7 +34,10 @@
       "name": "Jeu de donnees demo",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [420, 180],
+      "position": [
+        420,
+        180
+      ],
       "parameters": {
         "jsCode": "return [{\n  json: {\n    source: 'demo',\n    entity: 'ELTON OIL CI - Direction logistique',\n    report_period: 'Juillet 2026',\n    unit: 'litres',\n    manager_email: 'gestion.flotte@eltonoil.ci',\n    recipients: [\n      'gestion.flotte@eltonoil.ci',\n      'securite.hse@eltonoil.ci',\n      'audit.interne@eltonoil.ci'\n    ],\n    rules: {\n      absolute_variation_threshold: 40,\n      relative_variation_threshold: 0.2\n    },\n    rows: [\n      {\n        vehicle_id: 'CI-1187-AB',\n        vehicle_label: 'Pick-up Toyota Hilux - Site Yamoussoukro',\n        current_amount: 410,\n        previous_amount: 290,\n        support_required: true,\n        support_received: false,\n        owner: 'Chauffeur K. Ouattara'\n      },\n      {\n        vehicle_id: 'CI-0765-CD',\n        vehicle_label: 'Camion-citerne Renault - Site San Pedro',\n        current_amount: 610,\n        previous_amount: 615,\n        support_required: true,\n        support_received: false,\n        owner: 'Chauffeur B. Kouassi'\n      },\n      {\n        vehicle_id: 'CI-3390-EF',\n        vehicle_label: 'Berline direction - Abidjan Plateau',\n        current_amount: 95,\n        previous_amount: 60,\n        support_required: true,\n        support_received: false,\n        owner: 'Pool direction'\n      },\n      {\n        vehicle_id: 'CI-2201-KA',\n        vehicle_label: 'Camion-citerne Kamaz - Site Vridi',\n        current_amount: 850,\n        previous_amount: 830,\n        support_required: true,\n        support_received: true,\n        owner: 'Chauffeur S. Diabate'\n      },\n      {\n        vehicle_id: 'CI-4456-GH',\n        vehicle_label: 'Camion benne - Site Abidjan Nord',\n        current_amount: 300,\n        previous_amount: 305,\n        support_required: true,\n        support_received: true,\n        owner: 'Chauffeur M. Traore'\n      }\n    ]\n  }\n}];"
       }
@@ -38,9 +47,12 @@
       "name": "Normaliser entree webhook",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [420, 380],
+      "position": [
+        420,
+        380
+      ],
       "parameters": {
-        "jsCode": "const input = $input.first().json.body || $input.first().json;\nconst rows = Array.isArray(input.rows) ? input.rows : [];\n\nfunction parseBool(value, fallback) {\n  if (value === undefined || value === null || value === '') return fallback;\n  if (typeof value === 'boolean') return value;\n  const normalized = String(value).toLowerCase().trim();\n  if (['true', '1', 'oui', 'yes'].includes(normalized)) return true;\n  if (['false', '0', 'non', 'no'].includes(normalized)) return false;\n  return fallback;\n}\n\nreturn [{\n  json: {\n    source: 'webhook',\n    entity: input.entity || 'Flotte - Direction logistique',\n    report_period: input.report_period || new Date().toLocaleDateString('fr-FR'),\n    unit: input.unit || 'litres',\n    manager_email: input.manager_email || ($env.INTERNAL_REVIEW_EMAIL || 'gestion.flotte@eltonoil.ci'),\n    recipients: Array.isArray(input.recipients) && input.recipients.length ? input.recipients : ['gestion.flotte@eltonoil.ci'],\n    rules: {\n      absolute_variation_threshold: Number(input.absolute_variation_threshold || 40),\n      relative_variation_threshold: Number(input.relative_variation_threshold || 0.2)\n    },\n    rows: rows.map((row) => ({\n      vehicle_id: row.vehicle_id || row.immatriculation || '',\n      vehicle_label: row.vehicle_label || row.libelle || '',\n      current_amount: Number(row.current_amount || row.carburant_consomme_litres || 0),\n      previous_amount: Number(row.previous_amount || row.carburant_attendu_litres || 0),\n      support_required: parseBool(row.support_required ?? row.carnet_route_requis, true),\n      support_received: parseBool(row.support_received ?? row.carnet_route_recu, false),\n      owner: row.owner || row.chauffeur || 'Chauffeur non renseigne'\n    }))\n  }\n}];"
+        "jsCode": "const input = $input.first().json.body || $input.first().json;\nconst rows = Array.isArray(input.rows) ? input.rows : [];\n\nfunction parseBool(value, fallback) {\n  if (value === undefined || value === null || value === '') return fallback;\n  if (typeof value === 'boolean') return value;\n  const normalized = String(value).toLowerCase().trim();\n  if (['true', '1', 'oui', 'yes'].includes(normalized)) return true;\n  if (['false', '0', 'non', 'no'].includes(normalized)) return false;\n  return fallback;\n}\n\nreturn [{\n  json: {\n    source: 'webhook',\n    entity: input.entity || 'Flotte - Direction logistique',\n    report_period: input.report_period || new Date().toLocaleDateString('fr-FR'),\n    unit: input.unit || 'litres',\n    manager_email: input.manager_email || 'gestion.flotte@eltonoil.ci',\n    recipients: Array.isArray(input.recipients) && input.recipients.length ? input.recipients : ['gestion.flotte@eltonoil.ci'],\n    rules: {\n      absolute_variation_threshold: Number(input.absolute_variation_threshold || 40),\n      relative_variation_threshold: Number(input.relative_variation_threshold || 0.2)\n    },\n    rows: rows.map((row) => ({\n      vehicle_id: row.vehicle_id || row.immatriculation || '',\n      vehicle_label: row.vehicle_label || row.libelle || '',\n      current_amount: Number(row.current_amount || row.carburant_consomme_litres || 0),\n      previous_amount: Number(row.previous_amount || row.carburant_attendu_litres || 0),\n      support_required: parseBool(row.support_required ?? row.carnet_route_requis, true),\n      support_received: parseBool(row.support_received ?? row.carnet_route_recu, false),\n      owner: row.owner || row.chauffeur || 'Chauffeur non renseigne'\n    }))\n  }\n}];"
       }
     },
     {
@@ -48,7 +60,10 @@
       "name": "Detecter ecarts et priorites",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [700, 280],
+      "position": [
+        700,
+        280
+      ],
       "parameters": {
         "jsCode": "const data = $input.first().json;\nconst rows = Array.isArray(data.rows) ? data.rows : [];\nconst absThreshold = Number(data.rules?.absolute_variation_threshold || 40);\nconst relThreshold = Number(data.rules?.relative_variation_threshold || 0.2);\n\nfunction pct(current, previous) {\n  if (!previous) return current === 0 ? 0 : 1;\n  return (current - previous) / Math.abs(previous);\n}\n\nfunction formatNumber(value) {\n  return new Intl.NumberFormat('fr-FR').format(Number(value || 0));\n}\n\nconst anomalies = rows.map((row) => {\n  const current = Number(row.current_amount || 0);\n  const previous = Number(row.previous_amount || 0);\n  const absoluteVariation = current - previous;\n  const relativeVariation = pct(current, previous);\n  const missingSupport = Boolean(row.support_required) && !Boolean(row.support_received);\n  const thresholdBreach = Math.abs(absoluteVariation) >= absThreshold || Math.abs(relativeVariation) >= relThreshold;\n\n  let severity = 'faible';\n  if ((missingSupport && thresholdBreach) || Math.abs(relativeVariation) >= 0.4) {\n    severity = 'elevee';\n  } else if (missingSupport || thresholdBreach) {\n    severity = 'moyenne';\n  }\n\n  return {\n    ...row,\n    absolute_variation: absoluteVariation,\n    relative_variation: relativeVariation,\n    missing_support: missingSupport,\n    threshold_breach: thresholdBreach,\n    severity,\n    observation: [\n      thresholdBreach ? `Ecart de ${formatNumber(absoluteVariation)} ${data.unit || 'litres'} (${(relativeVariation * 100).toFixed(1)} %) entre consommation relevee et consommation attendue selon kilometrage.` : null,\n      missingSupport ? 'Carnet de route / justificatif de mission manquant.' : null\n    ].filter(Boolean).join(' ')\n  };\n}).filter((item) => item.threshold_breach || item.missing_support);\n\nconst priorityRank = { elevee: 3, moyenne: 2, faible: 1 };\nanomalies.sort((a, b) => (priorityRank[b.severity] || 0) - (priorityRank[a.severity] || 0) || Math.abs(b.absolute_variation) - Math.abs(a.absolute_variation));\n\nconst grouped = {\n  now: anomalies.filter((item) => item.severity === 'elevee'),\n  review: anomalies.filter((item) => item.severity === 'moyenne'),\n  wait: anomalies.filter((item) => item.severity === 'faible')\n};\n\nreturn [{\n  json: {\n    ...data,\n    anomalies,\n    anomaly_count: anomalies.length,\n    high_priority_count: grouped.now.length,\n    review_count: grouped.review.length,\n    wait_count: grouped.wait.length,\n    grouped,\n    kpi: {\n      vehicles_analyzed: rows.length,\n      anomalies_detected: anomalies.length,\n      high_priority_count: grouped.now.length,\n      missing_support_count: anomalies.filter((item) => item.missing_support).length\n    }\n  }\n}];"
       }
@@ -58,17 +73,16 @@
       "name": "Generer synthese IA",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [980, 280],
+      "position": [
+        980,
+        280
+      ],
       "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.OPENAI_API_KEY || 'OPENAI_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -84,6 +98,14 @@
               "neverError": true
             }
           }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "yVVQNhdB9RBzyLzv",
+          "name": "OpenAI API Key"
         }
       }
     },
@@ -92,7 +114,10 @@
       "name": "Parser synthese et HTML",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1260, 280],
+      "position": [
+        1260,
+        280
+      ],
       "parameters": {
         "jsCode": "const source = $('Detecter ecarts et priorites').first().json;\nconst raw = $input.first().json?.choices?.[0]?.message?.content || '{}';\n\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (error) {\n  parsed = {\n    executive_summary: 'Une revue humaine est requise avant toute diffusion ou decision.',\n    what_moved: [],\n    review_now: [],\n    can_wait: [],\n    escalate_to_manager: [],\n    managerial_comment: raw\n  };\n}\n\nfunction list(items) {\n  return (Array.isArray(items) ? items : []).map((item) => `<li>${String(item)}</li>`).join('') || '<li>Aucun point a signaler.</li>';\n}\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h1 style=\"color:#163556\">Synthese cockpit flotte - Ecarts carburant / kilometrage / entretien</h1>\n  <p><strong>Entite :</strong> ${source.entity}<br><strong>Periode :</strong> ${source.report_period}<br><strong>Vehicules avec ecart :</strong> ${source.anomaly_count}</p>\n  <div style=\"background:#f8fafc;border:1px solid #dbe4ee;border-radius:8px;padding:16px;margin:16px 0\">\n    <strong>Resume executif</strong>\n    <p>${parsed.executive_summary || ''}</p>\n  </div>\n  <h2 style=\"color:#163556\">Ce qui a bouge</h2>\n  <ul>${list(parsed.what_moved)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit etre revu maintenant</h2>\n  <ul>${list(parsed.review_now)}</ul>\n  <h2 style=\"color:#163556\">Ce qui peut attendre</h2>\n  <ul>${list(parsed.can_wait)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit remonter au gestionnaire de flotte</h2>\n  <ul>${list(parsed.escalate_to_manager)}</ul>\n  <h2 style=\"color:#163556\">Commentaire manager</h2>\n  <p>${parsed.managerial_comment || ''}</p>\n  <hr style=\"margin:24px 0;border:none;border-top:1px solid #e5e7eb\" />\n  <p style=\"font-size:12px;color:#6b7280\">Synthese preparee automatiquement. Validation humaine obligatoire avant toute decision operationnelle ou disciplinaire.</p>\n</div>`;\n\nreturn [{\n  json: {\n    ...source,\n    ai_summary: parsed,\n    summary_html: html,\n    final_subject: `[Cockpit Flotte] Synthese ecarts - ${source.entity} - ${source.report_period}`\n  }\n}];"
       }
@@ -102,9 +127,12 @@
       "name": "Construire email validation",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1540, 280],
+      "position": [
+        1540,
+        280
+      ],
       "parameters": {
-        "jsCode": "const data = $input.first().json;\nconst baseUrl = $env.N8N_BASE_URL || 'https://your-n8n.example.com';\nconst payload = {\n  entity: data.entity,\n  report_period: data.report_period,\n  recipients: data.recipients,\n  final_subject: data.final_subject,\n  ai_summary: data.ai_summary,\n  anomaly_count: data.anomaly_count,\n  high_priority_count: data.high_priority_count,\n  review_count: data.review_count,\n  wait_count: data.wait_count\n};\n\nconst encoded = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');\nconst approveUrl = `${baseUrl}/webhook/flotte-carburant-approve?decision=approved&payload=${encoded}`;\nconst rejectUrl = `${baseUrl}/webhook/flotte-carburant-approve?decision=rejected&payload=${encoded}`;\n\nconst reviewHtml = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h2 style=\"color:#163556\">Validation requise - Synthese cockpit flotte</h2>\n  <p><strong>Entite :</strong> ${data.entity}<br><strong>Periode :</strong> ${data.report_period}<br><strong>Vehicules avec ecart :</strong> ${data.anomaly_count}</p>\n  <p>Merci de valider la synthese avant toute diffusion ou decision operationnelle.</p>\n  <p style=\"margin:24px 0\">\n    <a href=\"${approveUrl}\" style=\"background:#059669;color:#ffffff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:bold;margin-right:12px\">Approuver et diffuser</a>\n    <a href=\"${rejectUrl}\" style=\"background:#dc2626;color:#ffffff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:bold\">Rejeter</a>\n  </p>\n  <div style=\"border:1px solid #dbe4ee;border-radius:8px;padding:16px;background:#f8fafc\">\n    ${data.summary_html}\n  </div>\n</div>`;\n\nreturn [{\n  json: {\n    ...data,\n    approval_payload: encoded,\n    approve_url: approveUrl,\n    reject_url: rejectUrl,\n    review_html: reviewHtml\n  }\n}];"
+        "jsCode": "const data = $input.first().json;\nconst baseUrl = 'https://n8n-pxlk.srv1480638.hstgr.cloud';\nconst payload = {\n  entity: data.entity,\n  report_period: data.report_period,\n  recipients: data.recipients,\n  final_subject: data.final_subject,\n  ai_summary: data.ai_summary,\n  anomaly_count: data.anomaly_count,\n  high_priority_count: data.high_priority_count,\n  review_count: data.review_count,\n  wait_count: data.wait_count\n};\n\nconst encoded = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');\nconst approveUrl = `${baseUrl}/webhook/flotte-carburant-approve?decision=approved&payload=${encoded}`;\nconst rejectUrl = `${baseUrl}/webhook/flotte-carburant-approve?decision=rejected&payload=${encoded}`;\n\nconst reviewHtml = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h2 style=\"color:#163556\">Validation requise - Synthese cockpit flotte</h2>\n  <p><strong>Entite :</strong> ${data.entity}<br><strong>Periode :</strong> ${data.report_period}<br><strong>Vehicules avec ecart :</strong> ${data.anomaly_count}</p>\n  <p>Merci de valider la synthese avant toute diffusion ou decision operationnelle.</p>\n  <p style=\"margin:24px 0\">\n    <a href=\"${approveUrl}\" style=\"background:#059669;color:#ffffff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:bold;margin-right:12px\">Approuver et diffuser</a>\n    <a href=\"${rejectUrl}\" style=\"background:#dc2626;color:#ffffff;padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:bold\">Rejeter</a>\n  </p>\n  <div style=\"border:1px solid #dbe4ee;border-radius:8px;padding:16px;background:#f8fafc\">\n    ${data.summary_html}\n  </div>\n</div>`;\n\nreturn [{\n  json: {\n    ...data,\n    approval_payload: encoded,\n    approve_url: approveUrl,\n    reject_url: rejectUrl,\n    review_html: reviewHtml\n  }\n}];"
       }
     },
     {
@@ -112,17 +140,16 @@
       "name": "Envoyer email validation",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1820, 280],
+      "position": [
+        1820,
+        280
+      ],
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -131,13 +158,21 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({\n  from: $env.OUTREACH_FROM_EMAIL || 'TransferAI <contact@transferai.ci>',\n  to: [$('Construire email validation').first().json.manager_email || $env.INTERNAL_REVIEW_EMAIL || 'gestion.flotte@eltonoil.ci'],\n  subject: 'Validation requise - ' + $('Construire email validation').first().json.final_subject,\n  html: $('Construire email validation').first().json.review_html\n}) }}",
+        "jsonBody": "={{ JSON.stringify({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: [$('Construire email validation').first().json.manager_email || 'gestion.flotte@eltonoil.ci'],\n  subject: 'Validation requise - ' + $('Construire email validation').first().json.final_subject,\n  html: $('Construire email validation').first().json.review_html\n}) }}",
         "options": {
           "response": {
             "response": {
               "neverError": true
             }
           }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "aZh8bomwzabAZ1S4",
+          "name": "Resend — Formation Emails (migré 03/07/2026)"
         }
       }
     },
@@ -146,7 +181,10 @@
       "name": "Webhook - Approbation finale",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [160, 620],
+      "position": [
+        160,
+        620
+      ],
       "parameters": {
         "httpMethod": "GET",
         "path": "flotte-carburant-approve",
@@ -160,7 +198,10 @@
       "name": "Parser decision approbation",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [420, 620],
+      "position": [
+        420,
+        620
+      ],
       "parameters": {
         "jsCode": "const query = $input.first().json.query || $input.first().json;\nconst decision = String(query.decision || '').toLowerCase();\nconst encoded = String(query.payload || '');\n\nlet payload = {};\ntry {\n  payload = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8'));\n} catch (error) {\n  payload = { decode_error: error.message };\n}\n\nreturn [{\n  json: {\n    decision,\n    approved: decision === 'approved',\n    ...payload\n  }\n}];"
       }
@@ -170,7 +211,10 @@
       "name": "IF approuve",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [700, 620],
+      "position": [
+        700,
+        620
+      ],
       "parameters": {
         "conditions": {
           "options": {
@@ -195,7 +239,10 @@
       "name": "Recomposer HTML final",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [980, 500],
+      "position": [
+        980,
+        500
+      ],
       "parameters": {
         "jsCode": "const data = $input.first().json;\nconst ai = data.ai_summary || {};\n\nfunction list(items) {\n  return (Array.isArray(items) ? items : []).map((item) => `<li>${String(item)}</li>`).join('') || '<li>Aucun point a signaler.</li>';\n}\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#1f2937\">\n  <h1 style=\"color:#163556\">Synthese cockpit flotte - Ecarts carburant / kilometrage / entretien</h1>\n  <p><strong>Entite :</strong> ${data.entity}<br><strong>Periode :</strong> ${data.report_period}<br><strong>Vehicules avec ecart :</strong> ${data.anomaly_count}</p>\n  <div style=\"background:#f8fafc;border:1px solid #dbe4ee;border-radius:8px;padding:16px;margin:16px 0\">\n    <strong>Resume executif</strong>\n    <p>${ai.executive_summary || ''}</p>\n  </div>\n  <h2 style=\"color:#163556\">Ce qui a bouge</h2>\n  <ul>${list(ai.what_moved)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit etre revu maintenant</h2>\n  <ul>${list(ai.review_now)}</ul>\n  <h2 style=\"color:#163556\">Ce qui peut attendre</h2>\n  <ul>${list(ai.can_wait)}</ul>\n  <h2 style=\"color:#163556\">Ce qui doit remonter au gestionnaire de flotte</h2>\n  <ul>${list(ai.escalate_to_manager)}</ul>\n  <h2 style=\"color:#163556\">Commentaire manager</h2>\n  <p>${ai.managerial_comment || ''}</p>\n  <hr style=\"margin:24px 0;border:none;border-top:1px solid #e5e7eb\" />\n  <p style=\"font-size:12px;color:#6b7280\">Synthese preparee automatiquement. Validation humaine obligatoire avant toute decision operationnelle ou disciplinaire.</p>\n</div>`;\n\nreturn [{ json: { ...data, summary_html: html } }];"
       }
@@ -205,17 +252,16 @@
       "name": "Envoyer synthese finale",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1260, 500],
+      "position": [
+        1260,
+        500
+      ],
       "parameters": {
         "method": "POST",
         "url": "https://api.resend.com/emails",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + ($env.RESEND_API_KEY || 'RESEND_API_KEY_MISSING') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -224,13 +270,21 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({\n  from: $env.OUTREACH_FROM_EMAIL || 'TransferAI <contact@transferai.ci>',\n  to: Array.isArray($json.recipients) ? $json.recipients : ['gestion.flotte@eltonoil.ci'],\n  subject: $json.final_subject,\n  html: $json.summary_html\n}) }}",
+        "jsonBody": "={{ JSON.stringify({\n  from: 'TransferAI <contact@transferai.ci>',\n  to: Array.isArray($json.recipients) ? $json.recipients : ['gestion.flotte@eltonoil.ci'],\n  subject: $json.final_subject,\n  html: $json.summary_html\n}) }}",
         "options": {
           "response": {
             "response": {
               "neverError": true
             }
           }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "aZh8bomwzabAZ1S4",
+          "name": "Resend — Formation Emails (migré 03/07/2026)"
         }
       }
     },
@@ -239,7 +293,10 @@
       "name": "Repondre approbation OK",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [1540, 500],
+      "position": [
+        1540,
+        500
+      ],
       "parameters": {
         "respondWith": "text",
         "responseBody": "=Validation enregistree. La synthese cockpit flotte a ete diffusee aux destinataires prevus."
@@ -250,7 +307,10 @@
       "name": "Repondre approbation refusee",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [980, 700],
+      "position": [
+        980,
+        700
+      ],
       "parameters": {
         "respondWith": "text",
         "responseBody": "=Validation refusee. Aucune diffusion officielle n a ete effectuee."
@@ -259,52 +319,162 @@
   ],
   "connections": {
     "Trigger manuel": {
-      "main": [[{ "node": "Jeu de donnees demo", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Jeu de donnees demo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Webhook - Donnees flotte": {
-      "main": [[{ "node": "Normaliser entree webhook", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Normaliser entree webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Jeu de donnees demo": {
-      "main": [[{ "node": "Detecter ecarts et priorites", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Detecter ecarts et priorites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Normaliser entree webhook": {
-      "main": [[{ "node": "Detecter ecarts et priorites", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Detecter ecarts et priorites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Detecter ecarts et priorites": {
-      "main": [[{ "node": "Generer synthese IA", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Generer synthese IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Generer synthese IA": {
-      "main": [[{ "node": "Parser synthese et HTML", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Parser synthese et HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Parser synthese et HTML": {
-      "main": [[{ "node": "Construire email validation", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Construire email validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Construire email validation": {
-      "main": [[{ "node": "Envoyer email validation", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Envoyer email validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Webhook - Approbation finale": {
-      "main": [[{ "node": "Parser decision approbation", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Parser decision approbation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Parser decision approbation": {
-      "main": [[{ "node": "IF approuve", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "IF approuve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "IF approuve": {
       "main": [
-        [{ "node": "Recomposer HTML final", "type": "main", "index": 0 }],
-        [{ "node": "Repondre approbation refusee", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Recomposer HTML final",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Repondre approbation refusee",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Recomposer HTML final": {
-      "main": [[{ "node": "Envoyer synthese finale", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Envoyer synthese finale",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Envoyer synthese finale": {
-      "main": [[{ "node": "Repondre approbation OK", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Repondre approbation OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
   },
   "meta": {
-    "description": "GABARIT TRANSPOSE (21/07/2026) - non deploye en production a ce jour. Transpose directement l'architecture validee du pipeline Demo_Pre_Cloture_Bancaire_Validation_Humaine (voir 127_n8n_Demo_Pre_Cloture_Bancaire_Validation_Humaine_05juillet2026.json) au domaine flotte : detection d ecarts carburant/kilometrage/entretien, synthese IA, validation humaine par le gestionnaire de flotte avant diffusion. Le cockpit flotte reel pour ELTON OIL CI (connexion cartes carburant, GPS/telematique, GMAO) reste un livrable du parcours de formation (J+15)."
+    "description": "Teste et deploye en n8n le 21/07/2026 (id workflow JXpc9y3FBnUa3wZQ, actif) avant la rencontre ELTON OIL CI du 25/07. Transpose l architecture validee du pipeline Demo_Pre_Cloture_Bancaire_Validation_Humaine au domaine flotte : detection d ecarts carburant/kilometrage/entretien, synthese IA, validation humaine par le gestionnaire de flotte avant diffusion. Corrige pour utiliser les credentials n8n reelles (OpenAI, Resend) au lieu de $env, bloque sur cette instance. Le cockpit flotte reel pour ELTON OIL CI (connexion cartes carburant, GPS/telematique, GMAO) reste un livrable du parcours de formation (J+15) ; ce workflow reste un gabarit teste sur donnees de demonstration, pas une integration ELTON reelle."
   }
 }
