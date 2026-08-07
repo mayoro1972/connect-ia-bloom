@@ -57,6 +57,8 @@ const DocumentRagDemoPage = lazy(() => import("./pages/DocumentRagDemoPage"));
 const PreClotureBancaireDemoPage = lazy(() => import("./pages/PreClotureBancaireDemoPage"));
 const CourrierPIIDemoPage = lazy(() => import("./pages/CourrierPIIDemoPage"));
 const ChatwootWhatsAppDemoPage = lazy(() => import("./pages/ChatwootWhatsAppDemoPage"));
+const DiagnosticCyberDemoPage = lazy(() => import("./pages/DiagnosticCyberDemoPage"));
+const PhishingSimDemoPage = lazy(() => import("./pages/PhishingSimDemoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -265,6 +267,8 @@ const AnimatedRoutes = () => {
           <Route path="/demo/pre-cloture-bancaire" element={<PreClotureBancaireDemoPage />} />
           <Route path="/demo/courrier-automatique-pii" element={<CourrierPIIDemoPage />} />
           <Route path="/demo/agent-ia-whatsapp-chatwoot" element={<ChatwootWhatsAppDemoPage />} />
+          <Route path="/demo/diagnostic-cybersecurite" element={<DiagnosticCyberDemoPage />} />
+          <Route path="/demo/simulateur-phishing" element={<PhishingSimDemoPage />} />
           <Route path="/back-office" element={<BackOffice />} />
           <Route path="/back-office/newsletters" element={<NewsletterBackOffice />} />
           <Route path="*" element={<NotFound />} />

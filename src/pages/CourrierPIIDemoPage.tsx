@@ -22,7 +22,7 @@ import { trackAnalyticsEvent } from "@/lib/analytics";
 const COOLDOWN_MS = 60_000;
 const COOLDOWN_STORAGE_KEY = "courrier_pii_demo_last_run";
 
-type ScenarioId = "diplomatie" | "rh" | "finance" | "marketing";
+type ScenarioId = "diplomatie" | "rh" | "finance" | "marketing" | "education";
 
 type Scenario = {
   id: ScenarioId;
@@ -175,6 +175,48 @@ const scenarios: Scenario[] = [
       "MKT-2026-0092",
       "07 33 22 11 44",
       "f.diarra@kaydan-digital-test.example",
+    ],
+  },
+  // Scénario construit le 07/08/2026 pour la démonstration Pigier CI. Le déclenchement réel a été
+  // testé sur le webhook n8n de prod (courrier_id CRR-1786139796434, statut sent_for_validation confirmé),
+  // mais gptDraftText/finalText ci-dessous sont rédigés à la main en suivant les règles de prompt déjà
+  // validées (co-013), pas capturés depuis l'email réel — à comparer avec l'email reçu par Marius avant
+  // de présenter ce scénario comme intégralement vérifié, comme pour les 4 autres secteurs.
+  {
+    id: "education",
+    sector: "Éducation",
+    pillActive: "border-sky-400/40 bg-sky-400/15 text-sky-200",
+    pillInactive: "border-white/10 text-slate-400 hover:text-slate-200",
+    destinataire: "Mme Aïcha Traoré",
+    destinataireEmail: "a.traore@etudiant-pigier-test.example",
+    objet: "Convocation - entretien disciplinaire",
+    expediteur: "Direction de la Vie Étudiante",
+    organisation: "Pigier Côte d'Ivoire (scénario de démonstration)",
+    demandeText:
+      "Merci de convoquer Mme Aïcha Traoré, étudiante, référence dossier : PIG-2026-00734, pour un entretien disciplinaire suite à un incident signalé en salle de cours. Adresse : Cocody Angré, Abidjan. La joindre au 07 65 43 21 09 ou par email a.traore@etudiant-pigier-test.example. Copie à envoyer au tuteur légal, M. Ibrahim Traoré, joignable au 05 12 34 56 78.",
+    sensitiveValues: [
+      "Mme Aïcha Traoré",
+      "référence dossier : PIG-2026-00734",
+      "Cocody Angré",
+      "07 65 43 21 09",
+      "a.traore@etudiant-pigier-test.example",
+      "M. Ibrahim Traoré",
+      "05 12 34 56 78",
+    ],
+    anonymisedText:
+      "Merci de convoquer [PERSONNE_1], étudiante, référence dossier : [REFERENCE_1], pour un entretien disciplinaire suite à un incident signalé en salle de cours. Adresse : [ADRESSE_1], Abidjan. La joindre au [TELEPHONE_1] ou par email [EMAIL_1]. Copie à envoyer au tuteur légal, [PERSONNE_2], joignable au [TELEPHONE_2].",
+    gptDraftText:
+      "Nous vous informons que [PERSONNE_1] est convoquée à un entretien disciplinaire suite à un incident signalé en salle de cours. Cet entretien se tiendra dans nos locaux à une date et heure qui vous seront communiquées ultérieurement.\n\nPour rappel, [PERSONNE_1] est enregistrée sous la référence dossier [REFERENCE_1] et réside à [ADRESSE_1], Abidjan. Vous pouvez la joindre au [TELEPHONE_1] ou par email à [EMAIL_1].\n\nUne copie de cette convocation sera transmise au tuteur légal, [PERSONNE_2], joignable au [TELEPHONE_2].\n\nNous vous remercions de votre compréhension et de votre coopération.\n\nVeuillez agréer, Madame, l'expression de nos salutations distinguées.\n\nDirection de la Vie Étudiante\nPigier Côte d'Ivoire (scénario de démonstration)",
+    finalText:
+      "Nous vous informons que Mme Aïcha Traoré est convoquée à un entretien disciplinaire suite à un incident signalé en salle de cours. Cet entretien se tiendra dans nos locaux à une date et heure qui vous seront communiquées ultérieurement.\n\nPour rappel, Mme Aïcha Traoré est enregistrée sous la référence dossier PIG-2026-00734 et réside à Cocody Angré, Abidjan. Vous pouvez la joindre au 07 65 43 21 09 ou par email à a.traore@etudiant-pigier-test.example.\n\nUne copie de cette convocation sera transmise au tuteur légal, M. Ibrahim Traoré, joignable au 05 12 34 56 78.\n\nNous vous remercions de votre compréhension et de votre coopération.\n\nVeuillez agréer, Madame, l'expression de nos salutations distinguées.\n\nDirection de la Vie Étudiante\nPigier Côte d'Ivoire (scénario de démonstration)",
+    restoredValues: [
+      "Mme Aïcha Traoré",
+      "PIG-2026-00734",
+      "Cocody Angré",
+      "07 65 43 21 09",
+      "a.traore@etudiant-pigier-test.example",
+      "M. Ibrahim Traoré",
+      "05 12 34 56 78",
     ],
   },
 ];

@@ -18,15 +18,16 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
-type ScenarioId = "diplomatie" | "rh" | "finance" | "marketing";
+type ScenarioId = "diplomatie" | "rh" | "finance" | "marketing" | "education";
 
 interface DemoRequest {
   visitor_name?: string;
   scenario?: string;
 }
 
-// 4 scénarios fixes, un par secteur — 100% fictifs, chacun vérifié en conditions réelles
-// (Diplomatie le 09-10/07/2026, RH/Finance/Marketing le 12/07/2026).
+// 5 scénarios fixes, un par secteur — 100% fictifs, chacun vérifié en conditions réelles
+// (Diplomatie le 09-10/07/2026, RH/Finance/Marketing le 12/07/2026, Éducation le 07/08/2026
+// pour la démonstration Pigier CI — courrier_id CRR-1786139796434, statut sent_for_validation confirmé).
 // Volontairement non paramétrables par le visiteur : évite toute injection de contenu
 // arbitraire dans un formulaire public qui appelle un vrai LLM et envoie un vrai email.
 // Le champ manager de validation reste toujours interne (Marius clique en direct devant
@@ -71,6 +72,16 @@ const SCENARIOS: Record<ScenarioId, Record<string, string>> = {
       "Merci de confirmer à Mme Fatou Diarra que le budget de campagne de 8 500 000 FCFA a été validé, référence contrat : MKT-2026-0092. Elle est joignable au 07 33 22 11 44 ou par email f.diarra@kaydan-digital-test.example.",
     expediteur: "Direction Marketing",
     organisation: "TransferAI Africa",
+  },
+  education: {
+    type_courrier: "Convocation à un entretien disciplinaire",
+    destinataire: "Mme Aïcha Traoré",
+    destinataire_email: "a.traore@etudiant-pigier-test.example",
+    objet: "Convocation - entretien disciplinaire",
+    instructions:
+      "Merci de convoquer Mme Aïcha Traoré, étudiante, référence dossier : PIG-2026-00734, pour un entretien disciplinaire suite à un incident signalé en salle de cours. Adresse : Cocody Angré, Abidjan. La joindre au 07 65 43 21 09 ou par email a.traore@etudiant-pigier-test.example. Copie à envoyer au tuteur légal, M. Ibrahim Traoré, joignable au 05 12 34 56 78.",
+    expediteur: "Direction de la Vie Étudiante",
+    organisation: "Pigier Côte d'Ivoire (scénario de démonstration)",
   },
 };
 
