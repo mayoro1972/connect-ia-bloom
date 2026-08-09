@@ -177,11 +177,10 @@ const scenarios: Scenario[] = [
       "f.diarra@kaydan-digital-test.example",
     ],
   },
-  // Scénario construit le 07/08/2026 pour la démonstration Pigier CI. Le déclenchement réel a été
-  // testé sur le webhook n8n de prod (courrier_id CRR-1786139796434, statut sent_for_validation confirmé),
-  // mais gptDraftText/finalText ci-dessous sont rédigés à la main en suivant les règles de prompt déjà
-  // validées (co-013), pas capturés depuis l'email réel — à comparer avec l'email reçu par Marius avant
-  // de présenter ce scénario comme intégralement vérifié, comme pour les 4 autres secteurs.
+  // Scénario construit le 07/08/2026 pour la démonstration Pigier CI. Testé en conditions réelles sur
+  // le webhook n8n de prod (courrier_id CRR-1786139796434 puis CRR-1786317499158, emails reçus et
+  // confirmés le 09/08) — gptDraftText/finalText ci-dessous reprennent mot pour mot le texte réellement
+  // généré par GPT-4o dans l'email reçu, pas une reconstitution.
   {
     id: "education",
     sector: "Éducation",
@@ -206,9 +205,9 @@ const scenarios: Scenario[] = [
     anonymisedText:
       "Merci de convoquer [PERSONNE_1], étudiante, référence dossier : [REFERENCE_1], pour un entretien disciplinaire suite à un incident signalé en salle de cours. Adresse : [ADRESSE_1], Abidjan. La joindre au [TELEPHONE_1] ou par email [EMAIL_1]. Copie à envoyer au tuteur légal, [PERSONNE_2], joignable au [TELEPHONE_2].",
     gptDraftText:
-      "Nous vous informons que [PERSONNE_1] est convoquée à un entretien disciplinaire suite à un incident signalé en salle de cours. Cet entretien se tiendra dans nos locaux à une date et heure qui vous seront communiquées ultérieurement.\n\nPour rappel, [PERSONNE_1] est enregistrée sous la référence dossier [REFERENCE_1] et réside à [ADRESSE_1], Abidjan. Vous pouvez la joindre au [TELEPHONE_1] ou par email à [EMAIL_1].\n\nUne copie de cette convocation sera transmise au tuteur légal, [PERSONNE_2], joignable au [TELEPHONE_2].\n\nNous vous remercions de votre compréhension et de votre coopération.\n\nVeuillez agréer, Madame, l'expression de nos salutations distinguées.\n\nDirection de la Vie Étudiante\nPigier Côte d'Ivoire (scénario de démonstration)",
+      "Madame [PERSONNE_1],\n\nNous vous informons que [PERSONNE_1], étudiante, référence dossier : [REFERENCE_1], est convoquée pour un entretien disciplinaire. Cet entretien fait suite à un incident signalé en salle de cours.\n\nNous vous prions de bien vouloir vous présenter à l'adresse suivante : [ADRESSE_1], Abidjan. Pour toute question ou information complémentaire, vous pouvez joindre [PERSONNE_1] au [TELEPHONE_1] ou par email à [EMAIL_1].\n\nNous vous informons également qu'une copie de cette convocation sera envoyée au tuteur légal, [PERSONNE_2], qui est joignable au [TELEPHONE_2].\n\nNous vous remercions de votre compréhension et de votre coopération.\n\nVeuillez agréer, Madame, l'expression de nos salutations distinguées.\n\nDirection de la Vie Étudiante\nPigier Côte d'Ivoire (scénario de démonstration)",
     finalText:
-      "Nous vous informons que Mme Aïcha Traoré est convoquée à un entretien disciplinaire suite à un incident signalé en salle de cours. Cet entretien se tiendra dans nos locaux à une date et heure qui vous seront communiquées ultérieurement.\n\nPour rappel, Mme Aïcha Traoré est enregistrée sous la référence dossier PIG-2026-00734 et réside à Cocody Angré, Abidjan. Vous pouvez la joindre au 07 65 43 21 09 ou par email à a.traore@etudiant-pigier-test.example.\n\nUne copie de cette convocation sera transmise au tuteur légal, M. Ibrahim Traoré, joignable au 05 12 34 56 78.\n\nNous vous remercions de votre compréhension et de votre coopération.\n\nVeuillez agréer, Madame, l'expression de nos salutations distinguées.\n\nDirection de la Vie Étudiante\nPigier Côte d'Ivoire (scénario de démonstration)",
+      "Madame Aïcha Traoré,\n\nNous vous informons que Mme Aïcha Traoré, étudiante, référence dossier : PIG-2026-00734, est convoquée pour un entretien disciplinaire. Cet entretien fait suite à un incident signalé en salle de cours.\n\nNous vous prions de bien vouloir vous présenter à l'adresse suivante : Cocody Angré, Abidjan. Pour toute question ou information complémentaire, vous pouvez joindre Mme Aïcha Traoré au 07 65 43 21 09 ou par email à a.traore@etudiant-pigier-test.example.\n\nNous vous informons également qu'une copie de cette convocation sera envoyée au tuteur légal, M. Ibrahim Traoré, qui est joignable au 05 12 34 56 78.\n\nNous vous remercions de votre compréhension et de votre coopération.\n\nVeuillez agréer, Madame, l'expression de nos salutations distinguées.\n\nDirection de la Vie Étudiante\nPigier Côte d'Ivoire (scénario de démonstration)",
     restoredValues: [
       "Mme Aïcha Traoré",
       "PIG-2026-00734",
