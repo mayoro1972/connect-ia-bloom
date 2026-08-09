@@ -85,10 +85,18 @@ const SCENARIOS: Record<ScenarioId, Record<string, string>> = {
   },
 };
 
+// Par défaut le manager de validation est toujours interne (Marius). Le scénario Éducation
+// est une exception délibérée pour la démo Pigier CI : la validation part directement aux
+// vrais interlocuteurs Pigier (M. Okou, Mme Goore) plutôt qu'à Marius, pour qu'ils voient le
+// résultat dans leur propre boîte pendant la présentation.
+const EMAIL_VALIDATION_OVERRIDES: Partial<Record<ScenarioId, string>> = {
+  education: "guigusokou2@yahoo.fr,mariefrancegoore@univmetiers.ci",
+};
+
 function buildPayload(scenario: ScenarioId) {
   return {
     ...SCENARIOS[scenario],
-    email_validation: "marius.ayoro70@gmail.com",
+    email_validation: EMAIL_VALIDATION_OVERRIDES[scenario] ?? "marius.ayoro70@gmail.com",
     email_secretaire: "contact@transferai.ci",
     langue: "fr",
   };
