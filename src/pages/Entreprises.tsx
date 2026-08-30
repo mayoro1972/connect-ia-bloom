@@ -31,11 +31,11 @@ const servicesHubCopy = {
     pillars: [
       {
         title: "Conseil & adoption IA",
-        desc: "Pour cadrer les priorités, choisir les bons cas d'usage et préparer les équipes avant d'investir.",
+        desc: "Pour cadrer les priorités, choisir les bons cas d'usage, gouverner les données sensibles et préparer les équipes avant d'investir.",
         highlights: [
           "Diagnostic de maturité IA et cartographie des cas d'usage",
           "Feuille de route 30 / 60 / 90 jours",
-          "Cadre d'adoption et gouvernance",
+          "Cadre d'adoption, gouvernance et données sensibles",
         ],
         cta: "Explorer le conseil",
         href: "/consulting-ia",
@@ -104,11 +104,11 @@ const servicesHubCopy = {
     pillars: [
       {
         title: "AI advisory & adoption",
-        desc: "To clarify priorities, frame the right use cases and prepare teams before investing.",
+        desc: "To clarify priorities, frame the right use cases, govern sensitive data, and prepare teams before investing.",
         highlights: [
           "AI maturity diagnosis and opportunity mapping",
           "30 / 60 / 90-day roadmap",
-          "Adoption and governance framework",
+          "Adoption, governance, and sensitive data framework",
         ],
         cta: "Explore advisory",
         href: "/consulting-ia",

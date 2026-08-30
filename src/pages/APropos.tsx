@@ -70,11 +70,12 @@ const pageCopy = {
     introBadge: "En bref",
     introTitle: "Transformer l'IA en décisions, compétences et résultats",
     introLead:
-      "Issu d'une collaboration avec Nettelecom CI, TransferAI Africa aide les professionnels, les entreprises et les institutions à cadrer leurs priorités IA, faire monter les équipes en compétence et déployer des usages réellement utiles.",
+      "TransferAI Africa est la branche Intelligence Artificielle de VTOC Limited, aujourd'hui GISUBIZO A CONSULTING LTD, une structure opérant depuis 2009 au Royaume-Uni. Créée en 2022, TransferAI aide les professionnels, les entreprises et les institutions à cadrer leurs priorités IA, faire monter les équipes en compétence, gouverner l'usage des données sensibles et déployer des solutions réellement utiles.",
     introPoints: [
-      "Un ancrage fort en Côte d'Ivoire, avec une ambition africaine claire.",
-      "Un accompagnement de la stratégie au passage à l'action.",
-      "Une équipe fondatrice renforcée par des consultants experts mobilisables.",
+      "M. Marius AYORO, Fondateur de TransferAI, est aussi Managing Director de VTOC Limited, aujourd'hui GISUBIZO A CONSULTING LTD.",
+      "Nettelecom est le premier hub et partenaire stratégique de TransferAI en Côte d'Ivoire et en Afrique de l'Ouest.",
+      "M. Casimir Kassi Beda, Directeur Général de Nettelecom et co-fondateur de TransferAI, renforce cet ancrage régional.",
+      "Une équipe de 15 experts couvre l'IA appliquée, la cybersécurité, la data, les réseaux, le conseil et l'implémentation.",
     ],
     missionTitle: "Notre mission",
     missionPillars: [
@@ -84,30 +85,30 @@ const pageCopy = {
       },
       {
         title: "Cadrer les bons usages",
-        desc: "Aider les structures à prioriser, choisir les bons cas d'usage et éviter la dispersion.",
+        desc: "Aider les structures à prioriser, choisir les bons cas d'usage, poser un cadre de gouvernance et éviter la dispersion.",
       },
       {
-        title: "Déployer avec impact",
-        desc: "Transformer l'IA en gains concrets : productivité, qualité, gouvernance et meilleure prise de décision.",
+        title: "Déployer avec confiance",
+        desc: "Transformer l'IA en gains concrets : productivité, qualité, gouvernance et meilleure prise de décision, sans exposer inutilement les données sensibles.",
       },
     ],
     trustTitle: "Ce qui nous distingue",
     trustItems: [
       {
         title: "Du cadrage à l'exécution",
-        desc: "Nous ne nous arrêtons pas au conseil : nous relions diagnostic, formation, cas d'usage et mise en œuvre.",
+        desc: "Nous ne nous arrêtons pas au conseil : nous relions diagnostic, formation, gouvernance, cas d'usage et mise en œuvre.",
       },
       {
         title: "Méthode métier, pas effet de mode",
         desc: "Chaque intervention part d'un besoin réel, d'un processus précis et d'un résultat attendu.",
       },
       {
-        title: "Gouvernance et exigence",
-        desc: "Nous intégrons pédagogie, conformité, qualité des livrables et maîtrise des risques dès le départ.",
+        title: "Gouvernance des données sensibles",
+        desc: "Nous intégrons dès le départ des règles claires de confidentialité, d'anonymisation, de validation humaine et de maîtrise des accès pour les usages IA sensibles.",
       },
       {
         title: "Une équipe élargie et mobilisable",
-        desc: "La structure réunit une équipe fondatrice et des consultants experts pour répondre à des besoins plus larges sans diluer la qualité.",
+        desc: "TransferAI s'appuie sur 15 experts couvrant l'IA, la data, la cybersécurité, les réseaux, le cloud, l'audit, les RH, la santé, les contenus, l'automatisation et l'accompagnement.",
       },
     ],
     teamTitle: "Une équipe fondatrice qui porte la vision",
@@ -119,16 +120,16 @@ const pageCopy = {
         category: "Co-fondateur",
         role: "Directeur Général",
         contribution:
-          "Pilote la vision, les orientations stratégiques et le positionnement de TransferAI Africa. Spécialiste des infrastructures télécoms et des systèmes réseaux, il accompagne les organisations dans la conception, le déploiement et l'optimisation de solutions de connectivité performantes et sécurisées. Il intervient sur des projets stratégiques liés à la transformation digitale, aux réseaux et à l'intégration des nouvelles technologies.",
+          "Directeur Général de Nettelecom et co-fondateur de TransferAI, il pilote la vision, les orientations stratégiques et le positionnement de TransferAI Africa. Spécialiste des infrastructures télécoms et des systèmes réseaux, il accompagne les organisations dans la conception, le déploiement et l'optimisation de solutions de connectivité performantes et sécurisées. Il intervient sur des projets stratégiques liés à la transformation digitale, aux réseaux et à l'intégration des nouvelles technologies.",
         specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Télécom", "Réseaux", "Infrastructures", "Connectivité", "Transformation digitale"],
       },
       {
         name: "Marius Ayoro",
         category: "Co-fondateur",
-        role: "Directeur Développement & Partenariats",
+        role: "Fondateur · Managing Director VTOC / GISUBIZO · Développement & Partenariats",
         contribution:
-          "Structure les demandes entreprises, les partenariats et la mise en relation avec l'offre TransferAI. Il conçoit et déploie des solutions de communication, d'agents IA et d'intégration de données sensibles à grande échelle pour des environnements critiques, avec une approche qui associe précision technique, robustesse opérationnelle et impact métier.",
-        specialties: ["Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "Supabase", "Réseaux", "IA appliquée"],
+          "Fondateur de TransferAI et Managing Director de VTOC Limited, aujourd'hui GISUBIZO A CONSULTING LTD, il structure les demandes entreprises, les partenariats et la mise en relation avec l'offre TransferAI. Il conçoit et déploie des solutions de communication, d'agents IA, de gouvernance et d'intégration de données sensibles à grande échelle pour des environnements critiques, avec une approche qui associe précision technique, robustesse opérationnelle et impact métier.",
+        specialties: ["Agents IA", "Pipelines RAG", "RAG / Chatbots", "Voice Agents", "Supabase", "Cybersécurité & Data", "IA appliquée"],
       },
       {
         name: "Soulemane Konate",
@@ -252,11 +253,12 @@ const pageCopy = {
     introBadge: "At a glance",
     introTitle: "Turn AI into decisions, skills, and measurable results",
     introLead:
-      "Built in collaboration with Nettelecom CI, TransferAI Africa helps professionals, companies, and institutions frame their AI priorities, build team capability, and deploy use cases that actually matter.",
+      "TransferAI Africa is the Artificial Intelligence arm of VTOC Limited, now GISUBIZO A CONSULTING LTD, a UK-based structure operating since 2009. Established in 2022, TransferAI helps professionals, companies, and institutions define their AI priorities, build internal capability, govern sensitive data usage, and deploy solutions that actually matter.",
     introPoints: [
-      "Strong Côte d'Ivoire grounding with a clear African ambition.",
-      "Support that runs from strategy to execution.",
-      "A founding team strengthened by expert consultants ready to mobilize.",
+      "Mr. Marius AYORO, Founder of TransferAI, also serves as Managing Director of VTOC Limited, now GISUBIZO A CONSULTING LTD.",
+      "Nettelecom is TransferAI's first hub and strategic partner in Côte d'Ivoire and across West Africa.",
+      "Mr. Casimir Kassi Beda, Managing Director of Nettelecom and co-founder of TransferAI, strengthens this regional footprint.",
+      "A team of 15 experts spans applied AI, cybersecurity, data, networks, advisory, and implementation.",
     ],
     missionTitle: "Our mission",
     missionPillars: [
@@ -266,30 +268,30 @@ const pageCopy = {
       },
       {
         title: "Frame the right use cases",
-        desc: "Help organizations prioritize, choose the right use cases, and move forward without noise.",
+        desc: "Help organizations prioritize, choose the right use cases, establish governance, and move forward without noise.",
       },
       {
-        title: "Deploy for impact",
-        desc: "Turn AI into concrete gains: productivity, quality, governance, and stronger decision-making.",
+        title: "Deploy with confidence",
+        desc: "Turn AI into concrete gains in productivity, quality, governance, and decision-making without unnecessarily exposing sensitive data.",
       },
     ],
     trustTitle: "What makes us different",
     trustItems: [
       {
         title: "From framing to execution",
-        desc: "We do not stop at advisory: we connect diagnosis, training, use cases, and implementation.",
+        desc: "We do not stop at advisory: we connect diagnosis, training, governance, use cases, and implementation.",
       },
       {
         title: "Business method, not hype",
         desc: "Every engagement starts from a real need, a defined process, and an expected outcome.",
       },
       {
-        title: "Governance and rigor",
-        desc: "We integrate pedagogy, compliance, delivery quality, and risk discipline from the start.",
+        title: "Sensitive data governance",
+        desc: "From day one, we integrate clear rules for confidentiality, anonymization, human validation, and access control around sensitive AI use cases.",
       },
       {
         title: "A broader team you can mobilize",
-        desc: "The structure brings together a founding team and expert consultants to cover broader needs without losing quality.",
+        desc: "TransferAI relies on 15 experts across AI, data, cybersecurity, networks, cloud, audit, HR, healthcare, content, automation, and advisory.",
       },
     ],
     teamTitle: "A founding team that carries the vision",
@@ -299,18 +301,18 @@ const pageCopy = {
       {
         name: "Casimir Kassi BEDA",
         category: "Co-founder",
-        role: "CEO",
+        role: "Managing Director",
         contribution:
-          "Leads the vision, strategic direction, and positioning of TransferAI Africa. A specialist in telecom infrastructure and network systems, he supports organizations in designing, deploying, and optimizing secure, high-performance connectivity solutions. He contributes to strategic initiatives linked to digital transformation, networks, and the integration of new technologies.",
+          "Managing Director of Nettelecom and co-founder of TransferAI, he leads the vision, strategic direction, and positioning of TransferAI Africa. A specialist in telecom infrastructure and network systems, he supports organizations in designing, deploying, and optimizing secure, high-performance connectivity solutions. He contributes to strategic initiatives linked to digital transformation, networks, and the integration of new technologies.",
         specialties: ["OpenAI", "Claude · Anthropic", "MS Copilot", "Telecom", "Networks", "Infrastructure", "Connectivity", "Digital transformation"],
       },
       {
         name: "Marius Ayoro",
         category: "Co-founder",
-        role: "Director of Business Development & Partnerships",
+        role: "Founder · Managing Director VTOC / GISUBIZO · Business Development & Partnerships",
         contribution:
-          "Structures enterprise opportunities, partnerships, and alignment between client needs and the TransferAI offer. He designs and deploys communication solutions, AI agents, and large-scale sensitive data integration for critical environments, combining technical precision, operational robustness, and business impact.",
-        specialties: ["AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "Supabase", "Networks", "Applied AI"],
+          "Founder of TransferAI and Managing Director of VTOC Limited, now GISUBIZO A CONSULTING LTD, he structures enterprise opportunities, partnerships, and alignment between client needs and the TransferAI offer. He designs and deploys communication solutions, AI agents, governance frameworks, and large-scale sensitive data integration for critical environments, combining technical precision, operational robustness, and business impact.",
+        specialties: ["AI agents", "RAG pipelines", "RAG / Chatbots", "Voice Agents", "Supabase", "Cybersecurity & Data", "Applied AI"],
       },
       {
         name: "Soulemane Konate",
