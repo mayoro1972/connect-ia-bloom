@@ -75,7 +75,7 @@ def add_footer(section) -> None:
     paragraph = section.footer.paragraphs[0]
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = paragraph.add_run(
-        "TransferAI Africa | NettelecomCI | contact@transferai.ci | www.transferai.ci | +225 07 16 57 39 90"
+        "TransferAI Africa | NettelecomCI | contact@transferai.ci | www.transferai.ci | WhatsApp +225 07 16 57 39 90"
     )
     set_font(run, "Aptos", 9.2, GRAY)
 

@@ -70,7 +70,7 @@ def draw_footer_cover(canvas, doc):
     canvas.setFillColor(C_BLANC)
     canvas.setFont("Helvetica", 7.5)
     canvas.drawCentredString(W/2, MB - 0.4*cm,
-        "www.transferai.ci  ·  contact@transferai.ci  ·  +225 07 16 57 39 90")
+        "www.transferai.ci  ·  contact@transferai.ci  ·  WhatsApp +225 07 16 57 39 90")
     canvas.restoreState()
 
 
@@ -448,7 +448,7 @@ def draw_cover(canvas, doc, prospect, secteur, pays, date_doc, enjeux):
     canvas.setFillColor(C_BLANC)
     canvas.setFont("Helvetica", 7.5)
     canvas.drawCentredString(W/2, 1.0*cm,
-        "www.transferai.ci  ·  contact@transferai.ci  ·  +225 07 16 57 39 90")
+        "www.transferai.ci  ·  contact@transferai.ci  ·  WhatsApp +225 07 16 57 39 90")
 
     canvas.restoreState()
 

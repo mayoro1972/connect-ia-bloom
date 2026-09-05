@@ -17,7 +17,7 @@ LOGO_PATH = Path(
 )
 FOOTER_LINE = (
     "TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | "
-    "www.transferai.ci | +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan"
+    "www.transferai.ci | WhatsApp +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan"
 )
 
 ACCENT = RGBColor(0xE7, 0x6F, 0x1D)

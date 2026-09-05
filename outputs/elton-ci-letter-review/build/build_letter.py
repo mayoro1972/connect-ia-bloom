@@ -72,7 +72,7 @@ def build_document():
     footer_para.paragraph_format.space_after = Pt(0)
     footer_run = footer_para.add_run(
         "TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | "
-        "www.transferai.ci | +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan"
+        "www.transferai.ci | WhatsApp +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan"
     )
     format_run(footer_run, size=7, color=RGBColor(90, 99, 109))
 

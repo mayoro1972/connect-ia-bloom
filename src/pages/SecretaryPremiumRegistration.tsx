@@ -555,7 +555,7 @@ const SecretaryPremiumRegistrationPage = () => {
                     </a>
                   </div>
                   <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/78">
-                    {contactDetails.phoneDisplay} · {contactDetails.email}
+                    {contactDetails.whatsappDisplay} · {contactDetails.email}
                   </div>
                 </div>
               </div>

@@ -1472,25 +1472,14 @@ const ContactPage = () => {
                 </motion.div>
                 )}
 
-                {!isBriefSolutionIntent && !isDefaultContactLanding && (
+                {!isBriefSolutionIntent && (
                 <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-3xl border border-border bg-card p-6">
                   <h3 className="mb-4 font-heading text-lg font-semibold text-card-foreground">
                     {isDefaultContactLanding
                       ? language === "en" ? "Key information" : "Informations clés"
                       : pageModel.contactCardTitle}
                   </h3>
-                  <div className={isDefaultContactLanding ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-sm" : "space-y-4 text-sm"}>
-                    {!isDefaultContactLanding && (
-                    <a href={directLinks.phone} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors group">
-                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                        <Phone size={16} />
-                      </span>
-                      <span className="flex flex-col min-w-0">
-                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Phone" : "Téléphone"}</span>
-                        <span className="font-medium">{contactDetails.phoneDisplay}</span>
-                      </span>
-                    </a>
-                    )}
+                  <div className={isDefaultContactLanding ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-sm" : "space-y-4 text-sm"}>
                     <a href={directLinks.email} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
                       <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Mail size={16} />
@@ -1509,17 +1498,26 @@ const ContactPage = () => {
                         <span className="font-medium leading-6">{contactDetails.addressShort}</span>
                       </span>
                     </a>
-                    {isDefaultContactLanding && (
-                      <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
-                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                          <MessageCircle size={16} />
-                        </span>
-                        <span className="flex flex-col min-w-0">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">WhatsApp</span>
-                          <span className="font-medium">{contactDetails.whatsappDisplay}</span>
-                        </span>
-                      </a>
-                    )}
+                    <a href={directLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors">
+                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <MessageCircle size={16} />
+                      </span>
+                      <span className="flex flex-col min-w-0">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "WhatsApp Business" : "WhatsApp Business"}</span>
+                        <span className="font-medium">{contactDetails.whatsappDisplay}</span>
+                        <span className="text-xs text-muted-foreground">{language === "en" ? "Messages only \u2014 this line does not take voice calls" : "Messages uniquement \u2014 cette ligne ne re\u00e7oit pas les appels"}</span>
+                      </span>
+                    </a>
+                    <a href={directLinks.phone} className="flex items-start gap-3 text-card-foreground hover:text-primary transition-colors group">
+                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <Phone size={16} />
+                      </span>
+                      <span className="flex flex-col min-w-0">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{language === "en" ? "Urgent \u2014 direct line" : "Urgence imm\u00e9diate"}</span>
+                        <span className="font-medium">{contactDetails.phoneDisplay}</span>
+                        <span className="text-xs text-muted-foreground">{language === "en" ? "Direct call, urgent matters only" : "Appel direct, urgences uniquement"}</span>
+                      </span>
+                    </a>
                     {isDefaultContactLanding && (
                       <div className="flex items-start gap-3 text-card-foreground">
                         <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">

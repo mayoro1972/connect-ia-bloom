@@ -45,7 +45,10 @@ export const socialLinks: SocialLink[] = [
 
 export const directLinks = {
   email: "mailto:contact@transferai.ci?subject=Contact%20TransferAI%20Africa",
-  phone: "tel:+2250716573990",
+  // Ligne directe de Marius Ayoro, reservee aux urgences (voir contactDetails.phoneLabel).
+  // Ne PAS y remettre le +225 07 16 57 39 90 : c'est le sender Twilio du WhatsApp Business,
+  // il recoit les messages WhatsApp mais aucun appel vocal.
+  phone: "tel:+447595715838",
   whatsapp: whatsappPrefilledHref,
   auditLanding: "/audit-ia-gratuit",
   appointment: "/prise-rdv",
@@ -77,8 +80,8 @@ export const appointmentBookings: Record<AppointmentSource, string> = {
 
 export const contactDetails = {
   email: "contact@transferai.ci",
-  phoneDisplay: "+225 07 16 57 39 90",
-  phoneDigits: "+2250716573990",
+  phoneDisplay: "+44 7595 715838",
+  phoneDigits: "+447595715838",
   whatsappDisplay: "+225 07 16 57 39 90",
   whatsappDigits: "2250716573990",
   addressShort: "Riviera 3, carrefour Sainte Famille, Abidjan, Côte\u00A0d'Ivoire",

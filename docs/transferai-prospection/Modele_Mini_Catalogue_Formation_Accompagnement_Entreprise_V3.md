@@ -339,7 +339,7 @@ Le logo de référence à utiliser est :
 
 Le pied de page standard à reprendre sans le modifier est :
 
-`TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | www.transferai.ci | +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan`
+`TransferAI | Hub IA de Nettelecom CI | contact@transferai.ci | www.transferai.ci | WhatsApp +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan`
 
 ### Usage recommandé
 

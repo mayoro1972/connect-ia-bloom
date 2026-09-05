@@ -530,7 +530,7 @@ def build():
     p.paragraph_format.space_before = Pt(4)
     r = p.add_run(
         "TransferAI Africa  ·  Hub IA de NettelecomCI  ·  www.transferai.ci  "
-        "·  contact@transferai.ci  ·  +225 07 16 57 39 90"
+        "·  contact@transferai.ci  ·  WhatsApp +225 07 16 57 39 90"
     )
     r.font.size = Pt(7.5)
     r.font.color.rgb = BLEU_TEXTE

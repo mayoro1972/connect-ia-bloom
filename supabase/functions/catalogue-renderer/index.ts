@@ -167,7 +167,7 @@ const getOrangeReference = (locale: SupportedLocale) => ({
 });
 
 const FOOTER_LINE =
-  "TransferAI Africa | Hub IA de NettelecomCI | contact@transferai.ci | www.transferai.ci | +225 07 16 57 39 90";
+  "TransferAI Africa | Hub IA de NettelecomCI | contact@transferai.ci | www.transferai.ci | WhatsApp +225 07 16 57 39 90";
 
 const TEAM_SIGNATURES = [
   {

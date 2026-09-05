@@ -73,7 +73,7 @@ def build_document():
     fp.paragraph_format.space_after = Pt(0)
     fr = fp.add_run(
         "TransferAI | contact@transferai.ci | "
-        "www.transferai.ci | +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan"
+        "www.transferai.ci | WhatsApp +225 07 16 57 39 90 | Riviera 3, carrefour Sainte Famille, Abidjan"
     )
     format_run(fr, size=7, color=FOOTER_COLOR)
 
@@ -211,7 +211,7 @@ def build_document():
 
     sig_contact = doc.add_paragraph()
     sig_contact.paragraph_format.space_after = Pt(0)
-    r = sig_contact.add_run("www.transferai.ci | +225 07 16 57 39 90 | contact@transferai.ci")
+    r = sig_contact.add_run("www.transferai.ci | WhatsApp +225 07 16 57 39 90 | contact@transferai.ci")
     format_run(r)
 
     doc.save(str(OUTPUT_DOCX))

@@ -55,7 +55,7 @@ export async function slide09(presentation, ctx) {
   paragraph(
     slide,
     ctx,
-    "www.transferai.ci\ncontact@transferai.ci\n+225 07 16 57 39 90\nRiviera 3, carrefour Sainte Famille, Abidjan",
+    "www.transferai.ci\ncontact@transferai.ci\nWhatsApp +225 07 16 57 39 90\nRiviera 3, carrefour Sainte Famille, Abidjan",
     862,
     348,
     250,
