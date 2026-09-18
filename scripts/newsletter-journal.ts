@@ -11,6 +11,7 @@
 // éditions "approved", l'approbation reste donc manuelle dans le back-office.
 import fs from "node:fs/promises";
 import path from "node:path";
+import { renderJournalEmail } from "./newsletter-journal-email.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
 const premiumDir = path.join(root, "docs/newsletter-premium");
@@ -61,7 +62,10 @@ const build = async () => {
     + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
     + `<title>TransferAI — Le Journal | ${formatFrenchDate(date)}</title><style>${css}</style></head><body>${body}</body></html>`;
   await fs.writeFile(path.join(editionDir, "newsletter-premium.html"), page, "utf8");
-  console.log(`Journal du ${formatFrenchDate(date)} généré : ${path.join(editionDir, "newsletter-premium.html")}`);
+  const meta = await readMeta();
+  const email = renderJournalEmail(await fs.readFile(path.join(editionDir, "newsletter-body.html"), "utf8"), meta);
+  await fs.writeFile(path.join(editionDir, "newsletter-email.html"), email, "utf8");
+  console.log(`Journal du ${formatFrenchDate(date)} généré : ${path.join(editionDir, "newsletter-premium.html")} (+ newsletter-email.html)`);
 };
 
 const readEnvFiles = async () => {
@@ -86,8 +90,10 @@ const push = async (): Promise<string | undefined> => {
   if (!adminToken) throw new Error("CONTENT_ADMIN_TOKEN absent : ajoutez-le dans .env.local pour déposer le brouillon.");
 
   const meta = await readMeta();
-  const bodyHtml = await fs.readFile(path.join(editionDir, "newsletter-body.html"), "utf8");
-  const css = await fs.readFile(path.join(premiumDir, "premium.css"), "utf8");
+  // Version email (tableaux, styles en ligne) produite par `build` : envoyée telle quelle par newsletter-send.
+  const emailHtml = await fs.readFile(path.join(editionDir, "newsletter-email.html"), "utf8").catch(() => {
+    throw new Error(`newsletter-email.html absent : lancez d'abord « build ${date} ».`);
+  });
 
   const call = async (action: string, payload: Record<string, unknown>, fn = "content-admin") => {
     const response = await fetch(`${supabaseUrl}/functions/v1/${fn}`, {
@@ -133,12 +139,13 @@ const push = async (): Promise<string | undefined> => {
     prompt_body: meta.prompt_body ?? null,
     cta_label: meta.cta_label ?? "Explorer les formations TransferAI",
     cta_url: meta.cta_url ?? "https://www.transferai.ci/catalogue",
-    body_html: `<style>${css}</style>${bodyHtml}`,
+    body_html: emailHtml,
     generation_source: "ai",
     generation_notes: `Journal hebdomadaire généré par Claude Code. Sujet brûlant : ${meta.hot_topic}. À relire et approuver manuellement.`,
     meta: {
       journal: true,
       template: "transferai-le-journal-premium",
+      email_format: "journal-email-v1",
       domain: meta.domain,
       profession: meta.profession,
       hot_topic: meta.hot_topic,

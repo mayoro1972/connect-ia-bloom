@@ -31,9 +31,11 @@ La présentation est un aperçu navigateur. L'adaptation et la vérification dan
 Chaque édition vit dans `editions/AAAA-MM-JJ/` (date du vendredi) : `newsletter-body.html` (contenu, conteneur `#transferai-formateurs` requis par `premium.css`), `meta.json` (titre, objet, pré-en-tête, domaine, métier, sujet brûlant, sources) et `README.md` (points à relire).
 
 ```sh
-node --experimental-strip-types scripts/newsletter-journal.ts build AAAA-MM-JJ    # génère editions/AAAA-MM-JJ/newsletter-premium.html
+node --experimental-strip-types scripts/newsletter-journal.ts build AAAA-MM-JJ    # génère newsletter-premium.html (page) et newsletter-email.html (email)
 node --experimental-strip-types scripts/newsletter-journal.ts review AAAA-MM-JJ   # brouillon back-office + email [TEST] au validateur
 ```
+
+La version email (`scripts/newsletter-journal-email.ts`) reconstruit l'édition en tableaux, une colonne de 600 px et styles en ligne, lisible dans Gmail, Outlook et Apple Mail ; c'est elle que `newsletter-send` expédie telle quelle (`meta.email_format = journal-email-v1`).
 
 `review` nécessite `CONTENT_ADMIN_TOKEN` dans `.env.local` (non versionné). L'édition est déposée en statut `draft`, avec `scheduled_for` au vendredi 01:00 (Africa/Abidjan).
 

@@ -22,6 +22,7 @@ export type NewsletterIssueRecord = {
   cta_url: string | null;
   body_markdown: string | null;
   body_html: string | null;
+  meta?: Record<string, unknown> | null;
 };
 
 const escapeHtml = (value: string) =>
@@ -197,6 +198,11 @@ export const domainsIntersect = (left: string[], right: string[]) => {
 };
 
 export const renderNewsletterHtml = (issue: NewsletterIssueRecord) => {
+  // « TransferAI — Le Journal » : body_html contient déjà l'email complet (tableaux, styles en ligne).
+  if (issue.meta?.email_format === "journal-email-v1" && issue.body_html && fullDocumentHtmlPattern.test(issue.body_html)) {
+    return issue.body_html;
+  }
+
   const domains = issue.target_domains.length > 0 ? issue.target_domains.join(" · ") : issue.language === "en" ? "All domains" : "Tous les domaines";
   const introBlock = issue.intro ? paragraphize(issue.intro) : "";
   const customBodyBlock = issue.body_html?.trim() && !fullDocumentHtmlPattern.test(issue.body_html)
