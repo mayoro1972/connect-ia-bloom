@@ -52,7 +52,11 @@ const formatFrenchDate = (isoDate: string) =>
 
 const build = async () => {
   const css = await fs.readFile(path.join(premiumDir, "premium.css"), "utf8");
-  const body = await fs.readFile(path.join(editionDir, "newsletter-body.html"), "utf8");
+  // Portrait officiel intégré (version allégée de src/assets/team-marius.jpg) : la page reste
+  // lisible hors ligne et dans les aperçus qui bloquent les images externes. L'email garde l'URL du site.
+  const portrait = await fs.readFile(path.join(premiumDir, "marius-ayoro-portrait.jpg"));
+  const body = (await fs.readFile(path.join(editionDir, "newsletter-body.html"), "utf8"))
+    .replace(/src="https:\/\/www\.transferai\.ci\/assets\/team-marius-[^"]+\.jpg"/, `src="data:image/jpeg;base64,${portrait.toString("base64")}"`);
   const page = "<!doctype html>\n<html lang=\"fr-CI\"><head><meta charset=\"utf-8\">"
     + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
     + `<title>TransferAI — Le Journal | ${formatFrenchDate(date)}</title><style>${css}</style></head><body>${body}</body></html>`;
