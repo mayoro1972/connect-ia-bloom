@@ -99,7 +99,7 @@ const renderHeader = (header: Element) => {
   const small = `font-family:${SANS};font-size:10px;line-height:1.5;letter-spacing:1.5px;text-transform:uppercase;`;
   return section(`
     <p style="margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid ${C.ink};${small}color:${C.muted};">${line.join(" &nbsp;·&nbsp; ")}</p>
-    <p style="margin:0 0 12px;font-family:${SERIF};font-size:44px;line-height:1;letter-spacing:-1px;color:${C.ink};">Transfer<span style="color:${C.orange};">AI</span> Le Journal</p>
+    <p class="mast" style="margin:0 0 12px;font-family:${SERIF};font-size:44px;line-height:1;letter-spacing:-1px;color:${C.ink};">Transfer<span style="color:${C.orange};">AI</span> Le Journal</p>
     <p style="margin:0;padding:8px 0;border-top:1px solid ${C.ink};border-bottom:3px solid ${C.ink};${small}color:${C.ink};">${caption[0] ?? ""}${caption[1] ? ` &nbsp;·&nbsp; <span style="color:${C.orange};">${caption[1]}</span>` : ""}</p>`, "24px 32px 0");
 };
 
@@ -209,6 +209,7 @@ export const renderJournalEmail = (bodyHtml: string, meta: JournalEmailMeta) => 
 <style>
   @media only screen and (max-width:620px) {
     .px { padding-left:18px !important; padding-right:18px !important; }
+    .mast { font-size:30px !important; }
   }
 </style>
 </head>
