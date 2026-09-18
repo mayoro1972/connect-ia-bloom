@@ -86,6 +86,40 @@ const readEnvFiles = async () => {
   return { ...values, ...process.env } as Record<string, string | undefined>;
 };
 
+const issuePayload = (meta: JournalMeta, emailHtml: string, status: "draft" | "approved", id?: string) => ({
+  ...(id ? { id } : {}),
+  issue_date: date,
+  language: "fr",
+  status,
+  approved_at: status === "approved" ? new Date().toISOString() : null,
+  // Jamais avant vendredi 01:00, heure d'Abidjan (UTC+0), une fois approuvée.
+  scheduled_for: `${date}T01:00:00Z`,
+  title: meta.title,
+  subject: meta.subject,
+  preheader: meta.preheader,
+  intro: meta.intro,
+  // Le domaine éditorial ne filtre pas les destinataires (ligne éditoriale du 11/09/2026).
+  target_domains: [],
+  tool_name: meta.tool_name ?? null,
+  prompt_title: meta.prompt_title ?? null,
+  prompt_body: meta.prompt_body ?? null,
+  cta_label: meta.cta_label ?? "Explorer les formations TransferAI",
+  cta_url: meta.cta_url ?? "https://www.transferai.ci/catalogue",
+  body_html: emailHtml,
+  generation_source: "ai",
+  generation_notes: `Journal hebdomadaire généré par Claude Code. Sujet brûlant : ${meta.hot_topic}. À relire et approuver manuellement.`,
+  meta: {
+    journal: true,
+    template: "transferai-le-journal-premium",
+    email_format: "journal-email-v1",
+    domain: meta.domain,
+    profession: meta.profession,
+    hot_topic: meta.hot_topic,
+    sources: meta.sources ?? [],
+    local_path: path.relative(root, path.join(editionDir, "newsletter-premium.html")),
+  },
+});
+
 type AdminResponse = { data?: Record<string, unknown> & { issues?: unknown[]; recipients?: number; sent?: number; id?: string } };
 type AdminCall = (action: string, payload: Record<string, unknown>, fn?: string) => Promise<AdminResponse>;
 
@@ -96,7 +130,7 @@ const findJournalIssue = async (call: AdminCall) => {
   return issues.find((issue) => issue.issue_date === date && issue.meta?.journal);
 };
 
-const sendCampaign = async (call: AdminCall) => {
+const sendCampaign = async (call: AdminCall, meta: JournalMeta, emailHtml: string) => {
   const issue = await findJournalIssue(call);
   if (!issue) throw new Error(`Aucune édition du Journal datée du ${date} dans le back-office : lancez d'abord « review ${date} ».`);
   if (issue.sent_at) throw new Error(`L'édition du ${date} a déjà été envoyée (${issue.sent_at}) : envoi annulé.`);
@@ -114,7 +148,8 @@ const sendCampaign = async (call: AdminCall) => {
   for (const reviewer of REVIEWERS) {
     await call("subscribe", { email: reviewer, language: "fr", subscribed_domains: ["IT & Transformation Digitale"], source_page: "/newsletter-journal" }, "newsletter-subscribe");
   }
-  await call("set-status", { id: issue.id, status: "approved", scheduled_for: `${date}T01:00:00Z` });
+  // Dernière version de l'email (newsletter-email.html) enregistrée et approuvée avant l'envoi.
+  await call("save", issuePayload(meta, emailHtml, "approved", issue.id));
   console.log(`Édition approuvée. Envoi en cours (environ 0,6 s par abonné)…`);
   const result = await call("send", { issue_id: issue.id }, "newsletter-send");
   console.log(`Envoi terminé : ${result?.data?.sent ?? "?"} email(s) envoyé(s) sur ${result?.data?.recipients ?? "?"} abonné(s).`);
@@ -152,7 +187,7 @@ const push = async (): Promise<string | undefined> => {
     return data;
   };
 
-  if (command === "send") return sendCampaign(call);
+  if (command === "send") return sendCampaign(call, meta, emailHtml);
 
   const listing = await call("list", {});
   const issues: Array<{ id: string; issue_date: string; status: string; meta: { journal?: boolean } | null }> =
@@ -164,38 +199,7 @@ const push = async (): Promise<string | undefined> => {
     return undefined;
   }
 
-  const payload = {
-    ...(existing ? { id: existing.id } : {}),
-    issue_date: date,
-    language: "fr",
-    status: "draft",
-    // Jamais avant vendredi 01:00, heure d'Abidjan (UTC+0), une fois approuvée.
-    scheduled_for: `${date}T01:00:00Z`,
-    title: meta.title,
-    subject: meta.subject,
-    preheader: meta.preheader,
-    intro: meta.intro,
-    // Le domaine éditorial ne filtre pas les destinataires (ligne éditoriale du 11/09/2026).
-    target_domains: [],
-    tool_name: meta.tool_name ?? null,
-    prompt_title: meta.prompt_title ?? null,
-    prompt_body: meta.prompt_body ?? null,
-    cta_label: meta.cta_label ?? "Explorer les formations TransferAI",
-    cta_url: meta.cta_url ?? "https://www.transferai.ci/catalogue",
-    body_html: emailHtml,
-    generation_source: "ai",
-    generation_notes: `Journal hebdomadaire généré par Claude Code. Sujet brûlant : ${meta.hot_topic}. À relire et approuver manuellement.`,
-    meta: {
-      journal: true,
-      template: "transferai-le-journal-premium",
-      email_format: "journal-email-v1",
-      domain: meta.domain,
-      profession: meta.profession,
-      hot_topic: meta.hot_topic,
-      sources: meta.sources ?? [],
-      local_path: path.relative(root, path.join(editionDir, "newsletter-premium.html")),
-    },
-  };
+  const payload = issuePayload(meta, emailHtml, "draft", existing?.id);
 
   const result = await call(existing ? "save" : "create", payload);
   const id = result?.data?.id ?? result?.id ?? existing?.id;
