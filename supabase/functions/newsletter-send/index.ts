@@ -14,7 +14,12 @@ const requireAdmin = (request: Request) => {
 
 const asString = (value: unknown, fallback = "") => (typeof value === "string" ? value.trim() : fallback);
 
-const sendEmail = async (to: string, subject: string, html: string, headers?: Record<string, string>) => {
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Resend accepte par défaut environ 2 requêtes par seconde : on espace les envois de campagne.
+const CAMPAIGN_SEND_INTERVAL_MS = 600;
+
+const sendEmail = async (to: string, subject: string, html: string, headers?: Record<string, string>, attempt = 1): Promise<string | null> => {
   if (!RESEND_API_KEY) {
     throw new Error("Missing RESEND_API_KEY");
   }
@@ -33,6 +38,12 @@ const sendEmail = async (to: string, subject: string, html: string, headers?: Re
       ...(headers ? { headers } : {}),
     }),
   });
+
+  if (response.status === 429 && attempt < 3) {
+    // Limite de débit Resend : on patiente puis on réessaie.
+    await sleep(1500 * attempt);
+    return sendEmail(to, subject, html, headers, attempt + 1);
+  }
 
   if (!response.ok) {
     throw new Error(`Resend request failed with ${response.status}`);
@@ -190,7 +201,8 @@ Deno.serve(async (request) => {
 
     let sentCount = 0;
 
-    for (const recipient of recipients) {
+    for (const [index, recipient] of recipients.entries()) {
+      if (index > 0) await sleep(CAMPAIGN_SEND_INTERVAL_MS);
       try {
         // Lien de désabonnement personnel + en-têtes « un clic » (RFC 8058).
         const providerMessageId = await sendEmail(

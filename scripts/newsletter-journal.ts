@@ -5,7 +5,11 @@
 //   node --experimental-strip-types scripts/newsletter-journal.ts push 2026-09-18
 //   node --experimental-strip-types scripts/newsletter-journal.ts review 2026-09-18
 //
+//   node --experimental-strip-types scripts/newsletter-journal.ts send 2026-09-18 [--confirmer]
+//
 // review = push + envoi test ([TEST]) aux validateurs, pour validation humaine.
+// send   = envoi immédiat à tous les abonnés actifs (validateurs inclus). Sans --confirmer,
+//          contrôle à blanc : affiche le nombre de destinataires et n'envoie rien.
 // Une édition = docs/newsletter-premium/editions/<date>/ avec newsletter-body.html et meta.json.
 // Le dépôt se fait toujours en statut "draft" : newsletter-send n'expédie que les
 // éditions "approved", l'approbation reste donc manuelle dans le back-office.
@@ -21,8 +25,10 @@ const [command, date] = process.argv.slice(2);
 
 const REVIEWERS = ["marius.ayoro70@gmail.com"];
 
-if (!["build", "push", "review"].includes(command ?? "") || !/^\d{4}-\d{2}-\d{2}$/.test(date ?? "")) {
-  console.error("Usage: node --experimental-strip-types scripts/newsletter-journal.ts <build|push|review> <AAAA-MM-JJ>");
+const confirmed = process.argv.includes("--confirmer");
+
+if (!["build", "push", "review", "send"].includes(command ?? "") || !/^\d{4}-\d{2}-\d{2}$/.test(date ?? "")) {
+  console.error("Usage: node --experimental-strip-types scripts/newsletter-journal.ts <build|push|review|send> <AAAA-MM-JJ> [--confirmer]");
   process.exit(1);
 }
 
@@ -80,6 +86,41 @@ const readEnvFiles = async () => {
   return { ...values, ...process.env } as Record<string, string | undefined>;
 };
 
+type AdminResponse = { data?: Record<string, unknown> & { issues?: unknown[]; recipients?: number; sent?: number; id?: string } };
+type AdminCall = (action: string, payload: Record<string, unknown>, fn?: string) => Promise<AdminResponse>;
+
+const findJournalIssue = async (call: AdminCall) => {
+  const listing = await call("list", {});
+  const issues: Array<{ id: string; issue_date: string; status: string; title: string; sent_at: string | null; meta: { journal?: boolean } | null }> =
+    (listing?.data?.issues ?? []) as typeof issues;
+  return issues.find((issue) => issue.issue_date === date && issue.meta?.journal);
+};
+
+const sendCampaign = async (call: AdminCall) => {
+  const issue = await findJournalIssue(call);
+  if (!issue) throw new Error(`Aucune édition du Journal datée du ${date} dans le back-office : lancez d'abord « review ${date} ».`);
+  if (issue.sent_at) throw new Error(`L'édition du ${date} a déjà été envoyée (${issue.sent_at}) : envoi annulé.`);
+
+  if (!confirmed) {
+    const preview = await call("send", { issue_id: issue.id, dry_run: true }, "newsletter-send");
+    const count = preview?.data?.recipients ?? "?";
+    console.log(`Contrôle à blanc — « ${issue.title} » (statut ${issue.status}).`);
+    console.log(`Destinataires actifs : ${count}, plus ${REVIEWERS.join(", ")} inscrit(s) avant l'envoi s'il(s) ne l'est/sont pas.`);
+    console.log(`Rien n'a été envoyé. Pour envoyer : ajoutez --confirmer.`);
+    return issue.id;
+  }
+
+  // Les validateurs reçoivent aussi l'édition : inscription (sans effet s'ils sont déjà abonnés).
+  for (const reviewer of REVIEWERS) {
+    await call("subscribe", { email: reviewer, language: "fr", subscribed_domains: ["IT & Transformation Digitale"], source_page: "/newsletter-journal" }, "newsletter-subscribe");
+  }
+  await call("set-status", { id: issue.id, status: "approved", scheduled_for: `${date}T01:00:00Z` });
+  console.log(`Édition approuvée. Envoi en cours (environ 0,6 s par abonné)…`);
+  const result = await call("send", { issue_id: issue.id }, "newsletter-send");
+  console.log(`Envoi terminé : ${result?.data?.sent ?? "?"} email(s) envoyé(s) sur ${result?.data?.recipients ?? "?"} abonné(s).`);
+  return issue.id;
+};
+
 const push = async (): Promise<string | undefined> => {
   const env = await readEnvFiles();
   const supabaseUrl = env.VITE_SUPABASE_URL;
@@ -110,6 +151,8 @@ const push = async (): Promise<string | undefined> => {
     if (!response.ok) throw new Error(`content-admin ${action} : HTTP ${response.status} ${JSON.stringify(data)}`);
     return data;
   };
+
+  if (command === "send") return sendCampaign(call);
 
   const listing = await call("list", {});
   const issues: Array<{ id: string; issue_date: string; status: string; meta: { journal?: boolean } | null }> =
