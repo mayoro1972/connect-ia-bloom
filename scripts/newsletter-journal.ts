@@ -1,0 +1,161 @@
+// « TransferAI — Le Journal » : assemble une édition hebdomadaire et la dépose
+// en brouillon dans le back-office (newsletter_issues, via content-admin).
+//
+//   node --experimental-strip-types scripts/newsletter-journal.ts build 2026-09-18
+//   node --experimental-strip-types scripts/newsletter-journal.ts push 2026-09-18
+//   node --experimental-strip-types scripts/newsletter-journal.ts review 2026-09-18
+//
+// review = push + envoi test ([TEST]) aux validateurs, pour validation humaine.
+// Une édition = docs/newsletter-premium/editions/<date>/ avec newsletter-body.html et meta.json.
+// Le dépôt se fait toujours en statut "draft" : newsletter-send n'expédie que les
+// éditions "approved", l'approbation reste donc manuelle dans le back-office.
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const root = path.resolve(import.meta.dirname, "..");
+const premiumDir = path.join(root, "docs/newsletter-premium");
+const journalDir = path.join(premiumDir, "editions");
+
+const [command, date] = process.argv.slice(2);
+
+const REVIEWERS = ["marius.ayoro70@gmail.com"];
+
+if (!["build", "push", "review"].includes(command ?? "") || !/^\d{4}-\d{2}-\d{2}$/.test(date ?? "")) {
+  console.error("Usage: node --experimental-strip-types scripts/newsletter-journal.ts <build|push|review> <AAAA-MM-JJ>");
+  process.exit(1);
+}
+
+const editionDir = path.join(journalDir, date);
+
+type JournalMeta = {
+  title: string;
+  subject: string;
+  preheader: string;
+  intro: string;
+  domain: string;
+  profession: string;
+  hot_topic: string;
+  tool_name?: string;
+  prompt_title?: string;
+  prompt_body?: string;
+  cta_label?: string;
+  cta_url?: string;
+  sources?: string[];
+};
+
+const readMeta = async (): Promise<JournalMeta> =>
+  JSON.parse(await fs.readFile(path.join(editionDir, "meta.json"), "utf8"));
+
+const formatFrenchDate = (isoDate: string) =>
+  new Intl.DateTimeFormat("fr-CI", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Abidjan" })
+    .format(new Date(`${isoDate}T12:00:00Z`));
+
+const build = async () => {
+  const css = await fs.readFile(path.join(premiumDir, "premium.css"), "utf8");
+  const body = await fs.readFile(path.join(editionDir, "newsletter-body.html"), "utf8");
+  const page = "<!doctype html>\n<html lang=\"fr-CI\"><head><meta charset=\"utf-8\">"
+    + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+    + `<title>TransferAI — Le Journal | ${formatFrenchDate(date)}</title><style>${css}</style></head><body>${body}</body></html>`;
+  await fs.writeFile(path.join(editionDir, "newsletter-premium.html"), page, "utf8");
+  console.log(`Journal du ${formatFrenchDate(date)} généré : ${path.join(editionDir, "newsletter-premium.html")}`);
+};
+
+const readEnvFiles = async () => {
+  const values: Record<string, string> = {};
+  for (const name of [".env", ".env.local"]) {
+    const content = await fs.readFile(path.join(root, name), "utf8").catch(() => "");
+    for (const line of content.split("\n")) {
+      const match = line.match(/^\s*([A-Z0-9_]+)\s*=\s*"?([^"\n]*)"?\s*$/);
+      if (match) values[match[1]] = match[2].trim();
+    }
+  }
+  return { ...values, ...process.env } as Record<string, string | undefined>;
+};
+
+const push = async (): Promise<string | undefined> => {
+  const env = await readEnvFiles();
+  const supabaseUrl = env.VITE_SUPABASE_URL;
+  const anonJwt = env.VITE_SUPABASE_ANON_KEY || env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  const adminToken = env.CONTENT_ADMIN_TOKEN;
+
+  if (!supabaseUrl || !anonJwt) throw new Error("VITE_SUPABASE_URL ou VITE_SUPABASE_ANON_KEY manquant dans .env.");
+  if (!adminToken) throw new Error("CONTENT_ADMIN_TOKEN absent : ajoutez-le dans .env.local pour déposer le brouillon.");
+
+  const meta = await readMeta();
+  const bodyHtml = await fs.readFile(path.join(editionDir, "newsletter-body.html"), "utf8");
+  const css = await fs.readFile(path.join(premiumDir, "premium.css"), "utf8");
+
+  const call = async (action: string, payload: Record<string, unknown>, fn = "content-admin") => {
+    const response = await fetch(`${supabaseUrl}/functions/v1/${fn}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: anonJwt,
+        Authorization: `Bearer ${anonJwt}`,
+        "x-admin-token": adminToken,
+      },
+      body: JSON.stringify(fn === "content-admin" ? { entity: "newsletter", action, payload } : payload),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(`content-admin ${action} : HTTP ${response.status} ${JSON.stringify(data)}`);
+    return data;
+  };
+
+  const listing = await call("list", {});
+  const issues: Array<{ id: string; issue_date: string; status: string; meta: { journal?: boolean } | null }> =
+    listing?.data?.issues ?? listing?.issues ?? [];
+  const existing = issues.find((issue) => issue.issue_date === date && issue.meta?.journal);
+
+  if (existing && existing.status !== "draft") {
+    console.log(`Édition du ${date} déjà au statut "${existing.status}" dans le back-office : rien n'est modifié.`);
+    return undefined;
+  }
+
+  const payload = {
+    ...(existing ? { id: existing.id } : {}),
+    issue_date: date,
+    language: "fr",
+    status: "draft",
+    // Jamais avant vendredi 01:00, heure d'Abidjan (UTC+0), une fois approuvée.
+    scheduled_for: `${date}T01:00:00Z`,
+    title: meta.title,
+    subject: meta.subject,
+    preheader: meta.preheader,
+    intro: meta.intro,
+    // Le domaine éditorial ne filtre pas les destinataires (ligne éditoriale du 11/09/2026).
+    target_domains: [],
+    tool_name: meta.tool_name ?? null,
+    prompt_title: meta.prompt_title ?? null,
+    prompt_body: meta.prompt_body ?? null,
+    cta_label: meta.cta_label ?? "Explorer les formations TransferAI",
+    cta_url: meta.cta_url ?? "https://www.transferai.ci/catalogue",
+    body_html: `<style>${css}</style>${bodyHtml}`,
+    generation_source: "ai",
+    generation_notes: `Journal hebdomadaire généré par Claude Code. Sujet brûlant : ${meta.hot_topic}. À relire et approuver manuellement.`,
+    meta: {
+      journal: true,
+      template: "transferai-le-journal-premium",
+      domain: meta.domain,
+      profession: meta.profession,
+      hot_topic: meta.hot_topic,
+      sources: meta.sources ?? [],
+      local_path: path.relative(root, path.join(editionDir, "newsletter-premium.html")),
+    },
+  };
+
+  const result = await call(existing ? "save" : "create", payload);
+  const id = result?.data?.id ?? result?.id ?? existing?.id;
+  console.log(`Brouillon ${existing ? "mis à jour" : "créé"} dans le back-office (id ${id}), statut draft.`);
+
+  if (command === "review" && id) {
+    for (const reviewer of REVIEWERS) {
+      await call("send", { issue_id: id, test_email: reviewer }, "newsletter-send");
+      console.log(`Brouillon envoyé en test à ${reviewer}.`);
+    }
+    console.log(`Validation : https://www.transferai.ci/back-office/newsletters?issue=${id}&mode=email`);
+  }
+  return id;
+};
+
+if (command === "build") await build();
+else await push();

@@ -42,6 +42,7 @@ const WebinarRegistration = lazy(() => import("./pages/WebinarRegistration"));
 const WebinarSeatRequest = lazy(() => import("./pages/WebinarSeatRequest"));
 const CreateurContenuIA = lazy(() => import("./pages/CreateurContenuIA"));
 const NewsletterBackOffice = lazy(() => import("./pages/NewsletterBackOffice"));
+const NewsletterValidation = lazy(() => import("./pages/NewsletterValidation"));
 const ConsultingIA = lazy(() => import("./pages/ConsultingIA"));
 const DeveloppementSolutionsIA = lazy(() => import("./pages/DeveloppementSolutionsIA"));
 const PreviewHub = lazy(() => import("./pages/PreviewHub"));
@@ -271,6 +272,7 @@ const AnimatedRoutes = () => {
           <Route path="/demo/simulateur-phishing" element={<PhishingSimDemoPage />} />
           <Route path="/back-office" element={<BackOffice />} />
           <Route path="/back-office/newsletters" element={<NewsletterBackOffice />} />
+          <Route path="/newsletter-validation" element={<NewsletterValidation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

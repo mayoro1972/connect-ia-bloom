@@ -25,3 +25,22 @@ python3 build-premium.py
 ```
 
 La présentation est un aperçu navigateur. L'adaptation et la vérification dans les clients email, le raccordement au générateur de campagnes et les liens personnalisés de désabonnement restent à réaliser. Le lien de cette édition est intégré au back-office TransferAI. Le push sur main déclenche le déploiement Cloudflare Pages du site, sans envoyer de newsletter.
+
+## Éditions hebdomadaires automatisées (depuis le 18 septembre 2026)
+
+Chaque édition vit dans `editions/AAAA-MM-JJ/` (date du vendredi) : `newsletter-body.html` (contenu, conteneur `#transferai-formateurs` requis par `premium.css`), `meta.json` (titre, objet, pré-en-tête, domaine, métier, sujet brûlant, sources) et `README.md` (points à relire).
+
+```sh
+node --experimental-strip-types scripts/newsletter-journal.ts build AAAA-MM-JJ    # génère editions/AAAA-MM-JJ/newsletter-premium.html
+node --experimental-strip-types scripts/newsletter-journal.ts review AAAA-MM-JJ   # brouillon back-office + email [TEST] au validateur
+```
+
+`review` nécessite `CONTENT_ADMIN_TOKEN` dans `.env.local` (non versionné). L'édition est déposée en statut `draft`, avec `scheduled_for` au vendredi 01:00 (Africa/Abidjan).
+
+Calendrier :
+
+1. Jeudi 23:59 : la tâche planifiée Claude « newsletter-hebdo-transferai-journal » repère le sujet IA de la semaine, rédige l'édition, puis lance `build` et `review`.
+2. L'email [TEST] contient les boutons **Approuver**, **Modifier** et **Rejeter**. Approuver et Rejeter ouvrent `/newsletter-validation` sur le site (liens signés, valables 7 jours, confirmation obligatoire) ; Modifier ouvre le back-office. Rejeter archive l'édition.
+3. Seules les éditions approuvées partent aux abonnés, via le cron Supabase `transferai-newsletter-send-weekly` (vendredi 08:30 UTC).
+
+Fonctions concernées : `newsletter-send` (bandeau de validation dans les seuls emails de test), `newsletter-review` (applique l'approbation ou le rejet), `_shared/review-links.ts` (signature HMAC dérivée de `CONTENT_ADMIN_TOKEN`).

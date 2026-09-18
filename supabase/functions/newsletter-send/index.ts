@@ -1,5 +1,6 @@
 import { corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
 import { domainsIntersect, normalizeDomains, renderNewsletterHtml, type NewsletterIssueRecord } from "../_shared/newsletter.ts";
+import { renderReviewBanner } from "../_shared/review-links.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <newsletter@transferai.ci>";
@@ -103,7 +104,10 @@ Deno.serve(async (request) => {
 
     if (testEmail) {
       if (!dryRun) {
-        const providerMessageId = await sendEmail(testEmail, `[TEST] ${issueRecord.subject}`, html);
+        // Boutons Approuver / Modifier / Rejeter, uniquement dans les emails de test.
+        const reviewBanner = await renderReviewBanner(issueRecord.id, issueRecord.title);
+        const testHtml = /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (tag) => `${tag}${reviewBanner}`) : `${reviewBanner}${html}`;
+        const providerMessageId = await sendEmail(testEmail, `[TEST] ${issueRecord.subject}`, testHtml);
 
         await editorialClient.from("newsletter_delivery_logs").insert({
           newsletter_issue_id: issueRecord.id,
