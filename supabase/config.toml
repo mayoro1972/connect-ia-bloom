@@ -23,3 +23,6 @@ verify_jwt = false
 
 [functions.newsletter-review]
 verify_jwt = false
+
+[functions.newsletter-unsubscribe]
+verify_jwt = false

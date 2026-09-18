@@ -43,6 +43,7 @@ const WebinarSeatRequest = lazy(() => import("./pages/WebinarSeatRequest"));
 const CreateurContenuIA = lazy(() => import("./pages/CreateurContenuIA"));
 const NewsletterBackOffice = lazy(() => import("./pages/NewsletterBackOffice"));
 const NewsletterValidation = lazy(() => import("./pages/NewsletterValidation"));
+const NewsletterUnsubscribe = lazy(() => import("./pages/NewsletterUnsubscribe"));
 const ConsultingIA = lazy(() => import("./pages/ConsultingIA"));
 const DeveloppementSolutionsIA = lazy(() => import("./pages/DeveloppementSolutionsIA"));
 const PreviewHub = lazy(() => import("./pages/PreviewHub"));
@@ -273,6 +274,7 @@ const AnimatedRoutes = () => {
           <Route path="/back-office" element={<BackOffice />} />
           <Route path="/back-office/newsletters" element={<NewsletterBackOffice />} />
           <Route path="/newsletter-validation" element={<NewsletterValidation />} />
+          <Route path="/desabonnement" element={<NewsletterUnsubscribe />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

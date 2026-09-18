@@ -46,3 +46,5 @@ Calendrier :
 3. Seules les éditions approuvées partent aux abonnés, via le cron Supabase `transferai-newsletter-send-weekly` (vendredi 08:30 UTC).
 
 Fonctions concernées : `newsletter-send` (bandeau de validation dans les seuls emails de test), `newsletter-review` (applique l'approbation ou le rejet), `_shared/review-links.ts` (signature HMAC dérivée de `CONTENT_ADMIN_TOKEN`).
+
+Désabonnement : chaque email (campagne et test) reçoit un lien personnel signé vers `/desabonnement` (confirmation sur le site) et les en-têtes `List-Unsubscribe` / `List-Unsubscribe-Post` pour le désabonnement « un clic » de Gmail et Apple Mail. La fonction `newsletter-unsubscribe` passe l'abonnement au statut `unsubscribed`. Le Journal place le lien dans son pied de page (`%%UNSUBSCRIBE_URL%%`) ; les autres emails le reçoivent en bas de page. Les liens sont signés avec `NEWSLETTER_UNSUBSCRIBE_SECRET` si ce secret existe, sinon avec une clé dérivée de `CONTENT_ADMIN_TOKEN` : changer ce jeton invalide les liens déjà envoyés.

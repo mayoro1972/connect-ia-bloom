@@ -1,6 +1,7 @@
 import { corsHeaders, editorialClient, json } from "../_shared/editorial.ts";
 import { domainsIntersect, normalizeDomains, renderNewsletterHtml, type NewsletterIssueRecord } from "../_shared/newsletter.ts";
 import { renderReviewBanner } from "../_shared/review-links.ts";
+import { unsubscribeHeaders, unsubscribePageUrl, withUnsubscribeLink } from "../_shared/unsubscribe.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <newsletter@transferai.ci>";
@@ -13,7 +14,7 @@ const requireAdmin = (request: Request) => {
 
 const asString = (value: unknown, fallback = "") => (typeof value === "string" ? value.trim() : fallback);
 
-const sendEmail = async (to: string, subject: string, html: string) => {
+const sendEmail = async (to: string, subject: string, html: string, headers?: Record<string, string>) => {
   if (!RESEND_API_KEY) {
     throw new Error("Missing RESEND_API_KEY");
   }
@@ -29,6 +30,7 @@ const sendEmail = async (to: string, subject: string, html: string) => {
       to,
       subject,
       html,
+      ...(headers ? { headers } : {}),
     }),
   });
 
@@ -107,7 +109,12 @@ Deno.serve(async (request) => {
         // Boutons Approuver / Modifier / Rejeter, uniquement dans les emails de test.
         const reviewBanner = await renderReviewBanner(issueRecord.id, issueRecord.title);
         const testHtml = /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (tag) => `${tag}${reviewBanner}`) : `${reviewBanner}${html}`;
-        const providerMessageId = await sendEmail(testEmail, `[TEST] ${issueRecord.subject}`, testHtml);
+        const providerMessageId = await sendEmail(
+          testEmail,
+          `[TEST] ${issueRecord.subject}`,
+          withUnsubscribeLink(testHtml, await unsubscribePageUrl(testEmail)),
+          await unsubscribeHeaders(testEmail),
+        );
 
         await editorialClient.from("newsletter_delivery_logs").insert({
           newsletter_issue_id: issueRecord.id,
@@ -185,7 +192,13 @@ Deno.serve(async (request) => {
 
     for (const recipient of recipients) {
       try {
-        const providerMessageId = await sendEmail(recipient.email, issueRecord.subject, html);
+        // Lien de désabonnement personnel + en-têtes « un clic » (RFC 8058).
+        const providerMessageId = await sendEmail(
+          recipient.email,
+          issueRecord.subject,
+          withUnsubscribeLink(html, await unsubscribePageUrl(recipient.email)),
+          await unsubscribeHeaders(recipient.email),
+        );
 
         await editorialClient.from("newsletter_delivery_logs").insert({
           newsletter_issue_id: issueRecord.id,

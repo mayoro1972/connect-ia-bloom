@@ -18,6 +18,8 @@ const C = {
 };
 const SERIF = "Georgia,'Times New Roman',serif";
 const SANS = "Arial,Helvetica,sans-serif";
+// Remplacé à l'envoi par le lien personnel de chaque destinataire (supabase/functions/_shared/unsubscribe.ts).
+const UNSUBSCRIBE_PLACEHOLDER = "%%UNSUBSCRIBE_URL%%";
 
 const kickerStyle = (color = C.orange) =>
   `margin:0 0 10px;font-family:${SANS};font-size:11px;line-height:1.5;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:${color};`;
@@ -192,7 +194,8 @@ export const renderJournalEmail = (bodyHtml: string, meta: JournalEmailMeta) => 
 
   const footer = document.querySelector(".ta-foot");
   if (footer) {
-    rows.push(section(`<div style="border-top:3px double ${C.ink};padding-top:16px;">${[...footer.children].map((child) => `<p style="margin:0 0 6px;font-family:${SANS};font-size:11px;line-height:1.6;color:${C.muted};">${inline(child, C.ink)}</p>`).join("")}</div>`, "8px 32px 28px"));
+    const unsubscribe = `<p style="margin:10px 0 0;font-family:${SANS};font-size:11px;line-height:1.6;color:${C.muted};">Vous recevez cet email car vous êtes inscrit à la newsletter TransferAI Africa. <a href="${UNSUBSCRIBE_PLACEHOLDER}" style="color:${C.muted};text-decoration:underline;">Se désabonner</a></p>`;
+    rows.push(section(`<div style="border-top:3px double ${C.ink};padding-top:16px;">${[...footer.children].map((child) => `<p style="margin:0 0 6px;font-family:${SANS};font-size:11px;line-height:1.6;color:${C.muted};">${inline(child, C.ink)}</p>`).join("")}${unsubscribe}</div>`, "8px 32px 28px"));
   }
 
   return `<!doctype html>
