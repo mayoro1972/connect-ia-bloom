@@ -9,7 +9,7 @@ OUT = os.path.join(os.path.dirname(__file__), "65_n8n_V4_Daily_Batch_5perDay.jso
 
 SUPABASE_URL   = "https://wlhznciwuofueffyoflo.supabase.co"
 SUPABASE_KEY   = "SUPABASE_SERVICE_ROLE_KEY_ICI"
-RESEND_KEY     = "re_9CWoT2CUTfKHuMMaQAeEBhkZJCpyY4v"
+RESEND_KEY     = "<RESEND_API_KEY>"
 FROM_EMAIL     = "onboarding@resend.dev"
 REVIEWER_EMAIL = "marius.ayoro70@gmail.com"
 V3_WORKFLOW_ID = "V3_WORKFLOW_ID_ICI"

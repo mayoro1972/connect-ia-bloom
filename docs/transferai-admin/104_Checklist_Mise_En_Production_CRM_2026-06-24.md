@@ -44,7 +44,7 @@
 RESEND_API_KEY=re_xxxx
 OPENAI_API_KEY=sk-xxxx
 SUPABASE_URL=https://wlhznciwuofueffyoflo.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsaHpuY2l3dW9mdWVmZnlvZmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDg4NDAwOSwiZXhwIjoyMDkwNDYwMDA5fQ.sr3Mez8zvmRbVGJ5yH7atEVcAqSZwuMsPwekj8oWxp4
+SUPABASE_SERVICE_ROLE_KEY=<SUPABASE_SERVICE_ROLE_KEY>
 BOOKING_LINK_45MIN=https://calendly.com/xxxx
 N8N_CHILD_WORKFLOW_ID_V3=<valeur de l'étape 3>
 N8N_CHILD_WORKFLOW_ID_FOLLOW_UP=<valeur de l'étape 2>
