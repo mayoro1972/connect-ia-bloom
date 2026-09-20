@@ -161,6 +161,16 @@ const LeadFormsPreview = () => {
           requested_domain_input: effectiveDomain,
           privacy_consent_input: privacyAccepted,
           honeypot_input: botField.trim() || null,
+          // Les 5 champs suivants ne sont pas collectés par cette page d'aperçu, mais ils
+          // sont indispensables : deux signatures de submit_contact_request portent les
+          // mêmes 15 noms de paramètres, et PostgREST choisit par les noms. Un appel à
+          // 15 champs est donc ambigu (PGRST203, HTTP 300) et n'atteint jamais la base.
+          // Avec ces 5 champs, l'appel vise la signature à 20 arguments, celle de /contact.
+          ai_maturity_input: null,
+          use_cases_input: null,
+          scoping_horizon_input: null,
+          engagement_format_input: null,
+          budget_range_input: null,
         });
 
         requestId = fallbackResult.data ?? null;
@@ -183,6 +193,16 @@ const LeadFormsPreview = () => {
         requested_domain_input: effectiveDomain,
         privacy_consent_input: privacyAccepted,
         honeypot_input: botField.trim() || null,
+        // Les 5 champs suivants ne sont pas collectés par cette page d'aperçu, mais ils
+        // sont indispensables : deux signatures de submit_contact_request portent les
+        // mêmes 15 noms de paramètres, et PostgREST choisit par les noms. Un appel à
+        // 15 champs est donc ambigu (PGRST203, HTTP 300) et n'atteint jamais la base.
+        // Avec ces 5 champs, l'appel vise la signature à 20 arguments, celle de /contact.
+        ai_maturity_input: null,
+        use_cases_input: null,
+        scoping_horizon_input: null,
+        engagement_format_input: null,
+        budget_range_input: null,
       });
 
       requestId = defaultResult.data ?? null;
