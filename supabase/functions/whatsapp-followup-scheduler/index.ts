@@ -1,11 +1,11 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import {
-import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
   buildSecondFollowupReply,
   normalizeWhatsappAddress,
   sendTwilioWhatsappMessage,
 } from "../_shared/whatsapp-followups.ts";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

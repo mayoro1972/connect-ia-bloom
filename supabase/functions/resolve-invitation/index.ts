@@ -1,7 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import {
-import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
   buildAuditAccessContext,
   buildAuditAccessContextFromPack,
   buildAuditDraftFormData,
@@ -9,6 +8,7 @@ import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
   type ProspectAuditPackRow,
   type ProspectAuditRequestRow,
 } from "../_shared/prospect-audit-context.ts";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
