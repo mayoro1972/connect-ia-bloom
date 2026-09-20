@@ -1,6 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { getEmailGreeting } from "../_shared/email-greetings.ts";
 import { resolveDomainCatalogueAsset } from "../_shared/domain-catalogues.ts";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 type ProspectEmailIntent =
   | "demande-catalogue"
@@ -149,7 +150,7 @@ const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <contact@trans
 const MAIL_TO = Deno.env.get("MAIL_TO") ?? "contact@transferai.ci";
 const SITE_URL = (Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.transferai.ci").replace(/\/$/, "");
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const serviceRoleKey = getSupabaseSecretKey();
 
 const supabase =
   supabaseUrl && serviceRoleKey

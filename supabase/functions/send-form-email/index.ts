@@ -3,6 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "npm:docx@8";
 import { jsPDF } from "npm:jspdf@2";
 import JSZip from "npm:jszip@3.10.1";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const DEFAULT_FORM_DESTINATION_EMAIL = "contact@transferai.ci";
 
@@ -674,7 +675,7 @@ Deno.serve(async (req: Request) => {
 
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabaseKey = getSupabaseSecretKey();
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Determine recipient email

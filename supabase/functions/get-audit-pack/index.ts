@@ -1,4 +1,5 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -17,7 +18,7 @@ Deno.serve(async (req) => {
 
   const client = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    getSupabaseSecretKey()
   );
 
   if (req.method === "POST") {

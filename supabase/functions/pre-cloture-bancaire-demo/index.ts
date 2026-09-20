@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,7 +9,7 @@ const corsHeaders = {
 };
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const serviceRoleKey = getSupabaseSecretKey();
 // URL du workflow n8n "Demo_Pre_Cloture_Bancaire_Validation_Humaine" (webhook "pre-cloture-bancaire-upload").
 const n8nWebhookUrl = Deno.env.get("N8N_PRE_CLOTURE_DEMO_WEBHOOK_URL")?.trim() ?? "";
 const n8nTimeoutMs = Number(Deno.env.get("N8N_PRE_CLOTURE_DEMO_TIMEOUT_MS") ?? "15000");

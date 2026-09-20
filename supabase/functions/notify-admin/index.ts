@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -79,7 +80,7 @@ Deno.serve(async (req: Request) => {
     const payload: NotificationPayload = await req.json();
     const { user_name, user_email, user_position, completion_percentage, response_id } = payload;
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const supabaseKey = getSupabaseSecretKey();
     let adminSettings: AdminSettingsRow | null = null;
 
     if (supabaseUrl && supabaseKey) {

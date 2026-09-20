@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import {
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
   buildAuditAccessContext,
   buildAuditAccessContextFromPack,
   buildAuditDraftFormData,
@@ -265,7 +266,7 @@ Deno.serve(async (request: Request) => {
     }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const supabaseServiceRoleKey = getSupabaseSecretKey();
 
     if (!supabaseUrl || !supabaseServiceRoleKey) {
       return jsonResponse({ error: "Supabase service role is not configured" }, 500);

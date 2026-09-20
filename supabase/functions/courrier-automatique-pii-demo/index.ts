@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,7 +9,7 @@ const corsHeaders = {
 };
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const serviceRoleKey = getSupabaseSecretKey();
 // URL du webhook "courrier-automatique-v2" du workflow n8n Courrier_Automatique_v2_PII,
 // hébergé sur l'instance Hostinger (n8n-pxlk.srv1480638.hstgr.cloud).
 const n8nWebhookUrl = Deno.env.get("N8N_COURRIER_PII_DEMO_WEBHOOK_URL")?.trim() ?? "";

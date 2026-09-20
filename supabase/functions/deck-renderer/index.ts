@@ -2,6 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import PptxGenJS from "npm:pptxgenjs";
 import { corsHeaders, json } from "../_shared/editorial.ts";
+import { estCleServeur, getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 type RenderStoragePayload = {
   bucket?: string;
@@ -76,7 +77,7 @@ type DeckVariant = "commercial_premium" | "institutional_premium";
 type SupportedLocale = "fr" | "en" | "es";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = getSupabaseSecretKey();
 const CONTENT_ADMIN_TOKEN = Deno.env.get("CONTENT_ADMIN_TOKEN") ?? "";
 const LOGO_PATH = new URL("../_shared/assets/transferai-africa-nettelecom-co-brand.png", import.meta.url);
 
@@ -318,7 +319,9 @@ const requireAuthorizedRequest = (request: Request) => {
   const authHeader = request.headers.get("authorization") ?? "";
   if (!authHeader.startsWith("Bearer ")) return false;
   const token = authHeader.slice(7).trim();
-  return token.length > 0 && token === SUPABASE_SERVICE_ROLE_KEY;
+  // Accepte la nouvelle clé sb_secret_ comme l'héritée, le temps que tous
+  // les appelants basculent (voir _shared/supabase-secret.ts).
+  return estCleServeur(token);
 };
 
 const inferVariant = (payload: DeckRenderPayload): DeckVariant => {

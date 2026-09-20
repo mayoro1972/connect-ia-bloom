@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import {
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
   buildSecondFollowupReply,
   normalizeWhatsappAddress,
   sendTwilioWhatsappMessage,
@@ -13,7 +14,7 @@ const corsHeaders = {
 };
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const serviceRoleKey = getSupabaseSecretKey();
 const schedulerToken = Deno.env.get("WHATSAPP_SCHEDULER_TOKEN") ?? "";
 const twilioAccountSid = Deno.env.get("TWILIO_ACCOUNT_SID") ?? "";
 const twilioAuthToken = Deno.env.get("TWILIO_AUTH_TOKEN") ?? "";

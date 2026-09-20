@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { buildRagContext, normalizeRetrievedDocuments } from "../_shared/document-rag.ts";
+import { getSupabaseSecretKey } from "../_shared/supabase-secret.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,7 +10,7 @@ const corsHeaders = {
 };
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const serviceRoleKey = getSupabaseSecretKey();
 const openAiApiKey = Deno.env.get("OPENAI_API_KEY") ?? "";
 const accessToken = Deno.env.get("DOCUMENT_RAG_ACCESS_TOKEN") ?? "";
 const answerModel = Deno.env.get("OPENAI_DOCUMENT_RAG_MODEL")?.trim() || "gpt-4o";
