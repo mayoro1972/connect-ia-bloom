@@ -257,7 +257,33 @@ Deno.serve(async (req) => {
         </p>
       </div>`;
 
-    const subject = `[TransferAI] Point quotidien — ${newWebinar.length} webinaire(s) / ${newFormation.length} formation(s) / ${newDecideurs.length} décideur(s) — ${today}`;
+    // Envoi conditionnel (20/09/2026) : un courriel quotidien qui annonce toujours
+    // zéro finit par ne plus être lu, et c'est celui qui compte qu'on rate.
+    // On n'écrit donc que s'il y a du nouveau — sauf le lundi, où l'envoi a lieu
+    // même à vide : ce battement hebdomadaire prouve que la chaîne fonctionne
+    // (cron → coffre-fort → fonction Edge → Resend). Sans lui, le silence serait
+    // ambigu : rien à dire, ou digest cassé ?
+    const totalNouveautes = newWebinar.length + newFormation.length + newDecideurs.length;
+    const estLundi = new Date().getUTCDay() === 1;
+    const doitEnvoyer = totalNouveautes > 0 || estLundi;
+
+    if (!doitEnvoyer) {
+      return new Response(
+        JSON.stringify({
+          ok: true,
+          newWebinar: newWebinar.length,
+          newFormation: newFormation.length,
+          newDecideurs: newDecideurs.length,
+          sent: { ok: true, skipped: "aucune nouveauté, envoi omis (battement le lundi)" },
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    const prefixe = totalNouveautes === 0 ? "[TransferAI] Point hebdomadaire — rien à signaler" : "[TransferAI] Point quotidien";
+    const subject = totalNouveautes === 0
+      ? `${prefixe} — ${today}`
+      : `${prefixe} — ${newWebinar.length} webinaire(s) / ${newFormation.length} formation(s) / ${newDecideurs.length} décideur(s) — ${today}`;
     const result = await sendEmail(getRecipients(), subject, html);
     return new Response(JSON.stringify({ ok: true, newWebinar: newWebinar.length, newFormation: newFormation.length, newDecideurs: newDecideurs.length, sent: result }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
