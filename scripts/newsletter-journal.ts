@@ -133,7 +133,9 @@ const findJournalIssue = async (call: AdminCall) => {
 const sendCampaign = async (call: AdminCall, meta: JournalMeta, emailHtml: string) => {
   const issue = await findJournalIssue(call);
   if (!issue) throw new Error(`Aucune édition du Journal datée du ${date} dans le back-office : lancez d'abord « review ${date} ».`);
-  if (issue.sent_at) throw new Error(`L'édition du ${date} a déjà été envoyée (${issue.sent_at}) : envoi annulé.`);
+  if (issue.sent_at || issue.status === "sent") throw new Error(`L'édition du ${date} a déjà été envoyée (${issue.sent_at ?? issue.status}) : envoi annulé.`);
+  // Un envoi interrompu se reprend côté serveur (newsletter-send, resume) sans réenregistrer l'édition.
+  if (issue.status === "sending") throw new Error(`L'édition du ${date} est en cours d'envoi : envoi annulé, ne relancez pas.`);
 
   if (!confirmed) {
     const preview = await call("send", { issue_id: issue.id, dry_run: true }, "newsletter-send");

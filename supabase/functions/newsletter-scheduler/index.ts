@@ -9,6 +9,7 @@ const NEWSLETTER_SCHEDULER_TOKEN = Deno.env.get("NEWSLETTER_SCHEDULER_TOKEN") ??
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") ?? "";
 const MAIL_FROM = Deno.env.get("MAIL_FROM") ?? "TransferAI Africa <contact@transferai.ci>";
 const REVIEW_REMINDER_RECIPIENTS = ["contact@transferai.ci", "marius.ayoro70@gmail.com"];
+const STALE_ISSUE_DAYS = 3;
 
 const requireScheduler = (request: Request) => {
   // Accept either the explicit scheduler token OR a valid service_role bearer (used by pg_cron)
@@ -259,8 +260,18 @@ const runSendApproved = async () => {
     throw error;
   }
 
-  const readyIssues = (dueIssues ?? []).filter((issue) => {
+  // Une édition approuvée après son vendredi ne doit pas partir le vendredi suivant :
+  // les abonnés recevraient l'édition de la semaine passée (cas du 09/10/2026).
+  // Au-delà de ce délai, l'envoi reste possible à la main (newsletter-journal.ts send).
+  const staleBefore = new Date(Date.now() - STALE_ISSUE_DAYS * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const staleIssues = (dueIssues ?? []).filter((issue) => issue.issue_date && issue.issue_date < staleBefore);
+
+  let readyIssues = (dueIssues ?? []).filter((issue) => {
     if (issue.send_count && issue.send_count > 0) {
+      return false;
+    }
+
+    if (staleIssues.includes(issue)) {
       return false;
     }
 
@@ -271,11 +282,22 @@ const runSendApproved = async () => {
     return issue.issue_date <= todayIsoDate();
   });
 
+  // Une seule édition par langue et par passage : la plus récente. Les abonnés ne reçoivent
+  // jamais deux numéros le même vendredi ; les autres restent visibles dans skippedIssues.
+  const latestByLanguage = new Map<string, (typeof readyIssues)[number]>();
+  for (const issue of readyIssues) {
+    const current = latestByLanguage.get(issue.language);
+    if (!current || issue.issue_date > current.issue_date) latestByLanguage.set(issue.language, issue);
+  }
+  const skippedIssues = readyIssues.filter((issue) => latestByLanguage.get(issue.language) !== issue);
+  readyIssues = Array.from(latestByLanguage.values());
+
   if (readyIssues.length === 0) {
     return {
       action: "send-approved",
       skipped: true,
-      reason: "no_due_issue",
+      reason: staleIssues.length > 0 ? "stale_issues_only" : "no_due_issue",
+      staleIssues,
     };
   }
 
@@ -296,6 +318,8 @@ const runSendApproved = async () => {
     action: "send-approved",
     skipped: false,
     sentIssues,
+    staleIssues,
+    skippedIssues,
   };
 };
 

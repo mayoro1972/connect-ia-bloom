@@ -14,6 +14,8 @@ const requireAdmin = (request: Request) => {
 
 const asString = (value: unknown, fallback = "") => (typeof value === "string" ? value.trim() : fallback);
 
+class DuplicateSendError extends Error {}
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Resend accepte par défaut environ 2 requêtes par seconde : on espace les envois de campagne.
@@ -62,7 +64,7 @@ Deno.serve(async (request) => {
     return json(401, { error: "Unauthorized." });
   }
 
-  let body: { issue_id?: string; test_email?: string; dry_run?: boolean } = {};
+  let body: { issue_id?: string; test_email?: string; dry_run?: boolean; force_resend?: boolean; resume?: boolean } = {};
 
   try {
     body = await request.json();
@@ -73,6 +75,8 @@ Deno.serve(async (request) => {
   const issueId = asString(body.issue_id);
   const testEmail = asString(body.test_email);
   const dryRun = body.dry_run === true;
+  const forceResend = body.force_resend === true;
+  const resume = body.resume === true;
 
   if (!issueId) {
     return json(400, { error: "Missing issue_id." });
@@ -111,6 +115,7 @@ Deno.serve(async (request) => {
       source_post_ids: string[];
       send_count: number;
       recipient_count: number;
+      sent_at: string | null;
     };
 
     const html = renderNewsletterHtml(issueRecord);
@@ -179,29 +184,84 @@ Deno.serve(async (request) => {
       return domainsIntersect(issueRecord.target_domains, subscriberDomains);
     });
 
+    // Garde-fous anti-doublon (incidents du 10/07/2026, jusqu'à 8 envois par abonné, et du 09/10/2026) :
+    // une édition ne part qu'une fois, un abonné ne la reçoit qu'une fois, et un objet déjà
+    // envoyé ne repart pas sous une autre édition. force_resend contourne ces contrôles,
+    // resume reprend un envoi interrompu (statut "sending") sans renvoyer aux destinataires déjà servis.
+    if (!forceResend) {
+      if (issueRecord.sent_at || issueRecord.status === "sent" || (issueRecord.send_count ?? 0) > 0) {
+        throw new DuplicateSendError("already_sent");
+      }
+
+      if (issueRecord.status === "sending" && !resume) {
+        throw new DuplicateSendError("send_in_progress");
+      }
+
+      const { data: sameSubject } = await editorialClient
+        .from("newsletter_issues")
+        .select("id, issue_date")
+        .neq("id", issueRecord.id)
+        .ilike("subject", issueRecord.subject.replace(/[\\%_]/g, (character) => `\\${character}`))
+        .not("sent_at", "is", null)
+        .limit(1);
+
+      if ((sameSubject ?? []).length > 0) {
+        throw new DuplicateSendError(`subject_already_sent_on_${sameSubject![0].issue_date}`);
+      }
+    }
+
+    const { data: alreadySentLogs } = await editorialClient
+      .from("newsletter_delivery_logs")
+      .select("recipient_email")
+      .eq("newsletter_issue_id", issueRecord.id)
+      .eq("delivery_type", "campaign")
+      .eq("status", "sent");
+
+    const alreadyServed = new Set((alreadySentLogs ?? []).map((log) => log.recipient_email.trim().toLowerCase()));
+    const uniqueRecipients = recipients.filter((recipient) => {
+      const email = recipient.email.trim().toLowerCase();
+      if (alreadyServed.has(email)) return false;
+      alreadyServed.add(email);
+      return true;
+    });
+
     if (dryRun) {
       if (job?.id) {
         await editorialClient
           .from("editorial_jobs")
           .update({
             status: "done",
-            output_payload: { recipients: recipients.length, sent: false },
+            output_payload: { recipients: uniqueRecipients.length, sent: false },
             finished_at: new Date().toISOString(),
           })
           .eq("id", job.id);
       }
 
-      return json(200, { data: { mode: "campaign", recipients: recipients.length, sent: false } });
+      return json(200, { data: { mode: "campaign", recipients: uniqueRecipients.length, sent: false } });
     }
 
-    await editorialClient
+    // Verrou atomique : un seul appel peut faire passer l'édition en "sending".
+    let claim = editorialClient
       .from("newsletter_issues")
       .update({ status: "sending" })
       .eq("id", issueRecord.id);
+    if (!forceResend) {
+      claim = claim.is("sent_at", null);
+      claim = resume ? claim.eq("status", "sending") : claim.neq("status", "sending");
+    }
+    const { data: claimed, error: claimError } = await claim.select("id");
+
+    if (claimError) {
+      throw claimError;
+    }
+
+    if ((claimed ?? []).length === 0) {
+      throw new DuplicateSendError("send_already_claimed");
+    }
 
     let sentCount = 0;
 
-    for (const [index, recipient] of recipients.entries()) {
+    for (const [index, recipient] of uniqueRecipients.entries()) {
       if (index > 0) await sleep(CAMPAIGN_SEND_INTERVAL_MS);
       try {
         // Lien de désabonnement personnel + en-têtes « un clic » (RFC 8058).
@@ -254,13 +314,13 @@ Deno.serve(async (request) => {
         .from("editorial_jobs")
         .update({
           status: "done",
-          output_payload: { recipients: recipients.length, sent: sentCount },
+          output_payload: { recipients: uniqueRecipients.length, sent: sentCount },
           finished_at: new Date().toISOString(),
         })
         .eq("id", job.id);
     }
 
-    return json(200, { data: { mode: "campaign", recipients: recipients.length, sent: sentCount } });
+    return json(200, { data: { mode: "campaign", recipients: uniqueRecipients.length, sent: sentCount } });
   } catch (error) {
     if (job?.id) {
       await editorialClient
@@ -273,6 +333,6 @@ Deno.serve(async (request) => {
         .eq("id", job.id);
     }
 
-    return json(400, { error: error instanceof Error ? error.message : "newsletter_send_failed" });
+    return json(error instanceof DuplicateSendError ? 409 : 400, { error: error instanceof Error ? error.message : "newsletter_send_failed" });
   }
 });
